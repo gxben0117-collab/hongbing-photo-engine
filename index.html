@@ -251,6 +251,16 @@
         <div class="name">C 旅拍大片</div>
         <div class="desc">全身入鏡,人物與環境並重</div>
       </label>
+      <label class="card" data-value="D">
+        <input type="radio" name="composition" value="D">
+        <div class="name">D 電影海報</div>
+        <div class="desc">半身特寫,強烈光影,戲劇感</div>
+      </label>
+      <label class="card" data-value="E">
+        <input type="radio" name="composition" value="E">
+        <div class="name">E 雜誌封面</div>
+        <div class="desc">直式全身,留白空間,封面感</div>
+      </label>
     </div>
   </section>
 
@@ -287,6 +297,31 @@
         <div class="name">電影海報感</div>
         <div class="desc">Cinematic Movie Poster</div>
       </label>
+      <label class="card" data-value="chinese">
+        <input type="radio" name="style" value="chinese">
+        <div class="name">中式古典</div>
+        <div class="desc">Chinese Classical Editorial</div>
+      </label>
+      <label class="card" data-value="luxury">
+        <input type="radio" name="style" value="luxury">
+        <div class="name">奢華精品</div>
+        <div class="desc">Luxury Brand Campaign</div>
+      </label>
+      <label class="card" data-value="gothic">
+        <input type="radio" name="style" value="gothic">
+        <div class="name">暗黑哥德</div>
+        <div class="desc">Dark Gothic Editorial</div>
+      </label>
+      <label class="card" data-value="ethereal">
+        <input type="radio" name="style" value="ethereal">
+        <div class="name">夢幻仙氣</div>
+        <div class="desc">Ethereal Fantasy Editorial</div>
+      </label>
+      <label class="card" data-value="vintage">
+        <input type="radio" name="style" value="vintage">
+        <div class="name">復古膠片</div>
+        <div class="desc">Vintage Film Photography</div>
+      </label>
     </div>
   </section>
 
@@ -305,7 +340,7 @@
       <label class="chip" data-value="雪國旅人"><input type="radio" name="themePreset" value="雪國旅人">雪國旅人</label>
       <label class="chip" data-value="古風仙女"><input type="radio" name="themePreset" value="古風仙女">古風仙女</label>
       <label class="chip" data-value="楓葉和服"><input type="radio" name="themePreset" value="楓葉和服">楓葉和服</label>
-      <label class="chip" data-value="沙漠遊俠"><input type="radio" name="themePreset" value="沙漠遊俠">沙漠遊俠</label>
+      <label class="chip" data-value="沙漠金字塔"><input type="radio" name="themePreset" value="沙漠金字塔">沙漠金字塔</label>
       <label class="chip" data-value="巴黎時尚"><input type="radio" name="themePreset" value="巴黎時尚">巴黎時尚</label>
       <label class="chip" data-value="峇里島神廟"><input type="radio" name="themePreset" value="峇里島神廟">峇里島神廟</label>
       <label class="chip" data-value="摩洛哥風情"><input type="radio" name="themePreset" value="摩洛哥風情">摩洛哥風情</label>
@@ -313,6 +348,16 @@
       <label class="chip" data-value="首爾韓服"><input type="radio" name="themePreset" value="首爾韓服">首爾韓服</label>
       <label class="chip" data-value="蒙古草原"><input type="radio" name="themePreset" value="蒙古草原">蒙古草原</label>
       <label class="chip" data-value="威尼斯面具"><input type="radio" name="themePreset" value="威尼斯面具">威尼斯面具</label>
+      <label class="chip" data-value="唐朝盛世"><input type="radio" name="themePreset" value="唐朝盛世">唐朝盛世</label>
+      <label class="chip" data-value="清宮格格"><input type="radio" name="themePreset" value="清宮格格">清宮格格</label>
+      <label class="chip" data-value="西域舞姬"><input type="radio" name="themePreset" value="西域舞姬">西域舞姬</label>
+      <label class="chip" data-value="杜拜沙漠"><input type="radio" name="themePreset" value="杜拜沙漠">杜拜沙漠</label>
+      <label class="chip" data-value="冰島極光"><input type="radio" name="themePreset" value="冰島極光">冰島極光</label>
+      <label class="chip" data-value="馬爾地夫海島"><input type="radio" name="themePreset" value="馬爾地夫海島">馬爾地夫海島</label>
+      <label class="chip" data-value="北海道薰衣草"><input type="radio" name="themePreset" value="北海道薰衣草">北海道薰衣草</label>
+      <label class="chip" data-value="米蘭時裝週"><input type="radio" name="themePreset" value="米蘭時裝週">米蘭時裝週</label>
+      <label class="chip" data-value="東京澀谷"><input type="radio" name="themePreset" value="東京澀谷">東京澀谷</label>
+      <label class="chip" data-value="上海外灘夜景"><input type="radio" name="themePreset" value="上海外灘夜景">上海外灘夜景</label>
     </div>
     <input type="text" class="theme-input" id="themeInput" placeholder="例如:九尾妖狐" style="margin-top:10px;">
   </section>
@@ -355,13 +400,49 @@
         <div class="name">16:9</div>
         <div class="desc">橫向桌布</div>
       </label>
+      <label class="card" data-value="21:9">
+        <input type="radio" name="ratio" value="21:9">
+        <div class="name">21:9</div>
+        <div class="desc">超寬螢幕 / 電影畫幅</div>
+      </label>
+      <label class="card" data-value="4:3">
+        <input type="radio" name="ratio" value="4:3">
+        <div class="name">4:3</div>
+        <div class="desc">傳統橫式 / 復古比例</div>
+      </label>
     </div>
   </section>
 
-  <!-- STEP 05 生成 -->
+  <!-- STEP 05 鏡頭氣場 -->
   <section>
     <div class="step">
       <div class="num">05</div>
+      <div class="title">鏡頭氣場</div>
+      <div class="sub">單選,可跳過(預設自然平視)</div>
+    </div>
+    <div class="cards" id="cameraCards">
+      <label class="card selected" data-value="neutral">
+        <input type="radio" name="camera" value="neutral" checked>
+        <div class="name">自然平視</div>
+        <div class="desc">標準旅拍視角(預設)</div>
+      </label>
+      <label class="card" data-value="low">
+        <input type="radio" name="camera" value="low">
+        <div class="name">低角度仰拍</div>
+        <div class="desc">Hero Shot / 鏡頭低於腰部</div>
+      </label>
+      <label class="card" data-value="high">
+        <input type="radio" name="camera" value="high">
+        <div class="name">高角度俯拍</div>
+        <div class="desc">俯視角 / 鏡頭高於頭部</div>
+      </label>
+    </div>
+  </section>
+
+  <!-- STEP 06 生成 -->
+  <section>
+    <div class="step">
+      <div class="num">06</div>
       <div class="title">生成咒語</div>
     </div>
     <button class="generate-btn" id="generateBtn">生成咒語</button>
@@ -449,10 +530,14 @@ Identity And Facial Features Remain Clearly Recognizable During Motion`,
 
 lighting:`【電影光影系統】
 
+Cinematic Natural Lighting
+Best Lighting For This Scene And Theme
+Lighting That Enhances The Mood
+Bright Face Illumination
+Luxury Fashion Photography Light Quality
+Natural Light Direction
 Global Lighting Consistency
 Physically Correct Lighting
-Golden Hour Lighting
-Luxury Fashion Lighting
 Fine Art Color Grading
 Soft Shadow Transition
 Natural Atmospheric Perspective
@@ -505,7 +590,31 @@ Midground Story Layer
 Background Landmark Layer
 Travel Destination Clearly Recognizable
 Character Integrated Into Environment
-Not A Portrait With Background, A Travel Editorial Story`
+Not A Portrait With Background, A Travel Editorial Story`,
+
+D:`【構圖模組｜電影海報】
+
+Half Body Shot, Waist Up
+Subject Occupies 60-70% Of Frame
+24mm-35mm Wide Lens
+Cinematic Movie Poster Composition
+Dramatic Lighting Contrast
+Strong Visual Tension
+Narrative Cinematic Framing
+Environment Creates Atmosphere Behind Subject
+Movie Poster Quality`,
+
+E:`【構圖模組｜雜誌封面】
+
+Full Body Vertical Shot
+Subject Occupies 55-65% Of Frame
+Upper Frame Reserved For Magazine Title Space
+85mm Portrait Lens
+Magazine Cover Composition
+Clean Background Or Soft Bokeh
+Strong Eye Contact Or Elegant Gaze
+Fashion Magazine Cover Quality
+Editorial Cover Girl Presence`
 };
 
 // ====== 風格模組(主風格) ======
@@ -539,6 +648,36 @@ cinematic:{
   text:`Cinematic Movie Poster Style
 電影海報級構圖,敘事性光影
 戲劇張力氛圍,Movie Poster Lighting`
+},
+chinese:{
+  label:"Chinese Classical Editorial",
+  text:`Chinese Classical Editorial
+中式古典美學,水墨意境光影
+漢服質感,東方雅韻攝影語言`
+},
+luxury:{
+  label:"Luxury Brand Campaign",
+  text:`Luxury Brand Campaign
+奢華精品廣告質感,極致細節光影
+高端品牌攝影語言,Hermès Chanel Level Quality`
+},
+gothic:{
+  label:"Dark Gothic Editorial",
+  text:`Dark Gothic Editorial
+暗黑哥德質感,戲劇性強烈陰影
+神秘氛圍光影,Dark Fantasy Photography`
+},
+ethereal:{
+  label:"Ethereal Fantasy Editorial",
+  text:`Ethereal Fantasy Editorial
+夢幻仙氣質感,柔焦光暈氛圍
+空靈唯美光影,Dreamy Fantasy Photography`
+},
+vintage:{
+  label:"Vintage Film Photography",
+  text:`Vintage Film Photography
+復古膠片質感,褪色暖調色彩
+底片顆粒感,Analog Film Aesthetic`
 }
 };
 
@@ -553,7 +692,59 @@ const RATIOS = {
 "4:5":"Aspect Ratio 4:5, Vertical Format, Social Media Post Composition",
 "1:1":"Aspect Ratio 1:1, Square Format",
 "2:3":"Aspect Ratio 2:3, Vertical Photo Format",
-"16:9":"Aspect Ratio 16:9, Horizontal Format, Landscape Wallpaper Composition"
+"16:9":"Aspect Ratio 16:9, Horizontal Format, Landscape Wallpaper Composition",
+"21:9":"Aspect Ratio 21:9, Ultra Wide Cinematic Format, Movie Aspect Ratio",
+"4:3":"Aspect Ratio 4:3, Traditional Horizontal Format, Classic Retro Proportion"
+};
+
+// ====== 鏡頭氣場 ======
+const CAMERA_ANGLES = {
+neutral: null,
+low:`【鏡頭氣場模組｜低角度仰拍】
+
+Low Angle Hero Shot
+Camera Below Subject Eye Level
+Camera Positioned Below Waist Level
+Upward Looking Camera Angle
+Slight Upward Perspective
+
+Viewer Looking Up At The Subject
+Subject Visually Towering Over Viewer
+Subject Appears Powerful And Elevated
+
+Chin Slightly Raised
+Eyes Looking Down Toward Camera
+Calm And Unshakable Expression
+Subtle Superior Gaze
+
+Dominant Royal Aura
+Elegant Queenly Authority
+High Status Female Leader
+Strong Visual Dominance
+Majestic Presence
+
+Golden Hour Rim Light
+Cinematic Depth Of Field`,
+
+high:`【鏡頭氣場模組｜高角度俯拍】
+
+High Angle Shot
+Camera Above Subject Eye Level
+Overhead Perspective
+Downward Looking Camera Angle
+
+Dreamy Aerial Composition
+Ethereal Top-Down View
+Subject Surrounded By Environment
+Soft Romantic Atmosphere
+
+Gentle Downward Gaze
+Serene Peaceful Expression
+Feminine Graceful Energy
+
+Soft Diffused Light From Above
+Dreamy Bokeh Background
+Ethereal Fantasy Mood`
 };
 
 // ====== 互動邏輯:單選卡片 ======
@@ -571,6 +762,7 @@ function setupRadioCards(containerId){
 setupRadioCards('compositionCards');
 setupRadioCards('styleCards');
 setupRadioCards('ratioCards');
+setupRadioCards('cameraCards');
 
 // ====== 互動邏輯:主題快選 chips ======
 const themeChips = document.querySelectorAll('#themeChips .chip');
@@ -599,6 +791,7 @@ document.getElementById('generateBtn').addEventListener('click', ()=>{
   const styleKey = document.querySelector('input[name="style"]:checked').value;
   const style = STYLES[styleKey];
   const ratioKey = document.querySelector('input[name="ratio"]:checked').value;
+  const cameraKey = document.querySelector('input[name="camera"]:checked').value;
 
   // 主題
   let theme = document.getElementById('themeInput').value.trim();
@@ -628,13 +821,17 @@ Premium Fabric / Fine Embroidery / Rich Material Detail
   // 輸出比例區塊
   const ratioBlock = `【輸出比例】\n\n${RATIOS[ratioKey]}`;
 
-  // 組合順序:身份鎖定 > 真人骨架 > 姿勢引擎 > 時尚攝影師 > 動作導演 > 構圖 > 主風格 > 主題 > 服裝邏輯 > 光影 > 畫面淨化 > 輸出規格 > 輸出比例
+  // 鏡頭氣場區塊(可選,neutral時不輸出)
+  const cameraBlock = CAMERA_ANGLES[cameraKey];
+
+  // 組合順序:身份鎖定 > 真人骨架 > 姿勢引擎 > 時尚攝影師 > 動作導演 > 鏡頭氣場(選) > 構圖 > 主風格 > 主題 > 服裝邏輯 > 光影 > 畫面淨化 > 輸出規格 > 輸出比例
   const sections = [
     CORE.identity,
     CORE.skeleton,
     CORE.pose,
     CORE.photographer,
     CORE.motion,
+    ...(cameraBlock ? [cameraBlock] : []),
     COMPOSITION[composition],
     styleBlock,
     themeBlock,
