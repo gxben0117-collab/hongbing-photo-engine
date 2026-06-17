@@ -3,887 +3,270 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>紅兵寫真旅拍引擎 v4.2｜咒語產生器</title>
+<title>藍寶 AI 咒語產生器｜Lanbao Editorial Engine</title>
 <style>
   :root{
-    --cream:#F8F1E7;
-    --paper:#FFFCF7;
-    --ink:#3B2A21;
-    --ink-soft:#8C7A6B;
-    --terracotta:#C97B5A;
-    --terracotta-deep:#A8593D;
-    --line:#E6D5C3;
-    --gold:#BB9457;
-    --selected:#F3E2D3;
+    --black:#0A0A0A;
+    --charcoal:#141414;
+    --line:#2A2A2A;
+    --paper:#F7F4EF;
+    --soft:#999;
+    --gold:#C9A84C;
+    --white:#FFFFFF;
+    --terra:#C97B5A;
   }
-  *{box-sizing:border-box;}
+  *{box-sizing:border-box;margin:0;padding:0;}
   body{
-    margin:0;
-    background:var(--cream);
-    color:var(--ink);
+    background:var(--black);
+    color:var(--paper);
     font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
-    line-height:1.6;
-    padding-bottom:60px;
+    min-height:100vh;
   }
-  .wrap{
-    max-width:640px;
-    margin:0 auto;
-    padding:28px 20px 40px;
-  }
-  header{
-    text-align:center;
-    margin-bottom:28px;
-  }
-  header .eyebrow{
-    font-family:"Noto Serif TC",serif;
-    font-size:13px;
-    letter-spacing:0.25em;
-    color:var(--terracotta-deep);
-    text-transform:uppercase;
-  }
-  header h1{
-    font-family:"Noto Serif TC",serif;
-    font-size:26px;
-    font-weight:700;
-    margin:6px 0 4px;
-  }
-  header p{
-    font-size:13px;
-    color:var(--ink-soft);
-    margin:0;
-  }
-  .note{
-    background:var(--paper);
-    border:1px solid var(--line);
-    border-radius:10px;
-    padding:12px 14px;
-    font-size:13px;
-    color:var(--ink-soft);
-    margin-bottom:28px;
-  }
-  section{
-    margin-bottom:30px;
-  }
-  .step{
+
+  /* ── NAV ── */
+  nav{
+    position:fixed;
+    top:0;left:0;right:0;
+    background:rgba(10,10,10,0.92);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+    z-index:100;
+    padding:0 24px;
+    height:54px;
     display:flex;
-    align-items:baseline;
-    gap:10px;
-    margin-bottom:12px;
+    align-items:center;
+    justify-content:space-between;
   }
-  .step .num{
+  .nav-logo{
     font-family:"Noto Serif TC",serif;
-    font-size:28px;
-    font-weight:700;
-    color:var(--terracotta);
-    line-height:1;
-  }
-  .step .title{
-    font-size:16px;
-    font-weight:700;
-  }
-  .step .sub{
-    font-size:12px;
-    color:var(--ink-soft);
-    margin-left:auto;
-  }
-  .cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-    gap:10px;
-  }
-  .card{
-    position:relative;
-    border:1px solid var(--line);
-    background:var(--paper);
-    border-radius:12px;
-    padding:12px 14px;
-    cursor:pointer;
-    transition:border-color .15s, background .15s;
-  }
-  .card input{
-    position:absolute;
-    opacity:0;
-    pointer-events:none;
-  }
-  .card .name{
-    font-weight:700;
     font-size:14px;
-    margin-bottom:2px;
+    font-weight:700;
+    color:var(--gold);
+    letter-spacing:0.08em;
+    text-decoration:none;
   }
-  .card .desc{
+  .nav-links{
+    display:flex;
+    gap:6px;
+  }
+  .nav-link{
     font-size:12px;
-    color:var(--ink-soft);
+    color:var(--soft);
+    text-decoration:none;
+    padding:6px 14px;
+    border-radius:999px;
+    border:1px solid transparent;
+    transition:all .15s;
+    letter-spacing:0.03em;
   }
-  .card.selected{
-    border-color:var(--terracotta);
-    background:var(--selected);
+  .nav-link:hover{
+    color:var(--paper);
+    border-color:var(--line);
   }
-  .card.selected .name{
-    color:var(--terracotta-deep);
+  .nav-link.active{
+    color:var(--gold);
+    border-color:var(--gold);
+    background:rgba(201,168,76,0.08);
   }
-  .chips{
+
+  /* ── HERO ── */
+  .hero{
+    padding:140px 24px 80px;
+    text-align:center;
+    max-width:700px;
+    margin:0 auto;
+  }
+  .hero-eyebrow{
+    font-size:11px;
+    letter-spacing:0.4em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:20px;
+  }
+  .hero h1{
+    font-family:"Noto Serif TC",serif;
+    font-size:clamp(28px,6vw,48px);
+    font-weight:900;
+    line-height:1.2;
+    color:var(--white);
+    margin-bottom:16px;
+    letter-spacing:0.02em;
+  }
+  .hero h1 span{
+    color:var(--gold);
+  }
+  .hero p{
+    font-size:15px;
+    color:var(--soft);
+    line-height:1.8;
+    max-width:480px;
+    margin:0 auto 48px;
+  }
+
+  /* ── CARDS ── */
+  .tools{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:16px;
+    max-width:700px;
+    margin:0 auto;
+    padding:0 24px 80px;
+  }
+  .tool-card{
+    display:block;
+    text-decoration:none;
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:32px 28px;
+    background:var(--charcoal);
+    transition:border-color .2s, transform .2s, background .2s;
+    cursor:pointer;
+    position:relative;
+    overflow:hidden;
+  }
+  .tool-card::before{
+    content:'';
+    position:absolute;
+    top:0;left:0;right:0;
+    height:2px;
+    opacity:0;
+    transition:opacity .2s;
+  }
+  .tool-card.travel::before{ background:var(--terra); }
+  .tool-card.studio::before{ background:var(--gold); }
+  .tool-card:hover{
+    border-color:#3A3A3A;
+    transform:translateY(-3px);
+    background:#1A1A1A;
+  }
+  .tool-card:hover::before{ opacity:1; }
+
+  .tool-tag{
+    display:inline-block;
+    font-size:10px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    padding:4px 10px;
+    border-radius:999px;
+    margin-bottom:20px;
+    font-weight:700;
+  }
+  .tool-card.travel .tool-tag{
+    background:rgba(201,123,90,0.15);
+    color:var(--terra);
+    border:1px solid rgba(201,123,90,0.3);
+  }
+  .tool-card.studio .tool-tag{
+    background:rgba(201,168,76,0.12);
+    color:var(--gold);
+    border:1px solid rgba(201,168,76,0.3);
+  }
+  .tool-card h2{
+    font-family:"Noto Serif TC",serif;
+    font-size:20px;
+    font-weight:900;
+    color:var(--white);
+    margin-bottom:10px;
+    line-height:1.3;
+  }
+  .tool-card p{
+    font-size:13px;
+    color:var(--soft);
+    line-height:1.7;
+    margin-bottom:24px;
+  }
+  .tool-features{
     display:flex;
     flex-wrap:wrap;
+    gap:6px;
+    margin-bottom:28px;
+  }
+  .tool-feature{
+    font-size:11px;
+    color:#666;
+    background:#1E1E1E;
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:3px 8px;
+  }
+  .tool-cta{
+    display:flex;
+    align-items:center;
     gap:8px;
-  }
-  .chip{
-    border:1px solid var(--line);
-    background:var(--paper);
-    border-radius:999px;
-    padding:8px 16px;
     font-size:13px;
-    cursor:pointer;
-    transition:border-color .15s, background .15s, color .15s;
-  }
-  .chip input{
-    position:absolute;
-    opacity:0;
-    pointer-events:none;
-  }
-  .chip.selected{
-    border-color:var(--gold);
-    background:var(--selected);
-    color:var(--terracotta-deep);
-    font-weight:700;
-  }
-  .theme-input{
-    width:100%;
-    border:1px solid var(--line);
-    background:var(--paper);
-    border-radius:10px;
-    padding:14px;
-    font-size:16px;
-    color:var(--ink);
-    font-family:inherit;
-  }
-  .theme-input::placeholder{
-    color:#C7B6A6;
-  }
-  .generate-btn{
-    width:100%;
-    background:var(--terracotta);
-    color:#fff;
-    border:none;
-    border-radius:12px;
-    padding:16px;
-    font-size:16px;
     font-weight:700;
     letter-spacing:0.05em;
-    cursor:pointer;
-    font-family:"Noto Serif TC",serif;
-    transition:background .15s;
   }
-  .generate-btn:active{
-    background:var(--terracotta-deep);
+  .tool-card.travel .tool-cta{ color:var(--terra); }
+  .tool-card.studio .tool-cta{ color:var(--gold); }
+  .tool-cta-arrow{
+    font-size:16px;
+    transition:transform .2s;
   }
-  .output-wrap{
-    margin-top:24px;
-  }
-  .output-wrap textarea{
-    width:100%;
-    min-height:280px;
-    border:1px solid var(--line);
-    background:var(--paper);
-    border-radius:12px;
-    padding:16px;
-    font-size:13px;
-    line-height:1.7;
-    color:var(--ink);
-    font-family:"Noto Sans TC",monospace;
-    resize:vertical;
-    white-space:pre-wrap;
-  }
-  .copy-btn{
-    margin-top:10px;
-    width:100%;
-    background:var(--paper);
-    border:1px solid var(--terracotta);
-    color:var(--terracotta-deep);
-    border-radius:12px;
-    padding:13px;
-    font-size:14px;
-    font-weight:700;
-    cursor:pointer;
-    transition:background .15s;
-  }
-  .copy-btn.copied{
-    background:var(--terracotta);
-    color:#fff;
-    border-color:var(--terracotta);
-  }
-  .hidden{
-    display:none;
+  .tool-card:hover .tool-cta-arrow{ transform:translateX(4px); }
+
+  /* ── FOOTER ── */
+  footer{
+    text-align:center;
+    padding:24px;
+    font-size:12px;
+    color:#444;
+    border-top:1px solid var(--line);
   }
 </style>
 </head>
 <body>
-<div class="wrap">
 
-  <header>
-    <div class="eyebrow">Lanbao Editorial Engine</div>
-    <h1>紅兵寫真旅拍引擎 v4.2</h1>
-    <p>咒語產生器｜身份鎖定 × 真人旅拍感</p>
-  </header>
-
-  <div class="note">
-    💡 產生咒語後,使用時請在對話中附上你的人物參考照片——身份鎖定系統需要照片才能生效。
+<nav>
+  <a class="nav-logo" href="index.html">藍寶 Editorial Engine</a>
+  <div class="nav-links">
+    <a class="nav-link active" href="index.html">首頁</a>
+    <a class="nav-link" href="travel.html">寫真旅拍</a>
+    <a class="nav-link" href="magazine.html">雜誌棚拍</a>
   </div>
+</nav>
 
-  <!-- STEP 01 構圖 -->
-  <section>
-    <div class="step">
-      <div class="num">01</div>
-      <div class="title">選擇構圖模組</div>
-    </div>
-    <div class="cards" id="compositionCards">
-      <label class="card" data-value="A">
-        <input type="radio" name="composition" value="A">
-        <div class="name">A 美女寫真</div>
-        <div class="desc">膝上特寫,角色為主</div>
-      </label>
-      <label class="card" data-value="B">
-        <input type="radio" name="composition" value="B">
-        <div class="name">B 時尚大片</div>
-        <div class="desc">七分身,人物與環境平衡</div>
-      </label>
-      <label class="card selected" data-value="C">
-        <input type="radio" name="composition" value="C" checked>
-        <div class="name">C 旅拍大片</div>
-        <div class="desc">全身入鏡,人物與環境並重</div>
-      </label>
-      <label class="card" data-value="D">
-        <input type="radio" name="composition" value="D">
-        <div class="name">D 電影海報</div>
-        <div class="desc">半身特寫,強烈光影,戲劇感</div>
-      </label>
-      <label class="card" data-value="E">
-        <input type="radio" name="composition" value="E">
-        <div class="name">E 雜誌封面</div>
-        <div class="desc">直式全身,留白空間,封面感</div>
-      </label>
-    </div>
-  </section>
+<div class="hero">
+  <div class="hero-eyebrow">Lanbao AI Editorial Engine</div>
+  <h1>AI 出圖<span>咒語產生器</span></h1>
+  <p>身份鎖定 × 真人旅拍感 × 雜誌封面氣場<br>選擇你要的風格,生成完整咒語,一鍵複製</p>
+</div>
 
-  <!-- STEP 02 主風格 -->
-  <section>
-    <div class="step">
-      <div class="num">02</div>
-      <div class="title">選擇主風格</div>
-      <div class="sub">單選,決定整體光影與氣質</div>
-    </div>
-    <div class="cards" id="styleCards">
-      <label class="card selected" data-value="jp_gravure">
-        <input type="radio" name="style" value="jp_gravure" checked>
-        <div class="name">日系寫真</div>
-        <div class="desc">Japanese Gravure Editorial</div>
-      </label>
-      <label class="card" data-value="korean">
-        <input type="radio" name="style" value="korean">
-        <div class="name">韓系寫真</div>
-        <div class="desc">Korean Editorial</div>
-      </label>
-      <label class="card" data-value="euro">
-        <input type="radio" name="style" value="euro">
-        <div class="name">歐美時尚大片</div>
-        <div class="desc">European Fashion Editorial</div>
-      </label>
-      <label class="card" data-value="vogue">
-        <input type="radio" name="style" value="vogue">
-        <div class="name">Vogue Editorial</div>
-        <div class="desc">國際時尚雜誌質感</div>
-      </label>
-      <label class="card" data-value="cinematic">
-        <input type="radio" name="style" value="cinematic">
-        <div class="name">電影海報感</div>
-        <div class="desc">Cinematic Movie Poster</div>
-      </label>
-      <label class="card" data-value="chinese">
-        <input type="radio" name="style" value="chinese">
-        <div class="name">中式古典</div>
-        <div class="desc">Chinese Classical Editorial</div>
-      </label>
-      <label class="card" data-value="luxury">
-        <input type="radio" name="style" value="luxury">
-        <div class="name">奢華精品</div>
-        <div class="desc">Luxury Brand Campaign</div>
-      </label>
-      <label class="card" data-value="gothic">
-        <input type="radio" name="style" value="gothic">
-        <div class="name">暗黑哥德</div>
-        <div class="desc">Dark Gothic Editorial</div>
-      </label>
-      <label class="card" data-value="ethereal">
-        <input type="radio" name="style" value="ethereal">
-        <div class="name">夢幻仙氣</div>
-        <div class="desc">Ethereal Fantasy Editorial</div>
-      </label>
-      <label class="card" data-value="vintage">
-        <input type="radio" name="style" value="vintage">
-        <div class="name">復古膠片</div>
-        <div class="desc">Vintage Film Photography</div>
-      </label>
-    </div>
-  </section>
+<div class="tools">
 
-  <!-- STEP 03 主題 -->
-  <section>
-    <div class="step">
-      <div class="num">03</div>
-      <div class="title">主題</div>
-      <div class="sub">點選快選或自行輸入</div>
+  <a class="tool-card travel" href="travel.html">
+    <div class="tool-tag">Vol.1 · 旅拍系列</div>
+    <h2>寫真旅拍風格<br>咒語產生器</h2>
+    <p>電影感旅拍大片、古風奇幻場景、真實景點人像。適合生成旅拍雜誌大片、主題場景寫真。</p>
+    <div class="tool-features">
+      <span class="tool-feature">構圖模組 A-E</span>
+      <span class="tool-feature">10種主風格</span>
+      <span class="tool-feature">25個主題快選</span>
+      <span class="tool-feature">鏡頭氣場</span>
+      <span class="tool-feature">8種比例</span>
     </div>
-    <div class="chips" id="themeChips">
-      <label class="chip" data-value="九尾妖狐"><input type="radio" name="themePreset" value="九尾妖狐">九尾妖狐</label>
-      <label class="chip" data-value="敦煌飛天"><input type="radio" name="themePreset" value="敦煌飛天">敦煌飛天</label>
-      <label class="chip" data-value="江南煙雨"><input type="radio" name="themePreset" value="江南煙雨">江南煙雨</label>
-      <label class="chip" data-value="京都藝伎"><input type="radio" name="themePreset" value="京都藝伎">京都藝伎</label>
-      <label class="chip" data-value="雪國旅人"><input type="radio" name="themePreset" value="雪國旅人">雪國旅人</label>
-      <label class="chip" data-value="古風仙女"><input type="radio" name="themePreset" value="古風仙女">古風仙女</label>
-      <label class="chip" data-value="楓葉和服"><input type="radio" name="themePreset" value="楓葉和服">楓葉和服</label>
-      <label class="chip" data-value="沙漠金字塔"><input type="radio" name="themePreset" value="沙漠金字塔">沙漠金字塔</label>
-      <label class="chip" data-value="巴黎時尚"><input type="radio" name="themePreset" value="巴黎時尚">巴黎時尚</label>
-      <label class="chip" data-value="峇里島神廟"><input type="radio" name="themePreset" value="峇里島神廟">峇里島神廟</label>
-      <label class="chip" data-value="摩洛哥風情"><input type="radio" name="themePreset" value="摩洛哥風情">摩洛哥風情</label>
-      <label class="chip" data-value="希臘聖托里尼"><input type="radio" name="themePreset" value="希臘聖托里尼">希臘聖托里尼</label>
-      <label class="chip" data-value="首爾韓服"><input type="radio" name="themePreset" value="首爾韓服">首爾韓服</label>
-      <label class="chip" data-value="蒙古草原"><input type="radio" name="themePreset" value="蒙古草原">蒙古草原</label>
-      <label class="chip" data-value="威尼斯面具"><input type="radio" name="themePreset" value="威尼斯面具">威尼斯面具</label>
-      <label class="chip" data-value="唐朝盛世"><input type="radio" name="themePreset" value="唐朝盛世">唐朝盛世</label>
-      <label class="chip" data-value="清宮格格"><input type="radio" name="themePreset" value="清宮格格">清宮格格</label>
-      <label class="chip" data-value="西域舞姬"><input type="radio" name="themePreset" value="西域舞姬">西域舞姬</label>
-      <label class="chip" data-value="杜拜沙漠"><input type="radio" name="themePreset" value="杜拜沙漠">杜拜沙漠</label>
-      <label class="chip" data-value="冰島極光"><input type="radio" name="themePreset" value="冰島極光">冰島極光</label>
-      <label class="chip" data-value="馬爾地夫海島"><input type="radio" name="themePreset" value="馬爾地夫海島">馬爾地夫海島</label>
-      <label class="chip" data-value="北海道薰衣草"><input type="radio" name="themePreset" value="北海道薰衣草">北海道薰衣草</label>
-      <label class="chip" data-value="米蘭時裝週"><input type="radio" name="themePreset" value="米蘭時裝週">米蘭時裝週</label>
-      <label class="chip" data-value="東京澀谷"><input type="radio" name="themePreset" value="東京澀谷">東京澀谷</label>
-      <label class="chip" data-value="上海外灘夜景"><input type="radio" name="themePreset" value="上海外灘夜景">上海外灘夜景</label>
-    </div>
-    <input type="text" class="theme-input" id="themeInput" placeholder="例如:九尾妖狐" style="margin-top:10px;">
-  </section>
+    <div class="tool-cta">進入工具 <span class="tool-cta-arrow">→</span></div>
+  </a>
 
-  <!-- STEP 04 圖片比例 -->
-  <section>
-    <div class="step">
-      <div class="num">04</div>
-      <div class="title">圖片比例</div>
-      <div class="sub">單選,輸出尺寸設定</div>
+  <a class="tool-card studio" href="magazine.html">
+    <div class="tool-tag">Vol.2 · 棚拍系列</div>
+    <h2>雜誌棚拍風格<br>咒語產生器</h2>
+    <p>名模雜誌封面、棚拍人像、指定姿態與氣場。適合生成時尚封面大片、指定名模姿勢。</p>
+    <div class="tool-features">
+      <span class="tool-feature">10種封面風格</span>
+      <span class="tool-feature">18種姿態</span>
+      <span class="tool-feature">主題推薦連動</span>
+      <span class="tool-feature">鏡頭氣場</span>
+      <span class="tool-feature">8種比例</span>
     </div>
-    <div class="cards" id="ratioCards">
-      <label class="card selected" data-value="9:16">
-        <input type="radio" name="ratio" value="9:16" checked>
-        <div class="name">9:16</div>
-        <div class="desc">手機桌布 / 限動</div>
-      </label>
-      <label class="card" data-value="3:4">
-        <input type="radio" name="ratio" value="3:4">
-        <div class="name">3:4</div>
-        <div class="desc">直式人像</div>
-      </label>
-      <label class="card" data-value="4:5">
-        <input type="radio" name="ratio" value="4:5">
-        <div class="name">4:5</div>
-        <div class="desc">IG貼文</div>
-      </label>
-      <label class="card" data-value="1:1">
-        <input type="radio" name="ratio" value="1:1">
-        <div class="name">1:1</div>
-        <div class="desc">正方形</div>
-      </label>
-      <label class="card" data-value="2:3">
-        <input type="radio" name="ratio" value="2:3">
-        <div class="name">2:3</div>
-        <div class="desc">直式相片</div>
-      </label>
-      <label class="card" data-value="16:9">
-        <input type="radio" name="ratio" value="16:9">
-        <div class="name">16:9</div>
-        <div class="desc">橫向桌布</div>
-      </label>
-      <label class="card" data-value="21:9">
-        <input type="radio" name="ratio" value="21:9">
-        <div class="name">21:9</div>
-        <div class="desc">超寬螢幕 / 電影畫幅</div>
-      </label>
-      <label class="card" data-value="4:3">
-        <input type="radio" name="ratio" value="4:3">
-        <div class="name">4:3</div>
-        <div class="desc">傳統橫式 / 復古比例</div>
-      </label>
-    </div>
-  </section>
-
-  <!-- STEP 05 鏡頭氣場 -->
-  <section>
-    <div class="step">
-      <div class="num">05</div>
-      <div class="title">鏡頭氣場</div>
-      <div class="sub">單選,可跳過(預設自然平視)</div>
-    </div>
-    <div class="cards" id="cameraCards">
-      <label class="card selected" data-value="neutral">
-        <input type="radio" name="camera" value="neutral" checked>
-        <div class="name">自然平視</div>
-        <div class="desc">標準旅拍視角(預設)</div>
-      </label>
-      <label class="card" data-value="low">
-        <input type="radio" name="camera" value="low">
-        <div class="name">低角度仰拍</div>
-        <div class="desc">Hero Shot / 鏡頭低於腰部</div>
-      </label>
-      <label class="card" data-value="high">
-        <input type="radio" name="camera" value="high">
-        <div class="name">高角度俯拍</div>
-        <div class="desc">俯視角 / 鏡頭高於頭部</div>
-      </label>
-    </div>
-  </section>
-
-  <!-- STEP 06 生成 -->
-  <section>
-    <div class="step">
-      <div class="num">06</div>
-      <div class="title">生成咒語</div>
-    </div>
-    <button class="generate-btn" id="generateBtn">生成咒語</button>
-  </section>
-
-  <div class="output-wrap hidden" id="outputWrap">
-    <textarea id="outputText" readonly></textarea>
-    <button class="copy-btn" id="copyBtn">複製咒語</button>
-  </div>
+    <div class="tool-cta">進入工具 <span class="tool-cta-arrow">→</span></div>
+  </a>
 
 </div>
 
-<script>
-// ====== 固定核心引擎 ======
-const CORE = {
-identity:`【身份鎖定系統｜最高優先級】
-
-使用上傳人物作為唯一主角
-使用上傳照片作為唯一身份來源
-保持與上傳照片為同一人
-第一眼就是本人,熟人一眼認得出來
-Identity Recognition Priority Maximum
-
-保留原始臉型、眉型、眼型、眼距、眼神
-保留原始鼻型、嘴型、下顎線、五官比例
-保留自然不對稱特徵、成熟感、真實皮膚質感
-保留人物原有氣質
-
-禁止換臉、禁止AI美女臉、禁止網紅臉
-禁止明星臉、禁止模板臉、禁止幼態化
-禁止過度磨皮、禁止塑膠皮膚、禁止身份漂移`,
-
-skeleton:`【真人骨架系統】
-
-Same Person Face And Body
-Realistic Female Anatomy
-Healthy Adult Female Figure
-Natural Human Proportions
-
-自然肩寬、自然鎖骨、自然胸腔厚度
-自然軀幹深度、自然腰臀比例
-自然四肢比例、自然頭身比例、自然重心
-
-禁止娃娃比例、禁止紙片人、禁止超模比例
-禁止肩膀過窄、禁止頭身失衡、禁止人體變形`,
-
-pose:`【姿勢引擎】
-
-Natural Body Mechanics
-Natural Weight Distribution
-Natural Center Of Gravity
-Fashion Editorial Pose / Travel Editorial Pose
-Movie Poster Pose / Vogue Editorial Pose
-Confident Female Lead Presence
-
-自然手部擺放、自然身體轉向、自然頭部角度
-自然站姿或行走姿勢,與場景自然互動
-
-禁止僵硬姿勢、禁止機器人姿勢、禁止斷裂肢體
-禁止怪異手指、禁止不合理扭腰、禁止脖子過度扭轉`,
-
-photographer:`【時尚攝影師模組】
-
-Model-Led Composition
-Natural Contrapposto Pose
-Dynamic S-Curve Posture
-Luxury Fashion Campaign
-Editorial Storytelling
-Vogue Editorial Photography`,
-
-motion:`【旅拍動作導演模組】
-
-Captured Mid-Step
-Captured Between Movements
-Turning While Walking
-
-Interacting With Environment
-Hair Movement
-Dress Movement
-
-Looking Toward Destination
-Candid Editorial Moment
-
-Identity And Facial Features Remain Clearly Recognizable During Motion`,
-
-lighting:`【電影光影系統】
-
-Cinematic Natural Lighting
-Best Lighting For This Scene And Theme
-Lighting That Enhances The Mood
-Bright Face Illumination
-Luxury Fashion Photography Light Quality
-Natural Light Direction
-Global Lighting Consistency
-Physically Correct Lighting
-Fine Art Color Grading
-Soft Shadow Transition
-Natural Atmospheric Perspective
-
-人物與背景光線一致,人物自然融入環境
-電影級光影,柔和散景,空氣透視感`,
-
-cleanframe:`【畫面淨化系統】
-
-Only One Human / Solo Female
-No Crowd / No Tourist / No Extra Person
-Luxury Editorial Quality`,
-
-output:`【輸出規格】
-
-4K Quality / Ultra Detailed
-Magazine Quality / Cinematic Photography`
-};
-
-// ====== 構圖模組 ======
-const COMPOSITION = {
-A:`【構圖模組｜美女寫真】
-
-Knee-up Shot
-Subject Occupies 70-80% Of Frame
-Head To Knees Visible
-85mm Portrait Lens
-Beauty Editorial Composition
-Background Secondary, Character Primary`,
-
-B:`【構圖模組｜時尚大片】
-
-Three Quarter Body Shot
-Subject Occupies 50-60% Of Frame
-Mid-Thigh Up
-85mm Portrait Lens
-Fashion Editorial Composition
-Balanced Character And Environment`,
-
-C:`【構圖模組｜旅拍大片】
-
-Full Body Shot, Head To Toe Visible
-Subject Occupies 45-55% Of Frame
-Environment Occupies 45-55% Of Frame
-50mm Cinema Lens
-Travel Editorial Composition
-Near / Mid / Far Composition
-Foreground Atmosphere Layer
-Midground Story Layer
-Background Landmark Layer
-Travel Destination Clearly Recognizable
-Character Integrated Into Environment
-Not A Portrait With Background, A Travel Editorial Story`,
-
-D:`【構圖模組｜電影海報】
-
-Half Body Shot, Waist Up
-Subject Occupies 60-70% Of Frame
-24mm-35mm Wide Lens
-Cinematic Movie Poster Composition
-Dramatic Lighting Contrast
-Strong Visual Tension
-Narrative Cinematic Framing
-Environment Creates Atmosphere Behind Subject
-Movie Poster Quality`,
-
-E:`【構圖模組｜雜誌封面】
-
-Full Body Vertical Shot
-Subject Occupies 55-65% Of Frame
-Upper Frame Reserved For Magazine Title Space
-85mm Portrait Lens
-Magazine Cover Composition
-Clean Background Or Soft Bokeh
-Strong Eye Contact Or Elegant Gaze
-Fashion Magazine Cover Quality
-Editorial Cover Girl Presence`
-};
-
-// ====== 風格模組(主風格) ======
-const STYLES = {
-jp_gravure:{
-  label:"Japanese Gravure Editorial",
-  text:`Japanese Gravure Editorial
-日系寫真質感,自然柔光,清透膚質感
-溫暖生活感氛圍,真實寫真集風格`
-},
-korean:{
-  label:"Korean Editorial Photography",
-  text:`Korean Editorial Photography
-韓系寫真質感,清新柔焦,粉霧色調
-氛圍感光線,清透唯美風格`
-},
-euro:{
-  label:"European Fashion Editorial",
-  text:`European Fashion Editorial
-歐美時尚大片質感,強烈光影對比
-高級時裝氛圍,Vogue級攝影語言`
-},
-vogue:{
-  label:"Vogue Editorial Style",
-  text:`Vogue Editorial Style
-國際時尚雜誌封面質感,極致精緻感
-強烈造型語言,高端時裝攝影`
-},
-cinematic:{
-  label:"Cinematic Movie Poster Style",
-  text:`Cinematic Movie Poster Style
-電影海報級構圖,敘事性光影
-戲劇張力氛圍,Movie Poster Lighting`
-},
-chinese:{
-  label:"Chinese Classical Editorial",
-  text:`Chinese Classical Editorial
-中式古典美學,水墨意境光影
-漢服質感,東方雅韻攝影語言`
-},
-luxury:{
-  label:"Luxury Brand Campaign",
-  text:`Luxury Brand Campaign
-奢華精品廣告質感,極致細節光影
-高端品牌攝影語言,Hermès Chanel Level Quality`
-},
-gothic:{
-  label:"Dark Gothic Editorial",
-  text:`Dark Gothic Editorial
-暗黑哥德質感,戲劇性強烈陰影
-神秘氛圍光影,Dark Fantasy Photography`
-},
-ethereal:{
-  label:"Ethereal Fantasy Editorial",
-  text:`Ethereal Fantasy Editorial
-夢幻仙氣質感,柔焦光暈氛圍
-空靈唯美光影,Dreamy Fantasy Photography`
-},
-vintage:{
-  label:"Vintage Film Photography",
-  text:`Vintage Film Photography
-復古膠片質感,褪色暖調色彩
-底片顆粒感,Analog Film Aesthetic`
-}
-};
-
-const STYLE_SCOPE_NOTE =
-`風格僅套用於光線、構圖、氛圍、服裝質感
-不可覆寫或調整五官、臉型、臉部特徵`;
-
-// ====== 圖片比例 ======
-const RATIOS = {
-"9:16":"Aspect Ratio 9:16, Vertical Format, Mobile Wallpaper Composition",
-"3:4":"Aspect Ratio 3:4, Vertical Portrait Format",
-"4:5":"Aspect Ratio 4:5, Vertical Format, Social Media Post Composition",
-"1:1":"Aspect Ratio 1:1, Square Format",
-"2:3":"Aspect Ratio 2:3, Vertical Photo Format",
-"16:9":"Aspect Ratio 16:9, Horizontal Format, Landscape Wallpaper Composition",
-"21:9":"Aspect Ratio 21:9, Ultra Wide Cinematic Format, Movie Aspect Ratio",
-"4:3":"Aspect Ratio 4:3, Traditional Horizontal Format, Classic Retro Proportion"
-};
-
-// ====== 鏡頭氣場 ======
-const CAMERA_ANGLES = {
-neutral: null,
-low:`【鏡頭氣場模組｜低角度仰拍】
-
-Low Angle Hero Shot
-Camera Below Subject Eye Level
-Camera Positioned Below Waist Level
-Upward Looking Camera Angle
-Slight Upward Perspective
-
-Viewer Looking Up At The Subject
-Subject Visually Towering Over Viewer
-Subject Appears Powerful And Elevated
-
-Chin Slightly Raised
-Eyes Looking Down Toward Camera
-Calm And Unshakable Expression
-Subtle Superior Gaze
-
-Dominant Royal Aura
-Elegant Queenly Authority
-High Status Female Leader
-Strong Visual Dominance
-Majestic Presence
-
-Golden Hour Rim Light
-Cinematic Depth Of Field`,
-
-high:`【鏡頭氣場模組｜高角度俯拍】
-
-High Angle Shot
-Camera Above Subject Eye Level
-Overhead Perspective
-Downward Looking Camera Angle
-
-Dreamy Aerial Composition
-Ethereal Top-Down View
-Subject Surrounded By Environment
-Soft Romantic Atmosphere
-
-Gentle Downward Gaze
-Serene Peaceful Expression
-Feminine Graceful Energy
-
-Soft Diffused Light From Above
-Dreamy Bokeh Background
-Ethereal Fantasy Mood`
-};
-
-// ====== 互動邏輯:單選卡片 ======
-function setupRadioCards(containerId){
-  const container = document.getElementById(containerId);
-  const cards = container.querySelectorAll('.card');
-  cards.forEach(card=>{
-    card.addEventListener('click', ()=>{
-      cards.forEach(c=>c.classList.remove('selected'));
-      card.classList.add('selected');
-      card.querySelector('input').checked = true;
-    });
-  });
-}
-setupRadioCards('compositionCards');
-setupRadioCards('styleCards');
-setupRadioCards('ratioCards');
-setupRadioCards('cameraCards');
-
-// ====== 互動邏輯:主題快選 chips ======
-const themeChips = document.querySelectorAll('#themeChips .chip');
-const themeInputEl = document.getElementById('themeInput');
-
-themeChips.forEach(chip=>{
-  chip.addEventListener('click', ()=>{
-    themeChips.forEach(c=>c.classList.remove('selected'));
-    chip.classList.add('selected');
-    chip.querySelector('input').checked = true;
-    themeInputEl.value = chip.dataset.value;
-  });
-});
-
-themeInputEl.addEventListener('input', ()=>{
-  const matching = Array.from(themeChips).find(c => c.dataset.value === themeInputEl.value);
-  themeChips.forEach(c=>{
-    c.classList.toggle('selected', c === matching);
-    if(c !== matching){ c.querySelector('input').checked = false; }
-  });
-});
-
-// ====== 生成咒語 ======
-document.getElementById('generateBtn').addEventListener('click', ()=>{
-  const composition = document.querySelector('input[name="composition"]:checked').value;
-  const styleKey = document.querySelector('input[name="style"]:checked').value;
-  const style = STYLES[styleKey];
-  const ratioKey = document.querySelector('input[name="ratio"]:checked').value;
-  const cameraKey = document.querySelector('input[name="camera"]:checked').value;
-
-  // 主題
-  let theme = document.getElementById('themeInput').value.trim();
-  if(!theme){ theme = "(請填寫主題)"; }
-
-  // 服裝邏輯模組(動態)
-  let costume =
-`【服裝邏輯模組｜動態造型系統】
-
-根據主題「${theme}」自動設計服裝層次(Layer1~Layer7)
-服裝層數依主題自動增減,通常2~5層,特殊主題可擴展至7層
-優先真人旅拍感
-優先${style.label}的視覺語言
-服裝符合主題世界觀與材質質感
-Premium Fabric / Fine Embroidery / Rich Material Detail
-
-避免過度Cosplay化
-避免遊戲角色盔甲化
-避免動漫角色化`;
-
-  // 主題區塊
-  const themeBlock = `【主題】\n\n${theme}`;
-
-  // 主風格區塊
-  const styleBlock = `【風格模組｜主風格】\n\n${style.text}\n\n${STYLE_SCOPE_NOTE}`;
-
-  // 輸出比例區塊
-  const ratioBlock = `【輸出比例】\n\n${RATIOS[ratioKey]}`;
-
-  // 鏡頭氣場區塊(可選,neutral時不輸出)
-  const cameraBlock = CAMERA_ANGLES[cameraKey];
-
-  // 組合順序:身份鎖定 > 真人骨架 > 姿勢引擎 > 時尚攝影師 > 動作導演 > 鏡頭氣場(選) > 構圖 > 主風格 > 主題 > 服裝邏輯 > 光影 > 畫面淨化 > 輸出規格 > 輸出比例
-  const sections = [
-    CORE.identity,
-    CORE.skeleton,
-    CORE.pose,
-    CORE.photographer,
-    CORE.motion,
-    ...(cameraBlock ? [cameraBlock] : []),
-    COMPOSITION[composition],
-    styleBlock,
-    themeBlock,
-    costume,
-    CORE.lighting,
-    CORE.cleanframe,
-    CORE.output,
-    ratioBlock
-  ];
-
-  const finalPrompt = sections.join('\n\n⸻\n\n');
-
-  document.getElementById('outputText').value = finalPrompt;
-  document.getElementById('outputWrap').classList.remove('hidden');
-  document.getElementById('outputWrap').scrollIntoView({behavior:'smooth', block:'start'});
-
-  // reset copy button state
-  const copyBtn = document.getElementById('copyBtn');
-  copyBtn.textContent = '複製咒語';
-  copyBtn.classList.remove('copied');
-});
-
-// ====== 複製咒語 ======
-document.getElementById('copyBtn').addEventListener('click', ()=>{
-  const text = document.getElementById('outputText').value;
-  const copyBtn = document.getElementById('copyBtn');
-
-  function showCopied(){
-    copyBtn.textContent = '已複製!';
-    copyBtn.classList.add('copied');
-    setTimeout(()=>{
-      copyBtn.textContent = '複製咒語';
-      copyBtn.classList.remove('copied');
-    }, 1500);
-  }
-
-  if(navigator.clipboard && navigator.clipboard.writeText){
-    navigator.clipboard.writeText(text).then(showCopied).catch(()=>{
-      fallbackCopy(text, showCopied);
-    });
-  } else {
-    fallbackCopy(text, showCopied);
-  }
-});
-
-function fallbackCopy(text, cb){
-  const ta = document.getElementById('outputText');
-  ta.focus();
-  ta.select();
-  try{ document.execCommand('copy'); cb(); }catch(e){}
-}
-</script>
+<footer>
+  Lanbao Editorial Engine · 藍寶 AI 咒語產生器
+</footer>
 
 </body>
 </html>

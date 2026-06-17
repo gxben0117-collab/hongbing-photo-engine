@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>雜誌棚拍風格咒語產生器｜藍寶 Editorial Engine</title>
+<style>
+  :root{
+    --black:#0A0A0A;
+    --charcoal:#1A1A1A;
+    --dark:#222222;
+    --mid:#555555;
+    --soft:#999999;
+    --line:#2E2E2E;
+    --paper:#F7F4EF;
+    --cream:#FFFCF8;
+    --gold:#C9A84C;
+    --gold-soft:#E8D5A3;
+    --white:#FFFFFF;
+    --selected-bg:#1E1A14;
+    --selected-border:#C9A84C;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--black);
+    color:var(--paper);
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    line-height:1.6;
+    padding-bottom:80px;
+  }
+  .wrap{
+    max-width:660px;
+    margin:0 auto;
+    padding:70px 20px 40px;
+  }
+
+  /* ── NAV ── */
+  nav{
+    position:fixed;
+    top:0;left:0;right:0;
+    background:rgba(10,10,10,0.92);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+    z-index:100;
+    padding:0 24px;
+    height:54px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .nav-logo{
+    font-family:"Noto Serif TC",serif;
+    font-size:14px;
+    font-weight:700;
+    color:var(--gold);
+    letter-spacing:0.08em;
+    text-decoration:none;
+  }
+  .nav-links{ display:flex; gap:6px; }
+  .nav-link{
+    font-size:12px;
+    color:var(--soft);
+    text-decoration:none;
+    padding:6px 14px;
+    border-radius:999px;
+    border:1px solid transparent;
+    transition:all .15s;
+  }
+  .nav-link:hover{ color:var(--paper); border-color:var(--line); }
+  .nav-link.active{ color:var(--gold); border-color:var(--gold); background:rgba(201,168,76,0.08); }
+
+  /* ── HEADER ── */
+  header{
+    padding:48px 0 36px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:36px;
+  }
+  .header-eyebrow{
+    font-size:11px;
+    letter-spacing:0.35em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:14px;
+  }
+  header h1{
+    font-family:"Noto Serif TC",serif;
+    font-size:32px;
+    font-weight:900;
+    letter-spacing:0.02em;
+    line-height:1.2;
+    color:var(--white);
+    margin-bottom:10px;
+  }
+  header h1 span{
+    color:var(--gold);
+  }
+  header p{
+    font-size:13px;
+    color:var(--soft);
+  }
+
+  /* ── SECTION ── */
+  section{
+    margin-bottom:36px;
+  }
+  .section-header{
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+    margin-bottom:14px;
+    padding-bottom:10px;
+    border-bottom:1px solid #3E3E3E;
+  }
+  .section-label{
+    font-family:"Noto Serif TC",serif;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    color:var(--gold);
+  }
+  .section-title{
+    font-size:16px;
+    font-weight:700;
+    color:var(--white);
+  }
+  .section-sub{
+    font-size:12px;
+    color:#BBBBBB;
+    margin-left:auto;
+  }
+
+  /* ── CARDS ── */
+  .cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+  }
+  .cards-4{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:8px;
+  }
+  .card{
+    position:relative;
+    border:1px solid var(--line);
+    background:var(--charcoal);
+    border-radius:8px;
+    padding:12px 14px;
+    cursor:pointer;
+    transition:border-color .15s, background .15s;
+  }
+  .card input{
+    position:absolute;
+    opacity:0;
+    pointer-events:none;
+  }
+  .card .name{
+    font-weight:700;
+    font-size:13px;
+    color:var(--paper);
+    margin-bottom:3px;
+  }
+  .card .desc{
+    font-size:11px;
+    color:var(--soft);
+    line-height:1.4;
+  }
+  .card.selected{
+    border-color:var(--gold);
+    background:var(--selected-bg);
+  }
+  .card.selected .name{
+    color:var(--gold);
+  }
+
+  /* ── POSE GROUP ── */
+  .pose-auto{
+    margin-bottom:14px;
+  }
+  .pose-auto .pose-card{
+    max-width:160px;
+  }
+  .pose-group{
+    margin-bottom:16px;
+  }
+  .pose-group-label{
+    font-size:11px;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    color:var(--soft);
+    margin-bottom:8px;
+    padding-left:2px;
+  }
+  .pose-group-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:8px;
+  }
+  .pose-group-grid-3{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+  }
+
+  /* ── CHIPS ── */
+  .chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .chip{
+    position:relative;
+    border:1px solid var(--line);
+    background:var(--charcoal);
+    border-radius:999px;
+    padding:7px 16px;
+    font-size:13px;
+    color:var(--paper);
+    cursor:pointer;
+    transition:border-color .15s, background .15s, color .15s;
+  }
+  .chip input{
+    position:absolute;
+    opacity:0;
+    pointer-events:none;
+  }
+  .chip.selected{
+    border-color:var(--gold);
+    background:var(--selected-bg);
+    color:var(--gold);
+    font-weight:700;
+  }
+
+  /* ── NOTE ── */
+  .note{
+    background:var(--charcoal);
+    border:1px solid var(--line);
+    border-left:3px solid var(--gold);
+    border-radius:6px;
+    padding:12px 14px;
+    font-size:12px;
+    color:var(--soft);
+    margin-bottom:32px;
+  }
+
+  /* ── POSE GRID ── */
+  .pose-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+    gap:8px;
+  }
+  .pose-card{
+    position:relative;
+    border:1px solid var(--line);
+    background:var(--charcoal);
+    border-radius:8px;
+    padding:12px 14px;
+    cursor:pointer;
+    transition:border-color .15s, background .15s;
+  }
+  .pose-card input{
+    position:absolute;
+    opacity:0;
+    pointer-events:none;
+  }
+  .pose-card .pose-name{
+    font-weight:700;
+    font-size:13px;
+    color:var(--paper);
+    margin-bottom:3px;
+  }
+  .pose-card .pose-desc{
+    font-size:11px;
+    color:var(--soft);
+    line-height:1.4;
+  }
+  .pose-card.selected{
+    border-color:var(--gold);
+    background:var(--selected-bg);
+  }
+  .pose-card.selected .pose-name{
+    color:var(--gold);
+  }
+  .pose-card.risky{
+    border-color:#5a2a2a;
+  }
+  .pose-card.risky .pose-name{
+    color:#E08080;
+  }
+  .pose-card.risky .pose-desc{
+    color:#a06060;
+  }
+  .pose-card.risky.selected{
+    border-color:#E08080;
+    background:#1E1010;
+  }
+  .pose-card.risky.selected .pose-name{
+    color:#E08080;
+  }
+  .pose-warning{
+    display:none;
+    margin-top:10px;
+    background:#1E1010;
+    border:1px solid #5a2a2a;
+    border-left:3px solid #E08080;
+    border-radius:6px;
+    padding:10px 14px;
+    font-size:12px;
+    color:#E08080;
+    line-height:1.6;
+  }
+  .pose-warning.visible{
+    display:block;
+  }
+
+  /* ── INPUTS ── */
+  .text-input{
+    width:100%;
+    background:var(--charcoal);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:13px 14px;
+    font-size:14px;
+    color:var(--paper);
+    font-family:inherit;
+    margin-top:10px;
+  }
+  .text-input::placeholder{ color:var(--mid); }
+  .text-input:focus{
+    outline:none;
+    border-color:var(--gold);
+  }
+
+  /* ── GENERATE BUTTON ── */
+  .generate-btn{
+    width:100%;
+    background:var(--gold);
+    color:var(--black);
+    border:none;
+    border-radius:8px;
+    padding:18px;
+    font-size:15px;
+    font-weight:900;
+    letter-spacing:0.08em;
+    cursor:pointer;
+    font-family:"Noto Serif TC",serif;
+    transition:opacity .15s;
+  }
+  .generate-btn:active{ opacity:0.85; }
+
+  /* ── OUTPUT ── */
+  .output-wrap{
+    margin-top:28px;
+  }
+  .output-wrap textarea{
+    width:100%;
+    min-height:300px;
+    background:var(--charcoal);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:16px;
+    font-size:12px;
+    line-height:1.8;
+    color:var(--paper);
+    font-family:monospace;
+    resize:vertical;
+  }
+  .copy-btn{
+    margin-top:8px;
+    width:100%;
+    background:transparent;
+    border:1px solid var(--gold);
+    color:var(--gold);
+    border-radius:8px;
+    padding:13px;
+    font-size:13px;
+    font-weight:700;
+    cursor:pointer;
+    letter-spacing:0.05em;
+    transition:background .15s, color .15s;
+  }
+  .copy-btn.copied{
+    background:var(--gold);
+    color:var(--black);
+  }
+  .hidden{ display:none; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">藍寶 Editorial Engine</a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">首頁</a>
+    <a class="nav-link" href="travel.html">寫真旅拍</a>
+    <a class="nav-link active" href="magazine.html">雜誌棚拍</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <header>
+    <div class="header-eyebrow">Vol.2 · Studio Editorial</div>
+    <h1>雜誌<span>棚拍風格</span>咒語產生器</h1>
+    <p>封面人像咒語產生器｜身份鎖定 × 封面氣場</p>
+  </header>
+
+  <div class="note">
+    💡 使用時請附上人物參考照片——身份鎖定系統需要照片才能生效。
+  </div>
+
+  <!-- 01 封面風格 -->
+  <section>
+    <div class="section-header">
+      <span class="section-label">01</span>
+      <span class="section-title">封面風格</span>
+      <span class="section-sub">單選</span>
+    </div>
+    <div class="cards" id="styleCards">
+      <label class="card selected" data-value="vogue">
+        <input type="radio" name="style" value="vogue" checked>
+        <div class="name">Vogue</div>
+        <div class="desc">極致精緻,強烈造型感</div>
+      </label>
+      <label class="card" data-value="bazaar">
+        <input type="radio" name="style" value="bazaar">
+        <div class="name">Harper's Bazaar</div>
+        <div class="desc">藝術感,戲劇光影</div>
+      </label>
+      <label class="card" data-value="elle">
+        <input type="radio" name="style" value="elle">
+        <div class="name">ELLE</div>
+        <div class="desc">時尚清新,現代都會</div>
+      </label>
+      <label class="card" data-value="bazaar_cn">
+        <input type="radio" name="style" value="bazaar_cn">
+        <div class="name">時尚芭莎</div>
+        <div class="desc">東方奢華,高級感</div>
+      </label>
+      <label class="card" data-value="cosmopolitan">
+        <input type="radio" name="style" value="cosmopolitan">
+        <div class="name">Cosmopolitan</div>
+        <div class="desc">活力自信,大膽色彩</div>
+      </label>
+      <label class="card" data-value="natgeo">
+        <input type="radio" name="style" value="natgeo">
+        <div class="name">National Geographic</div>
+        <div class="desc">故事感,自然光影</div>
+      </label>
+      <label class="card" data-value="w_magazine">
+        <input type="radio" name="style" value="w_magazine">
+        <div class="name">W Magazine</div>
+        <div class="desc">前衛藝術,大膽實驗構圖</div>
+      </label>
+      <label class="card" data-value="another">
+        <input type="radio" name="style" value="another">
+        <div class="name">AnOther Magazine</div>
+        <div class="desc">獨立時尚,黑白高對比</div>
+      </label>
+      <label class="card" data-value="lofficiel">
+        <input type="radio" name="style" value="lofficiel">
+        <div class="name">L'Officiel</div>
+        <div class="desc">法式優雅,古典柔和高貴</div>
+      </label>
+      <label class="card" data-value="marie_claire">
+        <input type="radio" name="style" value="marie_claire">
+        <div class="name">嘉人 Marie Claire</div>
+        <div class="desc">東方現代,清新都會女性</div>
+      </label>
+    </div>
+  </section>
+
+  <!-- 02 背景設定 -->
+  <section>
+    <div class="section-header">
+      <span class="section-label">02</span>
+      <span class="section-title">背景設定</span>
+      <span class="section-sub">單選</span>
+    </div>
+    <div class="cards" id="bgCards">
+      <label class="card selected" data-value="studio">
+        <input type="radio" name="bg" value="studio" checked>
+        <div class="name">純色棚拍</div>
+        <div class="desc">乾淨背景,人物為絕對主體</div>
+      </label>
+      <label class="card" data-value="gradient">
+        <input type="radio" name="bg" value="gradient">
+        <div class="name">漸層背景</div>
+        <div class="desc">色彩過渡,時尚感強</div>
+      </label>
+      <label class="card" data-value="scene">
+        <input type="radio" name="bg" value="scene">
+        <div class="name">場景融合</div>
+        <div class="desc">背景虛化,環境氛圍感</div>
+      </label>
+      <label class="card" data-value="abstract">
+        <input type="radio" name="bg" value="abstract">
+        <div class="name">抽象藝術</div>
+        <div class="desc">幾何/紋理/藝術感背景</div>
+      </label>
+    </div>
+  </section>
+
+  <!-- 03 姿態模組 -->
+  <section>
+    <div class="section-header">
+      <span class="section-label">03</span>
+      <span class="section-title">姿態模組</span>
+      <span class="section-sub">單選,可選自動</span>
+    </div>
+
+    <!-- 自動 -->
+    <div class="pose-auto">
+      <label class="pose-card selected" data-value="auto" style="display:inline-block;min-width:160px;">
+        <input type="radio" name="pose" value="auto" checked>
+        <div class="pose-name">✦ 自動</div>
+        <div class="pose-desc">交給AI判斷最佳姿態</div>
+      </label>
+    </div>
+
+    <!-- 站姿系 -->
+    <div class="pose-group">
+      <div class="pose-group-label">站姿系</div>
+      <div class="pose-group-grid" id="poseCards">
+        <label class="pose-card" data-value="contrapposto">
+          <input type="radio" name="pose" value="contrapposto">
+          <div class="pose-name">S曲線站姿</div>
+          <div class="pose-desc">重心單腳,肩骨盆反向</div>
+        </label>
+        <label class="pose-card" data-value="hip">
+          <input type="radio" name="pose" value="hip">
+          <div class="pose-name">手插腰站姿</div>
+          <div class="pose-desc">自信氣場,修長身形</div>
+        </label>
+        <label class="pose-card" data-value="lean">
+          <input type="radio" name="pose" value="lean">
+          <div class="pose-name">倚牆站姿</div>
+          <div class="pose-desc">有張力的側身倚靠</div>
+        </label>
+        <label class="pose-card" data-value="turn">
+          <input type="radio" name="pose" value="turn">
+          <div class="pose-name">回眸走姿</div>
+          <div class="pose-desc">轉身凝視,故事感強</div>
+        </label>
+        <label class="pose-card" data-value="back_turn">
+          <input type="radio" name="pose" value="back_turn">
+          <div class="pose-name">背對回首</div>
+          <div class="pose-desc">完全背對+緩緩回頭,神秘感</div>
+        </label>
+      </div>
+    </div>
+
+    <!-- 坐姿/地面系 -->
+    <div class="pose-group">
+      <div class="pose-group-label">坐姿 / 地面系</div>
+      <div class="pose-group-grid">
+        <label class="pose-card" data-value="guifei">
+          <input type="radio" name="pose" value="guifei">
+          <div class="pose-name">貴妃倚坐</div>
+          <div class="pose-desc">單腿伸展,慵懶女王感</div>
+        </label>
+        <label class="pose-card" data-value="chin_rest">
+          <input type="radio" name="pose" value="chin_rest">
+          <div class="pose-name">托腮坐姿</div>
+          <div class="pose-desc">單手托腮+腿交叉優雅感</div>
+        </label>
+        <label class="pose-card" data-value="kneel">
+          <input type="radio" name="pose" value="kneel">
+          <div class="pose-name">單膝跪姿</div>
+          <div class="pose-desc">挺胸收腰,時尚大片感</div>
+        </label>
+        <label class="pose-card" data-value="hands_ground">
+          <input type="radio" name="pose" value="hands_ground">
+          <div class="pose-name">雙手撐地跪姿</div>
+          <div class="pose-desc">前傾+雙手撐地+仰頭</div>
+        </label>
+        <label class="pose-card" data-value="lunge">
+          <input type="radio" name="pose" value="lunge">
+          <div class="pose-name">低重心弓步</div>
+          <div class="pose-desc">戰鬥起手式,爆發力</div>
+        </label>
+        <label class="pose-card" data-value="side_lie">
+          <input type="radio" name="pose" value="side_lie">
+          <div class="pose-name">側躺延伸</div>
+          <div class="pose-desc">側躺+單手托頭+腿部延伸</div>
+        </label>
+      </div>
+    </div>
+
+    <!-- 手勢/動作系 -->
+    <div class="pose-group">
+      <div class="pose-group-label">手勢 / 動作系</div>
+      <div class="pose-group-grid">
+        <label class="pose-card" data-value="vogue_hands">
+          <input type="radio" name="pose" value="vogue_hands">
+          <div class="pose-name">Vogue手勢</div>
+          <div class="pose-desc">雙手框住臉,Ballroom感</div>
+        </label>
+        <label class="pose-card" data-value="arms_wide">
+          <input type="radio" name="pose" value="arms_wide">
+          <div class="pose-name">展翅手臂</div>
+          <div class="pose-desc">雙臂大幅向兩側延伸</div>
+        </label>
+        <label class="pose-card" data-value="water_sleeve">
+          <input type="radio" name="pose" value="water_sleeve">
+          <div class="pose-name">水袖揚起</div>
+          <div class="pose-desc">東方戲劇感,水袖飄動</div>
+        </label>
+        <label class="pose-card" data-value="fan_cover">
+          <input type="radio" name="pose" value="fan_cover">
+          <div class="pose-name">持扇遮面</div>
+          <div class="pose-desc">單手持扇半遮臉+側身</div>
+        </label>
+        <label class="pose-card" data-value="tiptoe">
+          <input type="radio" name="pose" value="tiptoe">
+          <div class="pose-name">踮腳仰手</div>
+          <div class="pose-desc">踮腳尖+雙手向上延伸</div>
+        </label>
+      </div>
+    </div>
+
+    <!-- 高風險系 -->
+    <div class="pose-group">
+      <div class="pose-group-label" style="color:#E08080;">⚠️ 高風險系 — AI易出現肢體扭曲,建議多生成幾次挑選</div>
+      <div class="pose-group-grid-3">
+        <label class="pose-card risky" data-value="jojo_twist" data-risky="true">
+          <input type="radio" name="pose" value="jojo_twist">
+          <div class="pose-name">⚠️ JoJo扭腰</div>
+          <div class="pose-desc">誇張扭腰側身+手指指向鏡頭</div>
+        </label>
+        <label class="pose-card risky" data-value="jojo_cross" data-risky="true">
+          <input type="radio" name="pose" value="jojo_cross">
+          <div class="pose-name">⚠️ JoJo交叉</div>
+          <div class="pose-desc">雙手交叉胸前+仰頭俯視</div>
+        </label>
+        <label class="pose-card risky" data-value="dip" data-risky="true">
+          <input type="radio" name="pose" value="dip">
+          <div class="pose-name">⚠️ Dip後仰</div>
+          <div class="pose-desc">大幅後仰接近地面,Ballroom</div>
+        </label>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- 04 鏡頭氣場 -->
+  <section>
+    <div class="section-header">
+      <span class="section-label">04</span>
+      <span class="section-title">鏡頭氣場</span>
+      <span class="section-sub">單選</span>
+    </div>
+    <div class="cards" id="cameraCards">
+      <label class="card selected" data-value="neutral">
+        <input type="radio" name="camera" value="neutral" checked>
+        <div class="name">自然平視</div>
+        <div class="desc">標準封面視角(預設)</div>
+      </label>
+      <label class="card" data-value="low">
+        <input type="radio" name="camera" value="low">
+        <div class="name">低角度仰拍</div>
+        <div class="desc">Hero Shot / 鏡頭低於腰部</div>
+      </label>
+      <label class="card" data-value="high">
+        <input type="radio" name="camera" value="high">
+        <div class="name">高角度俯拍</div>
+        <div class="desc">俯視角 / 鏡頭高於頭部</div>
+      </label>
+    </div>
+  </section>
+
+  <!-- 05 主題/服裝方向 -->
+  <section>
+    <div class="section-header">
+      <span class="section-label">05</span>
+      <span class="section-title">主題 / 服裝方向</span>
+      <span class="section-sub">點選快選或自行輸入</span>
+    </div>
+    <div id="themeRecommendHint" style="display:none;font-size:12px;color:var(--gold);margin-bottom:8px;">✦ 金色邊框為推薦搭配,所有選項皆可自由選擇</div>
+    <div class="chips" id="themeChips">
+      <label class="chip" data-value="現代時尚"><input type="radio" name="themePreset" value="現代時尚">現代時尚</label>
+      <label class="chip" data-value="奢華晚裝"><input type="radio" name="themePreset" value="奢華晚裝">奢華晚裝</label>
+      <label class="chip" data-value="極簡主義"><input type="radio" name="themePreset" value="極簡主義">極簡主義</label>
+      <label class="chip" data-value="復古膠片"><input type="radio" name="themePreset" value="復古膠片">復古膠片</label>
+      <label class="chip" data-value="暗黑哥德"><input type="radio" name="themePreset" value="暗黑哥德">暗黑哥德</label>
+      <label class="chip" data-value="夢幻仙氣"><input type="radio" name="themePreset" value="夢幻仙氣">夢幻仙氣</label>
+      <label class="chip" data-value="運動風尚"><input type="radio" name="themePreset" value="運動風尚">運動風尚</label>
+      <label class="chip" data-value="九尾妖狐"><input type="radio" name="themePreset" value="九尾妖狐">九尾妖狐</label>
+      <label class="chip" data-value="女武神"><input type="radio" name="themePreset" value="女武神">女武神</label>
+      <label class="chip" data-value="暗黑女王"><input type="radio" name="themePreset" value="暗黑女王">暗黑女王</label>
+      <label class="chip" data-value="中式古典"><input type="radio" name="themePreset" value="中式古典">中式古典</label>
+      <label class="chip" data-value="唐朝盛世"><input type="radio" name="themePreset" value="唐朝盛世">唐朝盛世</label>
+      <label class="chip" data-value="敦煌飛天"><input type="radio" name="themePreset" value="敦煌飛天">敦煌飛天</label>
+      <label class="chip" data-value="西域舞姬"><input type="radio" name="themePreset" value="西域舞姬">西域舞姬</label>
+      <label class="chip" data-value="清宮格格"><input type="radio" name="themePreset" value="清宮格格">清宮格格</label>
+      <label class="chip" data-value="古風仙女"><input type="radio" name="themePreset" value="古風仙女">古風仙女</label>
+      <label class="chip" data-value="和風雅韻"><input type="radio" name="themePreset" value="和風雅韻">和風雅韻</label>
+      <label class="chip" data-value="巴黎時尚"><input type="radio" name="themePreset" value="巴黎時尚">巴黎時尚</label>
+      <label class="chip" data-value="米蘭時裝週"><input type="radio" name="themePreset" value="米蘭時裝週">米蘭時裝週</label>
+      <label class="chip" data-value="度假風尚"><input type="radio" name="themePreset" value="度假風尚">度假風尚</label>
+    </div>
+    <input type="text" class="text-input" id="themeInput" placeholder="自行輸入主題或服裝方向,例如:唐朝盛世">
+  </section>
+
+  <!-- 06 圖片比例 -->
+  <section>
+    <div class="section-header">
+      <span class="section-label">06</span>
+      <span class="section-title">圖片比例</span>
+      <span class="section-sub">單選</span>
+    </div>
+    <div class="cards-4" id="ratioCards">
+      <label class="card selected" data-value="2:3">
+        <input type="radio" name="ratio" value="2:3" checked>
+        <div class="name">2:3</div>
+        <div class="desc">雜誌封面標準</div>
+      </label>
+      <label class="card" data-value="3:4">
+        <input type="radio" name="ratio" value="3:4">
+        <div class="name">3:4</div>
+        <div class="desc">直式人像</div>
+      </label>
+      <label class="card" data-value="4:5">
+        <input type="radio" name="ratio" value="4:5">
+        <div class="name">4:5</div>
+        <div class="desc">IG貼文</div>
+      </label>
+      <label class="card" data-value="9:16">
+        <input type="radio" name="ratio" value="9:16">
+        <div class="name">9:16</div>
+        <div class="desc">手機桌布</div>
+      </label>
+      <label class="card" data-value="1:1">
+        <input type="radio" name="ratio" value="1:1">
+        <div class="name">1:1</div>
+        <div class="desc">正方形</div>
+      </label>
+      <label class="card" data-value="16:9">
+        <input type="radio" name="ratio" value="16:9">
+        <div class="name">16:9</div>
+        <div class="desc">橫向桌布</div>
+      </label>
+      <label class="card" data-value="21:9">
+        <input type="radio" name="ratio" value="21:9">
+        <div class="name">21:9</div>
+        <div class="desc">電影畫幅</div>
+      </label>
+      <label class="card" data-value="4:3">
+        <input type="radio" name="ratio" value="4:3">
+        <div class="name">4:3</div>
+        <div class="desc">復古橫式</div>
+      </label>
+    </div>
+  </section>
+
+  <!-- 07 生成 -->
+  <section>
+    <div class="section-header">
+      <span class="section-label">07</span>
+      <span class="section-title">生成咒語</span>
+    </div>
+    <button class="generate-btn" id="generateBtn">生成咒語</button>
+  </section>
+
+  <div class="output-wrap hidden" id="outputWrap">
+    <textarea id="outputText" readonly></textarea>
+    <button class="copy-btn" id="copyBtn">複製咒語</button>
+  </div>
+
+</div>
+
+<script>
+// ====== 固定核心引擎(與旅拍引擎共用) ======
+const CORE = {
+identity:`【身份鎖定系統｜最高優先級】
+
+使用上傳人物作為唯一主角
+使用上傳照片作為唯一身份來源
+保持與上傳照片為同一人
+第一眼就是本人,熟人一眼認得出來
+Identity Recognition Priority Maximum
+
+保留原始臉型、眉型、眼型、眼距、眼神
+保留原始鼻型、嘴型、下顎線、五官比例
+保留自然不對稱特徵、成熟感、真實皮膚質感
+保留人物原有氣質
+
+禁止換臉、禁止AI美女臉、禁止網紅臉
+禁止明星臉、禁止模板臉、禁止幼態化
+禁止過度磨皮、禁止塑膠皮膚、禁止身份漂移`,
+
+skeleton:`【真人骨架系統】
+
+Same Person Face And Body
+Realistic Female Anatomy
+Healthy Adult Female Figure
+Natural Human Proportions
+
+自然肩寬、自然鎖骨、自然胸腔厚度
+自然軀幹深度、自然腰臀比例
+自然四肢比例、自然頭身比例、自然重心
+
+禁止娃娃比例、禁止紙片人、禁止超模比例
+禁止肩膀過窄、禁止頭身失衡、禁止人體變形`,
+
+photographer:`【時尚攝影師模組】
+
+Model-Led Composition
+Natural Contrapposto Pose
+Dynamic S-Curve Posture
+Luxury Fashion Campaign
+Editorial Storytelling
+Vogue Editorial Photography`,
+
+cleanframe:`【畫面淨化系統】
+
+Only One Human / Solo Female
+No Crowd / No Tourist / No Extra Person
+Luxury Editorial Quality`,
+
+output:`【輸出規格】
+
+4K Quality / Ultra Detailed
+Magazine Quality / Cinematic Photography`
+};
+
+// ====== 封面風格 ======
+const STYLES = {
+vogue:{
+  label:"Vogue Editorial",
+  text:`Vogue Editorial Photography
+極致精緻封面質感,強烈造型語言
+High Fashion Magazine Cover Quality
+Vogue Cover Girl Presence`
+},
+bazaar:{
+  label:"Harper's Bazaar Editorial",
+  text:`Harper's Bazaar Editorial Photography
+藝術感封面構圖,戲劇性光影
+Fine Art Fashion Photography
+Dramatic Editorial Lighting`
+},
+elle:{
+  label:"ELLE Editorial",
+  text:`ELLE Magazine Editorial Photography
+現代都會時尚感,清新乾淨構圖
+Contemporary Fashion Magazine Quality
+Confident Modern Female Lead`
+},
+bazaar_cn:{
+  label:"時尚芭莎 Editorial",
+  text:`時尚芭莎 Editorial Photography
+東方奢華美學,高級感封面質感
+Asian Luxury Fashion Magazine Quality
+Elegant Oriental Female Presence`
+},
+cosmopolitan:{
+  label:"Cosmopolitan Editorial",
+  text:`Cosmopolitan Magazine Editorial Photography
+活力自信封面氣場,大膽色彩運用
+Bold Confident Female Energy
+Dynamic Magazine Cover Quality`
+},
+natgeo:{
+  label:"National Geographic Portrait",
+  text:`National Geographic Portrait Photography
+真實故事感構圖,自然光影質感
+Documentary Portrait Quality
+Authentic Human Story Presence`
+},
+w_magazine:{
+  label:"W Magazine Editorial",
+  text:`W Magazine Editorial Photography
+前衛藝術感封面構圖,大膽實驗性視覺
+Contemporary Art Fashion Photography
+Bold Avant-Garde Editorial Aesthetic`
+},
+another:{
+  label:"AnOther Magazine Editorial",
+  text:`AnOther Magazine Editorial Photography
+獨立時尚極致藝術感,高對比黑白美學
+Independent Fashion Art Photography
+Extreme Editorial Visual Language`
+},
+lofficiel:{
+  label:"L'Officiel Editorial",
+  text:`L'Officiel Magazine Editorial Photography
+法式優雅古典美學,柔和高貴光影
+French Elegance Fashion Photography
+Timeless Classical Beauty Aesthetic`
+},
+marie_claire:{
+  label:"Marie Claire Editorial",
+  text:`Marie Claire Magazine Editorial Photography
+東方現代都會女性氣質,清新質感
+Asian Contemporary Fashion Photography
+Modern Confident Female Editorial`
+}
+};
+
+// ====== 背景設定 ======
+const BACKGROUNDS = {
+studio:`Pure Studio Background
+Clean Seamless Backdrop
+Subject Is Absolute Primary Focus
+No Environmental Distraction
+Professional Studio Photography`,
+gradient:`Gradient Background
+Smooth Color Transition Backdrop
+Luxury Color Gradient
+Fashion Editorial Background`,
+scene:`Scene Integrated Background
+Soft Bokeh Environment
+Shallow Depth Of Field Background
+Character Stands Out From Environment
+Atmospheric Scene Background`,
+abstract:`Abstract Artistic Background
+Geometric Or Textured Backdrop
+Contemporary Art Background
+Bold Artistic Visual Statement`
+};
+
+// ====== 姿態模組 ======
+const POSES = {
+auto: null,
+contrapposto:`Natural Contrapposto Pose
+Weight On One Leg
+Shoulders And Hips In Opposition
+Dynamic S-Curve Body Line
+Elegant Model Stance`,
+hip:`Hand On Hip Power Pose
+Confident Assertive Stance
+Strong Female Presence
+Elongated Body Line`,
+lean:`Leaning Against Surface
+Relaxed Yet Powerful Stance
+Body Weight Shifted Elegantly
+Casual Luxury Attitude`,
+turn:`Walking Away Then Turning Back
+Mid-Turn Captured Moment
+Over The Shoulder Glance
+Candid Elegant Movement`,
+guifei:`Elegant Seated Pose
+One Leg Extended Gracefully Forward
+Other Leg Slightly Bent
+Upper Body Leaning Back With One Hand Supporting
+Relaxed Shoulders, Long Elegant Legs
+Confident And Alluring Expression`,
+kneel:`Elegant Kneeling Pose
+One Knee On The Ground
+Straight Posture, Graceful Waist Curve
+Hands Resting Gently On Thigh
+Fashion Editorial Pose, Refined Feminine Elegance`,
+lunge:`Dynamic Low Stance
+Wide Lunge Pose
+One Hand Touching The Ground
+One Leg Fully Extended
+Body Lowered Close To The Floor
+Powerful Feminine Energy, Ready-To-Strike Stance`,
+
+vogue_hands:`Vogue Hand Frame Pose
+Both Hands Framing The Face Elegantly
+Fingers Spread Gracefully Near Face
+Paris Ballroom Vogue Style
+Strong Dramatic Gesture`,
+
+arms_wide:`Arms Wide Open Pose
+Both Arms Extended Broadly To The Sides
+Expansive Powerful Body Language
+Wings-Like Feminine Presence
+Dramatic Editorial Gesture`,
+
+chin_rest:`Seated Hand Under Chin Pose
+One Hand Resting Under Chin Elegantly
+Legs Crossed Gracefully
+Thoughtful Confident Expression
+Refined Seated Editorial Pose`,
+
+water_sleeve:`Water Sleeve Dance Pose
+Flowing Fabric Sleeves Caught Mid-Motion
+Arms Extended In Classical Dance Form
+Traditional Eastern Performance Art Aesthetic
+Elegant Flowing Movement`,
+
+fan_cover:`Half Face Fan Cover Pose
+One Hand Holding Fan Partially Covering Face
+Body Turned Sideways
+Eyes Visible Above Fan
+Mysterious Elegant Eastern Expression`,
+
+tiptoe:`Tiptoe Arms Raised Pose
+Standing On Tiptoe
+Both Arms Reaching Upward Gracefully
+Elongated Vertical Body Line
+Ethereal Upward Reaching Energy`,
+
+jojo_twist:`Exaggerated Dramatic Twist Pose
+Upper Body Twisted 90 Degrees From Lower Body
+One Hand Pointing Directly At Camera
+Other Hand On Hip
+Dramatic Theatrical Body Language
+JoJo's Bizarre Adventure Inspired Pose
+Exaggerated Confident Expression`,
+
+jojo_cross:`Arms Crossed Dramatic Pose
+Both Arms Crossed Powerfully Across Chest
+Head Tilted Back Looking Down At Camera
+Dominant Superior Expression
+Theatrical Dramatic Stance
+JoJo's Bizarre Adventure Inspired`,
+
+dip:`Dramatic Deep Back Arch Pose
+Upper Body Arched Dramatically Backward
+Close To Ground Level
+One Leg Extended
+Arms Spread For Balance
+Paris Ballroom Dip Style
+Extreme Theatrical Movement`,
+
+back_turn:`Full Back To Camera Pose
+Completely Facing Away From Camera
+Slowly Turning Head Back Over Shoulder
+Mysterious Enigmatic Presence
+Story-Driven Narrative Pose`,
+
+hands_ground:`Kneeling Both Hands On Ground Pose
+Upper Body Leaning Forward
+Both Hands Planted On Ground
+Head Tilted Up Toward Camera
+High Tension Fashion Editorial Pose
+Powerful Grounded Energy`,
+
+side_lie:`Elegant Side Lying Pose
+Lying On Side
+One Hand Supporting Head Gracefully
+Legs Extended Elegantly In Line
+Full Body Length Visible
+Luxurious Editorial Lounging Pose`
+};
+
+// ====== 鏡頭氣場 ======
+const CAMERAS = {
+neutral: null,
+low:`【鏡頭氣場｜低角度仰拍】
+
+Low Angle Hero Shot
+Camera Below Subject Eye Level
+Camera Positioned Below Waist Level
+Upward Looking Camera Angle
+
+Viewer Looking Up At The Subject
+Subject Visually Towering Over Viewer
+Subject Appears Powerful And Elevated
+
+Chin Slightly Raised
+Eyes Looking Down Toward Camera
+Calm And Unshakable Expression
+Subtle Superior Gaze
+
+Dominant Royal Aura
+Strong Visual Dominance
+Cinematic Depth Of Field`,
+high:`【鏡頭氣場｜高角度俯拍】
+
+High Angle Shot
+Camera Above Subject Eye Level
+Downward Looking Camera Angle
+
+Dreamy Aerial Composition
+Subject Surrounded By Environment
+Gentle Downward Gaze, Serene Expression
+Soft Diffused Light From Above`
+};
+
+// ====== 比例 ======
+const RATIOS = {
+"2:3":"Aspect Ratio 2:3, Vertical Magazine Cover Format",
+"3:4":"Aspect Ratio 3:4, Vertical Portrait Format",
+"4:5":"Aspect Ratio 4:5, Social Media Post Format",
+"9:16":"Aspect Ratio 9:16, Vertical Mobile Format",
+"1:1":"Aspect Ratio 1:1, Square Format",
+"16:9":"Aspect Ratio 16:9, Horizontal Landscape Format",
+"21:9":"Aspect Ratio 21:9, Ultra Wide Cinematic Movie Format",
+"4:3":"Aspect Ratio 4:3, Traditional Retro Horizontal Format"
+};
+
+// ====== 封面光影系統(封面專屬) ======
+const COVER_LIGHTING =
+`【封面光影系統】
+
+Cinematic Natural Lighting
+Best Lighting For This Style And Theme
+Lighting That Enhances The Mood
+Bright Face Illumination
+Luxury Fashion Photography Light Quality
+Natural Light Direction
+Global Lighting Consistency
+Physically Correct Lighting
+Fine Art Color Grading
+Soft Shadow Transition
+
+Bright Catchlight In Eyes
+Skin Luminosity And Clarity
+Natural Skin Texture Preserved`;
+
+// ====== 封面構圖系統 ======
+const COVER_COMPOSITION =
+`【封面構圖系統】
+
+Magazine Cover Composition
+Portrait Oriented Vertical Frame
+Subject Occupies 60-75% Of Frame
+Head And Upper Body Clearly Visible
+Strong Eye Contact Or Elegant Gaze
+Upper Frame Has Visual Breathing Room
+Cover Girl Presence
+Luxury Editorial Quality`;
+
+// ====== 互動:單選卡片 ======
+function setupRadioCards(containerId){
+  const container = document.getElementById(containerId);
+  if(!container) return;
+  const cards = container.querySelectorAll('.card, .pose-card');
+  cards.forEach(card=>{
+    card.addEventListener('click',()=>{
+      cards.forEach(c=>c.classList.remove('selected'));
+      card.classList.add('selected');
+      card.querySelector('input').checked = true;
+    });
+  });
+}
+setupRadioCards('styleCards');
+setupRadioCards('bgCards');
+setupRadioCards('cameraCards');
+setupRadioCards('ratioCards');
+
+// ====== 姿態選擇(跨多個群組) ======
+const allPoseCards = document.querySelectorAll('.pose-card');
+allPoseCards.forEach(card=>{
+  card.addEventListener('click',()=>{
+    allPoseCards.forEach(c=>c.classList.remove('selected'));
+    card.classList.add('selected');
+    card.querySelector('input').checked = true;
+    updateThemeRecommendations(card.dataset.value);
+  });
+});
+
+// ====== 互動:主題快選 ======
+const themeChips = document.querySelectorAll('#themeChips .chip');
+const themeInputEl = document.getElementById('themeInput');
+
+// 姿態 → 推薦主題映射
+const POSE_THEME_MAP = {
+  auto:        [],
+  contrapposto:['現代時尚','奢華晚裝','極簡主義','度假風尚'],
+  hip:         ['現代時尚','奢華晚裝','米蘭時裝週','度假風尚'],
+  lean:        ['復古膠片','極簡主義','巴黎時尚','度假風尚'],
+  turn:        ['復古膠片','巴黎時尚','米蘭時裝週'],
+  guifei:      ['清宮格格','唐朝盛世','奢華晚裝'],
+  kneel:       ['清宮格格','唐朝盛世','奢華晚裝'],
+  lunge:       ['九尾妖狐','女武神','暗黑哥德'],
+  vogue_hands: ['現代時尚','巴黎時尚','米蘭時裝週'],
+  arms_wide:   ['夢幻仙氣','敦煌飛天','古風仙女'],
+  chin_rest:   ['奢華晚裝','極簡主義','復古膠片'],
+  water_sleeve:['唐朝盛世','敦煌飛天','西域舞姬','中式古典','古風仙女'],
+  fan_cover:   ['唐朝盛世','清宮格格','中式古典','和風雅韻'],
+  tiptoe:      ['敦煌飛天','古風仙女','夢幻仙氣'],
+  jojo_twist:  ['九尾妖狐','女武神','暗黑女王','暗黑哥德'],
+  jojo_cross:  ['九尾妖狐','女武神','暗黑女王'],
+  dip:         ['復古膠片','巴黎時尚','米蘭時裝週'],
+  back_turn:   ['暗黑哥德','九尾妖狐','復古膠片','夢幻仙氣'],
+  hands_ground:['女武神','九尾妖狐','暗黑女王','暗黑哥德'],
+  side_lie:    ['奢華晚裝','度假風尚','極簡主義','復古膠片']
+};
+
+function updateThemeRecommendations(poseKey){
+  const recommended = POSE_THEME_MAP[poseKey] || [];
+  const hint = document.getElementById('themeRecommendHint');
+  hint.style.display = recommended.length > 0 ? 'block' : 'none';
+  themeChips.forEach(chip=>{
+    const val = chip.dataset.value;
+    if(recommended.length === 0){
+      chip.style.borderColor = '';
+      chip.style.opacity = '1';
+    } else if(recommended.includes(val)){
+      chip.style.borderColor = 'var(--gold)';
+      chip.style.opacity = '1';
+    } else {
+      chip.style.borderColor = '';
+      chip.style.opacity = '0.45';
+    }
+  });
+}
+
+themeChips.forEach(chip=>{
+  chip.addEventListener('click',()=>{
+    themeChips.forEach(c=>c.classList.remove('selected'));
+    chip.classList.add('selected');
+    chip.querySelector('input').checked = true;
+    themeInputEl.value = chip.dataset.value;
+  });
+});
+themeInputEl.addEventListener('input',()=>{
+  const match = Array.from(themeChips).find(c=>c.dataset.value===themeInputEl.value);
+  themeChips.forEach(c=>c.classList.toggle('selected', c===match));
+});
+
+// ====== 生成咒語 ======
+document.getElementById('generateBtn').addEventListener('click',()=>{
+  const styleKey = document.querySelector('input[name="style"]:checked').value;
+  const bgKey = document.querySelector('input[name="bg"]:checked').value;
+  const poseKey = document.querySelector('input[name="pose"]:checked').value;
+  const cameraKey = document.querySelector('input[name="camera"]:checked').value;
+  const ratioKey = document.querySelector('input[name="ratio"]:checked').value;
+
+  let theme = themeInputEl.value.trim();
+  if(!theme) theme = "(請填寫主題或服裝方向)";
+
+  const style = STYLES[styleKey];
+
+  // 風格區塊
+  const styleBlock =
+`【封面風格｜${style.label}】
+
+${style.text}
+
+風格僅套用於光線、構圖、氛圍、服裝質感
+不可覆寫或調整五官、臉型、臉部特徵`;
+
+  // 背景區塊
+  const bgBlock = `【背景設定】\n\n${BACKGROUNDS[bgKey]}`;
+
+  // 姿態區塊(可選)
+  const poseText = POSES[poseKey];
+  const poseBlock = poseText ? `【姿態模組】\n\n${poseText}` : null;
+
+  // 鏡頭區塊(可選)
+  const cameraBlock = CAMERAS[cameraKey];
+
+  // 服裝邏輯
+  const costumeBlock =
+`【服裝邏輯模組｜動態造型系統】
+
+根據主題「${theme}」自動設計服裝層次
+服裝層數依主題自動增減,通常2~5層
+優先封面大片感
+優先${style.label}的視覺語言
+服裝符合主題世界觀與材質質感
+Premium Fabric / Luxury Material Detail
+
+避免過度Cosplay化
+避免遊戲角色盔甲化`;
+
+  // 主題區塊
+  const themeBlock = `【主題 / 服裝方向】\n\n${theme}`;
+
+  // 比例區塊
+  const ratioBlock = `【輸出比例】\n\n${RATIOS[ratioKey]}`;
+
+  const sections = [
+    CORE.identity,
+    CORE.skeleton,
+    CORE.photographer,
+    ...(poseBlock ? [poseBlock] : []),
+    ...(cameraBlock ? [cameraBlock] : []),
+    COVER_COMPOSITION,
+    styleBlock,
+    bgBlock,
+    themeBlock,
+    costumeBlock,
+    COVER_LIGHTING,
+    CORE.cleanframe,
+    CORE.output,
+    ratioBlock
+  ];
+
+  document.getElementById('outputText').value = sections.join('\n\n⸻\n\n');
+  document.getElementById('outputWrap').classList.remove('hidden');
+  document.getElementById('outputWrap').scrollIntoView({behavior:'smooth', block:'start'});
+
+  const copyBtn = document.getElementById('copyBtn');
+  copyBtn.textContent = '複製咒語';
+  copyBtn.classList.remove('copied');
+});
+
+// ====== 複製 ======
+document.getElementById('copyBtn').addEventListener('click',()=>{
+  const text = document.getElementById('outputText').value;
+  const btn = document.getElementById('copyBtn');
+  function showCopied(){
+    btn.textContent='已複製!';
+    btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='複製咒語';btn.classList.remove('copied');},1500);
+  }
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(showCopied).catch(()=>{
+      document.getElementById('outputText').select();
+      document.execCommand('copy');showCopied();
+    });
+  } else {
+    document.getElementById('outputText').select();
+    document.execCommand('copy');showCopied();
+  }
+});
+</script>
+</body>
+</html>
