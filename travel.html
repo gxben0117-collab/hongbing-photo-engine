@@ -291,7 +291,7 @@
     <div class="step">
       <div class="num">02</div>
       <div class="title">選擇主風格</div>
-      <div class="sub">單選,決定整體光影與氣質</div>
+      <div class="sub">單選,決定整體光影與氣質（清新 / 城市 / 東方 / 氛圍）</div>
     </div>
     <div class="cards" id="styleCards">
       <label class="card selected" data-value="jp_gravure">
@@ -303,6 +303,51 @@
         <input type="radio" name="style" value="korean">
         <div class="name">韓系寫真</div>
         <div class="desc">Korean Editorial</div>
+      </label>
+      <label class="card" data-value="french">
+        <input type="radio" name="style" value="french">
+        <div class="name">法式慵懶</div>
+        <div class="desc">French Relaxed Editorial</div>
+      </label>
+      <label class="card" data-value="street">
+        <input type="radio" name="style" value="street">
+        <div class="name">都會街拍</div>
+        <div class="desc">Urban Street Style Photography</div>
+      </label>
+      <label class="card" data-value="old_money">
+        <input type="radio" name="style" value="old_money">
+        <div class="name">Old Money</div>
+        <div class="desc">Quiet Luxury Editorial</div>
+      </label>
+      <label class="card" data-value="nature">
+        <input type="radio" name="style" value="nature">
+        <div class="name">森系自然</div>
+        <div class="desc">Natural Green Editorial</div>
+      </label>
+      <label class="card" data-value="island">
+        <input type="radio" name="style" value="island">
+        <div class="name">海島度假</div>
+        <div class="desc">Island Resort Editorial</div>
+      </label>
+      <label class="card" data-value="desert">
+        <input type="radio" name="style" value="desert">
+        <div class="name">沙漠旅拍</div>
+        <div class="desc">Desert Travel Editorial</div>
+      </label>
+      <label class="card" data-value="mono">
+        <input type="radio" name="style" value="mono">
+        <div class="name">黑白紀實</div>
+        <div class="desc">Monochrome Documentary</div>
+      </label>
+      <label class="card" data-value="light_luxury">
+        <input type="radio" name="style" value="light_luxury">
+        <div class="name">輕奢精品</div>
+        <div class="desc">Light Luxury Brand Mood</div>
+      </label>
+      <label class="card" data-value="art_portrait">
+        <input type="radio" name="style" value="art_portrait">
+        <div class="name">藝術感人像</div>
+        <div class="desc">Art Portrait Editorial</div>
       </label>
       <label class="card" data-value="euro">
         <input type="radio" name="style" value="euro">
@@ -352,12 +397,20 @@
     <div class="step">
       <div class="num">03</div>
       <div class="title">主題</div>
-      <div class="sub">點選快選或自行輸入</div>
+      <div class="sub">點選快選或自行輸入（台灣 / 日韓 / 海外 / 古風 / 海島）</div>
     </div>
     <div class="chips" id="themeChips">
       <label class="chip" data-value="九尾妖狐"><input type="radio" name="themePreset" value="九尾妖狐">九尾妖狐</label>
       <label class="chip" data-value="敦煌飛天"><input type="radio" name="themePreset" value="敦煌飛天">敦煌飛天</label>
       <label class="chip" data-value="江南煙雨"><input type="radio" name="themePreset" value="江南煙雨">江南煙雨</label>
+      <label class="chip" data-value="台北老街"><input type="radio" name="themePreset" value="台北老街">台北老街</label>
+      <label class="chip" data-value="九份山城"><input type="radio" name="themePreset" value="九份山城">九份山城</label>
+      <label class="chip" data-value="阿里山雲海"><input type="radio" name="themePreset" value="阿里山雲海">阿里山雲海</label>
+      <label class="chip" data-value="花蓮海岸線"><input type="radio" name="themePreset" value="花蓮海岸線">花蓮海岸線</label>
+      <label class="chip" data-value="台東稻田"><input type="radio" name="themePreset" value="台東稻田">台東稻田</label>
+      <label class="chip" data-value="東京銀座夜景"><input type="radio" name="themePreset" value="東京銀座夜景">東京銀座夜景</label>
+      <label class="chip" data-value="京都神社"><input type="radio" name="themePreset" value="京都神社">京都神社</label>
+      <label class="chip" data-value="首爾弘大"><input type="radio" name="themePreset" value="首爾弘大">首爾弘大</label>
       <label class="chip" data-value="京都藝伎"><input type="radio" name="themePreset" value="京都藝伎">京都藝伎</label>
       <label class="chip" data-value="雪國旅人"><input type="radio" name="themePreset" value="雪國旅人">雪國旅人</label>
       <label class="chip" data-value="古風仙女"><input type="radio" name="themePreset" value="古風仙女">古風仙女</label>
@@ -434,6 +487,26 @@
         <div class="name">4:3</div>
         <div class="desc">復古橫式</div>
       </label>
+      <label class="card" data-value="5:7">
+        <input type="radio" name="ratio" value="5:7">
+        <div class="name">5:7</div>
+        <div class="desc">直式海報</div>
+      </label>
+      <label class="card" data-value="11:14">
+        <input type="radio" name="ratio" value="11:14">
+        <div class="name">11:14</div>
+        <div class="desc">人像延展</div>
+      </label>
+      <label class="card" data-value="2:1">
+        <input type="radio" name="ratio" value="2:1">
+        <div class="name">2:1</div>
+        <div class="desc">寬幅橫構圖</div>
+      </label>
+      <label class="card" data-value="8:10">
+        <input type="radio" name="ratio" value="8:10">
+        <div class="name">8:10</div>
+        <div class="desc">方感直式</div>
+      </label>
     </div>
   </section>
 
@@ -459,6 +532,16 @@
         <input type="radio" name="camera" value="high">
         <div class="name">高角度俯拍</div>
         <div class="desc">俯視角 / 鏡頭高於頭部</div>
+      </label>
+      <label class="card" data-value="soft_focus">
+        <input type="radio" name="camera" value="soft_focus">
+        <div class="name">柔焦光感</div>
+        <div class="desc">柔和散景 / 膚質自然</div>
+      </label>
+      <label class="card" data-value="cover">
+        <input type="radio" name="camera" value="cover">
+        <div class="name">雜誌封面感</div>
+        <div class="desc">封面主視覺 / 眼神集中</div>
       </label>
     </div>
   </section>
@@ -661,7 +744,11 @@ const RATIOS = {
 "2:3":"Aspect Ratio 2:3, Vertical Photo Format",
 "16:9":"Aspect Ratio 16:9, Horizontal Format, Landscape Wallpaper Composition",
 "21:9":"Aspect Ratio 21:9, Ultra Wide Cinematic Format, Movie Aspect Ratio",
-"4:3":"Aspect Ratio 4:3, Traditional Horizontal Format, Classic Retro Proportion"
+"4:3":"Aspect Ratio 4:3, Traditional Horizontal Format, Classic Retro Proportion",
+"5:7":"Aspect Ratio 5:7, Vertical Poster Format",
+"11:14":"Aspect Ratio 11:14, Tall Portrait Format",
+"2:1":"Aspect Ratio 2:1, Wide Horizontal Format",
+"8:10":"Aspect Ratio 8:10, Balanced Portrait Format"
 };
 
 const CAMERA_ANGLES = {
@@ -695,7 +782,23 @@ Dreamy Aerial Composition
 Subject Surrounded By Environment
 Gentle Downward Gaze, Serene Expression
 Soft Diffused Light From Above
-Ethereal Fantasy Mood`
+Ethereal Fantasy Mood`,
+
+soft_focus:`【鏡頭氣場模組｜柔焦光感】
+
+Soft Focus Lighting
+Gentle Diffused Glow
+Natural Skin Texture Preserved
+Dreamy Yet Realistic Mood
+Clean Catchlight And Soft Background Separation`,
+
+cover:`【鏡頭氣場模組｜雜誌封面感】
+
+Magazine Cover Energy
+Strong Eye Contact
+Clean Hero Framing
+Editorial Presence
+Premium Cover Visual Focus`
 };
 
 function setupRadioCards(id){
