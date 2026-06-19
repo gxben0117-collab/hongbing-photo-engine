@@ -27,7 +27,7 @@
     color:var(--ink);
     font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
     line-height:1.6;
-    padding-bottom:60px;
+    padding-bottom:80px;
   }
 
   /* ── NAV ── */
@@ -70,29 +70,30 @@
   }
 
   .wrap{
-    max-width:640px;
+    max-width:660px;
     margin:0 auto;
-    padding:80px 20px 40px;
+    padding:70px 20px 40px;
   }
 
   /* ── HEADER ── */
   header{
-    text-align:center;
-    margin-bottom:28px;
+    padding:48px 0 36px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:36px;
   }
   .header-eyebrow{
     font-size:11px;
     letter-spacing:0.35em;
     text-transform:uppercase;
     color:var(--pink);
-    margin-bottom:10px;
+    margin-bottom:14px;
   }
   header h1{
     font-family:"Noto Serif TC",serif;
-    font-size:26px;
+    font-size:32px;
     font-weight:900;
     color:var(--ink);
-    margin-bottom:6px;
+    margin-bottom:10px;
   }
   header h1 span{ color:var(--pink-deep); }
   header p{ font-size:13px; color:var(--ink-soft); }
@@ -105,27 +106,28 @@
     padding:12px 14px;
     font-size:13px;
     color:var(--ink-soft);
-    margin-bottom:28px;
+    margin-bottom:36px;
   }
 
   /* ── SECTION ── */
-  section{ margin-bottom:28px; }
+  section{ margin-bottom:36px; }
   .step{
     display:flex;
     align-items:baseline;
-    gap:10px;
-    margin-bottom:12px;
-    padding-bottom:8px;
+    gap:12px;
+    margin-bottom:14px;
+    padding-bottom:10px;
     border-bottom:1px solid var(--line);
   }
   .step .num{
     font-family:"Noto Serif TC",serif;
-    font-size:22px;
+    font-size:13px;
     font-weight:700;
+    letter-spacing:0.15em;
     color:var(--pink);
     line-height:1;
   }
-  .step .title{ font-size:15px; font-weight:700; color:var(--ink); }
+  .step .title{ font-size:16px; font-weight:700; color:var(--ink); }
   .step .sub{ font-size:12px; color:var(--ink-soft); margin-left:auto; }
 
   /* ── CARDS ── */
@@ -143,8 +145,8 @@
     position:relative;
     border:1px solid var(--line);
     background:var(--paper);
-    border-radius:12px;
-    padding:11px 12px;
+    border-radius:8px;
+    padding:12px 14px;
     cursor:pointer;
     transition:border-color .15s, background .15s;
   }
@@ -155,13 +157,13 @@
   .card.selected .name{ color:var(--pink-deep); }
 
   /* ── CHIPS ── */
-  .chips{ display:flex; flex-wrap:wrap; gap:7px; }
+  .chips{ display:flex; flex-wrap:wrap; gap:8px; }
   .chip{
     position:relative;
     border:1px solid var(--line);
     background:var(--paper);
     border-radius:999px;
-    padding:7px 14px;
+    padding:7px 16px;
     font-size:13px;
     color:var(--ink);
     cursor:pointer;
@@ -180,14 +182,14 @@
     position:relative;
     border:2px solid var(--line);
     background:var(--paper);
-    border-radius:12px;
+    border-radius:8px;
     padding:10px 14px;
     cursor:pointer;
     transition:all .15s;
     display:inline-flex;
     align-items:center;
     gap:8px;
-    margin-bottom:10px;
+    margin-bottom:14px;
     font-size:13px;
     font-weight:700;
     color:var(--ink-soft);
@@ -202,9 +204,9 @@
   /* ── TEXT INPUT ── */
   .text-input{
     width:100%;
-    border:1.5px solid var(--line);
+    border:1px solid var(--line);
     background:var(--paper);
-    border-radius:12px;
+    border-radius:8px;
     padding:14px 16px;
     font-size:15px;
     color:var(--ink);
@@ -217,9 +219,9 @@
   .auto-all-btn{
     width:100%;
     background:var(--paper);
-    border:1.5px dashed var(--lavender);
+    border:1px dashed var(--lavender);
     color:#7B1FA2;
-    border-radius:12px;
+    border-radius:8px;
     padding:11px;
     font-size:13px;
     font-weight:700;
@@ -256,9 +258,9 @@
     background:linear-gradient(135deg, var(--pink), var(--pink-deep));
     color:#fff;
     border:none;
-    border-radius:14px;
+    border-radius:8px;
     padding:16px;
-    font-size:16px;
+    font-size:15px;
     font-weight:900;
     letter-spacing:0.05em;
     cursor:pointer;
@@ -272,10 +274,10 @@
   .output-wrap{ margin-top:24px; }
   .output-wrap textarea{
     width:100%;
-    min-height:260px;
-    border:1.5px solid var(--line);
+    min-height:300px;
+    border:1px solid var(--line);
     background:var(--paper);
-    border-radius:12px;
+    border-radius:8px;
     padding:16px;
     font-size:12px;
     line-height:1.8;
@@ -287,9 +289,9 @@
     margin-top:8px;
     width:100%;
     background:var(--paper);
-    border:1.5px solid var(--pink);
+    border:1px solid var(--pink);
     color:var(--pink-deep);
-    border-radius:12px;
+    border-radius:8px;
     padding:13px;
     font-size:14px;
     font-weight:700;

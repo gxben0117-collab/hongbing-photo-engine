@@ -24,7 +24,7 @@
     color:var(--ink);
     font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
     line-height:1.6;
-    padding-bottom:60px;
+    padding-bottom:80px;
   }
 
   /* ── NAV ── */
@@ -73,26 +73,29 @@
   }
 
   .wrap{
-    max-width:640px;
+    max-width:660px;
     margin:0 auto;
-    padding:80px 20px 40px;
+    padding:70px 20px 40px;
   }
   header{
-    text-align:center;
-    margin-bottom:28px;
+    padding:48px 0 36px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:36px;
   }
   header .eyebrow{
-    font-family:"Noto Serif TC",serif;
-    font-size:13px;
-    letter-spacing:0.25em;
-    color:var(--terracotta-deep);
+    font-size:11px;
+    letter-spacing:0.35em;
     text-transform:uppercase;
+    color:var(--terracotta-deep);
+    margin-bottom:14px;
   }
   header h1{
     font-family:"Noto Serif TC",serif;
-    font-size:24px;
-    font-weight:700;
-    margin:6px 0 4px;
+    font-size:32px;
+    font-weight:900;
+    letter-spacing:0.02em;
+    line-height:1.2;
+    margin-bottom:10px;
   }
   header p{
     font-size:13px;
@@ -101,51 +104,53 @@
   .note{
     background:var(--paper);
     border:1px solid var(--line);
-    border-radius:10px;
+    border-radius:8px;
     padding:12px 14px;
     font-size:13px;
     color:var(--ink-soft);
-    margin-bottom:28px;
+    margin-bottom:36px;
   }
-  section{ margin-bottom:30px; }
+  section{ margin-bottom:36px; }
   .step{
     display:flex;
     align-items:baseline;
-    gap:10px;
-    margin-bottom:12px;
+    gap:12px;
+    margin-bottom:14px;
+    padding-bottom:10px;
+    border-bottom:1px solid var(--line);
   }
   .step .num{
     font-family:"Noto Serif TC",serif;
-    font-size:28px;
+    font-size:13px;
     font-weight:700;
+    letter-spacing:0.15em;
     color:var(--terracotta);
     line-height:1;
   }
   .step .title{ font-size:16px; font-weight:700; }
   .step .sub{ font-size:12px; color:var(--ink-soft); margin-left:auto; }
-
   .cards{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:10px;
+    gap:8px;
   }
   .cards-5{
     display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:10px;
+    grid-template-columns:repeat(4,1fr);
+    gap:8px;
   }
   .card{
     position:relative;
     border:1px solid var(--line);
     background:var(--paper);
-    border-radius:12px;
+    border-radius:8px;
     padding:12px 14px;
     cursor:pointer;
     transition:border-color .15s, background .15s;
   }
   .card input{ position:absolute; opacity:0; pointer-events:none; }
-  .card .name{ font-weight:700; font-size:14px; margin-bottom:2px; }
-  .card .desc{ font-size:12px; color:var(--ink-soft); }
+  .card .name{ font-weight:700; font-size:13px; margin-bottom:3px; }
+  .card .desc{ font-size:11px; color:var(--ink-soft); line-height:1.4; }
   .card.selected{ border-color:var(--terracotta); background:var(--selected); }
   .card.selected .name{ color:var(--terracotta-deep); }
 
@@ -154,7 +159,7 @@
     border:1px solid var(--line);
     background:var(--paper);
     border-radius:999px;
-    padding:8px 16px;
+    padding:7px 16px;
     font-size:13px;
     cursor:pointer;
     transition:border-color .15s, background .15s, color .15s;
@@ -172,9 +177,9 @@
     width:100%;
     border:1px solid var(--line);
     background:var(--paper);
-    border-radius:10px;
+    border-radius:8px;
     padding:14px;
-    font-size:16px;
+    font-size:15px;
     color:var(--ink);
     font-family:inherit;
     margin-top:10px;
@@ -186,9 +191,9 @@
     background:var(--terracotta);
     color:#fff;
     border:none;
-    border-radius:12px;
+    border-radius:8px;
     padding:16px;
-    font-size:16px;
+    font-size:15px;
     font-weight:700;
     letter-spacing:0.05em;
     cursor:pointer;
@@ -200,10 +205,10 @@
   .output-wrap{ margin-top:24px; }
   .output-wrap textarea{
     width:100%;
-    min-height:280px;
+    min-height:300px;
     border:1px solid var(--line);
     background:var(--paper);
-    border-radius:12px;
+    border-radius:8px;
     padding:16px;
     font-size:13px;
     line-height:1.7;
@@ -217,7 +222,7 @@
     background:var(--paper);
     border:1px solid var(--terracotta);
     color:var(--terracotta-deep);
-    border-radius:12px;
+    border-radius:8px;
     padding:13px;
     font-size:14px;
     font-weight:700;
