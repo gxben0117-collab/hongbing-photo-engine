@@ -620,9 +620,18 @@
         <div class="name">極簡留白</div>
         <div class="desc">Minimal Negative Space</div>
       </label>
+      <label class="card" data-value="black_void">
+        <input type="radio" name="bg" value="black_void">
+        <div class="name">黑幕留白</div>
+        <div class="desc">Pure Black Background</div>
+      </label>
+      <label class="card" data-value="neon_night">
+        <input type="radio" name="bg" value="neon_night">
+        <div class="name">霓虹夜景</div>
+        <div class="desc">Neon Night Scene</div>
+      </label>
     </div>
   </section>
-
   <!-- 03 姿態模組 -->
   <section>
     <div class="section-header">
@@ -810,7 +819,7 @@
     <div class="section-header">
       <span class="section-label">04</span>
       <span class="section-title">鏡頭語感</span>
-      <span class="section-sub">單選，決定視角與氛圍</span>
+      <span class="section-sub">單選，可跳過（預設自然平視）</span>
     </div>
     <div class="cards" id="cameraCards">
       <label class="card selected" data-value="neutral">
@@ -838,9 +847,13 @@
         <div class="name">近距離美妝感</div>
         <div class="desc">Beauty Close-up Framing</div>
       </label>
+      <label class="card" data-value="side_profile">
+        <input type="radio" name="camera" value="side_profile">
+        <div class="name">側臉輪廓感</div>
+        <div class="desc">Side Profile / Clear Jawline</div>
+      </label>
     </div>
   </section>
-
   <!-- 05 動態節奏 -->
   <section>
     <div class="section-header">
@@ -982,8 +995,20 @@
       <label class="chip" data-value="亞文化街頭"><input type="radio" name="themePreset" value="亞文化街頭">亞文化街頭</label>
       <label class="chip" data-value="珠寶華服"><input type="radio" name="themePreset" value="珠寶華服">珠寶華服</label>
       <label class="chip" data-value="仙氣薄紗"><input type="radio" name="themePreset" value="仙氣薄紗">仙氣薄紗</label>
+      <label class="chip" data-value="黑金高訂"><input type="radio" name="themePreset" value="黑金高訂">黑金高訂</label>
+      <label class="chip" data-value="珠寶大片"><input type="radio" name="themePreset" value="珠寶大片">珠寶大片</label>
+      <label class="chip" data-value="極簡高級"><input type="radio" name="themePreset" value="極簡高級">極簡高級</label>
+      <label class="chip" data-value="都會冷感"><input type="radio" name="themePreset" value="都會冷感">都會冷感</label>
+      <label class="chip" data-value="夢幻光感"><input type="radio" name="themePreset" value="夢幻光感">夢幻光感</label>
+      <label class="chip" data-value="典藏封面"><input type="radio" name="themePreset" value="典藏封面">典藏封面</label>
     </div>
     <input type="text" class="text-input" id="themeInput" placeholder="自行輸入主題或服裝方向，例如：唐朝盛世">
+    <div style="font-size:12px;color:var(--gold);margin:10px 0 8px;">高風險系</div>
+    <div class="chips" id="riskThemeChips">
+      <label class="chip" data-value="透視薄紗"><input type="radio" name="riskThemePreset" value="透視薄紗">透視薄紗</label>
+      <label class="chip" data-value="深V高開衩"><input type="radio" name="riskThemePreset" value="深V高開衩">深V高開衩</label>
+      <label class="chip" data-value="鏤空剪裁"><input type="radio" name="riskThemePreset" value="鏤空剪裁">鏤空剪裁</label>
+    </div>
   </section>
 
   <!-- 08 圖片比例 -->
@@ -1651,6 +1676,39 @@ allPoseCards.forEach(card=>{
 });
 
 // ====== 互動:主題快選 ======
+const BG_LIGHTING_MAP = {
+  studio: 'beauty_fill',
+  gradient: 'mixed_studio',
+  scene: 'window_soft',
+  abstract: 'mixed_studio',
+  solid_color: 'beauty_fill',
+  seamless_paper: 'beauty_fill',
+  soft_gradient: 'mixed_studio',
+  translucent: 'mixed_studio',
+  concrete: 'rim_light',
+  metal: 'rim_light',
+  mirror_floor: 'rim_light',
+  drape: 'window_soft',
+  window_light: 'window_soft',
+  mist: 'mixed_studio',
+  install: 'mixed_studio',
+  minimal_space: 'beauty_fill',
+  black_void: 'black_gold',
+  neon_night: 'rim_light'
+};
+
+function setSelectedChipValue(containerId, value){
+  const container = document.getElementById(containerId);
+  if(!container) return;
+  const chips = container.querySelectorAll('.chip');
+  chips.forEach(chip=>{
+    const input = chip.querySelector('input');
+    const isSelected = input && input.value === value;
+    chip.classList.toggle('selected', isSelected);
+    if(input) input.checked = isSelected;
+  });
+}
+
 function setupChipGroup(containerId){
   const container = document.getElementById(containerId);
   if(!container) return;
@@ -1667,9 +1725,75 @@ setupChipGroup('makeupHairChips');
 setupChipGroup('jewelryChips');
 setupChipGroup('expressionChips');
 setupChipGroup('lightingChips');
+
+document.querySelectorAll('#bgCards .card').forEach(card=>{
+  card.addEventListener('click',()=>{
+    const lightingValue = BG_LIGHTING_MAP[card.dataset.value];
+    if(lightingValue){
+      setSelectedChipValue('lightingChips', lightingValue);
+    }
+  });
+});
+
+const defaultBgValue = document.querySelector('#bgCards .card.selected')?.dataset.value;
+if(defaultBgValue && BG_LIGHTING_MAP[defaultBgValue]){
+  setSelectedChipValue('lightingChips', BG_LIGHTING_MAP[defaultBgValue]);
+}
 const themeChips = document.querySelectorAll('#themeChips .chip');
+const riskThemeChips = document.querySelectorAll('#riskThemeChips .chip');
 const themeInputEl = document.getElementById('themeInput');
 
+const THEME_PRESET_DEFAULTS = {
+  '黑金高訂': { bg: 'window_light', camera: 'beauty_closeup', lighting: 'black_gold' },
+  '珠寶大片': { bg: 'gradient', camera: 'beauty_closeup', lighting: 'beauty_fill' },
+  '極簡高級': { bg: 'minimal_space', camera: 'neutral', lighting: 'beauty_fill' },
+  '都會冷感': { bg: 'concrete', camera: 'side_profile', lighting: 'rim_light' },
+  '夢幻光感': { bg: 'soft_gradient', camera: 'soft_focus', lighting: 'window_soft' },
+  '典藏封面': { bg: 'studio', camera: 'neutral', lighting: 'mixed_studio' },
+  '透視薄紗': { bg: 'translucent', camera: 'beauty_closeup', lighting: 'mixed_studio' },
+  '深V高開衩': { bg: 'black_void', camera: 'beauty_closeup', lighting: 'black_gold' },
+  '鏤空剪裁': { bg: 'neon_night', camera: 'side_profile', lighting: 'rim_light' }
+};
+
+function applyThemePresetDefaults(value){
+  const preset = THEME_PRESET_DEFAULTS[value];
+  if(!preset) return;
+  if(preset.bg) document.querySelector('#bgCards [data-value="' + preset.bg + '"]')?.click();
+  if(preset.camera) document.querySelector('#cameraCards [data-value="' + preset.camera + '"]')?.click();
+  if(preset.lighting) setSelectedChipValue('lightingChips', preset.lighting);
+}
+
+riskThemeChips.forEach(chip=>{
+  chip.addEventListener('click',()=>{
+    themeChips.forEach(c=>c.classList.remove('selected'));
+    riskThemeChips.forEach(c=>c.classList.remove('selected'));
+    chip.classList.add('selected');
+    chip.querySelector('input').checked = true;
+    themeInputEl.value = chip.dataset.value;
+    applyThemePresetDefaults(chip.dataset.value);
+  });
+});
+
+themeChips.forEach(chip=>{
+  chip.addEventListener('click',()=>{
+    riskThemeChips.forEach(c=>c.classList.remove('selected'));
+    themeChips.forEach(c=>c.classList.remove('selected'));
+    chip.classList.add('selected');
+    chip.querySelector('input').checked = true;
+    themeInputEl.value = chip.dataset.value;
+    applyThemePresetDefaults(chip.dataset.value);
+  });
+});
+
+themeInputEl.addEventListener('input',()=>{
+  const match = Array.from(themeChips).find(c=>c.dataset.value===themeInputEl.value);
+  const riskMatch = Array.from(riskThemeChips).find(c=>c.dataset.value===themeInputEl.value);
+  themeChips.forEach(c=>c.classList.toggle('selected', c===match));
+  riskThemeChips.forEach(c=>c.classList.toggle('selected', c===riskMatch));
+  if(match || riskMatch){
+    applyThemePresetDefaults(themeInputEl.value);
+  }
+});
 // 姿態 → 推薦主題映射
 const POSE_THEME_MAP = {
   auto:        [],
