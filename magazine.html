@@ -532,10 +532,84 @@
     </div>
   </section>
 
-  <!-- 02 背景設定 -->
+  <!-- 02 主題/服裝方向 -->
   <section>
     <div class="section-header">
       <span class="section-label">02</span>
+      <span class="section-title">主題 / 服裝方向</span>
+      <span class="section-sub">點選快選或自行輸入</span>
+    </div>
+    <div id="themeRecommendHint" style="display:none;font-size:12px;color:var(--gold);margin-bottom:8px;">✦ 金色邊框為推薦搭配，所有選項皆可自由選擇</div>
+    <div class="chips" id="themeChips">
+      <label class="chip" data-value="現代時尚"><input type="radio" name="themePreset" value="現代時尚">現代時尚</label>
+      <label class="chip" data-value="奢華晚裝"><input type="radio" name="themePreset" value="奢華晚裝">奢華晚裝</label>
+      <label class="chip" data-value="極簡主義"><input type="radio" name="themePreset" value="極簡主義">極簡主義</label>
+      <label class="chip" data-value="復古膠片"><input type="radio" name="themePreset" value="復古膠片">復古膠片</label>
+      <label class="chip" data-value="暗黑哥德"><input type="radio" name="themePreset" value="暗黑哥德">暗黑哥德</label>
+      <label class="chip" data-value="夢幻仙氣"><input type="radio" name="themePreset" value="夢幻仙氣">夢幻仙氣</label>
+      <label class="chip" data-value="運動風尚"><input type="radio" name="themePreset" value="運動風尚">運動風尚</label>
+      <label class="chip" data-value="九尾妖狐"><input type="radio" name="themePreset" value="九尾妖狐">九尾妖狐</label>
+      <label class="chip" data-value="女武神"><input type="radio" name="themePreset" value="女武神">女武神</label>
+      <label class="chip" data-value="暗黑女王"><input type="radio" name="themePreset" value="暗黑女王">暗黑女王</label>
+      <label class="chip" data-value="中式古典"><input type="radio" name="themePreset" value="中式古典">中式古典</label>
+      <label class="chip" data-value="唐朝盛世"><input type="radio" name="themePreset" value="唐朝盛世">唐朝盛世</label>
+      <label class="chip" data-value="敦煌飛天"><input type="radio" name="themePreset" value="敦煌飛天">敦煌飛天</label>
+      <label class="chip" data-value="西域舞姬"><input type="radio" name="themePreset" value="西域舞姬">西域舞姬</label>
+      <label class="chip" data-value="清宮格格"><input type="radio" name="themePreset" value="清宮格格">清宮格格</label>
+      <label class="chip" data-value="古風仙女"><input type="radio" name="themePreset" value="古風仙女">古風仙女</label>
+      <label class="chip" data-value="和風雅韻"><input type="radio" name="themePreset" value="和風雅韻">和風雅韻</label>
+      <label class="chip" data-value="巴黎時尚"><input type="radio" name="themePreset" value="巴黎時尚">巴黎時尚</label>
+      <label class="chip" data-value="米蘭時裝週"><input type="radio" name="themePreset" value="米蘭時裝週">米蘭時裝週</label>
+      <label class="chip" data-value="度假風尚"><input type="radio" name="themePreset" value="度假風尚">度假風尚</label>
+      <label class="chip" data-value="洛可可宮廷"><input type="radio" name="themePreset" value="洛可可宮廷">洛可可宮廷</label>
+      <label class="chip" data-value="賽博龐克"><input type="radio" name="themePreset" value="賽博龐克">賽博龐克</label>
+      <label class="chip" data-value="水下夢境"><input type="radio" name="themePreset" value="水下夢境">水下夢境</label>
+      <label class="chip" data-value="血月魔女"><input type="radio" name="themePreset" value="血月魔女">血月魔女</label>
+      <label class="chip" data-value="內頁故事"><input type="radio" name="themePreset" value="內頁故事">內頁故事</label>
+      <label class="chip" data-value="美妝特寫"><input type="radio" name="themePreset" value="美妝特寫">美妝特寫</label>
+      <label class="chip" data-value="品牌 lookbook"><input type="radio" name="themePreset" value="品牌 lookbook">品牌 lookbook</label>
+      <label class="chip" data-value="時裝廣告"><input type="radio" name="themePreset" value="時裝廣告">時裝廣告</label>
+      <label class="chip" data-value="珠寶廣告"><input type="radio" name="themePreset" value="珠寶廣告">珠寶廣告</label>
+      <label class="chip" data-value="香氛廣告"><input type="radio" name="themePreset" value="香氛廣告">香氛廣告</label>
+      <label class="chip" data-value="封面大片"><input type="radio" name="themePreset" value="封面大片">封面大片</label>
+      <label class="chip" data-value="人物專題"><input type="radio" name="themePreset" value="人物專題">人物專題</label>
+      <label class="chip" data-value="藝術雜誌感"><input type="radio" name="themePreset" value="藝術雜誌感">藝術雜誌感</label>
+      <label class="chip" data-value="高級訂製宣傳"><input type="radio" name="themePreset" value="高級訂製宣傳">高級訂製宣傳</label>
+      <label class="chip" data-value="旗袍雅韻"><input type="radio" name="themePreset" value="旗袍雅韻">旗袍雅韻</label>
+      <label class="chip" data-value="西裝女王"><input type="radio" name="themePreset" value="西裝女王">西裝女王</label>
+      <label class="chip" data-value="透明薄紗"><input type="radio" name="themePreset" value="透明薄紗">透明薄紗</label>
+      <label class="chip" data-value="甜酷風尚"><input type="radio" name="themePreset" value="甜酷風尚">甜酷風尚</label>
+      <label class="chip" data-value="高級訂製"><input type="radio" name="themePreset" value="高級訂製">高級訂製</label>
+      <label class="chip" data-value="黑白禁慾"><input type="radio" name="themePreset" value="黑白禁慾">黑白禁慾</label>
+      <label class="chip" data-value="皮革戰損"><input type="radio" name="themePreset" value="皮革戰損">皮革戰損</label>
+      <label class="chip" data-value="波西米亞"><input type="radio" name="themePreset" value="波西米亞">波西米亞</label>
+      <label class="chip" data-value="都會通勤"><input type="radio" name="themePreset" value="都會通勤">都會通勤</label>
+      <label class="chip" data-value="末日廢墟"><input type="radio" name="themePreset" value="末日廢墟">末日廢墟</label>
+      <label class="chip" data-value="古典宮廷"><input type="radio" name="themePreset" value="古典宮廷">古典宮廷</label>
+      <label class="chip" data-value="現代極簡"><input type="radio" name="themePreset" value="現代極簡">現代極簡</label>
+      <label class="chip" data-value="亞文化街頭"><input type="radio" name="themePreset" value="亞文化街頭">亞文化街頭</label>
+      <label class="chip" data-value="珠寶華服"><input type="radio" name="themePreset" value="珠寶華服">珠寶華服</label>
+      <label class="chip" data-value="仙氣薄紗"><input type="radio" name="themePreset" value="仙氣薄紗">仙氣薄紗</label>
+      <label class="chip" data-value="黑金高訂"><input type="radio" name="themePreset" value="黑金高訂">黑金高訂</label>
+      <label class="chip" data-value="珠寶大片"><input type="radio" name="themePreset" value="珠寶大片">珠寶大片</label>
+      <label class="chip" data-value="極簡高級"><input type="radio" name="themePreset" value="極簡高級">極簡高級</label>
+      <label class="chip" data-value="都會冷感"><input type="radio" name="themePreset" value="都會冷感">都會冷感</label>
+      <label class="chip" data-value="夢幻光感"><input type="radio" name="themePreset" value="夢幻光感">夢幻光感</label>
+      <label class="chip" data-value="典藏封面"><input type="radio" name="themePreset" value="典藏封面">典藏封面</label>
+    </div>
+    <input type="text" class="text-input" id="themeInput" placeholder="自行輸入主題或服裝方向，例如：唐朝盛世">
+    <div style="font-size:12px;color:var(--gold);margin:10px 0 8px;">高風險系</div>
+    <div class="chips" id="riskThemeChips">
+      <label class="chip" data-value="透視薄紗"><input type="radio" name="riskThemePreset" value="透視薄紗">透視薄紗</label>
+      <label class="chip" data-value="深V高開衩"><input type="radio" name="riskThemePreset" value="深V高開衩">深V高開衩</label>
+      <label class="chip" data-value="鏤空剪裁"><input type="radio" name="riskThemePreset" value="鏤空剪裁">鏤空剪裁</label>
+    </div>
+  </section>
+
+  <!-- 03 背景設定 -->
+  <section>
+    <div class="section-header">
+      <span class="section-label">03</span>
       <span class="section-title">背景設定</span>
       <span class="section-sub">單選，決定背景氣質</span>
     </div>
@@ -632,10 +706,10 @@
       </label>
     </div>
   </section>
-  <!-- 03 姿態模組 -->
+  <!-- 04 姿態模組 -->
   <section>
     <div class="section-header">
-      <span class="section-label">03</span>
+      <span class="section-label">04</span>
       <span class="section-title">姿態模組</span>
       <span class="section-sub">單選,可選自動</span>
     </div>
@@ -829,10 +903,10 @@
 
   </section>
 
-  <!-- 04 鏡頭氣場 -->
+  <!-- 05 鏡頭氣場 -->
   <section>
     <div class="section-header">
-      <span class="section-label">04</span>
+      <span class="section-label">05</span>
       <span class="section-title">鏡頭語感</span>
       <span class="section-sub">單選，可跳過（預設自然平視）</span>
     </div>
@@ -869,10 +943,10 @@
       </label>
     </div>
   </section>
-  <!-- 05 動態節奏 -->
+  <!-- 06 動態節奏 -->
   <section>
     <div class="section-header">
-      <span class="section-label">05</span>
+      <span class="section-label">06</span>
       <span class="section-title">動態節奏</span>
       <span class="section-sub">單選，可跳過（預設微風輕動）</span>
     </div>
@@ -900,10 +974,10 @@
     </div>
   </section>
 
-  <!-- 06 封面細節 -->
+  <!-- 07 封面細節 -->
   <section>
     <div class="section-header">
-      <span class="section-label">06</span>
+      <span class="section-label">07</span>
       <span class="section-title">封面細節</span>
       <span class="section-sub">妝髮 / 珠寶 / 眼神 / 光線</span>
     </div>
@@ -952,79 +1026,6 @@
   </section>
 
 
-  <!-- 07 主題/服裝方向 -->
-  <section>
-    <div class="section-header">
-      <span class="section-label">07</span>
-      <span class="section-title">主題 / 服裝方向</span>
-      <span class="section-sub">點選快選或自行輸入</span>
-    </div>
-    <div id="themeRecommendHint" style="display:none;font-size:12px;color:var(--gold);margin-bottom:8px;">✦ 金色邊框為推薦搭配，所有選項皆可自由選擇</div>
-    <div class="chips" id="themeChips">
-      <label class="chip" data-value="現代時尚"><input type="radio" name="themePreset" value="現代時尚">現代時尚</label>
-      <label class="chip" data-value="奢華晚裝"><input type="radio" name="themePreset" value="奢華晚裝">奢華晚裝</label>
-      <label class="chip" data-value="極簡主義"><input type="radio" name="themePreset" value="極簡主義">極簡主義</label>
-      <label class="chip" data-value="復古膠片"><input type="radio" name="themePreset" value="復古膠片">復古膠片</label>
-      <label class="chip" data-value="暗黑哥德"><input type="radio" name="themePreset" value="暗黑哥德">暗黑哥德</label>
-      <label class="chip" data-value="夢幻仙氣"><input type="radio" name="themePreset" value="夢幻仙氣">夢幻仙氣</label>
-      <label class="chip" data-value="運動風尚"><input type="radio" name="themePreset" value="運動風尚">運動風尚</label>
-      <label class="chip" data-value="九尾妖狐"><input type="radio" name="themePreset" value="九尾妖狐">九尾妖狐</label>
-      <label class="chip" data-value="女武神"><input type="radio" name="themePreset" value="女武神">女武神</label>
-      <label class="chip" data-value="暗黑女王"><input type="radio" name="themePreset" value="暗黑女王">暗黑女王</label>
-      <label class="chip" data-value="中式古典"><input type="radio" name="themePreset" value="中式古典">中式古典</label>
-      <label class="chip" data-value="唐朝盛世"><input type="radio" name="themePreset" value="唐朝盛世">唐朝盛世</label>
-      <label class="chip" data-value="敦煌飛天"><input type="radio" name="themePreset" value="敦煌飛天">敦煌飛天</label>
-      <label class="chip" data-value="西域舞姬"><input type="radio" name="themePreset" value="西域舞姬">西域舞姬</label>
-      <label class="chip" data-value="清宮格格"><input type="radio" name="themePreset" value="清宮格格">清宮格格</label>
-      <label class="chip" data-value="古風仙女"><input type="radio" name="themePreset" value="古風仙女">古風仙女</label>
-      <label class="chip" data-value="和風雅韻"><input type="radio" name="themePreset" value="和風雅韻">和風雅韻</label>
-      <label class="chip" data-value="巴黎時尚"><input type="radio" name="themePreset" value="巴黎時尚">巴黎時尚</label>
-      <label class="chip" data-value="米蘭時裝週"><input type="radio" name="themePreset" value="米蘭時裝週">米蘭時裝週</label>
-      <label class="chip" data-value="度假風尚"><input type="radio" name="themePreset" value="度假風尚">度假風尚</label>
-      <label class="chip" data-value="洛可可宮廷"><input type="radio" name="themePreset" value="洛可可宮廷">洛可可宮廷</label>
-      <label class="chip" data-value="賽博龐克"><input type="radio" name="themePreset" value="賽博龐克">賽博龐克</label>
-      <label class="chip" data-value="水下夢境"><input type="radio" name="themePreset" value="水下夢境">水下夢境</label>
-      <label class="chip" data-value="血月魔女"><input type="radio" name="themePreset" value="血月魔女">血月魔女</label>
-      <label class="chip" data-value="內頁故事"><input type="radio" name="themePreset" value="內頁故事">內頁故事</label>
-      <label class="chip" data-value="美妝特寫"><input type="radio" name="themePreset" value="美妝特寫">美妝特寫</label>
-      <label class="chip" data-value="品牌 lookbook"><input type="radio" name="themePreset" value="品牌 lookbook">品牌 lookbook</label>
-      <label class="chip" data-value="時裝廣告"><input type="radio" name="themePreset" value="時裝廣告">時裝廣告</label>
-      <label class="chip" data-value="珠寶廣告"><input type="radio" name="themePreset" value="珠寶廣告">珠寶廣告</label>
-      <label class="chip" data-value="香氛廣告"><input type="radio" name="themePreset" value="香氛廣告">香氛廣告</label>
-      <label class="chip" data-value="封面大片"><input type="radio" name="themePreset" value="封面大片">封面大片</label>
-      <label class="chip" data-value="人物專題"><input type="radio" name="themePreset" value="人物專題">人物專題</label>
-      <label class="chip" data-value="藝術雜誌感"><input type="radio" name="themePreset" value="藝術雜誌感">藝術雜誌感</label>
-      <label class="chip" data-value="高級訂製宣傳"><input type="radio" name="themePreset" value="高級訂製宣傳">高級訂製宣傳</label>
-      <label class="chip" data-value="旗袍雅韻"><input type="radio" name="themePreset" value="旗袍雅韻">旗袍雅韻</label>
-      <label class="chip" data-value="西裝女王"><input type="radio" name="themePreset" value="西裝女王">西裝女王</label>
-      <label class="chip" data-value="透明薄紗"><input type="radio" name="themePreset" value="透明薄紗">透明薄紗</label>
-      <label class="chip" data-value="甜酷風尚"><input type="radio" name="themePreset" value="甜酷風尚">甜酷風尚</label>
-      <label class="chip" data-value="高級訂製"><input type="radio" name="themePreset" value="高級訂製">高級訂製</label>
-      <label class="chip" data-value="黑白禁慾"><input type="radio" name="themePreset" value="黑白禁慾">黑白禁慾</label>
-      <label class="chip" data-value="皮革戰損"><input type="radio" name="themePreset" value="皮革戰損">皮革戰損</label>
-      <label class="chip" data-value="波西米亞"><input type="radio" name="themePreset" value="波西米亞">波西米亞</label>
-      <label class="chip" data-value="都會通勤"><input type="radio" name="themePreset" value="都會通勤">都會通勤</label>
-      <label class="chip" data-value="末日廢墟"><input type="radio" name="themePreset" value="末日廢墟">末日廢墟</label>
-      <label class="chip" data-value="古典宮廷"><input type="radio" name="themePreset" value="古典宮廷">古典宮廷</label>
-      <label class="chip" data-value="現代極簡"><input type="radio" name="themePreset" value="現代極簡">現代極簡</label>
-      <label class="chip" data-value="亞文化街頭"><input type="radio" name="themePreset" value="亞文化街頭">亞文化街頭</label>
-      <label class="chip" data-value="珠寶華服"><input type="radio" name="themePreset" value="珠寶華服">珠寶華服</label>
-      <label class="chip" data-value="仙氣薄紗"><input type="radio" name="themePreset" value="仙氣薄紗">仙氣薄紗</label>
-      <label class="chip" data-value="黑金高訂"><input type="radio" name="themePreset" value="黑金高訂">黑金高訂</label>
-      <label class="chip" data-value="珠寶大片"><input type="radio" name="themePreset" value="珠寶大片">珠寶大片</label>
-      <label class="chip" data-value="極簡高級"><input type="radio" name="themePreset" value="極簡高級">極簡高級</label>
-      <label class="chip" data-value="都會冷感"><input type="radio" name="themePreset" value="都會冷感">都會冷感</label>
-      <label class="chip" data-value="夢幻光感"><input type="radio" name="themePreset" value="夢幻光感">夢幻光感</label>
-      <label class="chip" data-value="典藏封面"><input type="radio" name="themePreset" value="典藏封面">典藏封面</label>
-    </div>
-    <input type="text" class="text-input" id="themeInput" placeholder="自行輸入主題或服裝方向，例如：唐朝盛世">
-    <div style="font-size:12px;color:var(--gold);margin:10px 0 8px;">高風險系</div>
-    <div class="chips" id="riskThemeChips">
-      <label class="chip" data-value="透視薄紗"><input type="radio" name="riskThemePreset" value="透視薄紗">透視薄紗</label>
-      <label class="chip" data-value="深V高開衩"><input type="radio" name="riskThemePreset" value="深V高開衩">深V高開衩</label>
-      <label class="chip" data-value="鏤空剪裁"><input type="radio" name="riskThemePreset" value="鏤空剪裁">鏤空剪裁</label>
-    </div>
-  </section>
 
   <!-- 08 圖片比例 -->
   <section>
