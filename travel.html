@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>寫真旅拍風格咒語產生器｜藍寶 Editorial Engine</title>
+<title>寫真旅拍風格咒語產生器｜藍寶寫真引擎</title>
 <style>
   :root{
     --cream:#F8F1E7;
@@ -231,7 +231,7 @@
 <body>
 
 <nav>
-  <a class="nav-logo" href="index.html">藍寶 Editorial Engine</a>
+  <a class="nav-logo" href="index.html">藍寶寫真引擎</a>
   <div class="nav-links">
     <a class="nav-link" href="index.html">首頁</a>
     <a class="nav-link active" href="travel.html">寫真旅拍</a>
@@ -242,7 +242,7 @@
 
 <div class="wrap">
   <header>
-    <div class="eyebrow">Vol.1 · Travel Editorial</div>
+    <div class="eyebrow">第一輯 · 寫真旅拍</div>
     <h1>寫真旅拍風格咒語產生器</h1>
     <p>身份鎖定 × 真人旅拍感 × 畫面氣場</p>
   </header>
@@ -291,86 +291,99 @@
         <div class="name">F 大景遠構</div>
         <div class="desc">全景環境,主體融入景色,旅行故事感</div>
       </label>
-      <label class="card" data-value="korean">
-        <input type="radio" name="style" value="korean">
+    </div>
+  </section>
+
+  <!-- 02 風格 -->
+  <section>
+    <div class="step">
+      <div class="num">02</div>
+      <div class="title">選擇旅拍風格</div>
+      <div class="sub">單選，決定整體光線與氛圍</div>
+    </div>
+    <div class="cards" id="styleCards">
+      <label class="card selected" data-value="korean">
+        <input type="radio" name="style" value="korean" checked>
         <div class="name">韓系寫真</div>
-        <div class="desc">Korean Editorial</div>
-      </label>
-      <label class="card" data-value="french">
-        <input type="radio" name="style" value="french">
-        <div class="name">法式慵懶</div>
-        <div class="desc">French Relaxed Editorial</div>
-      </label>
-      <label class="card" data-value="street">
-        <input type="radio" name="style" value="street">
-        <div class="name">都會街拍</div>
-        <div class="desc">Urban Street Style Photography</div>
-      </label>
-      <label class="card" data-value="old_money">
-        <input type="radio" name="style" value="old_money">
-        <div class="name">Old Money</div>
-        <div class="desc">Quiet Luxury Editorial</div>
-      </label>
-      <label class="card" data-value="nature">
-        <input type="radio" name="style" value="nature">
-        <div class="name">森系自然</div>
-        <div class="desc">Natural Green Editorial</div>
-      </label>
-      <label class="card" data-value="island">
-        <input type="radio" name="style" value="island">
-        <div class="name">海島度假</div>
-        <div class="desc">Island Resort Editorial</div>
-      </label>
-      <label class="card" data-value="desert">
-        <input type="radio" name="style" value="desert">
-        <div class="name">沙漠旅拍</div>
-        <div class="desc">Desert Travel Editorial</div>
-      </label>
-      <label class="card" data-value="mono">
-        <input type="radio" name="style" value="mono">
-        <div class="name">黑白紀實</div>
-        <div class="desc">Monochrome Documentary</div>
-      </label>
-      <label class="card" data-value="light_luxury">
-        <input type="radio" name="style" value="light_luxury">
-        <div class="name">輕奢精品</div>
-        <div class="desc">Light Luxury Brand Mood</div>
-      </label>
-      <label class="card" data-value="art_portrait">
-        <input type="radio" name="style" value="art_portrait">
-        <div class="name">藝術感人像</div>
-        <div class="desc">Art Portrait Editorial</div>
+        <div class="desc">清新柔焦,粉霧色調</div>
       </label>
       <label class="card" data-value="euro">
         <input type="radio" name="style" value="euro">
         <div class="name">歐美時尚大片</div>
-        <div class="desc">European Fashion Editorial</div>
+        <div class="desc">強烈光影,高端時裝感</div>
       </label>
       <label class="card" data-value="french">
         <input type="radio" name="style" value="french">
         <div class="name">法式慵懶</div>
-        <div class="desc">French Relaxed Editorial</div>
+        <div class="desc">自然柔光,鬆弛高級感</div>
       </label>
       <label class="card" data-value="street">
         <input type="radio" name="style" value="street">
         <div class="name">都會街拍</div>
-        <div class="desc">Urban Street Style Photography</div>
+        <div class="desc">城市節奏,時髦街拍感</div>
       </label>
-      <label class="chip" data-value="Taipei 101 Night View"><input type="radio" name="themePreset" value="Taipei 101 Night View">Taipei 101 Night View</label>
-      <label class="chip" data-value="Tamsui Sunset"><input type="radio" name="themePreset" value="Tamsui Sunset">Tamsui Sunset</label>
-      <label class="chip" data-value="Hualien Qixingtan"><input type="radio" name="themePreset" value="Hualien Qixingtan">Hualien Qixingtan</label>
-      <label class="chip" data-value="Taroko Gorge"><input type="radio" name="themePreset" value="Taroko Gorge">Taroko Gorge</label>
-      <label class="chip" data-value="Kenting Coast"><input type="radio" name="themePreset" value="Kenting Coast">Kenting Coast</label>
-      <label class="chip" data-value="Kaohsiung Harbor"><input type="radio" name="themePreset" value="Kaohsiung Harbor">Kaohsiung Harbor</label>
-      <label class="chip" data-value="Tokyo Omotesando"><input type="radio" name="themePreset" value="Tokyo Omotesando">Tokyo Omotesando</label>
-      <label class="chip" data-value="Kyoto Arashiyama"><input type="radio" name="themePreset" value="Kyoto Arashiyama">Kyoto Arashiyama</label>
-      <label class="chip" data-value="Osaka Dotonbori"><input type="radio" name="themePreset" value="Osaka Dotonbori">Osaka Dotonbori</label>
-      <label class="chip" data-value="Seoul Han River"><input type="radio" name="themePreset" value="Seoul Han River">Seoul Han River</label>
-      <label class="chip" data-value="Paris Seine River"><input type="radio" name="themePreset" value="Paris Seine River">Paris Seine River</label>
-      <label class="chip" data-value="Venice Canal"><input type="radio" name="themePreset" value="Venice Canal">Venice Canal</label>
-      <label class="chip" data-value="Swiss Alps"><input type="radio" name="themePreset" value="Swiss Alps">Swiss Alps</label>
-      <label class="chip" data-value="Iceland Black Sand Beach"><input type="radio" name="themePreset" value="Iceland Black Sand Beach">Iceland Black Sand Beach</label>
-      <label class="chip" data-value="Norway Fjord"><input type="radio" name="themePreset" value="Norway Fjord">Norway Fjord</label>
+      <label class="card" data-value="vogue">
+        <input type="radio" name="style" value="vogue">
+        <div class="name">國際雜誌風</div>
+        <div class="desc">封面級質感,高端造型語言</div>
+      </label>
+      <label class="card" data-value="cinematic">
+        <input type="radio" name="style" value="cinematic">
+        <div class="name">電影海報感</div>
+        <div class="desc">敘事光影,戲劇張力</div>
+      </label>
+      <label class="card" data-value="chinese">
+        <input type="radio" name="style" value="chinese">
+        <div class="name">中式古典</div>
+        <div class="desc">水墨意境,東方雅韻</div>
+      </label>
+      <label class="card" data-value="luxury">
+        <input type="radio" name="style" value="luxury">
+        <div class="name">精品廣告</div>
+        <div class="desc">奢華細節,品牌大片感</div>
+      </label>
+      <label class="card" data-value="gothic">
+        <input type="radio" name="style" value="gothic">
+        <div class="name">暗黑哥德</div>
+        <div class="desc">強烈陰影,神秘戲劇感</div>
+      </label>
+      <label class="card" data-value="ethereal">
+        <input type="radio" name="style" value="ethereal">
+        <div class="name">夢幻仙氣</div>
+        <div class="desc">柔焦光暈,空靈唯美</div>
+      </label>
+      <label class="card" data-value="vintage">
+        <input type="radio" name="style" value="vintage">
+        <div class="name">復古膠片</div>
+        <div class="desc">暖調顆粒,底片質感</div>
+      </label>
+    </div>
+  </section>
+
+  <!-- 03 主題地點 -->
+  <section>
+    <div class="step">
+      <div class="num">03</div>
+      <div class="title">選擇旅拍地點 / 主題</div>
+      <div class="sub">可選預設，也可自行輸入</div>
+    </div>
+    <div class="chips" id="themeChips">
+      <label class="chip" data-value="台北101夜景"><input type="radio" name="themePreset" value="台北101夜景">台北101夜景</label>
+      <label class="chip" data-value="淡水夕陽"><input type="radio" name="themePreset" value="淡水夕陽">淡水夕陽</label>
+      <label class="chip" data-value="花蓮七星潭"><input type="radio" name="themePreset" value="花蓮七星潭">花蓮七星潭</label>
+      <label class="chip" data-value="太魯閣峽谷"><input type="radio" name="themePreset" value="太魯閣峽谷">太魯閣峽谷</label>
+      <label class="chip" data-value="墾丁海岸"><input type="radio" name="themePreset" value="墾丁海岸">墾丁海岸</label>
+      <label class="chip" data-value="高雄港灣"><input type="radio" name="themePreset" value="高雄港灣">高雄港灣</label>
+      <label class="chip" data-value="東京表參道"><input type="radio" name="themePreset" value="東京表參道">東京表參道</label>
+      <label class="chip" data-value="京都嵐山"><input type="radio" name="themePreset" value="京都嵐山">京都嵐山</label>
+      <label class="chip" data-value="大阪道頓堀"><input type="radio" name="themePreset" value="大阪道頓堀">大阪道頓堀</label>
+      <label class="chip" data-value="首爾漢江"><input type="radio" name="themePreset" value="首爾漢江">首爾漢江</label>
+      <label class="chip" data-value="巴黎塞納河"><input type="radio" name="themePreset" value="巴黎塞納河">巴黎塞納河</label>
+      <label class="chip" data-value="威尼斯運河"><input type="radio" name="themePreset" value="威尼斯運河">威尼斯運河</label>
+      <label class="chip" data-value="瑞士阿爾卑斯山"><input type="radio" name="themePreset" value="瑞士阿爾卑斯山">瑞士阿爾卑斯山</label>
+      <label class="chip" data-value="冰島黑沙灘"><input type="radio" name="themePreset" value="冰島黑沙灘">冰島黑沙灘</label>
+      <label class="chip" data-value="挪威峽灣"><input type="radio" name="themePreset" value="挪威峽灣">挪威峽灣</label>
+    </div>
     <input type="text" class="theme-input" id="themeInput" placeholder="例如：九尾妖狐">
   </section>
 
@@ -461,7 +474,7 @@
       <label class="card" data-value="low">
         <input type="radio" name="camera" value="low">
         <div class="name">低角度仰拍</div>
-        <div class="desc">Hero Shot / 鏡頭低於腰部</div>
+        <div class="desc">英雄感視角 / 鏡頭低於腰部</div>
       </label>
       <label class="card" data-value="high">
         <input type="radio" name="camera" value="high">
@@ -688,28 +701,40 @@ Magazine Cover Composition
 Clean Background Or Soft Bokeh
 Strong Eye Contact Or Elegant Gaze
 Fashion Magazine Cover Quality
-Editorial Cover Girl Presence`
+Editorial Cover Girl Presence`,
+
+F:`【構圖模組｜大景遠構】
+
+Wide Environmental Shot
+Full Body Visible In A Large Scenic Frame
+Subject Occupies 20-35% Of Frame
+Environment Occupies 65-80% Of Frame
+24mm-35mm Wide Lens
+Grand Travel Landscape Composition
+Clear Destination Landmark Or Natural Scenery
+Subject Integrated Into The Scene
+Strong Travel Storytelling Atmosphere`
 };
 
 const STYLES = {
-jp_gravure:{ label:"Japanese Gravure Editorial", text:`Japanese Gravure Editorial\n日系寫真質感,自然柔光,清透膚質感\n溫暖生活感氛圍,真實寫真集風格` },
-korean:{ label:"Korean Editorial Photography", text:`Korean Editorial Photography\n韓系寫真質感,清新柔焦,粉霧色調\n氛圍感光線,清透唯美風格` },
-euro:{ label:"European Fashion Editorial", text:`European Fashion Editorial
+jp_gravure:{ label:"日系寫真", text:`Japanese Gravure Editorial\n日系寫真質感,自然柔光,清透膚質感\n溫暖生活感氛圍,真實寫真集風格` },
+korean:{ label:"韓系寫真", text:`Korean Editorial Photography\n韓系寫真質感,清新柔焦,粉霧色調\n氛圍感光線,清透唯美風格` },
+euro:{ label:"歐美時尚大片", text:`European Fashion Editorial
 European fashion editorial, strong light-and-shadow contrast
 High-end couture atmosphere, Vogue-level visual language` },
-french:{ label:"French Relaxed Editorial", text:`French Relaxed Editorial
+french:{ label:"法式慵懶", text:`French Relaxed Editorial
 French relaxed style, soft natural light
 Effortless chic mood, relaxed luxury feeling` },
-street:{ label:"Urban Street Editorial", text:`Urban Street Editorial
+street:{ label:"都會街拍", text:`Urban Street Editorial
 Urban street style, city rhythm and motion
 Authentic street scenery, polished fashion atmosphere` },
-vogue:{ label:"Vogue Editorial Style", text:`Vogue Editorial Style\n國際時尚雜誌封面質感,極致精緻感\n強烈造型語言,高端時裝攝影` },
-cinematic:{ label:"Cinematic Movie Poster Style", text:`Cinematic Movie Poster Style\n電影海報級構圖,敘事性光影\n戲劇張力氛圍,Movie Poster Lighting` },
-chinese:{ label:"Chinese Classical Editorial", text:`Chinese Classical Editorial\n中式古典美學,水墨意境光影\n漢服質感,東方雅韻攝影語言` },
-luxury:{ label:"Luxury Brand Campaign", text:`Luxury Brand Campaign\n奢華精品廣告質感,極致細節光影\n高端品牌攝影語言,Hermès Chanel Level Quality` },
-gothic:{ label:"Dark Gothic Editorial", text:`Dark Gothic Editorial\n暗黑哥德質感,戲劇性強烈陰影\n神秘氛圍光影,Dark Fantasy Photography` },
-ethereal:{ label:"Ethereal Fantasy Editorial", text:`Ethereal Fantasy Editorial\n夢幻仙氣質感,柔焦光暈氛圍\n空靈唯美光影,Dreamy Fantasy Photography` },
-vintage:{ label:"Vintage Film Photography", text:`Vintage Film Photography\n復古膠片質感,褪色暖調色彩\n底片顆粒感,Analog Film Aesthetic` }
+vogue:{ label:"國際雜誌風", text:`Vogue Editorial Style\n國際時尚雜誌封面質感,極致精緻感\n強烈造型語言,高端時裝攝影` },
+cinematic:{ label:"電影海報感", text:`Cinematic Movie Poster Style\n電影海報級構圖,敘事性光影\n戲劇張力氛圍,Movie Poster Lighting` },
+chinese:{ label:"中式古典", text:`Chinese Classical Editorial\n中式古典美學,水墨意境光影\n漢服質感,東方雅韻攝影語言` },
+luxury:{ label:"精品廣告", text:`Luxury Brand Campaign\n奢華精品廣告質感,極致細節光影\n高端品牌攝影語言,Hermès Chanel Level Quality` },
+gothic:{ label:"暗黑哥德", text:`Dark Gothic Editorial\n暗黑哥德質感,戲劇性強烈陰影\n神秘氛圍光影,Dark Fantasy Photography` },
+ethereal:{ label:"夢幻仙氣", text:`Ethereal Fantasy Editorial\n夢幻仙氣質感,柔焦光暈氛圍\n空靈唯美光影,Dreamy Fantasy Photography` },
+vintage:{ label:"復古膠片", text:`Vintage Film Photography\n復古膠片質感,褪色暖調色彩\n底片顆粒感,Analog Film Aesthetic` }
 };
 
 const STYLE_SCOPE_NOTE=`風格只影響光線、構圖、氛圍與服裝質感\n不改五官、臉型與身份辨識度`;
@@ -776,7 +801,17 @@ Magazine Cover Energy
 Strong Eye Contact
 Clean Hero Framing
 Editorial Presence
-Premium Cover Visual Focus`
+Premium Cover Visual Focus`,
+
+wide_scene:`【鏡頭氣場模組｜廣角環境感】
+
+Wide Environmental Angle
+Camera Captures The Subject And Destination Together
+Background Landmark Or Landscape Remains Clearly Visible
+Subject Integrated Into The Travel Scene
+Moderate Wide Lens Perspective
+Strong Sense Of Place
+Editorial Travel Story Framing`
 };
 
 const MOTION_LEVELS = {
