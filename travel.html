@@ -868,27 +868,6 @@ setupRadioCards('ratioCards');
 setupRadioCards('cameraCards');
 setupRadioCards('motionCards');
 
-const TRAVEL_PRESET_DEFAULTS = {
-  composition: {
-    F: { camera: 'wide_scene', motion: 'flow' }
-  },
-  style: {
-    french: { camera: 'soft_focus', motion: 'still' },
-    street: { camera: 'wide_scene', motion: 'dynamic' }
-  }
-};
-
-function applyTravelPresetDefaults(group, value){
-  const preset = TRAVEL_PRESET_DEFAULTS[group] && TRAVEL_PRESET_DEFAULTS[group][value];
-  if(!preset) return;
-  if(preset.camera){
-    document.querySelector('#cameraCards [data-value=' + preset.camera + ']')?.click();
-  }
-  if(preset.motion){
-    document.querySelector('#motionCards [data-value=' + preset.motion + ']')?.click();
-  }
-}
-
 function setRadioCardValue(containerId, value){
   const container = document.getElementById(containerId);
   if(!container) return;
@@ -928,12 +907,6 @@ function applyTravelRandomSelection(){
   themeInputEl.dispatchEvent(new Event('input', { bubbles: true }));
   document.getElementById('generateBtn').click();
 }
-document.querySelectorAll('#compositionCards .card').forEach(card=>{
-  card.addEventListener('click',()=>applyTravelPresetDefaults('composition', card.dataset.value));
-});
-document.querySelectorAll('#styleCards .card').forEach(card=>{
-  card.addEventListener('click',()=>applyTravelPresetDefaults('style', card.dataset.value));
-});
 
 const themeChips=document.querySelectorAll('#themeChips .chip');
 const themeInputEl=document.getElementById('themeInput');
