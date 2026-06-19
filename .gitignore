@@ -1,4 +1,4 @@
-# OS
+﻿# OS
 .DS_Store
 Thumbs.db
 
@@ -11,3 +11,27 @@ Thumbs.db
 *.temp
 *.bak
 *.swp
+
+# Project work folders
+output/*
+!output/.gitkeep
+temp/*
+!temp/.gitkeep
+
+# Editor and environment noise
+.vscode/
+.idea/
+.env
+.env.*
+node_modules/
+dist/
+build/
+coverage/
+
+# Python caches
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/

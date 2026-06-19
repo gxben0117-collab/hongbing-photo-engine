@@ -4,6 +4,7 @@
 
 - [使用方式](usage.md)
 - [核心咒語邏輯](core-logic.md)
+- [專案架構](architecture.md)
 - [寫真旅拍流程](travel-workflow.md)
 - [雜誌棚拍流程](magazine-workflow.md)
 - [公仔工作流程](doll-workflow.md)
