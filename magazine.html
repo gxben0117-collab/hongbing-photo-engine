@@ -2066,9 +2066,6 @@ themeInputEl.addEventListener('input',()=>{
   const riskMatch = Array.from(riskThemeChips).find(c=>c.dataset.value===themeInputEl.value);
   themeChips.forEach(c=>c.classList.toggle('selected', c===match));
   riskThemeChips.forEach(c=>c.classList.toggle('selected', c===riskMatch));
-  if(match || riskMatch){
-    applyThemePresetDefaults(themeInputEl.value);
-  }
 });
 // 姿態 → 推薦主題映射
 const POSE_THEME_MAP = {
@@ -2120,19 +2117,6 @@ function updateThemeRecommendations(poseKey){
     }
   });
 }
-
-themeChips.forEach(chip=>{
-  chip.addEventListener('click',()=>{
-    themeChips.forEach(c=>c.classList.remove('selected'));
-    chip.classList.add('selected');
-    chip.querySelector('input').checked = true;
-    themeInputEl.value = chip.dataset.value;
-  });
-});
-themeInputEl.addEventListener('input',()=>{
-  const match = Array.from(themeChips).find(c=>c.dataset.value===themeInputEl.value);
-  themeChips.forEach(c=>c.classList.toggle('selected', c===match));
-});
 
 // ====== 生成咒語 ======
 document.getElementById('generateBtn').addEventListener('click',()=>{
