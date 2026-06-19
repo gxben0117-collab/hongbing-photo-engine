@@ -1097,10 +1097,40 @@
     </div>
   </section>
 
-  <!-- 09 生成 -->
+  <!-- 09 輸出風格 -->
   <section>
     <div class="section-header">
       <span class="section-label">09</span>
+      <span class="section-title">輸出風格 / 畫面媒材</span>
+      <span class="section-sub">單選，決定最終媒材</span>
+    </div>
+    <div class="cards-4" id="mediaCards">
+      <label class="card selected" data-value="realistic_studio">
+        <input type="radio" name="media" value="realistic_studio" checked>
+        <div class="name">寫實棚拍</div>
+        <div class="desc">真人攝影 / 專業棚燈</div>
+      </label>
+      <label class="card" data-value="manga_cover">
+        <input type="radio" name="media" value="manga_cover">
+        <div class="name">漫畫封面</div>
+        <div class="desc">強構圖 / 角色封面感</div>
+      </label>
+      <label class="card" data-value="fashion_illustration">
+        <input type="radio" name="media" value="fashion_illustration">
+        <div class="name">時尚插畫</div>
+        <div class="desc">高級時裝 / 線條美感</div>
+      </label>
+      <label class="card" data-value="oil_portrait">
+        <input type="radio" name="media" value="oil_portrait">
+        <div class="name">油畫肖像</div>
+        <div class="desc">古典厚光 / 收藏感</div>
+      </label>
+    </div>
+  </section>
+  <!-- 10 生成 -->
+  <section>
+    <div class="section-header">
+      <span class="section-label">10</span>
       <span class="section-title">生成咒語</span>
     </div>
     <button class="generate-btn" id="generateBtn">生成咒語</button>
@@ -1804,6 +1834,44 @@ Luxury Haute Couture Atmosphere`
 }
 };
 // ====== 比例 ======
+const MEDIA_STYLES = {
+realistic_studio:`【輸出風格 / 畫面媒材｜寫實棚拍】
+
+Realistic Studio Fashion Photography
+Professional Studio Lighting
+High-End Editorial Portrait
+Realistic Skin Texture
+Luxury Magazine Quality
+Keep The Result Photographic, Polished And Human`,
+manga_cover:`【輸出風格 / 畫面媒材｜漫畫封面】
+
+Manga Cover Illustration
+Dramatic Character Composition
+Bold Line Art
+Expressive Eyes
+Dynamic Pose
+High Contrast Shading
+Cover-Worthy Character Art
+Keep Fashion Details Clear And Iconic`,
+fashion_illustration:`【輸出風格 / 畫面媒材｜時尚插畫】
+
+Fashion Editorial Illustration
+Elegant Stylized Figure
+Luxury Magazine Illustration
+Refined Silhouette
+Expressive Fabric Flow
+High Fashion Beauty Drawing
+Keep Makeup, Hair And Garment Design Sophisticated`,
+oil_portrait:`【輸出風格 / 畫面媒材｜油畫肖像】
+
+Classical Oil Painting Portrait
+Rich Brush Texture
+Soft Chiaroscuro Lighting
+Painterly Skin Tones
+Elegant Old Master Portrait Style
+Museum Quality
+Keep The Character Noble, Detailed And Timeless`
+};
 const RATIOS = {
 "2:3":"Aspect Ratio 2:3, Vertical Magazine Cover Format",
 "3:4":"Aspect Ratio 3:4, Vertical Portrait Format",
@@ -1869,6 +1937,7 @@ setupRadioCards('bgCards');
 setupRadioCards('cameraCards');
 setupRadioCards('motionCards');
 setupRadioCards('ratioCards');
+setupRadioCards('mediaCards');
 
 // ====== 姿態選擇(跨多個群組) ======
 const allPoseCards = document.querySelectorAll('.pose-card');
@@ -2072,6 +2141,7 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
   const cameraKey = document.querySelector('input[name="camera"]:checked').value;
   const motionKey = document.querySelector('input[name="motion"]:checked').value;
   const ratioKey = document.querySelector('input[name="ratio"]:checked').value;
+  const mediaKey = document.querySelector('input[name="media"]:checked').value;
   const hairKey = document.querySelector('input[name="makeupHair"]:checked').value;
   const jewelryKey = document.querySelector('input[name="jewelry"]:checked').value;
   const expressionKey = document.querySelector('input[name="expression"]:checked').value;
@@ -2104,6 +2174,7 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
   const jewelryBlock = `【珠寶配飾】\n\n${DETAIL_BLOCKS.jewelry[jewelryKey]}`;
   const expressionBlock = `【眼神表情】\n\n${DETAIL_BLOCKS.expression[expressionKey]}`;
   const lightingToneBlock = `【光線類型】\n\n${DETAIL_BLOCKS.lighting[lightingKey]}`;
+  const mediaBlock = MEDIA_STYLES[mediaKey];
   const themeBlock = `【主題 / 服裝方向】\n\n${theme}`;
   const ratioBlock = `【輸出比例】\n\n${RATIOS[ratioKey]}`;
 
@@ -2116,6 +2187,7 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
     ...(motionBlock ? [motionBlock] : []),
     COVER_COMPOSITION,
     styleBlock,
+    mediaBlock,
     bgBlock,
     themeBlock,
     costumeBlock,

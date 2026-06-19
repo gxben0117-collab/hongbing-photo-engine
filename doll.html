@@ -437,7 +437,36 @@
       </label>
     </div>
   </section>
-
+  <!-- 05 輸出風格 -->
+  <section>
+    <div class="step">
+      <div class="num">05</div>
+      <div class="title">輸出風格 / 材質媒材</div>
+      <div class="sub">單選，決定公仔質感</div>
+    </div>
+    <div class="cards-4" id="mediaCards">
+      <label class="card selected" data-value="3d_figure">
+        <input type="radio" name="media" value="3d_figure" checked>
+        <div class="name">3D 公仔</div>
+        <div class="desc">PVC / 收藏展示</div>
+      </label>
+      <label class="card" data-value="clay">
+        <input type="radio" name="media" value="clay">
+        <div class="name">黏土風</div>
+        <div class="desc">手作 / 圓潤霧面</div>
+      </label>
+      <label class="card" data-value="toy_photo">
+        <input type="radio" name="media" value="toy_photo">
+        <div class="name">玩具攝影</div>
+        <div class="desc">實拍感 / 桌面景深</div>
+      </label>
+      <label class="card" data-value="anime_model">
+        <input type="radio" name="media" value="anime_model">
+        <div class="name">動漫模型風</div>
+        <div class="desc">日系手辦 / 動漫臉</div>
+      </label>
+    </div>
+  </section>
   <!-- 進階選項 -->
   <div class="advanced-toggle">
     <button class="advanced-btn" id="advancedBtn">✦ 展開進階選項(髮型/表情/姿勢/底座)</button>
@@ -687,6 +716,44 @@ const BASES = {
 '透明旋轉台':'Transparent Rotating Display Stand, Clear Acrylic'
 };
 
+const MEDIA_STYLES = {
+'3d_figure':`【輸出風格 / 材質媒材｜3D 公仔】
+
+High Quality 3D Collectible Figure
+Glossy PVC Material
+Cute Stylized Proportions
+Clean Studio Product Render
+Detailed Sculpting
+Toy Photography Lighting
+Physical Display Figure Feeling`,
+clay:`【輸出風格 / 材質媒材｜黏土風】
+
+Handmade Clay Figure Style
+Soft Rounded Shapes
+Matte Clay Texture
+Tiny Handcrafted Details
+Cute Miniature Character
+Warm Craft Photography
+Tactile Handmade Collectible Feeling`,
+toy_photo:`【輸出風格 / 材質媒材｜玩具攝影】
+
+Real Toy Photography
+Miniature Figure On Display
+Macro Lens
+Shallow Depth Of Field
+Realistic Tabletop Lighting
+Physical Collectible Object
+Authentic Product Photo Feeling`,
+anime_model:`【輸出風格 / 材質媒材｜動漫模型風】
+
+Anime Figure Model Style
+Japanese Collectible Figure
+Clean Cel-Shaded Details
+Expressive Anime Face
+Painted Plastic Surface
+Display Base
+Hobby Figure Photography`
+};
 // ====== 比例 ======
 const RATIOS = {
 '9:16':'Aspect Ratio 9:16, Vertical Format',
@@ -710,6 +777,7 @@ function setupRadioCards(id){
 setupRadioCards('styleCards');
 setupRadioCards('compositionCards');
 setupRadioCards('ratioCards');
+setupRadioCards('mediaCards');
 
 // 主題快選
 const themeChips=document.querySelectorAll('#themeChips .chip');
@@ -780,9 +848,12 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
   const styleKey=document.querySelector('input[name="style"]:checked').value;
   const compositionKey=document.querySelector('input[name="composition"]:checked').value;
   const ratioKey=document.querySelector('input[name="ratio"]:checked').value;
+  const mediaKey=document.querySelector('input[name="media"]:checked').value;
 
   let theme=themeInputEl.value.trim();
   if(!theme)theme='(請輸入主題靈感)';
+
+  const mediaBlock=MEDIA_STYLES[mediaKey];
 
   // 進階選項
   const hairAuto=document.getElementById('hairAutoCard').classList.contains('selected');
