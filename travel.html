@@ -252,7 +252,7 @@
   </div>
 
   <section>
-    <button class="generate-btn" id="travelMoodPreset" style="margin-bottom:18px;background:linear-gradient(180deg,#FFF7EE 0%,#F6E1D0 100%);color:#A8593D;">一鍵套用｜旅拍動感感覺</button>
+    <button class="generate-btn" id="travelMoodPreset" style="margin-bottom:18px;background:linear-gradient(180deg,#FFF7EE 0%,#F6E1D0 100%);color:#A8593D;">隨機套用｜旅拍動感感覺</button>
   </section>
   <!-- 01 構圖 -->
   <section>
@@ -854,6 +854,45 @@ function applyTravelPresetDefaults(group, value){
   }
 }
 
+function setRadioCardValue(containerId, value){
+  const container = document.getElementById(containerId);
+  if(!container) return;
+  container.querySelectorAll('.card').forEach(card=>{
+    const input = card.querySelector('input');
+    const selected = card.dataset.value === value;
+    card.classList.toggle('selected', selected);
+    if(input) input.checked = selected;
+  });
+}
+
+function getRandomItem(values){
+  return values[Math.floor(Math.random() * values.length)];
+}
+
+function getCardValues(containerId){
+  return Array.from(document.querySelectorAll('#' + containerId + ' .card'))
+    .map(card=>card.dataset.value)
+    .filter(Boolean);
+}
+
+function applyTravelRandomSelection(){
+  const compositionValue = getRandomItem(getCardValues('compositionCards'));
+  const styleValue = getRandomItem(getCardValues('styleCards').filter(value => value !== 'vogue'));
+  const ratioValue = getRandomItem(getCardValues('ratioCards'));
+  const cameraValue = getRandomItem(getCardValues('cameraCards'));
+  const motionValue = getRandomItem(getCardValues('motionCards'));
+  const themeValue = getRandomItem(Array.from(document.querySelectorAll('#themeChips .chip')).map(chip => chip.dataset.value));
+
+  setRadioCardValue('compositionCards', compositionValue);
+  setRadioCardValue('styleCards', styleValue);
+  setRadioCardValue('ratioCards', ratioValue);
+  setRadioCardValue('cameraCards', cameraValue);
+  setRadioCardValue('motionCards', motionValue);
+
+  themeInputEl.value = themeValue;
+  themeInputEl.dispatchEvent(new Event('input', { bubbles: true }));
+  document.getElementById('generateBtn').click();
+}
 document.querySelectorAll('#compositionCards .card').forEach(card=>{
   card.addEventListener('click',()=>applyTravelPresetDefaults('composition', card.dataset.value));
 });
@@ -927,13 +966,7 @@ document.getElementById('copyBtn').addEventListener('click',()=>{
 });
 
 document.getElementById('travelMoodPreset').addEventListener('click',()=>{
-  document.querySelector('#styleCards [data-value="vogue"]')?.click();
-  document.querySelector('#cameraCards [data-value="cover"]')?.click();
-  document.querySelector('#motionCards [data-value="breeze"]')?.click();
-  document.querySelector('#compositionCards [data-value="E"]')?.click();
-  document.querySelector('#ratioCards [data-value="4:5"]')?.click();
-  themeInputEl.value='黑金高訂旅拍感';
-  themeInputEl.dispatchEvent(new Event('input',{bubbles:true}));
+  applyTravelRandomSelection();
 });
 </script>
 </body>
