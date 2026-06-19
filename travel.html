@@ -251,6 +251,9 @@
     💡 產生咒語後，使用時請附上人物參考照片。身份鎖定系統需要照片才能生效。
   </div>
 
+  <section>
+    <button class="generate-btn" id="travelMoodPreset" style="margin-bottom:18px;background:linear-gradient(180deg,#FFF7EE 0%,#F6E1D0 100%);color:#A8593D;">一鍵套用｜旅拍動感感覺</button>
+  </section>
   <!-- 01 構圖 -->
   <section>
     <div class="step">
@@ -546,15 +549,45 @@
     </div>
   </section>
 
-  <!-- 06 生成 -->
+  <!-- 06 動態節奏 -->
   <section>
     <div class="step">
       <div class="num">06</div>
+      <div class="title">動態節奏</div>
+      <div class="sub">單選，可跳過（預設微風輕動）</div>
+    </div>
+    <div class="cards" id="motionCards">
+      <label class="card" data-value="still">
+        <input type="radio" name="motion" value="still">
+        <div class="name">靜態定格</div>
+        <div class="desc">畫面穩定 / 幾乎無風</div>
+      </label>
+      <label class="card selected" data-value="breeze">
+        <input type="radio" name="motion" value="breeze" checked>
+        <div class="name">微風輕動</div>
+        <div class="desc">髮絲 / 衣擺 / 頭紗微動</div>
+      </label>
+      <label class="card" data-value="flow">
+        <input type="radio" name="motion" value="flow">
+        <div class="name">行走流動</div>
+        <div class="desc">步伐帶出自然動勢</div>
+      </label>
+      <label class="card" data-value="dynamic">
+        <input type="radio" name="motion" value="dynamic">
+        <div class="name">環境流動</div>
+        <div class="desc">風 / 景 / 背景一起帶節奏</div>
+      </label>
+    </div>
+  </section>
+
+  <!-- 07 生成 -->
+  <section>
+    <div class="step">
+      <div class="num">07</div>
       <div class="title">生成咒語</div>
     </div>
     <button class="generate-btn" id="generateBtn">生成咒語</button>
   </section>
-
   <div class="output-wrap hidden" id="outputWrap">
     <textarea id="outputText" readonly></textarea>
     <button class="copy-btn" id="copyBtn">複製咒語</button>
@@ -801,6 +834,43 @@ Editorial Presence
 Premium Cover Visual Focus`
 };
 
+const MOTION_LEVELS = {
+still:`【動態節奏｜靜態定格】
+
+The Scene Should Feel Calm And Controlled
+Minimal Wind And Minimal Body Motion
+Fabric Remains Mostly Still
+Hair Movement Is Very Subtle
+Strong Pose Clarity
+Elegant Editorial Pause`,
+
+breeze:`【動態節奏｜微風輕動】
+
+Soft Breeze Movement
+Hair Slightly Flowing
+Hemline And Sleeves Moving Lightly
+Natural Air Movement In The Scene
+Calm Yet Lively Editorial Mood
+Identity Remains Clear And Stable`,
+
+flow:`【動態節奏｜行走流動】
+
+Captured Mid-Step
+Natural Walking Motion
+Dress And Hair Flow With The Movement
+Environment Feels Alive And In Motion
+Travel Editorial Storytelling
+Identity Remains Clearly Recognizable`,
+
+dynamic:`【動態節奏｜環境流動】
+
+Wind Driven Motion
+Hair, Dress And Background Carry Stronger Movement
+Atmospheric Flow Around The Subject
+Landscape And Subject Move Together Visually
+Cinematic Travel Editorial Energy
+Identity Remains Stable And Clear`
+};
 function setupRadioCards(id){
   const c=document.getElementById(id);
   if(!c)return;
@@ -816,6 +886,7 @@ setupRadioCards('compositionCards');
 setupRadioCards('styleCards');
 setupRadioCards('ratioCards');
 setupRadioCards('cameraCards');
+setupRadioCards('motionCards');
 
 const themeChips=document.querySelectorAll('#themeChips .chip');
 const themeInputEl=document.getElementById('themeInput');
@@ -837,12 +908,14 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
   const styleKey=document.querySelector('input[name="style"]:checked').value;
   const ratioKey=document.querySelector('input[name="ratio"]:checked').value;
   const cameraKey=document.querySelector('input[name="camera"]:checked').value;
+  const motionKey=document.querySelector('input[name="motion"]:checked').value;
   const style=STYLES[styleKey];
   let theme=themeInputEl.value.trim();
   if(!theme)theme="(請填寫主題)";
 
   const styleBlock=`【風格模組｜主風格】\n\n${style.text}\n\n${STYLE_SCOPE_NOTE}`;
   const cameraBlock=CAMERA_ANGLES[cameraKey];
+  const motionBlock=MOTION_LEVELS[motionKey];
   const costumeBlock=`【服裝邏輯模組｜動態造型系統】\n\n根據主題「${theme}」自動設計服裝層次(Layer1~Layer7)\n服裝層數依主題自動增減,通常2~5層,特殊主題可擴展至7層\n優先真人旅拍感\n優先${style.label}的視覺語言\n服裝符合主題世界觀與材質質感\nPremium Fabric / Fine Embroidery / Rich Material Detail\n\n避免過度Cosplay化\n避免遊戲角色盔甲化\n避免動漫角色化`;
   const themeBlock=`【主題】\n\n${theme}`;
   const ratioBlock=`【輸出比例】\n\n${RATIOS[ratioKey]}`;
@@ -852,8 +925,8 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
     CORE.skeleton,
     CORE.pose,
     CORE.photographer,
-    CORE.motion,
     ...(cameraBlock?[cameraBlock]:[]),
+    ...(motionBlock?[motionBlock]:[]),
     COMPOSITION[composition],
     styleBlock,
     themeBlock,
@@ -878,6 +951,16 @@ document.getElementById('copyBtn').addEventListener('click',()=>{
   function ok(){ btn.textContent='已複製!'; btn.classList.add('copied'); setTimeout(()=>{ btn.textContent='複製咒語'; btn.classList.remove('copied'); },1500); }
   if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(ok).catch(()=>{ document.getElementById('outputText').select(); document.execCommand('copy'); ok(); }); }
   else{ document.getElementById('outputText').select(); document.execCommand('copy'); ok(); }
+});
+
+document.getElementById('travelMoodPreset').addEventListener('click',()=>{
+  document.querySelector('#styleCards [data-value="vogue"]')?.click();
+  document.querySelector('#cameraCards [data-value="cover"]')?.click();
+  document.querySelector('#motionCards [data-value="breeze"]')?.click();
+  document.querySelector('#compositionCards [data-value="E"]')?.click();
+  document.querySelector('#ratioCards [data-value="4:5"]')?.click();
+  themeInputEl.value='黑金高訂旅拍感';
+  themeInputEl.dispatchEvent(new Event('input',{bubbles:true}));
 });
 </script>
 </body>

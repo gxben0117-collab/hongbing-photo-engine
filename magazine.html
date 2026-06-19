@@ -836,12 +836,97 @@
     </div>
   </section>
 
-  <!-- 05 主題/服裝方向 -->
+  <!-- 05 動態節奏 -->
   <section>
     <div class="section-header">
       <span class="section-label">05</span>
+      <span class="section-title">動態節奏</span>
+      <span class="section-sub">單選，可跳過（預設微風輕動）</span>
+    </div>
+    <div class="cards" id="motionCards">
+      <label class="card" data-value="still">
+        <input type="radio" name="motion" value="still">
+        <div class="name">靜態定格</div>
+        <div class="desc">畫面穩定 / 幾乎無風</div>
+      </label>
+      <label class="card selected" data-value="breeze">
+        <input type="radio" name="motion" value="breeze" checked>
+        <div class="name">微風輕動</div>
+        <div class="desc">髮絲 / 珠寶 / 薄紗微動</div>
+      </label>
+      <label class="card" data-value="flow">
+        <input type="radio" name="motion" value="flow">
+        <div class="name">髮絲流動</div>
+        <div class="desc">風感更強 / 畫面更活</div>
+      </label>
+      <label class="card" data-value="dynamic">
+        <input type="radio" name="motion" value="dynamic">
+        <div class="name">封面張力</div>
+        <div class="desc">更強動態 / 更高封面氣場</div>
+      </label>
+    </div>
+  </section>
+
+  <!-- 06 封面細節 -->
+  <section>
+    <div class="section-header">
+      <span class="section-label">06</span>
+      <span class="section-title">封面細節</span>
+      <span class="section-sub">妝髮 / 珠寶 / 眼神 / 光線</span>
+    </div>
+    <div style="margin-bottom:14px;">
+      <div style="font-size:12px;color:var(--soft);margin-bottom:8px;">妝髮</div>
+      <div class="chips" id="makeupHairChips">
+        <label class="chip selected" data-value="natural_highend"><input type="radio" name="makeupHair" value="natural_highend" checked>自然高級</label>
+        <label class="chip" data-value="black_gold"><input type="radio" name="makeupHair" value="black_gold">黑金高訂</label>
+        <label class="chip" data-value="smoky_glam"><input type="radio" name="makeupHair" value="smoky_glam">煙燻濃妝</label>
+        <label class="chip" data-value="elegant_updo"><input type="radio" name="makeupHair" value="elegant_updo">高級盤髮</label>
+        <label class="chip" data-value="wind_wave"><input type="radio" name="makeupHair" value="wind_wave">風感長波浪</label>
+      </div>
+    </div>
+    <div style="margin-bottom:14px;">
+      <div style="font-size:12px;color:var(--soft);margin-bottom:8px;">珠寶配飾</div>
+      <div class="chips" id="jewelryChips">
+        <label class="chip" data-value="none"><input type="radio" name="jewelry" value="none">無</label>
+        <label class="chip selected" data-value="earrings"><input type="radio" name="jewelry" value="earrings" checked>耳飾重點</label>
+        <label class="chip" data-value="necklace"><input type="radio" name="jewelry" value="necklace">項鍊重點</label>
+        <label class="chip" data-value="statement"><input type="radio" name="jewelry" value="statement">華麗套組</label>
+        <label class="chip" data-value="ring_focus"><input type="radio" name="jewelry" value="ring_focus">戒指亮點</label>
+      </div>
+    </div>
+    <div style="margin-bottom:14px;">
+      <div style="font-size:12px;color:var(--soft);margin-bottom:8px;">眼神表情</div>
+      <div class="chips" id="expressionChips">
+        <label class="chip" data-value="calm_direct"><input type="radio" name="expression" value="calm_direct">平靜直視</label>
+        <label class="chip selected" data-value="cool_stare"><input type="radio" name="expression" value="cool_stare" checked>冷感凝視</label>
+        <label class="chip" data-value="allure_smile"><input type="radio" name="expression" value="allure_smile">微笑誘惑</label>
+        <label class="chip" data-value="distant_chic"><input type="radio" name="expression" value="distant_chic">高級疏離</label>
+        <label class="chip" data-value="lower_gaze"><input type="radio" name="expression" value="lower_gaze">垂眼沉靜</label>
+      </div>
+    </div>
+    <div style="margin-bottom:0;">
+      <div style="font-size:12px;color:var(--soft);margin-bottom:8px;">光線類型</div>
+      <div class="chips" id="lightingChips">
+        <label class="chip selected" data-value="window_soft"><input type="radio" name="lighting" value="window_soft" checked>窗光柔亮</label>
+        <label class="chip" data-value="rim_light"><input type="radio" name="lighting" value="rim_light">髮絲邊緣光</label>
+        <label class="chip" data-value="mixed_studio"><input type="radio" name="lighting" value="mixed_studio">棚拍混合光</label>
+        <label class="chip" data-value="beauty_fill"><input type="radio" name="lighting" value="beauty_fill">美妝補光</label>
+        <label class="chip" data-value="black_gold"><input type="radio" name="lighting" value="black_gold">黑金對比光</label>
+      </div>
+    </div>
+  </section>
+
+  <!-- 00 一鍵組合 -->
+  <section>
+    <button class="generate-btn" id="blackGoldPreset" style="margin-bottom:18px;background:linear-gradient(180deg,#17120b 0%,#22180f 100%);color:var(--gold);border:1px solid var(--gold);">一鍵套用｜黑金高訂美妝特寫</button>
+  </section>
+
+  <!-- 07 主題/服裝方向 -->
+  <section>
+    <div class="section-header">
+      <span class="section-label">07</span>
       <span class="section-title">主題 / 服裝方向</span>
-            <span class="section-sub">點選快選或自行輸入（主題 / 服裝方向）</span>
+      <span class="section-sub">點選快選或自行輸入</span>
     </div>
     <div id="themeRecommendHint" style="display:none;font-size:12px;color:var(--gold);margin-bottom:8px;">✦ 金色邊框為推薦搭配，所有選項皆可自由選擇</div>
     <div class="chips" id="themeChips">
@@ -898,10 +983,10 @@
     <input type="text" class="text-input" id="themeInput" placeholder="自行輸入主題或服裝方向，例如：唐朝盛世">
   </section>
 
-  <!-- 06 圖片比例 -->
+  <!-- 08 圖片比例 -->
   <section>
     <div class="section-header">
-      <span class="section-label">06</span>
+      <span class="section-label">08</span>
       <span class="section-title">圖片比例</span>
       <span class="section-sub">單選</span>
     </div>
@@ -969,15 +1054,14 @@
     </div>
   </section>
 
-  <!-- 07 生成 -->
+  <!-- 09 生成 -->
   <section>
     <div class="section-header">
-      <span class="section-label">07</span>
+      <span class="section-label">09</span>
       <span class="section-title">生成咒語</span>
     </div>
     <button class="generate-btn" id="generateBtn">生成咒語</button>
   </section>
-
   <div class="output-wrap hidden" id="outputWrap">
     <textarea id="outputText" readonly></textarea>
     <button class="copy-btn" id="copyBtn">複製咒語</button>
@@ -1374,6 +1458,111 @@ Gentle Downward Gaze, Serene Expression
 Soft Diffused Light From Above`
 };
 
+const MOTION_LEVELS = {
+still:`【動態節奏｜靜態定格】
+
+The Cover Feels Controlled And Still
+Minimal Wind And Minimal Body Motion
+Hair, Jewelry And Fabric Remain Mostly Calm
+Strong Editorial Pose Clarity
+Luxury Cover Freeze Frame`,
+
+breeze:`【動態節奏｜微風輕動】
+
+Soft Breeze Movement
+Hair Slightly Flows
+Jewelry Swings Very Slightly
+Thin Fabric Moves Lightly
+High End Editorial Energy
+Identity Remains Clear`,
+
+flow:`【動態節奏｜髮絲流動】
+
+Hair Motion Becomes Visible
+Thin Tulle And Fabric Flow Elegantly
+A Sense Of Wind Shapes The Frame
+Luxury Cover Atmosphere
+Fashion Editorial Motion`,
+
+dynamic:`【動態節奏｜封面張力】
+
+Stronger Movement In Hair, Jewelry And Fabric
+Cinematic Editorial Tension
+Subject Feels Larger Than The Frame
+Premium Cover Visual Power
+Identity Remains Stable And Recognizable`
+};
+
+const DETAIL_BLOCKS = {
+makeupHair:{
+  natural_highend:`Natural High End Makeup
+清透乾淨妝感,皮膚質地自然保留
+Hair Texture Soft And Elegant`,
+  black_gold:`Black Gold Haute Couture Makeup
+黑金高訂妝髮,精緻眼線,立體輪廓
+High Fashion Beauty Editorial`,
+  smoky_glam:`Smoky Glam Makeup
+煙燻眼妝,深邃輪廓,高對比感
+Dramatic Beauty Close-up`,
+  elegant_updo:`Elegant Updo Hair
+高級盤髮,乾淨輪廓線
+Refined Editorial Hair Styling`,
+  wind_wave:`Wind-Swept Long Waves
+長波浪髮絲帶風感
+Natural Movement And Soft Glam`
+},
+jewelry:{
+  none:`Minimal Jewelry Or No Jewelry
+Focus On Face And Skin Texture
+Clean Cover Simplicity`,
+  earrings:`Statement Earrings Focus
+耳飾成為視覺焦點
+Refined Luxury Detail`,
+  necklace:`Necklace Focus
+項鍊成為鎖骨與頸部焦點
+Elegant Jewelry Highlight`,
+  statement:`Full Jewelry Set
+耳飾 / 項鍊 / 手部細節一起成立
+Luxury Editorial Jewelry Presence`,
+  ring_focus:`Ring Accent Focus
+手部珠寶成為畫面亮點
+Subtle Luxury Detail`
+},
+expression:{
+  calm_direct:`Calm Direct Eye Contact
+平靜直視鏡頭,眼神穩定
+Confident And Controlled`,
+  cool_stare:`Cool Intense Gaze
+冷感凝視,情緒收斂
+High End Editorial Expression`,
+  allure_smile:`Alluring Micro Smile
+嘴角若有似無的微笑
+Subtle Seductive Presence`,
+  distant_chic:`Distant Chic Expression
+高級疏離感,不討好鏡頭
+Elegant And Untouchable`,
+  lower_gaze:`Lower Gaze Serenity
+垂眼沉靜,情緒更柔和
+Luxury Beauty Mood`
+},
+lighting:{
+  window_soft:`Window Soft Light
+窗光柔亮,膚質自然,輪廓乾淨
+Balanced Beauty Lighting`,
+  rim_light:`Rim Light Hair Glow
+髮絲邊緣光,線條更立體
+Backlit Luxury Editorial Glow`,
+  mixed_studio:`Mixed Studio Light
+棚拍主光加輔助輪廓光
+High Control Editorial Lighting`,
+  beauty_fill:`Beauty Fill Light
+美妝補光,五官清楚,皮膚明亮
+Clean Close-Up Beauty Light`,
+  black_gold:`Black Gold Contrast Light
+黑金對比光,深淺層次強
+Luxury Haute Couture Atmosphere`
+}
+};
 // ====== 比例 ======
 const RATIOS = {
 "2:3":"Aspect Ratio 2:3, Vertical Magazine Cover Format",
@@ -1438,6 +1627,7 @@ function setupRadioCards(containerId){
 setupRadioCards('styleCards');
 setupRadioCards('bgCards');
 setupRadioCards('cameraCards');
+setupRadioCards('motionCards');
 setupRadioCards('ratioCards');
 
 // ====== 姿態選擇(跨多個群組) ======
@@ -1452,6 +1642,22 @@ allPoseCards.forEach(card=>{
 });
 
 // ====== 互動:主題快選 ======
+function setupChipGroup(containerId){
+  const container = document.getElementById(containerId);
+  if(!container) return;
+  const chips = container.querySelectorAll('.chip');
+  chips.forEach(chip=>{
+    chip.addEventListener('click',()=>{
+      chips.forEach(c=>c.classList.remove('selected'));
+      chip.classList.add('selected');
+      chip.querySelector('input').checked = true;
+    });
+  });
+}
+setupChipGroup('makeupHairChips');
+setupChipGroup('jewelryChips');
+setupChipGroup('expressionChips');
+setupChipGroup('lightingChips');
 const themeChips = document.querySelectorAll('#themeChips .chip');
 const themeInputEl = document.getElementById('themeInput');
 
@@ -1525,7 +1731,12 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
   const bgKey = document.querySelector('input[name="bg"]:checked').value;
   const poseKey = document.querySelector('input[name="pose"]:checked').value;
   const cameraKey = document.querySelector('input[name="camera"]:checked').value;
+  const motionKey = document.querySelector('input[name="motion"]:checked').value;
   const ratioKey = document.querySelector('input[name="ratio"]:checked').value;
+  const hairKey = document.querySelector('input[name="makeupHair"]:checked').value;
+  const jewelryKey = document.querySelector('input[name="jewelry"]:checked').value;
+  const expressionKey = document.querySelector('input[name="expression"]:checked').value;
+  const lightingKey = document.querySelector('input[name="lighting"]:checked').value;
 
   let theme = themeInputEl.value.trim();
   if(!theme) theme = "(請填寫主題或服裝方向)";
@@ -1533,32 +1744,28 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
   const style = STYLES[styleKey];
   const isInkFlower = styleKey === 'ink_flower';
 
-  // 風格區塊(花墨染已內含範圍限定,不重複加)
   const styleBlock = isInkFlower
     ? `【封面風格｜${style.label}】\n\n${style.text}`
     : `【封面風格｜${style.label}】\n\n${style.text}\n\n風格僅套用於光線、構圖、氛圍、服裝質感\n不可覆寫或調整五官、臉型、臉部特徵`;
 
-  // 背景區塊(花墨染固定純白,忽略背景選項)
   const bgBlock = isInkFlower
     ? `【背景設定】\n\nPure White Background\nClean Empty Background\nNo Scene No Environment`
     : `【背景設定】\n\n${BACKGROUNDS[bgKey]}`;
 
-  // 姿態區塊(花墨染不指定姿態)
   const poseText = isInkFlower ? null : POSES[poseKey];
   const poseBlock = poseText ? `【姿態模組】\n\n${poseText}` : null;
-
-  // 鏡頭區塊(可選)
   const cameraBlock = CAMERAS[cameraKey];
+  const motionBlock = MOTION_LEVELS[motionKey];
 
-  // 服裝邏輯
   const costumeBlock = isInkFlower
     ? `【服裝邏輯模組｜花墨染專屬】\n\n服裝依主題「${theme}」或AI自動決定\n薄紗半透明材質為主\nSheer Translucent Fabric\nOrganza Or Thin Silk Texture\n服裝與花卉自然融合`
     : `【服裝邏輯模組｜動態造型系統】\n\n根據主題「${theme}」自動設計服裝層次\n服裝層數依主題自動增減,通常2~5層\n優先封面大片感\n優先${style.label}的視覺語言\n服裝符合主題世界觀與材質質感\nPremium Fabric / Luxury Material Detail\n\n避免過度Cosplay化\n避免遊戲角色盔甲化`;
 
-  // 主題區塊
+  const hairBlock = `【妝髮】\n\n${DETAIL_BLOCKS.makeupHair[hairKey]}`;
+  const jewelryBlock = `【珠寶配飾】\n\n${DETAIL_BLOCKS.jewelry[jewelryKey]}`;
+  const expressionBlock = `【眼神表情】\n\n${DETAIL_BLOCKS.expression[expressionKey]}`;
+  const lightingToneBlock = `【光線類型】\n\n${DETAIL_BLOCKS.lighting[lightingKey]}`;
   const themeBlock = `【主題 / 服裝方向】\n\n${theme}`;
-
-  // 比例區塊
   const ratioBlock = `【輸出比例】\n\n${RATIOS[ratioKey]}`;
 
   const sections = [
@@ -1567,11 +1774,16 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
     CORE.photographer,
     ...(poseBlock ? [poseBlock] : []),
     ...(cameraBlock ? [cameraBlock] : []),
+    ...(motionBlock ? [motionBlock] : []),
     COVER_COMPOSITION,
     styleBlock,
     bgBlock,
     themeBlock,
     costumeBlock,
+    hairBlock,
+    jewelryBlock,
+    expressionBlock,
+    lightingToneBlock,
     COVER_LIGHTING,
     CORE.cleanframe,
     CORE.output,
@@ -1587,7 +1799,6 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
   copyBtn.classList.remove('copied');
 });
 
-// ====== 複製 ======
 document.getElementById('copyBtn').addEventListener('click',()=>{
   const text = document.getElementById('outputText').value;
   const btn = document.getElementById('copyBtn');
@@ -1605,6 +1816,21 @@ document.getElementById('copyBtn').addEventListener('click',()=>{
     document.getElementById('outputText').select();
     document.execCommand('copy');showCopied();
   }
+});
+
+document.getElementById('blackGoldPreset').addEventListener('click',()=>{
+  document.querySelector('#styleCards [data-value="beauty_closeup"]')?.click();
+  document.querySelector('#bgCards [data-value="window_light"]')?.click();
+  document.querySelector('.pose-card[data-value="chin_rest"]')?.click();
+  document.querySelector('#cameraCards [data-value="beauty_closeup"]')?.click();
+  document.querySelector('#motionCards [data-value="breeze"]')?.click();
+  document.querySelector('#makeupHairChips [data-value="black_gold"]')?.click();
+  document.querySelector('#jewelryChips [data-value="statement"]')?.click();
+  document.querySelector('#expressionChips [data-value="allure_smile"]')?.click();
+  document.querySelector('#lightingChips [data-value="black_gold"]')?.click();
+  document.querySelector('#ratioCards [data-value="4:5"]')?.click();
+  themeInputEl.value='黑金高訂美妝特寫';
+  themeInputEl.dispatchEvent(new Event('input',{bubbles:true}));
 });
 </script>
 </body>
