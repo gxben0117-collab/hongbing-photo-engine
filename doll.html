@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>公仔萌工作室｜藍寶 Editorial Engine</title>
+<style>
+  :root{
+    --bg:#FFF5F9;
+    --paper:#FFFFFF;
+    --pink:#F06292;
+    --pink-deep:#C2185B;
+    --pink-soft:#FCE4EC;
+    --lavender:#CE93D8;
+    --mint:#80CBC4;
+    --line:#F8BBD0;
+    --ink:#3D1A24;
+    --ink-soft:#9E6B7A;
+    --selected:#FCE4EC;
+    --gold:#F9A825;
+    --black:#0A0A0A;
+    --nav-bg:rgba(255,245,249,0.92);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    line-height:1.6;
+    padding-bottom:60px;
+  }
+
+  /* ── NAV ── */
+  nav{
+    position:fixed;
+    top:0;left:0;right:0;
+    background:var(--nav-bg);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+    z-index:100;
+    padding:0 24px;
+    height:54px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .nav-logo{
+    font-family:"Noto Serif TC",serif;
+    font-size:14px;
+    font-weight:700;
+    color:var(--pink-deep);
+    letter-spacing:0.08em;
+    text-decoration:none;
+  }
+  .nav-links{ display:flex; gap:6px; }
+  .nav-link{
+    font-size:12px;
+    color:var(--ink-soft);
+    text-decoration:none;
+    padding:6px 14px;
+    border-radius:999px;
+    border:1px solid transparent;
+    transition:all .15s;
+  }
+  .nav-link:hover{ color:var(--ink); border-color:var(--line); }
+  .nav-link.active{
+    color:var(--pink-deep);
+    border-color:var(--pink);
+    background:var(--pink-soft);
+  }
+
+  .wrap{
+    max-width:640px;
+    margin:0 auto;
+    padding:80px 20px 40px;
+  }
+
+  /* ── HEADER ── */
+  header{
+    text-align:center;
+    margin-bottom:28px;
+  }
+  .header-eyebrow{
+    font-size:11px;
+    letter-spacing:0.35em;
+    text-transform:uppercase;
+    color:var(--pink);
+    margin-bottom:10px;
+  }
+  header h1{
+    font-family:"Noto Serif TC",serif;
+    font-size:26px;
+    font-weight:900;
+    color:var(--ink);
+    margin-bottom:6px;
+  }
+  header h1 span{ color:var(--pink-deep); }
+  header p{ font-size:13px; color:var(--ink-soft); }
+
+  .note{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-left:3px solid var(--pink);
+    border-radius:10px;
+    padding:12px 14px;
+    font-size:13px;
+    color:var(--ink-soft);
+    margin-bottom:28px;
+  }
+
+  /* ── SECTION ── */
+  section{ margin-bottom:28px; }
+  .step{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    margin-bottom:12px;
+    padding-bottom:8px;
+    border-bottom:1px solid var(--line);
+  }
+  .step .num{
+    font-family:"Noto Serif TC",serif;
+    font-size:22px;
+    font-weight:700;
+    color:var(--pink);
+    line-height:1;
+  }
+  .step .title{ font-size:15px; font-weight:700; color:var(--ink); }
+  .step .sub{ font-size:12px; color:var(--ink-soft); margin-left:auto; }
+
+  /* ── CARDS ── */
+  .cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+  }
+  .cards-4{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:8px;
+  }
+  .card{
+    position:relative;
+    border:1px solid var(--line);
+    background:var(--paper);
+    border-radius:12px;
+    padding:11px 12px;
+    cursor:pointer;
+    transition:border-color .15s, background .15s;
+  }
+  .card input{ position:absolute; opacity:0; pointer-events:none; }
+  .card .name{ font-weight:700; font-size:13px; color:var(--ink); margin-bottom:2px; }
+  .card .desc{ font-size:11px; color:var(--ink-soft); line-height:1.4; }
+  .card.selected{ border-color:var(--pink); background:var(--selected); }
+  .card.selected .name{ color:var(--pink-deep); }
+
+  /* ── CHIPS ── */
+  .chips{ display:flex; flex-wrap:wrap; gap:7px; }
+  .chip{
+    position:relative;
+    border:1px solid var(--line);
+    background:var(--paper);
+    border-radius:999px;
+    padding:7px 14px;
+    font-size:13px;
+    color:var(--ink);
+    cursor:pointer;
+    transition:all .15s;
+  }
+  .chip input{ position:absolute; opacity:0; pointer-events:none; }
+  .chip.selected{
+    border-color:var(--pink);
+    background:var(--pink-soft);
+    color:var(--pink-deep);
+    font-weight:700;
+  }
+
+  /* ── AUTO TOGGLE ── */
+  .auto-card{
+    position:relative;
+    border:2px solid var(--line);
+    background:var(--paper);
+    border-radius:12px;
+    padding:10px 14px;
+    cursor:pointer;
+    transition:all .15s;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:10px;
+    font-size:13px;
+    font-weight:700;
+    color:var(--ink-soft);
+  }
+  .auto-card input{ position:absolute; opacity:0; pointer-events:none; }
+  .auto-card.selected{
+    border-color:var(--lavender);
+    background:#F3E5F5;
+    color:#7B1FA2;
+  }
+
+  /* ── TEXT INPUT ── */
+  .text-input{
+    width:100%;
+    border:1.5px solid var(--line);
+    background:var(--paper);
+    border-radius:12px;
+    padding:14px 16px;
+    font-size:15px;
+    color:var(--ink);
+    font-family:inherit;
+  }
+  .text-input::placeholder{ color:#D4A0B0; }
+  .text-input:focus{ outline:none; border-color:var(--pink); }
+
+  /* ── ALL AUTO BTN ── */
+  .auto-all-btn{
+    width:100%;
+    background:var(--paper);
+    border:1.5px dashed var(--lavender);
+    color:#7B1FA2;
+    border-radius:12px;
+    padding:11px;
+    font-size:13px;
+    font-weight:700;
+    cursor:pointer;
+    margin-bottom:20px;
+    transition:background .15s;
+  }
+  .auto-all-btn:hover{ background:#F3E5F5; }
+
+  /* ── ADVANCED TOGGLE ── */
+  .advanced-toggle{
+    text-align:center;
+    margin-bottom:16px;
+  }
+  .advanced-btn{
+    background:none;
+    border:none;
+    color:var(--pink);
+    font-size:13px;
+    font-weight:700;
+    cursor:pointer;
+    letter-spacing:0.03em;
+    padding:6px 12px;
+    border-radius:999px;
+    border:1px solid var(--line);
+    background:var(--paper);
+  }
+  .advanced-section{ display:none; }
+  .advanced-section.open{ display:block; }
+
+  /* ── GENERATE ── */
+  .generate-btn{
+    width:100%;
+    background:linear-gradient(135deg, var(--pink), var(--pink-deep));
+    color:#fff;
+    border:none;
+    border-radius:14px;
+    padding:16px;
+    font-size:16px;
+    font-weight:900;
+    letter-spacing:0.05em;
+    cursor:pointer;
+    font-family:"Noto Serif TC",serif;
+    transition:opacity .15s;
+    box-shadow:0 4px 16px rgba(240,98,146,0.3);
+  }
+  .generate-btn:active{ opacity:0.85; }
+
+  /* ── OUTPUT ── */
+  .output-wrap{ margin-top:24px; }
+  .output-wrap textarea{
+    width:100%;
+    min-height:260px;
+    border:1.5px solid var(--line);
+    background:var(--paper);
+    border-radius:12px;
+    padding:16px;
+    font-size:12px;
+    line-height:1.8;
+    color:var(--ink);
+    font-family:monospace;
+    resize:vertical;
+  }
+  .copy-btn{
+    margin-top:8px;
+    width:100%;
+    background:var(--paper);
+    border:1.5px solid var(--pink);
+    color:var(--pink-deep);
+    border-radius:12px;
+    padding:13px;
+    font-size:14px;
+    font-weight:700;
+    cursor:pointer;
+    transition:all .15s;
+  }
+  .copy-btn.copied{ background:var(--pink); color:#fff; }
+  .hidden{ display:none; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">藍寶 Editorial Engine</a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">首頁</a>
+    <a class="nav-link" href="travel.html">寫真旅拍</a>
+    <a class="nav-link" href="magazine.html">雜誌棚拍</a>
+    <a class="nav-link active" href="doll.html">公仔萌工作室</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <header>
+    <div class="header-eyebrow">Vol.3 · Doll Studio</div>
+    <h1>公仔萌<span>工作室</span></h1>
+    <p>真人→可愛公仔｜主題服裝 × 布景 × 情景自動生成</p>
+  </header>
+
+  <div class="note">
+    💡 上傳真人照片後使用此咒語——系統會將本人轉化為可愛公仔風格,同時保留臉部辨識度。
+  </div>
+
+  <!-- 01 主題靈感 -->
+  <section>
+    <div class="step">
+      <div class="num">01</div>
+      <div class="title">主題靈感</div>
+      <div class="sub">輸入或點選快選</div>
+    </div>
+    <div class="chips" id="themeChips">
+      <label class="chip" data-value="貓咪女僕">🐱 貓咪女僕</label>
+      <label class="chip" data-value="萬聖節魔女">🎃 萬聖節魔女</label>
+      <label class="chip" data-value="草莓甜心">🍓 草莓甜心</label>
+      <label class="chip" data-value="太空探險">🚀 太空探險</label>
+      <label class="chip" data-value="海洋人魚">🧜 海洋人魚</label>
+      <label class="chip" data-value="森林精靈">🌿 森林精靈</label>
+      <label class="chip" data-value="賽博龐克">⚡ 賽博龐克</label>
+      <label class="chip" data-value="聖誕節">🎄 聖誕節</label>
+      <label class="chip" data-value="春日櫻花">🌸 春日櫻花</label>
+      <label class="chip" data-value="甜點魔法">🍰 甜點魔法</label>
+      <label class="chip" data-value="中式仙俠">⚔️ 中式仙俠</label>
+      <label class="chip" data-value="龍年新春">🐲 龍年新春</label>
+    </div>
+    <input type="text" class="text-input" id="themeInput" placeholder="輸入任意靈感,例如:草莓、萬聖節、未來忍者…" style="margin-top:10px;">
+  </section>
+
+  <!-- 02 風格強度 -->
+  <section>
+    <div class="step">
+      <div class="num">02</div>
+      <div class="title">風格強度</div>
+      <div class="sub">單選,決定整體氣質</div>
+    </div>
+    <div class="cards" id="styleCards">
+      <label class="card selected" data-value="sweet">
+        <input type="radio" name="style" value="sweet" checked>
+        <div class="name">🍬 甜美萌系</div>
+        <div class="desc">圓潤可愛,粉嫩色調</div>
+      </label>
+      <label class="card" data-value="cool">
+        <input type="radio" name="style" value="cool">
+        <div class="name">🖤 酷帥暗黑</div>
+        <div class="desc">個性冷酷,深色質感</div>
+      </label>
+      <label class="card" data-value="fairy">
+        <input type="radio" name="style" value="fairy">
+        <div class="name">🌙 清新童話</div>
+        <div class="desc">夢幻輕柔,自然色系</div>
+      </label>
+      <label class="card" data-value="cyber">
+        <input type="radio" name="style" value="cyber">
+        <div class="name">⚡ 賽博未來</div>
+        <div class="desc">霓虹發光,科技感強</div>
+      </label>
+    </div>
+  </section>
+
+  <!-- 03 構圖模式 -->
+  <section>
+    <div class="step">
+      <div class="num">03</div>
+      <div class="title">構圖模式</div>
+      <div class="sub">單選</div>
+    </div>
+    <div class="cards" id="compositionCards">
+      <label class="card selected" data-value="single">
+        <input type="radio" name="composition" value="single" checked>
+        <div class="name">單人展示</div>
+        <div class="desc">標準公仔展示構圖</div>
+      </label>
+      <label class="card" data-value="float">
+        <input type="radio" name="composition" value="float">
+        <div class="name">浮空構圖</div>
+        <div class="desc">角色漂浮,裙擺飄起</div>
+      </label>
+      <label class="card" data-value="capsule">
+        <input type="radio" name="composition" value="capsule">
+        <div class="name">膠囊包裝</div>
+        <div class="desc">模擬商品包裝外觀</div>
+      </label>
+    </div>
+  </section>
+
+  <!-- 04 圖片比例 -->
+  <section>
+    <div class="step">
+      <div class="num">04</div>
+      <div class="title">圖片比例</div>
+      <div class="sub">單選</div>
+    </div>
+    <div class="cards-4" id="ratioCards">
+      <label class="card selected" data-value="9:16">
+        <input type="radio" name="ratio" value="9:16" checked>
+        <div class="name">9:16</div>
+        <div class="desc">手機桌布</div>
+      </label>
+      <label class="card" data-value="1:1">
+        <input type="radio" name="ratio" value="1:1">
+        <div class="name">1:1</div>
+        <div class="desc">正方形</div>
+      </label>
+      <label class="card" data-value="3:4">
+        <input type="radio" name="ratio" value="3:4">
+        <div class="name">3:4</div>
+        <div class="desc">直式人像</div>
+      </label>
+      <label class="card" data-value="4:3">
+        <input type="radio" name="ratio" value="4:3">
+        <div class="name">4:3</div>
+        <div class="desc">橫式展示</div>
+      </label>
+    </div>
+  </section>
+
+  <!-- 進階選項 -->
+  <div class="advanced-toggle">
+    <button class="advanced-btn" id="advancedBtn">✦ 展開進階選項(髮型/表情/姿勢/底座)</button>
+  </div>
+
+  <div class="advanced-section" id="advancedSection">
+
+    <!-- A 髮型 -->
+    <section>
+      <div class="step">
+        <div class="num">A</div>
+        <div class="title">髮型</div>
+        <div class="sub">單選,可選自動</div>
+      </div>
+      <label class="auto-card selected" id="hairAutoCard" data-value="auto">
+        <input type="radio" name="hair" value="auto" checked>✦ 自動
+      </label>
+      <div class="chips" id="hairChips">
+        <label class="chip" data-value="雙馬尾">雙馬尾</label>
+        <label class="chip" data-value="波浪長髮">波浪長髮</label>
+        <label class="chip" data-value="短捲髮">短捲髮</label>
+        <label class="chip" data-value="中分長髮">中分長髮</label>
+        <label class="chip" data-value="丸子頭">丸子頭</label>
+        <label class="chip" data-value="雙髮環">雙髮環</label>
+        <label class="chip" data-value="側綁辮子">側綁辮子</label>
+        <label class="chip" data-value="蓬鬆短髮">蓬鬆短髮</label>
+      </div>
+    </section>
+
+    <!-- B 表情 -->
+    <section>
+      <div class="step">
+        <div class="num">B</div>
+        <div class="title">表情</div>
+        <div class="sub">單選,可選自動</div>
+      </div>
+      <label class="auto-card selected" id="faceAutoCard" data-value="auto">
+        <input type="radio" name="face" value="auto" checked>✦ 自動
+      </label>
+      <div class="chips" id="faceChips">
+        <label class="chip" data-value="微笑">微笑</label>
+        <label class="chip" data-value="開心大笑">開心大笑</label>
+        <label class="chip" data-value="呆萌">呆萌</label>
+        <label class="chip" data-value="壞笑">壞笑</label>
+        <label class="chip" data-value="驚訝閃眼">驚訝閃眼</label>
+        <label class="chip" data-value="害羞紅臉">害羞紅臉</label>
+      </div>
+    </section>
+
+    <!-- C 姿勢 -->
+    <section>
+      <div class="step">
+        <div class="num">C</div>
+        <div class="title">姿勢</div>
+        <div class="sub">單選,可選自動</div>
+      </div>
+      <label class="auto-card selected" id="poseAutoCard" data-value="auto">
+        <input type="radio" name="pose" value="auto" checked>✦ 自動
+      </label>
+      <div class="chips" id="poseChips">
+        <label class="chip" data-value="雙手遮嘴偷笑">雙手遮嘴偷笑</label>
+        <label class="chip" data-value="單腳踮起轉圈">單腳踮起轉圈</label>
+        <label class="chip" data-value="雙手捧臉眨眼">雙手捧臉眨眼</label>
+        <label class="chip" data-value="手舉帽緣側看">手舉帽緣側看</label>
+        <label class="chip" data-value="抱著娃娃蹲坐">抱著娃娃蹲坐</label>
+        <label class="chip" data-value="雙手插腰站立">雙手插腰站立</label>
+        <label class="chip" data-value="單手比愛心">單手比愛心</label>
+        <label class="chip" data-value="跳躍瞬間">跳躍瞬間</label>
+        <label class="chip" data-value="回眸微笑">回眸微笑</label>
+        <label class="chip" data-value="雙手舉高歡呼">雙手舉高歡呼</label>
+        <label class="chip" data-value="托腮坐姿">托腮坐姿</label>
+        <label class="chip" data-value="抱膝坐地">抱膝坐地</label>
+        <label class="chip" data-value="單手舉道具展示">單手舉道具展示</label>
+        <label class="chip" data-value="背對回眸">背對回眸</label>
+        <label class="chip" data-value="躺在底座上">躺在底座上</label>
+      </div>
+    </section>
+
+    <!-- D 底座 -->
+    <section>
+      <div class="step">
+        <div class="num">D</div>
+        <div class="title">展示底座</div>
+        <div class="sub">單選,可選自動</div>
+      </div>
+      <label class="auto-card selected" id="baseAutoCard" data-value="auto">
+        <input type="radio" name="base" value="auto" checked>✦ 自動
+      </label>
+      <div class="chips" id="baseChips">
+        <label class="chip" data-value="水晶圓底">水晶圓底</label>
+        <label class="chip" data-value="魔法陣浮空底">魔法陣浮空底</label>
+        <label class="chip" data-value="南瓜造型底">南瓜造型底</label>
+        <label class="chip" data-value="星星平台底">星星平台底</label>
+        <label class="chip" data-value="木紋櫥窗底">木紋櫥窗底</label>
+        <label class="chip" data-value="透明旋轉台">透明旋轉台</label>
+      </div>
+    </section>
+
+  </div><!-- end advanced -->
+
+  <!-- 全部自動按鈕 -->
+  <button class="auto-all-btn" id="autoAllBtn">✦ 一鍵全部交給 AI 決定(髮型/表情/姿勢/底座)</button>
+
+  <!-- 生成 -->
+  <section>
+    <div class="step">
+      <div class="num">05</div>
+      <div class="title">生成咒語</div>
+    </div>
+    <button class="generate-btn" id="generateBtn">✦ 生成公仔咒語</button>
+  </section>
+
+  <div class="output-wrap hidden" id="outputWrap">
+    <textarea id="outputText" readonly></textarea>
+    <button class="copy-btn" id="copyBtn">複製咒語</button>
+  </div>
+
+</div>
+
+<script>
+// ====== 核心系統 ======
+const CORE_IDENTITY =
+`【公仔化身份轉換系統｜最高優先級】
+
+使用上傳人物照片作為唯一角色原型
+將真人外觀轉化為可愛公仔風格
+保留本人臉部辨識度與基本特徵
+熟人一眼認得出來是同一人
+
+保留原始臉型輪廓比例
+保留原始眼型與眼神特徵
+保留原始鼻型與嘴型基本特徵
+保留人物原有氣質與個性感
+
+公仔化處理:
+Large Expressive Eyes In Chibi Style
+Smooth Porcelain Skin Texture
+Simplified But Recognizable Facial Features
+Cute Chibi Proportions While Maintaining Identity
+
+禁止完全替換成標準AI公仔臉
+禁止失去本人辨識度
+禁止過度卡通化至認不出來`;
+
+const CORE_BODY =
+`【公仔比例系統】
+
+頭身比例:3.5~4.2頭身(Q版公仔標準)
+Head To Body Ratio 1:3.5 To 1:4.2
+Large Head Relative To Body
+Compact Cute Body Proportions
+Short Legs And Arms In Chibi Style
+Round Soft Body Silhouette
+
+材質系統:
+PVC Figure Quality Surface
+Smooth Glossy Skin Texture
+Soft Fabric Clothing Appearance
+High Gloss Decorative Accessories
+Realistic Light Reflection On Surface
+Collectible Figure Aesthetic`;
+
+// ====== 風格強度 ======
+const STYLES = {
+sweet:`甜美萌系風格
+Sweet Cute Kawaii Aesthetic
+Soft Pink And Pastel Color Palette
+Round Soft Shapes Throughout
+Warm Gentle Lighting
+Adorable Cheerful Atmosphere`,
+cool:`酷帥暗黑風格
+Cool Dark Edgy Aesthetic
+Deep Dark Color Palette
+Sharp Confident Details
+Dramatic Moody Lighting
+Mysterious Powerful Atmosphere`,
+fairy:`清新童話風格
+Fresh Fairy Tale Aesthetic
+Natural Soft Color Palette
+Gentle Dreamy Details
+Soft Diffused Natural Lighting
+Whimsical Magical Atmosphere`,
+cyber:`賽博未來風格
+Cyberpunk Future Aesthetic
+Neon Glowing Color Palette
+Tech Details And Circuit Patterns
+Electric Neon Lighting
+High Tech Urban Atmosphere`
+};
+
+// ====== 構圖模式 ======
+const COMPOSITIONS = {
+single:`【構圖模式｜單人展示】
+
+Single Figure Display Composition
+Full Body Visible Head To Toe
+Figure Centered In Frame
+Clean Display Presentation
+Collectible Figure Showcase Style
+Subject Occupies 60-70% Of Frame`,
+
+float:`【構圖模式｜浮空構圖】
+
+Floating Figure Composition
+Character Levitating In Mid Air
+Flowing Dress And Hair Floating Upward
+Magic Floating Base Or Star Dust Platform
+Ethereal Dreamy Floating Atmosphere
+Dynamic Upward Energy`,
+
+capsule:`【構圖模式｜膠囊包裝】
+
+Capsule Toy Packaging Composition
+Figure Inside Clear Acrylic Display Case
+Product Packaging Aesthetic
+Brand Style Logo Space At Top
+Decorative Card Insert At Bottom
+Commercial Collectible Product Presentation`
+};
+
+// ====== 姿勢 ======
+const POSES = {
+'雙手遮嘴偷笑':'Both Hands Covering Mouth, Giggling Expression, Sneaky Cute Laugh',
+'單腳踮起轉圈':'Standing On Tiptoe One Foot, Spinning Movement, Playful Twirl',
+'雙手捧臉眨眼':'Both Hands Cupping Face, Winking One Eye, Adorable Pose',
+'手舉帽緣側看':'One Hand Lifting Hat Brim, Looking Sideways, Cute Curious Pose',
+'抱著娃娃蹲坐':'Hugging Small Doll While Squatting, Cozy Cute Sitting Pose',
+'雙手插腰站立':'Both Hands On Hips, Confident Standing Pose',
+'單手比愛心':'One Hand Making Heart Gesture, Cheerful Pose',
+'跳躍瞬間':'Mid Jump Captured Moment, Joyful Leaping Pose',
+'回眸微笑':'Turning Back With Smile, Over Shoulder Glance',
+'雙手舉高歡呼':'Both Arms Raised High, Cheering Victory Pose',
+'托腮坐姿':'Hand Under Chin Sitting, Thoughtful Cute Pose',
+'抱膝坐地':'Arms Hugging Knees While Sitting, Cozy Ground Sitting Pose',
+'單手舉道具展示':'One Hand Holding And Displaying Theme Prop',
+'背對回眸':'Back To Camera Turning Head Back, Mysterious Cute Pose',
+'躺在底座上':'Lying On Display Base, Relaxed Lounging Pose'
+};
+
+// ====== 底座 ======
+const BASES = {
+'水晶圓底':'Crystal Round Display Base, Clear Glossy Surface',
+'魔法陣浮空底':'Magic Circle Floating Base, Glowing Rune Platform',
+'南瓜造型底':'Pumpkin Shaped Display Base, Halloween Theme',
+'星星平台底':'Star Shaped Platform Base, Sparkle Surface',
+'木紋櫥窗底':'Wood Grain Display Case Base, Premium Showcase',
+'透明旋轉台':'Transparent Rotating Display Stand, Clear Acrylic'
+};
+
+// ====== 比例 ======
+const RATIOS = {
+'9:16':'Aspect Ratio 9:16, Vertical Format',
+'1:1':'Aspect Ratio 1:1, Square Format',
+'3:4':'Aspect Ratio 3:4, Vertical Portrait Format',
+'4:3':'Aspect Ratio 4:3, Horizontal Display Format'
+};
+
+// ====== UI互動 ======
+function setupRadioCards(id){
+  const c=document.getElementById(id);
+  if(!c)return;
+  c.querySelectorAll('.card').forEach(card=>{
+    card.addEventListener('click',()=>{
+      c.querySelectorAll('.card').forEach(x=>x.classList.remove('selected'));
+      card.classList.add('selected');
+      card.querySelector('input').checked=true;
+    });
+  });
+}
+setupRadioCards('styleCards');
+setupRadioCards('compositionCards');
+setupRadioCards('ratioCards');
+
+// 主題快選
+const themeChips=document.querySelectorAll('#themeChips .chip');
+const themeInputEl=document.getElementById('themeInput');
+themeChips.forEach(chip=>{
+  chip.addEventListener('click',()=>{
+    themeChips.forEach(c=>c.classList.remove('selected'));
+    chip.classList.add('selected');
+    themeInputEl.value=chip.dataset.value;
+  });
+});
+themeInputEl.addEventListener('input',()=>{
+  const m=Array.from(themeChips).find(c=>c.dataset.value===themeInputEl.value);
+  themeChips.forEach(c=>c.classList.toggle('selected',c===m));
+});
+
+// 進階選項auto+chip互斥邏輯
+function setupAutoGroup(autoCardId, chipsContainerId, radioName){
+  const autoCard=document.getElementById(autoCardId);
+  const chips=document.querySelectorAll(`#${chipsContainerId} .chip`);
+  autoCard.addEventListener('click',()=>{
+    autoCard.classList.add('selected');
+    autoCard.querySelector('input').checked=true;
+    chips.forEach(c=>c.classList.remove('selected'));
+  });
+  chips.forEach(chip=>{
+    chip.addEventListener('click',()=>{
+      chip.classList.toggle('selected');
+      const anySelected=Array.from(chips).some(c=>c.classList.contains('selected'));
+      if(anySelected){
+        autoCard.classList.remove('selected');
+        autoCard.querySelector('input').checked=false;
+      } else {
+        autoCard.classList.add('selected');
+        autoCard.querySelector('input').checked=true;
+      }
+    });
+  });
+}
+setupAutoGroup('hairAutoCard','hairChips','hair');
+setupAutoGroup('faceAutoCard','faceChips','face');
+setupAutoGroup('poseAutoCard','poseChips','pose');
+setupAutoGroup('baseAutoCard','baseChips','base');
+
+// 一鍵全自動
+document.getElementById('autoAllBtn').addEventListener('click',()=>{
+  ['hairAutoCard','faceAutoCard','poseAutoCard','baseAutoCard'].forEach(id=>{
+    const card=document.getElementById(id);
+    card.classList.add('selected');
+    card.querySelector('input').checked=true;
+  });
+  document.querySelectorAll('#hairChips .chip, #faceChips .chip, #poseChips .chip, #baseChips .chip')
+    .forEach(c=>c.classList.remove('selected'));
+});
+
+// 進階展開
+document.getElementById('advancedBtn').addEventListener('click',()=>{
+  const sec=document.getElementById('advancedSection');
+  const btn=document.getElementById('advancedBtn');
+  sec.classList.toggle('open');
+  btn.textContent=sec.classList.contains('open')
+    ?'✦ 收起進階選項'
+    :'✦ 展開進階選項(髮型/表情/姿勢/底座)';
+});
+
+// ====== 生成咒語 ======
+document.getElementById('generateBtn').addEventListener('click',()=>{
+  const styleKey=document.querySelector('input[name="style"]:checked').value;
+  const compositionKey=document.querySelector('input[name="composition"]:checked').value;
+  const ratioKey=document.querySelector('input[name="ratio"]:checked').value;
+
+  let theme=themeInputEl.value.trim();
+  if(!theme)theme='(請輸入主題靈感)';
+
+  // 進階選項
+  const hairAuto=document.getElementById('hairAutoCard').classList.contains('selected');
+  const faceAuto=document.getElementById('faceAutoCard').classList.contains('selected');
+  const poseAuto=document.getElementById('poseAutoCard').classList.contains('selected');
+  const baseAuto=document.getElementById('baseAutoCard').classList.contains('selected');
+
+  const selectedHair=hairAuto?[]:[...document.querySelectorAll('#hairChips .chip.selected')].map(c=>c.dataset.value);
+  const selectedFace=faceAuto?[]:[...document.querySelectorAll('#faceChips .chip.selected')].map(c=>c.dataset.value);
+  const selectedPose=poseAuto?[]:[...document.querySelectorAll('#poseChips .chip.selected')].map(c=>c.dataset.value);
+  const selectedBase=baseAuto?[]:[...document.querySelectorAll('#baseChips .chip.selected')].map(c=>c.dataset.value);
+
+  // 組合咒語
+  const themeBlock=`【主題設定】
+
+主題靈感:${theme}
+
+根據主題自動設計:
+服裝 — 符合主題世界觀,可愛Q版風格
+道具 — 主題相關代表性道具
+布景背景 — 對應主題情景與氛圍
+配色 — 依主題與風格強度自動配色
+細節裝飾 — 主題相關裝飾元素`;
+
+  const styleBlock=`【風格強度】\n\n${STYLES[styleKey]}`;
+
+  const hairBlock=selectedHair.length>0
+    ?`【髮型設定】\n\n${selectedHair.join(' / ')}`
+    :`【髮型設定】\n\nAI根據主題自動選配最適合的髮型`;
+
+  const faceBlock=selectedFace.length>0
+    ?`【表情設定】\n\n${selectedFace.join(' / ')}`
+    :`【表情設定】\n\nAI根據主題自動選配最適合的表情`;
+
+  const poseBlock=selectedPose.length>0
+    ?`【姿勢設定】\n\n${selectedPose.map(p=>POSES[p]||p).join('\n')}`
+    :`【姿勢設定】\n\nAI根據主題與構圖自動選配最適合的姿勢`;
+
+  const baseBlock=selectedBase.length>0
+    ?`【展示底座】\n\n${selectedBase.map(b=>BASES[b]||b).join('\n')}`
+    :`【展示底座】\n\nAI根據主題自動選配對應底座類型`;
+
+  const sections=[
+    CORE_IDENTITY,
+    CORE_BODY,
+    themeBlock,
+    styleBlock,
+    COMPOSITIONS[compositionKey],
+    hairBlock,
+    faceBlock,
+    poseBlock,
+    baseBlock,
+    `【輸出規格】\n\n4K Quality / Ultra Detailed\nCollectible Figure Photography Quality\nPVC Figure Showcase Lighting\n${RATIOS[ratioKey]}`
+  ];
+
+  document.getElementById('outputText').value=sections.join('\n\n⸻\n\n');
+  document.getElementById('outputWrap').classList.remove('hidden');
+  document.getElementById('outputWrap').scrollIntoView({behavior:'smooth',block:'start'});
+  const cb=document.getElementById('copyBtn');
+  cb.textContent='複製咒語';
+  cb.classList.remove('copied');
+});
+
+// 複製
+document.getElementById('copyBtn').addEventListener('click',()=>{
+  const text=document.getElementById('outputText').value;
+  const btn=document.getElementById('copyBtn');
+  function ok(){ btn.textContent='已複製!'; btn.classList.add('copied'); setTimeout(()=>{ btn.textContent='複製咒語'; btn.classList.remove('copied'); },1500); }
+  if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(ok).catch(()=>{ document.getElementById('outputText').select(); document.execCommand('copy'); ok(); }); }
+  else{ document.getElementById('outputText').select(); document.execCommand('copy'); ok(); }
+});
+</script>
+</body>
+</html>

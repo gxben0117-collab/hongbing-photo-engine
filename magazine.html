@@ -395,6 +395,7 @@
     <a class="nav-link" href="index.html">首頁</a>
     <a class="nav-link" href="travel.html">寫真旅拍</a>
     <a class="nav-link active" href="magazine.html">雜誌棚拍</a>
+    <a class="nav-link" href="doll.html">公仔萌工作室</a>
   </div>
 </nav>
 
@@ -467,6 +468,11 @@
         <input type="radio" name="style" value="marie_claire">
         <div class="name">嘉人 Marie Claire</div>
         <div class="desc">東方現代,清新都會女性</div>
+      </label>
+      <label class="card" data-value="ink_flower">
+        <input type="radio" name="style" value="ink_flower">
+        <div class="name">花墨染</div>
+        <div class="desc">水墨花卉人像,純白背景</div>
       </label>
     </div>
   </section>
@@ -548,6 +554,21 @@
           <div class="pose-name">背對回首</div>
           <div class="pose-desc">完全背對+緩緩回頭,神秘感</div>
         </label>
+        <label class="pose-card" data-value="door_frame">
+          <input type="radio" name="pose" value="door_frame">
+          <div class="pose-name">單手扶門框</div>
+          <div class="pose-desc">倚著門框側身,生活感張力</div>
+        </label>
+        <label class="pose-card" data-value="cape_wind">
+          <input type="radio" name="pose" value="cape_wind">
+          <div class="pose-name">披風揚起站姿</div>
+          <div class="pose-desc">衣擺被風吹起,戲劇感</div>
+        </label>
+        <label class="pose-card" data-value="step_up">
+          <input type="radio" name="pose" value="step_up">
+          <div class="pose-name">踏台階站姿</div>
+          <div class="pose-desc">單腳踩高台,俯視感</div>
+        </label>
       </div>
     </div>
 
@@ -585,6 +606,16 @@
           <div class="pose-name">側躺延伸</div>
           <div class="pose-desc">側躺+單手托頭+腿部延伸</div>
         </label>
+        <label class="pose-card" data-value="hug_knees">
+          <input type="radio" name="pose" value="hug_knees">
+          <div class="pose-name">抱膝坐姿</div>
+          <div class="pose-desc">雙手環抱膝蓋,情緒感強</div>
+        </label>
+        <label class="pose-card" data-value="prone_chin">
+          <input type="radio" name="pose" value="prone_chin">
+          <div class="pose-name">趴地仰頭</div>
+          <div class="pose-desc">俯臥+手撐下巴+仰頭,慵懶感</div>
+        </label>
       </div>
     </div>
 
@@ -616,6 +647,21 @@
           <input type="radio" name="pose" value="tiptoe">
           <div class="pose-name">踮腳仰手</div>
           <div class="pose-desc">踮腳尖+雙手向上延伸</div>
+        </label>
+        <label class="pose-card" data-value="hold_flower">
+          <input type="radio" name="pose" value="hold_flower">
+          <div class="pose-name">雙手托花/道具</div>
+          <div class="pose-desc">雙手捧著主題相關物件</div>
+        </label>
+        <label class="pose-card" data-value="hair_flip">
+          <input type="radio" name="pose" value="hair_flip">
+          <div class="pose-name">撩髮瞬間</div>
+          <div class="pose-desc">單手撥起頭髮的中間動作</div>
+        </label>
+        <label class="pose-card" data-value="eye_cover">
+          <input type="radio" name="pose" value="eye_cover">
+          <div class="pose-name">遮眼手勢</div>
+          <div class="pose-desc">單手半遮住眼睛,神秘感</div>
         </label>
       </div>
     </div>
@@ -699,6 +745,10 @@
       <label class="chip" data-value="巴黎時尚"><input type="radio" name="themePreset" value="巴黎時尚">巴黎時尚</label>
       <label class="chip" data-value="米蘭時裝週"><input type="radio" name="themePreset" value="米蘭時裝週">米蘭時裝週</label>
       <label class="chip" data-value="度假風尚"><input type="radio" name="themePreset" value="度假風尚">度假風尚</label>
+      <label class="chip" data-value="洛可可宮廷"><input type="radio" name="themePreset" value="洛可可宮廷">洛可可宮廷</label>
+      <label class="chip" data-value="賽博龐克"><input type="radio" name="themePreset" value="賽博龐克">賽博龐克</label>
+      <label class="chip" data-value="水下夢境"><input type="radio" name="themePreset" value="水下夢境">水下夢境</label>
+      <label class="chip" data-value="血月魔女"><input type="radio" name="themePreset" value="血月魔女">血月魔女</label>
     </div>
     <input type="text" class="text-input" id="themeInput" placeholder="自行輸入主題或服裝方向,例如:唐朝盛世">
   </section>
@@ -711,8 +761,13 @@
       <span class="section-sub">單選</span>
     </div>
     <div class="cards-4" id="ratioCards">
-      <label class="card selected" data-value="2:3">
-        <input type="radio" name="ratio" value="2:3" checked>
+      <label class="card selected" data-value="9:16">
+        <input type="radio" name="ratio" value="9:16" checked>
+        <div class="name">9:16</div>
+        <div class="desc">手機桌布</div>
+      </label>
+      <label class="card" data-value="2:3">
+        <input type="radio" name="ratio" value="2:3">
         <div class="name">2:3</div>
         <div class="desc">雜誌封面標準</div>
       </label>
@@ -725,11 +780,6 @@
         <input type="radio" name="ratio" value="4:5">
         <div class="name">4:5</div>
         <div class="desc">IG貼文</div>
-      </label>
-      <label class="card" data-value="9:16">
-        <input type="radio" name="ratio" value="9:16">
-        <div class="name">9:16</div>
-        <div class="desc">手機桌布</div>
       </label>
       <label class="card" data-value="1:1">
         <input type="radio" name="ratio" value="1:1">
@@ -896,6 +946,44 @@ marie_claire:{
 東方現代都會女性氣質,清新質感
 Asian Contemporary Fashion Photography
 Modern Confident Female Editorial`
+},
+ink_flower:{
+  label:"花墨染·中式水墨花卉寫真",
+  text:`Chinese Ink Wash Floral Portrait Style
+花墨染·水墨花卉人像
+
+Pure White Or Near-White Background
+No Environmental Scene, No Location
+Clean Minimal Negative Space Background
+
+Oversized Flowers Growing And Merging From Subject
+Flowers And Subject Integrated As One
+Petals Flowing Into And Out Of Clothing
+
+Translucent Ink Smoke Diffusing From Flowers
+Watercolor Smoke Spreading Softly Outward
+Semi-Transparent Ethereal Smoke Layers
+
+Garment Style Follows Theme Or AI Decision
+Sheer Translucent Fabric Quality
+Thin Silk Or Organza Texture
+Fabric And Flowers Blending Together
+
+Flower And Smoke Colors Follow The Theme Automatically
+Colors Harmonize With Subject And Theme
+
+Natural Pose Decided By AI
+Pose Harmonizes With Floral Composition
+No Fixed Pose Requirement
+
+High Key Soft Lighting
+No Strong Shadows
+Diffused Even Light Throughout
+Luminous Bright Exposure
+Dreamy Painterly Atmosphere
+
+風格僅套用於光線、構圖、氛圍、服裝質感
+不可覆寫或調整五官、臉型、臉部特徵`
 }
 };
 
@@ -1023,6 +1111,54 @@ Completely Facing Away From Camera
 Slowly Turning Head Back Over Shoulder
 Mysterious Enigmatic Presence
 Story-Driven Narrative Pose`,
+
+door_frame:`Leaning Against Door Frame Pose
+One Hand Resting On Door Frame
+Body Turned Sideways Against Frame
+Casual Yet Powerful Stance
+Natural Life Tension Pose`,
+
+cape_wind:`Cape Or Dress Caught In Wind Pose
+Fabric Dramatically Blown By Wind
+Dynamic Flowing Garment Movement
+Theatrical Windswept Atmosphere
+Standing Tall With Wind Effect`,
+
+step_up:`Stepping Up On Elevated Surface
+One Foot Raised On Step Or Platform
+Looking Down With Slight Elevation
+Commanding Elevated Presence
+Dominant High Ground Stance`,
+
+hug_knees:`Arms Wrapped Around Knees
+Both Legs Pulled To Chest
+Seated Knees Hugging Pose
+Emotionally Expressive Sitting Pose
+Introspective Vulnerable Energy`,
+
+prone_chin:`Lying Face Down Prone Pose
+Both Hands Supporting Chin
+Head Tilted Upward Looking At Camera
+Lazy Relaxed Lounging Mood
+Casual Magazine Editorial Pose`,
+
+hold_flower:`Both Hands Cupping And Holding Prop
+Hands Gently Cradling Theme-Related Object
+Flowers Bouquet Or Thematic Item
+Offering Gesture With Both Hands
+Soft Gentle Holding Pose`,
+
+hair_flip:`Mid Hair Flip Captured Moment
+One Hand Running Through Hair
+Hair Caught In Motion
+Candid Natural Movement
+Dynamic Hair Motion Editorial`,
+
+eye_cover:`One Hand Partially Covering Eye
+Fingers Slightly Spread Over Eye
+Mysterious Peek Through Fingers
+Enigmatic Seductive Expression
+Half Hidden Face Gesture`,
 
 hands_ground:`Kneeling Both Hands On Ground Pose
 Upper Body Leaning Forward
@@ -1169,9 +1305,17 @@ const POSE_THEME_MAP = {
   jojo_twist:  ['九尾妖狐','女武神','暗黑女王','暗黑哥德'],
   jojo_cross:  ['九尾妖狐','女武神','暗黑女王'],
   dip:         ['復古膠片','巴黎時尚','米蘭時裝週'],
-  back_turn:   ['暗黑哥德','九尾妖狐','復古膠片','夢幻仙氣'],
-  hands_ground:['女武神','九尾妖狐','暗黑女王','暗黑哥德'],
-  side_lie:    ['奢華晚裝','度假風尚','極簡主義','復古膠片']
+  back_turn:   ['暗黑哥德','九尾妖狐','復古膠片','夢幻仙氣','血月魔女'],
+  hands_ground:['女武神','九尾妖狐','暗黑女王','暗黑哥德','血月魔女'],
+  side_lie:    ['奢華晚裝','度假風尚','極簡主義','復古膠片'],
+  door_frame:  ['現代時尚','極簡主義','復古膠片','巴黎時尚'],
+  cape_wind:   ['古風仙女','敦煌飛天','血月魔女','洛可可宮廷','夢幻仙氣'],
+  step_up:     ['女武神','九尾妖狐','暗黑女王','洛可可宮廷'],
+  hug_knees:   ['復古膠片','水下夢境','夢幻仙氣','極簡主義'],
+  prone_chin:  ['度假風尚','奢華晚裝','復古膠片'],
+  hold_flower: ['古風仙女','敦煌飛天','中式古典','水下夢境','夢幻仙氣'],
+  hair_flip:   ['現代時尚','巴黎時尚','米蘭時裝週','度假風尚'],
+  eye_cover:   ['血月魔女','暗黑哥德','賽博龐克','九尾妖狐','水下夢境']
 };
 
 function updateThemeRecommendations(poseKey){
@@ -1218,39 +1362,29 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
   if(!theme) theme = "(請填寫主題或服裝方向)";
 
   const style = STYLES[styleKey];
+  const isInkFlower = styleKey === 'ink_flower';
 
-  // 風格區塊
-  const styleBlock =
-`【封面風格｜${style.label}】
+  // 風格區塊(花墨染已內含範圍限定,不重複加)
+  const styleBlock = isInkFlower
+    ? `【封面風格｜${style.label}】\n\n${style.text}`
+    : `【封面風格｜${style.label}】\n\n${style.text}\n\n風格僅套用於光線、構圖、氛圍、服裝質感\n不可覆寫或調整五官、臉型、臉部特徵`;
 
-${style.text}
+  // 背景區塊(花墨染固定純白,忽略背景選項)
+  const bgBlock = isInkFlower
+    ? `【背景設定】\n\nPure White Background\nClean Empty Background\nNo Scene No Environment`
+    : `【背景設定】\n\n${BACKGROUNDS[bgKey]}`;
 
-風格僅套用於光線、構圖、氛圍、服裝質感
-不可覆寫或調整五官、臉型、臉部特徵`;
-
-  // 背景區塊
-  const bgBlock = `【背景設定】\n\n${BACKGROUNDS[bgKey]}`;
-
-  // 姿態區塊(可選)
-  const poseText = POSES[poseKey];
+  // 姿態區塊(花墨染不指定姿態)
+  const poseText = isInkFlower ? null : POSES[poseKey];
   const poseBlock = poseText ? `【姿態模組】\n\n${poseText}` : null;
 
   // 鏡頭區塊(可選)
   const cameraBlock = CAMERAS[cameraKey];
 
   // 服裝邏輯
-  const costumeBlock =
-`【服裝邏輯模組｜動態造型系統】
-
-根據主題「${theme}」自動設計服裝層次
-服裝層數依主題自動增減,通常2~5層
-優先封面大片感
-優先${style.label}的視覺語言
-服裝符合主題世界觀與材質質感
-Premium Fabric / Luxury Material Detail
-
-避免過度Cosplay化
-避免遊戲角色盔甲化`;
+  const costumeBlock = isInkFlower
+    ? `【服裝邏輯模組｜花墨染專屬】\n\n服裝依主題「${theme}」或AI自動決定\n薄紗半透明材質為主\nSheer Translucent Fabric\nOrganza Or Thin Silk Texture\n服裝與花卉自然融合`
+    : `【服裝邏輯模組｜動態造型系統】\n\n根據主題「${theme}」自動設計服裝層次\n服裝層數依主題自動增減,通常2~5層\n優先封面大片感\n優先${style.label}的視覺語言\n服裝符合主題世界觀與材質質感\nPremium Fabric / Luxury Material Detail\n\n避免過度Cosplay化\n避免遊戲角色盔甲化`;
 
   // 主題區塊
   const themeBlock = `【主題 / 服裝方向】\n\n${theme}`;
