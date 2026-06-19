@@ -244,11 +244,11 @@
   <header>
     <div class="eyebrow">Vol.1 · Travel Editorial</div>
     <h1>寫真旅拍風格咒語產生器</h1>
-    <p>身份鎖定 × 真人旅拍感 × 電影級光影</p>
+    <p>身份鎖定 × 真人旅拍感 × 畫面氣場</p>
   </header>
 
   <div class="note">
-    💡 產生咒語後,使用時請附上人物參考照片——身份鎖定系統需要照片才能生效。
+    💡 產生咒語後，使用時請附上人物參考照片。身份鎖定系統需要照片才能生效。
   </div>
 
   <!-- 01 構圖 -->
@@ -397,7 +397,7 @@
     <div class="step">
       <div class="num">03</div>
       <div class="title">主題</div>
-      <div class="sub">點選快選或自行輸入（台灣 / 日韓 / 海外 / 古風 / 海島）</div>
+      <div class="sub">點選快選或自行輸入（台灣／日韓／海外／古風／海島）</div>
     </div>
     <div class="chips" id="themeChips">
       <label class="chip" data-value="九尾妖狐"><input type="radio" name="themePreset" value="九尾妖狐">九尾妖狐</label>
@@ -436,7 +436,7 @@
       <label class="chip" data-value="沙灘時尚"><input type="radio" name="themePreset" value="沙灘時尚">沙灘時尚</label>
       <label class="chip" data-value="度假風尚"><input type="radio" name="themePreset" value="度假風尚">度假風尚</label>
     </div>
-    <input type="text" class="theme-input" id="themeInput" placeholder="例如:九尾妖狐">
+    <input type="text" class="theme-input" id="themeInput" placeholder="例如：九尾妖狐">
   </section>
 
   <!-- 04 比例 -->
@@ -444,7 +444,7 @@
     <div class="step">
       <div class="num">04</div>
       <div class="title">圖片比例</div>
-      <div class="sub">單選</div>
+      <div class="sub">單選，決定版面比例</div>
     </div>
     <div class="cards-5" id="ratioCards">
       <label class="card selected" data-value="9:16">
@@ -514,8 +514,8 @@
   <section>
     <div class="step">
       <div class="num">05</div>
-      <div class="title">鏡頭氣場</div>
-      <div class="sub">單選,可跳過(預設自然平視)</div>
+      <div class="title">鏡頭語感</div>
+      <div class="sub">單選，可跳過（預設自然平視）</div>
     </div>
     <div class="cards" id="cameraCards">
       <label class="card selected" data-value="neutral">
@@ -734,7 +734,7 @@ ethereal:{ label:"Ethereal Fantasy Editorial", text:`Ethereal Fantasy Editorial\
 vintage:{ label:"Vintage Film Photography", text:`Vintage Film Photography\n復古膠片質感,褪色暖調色彩\n底片顆粒感,Analog Film Aesthetic` }
 };
 
-const STYLE_SCOPE_NOTE=`風格僅套用於光線、構圖、氛圍、服裝質感\n不可覆寫或調整五官、臉型、臉部特徵`;
+const STYLE_SCOPE_NOTE=`風格只影響光線、構圖、氛圍與服裝質感\n不改五官、臉型與身份辨識度`;
 
 const RATIOS = {
 "9:16":"Aspect Ratio 9:16, Vertical Format, Mobile Wallpaper Composition",
