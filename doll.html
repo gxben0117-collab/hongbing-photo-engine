@@ -888,6 +888,40 @@ setupRadioCards('compositionCards');
 setupRadioCards('ratioCards');
 setupRadioCards('mediaCards');
 
+function setRadioCardValue(containerId, value){
+  const container = document.getElementById(containerId);
+  if(!container) return;
+  container.querySelectorAll('.card').forEach(card=>{
+    const input = card.querySelector('input');
+    const selected = card.dataset.value === value;
+    card.classList.toggle('selected', selected);
+    if(input) input.checked = selected;
+  });
+}
+
+const DOLL_STYLE_PRESET_DEFAULTS = {
+  blindbox: { composition: 'blindbox_unbox', media: 'toy_photo', ratio: '4:5' },
+  nendoroid: { composition: 'front_display', media: 'anime_model', ratio: '1:1' },
+  plush: { composition: 'desktop_collect', media: 'toy_photo', ratio: '4:5' },
+  sofubi: { composition: 'front_display', media: '3d_figure', ratio: '1:1' },
+  resin_collectible: { composition: 'turntable', media: '3d_figure', ratio: '2:3' },
+  chibi_anime: { composition: 'mini_scene', media: 'anime_model', ratio: '3:4' },
+  premium_showcase: { composition: 'clear_box', media: '3d_figure', ratio: '2:3' }
+};
+
+function applyDollStyleDefaults(styleValue){
+  const preset = DOLL_STYLE_PRESET_DEFAULTS[styleValue];
+  if(!preset) return;
+  if(preset.composition) setRadioCardValue('compositionCards', preset.composition);
+  if(preset.media) setRadioCardValue('mediaCards', preset.media);
+  if(preset.ratio) setRadioCardValue('ratioCards', preset.ratio);
+}
+
+document.querySelectorAll('#styleCards .card').forEach(card=>{
+  card.addEventListener('click',()=>{
+    applyDollStyleDefaults(card.dataset.value);
+  });
+});
 // 主題快選
 const themeChips=document.querySelectorAll('#themeChips .chip');
 const themeInputEl=document.getElementById('themeInput');

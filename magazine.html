@@ -2207,7 +2207,15 @@ const BG_LIGHTING_MAP = {
   install: 'mixed_studio',
   minimal_space: 'beauty_fill',
   black_void: 'black_gold',
-  neon_night: 'rim_light'
+  neon_night: 'rim_light',
+  white_seamless: 'beauty_fill',
+  dark_gray_concrete: 'rim_light',
+  luxury_hotel_suite: 'window_soft',
+  mirror_studio: 'rim_light',
+  marble_wall: 'beauty_fill',
+  red_curtain: 'black_gold',
+  gallery_white_wall: 'beauty_fill',
+  dark_metal: 'rim_light'
 };
 
 function setSelectedChipValue(containerId, value){
@@ -2263,6 +2271,16 @@ const THEME_PRESET_DEFAULTS = {
   '都會冷感': { bg: 'concrete', camera: 'side_profile', lighting: 'rim_light' },
   '夢幻光感': { bg: 'soft_gradient', camera: 'soft_focus', lighting: 'window_soft' },
   '典藏封面': { bg: 'studio', camera: 'neutral', lighting: 'mixed_studio' },
+  '紅毯女星': { bg: 'red_curtain', camera: 'low', lighting: 'black_gold' },
+  '復古名伶': { bg: 'red_curtain', camera: 'side_profile', lighting: 'window_soft' },
+  '未來銀色高訂': { bg: 'dark_metal', camera: 'low', lighting: 'rim_light' },
+  '極簡白襯衫': { bg: 'white_seamless', camera: 'neutral', lighting: 'beauty_fill' },
+  '黑色西裝女王': { bg: 'dark_gray_concrete', camera: 'low', lighting: 'rim_light' },
+  '珠寶禮服': { bg: 'marble_wall', camera: 'beauty_closeup', lighting: 'beauty_fill' },
+  '羽毛高訂': { bg: 'soft_gradient', camera: 'soft_focus', lighting: 'mixed_studio' },
+  '濕髮皮革': { bg: 'dark_metal', camera: 'side_profile', lighting: 'rim_light' },
+  '紗裙芭蕾': { bg: 'gallery_white_wall', camera: 'soft_focus', lighting: 'window_soft' },
+  '霧面裸色高級感': { bg: 'white_seamless', camera: 'beauty_closeup', lighting: 'beauty_fill' },
   '透視薄紗': { bg: 'translucent', camera: 'beauty_closeup', lighting: 'mixed_studio' },
   '深V高開衩': { bg: 'black_void', camera: 'beauty_closeup', lighting: 'black_gold' },
   '鏤空剪裁': { bg: 'neon_night', camera: 'side_profile', lighting: 'rim_light' }
@@ -2307,19 +2325,19 @@ themeInputEl.addEventListener('input',()=>{
 // 姿態 → 推薦主題映射
 const POSE_THEME_MAP = {
   auto:        [],
-  contrapposto:['現代時尚','奢華晚裝','極簡主義','度假風尚'],
-  hip:         ['現代時尚','奢華晚裝','米蘭時裝週','度假風尚'],
-  lean:        ['復古膠片','極簡主義','巴黎時尚','度假風尚'],
-  turn:        ['復古膠片','巴黎時尚','米蘭時裝週'],
+  contrapposto:['現代時尚','奢華晚裝','極簡主義','度假風尚','極簡白襯衫','紅毯女星'],
+  hip:         ['現代時尚','奢華晚裝','米蘭時裝週','度假風尚','黑色西裝女王','紅毯女星'],
+  lean:        ['復古膠片','極簡主義','巴黎時尚','度假風尚','極簡白襯衫','濕髮皮革'],
+  turn:        ['復古膠片','巴黎時尚','米蘭時裝週','復古名伶','紗裙芭蕾'],
   guifei:      ['清宮格格','唐朝盛世','奢華晚裝'],
   kneel:       ['清宮格格','唐朝盛世','奢華晚裝'],
   lunge:       ['九尾妖狐','女武神','暗黑哥德'],
-  vogue_hands: ['現代時尚','巴黎時尚','米蘭時裝週'],
+  vogue_hands: ['現代時尚','巴黎時尚','米蘭時裝週','未來銀色高訂','羽毛高訂'],
   arms_wide:   ['夢幻仙氣','敦煌飛天','古風仙女'],
-  chin_rest:   ['奢華晚裝','極簡主義','復古膠片'],
+  chin_rest:   ['奢華晚裝','極簡主義','復古膠片','霧面裸色高級感','珠寶禮服'],
   water_sleeve:['唐朝盛世','敦煌飛天','西域舞姬','中式古典','古風仙女'],
   fan_cover:   ['唐朝盛世','清宮格格','中式古典','和風雅韻'],
-  tiptoe:      ['敦煌飛天','古風仙女','夢幻仙氣'],
+  tiptoe:      ['敦煌飛天','古風仙女','夢幻仙氣','紗裙芭蕾','羽毛高訂'],
   jojo_twist:  ['九尾妖狐','女武神','暗黑女王','暗黑哥德'],
   jojo_cross:  ['九尾妖狐','女武神','暗黑女王'],
   dip:         ['復古膠片','巴黎時尚','米蘭時裝週'],
@@ -2332,7 +2350,7 @@ const POSE_THEME_MAP = {
   hug_knees:   ['復古膠片','水下夢境','夢幻仙氣','極簡主義'],
   prone_chin:  ['度假風尚','奢華晚裝','復古膠片'],
   hold_flower: ['古風仙女','敦煌飛天','中式古典','水下夢境','夢幻仙氣'],
-  hair_flip:   ['現代時尚','巴黎時尚','米蘭時裝週','度假風尚'],
+  hair_flip:   ['現代時尚','巴黎時尚','米蘭時裝週','度假風尚','濕髮皮革','紅毯女星'],
   eye_cover:   ['血月魔女','暗黑哥德','賽博龐克','九尾妖狐','水下夢境']
 };
 

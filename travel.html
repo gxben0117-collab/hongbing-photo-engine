@@ -1121,6 +1121,7 @@ function applyTravelRandomSelection(){
   const ratioValue = getRandomItem(getCardValues('ratioCards'));
   const cameraValue = getRandomItem(getCardValues('cameraCards'));
   const motionValue = getRandomItem(getCardValues('motionCards'));
+  const mediaValue = getRandomItem(getCardValues('mediaCards'));
   const themeValue = getRandomItem(Array.from(document.querySelectorAll('#themeChips .chip')).map(chip => chip.dataset.value));
 
   setRadioCardValue('compositionCards', compositionValue);
@@ -1128,12 +1129,38 @@ function applyTravelRandomSelection(){
   setRadioCardValue('ratioCards', ratioValue);
   setRadioCardValue('cameraCards', cameraValue);
   setRadioCardValue('motionCards', motionValue);
+  setRadioCardValue('mediaCards', mediaValue);
 
   themeInputEl.value = themeValue;
   themeInputEl.dispatchEvent(new Event('input', { bubbles: true }));
   document.getElementById('generateBtn').click();
 }
 
+
+const TRAVEL_STYLE_PRESET_DEFAULTS = {
+  japanese_clear: { camera: 'soft_focus', motion: 'breeze', media: 'cinematic_realistic' },
+  retro_film_travel: { camera: 'handheld_doc', motion: 'flow', media: 'retro_film' },
+  resort_hotel: { camera: 'tele_compression', motion: 'breeze', media: 'real_ad_photo' },
+  natural_lifestyle: { camera: 'passerby_view', motion: 'flow', media: 'travel_magazine' },
+  cinematic: { camera: 'backlit_silhouette', motion: 'dynamic', media: 'film_still' },
+  vintage: { camera: 'handheld_doc', motion: 'breeze', media: 'retro_film' },
+  luxury: { camera: 'cover', motion: 'breeze', media: 'real_ad_photo' },
+  ethereal: { camera: 'soft_focus', motion: 'breeze', media: 'postcard_illustration' }
+};
+
+function applyTravelStyleDefaults(styleValue){
+  const preset = TRAVEL_STYLE_PRESET_DEFAULTS[styleValue];
+  if(!preset) return;
+  if(preset.camera) setRadioCardValue('cameraCards', preset.camera);
+  if(preset.motion) setRadioCardValue('motionCards', preset.motion);
+  if(preset.media) setRadioCardValue('mediaCards', preset.media);
+}
+
+document.querySelectorAll('#styleCards .card').forEach(card=>{
+  card.addEventListener('click',()=>{
+    applyTravelStyleDefaults(card.dataset.value);
+  });
+});
 const themeChips=document.querySelectorAll('#themeChips .chip');
 const themeInputEl=document.getElementById('themeInput');
 themeChips.forEach(chip=>{
