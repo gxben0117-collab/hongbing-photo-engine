@@ -2256,6 +2256,28 @@ const BG_LIGHTING_MAP = {
   dark_metal: 'rim_light'
 };
 
+
+function setSelectedCardValue(containerId, value){
+  const container = document.getElementById(containerId);
+  if(!container) return;
+  const cards = container.querySelectorAll('.card, .pose-card');
+  cards.forEach(card=>{
+    const input = card.querySelector('input');
+    const isSelected = card.dataset.value === value;
+    card.classList.toggle('selected', isSelected);
+    if(input) input.checked = isSelected;
+  });
+}
+
+function setSelectedPoseValue(value){
+  const cards = document.querySelectorAll('.pose-card');
+  cards.forEach(card=>{
+    const input = card.querySelector('input');
+    const isSelected = card.dataset.value === value;
+    card.classList.toggle('selected', isSelected);
+    if(input) input.checked = isSelected;
+  });
+}
 function setSelectedChipValue(containerId, value){
   const container = document.getElementById(containerId);
   if(!container) return;
@@ -2327,8 +2349,8 @@ const THEME_PRESET_DEFAULTS = {
 function applyThemePresetDefaults(value){
   const preset = THEME_PRESET_DEFAULTS[value];
   if(!preset) return;
-  if(preset.bg) document.querySelector('#bgCards [data-value="' + preset.bg + '"]')?.click();
-  if(preset.camera) document.querySelector('#cameraCards [data-value="' + preset.camera + '"]')?.click();
+  if(preset.bg) setSelectedCardValue('bgCards', preset.bg);
+  if(preset.camera) setSelectedCardValue('cameraCards', preset.camera);
   if(preset.lighting) setSelectedChipValue('lightingChips', preset.lighting);
 }
 
@@ -2508,16 +2530,16 @@ document.getElementById('copyBtn').addEventListener('click',()=>{
 });
 
 document.getElementById('blackGoldPreset').addEventListener('click',()=>{
-  document.querySelector('#styleCards [data-value="beauty_closeup"]')?.click();
-  document.querySelector('#bgCards [data-value="window_light"]')?.click();
-  document.querySelector('.pose-card[data-value="chin_rest"]')?.click();
-  document.querySelector('#cameraCards [data-value="beauty_closeup"]')?.click();
-  document.querySelector('#motionCards [data-value="breeze"]')?.click();
-  document.querySelector('#makeupHairChips [data-value="black_gold"]')?.click();
-  document.querySelector('#jewelryChips [data-value="statement"]')?.click();
-  document.querySelector('#expressionChips [data-value="allure_smile"]')?.click();
-  document.querySelector('#lightingChips [data-value="black_gold"]')?.click();
-  document.querySelector('#ratioCards [data-value="4:5"]')?.click();
+  setSelectedCardValue('styleCards', 'beauty_closeup');
+  setSelectedCardValue('bgCards', 'window_light');
+  setSelectedPoseValue('chin_rest');
+  setSelectedCardValue('cameraCards', 'beauty_closeup');
+  setSelectedCardValue('motionCards', 'breeze');
+  setSelectedChipValue('makeupHairChips', 'black_gold');
+  setSelectedChipValue('jewelryChips', 'statement');
+  setSelectedChipValue('expressionChips', 'allure_smile');
+  setSelectedChipValue('lightingChips', 'black_gold');
+  setSelectedCardValue('ratioCards', '4:5');
   themeInputEl.value='黑金高訂美妝特寫';
   themeInputEl.dispatchEvent(new Event('input',{bubbles:true}));
 });
