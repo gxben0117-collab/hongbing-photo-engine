@@ -498,6 +498,11 @@
             <div class="name">嘉人 Marie Claire</div>
             <div class="desc">東方現代,清新都會女性</div>
           </label>
+          <label class="card" data-value="japanese_photo_magazine">
+            <input type="radio" name="style" value="japanese_photo_magazine">
+            <div class="name">日系寫真雜誌</div>
+            <div class="desc">柔光寫真,乾淨日雜感</div>
+          </label>
         </div>
       </div>
 
@@ -680,10 +685,41 @@
     </div>
   </section>
 
-  <!-- 03 背景設定 -->
+  <!-- 03 身形輪廓 -->
   <section>
     <div class="section-header">
       <span class="section-label">03</span>
+      <span class="section-title">身形輪廓</span>
+      <span class="section-sub">單選，和風格分開控制</span>
+    </div>
+    <div class="cards" id="bodyShapeCards">
+      <label class="card selected" data-value="original">
+        <input type="radio" name="bodyShape" value="original" checked>
+        <div class="name">原圖自然比例</div>
+        <div class="desc">以參考照身形為主</div>
+      </label>
+      <label class="card" data-value="slight_waist">
+        <input type="radio" name="bodyShape" value="slight_waist">
+        <div class="name">輕微纖腰</div>
+        <div class="desc">自然修飾腰線</div>
+      </label>
+      <label class="card" data-value="curvy_waist">
+        <input type="radio" name="bodyShape" value="curvy_waist">
+        <div class="name">豐滿纖腰</div>
+        <div class="desc">明顯胸腰臀曲線</div>
+      </label>
+      <label class="card" data-value="fashion_tall">
+        <input type="radio" name="bodyShape" value="fashion_tall">
+        <div class="name">高挑時裝比例</div>
+        <div class="desc">修長高級模特感</div>
+      </label>
+    </div>
+  </section>
+
+  <!-- 04 背景設定 -->
+  <section>
+    <div class="section-header">
+      <span class="section-label">04</span>
       <span class="section-title">背景設定</span>
       <span class="section-sub">單選，決定背景氣質</span>
     </div>
@@ -819,10 +855,10 @@
         <div class="desc">深色金屬,冷峻高級感</div>
       </label></div>
   </section>
-  <!-- 04 姿態模組 -->
+  <!-- 05 姿態模組 -->
   <section>
     <div class="section-header">
-      <span class="section-label">04</span>
+      <span class="section-label">05</span>
       <span class="section-title">姿態模組</span>
       <span class="section-sub">單選,可選自動</span>
     </div>
@@ -1016,10 +1052,10 @@
 
   </section>
 
-  <!-- 05 人物入鏡比例 -->
+  <!-- 06 人物入鏡比例 -->
   <section>
     <div class="section-header">
-      <span class="section-label">05</span>
+      <span class="section-label">06</span>
       <span class="section-title">人物入鏡比例</span>
       <span class="section-sub">單選，控制人物在畫面中的大小</span>
     </div>
@@ -1057,10 +1093,10 @@
     </div>
   </section>
 
-  <!-- 06 鏡頭氣場 -->
+  <!-- 07 鏡頭氣場 -->
   <section>
     <div class="section-header">
-      <span class="section-label">06</span>
+      <span class="section-label">07</span>
       <span class="section-title">鏡頭語感</span>
       <span class="section-sub">單選，可跳過（預設自然平視）</span>
     </div>
@@ -1097,10 +1133,10 @@
       </label>
     </div>
   </section>
-  <!-- 07 動態節奏 -->
+  <!-- 08 動態節奏 -->
   <section>
     <div class="section-header">
-      <span class="section-label">07</span>
+      <span class="section-label">08</span>
       <span class="section-title">動態節奏</span>
       <span class="section-sub">單選，可跳過（預設微風輕動）</span>
     </div>
@@ -1128,40 +1164,34 @@
     </div>
   </section>
 
-  <!-- 08 封面細節 -->
+  <!-- 09 封面細節 -->
   <section>
     <div class="section-header">
-      <span class="section-label">08</span>
+      <span class="section-label">09</span>
       <span class="section-title">封面細節</span>
-      <span class="section-sub">妝髮 / 珠寶 / 眼神 / 光線</span>
+      <span class="section-sub">妝容 / 珠寶 / 眼神 / 光線</span>
     </div>
     <div style="margin-bottom:14px;">
-      <div style="font-size:12px;color:var(--soft);margin-bottom:8px;">妝髮</div>
-      <div class="chips" id="makeupHairChips">
-        <label class="chip" data-value="natural_highend"><input type="radio" name="makeupHair" value="natural_highend">自然高級</label>
-        <label class="chip" data-value="black_gold"><input type="radio" name="makeupHair" value="black_gold">黑金高訂</label>
-        <label class="chip" data-value="smoky_glam"><input type="radio" name="makeupHair" value="smoky_glam">煙燻濃妝</label>
-        <label class="chip" data-value="elegant_updo"><input type="radio" name="makeupHair" value="elegant_updo">高級盤髮</label>
-        <label class="chip" data-value="wind_wave"><input type="radio" name="makeupHair" value="wind_wave">風感長波浪</label>
-                <label class="chip" data-value="red_lip"><input type="radio" name="makeupHair" value="red_lip">紅唇</label>
-        <label class="chip" data-value="glossy_lip"><input type="radio" name="makeupHair" value="glossy_lip">濕亮唇妝</label>
-        <label class="chip" data-value="matte_base"><input type="radio" name="makeupHair" value="matte_base">霧面底妝</label>
-        <label class="chip" data-value="precise_eyeliner"><input type="radio" name="makeupHair" value="precise_eyeliner">精緻眼線</label>
-        <label class="chip" data-value="highlight_skin"><input type="radio" name="makeupHair" value="highlight_skin">高光肌膚</label><label class="chip selected" data-value="original"><input type="radio" name="makeupHair" value="original" checked>原圖一致</label>
+      <div style="font-size:12px;color:var(--soft);margin-bottom:8px;">妝容（最多 2 個）</div>
+      <div class="chips" id="makeupChips">
+        <label class="chip selected" data-value="original"><input type="checkbox" name="makeup" value="original" checked>原圖一致</label>
+        <label class="chip" data-value="natural_highend"><input type="checkbox" name="makeup" value="natural_highend">自然高級</label>
+        <label class="chip" data-value="smoky_glam"><input type="checkbox" name="makeup" value="smoky_glam">煙燻濃妝</label>
+        <label class="chip" data-value="red_lip"><input type="checkbox" name="makeup" value="red_lip">紅唇</label>
+        <label class="chip" data-value="glossy_lip"><input type="checkbox" name="makeup" value="glossy_lip">濕亮唇妝</label>
+        <label class="chip" data-value="matte_base"><input type="checkbox" name="makeup" value="matte_base">霧面底妝</label>
+        <label class="chip" data-value="precise_eyeliner"><input type="checkbox" name="makeup" value="precise_eyeliner">精緻眼線</label>
+        <label class="chip" data-value="highlight_skin"><input type="checkbox" name="makeup" value="highlight_skin">高光肌膚</label>
       </div>
     </div>
     <div style="margin-bottom:14px;">
-      <div style="font-size:12px;color:var(--soft);margin-bottom:8px;">珠寶配飾</div>
+      <div style="font-size:12px;color:var(--soft);margin-bottom:8px;">珠寶配飾（最多 2 個）</div>
       <div class="chips" id="jewelryChips">
-        <label class="chip" data-value="none"><input type="radio" name="jewelry" value="none">無</label>
-        <label class="chip selected" data-value="earrings"><input type="radio" name="jewelry" value="earrings" checked>耳飾重點</label>
-        <label class="chip" data-value="necklace"><input type="radio" name="jewelry" value="necklace">項鍊重點</label>
-        <label class="chip" data-value="statement"><input type="radio" name="jewelry" value="statement">華麗套組</label>
-        <label class="chip" data-value="ring_focus"><input type="radio" name="jewelry" value="ring_focus">戒指亮點</label>
-              <label class="chip" data-value="metal_earrings"><input type="radio" name="jewelry" value="metal_earrings">金屬耳環</label>
-        <label class="chip" data-value="diamond_necklace"><input type="radio" name="jewelry" value="diamond_necklace">鑽石項鍊</label>
-        <label class="chip" data-value="fingertip_closeup"><input type="radio" name="jewelry" value="fingertip_closeup">指尖特寫</label>
-        <label class="chip" data-value="luxury_nails"><input type="radio" name="jewelry" value="luxury_nails">高級指甲油</label></div>
+        <label class="chip" data-value="none"><input type="checkbox" name="jewelry" value="none">無</label>
+        <label class="chip selected" data-value="earrings"><input type="checkbox" name="jewelry" value="earrings" checked>耳飾重點</label>
+        <label class="chip" data-value="necklace"><input type="checkbox" name="jewelry" value="necklace">項鍊重點</label>
+        <label class="chip" data-value="statement"><input type="checkbox" name="jewelry" value="statement">華麗套組</label>
+      </div>
     </div>
     <div style="margin-bottom:14px;">
       <div style="font-size:12px;color:var(--soft);margin-bottom:8px;">眼神表情</div>
@@ -1188,10 +1218,10 @@
 
 
 
-  <!-- 09 圖片比例 -->
+  <!-- 10 圖片比例 -->
   <section>
     <div class="section-header">
-      <span class="section-label">09</span>
+      <span class="section-label">10</span>
       <span class="section-title">圖片比例</span>
       <span class="section-sub">單選</span>
     </div>
@@ -1259,10 +1289,10 @@
     </div>
   </section>
 
-  <!-- 10 輸出風格 -->
+  <!-- 11 輸出風格 -->
   <section>
     <div class="section-header">
-      <span class="section-label">10</span>
+      <span class="section-label">11</span>
       <span class="section-title">輸出風格 / 畫面媒材</span>
       <span class="section-sub">單選，決定最終媒材</span>
     </div>
@@ -1308,10 +1338,10 @@
         <div class="desc">動畫角色感 / 清透色彩</div>
       </label></div>
   </section>
-  <!-- 11 生成 -->
+  <!-- 12 生成 -->
   <section>
     <div class="section-header">
-      <span class="section-label">11</span>
+      <span class="section-label">12</span>
       <span class="section-title">生成咒語</span>
     </div>
     <button class="generate-btn" id="generateBtn">生成咒語</button>
@@ -1449,6 +1479,14 @@ marie_claire:{
 東方現代都會女性氣質,清新質感
 Asian Contemporary Fashion Photography
 Modern Confident Female Editorial`
+},
+japanese_photo_magazine:{
+  label:"日系寫真雜誌",
+  text:`Japanese Photo Magazine Editorial
+日系寫真雜誌感,柔和乾淨,自然親近但精緻
+Soft Japanese Magazine Photography
+Clean Skin Tone, Gentle Editorial Mood
+Bright Airy Composition With Refined Female Presence`
 },
 inner_story:{
   label:"內頁故事",
@@ -2016,22 +2054,13 @@ Identity Remains Stable And Recognizable`
 };
 
 const DETAIL_BLOCKS = {
-makeupHair:{
+makeup:{
   natural_highend:`Natural High End Makeup
 清透乾淨妝感,皮膚質地自然保留
-Hair Texture Soft And Elegant`,
-  black_gold:`Black Gold Haute Couture Makeup
-黑金高訂妝髮,精緻眼線,立體輪廓
-High Fashion Beauty Editorial`,
+Natural Refined Beauty Editorial Makeup`,
   smoky_glam:`Smoky Glam Makeup
 煙燻眼妝,深邃輪廓,高對比感
 Dramatic Beauty Close-up`,
-  elegant_updo:`Elegant Updo Hair
-高級盤髮,乾淨輪廓線
-Refined Editorial Hair Styling`,
-  wind_wave:`Wind-Swept Long Waves
-長波浪髮絲帶風感
-Natural Movement And Soft Glam`,
   red_lip:`Classic Red Lip Makeup
 紅唇成為封面焦點,唇線精緻乾淨
 Timeless Beauty Editorial Impact`,
@@ -2046,9 +2075,10 @@ Soft Powder Finish With Natural Skin Texture`,
 Sharp Beauty Detail And Strong Eye Definition`,
   highlight_skin:`Highlighted Glowing Skin
 高光肌膚,顴骨與鼻樑光澤自然
-Luxury Beauty Glow Without Plastic Skin`,  original:`Preserve Original Hair And Makeup
-維持原圖妝髮，不做額外改動
-Keep The Reference Photo Hair And Makeup As Is`
+Luxury Beauty Glow Without Plastic Skin`,
+  original:`Preserve Original Makeup
+維持原圖妝容，不做額外改動
+Keep The Reference Photo Makeup As Is`
 },
 jewelry:{
   none:`Minimal Jewelry Or No Jewelry
@@ -2062,22 +2092,7 @@ Refined Luxury Detail`,
 Elegant Jewelry Highlight`,
   statement:`Full Jewelry Set
 耳飾 / 項鍊 / 手部細節一起成立
-Luxury Editorial Jewelry Presence`,
-  ring_focus:`Ring Accent Focus
-手部珠寶成為畫面亮點
-Subtle Luxury Detail`,
-  metal_earrings:`Metal Statement Earrings
-金屬耳環成為臉側焦點
-Clean Reflective Luxury Accessory Detail`,
-  diamond_necklace:`Diamond Necklace Focus
-鑽石項鍊強化頸部與鎖骨焦點
-Sparkling High Jewelry Editorial Presence`,
-  fingertip_closeup:`Fingertip Detail Focus
-指尖特寫,手部姿態優雅
-Nail And Ring Area Sharply Presented`,
-  luxury_nails:`Luxury Nail Polish Detail
-高級指甲油,指尖色彩與光澤精緻
-Beauty Editorial Hand Detail`
+Luxury Editorial Jewelry Presence`
 },
 expression:{
   calm_direct:`Calm Direct Eye Contact
@@ -2204,6 +2219,37 @@ const RATIOS = {
 "8:10":"Aspect Ratio 8:10, Balanced Portrait Format"
 };
 
+const BODY_SHAPES = {
+original:`【身形輪廓｜原圖自然比例】
+
+Preserve The Reference Photo Natural Body Proportions
+Keep Original Body Shape, Height Impression, Shoulder Width, Waist-To-Hip Balance
+Natural Realistic Adult Female Anatomy
+Do Not Force A New Body Type
+Keep Face, Identity, Age Impression And Personal Features Unchanged`,
+slight_waist:`【身形輪廓｜輕微纖腰】
+
+Subtle Narrow Waist Refinement
+Slightly More Defined Waistline While Keeping Natural Body Proportions
+Elegant Feminine Silhouette, Not Exaggerated
+Keep The Original Face, Identity And Personal Features Unchanged
+Natural Realistic Adult Female Anatomy`,
+curvy_waist:`【身形輪廓｜豐滿纖腰】
+
+Curvy Narrow-Waist Adult Female Silhouette
+Full Bust, Slim Waist, Elegant Waist-To-Hip Curve
+Clearly Defined Feminine Body Line
+Keep The Original Face, Identity, Age Impression And Personal Features Unchanged
+Natural Realistic Body Proportions, No Exaggerated Fantasy Anatomy`,
+fashion_tall:`【身形輪廓｜高挑時裝比例】
+
+Tall High-Fashion Model Silhouette
+Longer Leg Impression, Refined Shoulder And Neck Line, Slim Editorial Body Shape
+Elegant Runway Proportions While Staying Realistic
+Keep The Original Face, Identity And Personal Features Unchanged
+No Doll-Like Or Over-Stretched Anatomy`
+};
+
 const FRAMING_RATIOS = {
 face_closeup:`【人物入鏡比例｜臉部特寫】
 
@@ -2295,6 +2341,7 @@ function setupRadioCards(containerId){
   });
 }
 setupRadioCards('styleCards');
+setupRadioCards('bodyShapeCards');
 setupRadioCards('bgCards');
 setupRadioCards('framingCards');
 setupRadioCards('cameraCards');
@@ -2377,6 +2424,18 @@ function setSelectedChipValue(containerId, value){
   });
 }
 
+function setMultiChipValues(containerId, values){
+  const container = document.getElementById(containerId);
+  if(!container) return;
+  const selectedValues = new Set(values);
+  container.querySelectorAll('.chip').forEach(chip=>{
+    const input = chip.querySelector('input');
+    const isSelected = input && selectedValues.has(input.value);
+    chip.classList.toggle('selected', isSelected);
+    if(input) input.checked = isSelected;
+  });
+}
+
 function setupChipGroup(containerId){
   const container = document.getElementById(containerId);
   if(!container) return;
@@ -2389,8 +2448,61 @@ function setupChipGroup(containerId){
     });
   });
 }
-setupChipGroup('makeupHairChips');
-setupChipGroup('jewelryChips');
+
+function setupMultiChipGroup(containerId, maxCount, exclusiveValues = []){
+  const container = document.getElementById(containerId);
+  if(!container) return;
+  const exclusiveSet = new Set(exclusiveValues);
+  const chips = Array.from(container.querySelectorAll('.chip'));
+
+  function sync(){
+    const hasSelected = chips.some(chip=>chip.querySelector('input')?.checked);
+    if(!hasSelected && exclusiveValues.length){
+      const fallbackInput = chips.find(chip=>exclusiveSet.has(chip.querySelector('input')?.value))?.querySelector('input');
+      if(fallbackInput) fallbackInput.checked = true;
+    }
+    chips.forEach(chip=>{
+      const input = chip.querySelector('input');
+      chip.classList.toggle('selected', Boolean(input && input.checked));
+    });
+  }
+
+  chips.forEach(chip=>{
+    chip.addEventListener('click',(event)=>{
+      event.preventDefault();
+      const input = chip.querySelector('input');
+      if(!input) return;
+      const willSelect = !input.checked;
+
+      if(willSelect && exclusiveSet.has(input.value)){
+        chips.forEach(other=>{
+          const otherInput = other.querySelector('input');
+          if(otherInput) otherInput.checked = false;
+        });
+        input.checked = true;
+        sync();
+        return;
+      }
+
+      if(willSelect){
+        chips.forEach(other=>{
+          const otherInput = other.querySelector('input');
+          if(otherInput && exclusiveSet.has(otherInput.value)) otherInput.checked = false;
+        });
+        const selectedNonExclusive = chips
+          .map(other=>other.querySelector('input'))
+          .filter(otherInput=>otherInput && otherInput.checked && !exclusiveSet.has(otherInput.value));
+        if(selectedNonExclusive.length >= maxCount) return;
+      }
+
+      input.checked = willSelect;
+      sync();
+    });
+  });
+}
+
+setupMultiChipGroup('makeupChips', 2, ['original']);
+setupMultiChipGroup('jewelryChips', 2, ['none']);
 setupChipGroup('expressionChips');
 setupChipGroup('lightingChips');
 
@@ -2520,9 +2632,15 @@ function updateThemeRecommendations(poseKey){
   });
 }
 
+function getSelectedCheckboxValues(name, fallbackValue){
+  const values = Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(input=>input.value);
+  return values.length ? values : [fallbackValue];
+}
+
 // ====== 生成咒語 ======
 document.getElementById('generateBtn').addEventListener('click',()=>{
   const styleKey = document.querySelector('input[name="style"]:checked').value;
+  const bodyShapeKey = document.querySelector('input[name="bodyShape"]:checked').value;
   const bgKey = document.querySelector('input[name="bg"]:checked').value;
   const poseKey = document.querySelector('input[name="pose"]:checked').value;
   const framingKey = document.querySelector('input[name="framing"]:checked').value;
@@ -2530,8 +2648,8 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
   const motionKey = document.querySelector('input[name="motion"]:checked').value;
   const ratioKey = document.querySelector('input[name="ratio"]:checked').value;
   const mediaKey = document.querySelector('input[name="media"]:checked').value;
-  const hairKey = document.querySelector('input[name="makeupHair"]:checked').value;
-  const jewelryKey = document.querySelector('input[name="jewelry"]:checked').value;
+  const makeupKeys = getSelectedCheckboxValues('makeup', 'original');
+  const jewelryKeys = getSelectedCheckboxValues('jewelry', 'none');
   const expressionKey = document.querySelector('input[name="expression"]:checked').value;
   const lightingKey = document.querySelector('input[name="lighting"]:checked').value;
 
@@ -2549,6 +2667,7 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
     ? `【背景設定】\n\nPure White Background\nClean Empty Background\nNo Scene No Environment`
     : `【背景設定】\n\n${BACKGROUNDS[bgKey]}`;
 
+  const bodyShapeBlock = BODY_SHAPES[bodyShapeKey];
   const poseText = isInkFlower ? null : POSES[poseKey];
   const poseBlock = poseText ? `【姿態模組】\n\n${poseText}` : null;
   const framingBlock = FRAMING_RATIOS[framingKey];
@@ -2559,8 +2678,8 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
     ? `【服裝邏輯模組｜花墨染專屬】\n\n服裝依主題「${theme}」或AI自動決定\n薄紗半透明材質為主\nSheer Translucent Fabric\nOrganza Or Thin Silk Texture\n服裝與花卉自然融合`
     : `【服裝邏輯模組｜動態造型系統】\n\n根據主題「${theme}」自動設計服裝層次\n服裝層數依主題自動增減,通常2~5層\n優先封面大片感\n優先${style.label}的視覺語言\n服裝符合主題世界觀與材質質感\nPremium Fabric / Luxury Material Detail\n\n避免過度Cosplay化\n避免遊戲角色盔甲化`;
 
-  const hairBlock = `【妝髮】\n\n${DETAIL_BLOCKS.makeupHair[hairKey]}`;
-  const jewelryBlock = `【珠寶配飾】\n\n${DETAIL_BLOCKS.jewelry[jewelryKey]}`;
+  const makeupBlock = `【妝容】\n\n${makeupKeys.map(key=>DETAIL_BLOCKS.makeup[key]).filter(Boolean).join('\n\n')}`;
+  const jewelryBlock = `【珠寶配飾】\n\n${jewelryKeys.map(key=>DETAIL_BLOCKS.jewelry[key]).filter(Boolean).join('\n\n')}`;
   const expressionBlock = `【眼神表情】\n\n${DETAIL_BLOCKS.expression[expressionKey]}`;
   const lightingToneBlock = `【光線類型】\n\n${DETAIL_BLOCKS.lighting[lightingKey]}`;
   const mediaBlock = MEDIA_STYLES[mediaKey];
@@ -2570,6 +2689,7 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
   const sections = [
     CORE.identity,
     CORE.skeleton,
+    bodyShapeBlock,
     CORE.photographer,
     ...(poseBlock ? [poseBlock] : []),
     framingBlock,
@@ -2581,7 +2701,7 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
     bgBlock,
     themeBlock,
     costumeBlock,
-    hairBlock,
+    makeupBlock,
     jewelryBlock,
     expressionBlock,
     lightingToneBlock,
@@ -2626,8 +2746,8 @@ document.getElementById('blackGoldPreset').addEventListener('click',()=>{
   setSelectedCardValue('framingCards', 'face_closeup');
   setSelectedCardValue('cameraCards', 'beauty_closeup');
   setSelectedCardValue('motionCards', 'breeze');
-  setSelectedChipValue('makeupHairChips', 'black_gold');
-  setSelectedChipValue('jewelryChips', 'statement');
+  setMultiChipValues('makeupChips', ['smoky_glam', 'precise_eyeliner']);
+  setMultiChipValues('jewelryChips', ['statement']);
   setSelectedChipValue('expressionChips', 'allure_smile');
   setSelectedChipValue('lightingChips', 'black_gold');
   setSelectedCardValue('ratioCards', '4:5');
