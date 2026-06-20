@@ -1016,10 +1016,51 @@
 
   </section>
 
-  <!-- 05 鏡頭氣場 -->
+  <!-- 05 人物入鏡比例 -->
   <section>
     <div class="section-header">
       <span class="section-label">05</span>
+      <span class="section-title">人物入鏡比例</span>
+      <span class="section-sub">單選，控制人物在畫面中的大小</span>
+    </div>
+    <div class="cards" id="framingCards">
+      <label class="card" data-value="face_closeup">
+        <input type="radio" name="framing" value="face_closeup">
+        <div class="name">臉部特寫</div>
+        <div class="desc">臉部 80-90%，美妝封面</div>
+      </label>
+      <label class="card" data-value="bust">
+        <input type="radio" name="framing" value="bust">
+        <div class="name">胸像近景</div>
+        <div class="desc">頭肩胸 70-80%，肖像感強</div>
+      </label>
+      <label class="card selected" data-value="half_body">
+        <input type="radio" name="framing" value="half_body" checked>
+        <div class="name">半身封面</div>
+        <div class="desc">上半身 60-75%，雜誌標準</div>
+      </label>
+      <label class="card" data-value="three_quarter">
+        <input type="radio" name="framing" value="three_quarter">
+        <div class="name">七分身</div>
+        <div class="desc">膝上 50-65%，服裝清楚</div>
+      </label>
+      <label class="card" data-value="full_body">
+        <input type="radio" name="framing" value="full_body">
+        <div class="name">全身入鏡</div>
+        <div class="desc">全身 35-50%，造型完整</div>
+      </label>
+      <label class="card" data-value="negative_space">
+        <input type="radio" name="framing" value="negative_space">
+        <div class="name">留白構圖</div>
+        <div class="desc">人物 25-40%，版面留白</div>
+      </label>
+    </div>
+  </section>
+
+  <!-- 06 鏡頭氣場 -->
+  <section>
+    <div class="section-header">
+      <span class="section-label">06</span>
       <span class="section-title">鏡頭語感</span>
       <span class="section-sub">單選，可跳過（預設自然平視）</span>
     </div>
@@ -1056,10 +1097,10 @@
       </label>
     </div>
   </section>
-  <!-- 06 動態節奏 -->
+  <!-- 07 動態節奏 -->
   <section>
     <div class="section-header">
-      <span class="section-label">06</span>
+      <span class="section-label">07</span>
       <span class="section-title">動態節奏</span>
       <span class="section-sub">單選，可跳過（預設微風輕動）</span>
     </div>
@@ -1087,10 +1128,10 @@
     </div>
   </section>
 
-  <!-- 07 封面細節 -->
+  <!-- 08 封面細節 -->
   <section>
     <div class="section-header">
-      <span class="section-label">07</span>
+      <span class="section-label">08</span>
       <span class="section-title">封面細節</span>
       <span class="section-sub">妝髮 / 珠寶 / 眼神 / 光線</span>
     </div>
@@ -1147,10 +1188,10 @@
 
 
 
-  <!-- 08 圖片比例 -->
+  <!-- 09 圖片比例 -->
   <section>
     <div class="section-header">
-      <span class="section-label">08</span>
+      <span class="section-label">09</span>
       <span class="section-title">圖片比例</span>
       <span class="section-sub">單選</span>
     </div>
@@ -1218,10 +1259,10 @@
     </div>
   </section>
 
-  <!-- 09 輸出風格 -->
+  <!-- 10 輸出風格 -->
   <section>
     <div class="section-header">
-      <span class="section-label">09</span>
+      <span class="section-label">10</span>
       <span class="section-title">輸出風格 / 畫面媒材</span>
       <span class="section-sub">單選，決定最終媒材</span>
     </div>
@@ -1267,10 +1308,10 @@
         <div class="desc">動畫角色感 / 清透色彩</div>
       </label></div>
   </section>
-  <!-- 10 生成 -->
+  <!-- 11 生成 -->
   <section>
     <div class="section-header">
-      <span class="section-label">10</span>
+      <span class="section-label">11</span>
       <span class="section-title">生成咒語</span>
     </div>
     <button class="generate-btn" id="generateBtn">生成咒語</button>
@@ -2163,6 +2204,51 @@ const RATIOS = {
 "8:10":"Aspect Ratio 8:10, Balanced Portrait Format"
 };
 
+const FRAMING_RATIOS = {
+face_closeup:`【人物入鏡比例｜臉部特寫】
+
+Face Close-Up Framing
+Subject Occupies 80-90% Of Frame
+Face, Eyes, Makeup And Skin Texture Are The Main Focus
+Crop Around Head And Neck
+Keep Facial Identity Completely Recognizable`,
+bust:`【人物入鏡比例｜胸像近景】
+
+Bust Portrait Framing
+Subject Occupies 70-80% Of Frame
+Head, Shoulders And Upper Chest Clearly Visible
+Strong Editorial Portrait Presence
+Keep Neckline, Jewelry And Facial Identity Clear`,
+half_body:`【人物入鏡比例｜半身封面】
+
+Half Body Cover Framing
+Subject Occupies 60-75% Of Frame
+Head, Upper Body, Hands And Styling Clearly Visible
+Standard Magazine Cover Subject Scale
+Keep Face And Outfit Both Important`,
+three_quarter:`【人物入鏡比例｜七分身】
+
+Three-Quarter Body Framing
+Subject Occupies 50-65% Of Frame
+Frame From Head To Above Or Around The Knees
+Show Outfit Silhouette, Pose And Body Line Clearly
+Keep Face Recognizable And Not Too Small`,
+full_body:`【人物入鏡比例｜全身入鏡】
+
+Full Body Framing
+Subject Occupies 35-50% Of Frame
+Entire Body Visible From Head To Feet
+Show Complete Outfit, Shoes, Pose And Body Line
+Keep Face Clear Enough For Identity Recognition`,
+negative_space:`【人物入鏡比例｜留白構圖】
+
+Editorial Negative Space Framing
+Subject Occupies 25-40% Of Frame
+Leave Intentional Empty Space For Magazine Layout
+Composition Feels Designed, Minimal And High-End
+Keep Subject Clearly Visible And Identity Recognizable`
+};
+
 // ====== 封面光影系統(封面專屬) ======
 const COVER_LIGHTING =
 `【封面光影系統】
@@ -2188,8 +2274,8 @@ const COVER_COMPOSITION =
 
 Magazine Cover Composition
 Portrait Oriented Vertical Frame
-Subject Occupies 60-75% Of Frame
-Head And Upper Body Clearly Visible
+Subject Scale Follows The Selected Framing Ratio
+Subject Remains Clear Within The Selected Crop
 Strong Eye Contact Or Elegant Gaze
 Upper Frame Has Visual Breathing Room
 Cover Girl Presence
@@ -2210,6 +2296,7 @@ function setupRadioCards(containerId){
 }
 setupRadioCards('styleCards');
 setupRadioCards('bgCards');
+setupRadioCards('framingCards');
 setupRadioCards('cameraCards');
 setupRadioCards('motionCards');
 setupRadioCards('ratioCards');
@@ -2438,6 +2525,7 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
   const styleKey = document.querySelector('input[name="style"]:checked').value;
   const bgKey = document.querySelector('input[name="bg"]:checked').value;
   const poseKey = document.querySelector('input[name="pose"]:checked').value;
+  const framingKey = document.querySelector('input[name="framing"]:checked').value;
   const cameraKey = document.querySelector('input[name="camera"]:checked').value;
   const motionKey = document.querySelector('input[name="motion"]:checked').value;
   const ratioKey = document.querySelector('input[name="ratio"]:checked').value;
@@ -2463,6 +2551,7 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
 
   const poseText = isInkFlower ? null : POSES[poseKey];
   const poseBlock = poseText ? `【姿態模組】\n\n${poseText}` : null;
+  const framingBlock = FRAMING_RATIOS[framingKey];
   const cameraBlock = CAMERAS[cameraKey];
   const motionBlock = MOTION_LEVELS[motionKey];
 
@@ -2483,6 +2572,7 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
     CORE.skeleton,
     CORE.photographer,
     ...(poseBlock ? [poseBlock] : []),
+    framingBlock,
     ...(cameraBlock ? [cameraBlock] : []),
     ...(motionBlock ? [motionBlock] : []),
     COVER_COMPOSITION,
@@ -2533,6 +2623,7 @@ document.getElementById('blackGoldPreset').addEventListener('click',()=>{
   setSelectedCardValue('styleCards', 'beauty_closeup');
   setSelectedCardValue('bgCards', 'window_light');
   setSelectedPoseValue('chin_rest');
+  setSelectedCardValue('framingCards', 'face_closeup');
   setSelectedCardValue('cameraCards', 'beauty_closeup');
   setSelectedCardValue('motionCards', 'breeze');
   setSelectedChipValue('makeupHairChips', 'black_gold');
