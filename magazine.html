@@ -136,6 +136,27 @@
     grid-template-columns:repeat(3,1fr);
     gap:8px;
   }
+  .style-groups{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+  }
+  .style-group{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .style-group-label{
+    font-size:12px;
+    color:var(--gold);
+    letter-spacing:0.08em;
+    font-weight:700;
+    border-left:2px solid var(--gold);
+    padding-left:8px;
+  }
+  .style-group .cards{
+    margin:0;
+  }
   .cards-4{
     display:grid;
     grid-template-columns:repeat(4,1fr);
@@ -423,145 +444,160 @@
       <span class="section-title">版面情境</span>
       <span class="section-sub">單選，決定畫面語氣</span>
     </div>
-    <div class="cards" id="styleCards">
-      <label class="card selected" data-value="vogue">
-        <input type="radio" name="style" value="vogue" checked>
-        <div class="name">Vogue</div>
-        <div class="desc">極致精緻,強烈造型感</div>
-      </label>
-      <label class="card" data-value="bazaar">
-        <input type="radio" name="style" value="bazaar">
-        <div class="name">Harper's Bazaar</div>
-        <div class="desc">藝術感,戲劇光影</div>
-      </label>
-      <label class="card" data-value="elle">
-        <input type="radio" name="style" value="elle">
-        <div class="name">ELLE</div>
-        <div class="desc">時尚清新,現代都會</div>
-      </label>
-      <label class="card" data-value="bazaar_cn">
-        <input type="radio" name="style" value="bazaar_cn">
-        <div class="name">時尚芭莎</div>
-        <div class="desc">東方奢華,高級感</div>
-      </label>
-      <label class="card" data-value="cosmopolitan">
-        <input type="radio" name="style" value="cosmopolitan">
-        <div class="name">Cosmopolitan</div>
-        <div class="desc">活力自信,大膽色彩</div>
-      </label>
-      <label class="card" data-value="natgeo">
-        <input type="radio" name="style" value="natgeo">
-        <div class="name">National Geographic</div>
-        <div class="desc">故事感,自然光影</div>
-      </label>
-      <label class="card" data-value="w_magazine">
-        <input type="radio" name="style" value="w_magazine">
-        <div class="name">W Magazine</div>
-        <div class="desc">前衛藝術,大膽實驗構圖</div>
-      </label>
-      <label class="card" data-value="another">
-        <input type="radio" name="style" value="another">
-        <div class="name">AnOther Magazine</div>
-        <div class="desc">獨立時尚,黑白高對比</div>
-      </label>
-      <label class="card" data-value="lofficiel">
-        <input type="radio" name="style" value="lofficiel">
-        <div class="name">L'Officiel</div>
-        <div class="desc">法式優雅,古典柔和高貴</div>
-      </label>
-      <label class="card" data-value="marie_claire">
-        <input type="radio" name="style" value="marie_claire">
-        <div class="name">嘉人 Marie Claire</div>
-        <div class="desc">東方現代,清新都會女性</div>
-      </label>
-      <label class="card" data-value="inner_story">
-        <input type="radio" name="style" value="inner_story">
-        <div class="name">內頁故事</div>
-        <div class="desc">敘事感雜誌內頁</div>
-      </label>
-      <label class="card" data-value="beauty_closeup">
-        <input type="radio" name="style" value="beauty_closeup">
-        <div class="name">美妝特寫</div>
-        <div class="desc">妝容與眼神特寫</div>
-      </label>
-      <label class="card" data-value="brand_lookbook">
-        <input type="radio" name="style" value="brand_lookbook">
-        <div class="name">品牌 lookbook</div>
-        <div class="desc">乾淨品牌型錄感</div>
-      </label>
-      <label class="card" data-value="fashion_ad">
-        <input type="radio" name="style" value="fashion_ad">
-        <div class="name">時裝廣告</div>
-        <div class="desc">高衝擊時裝廣告</div>
-      </label>
-      <label class="card" data-value="jewelry_ad">
-        <input type="radio" name="style" value="jewelry_ad">
-        <div class="name">珠寶廣告</div>
-        <div class="desc">高級珠寶廣告感</div>
-      </label>
-      <label class="card" data-value="fragrance_ad">
-        <input type="radio" name="style" value="fragrance_ad">
-        <div class="name">香氛廣告</div>
-        <div class="desc">優雅香氛廣告感</div>
-      </label>
-      <label class="card" data-value="cover_big">
-        <input type="radio" name="style" value="cover_big">
-        <div class="name">封面大片</div>
-        <div class="desc">強烈封面主視覺</div>
-      </label>
-      <label class="card" data-value="feature_story">
-        <input type="radio" name="style" value="feature_story">
-        <div class="name">人物專題</div>
-        <div class="desc">人物專題攝影感</div>
-      </label>
-      <label class="card" data-value="art_magazine">
-        <input type="radio" name="style" value="art_magazine">
-        <div class="name">藝術雜誌感</div>
-        <div class="desc">藝術雜誌美學</div>
-      </label>
-      <label class="card" data-value="haute_couture">
-        <input type="radio" name="style" value="haute_couture">
-        <div class="name">高級訂製宣傳</div>
-        <div class="desc">高級訂製宣傳感</div>
-      </label>
-      <label class="card" data-value="ink_flower">
-        <input type="radio" name="style" value="ink_flower">
-        <div class="name">花墨染</div>
-        <div class="desc">水墨花卉人像,純白背景</div>
-      </label>
-          <label class="card" data-value="beauty_cover">
-        <input type="radio" name="style" value="beauty_cover">
-        <div class="name">美妝封面</div>
-        <div class="desc">臉部妝容與肌膚質感</div>
-      </label>
-      <label class="card" data-value="couture_gown">
-        <input type="radio" name="style" value="couture_gown">
-        <div class="name">高訂禮服大片</div>
-        <div class="desc">禮服輪廓,高級訂製感</div>
-      </label>
-      <label class="card" data-value="black_white_art">
-        <input type="radio" name="style" value="black_white_art">
-        <div class="name">黑白藝術封面</div>
-        <div class="desc">黑白高對比,藝術肖像</div>
-      </label>
-      <label class="card" data-value="minimal_feature">
-        <input type="radio" name="style" value="minimal_feature">
-        <div class="name">極簡人物內頁</div>
-        <div class="desc">留白,人物情緒與版面感</div>
-      </label>
-      <label class="card" data-value="person_of_year">
-        <input type="radio" name="style" value="person_of_year">
-        <div class="name">年度人物專訪</div>
-        <div class="desc">成熟肖像,人物故事重量</div>
-      </label>
-      <label class="card" data-value="luxury_perfume_ad">
-        <input type="radio" name="style" value="luxury_perfume_ad">
-        <div class="name">精品香水廣告</div>
-        <div class="desc">香水廣告,高級空氣感</div>
-      </label></div>
-  </section>
+    <div class="style-groups" id="styleCards">
+      <div class="style-group">
+        <div class="style-group-label">雜誌品牌語氣</div>
+        <div class="cards">
+          <label class="card selected" data-value="vogue">
+            <input type="radio" name="style" value="vogue" checked>
+            <div class="name">Vogue</div>
+            <div class="desc">極致精緻,強烈造型感</div>
+          </label>
+          <label class="card" data-value="bazaar">
+            <input type="radio" name="style" value="bazaar">
+            <div class="name">Harper's Bazaar</div>
+            <div class="desc">藝術感,戲劇光影</div>
+          </label>
+          <label class="card" data-value="elle">
+            <input type="radio" name="style" value="elle">
+            <div class="name">ELLE</div>
+            <div class="desc">時尚清新,現代都會</div>
+          </label>
+          <label class="card" data-value="bazaar_cn">
+            <input type="radio" name="style" value="bazaar_cn">
+            <div class="name">時尚芭莎</div>
+            <div class="desc">東方奢華,高級感</div>
+          </label>
+          <label class="card" data-value="cosmopolitan">
+            <input type="radio" name="style" value="cosmopolitan">
+            <div class="name">Cosmopolitan</div>
+            <div class="desc">活力自信,大膽色彩</div>
+          </label>
+          <label class="card" data-value="natgeo">
+            <input type="radio" name="style" value="natgeo">
+            <div class="name">National Geographic</div>
+            <div class="desc">故事感,自然光影</div>
+          </label>
+          <label class="card" data-value="w_magazine">
+            <input type="radio" name="style" value="w_magazine">
+            <div class="name">W Magazine</div>
+            <div class="desc">前衛藝術,大膽實驗構圖</div>
+          </label>
+          <label class="card" data-value="another">
+            <input type="radio" name="style" value="another">
+            <div class="name">AnOther Magazine</div>
+            <div class="desc">獨立時尚,黑白高對比</div>
+          </label>
+          <label class="card" data-value="lofficiel">
+            <input type="radio" name="style" value="lofficiel">
+            <div class="name">L'Officiel</div>
+            <div class="desc">法式優雅,古典柔和高貴</div>
+          </label>
+          <label class="card" data-value="marie_claire">
+            <input type="radio" name="style" value="marie_claire">
+            <div class="name">嘉人 Marie Claire</div>
+            <div class="desc">東方現代,清新都會女性</div>
+          </label>
+        </div>
+      </div>
 
-  <!-- 02 主題/服裝方向 -->
+      <div class="style-group">
+        <div class="style-group-label">版面任務 / 商業企劃</div>
+        <div class="cards">
+          <label class="card" data-value="cover_big">
+            <input type="radio" name="style" value="cover_big">
+            <div class="name">封面大片</div>
+            <div class="desc">強烈封面主視覺</div>
+          </label>
+          <label class="card" data-value="inner_story">
+            <input type="radio" name="style" value="inner_story">
+            <div class="name">內頁故事</div>
+            <div class="desc">敘事感雜誌內頁</div>
+          </label>
+          <label class="card" data-value="feature_story">
+            <input type="radio" name="style" value="feature_story">
+            <div class="name">人物專題</div>
+            <div class="desc">人物專題攝影感</div>
+          </label>
+          <label class="card" data-value="person_of_year">
+            <input type="radio" name="style" value="person_of_year">
+            <div class="name">年度人物專訪</div>
+            <div class="desc">成熟肖像,人物故事重量</div>
+          </label>
+          <label class="card" data-value="brand_lookbook">
+            <input type="radio" name="style" value="brand_lookbook">
+            <div class="name">品牌 lookbook</div>
+            <div class="desc">乾淨品牌型錄感</div>
+          </label>
+          <label class="card" data-value="fashion_ad">
+            <input type="radio" name="style" value="fashion_ad">
+            <div class="name">時裝廣告</div>
+            <div class="desc">高衝擊時裝廣告</div>
+          </label>
+          <label class="card" data-value="haute_couture">
+            <input type="radio" name="style" value="haute_couture">
+            <div class="name">高級訂製宣傳</div>
+            <div class="desc">高級訂製宣傳感</div>
+          </label>
+          <label class="card" data-value="couture_gown">
+            <input type="radio" name="style" value="couture_gown">
+            <div class="name">高訂禮服大片</div>
+            <div class="desc">禮服輪廓,高級訂製感</div>
+          </label>
+          <label class="card" data-value="beauty_closeup">
+            <input type="radio" name="style" value="beauty_closeup">
+            <div class="name">美妝特寫</div>
+            <div class="desc">妝容與眼神特寫</div>
+          </label>
+          <label class="card" data-value="beauty_cover">
+            <input type="radio" name="style" value="beauty_cover">
+            <div class="name">美妝封面</div>
+            <div class="desc">臉部妝容與肌膚質感</div>
+          </label>
+          <label class="card" data-value="jewelry_ad">
+            <input type="radio" name="style" value="jewelry_ad">
+            <div class="name">珠寶廣告</div>
+            <div class="desc">高級珠寶廣告感</div>
+          </label>
+          <label class="card" data-value="fragrance_ad">
+            <input type="radio" name="style" value="fragrance_ad">
+            <div class="name">香氛廣告</div>
+            <div class="desc">優雅香氛廣告感</div>
+          </label>
+          <label class="card" data-value="luxury_perfume_ad">
+            <input type="radio" name="style" value="luxury_perfume_ad">
+            <div class="name">精品香水廣告</div>
+            <div class="desc">香水廣告,高級空氣感</div>
+          </label>
+        </div>
+      </div>
+
+      <div class="style-group">
+        <div class="style-group-label">藝術 / 特殊視覺</div>
+        <div class="cards">
+          <label class="card" data-value="art_magazine">
+            <input type="radio" name="style" value="art_magazine">
+            <div class="name">藝術雜誌感</div>
+            <div class="desc">藝術雜誌美學</div>
+          </label>
+          <label class="card" data-value="black_white_art">
+            <input type="radio" name="style" value="black_white_art">
+            <div class="name">黑白藝術封面</div>
+            <div class="desc">黑白高對比,藝術肖像</div>
+          </label>
+          <label class="card" data-value="minimal_feature">
+            <input type="radio" name="style" value="minimal_feature">
+            <div class="name">極簡人物內頁</div>
+            <div class="desc">留白,人物情緒與版面感</div>
+          </label>
+          <label class="card" data-value="ink_flower">
+            <input type="radio" name="style" value="ink_flower">
+            <div class="name">花墨染</div>
+            <div class="desc">水墨花卉人像,純白背景</div>
+          </label>
+        </div>
+      </div>
+    </div>  <!-- 02 主題/服裝方向 -->
   <section>
     <div class="section-header">
       <span class="section-label">02</span>
