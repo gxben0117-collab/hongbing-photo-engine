@@ -6,20 +6,21 @@
 <title>公仔萌工作室｜藍寶寫真引擎</title>
 <style>
   :root{
-    --bg:#FFF5F9;
-    --paper:#FFFFFF;
-    --pink:#F06292;
-    --pink-deep:#C2185B;
-    --pink-soft:#FCE4EC;
-    --lavender:#CE93D8;
-    --mint:#80CBC4;
-    --line:#F8BBD0;
-    --ink:#3D1A24;
-    --ink-soft:#9E6B7A;
-    --selected:#FCE4EC;
-    --gold:#F9A825;
+    --bg:#0A0A0A;
+    --paper:#1A1A1A;
+    --pink:#C9A84C;
+    --pink-deep:#E8D5A3;
+    --pink-soft:#1E1A14;
+    --lavender:#E8D5A3;
+    --mint:#C9A84C;
+    --line:#2E2E2E;
+    --ink:#F7F4EF;
+    --ink-soft:#999999;
+    --selected:#1E1A14;
+    --gold:#C9A84C;
     --black:#0A0A0A;
-    --nav-bg:rgba(255,245,249,0.92);
+    --white:#FFFFFF;
+    --nav-bg:rgba(10,10,10,0.92);
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{
@@ -196,9 +197,9 @@
   }
   .auto-card input{ position:absolute; opacity:0; pointer-events:none; }
   .auto-card.selected{
-    border-color:var(--lavender);
-    background:#F3E5F5;
-    color:#7B1FA2;
+    border-color:var(--gold);
+    background:var(--selected);
+    color:var(--gold);
   }
 
   /* ── TEXT INPUT ── */
@@ -212,15 +213,15 @@
     color:var(--ink);
     font-family:inherit;
   }
-  .text-input::placeholder{ color:#D4A0B0; }
+  .text-input::placeholder{ color:#666666; }
   .text-input:focus{ outline:none; border-color:var(--pink); }
 
   /* ── ALL AUTO BTN ── */
   .auto-all-btn{
     width:100%;
     background:var(--paper);
-    border:1px dashed var(--lavender);
-    color:#7B1FA2;
+    border:1px dashed var(--gold);
+    color:var(--gold);
     border-radius:8px;
     padding:11px;
     font-size:13px;
@@ -229,7 +230,7 @@
     margin-bottom:20px;
     transition:background .15s;
   }
-  .auto-all-btn:hover{ background:#F3E5F5; }
+  .auto-all-btn:hover{ background:var(--selected); }
 
   /* ── ADVANCED TOGGLE ── */
   .advanced-toggle{
@@ -255,18 +256,17 @@
   /* ── GENERATE ── */
   .generate-btn{
     width:100%;
-    background:linear-gradient(135deg, var(--pink), var(--pink-deep));
-    color:#fff;
+    background:var(--gold);
+    color:var(--black);
     border:none;
     border-radius:8px;
     padding:16px;
     font-size:15px;
-    font-weight:900;
+    font-weight:700;
     letter-spacing:0.05em;
     cursor:pointer;
     font-family:"Noto Serif TC",serif;
     transition:opacity .15s;
-    box-shadow:0 4px 16px rgba(240,98,146,0.3);
   }
   .generate-btn:active{ opacity:0.85; }
 
@@ -288,17 +288,16 @@
   .copy-btn{
     margin-top:8px;
     width:100%;
-    background:var(--paper);
-    border:1px solid var(--pink);
-    color:var(--pink-deep);
+    background:transparent;
+    border:1px solid var(--gold);
+    color:var(--gold);
     border-radius:8px;
     padding:13px;
     font-size:14px;
     font-weight:700;
     cursor:pointer;
-    transition:all .15s;
   }
-  .copy-btn.copied{ background:var(--pink); color:#fff; }
+  .copy-btn.copied{ background:var(--gold); color:var(--black); }
   .hidden{ display:none; }
 </style>
 </head>
