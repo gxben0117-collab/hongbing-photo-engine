@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>店家活動廣告產生器｜藍寶寫真引擎</title>
+<style>
+  :root{
+    --black:#0A0A0A;
+    --panel:#141414;
+    --panel-2:#1B1B1B;
+    --line:#2D2D2D;
+    --paper:#F7F4EF;
+    --soft:#9B9B9B;
+    --white:#FFFFFF;
+    --gold:#C9A84C;
+    --mint:#70D6C8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    min-height:100vh;
+    background:var(--black);
+    color:var(--paper);
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    line-height:1.6;
+    padding-bottom:72px;
+  }
+  nav{
+    position:fixed;
+    top:0;left:0;right:0;
+    height:54px;
+    padding:0 24px;
+    background:rgba(10,10,10,.92);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+    z-index:10;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .nav-logo{
+    color:var(--gold);
+    font-family:"Noto Serif TC",serif;
+    font-size:14px;
+    font-weight:700;
+    letter-spacing:.08em;
+    text-decoration:none;
+  }
+  .nav-links{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;}
+  .nav-link{
+    color:var(--soft);
+    text-decoration:none;
+    font-size:12px;
+    padding:6px 12px;
+    border:1px solid transparent;
+    border-radius:999px;
+  }
+  .nav-link:hover{color:var(--paper);border-color:var(--line);}
+  .nav-link.active{color:#A4EFE4;border-color:rgba(112,214,200,.65);background:rgba(112,214,200,.1);}
+  .wrap{
+    width:min(960px,100%);
+    margin:0 auto;
+    padding:88px 20px 40px;
+  }
+  header{
+    padding:28px 0 30px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:28px;
+  }
+  .eyebrow{
+    color:var(--mint);
+    font-size:11px;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+    margin-bottom:12px;
+  }
+  h1{
+    font-family:"Noto Serif TC",serif;
+    font-size:clamp(28px,6vw,42px);
+    line-height:1.2;
+    color:var(--white);
+    margin-bottom:10px;
+  }
+  h1 span{color:#A4EFE4;}
+  header p{color:var(--soft);font-size:14px;max-width:720px;}
+  .notice{
+    border:1px solid rgba(112,214,200,.32);
+    background:rgba(112,214,200,.08);
+    border-radius:8px;
+    padding:12px 14px;
+    color:#D8FFFA;
+    font-size:13px;
+    margin-bottom:26px;
+  }
+  section{margin-bottom:26px;}
+  .section-header{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:10px;
+    margin-bottom:12px;
+  }
+  .section-label{
+    color:var(--mint);
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.16em;
+  }
+  .section-title{font-size:16px;font-weight:800;color:var(--white);}
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:8px;
+  }
+  .card{
+    position:relative;
+    border:1px solid var(--line);
+    background:var(--panel);
+    border-radius:8px;
+    padding:12px 13px;
+    cursor:pointer;
+    transition:.15s;
+    min-height:72px;
+  }
+  .card:hover{border-color:#415B57;background:var(--panel-2);}
+  .card input{position:absolute;opacity:0;pointer-events:none;}
+  .card .name{font-size:13px;font-weight:800;color:var(--paper);margin-bottom:3px;}
+  .card .desc{font-size:11px;color:var(--soft);line-height:1.45;}
+  .card.selected{border-color:var(--mint);background:#10201E;}
+  .card.selected .name{color:#A4EFE4;}
+  .form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+  label.field{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    color:var(--soft);
+    font-size:12px;
+  }
+  input[type="text"], textarea, select{
+    width:100%;
+    border:1px solid var(--line);
+    background:var(--panel);
+    color:var(--paper);
+    border-radius:8px;
+    padding:11px 12px;
+    font:inherit;
+    font-size:13px;
+    outline:none;
+  }
+  textarea{min-height:86px;resize:vertical;}
+  input:focus, textarea:focus, select:focus{border-color:var(--mint);}
+  .full{grid-column:1/-1;}
+  .actions{
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:10px;
+    align-items:center;
+    margin-top:18px;
+  }
+  button{
+    border:0;
+    border-radius:8px;
+    padding:13px 18px;
+    color:#071311;
+    background:linear-gradient(135deg,#A4EFE4,#C9A84C);
+    font-weight:900;
+    letter-spacing:.08em;
+    cursor:pointer;
+  }
+  .copy-btn{
+    background:transparent;
+    color:#A4EFE4;
+    border:1px solid rgba(112,214,200,.45);
+  }
+  .output{
+    border:1px solid var(--line);
+    background:#0F1111;
+    border-radius:8px;
+    padding:16px;
+    white-space:pre-wrap;
+    min-height:320px;
+    color:#EDF8F5;
+    font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;
+    font-size:13px;
+    line-height:1.75;
+  }
+  .hint{color:var(--soft);font-size:12px;}
+  @media (max-width:760px){
+    nav{height:auto;min-height:54px;align-items:flex-start;padding:12px 16px;gap:10px;}
+    .nav-links{gap:4px;}
+    .nav-link{font-size:11px;padding:5px 8px;}
+    .wrap{padding-top:104px;}
+    .grid,.form-grid{grid-template-columns:1fr 1fr;}
+    .actions{grid-template-columns:1fr;}
+  }
+  @media (max-width:480px){
+    .grid,.form-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">藍寶寫真引擎</a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">首頁</a>
+    <a class="nav-link" href="travel.html">寫真旅拍</a>
+    <a class="nav-link" href="magazine.html">雜誌棚拍</a>
+    <a class="nav-link" href="doll.html">公仔系列</a>
+    <a class="nav-link" href="fantasy-fashion.html">幻想時裝</a>
+    <a class="nav-link active" href="store-ad.html">店家廣告</a>
+  </div>
+</nav>
+
+<main class="wrap">
+  <header>
+    <div class="eyebrow">Store Campaign Generator</div>
+    <h1>店家活動廣告<span>產生器</span></h1>
+    <p>輸入店家活動資訊，輸出海報企劃、版面建議、後製文字清單與完整主視覺咒語。</p>
+  </header>
+
+  <div class="notice">
+    安全版：本頁不放任何真實店家預設資料。公開前請確認沒有電話、地址、Logo 或內部活動資訊被寫入預設值。
+  </div>
+
+  <section>
+    <div class="section-header">
+      <div class="section-label">01</div>
+      <div class="section-title">活動類型</div>
+    </div>
+    <div class="grid" data-choice="campaign">
+      <label class="card selected"><input type="radio" name="campaign" value="promo" checked><div class="name">優惠促銷</div><div class="desc">限時優惠、周年慶</div></label>
+      <label class="card"><input type="radio" name="campaign" value="brand"><div class="name">品牌形象</div><div class="desc">品牌主視覺、形象廣告</div></label>
+      <label class="card"><input type="radio" name="campaign" value="festival"><div class="name">節慶活動</div><div class="desc">春節、母親節、聖誕節</div></label>
+      <label class="card"><input type="radio" name="campaign" value="price"><div class="name">價目表</div><div class="desc">服務菜單、方案價格</div></label>
+      <label class="card"><input type="radio" name="campaign" value="recruit"><div class="name">招募海報</div><div class="desc">設計師、助理、夥伴</div></label>
+      <label class="card"><input type="radio" name="campaign" value="newProduct"><div class="name">新品上市</div><div class="desc">新服務、新商品發表</div></label>
+      <label class="card"><input type="radio" name="campaign" value="vip"><div class="name">VIP活動</div><div class="desc">會員專屬、貴賓邀請</div></label>
+      <label class="card"><input type="radio" name="campaign" value="auto"><div class="name">AI自動排版</div><div class="desc">依資訊自動整理版面</div></label>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <div class="section-label">02</div>
+      <div class="section-title">店家資訊</div>
+    </div>
+    <div class="form-grid">
+      <label class="field">店名
+        <input id="storeName" type="text" placeholder="請輸入店名">
+      </label>
+      <label class="field">產業類型
+        <select id="industry">
+          <option value="general local business">通用店家</option>
+          <option value="hair salon">髮廊</option>
+          <option value="nail salon">美甲</option>
+          <option value="eyelash studio">美睫</option>
+          <option value="spa beauty studio">SPA</option>
+          <option value="restaurant">餐廳</option>
+          <option value="coffee shop">咖啡廳</option>
+          <option value="hotel">旅館</option>
+          <option value="fitness studio">健身房</option>
+          <option value="medical beauty clinic">醫美</option>
+          <option value="fashion boutique">服飾店</option>
+        </select>
+      </label>
+      <label class="field">活動名稱
+        <input id="eventName" type="text" placeholder="請輸入活動名稱">
+      </label>
+      <label class="field">活動日期
+        <input id="eventDate" type="text" placeholder="請輸入活動日期">
+      </label>
+      <label class="field full">優惠內容 / 活動重點
+        <textarea id="offer" placeholder="請輸入活動內容、優惠方案或服務亮點"></textarea>
+      </label>
+      <label class="field">電話
+        <input id="phone" type="text" placeholder="請輸入電話">
+      </label>
+      <label class="field">地址
+        <input id="address" type="text" placeholder="請輸入地址">
+      </label>
+      <label class="field">Logo
+        <select id="logo">
+          <option value="leave a clean empty logo area">預留 Logo 空白區</option>
+          <option value="brand name text area only, no logo generated">只預留店名文字區</option>
+          <option value="no logo area, clean visual only">不預留 Logo</option>
+        </select>
+      </label>
+      <label class="field">海報比例
+        <select id="ratio">
+          <option value="vertical 4:5 social media poster">直式 4:5</option>
+          <option value="vertical 9:16 story poster">直式 9:16</option>
+          <option value="square 1:1 social media poster">方形 1:1</option>
+          <option value="A4 vertical print poster">A4 直式</option>
+        </select>
+      </label>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <div class="section-label">03</div>
+      <div class="section-title">視覺風格</div>
+    </div>
+    <div class="grid" data-choice="visual">
+      <label class="card selected"><input type="radio" name="visual" value="minimal" checked><div class="name">極簡質感</div><div class="desc">資訊清楚、現代排版</div></label>
+      <label class="card"><input type="radio" name="visual" value="blackGold"><div class="name">高級黑金</div><div class="desc">精品店家、形象廣告</div></label>
+      <label class="card"><input type="radio" name="visual" value="cream"><div class="name">奶茶米白</div><div class="desc">溫柔、乾淨、生活感</div></label>
+      <label class="card"><input type="radio" name="visual" value="pink"><div class="name">粉金美業</div><div class="desc">美甲、美睫、保養</div></label>
+      <label class="card"><input type="radio" name="visual" value="green"><div class="name">自然植感</div><div class="desc">SPA、餐飲、旅宿</div></label>
+      <label class="card"><input type="radio" name="visual" value="red"><div class="name">節慶紅金</div><div class="desc">新年、周年、促銷</div></label>
+      <label class="card"><input type="radio" name="visual" value="fashion"><div class="name">時尚人物</div><div class="desc">模特主視覺、雜誌感</div></label>
+      <label class="card"><input type="radio" name="visual" value="custom"><div class="name">自訂風格</div><div class="desc">用下方文字補充</div></label>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <div class="section-label">04</div>
+      <div class="section-title">補充設定</div>
+    </div>
+    <div class="form-grid">
+      <label class="field">自訂主色
+        <input id="customColor" type="text" placeholder="例如：霧感藍、奶油白、玫瑰金">
+      </label>
+      <label class="field">自訂標語
+        <input id="slogan" type="text" placeholder="例如：換一個造型，迎接新的季節">
+      </label>
+      <label class="field full">額外要求
+        <textarea id="extraNote" placeholder="例如：上方保留大標題空間，中間放主視覺，底部放電話地址；不要生成任何亂字。"></textarea>
+      </label>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <div class="section-label">05</div>
+      <div class="section-title">輸出海報方案</div>
+    </div>
+    <div class="actions">
+      <button id="generateBtn">生成店家廣告方案</button>
+      <button class="copy-btn" id="copyBtn">複製全部</button>
+    </div>
+    <p class="hint">建議先生成無文字主視覺，再用 Canva / Photoshop 加上最終文字，避免 AI 產生錯字。</p>
+    <div class="output" id="output"></div>
+  </section>
+</main>
+
+<script>
+const campaignData = {
+  promo: {
+    title: '優惠促銷海報',
+    prompt: 'promotional campaign poster, luxury promotion design, commercial event advertisement',
+    layout: '標題醒目，主視覺置中，優惠內容放在中下方資訊區，底部保留電話與地址。'
+  },
+  brand: {
+    title: '品牌形象廣告',
+    prompt: 'luxury business advertisement, premium store brand campaign, elegant brand image poster',
+    layout: '上方放品牌名稱，中間放高級主視覺，底部放一句品牌精神與聯絡資訊。'
+  },
+  festival: {
+    title: '節慶活動海報',
+    prompt: 'seasonal event campaign poster, festive commercial promotion, premium holiday advertising',
+    layout: '上方大活動標題，中間節慶氛圍主視覺，下方活動日期與優惠內容。'
+  },
+  price: {
+    title: '價目表海報',
+    prompt: 'luxury service menu poster, premium price list, modern service menu design, clean information layout',
+    layout: '上方主標題，中央用清楚分區列出服務項目，底部放預約資訊。'
+  },
+  recruit: {
+    title: '招募海報',
+    prompt: 'professional recruitment poster, modern business advertising, luxury brand hiring campaign',
+    layout: '上方招募標題，中間放品牌工作氛圍或專業人物，下方列職缺與聯絡方式。'
+  },
+  newProduct: {
+    title: '新品上市海報',
+    prompt: 'new product launch poster, premium product campaign, elegant commercial announcement',
+    layout: '主視覺聚焦新品或新服務，中間放上市標語，下方放體驗優惠與預約資訊。'
+  },
+  vip: {
+    title: 'VIP活動海報',
+    prompt: 'VIP exclusive event poster, premium invitation design, luxury member campaign',
+    layout: '整體像高級邀請函，標題簡潔，資訊區精緻，保留貴賓感與留白。'
+  },
+  auto: {
+    title: 'AI自動排版海報',
+    prompt: 'AI optimized marketing poster layout, clear information hierarchy, premium commercial design',
+    layout: '依活動資訊自動排序：店名、主標題、副標題、優惠內容、日期、電話地址。'
+  }
+};
+
+const visualData = {
+  minimal: {
+    label: '極簡質感',
+    palette: 'warm white, charcoal black, muted gold',
+    font: '現代無襯線標題 + 表格化資訊字',
+    prompt: 'minimal premium poster design, clean grid layout, strong information hierarchy'
+  },
+  blackGold: {
+    label: '高級黑金',
+    palette: 'black, champagne gold, warm beige highlight',
+    font: '高級宋體標題 + 現代無襯線資訊字',
+    prompt: 'black gold luxury style, premium dark background, elegant gold typography space, high-end local business atmosphere'
+  },
+  cream: {
+    label: '奶茶米白',
+    palette: 'cream white, milk tea beige, soft brown',
+    font: '溫柔襯線標題 + 乾淨圓角資訊字',
+    prompt: 'cream beige premium lifestyle style, soft natural light, clean elegant poster design'
+  },
+  pink: {
+    label: '粉金美業',
+    palette: 'blush pink, rose gold, ivory white',
+    font: '精緻細襯線標題 + 輕盈無襯線資訊字',
+    prompt: 'rose gold beauty advertising, elegant feminine design, premium beauty campaign feeling'
+  },
+  green: {
+    label: '自然植感',
+    palette: 'sage green, warm white, natural wood brown',
+    font: '自然感標題字 + 清爽資訊字',
+    prompt: 'natural botanical commercial poster, calming green palette, premium wellness atmosphere'
+  },
+  red: {
+    label: '節慶紅金',
+    palette: 'deep red, gold, warm cream',
+    font: '醒目節慶標題 + 清楚資訊字',
+    prompt: 'festive red gold commercial poster, premium holiday campaign, energetic promotional design'
+  },
+  fashion: {
+    label: '時尚人物',
+    palette: 'black, beige, glossy highlight, premium gold accent',
+    font: '雜誌標題字 + 高級品牌資訊字',
+    prompt: 'fashion model commercial poster, premium beauty and lifestyle campaign, magazine advertising style'
+  },
+  custom: {
+    label: '自訂風格',
+    palette: 'custom brand color palette',
+    font: '依品牌調性選擇標題與資訊字',
+    prompt: 'custom premium commercial poster style based on user direction'
+  }
+};
+
+function selected(name){
+  return document.querySelector(`input[name="${name}"]:checked`).value;
+}
+
+function value(id){
+  return document.getElementById(id).value.trim();
+}
+
+function placeholderText(text){
+  return text || '請填入';
+}
+
+function refreshCards(){
+  document.querySelectorAll('[data-choice]').forEach(group => {
+    group.querySelectorAll('.card').forEach(card => {
+      card.classList.toggle('selected', card.querySelector('input').checked);
+    });
+  });
+}
+
+function generate(){
+  const campaign = campaignData[selected('campaign')];
+  const visual = visualData[selected('visual')];
+  const storeName = value('storeName');
+  const eventName = value('eventName');
+  const eventDate = value('eventDate');
+  const offer = value('offer');
+  const phone = value('phone');
+  const address = value('address');
+  const industry = document.getElementById('industry').value;
+  const logo = document.getElementById('logo').value;
+  const ratio = document.getElementById('ratio').value;
+  const customColor = value('customColor');
+  const slogan = value('slogan') || makeSlogan(industry, selected('campaign'));
+  const extraNote = value('extraNote');
+  const palette = customColor || visual.palette;
+  const title = eventName || campaign.title;
+
+  const posterText = [
+    '【海報企劃】',
+    `主標題：${title}`,
+    `副標題：${slogan}`,
+    `活動文案：${placeholderText(offer)}`,
+    `資訊排列：活動日期：${placeholderText(eventDate)}｜電話：${placeholderText(phone)}｜地址：${placeholderText(address)}`,
+    '',
+    `版面配置：${campaign.layout}`,
+    `字體配置：${visual.font}`,
+    `色彩建議：${palette}`,
+    '',
+    '【出圖咒語】',
+    [
+      `${ratio}, premium commercial poster background for a ${industry},`,
+      campaign.prompt + ',',
+      visual.prompt + ',',
+      `${logo}, clean blank headline space, clean blank information area,`,
+      'no readable text generated by AI, no fake characters, no random letters, no watermark,',
+      'clear visual hierarchy, refined lighting, high-end commercial design, premium local business advertising,',
+      `visual direction color palette: ${palette},`,
+      storeName ? `leave a clean area where the brand name "${storeName}" can be added later,` : 'leave a clean area where the brand name can be added later,',
+      eventName ? `leave a clean title area for "${eventName}" to be added later,` : 'leave a clean title area for the event name to be added later,',
+      offer ? 'leave a clean promotion text area for the offer content to be added later,' : 'leave a clean promotion text area for offer content to be added later,',
+      extraNote ? `extra direction: ${extraNote},` : '',
+      'professional advertising artwork, elegant composition, high quality, sharp focus'
+    ].filter(Boolean).join('\n'),
+    '',
+    '【後製文字清單】',
+    `店名：${placeholderText(storeName)}`,
+    `主標題：${title}`,
+    `副標題：${slogan}`,
+    `活動內容：${placeholderText(offer)}`,
+    `日期：${placeholderText(eventDate)}`,
+    `電話：${placeholderText(phone)}`,
+    `地址：${placeholderText(address)}`
+  ].join('\n');
+
+  document.getElementById('output').textContent = posterText;
+}
+
+function makeSlogan(industry, campaign){
+  if (industry === 'hair salon') {
+    if (campaign === 'recruit') return '一起打造更有質感的美';
+    if (campaign === 'price') return '精緻髮型服務，清楚透明方案';
+    return '換一個造型，迎接新的季節';
+  }
+  if (campaign === 'recruit') return '尋找一起成長的專業夥伴';
+  if (campaign === 'vip') return '專屬邀請，只為重要的你';
+  if (campaign === 'newProduct') return '全新登場，值得第一眼心動';
+  return '用更好的體驗，留住每一次美好';
+}
+
+document.querySelectorAll('input[type="radio"]').forEach(input => {
+  input.addEventListener('change', () => {
+    refreshCards();
+    generate();
+  });
+});
+document.querySelectorAll('input[type="text"], textarea, select').forEach(input => {
+  input.addEventListener('input', generate);
+  input.addEventListener('change', generate);
+});
+document.getElementById('generateBtn').addEventListener('click', generate);
+document.getElementById('copyBtn').addEventListener('click', async () => {
+  const text = document.getElementById('output').textContent;
+  await navigator.clipboard.writeText(text);
+  const btn = document.getElementById('copyBtn');
+  btn.textContent = '已複製';
+  setTimeout(() => btn.textContent = '複製全部', 1200);
+});
+refreshCards();
+generate();
+</script>
+</body>
+</html>
