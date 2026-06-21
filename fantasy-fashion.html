@@ -258,13 +258,13 @@
     <div class="grid grid-3" data-choice="garment">
       <label class="card selected"><input type="radio" name="garment" value="dress" checked><div class="name">高訂禮服</div><div class="desc">全身時裝廣告主視覺</div></label>
       <label class="card"><input type="radio" name="garment" value="splashDress"><div class="name">飛濺液體裙</div><div class="desc">動態爆發、裙擺成形</div></label>
-      <label class="card"><input type="radio" name="garment" value="cape"><div class="name">披風肩飾</div><div class="desc">材質形成披風與肩部裝飾</div></label>
-      <label class="card"><input type="radio" name="garment" value="jewelry"><div class="name">珠寶裝飾</div><div class="desc">材質轉為胸飾、頭飾與珠寶</div></label>
-      <label class="card"><input type="radio" name="garment" value="editorial"><div class="name">半身封面</div><div class="desc">近景商業封面構圖</div></label>
-      <label class="card"><input type="radio" name="garment" value="fullBody"><div class="name">全身走秀</div><div class="desc">長腿、動態姿態、完整衣身</div></label>
+      <label class="card"><input type="radio" name="garment" value="weddingDress"><div class="name">婚紗</div><div class="desc">純白、拖尾、浪漫儀式感</div></label>
+      <label class="card"><input type="radio" name="garment" value="qipao"><div class="name">旗袍</div><div class="desc">東方曲線、立領與窄身輪廓</div></label>
+      <label class="card"><input type="radio" name="garment" value="cape"><div class="name">披風造型</div><div class="desc">材質形成披風與肩部輪廓</div></label>
+      <label class="card"><input type="radio" name="garment" value="jewelry"><div class="name">珠寶華服</div><div class="desc">胸飾、頭飾與服裝融成一體</div></label>
       <label class="card"><input type="radio" name="garment" value="paperKimono"><div class="name">紙雕華服</div><div class="desc">多層紙藝服飾與花紋</div></label>
-      <label class="card"><input type="radio" name="garment" value="oiranPortrait"><div class="name">紙雕肖像</div><div class="desc">盤髮髮簪與藝術半身像</div></label>
-      <label class="card"><input type="radio" name="garment" value="museumArtwork"><div class="name">博物館級作品</div><div class="desc">藝術展覽主視覺</div></label>
+      <label class="card"><input type="radio" name="garment" value="trainGown"><div class="name">拖尾長裙</div><div class="desc">大裙擺、長拖尾、戲劇輪廓</div></label>
+      <label class="card"><input type="radio" name="garment" value="ritualRobe"><div class="name">儀式長袍</div><div class="desc">莊重、幻想、女王氣場</div></label>
     </div>
   </section>
 
@@ -299,6 +299,7 @@
       <label class="card"><input type="radio" name="style" value="cinematic"><div class="name">電影奇幻</div><div class="desc">強光影、戲劇場景</div></label>
       <label class="card"><input type="radio" name="style" value="blackGold"><div class="name">黑金奢華</div><div class="desc">暗背景、金色高反差</div></label>
       <label class="card"><input type="radio" name="style" value="clean"><div class="name">乾淨高級</div><div class="desc">留白、精緻、品牌感</div></label>
+      <label class="card"><input type="radio" name="style" value="artExhibit"><div class="name">藝術展覽</div><div class="desc">博物館級主視覺</div></label>
     </div>
   </section>
 
@@ -525,13 +526,13 @@ const materialData = {
 const garmentData = {
   dress: 'elegant couture gown, material elements sculpted into a luxurious dress, refined waistline and flowing silhouette',
   splashDress: 'dress made of splashing material, liquid fabric simulation, explosive flowing skirt, high speed frozen motion',
-  cape: 'dramatic cape and shoulder ornaments formed from the selected material, elegant body curve, high fashion styling',
-  jewelry: 'material transformed into luxury jewelry, chest ornament, headpiece, shoulder jewelry and refined decorative details',
-  editorial: 'upper body fashion portrait, material wrapping around the body like couture, premium magazine cover composition',
-  fullBody: 'full body shot, runway pose, long legs, complete couture silhouette made from the selected material',
+  weddingDress: 'luxury bridal gown, romantic wedding dress silhouette, elegant train, refined ceremonial beauty, couture bridal styling',
+  qipao: 'elegant qipao silhouette, high collar, fitted eastern couture line, refined waist and hip curve, sophisticated classic glamour',
+  cape: 'dramatic cape silhouette and shoulder structure formed from the selected material, high fashion styling, powerful outline',
+  jewelry: 'jewelry couture outfit, gemstone chest ornament, headpiece, shoulder jewelry and clothing fused into one luxurious design',
   paperKimono: 'luxurious sculptural paper couture outfit, multi-layer paper clothing, raised paper relief patterns, sakura and cloud motifs, folded washi paper structure, delicate carved paper edges',
-  oiranPortrait: 'photorealistic paper sculpture portrait, elegant side profile with slightly lowered gaze, traditional inspired updo, paper flower hair ornaments, gold paper hairpins, refined artistic portrait composition',
-  museumArtwork: 'museum quality fine art poster, full artwork presentation, layered paper sculpture environment, exhibition grade detail, luxury editorial art campaign'
+  trainGown: 'dramatic long train gown, grand flowing skirt, extended fabric trail, cinematic couture silhouette, strong luxury campaign shape',
+  ritualRobe: 'ceremonial fantasy robe, regal long robe silhouette, queen-like presence, layered formal structure, solemn luxury styling'
 };
 
 const styleData = {
@@ -540,7 +541,8 @@ const styleData = {
   editorial: 'high fashion editorial photography, magazine cover quality, dramatic couture styling, award winning fashion campaign',
   cinematic: 'cinematic fantasy commercial artwork, dramatic light beams, atmospheric depth, powerful visual storytelling',
   blackGold: 'black gold luxury campaign, dark premium background, metallic highlights, high contrast studio lighting',
-  clean: 'clean luxury brand campaign, refined soft lighting, minimal premium background, elegant commercial beauty'
+  clean: 'clean luxury brand campaign, refined soft lighting, minimal premium background, elegant commercial beauty',
+  artExhibit: 'museum quality art exhibition campaign, fine art poster presentation, gallery-grade composition, premium cultural artwork, refined negative space'
 };
 
 const poseData = {
