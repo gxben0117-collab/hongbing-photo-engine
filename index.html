@@ -135,6 +135,7 @@
   .tool-card.travel::before{ background:var(--terra); }
   .tool-card.studio::before{ background:var(--gold); }
   .tool-card.doll::before{ background:var(--gold); }
+  .tool-card.fantasy::before{ background:#B889FF; }
   .tool-card:hover{
     border-color:#3A3A3A;
     transform:translateY(-3px);
@@ -166,6 +167,11 @@
     background:rgba(201,168,76,0.12);
     color:var(--gold);
     border:1px solid rgba(201,168,76,0.3);
+  }
+  .tool-card.fantasy .tool-tag{
+    background:rgba(184,137,255,0.12);
+    color:#D9C3FF;
+    border:1px solid rgba(184,137,255,0.3);
   }
   .tool-card h2{
     font-family:"Noto Serif TC",serif;
@@ -206,6 +212,7 @@
   .tool-card.travel .tool-cta{ color:var(--gold); }
   .tool-card.studio .tool-cta{ color:var(--gold); }
   .tool-card.doll .tool-cta{ color:var(--gold); }
+  .tool-card.fantasy .tool-cta{ color:#D9C3FF; }
   .tool-cta-arrow{
     font-size:16px;
     transition:transform .2s;
@@ -231,6 +238,7 @@
     <a class="nav-link" href="travel.html">寫真旅拍</a>
     <a class="nav-link" href="magazine.html">雜誌棚拍</a>
     <a class="nav-link" href="doll.html">公仔系列</a>
+    <a class="nav-link" href="fantasy-fashion.html">幻想時裝</a>
   </div>
 </nav>
 
@@ -254,6 +262,17 @@
     <h2>公仔系列</h2>
   </a>
 
+  <a class="tool-card fantasy" href="fantasy-fashion.html">
+    <div class="tool-tag">Material Couture</div>
+    <h2>幻想時裝廣告<br>咒語產生器</h2>
+    <p>把牛奶、花瓣、水墨、珠寶、火焰、星河等主題材質變成高級時裝視覺。</p>
+    <div class="tool-features">
+      <span class="tool-feature">材質成衣</span>
+      <span class="tool-feature">商業大片</span>
+      <span class="tool-feature">幻想高訂</span>
+    </div>
+    <div class="tool-cta">開始生成 <span class="tool-cta-arrow">→</span></div>
+  </a>
 
 </div>
 

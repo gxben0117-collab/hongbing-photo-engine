@@ -5,7 +5,13 @@ import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const htmlFiles = ['index.html', 'travel.html', 'magazine.html', 'doll.html'];
+const htmlFiles = [
+  'index.html',
+  'travel.html',
+  'magazine.html',
+  'doll.html',
+  'fantasy-fashion.html',
+];
 const requiredDirs = ['docs', 'assets'];
 let failures = 0;
 

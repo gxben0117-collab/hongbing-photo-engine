@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>幻想時裝廣告咒語產生器｜藍寶寫真引擎</title>
+<style>
+  :root{
+    --black:#09090B;
+    --panel:#15131A;
+    --panel-2:#1D1924;
+    --line:#322D3C;
+    --paper:#F7F4EF;
+    --soft:#A7A0B5;
+    --white:#FFFFFF;
+    --gold:#C9A84C;
+    --violet:#B889FF;
+    --cyan:#72E4D5;
+    --rose:#F18AA6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    min-height:100vh;
+    background:var(--black);
+    color:var(--paper);
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    line-height:1.6;
+    padding-bottom:72px;
+  }
+  nav{
+    position:fixed;
+    top:0;left:0;right:0;
+    height:54px;
+    padding:0 24px;
+    background:rgba(9,9,11,.92);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+    z-index:10;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .nav-logo{
+    color:var(--gold);
+    font-family:"Noto Serif TC",serif;
+    font-size:14px;
+    font-weight:700;
+    letter-spacing:.08em;
+    text-decoration:none;
+  }
+  .nav-links{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;}
+  .nav-link{
+    color:var(--soft);
+    text-decoration:none;
+    font-size:12px;
+    padding:6px 12px;
+    border:1px solid transparent;
+    border-radius:999px;
+  }
+  .nav-link:hover{color:var(--paper);border-color:var(--line);}
+  .nav-link.active{color:#DCC8FF;border-color:rgba(184,137,255,.7);background:rgba(184,137,255,.1);}
+  .wrap{
+    width:min(920px,100%);
+    margin:0 auto;
+    padding:88px 20px 40px;
+  }
+  header{
+    padding:28px 0 30px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:28px;
+  }
+  .eyebrow{
+    color:var(--violet);
+    font-size:11px;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+    margin-bottom:12px;
+  }
+  h1{
+    font-family:"Noto Serif TC",serif;
+    font-size:clamp(28px,6vw,42px);
+    line-height:1.2;
+    color:var(--white);
+    margin-bottom:10px;
+  }
+  h1 span{color:#DCC8FF;}
+  header p{color:var(--soft);font-size:14px;max-width:680px;}
+  section{margin-bottom:26px;}
+  .section-header{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:10px;
+    margin-bottom:12px;
+  }
+  .section-label{
+    color:var(--violet);
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.16em;
+  }
+  .section-title{font-size:16px;font-weight:800;color:var(--white);}
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:8px;
+  }
+  .grid-3{grid-template-columns:repeat(3,1fr);}
+  .card{
+    position:relative;
+    border:1px solid var(--line);
+    background:var(--panel);
+    border-radius:8px;
+    padding:12px 13px;
+    cursor:pointer;
+    transition:.15s;
+    min-height:74px;
+  }
+  .card:hover{border-color:#554B67;background:var(--panel-2);}
+  .card input{position:absolute;opacity:0;pointer-events:none;}
+  .card .name{font-size:13px;font-weight:800;color:var(--paper);margin-bottom:3px;}
+  .card .desc{font-size:11px;color:var(--soft);line-height:1.45;}
+  .card.selected{border-color:var(--violet);background:#21172F;}
+  .card.selected .name{color:#DCC8FF;}
+  .form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+  label.field{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    color:var(--soft);
+    font-size:12px;
+  }
+  input[type="text"], textarea, select{
+    width:100%;
+    border:1px solid var(--line);
+    background:var(--panel);
+    color:var(--paper);
+    border-radius:8px;
+    padding:11px 12px;
+    font:inherit;
+    font-size:13px;
+    outline:none;
+  }
+  textarea{min-height:90px;resize:vertical;}
+  input:focus, textarea:focus, select:focus{border-color:var(--violet);}
+  .full{grid-column:1/-1;}
+  .actions{
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:10px;
+    align-items:center;
+    margin-top:18px;
+  }
+  button{
+    border:0;
+    border-radius:8px;
+    padding:13px 18px;
+    color:#120D18;
+    background:linear-gradient(135deg,#DCC8FF,#72E4D5);
+    font-weight:900;
+    letter-spacing:.08em;
+    cursor:pointer;
+  }
+  .copy-btn{
+    background:transparent;
+    color:#DCC8FF;
+    border:1px solid rgba(184,137,255,.45);
+  }
+  .output{
+    border:1px solid var(--line);
+    background:#0F0E13;
+    border-radius:8px;
+    padding:16px;
+    white-space:pre-wrap;
+    min-height:240px;
+    color:#EEE8F8;
+    font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;
+    font-size:13px;
+    line-height:1.75;
+  }
+  .hint{color:var(--soft);font-size:12px;}
+  @media (max-width:760px){
+    nav{height:auto;min-height:54px;align-items:flex-start;padding:12px 16px;gap:10px;}
+    .nav-links{gap:4px;}
+    .nav-link{font-size:11px;padding:5px 8px;}
+    .wrap{padding-top:104px;}
+    .grid,.grid-3,.form-grid{grid-template-columns:1fr 1fr;}
+    .actions{grid-template-columns:1fr;}
+  }
+  @media (max-width:480px){
+    .grid,.grid-3,.form-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">藍寶寫真引擎</a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">首頁</a>
+    <a class="nav-link" href="travel.html">寫真旅拍</a>
+    <a class="nav-link" href="magazine.html">雜誌棚拍</a>
+    <a class="nav-link" href="doll.html">公仔系列</a>
+    <a class="nav-link active" href="fantasy-fashion.html">幻想時裝</a>
+  </div>
+</nav>
+
+<main class="wrap">
+  <header>
+    <div class="eyebrow">Material Couture Campaign</div>
+    <h1>幻想時裝廣告<span>咒語產生器</span></h1>
+    <p>把液體、花瓣、水墨、珠寶、水晶、火焰、冰霜與星河能量轉成高級時裝視覺，適合做吸睛商業大片與幻想高訂海報。</p>
+  </header>
+
+  <section>
+    <div class="section-header">
+      <div class="section-label">01</div>
+      <div class="section-title">主題材質</div>
+    </div>
+    <div class="grid" data-choice="material">
+      <label class="card selected"><input type="radio" name="material" value="milkTea" checked><div class="name">奶茶牛奶</div><div class="desc">焦糖奶茶與牛奶對撞</div></label>
+      <label class="card"><input type="radio" name="material" value="strawberry"><div class="name">草莓奶昔</div><div class="desc">粉紅奶昔與草莓果粒</div></label>
+      <label class="card"><input type="radio" name="material" value="banana"><div class="name">香蕉牛奶</div><div class="desc">金黃香蕉與奶白液體</div></label>
+      <label class="card"><input type="radio" name="material" value="rose"><div class="name">玫瑰花瓣</div><div class="desc">花瓣形成高訂洋裝</div></label>
+      <label class="card"><input type="radio" name="material" value="inkGold"><div class="name">黑金水墨</div><div class="desc">水墨與金色顏料流動</div></label>
+      <label class="card"><input type="radio" name="material" value="diamond"><div class="name">鑽石水晶</div><div class="desc">珠寶雕塑與晶體反光</div></label>
+      <label class="card"><input type="radio" name="material" value="phoenix"><div class="name">鳳凰聖焰</div><div class="desc">火焰披風與金紅光粒</div></label>
+      <label class="card"><input type="radio" name="material" value="galaxy"><div class="name">星河能量</div><div class="desc">宇宙星塵與流光禮服</div></label>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <div class="section-label">02</div>
+      <div class="section-title">服裝形式</div>
+    </div>
+    <div class="grid grid-3" data-choice="garment">
+      <label class="card selected"><input type="radio" name="garment" value="dress" checked><div class="name">高訂禮服</div><div class="desc">全身時裝廣告主視覺</div></label>
+      <label class="card"><input type="radio" name="garment" value="splashDress"><div class="name">飛濺液體裙</div><div class="desc">動態爆發、裙擺成形</div></label>
+      <label class="card"><input type="radio" name="garment" value="cape"><div class="name">披風肩飾</div><div class="desc">材質形成披風與肩部裝飾</div></label>
+      <label class="card"><input type="radio" name="garment" value="jewelry"><div class="name">珠寶裝飾</div><div class="desc">材質轉為胸飾、頭飾與珠寶</div></label>
+      <label class="card"><input type="radio" name="garment" value="editorial"><div class="name">半身封面</div><div class="desc">近景商業封面構圖</div></label>
+      <label class="card"><input type="radio" name="garment" value="fullBody"><div class="name">全身走秀</div><div class="desc">長腿、動態姿態、完整衣身</div></label>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <div class="section-label">03</div>
+      <div class="section-title">廣告風格</div>
+    </div>
+    <div class="grid grid-3" data-choice="style">
+      <label class="card selected"><input type="radio" name="style" value="luxury" checked><div class="name">精品廣告</div><div class="desc">高級商業大片質感</div></label>
+      <label class="card"><input type="radio" name="style" value="poster"><div class="name">海報主視覺</div><div class="desc">留字空間、活動主圖感</div></label>
+      <label class="card"><input type="radio" name="style" value="editorial"><div class="name">時尚雜誌</div><div class="desc">Editorial fashion cover</div></label>
+      <label class="card"><input type="radio" name="style" value="cinematic"><div class="name">電影奇幻</div><div class="desc">強光影、戲劇場景</div></label>
+      <label class="card"><input type="radio" name="style" value="blackGold"><div class="name">黑金奢華</div><div class="desc">暗背景、金色高反差</div></label>
+      <label class="card"><input type="radio" name="style" value="clean"><div class="name">乾淨高級</div><div class="desc">留白、精緻、品牌感</div></label>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <div class="section-label">04</div>
+      <div class="section-title">自訂細節</div>
+    </div>
+    <div class="form-grid">
+      <label class="field">自訂材質或商品名稱
+        <input id="customMaterial" type="text" placeholder="例如：藍寶石能量、盛唐金粉、紅酒玫瑰">
+      </label>
+      <label class="field">人物與構圖
+        <select id="composition">
+          <option value="full body shot, elegant dynamic fashion pose, long legs">全身動態時裝姿態</option>
+          <option value="upper body fashion portrait, strong eye contact, poster composition">半身封面人像</option>
+          <option value="standing in the center of a material splash, cinematic low angle">站在材質飛濺中央</option>
+          <option value="runway pose, dramatic couture silhouette, premium campaign">走秀高訂姿態</option>
+        </select>
+      </label>
+      <label class="field">特效強度
+        <select id="intensity">
+          <option value="balanced material effects, elegant and luxurious">平衡高級</option>
+          <option value="massive explosive material splash, high speed frozen motion">強烈爆發</option>
+          <option value="subtle floating particles, refined couture details">細緻精修</option>
+        </select>
+      </label>
+      <label class="field">色彩補充
+        <input id="colorNote" type="text" placeholder="例如：黑金、草莓粉、奶油白、深紅背景">
+      </label>
+      <label class="field full">額外要求
+        <textarea id="extraNote" placeholder="例如：左側保留標題空間、不要文字、背景要像精品香水廣告"></textarea>
+      </label>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <div class="section-label">05</div>
+      <div class="section-title">姿態模組</div>
+    </div>
+    <div class="grid grid-3" data-choice="pose">
+      <label class="card selected"><input type="radio" name="pose" value="dynamic" checked><div class="name">動態時裝姿態</div><div class="desc">身體線條、裙擺流動</div></label>
+      <label class="card"><input type="radio" name="pose" value="runway"><div class="name">高訂走秀</div><div class="desc">伸展長腿、伸展步伐</div></label>
+      <label class="card"><input type="radio" name="pose" value="hero"><div class="name">廣告女主角</div><div class="desc">正面氣場、強眼神</div></label>
+      <label class="card"><input type="radio" name="pose" value="floating"><div class="name">懸浮旋轉</div><div class="desc">材質環繞、夢幻動勢</div></label>
+      <label class="card"><input type="radio" name="pose" value="elegant"><div class="name">優雅曲線</div><div class="desc">柔和姿態、身形修長</div></label>
+      <label class="card"><input type="radio" name="pose" value="power"><div class="name">力量爆發</div><div class="desc">液體/火焰向外爆開</div></label>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <div class="section-label">06</div>
+      <div class="section-title">人物入鏡比例</div>
+    </div>
+    <div class="grid grid-3" data-choice="framing">
+      <label class="card selected"><input type="radio" name="framing" value="fullBody" checked><div class="name">全身入鏡</div><div class="desc">完整服裝與姿態</div></label>
+      <label class="card"><input type="radio" name="framing" value="threeQuarter"><div class="name">七分身</div><div class="desc">人物更大、保留裙擺</div></label>
+      <label class="card"><input type="radio" name="framing" value="halfBody"><div class="name">半身廣告</div><div class="desc">臉、胸肩與材質特寫</div></label>
+      <label class="card"><input type="radio" name="framing" value="closeUp"><div class="name">近景封面</div><div class="desc">臉部辨識與材質包覆</div></label>
+      <label class="card"><input type="radio" name="framing" value="widePoster"><div class="name">海報全景</div><div class="desc">保留背景與標題空間</div></label>
+      <label class="card"><input type="radio" name="framing" value="lowAngle"><div class="name">低角度全身</div><div class="desc">腿長、氣場、商業大片</div></label>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <div class="section-label">07</div>
+      <div class="section-title">鏡頭語感</div>
+    </div>
+    <div class="grid grid-3" data-choice="camera">
+      <label class="card selected"><input type="radio" name="camera" value="studio" checked><div class="name">商業棚拍</div><div class="desc">精準燈光、高級質感</div></label>
+      <label class="card"><input type="radio" name="camera" value="lowFashion"><div class="name">低角度時尚</div><div class="desc">強氣場、長腿比例</div></label>
+      <label class="card"><input type="radio" name="camera" value="highSpeed"><div class="name">高速凝結</div><div class="desc">液體顆粒、瞬間爆發</div></label>
+      <label class="card"><input type="radio" name="camera" value="editorial"><div class="name">雜誌封面</div><div class="desc">封面構圖、眼神主導</div></label>
+      <label class="card"><input type="radio" name="camera" value="cinematic"><div class="name">電影鏡頭</div><div class="desc">戲劇光影、空間縱深</div></label>
+      <label class="card"><input type="radio" name="camera" value="product"><div class="name">商品廣告</div><div class="desc">材質像產品主視覺</div></label>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <div class="section-label">10</div>
+      <div class="section-title">圖片比例</div>
+    </div>
+    <div class="grid" data-choice="ratio">
+      <label class="card selected"><input type="radio" name="ratio" value="vertical916" checked><div class="name">9:16 直式</div><div class="desc">短影音封面、限動</div></label>
+      <label class="card"><input type="radio" name="ratio" value="vertical45"><div class="name">4:5 直式</div><div class="desc">IG / 小紅書貼文</div></label>
+      <label class="card"><input type="radio" name="ratio" value="square"><div class="name">1:1 方形</div><div class="desc">社群貼文主圖</div></label>
+      <label class="card"><input type="radio" name="ratio" value="poster23"><div class="name">2:3 海報</div><div class="desc">商業海報感</div></label>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <div class="section-label">11</div>
+      <div class="section-title">生成咒語</div>
+    </div>
+    <div class="actions">
+      <button id="generateBtn">生成幻想時裝咒語</button>
+      <button class="copy-btn" id="copyBtn">複製咒語</button>
+    </div>
+    <p class="hint">建議搭配真人參考照使用，並在生圖模型中開啟身份/臉部參考。</p>
+    <div class="output" id="output"></div>
+  </section>
+</main>
+
+<script>
+const materialData = {
+  milkTea: {
+    label: '奶茶牛奶',
+    prompt: 'milk tea and cream white milk, caramel brown tea liquid colliding with pure milk, tea leaves, coffee beans, cinnamon sticks and tiny spice particles floating around',
+    palette: 'caramel brown, cream white, warm golden beige'
+  },
+  strawberry: {
+    label: '草莓奶昔',
+    prompt: 'strawberry milkshake liquid and cream white milk, floating strawberries, strawberry slices, fresh berry pieces, glossy pink splash fabric',
+    palette: 'strawberry pink, cream white, deep red advertising background'
+  },
+  banana: {
+    label: '香蕉牛奶',
+    prompt: 'banana milk and cream white milk, floating banana slices, banana chunks, golden yellow liquid fabric',
+    palette: 'golden yellow, cream white, warm premium background'
+  },
+  rose: {
+    label: '玫瑰花瓣',
+    prompt: 'red rose petals, soft botanical fabric, petals sculpted into couture clothing, floating floral particles, elegant perfume campaign atmosphere',
+    palette: 'deep red, blush pink, ivory, romantic luxury lighting'
+  },
+  inkGold: {
+    label: '黑金水墨',
+    prompt: 'black ink and metallic gold paint, flowing ink fabric, gold pigment splash, liquid calligraphy texture, couture gown formed by ink and gold',
+    palette: 'black, antique gold, warm highlight, dramatic studio background'
+  },
+  diamond: {
+    label: '鑽石水晶',
+    prompt: 'diamonds, crystal shards, pearls and reflective gemstones sculpted into couture clothing, luxury jewelry advertising sparkle',
+    palette: 'clear crystal, silver white, champagne gold, black luxury background'
+  },
+  phoenix: {
+    label: '鳳凰聖焰',
+    prompt: 'phoenix holy flame, golden red fire fabric, ember particles, glowing feather-like flame couture, mythic luxury commercial artwork',
+    palette: 'red, gold, ember orange, deep cinematic shadow'
+  },
+  galaxy: {
+    label: '星河能量',
+    prompt: 'galaxy energy, stardust, nebula silk, cosmic glowing particles, starry liquid fabric forming a futuristic couture gown',
+    palette: 'midnight blue, violet, silver starlight, cosmic glow'
+  }
+};
+
+const garmentData = {
+  dress: 'elegant couture gown, material elements sculpted into a luxurious dress, refined waistline and flowing silhouette',
+  splashDress: 'dress made of splashing material, liquid fabric simulation, explosive flowing skirt, high speed frozen motion',
+  cape: 'dramatic cape and shoulder ornaments formed from the selected material, elegant body curve, high fashion styling',
+  jewelry: 'material transformed into luxury jewelry, chest ornament, headpiece, shoulder jewelry and refined decorative details',
+  editorial: 'upper body fashion portrait, material wrapping around the body like couture, premium magazine cover composition',
+  fullBody: 'full body shot, runway pose, long legs, complete couture silhouette made from the selected material'
+};
+
+const styleData = {
+  luxury: 'luxury commercial advertising campaign, premium product campaign, professional studio lighting, high fashion photography',
+  poster: 'premium commercial poster composition, clean negative space for headline, luxury advertising layout, strong product visual',
+  editorial: 'high fashion editorial photography, magazine cover quality, dramatic couture styling, award winning fashion campaign',
+  cinematic: 'cinematic fantasy commercial artwork, dramatic light beams, atmospheric depth, powerful visual storytelling',
+  blackGold: 'black gold luxury campaign, dark premium background, metallic highlights, high contrast studio lighting',
+  clean: 'clean luxury brand campaign, refined soft lighting, minimal premium background, elegant commercial beauty'
+};
+
+const poseData = {
+  dynamic: 'dynamic fashion pose, elegant body curve, flowing couture movement, confident model energy',
+  runway: 'high fashion runway walking pose, extended long legs, elegant stride, couture show presence',
+  hero: 'front-facing advertising heroine pose, strong eye contact, confident premium campaign presence',
+  floating: 'floating rotating pose, material swirling around the body, dreamy elegant motion',
+  elegant: 'soft elegant pose, refined feminine body curve, graceful arms and elongated silhouette',
+  power: 'powerful explosive pose, material bursting outward from the body, dramatic commercial impact'
+};
+
+const framingData = {
+  fullBody: 'full body shot, entire outfit visible, head to toe composition',
+  threeQuarter: 'three-quarter body shot, large model presence, dress and material details visible',
+  halfBody: 'half body advertising portrait, face, shoulders and upper couture details emphasized',
+  closeUp: 'close-up fashion beauty portrait, strong facial identity, material wrapping near face and shoulders',
+  widePoster: 'wide poster composition, model centered with negative space for headline and campaign text',
+  lowAngle: 'low angle full body shot, elongated legs, powerful luxury fashion proportions'
+};
+
+const cameraData = {
+  studio: 'professional studio camera language, controlled commercial lighting, crisp premium focus',
+  lowFashion: 'low angle fashion photography, dramatic perspective, high fashion long-leg proportions',
+  highSpeed: 'high speed splash photography, frozen motion, sharp liquid particles and material droplets',
+  editorial: 'magazine cover camera language, strong eye contact, refined editorial framing',
+  cinematic: 'cinematic camera language, dramatic depth, atmospheric lighting and premium visual storytelling',
+  product: 'luxury product advertising camera language, material treated like the hero product, clean commercial clarity'
+};
+
+const ratioData = {
+  vertical916: 'aspect ratio 9:16, vertical social media cover composition',
+  vertical45: 'aspect ratio 4:5, vertical social media feed poster composition',
+  square: 'aspect ratio 1:1, square commercial campaign image',
+  poster23: 'aspect ratio 2:3, vertical luxury poster composition'
+};
+
+function selected(name){
+  return document.querySelector(`input[name="${name}"]:checked`).value;
+}
+
+function refreshCards(){
+  document.querySelectorAll('[data-choice]').forEach(group => {
+    group.querySelectorAll('.card').forEach(card => {
+      card.classList.toggle('selected', card.querySelector('input').checked);
+    });
+  });
+}
+
+function generate(){
+  const materialKey = selected('material');
+  const material = materialData[materialKey];
+  const customMaterial = document.getElementById('customMaterial').value.trim();
+  const materialText = customMaterial
+    ? `${customMaterial}, ${material.prompt}`
+    : material.prompt;
+  const colorNote = document.getElementById('colorNote').value.trim();
+  const extraNote = document.getElementById('extraNote').value.trim();
+  const composition = document.getElementById('composition').value;
+  const intensity = document.getElementById('intensity').value;
+  const prompt = [
+    'Ultra beautiful adult woman, fashion editorial model, identity-preserving portrait based on reference photo if provided,',
+    composition + ',',
+    garmentData[selected('garment')] + ',',
+    'material fashion layer, dress and decorative elements made of ' + materialText + ',',
+    intensity + ',',
+    'dynamic material particles surrounding the body, elegant body curve, premium skin rendering, sophisticated hair and makeup,',
+    styleData[selected('style')] + ',',
+    poseData[selected('pose')] + ',',
+    framingData[selected('framing')] + ',',
+    cameraData[selected('camera')] + ',',
+    ratioData[selected('ratio')] + ',',
+    'professional studio lighting, cinematic composition, sharp focus, hyper realistic, 8K ultra detailed, award winning advertising,',
+    'color palette: ' + (colorNote || material.palette) + ',',
+    extraNote ? 'extra direction: ' + extraNote + ',' : '',
+    'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face'
+  ].filter(Boolean).join('\n');
+
+  document.getElementById('output').textContent = prompt;
+}
+
+document.querySelectorAll('input[type="radio"]').forEach(input => {
+  input.addEventListener('change', () => {
+    refreshCards();
+    generate();
+  });
+});
+document.getElementById('generateBtn').addEventListener('click', generate);
+document.getElementById('copyBtn').addEventListener('click', async () => {
+  const text = document.getElementById('output').textContent;
+  await navigator.clipboard.writeText(text);
+  const btn = document.getElementById('copyBtn');
+  btn.textContent = '已複製';
+  setTimeout(() => btn.textContent = '複製咒語', 1200);
+});
+['customMaterial','composition','intensity','colorNote','extraNote'].forEach(id => {
+  document.getElementById(id).addEventListener('input', generate);
+  document.getElementById(id).addEventListener('change', generate);
+});
+refreshCards();
+generate();
+</script>
+</body>
+</html>
