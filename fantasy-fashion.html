@@ -123,6 +123,39 @@
   .card .desc{font-size:11px;color:var(--soft);line-height:1.45;}
   .card.selected{border-color:var(--violet);background:#21172F;}
   .card.selected .name{color:#DCC8FF;}
+  .pose-auto{margin-bottom:14px;}
+  .pose-group{margin-bottom:18px;}
+  .pose-group-label{
+    color:#DCC8FF;
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:.12em;
+    border-left:2px solid var(--violet);
+    padding-left:8px;
+    margin-bottom:8px;
+  }
+  .pose-group-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:8px;
+  }
+  .pose-card{
+    position:relative;
+    display:block;
+    border:1px solid var(--line);
+    background:var(--panel);
+    border-radius:8px;
+    padding:12px 13px;
+    cursor:pointer;
+    transition:.15s;
+    min-height:74px;
+  }
+  .pose-card:hover{border-color:#554B67;background:var(--panel-2);}
+  .pose-card input{position:absolute;opacity:0;pointer-events:none;}
+  .pose-name{font-size:13px;font-weight:800;color:var(--paper);margin-bottom:3px;}
+  .pose-desc{font-size:11px;color:var(--soft);line-height:1.45;}
+  .pose-card.selected{border-color:var(--violet);background:#21172F;}
+  .pose-card.selected .pose-name{color:#DCC8FF;}
   .form-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -189,11 +222,11 @@
     .nav-links{gap:4px;}
     .nav-link{font-size:11px;padding:5px 8px;}
     .wrap{padding-top:104px;}
-    .grid,.grid-3,.form-grid{grid-template-columns:1fr 1fr;}
+    .grid,.grid-3,.form-grid,.pose-group-grid{grid-template-columns:1fr 1fr;}
     .actions{grid-template-columns:1fr;}
   }
   @media (max-width:480px){
-    .grid,.grid-3,.form-grid{grid-template-columns:1fr;}
+    .grid,.grid-3,.form-grid,.pose-group-grid{grid-template-columns:1fr;}
   }
 </style>
 </head>
@@ -302,13 +335,74 @@
       <div class="section-label">05</div>
       <div class="section-title">姿態模組</div>
     </div>
-    <div class="grid grid-3" data-choice="pose">
-      <label class="card selected"><input type="radio" name="pose" value="dynamic" checked><div class="name">動態時裝姿態</div><div class="desc">身體線條、裙擺流動</div></label>
-      <label class="card"><input type="radio" name="pose" value="runway"><div class="name">高訂走秀</div><div class="desc">伸展長腿、伸展步伐</div></label>
-      <label class="card"><input type="radio" name="pose" value="hero"><div class="name">廣告女主角</div><div class="desc">正面氣場、強眼神</div></label>
-      <label class="card"><input type="radio" name="pose" value="floating"><div class="name">懸浮旋轉</div><div class="desc">材質環繞、夢幻動勢</div></label>
-      <label class="card"><input type="radio" name="pose" value="elegant"><div class="name">優雅曲線</div><div class="desc">柔和姿態、身形修長</div></label>
-      <label class="card"><input type="radio" name="pose" value="power"><div class="name">力量爆發</div><div class="desc">液體/火焰向外爆開</div></label>
+    <div data-choice="pose">
+      <div class="pose-auto">
+        <label class="pose-card selected" data-value="auto" style="display:inline-block;min-width:170px;">
+          <input type="radio" name="pose" value="auto" checked>
+          <div class="pose-name">✦ 自動</div>
+          <div class="pose-desc">交給AI判斷最佳姿態</div>
+        </label>
+      </div>
+
+      <div class="pose-group">
+        <div class="pose-group-label">站姿系</div>
+        <div class="pose-group-grid">
+          <label class="pose-card"><input type="radio" name="pose" value="contrapposto"><div class="pose-name">S曲線站姿</div><div class="pose-desc">重心單腳,肩骨盆反向</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="hip"><div class="pose-name">手插腰站姿</div><div class="pose-desc">自信氣場,修長身形</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="lean"><div class="pose-name">倚牆站姿</div><div class="pose-desc">有張力的側身倚靠</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="turn"><div class="pose-name">回眸走姿</div><div class="pose-desc">轉身凝視,故事感強</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="back_turn"><div class="pose-name">背對回首</div><div class="pose-desc">完全背對+緩緩回頭,神秘感</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="door_frame"><div class="pose-name">單手扶門框</div><div class="pose-desc">倚著門框側身,生活感張力</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="cape_wind"><div class="pose-name">披風揚起站姿</div><div class="pose-desc">衣擺被風吹起,戲劇感</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="step_up"><div class="pose-name">踏台階站姿</div><div class="pose-desc">單腳踩高台,俯視感</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="runway_stride"><div class="pose-name">伸展走秀步</div><div class="pose-desc">一腳向前跨出,腿線修長</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="crossed_leg_stand"><div class="pose-name">交叉腿站姿</div><div class="pose-desc">雙腿交叉,窄身高級感</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="shoulder_wall"><div class="pose-name">肩靠牆面</div><div class="pose-desc">單肩貼牆,冷感側身</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="coat_hold"><div class="pose-name">抓外套領口</div><div class="pose-desc">雙手抓領口,高訂氣場</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="one_leg_forward"><div class="pose-name">單腿前伸站姿</div><div class="pose-desc">一腿前伸,腳尖拉長</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="profile_long_line"><div class="pose-name">側身長線條</div><div class="pose-desc">側身站立,頸肩腰線清楚</div></label>
+        </div>
+      </div>
+
+      <div class="pose-group">
+        <div class="pose-group-label">坐姿 / 地面系</div>
+        <div class="pose-group-grid">
+          <label class="pose-card"><input type="radio" name="pose" value="guifei"><div class="pose-name">貴妃倚坐</div><div class="pose-desc">單腿伸展,慵懶女王感</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="chin_rest"><div class="pose-name">托腮坐姿</div><div class="pose-desc">單手托腮+腿交叉優雅感</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="kneel"><div class="pose-name">單膝跪姿</div><div class="pose-desc">挺胸收腰,時尚大片感</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="hands_ground"><div class="pose-name">雙手撐地跪姿</div><div class="pose-desc">前傾+雙手撐地+仰頭</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="lunge"><div class="pose-name">低重心弓步</div><div class="pose-desc">戰鬥起手式,爆發力</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="side_lie"><div class="pose-name">側躺延伸</div><div class="pose-desc">側躺+單手托頭+腿部延伸</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="hug_knees"><div class="pose-name">抱膝坐姿</div><div class="pose-desc">雙手環抱膝蓋,情緒感強</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="prone_chin"><div class="pose-name">趴地仰頭</div><div class="pose-desc">俯臥+手撐下巴+仰頭,慵懶感</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="chair_edge"><div class="pose-name">椅緣前坐</div><div class="pose-desc">坐椅緣,上身前傾,封面張力</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="floor_side_sit"><div class="pose-name">側坐地面</div><div class="pose-desc">雙腿側放,腰背挺直</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="kneeling_sit"><div class="pose-name">跪坐端正</div><div class="pose-desc">跪坐但身形挺拔,安靜高級</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="stairs_sit"><div class="pose-name">坐台階</div><div class="pose-desc">坐在階梯上,腿部有層次</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="cross_leg_floor"><div class="pose-name">盤腿地坐</div><div class="pose-desc">盤腿坐姿,安定故事感</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="sofa_recline"><div class="pose-name">沙發斜倚</div><div class="pose-desc">身體斜靠,慵懶精品感</div></label>
+        </div>
+      </div>
+
+      <div class="pose-group">
+        <div class="pose-group-label">手勢 / 動作系</div>
+        <div class="pose-group-grid">
+          <label class="pose-card"><input type="radio" name="pose" value="vogue_hands"><div class="pose-name">Vogue手勢</div><div class="pose-desc">雙手框住臉,Ballroom感</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="arms_wide"><div class="pose-name">展翅手臂</div><div class="pose-desc">雙臂大幅向兩側延伸</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="water_sleeve"><div class="pose-name">水袖揚起</div><div class="pose-desc">東方戲劇感,水袖飄動</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="fan_cover"><div class="pose-name">持扇遮面</div><div class="pose-desc">單手持扇半遮臉+側身</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="tiptoe"><div class="pose-name">踮腳仰手</div><div class="pose-desc">踮腳尖+雙手向上延伸</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="hold_flower"><div class="pose-name">雙手托花/道具</div><div class="pose-desc">雙手捧著主題相關物件</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="hair_flip"><div class="pose-name">撩髮瞬間</div><div class="pose-desc">單手撥起頭髮的中間動作</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="eye_cover"><div class="pose-name">遮眼手勢</div><div class="pose-desc">單手半遮住眼睛,神秘感</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="hand_neck"><div class="pose-name">手扶頸側</div><div class="pose-desc">單手輕扶頸部,美妝特寫感</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="hands_pockets"><div class="pose-name">雙手插口袋</div><div class="pose-desc">俐落中性,西裝時裝感</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="adjust_earring"><div class="pose-name">整理耳飾</div><div class="pose-desc">手靠近耳飾,珠寶焦點</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="glove_pull"><div class="pose-name">拉手套動作</div><div class="pose-desc">一手拉另一手手套,高訂儀式感</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="reach_camera"><div class="pose-name">伸手向鏡頭</div><div class="pose-desc">手向前伸,強前景張力</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="fabric_hold"><div class="pose-name">提拉裙擺/布料</div><div class="pose-desc">手拉布料,展現材質流動</div></label>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -432,12 +526,49 @@ const styleData = {
 };
 
 const poseData = {
-  dynamic: 'dynamic fashion pose, elegant body curve, flowing couture movement, confident model energy',
-  runway: 'high fashion runway walking pose, extended long legs, elegant stride, couture show presence',
-  hero: 'front-facing advertising heroine pose, strong eye contact, confident premium campaign presence',
-  floating: 'floating rotating pose, material swirling around the body, dreamy elegant motion',
-  elegant: 'soft elegant pose, refined feminine body curve, graceful arms and elongated silhouette',
-  power: 'powerful explosive pose, material bursting outward from the body, dramatic commercial impact'
+  auto: '',
+  contrapposto: 'natural contrapposto pose, weight on one leg, shoulders and hips in opposition, dynamic S-curve body line, elegant model stance',
+  hip: 'hand on hip power pose, confident assertive stance, strong female presence, elongated body line',
+  lean: 'leaning against surface, relaxed yet powerful stance, body weight shifted elegantly, casual luxury attitude',
+  turn: 'walking away then turning back, mid-turn captured moment, over the shoulder glance, candid elegant movement',
+  back_turn: 'full back to camera pose, completely facing away from camera, slowly turning head back over shoulder, mysterious story-driven presence',
+  door_frame: 'leaning against door frame pose, one hand resting on door frame, body turned sideways against frame, natural life tension pose',
+  cape_wind: 'cape or dress caught in wind pose, fabric dramatically blown by wind, dynamic flowing garment movement, theatrical windswept atmosphere',
+  step_up: 'stepping up on elevated surface, one foot raised on step or platform, looking down with slight elevation, commanding high ground stance',
+  runway_stride: 'runway stride standing pose, one foot stepping forward in a clean fashion walk, long straight leg line, elegant editorial runway energy',
+  crossed_leg_stand: 'crossed leg standing pose, legs crossed narrowly while standing, slim vertical body line, quiet luxury magazine stance',
+  shoulder_wall: 'shoulder leaning against wall pose, one shoulder lightly touching the wall, body turned slightly sideways, cool detached editorial attitude',
+  coat_hold: 'holding coat collar pose, both hands holding coat collar or lapels, chest open and shoulders controlled, high fashion couture presence',
+  one_leg_forward: 'one leg forward standing pose, one leg extended forward with pointed toe, back leg supporting body weight, long elegant lower body line',
+  profile_long_line: 'side profile long line pose, standing in side profile, neck shoulder waist and hip forming a clean long line, sculptural fashion silhouette',
+  guifei: 'elegant seated pose, one leg extended gracefully forward, upper body leaning back with one hand supporting, relaxed shoulders, long elegant legs',
+  chin_rest: 'seated hand under chin pose, one hand resting under chin elegantly, legs crossed gracefully, thoughtful confident expression',
+  kneel: 'elegant kneeling pose, one knee on the ground, straight posture, graceful waist curve, hands resting gently on thigh, fashion editorial pose',
+  hands_ground: 'kneeling both hands on ground pose, upper body leaning forward, both hands planted on ground, head tilted up toward camera, high tension fashion editorial pose',
+  lunge: 'dynamic low stance, wide lunge pose, one hand touching the ground, one leg fully extended, powerful feminine energy',
+  side_lie: 'elegant side lying pose, lying on side, one hand supporting head gracefully, legs extended elegantly in line, luxurious editorial lounging pose',
+  hug_knees: 'arms wrapped around knees, both legs pulled to chest, seated knees hugging pose, emotionally expressive sitting pose',
+  prone_chin: 'lying face down prone pose, both hands supporting chin, head tilted upward looking at camera, lazy relaxed lounging mood',
+  chair_edge: 'sitting on chair edge pose, seated near the front edge of chair, upper body leaning slightly forward, intense fashion cover tension',
+  floor_side_sit: 'side seated floor pose, both legs placed to one side, torso upright and elegant, soft feminine editorial ground pose',
+  kneeling_sit: 'formal kneeling seated pose, sitting back on heels in a controlled kneeling position, quiet high-end elegance',
+  stairs_sit: 'sitting on stairs pose, seated on steps, layered leg placement, relaxed editorial story feeling',
+  cross_leg_floor: 'cross leg floor sitting pose, calm grounded posture, stable seated composition, quiet narrative mood',
+  sofa_recline: 'sofa reclining pose, body leaning diagonally, relaxed luxury boutique mood, elegant lounging fashion attitude',
+  vogue_hands: 'Vogue hand frame pose, both hands framing the face elegantly, fingers spread gracefully near face, Paris ballroom vogue style',
+  arms_wide: 'arms wide open pose, both arms extended broadly to the sides, expansive powerful body language, wings-like feminine presence',
+  water_sleeve: 'water sleeve dance pose, flowing fabric sleeves caught mid-motion, arms extended in classical dance form, elegant eastern movement',
+  fan_cover: 'half face fan cover pose, one hand holding fan partially covering face, body turned sideways, mysterious elegant eastern expression',
+  tiptoe: 'tiptoe arms raised pose, standing on tiptoe, both arms reaching upward gracefully, elongated vertical body line',
+  hold_flower: 'both hands cupping and holding a theme-related prop, offering gesture with both hands, soft gentle holding pose',
+  hair_flip: 'mid hair flip captured moment, one hand running through hair, hair caught in motion, candid natural editorial movement',
+  eye_cover: 'one hand partially covering eye, fingers slightly spread over eye, mysterious peek through fingers, half hidden face gesture',
+  hand_neck: 'one hand gently touching side of neck, beauty close-up gesture, elegant neckline and jawline focus',
+  hands_pockets: 'both hands in pockets pose, sharp androgynous fashion attitude, clean suit-like editorial presence',
+  adjust_earring: 'adjusting earring gesture, hand near ear jewelry, refined jewelry focus, elegant beauty detail',
+  glove_pull: 'pulling glove gesture, one hand pulling the other glove, couture ritual feeling, elegant hand detail',
+  reach_camera: 'one hand reaching toward camera, strong foreground tension, dramatic fashion perspective',
+  fabric_hold: 'holding and lifting skirt or fabric, hands showing material flow, couture texture emphasized'
 };
 
 const framingData = {
@@ -488,6 +619,7 @@ function generate(){
   const extraNote = document.getElementById('extraNote').value.trim();
   const composition = document.getElementById('composition').value;
   const intensity = document.getElementById('intensity').value;
+  const poseText = poseData[selected('pose')];
   const prompt = [
     'Ultra beautiful adult woman, fashion editorial model, identity-preserving portrait based on reference photo if provided,',
     composition + ',',
@@ -496,7 +628,7 @@ function generate(){
     intensity + ',',
     'dynamic material particles surrounding the body, elegant body curve, premium skin rendering, sophisticated hair and makeup,',
     styleData[selected('style')] + ',',
-    poseData[selected('pose')] + ',',
+    poseText ? poseText + ',' : '',
     framingData[selected('framing')] + ',',
     cameraData[selected('camera')] + ',',
     ratioData[selected('ratio')] + ',',
