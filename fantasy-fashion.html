@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>幻想時裝廣告咒語產生器｜藍寶寫真引擎</title>
+<title>幻想廣告咒語產生器｜藍寶寫真引擎</title>
 <style>
   :root{
     --black:#09090B;
@@ -238,22 +238,22 @@
     <a class="nav-link" href="travel.html">寫真旅拍</a>
     <a class="nav-link" href="magazine.html">雜誌棚拍</a>
     <a class="nav-link" href="doll.html">公仔系列</a>
-    <a class="nav-link active" href="fantasy-fashion.html">幻想時裝</a>
+    <a class="nav-link active" href="fantasy-fashion.html">幻想廣告</a>
     <a class="nav-link" href="store-ad.html">店家廣告</a>
   </div>
 </nav>
 
 <main class="wrap">
   <header>
-    <div class="eyebrow">Material Couture Campaign</div>
-    <h1>幻想時裝廣告<span>咒語產生器</span></h1>
-    <p>把液體、花瓣、水墨、珠寶、水晶、火焰、冰霜與星河能量轉成高級時裝視覺，適合做吸睛商業大片與幻想高訂海報。</p>
+    <div class="eyebrow">Fantasy Commercial Campaign</div>
+    <h1>幻想廣告<span>咒語產生器</span></h1>
+    <p>把液體、花瓣、水墨、珠寶、水晶、火焰、星河能量與立體紙雕轉成高級商業主視覺，適合做吸睛廣告大片、幻想高訂海報與藝術展覽級作品。</p>
   </header>
 
   <section>
     <div class="section-header">
       <div class="section-label">01</div>
-      <div class="section-title">主題材質</div>
+      <div class="section-title">主題材質 / 藝術系統</div>
     </div>
     <div class="grid" data-choice="material">
       <label class="card selected"><input type="radio" name="material" value="milkTea" checked><div class="name">奶茶牛奶</div><div class="desc">焦糖奶茶與牛奶對撞</div></label>
@@ -264,13 +264,15 @@
       <label class="card"><input type="radio" name="material" value="diamond"><div class="name">鑽石水晶</div><div class="desc">珠寶雕塑與晶體反光</div></label>
       <label class="card"><input type="radio" name="material" value="phoenix"><div class="name">鳳凰聖焰</div><div class="desc">火焰披風與金紅光粒</div></label>
       <label class="card"><input type="radio" name="material" value="galaxy"><div class="name">星河能量</div><div class="desc">宇宙星塵與流光禮服</div></label>
+      <label class="card"><input type="radio" name="material" value="paperOiran"><div class="name">和風花魁紙雕</div><div class="desc">櫻花紙藝與日式花魁</div></label>
+      <label class="card"><input type="radio" name="material" value="paperSculpture"><div class="name">立體紙雕藝術</div><div class="desc">多層紙雕與浮雕花藝</div></label>
     </div>
   </section>
 
   <section>
     <div class="section-header">
       <div class="section-label">02</div>
-      <div class="section-title">服裝形式</div>
+      <div class="section-title">服裝 / 呈現形式</div>
     </div>
     <div class="grid grid-3" data-choice="garment">
       <label class="card selected"><input type="radio" name="garment" value="dress" checked><div class="name">高訂禮服</div><div class="desc">全身時裝廣告主視覺</div></label>
@@ -279,6 +281,9 @@
       <label class="card"><input type="radio" name="garment" value="jewelry"><div class="name">珠寶裝飾</div><div class="desc">材質轉為胸飾、頭飾與珠寶</div></label>
       <label class="card"><input type="radio" name="garment" value="editorial"><div class="name">半身封面</div><div class="desc">近景商業封面構圖</div></label>
       <label class="card"><input type="radio" name="garment" value="fullBody"><div class="name">全身走秀</div><div class="desc">長腿、動態姿態、完整衣身</div></label>
+      <label class="card"><input type="radio" name="garment" value="paperKimono"><div class="name">紙雕和服</div><div class="desc">多層紙藝和服與花紋</div></label>
+      <label class="card"><input type="radio" name="garment" value="oiranPortrait"><div class="name">花魁肖像</div><div class="desc">盤髮髮簪與和風半身像</div></label>
+      <label class="card"><input type="radio" name="garment" value="museumArtwork"><div class="name">博物館級作品</div><div class="desc">藝術展覽主視覺</div></label>
     </div>
   </section>
 
@@ -455,7 +460,7 @@
       <div class="section-title">生成咒語</div>
     </div>
     <div class="actions">
-      <button id="generateBtn">生成幻想時裝咒語</button>
+      <button id="generateBtn">生成幻想廣告咒語</button>
       <button class="copy-btn" id="copyBtn">複製咒語</button>
     </div>
     <p class="hint">建議搭配真人參考照使用，並在生圖模型中開啟身份/臉部參考。</p>
@@ -504,6 +509,16 @@ const materialData = {
     label: '星河能量',
     prompt: 'galaxy energy, stardust, nebula silk, cosmic glowing particles, starry liquid fabric forming a futuristic couture gown',
     palette: 'midnight blue, violet, silver starlight, cosmic glow'
+  },
+  paperOiran: {
+    label: '和風花魁紙雕',
+    prompt: 'photorealistic Japanese oiran portrait, ultra detailed paper sculpture art, paper cut art, layered paper craft, traditional Japanese kimono fashion, cherry blossom paper garden, layered paper kimono with sakura, peony, chrysanthemum, camellia, cloud patterns and fan patterns, gold paper hair ornaments, paper carved hairpins, paper folding fan, tassel decorations, realistic human face and realistic skin texture, fine paper edge detail, museum quality artwork',
+    palette: 'sakura pink, ivory washi paper, warm gold, soft cream, traditional Japanese red accents'
+  },
+  paperSculpture: {
+    label: '立體紙雕藝術',
+    prompt: 'photorealistic human portrait blended with ultra detailed multi-layer paper sculpture art, handmade paper craft, paper cut art, layered shadow paper design, fine art paper sculpture, embossed paper flowers, paper scroll patterns, precise paper texture and fine paper edge details, museum quality artwork, luxury editorial photography',
+    palette: 'ivory paper white, warm beige, soft shadow gray, gentle gold highlight'
   }
 };
 
@@ -513,7 +528,10 @@ const garmentData = {
   cape: 'dramatic cape and shoulder ornaments formed from the selected material, elegant body curve, high fashion styling',
   jewelry: 'material transformed into luxury jewelry, chest ornament, headpiece, shoulder jewelry and refined decorative details',
   editorial: 'upper body fashion portrait, material wrapping around the body like couture, premium magazine cover composition',
-  fullBody: 'full body shot, runway pose, long legs, complete couture silhouette made from the selected material'
+  fullBody: 'full body shot, runway pose, long legs, complete couture silhouette made from the selected material',
+  paperKimono: 'luxurious Japanese kimono made of multi-layer paper sculpture, raised paper relief patterns, sakura and cloud motifs, folded washi paper structure, delicate carved paper edges',
+  oiranPortrait: 'photorealistic Japanese oiran portrait, elegant side profile with slightly lowered gaze, traditional oiran updo, paper flower hair ornaments, gold paper hairpins, refined kimono portrait composition',
+  museumArtwork: 'museum quality fine art poster, full artwork presentation, layered paper sculpture environment, exhibition grade detail, luxury editorial art campaign'
 };
 
 const styleData = {
@@ -624,9 +642,9 @@ function generate(){
     'Ultra beautiful adult woman, fashion editorial model, identity-preserving portrait based on reference photo if provided,',
     composition + ',',
     garmentData[selected('garment')] + ',',
-    'material fashion layer, dress and decorative elements made of ' + materialText + ',',
+    'fantasy commercial art layer, clothing, ornaments, background and decorative elements formed from ' + materialText + ',',
     intensity + ',',
-    'dynamic material particles surrounding the body, elegant body curve, premium skin rendering, sophisticated hair and makeup,',
+    'dynamic material particles or layered craft elements surrounding the body, elegant body curve, premium skin rendering, sophisticated hair and makeup,',
     styleData[selected('style')] + ',',
     poseText ? poseText + ',' : '',
     framingData[selected('framing')] + ',',
