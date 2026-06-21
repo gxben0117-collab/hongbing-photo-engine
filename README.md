@@ -33,6 +33,7 @@
 - [工程維護規劃](docs/engineering.md)
 - [寫真旅拍流程](docs/travel-workflow.md)
 - [雜誌棚拍流程](docs/magazine-workflow.md)
+- [幻想廣告咒語產生器分類表](docs/fantasy-ad-workflow.md)
 - [公仔工作流程](docs/doll-workflow.md)
 - [專案架構](docs/architecture.md)
 
