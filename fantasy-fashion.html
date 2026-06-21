@@ -253,6 +253,24 @@
   <section>
     <div class="section-header">
       <div class="section-label">01</div>
+      <div class="section-title">服裝 / 呈現形式</div>
+    </div>
+    <div class="grid grid-3" data-choice="garment">
+      <label class="card selected"><input type="radio" name="garment" value="dress" checked><div class="name">高訂禮服</div><div class="desc">全身時裝廣告主視覺</div></label>
+      <label class="card"><input type="radio" name="garment" value="splashDress"><div class="name">飛濺液體裙</div><div class="desc">動態爆發、裙擺成形</div></label>
+      <label class="card"><input type="radio" name="garment" value="cape"><div class="name">披風肩飾</div><div class="desc">材質形成披風與肩部裝飾</div></label>
+      <label class="card"><input type="radio" name="garment" value="jewelry"><div class="name">珠寶裝飾</div><div class="desc">材質轉為胸飾、頭飾與珠寶</div></label>
+      <label class="card"><input type="radio" name="garment" value="editorial"><div class="name">半身封面</div><div class="desc">近景商業封面構圖</div></label>
+      <label class="card"><input type="radio" name="garment" value="fullBody"><div class="name">全身走秀</div><div class="desc">長腿、動態姿態、完整衣身</div></label>
+      <label class="card"><input type="radio" name="garment" value="paperKimono"><div class="name">紙雕華服</div><div class="desc">多層紙藝服飾與花紋</div></label>
+      <label class="card"><input type="radio" name="garment" value="oiranPortrait"><div class="name">紙雕肖像</div><div class="desc">盤髮髮簪與藝術半身像</div></label>
+      <label class="card"><input type="radio" name="garment" value="museumArtwork"><div class="name">博物館級作品</div><div class="desc">藝術展覽主視覺</div></label>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <div class="section-label">02</div>
       <div class="section-title">主題材質 / 藝術系統</div>
     </div>
     <div class="grid" data-choice="material">
@@ -266,24 +284,6 @@
       <label class="card"><input type="radio" name="material" value="galaxy"><div class="name">星河能量</div><div class="desc">宇宙星塵與流光禮服</div></label>
       <label class="card"><input type="radio" name="material" value="paperOiran"><div class="name">和風花魁紙雕</div><div class="desc">櫻花紙藝與日式花魁</div></label>
       <label class="card"><input type="radio" name="material" value="paperSculpture"><div class="name">立體紙雕藝術</div><div class="desc">多層紙雕與浮雕花藝</div></label>
-    </div>
-  </section>
-
-  <section>
-    <div class="section-header">
-      <div class="section-label">02</div>
-      <div class="section-title">服裝 / 呈現形式</div>
-    </div>
-    <div class="grid grid-3" data-choice="garment">
-      <label class="card selected"><input type="radio" name="garment" value="dress" checked><div class="name">高訂禮服</div><div class="desc">全身時裝廣告主視覺</div></label>
-      <label class="card"><input type="radio" name="garment" value="splashDress"><div class="name">飛濺液體裙</div><div class="desc">動態爆發、裙擺成形</div></label>
-      <label class="card"><input type="radio" name="garment" value="cape"><div class="name">披風肩飾</div><div class="desc">材質形成披風與肩部裝飾</div></label>
-      <label class="card"><input type="radio" name="garment" value="jewelry"><div class="name">珠寶裝飾</div><div class="desc">材質轉為胸飾、頭飾與珠寶</div></label>
-      <label class="card"><input type="radio" name="garment" value="editorial"><div class="name">半身封面</div><div class="desc">近景商業封面構圖</div></label>
-      <label class="card"><input type="radio" name="garment" value="fullBody"><div class="name">全身走秀</div><div class="desc">長腿、動態姿態、完整衣身</div></label>
-      <label class="card"><input type="radio" name="garment" value="paperKimono"><div class="name">紙雕華服</div><div class="desc">多層紙藝服飾與花紋</div></label>
-      <label class="card"><input type="radio" name="garment" value="oiranPortrait"><div class="name">紙雕肖像</div><div class="desc">盤髮髮簪與藝術半身像</div></label>
-      <label class="card"><input type="radio" name="garment" value="museumArtwork"><div class="name">博物館級作品</div><div class="desc">藝術展覽主視覺</div></label>
     </div>
   </section>
 
@@ -308,7 +308,7 @@
       <div class="section-title">自訂細節</div>
     </div>
     <div class="form-grid">
-      <label class="field">自訂材質或商品名稱
+      <label class="field">自訂材質 / 藝術系統
         <input id="customMaterial" type="text" placeholder="例如：藍寶石能量、盛唐金粉、紅酒玫瑰">
       </label>
       <label class="field">人物與構圖
@@ -641,8 +641,9 @@ function generate(){
   const prompt = [
     'Ultra beautiful adult woman, fashion editorial model, identity-preserving portrait based on reference photo if provided,',
     composition + ',',
-    garmentData[selected('garment')] + ',',
-    'fantasy commercial art layer, clothing, ornaments, background and decorative elements formed from ' + materialText + ',',
+    'appearance form: ' + garmentData[selected('garment')] + ',',
+    'theme material and art system: ' + materialText + ',',
+    'use the selected material system to form the clothing, ornaments, background, surface details and advertising visual language,',
     intensity + ',',
     'dynamic material particles or layered craft elements surrounding the body, elegant body curve, premium skin rendering, sophisticated hair and makeup,',
     styleData[selected('style')] + ',',
