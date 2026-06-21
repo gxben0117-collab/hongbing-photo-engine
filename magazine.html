@@ -56,7 +56,7 @@
     letter-spacing:0.08em;
     text-decoration:none;
   }
-  .nav-links{ display:flex; gap:6px; }
+  .nav-links{ display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end; }
   .nav-link{
     font-size:12px;
     color:var(--soft);
@@ -416,7 +416,9 @@
     <a class="nav-link" href="index.html">首頁</a>
     <a class="nav-link" href="travel.html">寫真旅拍</a>
     <a class="nav-link active" href="magazine.html">雜誌棚拍</a>
-    <a class="nav-link" href="doll.html">公仔萌工作室</a>
+    <a class="nav-link" href="doll.html">公仔系列</a>
+    <a class="nav-link" href="fantasy-fashion.html">幻想廣告</a>
+    <a class="nav-link" href="store-ad.html">店家廣告</a>
   </div>
 </nav>
 
@@ -1280,7 +1282,7 @@
       <div style="font-size:12px;color:var(--soft);margin-bottom:8px;">妝容（最多 2 個）</div>
       <div class="chips" id="makeupChips">
         <label class="chip selected" data-value="original"><input type="checkbox" name="makeup" value="original" checked>原圖一致</label>
-        <label class="chip" data-value="natural_highend"><input type="checkbox" name="makeup" value="natural_highend">自然高級</label>
+        <label class="chip" data-value="natural_highend"><input type="checkbox" name="makeup" value="natural_highend">高級清透妝</label>
         <label class="chip" data-value="smoky_glam"><input type="checkbox" name="makeup" value="smoky_glam">煙燻濃妝</label>
         <label class="chip" data-value="red_lip"><input type="checkbox" name="makeup" value="red_lip">紅唇</label>
         <label class="chip" data-value="glossy_lip"><input type="checkbox" name="makeup" value="glossy_lip">濕亮唇妝</label>
@@ -1300,7 +1302,7 @@
         <label class="card" data-value="natural_real">
           <input type="radio" name="skinTexture" value="natural_real">
           <div class="name">自然真實皮膚</div>
-          <div class="desc">適合：生活感寫真、自然高級妝、清透人像</div>
+          <div class="desc">適合：生活感寫真、高級清透妝、清透人像</div>
         </label>
         <label class="card" data-value="luxury_campaign">
           <input type="radio" name="skinTexture" value="luxury_campaign">
@@ -1315,7 +1317,7 @@
         <label class="card" data-value="real_pores">
           <input type="radio" name="skinTexture" value="real_pores">
           <div class="name">真實毛孔</div>
-          <div class="desc">適合：高級寫真、電影感、近距離臉部、自然高級妝</div>
+          <div class="desc">適合：高級寫真、電影感、近距離臉部、高級清透妝</div>
         </label>
         <label class="card" data-value="dewy_glow">
           <input type="radio" name="skinTexture" value="dewy_glow">
