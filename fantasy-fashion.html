@@ -522,18 +522,16 @@
       <div class="section-label">09</div>
       <div class="section-title">光影色彩</div>
     </div>
-    <div class="form-grid">
-      <label class="field">光線選擇
-        <select id="lighting">
-          <option value="soft">柔光棚拍</option>
-          <option value="hard">強對比硬光</option>
-          <option value="halo">逆光光暈</option>
-          <option value="stage">舞台光束</option>
-          <option value="mist">夢幻霧光</option>
-          <option value="cold">冷調金屬光</option>
-        </select>
-      </label>
-      <label class="field">色彩補充
+    <div class="grid grid-3" data-choice="lighting">
+      <label class="card selected"><input type="radio" name="lighting" value="soft" checked><div class="name">柔光棚拍</div><div class="desc">柔和膚色與高級光感</div></label>
+      <label class="card"><input type="radio" name="lighting" value="hard"><div class="name">強對比硬光</div><div class="desc">強陰影、輪廓銳利</div></label>
+      <label class="card"><input type="radio" name="lighting" value="halo"><div class="name">逆光光暈</div><div class="desc">邊緣發光、神聖氣場</div></label>
+      <label class="card"><input type="radio" name="lighting" value="stage"><div class="name">舞台光束</div><div class="desc">聚光燈、戲劇舞台感</div></label>
+      <label class="card"><input type="radio" name="lighting" value="mist"><div class="name">夢幻霧光</div><div class="desc">柔霧、漂浮、空氣感</div></label>
+      <label class="card"><input type="radio" name="lighting" value="cold"><div class="name">冷調金屬光</div><div class="desc">冷冽反光、金屬質地</div></label>
+    </div>
+    <div class="form-grid" style="margin-top:10px;">
+      <label class="field full custom-choice" data-custom-choice="lighting">色彩補充
         <input id="colorNote" type="text" placeholder="例如：黑金、草莓粉、奶油白、深紅背景、冷藍霧感">
       </label>
     </div>
@@ -973,7 +971,7 @@ function generate(){
     ? `${customGarment}, ${garmentData[selected('garment')]}`
     : garmentData[selected('garment')];
   const background = backgroundData[selected('background')];
-  const lighting = lightingData[document.getElementById('lighting').value];
+  const lighting = lightingData[selected('lighting')];
   const colorNote = document.getElementById('colorNote').value.trim();
   const extraNote = document.getElementById('extraNote').value.trim();
   const composition = selected('composition');
@@ -1028,7 +1026,7 @@ document.getElementById('copyBtn').addEventListener('click', async () => {
   btn.textContent = '已複製';
   setTimeout(() => btn.textContent = '複製咒語', 1200);
 });
-['themeCustom','customGarment','customMaterial','intensity','colorNote','extraNote','lighting'].forEach(id => {
+['themeCustom','customGarment','customMaterial','intensity','colorNote','extraNote'].forEach(id => {
   document.getElementById(id).addEventListener('input', () => {
     refreshCards();
     generate();
