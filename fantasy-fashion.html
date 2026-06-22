@@ -207,6 +207,17 @@
     letter-spacing:.08em;
     cursor:pointer;
   }
+  button.card{
+    display:block;
+    width:100%;
+    text-align:left;
+    color:inherit;
+    background:var(--panel);
+    border:1px solid var(--line);
+    letter-spacing:0;
+    font-weight:400;
+  }
+  button.card:hover{border-color:#554B67;background:var(--panel-2);}
   .copy-btn{
     background:transparent;
     color:#DCC8FF;
@@ -287,6 +298,19 @@
 
   <section>
     <div class="section-header">
+      <div class="section-label">00</div>
+      <div class="section-title">一鍵主題模板</div>
+    </div>
+    <div class="grid grid-3">
+      <button class="card" type="button" id="redPaperWeddingPreset">
+        <div class="name">中式紅紙雕婚嫁廣告</div>
+        <div class="desc">紅色剪紙、牡丹新娘、蝴蝶紙藝、中式窗影</div>
+      </button>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
       <div class="section-label">01</div>
       <div class="section-title">核心主題 / 品牌感</div>
     </div>
@@ -297,6 +321,7 @@
       <label class="card"><input type="radio" name="theme" value="regalTheme"><div class="name">王權高訂</div><div class="desc">權威、禮儀、華麗與氣場</div></label>
       <label class="card"><input type="radio" name="theme" value="floralTheme"><div class="name">花園意象</div><div class="desc">花卉、植物、柔美與生命感</div></label>
       <label class="card"><input type="radio" name="theme" value="cosmicTheme"><div class="name">宇宙流光</div><div class="desc">星河、光粒、未來感與漂浮感</div></label>
+      <label class="card"><input type="radio" name="theme" value="redPaperWeddingTheme"><div class="name">中式紅紙雕婚嫁</div><div class="desc">剪紙婚嫁、牡丹新娘、東方喜慶廣告</div></label>
     </div>
     <div class="form-grid" style="margin-top:10px;">
       <label class="field full custom-choice" data-custom-choice="theme">主題自填
@@ -320,6 +345,7 @@
       <label class="card"><input type="radio" name="garment" value="paperKimono"><div class="name">紙雕華服</div><div class="desc">多層紙藝服飾與花紋</div></label>
       <label class="card"><input type="radio" name="garment" value="trainGown"><div class="name">拖尾長裙</div><div class="desc">大裙擺、長拖尾、戲劇輪廓</div></label>
       <label class="card"><input type="radio" name="garment" value="ritualRobe"><div class="name">儀式長袍</div><div class="desc">莊重、幻想、女王氣場</div></label>
+      <label class="card"><input type="radio" name="garment" value="redPaperBridal"><div class="name">紅紙雕婚嫁</div><div class="desc">紅色剪紙禮服、牡丹胸花、流蘇頭飾</div></label>
     </div>
     <div class="form-grid" style="margin-top:10px;">
       <label class="field full custom-choice" data-custom-choice="garment">服裝自填
@@ -367,6 +393,7 @@
       <label class="card"><input type="radio" name="material" value="galaxy"><div class="name">星河能量</div><div class="desc">宇宙星塵與流光禮服</div></label>
       <label class="card"><input type="radio" name="material" value="paperOiran"><div class="name">和風花魁紙雕</div><div class="desc">櫻花紙藝與日式花魁</div></label>
       <label class="card"><input type="radio" name="material" value="paperSculpture"><div class="name">立體紙雕藝術</div><div class="desc">多層紙雕與浮雕花藝</div></label>
+      <label class="card"><input type="radio" name="material" value="redPaperWedding"><div class="name">紅紙雕婚嫁</div><div class="desc">中國紅剪紙、蝴蝶、牡丹、鏤空花紋</div></label>
     </div>
     <div class="form-grid" style="margin-top:10px;">
       <label class="field custom-choice" data-custom-choice="material">材質自填
@@ -529,6 +556,7 @@
       <label class="card"><input type="radio" name="lighting" value="stage"><div class="name">舞台光束</div><div class="desc">聚光燈、戲劇舞台感</div></label>
       <label class="card"><input type="radio" name="lighting" value="mist"><div class="name">夢幻霧光</div><div class="desc">柔霧、漂浮、空氣感</div></label>
       <label class="card"><input type="radio" name="lighting" value="cold"><div class="name">冷調金屬光</div><div class="desc">冷冽反光、金屬質地</div></label>
+      <label class="card"><input type="radio" name="lighting" value="warmWindowSoft"><div class="name">柔暖窗影光</div><div class="desc">白棚日光、窗格陰影、紅色反射</div></label>
     </div>
     <div class="form-grid" style="margin-top:10px;">
       <label class="field full custom-choice" data-custom-choice="lighting">色彩補充
@@ -552,6 +580,7 @@
       <label class="card"><input type="radio" name="background" value="materialWall"><div class="name">材質牆面</div><div class="desc">背景也由材質構成</div></label>
       <label class="card"><input type="radio" name="background" value="luxuryRoom"><div class="name">精品室內</div><div class="desc">高級室內、品牌陳設、生活感</div></label>
       <label class="card"><input type="radio" name="background" value="titleVoid"><div class="name">標題留白</div><div class="desc">保留文字空間、海報友善</div></label>
+      <label class="card"><input type="radio" name="background" value="chineseWindowShadow"><div class="name">中式窗影白棚</div><div class="desc">白色背景、中式窗格陰影、紙雕飄片</div></label>
     </div>
   </section>
 
@@ -646,6 +675,11 @@ const materialData = {
     prompt: 'photorealistic human portrait blended with ultra detailed multi-layer paper sculpture art, handmade paper craft, paper cut art, layered shadow paper design, fine art paper sculpture, embossed paper flowers, paper scroll patterns, precise paper texture and fine paper edge details, museum quality artwork, luxury editorial photography',
     palette: 'ivory paper white, warm beige, soft shadow gray, gentle gold highlight'
   },
+  redPaperWedding: {
+    label: '紅紙雕婚嫁',
+    prompt: 'Chinese red paper cut art, layered red paper sculpture, Chinese paper lace, red butterflies, peony petals, tassels, delicate hollow cutout patterns, eastern bridal paper couture, luxury wedding advertisement craft detail',
+    palette: 'pure Chinese red, ivory white, warm sunlight, delicate red paper shadows'
+  },
   ice: {
     label: '冰晶',
     prompt: 'clear ice crystal textures, translucent frozen layers, sharp reflective shards, cool premium ice sculpture, frosted couture atmosphere',
@@ -704,7 +738,8 @@ const themeData = {
   perfumeTheme: 'luxury perfume campaign, soft haze, refined scent aura, elegant fragrance advertising',
   regalTheme: 'regal couture campaign, imperial presence, noble ceremony, commanding luxury identity',
   floralTheme: 'botanical fantasy campaign, blooming floral energy, romantic natural elegance',
-  cosmicTheme: 'cosmic fantasy campaign, stardust aura, futuristic luminous brand mood'
+  cosmicTheme: 'cosmic fantasy campaign, stardust aura, futuristic luminous brand mood',
+  redPaperWeddingTheme: 'Chinese red paper cut couture bridal fantasy advertisement, red peony bride, butterfly paper art, eastern wedding luxury campaign'
 };
 
 const garmentData = {
@@ -716,7 +751,8 @@ const garmentData = {
   jewelry: 'jewelry couture outfit, gemstone chest ornament, headpiece, shoulder jewelry and clothing fused into one luxurious design',
   paperKimono: 'luxurious sculptural paper couture outfit, multi-layer paper clothing, raised paper relief patterns, sakura and cloud motifs, folded washi paper structure, delicate carved paper edges',
   trainGown: 'dramatic long train gown, grand flowing skirt, extended fabric trail, cinematic couture silhouette, strong luxury campaign shape',
-  ritualRobe: 'ceremonial fantasy robe, regal long robe silhouette, queen-like presence, layered formal structure, solemn luxury styling'
+  ritualRobe: 'ceremonial fantasy robe, regal long robe silhouette, queen-like presence, layered formal structure, solemn luxury styling',
+  redPaperBridal: 'red Chinese paper cut couture dress, sculptural peony chest ornament, lace-like paper butterfly shoulder pieces, tassel earrings, ornate red bridal headpiece, traditional Chinese window pattern details'
 };
 
 const styleData = {
@@ -738,7 +774,8 @@ const backgroundData = {
   cosmic: 'cosmic starfield background, deep space atmosphere, floating luminous particles',
   materialWall: 'background made of the same selected material, immersive material wall, cohesive visual system',
   luxuryRoom: 'luxury interior room background, premium lifestyle setting, refined decorative atmosphere',
-  titleVoid: 'intentional negative space for title placement, poster-friendly empty area, clean composition buffer'
+  titleVoid: 'intentional negative space for title placement, poster-friendly empty area, clean composition buffer',
+  chineseWindowShadow: 'soft white studio background with Chinese lattice window shadows, red butterfly paper decorations floating around the subject, ivory white space, eastern bridal advertisement backdrop'
 };
 
 const lightingData = {
@@ -747,7 +784,8 @@ const lightingData = {
   halo: 'backlit halo lighting, glowing rim light, cinematic aura',
   stage: 'stage beam lighting, theatrical spotlight, grand commercial mood',
   mist: 'dream mist lighting, soft haze, floating luminous atmosphere',
-  cold: 'cold metallic lighting, crisp reflections, cool premium tone'
+  cold: 'cold metallic lighting, crisp reflections, cool premium tone',
+  warmWindowSoft: 'soft warm sunlight through Chinese lattice window shadows, refined red paper bounce light, luxury bridal advertisement glow, delicate facial exposure'
 };
 
 const identityGuard = `Identity Lock System:
@@ -949,6 +987,13 @@ function customKeywordList(value){
     .filter(Boolean);
 }
 
+function setRadioValue(name, value){
+  const input = document.querySelector(`input[name="${name}"][value="${value}"]`);
+  if(input){
+    input.checked = true;
+  }
+}
+
 function refreshCards(){
   document.querySelectorAll('[data-choice]').forEach(group => {
     const choiceName = group.dataset.choice;
@@ -964,6 +1009,43 @@ function refreshCards(){
       customField.classList.toggle('selected', customActive);
     }
   });
+}
+
+const themeTemplates = {
+  redPaperWedding: {
+    theme: 'redPaperWeddingTheme',
+    garment: 'redPaperBridal',
+    material: 'redPaperWedding',
+    style: 'luxury',
+    composition: 'upper body fashion portrait, strong eye contact, poster composition',
+    framing: 'closeUp',
+    pose: 'reach_camera',
+    camera: 'beautyCloseUp',
+    lighting: 'warmWindowSoft',
+    background: 'chineseWindowShadow',
+    ratio: 'vertical916',
+    themeCustom: 'Chinese red paper cut couture bridal fantasy advertisement, red peony bride, butterfly paper art, eastern wedding luxury campaign',
+    customGarment: 'red Chinese paper cut couture dress, sculptural peony chest ornament, lace-like paper butterfly shoulder pieces, tassel earrings, ornate red bridal headpiece, traditional Chinese window pattern details',
+    customMaterial: 'red paper cut art, layered paper sculpture, Chinese paper lace, red butterflies, peony petals, tassels, delicate hollow cutout patterns',
+    colorNote: 'pure Chinese red, ivory white background, soft warm sunlight, delicate red shadows, luxury bridal advertisement color grading',
+    extraNote: 'soft white studio background with Chinese lattice window shadows, red butterfly paper decorations floating around the subject, one butterfly resting near the hand, elegant lowered gaze, refined red eye makeup, glossy red lips, luxury cosmetic advertisement mood, keep the face softly lit but consistent with the surrounding red paper reflections, no random text, no watermark'
+  }
+};
+
+function applyThemeTemplate(key){
+  const preset = themeTemplates[key];
+  if(!preset) return;
+
+  ['theme','garment','material','style','composition','framing','pose','camera','lighting','background','ratio'].forEach(name => {
+    setRadioValue(name, preset[name]);
+  });
+
+  ['themeCustom','customGarment','customMaterial','colorNote','extraNote'].forEach(id => {
+    document.getElementById(id).value = preset[id] || '';
+  });
+
+  refreshCards();
+  generate();
 }
 
 function generate(){
@@ -1039,6 +1121,9 @@ document.querySelectorAll('input[type="radio"]').forEach(input => {
   });
 });
 document.getElementById('generateBtn').addEventListener('click', generate);
+document.getElementById('redPaperWeddingPreset').addEventListener('click', () => {
+  applyThemeTemplate('redPaperWedding');
+});
 document.getElementById('copyBtn').addEventListener('click', async () => {
   const text = document.getElementById('output').textContent;
   await navigator.clipboard.writeText(text);
