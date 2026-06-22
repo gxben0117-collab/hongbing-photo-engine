@@ -395,26 +395,26 @@
       <div class="section-label">06</div>
       <div class="section-title">構圖取景</div>
     </div>
-    <div class="form-grid">
-      <label class="field">構圖選擇
-        <select id="composition">
-          <option value="full body shot, elegant dynamic fashion pose, long legs">全身主視覺</option>
-          <option value="upper body fashion portrait, strong eye contact, poster composition">半身封面人像</option>
-          <option value="standing in the center of a material splash, cinematic low angle">材質中央站位</option>
-          <option value="runway pose, dramatic couture silhouette, premium campaign">走秀式英雄構圖</option>
-          <option value="wide poster composition, clean negative space for headline">海報留白構圖</option>
-        </select>
-      </label>
-      <label class="field">人物入鏡比例
-        <select id="framing">
-          <option value="fullBody">全身入鏡</option>
-          <option value="threeQuarter">七分身</option>
-          <option value="halfBody">半身廣告</option>
-          <option value="closeUp">近景封面</option>
-          <option value="widePoster">海報全景</option>
-          <option value="lowAngle">低角度全身</option>
-        </select>
-      </label>
+    <div class="pose-group">
+      <div class="pose-group-label">構圖選擇</div>
+      <div class="grid grid-3" data-choice="composition">
+        <label class="card selected"><input type="radio" name="composition" value="full body shot, elegant dynamic fashion pose, long legs" checked><div class="name">全身主視覺</div><div class="desc">完整造型、身形與材質都看得到</div></label>
+        <label class="card"><input type="radio" name="composition" value="upper body fashion portrait, strong eye contact, poster composition"><div class="name">半身封面人像</div><div class="desc">眼神、臉部與上身細節主導</div></label>
+        <label class="card"><input type="radio" name="composition" value="standing in the center of a material splash, cinematic low angle"><div class="name">材質中央站位</div><div class="desc">人物站在主題材質爆發中心</div></label>
+        <label class="card"><input type="radio" name="composition" value="runway pose, dramatic couture silhouette, premium campaign"><div class="name">走秀式英雄構圖</div><div class="desc">高訂輪廓、氣場與廣告張力</div></label>
+        <label class="card"><input type="radio" name="composition" value="wide poster composition, clean negative space for headline"><div class="name">海報留白構圖</div><div class="desc">保留標題空間與商業版面感</div></label>
+      </div>
+    </div>
+    <div class="pose-group">
+      <div class="pose-group-label">人物入鏡比例</div>
+      <div class="grid grid-3" data-choice="framing">
+        <label class="card selected"><input type="radio" name="framing" value="fullBody" checked><div class="name">全身入鏡</div><div class="desc">頭到腳完整出現</div></label>
+        <label class="card"><input type="radio" name="framing" value="threeQuarter"><div class="name">七分身</div><div class="desc">兼顧臉部辨識與服裝線條</div></label>
+        <label class="card"><input type="radio" name="framing" value="halfBody"><div class="name">半身廣告</div><div class="desc">臉、肩頸與上身材質更清楚</div></label>
+        <label class="card"><input type="radio" name="framing" value="closeUp"><div class="name">近景封面</div><div class="desc">臉部身份與美妝質感主導</div></label>
+        <label class="card"><input type="radio" name="framing" value="widePoster"><div class="name">海報全景</div><div class="desc">人物與留白形成主視覺版面</div></label>
+        <label class="card"><input type="radio" name="framing" value="lowAngle"><div class="name">低角度全身</div><div class="desc">拉長腿線、強化精品氣場</div></label>
+      </div>
     </div>
   </section>
 
@@ -950,8 +950,8 @@ function generate(){
   const lighting = lightingData[document.getElementById('lighting').value];
   const colorNote = document.getElementById('colorNote').value.trim();
   const extraNote = document.getElementById('extraNote').value.trim();
-  const composition = document.getElementById('composition').value;
-  const framing = framingData[document.getElementById('framing').value];
+  const composition = selected('composition');
+  const framing = framingData[selected('framing')];
   const intensity = document.getElementById('intensity').value;
   const poseText = poseData[selected('pose')];
   const prompt = [
@@ -1002,7 +1002,7 @@ document.getElementById('copyBtn').addEventListener('click', async () => {
   btn.textContent = '已複製';
   setTimeout(() => btn.textContent = '複製咒語', 1200);
 });
-['themeCustom','customGarment','customMaterial','composition','intensity','colorNote','extraNote','lighting','framing'].forEach(id => {
+['themeCustom','customGarment','customMaterial','intensity','colorNote','extraNote','lighting'].forEach(id => {
   document.getElementById(id).addEventListener('input', generate);
   document.getElementById(id).addEventListener('change', generate);
 });
