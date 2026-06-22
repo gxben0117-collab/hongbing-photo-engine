@@ -508,12 +508,12 @@
       <div class="section-title">鏡頭語法</div>
     </div>
     <div class="grid grid-3" data-choice="camera">
-      <label class="card selected"><input type="radio" name="camera" value="studio" checked><div class="name">商業棚拍</div><div class="desc">精準燈光、高級質感</div></label>
-      <label class="card"><input type="radio" name="camera" value="lowFashion"><div class="name">低角度時尚</div><div class="desc">強氣場、長腿比例</div></label>
-      <label class="card"><input type="radio" name="camera" value="highSpeed"><div class="name">高速凝結</div><div class="desc">液體顆粒、瞬間爆發</div></label>
-      <label class="card"><input type="radio" name="camera" value="editorial"><div class="name">雜誌封面</div><div class="desc">封面構圖、眼神主導</div></label>
-      <label class="card"><input type="radio" name="camera" value="cinematic"><div class="name">電影鏡頭</div><div class="desc">戲劇光影、空間縱深</div></label>
-      <label class="card"><input type="radio" name="camera" value="product"><div class="name">商品廣告</div><div class="desc">材質像產品主視覺</div></label>
+      <label class="card selected"><input type="radio" name="camera" value="eyeLevelCover" checked><div class="name">自然平視</div><div class="desc">標準封面視角(預設)</div></label>
+      <label class="card"><input type="radio" name="camera" value="lowAngleHero"><div class="name">低角度仰拍</div><div class="desc">英雄感視角 / 鏡頭低於腰部</div></label>
+      <label class="card"><input type="radio" name="camera" value="highAngleOverhead"><div class="name">高角度俯拍</div><div class="desc">俯視角 / 鏡頭高於頭部</div></label>
+      <label class="card"><input type="radio" name="camera" value="softFocusGlow"><div class="name">柔焦光感</div><div class="desc">柔和光暈棚拍感</div></label>
+      <label class="card"><input type="radio" name="camera" value="beautyCloseUp"><div class="name">近距離美妝感</div><div class="desc">美妝特寫構圖</div></label>
+      <label class="card"><input type="radio" name="camera" value="sideProfile"><div class="name">側臉輪廓感</div><div class="desc">側臉輪廓 / 下顎線清楚</div></label>
     </div>
   </section>
 
@@ -912,12 +912,12 @@ const framingData = {
 };
 
 const cameraData = {
-  studio: 'professional studio camera language, controlled commercial lighting, crisp premium focus',
-  lowFashion: 'low angle fashion photography, dramatic perspective, high fashion long-leg proportions',
-  highSpeed: 'high speed splash photography, frozen motion, sharp liquid particles and material droplets',
-  editorial: 'magazine cover camera language, strong eye contact, refined editorial framing',
-  cinematic: 'cinematic camera language, dramatic depth, atmospheric lighting and premium visual storytelling',
-  product: 'luxury product advertising camera language, material treated like the hero product, clean commercial clarity'
+  eyeLevelCover: 'natural eye-level camera angle, standard magazine cover perspective, balanced face and body proportion, clean premium portrait framing',
+  lowAngleHero: 'low angle hero shot, camera below waist level, powerful upward perspective, elongated fashion silhouette, strong commanding presence',
+  highAngleOverhead: 'high angle view, camera above head level, elegant top-down perspective, refined fashion composition, clear subject shape',
+  softFocusGlow: 'soft focus glow camera language, gentle halo bloom, luminous studio beauty atmosphere, refined dreamy commercial portrait',
+  beautyCloseUp: 'close distance beauty photography, beauty close-up composition, face and makeup details emphasized, polished cosmetic campaign framing',
+  sideProfile: 'side profile portrait angle, clear jawline silhouette, elegant facial contour, refined profile lighting and fashion editorial framing'
 };
 
 const ratioData = {
