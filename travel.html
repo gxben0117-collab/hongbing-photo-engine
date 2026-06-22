@@ -754,21 +754,44 @@ Candid Editorial Moment
 
 Identity And Facial Features Remain Clearly Recognizable During Motion`,
 
-lighting:`【電影光影系統】
+lighting:`【光線一致性系統】
 
-Cinematic Natural Lighting
-Best Lighting For This Scene And Theme
-Lighting That Enhances The Mood
-Bright Face Illumination
-Luxury Fashion Photography Light Quality
-Natural Light Direction
 Global Lighting Consistency
-Physically Correct Lighting
-Fine Art Color Grading
-Soft Shadow Transition
+Environmental Light Matching
+Subject And Environment Share The Same Light Source
+Face Lighting Matches Scene Lighting
+Physically Correct Light Direction
+Natural Bounce Light
+Environmental Reflection Light
 Natural Atmospheric Perspective
+No Separate Studio Lighting
+No Beauty Ring Light Effect
+No Detached Portrait Lighting
+No Floating Subject Effect
 
-人物與背景光線一致,人物自然融入環境
+【環境光融合系統】
+
+Scene Driven Lighting
+Character Receives Light From Environment
+Physically Based Illumination
+Global Illumination
+Environmental Reflection Light
+Atmospheric Light Interaction
+Subject And Environment Share The Same Light Source
+Face Body Hair Clothing And Background Rendered Under The Same Outdoor Lighting Conditions
+
+【自然臉部曝光系統】
+
+Face Visible Without Breaking Scene Lighting
+Natural Facial Exposure
+Subtle Beauty Fill Light
+Face Preserves Environmental Shadows
+Facial Lighting Consistent With Background
+Natural Catchlight Only
+
+人物與背景共享同一現場光源
+人物接受地面、水面、建築與天空的自然反射光
+臉部可見但不可變成棚拍補光或美顏燈效果
 電影級光影,柔和散景,空氣透視感`,
 
 cleanframe:`【畫面淨化系統】
@@ -1217,6 +1240,7 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
   const sections=[
     CORE.identity,
     CORE.skeleton,
+    CORE.lighting,
     CORE.pose,
     CORE.photographer,
     ...(cameraBlock?[cameraBlock]:[]),
@@ -1226,7 +1250,6 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
     mediaBlock,
     themeBlock,
     costumeBlock,
-    CORE.lighting,
     CORE.cleanframe,
     CORE.output,
     ratioBlock
