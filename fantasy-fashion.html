@@ -923,6 +923,13 @@ function selected(name){
   return document.querySelector(`input[name="${name}"]:checked`).value;
 }
 
+function customKeywordList(value){
+  return value
+    .split(/[\s,，、;；/｜|]+/)
+    .map(item => item.trim())
+    .filter(Boolean);
+}
+
 function refreshCards(){
   document.querySelectorAll('[data-choice]').forEach(group => {
     group.querySelectorAll('.card, .pose-card').forEach(card => {
@@ -939,8 +946,10 @@ function generate(){
   const materialKey = selected('material');
   const material = materialData[materialKey];
   const customMaterial = document.getElementById('customMaterial').value.trim();
-  const materialText = customMaterial
-    ? `${customMaterial}, ${material.prompt}`
+  const customMaterials = customKeywordList(customMaterial);
+  const customMaterialText = customMaterials.join(', ');
+  const materialText = customMaterials.length
+    ? `custom material keywords: ${customMaterialText}; read and use every custom material keyword with equal priority, combine all custom materials into one coherent art system, ${material.prompt}`
     : material.prompt;
   const customGarment = document.getElementById('customGarment').value.trim();
   const garmentText = customGarment
