@@ -516,6 +516,7 @@
           <label class="pose-card"><input type="radio" name="pose" value="fan_cover"><div class="pose-name">持扇遮面</div><div class="pose-desc">單手持扇半遮臉+側身</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="tiptoe"><div class="pose-name">踮腳仰手</div><div class="pose-desc">踮腳尖+雙手向上延伸</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="hold_flower"><div class="pose-name">雙手托花/道具</div><div class="pose-desc">雙手捧著主題相關物件</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="butterfly_hand"><div class="pose-name">托蝶伸手</div><div class="pose-desc">手掌托蝴蝶,近景廣告感</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="hair_flip"><div class="pose-name">撩髮瞬間</div><div class="pose-desc">單手撥起頭髮的中間動作</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="eye_cover"><div class="pose-name">遮眼手勢</div><div class="pose-desc">單手半遮住眼睛,神秘感</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="hand_neck"><div class="pose-name">手扶頸側</div><div class="pose-desc">單手輕扶頸部,美妝特寫感</div></label>
@@ -677,8 +678,8 @@ const materialData = {
   },
   redPaperWedding: {
     label: '紅紙雕婚嫁',
-    prompt: 'Chinese red paper cut art, layered red paper sculpture, Chinese paper lace, red butterflies, peony petals, tassels, delicate hollow cutout patterns, eastern bridal paper couture, luxury wedding advertisement craft detail',
-    palette: 'pure Chinese red, ivory white, warm sunlight, delicate red paper shadows'
+    prompt: 'Chinese red paper cut art, layered red paper sculpture, Chinese paper lace, red butterflies, peony petals, tassels, delicate hollow cutout patterns, red butterfly paper decorations floating around the subject, one butterfly resting near the hand, eastern bridal paper couture, luxury wedding advertisement craft detail',
+    palette: 'pure Chinese red, ivory white background, soft warm sunlight, delicate red shadows, luxury bridal advertisement color grading'
   },
   ice: {
     label: '冰晶',
@@ -739,7 +740,7 @@ const themeData = {
   regalTheme: 'regal couture campaign, imperial presence, noble ceremony, commanding luxury identity',
   floralTheme: 'botanical fantasy campaign, blooming floral energy, romantic natural elegance',
   cosmicTheme: 'cosmic fantasy campaign, stardust aura, futuristic luminous brand mood',
-  redPaperWeddingTheme: 'Chinese red paper cut couture bridal fantasy advertisement, red peony bride, butterfly paper art, eastern wedding luxury campaign'
+  redPaperWeddingTheme: 'Chinese red paper cut couture bridal fantasy advertisement, red peony bride, butterfly paper art, eastern wedding luxury campaign, refined red eye makeup, glossy red lips, luxury cosmetic advertisement mood'
 };
 
 const garmentData = {
@@ -752,7 +753,7 @@ const garmentData = {
   paperKimono: 'luxurious sculptural paper couture outfit, multi-layer paper clothing, raised paper relief patterns, sakura and cloud motifs, folded washi paper structure, delicate carved paper edges',
   trainGown: 'dramatic long train gown, grand flowing skirt, extended fabric trail, cinematic couture silhouette, strong luxury campaign shape',
   ritualRobe: 'ceremonial fantasy robe, regal long robe silhouette, queen-like presence, layered formal structure, solemn luxury styling',
-  redPaperBridal: 'red Chinese paper cut couture dress, sculptural peony chest ornament, lace-like paper butterfly shoulder pieces, tassel earrings, ornate red bridal headpiece, traditional Chinese window pattern details'
+  redPaperBridal: 'red Chinese paper cut couture dress, sculptural peony chest ornament, lace-like paper butterfly shoulder pieces, tassel earrings, ornate red bridal headpiece, traditional Chinese window pattern details, delicate paper lace shoulder ornaments and red bridal jewelry styling'
 };
 
 const styleData = {
@@ -775,7 +776,7 @@ const backgroundData = {
   materialWall: 'background made of the same selected material, immersive material wall, cohesive visual system',
   luxuryRoom: 'luxury interior room background, premium lifestyle setting, refined decorative atmosphere',
   titleVoid: 'intentional negative space for title placement, poster-friendly empty area, clean composition buffer',
-  chineseWindowShadow: 'soft white studio background with Chinese lattice window shadows, red butterfly paper decorations floating around the subject, ivory white space, eastern bridal advertisement backdrop'
+  chineseWindowShadow: 'soft white studio background with Chinese lattice window shadows, red butterfly paper decorations floating around the subject, ivory white space, eastern bridal advertisement backdrop, clean luxury bridal campaign layout'
 };
 
 const lightingData = {
@@ -785,7 +786,7 @@ const lightingData = {
   stage: 'stage beam lighting, theatrical spotlight, grand commercial mood',
   mist: 'dream mist lighting, soft haze, floating luminous atmosphere',
   cold: 'cold metallic lighting, crisp reflections, cool premium tone',
-  warmWindowSoft: 'soft warm sunlight through Chinese lattice window shadows, refined red paper bounce light, luxury bridal advertisement glow, delicate facial exposure'
+  warmWindowSoft: 'soft warm sunlight through Chinese lattice window shadows, refined red paper bounce light, red paper reflections softly affecting the face, luxury bridal advertisement glow, delicate facial exposure, face softly lit but consistent with surrounding red paper reflections'
 };
 
 const identityGuard = `Identity Lock System:
@@ -1019,16 +1020,11 @@ const themeTemplates = {
     style: 'luxury',
     composition: 'upper body fashion portrait, strong eye contact, poster composition',
     framing: 'closeUp',
-    pose: 'reach_camera',
+    pose: 'butterfly_hand',
     camera: 'beautyCloseUp',
     lighting: 'warmWindowSoft',
     background: 'chineseWindowShadow',
-    ratio: 'vertical916',
-    themeCustom: 'Chinese red paper cut couture bridal fantasy advertisement, red peony bride, butterfly paper art, eastern wedding luxury campaign',
-    customGarment: 'red Chinese paper cut couture dress, sculptural peony chest ornament, lace-like paper butterfly shoulder pieces, tassel earrings, ornate red bridal headpiece, traditional Chinese window pattern details',
-    customMaterial: 'red paper cut art, layered paper sculpture, Chinese paper lace, red butterflies, peony petals, tassels, delicate hollow cutout patterns',
-    colorNote: 'pure Chinese red, ivory white background, soft warm sunlight, delicate red shadows, luxury bridal advertisement color grading',
-    extraNote: 'soft white studio background with Chinese lattice window shadows, red butterfly paper decorations floating around the subject, one butterfly resting near the hand, elegant lowered gaze, refined red eye makeup, glossy red lips, luxury cosmetic advertisement mood, keep the face softly lit but consistent with the surrounding red paper reflections, no random text, no watermark'
+    ratio: 'vertical916'
   }
 };
 
@@ -1041,7 +1037,7 @@ function applyThemeTemplate(key){
   });
 
   ['themeCustom','customGarment','customMaterial','colorNote','extraNote'].forEach(id => {
-    document.getElementById(id).value = preset[id] || '';
+    document.getElementById(id).value = '';
   });
 
   refreshCards();
