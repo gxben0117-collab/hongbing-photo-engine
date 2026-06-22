@@ -822,6 +822,17 @@ Face Body Hair Costume Background Rendered Under The Same Lighting Conditions
 Integrated Commercial Photography Lighting
 Lighting Consistency Priority Maximum`;
 
+const colorTemperatureGuard = `【色溫統一系統】
+
+Unified Skin Tone Rendering
+Face And Body Must Share The Same Color Temperature
+Face And Body Must Share The Same White Balance
+No Face Color Correction
+No Artificial Facial Whitening
+No Separate Facial Brightening
+No Separate Facial Skin Processing
+Consistent Skin Tone Across Entire Subject`;
+
 const subjectIntegrationGuard = `【人物融合系統】
 
 Integrated Subject Rendering System
@@ -850,6 +861,8 @@ Elegant Catchlights In Eyes
 Controlled Beauty Fill Light
 Refined Facial Exposure
 Premium Cosmetic Advertisement Fill Light
+Face Fill Must Follow The Global Lighting Environment
+Face Fill Must Preserve Shared White Balance And Color Temperature
 No Flat Lighting
 No Overexposed Face
 Natural Three Dimensional Facial Structure`;
@@ -984,6 +997,7 @@ function generate(){
     anatomyGuard + ',',
     bodyShape + ',',
     lightingConsistencyGuard + ',',
+    colorTemperatureGuard + ',',
     subjectIntegrationGuard + ',',
     faceFillGuard + ',',
     themeCustom ? `core theme: ${themeCustom},` : `core theme: ${theme},`,
