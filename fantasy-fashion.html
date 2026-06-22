@@ -168,6 +168,14 @@
     color:var(--soft);
     font-size:12px;
   }
+  label.field.custom-choice.selected{
+    color:#DCC8FF;
+  }
+  label.field.custom-choice.selected input{
+    border-color:var(--violet);
+    background:#21172F;
+    box-shadow:0 0 0 1px rgba(184,137,255,.22);
+  }
   input[type="text"], textarea, select{
     width:100%;
     border:1px solid var(--line);
@@ -291,7 +299,7 @@
       <label class="card"><input type="radio" name="theme" value="cosmicTheme"><div class="name">宇宙流光</div><div class="desc">星河、光粒、未來感與漂浮感</div></label>
     </div>
     <div class="form-grid" style="margin-top:10px;">
-      <label class="field full">主題自填
+      <label class="field full custom-choice" data-custom-choice="theme">主題自填
         <input id="themeCustom" type="text" placeholder="例如：藍寶石女王、黑金香水大片、月光花園、紅酒玫瑰戰袍">
       </label>
     </div>
@@ -314,7 +322,7 @@
       <label class="card"><input type="radio" name="garment" value="ritualRobe"><div class="name">儀式長袍</div><div class="desc">莊重、幻想、女王氣場</div></label>
     </div>
     <div class="form-grid" style="margin-top:10px;">
-      <label class="field full">服裝自填
+      <label class="field full custom-choice" data-custom-choice="garment">服裝自填
         <input id="customGarment" type="text" placeholder="例如：漢唐華服、鎏金披肩、鯨尾禮服、月桂肩甲">
       </label>
     </div>
@@ -361,7 +369,7 @@
       <label class="card"><input type="radio" name="material" value="paperSculpture"><div class="name">立體紙雕藝術</div><div class="desc">多層紙雕與浮雕花藝</div></label>
     </div>
     <div class="form-grid" style="margin-top:10px;">
-      <label class="field">材質自填
+      <label class="field custom-choice" data-custom-choice="material">材質自填
         <input id="customMaterial" type="text" placeholder="例如：藍寶石能量、盛唐金粉、紅酒玫瑰、冰晶液態禮服">
       </label>
       <label class="field">材質強度
@@ -932,9 +940,18 @@ function customKeywordList(value){
 
 function refreshCards(){
   document.querySelectorAll('[data-choice]').forEach(group => {
+    const choiceName = group.dataset.choice;
+    const customField = document.querySelector(`[data-custom-choice="${choiceName}"]`);
+    const customInput = customField ? customField.querySelector('input') : null;
+    const customActive = customInput ? customInput.value.trim().length > 0 : false;
+
     group.querySelectorAll('.card, .pose-card').forEach(card => {
-      card.classList.toggle('selected', card.querySelector('input').checked);
+      card.classList.toggle('selected', !customActive && card.querySelector('input').checked);
     });
+
+    if(customField){
+      customField.classList.toggle('selected', customActive);
+    }
   });
 }
 
@@ -1012,8 +1029,14 @@ document.getElementById('copyBtn').addEventListener('click', async () => {
   setTimeout(() => btn.textContent = '複製咒語', 1200);
 });
 ['themeCustom','customGarment','customMaterial','intensity','colorNote','extraNote','lighting'].forEach(id => {
-  document.getElementById(id).addEventListener('input', generate);
-  document.getElementById(id).addEventListener('change', generate);
+  document.getElementById(id).addEventListener('input', () => {
+    refreshCards();
+    generate();
+  });
+  document.getElementById(id).addEventListener('change', () => {
+    refreshCards();
+    generate();
+  });
 });
 refreshCards();
 generate();
