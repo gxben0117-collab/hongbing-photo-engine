@@ -970,6 +970,9 @@ function generate(){
   const themeKey = selected('theme');
   const theme = themeData[themeKey];
   const themeCustom = document.getElementById('themeCustom').value.trim();
+  const themeText = themeCustom
+    ? `custom core theme only: ${themeCustom}; do not include or blend any preset theme option`
+    : theme;
   const bodyShape = BODY_SHAPES[selected('bodyShape')];
   const materialKey = selected('material');
   const material = materialData[materialKey];
@@ -977,11 +980,14 @@ function generate(){
   const customMaterials = customKeywordList(customMaterial);
   const customMaterialText = customMaterials.join(', ');
   const materialText = customMaterials.length
-    ? `custom material keywords: ${customMaterialText}; read and use every custom material keyword with equal priority, combine all custom materials into one coherent art system, ${material.prompt}`
+    ? `custom material system only: ${customMaterialText}; read and use every custom material keyword with equal priority, combine all custom materials into one coherent art system, do not include or blend any preset material option`
     : material.prompt;
+  const materialPalette = customMaterials.length
+    ? `derive the color palette only from custom material keywords: ${customMaterialText}`
+    : material.palette;
   const customGarment = document.getElementById('customGarment').value.trim();
   const garmentText = customGarment
-    ? `${customGarment}, ${garmentData[selected('garment')]}`
+    ? `custom garment form only: ${customGarment}; do not include or blend any preset garment option`
     : garmentData[selected('garment')];
   const background = backgroundData[selected('background')];
   const lighting = lightingData[selected('lighting')];
@@ -1000,13 +1006,13 @@ function generate(){
     colorTemperatureGuard + ',',
     subjectIntegrationGuard + ',',
     faceFillGuard + ',',
-    themeCustom ? `core theme: ${themeCustom},` : `core theme: ${theme},`,
+    'core theme: ' + themeText + ',',
     composition + ',',
     compositionGuard + ',',
     'appearance form: ' + garmentText + ',',
     'theme material and art system: ' + materialText + ',',
     'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',
-    'overall commercial style: ' + theme + ',',
+    'overall commercial direction: ' + themeText + ',',
     intensity + ',',
     'dynamic material particles or layered craft elements surrounding the body, elegant body curve, premium skin rendering, sophisticated hair and makeup,',
     styleData[selected('style')] + ',',
@@ -1018,7 +1024,7 @@ function generate(){
     'background design: ' + background + ',',
     ratioData[selected('ratio')] + ',',
     'professional studio lighting, cinematic composition, sharp focus, hyper realistic, 8K ultra detailed, award winning advertising,',
-    'color palette: ' + (colorNote || material.palette) + ',',
+    'color palette: ' + (colorNote || materialPalette) + ',',
     extraNote ? 'extra direction: ' + extraNote + ',' : '',
     'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face'
   ].filter(Boolean).join('\n');
