@@ -406,6 +406,104 @@
     color:var(--black);
   }
   .hidden{ display:none; }
+
+  @media (max-width:760px){
+    nav{
+      position:sticky;
+      height:auto;
+      align-items:stretch;
+      flex-direction:column;
+      padding:10px 14px 8px;
+      gap:8px;
+    }
+    .nav-logo{
+      font-size:13px;
+      line-height:1.2;
+    }
+    .nav-links{
+      flex-wrap:nowrap;
+      justify-content:flex-start;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      gap:6px;
+      padding-bottom:2px;
+    }
+    .nav-link{
+      flex:0 0 auto;
+      white-space:nowrap;
+      font-size:11px;
+      padding:5px 9px;
+    }
+    .wrap{
+      padding:20px 14px 36px;
+    }
+    header{
+      padding:24px 0 26px;
+      margin-bottom:26px;
+    }
+    header h1{
+      font-size:28px;
+    }
+    .header-eyebrow{
+      letter-spacing:0.22em;
+    }
+    section{
+      margin-bottom:28px;
+    }
+    .section-header{
+      align-items:flex-start;
+      flex-wrap:wrap;
+      gap:6px 10px;
+    }
+    .section-sub{
+      width:100%;
+      margin-left:0;
+      line-height:1.45;
+    }
+    .cards,
+    .cards-4,
+    .pose-group-grid,
+    .pose-group-grid-3{
+      grid-template-columns:repeat(2,1fr);
+    }
+    .pose-auto .pose-card{
+      max-width:none;
+      width:100%;
+    }
+    .chip{
+      padding:7px 12px;
+      font-size:12px;
+    }
+    .generate-btn{
+      padding:15px 14px;
+      line-height:1.35;
+    }
+  }
+
+  @media (max-width:480px){
+    .cards,
+    .cards-4,
+    .pose-group-grid,
+    .pose-group-grid-3,
+    .pose-grid{
+      grid-template-columns:1fr;
+    }
+    .card,
+    .pose-card{
+      padding:11px 12px;
+    }
+    .chips{
+      gap:7px;
+    }
+    .chip{
+      max-width:100%;
+      overflow-wrap:anywhere;
+    }
+    .output-wrap textarea{
+      font-size:12px;
+      padding:13px;
+    }
+  }
 </style>
 </head>
 <body>
@@ -2649,6 +2747,54 @@ Bright Catchlight In Eyes
 Skin Luminosity And Clarity
 Natural Skin Texture Preserved`;
 
+// ====== 封面光線一致性與臉部補光系統 ======
+const MAGAZINE_LIGHTING_CONSISTENCY =
+`【封面光線一致性系統】
+
+Unified Magazine Lighting System
+Face Lighting Must Match Body Lighting
+Single Studio Lighting Environment
+Same Light Direction Across Face Body Hair Styling And Background
+No Separate Face Relighting
+No Independent Portrait Lighting
+Physically Accurate Studio Light Interaction
+Environmental Light Affects The Entire Subject Naturally
+Hair Skin Makeup Jewelry Clothing Rendered Under The Same Lighting Conditions
+Integrated Editorial Photography Lighting
+Lighting Consistency Priority Maximum`;
+
+const MAGAZINE_SUBJECT_INTEGRATION =
+`【人物融合系統】
+
+Integrated Editorial Subject Rendering
+Face Is Part Of The Same Studio Scene
+Face Must Not Be Rendered Separately
+No Independent Face Exposure
+No Separate Face Lighting
+No Portrait Mode Face Processing
+No Beauty Filter Rendering
+No Face Enhancement Pipeline
+Environmental Light Affects Face Naturally
+Studio Reflections Affect Face Subtly
+Face Receives Light From Surrounding Styling, Jewelry, Fabric And Background
+Hair Skin Makeup Jewelry Clothing Rendered As One Cohesive Editorial Subject
+Integrated Subject Rendering Priority Maximum`;
+
+const MAGAZINE_FACE_FILL =
+`【高級臉部補光系統】
+
+Luxury Face Fill Lighting
+Soft Facial Fill Light
+Natural Facial Bounce Light
+Subtle Eye Area Illumination
+Elegant Catchlights In Eyes
+Controlled Beauty Fill Light
+Refined Facial Exposure
+Premium Cosmetic Advertisement Fill Light
+No Flat Lighting
+No Overexposed Face
+Natural Three Dimensional Facial Structure`;
+
 // ====== 封面構圖系統 ======
 const COVER_COMPOSITION =
 `【封面構圖系統】
@@ -3090,6 +3236,9 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
     CORE.identity,
     CORE.skeleton,
     bodyShapeBlock,
+    MAGAZINE_LIGHTING_CONSISTENCY,
+    MAGAZINE_SUBJECT_INTEGRATION,
+    MAGAZINE_FACE_FILL,
     CORE.photographer,
     ...(poseBlock ? [poseBlock] : []),
     framingBlock,

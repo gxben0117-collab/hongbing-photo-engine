@@ -218,15 +218,42 @@
   }
   .hint{color:var(--soft);font-size:12px;}
   @media (max-width:760px){
-    nav{height:auto;min-height:54px;align-items:flex-start;padding:12px 16px;gap:10px;}
-    .nav-links{gap:4px;}
-    .nav-link{font-size:11px;padding:5px 8px;}
-    .wrap{padding-top:104px;}
+    nav{
+      position:sticky;
+      height:auto;
+      min-height:0;
+      align-items:stretch;
+      flex-direction:column;
+      padding:10px 14px 8px;
+      gap:8px;
+    }
+    .nav-logo{font-size:13px;line-height:1.2;}
+    .nav-links{
+      gap:6px;
+      flex-wrap:nowrap;
+      justify-content:flex-start;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      padding-bottom:2px;
+    }
+    .nav-link{
+      flex:0 0 auto;
+      font-size:11px;
+      padding:5px 9px;
+      white-space:nowrap;
+    }
+    .wrap{padding:20px 14px 36px;}
+    header{padding:22px 0 24px;margin-bottom:22px;}
+    .eyebrow{letter-spacing:.2em;}
+    .section-header{align-items:flex-start;flex-wrap:wrap;gap:6px 10px;}
     .grid,.grid-3,.form-grid,.pose-group-grid{grid-template-columns:1fr 1fr;}
     .actions{grid-template-columns:1fr;}
+    button{width:100%;}
   }
   @media (max-width:480px){
     .grid,.grid-3,.form-grid,.pose-group-grid{grid-template-columns:1fr;}
+    .card,.pose-card{min-height:auto;padding:11px 12px;}
+    .output{font-size:12px;padding:13px;overflow-wrap:anywhere;}
   }
 </style>
 </head>
@@ -296,6 +323,19 @@
   <section>
     <div class="section-header">
       <div class="section-label">03</div>
+      <div class="section-title">身形輪廓</div>
+    </div>
+    <div class="grid grid-3" data-choice="bodyShape">
+      <label class="card selected"><input type="radio" name="bodyShape" value="original" checked><div class="name">原圖自然比例</div><div class="desc">以參考照身形為主</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="slight_waist"><div class="name">輕微纖腰</div><div class="desc">自然修飾腰線</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="curvy_waist"><div class="name">豐滿纖腰</div><div class="desc">明顯胸腰臀曲線</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="fashion_tall"><div class="name">高挑時裝比例</div><div class="desc">修長高級模特感</div></label>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <div class="section-label">04</div>
       <div class="section-title">主題材質 / 藝術系統</div>
     </div>
     <div class="grid" data-choice="material">
@@ -336,7 +376,7 @@
 
   <section>
     <div class="section-header">
-      <div class="section-label">04</div>
+      <div class="section-label">05</div>
       <div class="section-title">視覺風格 / 廣告調性</div>
     </div>
     <div class="grid grid-3" data-choice="style">
@@ -352,7 +392,7 @@
 
   <section>
     <div class="section-header">
-      <div class="section-label">05</div>
+      <div class="section-label">06</div>
       <div class="section-title">構圖取景</div>
     </div>
     <div class="form-grid">
@@ -380,7 +420,7 @@
 
   <section>
     <div class="section-header">
-      <div class="section-label">06</div>
+      <div class="section-label">07</div>
       <div class="section-title">姿態動作</div>
     </div>
     <div data-choice="pose">
@@ -456,7 +496,7 @@
 
   <section>
     <div class="section-header">
-      <div class="section-label">07</div>
+      <div class="section-label">08</div>
       <div class="section-title">鏡頭語法</div>
     </div>
     <div class="grid grid-3" data-choice="camera">
@@ -471,7 +511,7 @@
 
   <section>
     <div class="section-header">
-      <div class="section-label">08</div>
+      <div class="section-label">09</div>
       <div class="section-title">光影色彩</div>
     </div>
     <div class="form-grid">
@@ -493,7 +533,7 @@
 
   <section>
     <div class="section-header">
-      <div class="section-label">09</div>
+      <div class="section-label">10</div>
       <div class="section-title">背景場景 / 留白</div>
     </div>
     <div class="grid grid-3" data-choice="background">
@@ -511,7 +551,7 @@
 
   <section>
     <div class="section-header">
-      <div class="section-label">10</div>
+      <div class="section-label">11</div>
       <div class="section-title">自由補充 / 約束</div>
     </div>
     <div class="form-grid">
@@ -523,7 +563,7 @@
 
   <section>
     <div class="section-header">
-      <div class="section-label">11</div>
+      <div class="section-label">12</div>
       <div class="section-title">圖片比例</div>
     </div>
     <div class="grid" data-choice="ratio">
@@ -536,7 +576,7 @@
 
   <section>
     <div class="section-header">
-      <div class="section-label">12</div>
+      <div class="section-label">13</div>
       <div class="section-title">生成咒語</div>
     </div>
     <div class="actions">
@@ -704,7 +744,109 @@ const lightingData = {
   cold: 'cold metallic lighting, crisp reflections, cool premium tone'
 };
 
-const proportionGuard = 'Identity Preservation System: Same Person Face, Face Identity Preserved, Reference Photo Used For Identity Only, Identity Priority Maximum. Camera Reconstruction System: Ignore Original Selfie Perspective, Ignore Original Lens Distortion, Professional Fashion Editorial Camera Distance, Full Height Human Anatomy Reconstruction, Not Based On Original Camera Distance. Fashion Editorial Proportion Priority: Realistic Adult Female Anatomy, Natural Head To Body Ratio, Fashion Model Proportions, Long Elegant Legs, Natural Shoulder Width, Natural Torso Length, Full Body Visible Head To Toe, Head Size Determined By Full Body Proportion, Body Scale Priority Over Face Scale, No Oversized Head, No Big Head Small Body Effect';
+const identityGuard = `Identity Lock System:
+Use the uploaded person as the only subject.
+Use the reference photo for identity only.
+Same person face, same facial identity, identity recognition priority maximum.
+Preserve original face shape, eyes, eyebrows, nose, lips, jawline, facial proportions, gaze, age impression and personal features.
+Style, costume, material, lighting and background must not overwrite or redesign the face.
+No face swap, no AI beauty template face, no celebrity face, no influencer face, no identity drift`;
+
+const anatomyGuard = `Realistic Human Anatomy System:
+Realistic adult female anatomy, natural shoulder width, natural neck length, natural torso depth, natural limb proportions.
+Natural head to body ratio, head size follows the selected body framing and full-body scale whenever the body is visible.
+Body scale priority over face scale, fashion editorial camera distance, full height human anatomy reconstruction when full body is selected.
+Ignore original selfie perspective, ignore original lens distortion, not based on original camera distance.
+No oversized head, no big head small body effect, no doll proportions, no deformed body`;
+
+const BODY_SHAPES = {
+  original: `【身形輪廓｜原圖自然比例】
+
+Preserve The Reference Photo Natural Body Proportions
+Keep Original Body Shape, Height Impression, Shoulder Width, Waist-To-Hip Balance
+Natural Realistic Adult Female Anatomy
+Do Not Force A New Body Type
+Keep Face, Identity, Age Impression And Personal Features Unchanged`,
+  slight_waist: `【身形輪廓｜輕微纖腰】
+
+Subtle Narrow Waist Refinement
+Slightly More Defined Waistline While Keeping Natural Body Proportions
+Elegant Feminine Silhouette, Not Exaggerated
+Keep The Original Face, Identity And Personal Features Unchanged
+Natural Realistic Adult Female Anatomy`,
+  curvy_waist: `【身形輪廓｜豐滿纖腰】
+
+Curvy Narrow-Waist Adult Female Silhouette
+Full Bust, Slim Waist, Elegant Waist-To-Hip Curve
+Clearly Defined Feminine Body Line
+Keep The Original Face, Identity, Age Impression And Personal Features Unchanged
+Natural Realistic Body Proportions, No Exaggerated Fantasy Anatomy`,
+  fashion_tall: `【身形輪廓｜高挑時裝比例】
+
+Tall High-Fashion Model Silhouette
+Longer Leg Impression, Refined Shoulder And Neck Line, Slim Editorial Body Shape
+Elegant Runway Proportions While Staying Realistic
+Keep The Original Face, Identity And Personal Features Unchanged
+No Doll-Like Or Over-Stretched Anatomy`
+};
+
+const styleScopeGuard = `Style Scope Rule:
+Commercial style, fantasy material and art direction only affect clothing, ornaments, background, lighting, composition, mood and surface texture.
+They must not change the person's facial structure, identity, age impression or recognizable features`;
+
+const compositionGuard = `Commercial Composition Control:
+Subject scale follows the selected framing ratio.
+Keep the subject clear inside the crop, with clean breathing room around the head and body.
+If the body is visible, keep the body proportion coherent and do not enlarge the head to preserve the face.
+Poster layout, negative space and material effects must support the model instead of crowding the face`;
+
+const lightingConsistencyGuard = `【光線一致性系統】
+
+Unified Cinematic Lighting System
+Face Lighting Must Match Body Lighting
+Single Global Lighting Environment
+Same Light Direction Across Face Body And Background
+No Independent Beauty Light
+No Face Relighting
+No Separate Portrait Lighting
+Physically Accurate Light Interaction
+Environmental Lighting Affects Entire Subject
+Material Reflections Affect Facial Lighting
+Face Body Hair Costume Background Rendered Under The Same Lighting Conditions
+Integrated Commercial Photography Lighting
+Lighting Consistency Priority Maximum`;
+
+const subjectIntegrationGuard = `【人物融合系統】
+
+Integrated Subject Rendering System
+Face Is Part Of The Scene
+Face Must Not Be Rendered Separately
+No Independent Face Exposure
+No Separate Face Lighting
+No Portrait Mode Face Processing
+No Beauty Filter Rendering
+No Face Enhancement Pipeline
+Environmental Reflections Affect Face
+Material Reflections Affect Face
+Face Receives Light From Surrounding Materials
+Face Receives Light From Surrounding Environment
+Subject Interacts With Environment Naturally
+Entire Subject Rendered As One Cohesive Scene
+Integrated Subject Rendering Priority Maximum`;
+
+const faceFillGuard = `【高級補光系統】
+
+Luxury Face Fill Lighting
+Soft Facial Fill Light
+Natural Facial Bounce Light
+Subtle Eye Area Illumination
+Elegant Catchlights In Eyes
+Controlled Beauty Fill Light
+Refined Facial Exposure
+Premium Cosmetic Advertisement Fill Light
+No Flat Lighting
+No Overexposed Face
+Natural Three Dimensional Facial Structure`;
 
 const poseData = {
   auto: '',
@@ -793,6 +935,7 @@ function generate(){
   const themeKey = selected('theme');
   const theme = themeData[themeKey];
   const themeCustom = document.getElementById('themeCustom').value.trim();
+  const bodyShape = BODY_SHAPES[selected('bodyShape')];
   const materialKey = selected('material');
   const material = materialData[materialKey];
   const customMaterial = document.getElementById('customMaterial').value.trim();
@@ -813,8 +956,15 @@ function generate(){
   const poseText = poseData[selected('pose')];
   const prompt = [
     'Ultra beautiful adult woman, fashion editorial model, reference photo used for identity only,',
+    identityGuard + ',',
+    anatomyGuard + ',',
+    bodyShape + ',',
+    lightingConsistencyGuard + ',',
+    subjectIntegrationGuard + ',',
+    faceFillGuard + ',',
     themeCustom ? `core theme: ${themeCustom},` : `core theme: ${theme},`,
     composition + ',',
+    compositionGuard + ',',
     'appearance form: ' + garmentText + ',',
     'theme material and art system: ' + materialText + ',',
     'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',
@@ -822,10 +972,10 @@ function generate(){
     intensity + ',',
     'dynamic material particles or layered craft elements surrounding the body, elegant body curve, premium skin rendering, sophisticated hair and makeup,',
     styleData[selected('style')] + ',',
+    styleScopeGuard + ',',
     poseText ? poseText + ',' : '',
     framing + ',',
     cameraData[selected('camera')] + ',',
-    proportionGuard + ',',
     'lighting design: ' + lighting + ',',
     'background design: ' + background + ',',
     ratioData[selected('ratio')] + ',',
