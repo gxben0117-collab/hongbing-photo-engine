@@ -375,6 +375,36 @@
   }
   .generate-btn:active{ opacity:0.85; }
 
+  .preset-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    margin-bottom:18px;
+  }
+  .preset-btn{
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:linear-gradient(180deg,#171717 0%,#111 100%);
+    color:var(--paper);
+    padding:12px 14px;
+    font-size:13px;
+    font-weight:800;
+    cursor:pointer;
+    font-family:inherit;
+    text-align:left;
+    transition:border-color .15s, color .15s, opacity .15s;
+  }
+  .preset-btn:active{ opacity:0.82; }
+  .preset-btn:hover{
+    border-color:var(--gold);
+    color:var(--gold);
+  }
+  .preset-btn.primary{
+    background:linear-gradient(180deg,#17120b 0%,#22180f 100%);
+    color:var(--gold);
+    border-color:var(--gold);
+  }
+
   /* ── OUTPUT ── */
   .output-wrap{
     margin-top:28px;
@@ -504,6 +534,9 @@
       max-width:100%;
       overflow-wrap:anywhere;
     }
+    .preset-grid{
+      grid-template-columns:1fr;
+    }
     .output-wrap textarea{
       font-size:12px;
       padding:13px;
@@ -539,7 +572,14 @@
 
   <!-- 00 一鍵組合 -->
   <section>
-    <button class="generate-btn" id="blackGoldPreset" style="margin-bottom:18px;background:linear-gradient(180deg,#17120b 0%,#22180f 100%);color:var(--gold);border:1px solid var(--gold);">一鍵套用｜黑金高訂美妝特寫</button>
+    <div class="preset-grid">
+      <button type="button" class="preset-btn primary" data-magazine-preset="blackGoldBeauty">一鍵套用｜黑金高訂美妝特寫</button>
+      <button type="button" class="preset-btn" data-magazine-preset="jewelryCoolCover">一鍵套用｜珠寶冷光封面</button>
+      <button type="button" class="preset-btn" data-magazine-preset="perfumeMistCover">一鍵套用｜夢幻香氛柔霧</button>
+      <button type="button" class="preset-btn" data-magazine-preset="minimalWhiteShirt">一鍵套用｜極簡白襯衫封面</button>
+      <button type="button" class="preset-btn" data-magazine-preset="futureSilverCool">一鍵套用｜未來銀色冷感</button>
+      <button type="button" class="preset-btn" data-magazine-preset="redCarpetCouture">一鍵套用｜紅毯高訂全身</button>
+    </div>
   </section>
 
   <!-- 01 封面風格 -->
@@ -3458,8 +3498,9 @@ document.getElementById('copyBtn').addEventListener('click',()=>{
   }
 });
 
-document.getElementById('blackGoldPreset').addEventListener('click',()=>{
-  applyVisualPresetDefaults({
+const QUICK_MAGAZINE_PRESETS = {
+  blackGoldBeauty: {
+    label: '黑金高訂美妝特寫',
     style: 'beauty_closeup',
     bg: 'black_void',
     pose: 'chin_rest',
@@ -3473,9 +3514,97 @@ document.getElementById('blackGoldPreset').addEventListener('click',()=>{
     lighting: 'black_gold',
     media: 'realistic_studio',
     ratio: '4:5'
+  },
+  jewelryCoolCover: {
+    label: '珠寶冷光封面',
+    style: 'jewelry_ad',
+    bg: 'marble_wall',
+    pose: 'adjust_earring',
+    framing: 'bust',
+    camera: 'top_beauty',
+    motion: 'still',
+    makeup: ['natural_highend', 'highlight_skin'],
+    skinTexture: 'luxury_campaign',
+    jewelry: ['statement'],
+    expression: 'cool_stare',
+    lighting: 'jewelry_sparkle',
+    media: 'realistic_studio',
+    ratio: '4:5'
+  },
+  perfumeMistCover: {
+    label: '夢幻香氛柔霧',
+    style: 'luxury_perfume_ad',
+    bg: 'mist',
+    pose: 'hand_chest',
+    framing: 'bust',
+    camera: 'soft_focus',
+    motion: 'breeze',
+    makeup: ['natural_highend', 'glossy_lip'],
+    skinTexture: 'dewy_glow',
+    jewelry: ['earrings'],
+    expression: 'lower_gaze',
+    lighting: 'mist_glow',
+    media: 'realistic_studio',
+    ratio: '4:5'
+  },
+  minimalWhiteShirt: {
+    label: '極簡白襯衫封面',
+    style: 'minimal_feature',
+    bg: 'white_seamless',
+    pose: 'center_still',
+    framing: 'half_body',
+    camera: 'neutral',
+    motion: 'still',
+    makeup: ['natural_highend'],
+    skinTexture: 'natural_real',
+    jewelry: ['none'],
+    expression: 'calm_direct',
+    lighting: 'window_soft',
+    media: 'realistic_studio',
+    ratio: '4:5'
+  },
+  futureSilverCool: {
+    label: '未來銀色冷感',
+    style: 'fashion_ad',
+    bg: 'dark_metal',
+    pose: 'profile_long_line',
+    framing: 'three_quarter',
+    camera: 'three_quarter_side',
+    motion: 'dynamic',
+    makeup: ['smoky_glam', 'highlight_skin'],
+    skinTexture: 'luxury_campaign',
+    jewelry: ['earrings'],
+    expression: 'cool_stare',
+    lighting: 'cold_metal',
+    media: 'realistic_studio',
+    ratio: '4:5'
+  },
+  redCarpetCouture: {
+    label: '紅毯高訂全身',
+    style: 'couture_gown',
+    bg: 'red_curtain',
+    pose: 'runway_stride',
+    framing: 'full_body',
+    camera: 'low',
+    motion: 'flow',
+    makeup: ['red_lip', 'precise_eyeliner'],
+    skinTexture: 'premium_matte',
+    jewelry: ['statement'],
+    expression: 'cool_stare',
+    lighting: 'stage_beam',
+    media: 'realistic_studio',
+    ratio: '2:3'
+  }
+};
+
+document.querySelectorAll('[data-magazine-preset]').forEach(button=>{
+  button.addEventListener('click',()=>{
+    const preset = QUICK_MAGAZINE_PRESETS[button.dataset.magazinePreset];
+    if(!preset) return;
+    applyVisualPresetDefaults(preset);
+    themeInputEl.value = preset.label;
+    themeInputEl.dispatchEvent(new Event('input',{bubbles:true}));
   });
-  themeInputEl.value='黑金高訂美妝特寫';
-  themeInputEl.dispatchEvent(new Event('input',{bubbles:true}));
 });
 </script>
 </body>
