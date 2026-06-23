@@ -926,7 +926,7 @@ Identity Lock System:
 Use the uploaded person as the only subject.
 Use the reference photo for identity only.
 Same person face, same facial identity, identity recognition priority maximum.
-Preserve original face shape, eyes, eyebrows, nose, lips, jawline, facial proportions, gaze, age impression and personal features.
+Preserve facial proportions, gaze, age impression and personal features.
 Style, costume, material, lighting and background must not overwrite or redesign the face.
 No face swap, no AI beauty template face, no celebrity face, no influencer face, no identity drift`;
 
@@ -1003,7 +1003,6 @@ Physically Accurate Light Interaction
 Environmental Lighting Affects Entire Subject
 Material Reflections Affect Facial Lighting
 Face Body Hair Costume Background Rendered Under The Same Lighting Conditions
-Integrated Commercial Photography Lighting
 Lighting Consistency Priority Maximum`;
 
 const colorTemperatureGuard = `【色溫統一系統】
@@ -1032,7 +1031,6 @@ Material Reflections Affect Face
 Face Receives Light From Surrounding Materials
 Face Receives Light From Surrounding Environment
 Subject Interacts With Environment Naturally
-Entire Subject Rendered As One Cohesive Scene
 Integrated Subject Rendering Priority Maximum`;
 
 const faceFillGuard = `【高級補光系統】
@@ -1311,7 +1309,7 @@ function generate(){
     'theme material and art system: ' + materialText + ',',
     'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',
     intensity + ',',
-    'dynamic material particles or layered craft elements surrounding the body, elegant body curve, premium skin rendering, sophisticated hair and makeup,',
+    'selected material appears as controlled clothing details, ornaments, particles and background accents without overpowering facial identity,',
     styleData[selected('style')] + ',',
     styleScopeGuard + ',',
     poseText ? poseText + ',' : '',
@@ -1320,7 +1318,7 @@ function generate(){
     'lighting design: ' + lighting + ',',
     'background design: ' + background + ',',
     ratioData[selected('ratio')] + ',',
-    'professional studio lighting, cinematic composition, sharp focus, hyper realistic, 8K ultra detailed, award winning advertising,',
+    'sharp focus, hyper realistic, ultra detailed, premium advertising finish,',
     'color palette: ' + (colorNote || materialPalette) + ',',
     extraNote ? 'extra direction: ' + extraNote + ',' : '',
     'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face'
