@@ -590,13 +590,80 @@
         <input type="radio" name="camera" value="backlit_silhouette">
         <div class="name">逆光剪影</div>
         <div class="desc">背光輪廓 / 夕陽或窗光剪影</div>
-      </label></div>
+      </label>
+      <label class="card" data-value="three_quarter_side">
+        <input type="radio" name="camera" value="three_quarter_side">
+        <div class="name">斜側角度</div>
+        <div class="desc">三分之四側臉 / 旅拍輪廓立體</div>
+      </label>
+      <label class="card" data-value="top_beauty">
+        <input type="radio" name="camera" value="top_beauty">
+        <div class="name">高角度近景</div>
+        <div class="desc">由上往下 / 臉部與場景細節並重</div>
+      </label>
+      <label class="card" data-value="distant_hero">
+        <input type="radio" name="camera" value="distant_hero">
+        <div class="name">遠距主視覺</div>
+        <div class="desc">人物與景點完整 / 海報旅拍感</div>
+      </label>
+    </div>
   </section>
 
-  <!-- 06 動態節奏 -->
+  <!-- 06 光影色彩 -->
   <section>
     <div class="step">
       <div class="num">06</div>
+      <div class="title">光影色彩</div>
+      <div class="sub">單選，控制人物與環境的共同光線</div>
+    </div>
+    <div class="cards" id="lightingCards">
+      <label class="card selected" data-value="scene_natural">
+        <input type="radio" name="lighting" value="scene_natural" checked>
+        <div class="name">場景自然光</div>
+        <div class="desc">依現場光線,人物與背景同光</div>
+      </label>
+      <label class="card" data-value="warm_window_soft">
+        <input type="radio" name="lighting" value="warm_window_soft">
+        <div class="name">柔暖窗影光</div>
+        <div class="desc">窗影 / 午後暖光 / 臉身同色溫</div>
+      </label>
+      <label class="card" data-value="backlit_halo">
+        <input type="radio" name="lighting" value="backlit_halo">
+        <div class="name">逆光光暈</div>
+        <div class="desc">髮絲輪廓光 / 臉部保留自然補光</div>
+      </label>
+      <label class="card" data-value="hard_contrast">
+        <input type="radio" name="lighting" value="hard_contrast">
+        <div class="name">強對比硬光</div>
+        <div class="desc">街頭陽光陰影 / 時尚旅拍張力</div>
+      </label>
+      <label class="card" data-value="mist_glow">
+        <input type="radio" name="lighting" value="mist_glow">
+        <div class="name">夢幻霧光</div>
+        <div class="desc">霧氣柔光 / 場景空氣感一致</div>
+      </label>
+      <label class="card" data-value="cold_metal">
+        <input type="radio" name="lighting" value="cold_metal">
+        <div class="name">冷調金屬光</div>
+        <div class="desc">都市冷光 / 臉身同白平衡</div>
+      </label>
+      <label class="card" data-value="jewelry_sparkle">
+        <input type="radio" name="lighting" value="jewelry_sparkle">
+        <div class="name">珠寶閃光</div>
+        <div class="desc">細小高光 / 精品旅拍廣告感</div>
+      </label>
+      <label class="card" data-value="prismatic_color">
+        <input type="radio" name="lighting" value="prismatic_color">
+        <div class="name">彩色棱鏡光</div>
+        <div class="desc">彩虹折射 / 夢幻旅行廣告感</div>
+      </label>
+    </div>
+  </section>
+
+  <!-- 07 動態節奏 -->
+  <section>
+    <div class="step">
+      <div class="num">07</div>
       <div class="title">動態節奏</div>
       <div class="sub">單選，可跳過（預設微風輕動）</div>
     </div>
@@ -624,10 +691,10 @@
     </div>
   </section>
 
-  <!-- 07 輸出風格 -->
+  <!-- 08 輸出風格 -->
   <section>
     <div class="step">
-      <div class="num">07</div>
+      <div class="num">08</div>
       <div class="title">輸出風格 / 畫面媒材</div>
       <div class="sub">單選，決定最終畫面語言</div>
     </div>
@@ -668,10 +735,10 @@
         <div class="desc">厚光筆觸 / 風景肖像感</div>
       </label></div>
   </section>
-  <!-- 08 生成 -->
+  <!-- 09 生成 -->
   <section>
     <div class="step">
-      <div class="num">08</div>
+      <div class="num">09</div>
       <div class="title">生成咒語</div>
     </div>
     <button class="generate-btn" id="generateBtn">生成咒語</button>
@@ -1116,7 +1183,109 @@ Backlit Silhouette Portrait
 Strong Rim Light Around Hair And Body
 Sunset Or Window Backlight Atmosphere
 Face Still Readable With Gentle Fill Light
-Cinematic Outline And Travel Memory Mood`
+Cinematic Outline And Travel Memory Mood`,
+
+three_quarter_side:`【鏡頭氣場模組｜斜側角度】
+
+Three Quarter Side Travel Portrait
+Face Turned Slightly Away From Camera
+Both Identity And Destination Mood Remain Clear
+Natural Editorial Perspective
+Face, Neck, Shoulders And Body Direction Stay Coherent
+Elegant Travel Magazine Portrait Mood`,
+
+top_beauty:`【鏡頭氣場模組｜高角度近景】
+
+High Angle Travel Beauty Close-Up
+Camera Slightly Above Face Looking Down
+Face, Hair, Outfit Detail And Location Texture Stay Visible
+Soft Beauty Perspective Without Distorting Face Shape
+Controlled Head, Neck And Shoulder Alignment
+Premium Destination Portrait Feeling`,
+
+distant_hero:`【鏡頭氣場模組｜遠距主視覺】
+
+Distant Hero Travel Key Visual
+Subject And Destination Both Read Clearly
+Full Editorial Poster Presence
+Clean Silhouette Against The Environment
+Identity Preserved Despite Wider Framing
+No Tiny Unrecognizable Face`
+};
+
+const TRAVEL_LIGHTING_STYLES = {
+scene_natural:`【光影色彩｜場景自然光】
+
+Scene Driven Natural Lighting
+Character Receives Light From The Actual Environment
+Face Lighting Matches Background Lighting
+Face And Body Share The Same Color Temperature
+Natural Bounce Light From Ground, Walls, Water Or Surroundings
+No Separate Studio Lighting
+No Detached Portrait Lighting`,
+
+warm_window_soft:`【光影色彩｜柔暖窗影光】
+
+Warm Window Shadow Light
+Soft Warm Sunlight And Window Pattern Shadows
+Gentle Natural Facial Bounce Light
+Face, Body, Clothing And Background Share The Same Warm White Balance
+Subtle Shadow Detail Around Eyes, Nose And Chin
+No Overexposed Face`,
+
+backlit_halo:`【光影色彩｜逆光光暈】
+
+Backlit Halo Travel Light
+Rim Light Around Hair And Body
+Face Visible Without Breaking Scene Lighting
+Natural Facial Exposure With Subtle Fill
+Environmental Shadows Preserved On Face
+Background And Subject Share The Same Backlight Source`,
+
+hard_contrast:`【光影色彩｜強對比硬光】
+
+Hard Contrast Sunlight
+Strong Directional Light And Clear Shadow Edges
+Physically Correct Light Direction Across Face, Body And Environment
+Fashion Travel Editorial Tension
+Face Remains Recognizable Within The Same Hard Light
+No Independent Beauty Ring Light Effect`,
+
+mist_glow:`【光影色彩｜夢幻霧光】
+
+Dreamy Mist Glow
+Soft Atmospheric Haze In The Scene
+Diffused Environmental Light Affects Face, Body, Hair And Clothing
+Gentle Low-Contrast Shadows
+Subject Naturally Embedded In The Same Misty Air
+No Floating Subject Effect`,
+
+cold_metal:`【光影色彩｜冷調金屬光】
+
+Cold Metallic Urban Light
+Cool Blue Gray Reflections From City, Glass Or Stone Surfaces
+Face And Body Must Share The Same White Balance
+Controlled Specular Highlights
+Modern Luxury Travel Mood
+No Separate Facial Color Correction`,
+
+jewelry_sparkle:`【光影色彩｜珠寶閃光】
+
+Jewelry Sparkle Travel Light
+Small Controlled Sparkling Highlights
+Luxury Advertisement Reflection Detail
+Sparkle Reflections Affect Face, Skin, Accessories, Clothing And Background Naturally
+Refined Catchlights In Eyes
+No Random Glitter Overload`,
+
+prismatic_color:`【光影色彩｜彩色棱鏡光】
+
+Prismatic Color Travel Light
+Subtle Rainbow Refractions Across Face, Body, Clothing And Background
+Unified Colorful Light Environment
+Environmental Reflections Affect Facial Lighting
+Dreamy Premium Travel Campaign Glow
+No Separate Face Relighting`
 };
 
 const MOTION_LEVELS = {
@@ -1171,6 +1340,7 @@ setupRadioCards('compositionCards');
 setupRadioCards('styleCards');
 setupRadioCards('ratioCards');
 setupRadioCards('cameraCards');
+setupRadioCards('lightingCards');
 setupRadioCards('motionCards');
 setupRadioCards('mediaCards');
 
@@ -1200,6 +1370,7 @@ function applyTravelRandomSelection(){
   const styleValue = getRandomItem(getCardValues('styleCards').filter(value => value !== 'vogue'));
   const ratioValue = getRandomItem(getCardValues('ratioCards'));
   const cameraValue = getRandomItem(getCardValues('cameraCards'));
+  const lightingValue = getRandomItem(getCardValues('lightingCards'));
   const motionValue = getRandomItem(getCardValues('motionCards'));
   const mediaValue = getRandomItem(getCardValues('mediaCards'));
   const themeValue = getRandomItem(Array.from(document.querySelectorAll('#themeChips .chip')).map(chip => chip.dataset.value));
@@ -1208,6 +1379,7 @@ function applyTravelRandomSelection(){
   setRadioCardValue('styleCards', styleValue);
   setRadioCardValue('ratioCards', ratioValue);
   setRadioCardValue('cameraCards', cameraValue);
+  setRadioCardValue('lightingCards', lightingValue);
   setRadioCardValue('motionCards', motionValue);
   setRadioCardValue('mediaCards', mediaValue);
 
@@ -1261,6 +1433,7 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
   const styleKey=document.querySelector('input[name="style"]:checked').value;
   const ratioKey=document.querySelector('input[name="ratio"]:checked').value;
   const cameraKey=document.querySelector('input[name="camera"]:checked').value;
+  const lightingKey=document.querySelector('input[name="lighting"]:checked').value;
   const motionKey=document.querySelector('input[name="motion"]:checked').value;
   const mediaKey=document.querySelector('input[name="media"]:checked').value;
   const style=STYLES[styleKey];
@@ -1269,6 +1442,7 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
 
   const styleBlock=`【風格模組｜主風格】\n\n${style.text}\n\n${STYLE_SCOPE_NOTE}`;
   const cameraBlock=CAMERA_ANGLES[cameraKey];
+  const lightingBlock=TRAVEL_LIGHTING_STYLES[lightingKey];
   const motionBlock=MOTION_LEVELS[motionKey];
   const mediaBlock=MEDIA_STYLES[mediaKey];
   const costumeBlock=`【服裝邏輯模組｜動態造型系統】\n\n根據主題「${theme}」自動設計服裝層次(Layer1~Layer7)\n服裝層數依主題自動增減,通常2~5層,特殊主題可擴展至7層\n優先真人旅拍感\n優先${style.label}的視覺語言\n服裝符合主題世界觀與材質質感\nPremium Fabric / Fine Embroidery / Rich Material Detail\n\n避免過度Cosplay化\n避免遊戲角色盔甲化\n避免動漫角色化`;
@@ -1281,6 +1455,7 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
     CORE.lighting,
     CORE.pose,
     CORE.photographer,
+    ...(lightingBlock?[lightingBlock]:[]),
     ...(cameraBlock?[cameraBlock]:[]),
     ...(motionBlock?[motionBlock]:[]),
     COMPOSITION[composition],
