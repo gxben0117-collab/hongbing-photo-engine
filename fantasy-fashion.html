@@ -85,7 +85,22 @@
   }
   h1 span{color:#DCC8FF;}
   header p{color:var(--soft);font-size:14px;max-width:680px;}
+  main.wrap{display:flex;flex-direction:column;}
+  main.wrap > header{order:-1;}
   section{margin-bottom:26px;}
+  .section-preset{order:0;}
+  .section-style{order:1;}
+  .section-composition{order:2;}
+  .section-garment{order:3;}
+  .section-body{order:4;}
+  .section-material{order:5;}
+  .section-pose{order:6;}
+  .section-camera{order:7;}
+  .section-lighting{order:8;}
+  .section-background{order:9;}
+  .section-extra{order:10;}
+  .section-ratio{order:11;}
+  .section-output{order:12;}
   .section-header{
     display:flex;
     align-items:baseline;
@@ -296,7 +311,7 @@
     <p>把主題、造型、材質、風格、構圖、姿態、鏡頭、光影、背景與比例拆成清楚層級，讓幻想廣告可以穩定生成成像一致的高級商業主視覺。</p>
   </header>
 
-  <section>
+  <section class="section-preset">
     <div class="section-header">
       <div class="section-label">00</div>
       <div class="section-title">一鍵主題模板</div>
@@ -306,33 +321,32 @@
         <div class="name">中式紅紙雕婚嫁廣告</div>
         <div class="desc">紅色剪紙、牡丹新娘、蝴蝶紙藝、中式窗影</div>
       </button>
+      <button class="card" type="button" data-template="auroraBubbleChampagne">
+        <div class="name">極光泡泡香檳廣告</div>
+        <div class="desc">極光薄紗、香檳泡泡、夢幻香氛感</div>
+      </button>
+      <button class="card" type="button" data-template="obsidianRoseJewelry">
+        <div class="name">黑曜玫瑰珠寶廣告</div>
+        <div class="desc">黑曜石玫瑰、珠寶近景、暗黑奢華</div>
+      </button>
+      <button class="card" type="button" data-template="watercolorBeauty">
+        <div class="name">水彩花霧美妝廣告</div>
+        <div class="desc">水彩花霧、柔光棚拍、乾淨高級</div>
+      </button>
+      <button class="card" type="button" data-template="neonInkFuture">
+        <div class="name">霓虹墨流未來廣告</div>
+        <div class="desc">霓虹墨水、鏡面金屬、未來潮流感</div>
+      </button>
+      <button class="card" type="button" data-template="pearlMoonBridal">
+        <div class="name">珍珠月光婚紗廣告</div>
+        <div class="desc">珍珠月光、白紗、柔亮珠寶婚紗感</div>
+      </button>
     </div>
   </section>
 
-  <section>
+  <section class="section-garment">
     <div class="section-header">
-      <div class="section-label">01</div>
-      <div class="section-title">核心主題 / 品牌感</div>
-    </div>
-    <div class="grid grid-3" data-choice="theme">
-      <label class="card selected"><input type="radio" name="theme" value="luxuryTheme" checked><div class="name">精品廣告</div><div class="desc">商業感、品牌感、主視覺穩定</div></label>
-      <label class="card"><input type="radio" name="theme" value="mythTheme"><div class="name">神話幻想</div><div class="desc">女王、聖焰、儀式與傳說感</div></label>
-      <label class="card"><input type="radio" name="theme" value="perfumeTheme"><div class="name">香氛意象</div><div class="desc">香水廣告、柔霧、精緻感</div></label>
-      <label class="card"><input type="radio" name="theme" value="regalTheme"><div class="name">王權高訂</div><div class="desc">權威、禮儀、華麗與氣場</div></label>
-      <label class="card"><input type="radio" name="theme" value="floralTheme"><div class="name">花園意象</div><div class="desc">花卉、植物、柔美與生命感</div></label>
-      <label class="card"><input type="radio" name="theme" value="cosmicTheme"><div class="name">宇宙流光</div><div class="desc">星河、光粒、未來感與漂浮感</div></label>
-      <label class="card"><input type="radio" name="theme" value="redPaperWeddingTheme"><div class="name">中式紅紙雕婚嫁</div><div class="desc">剪紙婚嫁、牡丹新娘、東方喜慶廣告</div></label>
-    </div>
-    <div class="form-grid" style="margin-top:10px;">
-      <label class="field full custom-choice" data-custom-choice="theme">主題自填
-        <input id="themeCustom" type="text" placeholder="例如：藍寶石女王、黑金香水大片、月光花園、紅酒玫瑰戰袍">
-      </label>
-    </div>
-  </section>
-
-  <section>
-    <div class="section-header">
-      <div class="section-label">02</div>
+      <div class="section-label">03</div>
       <div class="section-title">造型輪廓 / 服裝形式</div>
     </div>
     <div class="grid grid-3" data-choice="garment">
@@ -345,7 +359,15 @@
       <label class="card"><input type="radio" name="garment" value="paperKimono"><div class="name">紙雕華服</div><div class="desc">多層紙藝服飾與花紋</div></label>
       <label class="card"><input type="radio" name="garment" value="trainGown"><div class="name">拖尾長裙</div><div class="desc">大裙擺、長拖尾、戲劇輪廓</div></label>
       <label class="card"><input type="radio" name="garment" value="ritualRobe"><div class="name">儀式長袍</div><div class="desc">莊重、幻想、女王氣場</div></label>
-      <label class="card"><input type="radio" name="garment" value="redPaperBridal"><div class="name">紅紙雕婚嫁</div><div class="desc">紅色剪紙禮服、牡丹胸花、流蘇頭飾</div></label>
+      <label class="card"><input type="radio" name="garment" value="redPaperBridal"><div class="name">中式婚嫁華服</div><div class="desc">中式婚嫁剪裁、紅色禮服、流蘇頭飾</div></label>
+      <label class="card"><input type="radio" name="garment" value="bubbleGown"><div class="name">泡泡禮服</div><div class="desc">透明泡泡、圓形裙擺、夢幻光感</div></label>
+      <label class="card"><input type="radio" name="garment" value="rainbowLightDress"><div class="name">彩虹光衣</div><div class="desc">彩虹折射、光帶纏身、發光薄紗</div></label>
+      <label class="card"><input type="radio" name="garment" value="modernHanfu"><div class="name">新式改良漢服</div><div class="desc">漢服線條、現代剪裁、東方時尚</div></label>
+      <label class="card"><input type="radio" name="garment" value="cloudGauze"><div class="name">雲紗禮服</div><div class="desc">薄紗雲霧、飄帶、空氣感輪廓</div></label>
+      <label class="card"><input type="radio" name="garment" value="mirrorMetal"><div class="name">鏡面金屬華服</div><div class="desc">反光金屬片、未來感、雕塑線條</div></label>
+      <label class="card"><input type="radio" name="garment" value="petalShoulder"><div class="name">花瓣肩飾高訂</div><div class="desc">花瓣肩線、胸花結構、柔美高訂</div></label>
+      <label class="card"><input type="radio" name="garment" value="featherCouture"><div class="name">羽毛高訂</div><div class="desc">羽毛肩線、輕盈裙擺、柔奢輪廓</div></label>
+      <label class="card"><input type="radio" name="garment" value="glassLiquidDress"><div class="name">液態玻璃裙</div><div class="desc">透明曲線、玻璃流動、未來禮服</div></label>
     </div>
     <div class="form-grid" style="margin-top:10px;">
       <label class="field full custom-choice" data-custom-choice="garment">服裝自填
@@ -354,9 +376,9 @@
     </div>
   </section>
 
-  <section>
+  <section class="section-body">
     <div class="section-header">
-      <div class="section-label">03</div>
+      <div class="section-label">04</div>
       <div class="section-title">身形輪廓</div>
     </div>
     <div class="grid grid-3" data-choice="bodyShape">
@@ -367,9 +389,9 @@
     </div>
   </section>
 
-  <section>
+  <section class="section-material">
     <div class="section-header">
-      <div class="section-label">04</div>
+      <div class="section-label">05</div>
       <div class="section-title">主題材質 / 藝術系統</div>
     </div>
     <div class="grid" data-choice="material">
@@ -394,12 +416,23 @@
       <label class="card"><input type="radio" name="material" value="paperOiran"><div class="name">和風花魁紙雕</div><div class="desc">櫻花紙藝與日式花魁</div></label>
       <label class="card"><input type="radio" name="material" value="paperSculpture"><div class="name">立體紙雕藝術</div><div class="desc">多層紙雕與浮雕花藝</div></label>
       <label class="card"><input type="radio" name="material" value="redPaperWedding"><div class="name">紅紙雕婚嫁</div><div class="desc">中國紅剪紙、蝴蝶、牡丹、鏤空花紋</div></label>
+      <label class="card"><input type="radio" name="material" value="watercolorBloom"><div class="name">水彩花霧</div><div class="desc">透明水彩、花瓣暈染、柔霧流動</div></label>
+      <label class="card"><input type="radio" name="material" value="inkPeony"><div class="name">墨染牡丹</div><div class="desc">黑墨暈染、牡丹花影、東方筆觸</div></label>
+      <label class="card"><input type="radio" name="material" value="diamondRain"><div class="name">鑽石光雨</div><div class="desc">碎鑽雨滴、珠寶閃光、透明折射</div></label>
+      <label class="card"><input type="radio" name="material" value="glassFlame"><div class="name">玻璃火焰</div><div class="desc">透明火焰、玻璃邊緣、橘紅高光</div></label>
+      <label class="card"><input type="radio" name="material" value="auroraSilk"><div class="name">極光薄紗</div><div class="desc">極光色帶、發光薄紗、夢幻折射</div></label>
+      <label class="card"><input type="radio" name="material" value="pearlMoon"><div class="name">珍珠月光</div><div class="desc">珍珠母貝、月白光暈、柔亮珠光</div></label>
+      <label class="card"><input type="radio" name="material" value="champagneBubble"><div class="name">香檳泡泡</div><div class="desc">金色氣泡、透明泡泡、奢華香檳感</div></label>
+      <label class="card"><input type="radio" name="material" value="obsidianRose"><div class="name">黑曜玫瑰</div><div class="desc">黑曜石、暗紅玫瑰、冷亮反光</div></label>
+      <label class="card"><input type="radio" name="material" value="goldFoilFeather"><div class="name">金箔羽毛</div><div class="desc">金箔碎片、羽毛飄動、輕奢光感</div></label>
+      <label class="card"><input type="radio" name="material" value="neonInk"><div class="name">霓虹墨流</div><div class="desc">霓虹墨水、液態光帶、未來廣告感</div></label>
+      <label class="card"><input type="radio" name="material" value="velvetStardust"><div class="name">絲絨星塵</div><div class="desc">深色絲絨、細碎星粉、柔亮奢華</div></label>
     </div>
     <div class="form-grid" style="margin-top:10px;">
       <label class="field custom-choice" data-custom-choice="material">材質自填
         <input id="customMaterial" type="text" placeholder="例如：藍寶石能量、盛唐金粉、紅酒玫瑰、冰晶液態禮服">
       </label>
-      <label class="field">材質強度
+      <label class="field">材質呈現強度
         <select id="intensity">
           <option value="balanced material effects, elegant and luxurious">平衡高級</option>
           <option value="massive explosive material splash, high speed frozen motion">強烈爆發</option>
@@ -409,53 +442,56 @@
     </div>
   </section>
 
-  <section>
+  <section class="section-style">
     <div class="section-header">
-      <div class="section-label">05</div>
-      <div class="section-title">視覺風格 / 廣告調性</div>
+      <div class="section-label">01</div>
+      <div class="section-title">廣告版型 / 視覺調性</div>
     </div>
     <div class="grid grid-3" data-choice="style">
-      <label class="card selected"><input type="radio" name="style" value="luxury" checked><div class="name">精品廣告</div><div class="desc">高級商業大片質感</div></label>
+      <label class="card selected"><input type="radio" name="style" value="luxury" checked><div class="name">精品廣告</div><div class="desc">品牌主視覺、精緻商業質感</div></label>
       <label class="card"><input type="radio" name="style" value="poster"><div class="name">海報主視覺</div><div class="desc">留字空間、活動主圖感</div></label>
       <label class="card"><input type="radio" name="style" value="editorial"><div class="name">時尚雜誌</div><div class="desc">Editorial fashion cover</div></label>
-      <label class="card"><input type="radio" name="style" value="cinematic"><div class="name">電影奇幻</div><div class="desc">強光影、戲劇場景</div></label>
-      <label class="card"><input type="radio" name="style" value="blackGold"><div class="name">黑金奢華</div><div class="desc">暗背景、金色高反差</div></label>
-      <label class="card"><input type="radio" name="style" value="clean"><div class="name">乾淨高級</div><div class="desc">留白、精緻、品牌感</div></label>
+      <label class="card"><input type="radio" name="style" value="cinematic"><div class="name">電影奇幻</div><div class="desc">敘事感、史詩感、幻想世界觀</div></label>
+      <label class="card"><input type="radio" name="style" value="blackGold"><div class="name">黑金奢華</div><div class="desc">奢華品牌語氣、珠寶廣告感</div></label>
+      <label class="card"><input type="radio" name="style" value="clean"><div class="name">乾淨高級</div><div class="desc">極簡留白、精緻品牌版面</div></label>
       <label class="card"><input type="radio" name="style" value="artExhibit"><div class="name">展覽級主視覺</div><div class="desc">博物館級、藝術展演感</div></label>
+      <label class="card"><input type="radio" name="style" value="perfumeAd"><div class="name">香氛廣告</div><div class="desc">柔霧、瓶身想像、精緻氣味感</div></label>
+      <label class="card"><input type="radio" name="style" value="beautyCampaign"><div class="name">美妝形象</div><div class="desc">臉部質感、彩妝、保養品牌感</div></label>
     </div>
   </section>
 
-  <section>
+  <section class="section-composition">
     <div class="section-header">
-      <div class="section-label">06</div>
+      <div class="section-label">02</div>
       <div class="section-title">構圖取景</div>
     </div>
     <div class="pose-group">
-      <div class="pose-group-label">構圖選擇</div>
+      <div class="pose-group-label">構圖選擇：只控制人物在畫面中的位置與版面安排</div>
       <div class="grid grid-3" data-choice="composition">
-        <label class="card selected"><input type="radio" name="composition" value="full body shot, elegant dynamic fashion pose, long legs" checked><div class="name">全身主視覺</div><div class="desc">完整造型、身形與材質都看得到</div></label>
-        <label class="card"><input type="radio" name="composition" value="upper body fashion portrait, strong eye contact, poster composition"><div class="name">半身封面人像</div><div class="desc">眼神、臉部與上身細節主導</div></label>
-        <label class="card"><input type="radio" name="composition" value="standing in the center of a material splash, cinematic low angle"><div class="name">材質中央站位</div><div class="desc">人物站在主題材質爆發中心</div></label>
-        <label class="card"><input type="radio" name="composition" value="runway pose, dramatic couture silhouette, premium campaign"><div class="name">走秀式英雄構圖</div><div class="desc">高訂輪廓、氣場與廣告張力</div></label>
-        <label class="card"><input type="radio" name="composition" value="wide poster composition, clean negative space for headline"><div class="name">海報留白構圖</div><div class="desc">保留標題空間與商業版面感</div></label>
+        <label class="card selected"><input type="radio" name="composition" value="centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout" checked><div class="name">人物置中主圖</div><div class="desc">人物放在畫面中央，左右平衡，適合穩定主視覺</div></label>
+        <label class="card"><input type="radio" name="composition" value="subject placed to one side, clean empty space reserved for headline and commercial layout"><div class="name">旁邊留空海報</div><div class="desc">人物偏左或偏右，另一側留乾淨空間放標題文字</div></label>
+        <label class="card"><input type="radio" name="composition" value="subject surrounded by selected material environment, material wraps around foreground and background, immersive fantasy advertisement layout"><div class="name">材質包圍人物</div><div class="desc">主題材質在前景和背景圍繞人物，畫面更有沉浸感</div></label>
+        <label class="card"><input type="radio" name="composition" value="diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner"><div class="name">斜線動態構圖</div><div class="desc">人物和材質沿斜線延伸，畫面比較有速度和張力</div></label>
+        <label class="card"><input type="radio" name="composition" value="symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout"><div class="name">對稱儀式主圖</div><div class="desc">人物和背景圖案左右對稱，適合婚嫁、王權、珠寶感</div></label>
+        <label class="card"><input type="radio" name="composition" value="foreground material frame composition, selected material appears close to camera around the edges, subject remains clear in the center"><div class="name">前景框景構圖</div><div class="desc">材質在畫面前方形成框，人物在中間更有層次</div></label>
       </div>
     </div>
     <div class="pose-group">
-      <div class="pose-group-label">人物入鏡比例</div>
+      <div class="pose-group-label">人物入鏡比例：只控制拍到哪裡，角度請到 07 鏡頭語法選</div>
       <div class="grid grid-3" data-choice="framing">
-        <label class="card selected"><input type="radio" name="framing" value="fullBody" checked><div class="name">全身入鏡</div><div class="desc">頭到腳完整出現</div></label>
-        <label class="card"><input type="radio" name="framing" value="threeQuarter"><div class="name">七分身</div><div class="desc">兼顧臉部辨識與服裝線條</div></label>
-        <label class="card"><input type="radio" name="framing" value="halfBody"><div class="name">半身廣告</div><div class="desc">臉、肩頸與上身材質更清楚</div></label>
-        <label class="card"><input type="radio" name="framing" value="closeUp"><div class="name">近景封面</div><div class="desc">臉部身份與美妝質感主導</div></label>
-        <label class="card"><input type="radio" name="framing" value="widePoster"><div class="name">海報全景</div><div class="desc">人物與留白形成主視覺版面</div></label>
-        <label class="card"><input type="radio" name="framing" value="lowAngle"><div class="name">低角度全身</div><div class="desc">拉長腿線、強化精品氣場</div></label>
+        <label class="card selected"><input type="radio" name="framing" value="fullBody" checked><div class="name">全身入鏡</div><div class="desc">人物約35-50%，頭到腳完整出現，整套服裝最清楚</div></label>
+        <label class="card"><input type="radio" name="framing" value="threeQuarter"><div class="name">七分身</div><div class="desc">人物約50-65%，拍到膝上，臉和服裝都兼顧</div></label>
+        <label class="card"><input type="radio" name="framing" value="halfBody"><div class="name">半身廣告</div><div class="desc">人物約60-75%，拍到腰上，臉、肩頸和上身材質清楚</div></label>
+        <label class="card"><input type="radio" name="framing" value="closeUp"><div class="name">近景封面</div><div class="desc">人物約75-90%，臉部、妝容、頭飾、珠寶最明顯</div></label>
+        <label class="card"><input type="radio" name="framing" value="widePoster"><div class="name">海報全景</div><div class="desc">人物約25-40%，背景和留白更多，適合做商業海報</div></label>
+        <label class="card"><input type="radio" name="framing" value="bustPortrait"><div class="name">胸像近景</div><div class="desc">人物約70-85%，拍到胸口以上，適合臉、珠寶和頭飾</div></label>
       </div>
     </div>
   </section>
 
-  <section>
+  <section class="section-pose">
     <div class="section-header">
-      <div class="section-label">07</div>
+      <div class="section-label">06</div>
       <div class="section-title">姿態動作</div>
     </div>
     <div data-choice="pose">
@@ -484,6 +520,8 @@
           <label class="pose-card"><input type="radio" name="pose" value="coat_hold"><div class="pose-name">抓外套領口</div><div class="pose-desc">雙手抓領口,高訂氣場</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="one_leg_forward"><div class="pose-name">單腿前伸站姿</div><div class="pose-desc">一腿前伸,腳尖拉長</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="profile_long_line"><div class="pose-name">側身長線條</div><div class="pose-desc">側身站立,頸肩腰線清楚</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="center_still"><div class="pose-name">正面安定站姿</div><div class="pose-desc">正面站穩,精品主視覺感</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="one_hand_waist"><div class="pose-name">單手扶腰</div><div class="pose-desc">一手扶腰,另一手自然垂放</div></label>
         </div>
       </div>
 
@@ -504,6 +542,8 @@
           <label class="pose-card"><input type="radio" name="pose" value="stairs_sit"><div class="pose-name">坐台階</div><div class="pose-desc">坐在階梯上,腿部有層次</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="cross_leg_floor"><div class="pose-name">盤腿地坐</div><div class="pose-desc">盤腿坐姿,安定故事感</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="sofa_recline"><div class="pose-name">沙發斜倚</div><div class="pose-desc">身體斜靠,慵懶精品感</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="side_kneel"><div class="pose-name">側跪延伸</div><div class="pose-desc">側身跪姿,裙擺向外延伸</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="low_seat_turn"><div class="pose-name">低坐回望</div><div class="pose-desc">低坐姿勢,上身回望鏡頭</div></label>
         </div>
       </div>
 
@@ -516,7 +556,7 @@
           <label class="pose-card"><input type="radio" name="pose" value="fan_cover"><div class="pose-name">持扇遮面</div><div class="pose-desc">單手持扇半遮臉+側身</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="tiptoe"><div class="pose-name">踮腳仰手</div><div class="pose-desc">踮腳尖+雙手向上延伸</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="hold_flower"><div class="pose-name">雙手托花/道具</div><div class="pose-desc">雙手捧著主題相關物件</div></label>
-          <label class="pose-card"><input type="radio" name="pose" value="butterfly_hand"><div class="pose-name">托蝶伸手</div><div class="pose-desc">手掌托蝴蝶,近景廣告感</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="hold_theme_prop"><div class="pose-name">托物伸手</div><div class="pose-desc">手掌托主題材質 / 藝術系統相關物品,近景廣告感</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="hair_flip"><div class="pose-name">撩髮瞬間</div><div class="pose-desc">單手撥起頭髮的中間動作</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="eye_cover"><div class="pose-name">遮眼手勢</div><div class="pose-desc">單手半遮住眼睛,神秘感</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="hand_neck"><div class="pose-name">手扶頸側</div><div class="pose-desc">單手輕扶頸部,美妝特寫感</div></label>
@@ -525,14 +565,15 @@
           <label class="pose-card"><input type="radio" name="pose" value="glove_pull"><div class="pose-name">拉手套動作</div><div class="pose-desc">一手拉另一手手套,高訂儀式感</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="reach_camera"><div class="pose-name">伸手向鏡頭</div><div class="pose-desc">手向前伸,強前景張力</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="fabric_hold"><div class="pose-name">提拉裙擺/布料</div><div class="pose-desc">手拉布料,展現材質流動</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="hand_chest"><div class="pose-name">手放胸前</div><div class="pose-desc">手輕放胸前,優雅廣告感</div></label>
         </div>
       </div>
     </div>
   </section>
 
-  <section>
+  <section class="section-camera">
     <div class="section-header">
-      <div class="section-label">08</div>
+      <div class="section-label">07</div>
       <div class="section-title">鏡頭語法</div>
     </div>
     <div class="grid grid-3" data-choice="camera">
@@ -542,12 +583,15 @@
       <label class="card"><input type="radio" name="camera" value="softFocusGlow"><div class="name">柔焦光感</div><div class="desc">柔和光暈棚拍感</div></label>
       <label class="card"><input type="radio" name="camera" value="beautyCloseUp"><div class="name">近距離美妝感</div><div class="desc">美妝特寫構圖</div></label>
       <label class="card"><input type="radio" name="camera" value="sideProfile"><div class="name">側臉輪廓感</div><div class="desc">側臉輪廓 / 下顎線清楚</div></label>
+      <label class="card"><input type="radio" name="camera" value="threeQuarterSide"><div class="name">斜側角度</div><div class="desc">約45度側拍 / 臉和身形都有立體感</div></label>
+      <label class="card"><input type="radio" name="camera" value="topBeauty"><div class="name">高角度近景</div><div class="desc">從上方靠近拍臉與肩頸</div></label>
+      <label class="card"><input type="radio" name="camera" value="distantHero"><div class="name">遠距主視覺</div><div class="desc">人物與背景完整，廣告版面感強</div></label>
     </div>
   </section>
 
-  <section>
+  <section class="section-lighting">
     <div class="section-header">
-      <div class="section-label">09</div>
+      <div class="section-label">08</div>
       <div class="section-title">光影色彩</div>
     </div>
     <div class="grid grid-3" data-choice="lighting">
@@ -558,17 +602,19 @@
       <label class="card"><input type="radio" name="lighting" value="mist"><div class="name">夢幻霧光</div><div class="desc">柔霧、漂浮、空氣感</div></label>
       <label class="card"><input type="radio" name="lighting" value="cold"><div class="name">冷調金屬光</div><div class="desc">冷冽反光、金屬質地</div></label>
       <label class="card"><input type="radio" name="lighting" value="warmWindowSoft"><div class="name">柔暖窗影光</div><div class="desc">白棚日光、窗格陰影、紅色反射</div></label>
+      <label class="card"><input type="radio" name="lighting" value="jewelrySparkle"><div class="name">珠寶閃光</div><div class="desc">細小高光、切面反射、精品閃耀</div></label>
+      <label class="card"><input type="radio" name="lighting" value="prismaticColor"><div class="name">彩色棱鏡光</div><div class="desc">彩虹折射、臉身同光、夢幻廣告</div></label>
     </div>
     <div class="form-grid" style="margin-top:10px;">
-      <label class="field full custom-choice" data-custom-choice="lighting">色彩補充
+      <label class="field full">色彩補充
         <input id="colorNote" type="text" placeholder="例如：黑金、草莓粉、奶油白、深紅背景、冷藍霧感">
       </label>
     </div>
   </section>
 
-  <section>
+  <section class="section-background">
     <div class="section-header">
-      <div class="section-label">10</div>
+      <div class="section-label">09</div>
       <div class="section-title">背景場景 / 留白</div>
     </div>
     <div class="grid grid-3" data-choice="background">
@@ -582,12 +628,14 @@
       <label class="card"><input type="radio" name="background" value="luxuryRoom"><div class="name">精品室內</div><div class="desc">高級室內、品牌陳設、生活感</div></label>
       <label class="card"><input type="radio" name="background" value="titleVoid"><div class="name">標題留白</div><div class="desc">保留文字空間、海報友善</div></label>
       <label class="card"><input type="radio" name="background" value="chineseWindowShadow"><div class="name">中式窗影白棚</div><div class="desc">白色背景、中式窗格陰影、紙雕飄片</div></label>
+      <label class="card"><input type="radio" name="background" value="mirrorGallery"><div class="name">鏡面藝廊</div><div class="desc">鏡面反射、精品陳列、空間延伸</div></label>
+      <label class="card"><input type="radio" name="background" value="floatingMaterialVoid"><div class="name">漂浮材質空間</div><div class="desc">乾淨背景中只有主題材質漂浮</div></label>
     </div>
   </section>
 
-  <section>
+  <section class="section-extra">
     <div class="section-header">
-      <div class="section-label">11</div>
+      <div class="section-label">10</div>
       <div class="section-title">自由補充 / 約束</div>
     </div>
     <div class="form-grid">
@@ -597,9 +645,9 @@
     </div>
   </section>
 
-  <section>
+  <section class="section-ratio">
     <div class="section-header">
-      <div class="section-label">12</div>
+      <div class="section-label">11</div>
       <div class="section-title">圖片比例</div>
     </div>
     <div class="grid" data-choice="ratio">
@@ -607,12 +655,16 @@
       <label class="card"><input type="radio" name="ratio" value="vertical45"><div class="name">4:5 直式</div><div class="desc">IG / 小紅書貼文</div></label>
       <label class="card"><input type="radio" name="ratio" value="square"><div class="name">1:1 方形</div><div class="desc">社群貼文主圖</div></label>
       <label class="card"><input type="radio" name="ratio" value="poster23"><div class="name">2:3 海報</div><div class="desc">商業海報感</div></label>
+      <label class="card"><input type="radio" name="ratio" value="vertical34"><div class="name">3:4 直式</div><div class="desc">寫真海報、人物主視覺</div></label>
+      <label class="card"><input type="radio" name="ratio" value="horizontal169"><div class="name">16:9 橫式</div><div class="desc">網站橫幅、影片封面</div></label>
+      <label class="card"><input type="radio" name="ratio" value="horizontal43"><div class="name">4:3 橫式</div><div class="desc">橫式廣告、場景更完整</div></label>
+      <label class="card"><input type="radio" name="ratio" value="wideBanner"><div class="name">21:9 寬幅</div><div class="desc">電影感橫幅、品牌主視覺</div></label>
     </div>
   </section>
 
-  <section>
+  <section class="section-output">
     <div class="section-header">
-      <div class="section-label">13</div>
+      <div class="section-label">12</div>
       <div class="section-title">生成咒語</div>
     </div>
     <div class="actions">
@@ -681,6 +733,56 @@ const materialData = {
     prompt: 'Chinese red paper cut art, layered red paper sculpture, Chinese paper lace, red butterflies, peony petals, tassels, delicate hollow cutout patterns, red butterfly paper decorations floating around the subject, one butterfly resting near the hand, eastern bridal paper couture, luxury wedding advertisement craft detail',
     palette: 'pure Chinese red, ivory white background, soft warm sunlight, delicate red shadows, luxury bridal advertisement color grading'
   },
+  watercolorBloom: {
+    label: '水彩花霧',
+    prompt: 'transparent watercolor bloom, soft floral pigment wash, petals dissolving into colored mist, delicate watercolor fabric, airy hand-painted luxury campaign texture',
+    palette: 'soft rose pink, watery coral, ivory white, translucent pastel wash'
+  },
+  inkPeony: {
+    label: '墨染牡丹',
+    prompt: 'black ink wash and peony silhouettes, eastern brush stroke texture, ink blooming through silk, smoky floral ink particles, refined Chinese contemporary art couture',
+    palette: 'black ink, muted peony red, warm ivory, soft gray wash'
+  },
+  diamondRain: {
+    label: '鑽石光雨',
+    prompt: 'diamond rain, tiny faceted diamonds falling like luminous droplets, crystal refraction, jewelry sparkle particles, premium gemstone couture atmosphere',
+    palette: 'clear diamond, silver white, champagne sparkle, pale blue refraction'
+  },
+  glassFlame: {
+    label: '玻璃火焰',
+    prompt: 'transparent glass flame, flame shapes made of clear glass edges, orange red inner glow, reflective hot crystal, elegant fire couture advertisement',
+    palette: 'transparent glass, ember orange, ruby red, warm gold highlight'
+  },
+  auroraSilk: {
+    label: '極光薄紗',
+    prompt: 'aurora silk, luminous northern light ribbons, iridescent sheer fabric, flowing prismatic veil, colorful light refraction wrapping around the body',
+    palette: 'aurora green, violet, cyan, pearl white, luminous pastel glow'
+  },
+  pearlMoon: {
+    label: '珍珠月光',
+    prompt: 'pearl moonlight, mother-of-pearl shell sheen, soft lunar glow, pearl dust particles, creamy luminous couture texture, elegant moonlit beauty campaign',
+    palette: 'pearl white, moon silver, soft cream, pale lavender shadow'
+  },
+  champagneBubble: {
+    label: '香檳泡泡',
+    prompt: 'champagne bubbles, golden sparkling foam, transparent floating bubbles, fizzy luxury celebration particles, glossy champagne couture details',
+    palette: 'champagne gold, translucent white, warm cream, tiny golden sparkle'
+  },
+  obsidianRose: {
+    label: '黑曜玫瑰',
+    prompt: 'obsidian black rose, glossy volcanic glass petals, dark red floral highlights, reflective black crystal texture, mysterious luxury perfume campaign',
+    palette: 'obsidian black, deep wine red, cold silver highlight, dark rose shadow'
+  },
+  goldFoilFeather: {
+    label: '金箔羽毛',
+    prompt: 'gold foil feathers, floating metallic leaf fragments, soft feather motion, delicate gilded couture texture, lightweight luxury advertising sparkle',
+    palette: 'warm gold foil, ivory, soft beige, feather white'
+  },
+  neonInk: {
+    label: '霓虹墨流',
+    prompt: 'neon ink flow, liquid glowing paint ribbons, futuristic colored ink trails, luminous splash fabric, high fashion cyber luxury advertisement',
+    palette: 'electric cyan, magenta neon, black ink, violet glow'
+  },
   ice: {
     label: '冰晶',
     prompt: 'clear ice crystal textures, translucent frozen layers, sharp reflective shards, cool premium ice sculpture, frosted couture atmosphere',
@@ -730,17 +832,12 @@ const materialData = {
     label: '施華洛水晶',
     prompt: 'faceted crystal shine, sparkling jewel refractions, luxury crystal highlights, premium jewelry-grade shimmer',
     palette: 'crystal clear, silver sparkle, champagne glow'
+  },
+  velvetStardust: {
+    label: '絲絨星塵',
+    prompt: 'deep velvet fabric, fine stardust powder, soft luminous speckles, plush luxury texture, subtle cosmic shimmer woven through couture details',
+    palette: 'midnight velvet, champagne stardust, deep plum shadow, soft silver sparkle'
   }
-};
-
-const themeData = {
-  luxuryTheme: 'luxury commercial campaign, premium brand identity, elegant product hero image',
-  mythTheme: 'mythic fantasy advertising, ceremonial power, regal story-driven visual language',
-  perfumeTheme: 'luxury perfume campaign, soft haze, refined scent aura, elegant fragrance advertising',
-  regalTheme: 'regal couture campaign, imperial presence, noble ceremony, commanding luxury identity',
-  floralTheme: 'botanical fantasy campaign, blooming floral energy, romantic natural elegance',
-  cosmicTheme: 'cosmic fantasy campaign, stardust aura, futuristic luminous brand mood',
-  redPaperWeddingTheme: 'Chinese red paper cut couture bridal fantasy advertisement, red peony bride, butterfly paper art, eastern wedding luxury campaign, refined red eye makeup, glossy red lips, luxury cosmetic advertisement mood'
 };
 
 const garmentData = {
@@ -753,17 +850,27 @@ const garmentData = {
   paperKimono: 'luxurious sculptural paper couture outfit, multi-layer paper clothing, raised paper relief patterns, sakura and cloud motifs, folded washi paper structure, delicate carved paper edges',
   trainGown: 'dramatic long train gown, grand flowing skirt, extended fabric trail, cinematic couture silhouette, strong luxury campaign shape',
   ritualRobe: 'ceremonial fantasy robe, regal long robe silhouette, queen-like presence, layered formal structure, solemn luxury styling',
-  redPaperBridal: 'red Chinese paper cut couture dress, sculptural peony chest ornament, lace-like paper butterfly shoulder pieces, tassel earrings, ornate red bridal headpiece, traditional Chinese window pattern details, delicate paper lace shoulder ornaments and red bridal jewelry styling'
+  redPaperBridal: 'Chinese bridal couture outfit, red eastern wedding gown silhouette, elegant Chinese bridal tailoring, refined collar and shoulder line, ornate tassel headdress, ceremonial wedding fashion styling, graceful luxury bridal form',
+  bubbleGown: 'transparent bubble couture gown, floating soap-bubble spheres, rounded airy skirt volume, iridescent bubble reflections, dreamy playful luxury advertisement styling',
+  rainbowLightDress: 'rainbow light dress, luminous rainbow bands wrapping around the body, prismatic fabric, iridescent sheer layers, colorful refraction on skin and clothing, fantasy beauty campaign styling',
+  modernHanfu: 'modern reimagined hanfu couture, cross collar and flowing sleeves with contemporary tailoring, elegant eastern silhouette, refined waistline, premium editorial Chinese fashion styling',
+  cloudGauze: 'cloud gauze couture gown, translucent misty tulle, floating ribbon layers, soft airy silhouette, ethereal cloud-like fabric volume, dreamy luxury campaign styling',
+  mirrorMetal: 'mirror metallic couture outfit, reflective metal plates, sculptural futuristic silhouette, chrome highlights, polished armor-like fashion structure, premium sci-fi advertising styling',
+  petalShoulder: 'petal shoulder couture, layered flower petal shoulder line, sculptural floral chest detail, soft botanical high fashion silhouette, romantic luxury advertising styling',
+  featherCouture: 'feather couture gown, soft feather shoulder line, lightweight feather skirt movement, airy luxury silhouette, refined editorial glamour',
+  glassLiquidDress: 'liquid glass dress, transparent flowing glass curves, glossy translucent couture surface, futuristic sculptural evening gown, premium crystal-like fashion form'
 };
 
 const styleData = {
-  luxury: 'luxury commercial advertising campaign, premium product campaign, professional studio lighting, high fashion photography',
+  luxury: 'luxury commercial advertising campaign, premium product campaign, refined brand hero visual, polished high fashion art direction',
   poster: 'premium commercial poster composition, clean negative space for headline, luxury advertising layout, strong product visual',
   editorial: 'high fashion editorial photography, magazine cover quality, dramatic couture styling, award winning fashion campaign',
-  cinematic: 'cinematic fantasy commercial artwork, dramatic light beams, atmospheric depth, powerful visual storytelling',
-  blackGold: 'black gold luxury campaign, dark premium background, metallic highlights, high contrast studio lighting',
-  clean: 'clean luxury brand campaign, refined soft lighting, minimal premium background, elegant commercial beauty',
-  artExhibit: 'museum quality art exhibition campaign, fine art poster presentation, gallery-grade composition, premium cultural artwork, refined negative space'
+  cinematic: 'cinematic fantasy commercial artwork, epic narrative mood, atmospheric worldbuilding, powerful visual storytelling',
+  blackGold: 'black gold luxury campaign, premium jewelry advertisement mood, elegant opulence, strong luxury brand identity',
+  clean: 'clean luxury brand campaign, minimal premium layout, elegant commercial beauty, refined negative space',
+  artExhibit: 'museum quality art exhibition campaign, fine art poster presentation, gallery-grade composition, premium cultural artwork, refined negative space',
+  perfumeAd: 'luxury perfume advertising campaign, soft fragrance aura, refined sensual mist, elegant scent-inspired commercial mood',
+  beautyCampaign: 'premium beauty campaign, cosmetic advertisement mood, polished face detail, refined skin texture, elegant makeup brand visual language'
 };
 
 const backgroundData = {
@@ -776,7 +883,9 @@ const backgroundData = {
   materialWall: 'background made of the same selected material, immersive material wall, cohesive visual system',
   luxuryRoom: 'luxury interior room background, premium lifestyle setting, refined decorative atmosphere',
   titleVoid: 'intentional negative space for title placement, poster-friendly empty area, clean composition buffer',
-  chineseWindowShadow: 'soft white studio background with Chinese lattice window shadows, red butterfly paper decorations floating around the subject, ivory white space, eastern bridal advertisement backdrop, clean luxury bridal campaign layout'
+  chineseWindowShadow: 'soft white studio background with Chinese lattice window shadows, red butterfly paper decorations floating around the subject, ivory white space, eastern bridal advertisement backdrop, clean luxury bridal campaign layout',
+  mirrorGallery: 'mirror gallery background, reflective luxury display space, polished mirrored surfaces, elegant boutique exhibition atmosphere, expanded spatial depth',
+  floatingMaterialVoid: 'clean minimal void background with selected material floating around the subject, uncluttered advertising space, strong subject focus and cohesive material atmosphere'
 };
 
 const lightingData = {
@@ -786,7 +895,9 @@ const lightingData = {
   stage: 'stage beam lighting, theatrical spotlight, grand commercial mood',
   mist: 'dream mist lighting, soft haze, floating luminous atmosphere',
   cold: 'cold metallic lighting, crisp reflections, cool premium tone',
-  warmWindowSoft: 'soft warm sunlight through Chinese lattice window shadows, refined red paper bounce light, red paper reflections softly affecting the face, luxury bridal advertisement glow, delicate facial exposure, face softly lit but consistent with surrounding red paper reflections'
+  warmWindowSoft: 'soft warm sunlight through Chinese lattice window shadows, refined red paper bounce light, red paper reflections softly affecting the face, luxury bridal advertisement glow, delicate facial exposure, face softly lit but consistent with surrounding red paper reflections',
+  jewelrySparkle: 'luxury jewelry sparkle lighting, precise tiny specular highlights, faceted reflections, refined catchlights, premium gemstone advertisement shine',
+  prismaticColor: 'prismatic color lighting, subtle rainbow refractions across face body clothing and background, unified colorful light environment, dreamy commercial glow'
 };
 
 const identityGuard = `Identity Lock System:
@@ -848,6 +959,8 @@ Poster layout, negative space and material effects must support the model instea
 const lightingConsistencyGuard = `【光線一致性系統】
 
 Unified Cinematic Lighting System
+Global Lighting Consistency
+Subject And Environment Share The Same Light Source
 Face Lighting Must Match Body Lighting
 Single Global Lighting Environment
 Same Light Direction Across Face Body And Background
@@ -922,6 +1035,8 @@ const poseData = {
   coat_hold: 'holding coat collar pose, both hands holding coat collar or lapels, chest open and shoulders controlled, high fashion couture presence',
   one_leg_forward: 'one leg forward standing pose, one leg extended forward with pointed toe, back leg supporting body weight, long elegant lower body line',
   profile_long_line: 'side profile long line pose, standing in side profile, neck shoulder waist and hip forming a clean long line, sculptural fashion silhouette',
+  center_still: 'front-facing stable standing pose, centered calm posture, elegant stillness, premium key visual presence, clean luxury advertising stance',
+  one_hand_waist: 'one hand on waist pose, the other hand relaxed naturally, refined confident body line, elegant commercial fashion attitude',
   guifei: 'elegant seated pose, one leg extended gracefully forward, upper body leaning back with one hand supporting, relaxed shoulders, long elegant legs',
   chin_rest: 'seated hand under chin pose, one hand resting under chin elegantly, legs crossed gracefully, thoughtful confident expression',
   kneel: 'elegant kneeling pose, one knee on the ground, straight posture, graceful waist curve, hands resting gently on thigh, fashion editorial pose',
@@ -936,12 +1051,15 @@ const poseData = {
   stairs_sit: 'sitting on stairs pose, seated on steps, layered leg placement, relaxed editorial story feeling',
   cross_leg_floor: 'cross leg floor sitting pose, calm grounded posture, stable seated composition, quiet narrative mood',
   sofa_recline: 'sofa reclining pose, body leaning diagonally, relaxed luxury boutique mood, elegant lounging fashion attitude',
+  side_kneel: 'side kneeling extended pose, body turned sideways while kneeling, skirt or fabric extending outward, elegant elongated couture shape',
+  low_seat_turn: 'low seated over-shoulder turn pose, seated low with torso turning back toward camera, refined cinematic fashion tension',
   vogue_hands: 'Vogue hand frame pose, both hands framing the face elegantly, fingers spread gracefully near face, Paris ballroom vogue style',
   arms_wide: 'arms wide open pose, both arms extended broadly to the sides, expansive powerful body language, wings-like feminine presence',
   water_sleeve: 'water sleeve dance pose, flowing fabric sleeves caught mid-motion, arms extended in classical dance form, elegant eastern movement',
   fan_cover: 'half face fan cover pose, one hand holding fan partially covering face, body turned sideways, mysterious elegant eastern expression',
   tiptoe: 'tiptoe arms raised pose, standing on tiptoe, both arms reaching upward gracefully, elongated vertical body line',
   hold_flower: 'both hands cupping and holding a theme-related prop, offering gesture with both hands, soft gentle holding pose',
+  hold_theme_prop: 'one hand extended forward, palm holding an object related to the selected theme material and art system, refined close-up advertising gesture, strong foreground hand detail, elegant product-like presentation',
   hair_flip: 'mid hair flip captured moment, one hand running through hair, hair caught in motion, candid natural editorial movement',
   eye_cover: 'one hand partially covering eye, fingers slightly spread over eye, mysterious peek through fingers, half hidden face gesture',
   hand_neck: 'one hand gently touching side of neck, beauty close-up gesture, elegant neckline and jawline focus',
@@ -949,16 +1067,17 @@ const poseData = {
   adjust_earring: 'adjusting earring gesture, hand near ear jewelry, refined jewelry focus, elegant beauty detail',
   glove_pull: 'pulling glove gesture, one hand pulling the other glove, couture ritual feeling, elegant hand detail',
   reach_camera: 'one hand reaching toward camera, strong foreground tension, dramatic fashion perspective',
-  fabric_hold: 'holding and lifting skirt or fabric, hands showing material flow, couture texture emphasized'
+  fabric_hold: 'holding and lifting skirt or fabric, hands showing material flow, couture texture emphasized',
+  hand_chest: 'one hand gently placed on chest, elegant commercial beauty gesture, refined emotional softness, graceful upper body detail'
 };
 
 const framingData = {
-  fullBody: 'full body shot, entire outfit visible, head to toe composition',
-  threeQuarter: 'three-quarter body shot, large model presence, dress and material details visible',
-  halfBody: 'half body advertising portrait, face, shoulders and upper couture details emphasized',
-  closeUp: 'close-up fashion beauty portrait, strong facial identity, material wrapping near face and shoulders',
-  widePoster: 'wide poster composition, model centered with negative space for headline and campaign text',
-  lowAngle: 'low angle full body shot, elongated legs, powerful luxury fashion proportions'
+  fullBody: 'full body framing, subject occupies about 35 to 50 percent of the image height, entire body and outfit visible from head to toe',
+  threeQuarter: 'three-quarter body framing, subject occupies about 50 to 65 percent of the image height, cropped around the knees, face and clothing both clear',
+  halfBody: 'half body advertising framing, subject occupies about 60 to 75 percent of the image height, cropped above the waist, face shoulders and upper couture details emphasized',
+  closeUp: 'close-up cover framing, subject occupies about 75 to 90 percent of the image height, face makeup headdress and jewelry details emphasized',
+  widePoster: 'wide poster framing, subject occupies about 25 to 40 percent of the image height, more background and clean negative space for commercial layout',
+  bustPortrait: 'bust portrait framing, subject occupies about 70 to 85 percent of the image height, cropped around upper chest, face jewelry headdress and neckline emphasized'
 };
 
 const cameraData = {
@@ -967,14 +1086,21 @@ const cameraData = {
   highAngleOverhead: 'high angle view, camera above head level, elegant top-down perspective, refined fashion composition, clear subject shape',
   softFocusGlow: 'soft focus glow camera language, gentle halo bloom, luminous studio beauty atmosphere, refined dreamy commercial portrait',
   beautyCloseUp: 'close distance beauty photography, beauty close-up composition, face and makeup details emphasized, polished cosmetic campaign framing',
-  sideProfile: 'side profile portrait angle, clear jawline silhouette, elegant facial contour, refined profile lighting and fashion editorial framing'
+  sideProfile: 'side profile portrait angle, clear jawline silhouette, elegant facial contour, refined profile lighting and fashion editorial framing',
+  threeQuarterSide: 'three-quarter side camera angle, about 45 degree side view, face and body both show dimensional structure, elegant advertising perspective',
+  topBeauty: 'high angle close beauty view, camera above the subject and slightly close, face shoulders neckline and headdress emphasized, elegant cosmetic perspective',
+  distantHero: 'distant hero advertising view, camera pulled back to show subject background and material environment together, spacious brand key visual perspective'
 };
 
 const ratioData = {
   vertical916: 'aspect ratio 9:16, vertical social media cover composition',
   vertical45: 'aspect ratio 4:5, vertical social media feed poster composition',
   square: 'aspect ratio 1:1, square commercial campaign image',
-  poster23: 'aspect ratio 2:3, vertical luxury poster composition'
+  poster23: 'aspect ratio 2:3, vertical luxury poster composition',
+  vertical34: 'aspect ratio 3:4, vertical portrait poster composition',
+  horizontal169: 'aspect ratio 16:9, horizontal website banner and video cover composition',
+  horizontal43: 'aspect ratio 4:3, horizontal commercial image with balanced subject and environment',
+  wideBanner: 'aspect ratio 21:9, cinematic wide luxury brand banner composition'
 };
 
 function selected(name){
@@ -1014,17 +1140,82 @@ function refreshCards(){
 
 const themeTemplates = {
   redPaperWedding: {
-    theme: 'redPaperWeddingTheme',
     garment: 'redPaperBridal',
     material: 'redPaperWedding',
     style: 'luxury',
-    composition: 'upper body fashion portrait, strong eye contact, poster composition',
+    composition: 'subject surrounded by selected material environment, material wraps around foreground and background, immersive fantasy advertisement layout',
     framing: 'closeUp',
-    pose: 'butterfly_hand',
+    pose: 'hold_theme_prop',
     camera: 'beautyCloseUp',
     lighting: 'warmWindowSoft',
     background: 'chineseWindowShadow',
-    ratio: 'vertical916'
+    ratio: 'vertical916',
+    intensity: 'balanced material effects, elegant and luxurious'
+  },
+  auroraBubbleChampagne: {
+    garment: 'bubbleGown',
+    material: 'champagneBubble',
+    style: 'luxury',
+    composition: 'foreground material frame composition, selected material appears close to camera around the edges, subject remains clear in the center',
+    framing: 'bustPortrait',
+    pose: 'hand_chest',
+    camera: 'softFocusGlow',
+    lighting: 'mist',
+    background: 'floatingMaterialVoid',
+    ratio: 'vertical45',
+    intensity: 'subtle floating particles, refined couture details'
+  },
+  obsidianRoseJewelry: {
+    garment: 'jewelry',
+    material: 'obsidianRose',
+    style: 'blackGold',
+    composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
+    framing: 'closeUp',
+    pose: 'adjust_earring',
+    camera: 'beautyCloseUp',
+    lighting: 'hard',
+    background: 'materialWall',
+    ratio: 'vertical45',
+    intensity: 'balanced material effects, elegant and luxurious'
+  },
+  watercolorBeauty: {
+    garment: 'petalShoulder',
+    material: 'watercolorBloom',
+    style: 'clean',
+    composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
+    framing: 'bustPortrait',
+    pose: 'hand_neck',
+    camera: 'eyeLevelCover',
+    lighting: 'soft',
+    background: 'plainStudio',
+    ratio: 'vertical45',
+    intensity: 'subtle floating particles, refined couture details'
+  },
+  neonInkFuture: {
+    garment: 'mirrorMetal',
+    material: 'neonInk',
+    style: 'cinematic',
+    composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
+    framing: 'threeQuarter',
+    pose: 'runway_stride',
+    camera: 'threeQuarterSide',
+    lighting: 'cold',
+    background: 'mirrorGallery',
+    ratio: 'poster23',
+    intensity: 'massive explosive material splash, high speed frozen motion'
+  },
+  pearlMoonBridal: {
+    garment: 'weddingDress',
+    material: 'pearlMoon',
+    style: 'luxury',
+    composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
+    framing: 'fullBody',
+    pose: 'center_still',
+    camera: 'eyeLevelCover',
+    lighting: 'halo',
+    background: 'mistSpace',
+    ratio: 'poster23',
+    intensity: 'balanced material effects, elegant and luxurious'
   }
 };
 
@@ -1032,11 +1223,15 @@ function applyThemeTemplate(key){
   const preset = themeTemplates[key];
   if(!preset) return;
 
-  ['theme','garment','material','style','composition','framing','pose','camera','lighting','background','ratio'].forEach(name => {
+  ['garment','material','style','composition','framing','pose','camera','lighting','background','ratio'].forEach(name => {
     setRadioValue(name, preset[name]);
   });
 
-  ['themeCustom','customGarment','customMaterial','colorNote','extraNote'].forEach(id => {
+  if(preset.intensity){
+    document.getElementById('intensity').value = preset.intensity;
+  }
+
+  ['customGarment','customMaterial','colorNote','extraNote'].forEach(id => {
     document.getElementById(id).value = '';
   });
 
@@ -1045,12 +1240,6 @@ function applyThemeTemplate(key){
 }
 
 function generate(){
-  const themeKey = selected('theme');
-  const theme = themeData[themeKey];
-  const themeCustom = document.getElementById('themeCustom').value.trim();
-  const themeText = themeCustom
-    ? `custom core theme only: ${themeCustom}; do not include or blend any preset theme option`
-    : theme;
   const bodyShape = BODY_SHAPES[selected('bodyShape')];
   const materialKey = selected('material');
   const material = materialData[materialKey];
@@ -1076,21 +1265,19 @@ function generate(){
   const intensity = document.getElementById('intensity').value;
   const poseText = poseData[selected('pose')];
   const prompt = [
-    'Ultra beautiful adult woman, fashion editorial model, reference photo used for identity only,',
     identityGuard + ',',
+    'Ultra beautiful adult woman, fashion editorial model, reference photo used for identity only,',
     anatomyGuard + ',',
     bodyShape + ',',
     lightingConsistencyGuard + ',',
     colorTemperatureGuard + ',',
     subjectIntegrationGuard + ',',
     faceFillGuard + ',',
-    'core theme: ' + themeText + ',',
     composition + ',',
     compositionGuard + ',',
     'appearance form: ' + garmentText + ',',
     'theme material and art system: ' + materialText + ',',
     'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',
-    'overall commercial direction: ' + themeText + ',',
     intensity + ',',
     'dynamic material particles or layered craft elements surrounding the body, elegant body curve, premium skin rendering, sophisticated hair and makeup,',
     styleData[selected('style')] + ',',
@@ -1120,6 +1307,11 @@ document.getElementById('generateBtn').addEventListener('click', generate);
 document.getElementById('redPaperWeddingPreset').addEventListener('click', () => {
   applyThemeTemplate('redPaperWedding');
 });
+document.querySelectorAll('[data-template]').forEach(button => {
+  button.addEventListener('click', () => {
+    applyThemeTemplate(button.dataset.template);
+  });
+});
 document.getElementById('copyBtn').addEventListener('click', async () => {
   const text = document.getElementById('output').textContent;
   await navigator.clipboard.writeText(text);
@@ -1127,7 +1319,7 @@ document.getElementById('copyBtn').addEventListener('click', async () => {
   btn.textContent = '已複製';
   setTimeout(() => btn.textContent = '複製咒語', 1200);
 });
-['themeCustom','customGarment','customMaterial','intensity','colorNote','extraNote'].forEach(id => {
+['customGarment','customMaterial','intensity','colorNote','extraNote'].forEach(id => {
   document.getElementById(id).addEventListener('input', () => {
     refreshCards();
     generate();
