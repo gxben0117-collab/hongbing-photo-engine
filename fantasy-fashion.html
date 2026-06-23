@@ -360,7 +360,7 @@
       <label class="card"><input type="radio" name="garment" value="trainGown"><div class="name">拖尾長裙</div><div class="desc">大裙擺、長拖尾、戲劇輪廓</div></label>
       <label class="card"><input type="radio" name="garment" value="ritualRobe"><div class="name">儀式長袍</div><div class="desc">莊重、幻想、女王氣場</div></label>
       <label class="card"><input type="radio" name="garment" value="redPaperBridal"><div class="name">中式婚嫁華服</div><div class="desc">中式婚嫁剪裁、紅色禮服、流蘇頭飾</div></label>
-      <label class="card"><input type="radio" name="garment" value="bubbleGown"><div class="name">泡泡禮服</div><div class="desc">透明泡泡、圓形裙擺、夢幻光感</div></label>
+      <label class="card"><input type="radio" name="garment" value="bubbleGown"><div class="name">和服</div><div class="desc">和服線條、寬袖、腰帶與東方優雅</div></label>
       <label class="card"><input type="radio" name="garment" value="rainbowLightDress"><div class="name">彩虹光衣</div><div class="desc">彩虹折射、光帶纏身、發光薄紗</div></label>
       <label class="card"><input type="radio" name="garment" value="modernHanfu"><div class="name">新式改良漢服</div><div class="desc">漢服線條、現代剪裁、東方時尚</div></label>
       <label class="card"><input type="radio" name="garment" value="cloudGauze"><div class="name">雲紗禮服</div><div class="desc">薄紗雲霧、飄帶、空氣感輪廓</div></label>
@@ -851,7 +851,7 @@ const garmentData = {
   trainGown: 'dramatic long train gown, grand flowing skirt, extended fabric trail, cinematic couture silhouette, strong luxury campaign shape',
   ritualRobe: 'ceremonial fantasy robe, regal long robe silhouette, queen-like presence, layered formal structure, solemn luxury styling',
   redPaperBridal: 'Chinese bridal couture outfit, red eastern wedding gown silhouette, elegant Chinese bridal tailoring, refined collar and shoulder line, ornate tassel headdress, ceremonial wedding fashion styling, graceful luxury bridal form',
-  bubbleGown: 'transparent bubble couture gown, floating soap-bubble spheres, rounded airy skirt volume, iridescent bubble reflections, dreamy playful luxury advertisement styling',
+  bubbleGown: 'elegant kimono silhouette, wide sleeves, refined obi belt structure, graceful eastern robe line, sophisticated Japanese-inspired couture styling',
   rainbowLightDress: 'rainbow light dress, luminous rainbow bands wrapping around the body, prismatic fabric, iridescent sheer layers, colorful refraction on skin and clothing, fantasy beauty campaign styling',
   modernHanfu: 'modern reimagined hanfu couture, cross collar and flowing sleeves with contemporary tailoring, elegant eastern silhouette, refined waistline, premium editorial Chinese fashion styling',
   cloudGauze: 'cloud gauze couture gown, translucent misty tulle, floating ribbon layers, soft airy silhouette, ethereal cloud-like fabric volume, dreamy luxury campaign styling',
@@ -900,7 +900,29 @@ const lightingData = {
   prismaticColor: 'prismatic color lighting, subtle rainbow refractions across face body clothing and background, unified colorful light environment, dreamy commercial glow'
 };
 
-const identityGuard = `Identity Lock System:
+const identityGuard = `Facial Geometry Lock System:
+Preserve Original Forehead Height
+Preserve Original Face Width
+Preserve Original Eye Shape
+Preserve Original Eye Distance
+Preserve Original Nose Shape
+Preserve Original Nose Width
+Preserve Original Nose Bridge
+Preserve Original Lip Shape
+Preserve Original Jawline Width
+Preserve Original Chin Shape
+No Facial Reconstruction
+No Facial Redesign
+No Facial Beautification
+No Facial Stylization
+Identity Preservation Priority Above Costume
+Identity Preservation Priority Above Materials
+Identity Preservation Priority Above Environment
+Identity Preservation Priority Above Advertising Style
+Face Similarity Maximum
+Recognizable By Family And Friends At First Sight
+
+Identity Lock System:
 Use the uploaded person as the only subject.
 Use the reference photo for identity only.
 Same person face, same facial identity, identity recognition priority maximum.
@@ -911,9 +933,15 @@ No face swap, no AI beauty template face, no celebrity face, no influencer face,
 const anatomyGuard = `Realistic Human Anatomy System:
 Realistic adult female anatomy, natural shoulder width, natural neck length, natural torso depth, natural limb proportions.
 Natural head to body ratio, head size follows the selected body framing and full-body scale whenever the body is visible.
-Body scale priority over face scale, fashion editorial camera distance, full height human anatomy reconstruction when full body is selected.
+Body scale priority over beauty exaggeration, realistic commercial camera distance, full height human anatomy reconstruction when full body is selected.
+Preserve reference body type and mature natural body impression unless a selected body refinement explicitly requests subtle adjustment.
+No supermodel body replacement, no overlong legs, no ultra narrow waist, no fashion model body template.
+Head Neck Shoulder Spine Alignment Must Be Anatomically Coherent.
+Face And Head Must Belong Naturally To The Same Body Pose.
+Pose Must Match Head Direction And Facial Gaze.
+No Contradictory Head And Body Direction.
 Ignore original selfie perspective, ignore original lens distortion, not based on original camera distance.
-No oversized head, no big head small body effect, no doll proportions, no deformed body`;
+No oversized head, no big head small body effect, no doll proportions, no deformed body, no pasted-on face, no mismatched head and body angle, no twisted neck`;
 
 const BODY_SHAPES = {
   original: `【身形輪廓｜原圖自然比例】
@@ -954,7 +982,11 @@ const compositionGuard = `Commercial Composition Control:
 Subject scale follows the selected framing ratio.
 Keep the subject clear inside the crop, with clean breathing room around the head and body.
 If the body is visible, keep the body proportion coherent and do not enlarge the head to preserve the face.
-Poster layout, negative space and material effects must support the model instead of crowding the face`;
+Poster layout, negative space and material effects must support the model instead of crowding the face
+Full Body Identity Protection:
+When full body or wide poster framing is selected, keep the face readable and recognizable.
+Do not sacrifice facial identity for outfit, body silhouette, background, particles or material spectacle.
+Facial likeness remains the highest priority even when the face is small in frame`;
 
 const lightingConsistencyGuard = `【光線一致性系統】
 
@@ -1153,7 +1185,7 @@ const themeTemplates = {
     intensity: 'balanced material effects, elegant and luxurious'
   },
   auroraBubbleChampagne: {
-    garment: 'bubbleGown',
+    garment: 'cloudGauze',
     material: 'champagneBubble',
     style: 'luxury',
     composition: 'foreground material frame composition, selected material appears close to camera around the edges, subject remains clear in the center',
@@ -1266,7 +1298,7 @@ function generate(){
   const poseText = poseData[selected('pose')];
   const prompt = [
     identityGuard + ',',
-    'Ultra beautiful adult woman, fashion editorial model, reference photo used for identity only,',
+    'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
     anatomyGuard + ',',
     bodyShape + ',',
     lightingConsistencyGuard + ',',
