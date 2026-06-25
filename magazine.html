@@ -579,6 +579,11 @@
       <button type="button" class="preset-btn" data-magazine-preset="minimalWhiteShirt">一鍵套用｜極簡白襯衫封面</button>
       <button type="button" class="preset-btn" data-magazine-preset="futureSilverCool">一鍵套用｜未來銀色冷感</button>
       <button type="button" class="preset-btn" data-magazine-preset="redCarpetCouture">一鍵套用｜紅毯高訂全身</button>
+      <button type="button" class="preset-btn" data-magazine-preset="pearlVeilBeauty">一鍵套用｜珠簾面紗美妝</button>
+      <button type="button" class="preset-btn" data-magazine-preset="darkGoldMoodCover">一鍵套用｜暗金情緒封面</button>
+      <button type="button" class="preset-btn" data-magazine-preset="silkRoadJewelry">一鍵套用｜西域珠寶封面</button>
+      <button type="button" class="preset-btn" data-magazine-preset="mastheadCover">一鍵套用｜雜誌刊頭封面</button>
+      <button type="button" class="preset-btn" data-magazine-preset="dessertBeautyAd">一鍵套用｜甜點美妝廣告</button>
     </div>
   </section>
 
@@ -718,6 +723,16 @@
             <input type="radio" name="style" value="luxury_perfume_ad">
             <div class="name">精品香水廣告</div>
             <div class="desc">香水廣告,高級空氣感</div>
+          </label>
+          <label class="card" data-value="magazine_masthead">
+            <input type="radio" name="style" value="magazine_masthead">
+            <div class="name">刊頭封面版型</div>
+            <div class="desc">上方刊頭空間,正式封面感</div>
+          </label>
+          <label class="card" data-value="dessert_beauty">
+            <input type="radio" name="style" value="dessert_beauty">
+            <div class="name">甜點美妝封面</div>
+            <div class="desc">甜點道具,明亮商業美妝</div>
           </label>
         </div>
       </div>
@@ -999,6 +1014,11 @@
         <input type="radio" name="bg" value="dark_metal">
         <div class="name">暗色金屬背景</div>
         <div class="desc">深色金屬,冷峻高級感</div>
+      </label>
+      <label class="card" data-value="dessert_table">
+        <input type="radio" name="bg" value="dessert_table">
+        <div class="name">甜點商品棚</div>
+        <div class="desc">蛋糕草莓,粉白棚拍,甜點桌</div>
       </label></div>
   </section>
   <!-- 05 姿態模組 -->
@@ -1276,6 +1296,21 @@
           <div class="pose-name">手放胸前</div>
           <div class="pose-desc">手輕放胸前,優雅封面感</div>
         </label>
+        <label class="pose-card" data-value="calligraphy_brush">
+          <input type="radio" name="pose" value="calligraphy_brush">
+          <div class="pose-name">執筆書法</div>
+          <div class="pose-desc">手持毛筆書寫,東方文化封面感</div>
+        </label>
+        <label class="pose-card" data-value="umbrella_gaze">
+          <input type="radio" name="pose" value="umbrella_gaze">
+          <div class="pose-name">持傘回眸</div>
+          <div class="pose-desc">手持紅傘回眸,雨景古風感</div>
+        </label>
+        <label class="pose-card" data-value="hold_mask_profile">
+          <input type="radio" name="pose" value="hold_mask_profile">
+          <div class="pose-name">持面具側臉</div>
+          <div class="pose-desc">手持面具靠近臉側,神秘古風感</div>
+        </label>
       </div>
     </div>
 
@@ -1327,6 +1362,11 @@
           <input type="radio" name="pose" value="extreme_crouch_twist">
           <div class="pose-name">⚠️ 低蹲扭身</div>
           <div class="pose-desc">低蹲加扭腰,肢體風險高</div>
+        </label>
+        <label class="pose-card risky" data-value="bow_hero" data-risky="true">
+          <input type="radio" name="pose" value="bow_hero">
+          <div class="pose-name">⚠️ 拉弓動作</div>
+          <div class="pose-desc">弓箭英雄姿態,手部與肩頸高風險</div>
         </label>
       </div>
     </div>
@@ -1554,6 +1594,10 @@
         <label class="chip" data-value="cold_metal"><input type="radio" name="lighting" value="cold_metal">冷調金屬光</label>
         <label class="chip" data-value="jewelry_sparkle"><input type="radio" name="lighting" value="jewelry_sparkle">珠寶閃光</label>
         <label class="chip" data-value="prismatic_color"><input type="radio" name="lighting" value="prismatic_color">彩色棱鏡光</label>
+        <label class="chip" data-value="dark_gold_mood"><input type="radio" name="lighting" value="dark_gold_mood">暗金低調光</label>
+        <label class="chip" data-value="pearl_veil_soft"><input type="radio" name="lighting" value="pearl_veil_soft">珠簾柔霧光</label>
+        <label class="chip" data-value="rain_cool_light"><input type="radio" name="lighting" value="rain_cool_light">雨景冷調光</label>
+        <label class="chip" data-value="dessert_soft_bright"><input type="radio" name="lighting" value="dessert_soft_bright">甜點柔亮棚光</label>
       </div>
     </div>
   </section>
@@ -1962,6 +2006,22 @@ luxury_perfume_ad:{
   text:`Luxury Perfume Campaign
 精品香水廣告氛圍,高級空氣感,柔和情緒張力
 Elegant Fragrance Visual Language, Premium Brand Mood`
+},
+magazine_masthead:{
+  label:"刊頭封面版型",
+  text:`Magazine Masthead Cover Layout
+正式雜誌封面版型,上方保留刊頭空間
+Strong Editorial Cover Composition
+Clean Title Space, No Random Text, No Fake Logo, No Watermark
+Face Remains Clear And Recognizable Below The Masthead Area`
+},
+dessert_beauty:{
+  label:"甜點美妝封面",
+  text:`Dessert Beauty Magazine Campaign
+甜點美妝廣告感,草莓蛋糕、奶油與粉白棚拍氛圍
+Playful But Premium Commercial Beauty Styling
+Bright Clean Dessert Table Composition
+No Random Text, No Watermark`
 },ink_flower:{
   label:"花墨染·中式水墨花卉寫真",
   text:`Chinese Ink Wash Floral Portrait Style
@@ -2131,7 +2191,12 @@ dark_metal:`Dark Metal Background
 Deep Metallic Panels
 Cold Luxury Industrial Surface
 Controlled Specular Highlights
-Powerful Modern Fashion Campaign Mood`
+Powerful Modern Fashion Campaign Mood`,
+dessert_table:`Dessert Product Studio Background
+Strawberry Cake, Cream And Dessert Table Props
+Soft Pink And White Commercial Studio Setting
+Clean Premium Beauty Advertisement Layout
+Dessert Props Support The Subject Without Covering The Face`
 };
 
 // ====== 姿態模組 ======
@@ -2491,6 +2556,28 @@ Graceful Upper Body Detail
 Natural Wrist And Finger Shape
 No Tension Between Head Direction And Shoulder Line`,
 
+calligraphy_brush:`Calligraphy Brush Holding Pose
+One Hand Holding A Writing Brush Naturally
+Wrist Angle Clear And Elegant
+Eastern Cultural Editorial Gesture
+Brush Tip Or Paper Can Be Visible Without Random Text
+Face, Neck And Hand Direction Stay Harmonious`,
+
+umbrella_gaze:`Red Umbrella Over Shoulder Pose
+One Hand Holding Umbrella Handle Naturally
+Body Slightly Turned With Over The Shoulder Gaze
+Rainy Editorial Storytelling Mood
+Shoulder, Neck And Face Direction Stay Anatomically Coherent
+Avoid Extra Fingers On The Umbrella Handle`,
+
+hold_mask_profile:`Mask Near Face Side Profile Pose
+One Hand Holding A Porcelain Or Opera Mask Near The Cheek
+Face Remains Visible And Recognizable
+Side Profile Or Three Quarter Face Angle
+Mysterious Eastern Editorial Gesture
+Keep Mask Separate From Facial Features
+No Face Replacement By Mask`,
+
 floor_split:`High Risk Floor Split Pose
 Floor Split Or Deep Leg Extension
 Both Legs Clearly Placed In Opposite Directions
@@ -2513,7 +2600,15 @@ One Knee Bent Deeply And One Leg Angled Out
 Hands Used For Balance Or Shape
 Dynamic Street Fashion Editorial Energy
 Keep Spine, Hips And Knees Anatomically Coherent
-Avoid Broken Wrists Or Impossible Limb Angles`
+Avoid Broken Wrists Or Impossible Limb Angles`,
+
+bow_hero:`High Risk Bow Drawing Pose
+One Arm Holding Bow And One Arm Drawing The String
+Strong Heroic Fashion Editorial Gesture
+Clear Shoulder Alignment And Natural Elbow Direction
+Face Remains Visible Beside The Bow Line
+Avoid Extra Fingers, Twisted Wrists Or Detached Hands
+No Weapon Blocking The Original Face`
 };
 
 // ====== 鏡頭氣場 ======
@@ -2776,7 +2871,27 @@ Sparkle Reflections Affect Face, Skin, Jewelry And Clothing Naturally`,
   prismatic_color:`Prismatic Color Lighting
 彩色棱鏡光,細緻彩虹折射,夢幻封面感
 Subtle Rainbow Refractions Across Face, Body, Clothing And Background
-Unified Colorful Light Environment`
+Unified Colorful Light Environment`,
+  dark_gold_mood:`Dark Gold Low-Key Beauty Lighting
+暗金低調光,深色背景中的金色邊緣與臉部柔亮
+Moody Luxury Magazine Cover Lighting
+Face, Body, Hair, Clothing And Background Share The Same Warm Gold Light
+No Detached Studio Face Relighting`,
+  pearl_veil_soft:`Pearl Veil Soft Glow Lighting
+珠簾柔霧光,珍珠高光與薄紗柔光
+Soft Beauty Fill Through Pearl And Veil Materials
+Subtle Pearl Reflections Affect Face, Skin, Jewelry And Fabric Naturally
+Consistent White Balance Across Face And Body`,
+  rain_cool_light:`Rainy Cool Editorial Lighting
+雨景冷調光,濕潤空氣與冷色環境反光
+Soft Cool Ambient Light With Natural Bounce From Wet Surfaces
+Face Lighting Matches The Rainy Background
+No Independent Beauty Ring Light Effect`,
+  dessert_soft_bright:`Soft Dessert Commercial Beauty Lighting
+甜點柔亮棚光,粉白明亮但不過曝
+Soft Creamy Beauty Fill With Strawberry And Cream Color Bounce
+Face, Skin, Dessert Props And Background Share The Same Clean Studio Light
+No Overexposed Face, No Flat Ring Light`
 }
 };
 // ====== 比例 ======
@@ -3078,7 +3193,8 @@ const BG_LIGHTING_MAP = {
   marble_wall: 'beauty_fill',
   red_curtain: 'black_gold',
   gallery_white_wall: 'beauty_fill',
-  dark_metal: 'rim_light'
+  dark_metal: 'rim_light',
+  dessert_table: 'dessert_soft_bright'
 };
 
 
@@ -3259,7 +3375,9 @@ const STYLE_PRESET_DEFAULTS = {
   art_magazine: { bg: 'abstract', framing: 'negative_space', camera: 'side_profile', motion: 'still', makeup: ['matte_base', 'precise_eyeliner'], skinTexture: 'real_pores', jewelry: ['earrings'], expression: 'distant_chic', lighting: 'mixed_studio', media: 'fashion_illustration', ratio: '4:5' },
   black_white_art: { bg: 'dark_gray_concrete', framing: 'bust', camera: 'side_profile', motion: 'still', makeup: ['matte_base', 'red_lip'], skinTexture: 'premium_matte', jewelry: ['none'], expression: 'cool_stare', lighting: 'rim_light', media: 'black_white_photo', ratio: '4:5' },
   minimal_feature: { bg: 'minimal_space', framing: 'half_body', camera: 'neutral', motion: 'still', makeup: ['natural_highend'], skinTexture: 'natural_real', jewelry: ['none'], expression: 'calm_direct', lighting: 'beauty_fill', media: 'realistic_studio', ratio: '4:5' },
-  ink_flower: { bg: 'white_seamless', framing: 'half_body', camera: 'soft_focus', motion: 'flow', makeup: ['natural_highend', 'highlight_skin'], skinTexture: 'soft_focus', jewelry: ['none'], expression: 'lower_gaze', lighting: 'window_soft', media: 'fashion_illustration', ratio: '4:5' }
+  ink_flower: { bg: 'white_seamless', framing: 'half_body', camera: 'soft_focus', motion: 'flow', makeup: ['natural_highend', 'highlight_skin'], skinTexture: 'soft_focus', jewelry: ['none'], expression: 'lower_gaze', lighting: 'window_soft', media: 'fashion_illustration', ratio: '4:5' },
+  magazine_masthead: { bg: 'minimal_space', framing: 'half_body', camera: 'neutral', motion: 'still', makeup: ['natural_highend', 'precise_eyeliner'], skinTexture: 'luxury_campaign', jewelry: ['earrings'], expression: 'calm_direct', lighting: 'beauty_fill', media: 'realistic_studio', ratio: '4:5' },
+  dessert_beauty: { bg: 'dessert_table', framing: 'bust', camera: 'beauty_closeup', motion: 'breeze', makeup: ['natural_highend', 'glossy_lip', 'highlight_skin'], skinTexture: 'dewy_glow', jewelry: ['earrings'], expression: 'allure_smile', lighting: 'dessert_soft_bright', media: 'realistic_studio', ratio: '4:5' }
 };
 
 const THEME_PRESET_DEFAULTS = {
@@ -3594,6 +3712,86 @@ const QUICK_MAGAZINE_PRESETS = {
     lighting: 'stage_beam',
     media: 'realistic_studio',
     ratio: '2:3'
+  },
+  pearlVeilBeauty: {
+    label: '珠簾面紗美妝',
+    style: 'jewelry_ad',
+    bg: 'mist',
+    pose: 'hand_neck',
+    framing: 'face_closeup',
+    camera: 'top_beauty',
+    motion: 'breeze',
+    makeup: ['natural_highend', 'glossy_lip', 'highlight_skin'],
+    skinTexture: 'dewy_glow',
+    jewelry: ['statement'],
+    expression: 'lower_gaze',
+    lighting: 'pearl_veil_soft',
+    media: 'realistic_studio',
+    ratio: '4:5'
+  },
+  darkGoldMoodCover: {
+    label: '暗金情緒封面',
+    style: 'beauty_closeup',
+    bg: 'black_void',
+    pose: 'hand_chest',
+    framing: 'bust',
+    camera: 'beauty_closeup',
+    motion: 'still',
+    makeup: ['smoky_glam', 'glossy_lip'],
+    skinTexture: 'dewy_glow',
+    jewelry: ['earrings'],
+    expression: 'distant_chic',
+    lighting: 'dark_gold_mood',
+    media: 'realistic_studio',
+    ratio: '4:5'
+  },
+  silkRoadJewelry: {
+    label: '西域珠寶封面',
+    style: 'jewelry_ad',
+    bg: 'drape',
+    pose: 'fabric_hold',
+    framing: 'three_quarter',
+    camera: 'three_quarter_side',
+    motion: 'flow',
+    makeup: ['natural_highend', 'highlight_skin'],
+    skinTexture: 'luxury_campaign',
+    jewelry: ['statement'],
+    expression: 'calm_direct',
+    lighting: 'pearl_veil_soft',
+    media: 'realistic_studio',
+    ratio: '4:5'
+  },
+  mastheadCover: {
+    label: '雜誌刊頭封面',
+    style: 'magazine_masthead',
+    bg: 'minimal_space',
+    pose: 'center_still',
+    framing: 'half_body',
+    camera: 'neutral',
+    motion: 'still',
+    makeup: ['natural_highend', 'precise_eyeliner'],
+    skinTexture: 'luxury_campaign',
+    jewelry: ['earrings'],
+    expression: 'calm_direct',
+    lighting: 'beauty_fill',
+    media: 'realistic_studio',
+    ratio: '4:5'
+  },
+  dessertBeautyAd: {
+    label: '甜點美妝廣告',
+    style: 'dessert_beauty',
+    bg: 'dessert_table',
+    pose: 'hold_theme_prop',
+    framing: 'bust',
+    camera: 'beauty_closeup',
+    motion: 'breeze',
+    makeup: ['natural_highend', 'glossy_lip', 'highlight_skin'],
+    skinTexture: 'dewy_glow',
+    jewelry: ['earrings'],
+    expression: 'allure_smile',
+    lighting: 'dessert_soft_bright',
+    media: 'realistic_studio',
+    ratio: '4:5'
   }
 };
 

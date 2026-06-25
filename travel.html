@@ -463,6 +463,13 @@
       <label class="chip" data-value="東京霓虹賽博女忍者"><input type="radio" name="themePreset" value="東京霓虹賽博女忍者">東京霓虹賽博女忍者</label>
       <label class="chip" data-value="歐洲聖堂天使戰姬"><input type="radio" name="themePreset" value="歐洲聖堂天使戰姬">歐洲聖堂天使戰姬</label>
       <label class="chip" data-value="首爾偶像舞台女主"><input type="radio" name="themePreset" value="首爾偶像舞台女主">首爾偶像舞台女主</label>
+      <label class="chip" data-value="雨巷江南古鎮"><input type="radio" name="themePreset" value="雨巷江南古鎮">雨巷江南古鎮</label>
+      <label class="chip" data-value="夜景宮殿雪景"><input type="radio" name="themePreset" value="夜景宮殿雪景">夜景宮殿雪景</label>
+      <label class="chip" data-value="沙漠西域旅拍"><input type="radio" name="themePreset" value="沙漠西域旅拍">沙漠西域旅拍</label>
+      <label class="chip" data-value="書法雅集室內"><input type="radio" name="themePreset" value="書法雅集室內">書法雅集室內</label>
+      <label class="chip" data-value="湖畔荷花古風"><input type="radio" name="themePreset" value="湖畔荷花古風">湖畔荷花古風</label>
+      <label class="chip" data-value="歐洲水都夜景"><input type="radio" name="themePreset" value="歐洲水都夜景">歐洲水都夜景</label>
+      <label class="chip" data-value="酒吧夜景寫真"><input type="radio" name="themePreset" value="酒吧夜景寫真">酒吧夜景寫真</label>
     </div>
     <input type="text" class="theme-input" id="themeInput" placeholder="例如：京都伏見稻荷九尾妖狐">
   </section>
@@ -661,6 +668,31 @@
         <input type="radio" name="lighting" value="prismatic_color">
         <div class="name">彩色棱鏡光</div>
         <div class="desc">彩虹折射 / 夢幻旅行廣告感</div>
+      </label>
+      <label class="card" data-value="rain_night_cool">
+        <input type="radio" name="lighting" value="rain_night_cool">
+        <div class="name">雨夜冷光</div>
+        <div class="desc">雨幕 / 濕地反光 / 冷色環境一致</div>
+      </label>
+      <label class="card" data-value="palace_night_warm">
+        <input type="radio" name="lighting" value="palace_night_warm">
+        <div class="name">夜景宮殿暖光</div>
+        <div class="desc">宮殿燈光 / 雪粒金箔 / 人景同光</div>
+      </label>
+      <label class="card" data-value="lotus_water_bounce">
+        <input type="radio" name="lighting" value="lotus_water_bounce">
+        <div class="name">水面柔光反射</div>
+        <div class="desc">荷塘 / 湖面反光 / 古風柔光</div>
+      </label>
+      <label class="card" data-value="canal_night_warm">
+        <input type="radio" name="lighting" value="canal_night_warm">
+        <div class="name">水都夜景暖光</div>
+        <div class="desc">運河燈光 / 水面反射 / 晚禮服感</div>
+      </label>
+      <label class="card" data-value="bar_ambient_warm">
+        <input type="radio" name="lighting" value="bar_ambient_warm">
+        <div class="name">酒吧暖調環境光</div>
+        <div class="desc">吧台燈 / 玻璃反射 / 都會夜景</div>
       </label>
     </div>
   </section>
@@ -1290,7 +1322,54 @@ Subtle Rainbow Refractions Across Face, Body, Clothing And Background
 Unified Colorful Light Environment
 Environmental Reflections Affect Facial Lighting
 Dreamy Premium Travel Campaign Glow
-No Separate Face Relighting`
+No Separate Face Relighting`,
+
+rain_night_cool:`【光影色彩｜雨夜冷光】
+
+Cool Rainy Night Travel Light
+Rain Curtains And Wet Stone Ground Reflections
+Blue Gray Ambient Light Affects Face, Body, Hair And Clothing
+Face Visible Without Breaking The Rainy Scene Lighting
+Natural Reflections From Wet Streets, Bridges And Architecture
+No Separate Studio Beauty Light
+No Floating Subject Effect`,
+
+palace_night_warm:`【光影色彩｜夜景宮殿暖光】
+
+Warm Palace Night Travel Light
+Glowing Palace Architecture As The Main Environmental Light Source
+Falling Snow And Gold Foil Reflect Warm Highlights Onto Face, Body And Clothing
+Subject And Palace Background Share The Same Night Lighting
+Natural Cold-Warm Balance Between Snow And Palace Lamps
+No Detached Portrait Lighting`,
+
+lotus_water_bounce:`【光影色彩｜水面柔光反射】
+
+Soft Lotus Pond Daylight
+Water Surface Bounce Light Affects Face, Body, Hair And Clothing
+Lotus Leaves And Lake Reflections Create Gentle Green And White Ambient Light
+Ancient Style Outfit Shares The Same Outdoor Lakeside Lighting
+Natural Reflections From Water And Wet Stone
+No Separate Studio Beauty Light
+No Floating Subject Effect`,
+
+canal_night_warm:`【光影色彩｜水都夜景暖光】
+
+Warm European Canal Night Light
+City Lamps And Bridge Lights Reflected From Canal Water Onto Face And Dress
+Golden Street Light And Water Reflection Affect The Entire Subject
+Subject And Canal Background Share The Same Night Lighting
+Elegant Travel Evening Portrait Mood
+No Detached Portrait Lighting`,
+
+bar_ambient_warm:`【光影色彩｜酒吧暖調環境光】
+
+Warm Bar Ambient Light
+Glass Reflections, Bottle Highlights And Counter Light Affect Face And Body
+Mature Urban Night Portrait Lighting
+Face Visible Within The Same Bar Environment
+No Independent Beauty Ring Light
+No Overexposed Face`
 };
 
 const MOTION_LEVELS = {
