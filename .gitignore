@@ -17,6 +17,13 @@ output/*
 !output/.gitkeep
 temp/*
 !temp/.gitkeep
+backup_original/
+紅兵寫真旅拍引擎_v4.3/
+紅兵寫真旅拍引擎_v4.3.zip
+
+# Local video experiment drafts
+scripts/guizhou_*.ass
+scripts/make_guizhou_*.ps1
 
 # Editor and environment noise
 .vscode/

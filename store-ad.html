@@ -355,7 +355,9 @@
   </section>
 </main>
 
+<script src="assets/core-prompt.js"></script>
 <script>
+const STORE_AD_CORE = window.HB_CORE_PROMPT?.page?.storeAd || {};
 const campaignData = {
   promo: {
     title: '優惠促銷海報',
@@ -512,6 +514,8 @@ function generate(){
       eventName ? `leave a clean title area for "${eventName}" to be added later,` : 'leave a clean title area for the event name to be added later,',
       offer ? 'leave a clean promotion text area for the offer content to be added later,' : 'leave a clean promotion text area for offer content to be added later,',
       extraNote ? `extra direction: ${extraNote},` : '',
+      STORE_AD_CORE.negativePrompt ? STORE_AD_CORE.negativePrompt + ',' : '',
+      STORE_AD_CORE.output ? STORE_AD_CORE.output + ',' : '',
       'professional advertising artwork, elegant composition, high quality, sharp focus'
     ].filter(Boolean).join('\n'),
     '',

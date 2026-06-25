@@ -611,10 +611,11 @@
 
 </div>
 
+<script src="assets/core-prompt.js"></script>
 <script>
 // ====== 核心系統 ======
 const CORE_IDENTITY =
-`【公仔化身份轉換系統｜最高優先級】
+[(window.HB_CORE_PROMPT?.page?.doll?.identityLock || ''), `【公仔化身份轉換系統｜最高優先級】
 
 使用上傳人物照片作為唯一角色原型
 將真人外觀轉化為可愛公仔風格
@@ -634,7 +635,7 @@ Cute Chibi Proportions While Maintaining Identity
 
 禁止完全替換成標準AI公仔臉
 禁止失去本人辨識度
-禁止過度卡通化至認不出來`;
+禁止過度卡通化至認不出來`].filter(Boolean).join('\n\n');
 
 const CORE_BODY =
 `【公仔比例系統】

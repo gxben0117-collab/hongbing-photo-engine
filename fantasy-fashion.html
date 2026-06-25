@@ -747,6 +747,7 @@
   </section>
 </main>
 
+<script src="assets/core-prompt.js"></script>
 <script>
 const materialData = {
   milkTea: {
@@ -1032,7 +1033,9 @@ const lightingData = {
   candyGlossLight: 'glossy candy commercial lighting, transparent jelly highlights, soft colorful candy reflections affect face skin hair and outfit naturally, premium beauty product studio light, no overexposed face'
 };
 
-const identityGuard = `Facial Geometry Lock System:
+const sharedFantasyCore = window.HB_CORE_PROMPT?.page?.fantasy || {};
+
+const identityGuard = sharedFantasyCore.identityGuard || `Facial Geometry Lock System:
 Preserve Original Forehead Height
 Preserve Original Face Width
 Preserve Original Eye Shape
@@ -1062,7 +1065,7 @@ Preserve facial proportions, gaze, age impression and personal features.
 Style, costume, material, lighting and background must not overwrite or redesign the face.
 No face swap, no AI beauty template face, no celebrity face, no influencer face, no identity drift`;
 
-const anatomyGuard = `Realistic Human Anatomy System:
+const anatomyGuard = sharedFantasyCore.anatomyGuard || `Realistic Human Anatomy System:
 Realistic adult female anatomy, natural shoulder width, natural neck length, natural torso depth, natural limb proportions.
 Natural head to body ratio, head size follows the selected body framing and full-body scale whenever the body is visible.
 Body scale priority over beauty exaggeration, realistic commercial camera distance, full height human anatomy reconstruction when full body is selected.
@@ -1120,7 +1123,7 @@ When full body or wide poster framing is selected, keep the face readable and re
 Do not sacrifice facial identity for outfit, body silhouette, background, particles or material spectacle.
 Facial likeness remains the highest priority even when the face is small in frame`;
 
-const lightingConsistencyGuard = `【光線一致性系統】
+const lightingConsistencyGuard = sharedFantasyCore.lightingGuard || `【光線一致性系統】
 
 Unified Cinematic Lighting System
 Global Lighting Consistency
@@ -1572,9 +1575,11 @@ function generate(){
     'lighting design: ' + lighting + ',',
     'background design: ' + background + ',',
     ratioData[selected('ratio')] + ',',
+    sharedFantasyCore.output ? sharedFantasyCore.output + ',' : '',
     'sharp focus, hyper realistic, ultra detailed, premium advertising finish,',
     'color palette: ' + (colorNote || materialPalette) + ',',
     extraNote ? 'extra direction: ' + extraNote + ',' : '',
+    sharedFantasyCore.negativePrompt ? sharedFantasyCore.negativePrompt + ',' : '',
     'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face'
   ].filter(Boolean).join('\n');
 
