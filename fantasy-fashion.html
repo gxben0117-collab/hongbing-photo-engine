@@ -243,19 +243,31 @@
     color:#DCC8FF;
     border:1px solid rgba(184,137,255,.45);
   }
-  .output{
-    border:1px solid var(--line);
+  .copy-btn.copied{
+    background:#DCC8FF;
+    color:#120D18;
+  }
+  .output-wrap{
+    margin-top:28px;
+  }
+  .output-wrap textarea{
+    width:100%;
+    min-height:300px;
     background:#0F0E13;
+    border:1px solid var(--line);
     border-radius:8px;
     padding:16px;
-    white-space:pre-wrap;
-    min-height:240px;
     color:#EEE8F8;
-    font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;
+    font-family:monospace;
     font-size:13px;
-    line-height:1.75;
+    line-height:1.8;
+    resize:vertical;
   }
-  .output.hidden{display:none;}
+  .output-wrap .copy-btn{
+    width:100%;
+    margin-top:8px;
+  }
+  .hidden{display:none;}
   .hint{color:var(--soft);font-size:12px;}
   @media (max-width:760px){
     nav{
@@ -293,7 +305,7 @@
   @media (max-width:480px){
     .grid,.grid-3,.form-grid,.pose-group-grid{grid-template-columns:1fr;}
     .card,.pose-card{min-height:auto;padding:11px 12px;}
-    .output{font-size:12px;padding:13px;overflow-wrap:anywhere;}
+    .output-wrap textarea{font-size:12px;padding:13px;overflow-wrap:anywhere;}
   }
 </style>
 </head>
@@ -415,6 +427,18 @@
         <div class="name">玫瑰金智慧手錶廣告</div>
         <div class="desc">玫瑰金錶盤、手腕特寫、女性科技精品</div>
       </button>
+      <button class="card" type="button" data-template="milkTeaSplashDress">
+        <div class="name">奶茶牛奶飛濺裙廣告</div>
+        <div class="desc">焦糖奶茶、牛奶對撞、溫暖奶茶色</div>
+      </button>
+      <button class="card" type="button" data-template="strawberryMilkshakeSplashDress">
+        <div class="name">草莓奶昔飛濺裙廣告</div>
+        <div class="desc">粉紅奶昔、草莓果粒、美妝廣告感</div>
+      </button>
+      <button class="card" type="button" data-template="tropicalFruitSplashDress">
+        <div class="name">熱帶水果飛濺裙廣告</div>
+        <div class="desc">芒果、百香果、鳳梨、柑橘果汁爆發</div>
+      </button>
     </div>
   </section>
 
@@ -521,6 +545,7 @@
       <label class="card"><input type="radio" name="material" value="silverPhoneGlass"><div class="name">銀色手機玻璃</div><div class="desc">玻璃螢幕、液態銀、冷白科技反射</div></label>
       <label class="card"><input type="radio" name="material" value="blueEarbudsWave"><div class="name">透明藍光耳機</div><div class="desc">透明外殼、藍色音波、科技光軌</div></label>
       <label class="card"><input type="radio" name="material" value="roseGoldSmartwatch"><div class="name">玫瑰金智慧手錶</div><div class="desc">玫瑰金、鏡面錶盤、手腕精品</div></label>
+      <label class="card"><input type="radio" name="material" value="tropicalFruitSplash"><div class="name">熱帶水果果汁</div><div class="desc">芒果、百香果、鳳梨、柑橘、金黃果汁</div></label>
     </div>
     <div class="form-grid" style="margin-top:10px;">
       <label class="field custom-choice" data-custom-choice="material">材質自填
@@ -793,13 +818,13 @@
       <div class="section-label">12</div>
       <div class="section-title">生成咒語</div>
     </div>
-    <div class="actions">
-      <button id="generateBtn">生成完整咒語</button>
-      <button class="copy-btn" id="copyBtn">一鍵複製</button>
-    </div>
+    <button id="generateBtn">生成完整咒語</button>
     <p class="hint">建議搭配真人參考照使用，並在生圖模型中開啟身份/臉部參考。</p>
-    <div class="output hidden" id="output"></div>
   </section>
+  <div class="output-wrap hidden" id="outputWrap">
+    <textarea id="outputText" readonly></textarea>
+    <button class="copy-btn" id="copyBtn">一鍵複製</button>
+  </div>
 </main>
 
 <script src="assets/core-prompt.js"></script>
@@ -1049,6 +1074,11 @@ const materialData = {
     label: '玫瑰金智慧手錶',
     prompt: 'rose gold smartwatch material system, polished watch face reflections, rose gold metal frame, elegant wrist technology details, premium wearable lifestyle campaign accents, watch remains a refined prop',
     palette: 'rose gold, soft champagne, polished black glass, warm ivory, cosmetic pink highlight'
+  },
+  tropicalFruitSplash: {
+    label: '熱帶水果果汁',
+    prompt: 'tropical fruit juice splash material system, mango juice, passion fruit pulp, pineapple pieces, citrus slices, golden liquid splash fabric, fresh summer drink advertisement energy, fruit particles suspended in high speed motion',
+    palette: 'mango yellow, passion fruit gold, pineapple orange, citrus green, clean white highlight'
   }
 };
 
@@ -1716,6 +1746,45 @@ const themeTemplates = {
     background: 'roseGoldTechStudio',
     ratio: 'vertical45',
     intensity: 'balanced material effects, elegant and luxurious'
+  },
+  milkTeaSplashDress: {
+    garment: 'splashDress',
+    material: 'milkTea',
+    style: 'beautyCampaign',
+    composition: 'diagonal dynamic advertising layout, caramel milk tea and cream white milk collide into a sculptural splash dress around the subject',
+    framing: 'threeQuarter',
+    pose: 'fabric_hold',
+    camera: 'threeQuarterSide',
+    lighting: 'dessertBeautyLight',
+    background: 'dessertBeautyStudio',
+    ratio: 'vertical45',
+    intensity: 'massive explosive material splash, high speed frozen motion'
+  },
+  strawberryMilkshakeSplashDress: {
+    garment: 'splashDress',
+    material: 'strawberry',
+    style: 'beautyCampaign',
+    composition: 'foreground material frame composition, pink strawberry milkshake splash forms a dynamic skirt with strawberry fruit pieces near the camera',
+    framing: 'threeQuarter',
+    pose: 'fabric_hold',
+    camera: 'beautyCloseUp',
+    lighting: 'dessertBeautyLight',
+    background: 'dessertBeautyStudio',
+    ratio: 'vertical45',
+    intensity: 'massive explosive material splash, high speed frozen motion'
+  },
+  tropicalFruitSplashDress: {
+    garment: 'splashDress',
+    material: 'tropicalFruitSplash',
+    style: 'beautyCampaign',
+    composition: 'diagonal dynamic advertising layout, golden tropical fruit juice explodes into a couture splash skirt with summer drink campaign energy',
+    framing: 'threeQuarter',
+    pose: 'fabric_hold',
+    camera: 'threeQuarterSide',
+    lighting: 'dessertBeautyLight',
+    background: 'dessertBeautyStudio',
+    ratio: 'vertical45',
+    intensity: 'massive explosive material splash, high speed frozen motion'
   }
 };
 
@@ -1802,13 +1871,14 @@ function generate(options = {}){
     'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face'
   ].filter(Boolean).join('\n');
 
-  const outputEl = document.getElementById('output');
-  outputEl.textContent = prompt;
+  const outputText = document.getElementById('outputText');
+  const outputWrap = document.getElementById('outputWrap');
+  outputText.value = prompt;
   if(options.reveal || fantasyOutputVisible){
     fantasyOutputVisible = true;
-    outputEl.classList.remove('hidden');
+    outputWrap.classList.remove('hidden');
     if(options.reveal){
-      outputEl.scrollIntoView({behavior:'smooth', block:'start'});
+      outputWrap.scrollIntoView({behavior:'smooth', block:'start'});
     }
   }
   resetCopyButton();
@@ -1830,35 +1900,30 @@ document.querySelectorAll('[data-template]').forEach(button => {
   });
 });
 document.getElementById('copyBtn').addEventListener('click', async () => {
-  const outputEl = document.getElementById('output');
-  if(outputEl.classList.contains('hidden') || !outputEl.textContent.trim()){
+  const outputWrap = document.getElementById('outputWrap');
+  const outputText = document.getElementById('outputText');
+  if(outputWrap.classList.contains('hidden') || !outputText.value.trim()){
     generate({reveal:true});
   }
-  const text = outputEl.textContent;
+  const text = outputText.value;
   const btn = document.getElementById('copyBtn');
   function showCopied(){
     btn.textContent = '已複製!';
-    setTimeout(() => btn.textContent = '一鍵複製', 1200);
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = '一鍵複製';
+      btn.classList.remove('copied');
+    }, 1500);
   }
   if(navigator.clipboard && navigator.clipboard.writeText){
     navigator.clipboard.writeText(text).then(showCopied).catch(() => {
-      const range = document.createRange();
-      range.selectNodeContents(outputEl);
-      const selection = window.getSelection();
-      selection.removeAllRanges();
-      selection.addRange(range);
+      outputText.select();
       document.execCommand('copy');
-      selection.removeAllRanges();
       showCopied();
     });
   } else {
-    const range = document.createRange();
-    range.selectNodeContents(outputEl);
-    const selection = window.getSelection();
-    selection.removeAllRanges();
-    selection.addRange(range);
+    outputText.select();
     document.execCommand('copy');
-    selection.removeAllRanges();
     showCopied();
   }
 });
