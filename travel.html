@@ -470,6 +470,8 @@
       <label class="chip" data-value="湖畔荷花古風"><input type="radio" name="themePreset" value="湖畔荷花古風">湖畔荷花古風</label>
       <label class="chip" data-value="歐洲水都夜景"><input type="radio" name="themePreset" value="歐洲水都夜景">歐洲水都夜景</label>
       <label class="chip" data-value="酒吧夜景寫真"><input type="radio" name="themePreset" value="酒吧夜景寫真">酒吧夜景寫真</label>
+      <label class="chip" data-value="紅紗古鎮飄帶"><input type="radio" name="themePreset" value="紅紗古鎮飄帶">紅紗古鎮飄帶</label>
+      <label class="chip" data-value="原宿粉色Y2K街頭"><input type="radio" name="themePreset" value="原宿粉色Y2K街頭">原宿粉色Y2K街頭</label>
     </div>
     <input type="text" class="theme-input" id="themeInput" placeholder="例如：京都伏見稻荷九尾妖狐">
   </section>
@@ -778,11 +780,11 @@
       <div class="num">09</div>
       <div class="title">生成咒語</div>
     </div>
-    <button class="generate-btn" id="generateBtn">生成咒語</button>
+    <button class="generate-btn" id="generateBtn">生成完整咒語</button>
   </section>
   <div class="output-wrap hidden" id="outputWrap">
     <textarea id="outputText" readonly></textarea>
-    <button class="copy-btn" id="copyBtn">複製咒語</button>
+    <button class="copy-btn" id="copyBtn">一鍵複製</button>
   </div>
 </div>
 
@@ -1398,14 +1400,14 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
   document.getElementById('outputWrap').classList.remove('hidden');
   document.getElementById('outputWrap').scrollIntoView({behavior:'smooth',block:'start'});
   const cb=document.getElementById('copyBtn');
-  cb.textContent='複製咒語';
+  cb.textContent='一鍵複製';
   cb.classList.remove('copied');
 });
 
 document.getElementById('copyBtn').addEventListener('click',()=>{
   const text=document.getElementById('outputText').value;
   const btn=document.getElementById('copyBtn');
-  function ok(){ btn.textContent='已複製!'; btn.classList.add('copied'); setTimeout(()=>{ btn.textContent='複製咒語'; btn.classList.remove('copied'); },1500); }
+  function ok(){ btn.textContent='已複製!'; btn.classList.add('copied'); setTimeout(()=>{ btn.textContent='一鍵複製'; btn.classList.remove('copied'); },1500); }
   if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(ok).catch(()=>{ document.getElementById('outputText').select(); document.execCommand('copy'); ok(); }); }
   else{ document.getElementById('outputText').select(); document.execCommand('copy'); ok(); }
 });

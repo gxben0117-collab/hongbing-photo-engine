@@ -584,6 +584,8 @@
       <button type="button" class="preset-btn" data-magazine-preset="silkRoadJewelry">一鍵套用｜西域珠寶封面</button>
       <button type="button" class="preset-btn" data-magazine-preset="mastheadCover">一鍵套用｜雜誌刊頭封面</button>
       <button type="button" class="preset-btn" data-magazine-preset="dessertBeautyAd">一鍵套用｜甜點美妝廣告</button>
+      <button type="button" class="preset-btn" data-magazine-preset="chineseRedBridalCover">一鍵套用｜中式紅妝婚嫁封面</button>
+      <button type="button" class="preset-btn" data-magazine-preset="whiteFloralBridalCover">一鍵套用｜白花婚紗花藝封面</button>
     </div>
   </section>
 
@@ -782,6 +784,8 @@
       <label class="chip" data-value="女武神"><input type="radio" name="themePreset" value="女武神">女武神</label>
       <label class="chip" data-value="暗黑女王"><input type="radio" name="themePreset" value="暗黑女王">暗黑女王</label>
       <label class="chip" data-value="中式古典"><input type="radio" name="themePreset" value="中式古典">中式古典</label>
+      <label class="chip" data-value="中式紅妝婚嫁封面"><input type="radio" name="themePreset" value="中式紅妝婚嫁封面">中式紅妝婚嫁封面</label>
+      <label class="chip" data-value="白花婚紗花藝封面"><input type="radio" name="themePreset" value="白花婚紗花藝封面">白花婚紗花藝封面</label>
       <label class="chip" data-value="唐朝盛世"><input type="radio" name="themePreset" value="唐朝盛世">唐朝盛世</label>
       <label class="chip" data-value="改良式漢服"><input type="radio" name="themePreset" value="改良式漢服">改良式漢服</label>
       <label class="chip" data-value="敦煌飛天"><input type="radio" name="themePreset" value="敦煌飛天">敦煌飛天</label>
@@ -1730,11 +1734,11 @@
       <span class="section-label">12</span>
       <span class="section-title">生成咒語</span>
     </div>
-    <button class="generate-btn" id="generateBtn">生成咒語</button>
+    <button class="generate-btn" id="generateBtn">生成完整咒語</button>
   </section>
   <div class="output-wrap hidden" id="outputWrap">
     <textarea id="outputText" readonly></textarea>
-    <button class="copy-btn" id="copyBtn">複製咒語</button>
+    <button class="copy-btn" id="copyBtn">一鍵複製</button>
   </div>
 
 </div>
@@ -3518,7 +3522,7 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
   document.getElementById('outputWrap').scrollIntoView({behavior:'smooth', block:'start'});
 
   const copyBtn = document.getElementById('copyBtn');
-  copyBtn.textContent = '複製咒語';
+  copyBtn.textContent = '一鍵複製';
   copyBtn.classList.remove('copied');
 });
 
@@ -3528,7 +3532,7 @@ document.getElementById('copyBtn').addEventListener('click',()=>{
   function showCopied(){
     btn.textContent='已複製!';
     btn.classList.add('copied');
-    setTimeout(()=>{btn.textContent='複製咒語';btn.classList.remove('copied');},1500);
+    setTimeout(()=>{btn.textContent='一鍵複製';btn.classList.remove('copied');},1500);
   }
   if(navigator.clipboard&&navigator.clipboard.writeText){
     navigator.clipboard.writeText(text).then(showCopied).catch(()=>{
@@ -3717,6 +3721,40 @@ const QUICK_MAGAZINE_PRESETS = {
     lighting: 'dessert_soft_bright',
     media: 'realistic_studio',
     ratio: '4:5'
+  },
+  chineseRedBridalCover: {
+    label: '中式紅妝婚嫁封面',
+    themeText: '中式紅妝婚嫁封面, Chinese red bridal beauty cover, ornate Chinese bridal headpiece, red veil, gold hair ornaments, luxury eastern bridal makeup, refined red lips, warm red background, no paper cut material',
+    style: 'bazaar_cn',
+    bg: 'red_curtain',
+    pose: 'hand_neck',
+    framing: 'bust',
+    camera: 'beauty_closeup',
+    motion: 'breeze',
+    makeup: ['red_lip', 'precise_eyeliner', 'highlight_skin'],
+    skinTexture: 'luxury_campaign',
+    jewelry: ['statement'],
+    expression: 'lower_gaze',
+    lighting: 'black_gold',
+    media: 'realistic_studio',
+    ratio: '4:5'
+  },
+  whiteFloralBridalCover: {
+    label: '白花婚紗花藝封面',
+    themeText: '白花婚紗花藝封面, white floral bridal couture cover, white flower shoulder ornaments, ivory bridal gown details, clean studio bridal beauty cover, ivory white background, soft bridal beauty lighting, refined flower details, no fantasy material explosion',
+    style: 'beauty_cover',
+    bg: 'white_seamless',
+    pose: 'hold_flower',
+    framing: 'bust',
+    camera: 'soft_focus',
+    motion: 'breeze',
+    makeup: ['natural_highend', 'glossy_lip', 'highlight_skin'],
+    skinTexture: 'dewy_glow',
+    jewelry: ['earrings'],
+    expression: 'calm_direct',
+    lighting: 'beauty_fill',
+    media: 'realistic_studio',
+    ratio: '4:5'
   }
 };
 
@@ -3725,7 +3763,7 @@ document.querySelectorAll('[data-magazine-preset]').forEach(button=>{
     const preset = QUICK_MAGAZINE_PRESETS[button.dataset.magazinePreset];
     if(!preset) return;
     applyVisualPresetDefaults(preset);
-    themeInputEl.value = preset.label;
+    themeInputEl.value = preset.themeText || preset.label;
     themeInputEl.dispatchEvent(new Event('input',{bubbles:true}));
   });
 });

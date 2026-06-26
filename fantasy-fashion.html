@@ -255,6 +255,7 @@
     font-size:13px;
     line-height:1.75;
   }
+  .output.hidden{display:none;}
   .hint{color:var(--soft);font-size:12px;}
   @media (max-width:760px){
     nav{
@@ -739,11 +740,11 @@
       <div class="section-title">生成咒語</div>
     </div>
     <div class="actions">
-      <button id="generateBtn">生成幻想廣告咒語</button>
-      <button class="copy-btn" id="copyBtn">複製咒語</button>
+      <button id="generateBtn">生成完整咒語</button>
+      <button class="copy-btn" id="copyBtn">一鍵複製</button>
     </div>
     <p class="hint">建議搭配真人參考照使用，並在生圖模型中開啟身份/臉部參考。</p>
-    <div class="output" id="output"></div>
+    <div class="output hidden" id="output"></div>
   </section>
 </main>
 
@@ -1526,7 +1527,13 @@ function applyThemeTemplate(key){
   generate();
 }
 
-function generate(){
+let fantasyOutputVisible = false;
+
+function resetCopyButton(){
+  document.getElementById('copyBtn').textContent = '一鍵複製';
+}
+
+function generate(options = {}){
   const bodyShape = BODY_SHAPES[selected('bodyShape')];
   const materialKey = selected('material');
   const material = materialData[materialKey];
@@ -1583,7 +1590,16 @@ function generate(){
     'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face'
   ].filter(Boolean).join('\n');
 
-  document.getElementById('output').textContent = prompt;
+  const outputEl = document.getElementById('output');
+  outputEl.textContent = prompt;
+  if(options.reveal || fantasyOutputVisible){
+    fantasyOutputVisible = true;
+    outputEl.classList.remove('hidden');
+    if(options.reveal){
+      outputEl.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+  }
+  resetCopyButton();
 }
 
 document.querySelectorAll('input[type="radio"]').forEach(input => {
@@ -1592,7 +1608,7 @@ document.querySelectorAll('input[type="radio"]').forEach(input => {
     generate();
   });
 });
-document.getElementById('generateBtn').addEventListener('click', generate);
+document.getElementById('generateBtn').addEventListener('click', () => generate({reveal:true}));
 document.getElementById('redPaperWeddingPreset').addEventListener('click', () => {
   applyThemeTemplate('redPaperWedding');
 });
@@ -1602,11 +1618,37 @@ document.querySelectorAll('[data-template]').forEach(button => {
   });
 });
 document.getElementById('copyBtn').addEventListener('click', async () => {
-  const text = document.getElementById('output').textContent;
-  await navigator.clipboard.writeText(text);
+  const outputEl = document.getElementById('output');
+  if(outputEl.classList.contains('hidden') || !outputEl.textContent.trim()){
+    generate({reveal:true});
+  }
+  const text = outputEl.textContent;
   const btn = document.getElementById('copyBtn');
-  btn.textContent = '已複製';
-  setTimeout(() => btn.textContent = '複製咒語', 1200);
+  function showCopied(){
+    btn.textContent = '已複製!';
+    setTimeout(() => btn.textContent = '一鍵複製', 1200);
+  }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(showCopied).catch(() => {
+      const range = document.createRange();
+      range.selectNodeContents(outputEl);
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      document.execCommand('copy');
+      selection.removeAllRanges();
+      showCopied();
+    });
+  } else {
+    const range = document.createRange();
+    range.selectNodeContents(outputEl);
+    const selection = window.getSelection();
+    selection.removeAllRanges();
+    selection.addRange(range);
+    document.execCommand('copy');
+    selection.removeAllRanges();
+    showCopied();
+  }
 });
 ['customGarment','customMaterial','intensity','colorNote','extraNote'].forEach(id => {
   document.getElementById(id).addEventListener('input', () => {
