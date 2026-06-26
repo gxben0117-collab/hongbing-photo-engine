@@ -823,11 +823,11 @@
     </div>
     <button id="generateBtn">生成完整咒語</button>
     <p class="hint">建議搭配真人參考照使用，並在生圖模型中開啟身份/臉部參考。</p>
+    <div class="output-wrap hidden" id="outputWrap">
+      <textarea id="outputText" readonly></textarea>
+      <button class="copy-btn" id="copyBtn">一鍵複製</button>
+    </div>
   </section>
-  <div class="output-wrap hidden" id="outputWrap">
-    <textarea id="outputText" readonly></textarea>
-    <button class="copy-btn" id="copyBtn">一鍵複製</button>
-  </div>
 </main>
 
 <script src="assets/core-prompt.js"></script>
@@ -1883,9 +1883,6 @@ function generate(options = {}){
   if(options.reveal || fantasyOutputVisible){
     fantasyOutputVisible = true;
     outputWrap.classList.remove('hidden');
-    if(options.reveal){
-      outputWrap.scrollIntoView({behavior:'smooth', block:'nearest'});
-    }
   }
   resetCopyButton();
 }
