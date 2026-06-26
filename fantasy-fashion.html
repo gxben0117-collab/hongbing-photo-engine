@@ -1878,7 +1878,7 @@ function generate(options = {}){
     fantasyOutputVisible = true;
     outputWrap.classList.remove('hidden');
     if(options.reveal){
-      outputWrap.scrollIntoView({behavior:'smooth', block:'start'});
+      outputWrap.scrollIntoView({behavior:'smooth', block:'nearest'});
     }
   }
   resetCopyButton();
