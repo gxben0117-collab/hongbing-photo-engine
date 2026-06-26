@@ -429,7 +429,7 @@
       </button>
       <button class="card" type="button" data-template="milkTeaSplashDress">
         <div class="name">奶茶牛奶飛濺裙廣告</div>
-        <div class="desc">焦糖奶茶、牛奶對撞、溫暖奶茶色</div>
+        <div class="desc">高飽和焦糖琥珀、奶白對撞、飲品衝擊感</div>
       </button>
       <button class="card" type="button" data-template="strawberryMilkshakeSplashDress">
         <div class="name">草莓奶昔飛濺裙廣告</div>
@@ -676,6 +676,7 @@
           <label class="pose-card"><input type="radio" name="pose" value="tiptoe"><div class="pose-name">踮腳仰手</div><div class="pose-desc">踮腳尖+雙手向上延伸</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="hold_flower"><div class="pose-name">雙手托花/道具</div><div class="pose-desc">雙手捧著主題相關物件</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="hold_theme_prop"><div class="pose-name">托物伸手</div><div class="pose-desc">手掌托主題材質 / 藝術系統相關物品,近景廣告感</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="table_appreciation"><div class="pose-name">桌邊欣賞</div><div class="pose-desc">坐在桌邊欣賞主題食物,高級餐桌廣告感</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="hair_flip"><div class="pose-name">撩髮瞬間</div><div class="pose-desc">單手撥起頭髮的中間動作</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="eye_cover"><div class="pose-name">遮眼手勢</div><div class="pose-desc">單手半遮住眼睛,神秘感</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="hand_neck"><div class="pose-name">手扶頸側</div><div class="pose-desc">單手輕扶頸部,美妝特寫感</div></label>
@@ -741,6 +742,7 @@
       <label class="card"><input type="radio" name="lighting" value="dessertBeautyLight"><div class="name">甜點美妝柔光</div><div class="desc">粉白棚光、奶油反射、乾淨膚色</div></label>
       <label class="card"><input type="radio" name="lighting" value="cherryPopLight"><div class="name">櫻桃氣泡亮光</div><div class="desc">紅色果凍反射、氣泡高光、潮流美妝</div></label>
       <label class="card"><input type="radio" name="lighting" value="matchaSoftLight"><div class="name">抹茶柔霧茶光</div><div class="desc">淡綠茶粉反射、米白柔光、東方高級感</div></label>
+      <label class="card"><input type="radio" name="lighting" value="milkTeaAmberLight"><div class="name">奶茶琥珀撞色光</div><div class="desc">焦糖琥珀、奶白對撞、高飽和飲品廣告</div></label>
       <label class="card"><input type="radio" name="lighting" value="silverScreenLight"><div class="name">銀色螢幕冷光</div><div class="desc">手機螢幕冷光、金屬反射、科技精品</div></label>
       <label class="card"><input type="radio" name="lighting" value="blueAudioLight"><div class="name">藍色音波科技光</div><div class="desc">藍光音波、透明外殼反射、夜色科技</div></label>
       <label class="card"><input type="radio" name="lighting" value="roseGoldTechLight"><div class="name">玫瑰金科技柔光</div><div class="desc">玫瑰金反射、錶面高光、精緻生活感</div></label>
@@ -776,6 +778,7 @@
       <label class="card"><input type="radio" name="background" value="candyStudio"><div class="name">糖果商品棚</div><div class="desc">乾淨棚拍、漂浮軟糖、繽紛商品感</div></label>
       <label class="card"><input type="radio" name="background" value="perfumeGlassStudio"><div class="name">玻璃香氛棚</div><div class="desc">香水瓶感、玻璃折射、柔霧留白</div></label>
       <label class="card"><input type="radio" name="background" value="dessertBeautyStudio"><div class="name">甜點美妝棚</div><div class="desc">草莓蛋糕、奶油白棚、乾淨商品感</div></label>
+      <label class="card"><input type="radio" name="background" value="milkTeaAmberStudio"><div class="name">奶茶撞色棚</div><div class="desc">焦糖琥珀背景、奶白液體、飲品主視覺</div></label>
       <label class="card"><input type="radio" name="background" value="cherryPopStudio"><div class="name">櫻桃氣泡棚</div><div class="desc">紅色氣泡、透明飲品光、潮流版面</div></label>
       <label class="card"><input type="radio" name="background" value="matchaWagashiSet"><div class="name">抹茶和菓子棚</div><div class="desc">米白茶席、淡綠和菓子、東方留白</div></label>
       <label class="card"><input type="radio" name="background" value="silverTechStudio"><div class="name">銀色科技棚</div><div class="desc">手機產品台、玻璃螢幕、冷白未來感</div></label>
@@ -832,8 +835,8 @@
 const materialData = {
   milkTea: {
     label: '奶茶牛奶',
-    prompt: 'milk tea and cream white milk, caramel brown tea liquid colliding with pure milk, tea leaves, coffee beans, cinnamon sticks and tiny spice particles floating around',
-    palette: 'caramel brown, cream white, warm golden beige'
+    prompt: 'vivid caramel milk tea and pure cream white milk collision, saturated amber tea liquid, glossy milk splash, dark tea droplets, caramel syrup ribbons, high contrast beverage advertising splash fabric, energetic drink campaign impact',
+    palette: 'vivid caramel amber, cream white, golden tea brown, dark tea accent, bright glossy highlight'
   },
   strawberry: {
     label: '草莓奶昔',
@@ -1137,6 +1140,7 @@ const backgroundData = {
   candyStudio: 'clean candy product studio background, floating colorful gummy candy, glossy white set, playful but premium commercial layout, uncluttered beauty advertisement space',
   perfumeGlassStudio: 'luxury perfume glass studio background, transparent perfume bottle silhouettes, soft fragrance mist, prismatic glass refraction, elegant negative space, clean high-end scent campaign layout',
   dessertBeautyStudio: 'bright dessert beauty studio background, strawberry cake and whipped cream inspired product set, clean ivory table surfaces, soft pink commercial layout, uncluttered cosmetic advertisement space',
+  milkTeaAmberStudio: 'bold milk tea beverage studio background, saturated caramel amber panels, cream white milk splash accents, glossy drink advertising layout, strong warm contrast, clean but vivid commercial key visual',
   cherryPopStudio: 'cherry soda pop studio background, transparent red drink bubbles, glossy cherries floating in controlled layout, clean pop beauty commercial set, energetic but not cluttered',
   matchaWagashiSet: 'minimal matcha wagashi studio background, ivory tea table, soft green confectionery accents, calm eastern negative space, premium Japanese dessert campaign layout',
   silverTechStudio: 'clean silver technology studio background, glass smartphone product pedestal, reflective metal panels, cool white futuristic space, premium mobile device advertising layout',
@@ -1167,6 +1171,7 @@ const lightingData = {
   dessertBeautyLight: 'dessert beauty lighting, soft pink and ivory studio fill, strawberry cream bounce light affects face body hands and outfit naturally, clean cosmetic advertisement exposure, no flat overexposed face',
   cherryPopLight: 'cherry soda pop lighting, glossy red jelly reflections and sparkling bubble highlights affect face body hair and outfit together, energetic beauty campaign light, skin tone remains consistent',
   matchaSoftLight: 'matcha wagashi soft lighting, calm green tea powder reflections and ivory bounce light affect the entire subject, refined eastern commercial softness, face visible without whitening',
+  milkTeaAmberLight: 'vivid milk tea amber lighting, saturated caramel tea reflections and cream white milk bounce light affect face body hair outfit and splash skirt consistently, high impact beverage campaign contrast, glossy highlights without overexposed face',
   silverScreenLight: 'silver smartphone screen lighting, cool glass screen glow and liquid metal reflections affect face hands body outfit and background consistently, premium technology campaign light, no detached portrait lighting',
   blueAudioLight: 'blue audio technology lighting, translucent blue device glow and waveform reflections affect face hair outfit and background together, clean cyber commercial light, natural facial exposure',
   roseGoldTechLight: 'rose gold wearable technology lighting, polished watch face highlights and warm rose gold bounce light affect hands face body and outfit consistently, elegant lifestyle tech campaign fill'
@@ -1364,6 +1369,7 @@ const poseData = {
   tiptoe: 'tiptoe arms raised pose, standing on tiptoe, both arms reaching upward gracefully, elongated vertical body line',
   hold_flower: 'both hands cupping and holding a theme-related prop, offering gesture with both hands, soft gentle holding pose',
   hold_theme_prop: 'one hand extended forward, palm holding an object related to the selected theme material and art system, refined close-up advertising gesture, strong foreground hand detail, elegant product-like presentation',
+  table_appreciation: 'seated at an elegant table, calmly appreciating the theme food placed on the tabletop, hands relaxed near the table or gently resting beside the plate, refined dining advertisement mood, no hand thrusting toward camera, food stays on the table as a premium still-life element',
   hair_flip: 'mid hair flip captured moment, one hand running through hair, hair caught in motion, candid natural editorial movement',
   eye_cover: 'one hand partially covering eye, fingers slightly spread over eye, mysterious peek through fingers, half hidden face gesture',
   hand_neck: 'one hand gently touching side of neck, beauty close-up gesture, elegant neckline and jawline focus',
@@ -1699,9 +1705,9 @@ const themeTemplates = {
     garment: 'modernHanfu',
     material: 'matchaWagashi',
     style: 'luxury',
-    composition: 'centered commercial key visual, calm eastern luxury dessert campaign layout with refined negative space',
+    composition: 'refined table-side eastern dessert campaign layout, subject seated beside an elegant tea table, matcha wagashi displayed on the tabletop as a premium still-life element, calm negative space',
     framing: 'threeQuarter',
-    pose: 'hold_theme_prop',
+    pose: 'table_appreciation',
     camera: 'eyeLevelCover',
     lighting: 'matchaSoftLight',
     background: 'matchaWagashiSet',
@@ -1751,12 +1757,12 @@ const themeTemplates = {
     garment: 'splashDress',
     material: 'milkTea',
     style: 'beautyCampaign',
-    composition: 'diagonal dynamic advertising layout, caramel milk tea and cream white milk collide into a sculptural splash dress around the subject',
+    composition: 'diagonal dynamic advertising layout, vivid caramel amber milk tea and pure cream white milk collide into a sculptural splash dress around the subject, high impact drink campaign color contrast',
     framing: 'threeQuarter',
     pose: 'fabric_hold',
     camera: 'threeQuarterSide',
-    lighting: 'dessertBeautyLight',
-    background: 'dessertBeautyStudio',
+    lighting: 'milkTeaAmberLight',
+    background: 'milkTeaAmberStudio',
     ratio: 'vertical45',
     intensity: 'massive explosive material splash, high speed frozen motion'
   },
