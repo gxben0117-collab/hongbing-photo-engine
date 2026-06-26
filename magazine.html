@@ -762,6 +762,26 @@
             <div class="name">花墨染</div>
             <div class="desc">水墨花卉人像,純白背景</div>
           </label>
+          <label class="card" data-value="white_stone_sculpture">
+            <input type="radio" name="style" value="white_stone_sculpture">
+            <div class="name">雕塑白石人像</div>
+            <div class="desc">白石雕塑感,古典美術館,霧面肌理</div>
+          </label>
+          <label class="card" data-value="glass_refraction">
+            <input type="radio" name="style" value="glass_refraction">
+            <div class="name">玻璃折射人像</div>
+            <div class="desc">透明玻璃折射,碎片光影,前衛藝術感</div>
+          </label>
+          <label class="card" data-value="white_paper_flower">
+            <input type="radio" name="style" value="white_paper_flower">
+            <div class="name">紙雕白花人像</div>
+            <div class="desc">白色紙雕花卉,立體剪裁,純淨藝術感</div>
+          </label>
+          <label class="card" data-value="geometric_light_portrait">
+            <input type="radio" name="style" value="geometric_light_portrait">
+            <div class="name">光影幾何人像</div>
+            <div class="desc">幾何投影,硬光切面,現代藝術封面</div>
+          </label>
         </div>
       </div>
     </div>  <!-- 02 主題/服裝方向 -->
@@ -1951,6 +1971,35 @@ dessert_beauty:{
 Playful But Premium Commercial Beauty Styling
 Bright Clean Dessert Table Composition
 No Random Text, No Watermark`
+},
+white_stone_sculpture:{
+  label:"雕塑白石人像",
+  text:`White Stone Sculpture Portrait
+白石雕塑感藝術人像,古典美術館氛圍
+Matte Stone Texture, Soft Marble-Like Skin Finish
+Fine Art Museum Portrait Mood
+Human Identity Must Stay Realistic, Not Turn Into A Statue`
+},
+glass_refraction:{
+  label:"玻璃折射人像",
+  text:`Glass Refraction Art Portrait
+透明玻璃折射人像,碎片光影與前衛藝術感
+Prismatic Glass Layers, Controlled Reflections, Editorial Experiment
+Refraction Affects Scene And Styling Without Distorting Facial Identity`
+},
+white_paper_flower:{
+  label:"紙雕白花人像",
+  text:`White Paper Flower Art Portrait
+白色紙雕花卉人像,立體剪裁與純淨藝術感
+Sculptural White Paper Flowers, Clean Couture Craft Details
+Elegant Bridal-Art Editorial Mood, Minimal Ivory Space`
+},
+geometric_light_portrait:{
+  label:"光影幾何人像",
+  text:`Geometric Light Portrait
+幾何投影人像,硬光切面與現代藝術封面
+Clean Shadow Shapes, Architectural Light Pattern, Graphic Editorial Layout
+Face And Body Share The Same Projection Direction`
 },ink_flower:{
   label:"花墨染·中式水墨花卉寫真",
   text:`Chinese Ink Wash Floral Portrait Style
@@ -3305,6 +3354,10 @@ const STYLE_PRESET_DEFAULTS = {
   black_white_art: { bg: 'dark_gray_concrete', framing: 'bust', camera: 'side_profile', motion: 'still', makeup: ['matte_base', 'red_lip'], skinTexture: 'premium_matte', jewelry: ['none'], expression: 'cool_stare', lighting: 'rim_light', media: 'black_white_photo', ratio: '4:5' },
   minimal_feature: { bg: 'minimal_space', framing: 'half_body', camera: 'neutral', motion: 'still', makeup: ['natural_highend'], skinTexture: 'natural_real', jewelry: ['none'], expression: 'calm_direct', lighting: 'beauty_fill', media: 'realistic_studio', ratio: '4:5' },
   ink_flower: { bg: 'white_seamless', framing: 'half_body', camera: 'soft_focus', motion: 'flow', makeup: ['natural_highend', 'highlight_skin'], skinTexture: 'soft_focus', jewelry: ['none'], expression: 'lower_gaze', lighting: 'window_soft', media: 'fashion_illustration', ratio: '4:5' },
+  white_stone_sculpture: { bg: 'gallery_white_wall', framing: 'bust', camera: 'neutral', motion: 'still', makeup: ['matte_base', 'natural_highend'], skinTexture: 'premium_matte', jewelry: ['none'], expression: 'calm_direct', lighting: 'window_soft', media: 'realistic_studio', ratio: '4:5' },
+  glass_refraction: { bg: 'abstract', framing: 'bust', camera: 'beauty_closeup', motion: 'still', makeup: ['highlight_skin', 'precise_eyeliner'], skinTexture: 'luxury_campaign', jewelry: ['earrings'], expression: 'cool_stare', lighting: 'jewelry_sparkle', media: 'realistic_studio', ratio: '4:5' },
+  white_paper_flower: { bg: 'white_seamless', framing: 'bust', camera: 'soft_focus', motion: 'breeze', makeup: ['natural_highend', 'glossy_lip'], skinTexture: 'dewy_glow', jewelry: ['earrings'], expression: 'lower_gaze', lighting: 'beauty_fill', media: 'realistic_studio', ratio: '4:5' },
+  geometric_light_portrait: { bg: 'minimal_space', framing: 'half_body', camera: 'neutral', motion: 'still', makeup: ['matte_base', 'precise_eyeliner'], skinTexture: 'real_pores', jewelry: ['none'], expression: 'distant_chic', lighting: 'rim_light', media: 'realistic_studio', ratio: '4:5' },
   magazine_masthead: { bg: 'minimal_space', framing: 'half_body', camera: 'neutral', motion: 'still', makeup: ['natural_highend', 'precise_eyeliner'], skinTexture: 'luxury_campaign', jewelry: ['earrings'], expression: 'calm_direct', lighting: 'beauty_fill', media: 'realistic_studio', ratio: '4:5' },
   dessert_beauty: { bg: 'dessert_table', framing: 'bust', camera: 'beauty_closeup', motion: 'breeze', makeup: ['natural_highend', 'glossy_lip', 'highlight_skin'], skinTexture: 'dewy_glow', jewelry: ['earrings'], expression: 'allure_smile', lighting: 'dessert_soft_bright', media: 'realistic_studio', ratio: '4:5' }
 };
