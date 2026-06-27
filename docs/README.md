@@ -14,3 +14,4 @@
 - [雜誌棚拍流程](magazine-workflow.md)
 - [幻想廣告咒語產生器分類表](fantasy-ad-workflow.md)
 - [公仔工作流程](doll-workflow.md)
+- [功能分類總表](function-category-map.md)
