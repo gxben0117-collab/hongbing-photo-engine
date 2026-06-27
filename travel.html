@@ -164,6 +164,35 @@
   .card.selected{ border-color:var(--terracotta); background:var(--selected); }
   .card.selected .name{ color:var(--terracotta-deep); }
 
+  .preset-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+  }
+  .preset-btn{
+    border:1px solid var(--line);
+    border-radius:8px;
+    background:linear-gradient(180deg,#171717 0%,#111 100%);
+    color:var(--ink);
+    padding:12px 14px;
+    font-size:13px;
+    font-weight:800;
+    line-height:1.35;
+    cursor:pointer;
+    font-family:inherit;
+    text-align:left;
+    transition:border-color .15s, color .15s, background .15s;
+  }
+  .preset-btn:hover{
+    border-color:var(--gold);
+    color:var(--terracotta-deep);
+    background:var(--selected);
+  }
+  .preset-btn.primary{
+    border-color:var(--gold);
+    color:var(--gold);
+  }
+
   .chips{ display:flex; flex-wrap:wrap; gap:8px; }
   .chip{
     border:1px solid var(--line);
@@ -241,6 +270,9 @@
   }
   .copy-btn.copied{ background:var(--gold); color:var(--black); border-color:var(--gold); }
   .hidden{ display:none; }
+  @media (max-width:560px){
+    .preset-grid{ grid-template-columns:1fr; }
+  }
 </style>
 </head>
 <body>
@@ -271,6 +303,24 @@
   <section>
     <button class="generate-btn" id="travelMoodPreset" style="margin-bottom:18px;background:linear-gradient(180deg,#17120b 0%,#22180f 100%);color:var(--gold);border:1px solid var(--gold);">隨機套用｜旅拍動感感覺</button>
   </section>
+
+  <!-- 00 一鍵模板 -->
+  <section>
+    <div class="step">
+      <div class="num">00</div>
+      <div class="title">一鍵旅拍模板</div>
+      <div class="sub">預填分類，可再手動微調</div>
+    </div>
+    <div class="preset-grid">
+      <button type="button" class="preset-btn primary" data-travel-preset="kyotoKimonoMorning">一鍵套用｜京都清晨和服旅拍</button>
+      <button type="button" class="preset-btn" data-travel-preset="parisCafeCorner">一鍵套用｜巴黎街角咖啡館</button>
+      <button type="button" class="preset-btn" data-travel-preset="londonRainTrench">一鍵套用｜倫敦雨天風衣旅拍</button>
+      <button type="button" class="preset-btn" data-travel-preset="seoulNeonNight">一鍵套用｜首爾夜景霓虹街拍</button>
+      <button type="button" class="preset-btn" data-travel-preset="okinawaWhiteDress">一鍵套用｜沖繩海邊白裙旅拍</button>
+      <button type="button" class="preset-btn" data-travel-preset="shanghaiQipaoHouse">一鍵套用｜上海復古洋房旗袍</button>
+    </div>
+  </section>
+
   <!-- 01 構圖 -->
   <section>
     <div class="step">
@@ -1316,6 +1366,86 @@ function applyTravelRandomSelection(){
   document.getElementById('generateBtn').click();
 }
 
+const QUICK_TRAVEL_PRESETS = {
+  kyotoKimonoMorning: {
+    composition: 'B',
+    style: 'japanese_clear',
+    ratio: '3:4',
+    camera: 'three_quarter_side',
+    lighting: 'warm_window_soft',
+    motion: 'breeze',
+    media: 'travel_magazine',
+    themeText: '京都清晨和服旅拍, 祇園石板路或古寺木門, 改良和服與細緻腰封, 清晨柔暖日光, 乾淨東方旅拍感, 優雅側身回眸'
+  },
+  parisCafeCorner: {
+    composition: 'B',
+    style: 'french',
+    ratio: '4:5',
+    camera: 'passerby_view',
+    lighting: 'scene_natural',
+    motion: 'still',
+    media: 'travel_magazine',
+    themeText: '巴黎街角咖啡館旅拍, 戶外咖啡桌, 風衣或針織上衣, 法式鬆弛感, 自然街角光, 優雅坐姿或靠桌凝望'
+  },
+  londonRainTrench: {
+    composition: 'C',
+    style: 'cinematic',
+    ratio: '9:16',
+    camera: 'tele_compression',
+    lighting: 'rain_night_cool',
+    motion: 'breeze',
+    media: 'cinematic_realistic',
+    themeText: '倫敦雨天風衣旅拍, 濕潤街道與橋邊城市背景, 米色風衣, 透明雨傘或手持傘, 冷灰雨光, 地面反射光影一致'
+  },
+  seoulNeonNight: {
+    composition: 'B',
+    style: 'street',
+    ratio: '4:5',
+    camera: 'handheld_doc',
+    lighting: 'cold_metal',
+    motion: 'flow',
+    media: 'cinematic_realistic',
+    themeText: '首爾夜景霓虹街拍, 弘大或漢江城市夜景, 甜辣潮流穿搭, 霓虹招牌與濕地反光, 自然走路動態, 都會街拍雜誌感'
+  },
+  okinawaWhiteDress: {
+    composition: 'C',
+    style: 'ethereal',
+    ratio: '9:16',
+    camera: 'wide_scene',
+    lighting: 'backlit_halo',
+    motion: 'flow',
+    media: 'travel_magazine',
+    themeText: '沖繩海邊白裙旅拍, 藍海白沙與透明天空, 白色長裙或度假洋裝, 海風吹動裙擺與髮絲, 明亮乾淨夏日度假感'
+  },
+  shanghaiQipaoHouse: {
+    composition: 'D',
+    style: 'vintage',
+    ratio: '3:4',
+    camera: 'cover',
+    lighting: 'warm_window_soft',
+    motion: 'still',
+    media: 'retro_film',
+    themeText: '上海復古洋房旗袍旅拍, 老洋房窗邊與木質室內, 改良旗袍或絲質披肩, 復古膠片暖調, 優雅半身封面人像感'
+  }
+};
+
+function applyTravelPreset(preset){
+  if(!preset) return;
+  if(preset.composition) setRadioCardValue('compositionCards', preset.composition);
+  if(preset.style) setRadioCardValue('styleCards', preset.style);
+  if(preset.ratio) setRadioCardValue('ratioCards', preset.ratio);
+  if(preset.camera) setRadioCardValue('cameraCards', preset.camera);
+  if(preset.lighting) setRadioCardValue('lightingCards', preset.lighting);
+  if(preset.motion) setRadioCardValue('motionCards', preset.motion);
+  if(preset.media) setRadioCardValue('mediaCards', preset.media);
+  if(preset.themeText){
+    themeInputEl.value = preset.themeText;
+    themeInputEl.dispatchEvent(new Event('input', { bubbles: true }));
+  }
+  const outputWrap = document.getElementById('outputWrap');
+  if(outputWrap) outputWrap.classList.add('hidden');
+}
+
 
 const TRAVEL_STYLE_PRESET_DEFAULTS = {
   japanese_clear: { camera: 'soft_focus', motion: 'breeze', media: 'cinematic_realistic' },
@@ -1414,6 +1544,13 @@ document.getElementById('copyBtn').addEventListener('click',()=>{
 
 document.getElementById('travelMoodPreset').addEventListener('click',()=>{
   applyTravelRandomSelection();
+});
+
+document.querySelectorAll('[data-travel-preset]').forEach(button=>{
+  button.addEventListener('click',()=>{
+    const preset = QUICK_TRAVEL_PRESETS[button.dataset.travelPreset];
+    applyTravelPreset(preset);
+  });
 });
 </script>
 </body>
