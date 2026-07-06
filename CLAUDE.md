@@ -18,6 +18,8 @@
 - 2026-07-06：Codex 已完成 `docs/ai-handoff-2026-07-06.md` 的任務 A 工程收尾：
   版本資料夾移入 `versions/`、歷史殘留工具檔已清除、誤放的東北行程頁移至
   `output/tohoku-20260711/` 暫存且不進正式首頁。
-- 下一步：任務 B 咒語優化（核心精簡、插畫媒材條件化）仍受
-  `docs/core-prompt-contract.md` 管制，須先給 owner 改前/改後對照，確認後才能套用。
+- 2026-07-06：Codex 已在 owner 確認後套用任務 B 第一波：
+  B1 保守核心瘦身，B2 travel / magazine 插畫媒材條件化；`fantasy-fashion.html` 暫不動。
+- 下一步：owner 可用 ChatGPT A/B 實測 travel 水彩、magazine 日系動畫等插畫媒材。
+  後續若再改咒語文字，仍需依 `docs/core-prompt-contract.md` 先提供改前/改後對照。
 - 已拍板不做：性別中性化（本產品即為女性設計）、多模型輸出切換（只給 ChatGPT 用）。

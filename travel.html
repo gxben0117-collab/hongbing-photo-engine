@@ -948,6 +948,13 @@ Candid lifestyle travel photography, relaxed human moment, natural everyday eleg
 
 const STYLE_SCOPE_NOTE=`風格只影響光線、構圖、氛圍與服裝質感\n不改五官、臉型與身份辨識度`;
 
+const ILLUSTRATION_MEDIA_KEYS = new Set([
+  'watercolor_travel',
+  'postcard_illustration',
+  'animated_travel',
+  'oil_travel_portrait'
+]);
+
 const MEDIA_STYLES = {
 cinematic_realistic:`【輸出風格 / 畫面媒材｜電影感寫實】
 
@@ -1503,13 +1510,16 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
   const lightingBlock=TRAVEL_LIGHTING_STYLES[lightingKey];
   const motionBlock=MOTION_LEVELS[motionKey];
   const mediaBlock=MEDIA_STYLES[mediaKey];
+  const skeletonBlock=ILLUSTRATION_MEDIA_KEYS.has(mediaKey)
+    ? (CORE.illustrationSkeleton || CORE.skeleton)
+    : CORE.skeleton;
   const costumeBlock=`【服裝邏輯模組｜動態造型系統】\n\n根據主題「${theme}」自動設計服裝層次(Layer1~Layer7)\n服裝層數依主題自動增減,通常2~5層,特殊主題可擴展至7層\n優先真人旅拍感\n優先${style.label}的視覺語言\n服裝符合主題世界觀與材質質感\nPremium Fabric / Fine Embroidery / Rich Material Detail\n\n避免過度Cosplay化\n避免遊戲角色盔甲化\n避免動漫角色化`;
   const themeBlock=`【主題】\n\n${theme}`;
   const ratioBlock=`【輸出比例】\n\n${RATIOS[ratioKey]}`;
 
   const sections=[
     CORE.identity,
-    CORE.skeleton,
+    skeletonBlock,
     CORE.lighting,
     CORE.pose,
     CORE.photographer,

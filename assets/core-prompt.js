@@ -12,23 +12,10 @@ Preserve original face shape, eyes, eyebrows, nose, lips, jawline, facial propor
 Preserve natural asymmetry, personal facial features and original temperament.
 Style, costume, material, lighting, pose and background must not overwrite or redesign the face.
 
-Identity Preservation Priority Above Costume.
-Identity Preservation Priority Above Pose.
-Identity Preservation Priority Above Body Styling.
-Identity Preservation Priority Above Editorial Style.
-Identity Preservation Priority Above Materials.
-Identity Preservation Priority Above Environment.
-Identity Preservation Priority Above Advertising Style.
+Identity preservation has priority above costume, pose, body styling, editorial style, materials, environment and advertising style.
 
-No face swap.
-No AI beauty template face.
-No influencer face.
-No celebrity face.
-No template face.
-No identity drift.
-No facial reconstruction.
-No facial redesign.
-No beautification that changes identity.`;
+No face swap, identity drift, facial reconstruction, facial redesign or beautification that changes identity.
+No AI beauty template face, influencer face, celebrity face or generic template face.`;
 
   const CORE_FACE_GEOMETRY_LOCK = `【臉部幾何鎖定系統】
 
@@ -44,10 +31,7 @@ Preserve Original Jawline Width.
 Preserve Original Chin Shape.
 
 Face Similarity Maximum.
-No Facial Reconstruction.
-No Facial Redesign.
-No Facial Beautification.
-No Facial Stylization.`;
+No facial reconstruction, redesign, beautification or stylization.`;
 
   const CORE_REALISTIC_ANATOMY = `【真人骨架系統】
 
@@ -63,18 +47,9 @@ Head, neck, shoulders and spine alignment must be anatomically coherent.
 Face and head must belong naturally to the same body pose.
 Pose must match head direction and facial gaze.
 
-No oversized head.
-No big head small body effect.
+No oversized head, big head small body effect, deformed body, warped anatomy, extra limbs, extra arms, extra fingers or broken hands.
 No doll proportions unless doll page explicitly requires doll style.
-No deformed body.
-No warped anatomy.
-No extra limbs.
-No extra arms.
-No extra fingers.
-No broken hands.
-No pasted-on face.
-No mismatched head and body angle.
-No twisted neck.`;
+No pasted-on face, mismatched head and body angle or twisted neck.`;
 
   const CORE_CAMERA_RECONSTRUCTION = `【鏡頭重建系統】
 
@@ -124,6 +99,20 @@ No plastic skin.
 No over-smoothing.
 No waxy face.
 No porcelain doll skin unless doll page explicitly requires it.`;
+
+  const CORE_ILLUSTRATION_RECONSTRUCTION = `【插畫媒材比例重建系統】
+
+Ignore original selfie perspective.
+Ignore original lens distortion.
+Reconstruct full human body naturally when body is visible.
+Body scale priority over face scale.
+Head size follows selected framing.
+If full body or wide poster framing is selected, keep body proportion coherent and do not enlarge the head to preserve the face.
+Face remains readable and recognizable even when the face is smaller in frame.
+Render skin, face and body through the selected illustration medium instead of photographic pore detail.
+Preserve recognizable facial geometry, natural skin tone impression and age impression within the selected illustration style.
+No plastic face.
+No detached face look.`;
 
   const CORE_NEGATIVE_PROMPT = `【通用負面約束】
 
@@ -190,9 +179,15 @@ Luxury Editorial Quality.`;
     CORE_SKIN_TEXTURE
   ].join("\n\n");
 
+  const illustrationHumanCore = [
+    CORE_REALISTIC_ANATOMY,
+    CORE_ILLUSTRATION_RECONSTRUCTION
+  ].join("\n\n");
+
   const travelCore = {
     identity: identityCore,
     skeleton: humanCore,
+    illustrationSkeleton: illustrationHumanCore,
     pose: CORE_POSE_NATURALITY,
     photographer: `【時尚攝影師模組】
 
@@ -219,6 +214,7 @@ Identity And Facial Features Remain Clearly Recognizable During Motion.`,
   const magazineCore = {
     identity: identityCore,
     skeleton: humanCore,
+    illustrationSkeleton: illustrationHumanCore,
     photographer: `【時尚攝影師模組】
 
 Human-Centered Editorial Composition.
@@ -277,6 +273,7 @@ Even in doll style, the character must remain recognizable as the uploaded perso
       cameraReconstruction: CORE_CAMERA_RECONSTRUCTION,
       lightingUnification: CORE_LIGHTING_UNIFICATION,
       skinTexture: CORE_SKIN_TEXTURE,
+      illustrationReconstruction: CORE_ILLUSTRATION_RECONSTRUCTION,
       negativePrompt: CORE_NEGATIVE_PROMPT,
       outputQuality: CORE_OUTPUT_QUALITY,
       poseNaturality: CORE_POSE_NATURALITY,

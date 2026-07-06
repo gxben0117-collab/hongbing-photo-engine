@@ -2874,6 +2874,23 @@ No Overexposed Face, No Flat Ring Light`
 }
 };
 // ====== 比例 ======
+const MAGAZINE_ILLUSTRATION_MEDIA_KEYS = new Set([
+  'manga_cover',
+  'fashion_illustration',
+  'oil_portrait',
+  'american_comic',
+  'korean_webtoon',
+  'japanese_anime'
+]);
+
+const MAGAZINE_ILLUSTRATION_SKIN_TEXTURE = `【膚質質感｜插畫媒材版】
+
+Represent skin and makeup through the selected illustration medium.
+Preserve the original person's facial identity, natural skin tone impression, age impression and makeup direction.
+Do not force photographic pore detail, beauty retouching texture or hyper-real skin micro-detail.
+No plastic face.
+No detached face look.`;
+
 const MEDIA_STYLES = {
 realistic_studio:`【輸出風格 / 畫面媒材｜寫實棚拍】
 
@@ -3540,12 +3557,15 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
   const expressionBlock = `【眼神表情】\n\n${DETAIL_BLOCKS.expression[expressionKey]}`;
   const lightingToneBlock = `【光線類型】\n\n${DETAIL_BLOCKS.lighting[lightingKey]}`;
   const mediaBlock = MEDIA_STYLES[mediaKey];
+  const isIllustrationMedia = MAGAZINE_ILLUSTRATION_MEDIA_KEYS.has(mediaKey);
+  const skeletonBlock = isIllustrationMedia ? (CORE.illustrationSkeleton || CORE.skeleton) : CORE.skeleton;
+  const resolvedSkinTextureBlock = isIllustrationMedia ? MAGAZINE_ILLUSTRATION_SKIN_TEXTURE : skinTextureBlock;
   const themeBlock = `【主題 / 服裝方向】\n\n${theme}`;
   const ratioBlock = `【輸出比例】\n\n${RATIOS[ratioKey]}`;
 
   const sections = [
     CORE.identity,
-    CORE.skeleton,
+    skeletonBlock,
     bodyShapeBlock,
     MAGAZINE_LIGHTING_CONSISTENCY,
     MAGAZINE_SUBJECT_INTEGRATION,
@@ -3562,7 +3582,7 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
     themeBlock,
     costumeBlock,
     makeupBlock,
-    skinTextureBlock,
+    resolvedSkinTextureBlock,
     jewelryBlock,
     expressionBlock,
     lightingToneBlock,
