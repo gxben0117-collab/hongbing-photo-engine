@@ -22,6 +22,13 @@
   B1 保守核心瘦身，B2 travel / magazine 插畫媒材條件化；`fantasy-fashion.html` 暫不動。
 - 2026-07-06：Codex 已整理 magazine 妝容 / 珠寶配飾：妝容維持最多 2 個、
   珠寶配飾維持最多 2 個；黑金高訂 preset 改為只給精簡推薦值，不再塞滿多個妝容與華麗套組。
-- 下一步：owner 可用 ChatGPT A/B 實測 travel 水彩、magazine 日系動畫等插畫媒材。
+- 2026-07-06：Claude Code 已核對第一波成果（git / 檔案系統 / check-static 重跑全過），
+  確認未完成項寫在 `docs/ai-handoff-2026-07-06.md`「第二波待辦」：
+  R1 temp/ 清理（owner 已同意）、R2 五頁瀏覽器實測（重點驗 B2 條件化）、
+  R3 明確暫緩（B1 第二刀與 fantasy-fashion 等 owner A/B 實測後再議）。
+- 2026-07-06：Codex 已完成第二波 R1/R2：`temp/` 只保留 `.gitkeep` 與
+  `style-contact-sheets/`，五個工具頁 Chrome 實測「生成 / 複製」皆正常，B2 條件化通過。
+- 下一步：owner 用 ChatGPT A/B 實測 travel 水彩、
+  magazine 日系動畫等插畫媒材的身份保持度。
   後續若再改咒語文字，仍需依 `docs/core-prompt-contract.md` 先提供改前/改後對照。
 - 已拍板不做：性別中性化（本產品即為女性設計）、多模型輸出切換（只給 ChatGPT 用）。
