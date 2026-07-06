@@ -1536,7 +1536,7 @@
       <div style="font-size:12px;color:var(--soft);margin-bottom:8px;">妝容（最多 2 個）</div>
       <div class="chips" id="makeupChips">
         <label class="chip selected" data-value="original"><input type="checkbox" name="makeup" value="original" checked>原圖一致</label>
-        <label class="chip" data-value="natural_highend"><input type="checkbox" name="makeup" value="natural_highend">高級清透妝</label>
+        <label class="chip" data-value="natural_highend"><input type="checkbox" name="makeup" value="natural_highend">自然高級</label>
         <label class="chip" data-value="smoky_glam"><input type="checkbox" name="makeup" value="smoky_glam">煙燻濃妝</label>
         <label class="chip" data-value="red_lip"><input type="checkbox" name="makeup" value="red_lip">紅唇</label>
         <label class="chip" data-value="glossy_lip"><input type="checkbox" name="makeup" value="glossy_lip">濕亮唇妝</label>
@@ -1556,7 +1556,7 @@
         <label class="card" data-value="natural_real">
           <input type="radio" name="skinTexture" value="natural_real">
           <div class="name">自然真實皮膚</div>
-          <div class="desc">適合：生活感寫真、高級清透妝、清透人像</div>
+          <div class="desc">適合：生活感寫真、自然高級、清透人像</div>
         </label>
         <label class="card" data-value="luxury_campaign">
           <input type="radio" name="skinTexture" value="luxury_campaign">
@@ -1571,7 +1571,7 @@
         <label class="card" data-value="real_pores">
           <input type="radio" name="skinTexture" value="real_pores">
           <div class="name">真實毛孔</div>
-          <div class="desc">適合：高級寫真、電影感、近距離臉部、高級清透妝</div>
+          <div class="desc">適合：高級寫真、電影感、近距離臉部、自然高級</div>
         </label>
         <label class="card" data-value="dewy_glow">
           <input type="radio" name="skinTexture" value="dewy_glow">
@@ -2716,8 +2716,8 @@ Identity Remains Stable And Recognizable`
 const DETAIL_BLOCKS = {
 makeup:{
   natural_highend:`Natural High End Makeup
-清透乾淨妝感,皮膚質地自然保留
-Natural Refined Beauty Editorial Makeup`,
+自然高級妝感,清透乾淨,皮膚質地自然保留
+Natural Refined Beauty Editorial Makeup, understated luxury beauty`,
   smoky_glam:`Smoky Glam Makeup
 煙燻眼妝,深邃輪廓,高對比感
 Dramatic Beauty Close-up`,
@@ -3381,7 +3381,7 @@ const STYLE_PRESET_DEFAULTS = {
 };
 
 const THEME_PRESET_DEFAULTS = {
-  '黑金高訂': { style: 'haute_couture', bg: 'black_void', pose: 'chin_rest', framing: 'face_closeup', camera: 'beauty_closeup', motion: 'breeze', makeup: ['smoky_glam', 'precise_eyeliner'], skinTexture: 'luxury_campaign', jewelry: ['statement'], expression: 'allure_smile', lighting: 'black_gold', ratio: '4:5' },
+  '黑金高訂': { style: 'haute_couture', bg: 'black_void', pose: 'chin_rest', framing: 'face_closeup', camera: 'beauty_closeup', motion: 'breeze', makeup: ['smoky_glam'], skinTexture: 'premium_matte', jewelry: ['earrings'], expression: 'allure_smile', lighting: 'black_gold', ratio: '4:5' },
   '珠寶大片': { style: 'jewelry_ad', bg: 'marble_wall', framing: 'bust', camera: 'beauty_closeup', motion: 'still', makeup: ['natural_highend', 'highlight_skin'], skinTexture: 'luxury_campaign', jewelry: ['statement'], expression: 'cool_stare', lighting: 'beauty_fill', ratio: '4:5' },
   '極簡高級': { style: 'minimal_feature', bg: 'minimal_space', framing: 'half_body', camera: 'neutral', motion: 'still', makeup: ['natural_highend'], skinTexture: 'natural_real', jewelry: ['none'], expression: 'calm_direct', lighting: 'beauty_fill', ratio: '4:5' },
   '都會冷感': { style: 'another', bg: 'concrete', framing: 'three_quarter', camera: 'side_profile', motion: 'still', makeup: ['matte_base', 'precise_eyeliner'], skinTexture: 'real_pores', jewelry: ['earrings'], expression: 'distant_chic', lighting: 'rim_light', ratio: '4:5' },
@@ -3629,9 +3629,9 @@ const QUICK_MAGAZINE_PRESETS = {
     framing: 'face_closeup',
     camera: 'beauty_closeup',
     motion: 'breeze',
-    makeup: ['smoky_glam', 'precise_eyeliner'],
-    skinTexture: 'luxury_campaign',
-    jewelry: ['statement'],
+    makeup: ['smoky_glam'],
+    skinTexture: 'premium_matte',
+    jewelry: ['earrings'],
     expression: 'allure_smile',
     lighting: 'black_gold',
     media: 'realistic_studio',

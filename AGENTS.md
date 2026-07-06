@@ -20,6 +20,8 @@
   `output/tohoku-20260711/` 暫存且不進正式首頁。
 - 2026-07-06：Codex 已在 owner 確認後套用任務 B 第一波：
   B1 保守核心瘦身，B2 travel / magazine 插畫媒材條件化；`fantasy-fashion.html` 暫不動。
+- 2026-07-06：Codex 已整理 magazine 妝容 / 珠寶配飾：妝容維持最多 2 個、
+  珠寶配飾維持最多 2 個；黑金高訂 preset 改為只給精簡推薦值，不再塞滿多個妝容與華麗套組。
 - 下一步：owner 可用 ChatGPT A/B 實測 travel 水彩、magazine 日系動畫等插畫媒材。
   後續若再改咒語文字，仍需依 `docs/core-prompt-contract.md` 先提供改前/改後對照。
 - 已拍板不做：性別中性化（本產品即為女性設計）、多模型輸出切換（只給 ChatGPT 用）。
