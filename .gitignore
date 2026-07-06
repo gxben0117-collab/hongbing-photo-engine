@@ -20,6 +20,8 @@ temp/*
 backup_original/
 紅兵寫真旅拍引擎_v4.3/
 紅兵寫真旅拍引擎_v4.3.zip
+versions/_vercel_deploy_stage_20260704/
+ai-local-controller/
 
 # Local video experiment drafts
 scripts/guizhou_*.ass
@@ -42,3 +44,4 @@ __pycache__/
 .mypy_cache/
 .ruff_cache/
 .venv/
+.vercel/
