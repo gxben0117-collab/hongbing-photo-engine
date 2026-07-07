@@ -1213,6 +1213,16 @@ const lightingData = {
 
 const sharedFantasyCore = window.HB_CORE_PROMPT?.page?.fantasy || {};
 
+const FANTASY_ILLUSTRATION_MATERIAL_KEYS = new Set([
+  'paperOiran',
+  'paperSculpture',
+  'redPaperWedding',
+  'watercolorBloom',
+  'inkPeony',
+  'inkGold',
+  'whitePaperFlower'
+]);
+
 const identityGuard = sharedFantasyCore.identityGuard || `Facial Geometry Lock System:
 Preserve Original Forehead Height
 Preserve Original Face Width
@@ -1874,6 +1884,11 @@ function generate(options = {}){
   const customMaterial = document.getElementById('customMaterial').value.trim();
   const customMaterials = customKeywordList(customMaterial);
   const customMaterialText = customMaterials.join(', ');
+  const isIllustrationMaterial = FANTASY_ILLUSTRATION_MATERIAL_KEYS.has(materialKey)
+    || /illustration|watercolor|anime|manga|oil painting|paper|ink/i.test(customMaterialText);
+  const resolvedAnatomyGuard = isIllustrationMaterial
+    ? (sharedFantasyCore.illustrationSkeleton || anatomyGuard)
+    : anatomyGuard;
   const materialText = customMaterials.length
     ? `custom material system only: ${customMaterialText}; read and use every custom material keyword with equal priority, combine all custom materials into one coherent art system, do not include or blend any preset material option`
     : material.prompt;
@@ -1895,7 +1910,7 @@ function generate(options = {}){
   const prompt = [
     identityGuard + ',',
     'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
-    anatomyGuard + ',',
+    resolvedAnatomyGuard + ',',
     bodyShape + ',',
     lightingConsistencyGuard + ',',
     colorTemperatureGuard + ',',

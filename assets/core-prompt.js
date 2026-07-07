@@ -1,34 +1,17 @@
 (function(){
   const CORE_IDENTITY_LOCK = `【身份鎖定系統｜最高優先級】
 
-Use the uploaded person as the only subject.
-Use the uploaded photo as the only identity source.
-Same person face.
-Same facial identity.
-Identity Recognition Priority Maximum.
-Recognizable By Family And Friends At First Sight.
+Use uploaded person/photo as the only subject and identity source; same face/identity, family/friends recognizable at first sight.
 
-Preserve original face shape, eyes, eyebrows, nose, lips, jawline, facial proportions, gaze and age impression.
-Preserve natural asymmetry, personal facial features and original temperament.
-Style, costume, material, lighting, pose and background must not overwrite or redesign the face.
+Preserve original face shape, eyes, eyebrows, nose, lips, jawline, proportions, gaze, age impression, natural asymmetry, personal features and temperament.
+Style, costume, material, lighting, pose and background must not overwrite/redesign the face; identity priority stays above all styling, editorial, material and environment changes.
 
-Identity preservation has priority above costume, pose, body styling, editorial style, materials, environment and advertising style.
-
-No face swap, identity drift, facial reconstruction, facial redesign or beautification that changes identity.
-No AI beauty template face, influencer face, celebrity face or generic template face.`;
+No face swap, identity drift, facial reconstruction/redesign or identity-changing beautification.
+No AI beauty, influencer, celebrity or generic template face.`;
 
   const CORE_FACE_GEOMETRY_LOCK = `【臉部幾何鎖定系統】
 
-Preserve Original Forehead Height.
-Preserve Original Face Width.
-Preserve Original Eye Shape.
-Preserve Original Eye Distance.
-Preserve Original Nose Shape.
-Preserve Original Nose Width.
-Preserve Original Nose Bridge.
-Preserve Original Lip Shape.
-Preserve Original Jawline Width.
-Preserve Original Chin Shape.
+Preserve original forehead height, face width, eye shape/distance, nose shape/width/bridge, lip shape, jawline width and chin shape.
 
 Face Similarity Maximum.
 No facial reconstruction, redesign, beautification or stylization.`;
@@ -65,28 +48,10 @@ Face remains readable and recognizable even when the face is smaller in frame.`;
 
   const CORE_LIGHTING_UNIFICATION = `【光線一致性系統】
 
-Unified Cinematic Lighting System.
-Global Lighting Consistency.
-Single Global Lighting Environment.
-Same light source affects face, body, outfit and background.
-Same light direction across face, body and background.
-Face lighting must match body lighting.
-Subject and environment share the same light source.
-Environmental lighting affects entire subject.
-Material reflections affect facial lighting.
-Face receives light from surrounding materials and environment.
-Face, body, outfit and background must be rendered as one integrated photograph.
-
-No independent face lighting.
-No independent beauty light.
-No separate portrait lighting.
-No separate face relighting.
-No pasted face look.
-Face must not look separately rendered.
-Natural shadow transition.
-Consistent exposure.
-Consistent color temperature.
-No floating subject effect.`;
+Unified light: one global source, direction, color temp and exposure apply to face, body, outfit and background.
+Environmental/material reflections affect the entire subject, including face.
+Render face/body/outfit/background as one integrated photograph with natural shadows.
+No independent face/beauty/portrait light, face relighting, pasted/separately rendered face or floating subject.`;
 
   const CORE_SKIN_TEXTURE = `【真實膚質系統】
 
@@ -116,24 +81,8 @@ No detached face look.`;
 
   const CORE_NEGATIVE_PROMPT = `【通用負面約束】
 
-No face swap.
-No identity drift.
-No AI beauty face.
-No influencer face.
-No celebrity face.
-No template face.
-No oversized head.
-No extra limbs.
-No extra arms.
-No extra fingers.
-No broken hands.
-No warped anatomy.
-No duplicated person.
-No pasted face.
-No inconsistent lighting.
-No independent face lighting.
-No random text.
-No watermark.`;
+No face swap/drift, AI/influencer/celebrity/template face, duplicated/pasted face.
+No oversized head, extra limbs/arms/fingers, broken hands, warped anatomy, inconsistent/independent face light, random text or watermark.`;
 
   const CORE_OUTPUT_QUALITY = `【輸出規格】
 
@@ -147,17 +96,9 @@ Professional color grading.`;
 
   const CORE_POSE_NATURALITY = `【姿勢自然性系統】
 
-Natural Body Mechanics.
-Natural Weight Distribution.
-Natural Center Of Gravity.
-Natural hand placement.
-Natural body turn.
-Natural head angle.
-Head, gaze, shoulders, torso, arms and legs must belong to one coherent moment.
-No contradictory head and body direction.
-No stiff pose.
-No robot pose.
-No broken limb geometry.`;
+Natural body mechanics: weight, gravity, hands, body turn and head angle.
+Head/gaze/shoulders/torso/arms/legs form one coherent moment.
+No contradictory head/body direction, stiff/robot pose or broken limbs.`;
 
   const CORE_CLEAN_FRAME = `【畫面淨化系統】
 
@@ -235,6 +176,7 @@ Commercial style, fantasy material and art direction only affect clothing, ornam
 They must not change the person's facial structure, identity, age impression or recognizable features.`
     ].join("\n\n"),
     anatomyGuard: humanCore,
+    illustrationSkeleton: illustrationHumanCore,
     lightingGuard: CORE_LIGHTING_UNIFICATION,
     negativePrompt: CORE_NEGATIVE_PROMPT,
     output: CORE_OUTPUT_QUALITY

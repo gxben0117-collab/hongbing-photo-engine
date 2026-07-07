@@ -24,6 +24,11 @@
   珠寶配飾維持最多 2 個；黑金高訂 preset 改為只給精簡推薦值，不再塞滿多個妝容與華麗套組。
 - 2026-07-06：Codex 已完成第二波 R1/R2：`temp/` 只保留 `.gitkeep` 與
   `style-contact-sheets/`，五個工具頁 Chrome 實測「生成 / 複製」皆正常，B2 條件化通過。
-- 下一步：owner 可用 ChatGPT A/B 實測 travel 水彩、magazine 日系動畫等插畫媒材。
-  後續若再改咒語文字，仍需依 `docs/core-prompt-contract.md` 先提供改前/改後對照。
+- 2026-07-07：Owner 已同意正式套用任務 C；Codex 已完成 C0 預覽工具、
+  C1 核心第二刀瘦身（5,162 → 4,099）、C2 fantasy-fashion 插畫媒材條件化。
+- 2026-07-07：`node scripts\check-static.mjs` 通過；Chrome 實測五個工具頁
+  生成 / 複製正常，travel / magazine / fantasy 條件化通過。
+- 下一步：owner 可用 ChatGPT A/B 實測 travel 水彩、magazine 日系動畫、
+  fantasy 紙雕 / 水彩 / 水墨類材質的身份保持度。後續若再改咒語文字，
+  仍需依 `docs/core-prompt-contract.md` 先提供改前/改後對照。
 - 已拍板不做：性別中性化（本產品即為女性設計）、多模型輸出切換（只給 ChatGPT 用）。
