@@ -194,40 +194,6 @@
     font-size:13px;
     line-height:1.75;
   }
-  .poster-workspace{
-    display:grid;
-    grid-template-columns:minmax(0,1fr) minmax(260px,.72fr);
-    gap:16px;
-    align-items:start;
-  }
-  .poster-canvas-wrap{
-    border:1px solid var(--line);
-    background:#0F1111;
-    border-radius:8px;
-    overflow:hidden;
-  }
-  #posterCanvas{
-    display:block;
-    width:100%;
-    height:auto;
-    background:#171717;
-  }
-  .poster-controls{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-  }
-  input[type="file"]{
-    width:100%;
-    border:1px dashed #415B57;
-    background:var(--panel);
-    color:var(--soft);
-    border-radius:8px;
-    padding:10px;
-    font:inherit;
-    font-size:12px;
-  }
-  .poster-status{color:var(--soft);font-size:12px;min-height:20px;}
   .hint{color:var(--soft);font-size:12px;}
   @media (max-width:760px){
     nav{height:auto;min-height:54px;align-items:flex-start;padding:12px 16px;gap:10px;}
@@ -235,7 +201,6 @@
     .nav-link{font-size:11px;padding:5px 8px;}
     .wrap{padding-top:104px;}
     .grid,.form-grid{grid-template-columns:1fr 1fr;}
-    .poster-workspace{grid-template-columns:1fr;}
     .actions{grid-template-columns:1fr;}
   }
   @media (max-width:480px){
@@ -260,7 +225,7 @@
   <header>
     <div class="eyebrow">Store Campaign Generator</div>
     <h1>店家活動廣告<span>產生器</span></h1>
-    <p>輸入店家活動資訊，輸出海報企劃、版面建議、後製文字清單與完整主視覺咒語。</p>
+    <p>輸入店家活動資訊，輸出含完整繁中資訊的海報企劃與主視覺咒語。</p>
   </header>
 
   <div class="notice">
@@ -272,7 +237,7 @@
       <div class="section-label">01</div>
       <div class="section-title">活動類型</div>
     </div>
-    <p class="hint">先選這張海報的任務，系統會依用途安排主視覺與後製文字重點。</p>
+    <p class="hint">先選這張海報的任務，系統會依用途安排主視覺與文字重點。</p>
     <div class="grid" data-choice="campaign">
       <label class="card selected"><input type="radio" name="campaign" value="promo" checked><div class="name">優惠促銷</div><div class="desc">限時優惠、周年慶</div></label>
       <label class="card"><input type="radio" name="campaign" value="brand"><div class="name">品牌形象</div><div class="desc">品牌主視覺、形象廣告</div></label>
@@ -326,11 +291,11 @@
       <label class="field">地址
         <input id="address" type="text" placeholder="請輸入地址">
       </label>
-      <label class="field">Logo
+      <label class="field">店名 / Logo 呈現
         <select id="logo">
-          <option value="leave a clean empty logo area">預留 Logo 空白區</option>
-          <option value="brand name text area only, no logo generated">只預留店名文字區</option>
-          <option value="no logo area, clean visual only">不預留 Logo</option>
+          <option value="show the provided store name as a small brand label, no generated logo mark">顯示店名，不生成 Logo 圖案</option>
+          <option value="show a clean store name line only, no logo mark">只放店名文字</option>
+          <option value="do not show a brand name or logo">不放店名與 Logo</option>
         </select>
       </label>
       <label class="field">海報比例
@@ -376,7 +341,7 @@
         <input id="slogan" type="text" placeholder="例如：換一個造型，迎接新的季節">
       </label>
       <label class="field full">額外要求
-        <textarea id="extraNote" placeholder="例如：上方保留大標題空間，中間放主視覺，底部放電話地址；不要生成任何亂字。"></textarea>
+        <textarea id="extraNote" placeholder="例如：上方主標題要醒目，中間放主視覺，底部放電話地址；文字必須清楚可讀。"></textarea>
       </label>
     </div>
   </section>
@@ -390,33 +355,8 @@
       <button id="generateBtn">生成店家廣告方案</button>
       <button class="copy-btn" id="copyBtn">複製全部</button>
     </div>
-    <p class="hint">建議先生成無文字主視覺，再用 Canva / Photoshop 加上最終文字，避免 AI 產生錯字。</p>
+    <p class="hint">咒語會要求 AI 將填入的繁中內容與主視覺一起完成；請確認文字、日期與電話都已填正確。</p>
     <div class="output" id="output"></div>
-  </section>
-
-  <section>
-    <div class="section-header">
-      <div class="section-label">06</div>
-      <div class="section-title">文字版海報成稿</div>
-    </div>
-    <div class="poster-workspace">
-      <div class="poster-canvas-wrap"><canvas id="posterCanvas" width="1600" height="2000" aria-label="文字版海報預覽"></canvas></div>
-      <div class="poster-controls">
-        <label class="field">AI 無字底圖
-          <input id="posterImage" type="file" accept="image/png,image/jpeg,image/webp">
-        </label>
-        <label class="field">文字色調
-          <select id="textTone">
-            <option value="auto">依主視覺風格自動搭配</option>
-            <option value="light">亮金白字</option>
-            <option value="dark">深色文字</option>
-          </select>
-        </label>
-        <button id="renderPosterBtn" type="button">產生文字版海報</button>
-        <button class="copy-btn" id="downloadPosterBtn" type="button">下載 PNG</button>
-        <div class="poster-status" id="posterStatus">請上傳 AI 產出的無字底圖。</div>
-      </div>
-    </div>
   </section>
 </main>
 
@@ -554,6 +494,15 @@ function generate(){
   const extraNote = value('extraNote');
   const palette = customColor || visual.palette;
   const title = eventName || campaign.title;
+  const posterCopy = [
+    logo !== 'do not show a brand name or logo' && storeName ? `store name: ${storeName}` : '',
+    `headline: ${title}`,
+    `subheadline: ${slogan}`,
+    offer ? `offer: ${offer}` : '',
+    eventDate ? `date: ${eventDate}` : '',
+    phone ? `phone: ${phone}` : '',
+    address ? `address: ${address}` : ''
+  ].filter(Boolean).join(' | ');
 
   const posterText = [
     '【海報企劃】',
@@ -568,23 +517,22 @@ function generate(){
     '',
     '【出圖咒語】',
     [
-      `${ratio}, premium commercial poster background for a ${industry},`,
+      `${ratio}, premium commercial poster for a ${industry},`,
       campaign.prompt + ',',
       visual.prompt + ',',
-      `${logo}, clean blank headline space, clean blank information area,`,
-      'no readable text generated by AI, no fake characters, no random letters, no watermark,',
+      `${logo}, clear headline area and clear information area,`,
+      'render the following Traditional Chinese poster copy exactly, legibly, with correct characters, punctuation, numerals, and line breaks; do not print field labels and do not add any other text:',
+      posterCopy + ',',
+      'no misspelled text, no gibberish, no random letters, no watermark,',
       'clear visual hierarchy, refined lighting, high-end commercial design, premium local business advertising,',
       `visual direction color palette: ${palette},`,
-      storeName ? `leave a clean area where the brand name "${storeName}" can be added later,` : 'leave a clean area where the brand name can be added later,',
-      eventName ? `leave a clean title area for "${eventName}" to be added later,` : 'leave a clean title area for the event name to be added later,',
-      offer ? 'leave a clean promotion text area for the offer content to be added later,' : 'leave a clean promotion text area for offer content to be added later,',
       extraNote ? `extra direction: ${extraNote},` : '',
       STORE_AD_CORE.negativePrompt ? STORE_AD_CORE.negativePrompt + ',' : '',
       STORE_AD_CORE.output ? STORE_AD_CORE.output + ',' : '',
       'professional advertising artwork, elegant composition, high quality, sharp focus'
     ].filter(Boolean).join('\n'),
     '',
-    '【後製文字清單】',
+    '【海報文字內容】',
     `店名：${placeholderText(storeName)}`,
     `主標題：${title}`,
     `副標題：${slogan}`,
@@ -595,7 +543,6 @@ function generate(){
   ].join('\n');
 
   document.getElementById('output').textContent = posterText;
-  if (posterImage) renderPoster();
 }
 
 function makeSlogan(industry, campaign){
@@ -617,161 +564,6 @@ function makeSlogan(industry, campaign){
   return '用更好的體驗，留住每一次美好';
 }
 
-let posterImage = null;
-
-function posterSize(){
-  const ratio = document.getElementById('ratio').value;
-  if (ratio.includes('9:16')) return { width: 1440, height: 2560 };
-  if (ratio.includes('1:1')) return { width: 1600, height: 1600 };
-  if (ratio.includes('A4')) return { width: 1414, height: 2000 };
-  return { width: 1600, height: 2000 };
-}
-
-function roundedRect(ctx, x, y, width, height, radius){
-  const r = Math.min(radius, width / 2, height / 2);
-  ctx.beginPath();
-  ctx.moveTo(x + r, y);
-  ctx.arcTo(x + width, y, x + width, y + height, r);
-  ctx.arcTo(x + width, y + height, x, y + height, r);
-  ctx.arcTo(x, y + height, x, y, r);
-  ctx.arcTo(x, y, x + width, y, r);
-  ctx.closePath();
-}
-
-function drawCoverImage(ctx, image, width, height){
-  const scale = Math.max(width / image.width, height / image.height);
-  const drawWidth = image.width * scale;
-  const drawHeight = image.height * scale;
-  ctx.drawImage(image, (width - drawWidth) / 2, (height - drawHeight) / 2, drawWidth, drawHeight);
-}
-
-function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight, maxLines){
-  const characters = Array.from(text || '');
-  const lines = [];
-  let line = '';
-  characters.forEach(character => {
-    const next = line + character;
-    if (ctx.measureText(next).width > maxWidth && line) {
-      lines.push(line);
-      line = character;
-    } else {
-      line = next;
-    }
-  });
-  if (line) lines.push(line);
-  const visibleLines = lines.slice(0, maxLines);
-  if (lines.length > maxLines) visibleLines[maxLines - 1] = visibleLines[maxLines - 1].replace(/.$/, '…');
-  visibleLines.forEach((item, index) => ctx.fillText(item, x, y + index * lineHeight));
-  return y + visibleLines.length * lineHeight;
-}
-
-function posterPalette(){
-  const visual = selected('visual');
-  const tone = document.getElementById('textTone').value;
-  const darkText = tone === 'dark' || (tone === 'auto' && ['minimal', 'cream', 'green'].includes(visual));
-  return darkText
-    ? { panel: 'rgba(255,248,232,.90)', title: '#7E1615', body: '#2A1B15', accent: '#B97821' }
-    : { panel: visual === 'red' ? 'rgba(91,10,12,.86)' : 'rgba(8,10,12,.82)', title: '#FFF0BF', body: '#FFF9E8', accent: '#D9AB4B' };
-}
-
-function renderPoster(){
-  const canvas = document.getElementById('posterCanvas');
-  const status = document.getElementById('posterStatus');
-  const size = posterSize();
-  canvas.width = size.width;
-  canvas.height = size.height;
-  const ctx = canvas.getContext('2d');
-  const { width, height } = canvas;
-
-  ctx.fillStyle = '#171717';
-  ctx.fillRect(0, 0, width, height);
-  if (!posterImage) {
-    ctx.fillStyle = '#9B9B9B';
-    ctx.font = `500 ${Math.round(width * .032)}px "Noto Sans TC", sans-serif`;
-    ctx.textAlign = 'center';
-    ctx.fillText('上傳 AI 無字底圖後產生文字版海報', width / 2, height / 2);
-    status.textContent = '請上傳 AI 產出的無字底圖。';
-    return;
-  }
-
-  drawCoverImage(ctx, posterImage, width, height);
-  const palette = posterPalette();
-  const topHeight = Math.round(height * .36);
-  const bottomHeight = Math.round(height * .29);
-  const topGradient = ctx.createLinearGradient(0, 0, 0, topHeight);
-  topGradient.addColorStop(0, palette.panel);
-  topGradient.addColorStop(1, 'rgba(0,0,0,0)');
-  ctx.fillStyle = topGradient;
-  ctx.fillRect(0, 0, width, topHeight);
-
-  const bottomGradient = ctx.createLinearGradient(0, height - bottomHeight, 0, height);
-  bottomGradient.addColorStop(0, 'rgba(0,0,0,0)');
-  bottomGradient.addColorStop(.28, palette.panel);
-  bottomGradient.addColorStop(1, palette.panel);
-  ctx.fillStyle = bottomGradient;
-  ctx.fillRect(0, height - bottomHeight, width, bottomHeight);
-
-  const padding = Math.round(width * .075);
-  const storeName = value('storeName');
-  const eventName = value('eventName') || campaignData[selected('campaign')].title;
-  const slogan = value('slogan') || makeSlogan(document.getElementById('industry').value, selected('campaign'));
-  const offer = value('offer');
-  const details = [
-    value('eventDate') && `日期｜${value('eventDate')}`,
-    value('phone') && `電話｜${value('phone')}`,
-    value('address') && `地址｜${value('address')}`
-  ].filter(Boolean);
-
-  ctx.textAlign = 'left';
-  let topY = Math.round(height * .075);
-  if (storeName) {
-    ctx.font = `700 ${Math.round(width * .026)}px "Noto Sans TC", sans-serif`;
-    ctx.fillStyle = palette.accent;
-    roundedRect(ctx, padding, topY, Math.min(width - padding * 2, ctx.measureText(storeName).width + 52), 48, 24);
-    ctx.fill();
-    ctx.fillStyle = palette.body;
-    ctx.fillText(storeName, padding + 26, topY + 33);
-    topY += 92;
-  }
-  ctx.fillStyle = palette.title;
-  ctx.font = `900 ${Math.round(width * (eventName.length > 20 ? .065 : .078))}px "Noto Sans TC", "Microsoft JhengHei", sans-serif`;
-  topY = wrapCanvasText(ctx, eventName, padding, topY, width - padding * 2, Math.round(width * .09), 3) + 16;
-  ctx.fillStyle = palette.body;
-  ctx.font = `700 ${Math.round(width * .032)}px "Noto Sans TC", "Microsoft JhengHei", sans-serif`;
-  wrapCanvasText(ctx, slogan, padding, topY, width - padding * 2, Math.round(width * .048), 2);
-
-  let bottomY = height - bottomHeight + Math.round(height * .11);
-  if (offer) {
-    ctx.fillStyle = palette.title;
-    ctx.font = `800 ${Math.round(width * .035)}px "Noto Sans TC", "Microsoft JhengHei", sans-serif`;
-    bottomY = wrapCanvasText(ctx, offer, padding, bottomY, width - padding * 2, Math.round(width * .052), 3) + 26;
-  }
-  if (details.length) {
-    ctx.strokeStyle = palette.accent;
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(padding, bottomY);
-    ctx.lineTo(width - padding, bottomY);
-    ctx.stroke();
-    bottomY += 36;
-    ctx.fillStyle = palette.body;
-    ctx.font = `600 ${Math.round(width * .025)}px "Noto Sans TC", "Microsoft JhengHei", sans-serif`;
-    wrapCanvasText(ctx, details.join('   '), padding, bottomY, width - padding * 2, Math.round(width * .04), 3);
-  }
-  status.textContent = '文字版海報已完成，可直接下載 PNG。';
-}
-
-function downloadPoster(){
-  if (!posterImage) {
-    document.getElementById('posterStatus').textContent = '請先上傳 AI 產出的無字底圖。';
-    return;
-  }
-  const link = document.createElement('a');
-  link.download = 'store-ad-poster.png';
-  link.href = document.getElementById('posterCanvas').toDataURL('image/png');
-  link.click();
-}
-
 document.querySelectorAll('input[type="radio"]').forEach(input => {
   input.addEventListener('change', () => {
     refreshCards();
@@ -790,31 +582,8 @@ document.getElementById('copyBtn').addEventListener('click', async () => {
   btn.textContent = '已複製';
   setTimeout(() => btn.textContent = '複製全部', 1200);
 });
-document.getElementById('posterImage').addEventListener('change', event => {
-  const file = event.target.files[0];
-  if (!file) {
-    posterImage = null;
-    renderPoster();
-    return;
-  }
-  const image = new Image();
-  const objectUrl = URL.createObjectURL(file);
-  image.onload = () => {
-    posterImage = image;
-    URL.revokeObjectURL(objectUrl);
-    renderPoster();
-  };
-  image.onerror = () => {
-    URL.revokeObjectURL(objectUrl);
-    document.getElementById('posterStatus').textContent = '圖片讀取失敗，請改用 PNG、JPG 或 WebP。';
-  };
-  image.src = objectUrl;
-});
-document.getElementById('renderPosterBtn').addEventListener('click', renderPoster);
-document.getElementById('downloadPosterBtn').addEventListener('click', downloadPoster);
 refreshCards();
 generate();
-renderPoster();
 </script>
 </body>
 </html>
