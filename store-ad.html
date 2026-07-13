@@ -270,6 +270,7 @@
           <option value="restaurant">餐廳</option>
           <option value="coffee shop">咖啡廳</option>
           <option value="hotel">旅館</option>
+          <option value="real estate agency / residential property sales">房仲／房屋銷售</option>
           <option value="fitness studio">健身房</option>
           <option value="medical beauty clinic">醫美</option>
           <option value="fashion boutique">服飾店</option>
@@ -537,6 +538,13 @@ function generate(){
 }
 
 function makeSlogan(industry, campaign){
+  if (industry === 'real estate agency / residential property sales') {
+    if (campaign === 'recruit') return '尋找懂市場、也懂服務的專業夥伴';
+    if (campaign === 'price') return '透明資訊，安心找到理想住處';
+    if (campaign === 'vip') return '專屬賞屋服務，為重要的選擇把關';
+    if (campaign === 'newProduct') return '全新物件登場，遇見理想生活';
+    return '找到適合生活的理想住所';
+  }
   if (industry === 'hair salon') {
     if (campaign === 'recruit') return '一起打造更有質感的美';
     if (campaign === 'price') return '精緻髮型服務，清楚透明方案';
