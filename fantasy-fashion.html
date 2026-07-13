@@ -472,6 +472,14 @@
         <div class="name">漂浮花瓣玻璃花園</div>
         <div class="desc">透明花瓣、玻璃溫室、柔霧月光、浪漫全身肖像</div>
       </button>
+      <button class="card" type="button" data-template="solarGoddessThrone">
+        <div class="name">白金太陽女神寶座</div>
+        <div class="desc">日輪冠飾、白金薄紗、神殿寶座、晨光金緞帶</div>
+      </button>
+      <button class="card" type="button" data-template="solarGoddessTemple">
+        <div class="name">白金太陽女神神殿</div>
+        <div class="desc">日輪冠飾、全身站姿、白色神殿、金色晨光飄帶</div>
+      </button>
     </div>
   </section>
 
@@ -560,6 +568,7 @@
       <label class="card"><input type="radio" name="garment" value="circusDollCouture"><div class="name">馬戲娃娃高訂</div><div class="desc">黑白蝴蝶結、荷葉邊、奇幻娃娃感</div></label>
       <label class="card"><input type="radio" name="garment" value="desertQueenVeil"><div class="name">沙漠女王頭紗</div><div class="desc">寶石頭紗、異域短上衣、薄紗長裙</div></label>
       <label class="card"><input type="radio" name="garment" value="darkQueenCouture"><div class="name">暗黑女王高訂</div><div class="desc">尖銳肩線、黑色禮服、女王氣場</div></label>
+      <label class="card"><input type="radio" name="garment" value="solarGoddessDrape"><div class="name">白金太陽女神薄紗</div><div class="desc">白色垂墜薄紗、金屬腰飾、神殿女王輪廓</div></label>
     </div>
     <div class="form-grid" style="margin-top:10px;">
       <label class="field full custom-choice" data-custom-choice="garment">服裝自填
@@ -666,6 +675,7 @@
       <label class="card"><input type="radio" name="material" value="cloudRuneSilk"><div class="name">雲紋發光符文</div><div class="desc">東方雲紋、金色符文、柔霧光絲</div></label>
       <label class="card"><input type="radio" name="material" value="stardustLightSilk"><div class="name">星塵光絲</div><div class="desc">細緻星塵、發光絲線、深色奢華光流</div></label>
       <label class="card"><input type="radio" name="material" value="floatingPetalGlass"><div class="name">漂浮花瓣玻璃</div><div class="desc">透明花瓣、玻璃碎光、空氣感層次</div></label>
+      <label class="card"><input type="radio" name="material" value="solarHaloFiligree"><div class="name">太陽光環金絲</div><div class="desc">日輪冠飾、金色飄帶、珍珠光與神殿碎光</div></label>
     </div>
     <div class="form-grid" style="margin-top:10px;">
       <label class="field custom-choice" data-custom-choice="material">材質自填
@@ -737,6 +747,7 @@
           <label class="pose-card"><input type="radio" name="pose" value="sofa_recline"><div class="pose-name">沙發斜倚</div><div class="pose-desc">身體斜靠,慵懶精品感</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="side_kneel"><div class="pose-name">側跪延伸</div><div class="pose-desc">側身跪姿,裙擺向外延伸</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="low_seat_turn"><div class="pose-name">低坐回望</div><div class="pose-desc">低坐姿勢,上身回望鏡頭</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="throne_cross_leg"><div class="pose-name">寶座交腿坐姿</div><div class="pose-desc">端坐寶座、單腿交疊、女王主視覺</div></label>
         </div>
       </div>
 
@@ -839,6 +850,7 @@
       <label class="card"><input type="radio" name="lighting" value="dataFlowBlueViolet"><div class="name">資料流藍紫光</div><div class="desc">藍紫資料線、黑鏡螢幕、未來廣告</div></label>
       <label class="card"><input type="radio" name="lighting" value="blueEnergyWingLight"><div class="name">藍色能源翼光</div><div class="desc">藍色能源燈、機械翼反射、冷灰棚光</div></label>
       <label class="card"><input type="radio" name="lighting" value="wastelandIndustrialSideLight"><div class="name">工業廢土側光</div><div class="desc">斜側硬光、老化金屬反射、廢土陰影</div></label>
+      <label class="card"><input type="radio" name="lighting" value="solarTempleGold"><div class="name">太陽神殿金光</div><div class="desc">晨光日輪、白金反射、肌膚與神殿同光</div></label>
     </div>
     <div class="form-grid" style="margin-top:10px;">
       <label class="field full">色彩補充
@@ -895,6 +907,7 @@
       <label class="card"><input type="radio" name="background" value="blackMirrorDataRoom"><div class="name">資料流黑鏡空間</div><div class="desc">黑鏡牆、藍紫資料線、未來商品感</div></label>
       <label class="card"><input type="radio" name="background" value="coolGrayTechStudio"><div class="name">冷灰科技白棚</div><div class="desc">冷灰白棚、科技留白、黑銀機械翼</div></label>
       <label class="card"><input type="radio" name="background" value="wastelandMechaWorkshop"><div class="name">廢土機械工坊</div><div class="desc">機械工坊、管線零件、老化金屬背景</div></label>
+      <label class="card"><input type="radio" name="background" value="solarMarbleThrone"><div class="name">太陽神殿寶座</div><div class="desc">白色大理石寶座、日輪拱門、金色晨光</div></label>
     </div>
   </section>
 
@@ -1330,6 +1343,11 @@ const materialData = {
     label: '紫晶洛可可蕾絲',
     prompt: 'amethyst rococo lace material system, purple gemstone drops, lavender roses, pearl chains, ornate lace ribbons, feathered court headpiece and jeweled fan details, luxury palace portrait accents kept refined and face-framing',
     palette: 'amethyst purple, antique gold, pearl cream, candle amber, muted rose violet'
+  },
+  solarHaloFiligree: {
+    label: '太陽光環金絲',
+    prompt: 'solar halo filigree material system, refined gold sun disc crown behind the head, luminous white gold ribbons, pearl crystal ornaments, delicate gold arm cuffs and waist chains, sacred solar temple accents framing the body without covering face or hands',
+    palette: 'pearl white, warm sunrise gold, ivory marble, soft champagne, pale amber glow'
   }
 };
 
@@ -1363,7 +1381,8 @@ const garmentData = {
   mermaidTailCouture: 'mermaid tail couture silhouette, iridescent fish scale tail, transparent fin tulle, pearl shell bust detail, aquatic fantasy gown structure, tail replaces only the lower garment while upper body and face remain clear',
   circusDollCouture: 'black white circus doll couture, ruffled collar, harlequin ribbons, oversized bow accents, short theatrical skirt with luxury ornament details, playful surreal fashion silhouette',
   desertQueenVeil: 'desert queen veil couture, embroidered jeweled veil, exotic cropped bodice, layered translucent skirt, warm gold jewelry chains, powerful mythic queen styling',
-  darkQueenCouture: 'dark queen couture gown, sharp sculptural shoulder line, black blue crystal accents, regal long silhouette, icy luxury authority, strong but elegant fantasy fashion form'
+  darkQueenCouture: 'dark queen couture gown, sharp sculptural shoulder line, black blue crystal accents, regal long silhouette, icy luxury authority, strong but elegant fantasy fashion form',
+  solarGoddessDrape: 'solar goddess draped couture, layered white translucent silk and pearl chiffon, refined gold waist belt, delicate gold leg wraps and arm cuffs, ceremonial temple queen silhouette, sensual but elegant coverage, long luminous train'
 };
 
 const styleData = {
@@ -1403,6 +1422,7 @@ const backgroundData = {
   underwaterKingdom: 'underwater fantasy kingdom background, coral palace, clear blue ocean depth, dolphins turtles fish and jellyfish, sunbeams from water surface, colorful reef foreground, immersive aquatic world',
   cloudCathedralRift: 'cloud cathedral rift background, high stone arch opening to dramatic clouds, white gold light breaking through sky, floating feathers, sacred storm atmosphere, celestial luxury space',
   darkIcePalace: 'dark ice palace background, black blue crystal walls, frosted reflective floor, snow particles, cold cinematic queen atmosphere, immersive frozen luxury space',
+  solarMarbleThrone: 'sunlit marble throne temple background, white marble throne with a sculptural solar disc arch behind it, tall luminous columns, controlled gold ribbon details, warm morning light and spacious sacred interior, subject remains the clear primary focus',
   candyStudio: 'clean candy product studio background, floating colorful gummy candy, glossy white set, playful but premium commercial layout, uncluttered beauty advertisement space',
   perfumeGlassStudio: 'luxury perfume glass studio background, transparent perfume bottle silhouettes, soft fragrance mist, prismatic glass refraction, elegant negative space, clean high-end scent campaign layout',
   dessertBeautyStudio: 'bright dessert beauty studio background, strawberry cake and whipped cream inspired product set, clean ivory table surfaces, soft pink commercial layout, uncluttered cosmetic advertisement space',
@@ -1449,6 +1469,7 @@ const lightingData = {
   underwaterSunbeam: 'underwater sunbeam lighting, blue green water caustics and surface rays affect face hair body tail and marine background consistently, clean aquatic exposure, no separate dry studio light',
   cloudRiftHolyLight: 'cloud rift holy lighting, dramatic white gold sky beam behind feather wings, soft sacred bounce light on face body fabric and background, powerful celestial contrast without overexposure',
   darkIceBlue: 'dark blue ice crystal lighting, cold reflections from black ice affect face body hair costume and background, unified frozen color temperature, face remains visible without beauty ring light',
+  solarTempleGold: 'solar temple gold lighting, warm morning sunlight through white marble columns, subtle gold ribbon and pearl reflections affect face body hair clothing throne and temple consistently, radiant sacred glow with clear natural facial detail',
   candyGlossLight: 'glossy candy commercial lighting, transparent jelly highlights, soft colorful candy reflections affect face skin hair and outfit naturally, premium beauty product studio light, no overexposed face',
   auroraPerfumeLight: 'aurora perfume lighting, soft fragrance mist glow, prismatic glass reflections affect face body hair outfit and background consistently, refined scent campaign fill light, no separate face relighting',
   dessertBeautyLight: 'dessert beauty lighting, soft pink and ivory studio fill, strawberry cream bounce light affects face body hands and outfit naturally, clean cosmetic advertisement exposure, no flat overexposed face',
@@ -1663,6 +1684,7 @@ const poseData = {
   sofa_recline: 'sofa reclining pose, body leaning diagonally, relaxed luxury boutique mood, elegant lounging fashion attitude',
   side_kneel: 'side kneeling extended pose, body turned sideways while kneeling, skirt or fabric extending outward, elegant elongated couture shape',
   low_seat_turn: 'low seated over-shoulder turn pose, seated low with torso turning back toward camera, refined cinematic fashion tension',
+  throne_cross_leg: 'regal throne seated pose, sitting upright on a grand chair, one leg crossed elegantly over the other, one hand relaxed on the armrest and the other near the jawline, calm goddess authority, balanced full body editorial composition',
   vogue_hands: 'Vogue hand frame pose, both hands framing the face elegantly, fingers spread gracefully near face, Paris ballroom vogue style',
   arms_wide: 'arms wide open pose, both arms extended broadly to the sides, expansive powerful body language, wings-like feminine presence',
   water_sleeve: 'water sleeve dance pose, flowing fabric sleeves caught mid-motion, arms extended in classical dance form, elegant eastern movement',
@@ -2330,6 +2352,16 @@ const themeTemplates = {
     garment: 'cloudGauze', material: 'floatingPetalGlass', style: 'perfumeAd',
     composition: 'romantic full body glass garden composition, translucent petals float at varied depth while the subject remains clear in the center of the greenhouse walkway',
     framing: 'fullBody', pose: 'back_turn', camera: 'threeQuarterSide', lighting: 'moonGlassSparkle', background: 'moonGlassGarden', ratio: 'vertical916', intensity: 'subtle floating particles, refined couture details'
+  },
+  solarGoddessThrone: {
+    garment: 'solarGoddessDrape', material: 'solarHaloFiligree', style: 'luxury',
+    composition: 'radiant solar goddess key visual, subject seated on a white marble throne beneath a refined gold sun disc, flowing gold ribbons form controlled arcs behind the body, spacious sacred symmetry without covering face or legs',
+    framing: 'fullBody', pose: 'throne_cross_leg', camera: 'eyeLevelCover', lighting: 'solarTempleGold', background: 'solarMarbleThrone', ratio: 'vertical916', intensity: 'balanced material effects, elegant and luxurious'
+  },
+  solarGoddessTemple: {
+    garment: 'solarGoddessDrape', material: 'solarHaloFiligree', style: 'luxury',
+    composition: 'full body solar goddess temple key visual, subject standing tall before luminous white marble columns, refined gold sun disc halo behind the head, flowing ribbons create spacious S-curve arcs while keeping the silhouette and legs clear',
+    framing: 'fullBody', pose: 'one_hand_waist', camera: 'eyeLevelCover', lighting: 'solarTempleGold', background: 'solarMarbleThrone', ratio: 'vertical916', intensity: 'balanced material effects, elegant and luxurious'
   }
 };
 
