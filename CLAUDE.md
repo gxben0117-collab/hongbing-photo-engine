@@ -32,3 +32,15 @@
   fantasy 紙雕 / 水彩 / 水墨類材質的身份保持度。後續若再改咒語文字，
   仍需依 `docs/core-prompt-contract.md` 先提供改前/改後對照。
 - 已拍板不做：性別中性化（本產品即為女性設計）、多模型輸出切換（只給 ChatGPT 用）。
+- 2026-07-15：Claude Code 讀完桌面 30 張風格範例並產出第四波方案
+  **`docs/handoff-2026-07-15-batch4.md`**（交 Codex）：T 旅拍補姿勢/服裝/裝扮三模組＋
+  黃金時刻等 5 光線；M 雜誌補私房閨房/戶外封面/亂世古風(去版權)；F 幻想補暗黑仙俠/
+  魅魔/花卉紗 4 花種＋材質 UI 分組；S store-ad 加上傳素材模式(修 lighting 未接 bug)/
+  節慶快選/4 風格/文字 fallback；L 分類邏輯修正(travel 鏡頭與構圖同軸互斥、
+  magazine 藝術媒材 style 與 media 衝突鎖定)。規則：加選項不改舊輸出、
+  新 prompt 先出 d-prompt-review 等 owner 確認、真三國無雙等角色名嚴禁入 prompt。
+- 2026-07-15：Claude Code **已親自執行第四波**（T/M/F/S/L1 全部，L2 實查後判定
+  既有 STYLE_PRESET_DEFAULTS 已自動帶相容 media 故不需改；L3/F4 純 UI 分組留給 Codex）。
+  驗證全過：check-static、build-prompt-preview 舊組合 0 diff、77 項整合驗證。
+  對照文件 `docs/d-prompt-review-2026-07-15.md`、新選項 sample 在
+  `output/ab-test-2026-07-15/`。**尚未 commit，等 owner 確認 review 文件後提交。**

@@ -321,6 +321,8 @@
       <button type="button" class="preset-btn" data-travel-preset="sunsetRooftopCouture">一鍵套用｜夕陽頂樓時裝旅拍</button>
       <button type="button" class="preset-btn" data-travel-preset="pinkY2KNightStreet">一鍵套用｜粉色 Y2K 夜街旅拍</button>
       <button type="button" class="preset-btn" data-travel-preset="cherryCampusSpring">一鍵套用｜櫻花校園春日寫真</button>
+      <button type="button" class="preset-btn" data-travel-preset="seasideCastleSunset">一鍵套用｜海邊城堡夕陽旅拍</button>
+      <button type="button" class="preset-btn" data-travel-preset="chineseTeaCourtyard">一鍵套用｜中式庭院茶席旗袍</button>
     </div>
   </section>
 
@@ -632,12 +634,12 @@
       <label class="card" data-value="cover">
         <input type="radio" name="camera" value="cover">
         <div class="name">雜誌封面感</div>
-        <div class="desc">封面主視覺 / 眼神集中</div>
+        <div class="desc">封面主視覺 / 眼神集中(覆蓋01構圖)</div>
       </label>
       <label class="card" data-value="wide_scene">
         <input type="radio" name="camera" value="wide_scene">
         <div class="name">廣角環境感</div>
-        <div class="desc">景物更完整 / 人物融入風景</div>
+        <div class="desc">景物更完整 / 人物融入風景(覆蓋01構圖)</div>
       </label>
           <label class="card" data-value="tele_compression">
         <input type="radio" name="camera" value="tele_compression">
@@ -672,7 +674,7 @@
       <label class="card" data-value="distant_hero">
         <input type="radio" name="camera" value="distant_hero">
         <div class="name">遠距主視覺</div>
-        <div class="desc">人物與景點完整 / 海報旅拍感</div>
+        <div class="desc">人物與景點完整 / 海報旅拍感(覆蓋01構圖)</div>
       </label>
     </div>
   </section>
@@ -750,6 +752,31 @@
         <div class="name">酒吧暖調環境光</div>
         <div class="desc">吧台燈 / 玻璃反射 / 都會夜景</div>
       </label>
+      <label class="card" data-value="golden_hour">
+        <input type="radio" name="lighting" value="golden_hour">
+        <div class="name">黃金時刻夕陽</div>
+        <div class="desc">夕陽逆光 / 長影 / 髮絲金邊</div>
+      </label>
+      <label class="card" data-value="blue_hour">
+        <input type="radio" name="lighting" value="blue_hour">
+        <div class="name">藍調暮色</div>
+        <div class="desc">日落後藍調 / 城市燈光點亮</div>
+      </label>
+      <label class="card" data-value="neon_night">
+        <input type="radio" name="lighting" value="neon_night">
+        <div class="name">霓虹夜街</div>
+        <div class="desc">霓虹反光 / 濕地倒影 / 夜生活感</div>
+      </label>
+      <label class="card" data-value="morning_mist">
+        <input type="radio" name="lighting" value="morning_mist">
+        <div class="name">清晨柔霧光</div>
+        <div class="desc">日出薄霧 / 粉彩柔光 / 安靜清新</div>
+      </label>
+      <label class="card" data-value="lantern_night">
+        <input type="radio" name="lighting" value="lantern_night">
+        <div class="name">燈籠暖夜</div>
+        <div class="desc">燈籠暖光 / 夜市古街 / 東方節慶感</div>
+      </label>
     </div>
   </section>
 
@@ -784,10 +811,220 @@
     </div>
   </section>
 
-  <!-- 08 輸出風格 -->
+  <!-- 08 姿勢 -->
   <section>
     <div class="step">
       <div class="num">08</div>
+      <div class="title">姿勢</div>
+      <div class="sub">單選，指定明確姿勢；「交給導演」維持原本的動作氛圍自動安排</div>
+    </div>
+    <div class="cards" id="poseCards">
+      <label class="card selected" data-value="auto">
+        <input type="radio" name="pose" value="auto" checked>
+        <div class="name">交給導演</div>
+        <div class="desc">依主題與動態自動安排(預設)</div>
+      </label>
+      <label class="card" data-value="look_back">
+        <input type="radio" name="pose" value="look_back">
+        <div class="name">回眸站姿</div>
+        <div class="desc">轉身回望 / 經典旅拍瞬間</div>
+      </label>
+      <label class="card" data-value="lean_wall">
+        <input type="radio" name="pose" value="lean_wall">
+        <div class="name">倚牆而立</div>
+        <div class="desc">靠牆放鬆 / 慵懶時尚感</div>
+      </label>
+      <label class="card" data-value="railing_gaze">
+        <input type="radio" name="pose" value="railing_gaze">
+        <div class="name">欄杆遠眺</div>
+        <div class="desc">手扶欄杆 / 望向風景</div>
+      </label>
+      <label class="card" data-value="stairs_sit">
+        <input type="radio" name="pose" value="stairs_sit">
+        <div class="name">階梯輕坐</div>
+        <div class="desc">石階優雅坐姿</div>
+      </label>
+      <label class="card" data-value="street_crouch">
+        <input type="radio" name="pose" value="street_crouch">
+        <div class="name">街拍蹲姿</div>
+        <div class="desc">低位蹲姿 / 街頭潮流感</div>
+      </label>
+      <label class="card" data-value="walk_turn">
+        <input type="radio" name="pose" value="walk_turn">
+        <div class="name">行走回望</div>
+        <div class="desc">走路中回頭 / 抓拍感</div>
+      </label>
+      <label class="card" data-value="hair_sweep">
+        <input type="radio" name="pose" value="hair_sweep">
+        <div class="name">撩髮側望</div>
+        <div class="desc">撥髮 / 側望光線</div>
+      </label>
+      <label class="card" data-value="skirt_lift">
+        <input type="radio" name="pose" value="skirt_lift">
+        <div class="name">輕提裙擺</div>
+        <div class="desc">提裙前行 / 布料流動</div>
+      </label>
+      <label class="card" data-value="back_view_gaze">
+        <input type="radio" name="pose" value="back_view_gaze">
+        <div class="name">背影遠望</div>
+        <div class="desc">背影+微側臉 / 旅途敘事</div>
+      </label>
+      <label class="card" data-value="umbrella_walk">
+        <input type="radio" name="pose" value="umbrella_walk">
+        <div class="name">執傘漫步</div>
+        <div class="desc">持傘慢行 / 晴雨皆宜</div>
+      </label>
+      <label class="card" data-value="tea_pour">
+        <input type="radio" name="pose" value="tea_pour">
+        <div class="name">茶席斟茶</div>
+        <div class="desc">茶桌斟茶 / 東方生活感</div>
+      </label>
+      <label class="card" data-value="flower_smell">
+        <input type="radio" name="pose" value="flower_smell">
+        <div class="name">捧花輕嗅</div>
+        <div class="desc">捧花低眸 / 不遮五官</div>
+      </label>
+    </div>
+  </section>
+
+  <!-- 09 服裝方向 -->
+  <section>
+    <div class="step">
+      <div class="num">09</div>
+      <div class="title">服裝方向</div>
+      <div class="sub">單選，指定服裝主軸；「主題自動」維持原本依主題自動設計</div>
+    </div>
+    <div class="cards" id="costumeCards">
+      <label class="card selected" data-value="auto">
+        <input type="radio" name="costume" value="auto" checked>
+        <div class="name">主題自動</div>
+        <div class="desc">依主題自動設計服裝(預設)</div>
+      </label>
+      <label class="card" data-value="flow_dress">
+        <input type="radio" name="costume" value="flow_dress">
+        <div class="name">飄逸洋裝</div>
+        <div class="desc">長裙 / 布料隨風</div>
+      </label>
+      <label class="card" data-value="qipao">
+        <input type="radio" name="costume" value="qipao">
+        <div class="name">旗袍</div>
+        <div class="desc">改良旗袍 / 東方剪裁</div>
+      </label>
+      <label class="card" data-value="kimono_yukata">
+        <input type="radio" name="costume" value="kimono_yukata">
+        <div class="name">和服浴衣</div>
+        <div class="desc">和服 / 夏日浴衣</div>
+      </label>
+      <label class="card" data-value="campus_uniform">
+        <input type="radio" name="costume" value="campus_uniform">
+        <div class="name">學院制服風</div>
+        <div class="desc">襯衫 / 百褶裙 / 針織外套</div>
+      </label>
+      <label class="card" data-value="y2k_street">
+        <input type="radio" name="costume" value="y2k_street">
+        <div class="name">Y2K 街頭</div>
+        <div class="desc">緞面外套 / 厚底鞋 / 潮流層次</div>
+      </label>
+      <label class="card" data-value="denim_casual">
+        <input type="radio" name="costume" value="denim_casual">
+        <div class="name">牛仔休閒</div>
+        <div class="desc">丹寧 / 日常鬆弛感</div>
+      </label>
+      <label class="card" data-value="resort_cover">
+        <input type="radio" name="costume" value="resort_cover">
+        <div class="name">度假風</div>
+        <div class="desc">度假洋裝 / 海邊罩衫</div>
+      </label>
+      <label class="card" data-value="evening_gown">
+        <input type="radio" name="costume" value="evening_gown">
+        <div class="name">晚禮服</div>
+        <div class="desc">精緻晚裝 / 夜景飯店</div>
+      </label>
+      <label class="card" data-value="winter_coat">
+        <input type="radio" name="costume" value="winter_coat">
+        <div class="name">冬季大衣</div>
+        <div class="desc">長大衣 / 圍巾層次</div>
+      </label>
+    </div>
+  </section>
+
+  <!-- 10 裝扮細節 -->
+  <section>
+    <div class="step">
+      <div class="num">10</div>
+      <div class="title">裝扮細節</div>
+      <div class="sub">髮型與隨身配件各選一項；裝扮只改造型，不改臉部與身份</div>
+    </div>
+    <div class="cards" id="hairCards">
+      <label class="card selected" data-value="auto">
+        <input type="radio" name="hair" value="auto" checked>
+        <div class="name">髮型自動</div>
+        <div class="desc">依主題與風格自動(預設)</div>
+      </label>
+      <label class="card" data-value="long_straight">
+        <input type="radio" name="hair" value="long_straight">
+        <div class="name">黑長直</div>
+        <div class="desc">柔順長直髮</div>
+      </label>
+      <label class="card" data-value="soft_waves">
+        <input type="radio" name="hair" value="soft_waves">
+        <div class="name">自然大波浪</div>
+        <div class="desc">空氣感捲度</div>
+      </label>
+      <label class="card" data-value="short_bob">
+        <input type="radio" name="hair" value="short_bob">
+        <div class="name">及肩短髮</div>
+        <div class="desc">俐落現代線條</div>
+      </label>
+      <label class="card" data-value="braided_updo">
+        <input type="radio" name="hair" value="braided_updo">
+        <div class="name">編髮盤髮</div>
+        <div class="desc">優雅盤髮 / 碎髮自然</div>
+      </label>
+      <label class="card" data-value="high_ponytail">
+        <input type="radio" name="hair" value="high_ponytail">
+        <div class="name">高馬尾</div>
+        <div class="desc">清爽有精神</div>
+      </label>
+    </div>
+    <div class="cards" id="propCards" style="margin-top:10px;">
+      <label class="card selected" data-value="none">
+        <input type="radio" name="prop" value="none" checked>
+        <div class="name">無配件</div>
+        <div class="desc">不指定配件(預設)</div>
+      </label>
+      <label class="card" data-value="glasses">
+        <input type="radio" name="prop" value="glasses">
+        <div class="name">細框眼鏡</div>
+        <div class="desc">知性感 / 不遮眼神</div>
+      </label>
+      <label class="card" data-value="headphones">
+        <input type="radio" name="prop" value="headphones">
+        <div class="name">頸掛耳機</div>
+        <div class="desc">耳罩耳機掛頸 / 街頭感</div>
+      </label>
+      <label class="card" data-value="hair_flower">
+        <input type="radio" name="prop" value="hair_flower">
+        <div class="name">髮飾花</div>
+        <div class="desc">小花 / 精緻髮夾</div>
+      </label>
+      <label class="card" data-value="beret">
+        <input type="radio" name="prop" value="beret">
+        <div class="name">貝雷帽</div>
+        <div class="desc">法式軟帽 / 臉部完整可見</div>
+      </label>
+      <label class="card" data-value="mini_backpack">
+        <input type="radio" name="prop" value="mini_backpack">
+        <div class="name">小背包</div>
+        <div class="desc">後背或側背小包</div>
+      </label>
+    </div>
+  </section>
+
+  <!-- 11 輸出風格 -->
+  <section>
+    <div class="step">
+      <div class="num">11</div>
       <div class="title">輸出風格 / 畫面媒材</div>
       <div class="sub">單選，最後決定要做成真人攝影、插畫、底片或動畫感</div>
     </div>
@@ -828,10 +1065,10 @@
         <div class="desc">厚光筆觸 / 風景肖像感</div>
       </label></div>
   </section>
-  <!-- 09 生成 -->
+  <!-- 12 生成 -->
   <section>
     <div class="step">
-      <div class="num">09</div>
+      <div class="num">12</div>
       <div class="title">生成咒語</div>
     </div>
     <button class="generate-btn" id="generateBtn">生成完整咒語</button>
@@ -1274,7 +1511,52 @@ Glass Reflections, Bottle Highlights And Counter Light Affect Face And Body
 Mature Urban Night Portrait Lighting
 Face Visible Within The Same Bar Environment
 No Independent Beauty Ring Light
-No Overexposed Face`
+No Overexposed Face`,
+
+golden_hour:`【光影色彩｜黃金時刻夕陽】
+
+Golden Hour Sunset Light
+Warm Orange Sunlight Wraps Face, Body And Landscape Together
+Long Soft Shadows And Gentle Rim Light On Hair
+Sun Position Low Near The Horizon
+Sky Gradient From Gold To Soft Peach
+Face Keeps Natural Warm Exposure Within The Same Sunset Light`,
+
+blue_hour:`【光影色彩｜藍調暮色】
+
+Blue Hour Twilight Light
+Soft Deep-Blue Ambient Sky After Sunset
+City Lights And Warm Lamps Begin To Glow Against The Blue Dusk
+Cool Ambient Tone With Warm Accent Lights On Face And Outfit
+Subject And Cityscape Share The Same Twilight Balance
+Calm Cinematic Evening Travel Mood`,
+
+neon_night:`【光影色彩｜霓虹夜街】
+
+Neon Night Street Light
+Colorful Neon Signs Reflect On Face, Outfit And Wet Ground
+Mixed Warm And Cool Neon Color Cast Kept Consistent On Subject And Background
+Urban Nightlife Travel Atmosphere
+Face Remains Clear And Naturally Lit Within The Neon Environment
+No Detached Portrait Lighting`,
+
+morning_mist:`【光影色彩｜清晨柔霧光】
+
+Early Morning Mist Light
+Soft Diffused Sunrise Light Through Thin Fog
+Gentle Pastel Tones Across Subject And Landscape
+Quiet Fresh Morning Travel Mood
+Subject And Misty Scenery Share The Same Soft Exposure
+No Harsh Shadows`,
+
+lantern_night:`【光影色彩｜燈籠暖夜】
+
+Warm Lantern Night Light
+Traditional Lanterns Cast Warm Glow On Face, Outfit And Street
+Deep Night Background With Layered Lantern Bokeh
+Festive Eastern Night Travel Atmosphere
+Subject And Lantern Street Share The Same Warm Night Light
+No Independent Face Lighting`
 };
 
 const MOTION_LEVELS = {
@@ -1314,6 +1596,129 @@ Landscape And Subject Move Together Visually
 Cinematic Travel Editorial Energy
 Identity Remains Stable And Clear`
 };
+
+const POSE_STYLES = {
+auto: null,
+look_back:`【姿勢模組｜回眸站姿】
+
+Standing Pose Turning Back Toward Camera
+Shoulders Rotated Naturally, Chin Over Shoulder
+Gentle Eye Contact With Camera
+Relaxed Arms, Natural Hand Lines
+Classic Travel Portrait Look-Back Moment
+Identity And Facial Features Remain Clearly Recognizable`,
+lean_wall:`【姿勢模組｜倚牆而立】
+
+Leaning Casually Against A Wall Or Pillar
+One Shoulder Or Back Softly Touching The Surface
+One Leg Relaxed Or Crossed At The Ankle
+Effortless Editorial Attitude
+Natural Weight On The Supporting Side
+Identity And Facial Features Remain Clearly Recognizable`,
+railing_gaze:`【姿勢模組｜欄杆遠眺】
+
+Resting Hands Lightly On A Railing Or Balustrade
+Gazing Toward The Distant Scenery
+Relaxed Shoulders, Elegant Side Profile Or Three-Quarter Angle
+Travel Storytelling Moment Of Quiet Admiration
+Identity And Facial Features Remain Clearly Recognizable`,
+stairs_sit:`【姿勢模組｜階梯輕坐】
+
+Sitting Gracefully On Stone Steps Or Stairs
+Knees Together Or Softly Angled To One Side
+Hands Resting Naturally On Knees Or Beside The Body
+Skirt Or Coat Arranged Neatly
+Relaxed Travel Editorial Sitting Pose
+Identity And Facial Features Remain Clearly Recognizable`,
+street_crouch:`【姿勢模組｜街拍蹲姿】
+
+Fashionable Low Crouch Pose On The Street
+One Knee Lower, Balanced Center Of Gravity
+Hands Resting On Knees Naturally
+Streetwear Editorial Energy, Playful Gaze Into Camera
+Identity And Facial Features Remain Clearly Recognizable`,
+walk_turn:`【姿勢模組｜行走回望】
+
+Captured Mid-Walk While Turning Back Toward Camera
+Natural Step With Hair And Hem In Gentle Motion
+Candid Travel Snapshot Feeling
+Balanced Body Mechanics During The Turn
+Identity And Facial Features Remain Clearly Recognizable`,
+hair_sweep:`【姿勢模組｜撩髮側望】
+
+One Hand Gently Sweeping Hair Behind The Ear
+Soft Side Gaze Toward Light Or Scenery
+Elegant Relaxed Posture
+Quiet Cinematic Portrait Moment
+Identity And Facial Features Remain Clearly Recognizable`,
+skirt_lift:`【姿勢模組｜輕提裙擺】
+
+One Hand Lightly Lifting The Edge Of The Skirt Or Dress
+Gentle Step Forward Or Slight Turn
+Fabric Flowing Naturally With The Motion
+Graceful Travel Editorial Gesture
+Identity And Facial Features Remain Clearly Recognizable`,
+back_view_gaze:`【姿勢模組｜背影遠望】
+
+Elegant Back View Facing The Scenery
+Head Slightly Turned To Show A Partial Profile
+Relaxed Shoulders And Natural Standing Line
+Strong Sense Of Place And Journey
+Facial Profile Remains Recognizable As The Same Person`,
+umbrella_walk:`【姿勢模組｜執傘漫步】
+
+Walking Slowly While Holding An Umbrella Or Parasol
+Umbrella Held Naturally Above The Shoulder
+Soft Gaze Forward Or Toward Camera
+Rainy Or Sunny Travel Story Mood
+Identity And Facial Features Remain Clearly Recognizable`,
+tea_pour:`【姿勢模組｜茶席斟茶】
+
+Seated Or Standing At A Tea Table, Gracefully Pouring Tea
+Both Hands Engaged Naturally With Teapot And Cup
+Gentle Downward Gaze On The Tea, Calm Elegant Expression
+Refined Eastern Lifestyle Editorial Moment
+Identity And Facial Features Remain Clearly Recognizable`,
+flower_smell:`【姿勢模組｜捧花輕嗅】
+
+Holding A Small Bouquet Or Blossom Branch Near The Face
+Eyes Softly Lowered Or Gently Closed
+Flowers Must Not Cover The Facial Features
+Romantic Travel Portrait Gesture
+Identity And Facial Features Remain Clearly Recognizable`
+};
+
+const COSTUME_DIRECTIONS = {
+auto: null,
+flow_dress:`Costume Direction: Flowing Dress — elegant long dress with soft flowing fabric, hemline moving with the wind, romantic travel silhouette`,
+qipao:`Costume Direction: Refined Qipao — modern refined cheongsam with high collar and elegant side slit, fine oriental fabric pattern, graceful eastern silhouette`,
+kimono_yukata:`Costume Direction: Kimono / Yukata — modern refined kimono or summer yukata with obi sash, clean layered collar, elegant Japanese travel styling`,
+campus_uniform:`Costume Direction: Campus Style — preppy academic outfit with shirt, ribbon or bow tie, pleated skirt and cardigan, fresh youthful yet adult styling`,
+y2k_street:`Costume Direction: Y2K Streetwear — glossy jacket or satin top, layered accessories, pleated or cargo skirt, chunky sneakers, playful urban trend styling`,
+denim_casual:`Costume Direction: Denim Casual — well-fitted denim with simple top or knitwear, relaxed everyday travel outfit, effortless natural styling`,
+resort_cover:`Costume Direction: Resort Style — breezy resort dress or light cover-up over swim-inspired top, straw hat optional, vacation seaside styling kept elegant`,
+evening_gown:`Costume Direction: Evening Gown — refined evening dress with premium fabric and clean silhouette, suitable for night city or hotel scenes`,
+winter_coat:`Costume Direction: Winter Coat — long wool coat or padded jacket with scarf, layered winter textures, cozy cold-season travel styling`
+};
+
+const HAIR_STYLES = {
+auto: null,
+long_straight:`Hair Styling: long straight black hair, smooth and healthy shine`,
+soft_waves:`Hair Styling: natural soft wavy long hair with airy volume`,
+short_bob:`Hair Styling: shoulder-length or shorter bob hair, clean modern lines`,
+braided_updo:`Hair Styling: elegant braided or pinned-up hairstyle with a few loose strands`,
+high_ponytail:`Hair Styling: high ponytail with clean hairline, lively and refined`
+};
+
+const ACCESSORY_PROPS = {
+none: null,
+glasses:`Accessory: slim thin-frame glasses that do not hide the eyes or facial features`,
+headphones:`Accessory: over-ear headphones worn around the neck, trendy street styling`,
+hair_flower:`Accessory: small flower or delicate hairpin accent in the hair`,
+beret:`Accessory: soft beret hat tilted naturally, face fully visible`,
+mini_backpack:`Accessory: small fashionable backpack or crossbody bag`
+};
+
 function setupRadioCards(id){
   const c=document.getElementById(id);
   if(!c)return;
@@ -1332,6 +1737,10 @@ setupRadioCards('cameraCards');
 setupRadioCards('lightingCards');
 setupRadioCards('motionCards');
 setupRadioCards('mediaCards');
+setupRadioCards('poseCards');
+setupRadioCards('costumeCards');
+setupRadioCards('hairCards');
+setupRadioCards('propCards');
 
 function setRadioCardValue(containerId, value){
   const container = document.getElementById(containerId);
@@ -1371,6 +1780,10 @@ function applyTravelRandomSelection(){
   setRadioCardValue('lightingCards', lightingValue);
   setRadioCardValue('motionCards', motionValue);
   setRadioCardValue('mediaCards', mediaValue);
+  setRadioCardValue('poseCards', 'auto');
+  setRadioCardValue('costumeCards', 'auto');
+  setRadioCardValue('hairCards', 'auto');
+  setRadioCardValue('propCards', 'none');
 
   themeInputEl.value = themeValue;
   themeInputEl.dispatchEvent(new Event('input', { bubbles: true }));
@@ -1467,6 +1880,30 @@ const QUICK_TRAVEL_PRESETS = {
     motion: 'breeze',
     media: 'travel_magazine',
     themeText: '櫻花校園春日旅拍, 櫻花大道與柔焦花瓣背景, 粉色針織外套、白襯衫、格紋短裙、蝴蝶結與小肩背包, 全身站姿一手輕扶包帶, 明亮午後自然光, 清新日系校園寫真'
+  },
+  seasideCastleSunset: {
+    composition: 'C',
+    style: 'resort_hotel',
+    ratio: '3:4',
+    camera: 'three_quarter_side',
+    lighting: 'golden_hour',
+    motion: 'breeze',
+    media: 'cinematic_realistic',
+    pose: 'stairs_sit',
+    costume: 'flow_dress',
+    themeText: '海邊白色城堡夕陽旅拍, 白色大理石階梯與拱廊, 遠方海面與棕櫚樹, 珊瑚橘色飄逸洋裝, 坐在階梯上望向夕陽海面, 金橘色夕陽逆光, 慵懶度假故事感'
+  },
+  chineseTeaCourtyard: {
+    composition: 'B',
+    style: 'chinese',
+    ratio: '3:4',
+    camera: 'passerby_view',
+    lighting: 'scene_natural',
+    motion: 'still',
+    media: 'travel_magazine',
+    pose: 'tea_pour',
+    costume: 'qipao',
+    themeText: '中式庭院茶席旅拍, 老宅庭院與木質茶桌, 盆栽綠意與斑駁光影, 墨綠色改良旗袍, 站在茶桌旁優雅斟茶, 低眸專注神情, 午後自然光與地面樹影, 東方生活美學'
   }
 };
 
@@ -1479,6 +1916,10 @@ function applyTravelPreset(preset){
   if(preset.lighting) setRadioCardValue('lightingCards', preset.lighting);
   if(preset.motion) setRadioCardValue('motionCards', preset.motion);
   if(preset.media) setRadioCardValue('mediaCards', preset.media);
+  setRadioCardValue('poseCards', preset.pose || 'auto');
+  setRadioCardValue('costumeCards', preset.costume || 'auto');
+  setRadioCardValue('hairCards', preset.hair || 'auto');
+  setRadioCardValue('propCards', preset.prop || 'none');
   if(preset.themeText){
     themeInputEl.value = preset.themeText;
     themeInputEl.dispatchEvent(new Event('input', { bubbles: true }));
@@ -1535,6 +1976,10 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
   const lightingKey=document.querySelector('input[name="lighting"]:checked').value;
   const motionKey=document.querySelector('input[name="motion"]:checked').value;
   const mediaKey=document.querySelector('input[name="media"]:checked').value;
+  const poseKey=document.querySelector('input[name="pose"]:checked')?.value||'auto';
+  const costumeKey=document.querySelector('input[name="costume"]:checked')?.value||'auto';
+  const hairKey=document.querySelector('input[name="hair"]:checked')?.value||'auto';
+  const propKey=document.querySelector('input[name="prop"]:checked')?.value||'none';
   const style=STYLES[styleKey];
   let theme=themeInputEl.value.trim();
   if(!theme)theme="(請填寫主題)";
@@ -1551,6 +1996,18 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
   const themeBlock=`【主題】\n\n${theme}`;
   const ratioBlock=`【輸出比例】\n\n${RATIOS[ratioKey]}`;
 
+  const poseBlock=POSE_STYLES[poseKey]||null;
+  const costumeDirection=COSTUME_DIRECTIONS[costumeKey]||null;
+  const costumeBlockFinal=costumeDirection
+    ? costumeBlock+`\n\n${costumeDirection}\n服裝以上述方向為主軸,細節仍需符合主題世界觀`
+    : costumeBlock;
+  const adornLines=[HAIR_STYLES[hairKey],ACCESSORY_PROPS[propKey]].filter(Boolean);
+  const adornBlock=adornLines.length
+    ? `【裝扮細節模組】\n\n${adornLines.join('\n')}\nStyling must not change facial identity or face shape`
+    : null;
+  // 封面 / 廣角環境 / 遠距主視覺屬於景別指令,與 01 構圖同軸,避免同時輸出互斥構圖
+  const cameraOverridesComposition=['cover','wide_scene','distant_hero'].includes(cameraKey);
+
   const sections=[
     CORE.identity,
     skeletonBlock,
@@ -1559,12 +2016,14 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
     CORE.photographer,
     ...(lightingBlock?[lightingBlock]:[]),
     ...(cameraBlock?[cameraBlock]:[]),
+    ...(poseBlock?[poseBlock]:[]),
     ...(motionBlock?[motionBlock]:[]),
-    COMPOSITION[composition],
+    ...(cameraOverridesComposition?[]:[COMPOSITION[composition]]),
     styleBlock,
     mediaBlock,
     themeBlock,
-    costumeBlock,
+    costumeBlockFinal,
+    ...(adornBlock?[adornBlock]:[]),
     CORE.cleanframe,
     CORE.output,
     ratioBlock

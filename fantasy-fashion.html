@@ -676,6 +676,14 @@
       <label class="card"><input type="radio" name="material" value="stardustLightSilk"><div class="name">星塵光絲</div><div class="desc">細緻星塵、發光絲線、深色奢華光流</div></label>
       <label class="card"><input type="radio" name="material" value="floatingPetalGlass"><div class="name">漂浮花瓣玻璃</div><div class="desc">透明花瓣、玻璃碎光、空氣感層次</div></label>
       <label class="card"><input type="radio" name="material" value="solarHaloFiligree"><div class="name">太陽光環金絲</div><div class="desc">日輪冠飾、金色飄帶、珍珠光與神殿碎光</div></label>
+      <label class="card"><input type="radio" name="material" value="arcaneFlameLotus"><div class="name">藍焰蓮花法術</div><div class="desc">掌心藍焰蓮花、黑紅法袍、暗黑仙俠</div></label>
+      <label class="card"><input type="radio" name="material" value="serpentTattooSilk"><div class="name">蛇靈紋身黑紗</div><div class="desc">手臂圖騰紋身、靈蛇繞臂、不上臉</div></label>
+      <label class="card"><input type="radio" name="material" value="moonVeilDance"><div class="name">月夜面紗紗舞</div><div class="desc">薄紗面紗、紅綬帶、月下起舞</div></label>
+      <label class="card"><input type="radio" name="material" value="crimsonBatWings"><div class="name">絳紅琉璃蝠翼</div><div class="desc">琉璃蝠翼、寶石角飾、黑蕾絲哥德</div></label>
+      <label class="card"><input type="radio" name="material" value="spiderLilyGold"><div class="name">彼岸花金箔</div><div class="desc">紅彼岸花、金箔絲、藍天白紗</div></label>
+      <label class="card"><input type="radio" name="material" value="osmanthusGoldGauze"><div class="name">金桂花紗</div><div class="desc">金桂花簇、香檳紗、暖金光</div></label>
+      <label class="card"><input type="radio" name="material" value="orchidPurpleGauze"><div class="name">紫蘭花紗</div><div class="desc">紫蘭花瓣、丁香蕾絲、銀流蘇</div></label>
+      <label class="card"><input type="radio" name="material" value="sakuraGoldCheongsam"><div class="name">粉金櫻花旗袍</div><div class="desc">粉蕾絲旗袍、金箔櫻枝、東方春日</div></label>
     </div>
     <div class="form-grid" style="margin-top:10px;">
       <label class="field custom-choice" data-custom-choice="material">材質自填
@@ -851,6 +859,8 @@
       <label class="card"><input type="radio" name="lighting" value="blueEnergyWingLight"><div class="name">藍色能源翼光</div><div class="desc">藍色能源燈、機械翼反射、冷灰棚光</div></label>
       <label class="card"><input type="radio" name="lighting" value="wastelandIndustrialSideLight"><div class="name">工業廢土側光</div><div class="desc">斜側硬光、老化金屬反射、廢土陰影</div></label>
       <label class="card"><input type="radio" name="lighting" value="solarTempleGold"><div class="name">太陽神殿金光</div><div class="desc">晨光日輪、白金反射、肌膚與神殿同光</div></label>
+      <label class="card"><input type="radio" name="lighting" value="blueFlameGlow"><div class="name">藍焰法術光</div><div class="desc">藍色法術光+遠處火光、暗黑仙俠對比</div></label>
+      <label class="card"><input type="radio" name="lighting" value="moonlightCandle"><div class="name">月光燭火混合光</div><div class="desc">冷月光+暖燭光、詩意夜景</div></label>
     </div>
     <div class="form-grid" style="margin-top:10px;">
       <label class="field full">色彩補充
@@ -908,6 +918,10 @@
       <label class="card"><input type="radio" name="background" value="coolGrayTechStudio"><div class="name">冷灰科技白棚</div><div class="desc">冷灰白棚、科技留白、黑銀機械翼</div></label>
       <label class="card"><input type="radio" name="background" value="wastelandMechaWorkshop"><div class="name">廢土機械工坊</div><div class="desc">機械工坊、管線零件、老化金屬背景</div></label>
       <label class="card"><input type="radio" name="background" value="solarMarbleThrone"><div class="name">太陽神殿寶座</div><div class="desc">白色大理石寶座、日輪拱門、金色晨光</div></label>
+      <label class="card"><input type="radio" name="background" value="burningTempleNight"><div class="name">夜火古廟</div><div class="desc">古廟石柱、遠處火光飛燼、暗黑史詩</div></label>
+      <label class="card"><input type="radio" name="background" value="moonPavilionNight"><div class="name">月夜古樓</div><div class="desc">滿月古樓、燈籠燭列、東方夜色</div></label>
+      <label class="card"><input type="radio" name="background" value="mysticWaterHall"><div class="name">水面殿堂</div><div class="desc">水面倒影、殘柱霧氣、淺水站姿</div></label>
+      <label class="card"><input type="radio" name="background" value="darkMirrorChamber"><div class="name">暗黑鏡廳</div><div class="desc">黑鏡面牆、燭光反射、哥德奢華</div></label>
     </div>
   </section>
 
@@ -1348,6 +1362,46 @@ const materialData = {
     label: '太陽光環金絲',
     prompt: 'solar halo filigree material system, refined gold sun disc crown behind the head, luminous white gold ribbons, pearl crystal ornaments, delicate gold arm cuffs and waist chains, sacred solar temple accents framing the body without covering face or hands',
     palette: 'pearl white, warm sunrise gold, ivory marble, soft champagne, pale amber glow'
+  },
+  arcaneFlameLotus: {
+    label: '藍焰蓮花法術',
+    prompt: 'arcane blue flame lotus material system, glowing blue-orange spectral lotus held above one open palm, elegant blue energy wisps flowing around arms and gown, dark red and black layered sorceress robe with gold chain ornaments, magical flame light stays away from the face and never covers facial features',
+    palette: 'arcane blue, ember orange, deep crimson, obsidian black, antique gold'
+  },
+  serpentTattooSilk: {
+    label: '蛇靈紋身黑紗',
+    prompt: 'serpent spirit tattoo silk material system, elegant black red silk gown with silver embroidery, delicate mystical line tattoos on arms and shoulders only, a small luminous spectral snake coiling around one forearm, ornamental hairpins with hanging chains, tattoos are refined art lines and must never appear on the face or neck',
+    palette: 'ink black, deep crimson, silver line, spectral blue glow, pale skin contrast'
+  },
+  moonVeilDance: {
+    label: '月夜面紗紗舞',
+    prompt: 'moonlit veil dance material system, translucent indigo-violet layered dance gauze with silver thread patterns, sheer face veil worn below the eyes keeping eyes and upper face fully visible, long red ribbon sashes flowing with dance motion, delicate hair sticks with hanging tassels',
+    palette: 'indigo violet, moon silver, deep red ribbon, midnight blue, candle gold'
+  },
+  crimsonBatWings: {
+    label: '絳紅琉璃蝠翼',
+    prompt: 'crimson glass bat wing material system, translucent ruby glass bat wings folded elegantly behind the shoulders, small jeweled horn hair ornaments, black lace and fine chain gown details, gothic gemstone rings and necklace, wings and horns are refined couture ornaments that never cover the face',
+    palette: 'ruby red, obsidian black, dark gold, wine crimson, candle warm glow'
+  },
+  spiderLilyGold: {
+    label: '彼岸花金箔',
+    prompt: 'red spider lily gold foil material system, vivid red spider lily blossoms with long curved stamens surrounding the subject, white translucent gauze gown with red lily embroidery, flowing gold foil ribbon threads sparkling in the air, bright blue sky atmosphere, flowers frame the body without covering the face',
+    palette: 'spider lily red, gold foil, pure white gauze, sky blue, warm sunlight'
+  },
+  osmanthusGoldGauze: {
+    label: '金桂花紗',
+    prompt: 'golden osmanthus gauze material system, tiny golden osmanthus blossom clusters woven through translucent champagne gauze layers, delicate gold flower hairpiece with hanging bead strands, soft glowing petals drifting in the air, warm luminous elegance framing the subject',
+    palette: 'osmanthus gold, warm champagne, ivory white, honey amber, soft daylight'
+  },
+  orchidPurpleGauze: {
+    label: '紫蘭花紗',
+    prompt: 'purple orchid gauze material system, large translucent lavender orchid petals swirling around the subject, layered lilac lace and gauze gown with orchid embroidery, purple flower hair ornaments with silver tassels, airy pale violet atmosphere, petals never cover the face',
+    palette: 'lavender purple, lilac white, silver thread, pale violet mist, cool porcelain'
+  },
+  sakuraGoldCheongsam: {
+    label: '粉金櫻花旗袍',
+    prompt: 'pink gold sakura cheongsam material system, blush pink lace qipao with gold vine embroidery, gilded cherry blossom branches and pink petals surrounding the scene, gold leaf accents on rocks and water surface, soft pink petal bokeh, elegant eastern spring luxury framing the subject',
+    palette: 'sakura pink, antique gold leaf, blush cream, pearl white, warm ivory'
   }
 };
 
@@ -1439,7 +1493,11 @@ const backgroundData = {
   maglevProductStage: 'maglev product pedestal background, floating crystal product stage, clean black mirror floor, controlled luxury reflections, premium handbag or accessory advertising layout',
   blackMirrorDataRoom: 'black mirror data room background, blue violet data flow lines, dark reflective walls, minimal futuristic product space, premium AI luxury campaign layout',
   coolGrayTechStudio: 'cool gray technology white studio background, minimal gray-white cyclorama, black mechanical wings clearly visible behind the subject, clean negative space, premium dark tech fashion campaign layout',
-  wastelandMechaWorkshop: 'wasteland mechanical workshop background, aged machinery, hanging cables, industrial metal parts, dusty atmosphere, gritty sci-fi advertising environment, controlled clutter behind the subject'
+  wastelandMechaWorkshop: 'wasteland mechanical workshop background, aged machinery, hanging cables, industrial metal parts, dusty atmosphere, gritty sci-fi advertising environment, controlled clutter behind the subject',
+  burningTempleNight: 'burning ancient temple night background, dark stone columns and ruined palace stairs, controlled distant flames and drifting embers, deep night sky, dramatic mythic fantasy atmosphere, fire stays behind the subject and never touches the body',
+  moonPavilionNight: 'moonlit ancient pavilion night background, full moon behind carved wooden towers and tiled roofs, glowing lanterns and candle rows along the railings, deep blue night sky with thin clouds, poetic eastern night stage for dance or portrait',
+  mysticWaterHall: 'mystic water hall background, dark ruined palace columns rising from a calm reflective water surface, soft ripples and floating sparks of light, misty deep blue atmosphere, subject standing gracefully in shallow water with elegant reflections',
+  darkMirrorChamber: 'dark mirror chamber background, black glossy mirrored walls with warm candlelight reflections, subtle elegant reflections of the subject in the panels, deep gothic luxury interior, refined dark glamour advertising space'
 };
 
 const lightingData = {
@@ -1486,7 +1544,9 @@ const lightingData = {
   maglevCrystalRefraction: 'maglev crystal refraction lighting, floating crystal facets create controlled highlights across face hands outfit and background, premium product pedestal light, no overexposed face',
   dataFlowBlueViolet: 'blue violet data flow lighting, black mirror screen glow and fine data lines reflect consistently on face hair outfit and background, futuristic luxury campaign light, natural facial exposure',
   blueEnergyWingLight: 'blue energy wing lighting, electric blue lights from black mechanical wings reflect subtly on face shoulders hair outfit and background, cool gray studio exposure, face remains recognizable without overexposure',
-  wastelandIndustrialSideLight: 'wasteland industrial side lighting, hard angled workshop light, aged metal reflections and dusty shadow affect the entire subject consistently, gritty sci-fi commercial mood, no detached portrait lighting'
+  wastelandIndustrialSideLight: 'wasteland industrial side lighting, hard angled workshop light, aged metal reflections and dusty shadow affect the entire subject consistently, gritty sci-fi commercial mood, no detached portrait lighting',
+  blueFlameGlow: 'arcane blue flame lighting, cool blue spell glow mixed with warm distant fire light, blue energy reflections affect face body hair gown and background consistently, dramatic sorceress contrast while facial features stay clearly readable, no overexposed face',
+  moonlightCandle: 'moonlight and candle mixed lighting, cool silver moonlight from above with warm lantern candle glow from below, both light sources affect face body veil fabric and architecture consistently, poetic night contrast with natural facial exposure'
 };
 
 const sharedFantasyCore = window.HB_CORE_PROMPT?.page?.fantasy || {};

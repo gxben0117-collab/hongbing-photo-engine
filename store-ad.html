@@ -248,6 +248,35 @@
       <label class="card"><input type="radio" name="campaign" value="vip"><div class="name">VIP活動</div><div class="desc">會員專屬、貴賓邀請</div></label>
       <label class="card"><input type="radio" name="campaign" value="auto"><div class="name">AI自動排版</div><div class="desc">依資訊自動整理版面</div></label>
     </div>
+    <div class="form-grid" id="festivalField" style="display:none;margin-top:10px;">
+      <label class="field">節慶快選（選了會自動帶入節慶視覺元素）
+        <select id="festivalType">
+          <option value="">不指定</option>
+          <option value="Lunar New Year celebration visual elements, red and gold lanterns, plum blossom branches, festive spring couplets atmosphere">春節</option>
+          <option value="Valentine's Day visual elements, soft roses, ribbon hearts, romantic warm pink and red tones">情人節</option>
+          <option value="Mother's Day visual elements, carnation flowers, gentle warm tones, caring family atmosphere">母親節</option>
+          <option value="Father's Day visual elements, refined masculine tones, subtle tie or watch motifs, warm appreciation mood">父親節</option>
+          <option value="Mid-Autumn Festival visual elements, full moon, warm lantern glow, osmanthus and mooncake motifs">中秋節</option>
+          <option value="Halloween visual elements, playful pumpkin and bat motifs, orange purple palette, fun not scary">萬聖節</option>
+          <option value="Christmas visual elements, pine branches, warm string lights, red green gold festive palette">聖誕節</option>
+          <option value="anniversary celebration visual elements, elegant gold confetti, ribbon and champagne tones, premium celebration mood">周年慶</option>
+        </select>
+      </label>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <div class="section-label">01b</div>
+      <div class="section-title">主視覺素材</div>
+    </div>
+    <p class="hint">海報中間的主視覺要用什麼：純設計排版，或以你上傳的照片為主角。</p>
+    <div class="grid" data-choice="heroSource">
+      <label class="card selected"><input type="radio" name="heroSource" value="design" checked><div class="name">純設計版面</div><div class="desc">不用照片，AI 設計主視覺(預設)</div></label>
+      <label class="card"><input type="radio" name="heroSource" value="product"><div class="name">上傳商品照</div><div class="desc">商品照當主視覺，保留商品細節</div></label>
+      <label class="card"><input type="radio" name="heroSource" value="person"><div class="name">上傳人物照</div><div class="desc">人物當模特主視覺，鎖定同一張臉</div></label>
+      <label class="card"><input type="radio" name="heroSource" value="storefront"><div class="name">上傳店面照</div><div class="desc">店面外觀當主視覺，招牌清楚</div></label>
+    </div>
   </section>
 
   <section>
@@ -304,6 +333,7 @@
           <option value="vertical 9:16 story poster">直式 9:16</option>
           <option value="square 1:1 social media poster">方形 1:1</option>
           <option value="A4 vertical print poster">A4 直式</option>
+          <option value="horizontal 16:9 banner poster">橫式 16:9（FB 封面 / 看板）</option>
         </select>
       </label>
     </div>
@@ -323,6 +353,10 @@
       <label class="card"><input type="radio" name="visual" value="green"><div class="name">自然植感</div><div class="desc">SPA、餐飲、旅宿</div></label>
       <label class="card"><input type="radio" name="visual" value="red"><div class="name">節慶紅金</div><div class="desc">新年、周年、促銷</div></label>
       <label class="card"><input type="radio" name="visual" value="fashion"><div class="name">時尚人物</div><div class="desc">模特主視覺、雜誌感</div></label>
+      <label class="card"><input type="radio" name="visual" value="illustration"><div class="name">手繪插畫風</div><div class="desc">溫暖插畫、親切生活感</div></label>
+      <label class="card"><input type="radio" name="visual" value="japanMag"><div class="name">日系雜誌風</div><div class="desc">留白、細字、清新質感</div></label>
+      <label class="card"><input type="radio" name="visual" value="retroTaiwan"><div class="name">復古台味</div><div class="desc">老招牌字體、復古配色</div></label>
+      <label class="card"><input type="radio" name="visual" value="tech"><div class="name">科技3C感</div><div class="desc">深色科技、光線俐落</div></label>
       <label class="card"><input type="radio" name="visual" value="custom"><div class="name">自訂風格</div><div class="desc">用下方文字補充</div></label>
     </div>
   </section>
@@ -449,12 +483,43 @@ const visualData = {
     font: '雜誌標題字 + 高級品牌資訊字',
     prompt: 'fashion model commercial poster, premium beauty and lifestyle campaign, magazine advertising style'
   },
+  illustration: {
+    label: '手繪插畫風',
+    palette: 'warm cream, soft coral, gentle sage green',
+    font: '手寫感標題 + 圓潤資訊字',
+    prompt: 'warm hand-drawn illustration poster style, friendly storybook shop atmosphere, soft textured brush details, charming lifestyle advertising'
+  },
+  japanMag: {
+    label: '日系雜誌風',
+    palette: 'off white, light gray, single muted accent color',
+    font: '細明體標題 + 小級數資訊字',
+    prompt: 'Japanese magazine layout style, generous white space, thin elegant typography area, clean airy lifestyle photography mood, refined minimal composition'
+  },
+  retroTaiwan: {
+    label: '復古台味',
+    palette: 'retro red, teal green, warm cream yellow',
+    font: '復古圓體或楷體標題 + 樸實資訊字',
+    prompt: 'retro Taiwanese signboard poster style, nostalgic hand-painted sign aesthetics, vintage local shop atmosphere, warm retro color blocks, playful traditional charm'
+  },
+  tech: {
+    label: '科技3C感',
+    palette: 'deep navy black, electric blue, silver highlight',
+    font: '幾何無襯線標題 + 精密資訊字',
+    prompt: 'modern technology product poster style, dark premium background with clean light streaks, precise grid layout, futuristic commercial design'
+  },
   custom: {
     label: '自訂風格',
     palette: 'custom brand color palette',
     font: '依品牌調性選擇標題與資訊字',
     prompt: 'custom premium commercial poster style based on user direction'
   }
+};
+
+const heroSourceData = {
+  design: null,
+  product: 'use the uploaded product photo as the hero visual, keep the product shape, color, label and details completely accurate, premium product-centered composition',
+  person: 'use the uploaded person as the poster model and hero visual',
+  storefront: 'use the uploaded storefront photo as the hero visual, keep the signage, facade, colors and details accurate, inviting premium storefront composition'
 };
 
 function selected(name){
@@ -477,9 +542,19 @@ function refreshCards(){
   });
 }
 
+function updateFestivalVisibility(){
+  const field = document.getElementById('festivalField');
+  if(field) field.style.display = selected('campaign') === 'festival' ? '' : 'none';
+}
+
 function generate(){
   const campaign = campaignData[selected('campaign')];
   const visual = visualData[selected('visual')];
+  const heroSource = selected('heroSource');
+  const heroLine = heroSourceData[heroSource];
+  const isPersonHero = heroSource === 'person';
+  const festivalType = selected('campaign') === 'festival' ? document.getElementById('festivalType').value : '';
+  const coreBlocks = window.HB_CORE_PROMPT?.blocks || {};
   const storeName = value('storeName');
   const eventName = value('eventName');
   const eventDate = value('eventDate');
@@ -519,10 +594,16 @@ function generate(){
     [
       `${ratio}, premium commercial poster for a ${industry},`,
       campaign.prompt + ',',
+      festivalType ? festivalType + ',' : '',
       visual.prompt + ',',
+      heroLine ? heroLine + ',' : '',
+      isPersonHero && coreBlocks.identityLock ? coreBlocks.identityLock + ',' : '',
+      isPersonHero && coreBlocks.faceGeometryLock ? coreBlocks.faceGeometryLock + ',' : '',
+      isPersonHero && STORE_AD_CORE.lighting ? STORE_AD_CORE.lighting + ',' : '',
       `${logo}, clear headline area and clear information area,`,
       'render the following Traditional Chinese poster copy exactly, legibly, with correct characters, punctuation, numerals, and line breaks; do not print field labels and do not add any other text:',
       posterCopy + ',',
+      'place all text on high-contrast solid color areas or clean negative space for readability; if any Traditional Chinese character cannot be rendered perfectly, leave that text area blank instead of printing wrong characters,',
       'no misspelled text, no gibberish, no random letters, no watermark,',
       'clear visual hierarchy, refined lighting, high-end commercial design, premium local business advertising,',
       `visual direction color palette: ${palette},`,
@@ -567,6 +648,7 @@ function makeSlogan(industry, campaign){
 document.querySelectorAll('input[type="radio"]').forEach(input => {
   input.addEventListener('change', () => {
     refreshCards();
+    updateFestivalVisibility();
     generate();
   });
 });
