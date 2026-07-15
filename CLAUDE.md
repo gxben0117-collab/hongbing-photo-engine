@@ -49,6 +49,14 @@
   L4 index 三卡定位句一併入 batch4。已 push GitHub Pages，線上五頁 200 且新內容
   HTTP 驗證通過（https://gxben0117-collab.github.io/hongbing-photo-engine/）。
   Vault 專案索引已回寫。
+- 2026-07-15（二）：Claude Code 依 owner 指定新增 fantasy「特效瞬間（高速凝結）」材質群 7 個
+  （墨染水雲裙/水銀液態金屬裙/碎鏡爆散裙/色粉爆裂/煙霧紗裙/光繪絲帶裙/冰晶凍結瞬間），
+  其中 3 個做成一鍵模板（inkWaterBloomGown/shatteredMirrorBurstGown/frozenSplashIceGown，
+  皆配 splashDress 剪裁＋爆濺強度）。新模板全引用既有選項值；驗證全過、舊輸出 0 diff。
+- 觀察待查（交下一波）：舊有 30+ 個一鍵模板的 composition 欄是自訂長文字，
+  不在 composition radio 的 6 個值裡，`setRadioValue('composition',...)` 可能沒套上
+  （新加的 3 個模板已改用合法 radio 值，不受影響）。建議 Codex 查證 setRadioValue 行為。
 - 下一步：owner 用 ChatGPT 出圖實測（a）第三波核心瘦身 A/B（`output/ab-test-2026-07-07-c-final/`）
-  （b）第四波新選項抽測（中式庭院茶席、彼岸花金箔、藍焰蓮花、古風私房）。
+  （b）第四波新選項抽測（中式庭院茶席、彼岸花金箔、藍焰蓮花、古風私房）
+  （c）新特效模板抽測（墨染水雲/碎鏡爆散/冰晶凍結）。
   選配待議：L5 travel 主題裁決句（改舊輸出需同意）、doll.html 全頁體檢。

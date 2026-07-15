@@ -480,6 +480,18 @@
         <div class="name">白金太陽女神神殿</div>
         <div class="desc">日輪冠飾、全身站姿、白色神殿、金色晨光飄帶</div>
       </button>
+      <button class="card" type="button" data-template="inkWaterBloomGown">
+        <div class="name">墨染水雲裙</div>
+        <div class="desc">墨水入水瞬凍成裙、水袖東方禪意、藝術展覽級</div>
+      </button>
+      <button class="card" type="button" data-template="shatteredMirrorBurstGown">
+        <div class="name">碎鏡爆散裙</div>
+        <div class="desc">千片碎鏡懸浮凍結、稜鏡折射、對角動態構圖</div>
+      </button>
+      <button class="card" type="button" data-template="frozenSplashIceGown">
+        <div class="name">冰晶凍結瞬間</div>
+        <div class="desc">水花瞬凍成冰裙、黑藍冰宮、冷調電影感</div>
+      </button>
     </div>
   </section>
 
@@ -597,7 +609,15 @@
       <div class="section-title">主題材質與奇幻元素</div>
     </div>
     <p class="hint">選擇要圍繞人物出現的特殊材質或世界觀元素，例如花瓣、水晶、流體、紙雕或神話意象；這不是背景地點。</p>
-    <div class="grid" data-choice="material">      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 甜點食品飲品</div>
+    <div class="grid" data-choice="material">      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 特效瞬間（高速凝結）</div>
+      <label class="card"><input type="radio" name="material" value="inkWaterBloom"><div class="name">墨染水雲裙</div><div class="desc">墨水入水暈開瞬凍、東方禪意</div></label>
+      <label class="card"><input type="radio" name="material" value="mercuryLiquidMetal"><div class="name">水銀液態金屬裙</div><div class="desc">鏡面水銀流體、反射環境、未來精品</div></label>
+      <label class="card"><input type="radio" name="material" value="shatteredMirrorBurst"><div class="name">碎鏡爆散裙</div><div class="desc">千片碎鏡懸浮凍結、稜鏡折射</div></label>
+      <label class="card"><input type="radio" name="material" value="holiPowderBurst"><div class="name">色粉爆裂</div><div class="desc">彩色粉末爆炸凝結、運動廣告感</div></label>
+      <label class="card"><input type="radio" name="material" value="smokeVeilGown"><div class="name">煙霧紗裙</div><div class="desc">彩色濃煙凝成布料、夢幻戲劇</div></label>
+      <label class="card"><input type="radio" name="material" value="lightPaintingRibbon"><div class="name">光繪絲帶裙</div><div class="desc">長曝光光軌纏繞、夜景金銀光線</div></label>
+      <label class="card"><input type="radio" name="material" value="frozenSplashIce"><div class="name">冰晶凍結瞬間</div><div class="desc">水花瞬凍成冰裙、冷調高級</div></label>
+      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 甜點食品飲品</div>
       <label class="card selected"><input type="radio" name="material" value="milkTea" checked><div class="name">奶茶牛奶</div><div class="desc">焦糖奶茶與牛奶對撞</div></label>
       <label class="card"><input type="radio" name="material" value="strawberry"><div class="name">草莓奶昔</div><div class="desc">粉紅奶昔與草莓果粒</div></label>
       <label class="card"><input type="radio" name="material" value="banana"><div class="name">香蕉牛奶</div><div class="desc">金黃香蕉與奶白液體</div></label>
@@ -1410,6 +1430,41 @@ const materialData = {
     label: '粉金櫻花旗袍',
     prompt: 'pink gold sakura cheongsam material system, blush pink lace qipao with gold vine embroidery, gilded cherry blossom branches and pink petals surrounding the scene, gold leaf accents on rocks and water surface, soft pink petal bokeh, elegant eastern spring luxury framing the subject',
     palette: 'sakura pink, antique gold leaf, blush cream, pearl white, warm ivory'
+  },
+  inkWaterBloom: {
+    label: '墨染水雲裙',
+    prompt: 'ink-in-water bloom material system, black and indigo ink drops blooming underwater frozen at the perfect moment, swirling ink clouds forming the gown silhouette, delicate ink tendrils and soft white water space, eastern zen art atmosphere, ink stays around the body and never covers the face',
+    palette: 'ink black, deep indigo, misty white, pale gray wash, subtle gold fleck'
+  },
+  mercuryLiquidMetal: {
+    label: '水銀液態金屬裙',
+    prompt: 'liquid mercury metal material system, flowing chrome liquid metal wrapping into a gown, mirror-polished silver surface reflecting the environment, smooth molten metal ripples and droplets suspended mid-air, futuristic luxury sculpture fashion',
+    palette: 'chrome silver, gunmetal gray, cool white highlight, subtle blue reflection'
+  },
+  shatteredMirrorBurst: {
+    label: '碎鏡爆散裙',
+    prompt: 'shattered mirror burst material system, thousands of mirror and crystal glass shards frozen mid-explosion forming the skirt, sharp fragments suspended in the air catching prismatic light, controlled radial burst around the body, shards never touch or cover the face',
+    palette: 'mirror silver, prism rainbow flash, ice white, deep charcoal contrast'
+  },
+  holiPowderBurst: {
+    label: '色粉爆裂',
+    prompt: 'color powder burst material system, vivid holi powder clouds exploding frozen in time, magenta orange teal and yellow pigment bursts forming dynamic dress volume, fine powder particles floating in sharp detail, energetic sports campaign visual, powder stays away from the eyes',
+    palette: 'magenta, vivid orange, teal, sun yellow, violet dust'
+  },
+  smokeVeilGown: {
+    label: '煙霧紗裙',
+    prompt: 'colored smoke veil material system, dense colored smoke flowing and curling into a gown silhouette, layered smoke ribbons drifting like silk, soft volumetric wisps around the body, dreamy theatrical atmosphere, face remains clear of smoke',
+    palette: 'smoke violet, deep teal, soft magenta, charcoal night, pale mist'
+  },
+  lightPaintingRibbon: {
+    label: '光繪絲帶裙',
+    prompt: 'light painting ribbon material system, long-exposure golden and silver light trails wrapping around the body into a glowing gown, elegant spiral light ribbons frozen in the night air, sparkling particle trails, premium night campaign visual, light trails never cross the face',
+    palette: 'warm gold light, silver white streak, deep night blue, amber glow'
+  },
+  frozenSplashIce: {
+    label: '冰晶凍結瞬間',
+    prompt: 'frozen splash ice material system, water splash flash-frozen in mid-air into crystalline ice forming the gown, sharp transparent ice petals and frost edges, tiny snow crystals suspended around, cold premium clarity, ice fragments never cover the face',
+    palette: 'ice blue, crystal clear, frost white, deep arctic navy, silver shimmer'
   }
 };
 
@@ -2430,6 +2485,21 @@ const themeTemplates = {
     garment: 'solarGoddessDrape', material: 'solarHaloFiligree', style: 'luxury',
     composition: 'full body solar goddess temple key visual, subject standing tall before luminous white marble columns, refined gold sun disc halo behind the head, flowing ribbons create spacious S-curve arcs while keeping the silhouette and legs clear',
     framing: 'fullBody', pose: 'one_hand_waist', camera: 'eyeLevelCover', lighting: 'solarTempleGold', background: 'solarMarbleThrone', ratio: 'vertical916', intensity: 'balanced material effects, elegant and luxurious'
+  },
+  inkWaterBloomGown: {
+    garment: 'splashDress', material: 'inkWaterBloom', style: 'artExhibit',
+    composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
+    framing: 'threeQuarter', pose: 'water_sleeve', camera: 'eyeLevelCover', lighting: 'soft', background: 'mistSpace', ratio: 'vertical34', intensity: 'massive explosive material splash, high speed frozen motion'
+  },
+  shatteredMirrorBurstGown: {
+    garment: 'splashDress', material: 'shatteredMirrorBurst', style: 'cinematic',
+    composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
+    framing: 'threeQuarter', pose: 'arms_wide', camera: 'lowAngleHero', lighting: 'prismaticColor', background: 'mirrorGallery', ratio: 'vertical45', intensity: 'massive explosive material splash, high speed frozen motion'
+  },
+  frozenSplashIceGown: {
+    garment: 'splashDress', material: 'frozenSplashIce', style: 'cinematic',
+    composition: 'subject surrounded by selected material environment, material wraps around foreground and background, immersive fantasy advertisement layout',
+    framing: 'threeQuarter', pose: 'turn', camera: 'threeQuarterSide', lighting: 'darkIceBlue', background: 'darkIcePalace', ratio: 'vertical916', intensity: 'massive explosive material splash, high speed frozen motion'
   }
 };
 
