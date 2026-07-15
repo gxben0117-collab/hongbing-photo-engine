@@ -43,4 +43,12 @@
   既有 STYLE_PRESET_DEFAULTS 已自動帶相容 media 故不需改；L3/F4 純 UI 分組留給 Codex）。
   驗證全過：check-static、build-prompt-preview 舊組合 0 diff、77 項整合驗證。
   對照文件 `docs/d-prompt-review-2026-07-15.md`、新選項 sample 在
-  `output/ab-test-2026-07-15/`。**尚未 commit，等 owner 確認 review 文件後提交。**
+  `output/ab-test-2026-07-15/`。
+- 2026-07-15：owner 確認後已全部收尾：第四波 commit `427bf20`；L3/F4 UI 分組
+  （magazine 主題 9 群組＋補 5 個孤兒 preset chips、fantasy 材質 9 群組）commit `7f9dc19`；
+  L4 index 三卡定位句一併入 batch4。已 push GitHub Pages，線上五頁 200 且新內容
+  HTTP 驗證通過（https://gxben0117-collab.github.io/hongbing-photo-engine/）。
+  Vault 專案索引已回寫。
+- 下一步：owner 用 ChatGPT 出圖實測（a）第三波核心瘦身 A/B（`output/ab-test-2026-07-07-c-final/`）
+  （b）第四波新選項抽測（中式庭院茶席、彼岸花金箔、藍焰蓮花、古風私房）。
+  選配待議：L5 travel 主題裁決句（改舊輸出需同意）、doll.html 全頁體檢。
