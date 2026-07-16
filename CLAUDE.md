@@ -56,7 +56,17 @@
 - 觀察待查（交下一波）：舊有 30+ 個一鍵模板的 composition 欄是自訂長文字，
   不在 composition radio 的 6 個值裡，`setRadioValue('composition',...)` 可能沒套上
   （新加的 3 個模板已改用合法 radio 值，不受影響）。建議 Codex 查證 setRadioValue 行為。
+- 2026-07-16：Claude Code 讀取桌面新一批風格範例 5 張（全部幻想：玻璃植物園穹頂/
+  透明水晶城市/水晶森林/雲朵棉花/彩虹雲海），補齊缺口：fantasy 背景+4
+  （glassBotanicalDome/glassCrystalCity/crystalForestPath/rainbowCloudSky）、
+  材質+1（cottonCloudGown 雲朵棉花裙）、服裝+1（modernSuit 現代西裝大衣）、
+  光線+1（crystalDaylight 水晶日光）；並補上**髮色模組**（前兩批都出現的缺口）：
+  fantasy 服裝區下方髮色選區、travel 裝扮細節第三組，各 6 選項
+  （維持原髮色預設不輸出/銀白/粉彩虹漸層/玫瑰粉/蜜茶棕/亞麻金），
+  髮色句固定帶「hair color change only, facial identity unchanged」。
+  驗證全過（check-static、舊組合 0 diff、17 項新增完整性檢查）。
 - 下一步：owner 用 ChatGPT 出圖實測（a）第三波核心瘦身 A/B（`output/ab-test-2026-07-07-c-final/`）
   （b）第四波新選項抽測（中式庭院茶席、彼岸花金箔、藍焰蓮花、古風私房）
-  （c）新特效模板抽測（墨染水雲/碎鏡爆散/冰晶凍結）。
+  （c）新特效模板抽測（墨染水雲/碎鏡爆散/冰晶凍結）
+  （d）7-16 新增抽測（水晶森林+銀白髮、彩虹雲海+粉彩虹髮、玻璃城市+現代西裝）。
   選配待議：L5 travel 主題裁決句（改舊輸出需同意）、doll.html 全頁體檢。

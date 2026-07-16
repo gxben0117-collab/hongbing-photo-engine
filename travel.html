@@ -987,6 +987,38 @@
         <div class="desc">清爽有精神</div>
       </label>
     </div>
+    <div class="cards" id="hairColorCards" style="margin-top:10px;">
+      <label class="card selected" data-value="auto">
+        <input type="radio" name="hairColor" value="auto" checked>
+        <div class="name">維持原髮色</div>
+        <div class="desc">依上傳照片(預設)</div>
+      </label>
+      <label class="card" data-value="silver_white">
+        <input type="radio" name="hairColor" value="silver_white">
+        <div class="name">銀白髮</div>
+        <div class="desc">仙氣銀白</div>
+      </label>
+      <label class="card" data-value="pastel_rainbow">
+        <input type="radio" name="hairColor" value="pastel_rainbow">
+        <div class="name">粉彩虹漸層</div>
+        <div class="desc">粉紫藍漸層夢幻</div>
+      </label>
+      <label class="card" data-value="rose_pink">
+        <input type="radio" name="hairColor" value="rose_pink">
+        <div class="name">玫瑰粉髮</div>
+        <div class="desc">Y2K 甜美粉</div>
+      </label>
+      <label class="card" data-value="honey_brown">
+        <input type="radio" name="hairColor" value="honey_brown">
+        <div class="name">蜜茶棕髮</div>
+        <div class="desc">暖棕自然</div>
+      </label>
+      <label class="card" data-value="ash_blonde">
+        <input type="radio" name="hairColor" value="ash_blonde">
+        <div class="name">亞麻金髮</div>
+        <div class="desc">冷調歐系</div>
+      </label>
+    </div>
     <div class="cards" id="propCards" style="margin-top:10px;">
       <label class="card selected" data-value="none">
         <input type="radio" name="prop" value="none" checked>
@@ -1710,6 +1742,15 @@ braided_updo:`Hair Styling: elegant braided or pinned-up hairstyle with a few lo
 high_ponytail:`Hair Styling: high ponytail with clean hairline, lively and refined`
 };
 
+const HAIR_COLORS = {
+auto: null,
+silver_white:`Hair Color: silver white, luminous platinum tone, hair color change only, facial identity unchanged`,
+pastel_rainbow:`Hair Color: pastel rainbow gradient, soft pink violet blue blend, hair color change only, facial identity unchanged`,
+rose_pink:`Hair Color: rose pink, soft sweet pink tone, hair color change only, facial identity unchanged`,
+honey_brown:`Hair Color: honey brown, warm natural tea tone, hair color change only, facial identity unchanged`,
+ash_blonde:`Hair Color: ash blonde, cool muted golden tone, hair color change only, facial identity unchanged`
+};
+
 const ACCESSORY_PROPS = {
 none: null,
 glasses:`Accessory: slim thin-frame glasses that do not hide the eyes or facial features`,
@@ -1740,6 +1781,7 @@ setupRadioCards('mediaCards');
 setupRadioCards('poseCards');
 setupRadioCards('costumeCards');
 setupRadioCards('hairCards');
+setupRadioCards('hairColorCards');
 setupRadioCards('propCards');
 
 function setRadioCardValue(containerId, value){
@@ -1783,6 +1825,7 @@ function applyTravelRandomSelection(){
   setRadioCardValue('poseCards', 'auto');
   setRadioCardValue('costumeCards', 'auto');
   setRadioCardValue('hairCards', 'auto');
+  setRadioCardValue('hairColorCards', 'auto');
   setRadioCardValue('propCards', 'none');
 
   themeInputEl.value = themeValue;
@@ -1919,6 +1962,7 @@ function applyTravelPreset(preset){
   setRadioCardValue('poseCards', preset.pose || 'auto');
   setRadioCardValue('costumeCards', preset.costume || 'auto');
   setRadioCardValue('hairCards', preset.hair || 'auto');
+  setRadioCardValue('hairColorCards', preset.hairColor || 'auto');
   setRadioCardValue('propCards', preset.prop || 'none');
   if(preset.themeText){
     themeInputEl.value = preset.themeText;
@@ -1979,6 +2023,7 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
   const poseKey=document.querySelector('input[name="pose"]:checked')?.value||'auto';
   const costumeKey=document.querySelector('input[name="costume"]:checked')?.value||'auto';
   const hairKey=document.querySelector('input[name="hair"]:checked')?.value||'auto';
+  const hairColorKey=document.querySelector('input[name="hairColor"]:checked')?.value||'auto';
   const propKey=document.querySelector('input[name="prop"]:checked')?.value||'none';
   const style=STYLES[styleKey];
   let theme=themeInputEl.value.trim();
@@ -2001,7 +2046,7 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
   const costumeBlockFinal=costumeDirection
     ? costumeBlock+`\n\n${costumeDirection}\n服裝以上述方向為主軸,細節仍需符合主題世界觀`
     : costumeBlock;
-  const adornLines=[HAIR_STYLES[hairKey],ACCESSORY_PROPS[propKey]].filter(Boolean);
+  const adornLines=[HAIR_STYLES[hairKey],HAIR_COLORS[hairColorKey],ACCESSORY_PROPS[propKey]].filter(Boolean);
   const adornBlock=adornLines.length
     ? `【裝扮細節模組】\n\n${adornLines.join('\n')}\nStyling must not change facial identity or face shape`
     : null;

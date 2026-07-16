@@ -581,11 +581,21 @@
       <label class="card"><input type="radio" name="garment" value="desertQueenVeil"><div class="name">沙漠女王頭紗</div><div class="desc">寶石頭紗、異域短上衣、薄紗長裙</div></label>
       <label class="card"><input type="radio" name="garment" value="darkQueenCouture"><div class="name">暗黑女王高訂</div><div class="desc">尖銳肩線、黑色禮服、女王氣場</div></label>
       <label class="card"><input type="radio" name="garment" value="solarGoddessDrape"><div class="name">白金太陽女神薄紗</div><div class="desc">白色垂墜薄紗、金屬腰飾、神殿女王輪廓</div></label>
+      <label class="card"><input type="radio" name="garment" value="modernSuit"><div class="name">現代西裝大衣</div><div class="desc">長大衣、高腰寬褲、都會未來精品</div></label>
     </div>
     <div class="form-grid" style="margin-top:10px;">
       <label class="field full custom-choice" data-custom-choice="garment">服裝自填
         <input id="customGarment" type="text" placeholder="例如：漢唐華服、鎏金披肩、鯨尾禮服、月桂肩甲">
       </label>
+    </div>
+    <p class="hint" style="margin-top:14px;">髮色（選配）：只改髮色不改臉；「維持原髮色」不會輸出任何髮色指令。</p>
+    <div class="grid grid-3" data-choice="hairColor">
+      <label class="card selected"><input type="radio" name="hairColor" value="original" checked><div class="name">維持原髮色</div><div class="desc">依上傳照片(預設)</div></label>
+      <label class="card"><input type="radio" name="hairColor" value="silverWhite"><div class="name">銀白髮</div><div class="desc">仙氣銀白、天使雲朵系</div></label>
+      <label class="card"><input type="radio" name="hairColor" value="pastelRainbow"><div class="name">粉彩虹漸層</div><div class="desc">粉紫藍漸層、夢幻糖果系</div></label>
+      <label class="card"><input type="radio" name="hairColor" value="rosePink"><div class="name">玫瑰粉髮</div><div class="desc">粉色系、Y2K 甜美</div></label>
+      <label class="card"><input type="radio" name="hairColor" value="honeyBrown"><div class="name">蜜茶棕髮</div><div class="desc">暖棕茶色、日常自然</div></label>
+      <label class="card"><input type="radio" name="hairColor" value="ashBlonde"><div class="name">亞麻金髮</div><div class="desc">冷調亞麻金、歐系時尚</div></label>
     </div>
   </section>
 
@@ -638,6 +648,7 @@
       <label class="card"><input type="radio" name="material" value="cat"><div class="name">貓咪</div><div class="desc">毛感、靈氣與俏皮生物感</div></label>
       <label class="card"><input type="radio" name="material" value="fish"><div class="name">魚群</div><div class="desc">鱗光、游動感與水中流線</div></label>
       <label class="card"><input type="radio" name="material" value="jellyfishGlow"><div class="name">深海水母光</div><div class="desc">透明水母、藍綠螢光、水下香氛</div></label>
+      <label class="card"><input type="radio" name="material" value="cottonCloudGown"><div class="name">雲朵棉花裙</div><div class="desc">真實雲朵成裙、金鏈點綴、坐臥雲上</div></label>
       <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 寶石琉璃光絲</div>
       <label class="card"><input type="radio" name="material" value="diamond"><div class="name">鑽石水晶</div><div class="desc">珠寶雕塑與晶體反光</div></label>
       <label class="card"><input type="radio" name="material" value="swarovski"><div class="name">施華洛水晶</div><div class="desc">切面反光與珠寶級閃耀</div></label>
@@ -889,6 +900,7 @@
       <label class="card"><input type="radio" name="lighting" value="solarTempleGold"><div class="name">太陽神殿金光</div><div class="desc">晨光日輪、白金反射、肌膚與神殿同光</div></label>
       <label class="card"><input type="radio" name="lighting" value="blueFlameGlow"><div class="name">藍焰法術光</div><div class="desc">藍色法術光+遠處火光、暗黑仙俠對比</div></label>
       <label class="card"><input type="radio" name="lighting" value="moonlightCandle"><div class="name">月光燭火混合光</div><div class="desc">冷月光+暖燭光、詩意夜景</div></label>
+      <label class="card"><input type="radio" name="lighting" value="crystalDaylight"><div class="name">水晶日光</div><div class="desc">陽光穿透玻璃水晶、清透稜鏡碎光</div></label>
     </div>
     <div class="form-grid" style="margin-top:10px;">
       <label class="field full">色彩補充
@@ -950,6 +962,10 @@
       <label class="card"><input type="radio" name="background" value="moonPavilionNight"><div class="name">月夜古樓</div><div class="desc">滿月古樓、燈籠燭列、東方夜色</div></label>
       <label class="card"><input type="radio" name="background" value="mysticWaterHall"><div class="name">水面殿堂</div><div class="desc">水面倒影、殘柱霧氣、淺水站姿</div></label>
       <label class="card"><input type="radio" name="background" value="darkMirrorChamber"><div class="name">暗黑鏡廳</div><div class="desc">黑鏡面牆、燭光反射、哥德奢華</div></label>
+      <label class="card"><input type="radio" name="background" value="glassBotanicalDome"><div class="name">玻璃植物園穹頂</div><div class="desc">玻璃鐘罩花房、水晶吊燈、前景葉框</div></label>
+      <label class="card"><input type="radio" name="background" value="glassCrystalCity"><div class="name">透明水晶城市</div><div class="desc">玻璃高塔、懸浮球體、鏡面步道藍天</div></label>
+      <label class="card"><input type="radio" name="background" value="crystalForestPath"><div class="name">水晶森林步道</div><div class="desc">水晶樹、垂墜吊墜、玻璃棧道聖光</div></label>
+      <label class="card"><input type="radio" name="background" value="rainbowCloudSky"><div class="name">彩虹雲海天空</div><div class="desc">彩虹拱、泡泡、粉彩雲海陽光</div></label>
     </div>
   </section>
 
@@ -1465,6 +1481,11 @@ const materialData = {
     label: '冰晶凍結瞬間',
     prompt: 'frozen splash ice material system, water splash flash-frozen in mid-air into crystalline ice forming the gown, sharp transparent ice petals and frost edges, tiny snow crystals suspended around, cold premium clarity, ice fragments never cover the face',
     palette: 'ice blue, crystal clear, frost white, deep arctic navy, silver shimmer'
+  },
+  cottonCloudGown: {
+    label: '雲朵棉花裙',
+    prompt: 'cotton cloud material system, soft voluminous real cloud puffs forming the gown bodice and skirt, fluffy cumulus texture with delicate gold chain accents woven through, sheer white gauze layers between cloud volumes, sitting or resting on solid cloud masses, heavenly softness framing the subject',
+    palette: 'pure cloud white, warm ivory, soft gold chain, pale sky blue, gentle sunlight'
   }
 };
 
@@ -1499,7 +1520,8 @@ const garmentData = {
   circusDollCouture: 'black white circus doll couture, ruffled collar, harlequin ribbons, oversized bow accents, short theatrical skirt with luxury ornament details, playful surreal fashion silhouette',
   desertQueenVeil: 'desert queen veil couture, embroidered jeweled veil, exotic cropped bodice, layered translucent skirt, warm gold jewelry chains, powerful mythic queen styling',
   darkQueenCouture: 'dark queen couture gown, sharp sculptural shoulder line, black blue crystal accents, regal long silhouette, icy luxury authority, strong but elegant fantasy fashion form',
-  solarGoddessDrape: 'solar goddess draped couture, layered white translucent silk and pearl chiffon, refined gold waist belt, delicate gold leg wraps and arm cuffs, ceremonial temple queen silhouette, sensual but elegant coverage, long luminous train'
+  solarGoddessDrape: 'solar goddess draped couture, layered white translucent silk and pearl chiffon, refined gold waist belt, delicate gold leg wraps and arm cuffs, ceremonial temple queen silhouette, sensual but elegant coverage, long luminous train',
+  modernSuit: 'modern tailored suit ensemble, long elegant coat over a fitted top and high-waist wide-leg trousers, refined belt and pointed heels, premium urban futuristic fashion silhouette, clean professional luxury styling'
 };
 
 const styleData = {
@@ -1560,7 +1582,11 @@ const backgroundData = {
   burningTempleNight: 'burning ancient temple night background, dark stone columns and ruined palace stairs, controlled distant flames and drifting embers, deep night sky, dramatic mythic fantasy atmosphere, fire stays behind the subject and never touches the body',
   moonPavilionNight: 'moonlit ancient pavilion night background, full moon behind carved wooden towers and tiled roofs, glowing lanterns and candle rows along the railings, deep blue night sky with thin clouds, poetic eastern night stage for dance or portrait',
   mysticWaterHall: 'mystic water hall background, dark ruined palace columns rising from a calm reflective water surface, soft ripples and floating sparks of light, misty deep blue atmosphere, subject standing gracefully in shallow water with elegant reflections',
-  darkMirrorChamber: 'dark mirror chamber background, black glossy mirrored walls with warm candlelight reflections, subtle elegant reflections of the subject in the panels, deep gothic luxury interior, refined dark glamour advertising space'
+  darkMirrorChamber: 'dark mirror chamber background, black glossy mirrored walls with warm candlelight reflections, subtle elegant reflections of the subject in the panels, deep gothic luxury interior, refined dark glamour advertising space',
+  glassBotanicalDome: 'glass botanical conservatory dome background, towering crystal greenhouse with glass bell jars holding luminous preserved flowers, ornate glass chandeliers, tropical leaves framing the foreground edges, reflective glass floor, dreamy futuristic garden atmosphere',
+  glassCrystalCity: 'transparent crystal city background, futuristic skyline built entirely of clear glass towers and floating glass spheres under a bright blue sky, mirrored walkway with railing reflections, sunlight refracting through the architecture, clean utopian luxury atmosphere',
+  crystalForestPath: 'bright crystal forest path background, white crystalline trees with hanging teardrop crystal pendants, glass walkway over clear shallow water, giant crystal flowers along the path, soft heavenly light beams from above, radiant pure fantasy atmosphere',
+  rainbowCloudSky: 'rainbow cloud sky background, vivid rainbow arcs across a pastel sunlit cloudscape, floating soap bubbles and sparkling light flares, dreamy candy-colored sky kingdom, bright cheerful fantasy atmosphere'
 };
 
 const lightingData = {
@@ -1609,7 +1635,8 @@ const lightingData = {
   blueEnergyWingLight: 'blue energy wing lighting, electric blue lights from black mechanical wings reflect subtly on face shoulders hair outfit and background, cool gray studio exposure, face remains recognizable without overexposure',
   wastelandIndustrialSideLight: 'wasteland industrial side lighting, hard angled workshop light, aged metal reflections and dusty shadow affect the entire subject consistently, gritty sci-fi commercial mood, no detached portrait lighting',
   blueFlameGlow: 'arcane blue flame lighting, cool blue spell glow mixed with warm distant fire light, blue energy reflections affect face body hair gown and background consistently, dramatic sorceress contrast while facial features stay clearly readable, no overexposed face',
-  moonlightCandle: 'moonlight and candle mixed lighting, cool silver moonlight from above with warm lantern candle glow from below, both light sources affect face body veil fabric and architecture consistently, poetic night contrast with natural facial exposure'
+  moonlightCandle: 'moonlight and candle mixed lighting, cool silver moonlight from above with warm lantern candle glow from below, both light sources affect face body veil fabric and architecture consistently, poetic night contrast with natural facial exposure',
+  crystalDaylight: 'crystal daylight lighting, bright natural sunlight refracted through glass and crystal structures, clean white-blue clarity with sparkling prismatic accents on face hair outfit and background, airy utopian exposure, face remains naturally lit without overexposure'
 };
 
 const sharedFantasyCore = window.HB_CORE_PROMPT?.page?.fantasy || {};
@@ -2510,6 +2537,7 @@ function applyThemeTemplate(key){
   ['garment','material','style','composition','framing','pose','camera','lighting','background','ratio'].forEach(name => {
     setRadioValue(name, preset[name]);
   });
+  setRadioValue('hairColor', preset.hairColor || 'original');
 
   if(preset.intensity){
     document.getElementById('intensity').value = preset.intensity;
@@ -2559,6 +2587,15 @@ function generate(options = {}){
   const framing = framingData[selected('framing')];
   const intensity = document.getElementById('intensity').value;
   const poseText = poseData[selected('pose')];
+  const HAIR_COLOR_PROMPTS = {
+    original: null,
+    silverWhite: 'silver white hair color, luminous platinum strands',
+    pastelRainbow: 'pastel rainbow gradient hair color, soft pink violet and blue blend',
+    rosePink: 'rose pink hair color, soft sweet pink tone',
+    honeyBrown: 'honey brown hair color, warm natural tea tone',
+    ashBlonde: 'ash blonde hair color, cool muted golden tone'
+  };
+  const hairColorText = HAIR_COLOR_PROMPTS[selected('hairColor')] || null;
   const prompt = [
     identityGuard + ',',
     'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
@@ -2571,6 +2608,7 @@ function generate(options = {}){
     composition + ',',
     compositionGuard + ',',
     'appearance form: ' + garmentText + ',',
+    hairColorText ? 'hair styling: ' + hairColorText + ', hair color change only, keep the original hairstyle volume natural, facial identity and features unchanged,' : '',
     'theme material and art system: ' + materialText + ',',
     'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',
     intensity + ',',
