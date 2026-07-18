@@ -492,6 +492,10 @@
         <div class="name">冰晶凍結瞬間</div>
         <div class="desc">水花瞬凍成冰裙、黑藍冰宮、冷調電影感</div>
       </button>
+      <button class="card" type="button" data-template="catMaidLaceTheater">
+        <div class="name">貓系女僕蕾絲劇院</div>
+        <div class="desc">黑白層次女僕高訂、蕾絲紗幕、水晶劇院、電影感</div>
+      </button>
     </div>
   </section>
 
@@ -583,6 +587,7 @@
       <label class="card"><input type="radio" name="garment" value="darkQueenCouture"><div class="name">暗黑女王高訂</div><div class="desc">尖銳肩線、黑色禮服、女王氣場</div></label>
       <label class="card"><input type="radio" name="garment" value="solarGoddessDrape"><div class="name">白金太陽女神薄紗</div><div class="desc">白色垂墜薄紗、金屬腰飾、神殿女王輪廓</div></label>
       <label class="card"><input type="radio" name="garment" value="modernSuit"><div class="name">現代西裝大衣</div><div class="desc">長大衣、高腰寬褲、都會未來精品</div></label>
+      <label class="card"><input type="radio" name="garment" value="catMaidLayer"><div class="name">貓系女僕 Layer 高訂</div><div class="desc">黑白層次、蕾絲圍裙、貓耳髮飾、精品化剪裁</div></label>
     </div>
     <div class="form-grid" style="margin-top:10px;">
       <label class="field full custom-choice" data-custom-choice="garment">服裝自填
@@ -602,6 +607,7 @@
       <label class="card"><input type="radio" name="bodyShape" value="slight_waist"><div class="name">輕微纖腰</div><div class="desc">自然修飾腰線</div></label>
       <label class="card"><input type="radio" name="bodyShape" value="curvy_waist"><div class="name">豐滿纖腰</div><div class="desc">明顯胸腰臀曲線</div></label>
       <label class="card"><input type="radio" name="bodyShape" value="fashion_tall"><div class="name">高挑時裝比例</div><div class="desc">修長高級模特感</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="korean_idol"><div class="name">韓系偶像比例</div><div class="desc">修長腿線、俐落肩頸、舞台鏡頭平衡感</div></label>
     </div>
   </section>
 
@@ -1546,7 +1552,8 @@ const garmentData = {
   desertQueenVeil: 'desert queen veil couture, embroidered jeweled veil, exotic cropped bodice, layered translucent skirt, warm gold jewelry chains, powerful mythic queen styling',
   darkQueenCouture: 'dark queen couture gown, sharp sculptural shoulder line, black blue crystal accents, regal long silhouette, icy luxury authority, strong but elegant fantasy fashion form',
   solarGoddessDrape: 'solar goddess draped couture, layered white translucent silk and pearl chiffon, refined gold waist belt, delicate gold leg wraps and arm cuffs, ceremonial temple queen silhouette, sensual but elegant coverage, long luminous train',
-  modernSuit: 'modern tailored suit ensemble, long elegant coat over a fitted top and high-waist wide-leg trousers, refined belt and pointed heels, premium urban futuristic fashion silhouette, clean professional luxury styling'
+  modernSuit: 'modern tailored suit ensemble, long elegant coat over a fitted top and high-waist wide-leg trousers, refined belt and pointed heels, premium urban futuristic fashion silhouette, clean professional luxury styling',
+  catMaidLayer: 'cat-inspired maid layer couture, refined black and ivory layered dress with a structured corset bodice, crisp apron panel, lace cuffs, ribbon collar and polished metal buttons, elegant cat-ear headband as a fashion accessory, layered tulle skirt and delicate tail-like ribbon accent, playful luxury styling, no animal anatomy and no facial changes'
 };
 
 const styleData = {
@@ -1749,7 +1756,15 @@ Tall High-Fashion Model Silhouette
 Longer Leg Impression, Refined Shoulder And Neck Line, Slim Editorial Body Shape
 Elegant Runway Proportions While Staying Realistic
 Keep The Original Face, Identity And Personal Features Unchanged
-No Doll-Like Or Over-Stretched Anatomy`
+No Doll-Like Or Over-Stretched Anatomy`,
+  korean_idol: `【身形輪廓｜韓系偶像比例】
+
+Korean Idol Stage Proportions
+Balanced Adult Idol Silhouette With A Naturally Long-Leg Impression
+Refined Shoulder And Neck Line, Upright Posture, Toned Yet Soft Feminine Body Balance
+Camera-Friendly Proportions For Performance, Beauty And Editorial Photography
+Keep The Original Face, Identity And Personal Features Unchanged
+Natural Realistic Adult Anatomy, No Doll-Like Or Over-Stretched Body`
 };
 
 const styleScopeGuard = `Style Scope Rule:
@@ -2555,6 +2570,11 @@ const themeTemplates = {
     garment: 'splashDress', material: 'frozenSplashIce', style: 'cinematic',
     composition: 'subject surrounded by selected material environment, material wraps around foreground and background, immersive fantasy advertisement layout',
     framing: 'threeQuarter', pose: 'turn', camera: 'threeQuarterSide', lighting: 'darkIceBlue', background: 'darkIcePalace', ratio: 'vertical916', intensity: 'massive explosive material splash, high speed frozen motion'
+  },
+  catMaidLaceTheater: {
+    garment: 'catMaidLayer', material: 'laceCouture', style: 'cinematic',
+    composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
+    framing: 'threeQuarter', pose: 'hand_chest', camera: 'threeQuarterSide', lighting: 'amethystCandleGlow', background: 'crystalThroneTheater', ratio: 'vertical916', intensity: 'balanced material effects, elegant and luxurious'
   }
 };
 
