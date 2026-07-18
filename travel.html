@@ -323,6 +323,7 @@
       <button type="button" class="preset-btn" data-travel-preset="cherryCampusSpring">一鍵套用｜櫻花校園春日寫真</button>
       <button type="button" class="preset-btn" data-travel-preset="seasideCastleSunset">一鍵套用｜海邊城堡夕陽旅拍</button>
       <button type="button" class="preset-btn" data-travel-preset="chineseTeaCourtyard">一鍵套用｜中式庭院茶席旗袍</button>
+      <button type="button" class="preset-btn" data-travel-preset="silkRoadBlueTiles">一鍵套用｜絲路藍磚古城旅拍</button>
     </div>
   </section>
 
@@ -944,6 +945,11 @@
         <input type="radio" name="costume" value="winter_coat">
         <div class="name">冬季大衣</div>
         <div class="desc">長大衣 / 圍巾層次</div>
+      </label>
+      <label class="card" data-value="floral_bikini">
+        <input type="radio" name="costume" value="floral_bikini">
+        <div class="name">花卉刺繡比基尼</div>
+        <div class="desc">刺繡珍珠泳裝 / 薄紗罩衫 / 度假奢華</div>
       </label>
     </div>
   </section>
@@ -1698,7 +1704,8 @@ y2k_street:`Costume Direction: Y2K Streetwear — glossy jacket or satin top, la
 denim_casual:`Costume Direction: Denim Casual — well-fitted denim with simple top or knitwear, relaxed everyday travel outfit, effortless natural styling`,
 resort_cover:`Costume Direction: Resort Style — breezy resort dress or light cover-up over swim-inspired top, straw hat optional, vacation seaside styling kept elegant`,
 evening_gown:`Costume Direction: Evening Gown — refined evening dress with premium fabric and clean silhouette, suitable for night city or hotel scenes`,
-winter_coat:`Costume Direction: Winter Coat — long wool coat or padded jacket with scarf, layered winter textures, cozy cold-season travel styling`
+winter_coat:`Costume Direction: Winter Coat — long wool coat or padded jacket with scarf, layered winter textures, cozy cold-season travel styling`,
+floral_bikini:`Costume Direction: Luxury Floral Bikini — designer bikini with embroidered flower appliques, pearl and crystal flower accents, delicate scalloped trim and satin ribbon details, sheer chiffon cover-up or light open hoodie, elegant feminine resort swimwear styling kept tasteful`
 };
 
 const HAIR_STYLES = {
@@ -1905,6 +1912,18 @@ const QUICK_TRAVEL_PRESETS = {
     costume: 'qipao',
     themeText: '中式庭院茶席旅拍, 老宅庭院與木質茶桌, 盆栽綠意與斑駁光影, 墨綠色改良旗袍, 站在茶桌旁優雅斟茶, 低眸專注神情, 午後自然光與地面樹影, 東方生活美學'
   }
+};
+
+QUICK_TRAVEL_PRESETS.silkRoadBlueTiles = {
+  composition: 'B',
+  style: 'vintage',
+  ratio: '3:4',
+  camera: 'soft_focus',
+  lighting: 'scene_natural',
+  motion: 'still',
+  media: 'travel_magazine',
+  pose: 'stairs_sit',
+  themeText: '絲路藍磚古城旅拍, 中亞藍白花磚拱廊與土色石牆, 湖水綠透紗長裙與金幣頭飾層次, 慵懶托腮坐姿, 午後暖陽斜光, 神秘絲路風情'
 };
 
 function applyTravelPreset(preset){
