@@ -335,6 +335,10 @@
       <div class="section-title">一鍵主題模板</div>
     </div>
     <p class="hint">一鍵套用會同時填入適合的服裝、材質、姿勢、光線與背景；套用後仍可逐區改成自己的版本。</p>
+    <button class="card" type="button" id="fantasyMoodPreset" style="width:100%;min-height:auto;margin-bottom:12px;background:linear-gradient(180deg,#20142E 0%,#120D18 100%);border-color:#DCC8FF;">
+      <div class="name">隨機套用｜幻想廣告動感感覺</div>
+      <div class="desc">從現有幻想主題模板抽一組，快速帶入材質、服裝、姿勢、光線與背景</div>
+    </button>
     <div class="grid grid-3">
       <button class="card" type="button" id="redPaperWeddingPreset">
         <div class="name">中式紅紙雕婚嫁廣告</div>
@@ -2598,6 +2602,15 @@ function applyThemeTemplate(key){
   generate();
 }
 
+function getRandomItem(values){
+  return values[Math.floor(Math.random() * values.length)];
+}
+
+function applyFantasyRandomSelection(){
+  const keys = Object.keys(themeTemplates);
+  applyThemeTemplate(getRandomItem(keys));
+}
+
 let fantasyOutputVisible = false;
 
 function resetCopyButton(){
@@ -2685,6 +2698,10 @@ document.querySelectorAll('input[type="radio"]').forEach(input => {
 document.getElementById('generateBtn').addEventListener('click', () => generate({reveal:true}));
 document.getElementById('redPaperWeddingPreset').addEventListener('click', () => {
   applyThemeTemplate('redPaperWedding');
+});
+document.getElementById('fantasyMoodPreset').addEventListener('click', () => {
+  fantasyOutputVisible = true;
+  applyFantasyRandomSelection();
 });
 document.querySelectorAll('[data-template]').forEach(button => {
   button.addEventListener('click', () => {
