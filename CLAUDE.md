@@ -115,11 +115,39 @@
   `build-prompt-preview.mjs` 五組舊選項組合 0 diff（純行為/樣式調整，未動任何 prompt 文字）；
   另寫 41 項整合驗證腳本逐一確認三頁的 markStale/clearStale/stale 徽章/金色樣式/套用即顯示
   邏輯都正確接上。
+- 2026-07-21：Claude Code 依 owner 要求做「全專案檢查」：UI 結構、咒語內容、100 次隨機模擬。
+  新增 `scripts/audit-100x.mjs`（VM-based，重建五頁 generate 邏輯，每頁隨機抽 100 組選項，
+  共 500 次模擬，檢查 undefined/NaN/[object Object]/null 洩漏、身份鎖定區塊是否存在、
+  相鄰重複行、原始碼禁用角色名靜態掃描）。第一輪抓到 1 個真實問題並修正：
+  `travel.html` 主題快選 chip「大阪祭典不知火舞」誤把 SNK 版權角色「不知火舞」直接寫進
+  可被選用、會流入咒語輸出的主題文字，已改為通用描述「大阪祭典和服舞姬」（周圍其他
+  「京都伏見稻荷九尾妖狐」「東京原宿cosplay貓女」等 chip 皆為通用原型描述，非角色名，
+  不用改）。第二輪修後重跑 500 次模擬與 check-static 全過、fantasy 咒語輸出仍 0 diff。
+  另外針對 owner 重申「fantasy 的 UI 操作/展現方式/邏輯要跟 travel/magazine 一樣」，
+  逐項比對 CSS 後發現上一波只統一了生成/複製鈕，還有 4 處互動狀態色沒統一：
+  材質卡片與姿勢卡片被選中時的邊框/底色（原紫色 `--violet`/`#21172F`，改為
+  `var(--gold)`/新增的 `--selected-bg:#1E1A14`，數值取自 travel/magazine 既有的
+  `--terracotta`(=`--gold` 同色)/`--selected` 變數）、自訂欄位啟用時的框線與陰影、
+  導覽列目前頁面高亮色（原紫色，改成跟 travel/magazine 完全一致的
+  `var(--gold)`/`rgba(201,168,76,.08)`）、輸入框 focus 邊框色、「隨機套用」按鈕的漸層底色
+  （改用跟 travel/magazine 的 `travelMoodPreset`/`magazineMoodPreset` 完全相同的
+  `#17120b→#22180f` 漸層＋金色框）。刻意保留不動：`h1 span` 標題強調色與
+  `.pose-group-label` 分組標題色——這兩項 travel 本身沒有這個概念（travel 的 `<h1>` 沒有
+  `<span>`、也沒有自訂 `:focus` 樣式），屬於各頁自己的標題風格，非共用操作元件，跟三頁本來
+  就沒有統一過的部分一致，不算新的不一致。順手修 `store-ad.html` 複製鈕：原本
+  `await navigator.clipboard.writeText(text)` 沒有 catch，剪貼簿權限被拒或非 HTTPS
+  環境會直接丟出未捕捉的 rejection、按鈕文字也不會變成「已複製」；已補上跟其他四頁一致的
+  fallback（`document.execCommand('copy')` 搭配 `Range`/`Selection`，因為 store-ad 的
+  輸出是 `<div>` 不是 `<textarea>`，不能用 `.select()`）。全部驗證：`check-static.mjs`
+  五頁全過、`build-prompt-preview.mjs` 0 diff、`audit-100x.mjs` 500 次模擬 0 issue。
 - 下一步：owner 用 ChatGPT 出圖實測（a）第三波核心瘦身 A/B（`output/ab-test-2026-07-07-c-final/`）
   （b）第四波新選項抽測（中式庭院茶席、彼岸花金箔、藍焰蓮花、古風私房）
   （c）新特效模板抽測（墨染水雲/碎鏡爆散/冰晶凍結）
   （d）7-16 新增抽測（水晶森林+銀白髮、彩虹雲海+粉彩虹髮、玻璃城市+現代西裝）
-  （e）三頁統一後的 UI 手動點測（改選項確認 stale 提示、個別一鍵套用確認立即顯示）。
-  選配待議：L5 travel 主題裁決句（改舊輸出需同意）、doll.html 全頁體檢／是否也要套用同一套
-  stale+套用即顯示模式（doll/store-ad 目前未檢查，屬性質不同——store-ad 是每次輸入都即時
-  重算、doll 未查）。
+  （e）三頁統一後的 UI 手動點測（改選項確認 stale 提示、個別一鍵套用確認立即顯示、
+  fantasy 卡片選中/導覽列高亮確認變金色）。
+  選配待議：L5 travel 主題裁決句（改舊輸出需同意）；doll.html 目前仍是「手動生成、無
+  stale 保護、一鍵主題不會自動顯示」的舊模式（跟 travel/magazine 統一前一樣），
+  若 owner 要 doll 也套用同一套規則需另外確認；store-ad.html 本質是「即時重算、
+  無隱藏態」的完全不同設計（表單填一半就即時看到海報企劃），目前判斷不適合套用
+  stale 機制，維持現狀。

@@ -657,12 +657,32 @@ document.querySelectorAll('input[type="text"], textarea, select').forEach(input 
   input.addEventListener('change', generate);
 });
 document.getElementById('generateBtn').addEventListener('click', generate);
-document.getElementById('copyBtn').addEventListener('click', async () => {
-  const text = document.getElementById('output').textContent;
-  await navigator.clipboard.writeText(text);
+document.getElementById('copyBtn').addEventListener('click', () => {
+  const output = document.getElementById('output');
+  const text = output.textContent;
   const btn = document.getElementById('copyBtn');
-  btn.textContent = '已複製';
-  setTimeout(() => btn.textContent = '複製全部', 1200);
+  function showCopied(){ btn.textContent = '已複製'; setTimeout(() => btn.textContent = '複製全部', 1200); }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(showCopied).catch(() => {
+      const range = document.createRange();
+      range.selectNodeContents(output);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      document.execCommand('copy');
+      sel.removeAllRanges();
+      showCopied();
+    });
+  } else {
+    const range = document.createRange();
+    range.selectNodeContents(output);
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+    document.execCommand('copy');
+    sel.removeAllRanges();
+    showCopied();
+  }
 });
 refreshCards();
 generate();
