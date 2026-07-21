@@ -91,8 +91,35 @@
   純 UI 提示調整，未動 `generate()` 組裝邏輯與任何 prompt 文字。
   `node scripts\check-static.mjs` 全過；`build-prompt-preview.mjs` 驗證 magazine
   兩種媒材組合皆 0 diff。
+- 2026-07-20（二）：Claude Code 依 owner 要求統一 travel/magazine/fantasy 三頁的
+  「生成→顯示→複製」操作模式（原本三頁各是一套規則，見前次分析）。改動：
+  **(A) staleness 保護**——三頁都新增 `markStale()`/`clearStale()` 與 `document` 層級的
+  `input`/`change` 委派監聽（捕獲階段）；只要已經生成過一次，之後任何選項變動都會讓輸出區
+  加上 `.stale`：顯示金框提示「選項已變更，請重新按『生成完整咒語』」、文字轉淡、複製鈕
+  失效（CSS `pointer-events:none` 擋滑鼠 + JS 內部再擋一次防鍵盤 Enter 誤觸）；按下生成鈕
+  才清除。fantasy 原本是「生成過一次後每改一個選項就整頁即時重算」，已改成與另兩頁一致的
+  手動生成＋stale 提示模式（拿掉 radio/change、text-input 監聽裡的 `generate()` 呼叫，
+  只保留卡片視覺刷新 `refreshCards()`）；magazine 的妝容/珠寶多選 chip 因為原本
+  `preventDefault()` 擋掉原生 change 事件，額外在 `sync()` 內手動呼叫 `markStale()`。
+  **(B) 套用即顯示**——三頁「隨機套用」原本就會立即生成顯示，但個別「一鍵套用」按鈕不會
+  （travel 甚至會主動把輸出區藏起來、magazine 完全不處理導致可能留著舊咒語、fantasy 默默
+  背景更新但不顯示）；已統一成套用後立即生成、顯示、捲動過去：travel 的
+  `applyTravelPreset` 結尾改呼叫 `generateBtn.click()`；magazine 的
+  `[data-magazine-preset]` 改傳 `{generate:true}`；fantasy 的 `applyThemeTemplate`
+  結尾改呼叫 `generate({reveal:true})`（連帶讓 `fantasyMoodPreset` 按鈕不用再手動預設
+  `fantasyOutputVisible`）。**(C) 按鈕配色**——fantasy 的生成鈕（原本沒有 `.generate-btn`
+  class，吃到全站按鈕預設的紫綠漸層）與複製鈕（原紫色系）已改成跟 travel/magazine 一樣的
+  金色系（沿用 fantasy 既有的 `--gold` 變數）；材質卡片、模板卡片等裝飾性元件維持原本的
+  紫綠主題不動。順手把 fantasy 複製鈕裡「生成後才會顯示複製鈕，理論上摸不到」的一段死碼
+  防禦分支拿掉，讓三頁複製鈕程式碼結構一致。驗證：`check-static.mjs` 全過；
+  `build-prompt-preview.mjs` 五組舊選項組合 0 diff（純行為/樣式調整，未動任何 prompt 文字）；
+  另寫 41 項整合驗證腳本逐一確認三頁的 markStale/clearStale/stale 徽章/金色樣式/套用即顯示
+  邏輯都正確接上。
 - 下一步：owner 用 ChatGPT 出圖實測（a）第三波核心瘦身 A/B（`output/ab-test-2026-07-07-c-final/`）
   （b）第四波新選項抽測（中式庭院茶席、彼岸花金箔、藍焰蓮花、古風私房）
   （c）新特效模板抽測（墨染水雲/碎鏡爆散/冰晶凍結）
-  （d）7-16 新增抽測（水晶森林+銀白髮、彩虹雲海+粉彩虹髮、玻璃城市+現代西裝）。
-  選配待議：L5 travel 主題裁決句（改舊輸出需同意）、doll.html 全頁體檢。
+  （d）7-16 新增抽測（水晶森林+銀白髮、彩虹雲海+粉彩虹髮、玻璃城市+現代西裝）
+  （e）三頁統一後的 UI 手動點測（改選項確認 stale 提示、個別一鍵套用確認立即顯示）。
+  選配待議：L5 travel 主題裁決句（改舊輸出需同意）、doll.html 全頁體檢／是否也要套用同一套
+  stale+套用即顯示模式（doll/store-ad 目前未檢查，屬性質不同——store-ad 是每次輸入都即時
+  重算、doll 未查）。

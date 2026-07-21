@@ -444,6 +444,21 @@
     background:var(--gold);
     color:var(--black);
   }
+  .output-stale-badge{
+    display:none;
+    margin-bottom:10px;
+    padding:10px 14px;
+    background:rgba(201,168,76,.12);
+    border:1px solid var(--gold);
+    border-radius:8px;
+    color:var(--gold);
+    font-size:13px;
+    font-weight:700;
+    text-align:center;
+  }
+  .output-wrap.stale .output-stale-badge{ display:block; }
+  .output-wrap.stale textarea{ opacity:.45; }
+  .output-wrap.stale .copy-btn{ opacity:.4; pointer-events:none; cursor:not-allowed; }
   .hidden{ display:none; }
 
   @media (max-width:760px){
@@ -2028,6 +2043,7 @@
     <button class="generate-btn" id="generateBtn">生成完整咒語</button>
   </section>
   <div class="output-wrap hidden" id="outputWrap">
+    <div class="output-stale-badge">選項已變更，請重新按「生成完整咒語」</div>
     <textarea id="outputText" readonly></textarea>
     <button class="copy-btn" id="copyBtn">一鍵複製</button>
   </div>
@@ -3872,6 +3888,7 @@ function setupMultiChipGroup(containerId, maxCount, exclusiveValues = []){
   const chips = Array.from(container.querySelectorAll('.chip'));
 
   function sync(){
+    markStale();
     const hasSelected = chips.some(chip=>chip.querySelector('input')?.checked);
     if(!hasSelected && exclusiveValues.length){
       const fallbackInput = chips.find(chip=>exclusiveSet.has(chip.querySelector('input')?.value))?.querySelector('input');
@@ -4154,6 +4171,21 @@ function getSelectedCheckboxValues(name, fallbackValue){
 }
 
 // ====== 生成咒語 ======
+function markStale(){
+  const wrap=document.getElementById('outputWrap');
+  if(wrap && !wrap.classList.contains('hidden')) wrap.classList.add('stale');
+}
+function clearStale(){
+  const wrap=document.getElementById('outputWrap');
+  if(wrap) wrap.classList.remove('stale');
+}
+document.addEventListener('input',(event)=>{
+  if(event.target && event.target.closest && !event.target.closest('#outputWrap')) markStale();
+},true);
+document.addEventListener('change',(event)=>{
+  if(event.target && event.target.closest && !event.target.closest('#outputWrap')) markStale();
+},true);
+
 document.getElementById('generateBtn').addEventListener('click',()=>{
   const styleKey = document.querySelector('input[name="style"]:checked').value;
   const bodyShapeKey = document.querySelector('input[name="bodyShape"]:checked').value;
@@ -4238,6 +4270,7 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
 
   document.getElementById('outputText').value = sections.join('\n\n⸻\n\n');
   document.getElementById('outputWrap').classList.remove('hidden');
+  clearStale();
   document.getElementById('outputWrap').scrollIntoView({behavior:'smooth', block:'nearest'});
 
   const copyBtn = document.getElementById('copyBtn');
@@ -4246,6 +4279,7 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
 });
 
 document.getElementById('copyBtn').addEventListener('click',()=>{
+  if(document.getElementById('outputWrap').classList.contains('stale')) return;
   const text = document.getElementById('outputText').value;
   const btn = document.getElementById('copyBtn');
   function showCopied(){
@@ -4546,7 +4580,7 @@ document.getElementById('magazineMoodPreset').addEventListener('click',()=>{
 document.querySelectorAll('[data-magazine-preset]').forEach(button=>{
   button.addEventListener('click',()=>{
     const preset = QUICK_MAGAZINE_PRESETS[button.dataset.magazinePreset];
-    applyMagazinePreset(preset);
+    applyMagazinePreset(preset, { generate: true });
   });
 });
 </script>
