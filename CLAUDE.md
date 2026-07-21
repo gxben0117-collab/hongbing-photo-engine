@@ -80,6 +80,17 @@
 - 2026-07-19：Codex 依 owner 要求補齊隨機入口：`magazine.html` 新增
   「隨機套用｜棚拍封面感覺」、`fantasy-fashion.html` 新增「隨機套用｜幻想廣告動感感覺」。
   兩者都只抽既有一鍵模板 / 已整理過的模板資料，不新增 prompt 文字、不改核心輸出段落。
+- 2026-07-20：Claude Code 修正 owner 回報的 UI 顯示 bug：`magazine.html`「隨機套用」
+  與全部 19 顆「一鍵套用」按鈕套用主題時，02 主題/服裝方向區塊的短標籤 chip 不會亮起，
+  容易讓人以為沒套到。根因：這些按鈕走的是 `QUICK_MAGAZINE_PRESETS`（客製長描述文字），
+  跟 02 區塊固定的短名 chip 是兩套系統，套用時只會把長描述文字寫進主題自訂欄
+  （這段文字本來就有正確進入生成的咒語，不影響輸出），但沒有任何 chip 的文字能精準比對
+  到那段長描述，所以 chip 一直維持未選取。修法：主題輸入框在套用一鍵/隨機主題時加上
+  `.theme-active` 金色外框提示（新增 CSS class），並清空舊的 chip 選取狀態避免殘留；
+  使用者親自打字（`event.isTrusted`）時自動移除提示，改回原本的 chip 比對高亮邏輯。
+  純 UI 提示調整，未動 `generate()` 組裝邏輯與任何 prompt 文字。
+  `node scripts\check-static.mjs` 全過；`build-prompt-preview.mjs` 驗證 magazine
+  兩種媒材組合皆 0 diff。
 - 下一步：owner 用 ChatGPT 出圖實測（a）第三波核心瘦身 A/B（`output/ab-test-2026-07-07-c-final/`）
   （b）第四波新選項抽測（中式庭院茶席、彼岸花金箔、藍焰蓮花、古風私房）
   （c）新特效模板抽測（墨染水雲/碎鏡爆散/冰晶凍結）

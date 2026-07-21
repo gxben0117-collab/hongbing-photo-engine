@@ -357,6 +357,10 @@
     outline:none;
     border-color:var(--gold);
   }
+  .text-input.theme-active{
+    border-color:var(--gold);
+    box-shadow:0 0 0 1px var(--gold);
+  }
 
   /* ── GENERATE BUTTON ── */
   .generate-btn{
@@ -4057,6 +4061,7 @@ function selectThemePresetChip(chip){
   const input = chip.querySelector('input');
   if(input) input.checked = true;
   themeInputEl.value = chip.dataset.value;
+  themeInputEl.classList.remove('theme-active');
   applyThemePresetDefaults(chip.dataset.value);
 }
 
@@ -4078,7 +4083,7 @@ themeChips.forEach(chip=>{
   });
 });
 
-themeInputEl.addEventListener('input',()=>{
+themeInputEl.addEventListener('input',(event)=>{
   const match = Array.from(themeChips).find(c=>c.dataset.value===themeInputEl.value);
   const riskMatch = Array.from(riskThemeChips).find(c=>c.dataset.value===themeInputEl.value);
   [...themeChips, ...riskThemeChips].forEach(c=>{
@@ -4087,6 +4092,10 @@ themeInputEl.addEventListener('input',()=>{
     const input = c.querySelector('input');
     if(input) input.checked = isSelected;
   });
+  // 使用者親自打字時，代表要脫離「一鍵套用」的主題內容，移除套用中提示
+  if(event.isTrusted){
+    themeInputEl.classList.remove('theme-active');
+  }
 });
 // 姿態 → 推薦主題映射
 const POSE_THEME_MAP = {
@@ -4515,7 +4524,9 @@ function getRandomItem(values){
 function applyMagazinePreset(preset, options = {}){
   if(!preset) return;
   applyVisualPresetDefaults(preset);
+  clearThemePresetSelection();
   themeInputEl.value = preset.themeText || preset.label;
+  themeInputEl.classList.add('theme-active');
   themeInputEl.dispatchEvent(new Event('input',{bubbles:true}));
   if(options.generate){
     document.getElementById('generateBtn').click();
