@@ -559,3 +559,14 @@
   霓虹酸雨街、摺紙世界、鏡像月蝕大廳、蕾絲聖堂、水晶瀑布洞窟與水墨浮山。
 - 全專案驗證：`check-static.mjs`、`build-prompt-preview.mjs`、`audit-100x.mjs`（500 組）、
   `validate-preset-refs.mjs`、`git diff --check` 全部通過。
+
+## 2026-07-23（一）　動漫合鏡高相似度鎖臉模式 v4.14
+
+- owner 明確要求改造 `anime-hero.html` 的核心 prompt 優先序，並提供完整鎖臉與衝突處理
+  規格；本次屬核心咒語高風險變更，改前／改後說明已記錄於
+  `docs/history/anime-high-similarity-lock-v4.14.md`。
+- 新增預設開啟的「高相似度鎖臉模式」。身份與臉部幾何維持最先，新增絕對身份優先、
+  衝突元素自動降級、臉部五官淨空、唯一暴露人臉與守護者不可成為身份來源等規則。
+- 模式開啟時，鏡頭自動限制為平視、自然 3/4 或輕微英雄仰角；隨機套用同樣排除側臉、
+  高／低極端角度與遠距主視覺。關係敘事則移至身份核心之後，保留召喚／變身因果。
+- 驗證：`node scripts\\check-static.mjs`、`git diff --check` 通過。
