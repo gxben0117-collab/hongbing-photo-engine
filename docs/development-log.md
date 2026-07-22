@@ -305,6 +305,29 @@
   選項忘記同步補資料表」的覆轍，這次反過來也要求「刪除/改名前先查一鍵模板
   系統有沒有依賴」。
 
+## 2026-07-22（七）　幻想頁材質新增：天象自然現象系
+
+- owner 實際看過線上頁面後提出精準建議：「銀河穿在身上」這類概念該放
+  **04 主題材質**，不是 03 服裝輪廓——因為服裝輪廓決定衣服形狀（高訂禮服、
+  拖尾長裙），材質才決定效果/世界觀，網站自己的 hint 文字也是這樣寫的。owner
+  列了 9 個候選（銀河星海、星雲薄紗、深空星塵、極光流紗、月蝕光環、太陽耀斑、
+  流星雨、宇宙黑洞、星河水瀑），並建議再擴大成「自然現象×天象實體化」整組
+  （加上海浪、雷電、雲霧、熔岩、暴風雪）。
+- 檢查後發現 9 個候選裡有 3 個其實已經存在（`nebulaGasVeil` 星雲氣體薄紗、
+  `auroraSilk` 極光薄紗、`mirrorEclipse` 鏡像月蝕，都在既有的「寶石琉璃光絲」
+  子分類裡），所以沒有重複新增，只新增真正缺口的部分：新開一個「✦ 天象自然
+  現象」子分類，共 11 項材質——銀河星海(`galaxyOceanDrape`)、深空星塵禮服
+  (`deepSpaceStardust`)、太陽耀斑華服(`solarFlareGown`)、流星雨拖尾裙
+  (`meteorShowerTrain`)、宇宙黑洞吸積裙(`blackHoleAccretionGown`)、星河水瀑
+  禮服(`galaxyWaterfallCascade`)、巨浪捲身禮服(`oceanWaveCouture`)、雷暴閃電
+  禮服(`lightningStormGown`)、雲霧繚繞紗裙(`mistCloudVeil`)、熔岩岩漿禮服
+  (`lavaMagmaGown`)、暴風雪斗篷(`blizzardSnowstormCloak`)。新增選項卡與
+  `materialData` 對照表一起完成（延續前兩條記錄的教訓，不分批做）。
+- **驗證**：`check-static.mjs` 全過；新寫 jsdom 測試對 11 項新材質逐一點真正
+  `generateBtn`，全部輸出正常（無 undefined/NaN/JS error）；
+  `build-prompt-preview.mjs` 5 組固定組合仍 0 diff；`audit-100x.mjs` 500 次
+  模擬 0 問題。
+
 ## 尚未完成 / 待 owner 決定
 
 - ChatGPT 出圖實測：第三波核心瘦身 A/B（`output/ab-test-2026-07-07-c-final/`）、

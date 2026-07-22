@@ -798,6 +798,18 @@
       <label class="card"><input type="radio" name="material" value="chromePlatingSkin"><div class="name">鉻合金鍍層</div><div class="desc">反光金屬鍍膜質感、未來感</div></label>
       <label class="card"><input type="radio" name="material" value="dataStreamMesh"><div class="name">數據流網紗</div><div class="desc">藍紫數據流纖維、透明科技網紗</div></label>
       <label class="card"><input type="radio" name="material" value="neonAcidRain"><div class="name">霓虹酸雨質感</div><div class="desc">濕潤反光表面、霓虹倒影水痕</div></label>
+      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 天象自然現象</div>
+      <label class="card"><input type="radio" name="material" value="galaxyOceanDrape"><div class="name">銀河星海</div><div class="desc">整片銀河如流動布料包覆全身，星點隨身形流動</div></label>
+      <label class="card"><input type="radio" name="material" value="deepSpaceStardust"><div class="name">深空星塵禮服</div><div class="desc">深黑宇宙背景、密集星塵顆粒、裙擺邊緣發光</div></label>
+      <label class="card"><input type="radio" name="material" value="solarFlareGown"><div class="name">太陽耀斑華服</div><div class="desc">金色太陽火焰、動態流動禮服、日冕光暈</div></label>
+      <label class="card"><input type="radio" name="material" value="meteorShowerTrain"><div class="name">流星雨拖尾裙</div><div class="desc">大量流星光軌、拖尾長裙、瞬間光跡凝結</div></label>
+      <label class="card"><input type="radio" name="material" value="blackHoleAccretionGown"><div class="name">宇宙黑洞吸積裙</div><div class="desc">黑洞吸積盤、旋轉裙擺、扭曲光環</div></label>
+      <label class="card"><input type="radio" name="material" value="galaxyWaterfallCascade"><div class="name">星河水瀑禮服</div><div class="desc">銀河如瀑布般從肩線流洩至裙擺</div></label>
+      <label class="card"><input type="radio" name="material" value="oceanWaveCouture"><div class="name">巨浪捲身禮服</div><div class="desc">深藍巨浪、白色浪花裙擺、動態海浪捲身</div></label>
+      <label class="card"><input type="radio" name="material" value="lightningStormGown"><div class="name">雷暴閃電禮服</div><div class="desc">紫藍閃電紋路、暴風雲層、瞬間高壓電光</div></label>
+      <label class="card"><input type="radio" name="material" value="mistCloudVeil"><div class="name">雲霧繚繞紗裙</div><div class="desc">濃霧雲海纏繞身形、朦朧漂浮感</div></label>
+      <label class="card"><input type="radio" name="material" value="lavaMagmaGown"><div class="name">熔岩岩漿禮服</div><div class="desc">熾熱熔岩紋路、黑曜岩裂縫、橘紅光暈</div></label>
+      <label class="card"><input type="radio" name="material" value="blizzardSnowstormCloak"><div class="name">暴風雪斗篷</div><div class="desc">狂風暴雪、冰晶飛舞、凜冽動態感</div></label>
     </div>
     <div class="form-grid" style="margin-top:10px;">
       <label class="field custom-choice" data-custom-choice="material">材質自填
@@ -1732,6 +1744,61 @@ const materialData = {
     label: '霓虹酸雨質感',
     prompt: 'neon acid rain material system, wet reflective surface texture with streaking neon light reflections, cyberpunk night-street couture sheen',
     palette: 'wet black, neon pink reflection, acid green highlight'
+  },
+  galaxyOceanDrape: {
+    label: '銀河星海',
+    prompt: 'galaxy ocean drape material system, an entire galaxy rendered as flowing draped fabric wrapping the body, stars and cosmic dust moving with the fabric folds, immersive celestial couture',
+    palette: 'deep cosmic indigo, violet nebula glow, scattered starlight white'
+  },
+  deepSpaceStardust: {
+    label: '深空星塵禮服',
+    prompt: 'deep space stardust material system, dense stardust particles suspended in a vast black cosmic void forming the gown, glowing particle edges along the hem, dramatic astronomical couture',
+    palette: 'void black, silver stardust, faint blue star glow'
+  },
+  solarFlareGown: {
+    label: '太陽耀斑華服',
+    prompt: 'solar flare material system, golden solar fire flowing as a dynamic living gown, corona-like radiant halo behind the shoulders, powerful celestial advertisement energy',
+    palette: 'radiant gold, solar orange, white-hot highlight'
+  },
+  meteorShowerTrain: {
+    label: '流星雨拖尾裙',
+    prompt: 'meteor shower material system, countless streaking meteor light trails converging into a long trailing skirt, frozen mid-motion light streak texture, celestial couture drama',
+    palette: 'deep night blue, bright meteor white, faint gold streak'
+  },
+  blackHoleAccretionGown: {
+    label: '宇宙黑洞吸積裙',
+    prompt: 'black hole accretion disk material system, a swirling glowing accretion disk forming a rotating skirt silhouette, warped light ring effect around the hem, high-concept cosmic couture',
+    palette: 'deep black, molten orange accretion glow, warped violet edge'
+  },
+  galaxyWaterfallCascade: {
+    label: '星河水瀑禮服',
+    prompt: 'galaxy waterfall cascade material system, a galaxy rendered as a cascading waterfall of light flowing from the shoulders down into the skirt, luminous star-particle spray, dreamlike celestial couture',
+    palette: 'deep indigo, cascading silver-blue light, starlight sparkle'
+  },
+  oceanWaveCouture: {
+    label: '巨浪捲身禮服',
+    prompt: 'ocean wave couture material system, a towering deep blue wave curling around the body with white foam crest details, dynamic frozen-motion water couture',
+    palette: 'deep ocean blue, foam white, sea spray silver'
+  },
+  lightningStormGown: {
+    label: '雷暴閃電禮服',
+    prompt: 'lightning storm material system, sharp violet-blue lightning bolts branching across a dark storm-cloud gown, high voltage energy silhouette, dramatic weather-couture advertisement',
+    palette: 'storm violet, electric blue, deep charcoal cloud'
+  },
+  mistCloudVeil: {
+    label: '雲霧繚繞紗裙',
+    prompt: 'mist cloud veil material system, dense drifting fog and cloud layers wrapping softly around the silhouette, ethereal floating sheer volume, dreamy atmospheric couture',
+    palette: 'soft pearl gray, misty white, faint blue undertone'
+  },
+  lavaMagmaGown: {
+    label: '熔岩岩漿禮服',
+    prompt: 'lava magma material system, glowing molten lava veins cracking through obsidian-black rock-like fabric, intense heat-glow couture silhouette',
+    palette: 'obsidian black, molten orange-red glow, ember highlight'
+  },
+  blizzardSnowstormCloak: {
+    label: '暴風雪斗篷',
+    prompt: 'blizzard snowstorm material system, swirling wind-driven snow and ice crystals forming a dramatic dynamic cloak, harsh cold cinematic motion',
+    palette: 'icy white, cold steel blue, pale gray wind streak'
   }
 };
 
