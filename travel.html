@@ -900,6 +900,11 @@
         <div class="name">捧花輕嗅</div>
         <div class="desc">捧花低眸 / 不遮五官</div>
       </label>
+      <label class="card" data-value="morning_stretch">
+        <input type="radio" name="pose" value="morning_stretch">
+        <div class="name">晨光伸展</div>
+        <div class="desc">仰頭伸展 / 慵懶晨間感</div>
+      </label>
     </div>
   </section>
 
@@ -965,6 +970,11 @@
         <input type="radio" name="costume" value="floral_bikini">
         <div class="name">花卉刺繡比基尼</div>
         <div class="desc">刺繡珍珠泳裝 / 薄紗罩衫 / 度假奢華</div>
+      </label>
+      <label class="card" data-value="athleisure">
+        <input type="radio" name="costume" value="athleisure">
+        <div class="name">運動休閒服</div>
+        <div class="desc">寬鬆棉麻 / 罩衫外套 / 居家旅居感</div>
       </label>
     </div>
   </section>
@@ -1707,6 +1717,14 @@ Holding A Small Bouquet Or Blossom Branch Near The Face
 Eyes Softly Lowered Or Gently Closed
 Flowers Must Not Cover The Facial Features
 Romantic Travel Portrait Gesture
+Identity And Facial Features Remain Clearly Recognizable`,
+morning_stretch:`【姿勢模組｜晨光伸展】
+
+Relaxed Morning Stretch Pose
+Arms Gently Raised Or Reaching Overhead
+Head Tilted Back With Eyes Softly Closed Or Gazing Upward
+One Shoulder Of A Jacket Or Cardigan Slipping Loose
+Calm Unhurried Morning Atmosphere
 Identity And Facial Features Remain Clearly Recognizable`
 };
 
@@ -1721,7 +1739,8 @@ denim_casual:`Costume Direction: Denim Casual — well-fitted denim with simple 
 resort_cover:`Costume Direction: Resort Style — breezy resort dress or light cover-up over swim-inspired top, straw hat optional, vacation seaside styling kept elegant`,
 evening_gown:`Costume Direction: Evening Gown — refined evening dress with premium fabric and clean silhouette, suitable for night city or hotel scenes`,
 winter_coat:`Costume Direction: Winter Coat — long wool coat or padded jacket with scarf, layered winter textures, cozy cold-season travel styling`,
-floral_bikini:`Costume Direction: Luxury Floral Bikini — designer bikini with embroidered flower appliques, pearl and crystal flower accents, delicate scalloped trim and satin ribbon details, sheer chiffon cover-up or light open hoodie, elegant feminine resort swimwear styling kept tasteful`
+floral_bikini:`Costume Direction: Luxury Floral Bikini — designer bikini with embroidered flower appliques, pearl and crystal flower accents, delicate scalloped trim and satin ribbon details, sheer chiffon cover-up or light open hoodie, elegant feminine resort swimwear styling kept tasteful`,
+athleisure:`Costume Direction: Athleisure Loungewear — soft ribbed camisole or tank top with a loose open jacket half slipping off one shoulder, relaxed drawstring trousers or wide-leg pants, minimal premium loungewear styling, effortless morning-at-home mood`
 };
 
 const HAIR_STYLES = {
@@ -1786,6 +1805,8 @@ function getCardValues(containerId){
     .filter(Boolean);
 }
 
+// 元素級獨立隨機：構圖/風格/比例/鏡頭/光線/動態/媒材/姿勢/服裝/髮型/配件
+// 每一項各自從完整選項池抽一個，動態組合成結果，不是從既有一鍵套用清單三選一。
 function applyTravelRandomSelection(){
   const compositionValue = getRandomItem(getCardValues('compositionCards'));
   const styleValue = getRandomItem(getCardValues('styleCards').filter(value => value !== 'vogue'));
@@ -1794,6 +1815,10 @@ function applyTravelRandomSelection(){
   const lightingValue = getRandomItem(getCardValues('lightingCards'));
   const motionValue = getRandomItem(getCardValues('motionCards'));
   const mediaValue = getRandomItem(getCardValues('mediaCards'));
+  const poseValue = getRandomItem(getCardValues('poseCards'));
+  const costumeValue = getRandomItem(getCardValues('costumeCards'));
+  const hairValue = getRandomItem(getCardValues('hairCards'));
+  const propValue = getRandomItem(getCardValues('propCards'));
   const themeValue = getRandomItem(Array.from(document.querySelectorAll('#themeChips .chip')).map(chip => chip.dataset.value));
 
   setRadioCardValue('compositionCards', compositionValue);
@@ -1803,10 +1828,10 @@ function applyTravelRandomSelection(){
   setRadioCardValue('lightingCards', lightingValue);
   setRadioCardValue('motionCards', motionValue);
   setRadioCardValue('mediaCards', mediaValue);
-  setRadioCardValue('poseCards', 'auto');
-  setRadioCardValue('costumeCards', 'auto');
-  setRadioCardValue('hairCards', 'auto');
-  setRadioCardValue('propCards', 'none');
+  setRadioCardValue('poseCards', poseValue);
+  setRadioCardValue('costumeCards', costumeValue);
+  setRadioCardValue('hairCards', hairValue);
+  setRadioCardValue('propCards', propValue);
 
   themeInputEl.value = themeValue;
   themeInputEl.dispatchEvent(new Event('input', { bubbles: true }));

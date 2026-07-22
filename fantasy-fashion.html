@@ -652,6 +652,8 @@
       <label class="card"><input type="radio" name="material" value="smokeVeilGown"><div class="name">煙霧紗裙</div><div class="desc">彩色濃煙凝成布料、夢幻戲劇</div></label>
       <label class="card"><input type="radio" name="material" value="lightPaintingRibbon"><div class="name">光繪絲帶裙</div><div class="desc">長曝光光軌纏繞、夜景金銀光線</div></label>
       <label class="card"><input type="radio" name="material" value="frozenSplashIce"><div class="name">冰晶凍結瞬間</div><div class="desc">水花瞬凍成冰裙、冷調高級</div></label>
+      <label class="card"><input type="radio" name="material" value="heartsQueenCouture"><div class="name">紅心皇后禮服</div><div class="desc">撲克紅心宮廷裝、鑲鑽皇冠、撕紙牌框構圖</div></label>
+      <label class="card"><input type="radio" name="material" value="jellyfishIridescentGown"><div class="name">水母虹彩裙</div><div class="desc">半透明虹彩水母裙、垂墜觸鬚緞帶、珍珠光澤</div></label>
       <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 甜點食品飲品</div>
       <label class="card selected"><input type="radio" name="material" value="milkTea" checked><div class="name">奶茶牛奶</div><div class="desc">焦糖奶茶與牛奶對撞</div></label>
       <label class="card"><input type="radio" name="material" value="strawberry"><div class="name">草莓奶昔</div><div class="desc">粉紅奶昔與草莓果粒</div></label>
@@ -997,6 +999,8 @@
       <label class="card"><input type="radio" name="background" value="crystalThroneTheater"><div class="name">水晶寶座劇院</div><div class="desc">黑劇院、巨型水晶寶座、稜鏡光束</div></label>
       <label class="card"><input type="radio" name="background" value="glassBotanicalDome"><div class="name">玻璃植物園穹頂</div><div class="desc">玻璃鐘罩花房、水晶吊燈、前景葉框</div></label>
       <label class="card"><input type="radio" name="background" value="glassCrystalCity"><div class="name">透明水晶城市</div><div class="desc">玻璃高塔、懸浮球體、鏡面步道藍天</div></label>
+      <label class="card"><input type="radio" name="background" value="goldenCarriageSquare"><div class="name">哥德馬車廣場</div><div class="desc">黑金馬車、教堂廣場、鵝卵石街道</div></label>
+      <label class="card"><input type="radio" name="background" value="rockyCoastTidepool"><div class="name">礁岩海岸潮池</div><div class="desc">海蝕礁岩、清澈潮池、藍天海風</div></label>
       <label class="card"><input type="radio" name="background" value="crystalForestPath"><div class="name">水晶森林步道</div><div class="desc">水晶樹、垂墜吊墜、玻璃棧道聖光</div></label>
       <label class="card"><input type="radio" name="background" value="rainbowCloudSky"><div class="name">彩虹雲海天空</div><div class="desc">彩虹拱、泡泡、粉彩雲海陽光</div></label>
     </div>
@@ -1521,6 +1525,16 @@ const materialData = {
     prompt: 'cotton cloud material system, soft voluminous real cloud puffs forming the gown bodice and skirt, fluffy cumulus texture with delicate gold chain accents woven through, sheer white gauze layers between cloud volumes, sitting or resting on solid cloud masses, heavenly softness framing the subject',
     palette: 'pure cloud white, warm ivory, soft gold chain, pale sky blue, gentle sunlight'
   },
+  heartsQueenCouture: {
+    label: '紅心皇后禮服',
+    prompt: 'heart-suit playing card queen couture material system, ornate Victorian-inspired gown covered in heart motifs and card-suit embroidery, jeweled crown, ribbon bow hair accents, ruffled lace trim and puffed sleeves, torn oversized playing-card frame surrounding the subject as a surreal advertisement border, classic fairy-tale queen archetype with no specific character likeness',
+    palette: 'deep card red, ivory white, antique gold, black accent trim, ruby crystal'
+  },
+  jellyfishIridescentGown: {
+    label: '水母虹彩裙',
+    prompt: 'iridescent jellyfish gown material system, translucent pearlescent fabric layered like jellyfish bell and trailing tentacle ribbons, delicate beaded droplet fringe, soft opalescent shimmer across the bodice and headpiece, ethereal sea-creature couture silhouette, tentacle ribbons drift naturally without covering the face',
+    palette: 'opal white, soft lavender, pearl pink, sea foam blue, silver shimmer'
+  },
   laceCouture: {
     label: '蕾絲高訂',
     prompt: 'lace haute couture material system, intricate handmade lace forming a fitted couture gown with high collar and delicate sleeve details, layered lace medallions and floral lace appliques, fine tassel and bead accents, the surrounding space draped with oversized lace curtains sharing the same lace language and color family as the outfit, elegant and refined coverage',
@@ -1648,7 +1662,9 @@ const backgroundData = {
   crystalForestPath: 'bright crystal forest path background, white crystalline trees with hanging teardrop crystal pendants, glass walkway over clear shallow water, giant crystal flowers along the path, soft heavenly light beams from above, radiant pure fantasy atmosphere',
   rainbowCloudSky: 'rainbow cloud sky background, vivid rainbow arcs across a pastel sunlit cloudscape, floating soap bubbles and sparkling light flares, dreamy candy-colored sky kingdom, bright cheerful fantasy atmosphere',
   laceVeilHall: 'lace veil hall background, layers of oversized handmade lace curtains and lace medallions hanging in depth, the lace shares the same color family as the outfit, soft backlight glowing through the lace holes, refined couture atelier atmosphere, subject stays clearly separated from the lace layers',
-  crystalThroneTheater: 'grand dark theater hall background with a colossal transparent crystal throne at center stage, towering crystal pillars and cathedral-scale hanging gem clusters, floating prisms refracting blue-white light beams, polished obsidian floor reflecting the crystals, large foreground crystal formations partially framing the lower frame, layered foreground middle ground and background depth'
+  crystalThroneTheater: 'grand dark theater hall background with a colossal transparent crystal throne at center stage, towering crystal pillars and cathedral-scale hanging gem clusters, floating prisms refracting blue-white light beams, polished obsidian floor reflecting the crystals, large foreground crystal formations partially framing the lower frame, layered foreground middle ground and background depth',
+  goldenCarriageSquare: 'gothic carriage square background, ornate black and gold horse-drawn carriage with an open door beside a grand cathedral facade, cobblestone plaza, tall gothic spires and street lamps, soft overcast daylight, elegant period-drama travel atmosphere',
+  rockyCoastTidepool: 'rocky coastal tidepool background, weathered sea rocks and shallow clear tidepools under a bright blue sky, gentle ocean waves in the distance, soft natural sea breeze atmosphere, clean airy coastal fantasy setting'
 };
 
 const lightingData = {
@@ -2630,9 +2646,30 @@ function getRandomItem(values){
   return values[Math.floor(Math.random() * values.length)];
 }
 
+function getAllRadioValues(name){
+  return Array.from(document.querySelectorAll(`input[name="${name}"]`)).map(el => el.value);
+}
+function getAllSelectValues(id){
+  const el = document.getElementById(id);
+  return el ? Array.from(el.options).map(o => o.value) : [];
+}
+
+// 元素級獨立隨機：服裝/材質/背景/光線/構圖/框景/姿勢/風格/鏡頭/比例/強度
+// 每一項各自從完整選項池抽一個，動態組合成結果，不是從預寫好的主題模板三選一。
 function applyFantasyRandomSelection(){
-  const keys = Object.keys(themeTemplates);
-  applyThemeTemplate(getRandomItem(keys));
+  ['garment','material','background','lighting','composition','framing','pose','style','camera','ratio'].forEach(name => {
+    const values = getAllRadioValues(name);
+    if(values.length) setRadioValue(name, getRandomItem(values));
+  });
+  const intensityValues = getAllSelectValues('intensity');
+  if(intensityValues.length){
+    document.getElementById('intensity').value = getRandomItem(intensityValues);
+  }
+  ['customGarment','customMaterial','colorNote','extraNote'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  refreshCards();
+  generate({reveal:true});
 }
 
 let fantasyOutputVisible = false;

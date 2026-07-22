@@ -4567,10 +4567,59 @@ function applyMagazinePreset(preset, options = {}){
   }
 }
 
+function getAllRadioValues(name){
+  return Array.from(document.querySelectorAll(`input[name="${name}"]`)).map(el => el.value);
+}
+
+function pickWeightedChipSelection(values, exclusiveValue, maxCount){
+  const pool = values.filter(v => v !== exclusiveValue);
+  if(!pool.length || Math.random() < 0.3) return [exclusiveValue];
+  const count = 1 + Math.floor(Math.random() * maxCount);
+  const bag = [...pool];
+  const picked = [];
+  for(let i = 0; i < count && bag.length; i += 1){
+    picked.push(bag.splice(Math.floor(Math.random() * bag.length), 1)[0]);
+  }
+  return picked;
+}
+
+// 元素級獨立隨機：風格/背景/姿態/框景/鏡頭/動態/媒材/比例/妝容/珠寶/表情/光線
+// 每一項各自從完整選項池抽一個，動態組合成結果，不是從既有一鍵套用清單三選一。
 function applyMagazineRandomSelection(){
-  const keys = Object.keys(QUICK_MAGAZINE_PRESETS);
-  const preset = QUICK_MAGAZINE_PRESETS[getRandomItem(keys)];
-  applyMagazinePreset(preset, { generate: true });
+  const styleValues = getAllRadioValues('style');
+  const bgValues = getAllRadioValues('bg');
+  const poseValues = getAllRadioValues('pose');
+  const framingValues = getAllRadioValues('framing');
+  const cameraValues = getAllRadioValues('camera');
+  const motionValues = getAllRadioValues('motion');
+  const mediaValues = getAllRadioValues('media');
+  const ratioValues = getAllRadioValues('ratio');
+  const makeupValues = getAllRadioValues('makeup');
+  const jewelryValues = getAllRadioValues('jewelry');
+  const expressionValues = getAllRadioValues('expression');
+  const lightingValues = getAllRadioValues('lighting');
+  const themeTexts = Array.from(document.querySelectorAll('#themeChips .chip')).map(c => c.dataset.value);
+
+  if(styleValues.length) setSelectedCardValue('styleCards', getRandomItem(styleValues));
+  if(bgValues.length) setSelectedCardValue('bgCards', getRandomItem(bgValues));
+  if(poseValues.length) setSelectedPoseValue(getRandomItem(poseValues));
+  if(framingValues.length) setSelectedCardValue('framingCards', getRandomItem(framingValues));
+  if(cameraValues.length) setSelectedCardValue('cameraCards', getRandomItem(cameraValues));
+  if(motionValues.length) setSelectedCardValue('motionCards', getRandomItem(motionValues));
+  if(mediaValues.length) setSelectedCardValue('mediaCards', getRandomItem(mediaValues));
+  if(ratioValues.length) setSelectedCardValue('ratioCards', getRandomItem(ratioValues));
+  setMultiChipValues('makeupChips', pickWeightedChipSelection(makeupValues, 'original', 2));
+  setMultiChipValues('jewelryChips', pickWeightedChipSelection(jewelryValues, 'none', 2));
+  if(expressionValues.length) setSelectedChipValue('expressionChips', getRandomItem(expressionValues));
+  if(lightingValues.length) setSelectedChipValue('lightingChips', getRandomItem(lightingValues));
+
+  clearThemePresetSelection();
+  if(themeTexts.length){
+    themeInputEl.value = getRandomItem(themeTexts);
+    themeInputEl.classList.remove('theme-active');
+    themeInputEl.dispatchEvent(new Event('input', { bubbles: true }));
+  }
+  document.getElementById('generateBtn').click();
 }
 
 document.getElementById('magazineMoodPreset').addEventListener('click',()=>{
