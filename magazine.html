@@ -3955,6 +3955,7 @@ if(defaultBgValue && BG_LIGHTING_MAP[defaultBgValue]){
 const themeChips = document.querySelectorAll('#themeChips .chip');
 const riskThemeChips = document.querySelectorAll('#riskThemeChips .chip');
 const themeInputEl = document.getElementById('themeInput');
+let skipNextScroll = false;
 
 const STYLE_PRESET_DEFAULTS = {
   vogue: { bg: 'gradient', framing: 'half_body', camera: 'low', motion: 'dynamic', makeup: ['natural_highend', 'precise_eyeliner'], skinTexture: 'luxury_campaign', jewelry: ['statement'], expression: 'cool_stare', lighting: 'mixed_studio', media: 'realistic_studio', ratio: '4:5' },
@@ -4271,7 +4272,11 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
   document.getElementById('outputText').value = sections.join('\n\n⸻\n\n');
   document.getElementById('outputWrap').classList.remove('hidden');
   clearStale();
-  document.getElementById('outputWrap').scrollIntoView({behavior:'smooth', block:'nearest'});
+  if(skipNextScroll){
+    skipNextScroll = false;
+  } else {
+    document.getElementById('outputWrap').scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
 
   const copyBtn = document.getElementById('copyBtn');
   copyBtn.textContent = '一鍵複製';
@@ -4563,6 +4568,7 @@ function applyMagazinePreset(preset, options = {}){
   themeInputEl.classList.add('theme-active');
   themeInputEl.dispatchEvent(new Event('input',{bubbles:true}));
   if(options.generate){
+    skipNextScroll = true;
     document.getElementById('generateBtn').click();
   }
 }
@@ -4619,6 +4625,7 @@ function applyMagazineRandomSelection(){
     themeInputEl.classList.remove('theme-active');
     themeInputEl.dispatchEvent(new Event('input', { bubbles: true }));
   }
+  skipNextScroll = true;
   document.getElementById('generateBtn').click();
 }
 

@@ -239,6 +239,7 @@
     font-weight:400;
   }
   button.card:hover{border-color:#554B67;background:var(--panel-2);}
+  .section-preset button.card.template-selected{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold);}
   .generate-btn{
     width:100%;
     background:var(--gold);
@@ -358,9 +359,8 @@
       <div class="section-title">一鍵主題模板</div>
     </div>
     <p class="hint">一鍵套用會同時填入適合的服裝、材質、姿勢、光線與背景；套用後仍可逐區改成自己的版本。</p>
-    <button class="card" type="button" id="fantasyMoodPreset" style="width:100%;min-height:auto;margin-bottom:12px;background:linear-gradient(180deg,#17120b 0%,#22180f 100%);border-color:var(--gold);">
-      <div class="name">隨機套用｜幻想廣告動感感覺</div>
-      <div class="desc">從現有幻想主題模板抽一組，快速帶入材質、服裝、姿勢、光線與背景</div>
+    <button class="card" type="button" id="fantasyMoodPreset" style="width:100%;min-height:auto;margin-bottom:12px;background:linear-gradient(180deg,#17120b 0%,#22180f 100%);">
+      <div class="name">隨機套用</div>
     </button>
     <div class="grid grid-3">
       <button class="card" type="button" id="redPaperWeddingPreset">
@@ -2767,6 +2767,12 @@ document.querySelectorAll('[data-template]').forEach(button => {
   button.addEventListener('click', () => {
     applyThemeTemplate(button.dataset.template);
   });
+});
+document.querySelector('.section-preset').addEventListener('click', (event) => {
+  const btn = event.target.closest('button.card');
+  if(!btn) return;
+  document.querySelectorAll('.section-preset button.card.template-selected').forEach(b => b.classList.remove('template-selected'));
+  btn.classList.add('template-selected');
 });
 document.getElementById('copyBtn').addEventListener('click', () => {
   if(document.getElementById('outputWrap').classList.contains('stale')) return;

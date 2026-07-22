@@ -150,6 +150,32 @@
   與根目錄 `README.md` 反映現況；`CLAUDE.md` 的「目前狀態」精簡為現況摘要，
   詳細歷史改指到本檔案。
 
+## 2026-07-22（三）　UI 互動細節修正
+
+- owner 回報 fantasy「00 一鍵主題模板」區的金色選取框「鎖死」在隨機套用按鈕上，
+  點其他模板不會跟著移動。根因：隨機按鈕原本有寫死的
+  `border-color:var(--gold)` 內聯樣式（07-21 統一配色時加的，用意是讓它像
+  travel/magazine 的隨機按鈕一樣顯眼），但那是靜態樣式，不是「目前選取」狀態，
+  ~40 個具名模板按鈕則完全沒有任何選取追蹤機制。修法：拿掉隨機按鈕的靜態金框，
+  改成在 `.section-preset` 容器上掛一個事件委派的 click 監聽，點擊任何一顆
+  卡片（隨機套用或具名模板）就把 `.template-selected` 這個 class 移到它身上、
+  從其他卡片移除，CSS 用 `.section-preset button.card.template-selected` 給金框
+  ＋ box-shadow。順手把隨機按鈕文字從兩行（標題＋說明）簡化成單一行「隨機套用」。
+- owner 要求 travel/magazine 的「隨機套用」與「一鍵套用」按鈕不要再自動把頁面
+  捲到輸出區，維持使用者當下瀏覽位置；但手動按「生成完整咒語」時仍要捲動
+  （這是使用者主動要求看結果，跟套用範本後被動跳走不一樣）。做法：加一個
+  模組層級的 `skipNextScroll` 旗標，`applyTravelPreset`/`applyTravelRandomSelection`/
+  `applyMagazinePreset`（`options.generate` 為真時）/`applyMagazineRandomSelection`
+  在觸發 `generateBtn.click()` 前把旗標設成 true，真正的生成處理常式讀到旗標為
+  true 時跳過 `scrollIntoView`、並把旗標重置回 false，讓使用者直接點生成鈕的
+  路徑不受影響。
+- **驗證方式**：這三項都是操作真實 DOM 的行為，靜態檢查測不出來，沿用 jsdom
+  載入三頁「實際」HTML/JS 模擬點擊：確認 fantasy 選取框在點擊間正確移動且同時
+  只有一個被選取、確認 travel/magazine 的套用/隨機按鈕不觸發 `scrollIntoView`
+  而手動生成鈕仍會觸發。12 項檢查全過。另外 `check-static.mjs` 全過、
+  `build-prompt-preview.mjs` 固定選項組合仍 0 diff（純 UI 互動調整，未動任何
+  prompt 文字）。
+
 ## 尚未完成 / 待 owner 決定
 
 - ChatGPT 出圖實測：第三波核心瘦身 A/B（`output/ab-test-2026-07-07-c-final/`）、

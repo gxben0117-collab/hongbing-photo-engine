@@ -1835,6 +1835,7 @@ function applyTravelRandomSelection(){
 
   themeInputEl.value = themeValue;
   themeInputEl.dispatchEvent(new Event('input', { bubbles: true }));
+  skipNextScroll = true;
   document.getElementById('generateBtn').click();
 }
 
@@ -1984,6 +1985,7 @@ function applyTravelPreset(preset){
     themeInputEl.value = preset.themeText;
     themeInputEl.dispatchEvent(new Event('input', { bubbles: true }));
   }
+  skipNextScroll = true;
   document.getElementById('generateBtn').click();
 }
 
@@ -2014,6 +2016,7 @@ document.querySelectorAll('#styleCards .card').forEach(card=>{
 });
 const themeChips=document.querySelectorAll('#themeChips .chip');
 const themeInputEl=document.getElementById('themeInput');
+let skipNextScroll=false;
 themeChips.forEach(chip=>{
   chip.addEventListener('click',()=>{
     themeChips.forEach(c=>c.classList.remove('selected'));
@@ -2106,7 +2109,11 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
   document.getElementById('outputText').value=sections.join('\n\n⸻\n\n');
   document.getElementById('outputWrap').classList.remove('hidden');
   clearStale();
-  document.getElementById('outputWrap').scrollIntoView({behavior:'smooth',block:'nearest'});
+  if(skipNextScroll){
+    skipNextScroll=false;
+  } else {
+    document.getElementById('outputWrap').scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
   const cb=document.getElementById('copyBtn');
   cb.textContent='一鍵複製';
   cb.classList.remove('copied');
