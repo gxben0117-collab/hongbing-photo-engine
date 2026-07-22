@@ -406,6 +406,30 @@
   輸出正常無 undefined/錯誤；`build-prompt-preview.mjs` 5 組固定組合仍
   0 diff；`audit-100x.mjs` 500 次模擬 0 問題。
 
+## 2026-07-22（十一）　旅拍頁補地點快選 + 全專案上架前檢查
+
+- 補回稍早稽核報告裡列過、owner 當時沒選進優先項的旅拍地點缺口候選：九份
+  老街、日月潭、阿里山日出、荷蘭鬱金香花田、泰姬瑪哈陵、吳哥窟、下龍灣、
+  澳洲大堡礁、優勝美地國家公園、冰島極光，共 10 個，比照既有 chip 純文字
+  地點的加法（不需要對照表，選中會直接填進 `themeInput`）。
+- owner 要求「全專案檢查後上架」。除了固定的三個腳本，這次額外寫了一個
+  **preset/模板引用有效性交叉驗證**腳本：把三頁所有的預設連動物件
+  （travel 的 `QUICK_TRAVEL_PRESETS`＋`TRAVEL_STYLE_PRESET_DEFAULTS`、
+  magazine 的 `QUICK_MAGAZINE_PRESETS`＋`STYLE_PRESET_DEFAULTS`＋
+  `THEME_PRESET_DEFAULTS`、fantasy 的 `themeTemplates`）裡每一筆用到的每個
+  欄位值，逐一比對是否存在於該頁當下 DOM 的即時選項池——這正是能抓出上一條
+  記錄那種「composition 對不上」問題的通用檢查法，往後任何一頁的預設系統
+  出現同類拼字/對不上問題都能一次篩出來。用 `dom.window.eval()` 讀取頁面
+  內 `const` 物件（top-level const 不會掛在 `window` 上，用 eval 在頁面自己
+  的 global scope 內執行才拿得到）。
+- **結果**：三頁共 195 筆預設/模板條目（travel 12+8、magazine 21+34+63、
+  fantasy 57）全數比對通過，0 個引用失效——確認這次新增/刪除/改名都沒有
+  遺漏，也代表 fantasy 的 composition/intensity 問題這次是徹底清乾淨了。
+- **驗證**：`check-static.mjs` 全過；新寫 jsdom 測試對 10 個新地點逐一點擊
+  ＋點真正 `generateBtn`，確認輸出正常且地點文字有進到咒語裡；
+  `build-prompt-preview.mjs` 5 組固定組合仍 0 diff；`audit-100x.mjs` 500 次
+  模擬 0 問題。
+
 ## 尚未完成 / 待 owner 決定
 
 - fantasy 頁有 15 個 `themeTemplates` 孤兒定義（沒有按鈕連到），要不要清掉

@@ -101,6 +101,7 @@ git diff --check
 ```powershell
 node scripts\build-prompt-preview.mjs   # 固定選項組合，改前/改後 0 diff 迴歸檢查
 node scripts\audit-100x.mjs             # 五頁各隨機 100 組選項，檢查內容問題
+node scripts\validate-preset-refs.mjs   # 三頁一鍵套用/預設連動物件引用的選項值是否都存在
 ```
 
 ## 維護原則

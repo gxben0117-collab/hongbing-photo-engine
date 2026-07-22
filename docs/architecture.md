@@ -23,6 +23,8 @@
   - `check-static.mjs` - 結構檢查（重複 id、本地連結、inline script 語法）
   - `build-prompt-preview.mjs` - 重建改前/改後完整咒語，比對固定選項組合輸出
   - `audit-100x.mjs` - 重建五頁組裝邏輯，隨機模擬 100×5 組選項，檢查內容問題
+  - `validate-preset-refs.mjs` - 檢查三頁「一鍵套用/預設連動」物件（QUICK_*_PRESETS、
+    *_DEFAULTS、fantasy 的 themeTemplates）引用的欄位值是否都存在於當下選項池
 - `assets/` - 共用圖片、圖示、未來靜態資產
 - `experiments/` - 不屬於正式網站流程的實驗腳本
 - `output/` - 使用者生成結果、匯出稿、截圖、`build-prompt-preview.mjs` 的對照輸出
@@ -42,8 +44,10 @@
 - 保持 HTML 入口檔在根目錄，避免 GitHub Pages 路徑變動
 - 新增的規則或流程先寫進 `docs/`，重大改動記一筆到 `docs/development-log.md`
 - 上架前執行 `node scripts\check-static.mjs`；若動到咒語組裝邏輯或新增選項，
-  再跑 `node scripts\build-prompt-preview.mjs` 確認 0 diff，以及
-  `node scripts\audit-100x.mjs` 確認沒有內容問題
+  再跑 `node scripts\build-prompt-preview.mjs` 確認 0 diff、
+  `node scripts\audit-100x.mjs` 確認沒有內容問題、以及
+  `node scripts\validate-preset-refs.mjs` 確認沒有一鍵套用/預設連動物件
+  引用到不存在的選項值
 - 若未來加入 JS 模組化或套件管理，再補 `package.json`
 - 核心咒語內容受 `docs/core-prompt-contract.md` 保護，未經同意不得修改
 - 新增正式 HTML 工具頁時，需同步更新 `index.html`、`scripts/check-static.mjs`、`README.md` 與相關流程文件

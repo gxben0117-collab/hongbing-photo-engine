@@ -28,15 +28,26 @@
   （改選項後輸出區標記過期，需重新生成）、套用即顯示、按鈕配色一致。
   `doll.html` 尚未套用這套規則（見下方待辦）；`store-ad.html` 本質不同不適用。
 - **隨機套用已改為元素級獨立隨機**（每欄位各自抽選再動態組合），不是預寫模板三選一。
-- **驗證工具**：`scripts/check-static.mjs`（結構）、`scripts/build-prompt-preview.mjs`
-  （0-diff 迴歸）、`scripts/audit-100x.mjs`（500 次隨機模擬內容稽核）三個腳本
-  覆蓋不同驗證面向，改咒語相關邏輯後都應該跑。**重要限制**：`audit-100x.mjs`
-  是重新實作一份組裝邏輯直接讀 DOM 文字來模擬，不是真的執行頁面上的
-  `generate()`，測不出「新增選項卡但忘記同步補頁面自己維護的文字對照表」這類
-  問題（2026-07-22（五）就是這樣被漏掉，導致 fantasy 生成按鈕直接壞掉）。
-  **凡是新增/修改選項卡，都要另外用 jsdom 載入真實 HTML、對每個新選項值
-  dispatch change + 點真正的 `generateBtn`，檢查輸出沒有 undefined/過短/JS
-  錯誤**，不能只靠 audit-100x 過關就當作驗證完成。
+- **驗證工具**：四個腳本，改咒語相關邏輯後都應該跑：
+  - `scripts/check-static.mjs`（結構：重複 id、本地連結、inline script 語法）
+  - `scripts/build-prompt-preview.mjs`（固定選項組合 0-diff 迴歸）
+  - `scripts/audit-100x.mjs`（五頁各 100 組隨機模擬內容稽核）
+  - `scripts/validate-preset-refs.mjs`（2026-07-22（十一）新增：檢查
+    `QUICK_TRAVEL_PRESETS`/`TRAVEL_STYLE_PRESET_DEFAULTS`、
+    `QUICK_MAGAZINE_PRESETS`/`STYLE_PRESET_DEFAULTS`/`THEME_PRESET_DEFAULTS`、
+    fantasy 的 `themeTemplates` 這些「一鍵套用/預設連動」物件裡，每筆用到的
+    每個欄位值是不是真的存在於該頁當下的選項池——**這是專門為了抓 composition/
+    intensity 那種靜默失效問題而寫的**，跟 node:vm 解析＋正規表示式讀值，不需要
+    jsdom，維持專案零 npm 依賴）
+  **重要限制**：`audit-100x.mjs` 是重新實作一份組裝邏輯直接讀 DOM 文字來模擬，
+  不是真的執行頁面上的 `generate()`，測不出「新增選項卡但忘記同步補頁面自己
+  維護的文字對照表」這類問題（2026-07-22（五）就是這樣被漏掉，導致 fantasy
+  生成按鈕直接壞掉）；`validate-preset-refs.mjs` 也測不出這個，因為它只查
+  「一鍵套用」物件的欄位值有沒有對到選項池，不會去查 `garmentData`/
+  `materialData` 這類文字對照表本身有沒有缺項。**凡是新增/修改選項卡，都要
+  另外用 jsdom 載入真實 HTML、對每個新選項值 dispatch change + 點真正的
+  `generateBtn`，檢查輸出沒有 undefined/過短/JS 錯誤**，不能只靠這四個腳本
+  過關就當作驗證完成。
 - **版權規則**：讀取風格參考圖時常遇到遊戲/動漫角色 cosplay 圖，只取視覺技法，
   角色名/作品名一律不得進入 prompt 或 UI。
 - **fantasy 的 00 一鍵主題模板區**有「當下選取」金框追蹤（點哪個模板/隨機套用，

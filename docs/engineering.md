@@ -70,4 +70,6 @@ node scripts\\check-static.mjs
 - 若動到咒語組裝邏輯或新增/調整選項：
   - `node scripts\build-prompt-preview.mjs`（固定選項組合 0-diff 迴歸檢查）
   - `node scripts\audit-100x.mjs`（五頁各隨機 100 組選項，內容稽核）
+  - `node scripts\validate-preset-refs.mjs`（三頁一鍵套用/預設連動物件引用的
+    欄位值是否都存在於當下選項池，抓 composition/intensity 這類靜默失效）
 - 五頁手動生成一次咒語，確認生成/複製正常
