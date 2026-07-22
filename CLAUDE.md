@@ -54,6 +54,15 @@
   BACKGROUNDS/POSES/DETAIL_BLOCKS.lighting），導致 fantasy 選到新材質會直接
   丟錯讓生成失效，其餘缺項則是輸出出現 undefined 或選項悄悄不生效；已於
   2026-07-22（五）補齊全部 75 筆並用 jsdom 逐項驗證，細節見該條記錄。
+- **三頁選項分類稽核**（2026-07-22（六））：travel 刪除 6 個誤放的奇幻地點
+  chip（內容已在 fantasy 頁重複建設）；magazine 刪除/改寫 6 組重複選項；
+  fantasy 新增「暗黑哥德巫術」「賽博霓虹都市」兩大主題共 26 個選項＋2 個
+  一鍵模板，且這次新增選項卡與補資料表是同一批做完，不再分兩批。**刪除/
+  改名前一律先 grep 過 `THEME_PRESET_DEFAULTS`/`POSE_THEME_MAP`/
+  `QUICK_TRAVEL_PRESETS`/`QUICK_MAGAZINE_PRESETS`/fantasy 的
+  `themeTemplates`，確認零引用才刪，有引用的只改顯示文字不動 value/key**——
+  這是繼「新增要補資料表」之後的第二條教訓：改動既有選項前也要查一鍵模板
+  系統的依賴，兩者都要查才算完整。
 - **文件結構**：`docs/development-log.md` 是唯一時間軸記錄；`docs/history/` 存放
   已完成批次的一次性交接/對照文件（不再更新，只供追溯）；`docs/README.md` 是
   文件總索引。

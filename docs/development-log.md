@@ -244,6 +244,67 @@
   測試——fantasy 36 項、travel 20 項、magazine 19 項，共 75 項全部通過
   （輸出長度正常、無 undefined/NaN、無 JS 錯誤）。
 
+## 2026-07-22（六）　三頁選項分類稽核：刪除誤放項目、整併重複、新增幻想兩大主題
+
+- owner 要求檢查三頁每個選項是不是放對分類，並評估要不要補姿勢/服裝/材質等
+  缺口。拆三個子代理（純文字比對，不開圖）分別稽核 travel/magazine/fantasy，
+  逐一比對每個選項的中文標題與說明是否符合該頁定位，並列出重複/近似重複與
+  缺口候選。owner 逐項回覆後，實際執行的部分：
+  - **travel.html**：地點快選 chip 裡混入 6 個明顯奇幻/科幻設定（京都伏見稻荷
+    九尾妖狐、秋葉原科技機器女郎、布拉格古城魔法女巫、英國古堡吸血鬼女王、
+    東京霓虹賽博女忍者、歐洲聖堂天使戰姬）——這些內容本來就已經在 fantasy 頁
+    的材質/服裝池裡有對應（九尾狐神光、天使羽翼高訂、機甲未來系等），屬於
+    重複建設，直接從 travel.html 刪除，不搬遷。保留另外 2 個邊界案例（東京
+    原宿cosplay貓女、巴黎哥德教堂暗黑修女）。順手把 themeInput 的 placeholder
+    範例文字從被刪的九尾妖狐改成保留的貓女範例。
+  - **magazine.html**：
+    - `bow_hero`（拉弓動作）desc 拿掉「英雄姿態」字眼（改「持弓側身張力姿」），
+      英文 POSES 文字裡的 `Strong Heroic Fashion Editorial Gesture` 也改成
+      `Strong Sculptural Fashion Editorial Gesture`，降低戰鬥角色感。
+    - `dessert_table`（甜點商品棚）desc 補一句「人物置身甜點桌旁」，強調這是
+      人像背景不是純商品棚拍。
+    - 刪除 3 個零引用的重複 themePreset chip：「現代極簡」（跟極簡主義/極簡
+      高級重疊）、「西裝女王」（跟黑色西裝女王重疊，且無 THEME_PRESET_DEFAULTS
+      連動）、「高級訂製」（跟高級訂製宣傳重疊）。刪除前都先 grep 過
+      `THEME_PRESET_DEFAULTS`、`POSE_THEME_MAP`、`QUICK_MAGAZINE_PRESETS`
+      確認零引用才動手，避免重演上一條記錄的漏改對照表問題。
+    - 刪除 2 個零引用的重複 bg：`solid_color`（跟 studio 重疊）、
+      `plain_gray_backdrop`（上一批新增的，跟既有 4 個純色棚背景重疊，直接砍
+      掉最新加的比動既有的風險低），同步移除 `BACKGROUNDS` 文字條目與
+      `BG_LIGHTING_MAP` 裡對應的一行。
+    - `concrete`/`dark_gray_concrete`、`低坐回望`/`側坐回頭` 這兩組因為被多個
+      `THEME_PRESET_DEFAULTS`/`QUICK_MAGAZINE_PRESETS` 引用，風險較高，維持
+      不動。
+    - `抱膝坐姿`(hug_knees,舊)／`抱膝側坐`(hug_knee_sit,上一批新增) 改寫後者的
+      中英文措辭，明確標出「側身面向鏡頭、慵懶雜誌感」跟前者「情緒感強」的
+      差異，不刪除。
+  - **fantasy-fashion.html**：
+    - `material` 池裡兩筆中文名稱都叫「玻璃火焰」(`glassFlame`/
+      `glassFlameOpera`)，後者改名「玻璃火焰．劇院版」（同步改
+      `materialData.glassFlameOpera.label`），只改顯示文字，`value`/key 不動
+      （`glassFlameOpera` 有被一鍵模板 `data-template="glassFlameOpera"` 引用）。
+    - `background` 的「礁岩海岸潮池」(`rockyCoastTidepool`) owner 確認不動。
+    - 新增兩個目前完全沒覆蓋到的主題方向：**暗黑哥德巫術**（material 6 項、
+      garment 2 項、background 3 項、lighting 2 項）與**賽博霓虹都市**
+      （material 6 項、garment 2 項、background 3 項、lighting 2 項），
+      共 26 個新選項卡，每一項都同步補齊 `materialData`/`garmentData`/
+      `backgroundData`/`lightingData` 對照表（這次記取教訓，新增選項卡跟補
+      對照表一起做，不是分開兩批）。另外各配一個「00 一鍵主題模板」新按鈕
+      （`gothicWitchRitual` 暗黑哥德巫術儀式、`cyberNeonPulse` 賽博霓虹都市
+      脈動），讓新主題可以一鍵套用，不用在大選項池裡逐一手選。
+- **驗證**：`check-static.mjs` 全過；新寫 jsdom 測試 44 項全過——確認 6+3+2
+  個刪除項目在真實 DOM 裡確實消失、3 個保留項目仍在、fantasy 新增的 26 個
+  選項值＋2 個新模板逐一點真正 `generateBtn` 都輸出正常（無 undefined/NaN/
+  JS error）、三頁預設狀態直接生成也正常；`build-prompt-preview.mjs` 5 組
+  固定組合仍 0 diff（刪除/新增的都不在這幾組固定選項裡，純淨迴歸）；
+  `audit-100x.mjs` 500 次模擬 0 問題。
+- 本次刪除/改名前都先用 grep 逐一確認目標字串在 `THEME_PRESET_DEFAULTS`、
+  `POSE_THEME_MAP`、`QUICK_TRAVEL_PRESETS`、`QUICK_MAGAZINE_PRESETS`、
+  fantasy 的 `themeTemplates`/`data-template` 裡有沒有被引用，零引用才刪，
+  有引用的一律只改顯示文字、不動 value/key——這是為了不重蹈上一條記錄「新增
+  選項忘記同步補資料表」的覆轍，這次反過來也要求「刪除/改名前先查一鍵模板
+  系統有沒有依賴」。
+
 ## 尚未完成 / 待 owner 決定
 
 - ChatGPT 出圖實測：第三波核心瘦身 A/B（`output/ab-test-2026-07-07-c-final/`）、
