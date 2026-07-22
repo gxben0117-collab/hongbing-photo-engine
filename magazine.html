@@ -614,6 +614,8 @@
       <button type="button" class="preset-btn" data-magazine-preset="rainMirrorBeauty">一鍵套用｜雨夜鏡面美妝</button>
       <button type="button" class="preset-btn" data-magazine-preset="crystalBallroomToast">一鍵套用｜水晶晚宴陽台</button>
       <button type="button" class="preset-btn" data-magazine-preset="cherryRedHairBeauty">一鍵套用｜紅髮櫻桃美妝</button>
+      <button type="button" class="preset-btn" data-magazine-preset="redFloralDeepV">一鍵套用｜紅花薄紗深 V 禮服</button>
+      <button type="button" class="preset-btn" data-magazine-preset="futureCosPortrait">一鍵套用｜未來系 Cos 風寫真</button>
     </div>
   </section>
 
@@ -926,6 +928,7 @@
       <label class="chip" data-value="法式微醺性感"><input type="radio" name="themePreset" value="法式微醺性感">法式微醺性感</label>
       <label class="chip" data-value="古風私房"><input type="radio" name="themePreset" value="古風私房">古風私房</label>
       <label class="chip" data-value="緞面晨光私房"><input type="radio" name="themePreset" value="緞面晨光私房">緞面晨光私房</label>
+      <label class="chip" data-value="紅花薄紗深 V 禮服"><input type="radio" name="themePreset" value="紅花薄紗深 V 禮服">紅花薄紗深 V 禮服</label>
       <div style="flex-basis:100%;width:100%;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 藝術場景佈景</div>
       <label class="chip" data-value="鏡面珠鑽背影"><input type="radio" name="themePreset" value="鏡面珠鑽背影">鏡面珠鑽背影</label>
       <label class="chip" data-value="管弦樂女指揮"><input type="radio" name="themePreset" value="管弦樂女指揮">管弦樂女指揮</label>
@@ -948,6 +951,7 @@
       <label class="chip" data-value="露肩開衩印花洋裝"><input type="radio" name="themePreset" value="露肩開衩印花洋裝">露肩開衩印花洋裝</label>
       <label class="chip" data-value="挖空削肩簡約上衣"><input type="radio" name="themePreset" value="挖空削肩簡約上衣">挖空削肩簡約上衣</label>
       <div style="flex-basis:100%;width:100%;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 二次元角色風</div>
+      <label class="chip" data-value="未來系 Cos 風寫真"><input type="radio" name="themePreset" value="未來系 Cos 風寫真">未來系 Cos 風寫真</label>
       <label class="chip" data-value="元氣偶像社團服"><input type="radio" name="themePreset" value="元氣偶像社團服">元氣偶像社團服</label>
       <label class="chip" data-value="魔法少女變身服"><input type="radio" name="themePreset" value="魔法少女變身服">魔法少女變身服</label>
       <label class="chip" data-value="校園風紀委員制服"><input type="radio" name="themePreset" value="校園風紀委員制服">校園風紀委員制服</label>
@@ -4208,6 +4212,8 @@ const THEME_PRESET_DEFAULTS = {
   '鏤空剪裁': { style: 'fashion_ad', bg: 'neon_night', framing: 'three_quarter', camera: 'side_profile', motion: 'dynamic', makeup: ['precise_eyeliner', 'highlight_skin'], skinTexture: 'luxury_campaign', jewelry: ['earrings'], expression: 'cool_stare', lighting: 'rim_light', ratio: '4:5' },
   '古風私房': { style: 'bazaar_cn', bg: 'chinese_bedroom', pose: 'side_lie', framing: 'three_quarter', camera: 'soft_focus', motion: 'still', makeup: ['natural_highend', 'glossy_lip'], skinTexture: 'dewy_glow', jewelry: ['earrings'], expression: 'lazy_allure', lighting: 'bedside_candle_warm', ratio: '3:4' },
   '緞面晨光私房': { style: 'beauty_closeup', bg: 'satin_bed_morning', pose: 'prone_chin', framing: 'three_quarter', camera: 'soft_focus', motion: 'breeze', makeup: ['natural_highend', 'glossy_lip'], skinTexture: 'dewy_glow', jewelry: ['none'], expression: 'tipsy_gaze', lighting: 'window_soft', ratio: '4:5' },
+  '紅花薄紗深 V 禮服': { style: 'beauty_closeup', bg: 'luxury_hotel_suite', pose: 'chair_edge', framing: 'three_quarter', camera: 'beauty_closeup', motion: 'still', makeup: ['glossy_lip', 'highlight_skin'], skinTexture: 'dewy_glow', jewelry: ['earrings'], expression: 'allure_smile', lighting: 'bedside_candle_warm', ratio: '4:5' },
+  '未來系 Cos 風寫真': { style: 'cosmopolitan', bg: 'white_seamless', pose: 'reach_camera', framing: 'three_quarter', camera: 'top_beauty', motion: 'dynamic', makeup: ['glossy_lip', 'precise_eyeliner'], skinTexture: 'dewy_glow', jewelry: ['none'], expression: 'allure_smile', lighting: 'beauty_fill', ratio: '4:5' },
   '日雜海邊封面': { style: 'japanese_photo_magazine', bg: 'seaside_backlight', pose: 'turn', framing: 'half_body', camera: 'neutral', motion: 'breeze', makeup: ['natural_highend'], skinTexture: 'natural_real', jewelry: ['none'], expression: 'natural_innocent', lighting: 'seaside_sun_backlight', ratio: '2:3' },
   '亂世紅顏': { style: 'bazaar_cn', bg: 'chinese_bedroom', pose: 'guifei', framing: 'three_quarter', camera: 'side_profile', motion: 'breeze', makeup: ['red_lip', 'precise_eyeliner'], skinTexture: 'premium_matte', jewelry: ['statement'], expression: 'queen_smirk', lighting: 'bedside_candle_warm', ratio: '3:4' },
   '古風軍師': { style: 'inner_story', bg: 'scholar_study', pose: 'calligraphy_brush', framing: 'half_body', camera: 'neutral', motion: 'still', makeup: ['natural_highend', 'matte_base'], skinTexture: 'natural_real', jewelry: ['none'], expression: 'calm_direct', lighting: 'window_soft', ratio: '3:4' },
@@ -4228,11 +4234,18 @@ function clearThemePresetSelection(){
   });
 }
 
-function selectThemePresetChip(chip){
+function markThemePresetByValue(value){
   clearThemePresetSelection();
+  const chip = [...themeChips, ...riskThemeChips].find(item=>item.dataset.value===value);
+  if(!chip) return null;
   chip.classList.add('selected');
   const input = chip.querySelector('input');
   if(input) input.checked = true;
+  return chip;
+}
+
+function selectThemePresetChip(chip){
+  markThemePresetByValue(chip.dataset.value);
   themeInputEl.value = chip.dataset.value;
   themeInputEl.classList.remove('theme-active');
   applyThemePresetDefaults(chip.dataset.value);
@@ -4708,6 +4721,40 @@ const QUICK_MAGAZINE_PRESETS = {
     label: '紅髮櫻桃美妝',
     themeText: '深紅長髮、金紅髮飾、紅色薄紗禮服與櫻桃紅唇；櫻桃是否入鏡可在自訂欄指定',
     style: 'beauty_closeup', bg: 'red_cherry_sunset_bokeh', pose: 'hand_neck', framing: 'face_closeup', camera: 'side_profile', motion: 'breeze', makeup: ['red_lip', 'highlight_skin'], skinTexture: 'dewy_glow', jewelry: ['earrings'], expression: 'lower_gaze', lighting: 'cherry_sunset_beauty', media: 'realistic_studio', ratio: '4:5'
+  },
+  redFloralDeepV: {
+    label: '紅花薄紗深 V 禮服',
+    themeText: '紅花薄紗深 V 禮服, deep V neckline red floral sheer couture dress, chest area covered by layered embroidered floral tulle, elegant luxury boudoir editorial, refined sensual but not vulgar, no nudity, no explicit exposure',
+    style: 'beauty_closeup',
+    bg: 'luxury_hotel_suite',
+    pose: 'chair_edge',
+    framing: 'three_quarter',
+    camera: 'beauty_closeup',
+    motion: 'still',
+    makeup: ['glossy_lip', 'highlight_skin'],
+    skinTexture: 'dewy_glow',
+    jewelry: ['earrings'],
+    expression: 'allure_smile',
+    lighting: 'bedside_candle_warm',
+    media: 'realistic_studio',
+    ratio: '4:5'
+  },
+  futureCosPortrait: {
+    label: '未來系 Cos 風寫真',
+    themeText: '未來系 Cos 風寫真, original futuristic cosplay-inspired portrait, white blue gold costume styling, clean character portrait photography, gloved hand reaching toward camera, bright clean studio background, no copyrighted character, no anime franchise identity',
+    style: 'cosmopolitan',
+    bg: 'white_seamless',
+    pose: 'reach_camera',
+    framing: 'three_quarter',
+    camera: 'top_beauty',
+    motion: 'dynamic',
+    makeup: ['glossy_lip', 'precise_eyeliner'],
+    skinTexture: 'dewy_glow',
+    jewelry: ['none'],
+    expression: 'allure_smile',
+    lighting: 'beauty_fill',
+    media: 'realistic_studio',
+    ratio: '4:5'
   }
 };
 
@@ -4718,10 +4765,9 @@ function getRandomItem(values){
 function applyMagazinePreset(preset, options = {}){
   if(!preset) return;
   applyVisualPresetDefaults(preset);
-  clearThemePresetSelection();
+  markThemePresetByValue(preset.label);
   themeInputEl.value = preset.themeText || preset.label;
   themeInputEl.classList.add('theme-active');
-  themeInputEl.dispatchEvent(new Event('input',{bubbles:true}));
   if(options.generate){
     skipNextScroll = true;
     document.getElementById('generateBtn').click();
@@ -4759,7 +4805,7 @@ function applyMagazineRandomSelection(){
   const jewelryValues = getAllRadioValues('jewelry');
   const expressionValues = getAllRadioValues('expression');
   const lightingValues = getAllRadioValues('lighting');
-  const themeTexts = Array.from(document.querySelectorAll('#themeChips .chip')).map(c => c.dataset.value);
+  const themePresetChips = Array.from(document.querySelectorAll('#themeChips .chip'));
 
   if(styleValues.length) setSelectedCardValue('styleCards', getRandomItem(styleValues));
   if(bgValues.length) setSelectedCardValue('bgCards', getRandomItem(bgValues));
@@ -4774,11 +4820,11 @@ function applyMagazineRandomSelection(){
   if(expressionValues.length) setSelectedChipValue('expressionChips', getRandomItem(expressionValues));
   if(lightingValues.length) setSelectedChipValue('lightingChips', getRandomItem(lightingValues));
 
-  clearThemePresetSelection();
-  if(themeTexts.length){
-    themeInputEl.value = getRandomItem(themeTexts);
+  if(themePresetChips.length){
+    const selectedThemeChip = getRandomItem(themePresetChips);
+    markThemePresetByValue(selectedThemeChip.dataset.value);
+    themeInputEl.value = selectedThemeChip.dataset.value;
     themeInputEl.classList.remove('theme-active');
-    themeInputEl.dispatchEvent(new Event('input', { bubbles: true }));
   }
   skipNextScroll = true;
   document.getElementById('generateBtn').click();

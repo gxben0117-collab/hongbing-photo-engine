@@ -430,6 +430,28 @@
   `build-prompt-preview.mjs` 5 組固定組合仍 0 diff；`audit-100x.mjs` 500 次
   模擬 0 問題。
 
+## 2026-07-22（十二）　桌面三張風格範例歸類後補棚拍與幻想模板
+
+- 讀取 owner 指定的桌面範例資料夾 `C:\Users\User\Desktop\ai生圖\風格範例`；
+  當下只有 3 張 JPG、沒有咒語文字檔。分類結果：紅花薄紗私房歸雜誌棚拍、
+  白藍金造型歸「未來系 Cos 風寫真」（只取原創 cosplay 視覺語彙，不取 IP/角色名）、
+  花卉紗藝女神歸幻想廣告。
+- `magazine.html` 新增 02 主題 chip 兩個：「紅花薄紗深 V 禮服」與
+  「未來系 Cos 風寫真」，並補 `THEME_PRESET_DEFAULTS` 與一鍵套用按鈕。
+  紅花薄紗版本用「deep V neckline + chest area covered by layered embroidered
+  floral tulle + no nudity/no explicit exposure」把深 V 限定為合法合規的服裝剪裁；
+  未來系版本使用 `original futuristic cosplay-inspired portrait` 並明確排除
+  copyrighted character / anime franchise identity。
+- 修正 `magazine.html` 的「隨機套用｜棚拍封面感覺」02 主題未穩定顯示選中的問題：
+  隨機不再只填 `themeInput` 文字，而是直接選中實際 chip；一鍵套用也改為可以保留
+  chip selected 狀態，同時讓 `themeText` 輸出更精準的長描述。
+- `fantasy-fashion.html` 新增「花卉紗藝女神」模板，使用雲紗禮服、四季花靈材質、
+  背對回首、側臉鏡頭、逆光丁達爾光束、材質牆面與 9:16 版面。
+- **驗證**：`check-static.mjs` 全過；`validate-preset-refs.mjs` 全過
+  （magazine quick presets 23、theme defaults 65、fantasy templates 58 全部引用有效）；
+  `audit-100x.mjs` 500 次模擬 0 問題；`build-prompt-preview.mjs` 正常產出
+  `output/ab-test-2026-07-22`。
+
 ## 尚未完成 / 待 owner 決定
 
 - fantasy 頁有 15 個 `themeTemplates` 孤兒定義（沒有按鈕連到），要不要清掉

@@ -257,5 +257,12 @@
   （哥德馬車廣場、礁岩海岸潮池）；travel 服裝 +1（運動休閒服）、姿勢 +1（晨光伸展）。
   全部驗證：`check-static.mjs` 全過、`build-prompt-preview.mjs` 五組舊選項組合仍
   0 diff（新增選項不影響既有輸出）、`audit-100x.mjs` 500 次模擬 0 issue（含新選項）。
+- 2026-07-22：Codex 讀取 owner 指定桌面風格範例資料夾（3 張 JPG、無咒語文字檔），
+  分類為雜誌棚拍 2 張、幻想廣告 1 張；依 owner 拍板新增 magazine「紅花薄紗深 V 禮服」
+  與「未來系 Cos 風寫真」chip/一鍵套用/預設關聯，新增 fantasy「花卉紗藝女神」模板。
+  同步修正 magazine「隨機套用｜棚拍封面感覺」只填主題文字但未穩定選中 02 chip 的問題，
+  讓隨機與一鍵套用都會保留可見的 02 選中狀態。驗證：`check-static.mjs` 全過、
+  `validate-preset-refs.mjs` 全過、`audit-100x.mjs` 500 次模擬 0 issue、
+  `build-prompt-preview.mjs` 正常產出 `output/ab-test-2026-07-22`。
 
 </details>
