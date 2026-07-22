@@ -4,7 +4,7 @@
 
 ## 版本
 
-v4.3 起持續迭代中；完整逐日開發記錄見 [docs/development-log.md](docs/development-log.md)。
+v4.4 起持續迭代中；完整逐日開發記錄見 [docs/development-log.md](docs/development-log.md)。
 
 v4.3 基礎重點：
 
@@ -26,7 +26,7 @@ v4.3 之後陸續完成（詳見開發日誌）：
 ## 專案定位
 
 - `index.html` 是入口與工具導覽頁。
-- 五個工具頁各自包含 UI、選項資料與咒語組裝邏輯。
+- 六個工具頁各自包含 UI、選項資料與咒語組裝邏輯。
 - `assets/core-prompt.js` 集中管理 v4.3 共用身份鎖定、臉部幾何、真人骨架、鏡頭重建、光線一致、膚質、負面詞與輸出品質規則。
 - `scripts/check-static.mjs` 是目前唯一正式檢查腳本。
 - `docs/` 保存規格、流程、核心 prompt 契約與工程說明。
@@ -40,6 +40,7 @@ v4.3 之後陸續完成（詳見開發日誌）：
 - `magazine.html` - 雜誌棚拍風格咒語產生器
 - `doll.html` - 公仔萌工作室
 - `fantasy-fashion.html` - 幻想廣告咒語產生器
+- `anime-hero.html` - 動漫變身／機甲／聖衣／替身合鏡咒語產生器
 - `store-ad.html` - 店家活動廣告產生器
 
 ## 建議資料夾分工
