@@ -22,3 +22,10 @@
 - 髮型、表情、姿勢、底座預設由 AI 自動決定
 - 使用者選擇進階 chip 時，才覆寫對應進階項目
 - 一鍵全部交給 AI 決定只影響進階設定，不應改動主題、比例或輸出媒材
+
+## 與 travel/magazine/fantasy 的差異（現況）
+
+`doll.html` 目前**尚未**套用 travel/magazine/fantasy 那套「stale 保護 + 套用即
+顯示」規則：改選項不會標記輸出過期、一鍵主題套用後也不會自動生成顯示，維持較舊的
+純手動生成模式。若要統一，需 owner 先確認（詳見 `docs/development-log.md`
+2026-07-21 條目與 `CLAUDE.md` 待辦）。

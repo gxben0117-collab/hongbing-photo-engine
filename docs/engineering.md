@@ -66,7 +66,8 @@ node scripts\\check-static.mjs
 
 - `git status --short`
 - `git diff --check`
-- HTML 本地連結檢查
-- 重複 id 檢查
-- inline JavaScript 語法檢查
-- 三頁手動生成一次咒語
+- `node scripts\check-static.mjs`（HTML 本地連結、重複 id、inline JavaScript 語法）
+- 若動到咒語組裝邏輯或新增/調整選項：
+  - `node scripts\build-prompt-preview.mjs`（固定選項組合 0-diff 迴歸檢查）
+  - `node scripts\audit-100x.mjs`（五頁各隨機 100 組選項，內容稽核）
+- 五頁手動生成一次咒語，確認生成/複製正常

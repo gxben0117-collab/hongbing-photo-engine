@@ -4,17 +4,24 @@
 
 ## 版本
 
-紅兵寫真旅拍引擎_v4.3 穩定版
+v4.3 起持續迭代中；完整逐日開發記錄見 [docs/development-log.md](docs/development-log.md)。
 
-本版重點：
+v4.3 基礎重點：
 
 - 統一身份鎖定核心
 - 統一臉部幾何鎖定
 - 統一真人骨架規則
 - 統一光線一致化規則
 - 補強 travel / magazine / fantasy 的身份保持
-- 保留原 UI 與原使用流程
-- 清理實驗檔案與亂碼文件名
+
+v4.3 之後陸續完成（詳見開發日誌）：
+
+- travel / magazine / fantasy 大量擴充選項（姿勢、服裝、材質、背景、光線）
+- travel / magazine / fantasy 的「生成 → 顯示 → 複製」操作模式統一
+  （stale 保護、套用即顯示、按鈕配色一致）
+- 三頁「隨機套用」改為元素級獨立隨機（每個欄位各自抽選再動態組合）
+- 建立 `build-prompt-preview.mjs`（0-diff 迴歸檢查）與 `audit-100x.mjs`
+  （500 次隨機模擬內容稽核）兩個自動化驗證腳本
 
 ## 專案定位
 
@@ -55,19 +62,17 @@
 
 ## 文件索引
 
-- [文件總覽](docs/README.md)
-- [使用方式](docs/usage.md)
-- [核心咒語邏輯](docs/core-logic.md)
-- [核心咒語保護契約](docs/core-prompt-contract.md)
-- [底層保護核心](docs/shared-protection-core.md)
-- [工程維護規劃](docs/engineering.md)
-- [寫真旅拍流程](docs/travel-workflow.md)
-- [雜誌棚拍流程](docs/magazine-workflow.md)
-- [幻想廣告咒語產生器分類表](docs/fantasy-ad-workflow.md)
-- [公仔工作流程](docs/doll-workflow.md)
-- [專案架構](docs/architecture.md)
-- [v4.3 更新紀錄](docs/v4.3-change-log.md)
-- [完整程式規格邏輯文件](docs/full-program-spec.md)
+完整索引見 [docs/README.md](docs/README.md)；最重要的兩份是：
+
+- [開發日誌](docs/development-log.md) — 現況與完整歷史記錄
+- [核心咒語保護契約](docs/core-prompt-contract.md) — 改咒語前必看
+
+其餘：[使用方式](docs/usage.md)｜[核心咒語邏輯](docs/core-logic.md)｜
+[底層保護核心](docs/shared-protection-core.md)｜[工程維護規劃](docs/engineering.md)｜
+[寫真旅拍流程](docs/travel-workflow.md)｜[雜誌棚拍流程](docs/magazine-workflow.md)｜
+[幻想廣告分類表](docs/fantasy-ad-workflow.md)｜[公仔工作流程](docs/doll-workflow.md)｜
+[專案架構](docs/architecture.md)｜[完整程式規格邏輯文件](docs/full-program-spec.md)｜
+[歷史交接文件歸檔](docs/history/)
 
 ## 執行方式
 
@@ -90,6 +95,13 @@ git diff --check
 - HTML 是否有重複 `id`
 - 本地連結是否存在
 - inline JavaScript 語法是否可解析
+
+若改動涉及咒語組裝邏輯或新增/調整選項，再加跑：
+
+```powershell
+node scripts\build-prompt-preview.mjs   # 固定選項組合，改前/改後 0 diff 迴歸檢查
+node scripts\audit-100x.mjs             # 五頁各隨機 100 組選項，檢查內容問題
+```
 
 ## 維護原則
 

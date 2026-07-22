@@ -15,6 +15,49 @@
 
 ## 目前狀態與下一步
 
+**完整逐日開發記錄在 [`docs/development-log.md`](docs/development-log.md)，本節只放
+現況摘要與待辦；不要在這裡繼續累加逐日流水帳，改記到開發日誌裡。**
+
+### 現況摘要（2026-07-22）
+
+- 五個工具頁（travel / magazine / doll / fantasy-fashion / store-ad）皆已上線，
+  正式站 <https://gxben0117-collab.github.io/hongbing-photo-engine/>。
+- **共用核心**：`assets/core-prompt.js` 集中管理身份鎖定等保護區塊；核心文字經過
+  兩輪瘦身（5,162 → 4,099 字元），語意零遺漏。
+- **travel / magazine / fantasy 操作模式已統一**：手動生成、stale 保護
+  （改選項後輸出區標記過期，需重新生成）、套用即顯示、按鈕配色一致。
+  `doll.html` 尚未套用這套規則（見下方待辦）；`store-ad.html` 本質不同不適用。
+- **隨機套用已改為元素級獨立隨機**（每欄位各自抽選再動態組合），不是預寫模板三選一。
+- **驗證工具**：`scripts/check-static.mjs`（結構）、`scripts/build-prompt-preview.mjs`
+  （0-diff 迴歸）、`scripts/audit-100x.mjs`（500 次隨機模擬內容稽核）三個腳本
+  覆蓋不同驗證面向，改咒語相關邏輯後都應該跑。
+- **版權規則**：讀取風格參考圖時常遇到遊戲/動漫角色 cosplay 圖，只取視覺技法，
+  角色名/作品名一律不得進入 prompt 或 UI。
+- **文件結構**：`docs/development-log.md` 是唯一時間軸記錄；`docs/history/` 存放
+  已完成批次的一次性交接/對照文件（不再更新，只供追溯）；`docs/README.md` 是
+  文件總索引。
+
+### 已拍板不做（不要重新提議）
+
+- 性別中性化：本產品即為女性設計。
+- 多模型輸出切換：咒語只給 ChatGPT 用，不做 Midjourney/SD 版本。
+- 髮色模組：曾短暫加入又依 owner 指示整組移除，特殊髮色需求由使用者自行在
+  主題欄輸入。
+
+### 待辦 / 待 owner 決定
+
+- ChatGPT 出圖實測：核心瘦身 A/B、各波新選項與特效模板抽測、三頁 UI 統一後的
+  手動點測（清單見開發日誌 2026-07-21/22 條目）。
+- `doll.html` 是否要套用 travel/magazine/fantasy 那套「stale 保護 + 套用即顯示」
+  規則，需 owner 確認。
+- L5：travel 風格模組加「主題與風格衝突時以主題為準」的裁決句——會改既有輸出
+  文字，屬 `docs/core-prompt-contract.md` 管制範圍，需先出改前/改後對照。
+
+### 歷史記錄（已移入開發日誌，以下保留供 git blame 對照，不再新增）
+
+<details>
+<summary>展開查看 2026-07-06 ～ 07-22 逐日記錄原文（已整併進 docs/development-log.md）</summary>
+
 - 2026-07-06：Codex 已完成 `docs/ai-handoff-2026-07-06.md` 的任務 A 工程收尾：
   版本資料夾移入 `versions/`、歷史殘留工具檔已清除、誤放的東北行程頁移至
   `output/tohoku-20260711/` 暫存且不進正式首頁。
@@ -173,3 +216,5 @@
   （哥德馬車廣場、礁岩海岸潮池）；travel 服裝 +1（運動休閒服）、姿勢 +1（晨光伸展）。
   全部驗證：`check-static.mjs` 全過、`build-prompt-preview.mjs` 五組舊選項組合仍
   0 diff（新增選項不影響既有輸出）、`audit-100x.mjs` 500 次模擬 0 issue（含新選項）。
+
+</details>
