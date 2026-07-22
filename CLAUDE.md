@@ -30,7 +30,13 @@
 - **隨機套用已改為元素級獨立隨機**（每欄位各自抽選再動態組合），不是預寫模板三選一。
 - **驗證工具**：`scripts/check-static.mjs`（結構）、`scripts/build-prompt-preview.mjs`
   （0-diff 迴歸）、`scripts/audit-100x.mjs`（500 次隨機模擬內容稽核）三個腳本
-  覆蓋不同驗證面向，改咒語相關邏輯後都應該跑。
+  覆蓋不同驗證面向，改咒語相關邏輯後都應該跑。**重要限制**：`audit-100x.mjs`
+  是重新實作一份組裝邏輯直接讀 DOM 文字來模擬，不是真的執行頁面上的
+  `generate()`，測不出「新增選項卡但忘記同步補頁面自己維護的文字對照表」這類
+  問題（2026-07-22（五）就是這樣被漏掉，導致 fantasy 生成按鈕直接壞掉）。
+  **凡是新增/修改選項卡，都要另外用 jsdom 載入真實 HTML、對每個新選項值
+  dispatch change + 點真正的 `generateBtn`，檢查輸出沒有 undefined/過短/JS
+  錯誤**，不能只靠 audit-100x 過關就當作驗證完成。
 - **版權規則**：讀取風格參考圖時常遇到遊戲/動漫角色 cosplay 圖，只取視覺技法，
   角色名/作品名一律不得進入 prompt 或 UI。
 - **fantasy 的 00 一鍵主題模板區**有「當下選取」金框追蹤（點哪個模板/隨機套用，
@@ -42,7 +48,12 @@
   costume/themePreset 地點 chip/lighting/pose 追加；magazine 的 bg/themePreset
   服裝方向 chip（新的「私房棚拍風」不掛 `THEME_PRESET_DEFAULTS` 連動）/pose/
   lighting 追加。純附加、未改任何既有 value 或輸出邏輯，細節見開發日誌
-  2026-07-22（四）。
+  2026-07-22（四）。**這批新增當時漏了同步補三頁各自的文字對照表**
+  （fantasy 的 garmentData/materialData/backgroundData/lightingData/poseData、
+  travel 的 COSTUME_DIRECTIONS/POSE_STYLES/TRAVEL_LIGHTING_STYLES、magazine 的
+  BACKGROUNDS/POSES/DETAIL_BLOCKS.lighting），導致 fantasy 選到新材質會直接
+  丟錯讓生成失效，其餘缺項則是輸出出現 undefined 或選項悄悄不生效；已於
+  2026-07-22（五）補齊全部 75 筆並用 jsdom 逐項驗證，細節見該條記錄。
 - **文件結構**：`docs/development-log.md` 是唯一時間軸記錄；`docs/history/` 存放
   已完成批次的一次性交接/對照文件（不再更新，只供追溯）；`docs/README.md` 是
   文件總索引。

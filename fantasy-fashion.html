@@ -1596,6 +1596,46 @@ const materialData = {
     label: '孔雀羽織錦',
     prompt: 'peacock feather brocade material system, luxurious silk jacquard with large embroidered peacock motifs in silver thread, iridescent sapphire and crystal-blue feather eyes, magnolia flower embroidery accents, layered asymmetric hem with crystal tassels and faceted sapphires, translucent ice-blue organza details, regal eastern couture craftsmanship',
     palette: 'ice blue, moonlight silver, sapphire, crystal white, platinum trim'
+  },
+  crystalMechaGlow: {
+    label: '水晶機甲光紋',
+    prompt: 'crystal mecha glow material system, semi-translucent techwear fabric embedded with faceted crystal shards, cool white light lines tracing the seams, futuristic armor-couture hybrid silhouette',
+    palette: 'cool white, ice blue, silver, crystal clear highlight'
+  },
+  mirrorMosaicShard: {
+    label: '鏡面馬賽克拼接',
+    prompt: 'mirror mosaic shard material system, geometric mirrored tile fragments pieced into the garment surface, sharp prismatic reflections scattering rainbow light across the body, futuristic disco-armor couture',
+    palette: 'silver mirror, prismatic rainbow highlight, black base'
+  },
+  distressedInkLace: {
+    label: '泛黃破損蕾絲',
+    prompt: 'distressed vintage lace material system, aged ivory sheer lace with soft frayed and torn edges, nostalgic weathered texture, delicate romantic decay aesthetic',
+    palette: 'aged ivory, faded sepia, soft dust beige'
+  },
+  glassPrismRibbon: {
+    label: '玻璃稜鏡絲帶',
+    prompt: 'glass prism ribbon material system, swirling transparent glass ribbons twisting around the body, refracting warm and cool light into abstract prismatic streaks, futuristic sculptural couture',
+    palette: 'clear glass, warm amber refraction, cool cyan refraction'
+  },
+  splatterInkSatin: {
+    label: '潑墨紋理緞面',
+    prompt: 'ink splatter satin material system, glossy satin fabric marked with abstract splashed ink texture in violet and gold, expressive painterly couture surface',
+    palette: 'deep violet, antique gold, black ink accent'
+  },
+  shellPearlCluster: {
+    label: '貝殼珍珠簇',
+    prompt: 'shell and pearl cluster material system, clustered iridescent shell fragments and pearls forming bodice and headpiece details, soft sheer tulle underlay, oceanic luxury couture',
+    palette: 'pearl white, soft nacre iridescence, pale aqua'
+  },
+  militaryPatchLeather: {
+    label: '皮革戰術拼接',
+    prompt: 'tactical patchwork leather material system, weathered canvas and leather panels stitched together with buckle straps and metal fasteners, utilitarian street-fashion couture',
+    palette: 'worn olive canvas, dark leather brown, gunmetal hardware'
+  },
+  embroideredGoldVelvet: {
+    label: '絲絨金線刺繡',
+    prompt: 'gold thread embroidered velvet material system, deep velvet fabric with intricate gold floral embroidery along a structured mandarin collar, opulent traditional-luxury couture',
+    palette: 'deep velvet burgundy, antique gold thread, ivory trim'
   }
 };
 
@@ -1632,7 +1672,15 @@ const garmentData = {
   darkQueenCouture: 'dark queen couture gown, sharp sculptural shoulder line, black blue crystal accents, regal long silhouette, icy luxury authority, strong but elegant fantasy fashion form',
   solarGoddessDrape: 'solar goddess draped couture, layered white translucent silk and pearl chiffon, refined gold waist belt, delicate gold leg wraps and arm cuffs, ceremonial temple queen silhouette, sensual but elegant coverage, long luminous train',
   modernSuit: 'modern tailored suit ensemble, long elegant coat over a fitted top and high-waist wide-leg trousers, refined belt and pointed heels, premium urban futuristic fashion silhouette, clean professional luxury styling',
-  catMaidLayer: 'cat-inspired maid layer couture, refined black and ivory layered dress with a structured corset bodice, crisp apron panel, lace cuffs, ribbon collar and polished metal buttons, elegant cat-ear headband as a fashion accessory, layered tulle skirt and delicate tail-like ribbon accent, playful luxury styling, no animal anatomy and no facial changes'
+  catMaidLayer: 'cat-inspired maid layer couture, refined black and ivory layered dress with a structured corset bodice, crisp apron panel, lace cuffs, ribbon collar and polished metal buttons, elegant cat-ear headband as a fashion accessory, layered tulle skirt and delicate tail-like ribbon accent, playful luxury styling, no animal anatomy and no facial changes',
+  mechaArmorSkirt: 'high-waist mecha armor skirt ensemble, hard-shell armor plating with a high side slit, cropped waist-baring top, tactical combat-couture silhouette',
+  combatLeatherSuit: 'fitted combat leather suit, structured shoulder armor pieces, tactical strap and buckle detailing, sleek utilitarian high-fashion silhouette',
+  starSequinGown: 'floor-length star sequin gown, dense blue and white sequin coverage, sheer tulle skirt panels beneath, glamorous celestial couture silhouette',
+  victorianRuffleGown: 'victorian ruffle gown, layered lace ruffles, full voluminous skirt, wide-brim lace hat accent, romantic period-couture silhouette',
+  origamiFanRobe: 'origami fan-fold robe, crisp geometric pleated panels forming a stiff sculptural silhouette, off-shoulder wrap tie detail',
+  checkeredSlitGown: 'black and white checkered high-slit gown, structured stiff jacquard fabric, off-shoulder fitted bodice, bold graphic couture silhouette',
+  circusRibbonSuit: 'cinched-waist circus ringmaster suit, structured leather corset belt, sequin satin fabric, paired with a small top hat accessory',
+  geometricCutoutSuit: 'geometric cutout crop suit, faceted pearlescent hard-surface fabric, waist-baring silhouette, star-shaped ornament accents'
 };
 
 const styleData = {
@@ -1701,7 +1749,15 @@ const backgroundData = {
   laceVeilHall: 'lace veil hall background, layers of oversized handmade lace curtains and lace medallions hanging in depth, the lace shares the same color family as the outfit, soft backlight glowing through the lace holes, refined couture atelier atmosphere, subject stays clearly separated from the lace layers',
   crystalThroneTheater: 'grand dark theater hall background with a colossal transparent crystal throne at center stage, towering crystal pillars and cathedral-scale hanging gem clusters, floating prisms refracting blue-white light beams, polished obsidian floor reflecting the crystals, large foreground crystal formations partially framing the lower frame, layered foreground middle ground and background depth',
   goldenCarriageSquare: 'gothic carriage square background, ornate black and gold horse-drawn carriage with an open door beside a grand cathedral facade, cobblestone plaza, tall gothic spires and street lamps, soft overcast daylight, elegant period-drama travel atmosphere',
-  rockyCoastTidepool: 'rocky coastal tidepool background, weathered sea rocks and shallow clear tidepools under a bright blue sky, gentle ocean waves in the distance, soft natural sea breeze atmosphere, clean airy coastal fantasy setting'
+  rockyCoastTidepool: 'rocky coastal tidepool background, weathered sea rocks and shallow clear tidepools under a bright blue sky, gentle ocean waves in the distance, soft natural sea breeze atmosphere, clean airy coastal fantasy setting',
+  industrialSteamFactory: 'abandoned industrial factory background, tangled steam pipes and rusted machinery, drifting steam and haze, dramatic mechanical atmosphere',
+  skySteamCastle: 'giant flying steampunk castle background, floating fortress drifting through a sea of clouds, distant hot air balloons, epic airborne fantasy scale',
+  crackedTomeRift: 'giant cracked ancient book background, torn glowing pages and paper fragments drifting through a rift in the massive tome, luminous dust particles, surreal literary fantasy scale',
+  starfleetParade: 'starfleet parade background, distant planet and starships arranged in formation, ceremonial honor-guard fleet composition, epic space-opera scale',
+  graffitiWireWall: 'urban wasteland background, chain-link fence covered in graffiti, a worn sofa discarded against the wall, gritty street-punk atmosphere',
+  koiArchGarden: 'giant flower arch garden background, oversized blossom archway framing a koi pond with koi fish swimming beneath, dreamlike garden fantasy scale',
+  twinMoonCastle: 'starry sky with twin moons background, a distant glowing magic castle silhouette on the horizon, mystical night fantasy atmosphere',
+  chessboardGoldPalace: 'giant chess piece hall background, oversized golden chess pieces arranged across a gilded palace floor, opulent surreal fantasy scale'
 };
 
 const lightingData = {
@@ -1751,7 +1807,13 @@ const lightingData = {
   wastelandIndustrialSideLight: 'wasteland industrial side lighting, hard angled workshop light, aged metal reflections and dusty shadow affect the entire subject consistently, gritty sci-fi commercial mood, no detached portrait lighting',
   blueFlameGlow: 'arcane blue flame lighting, cool blue spell glow mixed with warm distant fire light, blue energy reflections affect face body hair gown and background consistently, dramatic sorceress contrast while facial features stay clearly readable, no overexposed face',
   moonlightCandle: 'moonlight and candle mixed lighting, cool silver moonlight from above with warm lantern candle glow from below, both light sources affect face body veil fabric and architecture consistently, poetic night contrast with natural facial exposure',
-  crystalDaylight: 'crystal daylight lighting, bright natural sunlight refracted through glass and crystal structures, clean white-blue clarity with sparkling prismatic accents on face hair outfit and background, airy utopian exposure, face remains naturally lit without overexposure'
+  crystalDaylight: 'crystal daylight lighting, bright natural sunlight refracted through glass and crystal structures, clean white-blue clarity with sparkling prismatic accents on face hair outfit and background, airy utopian exposure, face remains naturally lit without overexposure',
+  tyndallBacklight: 'tyndall backlight lighting, strong backlit mist beams cutting through haze, high contrast warm-cool split tone, dramatic god-ray atmosphere',
+  starfieldColdBlue: 'cold blue starfield lighting, scattered pinpoint starlight, cool blue dreamy ambient tone, soft glowing atmosphere',
+  windColdMistBack: 'cold backlit mist lighting, wind-driven haze glowing from behind, chilly high-tension atmosphere',
+  candleStarContrast: 'candle and starlight contrast lighting, warm amber candle glow on the subject against a cool blue starry background, romantic high-contrast atmosphere',
+  neonPurpleMoonlit: 'purple neon and moonlight lighting, cool violet neon glow blended with silver moonlight silhouette edges, night-city fantasy atmosphere',
+  holyMistBeam: 'holy backlit mist beam lighting, radiant light shafts piercing through soft haze, sacred cinematic glow'
 };
 
 const sharedFantasyCore = window.HB_CORE_PROMPT?.page?.fantasy || {};
@@ -1980,7 +2042,13 @@ const poseData = {
   calligraphy_brush: 'one hand holding a calligraphy brush near a wall or scroll, refined writing gesture, eastern cultural advertisement mood, natural wrist angle, no random readable text',
   umbrella_gaze: 'holding a red oil-paper umbrella while turning back toward camera, over-shoulder gaze, flowing ribbon and rain atmosphere, elegant travel fantasy pose',
   bow_hero: 'heroic bow drawing pose, one arm extended and the other pulling the bowstring, dynamic warrior couture stance, clear hand separation, anatomically coherent shoulders and wrists, avoid broken fingers',
-  recline_diagonal: 'reclining diagonal pose among the material layers, body extending from lower left toward upper right with legs softly crossed, one hand reaching forward into the blurred foreground elements creating a natural extended line, the other hand resting lightly near the neck or side, head tilted slightly back with face turned toward camera in direct gaze, calm floating stillness, torso gently twisted for an elegant soft curve'
+  recline_diagonal: 'reclining diagonal pose among the material layers, body extending from lower left toward upper right with legs softly crossed, one hand reaching forward into the blurred foreground elements creating a natural extended line, the other hand resting lightly near the neck or side, head tilted slightly back with face turned toward camera in direct gaze, calm floating stillness, torso gently twisted for an elegant soft curve',
+  shield_guard_stand: 'guardian stance holding a shield, one hand braced on the shield, body turned slightly sideways pointing forward, alert protective posture',
+  broom_flight_dangle: 'mid-flight riding pose, legs dangling freely below the body, upper body turned back in an over-the-shoulder glance, dynamic airborne motion',
+  crawl_out_rift: 'crawling forward pose emerging from a rift or crack, body low to the ground pulling forward with both hands, tense dramatic emergence',
+  beast_mount_look: 'riding pose atop a mount or creature, one hand holding a prop, upper body turned back toward camera in a confident glance',
+  wide_wing_spread: 'wide arm-spread pose evoking flight, both arms extended outward, head tilted upward toward the sky, soaring triumphant energy',
+  throw_dart_lunge: 'forward lunging throw pose, body bent low with one arm extended in a throwing motion, sharp explosive combat energy'
 };
 
 const framingData = {

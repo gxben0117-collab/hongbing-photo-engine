@@ -206,6 +206,44 @@
   DOM 選項池，新增的選項會自然被抽到）共 500 次模擬，0 個問題（無 undefined/
   NaN/[object Object] 洩漏、身份鎖定完整、無相鄰重複行、無禁用角色名）。
 
+## 2026-07-22（五）　修復：新增選項未接上真正的文字對照表，導致生成失效/內容缺漏
+
+- owner 回報 fantasy「生成完整咒語」按鈕沒反應。追查發現：上一條記錄新增的
+  UI 選項卡只加了 `<label>` 卡片本身，**沒有同步補上三頁各自用來把選項值轉成
+  英文咒語文字的獨立資料表**：
+  - `fantasy-fashion.html`：`garmentData`、`materialData`、`backgroundData`、
+    `lightingData`、`poseData` 五個表，其中 `materialData` 每筆是
+    `{label, prompt, palette}` 物件——新選項不存在時 `material.prompt` 對
+    `undefined` 取屬性直接丟 `TypeError`，整個 `generate()` 中斷、畫面完全
+    沒有輸出，這正是 owner 看到的「按下去沒反應」。`garmentData`/
+    `backgroundData`/`lightingData` 是純字串表，缺項時不會丟錯但會讓輸出
+    出現字面上的「undefined」。
+  - `travel.html`：`COSTUME_DIRECTIONS`、`POSE_STYLES`、
+    `TRAVEL_LIGHTING_STYLES` 三個表。前兩者組裝時有 `||null` 安全防呆，
+    缺項只會靜默跳過該段落（選了新服裝/新姿勢等於沒選，不會報錯但也不會
+    生效）；`TRAVEL_LIGHTING_STYLES` 沒有防呆，但下游用
+    `...(lightingBlock?[lightingBlock]:[])` 展開，缺項一樣被安全省略，不會
+    洩漏 undefined 文字。
+  - `magazine.html`：`BACKGROUNDS`、`POSES`、`DETAIL_BLOCKS.lighting` 三個表。
+    `POSES` 有防呆（`poseText?...:null`）；`BACKGROUNDS`／
+    `DETAIL_BLOCKS.lighting` 都是直接字串插值，缺項會讓輸出出現「undefined」。
+  - 補法：把上一條記錄新增的每個選項卡都在對應表裡各補一筆英文咒語文字
+    （fantasy 5 表、travel 3 表、magazine 3 表，共 75 筆），文字內容延續
+    各表既有的語氣與格式（fantasy 用短句 prompt/palette、travel/magazine
+    用中文模組標題＋條列英文指令的多行樣式）。
+- **重要教訓**：`audit-100x.mjs` 這次完全沒抓到問題——因為它是「重新實作一份
+  組裝邏輯直接讀 DOM 的 name/desc 文字」來跑 500 次模擬，不是真的執行頁面上
+  `generate()` 這個函式，所以測不出頁面自己維護的獨立資料表缺項。**往後任何
+  新增/修改選項卡的變更，除了 `audit-100x.mjs`，必須另外用 jsdom 載入真實
+  HTML、對新選項逐一 dispatch change + 點擊真正的 `generateBtn`，確認
+  `outputText` 沒有變成短字串、沒有 `undefined`/`NaN` 字樣、且視窗沒有噴
+  `error` 事件——這次補資料表後就是用這套測試逐一驗證三頁共 78 個新選項值。**
+- **驗證**：`check-static.mjs` 全過；`build-prompt-preview.mjs` 5 組固定組合
+  （不觸及新選項）仍 0 diff；`audit-100x.mjs` 500 次模擬仍 0 問題（如上述，
+  這個腳本測不到這類問題，僅供既有邏輯的迴歸確認）；新寫的 jsdom 逐選項點擊
+  測試——fantasy 36 項、travel 20 項、magazine 19 項，共 75 項全部通過
+  （輸出長度正常、無 undefined/NaN、無 JS 錯誤）。
+
 ## 尚未完成 / 待 owner 決定
 
 - ChatGPT 出圖實測：第三波核心瘦身 A/B（`output/ab-test-2026-07-07-c-final/`）、
