@@ -348,7 +348,41 @@
   （驗證 chip 真的有生效，不是選了但沒作用）；`build-prompt-preview.mjs` 5
   組固定組合仍 0 diff；`audit-100x.mjs` 500 次模擬 0 問題。
 
+## 2026-07-22（九）　fantasy 新增「妖狐夜櫻高台」一鍵模板＋修正 intensity 靜默失效問題
+
+- owner 提供本機一張參考圖並要求分析（狐耳狐尾和風角色 cosplay 圖，左側橫幅
+  直接印出角色名與作品名）。分析時依規則完全不提角色名/作品名，只回報視覺
+  技法：紫金和風套裝、多層薄紗罩袍、金鍊墜流蘇腰封、夜櫻高台欄杆、滿月古樓
+  燈籠、持扇側身站姿、冷暖對比光。單一元素其實都已存在於 fantasy 頁
+  （`foxMythCouture` 妖狐神話高訂、`foxfireTails` 九尾狐神光、`moonPavilionNight`
+  月夜古樓、`fan_cover` 持扇遮面、`moonlightCandle` 月光燭火混合光），但沒有
+  一個模板把它們組成這個畫面，owner 同意新增。
+- 新增一鍵模板 `foxMuseMoonlitPlatform`（妖狐夜櫻高台），組合上述既有選項；
+  沒有新增任何選項卡或對照表，純粹是既有元素的新排列。
+- **意外發現並修正一個既有的靜默失效問題**：`themeTemplates` 物件裡的
+  `composition`／`intensity` 兩個欄位，`applyThemeTemplate()` 是用
+  `document.querySelector('input[value="..."]')`／`select.value = "..."`
+  去精準比對既有選項的字串。`composition` 只有 6 種固定文案、`intensity`
+  （`<select>`）只有 3 種固定文案，如果模板作者填的是自己新寫的敘述句（沒有
+  逐字對到那 6 或 3 種既有文案），瀏覽器對 `<select>.value` 指派不存在的
+  option 值時會靜默變成空字串——模板套用後那個欄位其實沒生效，但因為
+  `applyThemeTemplate` 沒有拋錯，肉眼也看不出來。實測發現上週新增的
+  `gothicWitchRitual`／`cyberNeonPulse` 兩個模板的 `intensity` 都中了這個坑
+  （兩個都是原創敘述句，沒對到 3 種既有選項），一路以來這兩個模板的材質強度
+  說明其實都沒真正套用到咒語裡。已改成從 3 個既有 `intensity` 選項裡挑最貼近
+  的固定文案，`composition` 也統一改用既有的 6 種固定文案之一，不再新寫敘述
+  句。（這是舊有 40 個模板就存在的架構限制，這次只修了我自己新增的 3 個，
+  沒有動其餘既有模板——那是更大範圍的清查，先記錄在待辦。）
+- **驗證**：`check-static.mjs` 全過；新寫 jsdom 測試確認三個模板套用後
+  `intensity`／`composition` 欄位確實被選中且文字有進到最終咒語裡（不再是
+  靜默空值）；`build-prompt-preview.mjs` 5 組固定組合仍 0 diff；
+  `audit-100x.mjs` 500 次模擬 0 問題。
+
 ## 尚未完成 / 待 owner 決定
+
+- 待清查：舊有 40 個 fantasy 一鍵模板裡，`composition`/`intensity` 欄位是否
+  還有其他沒精準對到既有選項文案、導致靜默失效的案例（上面剛發現的是新增
+  模板才踩到，舊模板還沒逐一驗證）。
 
 - ChatGPT 出圖實測：第三波核心瘦身 A/B（`output/ab-test-2026-07-07-c-final/`）、
   第四波新選項抽測、特效模板抽測、水晶場景抽測、三頁 UI 統一後的手動點測。
