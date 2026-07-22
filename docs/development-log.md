@@ -378,11 +378,38 @@
   靜默空值）；`build-prompt-preview.mjs` 5 組固定組合仍 0 diff；
   `audit-100x.mjs` 500 次模擬 0 問題。
 
+## 2026-07-22（十）　清查並修復舊有 40 個 fantasy 模板的 composition 靜默失效
+
+- 承接上一條待辦，寫稽核腳本把 `themeTemplates` 物件（57 個模板）跟 HTML 上
+  實際的 7 種 `composition` 固定文案、3 種 `intensity` 固定文案逐一比對字串
+  是否完全相符。結果：**40 個模板的 `composition` 對不上**（作者當初寫的是
+  原創敘述句，不是逐字複製既有選項），套用這些模板時構圖欄位完全沒被設定，
+  會停留在使用者當下原本的構圖；`intensity` 這次反而全部正常（上次那兩個
+  已經修過）。
+- owner 確認「都改，照你的方式」。做法：讀每個模板原本 `composition` 敘述句
+  的語意關鍵字（diagonal / symmetrical / frame / surround / centered / 留白
+  等），對應挑選 7 種固定文案裡最貼近原意的一個，寫成對照表後用腳本批次做
+  精準字串替換（40 筆全部一次比對成功，沒有誤觸其他欄位）。
+- **範例對應邏輯**：`darkIceQueen` 原文「centered commercial key visual, subject
+  framed by dark ice crystals...」開頭就是「centered commercial key visual」
+  → 直接對應「人物置中主圖」；`milkTeaSplashDress` 原文開頭「diagonal dynamic
+  advertising layout」→ 對應「斜線動態構圖」；`bettaFishWaterGown` 原文「fish
+  orbit around the gown」（材質圍繞人物）→ 對應「材質包圍人物」。
+- 順手發現一個獨立的既有清潔度問題（**不影響功能，先記錄不動**）：
+  `themeTemplates` 裡有 15 個模板定義（如 `redPaperWedding`、
+  `auroraBubbleChampagne`、`gummyCandyAd` 等）**沒有任何按鈕接到它們**，是
+  已定義但用不到的孤兒資料，可能是舊版按鈕被移除但物件沒同步清掉。不影響
+  現有功能，之後有空再一併清理。
+- **驗證**：稽核腳本複跑確認 57 個模板的 composition/intensity 全部 100%
+  對應到既有固定文案；`check-static.mjs` 全過；新寫 jsdom 測試對全部 42 個
+  實際有按鈕的模板逐一點擊，確認 composition 有被選中、intensity 不是空值、
+  輸出正常無 undefined/錯誤；`build-prompt-preview.mjs` 5 組固定組合仍
+  0 diff；`audit-100x.mjs` 500 次模擬 0 問題。
+
 ## 尚未完成 / 待 owner 決定
 
-- 待清查：舊有 40 個 fantasy 一鍵模板裡，`composition`/`intensity` 欄位是否
-  還有其他沒精準對到既有選項文案、導致靜默失效的案例（上面剛發現的是新增
-  模板才踩到，舊模板還沒逐一驗證）。
+- fantasy 頁有 15 個 `themeTemplates` 孤兒定義（沒有按鈕連到），要不要清掉
+  或幫它們補按鈕，待 owner 決定（見 2026-07-22（十）記錄）。
 
 - ChatGPT 出圖實測：第三波核心瘦身 A/B（`output/ab-test-2026-07-07-c-final/`）、
   第四波新選項抽測、特效模板抽測、水晶場景抽測、三頁 UI 統一後的手動點測。
