@@ -4,7 +4,7 @@
 
 ## 版本
 
-v4.5 起持續迭代中；完整逐日開發記錄見 [docs/development-log.md](docs/development-log.md)。
+v4.6 起持續迭代中；完整逐日開發記錄見 [docs/development-log.md](docs/development-log.md)。
 
 v4.3 基礎重點：
 
