@@ -37,6 +37,12 @@
   金框就跟到哪個），隨機按鈕文字已簡化為「隨機套用」。
 - **travel/magazine 的隨機/一鍵模板按鈕不會自動捲動頁面**（維持使用者當下位置），
   只有手動按「生成完整咒語」才會捲到輸出區。
+- **三頁服裝/材質/背景/姿勢/光線選項已依 169 張參考圖擴充**（2026-07-22）：
+  fantasy 的 garment/material/background/pose/lighting 各池尾端追加；travel 的
+  costume/themePreset 地點 chip/lighting/pose 追加；magazine 的 bg/themePreset
+  服裝方向 chip（新的「私房棚拍風」不掛 `THEME_PRESET_DEFAULTS` 連動）/pose/
+  lighting 追加。純附加、未改任何既有 value 或輸出邏輯，細節見開發日誌
+  2026-07-22（四）。
 - **文件結構**：`docs/development-log.md` 是唯一時間軸記錄；`docs/history/` 存放
   已完成批次的一次性交接/對照文件（不再更新，只供追溯）；`docs/README.md` 是
   文件總索引。

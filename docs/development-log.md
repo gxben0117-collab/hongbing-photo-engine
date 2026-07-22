@@ -176,6 +176,36 @@
   `build-prompt-preview.mjs` 固定選項組合仍 0 diff（純 UI 互動調整，未動任何
   prompt 文字）。
 
+## 2026-07-22（四）　讀 169 張參考圖擴充三頁服裝/材質/背景/姿勢/光線選項
+
+- owner 提供 `C:\Users\User\Desktop\ai生圖\風格範例`（169 張本機參考圖，多為
+  AI 生成或 cosplay 風格人像），要求分類進旅拍/雜誌/幻想三頁並擴充服裝、材質、
+  背景、姿勢等元素。因圖量大，拆 4 組子代理各看 40 幾張，逐張以 Read 工具開圖
+  分類＋萃取視覺技法；嚴格套用版權角色名規則——只取材質/服裝款式/姿勢/背景/光線
+  的純視覺描述，完全不寫角色名、作品名、遊戲名、真人姓名（4 批分析中都有標記
+  含角色 cosplay 浮水印或真人宣傳海報的圖片，已個別排除或只取視覺技法）。
+- 三頁架構不同，新增元素落點也不同：
+  - **fantasy-fashion.html**：本來就有獨立的 `garment`/`material`/`background`/
+    `pose`/`lighting` 選項池，直接在各池尾端追加新卡片（garment +8、material +8、
+    background +8、pose +6、lighting +6）。
+  - **travel.html**：沒有獨立的材質/背景欄位，材質敘述併入 `costume`（服裝）
+    desc 文字，背景併入既有的「地點/主題」`themePreset` 快選 chip（本來就是純
+    文字地點清單，選中會直接填進 `themeInput`，无需額外 mapping）。新增
+    costume +8、themePreset 地點 chip +10、lighting +6、pose +6。
+  - **magazine.html**：`bg`（背景）已是獨立選項池，直接追加 +8；服裝方向沒有
+    獨立欄位，比照 travel 的做法，加進「主題/服裝方向」`themePreset` chip
+    （新增一組「✦ 私房棚拍風」共 6 個），但**特別確認**這些新 chip 沒有寫進
+    `THEME_PRESET_DEFAULTS` 這個會連動覆寫 bg/pose/framing/lighting 等欄位的
+    預設連動表——只當純文字造型方向、不觸發任何 cascade，避免碰到
+    `core-prompt-contract.md` 標記的「預設連動覆寫使用者選擇」高風險區。新增
+    pose +6（分散進坐姿群/手勢群）、lighting +5。
+  - 所有新增前都先 grep 過三頁既有的選項 `value` 清單，確認新 key 不會撞名。
+- **驗證**：`check-static.mjs` 全過；`build-prompt-preview.mjs` 對 5 組固定選項
+  組合（未使用任何新選項）跑出 0 diff，證明純新增不影響既有輸出；
+  `audit-100x.mjs` 對五頁各跑 100 組隨機組合（隨機邏輯本來就是讀取全部即時
+  DOM 選項池，新增的選項會自然被抽到）共 500 次模擬，0 個問題（無 undefined/
+  NaN/[object Object] 洩漏、身份鎖定完整、無相鄰重複行、無禁用角色名）。
+
 ## 尚未完成 / 待 owner 決定
 
 - ChatGPT 出圖實測：第三波核心瘦身 A/B（`output/ab-test-2026-07-07-c-final/`）、
