@@ -16,6 +16,12 @@ const dynamicMedia = ['inkWash', 'watercolor', 'conceptArt', 'gouache', 'ukiyoe'
 for (const value of dynamicMedia) optionsByGroup.get('medium').add(value);
 const dynamicOutfits = ['architecturalWhite', 'blackVelvet', 'silkDrape', 'powerSuit', 'tweedSet', 'knitSoft', 'crystalCocktail', 'bridalEditorial', 'fringeStage', 'modernEastern', 'redBlackTalisman'];
 for (const value of dynamicOutfits) optionsByGroup.get('outfit').add(value);
+const directorGroups = ['manifestStage', 'screenRole', 'screenScale', 'facePolicy', 'mechaForm'];
+const directorValues = {manifestStage:['forming','half','complete','transition'],screenRole:['protect','sync','strike','transfer','throne','guide'],screenScale:['close','back','giant','sky','partial'],facePolicy:['featureless','visor','beast','abstract'],mechaForm:['humanoid','beastMachine','droneUnits','vehicleCore']};
+for (const group of directorGroups) {
+  optionsByGroup.set(group, new Set(directorValues[group]));
+  expect(source.includes(`SECOND_DIRECTOR_DATA.${group}[pick('${group}')]`), `${group}: not connected to second-entity director prompt`);
+}
 
 const promptGroups = ['mode', 'outfit', 'body', 'archetype', 'power', 'standForm', 'standAbility', 'shikigamiForm', 'shikigamiContract', 'personPose', 'pose', 'scene', 'fx', 'motion', 'camera', 'medium'];
 const relationGroups = ['relationship', 'relationStrength', 'relationEvidence'];
@@ -59,6 +65,7 @@ expect(source.includes("text('extra')"), 'custom-direction field: not connected 
 expect(source.includes("text('prop')"), 'signature-prop field: not connected to prompt generation');
 expect(source.includes("text('palette')"), 'palette field: not connected to prompt generation');
 expect(source.includes("text('backgroundNote')"), 'background-note field: not connected to prompt generation');
+expect(source.includes('secondDirectorSection'), 'second-entity director UI: missing');
 
 if (failures.length) {
   console.error(`FAIL anime option audit: ${failures.length} issue(s)`);
