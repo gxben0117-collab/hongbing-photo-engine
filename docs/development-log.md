@@ -674,3 +674,27 @@
   `validate-preset-refs.mjs` 7 組物件（含新增的 anime-hero `presets` 20 筆）
   0 issue；`audit-100x.mjs` 六頁共 600 次模擬 0 issue；jsdom smoke test
   44 項檢查（17 新選項 + 4 新模板 + 20 次隨機）0 JS error、0 failure。
+
+## 2026-07-23（三）　動漫合鏡新增「構圖法則」獨立軸，回應 owner「想要更多帥氣好看的構圖」
+
+- owner 上架實測後回饋想要更多好看的構圖；盤點發現原本畫面排列只靠「02 互動姿勢」
+  （主角配角的關係擺位）跟「06 拍攝角度」（鏡頭視角）兩軸疊加，缺一個真正描述
+  「畫面元素怎麼組成一張海報」的獨立構圖法則軸，導致同一個互動姿勢＋角度組合看久
+  了會覺得排版都差不多。
+- 新增獨立單選區塊「03 構圖法則」（`compositionData`，8 個選項）：縱深層次構圖、
+  黃金三角構圖、對角張力構圖、對稱式對峙構圖、前景框景構圖、三分法偏軸構圖、
+  放射爆發構圖、留白構圖（預留標題區）。跟互動姿勢／拍攝角度各自獨立，三者互乘
+  可組出更多樣的畫面排版，不是彼此覆蓋。
+- 因為新插入一個章節，02 之後的所有章節編號（服裝～輸出）整批 +1（03→04… 13→14），
+  純顯示用的 `.section-label`/`.group-label` 文字重排，不影響任何欄位邏輯。
+- `generate()`／`applyPreset()`／`applyTrueRandomCombo()` 都接上 `composition` 欄位；
+  既有 20 個一鍵模板逐一指派對應的構圖法則（依主題挑選，例如背對背蓄勢配對稱式
+  對峙構圖、召喚類配放射爆發構圖、環繞守護配前景框景構圖），讓舊模板套用後畫面
+  排版也更講究，而不是全部落回預設值。**這是刻意的輸出變更**（每次生成從此都會
+  多一段【構圖法則】），不是靜默 regression——owner 明確要的就是更多構圖變化。
+- 驗證：`check-static.mjs`／`build-prompt-preview.mjs`／`validate-preset-refs.mjs`
+  （anime-hero fieldLive 補上 `composition: keysOf('compositionData')`）／
+  `audit-100x.mjs`（六頁共 600 次模擬，anime-hero 段落補上 composition pool／
+  prompt 組裝）全過 0 issue；scratchpad jsdom smoke test 58 項檢查（8 種構圖法則
+  逐一 dispatch change、全部 20 個一鍵模板、30 次隨機按鈕且確認 30 次內 8 種構圖
+  全部出現過)，0 JS error、0 failure。

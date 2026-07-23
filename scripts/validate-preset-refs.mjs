@@ -159,6 +159,7 @@ const issues = [];
   const fieldLive = {
     companion: keysOf('companionData'),
     interaction: keysOf('interactionData'),
+    composition: keysOf('compositionData'),
     outfit: outfitKeys,
     body: keysOf('bodyData'),
     style: keysOf('styleData'),

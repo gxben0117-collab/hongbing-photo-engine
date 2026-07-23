@@ -440,10 +440,11 @@ const core = evalCore(coreSource);
     window: { HB_CORE_PROMPT: { page: { fantasy: core.page.fantasy } } },
     document: { getElementById: () => ({ innerHTML: '' }) },
   };
-  vm.runInNewContext(`${segment}\n;globalThis.__d = ({ companionData, interactionData, outfitBattle, outfitNormal, outfitHybrid, bodyData, styleData, cameraData, lightingData, backgroundData, fxData, ratioData, mediaData, presets, RELATION_LOCK, SECOND_EXISTENCE_IDENTITY_ISOLATION });`, context, { filename: 'anime-hero-data.js' });
+  vm.runInNewContext(`${segment}\n;globalThis.__d = ({ companionData, interactionData, compositionData, outfitBattle, outfitNormal, outfitHybrid, bodyData, styleData, cameraData, lightingData, backgroundData, fxData, ratioData, mediaData, presets, RELATION_LOCK, SECOND_EXISTENCE_IDENTITY_ISOLATION });`, context, { filename: 'anime-hero-data.js' });
   const data = context.__d;
   const pools = {
     companion: Object.keys(data.companionData), interaction: Object.keys(data.interactionData),
+    composition: Object.keys(data.compositionData),
     outfit: [...Object.keys(data.outfitBattle), ...Object.keys(data.outfitNormal), ...Object.keys(data.outfitHybrid)],
     body: Object.keys(data.bodyData), style: Object.keys(data.styleData), camera: Object.keys(data.cameraData),
     lighting: Object.keys(data.lightingData), background: Object.keys(data.backgroundData), fx: Object.keys(data.fxData),
@@ -458,7 +459,8 @@ const core = evalCore(coreSource);
   const customSamples = ['', '', '白銀鎧甲禮服', '測試主題 with émoji 🌸 and "quotes"'];
   for (let i = 0; i < N; i += 1) {
     const sel = {
-      companion: pick(pools.companion), interaction: pick(pools.interaction), outfit: pick(pools.outfit),
+      companion: pick(pools.companion), interaction: pick(pools.interaction), composition: pick(pools.composition),
+      outfit: pick(pools.outfit),
       body: pick(pools.body), style: pick(pools.style), camera: pick(pools.camera), lighting: pick(pools.lighting),
       background: pick(pools.background), fx: pick(pools.fx), ratio: pick(pools.ratio), media: pick(pools.media),
       colorNote: randomText(), prop: randomText(), titleArea: randomText(), extraNote: randomText(),
@@ -466,6 +468,7 @@ const core = evalCore(coreSource);
     };
     const companion = data.companionData[sel.companion];
     const interaction = data.interactionData[sel.interaction];
+    const composition = data.compositionData[sel.composition];
     const outfit = data.outfitBattle[sel.outfit] || data.outfitNormal[sel.outfit] || data.outfitHybrid[sel.outfit];
     const body = data.bodyData[sel.body];
     const style = data.styleData[sel.style];
@@ -487,7 +490,8 @@ const core = evalCore(coreSource);
       identityGuard + ',', 'Same adult person from the reference photo, realistic cinematic key-art subject, reference photo used for identity only,',
       anatomyGuard + ',', body.prompt + ',', data.SECOND_EXISTENCE_IDENTITY_ISOLATION, data.RELATION_LOCK,
       '【配角設計】\ncompanion: ' + companion.prompt + ',', 'identity exception: ' + companion.identityException + ',',
-      '【互動構圖】\n' + interaction.prompt + ',', lightingConsistencyGuard, subjectIntegrationGuard,
+      '【互動構圖】\n' + interaction.prompt + ',', '【構圖法則】\n' + composition.prompt + ',',
+      lightingConsistencyGuard, subjectIntegrationGuard,
       '【服裝】\nperson outfit: ' + outfitText + ',', '【海報語氣】\n' + style.prompt + ',', '【場景】\nbackground: ' + backgroundText + ',',
       '【特效】\n' + fx.prompt + ',', '【鏡頭】\n' + camera.prompt + ',', '【光影】\nlighting design: ' + lighting.prompt + ',',
       'color palette: ' + (colorNote || 'derive a cohesive premium palette from the selected lighting and companion design') + ',',
