@@ -440,7 +440,7 @@ const core = evalCore(coreSource);
     window: { HB_CORE_PROMPT: { page: { fantasy: core.page.fantasy } } },
     document: { getElementById: () => ({ innerHTML: '' }) },
   };
-  vm.runInNewContext(`${segment}\n;globalThis.__d = ({ companionData, interactionData, compositionData, outfitBattle, outfitNormal, outfitHybrid, bodyData, styleData, cameraData, lightingData, backgroundData, fxData, ratioData, mediaData, presets, RELATION_LOCK, SECOND_EXISTENCE_IDENTITY_ISOLATION });`, context, { filename: 'anime-hero-data.js' });
+  vm.runInNewContext(`${segment}\n;globalThis.__d = ({ companionData, interactionData, compositionData, outfitBattle, outfitNormal, outfitHybrid, bodyData, styleData, cameraData, lightingData, backgroundData, fxData, ratioData, mediaData, presets, RELATION_LOCK, SECOND_EXISTENCE_IDENTITY_ISOLATION, FACE_ORIENTATION_GUARD });`, context, { filename: 'anime-hero-data.js' });
   const data = context.__d;
   const pools = {
     companion: Object.keys(data.companionData), interaction: Object.keys(data.interactionData),
@@ -490,7 +490,8 @@ const core = evalCore(coreSource);
       identityGuard + ',', 'Same adult person from the reference photo, realistic cinematic key-art subject, reference photo used for identity only,',
       anatomyGuard + ',', body.prompt + ',', data.SECOND_EXISTENCE_IDENTITY_ISOLATION, data.RELATION_LOCK,
       '【配角設計】\ncompanion: ' + companion.prompt + ',', 'identity exception: ' + companion.identityException + ',',
-      '【互動構圖】\n' + interaction.prompt + ',', '【構圖法則】\n' + composition.prompt + ',',
+      '【互動構圖】\n' + interaction.prompt + ',', data.FACE_ORIENTATION_GUARD,
+      '【構圖法則】\n' + composition.prompt + ',',
       lightingConsistencyGuard, subjectIntegrationGuard,
       '【服裝】\nperson outfit: ' + outfitText + ',', '【海報語氣】\n' + style.prompt + ',', '【場景】\nbackground: ' + backgroundText + ',',
       '【特效】\n' + fx.prompt + ',', '【鏡頭】\n' + camera.prompt + ',', '【光影】\nlighting design: ' + lighting.prompt + ',',

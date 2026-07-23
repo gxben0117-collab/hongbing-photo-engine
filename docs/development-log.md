@@ -698,3 +698,26 @@
   prompt 組裝）全過 0 issue；scratchpad jsdom smoke test 58 項檢查（8 種構圖法則
   逐一 dispatch change、全部 20 個一鍵模板、30 次隨機按鈕且確認 30 次內 8 種構圖
   全部出現過)，0 JS error、0 failure。
+
+## 2026-07-23（四）　修正「背對背」等互動姿勢意外側臉（核心咒語變更，owner 已確認）
+
+- owner 在 anime-hero.html 用「背對背蓄勢」實測，原圖正面、咒語也沒要求側臉，
+  出圖卻側臉了；owner 貼 ChatGPT 診斷討論後確認根因，並指出「之前核心是寫以臉
+  為主，姿勢配合臉部去產生」——原始設計意圖跟共用核心文字實際寫法方向不一致。
+- 根因：`assets/core-prompt.js` 的 `CORE_REALISTIC_ANATOMY`（跨六頁共用骨架
+  文字）裡「Pose must match head direction and facial gaze.」方向模糊，遇到
+  anime-hero「背對背、各自面向相反方向」這類姿勢描述時，AI 把姿勢方向詞誤解成
+  也要拖著臉一起轉。
+- **改動 1（共用核心，影響全部 6 頁）**：把該句改寫成明確「頭優先，身體配合頭」
+  的因果方向，不改變原本防止頭身角度不一致的防呆語意。完整改前/改後見
+  `docs/history/face-orientation-fix-2026-07-23.md`。
+- **改動 2（anime-hero 專屬）**：新增 `FACE_ORIENTATION_GUARD` 常數（插在
+  【互動構圖】之後），明講「opposite direction/back to back/face one another」
+  這類語言只描述肩膀軀幹，臉部仍需朝向鏡頭；並修正背對背蓄勢／鏡界對視／對戰
+  蓄勢三個高風險互動姿勢文字，把身體轉向跟臉部朝向明確拆開。
+- 這是核心咒語文字變更（`docs/core-prompt-contract.md` 管制範圍），事前已提供
+  改前/改後對照並取得 owner 明確同意（「對」）才動手。
+- 驗證：四個腳本全過（`audit-100x.mjs` 六頁 600 次模擬 0 issue）；scratchpad
+  jsdom smoke test 對 5 種互動逐一驗證輸出含新 guard 且不含舊模糊句，0 JS
+  error。`build-prompt-preview.mjs` 這次預期會有 diff（共用核心文字本來就是
+  刻意變更，不是意外 regression）。
