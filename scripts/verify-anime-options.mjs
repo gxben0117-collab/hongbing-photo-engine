@@ -14,6 +14,8 @@ for (const match of source.matchAll(optionPattern)) {
 }
 const dynamicMedia = ['inkWash', 'watercolor', 'conceptArt', 'gouache', 'ukiyoe', 'charcoal', 'pastel'];
 for (const value of dynamicMedia) optionsByGroup.get('medium').add(value);
+const dynamicOutfits = ['sculpturalWhite', 'blackVelvet', 'silkDrape', 'powerSuit', 'tweedSet', 'knitSoft', 'crystalCocktail', 'bridalEditorial', 'fringeStage', 'modernEastern'];
+for (const value of dynamicOutfits) optionsByGroup.get('outfit').add(value);
 
 const promptGroups = ['mode', 'outfit', 'body', 'archetype', 'power', 'standForm', 'standAbility', 'shikigamiForm', 'shikigamiContract', 'personPose', 'pose', 'scene', 'fx', 'motion', 'camera', 'medium'];
 const relationGroups = ['relationship', 'relationStrength', 'relationEvidence'];
@@ -41,6 +43,9 @@ for (const [group, values] of optionsByGroup) {
 const mediaValues = optionsByGroup.get('medium') || new Set();
 for (const value of mediaValues) {
   expect(new RegExp(`\\b${escape(value)}\\s*:`).test(source.slice(source.indexOf('const RENDER_MEDIUM_LOCKS'))), `medium.${value}: missing render-medium lock`);
+}
+for (const value of dynamicOutfits) {
+  expect(new RegExp(`\\b${escape(value)}\\s*:`).test(source.slice(source.indexOf('const MAGAZINE_EDITORIAL_OUTFITS'))), `outfit.${value}: missing editorial-fashion prompt`);
 }
 const presetPattern = /data-preset="([^"]+)"/g;
 for (const match of source.matchAll(presetPattern)) {
