@@ -14,7 +14,7 @@ for (const match of source.matchAll(optionPattern)) {
 }
 const dynamicMedia = ['inkWash', 'watercolor', 'conceptArt', 'gouache', 'ukiyoe', 'charcoal', 'pastel'];
 for (const value of dynamicMedia) optionsByGroup.get('medium').add(value);
-const dynamicOutfits = ['sculpturalWhite', 'blackVelvet', 'silkDrape', 'powerSuit', 'tweedSet', 'knitSoft', 'crystalCocktail', 'bridalEditorial', 'fringeStage', 'modernEastern'];
+const dynamicOutfits = ['sculpturalWhite', 'blackVelvet', 'silkDrape', 'powerSuit', 'tweedSet', 'knitSoft', 'crystalCocktail', 'bridalEditorial', 'fringeStage', 'modernEastern', 'redBlackTalisman'];
 for (const value of dynamicOutfits) optionsByGroup.get('outfit').add(value);
 
 const promptGroups = ['mode', 'outfit', 'body', 'archetype', 'power', 'standForm', 'standAbility', 'shikigamiForm', 'shikigamiContract', 'personPose', 'pose', 'scene', 'fx', 'motion', 'camera', 'medium'];
