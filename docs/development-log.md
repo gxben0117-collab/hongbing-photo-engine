@@ -626,3 +626,51 @@
 - 模式開啟時，鏡頭自動限制為平視、自然 3/4 或輕微英雄仰角；隨機套用同樣排除側臉、
   高／低極端角度與遠距主視覺。關係敘事則移至身份核心之後，保留召喚／變身因果。
 - 驗證：`node scripts\\check-static.mjs`、`git diff --check` 通過。
+
+## 2026-07-23（二）　動漫合鏡擴充內容＋補齊驗證涵蓋（現行版：companion+interaction 架構）
+
+- owner 要求優化 `anime-hero.html`（重建後的「配角＋互動」架構，見 commit
+  `6446d74`），加更多帥氣的電影風格素材，並修掉所有 build/runtime error 直到
+  「production build」（本專案沒有 npm build，等同四個驗證腳本全過）成功。
+- 純附加、未改任何既有 key 的 value 或輸出邏輯：
+  - 配角 +3：虛空死神使者、鏡界分身、雷霆巨像（皆為無臉/抽象造型，符合
+    `SECOND_EXISTENCE_IDENTITY_ISOLATION` 規則）。
+  - 互動姿勢 +3：騰空躍起同步、背對背蓄勢、鏡界對視。
+  - 服裝 +6：戰鬥服 2（虛空裂隙戰袍/烈日聖甲）、一般服裝 2（電影首映禮服/
+    復古軍裝風）、改良版 2（星河改良禮服/符文皮革戰裙）。
+  - 海報語氣 +2：史詩奇幻大片感、新黑色驚悚感。鏡頭 +2：傾斜動態運鏡、
+    追焦動態鏡頭。光影 +1：極光幻彩光效。背景 +2：古代競技場廢墟、浮空群島
+    天空。輸出媒材 +1：好萊塢史詩全景（IMAX 感）。
+  - 一鍵主題模板 +4：虛空死神覺醒、鏡界分身對峙、雷霆巨像壓陣、極光騰躍雙生
+    （組合新舊元素，示範新素材可如何搭配）。
+- **發現並修掉 build error**：`scripts/verify-anime-options.mjs` 是重建前
+  （五型態/`SECOND_DIRECTOR_DATA`/`pick()` 架構）留下的驗證腳本，對照現行
+  DOM 結構已完全對不上，執行會直接 TypeError 崩潰。確認其覆蓋範圍已被
+  `validate-preset-refs.mjs`（欄位值存在性）與 `audit-100x.mjs`（內容稽核）
+  取代後刪除，不再維護一份對不上現行程式碼的殭屍腳本。
+- **補上原本缺失的驗證涵蓋**：`anime-hero.html` 先前完全不在
+  `audit-100x.mjs`/`validate-preset-refs.mjs`/禁用角色名靜態掃描 的範圍內。
+  - `validate-preset-refs.mjs` 新增 anime-hero 區塊：因為這頁的選項卡是
+    JS data object 動態渲染（不是靜態 `name=/value=` markup），改成直接讀
+    `companionData`/`interactionData`/`outfitBattle`+`outfitNormal`+
+    `outfitHybrid`/`bodyData`/`styleData`/`cameraData`/`lightingData`/
+    `backgroundData`/`fxData`/`ratioData` 的 key 當作「當下存在的選項」，
+    驗證 `presets` 物件（20 筆）每個欄位值都對得上，跟 travel/magazine/
+    fantasy 用 `liveRadioValues()` 掃 markup 的作法不同。
+  - `audit-100x.mjs` 新增 anime-hero 模擬區塊：直接從 HTML 抽出
+    `companionData`…`presets` 這段原始碼丟進 `vm`（context 補一個最小
+    `document.getElementById` stub，讓段落裡順帶跑到的 `buildCards()` 呼叫
+    不會因為缺 DOM 而丟錯），完整複刻 `generate()` 的組裝邏輯（含
+    `customOutfit`/`customBackground` 覆寫分支），跑 100 組隨機模擬。
+  - 禁用角色名靜態掃描清單補上 `anime-hero.html`。
+  - 依 CLAUDE.md 規則，新增選項卡不能只靠上述模擬腳本驗證（它們是重新實作
+    組裝邏輯，測不出「新增選項卡但忘了頁面自己會不會噴錯」），另外在
+    scratchpad 暫時 `npm install jsdom`（未動專案本身依賴）寫一次性
+    smoke test：真的載入 `anime-hero.html`、對全部 17 個新選項值逐一
+    dispatch change、點真正的 `generateBtn`，以及點擊全部 4 個新一鍵模板
+    按鈕與跑 20 次「隨機亂數組合」，檢查 0 JS error、輸出無 undefined/
+    NaN/[object Object]/過短。
+- 驗證結果：`check-static.mjs` 全過；`build-prompt-preview.mjs` 正常輸出；
+  `validate-preset-refs.mjs` 7 組物件（含新增的 anime-hero `presets` 20 筆）
+  0 issue；`audit-100x.mjs` 六頁共 600 次模擬 0 issue；jsdom smoke test
+  44 項檢查（17 新選項 + 4 新模板 + 20 次隨機）0 JS error、0 failure。

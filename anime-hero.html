@@ -510,6 +510,24 @@ const companionData = {
     desc:'白金羽翼的神聖守護者，包覆式的庇護感',
     prompt:'a luminous winged guardian spirit rises behind the person, ivory-and-gold feathered wings partially enfolding them in a protective arc, the guardian\'s face concealed by a soft radiant light or an elegant featureless mask, radiating a shared sacred glow with the person\'s own outfit',
     identityException:'the guardian\'s face is concealed by light or a mask; no second exposed human face exists'
+  },
+  voidReaper: {
+    name:'虛空死神使者',
+    desc:'鐮刀輪廓的黑袍靈體，深淵能量環繞',
+    prompt:'a towering void reaper spirit looms behind the person, a flowing tattered black cloak concealing a featureless hooded void where a face would be, gripping an oversized curved scythe wreathed in dark violet mist, its posture bent protectively toward the person as if answering their call',
+    identityException:'the reaper\'s hood conceals an empty featureless void; no human face is ever visible beneath it'
+  },
+  mirrorTwin: {
+    name:'鏡界分身',
+    desc:'從鏡面裂縫映出的水銀色鏡像存在',
+    prompt:'a mercurial mirror-realm duplicate of the person\'s silhouette steps out through a cracked floating mirror shard behind them, its surface a seamless liquid-chrome reflection with no carved facial features, moving in perfect inverted synchrony with the person\'s own pose',
+    identityException:'the mirror twin has a smooth featureless liquid-chrome surface where a face would be; it must never render distinct human facial features'
+  },
+  stormTitan: {
+    name:'雷霆巨像',
+    desc:'雲層凝聚而成的巨大風暴石像守護者',
+    prompt:'a colossal storm titan condenses out of churning thunderclouds behind the person, its body carved from dark stone and crackling electricity with a smooth faceless carved mask for a head, one massive fist grounded near the person as lightning arcs between them',
+    identityException:'the storm titan has a smooth faceless carved stone mask; no human facial features are ever depicted on it'
   }
 };
 
@@ -553,6 +571,21 @@ const interactionData = {
     name:'對戰蓄勢',
     desc:'兩者面向同一方向，共同備戰',
     prompt:'person and companion both face the same off-frame direction in a shared battle-ready stance, weapons or energy raised together toward one implied threat, unmistakably fighting as one team'
+  },
+  ascentLeap: {
+    name:'騰空躍起同步',
+    desc:'兩者同時躍向空中，動態感強烈',
+    prompt:'person and companion launch into the air together at the same instant, bodies angled in mirrored dynamic trajectories, fabric and energy trailing behind both as if propelled by the same force'
+  },
+  backToBack: {
+    name:'背對背蓄勢',
+    desc:'背靠背站立，共同面對威脅',
+    prompt:'person and companion stand back to back, weight settled into a shared ready stance, each facing an opposite direction as though guarding one another from unseen threats on both sides'
+  },
+  mirrorGaze: {
+    name:'鏡界對視',
+    desc:'兩者面對面對視，形成鏡像式構圖',
+    prompt:'the person and companion face one another at close distance in a mirrored confrontation pose, matching silhouette angles and shared eye-line creating a symmetrical reflective composition'
   }
 };
 
@@ -581,7 +614,9 @@ const outfitBattle = {
   winterKnight:{name:'雪地騎士裝',desc:'毛領、冰晶護甲',prompt:'winter knight armor with fur-trimmed collar and pale ice-crystal armor plating'},
   combatLeather:{name:'皮革緊身戰鬥服',desc:'肩部護甲、機能綁帶',prompt:'fitted leather combat suit with shoulder armor plates and functional strap details'},
   stormGuardArmor:{name:'雷霆護甲戰衣',desc:'能量脈紋、俐落空氣力學輪廓',prompt:'storm-forged battle armor with crackling energy vents and a sharp aerodynamic silhouette'},
-  crimsonValkyrieSuit:{name:'緋紅女武神戰衣',desc:'雕塑感肩甲、英氣輪廓',prompt:'crimson valkyrie battle attire with sculpted wing-like pauldrons and a bold heroic silhouette'}
+  crimsonValkyrieSuit:{name:'緋紅女武神戰衣',desc:'雕塑感肩甲、英氣輪廓',prompt:'crimson valkyrie battle attire with sculpted wing-like pauldrons and a bold heroic silhouette'},
+  voidCloak:{name:'虛空裂隙戰袍',desc:'破碎黑紗、深淵光紋',prompt:'a void-touched battle cloak with fractured sheer black layers and faint fissures of glowing violet light tracing the seams'},
+  solarArmor:{name:'烈日聖甲',desc:'金銅甲片、熾焰紋飾',prompt:'radiant solar battle armor in brushed gold and bronze plating with etched flame motifs catching the light'}
 };
 
 const outfitNormal = {
@@ -600,7 +635,9 @@ const outfitNormal = {
   loungeSweater:{name:'慵懶毛衣居家裝',desc:'寬鬆針織、放鬆生活感',prompt:'soft oversized sweater with relaxed loungewear styling and a warm everyday mood'},
   trenchCoatCasual:{name:'風衣休閒裝',desc:'剪裁風衣、俐落日常感',prompt:'tailored trench coat layered over simple everyday pieces, timeless understated elegance'},
   summerSundress:{name:'夏日洋裝',desc:'輕盈自然、清爽感',prompt:'light summer sundress with a breezy natural silhouette and soft flowing fabric'},
-  collegeVarsity:{name:'學院運動外套裝',desc:'棒球外套、青春休閒感',prompt:'varsity-style college jacket paired with casual everyday pieces, sporty youthful styling'}
+  collegeVarsity:{name:'學院運動外套裝',desc:'棒球外套、青春休閒感',prompt:'varsity-style college jacket paired with casual everyday pieces, sporty youthful styling'},
+  eveningGownCasual:{name:'電影首映禮服',desc:'俐落晚裝、紅毯質感',prompt:'an elegant movie-premiere evening gown with a clean modern silhouette and understated red-carpet polish'},
+  vintageMilitary:{name:'復古軍裝風',desc:'剪裁俐落、金屬釦飾',prompt:'a vintage-inspired tailored military-style coat with structured shoulders and polished button details'}
 };
 
 const outfitHybrid = {
@@ -618,7 +655,9 @@ const outfitHybrid = {
   gothicLaceArmor:{name:'哥德蕾絲甲裙',desc:'黑蕾絲、尖銳甲片',prompt:'gothic lace dress fused with sharp obsidian armor fragments, dark romantic silhouette'},
   neonSamuraiHybrid:{name:'霓虹武士改良服',desc:'和風輪廓、發光科技配件',prompt:'neon-lit samurai-inspired hybrid outfit blending a traditional silhouette with glowing tech accents'},
   celestialSchoolArmor:{name:'星輝改良制服',desc:'制服底＋星輝甲片',prompt:'school uniform silhouette fused with luminous celestial armor panels, retaining a recognizable uniform base'},
-  royalMechaGown:{name:'王族機甲禮服',desc:'禮服輪廓＋精密機甲細節',prompt:'royal gown silhouette fused with precision mecha panel details and a glowing chest core accent'}
+  royalMechaGown:{name:'王族機甲禮服',desc:'禮服輪廓＋精密機甲細節',prompt:'royal gown silhouette fused with precision mecha panel details and a glowing chest core accent'},
+  galaxyGown:{name:'星河改良禮服',desc:'深藍紗裙、星塵縫線',prompt:'a deep-indigo battle-couture gown with a flowing star-dust embroidered skirt fused with minimal light armor accents at the shoulder'},
+  runicLeather:{name:'符文皮革戰裙',desc:'皮革剪裁、發光符文刻紋',prompt:'a fitted leather battle skirt and bodice etched with faintly glowing runic engravings, fused with lightweight tactical straps'}
 };
 
 const bodyData = {
@@ -638,7 +677,9 @@ const styleData = {
   realisticStill:{name:'寫實電影劇照感',desc:'像真人電影劇照',prompt:'photorealistic live-action movie still mood, natural cinematic lighting, grounded believable atmosphere'},
   retroSentai:{name:'復古特攝懷舊感',desc:'像老派特攝節目海報',prompt:'retro tokusatsu sentai poster mood, nostalgic saturated film color, classic practical-effects charm'},
   gothicHorrorHero:{name:'暗黑哥德驚悚感',desc:'像哥德驚悚系英雄海報',prompt:'gothic horror-tinged hero mood, eerie atmospheric tension, dramatic shadow play'},
-  popCollectible:{name:'潮流公仔收藏感',desc:'像潮玩公仔包裝主視覺',prompt:'vibrant pop-collectible key visual mood, bold graphic color blocking, playful iconic presentation'}
+  popCollectible:{name:'潮流公仔收藏感',desc:'像潮玩公仔包裝主視覺',prompt:'vibrant pop-collectible key visual mood, bold graphic color blocking, playful iconic presentation'},
+  epicFantasyBlockbuster:{name:'史詩奇幻大片感',desc:'像史詩奇幻電影主視覺',prompt:'epic fantasy blockbuster key visual, sweeping monumental scale, richly detailed production-design atmosphere'},
+  neoNoirThriller:{name:'新黑色驚悚感',desc:'像新黑色驚悚片海報',prompt:'neo-noir thriller poster mood, moody desaturated palette with isolated pools of color, tense atmospheric mystery'}
 };
 
 const mediaData = {
@@ -648,7 +689,8 @@ const mediaData = {
   travelMagazine:{name:'旅遊雜誌攝影',desc:'雜誌旅拍／地點故事感',prompt:'Editorial Magazine Photography, Cinematic Storytelling, Clear Sense Of Place And Mood, Polished Magazine Layout Quality, Elegant Heroic Portrait Composition, Commercial Editorial Finish'},
   postcardIllustration:{name:'明信片插畫',desc:'手繪紀念感／地標清楚',prompt:'Postcard-Style Illustration, Charming Hand-Drawn Detail, Clean Readable Character And Companion Silhouette, Bright Collectible Souvenir Mood, Printed Postcard Composition'},
   animatedTravel:{name:'動畫電影旅行感',desc:'動畫光色／旅行場景敘事',prompt:'Animated Movie Film Look, Painterly Animated Background Atmosphere, Warm Storybook Lighting, Clear Character And Companion Silhouette, Soft Color Design With Cinematic Mood, Keep The Character Recognizable In Stylized Animation Form'},
-  oilTravelPortrait:{name:'油畫旅行肖像',desc:'厚光筆觸／風景肖像感',prompt:'Oil Painted Portrait, Rich Brush Texture, Painterly Background, Warm Natural Light And Soft Chiaroscuro, Elegant Portrait Mood, Keep The Subject Recognizable With Refined Painterly Detail'}
+  oilTravelPortrait:{name:'油畫旅行肖像',desc:'厚光筆觸／風景肖像感',prompt:'Oil Painted Portrait, Rich Brush Texture, Painterly Background, Warm Natural Light And Soft Chiaroscuro, Elegant Portrait Mood, Keep The Subject Recognizable With Refined Painterly Detail'},
+  cinematicIMAX:{name:'好萊塢史詩全景',desc:'IMAX 級大片感、極致細節',prompt:'Hollywood Blockbuster IMAX-Scale Cinematography, Ultra-Detailed Production Design, Sweeping Epic Scale, Rich Practical-Feeling Texture, Controlled Dramatic Color Grading, Keep The Result Grounded And Photographically Believable'}
 };
 
 const cameraData = {
@@ -658,7 +700,9 @@ const cameraData = {
   softFocusGlow:{name:'柔焦光感',desc:'柔和光暈棚拍感',prompt:'soft focus glow camera language, gentle halo bloom, luminous cinematic atmosphere'},
   beautyCloseUp:{name:'近距離特寫',desc:'臉部與核心道具突出',prompt:'close distance photography, face and signature prop details emphasized, polished cinematic framing'},
   threeQuarterSide:{name:'斜側角度',desc:'臉和身形都有立體感',prompt:'three-quarter side camera angle, about 45 degree side view, face and body both show dimensional structure'},
-  distantHero:{name:'遠距主視覺',desc:'人物與背景完整呈現',prompt:'distant hero key-art view, camera pulled back to show subject, companion and environment together, spacious cinematic perspective'}
+  distantHero:{name:'遠距主視覺',desc:'人物與背景完整呈現',prompt:'distant hero key-art view, camera pulled back to show subject, companion and environment together, spacious cinematic perspective'},
+  dutchTiltAction:{name:'傾斜動態運鏡',desc:'畫面傾斜、強烈動勢',prompt:'dynamic dutch-tilt camera angle, deliberately canted horizon line amplifying kinetic tension'},
+  trackingMotion:{name:'追焦動態鏡頭',desc:'模擬跟拍運動感',prompt:'tracking action-shot camera language, slight motion-following perspective that amplifies a sense of speed'}
 };
 
 const lightingData = {
@@ -676,7 +720,8 @@ const lightingData = {
   electricViolet:{name:'紫電光效',desc:'電光紫、能量感',prompt:'electric violet energy lighting, crackling light accents and a charged atmosphere'},
   overcastReal:{name:'陰天寫實光',desc:'自然柔光、生活感',prompt:'overcast natural daylight, soft even exposure and a grounded realistic mood'},
   dawnCool:{name:'晨曦冷光',desc:'清晨藍紫、安靜氣氛',prompt:'cool dawn light, pale blue-violet tones and a quiet early-morning atmosphere'},
-  crystalIceGlow:{name:'水晶冰藍光效',desc:'透明晶體折射、冷藍光束',prompt:'crystalline ice-blue refracted lighting, translucent shard highlights and a cold luminous glow'}
+  crystalIceGlow:{name:'水晶冰藍光效',desc:'透明晶體折射、冷藍光束',prompt:'crystalline ice-blue refracted lighting, translucent shard highlights and a cold luminous glow'},
+  auroraGlow:{name:'極光幻彩光效',desc:'綠紫極光、夢幻氛圍',prompt:'aurora-inspired shifting light bands of green and violet washing across the scene, dreamlike ethereal color play'}
 };
 
 const backgroundData = {
@@ -700,7 +745,9 @@ const backgroundData = {
   cosmicRift:{name:'宇宙裂縫',desc:'星雲、行星環、奇幻感',prompt:'a monumental cosmic rift with nebulae, planetary rings and controlled spatial light fractures'},
   lightRealmVortex:{name:'光之異空間漩渦',desc:'白紫能量漩渦、破碎水晶',prompt:'a bright ethereal energy vortex realm, swirling luminous white and violet ribbons with shattered floating crystal fragments'},
   phoenixFlameVortex:{name:'鳳凰烈焰漩渦',desc:'巨大鳳凰剪影、熾焰漩渦',prompt:'a monumental phoenix silhouette formed from swirling flame and light against a warm blazing vortex sky'},
-  crystalWaterfallCave:{name:'水晶瀑布洞窟',desc:'透明晶瀑、水霧、法陣水面',prompt:'a crystalline waterfall cavern with cascading water, refracted light shards and a glowing magic circle on the water surface'}
+  crystalWaterfallCave:{name:'水晶瀑布洞窟',desc:'透明晶瀑、水霧、法陣水面',prompt:'a crystalline waterfall cavern with cascading water, refracted light shards and a glowing magic circle on the water surface'},
+  ancientColosseumRuins:{name:'古代競技場廢墟',desc:'斷裂石柱、電影感尺度',prompt:'a monumental ruined ancient colosseum, shattered stone tiers and towering broken columns under a dramatic sky'},
+  floatingIslandsSky:{name:'浮空群島天空',desc:'漂浮島嶼、瀑布垂落',prompt:'a sweeping sky filled with floating islands and cascading waterfalls trailing into open clouds below'}
 };
 
 const fxData = {
@@ -736,7 +783,11 @@ const presets = {
   crystalDragonSummon:{name:'水晶巨龍召喚',desc:'掌心核心、巨大水晶靈獸',companion:'beastSpirit',interaction:'energyLink',outfit:'techwear',body:'original',style:'cyberMecha',camera:'eyeLevelCover',lighting:'crystalIceGlow',background:'crystalWaterfallCave',fx:'strong',ratio:'square',prop:'a small glowing hexagonal core crystal held delicately between the fingers'},
   stormMechaGuard:{name:'暴雨機甲守護',desc:'雨夜天台、巨大守護者背後壓陣',companion:'armoredKnight',interaction:'backGuard',outfit:'darkCouture',body:'original',style:'darkCinema',camera:'lowAngleHero',lighting:'stormNight',background:'cityRooftopNight',fx:'strong',ratio:'vertical34'},
   crimsonCathedralKnight:{name:'暗紅聖殿騎士召喚',desc:'伸手蓄勢、巨大黑紅騎士壓陣',companion:'armoredKnight',interaction:'backGuard',outfit:'redBlackTalisman',body:'slightWaist',style:'darkCinema',camera:'lowAngleHero',lighting:'halo',background:'cathedralHall',fx:'strong',ratio:'poster23'},
-  angelGuard:{name:'聖光守護降臨',desc:'羽翼環抱、聖潔氛圍',companion:'guardianAngel',interaction:'circleFrame',outfit:'saintRobe',body:'slightWaist',style:'orientalFantasy',camera:'softFocusGlow',lighting:'holyLight',background:'celestialTemple',fx:'medium',ratio:'vertical45'}
+  angelGuard:{name:'聖光守護降臨',desc:'羽翼環抱、聖潔氛圍',companion:'guardianAngel',interaction:'circleFrame',outfit:'saintRobe',body:'slightWaist',style:'orientalFantasy',camera:'softFocusGlow',lighting:'holyLight',background:'celestialTemple',fx:'medium',ratio:'vertical45'},
+  voidReaperAwaken:{name:'虛空死神覺醒',desc:'深淵鐮刀、黑霧壟罩',companion:'voidReaper',interaction:'backToBack',outfit:'voidCloak',body:'original',style:'darkCinema',camera:'dutchTiltAction',lighting:'darkVoid',background:'industrialRuin',fx:'strong',ratio:'vertical916'},
+  mirrorRealmDuel:{name:'鏡界分身對峙',desc:'鏡面裂縫、對視構圖',companion:'mirrorTwin',interaction:'mirrorGaze',outfit:'techwear',body:'tallFashion',style:'cyberMecha',camera:'threeQuarterSide',lighting:'electricViolet',background:'cyberCity',fx:'medium',ratio:'square'},
+  stormTitanGuard:{name:'雷霆巨像壓陣',desc:'風暴巨像、雷霆守護',companion:'stormTitan',interaction:'backGuard',outfit:'stormGuardArmor',body:'athletic',style:'epicFantasyBlockbuster',camera:'lowAngleHero',lighting:'stormNight',background:'mountainCliff',fx:'strong',ratio:'poster23'},
+  auroraAscent:{name:'極光騰躍雙生',desc:'極光夜空、同步躍起',companion:'mirrorTwin',interaction:'ascentLeap',outfit:'galaxyGown',body:'slightWaist',style:'orientalFantasy',camera:'trackingMotion',lighting:'auroraGlow',background:'floatingIslandsSky',fx:'medium',ratio:'vertical34'}
 };
 
 /* ---------- 動態渲染卡片 ---------- */
