@@ -673,6 +673,7 @@
       <label class="card"><input type="radio" name="garment" value="royalMechaGown"><div class="name">王族機甲禮服</div><div class="desc">禮服輪廓＋精密機甲細節</div></label>
       <label class="card"><input type="radio" name="garment" value="galaxyGown"><div class="name">星河改良禮服</div><div class="desc">深藍紗裙、星塵縫線</div></label>
       <label class="card"><input type="radio" name="garment" value="runicLeather"><div class="name">符文皮革戰裙</div><div class="desc">皮革剪裁、發光符文刻紋</div></label>
+      <label class="card"><input type="radio" name="garment" value="wideBrimFloralTrailGown"><div class="name">寬簷花帽曳地禮服</div><div class="desc">寬簷薄紗花帽、削肩束腰、大裙擺拖尾</div></label>
     </div>
     <div class="form-grid" style="margin-top:10px;">
       <label class="field full custom-choice" data-custom-choice="garment">服裝自填
@@ -842,6 +843,8 @@
       <label class="card"><input type="radio" name="material" value="mistCloudVeil"><div class="name">雲霧繚繞紗裙</div><div class="desc">濃霧雲海纏繞身形、朦朧漂浮感</div></label>
       <label class="card"><input type="radio" name="material" value="lavaMagmaGown"><div class="name">熔岩岩漿禮服</div><div class="desc">熾熱熔岩紋路、黑曜岩裂縫、橘紅光暈</div></label>
       <label class="card"><input type="radio" name="material" value="blizzardSnowstormCloak"><div class="name">暴風雪斗篷</div><div class="desc">狂風暴雪、冰晶飛舞、凜冽動態感</div></label>
+      <label class="card"><input type="radio" name="material" value="inkCalligraphyButterflyGown"><div class="name">水墨書法蝶舞裙</div><div class="desc">水墨書法暈染、蝴蝶群飛、留白詩意</div></label>
+      <label class="card"><input type="radio" name="material" value="dragonflyScaleWingGown"><div class="name">蜻蜓鱗翅紗裙</div><div class="desc">虹彩蜻蜓翅膀、層疊透翅裙擺</div></label>
     </div>
     <div class="form-grid" style="margin-top:10px;">
       <label class="field custom-choice" data-custom-choice="material">材質自填
@@ -949,6 +952,8 @@
           <label class="pose-card"><input type="radio" name="pose" value="beast_mount_look"><div class="pose-name">騎乘回眸姿</div><div class="pose-desc">騎乘巨獸或坐騎,持道具回望鏡頭</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="wide_wing_spread"><div class="pose-name">展臂飛翔姿</div><div class="pose-desc">雙臂展開如飛翔,仰頭望向遠方</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="throw_dart_lunge"><div class="pose-name">出手俯身戰鬥姿</div><div class="pose-desc">俯身出手擲物,動勢強烈</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="piano_glance_sit"><div class="pose-name">坐彈鋼琴側望</div><div class="pose-desc">側坐彈奏,回眸望向鏡頭</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="swing_dangle_glance"><div class="pose-name">盪鞦韆懸空回眸</div><div class="pose-desc">雙手握鍊懸空,笑望鏡頭</div></label>
         </div>
       </div>
     </div>
@@ -1120,6 +1125,10 @@
       <label class="card"><input type="radio" name="background" value="neonAlleyRain"><div class="name">霓虹雨夜巷弄</div><div class="desc">濕潤路面反光、霓虹招牌林立</div></label>
       <label class="card"><input type="radio" name="background" value="cyberMegacityRooftop"><div class="name">賽博都市天台</div><div class="desc">高樓全息廣告、飛行載具遠景</div></label>
       <label class="card"><input type="radio" name="background" value="dataServerVoid"><div class="name">數據伺服器空間</div><div class="desc">藍紫光纖矩陣、科技無盡空間</div></label>
+      <label class="card"><input type="radio" name="background" value="silverReedMountainField"><div class="name">銀芒草原山景</div><div class="desc">銀白芒草隨風、遠山剪影、開闊天空</div></label>
+      <label class="card"><input type="radio" name="background" value="crystalPianoGoldenField"><div class="name">水晶鋼琴金草原</div><div class="desc">透明水晶鋼琴、夕陽金草原、遠山</div></label>
+      <label class="card"><input type="radio" name="background" value="crescentMoonSwingSky"><div class="name">新月鞦韆雲海</div><div class="desc">金色新月鞦韆懸空、藍天雲海</div></label>
+      <label class="card"><input type="radio" name="background" value="forestStreamMossyRock"><div class="name">森林溪流苔石</div><div class="desc">溪流巨石、青苔濕潤、林間光束</div></label>
     </div>
   </section>
 
@@ -1871,6 +1880,16 @@ const materialData = {
     label: '星塵戰袍刺繡',
     prompt: 'deep indigo fabric embroidered with fine stardust thread, subtle armor accents catching a faint starlight glow at the seams',
     palette: 'deep indigo, silver stardust thread, faint starlight glow'
+  },
+  inkCalligraphyButterflyGown: {
+    label: '水墨書法蝶舞裙',
+    prompt: 'ink calligraphy butterfly material system, monochrome ink-wash calligraphy characters and brushstroke florals bleeding across sheer flowing fabric, a swirling cloud of paper-winged butterflies drifting around the gown, poetic negative-space composition',
+    palette: 'ink black, warm ivory paper white, soft grey wash'
+  },
+  dragonflyScaleWingGown: {
+    label: '蜻蜓鱗翅紗裙',
+    prompt: 'dragonfly wing scale material system, iridescent teal and violet dragonfly-wing panels layered as translucent sleeves and a tiered skirt, fine vein-like tracery catching the light, mystical woodland couture',
+    palette: 'iridescent teal, deep violet sheen, dark emerald undertone'
   }
 };
 
@@ -1934,7 +1953,8 @@ const garmentData = {
   celestialSchoolArmor: 'school uniform silhouette fused with luminous celestial armor panels, retaining a recognizable uniform base',
   royalMechaGown: 'royal gown silhouette fused with precision mecha panel details and a glowing chest core accent',
   galaxyGown: 'a deep-indigo battle-couture gown with a flowing star-dust embroidered skirt fused with minimal light armor accents at the shoulder',
-  runicLeather: 'a fitted leather battle skirt and bodice etched with faintly glowing runic engravings, fused with lightweight tactical straps'
+  runicLeather: 'a fitted leather battle skirt and bodice etched with faintly glowing runic engravings, fused with lightweight tactical straps',
+  wideBrimFloralTrailGown: 'wide-brim sheer floral hat paired with an off-shoulder corseted ball gown and a dramatic trailing skirt, romantic editorial silhouette'
 };
 
 const styleData = {
@@ -2017,7 +2037,11 @@ const backgroundData = {
   witchAltarChamber: 'witch altar chamber background, glowing rune circle surrounded by candles, occult ritual atmosphere',
   neonAlleyRain: 'neon-lit rainy alley background, wet reflective pavement, dense overlapping neon signage, cyberpunk night-street atmosphere',
   cyberMegacityRooftop: 'cyberpunk megacity rooftop background, holographic billboards on distant towers, flying vehicles in the skyline, futuristic urban scale',
-  dataServerVoid: 'data server void background, endless blue-violet fiber-optic matrix, abstract futuristic tech space'
+  dataServerVoid: 'data server void background, endless blue-violet fiber-optic matrix, abstract futuristic tech space',
+  silverReedMountainField: 'silver reed field background, tall wind-blown silver pampas grass stretching to distant mountain silhouettes under an open sky, romantic windswept editorial atmosphere',
+  crystalPianoGoldenField: 'crystal piano golden field background, a transparent glass grand piano standing in golden grass at sunset with distant mountains, warm romantic light',
+  crescentMoonSwingSky: 'crescent moon swing sky background, an ornate golden crescent-moon swing suspended among blue sky and clouds, dreamlike floating fantasy atmosphere',
+  forestStreamMossyRock: 'forest stream mossy rock background, a moss-covered boulder beside a clear woodland stream, soft light beams filtering through dense trees, mystical natural atmosphere'
 };
 
 const lightingData = {
@@ -2312,7 +2336,9 @@ const poseData = {
   crawl_out_rift: 'crawling forward pose emerging from a rift or crack, body low to the ground pulling forward with both hands, tense dramatic emergence',
   beast_mount_look: 'riding pose atop a mount or creature, one hand holding a prop, upper body turned back toward camera in a confident glance',
   wide_wing_spread: 'wide arm-spread pose evoking flight, both arms extended outward, head tilted upward toward the sky, soaring triumphant energy',
-  throw_dart_lunge: 'forward lunging throw pose, body bent low with one arm extended in a throwing motion, sharp explosive combat energy'
+  throw_dart_lunge: 'forward lunging throw pose, body bent low with one arm extended in a throwing motion, sharp explosive combat energy',
+  piano_glance_sit: 'seated piano-playing pose, one hand resting on the keys mid-play, upper body turned toward camera in a soft over-the-shoulder glance, elegant poised posture',
+  swing_dangle_glance: 'seated swing pose with both hands gripping the chains, legs dangling freely, joyful smiling glance toward camera, gentle floating motion'
 };
 
 const framingData = {

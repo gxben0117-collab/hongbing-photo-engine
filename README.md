@@ -40,7 +40,6 @@ v4.3 之後陸續完成（詳見開發日誌）：
 - `magazine.html` - 雜誌棚拍風格咒語產生器
 - `doll.html` - 公仔萌工作室
 - `fantasy-fashion.html` - 幻想廣告咒語產生器
-- `anime-hero.html` - 動漫變身／機甲／聖衣／替身合鏡咒語產生器
 - `store-ad.html` - 店家活動廣告產生器
 
 ## 建議資料夾分工

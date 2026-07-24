@@ -147,30 +147,5 @@ const issues = [];
   checkObject('fantasy-fashion.html', 'themeTemplates', extractObjectLiteral(src, 'themeTemplates'), fieldLive, issues);
 }
 
-// ===== anime-hero.html =====
-// anime-hero.html builds its option cards dynamically from JS data objects
-// (buildCards() renders Object.entries(dataObj)) instead of static radio
-// markup, so live options here come from the data objects themselves rather
-// than from liveRadioValues().
-{
-  const src = fs.readFileSync(path.join(root, 'anime-hero.html'), 'utf8');
-  const keysOf = (varName) => new Set(Object.keys(extractObjectLiteral(src, varName) || {}));
-  const outfitKeys = new Set([...keysOf('outfitBattle'), ...keysOf('outfitNormal'), ...keysOf('outfitHybrid')]);
-  const fieldLive = {
-    companion: keysOf('companionData'),
-    interaction: keysOf('interactionData'),
-    composition: keysOf('compositionData'),
-    outfit: outfitKeys,
-    body: keysOf('bodyData'),
-    style: keysOf('styleData'),
-    camera: keysOf('cameraData'),
-    lighting: keysOf('lightingData'),
-    background: keysOf('backgroundData'),
-    fx: keysOf('fxData'),
-    ratio: keysOf('ratioData'),
-  };
-  checkObject('anime-hero.html', 'presets', extractObjectLiteral(src, 'presets'), fieldLive, issues);
-}
-
 console.log(`\nTotal issues found: ${issues.length}`);
 process.exit(issues.length === 0 ? 0 : 1);

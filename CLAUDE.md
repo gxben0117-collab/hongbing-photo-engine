@@ -20,15 +20,17 @@
 
 ### 現況摘要（2026-07-22）
 
-- 六個工具頁（travel / magazine / doll / fantasy-fashion / anime-hero / store-ad）
-  皆已上線，正式站 <https://gxben0117-collab.github.io/hongbing-photo-engine/>。
-  `anime-hero.html`（動漫電影變身夥伴咒語產生器）是真人主角＋一個非人臉配角
-  （變身英雄/替身/式神/機甲/忍者等）的電影海報級合鏡咒語產生器，選項卡是用
-  JS data object（`companionData`/`interactionData`/…）動態渲染，不是靜態
-  radio markup——這點會影響驗證腳本的抓取方式，見下方驗證工具說明。
-  **2026-07-23（三）新增獨立的「構圖法則」軸**（`compositionData`）：跟
-  「互動姿勢」（關係擺位）、「拍攝角度」（鏡頭視角）三軸互乘，避免同一組
-  互動+角度組合看久了排版都差不多；20 個一鍵模板已逐一指派對應構圖法則。
+- 五個工具頁（travel / magazine / doll / fantasy-fashion / store-ad）皆已上線，
+  正式站 <https://gxben0117-collab.github.io/hongbing-photo-engine/>。
+  **`anime-hero.html`（動漫電影變身夥伴咒語產生器）已於 2026-07-24 整頁下架**：
+  owner 對這系列不滿意，且該頁架構已疊到 10 層 monkey-patch 式的
+  `generate = function(){ 上一版generate(); ... }`，難以維護；docs 底下留有一份
+  「開發規格 v2（整理版）」規劃改用 fantasy-fashion.html 的乾淨版型從零重建，
+  但目前決議是整頁刪除、暫不重建。下架範圍：`anime-hero.html` 本檔、首頁
+  nav-link/tool-card/CSS、`check-static.mjs`/`audit-100x.mjs`/
+  `validate-preset-refs.mjs` 裡的專屬區塊、README/CLAUDE.md 的頁面清單。
+  `docs/history/` 底下 2026-07-23 前後幾篇 anime-hero 開發記錄維持原樣不改
+  （歷史事實記錄）。
 - **共用核心**：`assets/core-prompt.js` 集中管理身份鎖定等保護區塊；核心文字經過
   兩輪瘦身（5,162 → 4,099 字元），語意零遺漏。
 - **travel / magazine / fantasy 操作模式已統一**：手動生成、stale 保護
@@ -38,19 +40,14 @@
 - **驗證工具**：四個腳本，改咒語相關邏輯後都應該跑：
   - `scripts/check-static.mjs`（結構：重複 id、本地連結、inline script 語法）
   - `scripts/build-prompt-preview.mjs`（固定選項組合 0-diff 迴歸）
-  - `scripts/audit-100x.mjs`（六頁各 100 組隨機模擬內容稽核，含 anime-hero）
+  - `scripts/audit-100x.mjs`（五頁各 100 組隨機模擬內容稽核）
   - `scripts/validate-preset-refs.mjs`（2026-07-22（十一）新增：檢查
     `QUICK_TRAVEL_PRESETS`/`TRAVEL_STYLE_PRESET_DEFAULTS`、
     `QUICK_MAGAZINE_PRESETS`/`STYLE_PRESET_DEFAULTS`/`THEME_PRESET_DEFAULTS`、
-    fantasy 的 `themeTemplates`、anime-hero 的 `presets`（2026-07-23 補上）這些
-    「一鍵套用/預設連動」物件裡，每筆用到的每個欄位值是不是真的存在於該頁當下的
-    選項池——**這是專門為了抓 composition/intensity 那種靜默失效問題而寫的**，
-    跟 node:vm 解析＋正規表示式讀值，不需要 jsdom，維持專案零 npm 依賴。
-    **anime-hero 是例外**：它的選項卡是 JS 動態渲染，原始碼裡沒有靜態
-    `name="x" value="y"` markup，所以這頁的「當下存在選項」改成直接讀
-    `companionData`/`interactionData`/`outfitBattle+outfitNormal+outfitHybrid`/
-    `bodyData`/`styleData`/`cameraData`/`lightingData`/`backgroundData`/
-    `fxData`/`ratioData` 這些 data object 的 key，而不是掃描 radio markup)
+    fantasy 的 `themeTemplates` 這些「一鍵套用/預設連動」物件裡，每筆用到的
+    每個欄位值是不是真的存在於該頁當下的選項池——**這是專門為了抓
+    composition/intensity 那種靜默失效問題而寫的**，跟 node:vm 解析＋正規
+    表示式讀值，不需要 jsdom，維持專案零 npm 依賴。
   **重要限制**：`audit-100x.mjs` 是重新實作一份組裝邏輯直接讀 DOM 文字來模擬，
   不是真的執行頁面上的 `generate()`，測不出「新增選項卡但忘記同步補頁面自己
   維護的文字對照表」這類問題（2026-07-22（五）就是這樣被漏掉，導致 fantasy

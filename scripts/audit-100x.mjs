@@ -427,92 +427,9 @@ const core = evalCore(coreSource);
   report('store-ad', N);
 }
 
-// ===================== ANIME-HERO =====================
-{
-  const html = read('anime-hero.html');
-  // anime-hero.html builds its cards dynamically from JS data objects and calls
-  // document.getElementById(...)/buildCards(...) at load time, so the vm context
-  // needs a minimal document stub for that top-level code to run without throwing.
-  const start = html.indexOf('const companionData = {');
-  const end = html.indexOf('function selected(');
-  const segment = html.slice(start, end);
-  const context = {
-    window: { HB_CORE_PROMPT: { page: { fantasy: core.page.fantasy } } },
-    document: { getElementById: () => ({ innerHTML: '' }) },
-  };
-  vm.runInNewContext(`${segment}\n;globalThis.__d = ({ companionData, interactionData, compositionData, outfitBattle, outfitNormal, outfitHybrid, bodyData, styleData, cameraData, lightingData, backgroundData, fxData, ratioData, mediaData, presets, RELATION_LOCK, SECOND_EXISTENCE_IDENTITY_ISOLATION, FACE_ORIENTATION_GUARD });`, context, { filename: 'anime-hero-data.js' });
-  const data = context.__d;
-  const pools = {
-    companion: Object.keys(data.companionData), interaction: Object.keys(data.interactionData),
-    composition: Object.keys(data.compositionData),
-    outfit: [...Object.keys(data.outfitBattle), ...Object.keys(data.outfitNormal), ...Object.keys(data.outfitHybrid)],
-    body: Object.keys(data.bodyData), style: Object.keys(data.styleData), camera: Object.keys(data.cameraData),
-    lighting: Object.keys(data.lightingData), background: Object.keys(data.backgroundData), fx: Object.keys(data.fxData),
-    ratio: Object.keys(data.ratioData), media: Object.keys(data.mediaData),
-  };
-  const identityGuard = core.page.fantasy.identityGuard;
-  const anatomyGuard = core.page.fantasy.anatomyGuard;
-  const lightingConsistencyGuard = core.page.fantasy.lightingGuard;
-  const negativePrompt = core.page.fantasy.negativePrompt;
-  const outputQuality = core.page.fantasy.output;
-  const subjectIntegrationGuard = '【人物融合系統】';
-  const customSamples = ['', '', '白銀鎧甲禮服', '測試主題 with émoji 🌸 and "quotes"'];
-  for (let i = 0; i < N; i += 1) {
-    const sel = {
-      companion: pick(pools.companion), interaction: pick(pools.interaction), composition: pick(pools.composition),
-      outfit: pick(pools.outfit),
-      body: pick(pools.body), style: pick(pools.style), camera: pick(pools.camera), lighting: pick(pools.lighting),
-      background: pick(pools.background), fx: pick(pools.fx), ratio: pick(pools.ratio), media: pick(pools.media),
-      colorNote: randomText(), prop: randomText(), titleArea: randomText(), extraNote: randomText(),
-      customOutfit: pick(customSamples), customBackground: pick(customSamples),
-    };
-    const companion = data.companionData[sel.companion];
-    const interaction = data.interactionData[sel.interaction];
-    const composition = data.compositionData[sel.composition];
-    const outfit = data.outfitBattle[sel.outfit] || data.outfitNormal[sel.outfit] || data.outfitHybrid[sel.outfit];
-    const body = data.bodyData[sel.body];
-    const style = data.styleData[sel.style];
-    const camera = data.cameraData[sel.camera];
-    const lighting = data.lightingData[sel.lighting];
-    const background = data.backgroundData[sel.background];
-    const fx = data.fxData[sel.fx];
-    const ratio = data.ratioData[sel.ratio];
-    const media = data.mediaData[sel.media];
-    const colorNote = sel.colorNote.trim();
-    const propInput = sel.prop.trim();
-    const propLine = propInput
-      ? 'signature prop: ' + propInput + ','
-      : "No handheld transformation device, summoning device, medallion, transformation core or weapon. Keep both hands naturally free and unobstructed. The transformation connection is expressed through synchronized pose, body movement, energy flow, glowing aura and the companion's protective interaction with the person.,";
-    const titleArea = sel.titleArea.trim() || 'leave a clean lower poster area for optional title treatment, but generate no readable text';
-    const extraNote = sel.extraNote.trim();
-    const customOutfit = sel.customOutfit.trim();
-    const customBackground = sel.customBackground.trim();
-    const outfitText = customOutfit ? 'custom outfit description only: ' + customOutfit + '; do not include or blend any preset outfit option' : outfit.prompt;
-    const backgroundText = customBackground ? 'custom background description only: ' + customBackground + '; do not include or blend any preset background option' : background.prompt;
-    const prompt = [
-      identityGuard + ',', 'Same adult person from the reference photo, realistic cinematic key-art subject, reference photo used for identity only,',
-      anatomyGuard + ',', body.prompt + ',', data.SECOND_EXISTENCE_IDENTITY_ISOLATION, data.RELATION_LOCK,
-      '【配角設計】\ncompanion: ' + companion.prompt + ',', 'identity exception: ' + companion.identityException + ',',
-      '【互動構圖】\n' + interaction.prompt + ',', data.FACE_ORIENTATION_GUARD,
-      '【構圖法則】\n' + composition.prompt + ',',
-      lightingConsistencyGuard, subjectIntegrationGuard,
-      '【服裝】\nperson outfit: ' + outfitText + ',', '【海報語氣】\n' + style.prompt + ',', '【場景】\nbackground: ' + backgroundText + ',',
-      '【特效】\n' + fx.prompt + ',', '【鏡頭】\n' + camera.prompt + ',', '【光影】\nlighting design: ' + lighting.prompt + ',',
-      'color palette: ' + (colorNote || 'derive a cohesive premium palette from the selected lighting and companion design') + ',',
-      propLine, titleArea + ',', ratio.prompt + ',', '【輸出風格／畫面媒材】\n' + media.prompt + ',',
-      extraNote ? 'extra direction: ' + extraNote + ',' : '', outputQuality ? outputQuality + ',' : '',
-      'premium cinematic promotional key art, rich layered depth: foreground particles, midground subjects, monumental background, volumetric light, controlled contrast,',
-      negativePrompt ? negativePrompt + ',' : '',
-      'no franchise character, no copyrighted logo, no readable title text, no watermark, no duplicate human, no extra exposed human face, no face-covered effects',
-    ].filter(Boolean).join('\n');
-    checkOutput('anime-hero', i, sel, prompt, { requireIdentity: true, identityMarkers: ['身份鎖定系統'] });
-  }
-  report('anime-hero', N);
-}
-
 // ===================== BANNED-NAME STATIC SCAN (source files, not simulation) =====================
 const bannedNames = ['不知火舞', '月野うさぎ', '胡蝶しのぶ', '麻宮アテナ', 'ボア・ハンコック', 'ニコ・ロビン', '真三國無雙', '月英', '練師', '孫尚香'];
-for (const file of ['travel.html', 'magazine.html', 'fantasy-fashion.html', 'doll.html', 'store-ad.html', 'anime-hero.html']) {
+for (const file of ['travel.html', 'magazine.html', 'fantasy-fashion.html', 'doll.html', 'store-ad.html']) {
   const html = read(file);
   for (const name of bannedNames) {
     if (html.includes(name)) ISSUES.push({ page: file, iteration: 'static-scan', selection: null, problems: [`原始碼含禁用角色名: ${name}`] });
@@ -530,5 +447,5 @@ if (ISSUES.length) {
   }
   process.exitCode = 1;
 } else {
-  console.log('\n✅ ALL SIMULATIONS PASS — 全部 100x6 隨機模擬皆無 undefined/NaN/[object Object]/null 洩漏、身份鎖定完整、無相鄰重複行、無禁用角色名。');
+  console.log('\n✅ ALL SIMULATIONS PASS — 全部 100x5 隨機模擬皆無 undefined/NaN/[object Object]/null 洩漏、身份鎖定完整、無相鄰重複行、無禁用角色名。');
 }

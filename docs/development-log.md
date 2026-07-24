@@ -774,3 +774,57 @@
   六頁各自 8 輪隨機切換全部 radio 群組後重新生成，共檢查 baseline＋backGuard＋
   48 輪隨機生成，0 JS error、0 undefined/NaN/[object Object]/null 洩漏、
   無輸出過短。
+
+## 2026-07-24（六）　fantasy 新增天象/自然/森林系材質與場景（讀圖擴充）＋anime-hero.html 整頁下架
+
+- owner 提供 5 張新參考圖，讀圖分類後判斷全部適合幻想頁（水墨書法曳地禮服＋
+  蝴蝶群飛草原、金色新月鞦韆懸空＋水質裙＋金魚、水晶鋼琴金草原夕陽、蜻蜓
+  鱗翅紗裙森林溪流苔石、閃亮薄紗近景美妝——最後一張因為極光薄紗＋珠寶閃光
+  既有組合已經能達到效果，未重複新增）。新增選項卡與對照表同一批做完：
+  - `garment` +1：寬簷花帽曳地禮服 `wideBrimFloralTrailGown`
+  - `material` +2：水墨書法蝶舞裙 `inkCalligraphyButterflyGown`、蜻蜓鱗翅紗裙
+    `dragonflyScaleWingGown`
+  - `background` +4：銀芒草原山景 `silverReedMountainField`、水晶鋼琴金草原
+    `crystalPianoGoldenField`、新月鞦韆雲海 `crescentMoonSwingSky`、森林溪流
+    苔石 `forestStreamMossyRock`
+  - `pose` +2：坐彈鋼琴側望 `piano_glance_sit`、盪鞦韆懸空回眸
+    `swing_dangle_glance`
+  - 驗證：`check-static.mjs`／`validate-preset-refs.mjs`（0 issue）／
+    `build-prompt-preview.mjs`（0 diff）／`audit-100x.mjs`（0 issue）全過；
+    scratchpad jsdom 對全部 9 個新選項值逐一點真正 `generateBtn`，輸出正常。
+
+- **`anime-hero.html`（動漫變身合鏡咒語產生器）整頁下架**：owner 表示對這個
+  系列不滿意，不需要了。過程中先發生一次誤判——把 owner 說的「動漫電影變身
+  夥伴咒語產生器」誤認成 `doll.html`（公仔系列，完全不同的另一頁），對 owner
+  講錯兩次，後來自己重新用 Read 工具核對 `index.html` 才發現真正對應的是
+  `anime-hero.html`（首頁文案「動漫變身合鏡咒語產生器」「與原創變身英雄、機甲、
+  聖衣或守護替身合鏡，建立電影宣傳美術海報」），並用 `AskUserQuestion` 明確
+  跟 owner 確認過刪除目標才動手，避免刪錯頁。
+  - 過程中意外發現 `docs/動漫電影 變身夥伴/開發規格-v2-整理版.md`——這是
+    owner（或先前對話）已經寫好的重建規格，說明現行 `anime-hero.html` 疊了
+    10 層 monkey-patch 式 `generate = function(){ 上一版generate(); ... }`，
+    規劃「開新檔案重建」而非原地修補；owner 這次的決議是整頁刪除、不重建，
+    這份規格文件先保留在原處（不是正式站內容，不影響上架）。
+  - **下架範圍**（全部完成）：
+    - `git rm anime-hero.html`
+    - `index.html`：移除 nav-link（`<a href="anime-hero.html">動漫合鏡</a>`）、
+      整個 `tool-card anime` 區塊、對應的 `.tool-card.anime` 三處 CSS
+    - `scripts/check-static.mjs`：頁面清單移除 `'anime-hero.html'`
+    - `scripts/audit-100x.mjs`：移除整個 ANIME-HERO 模擬區塊（約 80 行，含
+      `companionData`/`interactionData`/`compositionData`/`outfitBattle` 等
+      VM 讀取邏輯）、頁面清單陣列移除 `anime-hero.html`、報告文字
+      「100x6」改回「100x5」
+    - `scripts/validate-preset-refs.mjs`：移除 anime-hero.html 專屬區塊
+      （它的選項卡是 JS 動態渲染非靜態 radio markup，用 `keysOf()` 直接讀
+      data object key 的那段特殊邏輯）
+    - `README.md`／`CLAUDE.md`：頁面清單移除 anime-hero.html、六頁改回五頁、
+      驗證工具說明移除 anime-hero 相關敘述
+  - `docs/history/face-orientation-fix-2026-07-23.md`、
+    `docs/history/anime-high-similarity-lock-v4.14.md` 等歷史交接文件維持
+    原樣不改（歷史事實記錄，不回頭改寫）；`travel.html`／`magazine.html`／
+    `fantasy-fashion.html`／`doll.html`／`store-ad.html` 的導覽列本來就沒有
+    連到 anime-hero.html（never 被接上共用導覽），不用改。
+  - **驗證**：`check-static.mjs` 全過；`validate-preset-refs.mjs` 0 issue
+    （travel 12+8、magazine 23+34+65、fantasy 58 筆，皆不含 anime-hero）；
+    `build-prompt-preview.mjs` 5 組固定組合 0 diff；`audit-100x.mjs` 改回
+    500 次模擬（5 頁）0 issue，確認拿掉 anime-hero 後其餘五頁完全不受影響。

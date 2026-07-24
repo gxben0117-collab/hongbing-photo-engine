@@ -11,7 +11,6 @@ const htmlFiles = [
   'magazine.html',
   'doll.html',
   'fantasy-fashion.html',
-  'anime-hero.html',
   'store-ad.html',
 ];
 const requiredDirs = ['docs', 'assets'];
