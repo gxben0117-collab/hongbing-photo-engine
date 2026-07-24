@@ -43,3 +43,16 @@
 - [2026-07-15 咒語改動對照](history/d-prompt-review-2026-07-15.md)
 - [2026-07-18 第三批讀圖對照](history/e-prompt-review-2026-07-18.md)
 - [v4.3 版本記錄（原始版本說明，已併入開發日誌）](history/v4.3-change-log.md)
+
+### anime-hero.html 開發記錄（該頁已於 2026-07-24 整頁下架，以下純供追溯）
+
+- [高相似度鎖臉模式 v4.14](history/anime-high-similarity-lock-v4.14.md)
+- [第二存在身份隔離 v4.15](history/anime-second-existence-isolation-v4.15.md)
+- [系統介面與因果稽查 v4.16](history/anime-system-audit-v4.16.md)
+- [呈現媒材硬鎖定 v4.17](history/anime-render-medium-lock-v4.17.md)
+- [畫風擴充與選項對應稽查 v4.18](history/anime-style-and-option-audit-v4.18.md)
+- [雜誌時裝擴充 v4.19](history/anime-editorial-outfits-v4.19.md)
+- [高訂儀式戰禮服語言 v4.20](history/anime-couture-battle-language-v4.20.md)
+- [服裝三分類 v4.21](history/anime-outfit-categories-v4.21.md)
+- [第二存在導演系統 v4.22](history/anime-second-entity-director-v4.22.md)
+- [臉部朝向修正（2026-07-23）](history/face-orientation-fix-2026-07-23.md)

@@ -17,6 +17,7 @@ output/*
 !output/.gitkeep
 temp/*
 !temp/.gitkeep
+待清除/
 backup_original/
 紅兵寫真旅拍引擎_v4.3/
 紅兵寫真旅拍引擎_v4.3.zip

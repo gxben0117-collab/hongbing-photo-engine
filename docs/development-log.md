@@ -803,8 +803,11 @@
   - 過程中意外發現 `docs/動漫電影 變身夥伴/開發規格-v2-整理版.md`——這是
     owner（或先前對話）已經寫好的重建規格，說明現行 `anime-hero.html` 疊了
     10 層 monkey-patch 式 `generate = function(){ 上一版generate(); ... }`，
-    規劃「開新檔案重建」而非原地修補；owner 這次的決議是整頁刪除、不重建，
-    這份規格文件先保留在原處（不是正式站內容，不影響上架）。
+    規劃「開新檔案重建」而非原地修補；owner 這次的決議是整頁刪除、不重建。
+    2026-07-24（七）文件整理時，這份規格與其參考圖整批搬到專案根目錄的
+    `待清除/動漫電影 變身夥伴（anime-hero.html已下架-僅供參考）/`，並加進
+    `.gitignore`（不是正式站內容，本來就未曾提交進版本控制，純粹是本機
+    待審閱/待刪除的暫存區）。
   - **下架範圍**（全部完成）：
     - `git rm anime-hero.html`
     - `index.html`：移除 nav-link（`<a href="anime-hero.html">動漫合鏡</a>`）、
@@ -828,3 +831,34 @@
     （travel 12+8、magazine 23+34+65、fantasy 58 筆，皆不含 anime-hero）；
     `build-prompt-preview.mjs` 5 組固定組合 0 diff；`audit-100x.mjs` 改回
     500 次模擬（5 頁）0 issue，確認拿掉 anime-hero 後其餘五頁完全不受影響。
+
+## 2026-07-24（七）　全專案檢查＋文件整理＋導覽連結逐頁核對
+
+- owner 要求「全專案檢查、文件整理、把預備清除檔案移到一個檔案夾、每頁檢查
+  最上方導覽連結、上架」。逐項執行：
+  - **導覽連結**：逐一讀取 index.html/travel.html/magazine.html/doll.html/
+    fantasy-fashion.html/store-ad.html 的 `.nav-links` 區塊，確認 6 頁的
+    連結清單完全一致（首頁/寫真旅拍/雜誌棚拍/公仔系列/幻想廣告/店家廣告）、
+    each 頁面正確標記自己的 `nav-link active`、6 個目標檔案都存在。全部正常，
+    沒有殘留 anime-hero.html 連結。
+  - **全專案驗證**：`check-static.mjs`／`build-prompt-preview.mjs`（5 組固定
+    組合 0 diff）／`audit-100x.mjs`（500 次模擬 0 issue）／
+    `validate-preset-refs.mjs`（0 issue）全過。
+  - **文件整理**：
+    - `docs/README.md` 的開發紀錄歸檔索引本來漏列 9 篇 anime-hero 相關的
+      `docs/history/*.md`（v4.14～v4.22、face-orientation-fix），補上並
+      加註「該頁已於 2026-07-24 整頁下架，以下純供追溯」，跟既有的
+      「不用當成現況參考」提示語氣一致。
+    - `README.md`「專案定位」段落修正兩處過時敘述：「六個工具頁」改「五個
+      工具頁」、「`check-static.mjs` 是目前唯一正式檢查腳本」改成正確反映
+      現在四個驗證腳本並存的狀態。
+    - 確認 `docs/architecture.md`／`docs/engineering.md`／
+      `docs/function-category-map.md`／`docs/usage.md`／
+      `docs/full-program-spec.md` 的頁數/頁面清單本來就沒有把 anime-hero
+      算進去，不用改。
+  - **待清除檔案歸檔**：專案根目錄新增 `待清除/` 資料夾（已加進
+    `.gitignore`，不會進版本控制），把 `docs/動漫電影 變身夥伴/`
+    （anime-hero.html 的 v2 重建規格＋參考圖，本來就是未提交的本機檔案）
+    整批搬進去並改名標註「anime-hero.html已下架-僅供參考」，方便 owner
+    之後決定要不要真的刪掉。目前專案掃過一輪沒有發現其他待清理的正式頁面
+    或文件，只有這一批。
