@@ -721,3 +721,56 @@
   jsdom smoke test 對 5 種互動逐一驗證輸出含新 guard 且不含舊模糊句，0 JS
   error。`build-prompt-preview.mjs` 這次預期會有 diff（共用核心文字本來就是
   刻意變更，不是意外 regression）。
+
+## 2026-07-24（五）　fantasy 服裝輪廓擴充、anime-hero 疊影構圖升級、全專案 jsdom 檢查
+
+- owner 指定把 anime-hero.html「04-C 改良版（一般服裝＋戰鬥元素）」
+  （`outfitHybrid`）裡的服裝移植到 fantasy-fashion.html「03 服裝輪廓」
+  （`garmentData`）。17 款裡有 2 款（賽博街頭夾克／露腰機甲護甲短裙）fantasy
+  已有近似版本先跳過，其餘 15 款純附加（赤黑金符印高訂戰禮服、黑金高訂戰衣、
+  神話儀式禮裝、星座聖衣披風、水晶戰鬥禮服、月光戰鬥禮服、祭典戰甲、東方刺繡
+  戰袍、銀羽鳳凰改良戰裙、哥德蕾絲甲裙、霓虹武士改良服、星輝改良制服、王族
+  機甲禮服、星河改良禮服、符文皮革戰裙），未動任何舊選項 value/文字。
+- owner 貼一段 ChatGPT 討論出的「雙角色疊影構圖」規格（前景真人三七分側身＋
+  背景配角明顯放大、垂直軸線微偏移、30–50% 疊影比例、配角邊緣半透明／雙重曝光
+  式消融、統一成單一疊影剪影而非左右並列），確認要**升級**既有的
+  `interactionData.backGuard`（背後巨大守護）而非新增選項——這是既有互動選項
+  的輸出文字變更，選到這顆的人之後生成內容會不同於之前版本。
+- 承接上一輪的「no handheld transformation device」修改，anime-hero 這一批
+  已有兩處輸出文字變更（`prop` 空欄邏輯、`backGuard` 疊影構圖），故本次額外做
+  一次全專案檢查而非只驗證單一改動。
+- 驗證：`check-static.mjs`／`validate-preset-refs.mjs`／`build-prompt-preview.mjs`
+  （anime-hero 不在此腳本覆蓋範圍內，五組舊組合 0 diff）／`audit-100x.mjs`
+  （六頁共 600 次模擬 0 issue，anime-hero 走 VM 載入真實 `interactionData`／
+  `garmentData` 等 object，非重寫模擬，故 backGuard 文字改動有被真正驗證到）
+  全過。另外在 scratchpad 用真正的 npm 安裝 jsdom（僅供這次驗證，不進專案
+  `package.json`／不留在 repo）對六頁做真實 DOM smoke test：baseline 生成、
+  anime-hero 額外 dispatch `backGuard` 並確認輸出含新疊影構圖描述關鍵字、
+  六頁各自 8 輪隨機切換全部 radio 群組後重新生成，共檢查 baseline＋backGuard＋
+  48 輪隨機生成，0 JS error、0 undefined/NaN/[object Object]/null 洩漏、
+  無輸出過短。
+- owner 接著反映 fantasy-fashion.html「03 服裝輪廓」選了新加入的「赤黑金符印
+  高訂戰禮服」後，不知道「05 主題材質與奇幻元素」要配哪一個——因為這批新戰服
+  本身已經自帶完整材質敘述（刺繡薄紗、符印流蘇、金屬配飾），但 05 既有 15 組
+  材質多半是甜點/科技產品/寶石等跟戰鬥風格對不上，才會選不出來。owner 選定
+  「新增戰鬥系材質分組」而非只加提示文字或整組重新分類。
+  - 在 `materialData` 新增 8 個材質（`runicMetalEtching`/`gildedArmorCape`/
+    `tatteredBrocadeBanner`/`talismanTasselBind`/`shatteredObsidianShard`/
+    `energyVeinArmorGlow`/`silverFeatherArmorSheen`/`stardustBattleEmbroidery`），
+    專門呼應這批戰鬥／改良戰服的色系與質感（符文金屬、鎏金披風、破損織錦、
+    符印流蘇、黑曜甲片、能量脈紋、銀羽戰甲、星塵刺繡），列為 05 的第一個分組
+    「✦ 戰鬥高訂特調」，並在 05 的 hint 文字加一句提示：選到戰鬥／改良戰服系列
+    時建議直接從這組挑，不用再疊加甜點/科技類不相關材質。純附加，未動舊材質
+    value/文字。
+  - 同時把 owner 要求的章節順序調整一併做掉：**03 服裝輪廓／04 身形輪廓 對調
+    成 03 身形輪廓／04 服裝輪廓**（05 材質章節編號不變），純 DOM 順序與
+    `.section-label` 文字調整，兩個區塊內部的 radio 群組/欄位邏輯完全不動。
+  - 驗證：`check-static.mjs`／`validate-preset-refs.mjs`／`build-prompt-preview.mjs`
+    （0 diff）／`audit-100x.mjs`（600 次模擬 0 issue）全過；scratchpad jsdom
+    額外針對 fantasy-fashion.html 驗證：真實 DOM 上確認 03 身形輪廓的
+    `.section-label` 在 DOM 順序與文字上都排在 04 服裝輪廓之前，並把 15 個新
+    戰鬥服裝逐一對應 8 個新材質做交叉抽測（15 組 garment×material 組合）重新
+    生成，0 JS error、0 undefined/NaN/[object Object]/null、輸出長度正常。
+  六頁各自 8 輪隨機切換全部 radio 群組後重新生成，共檢查 baseline＋backGuard＋
+  48 輪隨機生成，0 JS error、0 undefined/NaN/[object Object]/null 洩漏、
+  無輸出過短。

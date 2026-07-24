@@ -591,9 +591,24 @@
     </div>
   </section>
 
-  <section class="section-garment">
+  <section class="section-body">
     <div class="section-header">
       <div class="section-label">03</div>
+      <div class="section-title">身形輪廓</div>
+    </div>
+    <p class="hint">單選，控制人物比例與腰線。選「原圖自然比例」時，會以參考照身形為主要依據。</p>
+    <div class="grid grid-3" data-choice="bodyShape">
+      <label class="card selected"><input type="radio" name="bodyShape" value="original" checked><div class="name">原圖自然比例</div><div class="desc">以參考照身形為主</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="slight_waist"><div class="name">輕微纖腰</div><div class="desc">自然修飾腰線</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="curvy_waist"><div class="name">豐滿纖腰</div><div class="desc">明顯胸腰臀曲線</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="fashion_tall"><div class="name">高挑時裝比例</div><div class="desc">修長高級模特感</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="korean_idol"><div class="name">韓系偶像比例</div><div class="desc">修長腿線、俐落肩頸、舞台鏡頭平衡感</div></label>
+    </div>
+  </section>
+
+  <section class="section-garment">
+    <div class="section-header">
+      <div class="section-label">04</div>
       <div class="section-title">服裝輪廓</div>
     </div>
     <p class="hint">這裡只決定衣服的外型，例如禮服、和服、披風或肩甲；材質效果請在下一個「主題材質」選。</p>
@@ -643,6 +658,21 @@
       <label class="card"><input type="radio" name="garment" value="ravenCloakGown"><div class="name">烏鴉羽翼斗篷禮服</div><div class="desc">黑羽披肩、修身禮服、暗黑女巫剪裁</div></label>
       <label class="card"><input type="radio" name="garment" value="cyberStreetJacket"><div class="name">賽博街頭夾克</div><div class="desc">不對稱剪裁、發光縫線、未來街頭感</div></label>
       <label class="card"><input type="radio" name="garment" value="neonBodysuitHarness"><div class="name">霓虹緊身衣綁帶</div><div class="desc">高衩緊身衣、發光綁帶細節</div></label>
+      <label class="card"><input type="radio" name="garment" value="redBlackTalisman"><div class="name">赤黑金符印高訂戰禮服</div><div class="desc">刺繡薄紗、流蘇符印</div></label>
+      <label class="card"><input type="radio" name="garment" value="blackGoldCouture"><div class="name">黑金高訂戰衣</div><div class="desc">黑金剪裁、珠寶肩飾</div></label>
+      <label class="card"><input type="radio" name="garment" value="ceremonial"><div class="name">神話儀式禮裝</div><div class="desc">高級長袍、護符</div></label>
+      <label class="card"><input type="radio" name="garment" value="saintRobe"><div class="name">星座聖衣披風</div><div class="desc">神話金屬、長披風</div></label>
+      <label class="card"><input type="radio" name="garment" value="crystalDress"><div class="name">水晶戰鬥禮服</div><div class="desc">透明晶片、短披風</div></label>
+      <label class="card"><input type="radio" name="garment" value="moonGown"><div class="name">月光戰鬥禮服</div><div class="desc">長裙與護甲融合</div></label>
+      <label class="card"><input type="radio" name="garment" value="festivalArmor"><div class="name">祭典戰甲</div><div class="desc">面具、繩結、金屬片</div></label>
+      <label class="card"><input type="radio" name="garment" value="easternEmbroidered"><div class="name">東方刺繡戰袍</div><div class="desc">雲紋刺繡、盤扣</div></label>
+      <label class="card"><input type="radio" name="garment" value="silverPhoenixCouture"><div class="name">銀羽鳳凰改良戰裙</div><div class="desc">銀羽細工、輕甲點綴</div></label>
+      <label class="card"><input type="radio" name="garment" value="gothicLaceArmor"><div class="name">哥德蕾絲甲裙</div><div class="desc">黑蕾絲、尖銳甲片</div></label>
+      <label class="card"><input type="radio" name="garment" value="neonSamuraiHybrid"><div class="name">霓虹武士改良服</div><div class="desc">和風輪廓、發光科技配件</div></label>
+      <label class="card"><input type="radio" name="garment" value="celestialSchoolArmor"><div class="name">星輝改良制服</div><div class="desc">制服底＋星輝甲片</div></label>
+      <label class="card"><input type="radio" name="garment" value="royalMechaGown"><div class="name">王族機甲禮服</div><div class="desc">禮服輪廓＋精密機甲細節</div></label>
+      <label class="card"><input type="radio" name="garment" value="galaxyGown"><div class="name">星河改良禮服</div><div class="desc">深藍紗裙、星塵縫線</div></label>
+      <label class="card"><input type="radio" name="garment" value="runicLeather"><div class="name">符文皮革戰裙</div><div class="desc">皮革剪裁、發光符文刻紋</div></label>
     </div>
     <div class="form-grid" style="margin-top:10px;">
       <label class="field full custom-choice" data-custom-choice="garment">服裝自填
@@ -651,28 +681,22 @@
     </div>
   </section>
 
-  <section class="section-body">
-    <div class="section-header">
-      <div class="section-label">04</div>
-      <div class="section-title">身形輪廓</div>
-    </div>
-    <p class="hint">單選，控制人物比例與腰線。選「原圖自然比例」時，會以參考照身形為主要依據。</p>
-    <div class="grid grid-3" data-choice="bodyShape">
-      <label class="card selected"><input type="radio" name="bodyShape" value="original" checked><div class="name">原圖自然比例</div><div class="desc">以參考照身形為主</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="slight_waist"><div class="name">輕微纖腰</div><div class="desc">自然修飾腰線</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="curvy_waist"><div class="name">豐滿纖腰</div><div class="desc">明顯胸腰臀曲線</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="fashion_tall"><div class="name">高挑時裝比例</div><div class="desc">修長高級模特感</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="korean_idol"><div class="name">韓系偶像比例</div><div class="desc">修長腿線、俐落肩頸、舞台鏡頭平衡感</div></label>
-    </div>
-  </section>
-
   <section class="section-material">
     <div class="section-header">
       <div class="section-label">05</div>
       <div class="section-title">主題材質與奇幻元素</div>
     </div>
-    <p class="hint">選擇要圍繞人物出現的特殊材質或世界觀元素，例如花瓣、水晶、流體、紙雕或神話意象；這不是背景地點。</p>
-    <div class="grid" data-choice="material">      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 特效瞬間（高速凝結）</div>
+    <p class="hint">選擇要圍繞人物出現的特殊材質或世界觀元素，例如花瓣、水晶、流體、紙雕或神話意象；這不是背景地點。💡 若 04 選的是「戰鬥／改良戰服」系列（例如赤黑金符印高訂戰禮服、王族機甲禮服），服裝本身已經有完整材質敘述，這裡建議直接從下方「戰鬥高訂特調」挑一個做局部呼應即可，不需要再疊加甜點、科技產品等不相關材質。</p>
+    <div class="grid" data-choice="material">
+      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 戰鬥高訂特調（搭配 04 戰鬥／改良戰服系列）</div>
+      <label class="card"><input type="radio" name="material" value="runicMetalEtching"><div class="name">符文金屬刻紋</div><div class="desc">發光符文金屬、領口袖口刻紋</div></label>
+      <label class="card"><input type="radio" name="material" value="gildedArmorCape"><div class="name">戰甲鎏金披風</div><div class="desc">鎏金甲片披風、莊重儀式感</div></label>
+      <label class="card"><input type="radio" name="material" value="tatteredBrocadeBanner"><div class="name">破損戰袍織錦</div><div class="desc">陳舊織錦、破損戰旗飄帶</div></label>
+      <label class="card"><input type="radio" name="material" value="talismanTasselBind"><div class="name">符印流蘇縛帶</div><div class="desc">符紙流蘇、手腕腰間縛帶</div></label>
+      <label class="card"><input type="radio" name="material" value="shatteredObsidianShard"><div class="name">破碎黑曜甲片</div><div class="desc">碎裂黑曜甲片懸浮、銳利反光</div></label>
+      <label class="card"><input type="radio" name="material" value="energyVeinArmorGlow"><div class="name">能量脈紋戰甲光</div><div class="desc">戰甲接縫發光能量脈紋</div></label>
+      <label class="card"><input type="radio" name="material" value="silverFeatherArmorSheen"><div class="name">銀羽戰甲流光</div><div class="desc">銀羽戰甲、冷冽月光光澤</div></label>
+      <label class="card"><input type="radio" name="material" value="stardustBattleEmbroidery"><div class="name">星塵戰袍刺繡</div><div class="desc">深藍戰袍、星塵絲線刺繡</div></label>      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 特效瞬間（高速凝結）</div>
       <label class="card"><input type="radio" name="material" value="inkWaterBloom"><div class="name">墨染水雲裙</div><div class="desc">墨水入水暈開瞬凍、東方禪意</div></label>
       <label class="card"><input type="radio" name="material" value="mercuryLiquidMetal"><div class="name">水銀液態金屬裙</div><div class="desc">鏡面水銀流體、反射環境、未來精品</div></label>
       <label class="card"><input type="radio" name="material" value="shatteredMirrorBurst"><div class="name">碎鏡爆散裙</div><div class="desc">千片碎鏡懸浮凍結、稜鏡折射</div></label>
@@ -1807,6 +1831,46 @@ const materialData = {
     label: '暴風雪斗篷',
     prompt: 'blizzard snowstorm material system, swirling wind-driven snow and ice crystals forming a dramatic dynamic cloak, harsh cold cinematic motion',
     palette: 'icy white, cold steel blue, pale gray wind streak'
+  },
+  runicMetalEtching: {
+    label: '符文金屬刻紋',
+    prompt: 'faintly glowing rune-etched metal fragments tracing the collar, cuffs and hemline, ancient engraved patterns catching cool ambient light',
+    palette: 'gunmetal grey, faint cyan-white rune glow, dark iron accent'
+  },
+  gildedArmorCape: {
+    label: '戰甲鎏金披風',
+    prompt: 'a gilded battle-armor cape draping from the shoulders, burnished gold plating with a regal ceremonial sheen and structured metallic folds',
+    palette: 'burnished gold, deep bronze, warm amber highlight'
+  },
+  tatteredBrocadeBanner: {
+    label: '破損戰袍織錦',
+    prompt: 'weathered brocade fabric and torn ceremonial banner ribbons trailing in the wind, battle-worn textile with rich woven patterns and frayed edges',
+    palette: 'faded crimson, aged gold thread, smoky charcoal'
+  },
+  talismanTasselBind: {
+    label: '符印流蘇縛帶',
+    prompt: 'paper talisman tassels and cord bindings wrapping the wrists and waist, faint glowing ink strokes over an aged parchment-like texture',
+    palette: 'aged parchment ivory, cinnabar red ink, black brush stroke accent'
+  },
+  shatteredObsidianShard: {
+    label: '破碎黑曜甲片',
+    prompt: 'fractured obsidian armor shards floating around the body, sharp glassy black facets catching hard directional light',
+    palette: 'obsidian black, sharp white highlight, faint violet reflection'
+  },
+  energyVeinArmorGlow: {
+    label: '能量脈紋戰甲光',
+    prompt: 'crackling energy veins glowing along the armor seams and fabric edges, faint circuitry-like light tracing the silhouette',
+    palette: 'deep charcoal base, electric cyan-blue glow, white spark highlight'
+  },
+  silverFeatherArmorSheen: {
+    label: '銀羽戰甲流光',
+    prompt: 'silver feather-textured armor plating with a cold moonlit sheen, delicate metallic featherwork layered along the shoulders and spine',
+    palette: 'cool silver, pale moonlight white, faint blue undertone'
+  },
+  stardustBattleEmbroidery: {
+    label: '星塵戰袍刺繡',
+    prompt: 'deep indigo fabric embroidered with fine stardust thread, subtle armor accents catching a faint starlight glow at the seams',
+    palette: 'deep indigo, silver stardust thread, faint starlight glow'
   }
 };
 
@@ -1855,7 +1919,22 @@ const garmentData = {
   gothicWitchRobe: 'gothic witch robe, tall pointed hood, layered black sheer panels, dramatic ritualistic silhouette',
   ravenCloakGown: 'raven feather cloak gown, black feathered shoulder cape over a fitted gown, dark witch couture silhouette',
   cyberStreetJacket: 'cyberpunk street jacket, asymmetric cut with glowing seam lines, futuristic streetwear silhouette',
-  neonBodysuitHarness: 'neon bodysuit with harness straps, high-cut fitted bodysuit, glowing strap details, futuristic club couture silhouette'
+  neonBodysuitHarness: 'neon bodysuit with harness straps, high-cut fitted bodysuit, glowing strap details, futuristic club couture silhouette',
+  redBlackTalisman: 'red-black-gold talisman couture battle gown, embroidered sheer layers, controlled red ribbon movement, talisman tassels, refined gold charms and selective armor-like accents, fashion-first ceremonial styling, never a full-body armored suit',
+  blackGoldCouture: 'black-and-gold haute couture battle suit with precise tailoring and jewel shoulder ornaments',
+  ceremonial: 'mythic ceremonial couture, elegant long robe, sacred talismans and premium armor ornaments',
+  saintRobe: 'celestial holy armor with a flowing ceremonial cape, constellation relief and mythic metallic details',
+  crystalDress: 'crystalline battle couture with translucent facets, short cape and luminous ornaments',
+  moonGown: 'moonlit battle gown with elegant long skirt fused with light armor detailing',
+  festivalArmor: 'festival-inspired battle armor with mask accents, cord knots and metallic panel details',
+  easternEmbroidered: 'eastern embroidered battle robe with cloud motifs, minimal knot buttons and fitted bracers',
+  silverPhoenixCouture: 'silver phoenix-feather couture skirt fused with light armor accents and delicate metallic featherwork',
+  gothicLaceArmor: 'gothic lace dress fused with sharp obsidian armor fragments, dark romantic silhouette',
+  neonSamuraiHybrid: 'neon-lit samurai-inspired hybrid outfit blending a traditional silhouette with glowing tech accents',
+  celestialSchoolArmor: 'school uniform silhouette fused with luminous celestial armor panels, retaining a recognizable uniform base',
+  royalMechaGown: 'royal gown silhouette fused with precision mecha panel details and a glowing chest core accent',
+  galaxyGown: 'a deep-indigo battle-couture gown with a flowing star-dust embroidered skirt fused with minimal light armor accents at the shoulder',
+  runicLeather: 'a fitted leather battle skirt and bodice etched with faintly glowing runic engravings, fused with lightweight tactical straps'
 };
 
 const styleData = {

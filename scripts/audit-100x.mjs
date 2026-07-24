@@ -479,7 +479,10 @@ const core = evalCore(coreSource);
     const ratio = data.ratioData[sel.ratio];
     const media = data.mediaData[sel.media];
     const colorNote = sel.colorNote.trim();
-    const prop = sel.prop.trim() || 'an original transformation core or matching signature weapon';
+    const propInput = sel.prop.trim();
+    const propLine = propInput
+      ? 'signature prop: ' + propInput + ','
+      : "No handheld transformation device, summoning device, medallion, transformation core or weapon. Keep both hands naturally free and unobstructed. The transformation connection is expressed through synchronized pose, body movement, energy flow, glowing aura and the companion's protective interaction with the person.,";
     const titleArea = sel.titleArea.trim() || 'leave a clean lower poster area for optional title treatment, but generate no readable text';
     const extraNote = sel.extraNote.trim();
     const customOutfit = sel.customOutfit.trim();
@@ -496,7 +499,7 @@ const core = evalCore(coreSource);
       '【服裝】\nperson outfit: ' + outfitText + ',', '【海報語氣】\n' + style.prompt + ',', '【場景】\nbackground: ' + backgroundText + ',',
       '【特效】\n' + fx.prompt + ',', '【鏡頭】\n' + camera.prompt + ',', '【光影】\nlighting design: ' + lighting.prompt + ',',
       'color palette: ' + (colorNote || 'derive a cohesive premium palette from the selected lighting and companion design') + ',',
-      'signature prop: ' + prop + ',', titleArea + ',', ratio.prompt + ',', '【輸出風格／畫面媒材】\n' + media.prompt + ',',
+      propLine, titleArea + ',', ratio.prompt + ',', '【輸出風格／畫面媒材】\n' + media.prompt + ',',
       extraNote ? 'extra direction: ' + extraNote + ',' : '', outputQuality ? outputQuality + ',' : '',
       'premium cinematic promotional key art, rich layered depth: foreground particles, midground subjects, monumental background, volumetric light, controlled contrast,',
       negativePrompt ? negativePrompt + ',' : '',

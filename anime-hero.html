@@ -434,7 +434,7 @@
     </div>
     <p class="hint">只有需要指定道具、文字留白或特殊細節時再填寫。</p>
     <div class="form-grid">
-      <label class="field">核心道具／武器（可留空由 AI 自選）
+      <label class="field">核心道具／武器（留空＝空手演繹，由姿勢與能量流表現變身感）
         <input id="prop" type="text" placeholder="例如：變身核心、符紙、雙刃長劍">
       </label>
       <label class="field">標題留白
@@ -543,8 +543,8 @@ const companionData = {
 const interactionData = {
   backGuard: {
     name:'背後巨大守護',
-    desc:'配角在主角後方巨大化，壓迫感十足',
-    prompt:'the companion looms large directly behind and above the person at monumental scale, silhouettes overlapping so the two read as one layered composition, the person remains the clear foreground identity anchor'
+    desc:'主從疊影構圖，配角在後方巨大化並與主角輪廓融合',
+    prompt:'a layered two-character composition: the person dominates the foreground in a three-quarter profile portrait while the companion emerges directly behind at significantly larger scale, vertically aligned but slightly offset so their silhouettes intersect by roughly 30 to 50 percent; the companion\'s head rises above and behind the person\'s head, its shoulders and upper body extending outward around the person, forming one unified layered silhouette rather than two separate figures placed side by side; the companion reads slightly softer and more atmospheric than the sharply focused person, its edges dissolving into light, mist, particles or subtle chromatic ghosting for a double-exposure relationship; the person remains the sharp foreground identity anchor, no side-by-side placement, no large gap between the two figures'
   },
   sideBySync: {
     name:'並肩同步出招',
@@ -926,7 +926,10 @@ function generate(options = {}){
   const ratio = ratioData[selected('ratio')];
   const media = mediaData[selected('media')];
   const colorNote = document.getElementById('colorNote').value.trim();
-  const prop = document.getElementById('prop').value.trim() || 'an original transformation core or matching signature weapon';
+  const propInput = document.getElementById('prop').value.trim();
+  const propLine = propInput
+    ? 'signature prop: ' + propInput + ','
+    : "No handheld transformation device, summoning device, medallion, transformation core or weapon. Keep both hands naturally free and unobstructed. The transformation connection is expressed through synchronized pose, body movement, energy flow, glowing aura and the companion's protective interaction with the person.,";
   const titleArea = document.getElementById('titleArea').value.trim() || 'leave a clean lower poster area for optional title treatment, but generate no readable text';
   const extraNote = document.getElementById('extraNote').value.trim();
   const customOutfit = document.getElementById('customOutfit').value.trim();
@@ -959,7 +962,7 @@ function generate(options = {}){
     '【鏡頭】\n' + camera.prompt + ',',
     '【光影】\nlighting design: ' + lighting.prompt + ',',
     'color palette: ' + (colorNote || 'derive a cohesive premium palette from the selected lighting and companion design') + ',',
-    'signature prop: ' + prop + ',',
+    propLine,
     titleArea + ',',
     ratio.prompt + ',',
     '【輸出風格／畫面媒材】\n' + media.prompt + ',',
