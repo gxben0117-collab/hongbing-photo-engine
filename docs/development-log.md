@@ -862,3 +862,50 @@
     整批搬進去並改名標註「anime-hero.html已下架-僅供參考」，方便 owner
     之後決定要不要真的刪掉。目前專案掃過一輪沒有發現其他待清理的正式頁面
     或文件，只有這一批。
+
+## 2026-07-25（一）　fantasy 新增 7 個電影感動態姿勢＋04/05/06 重新分類整理
+
+- owner 貼一段 ChatGPT 建議的「Cinematic Action Pose Library」，問現有姿勢池
+  要不要收錄。逐一比對現有 63 個姿勢後回報：5 個跟既有姿勢重疊度太高
+  （Throne Command≈`throne_cross_leg`、Arms Wide Power Pose≈`arms_wide`、
+  Back Turn Hero≈`back_turn`、Fashion Wind Walk≈`runway_stride`、Dominating
+  Step≈`step_up`），King Of The Battlefield 只是把 `center_still` 換個戰場
+  敘述、Editorial Lean／Over Shoulder Look 跟這次「戰鬥服」動機關聯度低，
+  建議先跳過；但確認現有姿勢池**完全沒有「動態衝擊/戰鬥瞬間」這類姿勢**，
+  這塊是真空缺，建議收錄 7 個：Hero Landing、Sword Draw、Mid Air Slash、
+  Running Charge、Spell Casting、Floating Ascension、Energy Burst。owner
+  同意，並要求「順便整理 04 服裝輪廓／05 主題材質／06 人物姿勢的分類排序，
+  但別忘記 00 一鍵主題模板的設定」。
+- **新增 7 個姿勢**：`hero_landing_pose`／`sword_draw_pose`／`mid_air_slash`／
+  `running_charge`／`spell_casting`／`floating_ascension`／`energy_burst`，
+  HTML 卡片與 `poseData` 對照表同一批做完（過程中一度因為檔案是 CRLF 換行、
+  腳本用 LF 字串比對導致 `poseData` 那段靜默插入失敗，只有 HTML 卡片插入
+  成功——事後用 grep 比對「HTML應有7筆＋data應有7筆＝14行」才抓到少了一半，
+  改用不依賴換行字元比對的方式補上）。
+- **04 服裝輪廓重新分類**：原本 61 件服裝完全沒有分類標題、純平鋪清單，
+  改成 10 個 `✦` 分類（高訂禮服基礎／東方古風／婚嫁儀式／特效材質裙款／
+  神話奇幻生靈／洛可可與馬戲奇想／暗黑哥德／賽博未來／角色原型／戰鬥高訂
+  「機甲／聖衣／符文」）。**只搬動 DOM 位置與新增分類標題文字，所有
+  `value` 屬性、`garmentData` 對照表完全沒動**。
+- **05 主題材質輕量優化**：既有 15 組分類本來就有標題，不用整個重做，只
+  做兩件事：(1) 修正一個既有的格式小問題——`stardustBattleEmbroidery` 那筆
+  跟下一個分類標題黏在同一行沒換行（純格式，不影響功能，但重組時一併順便
+  修掉）；(2) 把「戰鬥高訂特調」分類從最前面移到「機甲未來」與「賽博霓虹
+  都市」中間，跟其他暗黑／戰鬥／科技系分類放在一起，語意分群更合理。
+- **06 人物姿勢重新分類**：原本「手勢與動作」這組被當成雜物袋，混了真正的
+  手勢細節（托腮、撩髮）跟動態動作（持盾站姿、飛行懸空、擲物戰鬥姿）。
+  拆成「手勢與細節」（23項，純手勢/近景張力）跟新的「電影感動態／戰鬥
+  瞬間」（15項＝既有8個動作類姿勢＋新增7個），跟站姿(16)、坐姿與地面(17)
+  並列成四組。
+- **不忘 00 一鍵主題模板**：全程只搬 DOM 位置、只新增內容，沒有刪除或改名
+  任何 `value`；用程式化方式（node 腳本抽取每張卡片的完整 HTML 存進
+  value→html 對照表、按新分類清單重組、比對「應放進去的清單」跟「原始擷取
+  清單」數量與內容完全一致才寫檔）而非手動搬移文字，避免 61+141+71 張卡片
+  手動搬移時抄錯或漏掉的風險。
+- **驗證**：`check-static.mjs` 全過；`validate-preset-refs.mjs` 確認 58 個
+  `themeTemplates` 全部 0 issue（證明重新分類完全沒影響任何模板能不能正確
+  找到它引用的選項）；`build-prompt-preview.mjs` 5 組固定組合仍 0 diff
+  （純視覺重組，既有輸出文字完全沒變）；`audit-100x.mjs` 500 次模擬 0
+  issue；另外寫 jsdom 測試對全部 43 個目前真的有按鈕的模板逐一點擊、對 7
+  個新姿勢逐一點真正 `generateBtn`、以及預設狀態生成，全部正常無
+  undefined/NaN/JS error。

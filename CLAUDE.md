@@ -31,6 +31,15 @@
   `validate-preset-refs.mjs` 裡的專屬區塊、README/CLAUDE.md 的頁面清單。
   `docs/history/` 底下 2026-07-23 前後幾篇 anime-hero 開發記錄維持原樣不改
   （歷史事實記錄）。
+- **fantasy 頁 04/05/06 已重新分類**（2026-07-25）：04 服裝輪廓（61項）從
+  完全無分類的平鋪清單改成 10 個 `✦` 分類；05 主題材質輕量優化（戰鬥高訂
+  特調分類移到機甲未來／賽博霓虹都市旁邊，語意分群更合理）；06 人物姿勢
+  把原本混雜的「手勢與動作」拆成「手勢與細節」＋新的「電影感動態／戰鬥
+  瞬間」（新增 7 個：hero_landing_pose/sword_draw_pose/mid_air_slash/
+  running_charge/spell_casting/floating_ascension/energy_burst）。**全程
+  只搬 DOM 位置、新增內容，沒有刪除或改名任何 `value`**，用程式化抽取重組
+  避免大量卡片手動搬移出錯，`validate-preset-refs.mjs` 確認 58 個
+  `themeTemplates` 全數 0 issue，證明 00 一鍵主題模板系統完全不受影響。
 - **共用核心**：`assets/core-prompt.js` 集中管理身份鎖定等保護區塊；核心文字經過
   兩輪瘦身（5,162 → 4,099 字元），語意零遺漏。
 - **travel / magazine / fantasy 操作模式已統一**：手動生成、stale 保護
