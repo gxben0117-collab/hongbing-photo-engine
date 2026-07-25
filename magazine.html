@@ -1287,6 +1287,8 @@
         <div class="desc">蛋糕草莓,粉白棚拍,人物置身甜點桌旁</div>
       </label>
     </div>
+    <div style="font-size:12px;color:var(--soft);margin:10px 0 4px;">背景自填（填寫後會取代上方所有選項）</div>
+    <input type="text" class="text-input" id="customBg" placeholder="例如：老式書房壁爐、廢棄溫室玻璃屋、深夜便利商店">
   </section>
   <!-- 05 姿態模組 -->
   <section>
@@ -1757,6 +1759,8 @@
         </label>
       </div>
     </div>
+    <div style="font-size:12px;color:var(--soft);margin:10px 0 4px;">姿勢自填（填寫後會取代上方所有選項）</div>
+    <input type="text" class="text-input" id="customPose" placeholder="例如：單手撐傘回眸、蹲坐翻閱雜誌、側身靠窗托腮">
 
   </section>
 
@@ -4033,8 +4037,14 @@ function setMultiChipValues(containerId, values){
   });
 }
 
+function clearCustomChoiceFields(){
+  document.getElementById('customBg').value = '';
+  document.getElementById('customPose').value = '';
+}
+
 function applyVisualPresetDefaults(preset){
   if(!preset) return;
+  clearCustomChoiceFields();
   if(preset.style) setSelectedCardValue('styleCards', preset.style);
   if(preset.bg) setSelectedCardValue('bgCards', preset.bg);
   if(preset.pose) setSelectedPoseValue(preset.pose);
@@ -4404,12 +4414,16 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
     ? `【封面風格｜${style.label}】\n\n${style.text}`
     : `【封面風格｜${style.label}】\n\n${style.text}\n\n風格僅套用於光線、構圖、氛圍、服裝質感\n不可覆寫或調整五官、臉型、臉部特徵`;
 
+  const customBg = document.getElementById('customBg').value.trim();
   const bgBlock = isInkFlower
     ? `【背景設定】\n\nPure White Background\nClean Empty Background\nNo Scene No Environment`
-    : `【背景設定】\n\n${BACKGROUNDS[bgKey]}`;
+    : customBg
+      ? `【背景設定】\n\ncustom background only: ${customBg}; do not include or blend any preset background option`
+      : `【背景設定】\n\n${BACKGROUNDS[bgKey]}`;
 
   const bodyShapeBlock = BODY_SHAPES[bodyShapeKey];
-  const poseText = isInkFlower ? null : POSES[poseKey];
+  const customPose = document.getElementById('customPose').value.trim();
+  const poseText = isInkFlower ? null : (customPose ? `custom pose only: ${customPose}; do not include or blend any preset pose` : POSES[poseKey]);
   const poseBlock = poseText ? `【姿態模組】\n\n${poseText}` : null;
   const framingBlock = FRAMING_RATIOS[framingKey];
   const cameraBlock = CAMERAS[cameraKey];
@@ -4816,6 +4830,7 @@ function pickWeightedChipSelection(values, exclusiveValue, maxCount){
 // 元素級獨立隨機：風格/背景/姿態/框景/鏡頭/動態/媒材/比例/妝容/珠寶/表情/光線
 // 每一項各自從完整選項池抽一個，動態組合成結果，不是從既有一鍵套用清單三選一。
 function applyMagazineRandomSelection(){
+  clearCustomChoiceFields();
   const styleValues = getAllRadioValues('style');
   const bgValues = getAllRadioValues('bg');
   const poseValues = getAllRadioValues('pose');

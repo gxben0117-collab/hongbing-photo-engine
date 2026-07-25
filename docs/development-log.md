@@ -1028,3 +1028,33 @@
   （500 次模擬 0 issue）全過；另外針對這 11 個新元素逐一寫 jsdom 測試，
   對每個新 value 觸發對應事件並執行 `generateBtn`，確認輸出文字包含新增
   內容、無 undefined/NaN/JS error。
+
+## 2026-07-25（五）　三頁指定欄位新增「自填」格
+
+- owner 指定六個欄位要各加一格自由文字輸入：magazine 04 拍攝場景與背景／
+  05 人物姿勢，fantasy-fashion 09 背景場景與留白／06 人物姿勢，travel 08
+  姿勢／10 裝扮細節。
+- **fantasy-fashion.html 沿用既有的 `customGarment`/`customMaterial` 自填
+  機制**（`data-custom-choice` + `refreshCards()` 通用視覺切換系統，填了字
+  卡片會自動取消選取，欄位本身會亮起）：新增 `customBackground`（09）、
+  `customPose`（06），兩者都是「填了就完全取代該欄位的預設選項」語意，跟
+  服裝/材質自填的行為一致。同步把這兩個 id 加進 `applyThemeTemplate`／
+  `applyFantasyRandomSelection` 的清空清單，避免使用者填了自填字後再點
+  一鍵模板或隨機套用時，殘留的自填文字沒被清掉、默默蓋掉新選的預設值。
+- **magazine.html／travel.html 過去完全沒有這套自填機制**，從零建立：
+  - magazine 新增 `customBg`（04）、`customPose`（05），沿用既有
+    `.text-input` 樣式，填了就取代 `BACKGROUNDS[bgKey]`／`POSES[poseKey]`；
+    同步在 `applyVisualPresetDefaults()`／`applyMagazineRandomSelection()`
+    加入新的 `clearCustomChoiceFields()` 呼叫。
+  - travel 新增 `customPose`（08，取代語意，同 fantasy/magazine）、
+    `customAdorn`（10 裝扮細節，**用「附加」而非「取代」語意**——因為這格
+    底下同時有髮型跟配件兩個獨立欄位，取代整組沒有意義，改成額外補一行
+    styling detail，跟原本選的髮型/配件文字一起輸出）；同步新增
+    `clearCustomChoiceFields()`，在 `applyTravelPreset()`／
+    `applyTravelRandomSelection()` 呼叫。
+- **驗證**：`check-static.mjs`／`validate-preset-refs.mjs`／
+  `build-prompt-preview.mjs`（5 組固定組合仍 0 diff，代表沒改到任何既有
+  輸出邏輯）／`audit-100x.mjs`（500 次模擬 0 issue）全過；另外寫 jsdom
+  測試逐一填入這 6 個新欄位、觸發 `generateBtn`，確認輸出文字包含填入的
+  自訂內容、無 JS error；並額外測試「填自填字→點一鍵模板/預設」情境，
+  確認三頁的自填欄位都會被正確清空，不會殘留污染下一次生成。

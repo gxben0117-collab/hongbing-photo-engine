@@ -984,6 +984,11 @@
         </div>
       </div>
     </div>
+    <div class="form-grid" style="margin-top:10px;">
+      <label class="field full custom-choice" data-custom-choice="pose">姿勢自填
+        <input id="customPose" type="text" placeholder="例如：仰躺花瓣堆中、單手撐傘回眸、盤坐懸浮冥想">
+      </label>
+    </div>
   </section>
 
   <section class="section-camera">
@@ -1159,6 +1164,11 @@
       <label class="card"><input type="radio" name="background" value="crescentMoonGoldfishSky"><div class="name">新月鞦韆錦鯉雲海</div><div class="desc">金色新月鞦韆懸空、錦鯉悠游環繞、藍天雲海</div></label>
       <label class="card"><input type="radio" name="background" value="blossomGardenRainbowFlare"><div class="name">花園逆光虹彩</div><div class="desc">逆光花園、暖陽穿透花叢、彩虹鏡頭光斑</div></label>
       <label class="card"><input type="radio" name="background" value="phoenixDragonThroneHall"><div class="name">鳳凰玄龍寶座殿</div><div class="desc">古殿寶座、左側火鳳凰盤旋、右側冰晶巨龍守護</div></label>
+    </div>
+    <div class="form-grid" style="margin-top:10px;">
+      <label class="field full custom-choice" data-custom-choice="background">背景自填
+        <input id="customBackground" type="text" placeholder="例如：廢棄教堂玫瑰花窗、深海發光水母群、古代星圖天文台">
+      </label>
     </div>
   </section>
 
@@ -3097,7 +3107,7 @@ function applyThemeTemplate(key){
     document.getElementById('intensity').value = preset.intensity;
   }
 
-  ['customGarment','customMaterial','colorNote','extraNote'].forEach(id => {
+  ['customGarment','customMaterial','customBackground','customPose','colorNote','extraNote'].forEach(id => {
     document.getElementById(id).value = '';
   });
 
@@ -3128,7 +3138,7 @@ function applyFantasyRandomSelection(){
   if(intensityValues.length){
     document.getElementById('intensity').value = getRandomItem(intensityValues);
   }
-  ['customGarment','customMaterial','colorNote','extraNote'].forEach(id => {
+  ['customGarment','customMaterial','customBackground','customPose','colorNote','extraNote'].forEach(id => {
     document.getElementById(id).value = '';
   });
   refreshCards();
@@ -3163,14 +3173,20 @@ function generate(options = {}){
   const garmentText = customGarment
     ? `custom garment form only: ${customGarment}; do not include or blend any preset garment option`
     : garmentData[selected('garment')];
-  const background = backgroundData[selected('background')];
+  const customBackground = document.getElementById('customBackground').value.trim();
+  const background = customBackground
+    ? `custom background only: ${customBackground}; do not include or blend any preset background option`
+    : backgroundData[selected('background')];
   const lighting = lightingData[selected('lighting')];
   const colorNote = document.getElementById('colorNote').value.trim();
   const extraNote = document.getElementById('extraNote').value.trim();
   const composition = selected('composition');
   const framing = framingData[selected('framing')];
   const intensity = document.getElementById('intensity').value;
-  const poseText = poseData[selected('pose')];
+  const customPose = document.getElementById('customPose').value.trim();
+  const poseText = customPose
+    ? `custom pose only: ${customPose}; do not include or blend any preset pose`
+    : poseData[selected('pose')];
   const prompt = [
     identityGuard + ',',
     'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
@@ -3277,7 +3293,7 @@ document.addEventListener('input',(event)=>{
 document.addEventListener('change',(event)=>{
   if(event.target && event.target.closest && !event.target.closest('#outputWrap')) markStale();
 },true);
-['customGarment','customMaterial','intensity','colorNote','extraNote'].forEach(id => {
+['customGarment','customMaterial','customBackground','customPose','intensity','colorNote','extraNote'].forEach(id => {
   document.getElementById(id).addEventListener('input', () => {
     refreshCards();
   });

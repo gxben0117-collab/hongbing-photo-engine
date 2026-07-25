@@ -1003,6 +1003,8 @@
         <div class="desc">仰頭伸展 / 慵懶晨間感</div>
       </label>
     </div>
+    <div style="font-size:12px;color:var(--ink-soft);margin:10px 0 4px;">姿勢自填（填寫後會取代上方所有選項）</div>
+    <input type="text" class="theme-input" id="customPose" placeholder="例如：單手撐傘回眸、坐在窗邊托腮望向遠方">
   </section>
 
   <!-- 09 服裝方向 -->
@@ -1197,6 +1199,8 @@
         <div class="desc">後背或側背小包</div>
       </label>
     </div>
+    <div style="font-size:12px;color:var(--ink-soft);margin:10px 0 4px;">裝扮細節自填（額外補充，會與上方髮型/配件選項一併加入）</div>
+    <input type="text" class="theme-input" id="customAdorn" placeholder="例如：珍珠耳環、絲巾綁髮、復古墨鏡">
   </section>
 
   <!-- 11 輸出風格 -->
@@ -2054,7 +2058,13 @@ function getCardValues(containerId){
 
 // 元素級獨立隨機：構圖/風格/比例/鏡頭/光線/動態/媒材/姿勢/服裝/髮型/配件
 // 每一項各自從完整選項池抽一個，動態組合成結果，不是從既有一鍵套用清單三選一。
+function clearCustomChoiceFields(){
+  document.getElementById('customPose').value = '';
+  document.getElementById('customAdorn').value = '';
+}
+
 function applyTravelRandomSelection(){
+  clearCustomChoiceFields();
   const compositionValue = getRandomItem(getCardValues('compositionCards'));
   const styleValue = getRandomItem(getCardValues('styleCards').filter(value => value !== 'vogue'));
   const ratioValue = getRandomItem(getCardValues('ratioCards'));
@@ -2217,6 +2227,7 @@ QUICK_TRAVEL_PRESETS.silkRoadBlueTiles = {
 
 function applyTravelPreset(preset){
   if(!preset) return;
+  clearCustomChoiceFields();
   if(preset.composition) setRadioCardValue('compositionCards', preset.composition);
   if(preset.style) setRadioCardValue('styleCards', preset.style);
   if(preset.ratio) setRadioCardValue('ratioCards', preset.ratio);
@@ -2320,12 +2331,16 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
   const themeBlock=`【主題】\n\n${theme}`;
   const ratioBlock=`【輸出比例】\n\n${RATIOS[ratioKey]}`;
 
-  const poseBlock=POSE_STYLES[poseKey]||null;
+  const customPose=document.getElementById('customPose').value.trim();
+  const poseBlock=customPose
+    ? `【姿勢模組｜自填】\n\ncustom pose only: ${customPose}; do not include or blend any preset pose\nIdentity And Facial Features Remain Clearly Recognizable`
+    : (POSE_STYLES[poseKey]||null);
   const costumeDirection=COSTUME_DIRECTIONS[costumeKey]||null;
   const costumeBlockFinal=costumeDirection
     ? costumeBlock+`\n\n${costumeDirection}\n服裝以上述方向為主軸,細節仍需符合主題世界觀`
     : costumeBlock;
-  const adornLines=[HAIR_STYLES[hairKey],ACCESSORY_PROPS[propKey]].filter(Boolean);
+  const customAdorn=document.getElementById('customAdorn').value.trim();
+  const adornLines=[HAIR_STYLES[hairKey],ACCESSORY_PROPS[propKey],customAdorn?`Additional Styling Detail: ${customAdorn}`:null].filter(Boolean);
   const adornBlock=adornLines.length
     ? `【裝扮細節模組】\n\n${adornLines.join('\n')}\nStyling must not change facial identity or face shape`
     : null;

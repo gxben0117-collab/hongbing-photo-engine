@@ -67,6 +67,20 @@
   文字填進自由文字主題框，純新增 chip 完全不用碰 JS 資料結構。全部純附加，
   `validate-preset-refs`/`build-prompt-preview`/`audit-100x` 全過，另外對
   這 11 個新元素逐一 jsdom 測試確認可正常生成。
+- **三頁指定欄位加「自填」格**（2026-07-25）：fantasy-fashion 的 09 背景／
+  06 姿勢新增 `customBackground`/`customPose`，沿用既有
+  `data-custom-choice` + `refreshCards()` 機制（填了就取代整欄位預設值，
+  卡片自動取消選取）；magazine／travel 過去沒有這套機制，從零建立
+  `customBg`/`customPose`（magazine 04/05）、`customPose`/`customAdorn`
+  （travel 08/10）。**注意語意差異**：除了 travel 的 `customAdorn`（10
+  裝扮細節）是「附加」語意（因為該欄位底下同時有髮型+配件兩個獨立選項，
+  取代整組沒意義，改成額外補一行）之外，其餘全部是「取代」語意（填了就
+  完全不混用預設選項的文字）。**新增自填欄位務必同步做兩件事**：(1) 在
+  `applyThemeTemplate`/`applyXxxPreset`/`applyXxxRandomSelection` 這類
+  一鍵套用函式裡把新欄位 id 加進清空清單，否則使用者填字後再點模板/隨機，
+  殘留文字會默默蓋掉新選的預設值；(2) 若該頁面有 `refreshCards()` 這類
+  卡片選取視覺同步機制（目前只有 fantasy 有），要確認 `data-choice`／
+  `data-custom-choice` 的欄位名稱對得起來。
 - **共用核心**：`assets/core-prompt.js` 集中管理身份鎖定等保護區塊；核心文字經過
   兩輪瘦身（5,162 → 4,099 字元），語意零遺漏。
 - **travel / magazine / fantasy 操作模式已統一**：手動生成、stale 保護
