@@ -909,3 +909,50 @@
   issue；另外寫 jsdom 測試對全部 43 個目前真的有按鈕的模板逐一點擊、對 7
   個新姿勢逐一點真正 `generateBtn`、以及預設狀態生成，全部正常無
   undefined/NaN/JS error。
+
+## 2026-07-25（二）　同一套邏輯套用到 travel.html／magazine.html 的分類整理
+
+- owner 指示「一樣的邏輯 幫我整理雜誌 旅拍介面」——沿用前一則 fantasy
+  04/05/06 重整用的「抽取→比對完整性→dry-run→寫檔」腳本化流程，套到
+  travel.html 與 magazine.html 上。
+- **travel.html 四個欄位全部從平鋪清單改成分類**：
+  - `themePreset`（81 個地點小卡）→ 9 組：台灣(9)／日本(10)／韓國(2)／
+    東南亞與大洋洲(8)／歐洲(22)／美洲(6)／中東與非洲(4)／東方古風與文化
+    景點(12)／都會生活場景(8)。
+  - `costume`（20 項服裝）→ 5 組：東方古風／校園青春／日常休閒／度假海灘／
+    正式與晚宴；「主題自動」維持釘在最前面、不分組。
+  - `lighting`（24 項光線）→ 4 組：自然日光(8)／室內窗光(4)／都會夜景(6)／
+    精品戲劇光(6)；預設值「場景自然光」釘在最前面。
+  - `pose`（20 項姿勢）→ 4 組：站姿與行走(8)／坐臥休憩(3)／回眸手勢(5)／
+    生活情境(3)；「交給導演」釘在最前面。
+  - 過程中發現 travel.html 的卡片 HTML 格式跟 fantasy 不同（多行、
+    `data-value` 寫在 `<label>` 上、有獨立的 `selected` class 變體），第一版
+    抽取用 fantasy 格式的 regex 只抓到 0 或漏掉預設卡，改寫成對應 travel
+    多行格式的 regex 才抓全。
+  - 順手把單次用途的 splice 腳本抽成通用工具 `apply-block.mjs`（給容器起始
+    marker + 新內容檔案 + 可選 `--dry-run`，用 depth-counting 的 div
+    配對找到正確結束位置，不是單純字串搜尋）。
+- **magazine.html 先盤點三個候選欄位，發現只有 2 個真的需要動**：`style`
+  （34 個雜誌調性）其實已經有 3 組 `style-group-label`（雜誌品牌語氣11／
+  版面任務商業企劃15／藝術特殊視覺8），`pose`（86項）也已經分 4 組
+  （站姿20／坐姿與地面24／手勢與動作31／複雜姿勢11），兩者都不需要重整；
+  真正還是平鋪的只有 `bg`（52項）跟 `lighting`（35項）。
+  - `bg` → 7 組：純色棚拍基底(8)／材質牆面與冷調空間(9)／抽象裝置與夜景
+    霓虹(5)／窗光居家與生活材質(8)／宮廷宴會與奢華空間(10)／花園庭院與
+    自然光景(7)／文化展場與都會場景(5)；預設值「單色攝影棚」釘在最前面。
+  - `lighting` → 7 組：基礎棚拍光(8)／窗光與居家柔光(5)／金屬冷調與都會
+    夜色(5)／珠寶精品閃耀(5)／宮廷宴會暖光(5)／花園自然逆光(4)／蕾絲珠簾
+    情境光(2)；預設值「窗光柔亮」釘在最前面。
+- **不忘一鍵主題模板**：全程只搬 DOM 位置、新增分類標題，`value` 屬性與
+  `QUICK_TRAVEL_PRESETS`／`TRAVEL_STYLE_PRESET_DEFAULTS`／
+  `QUICK_MAGAZINE_PRESETS`／`STYLE_PRESET_DEFAULTS`／`THEME_PRESET_DEFAULTS`
+  完全沒動，跟 fantasy 那次一樣先用腳本比對「該分類清單」跟「原始擷取清單」
+  數量與內容完全一致才寫檔。
+- **驗證**：`check-static.mjs` 全過；重整前後用 grep 逐一比對欄位總數不變
+  （travel: costume 20／lighting 24／pose 20／themePreset 81；magazine:
+  bg 52／lighting 35／style 34／pose 86）；`validate-preset-refs.mjs` 確認
+  travel 的 12＋8 個、magazine 的 23＋34＋65 個模板/預設項目全部 0 issue；
+  `build-prompt-preview.mjs` 5 組固定組合仍 0 diff；`audit-100x.mjs` 500
+  次模擬 0 issue；另外寫 jsdom 測試逐一點擊 travel 12 個 `data-travel-preset`
+  快速模板、magazine 23 個 `data-magazine-preset` 快速模板，以及兩頁重整
+  欄位中抽樣的數十個新分組選項，全部正常無 undefined/NaN/JS error。

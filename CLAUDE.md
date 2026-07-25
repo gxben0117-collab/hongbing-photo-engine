@@ -40,6 +40,14 @@
   只搬 DOM 位置、新增內容，沒有刪除或改名任何 `value`**，用程式化抽取重組
   避免大量卡片手動搬移出錯，`validate-preset-refs.mjs` 確認 58 個
   `themeTemplates` 全數 0 issue，證明 00 一鍵主題模板系統完全不受影響。
+- **travel / magazine 平鋪清單也已比照重新分類**（2026-07-25）：travel 四個
+  欄位（themePreset 81項→9組、costume 20項→5組、lighting 24項→4組、
+  pose 20項→4組）全部從平鋪改分類；magazine 盤點後發現 `style`/`pose`
+  已經有分組不用動，只重整 `bg`（52項→7組）與 `lighting`（35項→7組）。
+  同樣全程只搬 DOM 位置、不動 `value`，重整用的通用 splice 工具收在
+  scratchpad 的 `apply-block.mjs`（給容器起始 marker + 新內容 +
+  `--dry-run`，depth-counting 找正確結束位置，避免 CSS class 重用導致抓錯
+  區塊）。
 - **共用核心**：`assets/core-prompt.js` 集中管理身份鎖定等保護區塊；核心文字經過
   兩輪瘦身（5,162 → 4,099 字元），語意零遺漏。
 - **travel / magazine / fantasy 操作模式已統一**：手動生成、stale 保護
