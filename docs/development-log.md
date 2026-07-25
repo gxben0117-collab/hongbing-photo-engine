@@ -956,3 +956,27 @@
   次模擬 0 issue；另外寫 jsdom 測試逐一點擊 travel 12 個 `data-travel-preset`
   快速模板、magazine 23 個 `data-magazine-preset` 快速模板，以及兩頁重整
   欄位中抽樣的數十個新分組選項，全部正常無 undefined/NaN/JS error。
+
+## 2026-07-25（三）　全站 header 版面節奏統一
+
+- owner 提出「全部頁面風格要一致化」，逐一比對六頁 CSS 找出實際落差：
+  顏色上 travel/magazine/doll 三頁已統一用金色 `--gold:#C9A84C` 當強調色，
+  但 fantasy-fashion 用紫色（`--violet:#B889FF`）、store-ad 用薄荷綠
+  （`--mint:#70D6C8`）；版面節奏上 travel/magazine/doll 的 `.wrap` 頂部留白
+  70px、`header{padding:48px 0 36px}`、h1 固定 32px，fantasy/store-ad 卻是
+  `.wrap` 88px、`header{padding:28px 0 30px}`、h1 用 `clamp(28px,6vw,42px)`
+  隨螢幕縮放。用 `AskUserQuestion` 跟 owner 確認兩件事：(1) 紫色／薄荷綠是
+  刻意做頁面區隔用的設計，不要統一成金色；(2) header 版面節奏統一成 travel
+  那套固定尺寸。
+- **只改 fantasy-fashion.html／store-ad.html 兩頁**：`.wrap` 頂部 padding
+  88px→70px、`header{padding:28px 0 30px}`→`{padding:48px 0 36px}`、
+  `margin-bottom:28px`→`36px`、h1 `font-size:clamp(28px,6vw,42px)`→固定
+  `32px`（並補上 travel 同款的 `font-weight:900`／
+  `letter-spacing:0.02em`）。**強調色（violet/mint）、h1 跳色、`.wrap`
+  最大寬度、mobile `@media` 覆寫全部沒動**——兩頁的 mobile nav 架構本來就跟
+  桌機不同（fantasy 手機版 nav 改成 `position:sticky`、store-ad 維持
+  `fixed` 但允許換行變兩排），各自的 mobile-only `.wrap`/`header` 覆寫值是
+  用來配合各自的 nav 行為，不屬於這次要統一的「桌機版面節奏」範圍，改動前
+  有先確認過不會互相衝突。
+- **驗證**：純 CSS 改動、沒動任何 JS 或 `value` 屬性，`check-static.mjs`
+  全過；`git diff` 確認兩頁改動範圍完全對應上述清單，無其他意外變更。

@@ -48,6 +48,14 @@
   scratchpad 的 `apply-block.mjs`（給容器起始 marker + 新內容 +
   `--dry-run`，depth-counting 找正確結束位置，避免 CSS class 重用導致抓錯
   區塊）。
+- **全站 header 版面節奏已統一**（2026-07-25）：fantasy-fashion／store-ad
+  原本用 `.wrap` 頂部 88px＋`header{padding:28px 0 30px}`＋h1 響應式
+  `clamp(28px,6vw,42px)`，跟 travel/magazine/doll 三頁固定的 70px／
+  `48px 0 36px`／32px 不一致，已統一成後者。**強調色刻意保留不動**：
+  fantasy 紫色（`--violet`）、store-ad 薄荷綠（`--mint`）是 owner 確認過的
+  頁面區隔設計，不併入其他三頁的金色；兩頁各自 mobile `@media` 底下的
+  `.wrap`/`header` 覆寫值也保留原樣，因為兩頁行動版 nav 行為本來就不同
+  （fantasy 用 `position:sticky`、store-ad 維持 `fixed` 但允許換行兩排）。
 - **共用核心**：`assets/core-prompt.js` 集中管理身份鎖定等保護區塊；核心文字經過
   兩輪瘦身（5,162 → 4,099 字元），語意零遺漏。
 - **travel / magazine / fantasy 操作模式已統一**：手動生成、stale 保護
