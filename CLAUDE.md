@@ -56,6 +56,17 @@
   頁面區隔設計，不併入其他三頁的金色；兩頁各自 mobile `@media` 底下的
   `.wrap`/`header` 覆寫值也保留原樣，因為兩頁行動版 nav 行為本來就不同
   （fantasy 用 `position:sticky`、store-ad 維持 `fixed` 但允許換行兩排）。
+- **三頁再補 11 個要素**（2026-07-25，讀取新一批風格範例圖）：fantasy 新增
+  3 背景／2 姿勢／1 服裝／1 材質（含 `phoenixDragonThroneHall`＋
+  `dual_spirit_guardian_throne` 雙靈守護寶座組合、`rock_stream_leg_extend`
+  補上溪流苔石背景原本缺的坐姿）；travel 新增服裝
+  `floral_halter_kimono_dress`＋日本地點 chip「古町運河櫻花小徑」＋姿勢
+  `kimono_collar_adjust_glance`；magazine 新增背景
+  `golden_field_backlight`（原本 52 個背景沒有開闊草原場景）。**重要澄清**：
+  travel 的 `themePreset` 地點 chip 沒有另外的英文對照表，點擊只是把中文
+  文字填進自由文字主題框，純新增 chip 完全不用碰 JS 資料結構。全部純附加，
+  `validate-preset-refs`/`build-prompt-preview`/`audit-100x` 全過，另外對
+  這 11 個新元素逐一 jsdom 測試確認可正常生成。
 - **共用核心**：`assets/core-prompt.js` 集中管理身份鎖定等保護區塊；核心文字經過
   兩輪瘦身（5,162 → 4,099 字元），語意零遺漏。
 - **travel / magazine / fantasy 操作模式已統一**：手動生成、stale 保護

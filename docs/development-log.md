@@ -980,3 +980,51 @@
   有先確認過不會互相衝突。
 - **驗證**：純 CSS 改動、沒動任何 JS 或 `value` 屬性，`check-static.mjs`
   全過；`git diff` 確認兩頁改動範圍完全對應上述清單，無其他意外變更。
+
+## 2026-07-25（四）　讀取新一批風格範例圖，分類補強三頁缺少要素
+
+- owner 再次提供 `C:\Users\User\Desktop\ai生圖\風格範例` 資料夾（10 張圖，
+  無咒語文字檔、也無 EXIF 內嵌 prompt），要求逐張分類歸屬旅拍／雜誌／幻想，
+  並補強缺少的姿勢、衣服、構圖、光線、背景、裝扮要素。
+- 逐張比對後發現：其中 4 張（水墨書法蝶舞寬簷帽禮服、水晶鋼琴金草原彈奏、
+  蜻蜓鱗翅紗裙溪石、新月鞦韆水裙錦鯉）跟本輪之前已加入的
+  `wideBrimFloralTrailGown`／`inkCalligraphyButterflyGown`／
+  `crystalPianoGoldenField`／`dragonflyScaleWingGown`／
+  `forestStreamMossyRock`／`crescentMoonSwingSky` 等元素高度重疊，判斷是
+  owner 資料夾內容重複讀取，**沒有重複新增**，只從中挑出兩個真正沒被涵蓋的
+  細節：錦鯉懸浮於新月鞦韆天空、以及側坐溪石一腿伸入水中的姿勢。
+- **fantasy-fashion.html 新增 7 個要素**（09 背景 3／06 姿勢 2／04 服裝 1／
+  05 材質 1，全部純附加不動既有 `value`）：
+  - 背景：`crescentMoonGoldfishSky`（新月鞦韆錦鯉雲海）、
+    `blossomGardenRainbowFlare`（花園逆光虹彩）、
+    `phoenixDragonThroneHall`（鳳凰玄龍寶座殿，取材自持杖端坐寶座、左火鳳凰
+    右冰龍護法的參考圖）。
+  - 姿勢：`rock_stream_leg_extend`（溪石側坐伸腿，補上 04/05/06 重整時發現
+    的空缺——溪流苔石背景原本沒有對應的坐姿選項）、
+    `dual_spirit_guardian_throne`（雙靈守護寶座姿，跟新背景
+    `phoenixDragonThroneHall` 搭配）。
+  - 服裝：`crystalLeafCrownArmor`（水晶葉冠精靈鎧甲，金葉水晶冠＋玻璃金脈
+    胸甲，放進「神話奇幻生靈」分類）。
+  - 材質：`sageCrystalVeilGown`（鼠尾草水晶紗巾，取材自近景美妝參考圖的
+    鼠尾草綠閃鑽頭紗＋削肩深V，放進「寶石琉璃光絲」分類，緊接既有
+    `pearlVeil`）。近景構圖已有 `closeUp`/`bustPortrait` 框景涵蓋，不需要
+    新增構圖選項。
+- **travel.html 新增 3 個要素**：新服裝 `floral_halter_kimono_dress`（改良
+  和服削肩綁帶洋裝，深V＋高衩＋腰間流蘇綁帶，跟既有樸素款 `kimono_yukata`
+  區隔，放在日本古風分組）；日本分組新增地點 chip「古町運河櫻花小徑」
+  （運河老街木屋＋櫻花＋燈籠，先前 10 個日本地點都沒有這種畫面）；新姿勢
+  `kimono_collar_adjust_glance`（整理衣領垂眸，靜立調整領口、視線垂下，
+  跟既有走動類姿勢區隔）。過程中確認 `themePreset` chip 只是把中文文字填進
+  自由文字主題框（`themeInputEl.value=chip.dataset.value`），沒有另外的
+  英文對照表，純新增 chip 不需要動任何 JS 資料結構。
+- **magazine.html 新增 1 個要素**：背景 `golden_field_backlight`（黃金草原
+  逆光，風吹草原＋金色時刻強逆光），放進「花園庭院與自然光景」分類——比對
+  發現 magazine 原本 52 個背景全部是棚拍／室內／花園／都會，沒有開闊草原
+  場景；姿勢「回眸走姿」已涵蓋參考圖的回眸走動動作、`style` 已有
+  `magazine_masthead`／`cover_big`，不需要重複新增。
+- **驗證**：`check-static.mjs`／`validate-preset-refs.mjs`（travel
+  12+8、magazine 23+34+65、fantasy 58 個模板全部 0 issue）／
+  `build-prompt-preview.mjs`（5 組固定組合 0 diff）／`audit-100x.mjs`
+  （500 次模擬 0 issue）全過；另外針對這 11 個新元素逐一寫 jsdom 測試，
+  對每個新 value 觸發對應事件並執行 `generateBtn`，確認輸出文字包含新增
+  內容、無 undefined/NaN/JS error。
