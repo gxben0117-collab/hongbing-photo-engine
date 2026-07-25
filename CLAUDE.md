@@ -81,6 +81,22 @@
   殘留文字會默默蓋掉新選的預設值；(2) 若該頁面有 `refreshCards()` 這類
   卡片選取視覺同步機制（目前只有 fantasy 有），要確認 `data-choice`／
   `data-custom-choice` 的欄位名稱對得起來。
+- **咒語內容無用字詞清理**（2026-07-25，全專案檢查）：修正 4 個確認過的
+  重複/無關字詞問題——(1) fantasy-fashion.html 頁面自己多宣告一份跟
+  `identityGuard` 內建文字逐字相同的 `styleScopeGuard`，造成「Style Scope
+  Rule」整段重複兩次，已移除頁面自己那份；(2) store-ad.html 的
+  `STORE_AD_CORE.negativePrompt`（人臉/肢體負面約束）沒有跟著
+  `identityLock`/`faceGeometryLock`/`lighting` 一起用 `isPersonHero`
+  把關，四種主視覺只有一種有人臉卻無條件塞入，已補上判斷；(3)
+  fantasy-fashion.html／store-ad.html 都各自在 `CORE.output`（含"Sharp
+  focus."）後面又加一行含"sharp focus"的補充句，造成相鄰重複，已去重；
+  (4) `assets/core-prompt.js` 的 `CORE_CLEAN_FRAME`（travel/magazine 共用）
+  移除「No Tourist.」——這行完全被同段落的「No Crowd.」/「No Extra
+  Person.」涵蓋，屬於純重複，套到 magazine 棚拍情境更完全無意義。
+  **改動前先用 `AskUserQuestion` 取得 owner 明確同意才動手**，因為這些都
+  屬於核心提示詞相關內容；`build-prompt-preview.mjs`/`audit-100x.mjs`
+  兩支腳本各自維護一份 fantasy 生成邏輯鏡像，硬編碼引用了
+  `styleScopeGuard`，改動後同步修正這兩支腳本，否則會直接報錯。
 - **共用核心**：`assets/core-prompt.js` 集中管理身份鎖定等保護區塊；核心文字經過
   兩輪瘦身（5,162 → 4,099 字元），語意零遺漏。
 - **travel / magazine / fantasy 操作模式已統一**：手動生成、stale 保護

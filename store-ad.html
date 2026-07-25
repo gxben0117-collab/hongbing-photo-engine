@@ -610,9 +610,9 @@ function generate(){
       'clear visual hierarchy, refined lighting, high-end commercial design, premium local business advertising,',
       `visual direction color palette: ${palette},`,
       extraNote ? `extra direction: ${extraNote},` : '',
-      STORE_AD_CORE.negativePrompt ? STORE_AD_CORE.negativePrompt + ',' : '',
+      isPersonHero && STORE_AD_CORE.negativePrompt ? STORE_AD_CORE.negativePrompt + ',' : '',
       STORE_AD_CORE.output ? STORE_AD_CORE.output + ',' : '',
-      'professional advertising artwork, elegant composition, high quality, sharp focus'
+      'professional advertising artwork, elegant composition, high quality'
     ].filter(Boolean).join('\n'),
     '',
     '【海報文字內容】',

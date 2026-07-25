@@ -104,7 +104,6 @@ No contradictory head/body direction, stiff/robot pose or broken limbs.`;
 
 Only One Human / Solo Subject.
 No Crowd.
-No Tourist.
 No Extra Person.
 No duplicated person.
 Luxury Editorial Quality.`;

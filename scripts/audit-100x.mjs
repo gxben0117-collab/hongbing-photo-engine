@@ -234,7 +234,7 @@ const core = evalCore(coreSource);
     source: html, core, page: 'fantasy',
     startMarker: 'const materialData = {',
     endMarker: 'function setRadioValue',
-    exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedFantasyCore, FANTASY_ILLUSTRATION_MATERIAL_KEYS: typeof FANTASY_ILLUSTRATION_MATERIAL_KEYS === "undefined" ? new Set() : FANTASY_ILLUSTRATION_MATERIAL_KEYS, identityGuard, anatomyGuard, BODY_SHAPES, styleScopeGuard, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
+    exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedFantasyCore, FANTASY_ILLUSTRATION_MATERIAL_KEYS: typeof FANTASY_ILLUSTRATION_MATERIAL_KEYS === "undefined" ? new Set() : FANTASY_ILLUSTRATION_MATERIAL_KEYS, identityGuard, anatomyGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
   });
   const compositionValues = radioValues(html, 'composition');
   const intensityValues = selectValues(html, 'intensity');
@@ -276,10 +276,10 @@ const core = evalCore(coreSource);
       'appearance form: ' + garmentText + ',', 'theme material and art system: ' + materialText + ',',
       'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',
       sel.intensity + ',', 'selected material appears as controlled clothing details, ornaments, particles and background accents without overpowering facial identity,',
-      data.styleData[sel.style] + ',', data.styleScopeGuard + ',', poseText ? poseText + ',' : '', framing + ',',
+      data.styleData[sel.style] + ',', poseText ? poseText + ',' : '', framing + ',',
       data.cameraData[sel.camera] + ',', 'lighting design: ' + lighting + ',', 'background design: ' + background + ',',
       data.ratioData[sel.ratio] + ',', core.page.fantasy.output ? core.page.fantasy.output + ',' : '',
-      'sharp focus, hyper realistic, ultra detailed, premium advertising finish,', 'color palette: ' + (sel.colorNote || materialPalette) + ',',
+      'hyper realistic, ultra detailed, premium advertising finish,', 'color palette: ' + (sel.colorNote || materialPalette) + ',',
       sel.extraNote ? 'extra direction: ' + sel.extraNote + ',' : '', core.page.fantasy.negativePrompt ? core.page.fantasy.negativePrompt + ',' : '',
       'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face',
     ].filter(Boolean);

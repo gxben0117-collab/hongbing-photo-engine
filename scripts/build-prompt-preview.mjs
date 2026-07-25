@@ -250,7 +250,6 @@ function generateFantasy(core, data) {
     selection.intensity + ',',
     'selected material appears as controlled clothing details, ornaments, particles and background accents without overpowering facial identity,',
     data.styleData[selection.style] + ',',
-    data.styleScopeGuard + ',',
     poseText ? poseText + ',' : '',
     framing + ',',
     data.cameraData[selection.camera] + ',',
@@ -258,7 +257,7 @@ function generateFantasy(core, data) {
     'background design: ' + background + ',',
     data.ratioData[selection.ratio] + ',',
     core.page.fantasy.output ? core.page.fantasy.output + ',' : '',
-    'sharp focus, hyper realistic, ultra detailed, premium advertising finish,',
+    'hyper realistic, ultra detailed, premium advertising finish,',
     'color palette: ' + materialPalette + ',',
     core.page.fantasy.negativePrompt ? core.page.fantasy.negativePrompt + ',' : '',
     'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face',
@@ -294,7 +293,7 @@ function loadRevision(label, sourceReader) {
     page: 'fantasy',
     startMarker: 'const materialData = {',
     endMarker: 'function setRadioValue',
-    exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedFantasyCore, FANTASY_ILLUSTRATION_MATERIAL_KEYS: typeof FANTASY_ILLUSTRATION_MATERIAL_KEYS === "undefined" ? new Set(["paperOiran","paperSculpture","redPaperWedding","watercolorBloom","inkPeony","inkGold","whitePaperFlower"]) : FANTASY_ILLUSTRATION_MATERIAL_KEYS, identityGuard, anatomyGuard, BODY_SHAPES, styleScopeGuard, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
+    exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedFantasyCore, FANTASY_ILLUSTRATION_MATERIAL_KEYS: typeof FANTASY_ILLUSTRATION_MATERIAL_KEYS === "undefined" ? new Set(["paperOiran","paperSculpture","redPaperWedding","watercolorBloom","inkPeony","inkGold","whitePaperFlower"]) : FANTASY_ILLUSTRATION_MATERIAL_KEYS, identityGuard, anatomyGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
   });
   return {
     label,

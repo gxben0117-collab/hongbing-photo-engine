@@ -1058,3 +1058,45 @@
   測試逐一填入這 6 個新欄位、觸發 `generateBtn`，確認輸出文字包含填入的
   自訂內容、無 JS error；並額外測試「填自填字→點一鍵模板/預設」情境，
   確認三頁的自填欄位都會被正確清空，不會殘留污染下一次生成。
+
+## 2026-07-25（六）　全專案檢查：咒語內容無用字詞清理
+
+- owner 要求「全專案檢查 介面檢查 產生咒語內容檢查無用字詞」。先跑
+  `check-static.mjs`/`validate-preset-refs.mjs`/`build-prompt-preview.mjs`/
+  `audit-100x.mjs` 確認結構正常、逐頁核對頂部導覽連結（皆正常）；接著針對
+  「咒語內容」實際生成 fantasy/travel/magazine/doll/store-ad 五頁的樣本咒語
+  逐段閱讀，找到 4 個具體問題，跟 owner 確認後全部修正：
+  1. **fantasy-fashion.html：「Style Scope Rule」整段重複兩次**——一次透過
+     `identityGuard`（來自 `core-prompt.js` 的 `fantasyCore.identityGuard`，
+     內部已 join 進這段文字）帶入，另一次是頁面自己又宣告了一份逐字相同的
+     `styleScopeGuard` 常數，在 `styleData` 後面又插入一次。移除頁面自己
+     宣告的 `styleScopeGuard`（連同它在 `generate()` sections 陣列裡的
+     使用），只保留 `identityGuard` 內建的那一份。
+  2. **store-ad.html：無人物主視覺時仍塞入人臉/肢體負面約束**——四種
+     `heroSource`（純設計版面〔預設〕/上傳商品照/上傳人物照/上傳店面照）
+     只有「上傳人物照」畫面裡有人臉，但 `STORE_AD_CORE.negativePrompt`
+     （"No face swap... No oversized head, extra limbs..."）沒有比照
+     `identityLock`/`faceGeometryLock`/`lighting` 三個區塊用 `isPersonHero`
+     把關，無條件輸出。改成 `isPersonHero && STORE_AD_CORE.negativePrompt`。
+  3. **fantasy-fashion.html + store-ad.html：「sharp focus」相鄰重複**——
+     兩頁都在共用的 `CORE.output`（【輸出規格】，內含"Sharp focus."）後面
+     自己又加一行含 "sharp focus" 的補充句。各自從補充句移除重複的
+     "sharp focus,"，保留其餘不重複的內容（hyper realistic / high
+     quality 等）。
+  4. **`assets/core-prompt.js` 的 `CORE_CLEAN_FRAME`（travel/magazine 共用，
+     doll 定義了但未實際使用）：「No Tourist.」這行拿掉**——這行本來就是
+     「No Crowd.」/「No Extra Person.」的旅拍特化版本，語意完全被那兩行
+     涵蓋，屬於純重複；套到 magazine.html 的棚拍情境更是完全無意義（棚內
+     不會有路人問題）。改動屬於安全刪減，不影響任何既有指令覆蓋範圍。
+  - 因為 `build-prompt-preview.mjs`／`audit-100x.mjs` 兩支腳本各自維護一份
+    fantasy 生成邏輯的鏡像（用來做 0-diff 迴歸），移除 `styleScopeGuard`／
+    去重複 `sharp focus` 後，這兩支腳本原本硬編碼引用 `styleScopeGuard` 的
+    地方會直接報錯（`ReferenceError`），連帶同步修正。
+- **驗證**：`check-static.mjs` 全過；`build-prompt-preview.mjs` 5 組固定
+  組合這次「不是」0-diff（預期中，因為這次是刻意改輸出內容）——實際比對
+  travel/magazine 4 組輸出只少了一行「No Tourist.」，fantasy 直接讀新版
+  輸出確認「Style Scope Rule」只剩 1 次、「sharp focus」只剩 1 次，沒有
+  其他意外變動；`validate-preset-refs.mjs`／`audit-100x.mjs`
+  （500 次模擬 0 issue）全過；另外寫 jsdom 測試針對 store-ad.html 兩種
+  情境（預設純設計版面 vs. 切換成上傳人物照）分別確認 negativePrompt
+  正確地「無人物時不輸出、有人物時仍輸出」。

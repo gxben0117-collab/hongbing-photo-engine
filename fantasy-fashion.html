@@ -2247,9 +2247,6 @@ Keep The Original Face, Identity And Personal Features Unchanged
 Natural Realistic Adult Anatomy, No Doll-Like Or Over-Stretched Body`
 };
 
-const styleScopeGuard = `Style Scope Rule:
-Commercial style, fantasy material and art direction only affect clothing, ornaments, background, lighting, composition, mood and surface texture.
-They must not change the person's facial structure, identity, age impression or recognizable features`;
 
 const compositionGuard = `Commercial Composition Control:
 Subject scale follows the selected framing ratio.
@@ -3204,7 +3201,6 @@ function generate(options = {}){
     intensity + ',',
     'selected material appears as controlled clothing details, ornaments, particles and background accents without overpowering facial identity,',
     styleData[selected('style')] + ',',
-    styleScopeGuard + ',',
     poseText ? poseText + ',' : '',
     framing + ',',
     cameraData[selected('camera')] + ',',
@@ -3212,7 +3208,7 @@ function generate(options = {}){
     'background design: ' + background + ',',
     ratioData[selected('ratio')] + ',',
     sharedFantasyCore.output ? sharedFantasyCore.output + ',' : '',
-    'sharp focus, hyper realistic, ultra detailed, premium advertising finish,',
+    'hyper realistic, ultra detailed, premium advertising finish,',
     'color palette: ' + (colorNote || materialPalette) + ',',
     extraNote ? 'extra direction: ' + extraNote + ',' : '',
     sharedFantasyCore.negativePrompt ? sharedFantasyCore.negativePrompt + ',' : '',
