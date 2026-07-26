@@ -1195,3 +1195,41 @@
   就沒有接 `CORE_REALISTIC_ANATOMY`，不受影響，屬預期）；重跑姿勢自然性
   驗證腳本與 55 項鎖臉稽核腳本，全部依然通過，確認這次改寫沒有破壞鎖臉
   或姿勢自然性防護。
+
+## 2026-07-25（九）　補上「鎖身份不鎖照片」澄清句，否決重做 ANATOMY 的提案
+
+- owner 把上一輪分析轉給另一個 AI 做第三輪討論。那個 AI 同意 Mode A/B
+  改寫的方向，但提出兩個新建議：(1) 把 `CORE_REALISTIC_ANATOMY` 改寫成
+  更完整的顯式雙分支結構（明確寫出「Mode A — Reference Head Pose」／
+  「Mode B — Character Performance」兩段，各自完整說明）取代已經上線的
+  精簡版；(2) 加一句「Lock the person's identity, not the original
+  photograph」，並在裡面提到 camera angle 也可以重建。
+- **對第 (1) 項明確不同意並說明理由**：系統實際上只有一種運作模式——
+  三頁的每次生成都是「使用者選好姿勢→身體重新建立配合」，**沒有任何 UI
+  選項讓使用者選「保留原照片頭部角度」（對應到它說的 Mode A）**。如果把
+  Mode A / Mode B 兩個並列分支字面寫進實際咒語，等於給圖像模型一個它
+  無法判斷該走哪條的選擇題（系統從來不會傳遞「這次是 A 還是 B」的訊號），
+  反而比現有的單一句子更模糊，且長度多了近 3 倍卻沒有新增任何實際行為。
+  上一輪（八）已經上線並驗證過的精簡版本已經完整涵蓋系統唯一會用到的
+  行為（頭自由轉、身份不變、身體必須跟隨、絕不反過來），Mode A/B 這個
+  說法適合當討論用的概念標籤（commit message、開發日誌都這樣用），不
+  適合字面結構化寫進生成邏輯——**這次沒有重做 ANATOMY**。
+- **對第 (2) 項同意，但做了調整**：它提議的版本裡「camera angle...may be
+  reconstructed」跟現有 `CORE_CAMERA_RECONSTRUCTION`（【鏡頭重建系統】：
+  "Ignore original selfie perspective. Ignore original lens
+  distortion..."）已經講過同一件事，會變成新的重複，予以移除；另外
+  建議折進既有 `CORE_IDENTITY_LOCK` 當補充句，不另開新的 `CORE_XXX`
+  區塊（省 token、集中維護）。owner 回覆「你建議」，採用調整後版本執行。
+- **修正**：`CORE_IDENTITY_LOCK` 第一段後面插入一句——「The reference
+  photo locks identity only, not the original composition — body, pose,
+  clothing, hairstyle and environment may be freely reconstructed for
+  the new scene unless explicitly requested otherwise.」。`identityCore`
+  （travel/magazine/fantasy 共用）、`dollCore.identityLock`、
+  `storeAdCore`（人物主視覺時經 `coreBlocks.identityLock`）都會拿到
+  這句，因為全部都是組合自 `CORE_IDENTITY_LOCK`。
+- **驗證**：`check-static.mjs`／`validate-preset-refs.mjs`／
+  `audit-100x.mjs`（500 次模擬 0 issue）全過；jsdom 測試確認新句子逐字
+  出現在 travel/magazine/fantasy/doll 四頁的實際生成輸出、以及 store-ad
+  切換成「上傳人物照」時的輸出，且都恰好出現 1 次；直接讀取 travel.html
+  的完整生成結果，肉眼確認新句子插入位置乾淨、跟鏡頭重建系統的內容沒有
+  重疊；重跑 55 項鎖臉稽核腳本，全部依然通過。

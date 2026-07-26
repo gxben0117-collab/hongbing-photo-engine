@@ -128,6 +128,21 @@
   （身份不鎖照片澄清句、豐富 `CORE_POSE_NATURALITY` 具體重心/關節內容、
   Anime/Xianxia 新頁待辦）owner 都表示先不動**，見開發日誌
   2026-07-25（八）完整討論脈絡。
+- **`CORE_IDENTITY_LOCK` 補上「鎖身份不鎖照片」澄清句**（2026-07-25）：
+  另一個 AI 第三輪建議把 ANATOMY 改成顯式的「Mode A — Reference Head
+  Pose／Mode B — Character Performance」雙分支結構——**已評估並否決**，
+  理由是系統實際上只有一種運作模式（沒有任何 UI 讓使用者選「保留原照片
+  頭部角度」），字面寫兩個並列分支等於給模型一個它無法判斷該走哪條的
+  選擇題，比現有精簡句子更模糊、又長 3 倍卻沒新增行為，Mode A/B 適合當
+  討論用概念標籤，不適合結構化寫進生成邏輯。**另一個建議（補「鎖身份不
+  鎖照片」句）採納**，但拿掉它版本裡的 camera angle 部分（跟既有
+  `CORE_CAMERA_RECONSTRUCTION` 重複），改折進 `CORE_IDENTITY_LOCK` 當
+  補充句，不另開新區塊：「The reference photo locks identity only, not
+  the original composition — body, pose, clothing, hairstyle and
+  environment may be freely reconstructed for the new scene unless
+  explicitly requested otherwise.」——travel/magazine/fantasy/doll 四頁
+  以及 store-ad 人物主視覺情境都會拿到，因為全部組合自
+  `CORE_IDENTITY_LOCK`。
 - **共用核心**：`assets/core-prompt.js` 集中管理身份鎖定等保護區塊；核心文字經過
   兩輪瘦身（5,162 → 4,099 字元），語意零遺漏。
 - **travel / magazine / fantasy 操作模式已統一**：手動生成、stale 保護

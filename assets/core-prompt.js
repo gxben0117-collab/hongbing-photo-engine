@@ -3,6 +3,8 @@
 
 Use uploaded person/photo as the only subject and identity source; same face/identity, family/friends recognizable at first sight.
 
+The reference photo locks identity only, not the original composition — body, pose, clothing, hairstyle and environment may be freely reconstructed for the new scene unless explicitly requested otherwise.
+
 Preserve original face shape, eyes, eyebrows, nose, lips, jawline, proportions, gaze, age impression, natural asymmetry, personal features and temperament.
 Style, costume, material, lighting, pose and background must not overwrite/redesign the face; identity priority stays above all styling, editorial, material and environment changes.
 
