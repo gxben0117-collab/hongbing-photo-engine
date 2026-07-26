@@ -185,6 +185,22 @@ They must not change the person's facial structure, identity, age impression or 
     output: CORE_OUTPUT_QUALITY
   };
 
+  const xianxiaCore = {
+    identityGuard: [
+      CORE_IDENTITY_LOCK,
+      CORE_FACE_GEOMETRY_LOCK,
+      `Style Scope Rule:
+Commercial style, xianxia material and art direction only affect clothing, ornaments, background, lighting, composition, mood and surface texture.
+They must not change the person's facial structure, identity, age impression or recognizable features.`
+    ].join("\n\n"),
+    anatomyGuard: humanCore,
+    illustrationSkeleton: illustrationHumanCore,
+    poseGuard: CORE_POSE_NATURALITY,
+    lightingGuard: CORE_LIGHTING_UNIFICATION,
+    negativePrompt: CORE_NEGATIVE_PROMPT,
+    output: CORE_OUTPUT_QUALITY
+  };
+
   const dollCore = {
     identityLock: [
       CORE_IDENTITY_LOCK,
@@ -228,6 +244,7 @@ Even in doll style, the character must remain recognizable as the uploaded perso
       travel: travelCore,
       magazine: magazineCore,
       fantasy: fantasyCore,
+      xianxia: xianxiaCore,
       doll: dollCore,
       storeAd: storeAdCore
     }

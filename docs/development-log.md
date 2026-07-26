@@ -1233,3 +1233,58 @@
   切換成「上傳人物照」時的輸出，且都恰好出現 1 次；直接讀取 travel.html
   的完整生成結果，肉眼確認新句子插入位置乾淨、跟鏡頭重建系統的內容沒有
   重疊；重跑 55 項鎖臉稽核腳本，全部依然通過。
+
+## 2026-07-25（十）　新增 xianxia.html（中式仙俠咒語產生器）
+
+- owner 針對前面討論的「五大人物美圖系統」文件，先要求對仙俠／動漫兩個
+  新頁面各提 3 組方案（獨立完整新頁 / 併入既有頁面擴充分類 / 獨立新頁但
+  先做輕量 MVP），並在分析後推薦「先做輕量 MVP」；owner 選了另一個方向：
+  兩頁都採「方案 A｜獨立完整新頁，比照 fantasy-fashion.html 全套規格」，
+  並說「先做看看」。
+- **建置手法**：直接 `cp fantasy-fashion.html xianxia.html`，保留所有已
+  驗證過的共用管線（身份鎖定／臉部幾何／真人骨架／姿勢自然性／構圖控制／
+  光線一致性／色溫統一／人物融合／補光／鏡頭重建／輸出規格／通用負面
+  約束／custom-choice 自填引擎／00 一鍵模板系統／隨機套用引擎）完全不動，
+  只替換仙俠專屬的內容區塊：
+  - **00 一鍵仙俠模板**：16 組策展好的組合（掌門飛升、九尾狐仙、劍修對決、
+    天雷渡劫、火鳳涅槃、月下靜修、桃花仙緣婚典、煉丹道姑、江湖遊俠、
+    仙鶴相伴、青龍守護、竹林劍舞、蓮花法印、白虎霜行、楓葉書卷、符紙夜巡）
+  - **01 成品用途**：把 9 個風格選項改成仙俠語境（仙門正統/電影海報/國風
+    雜誌/仙俠史詩/黑金奇緣/乾淨古風/水墨展覽/江湖俠氣/美妝形象），拿掉
+    跟仙俠不搭的「香氛廣告」換成「江湖俠氣」
+  - **04 服裝輪廓**：30 項/6 組（仙門正裝基礎、古典勁裝與遊俠、法袍道服、
+    婚嫁儀式、戰鬥仙裝與聖器化、妖靈與靈獸化裝束）
+  - **05 主題材質與仙俠元素**：30 項/5 組（法器仙劍、靈獸神獸、劍氣仙氣
+    特效、雲霧仙境元素、五行元素法術）
+  - **06 人物姿勢**：26 項/4 組（站姿仙儀、坐姿修煉、手勢與細節、御劍飛行
+    與戰鬥）
+  - **09 背景場景**：30 項/6 組（仙山秘境、宗門山門與樓閣、雲海仙境與
+    天象、江湖市井與人間煙火、神殿祭壇與秘境遺跡、竹林溪谷與四季）
+  - **02 構圖／03 身形／07 鏡頭／08 光影／11 比例**：完全沿用 fantasy 原始
+    內容不改，因為這些是通用攝影概念，不是奇幻或仙俠專屬。
+- **核心接線**：`assets/core-prompt.js` 新增 `xianxiaCore`（結構跟
+  `fantasyCore` 完全一樣：identityGuard 內含 Style Scope Rule、anatomyGuard、
+  illustrationSkeleton、poseGuard、lightingGuard、negativePrompt、output），
+  註冊到 `window.HB_CORE_PROMPT.page.xianxia`。**這次從第一天就正確接上
+  `CORE_POSE_NATURALITY`**，不重演上一輪才發現的「fantasy/magazine 漏接
+  姿勢自然性防護」那個缺口。頁面內部把 `sharedFantasyCore` 改名
+  `sharedXianxiaCore`、`FANTASY_ILLUSTRATION_MATERIAL_KEYS` 改名
+  `XIANXIA_ILLUSTRATION_MATERIAL_KEYS`（設空集合，因為仙俠材質庫沒有
+  水彩/紙雕這類插畫媒材，不需要特殊觸發規則）。
+- **全站接線**：travel/magazine/doll/fantasy-fashion/store-ad 五頁的 nav
+  都加上「中式仙俠」連結；`index.html` 首頁在幻想廣告卡片後面新增仙俠卡片，
+  強調色選用還沒用過的翡翠綠 `#7ED9A8`（跟 fantasy 紫色、store-ad 薄荷綠
+  區隔）。
+- **驗證腳本同步**：`check-static.mjs`／`validate-preset-refs.mjs`
+  （新增 xianxia.html 的 themeTemplates 檢查，16 組全部 0 issue）／
+  `audit-100x.mjs`（新增 XIANXIA 模擬區塊，總模擬數 500→600，全部 0
+  issue）／`build-prompt-preview.mjs`（新增 `generateXianxia()`，並讓
+  `loadRevision()` 對 xianxia.html 的讀取包 try/catch——這次因為是全新頁面，
+  base revision（上個 commit）還沒有這個檔案，捕捉例外優雅跳過，不影響
+  其他 5 組既有 combo 的 0-diff 比對；等這次 commit 進 git 之後，未來的
+  修改就會有正常的 0-diff 迴歸保護）。
+- **驗證**：所有腳本跑過確認 0 issue；另外寫 24 項 jsdom 實測——預設生成、
+  隨機套用按鈕、全部 16 個一鍵模板、4 個自填欄位同時填寫——全部確認身份
+  鎖定系統、姿勢自然性系統、鎖身份不鎖照片澄清句都正確出現，無 JS
+  error、無 undefined/NaN 洩漏。
+

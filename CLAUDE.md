@@ -20,8 +20,8 @@
 
 ### 現況摘要（2026-07-22）
 
-- 五個工具頁（travel / magazine / doll / fantasy-fashion / store-ad）皆已上線，
-  正式站 <https://gxben0117-collab.github.io/hongbing-photo-engine/>。
+- 六個工具頁（travel / magazine / doll / fantasy-fashion / xianxia / store-ad）
+  皆已上線，正式站 <https://gxben0117-collab.github.io/hongbing-photo-engine/>。
   **`anime-hero.html`（動漫電影變身夥伴咒語產生器）已於 2026-07-24 整頁下架**：
   owner 對這系列不滿意，且該頁架構已疊到 10 層 monkey-patch 式的
   `generate = function(){ 上一版generate(); ... }`，難以維護；docs 底下留有一份
@@ -143,6 +143,30 @@
   explicitly requested otherwise.」——travel/magazine/fantasy/doll 四頁
   以及 store-ad 人物主視覺情境都會拿到，因為全部組合自
   `CORE_IDENTITY_LOCK`。
+- **新增 `xianxia.html`（中式仙俠咒語產生器）**（2026-07-25）：owner 討論五大
+  人物美圖系統時規劃的其中一個新頁面，選「方案A：獨立完整新頁，比照
+  fantasy-fashion.html 全套規格」執行。作法是直接複製 `fantasy-fashion.html`
+  當模板（保留身份/骨架/姿勢自然性/構圖/鏡頭/光影/輸出規格等共用管線
+  完全不動），只替換仙俠專屬內容：04 服裝（30項/6組：仙門正裝、古典勁裝、
+  法袍道服、婚嫁儀式、戰鬥仙裝、妖靈靈獸化）、05 材質與仙俠元素
+  （30項/5組：法器仙劍、靈獸神獸、劍氣仙氣特效、雲霧仙境元素、五行元素
+  法術）、06 姿勢（26項/4組：站姿仙儀、坐姿修煉、手勢細節、御劍飛行與
+  戰鬥）、09 背景（30項/6組：仙山秘境、宗門樓閣、雲海天象、江湖市井、
+  神殿遺跡、竹林四季）、00 一鍵模板（16組）；02 構圖／03 身形／07 鏡頭／
+  08 光影沿用 fantasy 原始內容（這些是通用攝影概念，不是奇幻專屬）。
+  `core-prompt.js` 新增 `xianxiaCore`（結構完全比照 `fantasyCore`：
+  identityGuard/anatomyGuard/poseGuard/lightingGuard/negativePrompt/output），
+  註冊到 `window.HB_CORE_PROMPT.page.xianxia`，**從第一天就正確接上鎖臉
+  三件套**，不重演這次 session 才修的「fantasy/magazine 漏接
+  `CORE_POSE_NATURALITY`」那個坑。全站 nav（含 index.html 首頁卡片，強調色
+  選用未使用過的翡翠綠 `#7ED9A8`，跟 fantasy 紫色／store-ad 薄荷綠區隔）、
+  四支驗證腳本（`check-static`/`validate-preset-refs`/`audit-100x`/
+  `build-prompt-preview`）都同步加入 xianxia 支援。**這是「四大提案方案」
+  的第一個**，另一個「動漫人物美圖（女）」`anime-character.html` 待建——
+  注意：那是全新的「單人動漫化」概念，跟已刪除的 `anime-hero.html`
+  （真人+變身夥伴/式神/機甲的雙角色關係敘事）是不同東西，不要混淆；
+  建置時務必比照這次做法，第一天就接上鎖臉三件套，並針對「動漫化保留
+  身份、不淪為模板動漫臉」這個新技術風險額外設計、測試核心文字。
 - **共用核心**：`assets/core-prompt.js` 集中管理身份鎖定等保護區塊；核心文字經過
   兩輪瘦身（5,162 → 4,099 字元），語意零遺漏。
 - **travel / magazine / fantasy 操作模式已統一**：手動生成、stale 保護

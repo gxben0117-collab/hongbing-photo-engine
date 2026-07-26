@@ -1,0 +1,1728 @@
+﻿<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中式仙俠咒語產生器｜寫真引擎</title>
+<meta name="description" content="中式仙俠咒語產生器，整合仙門造型、法器靈獸材質、御劍姿態、鏡頭與光影控制。">
+<meta property="og:title" content="中式仙俠咒語產生器｜寫真引擎">
+<meta property="og:description" content="中式仙俠咒語產生器，整合仙門造型、法器靈獸材質、御劍姿態、鏡頭與光影控制。">
+<meta name="twitter:title" content="中式仙俠咒語產生器｜寫真引擎">
+<meta name="twitter:description" content="中式仙俠咒語產生器，整合仙門造型、法器靈獸材質、御劍姿態、鏡頭與光影控制。">
+<style>
+  :root{
+    --black:#09090B;
+    --panel:#15131A;
+    --panel-2:#1D1924;
+    --line:#322D3C;
+    --paper:#F7F4EF;
+    --soft:#A7A0B5;
+    --white:#FFFFFF;
+    --gold:#C9A84C;
+    --selected-bg:#1E1A14;
+    --violet:#B889FF;
+    --cyan:#72E4D5;
+    --rose:#F18AA6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    min-height:100vh;
+    background:var(--black);
+    color:var(--paper);
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    line-height:1.6;
+    padding-bottom:72px;
+  }
+  nav{
+    position:fixed;
+    top:0;left:0;right:0;
+    height:54px;
+    padding:0 24px;
+    background:rgba(9,9,11,.92);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+    z-index:10;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .nav-logo{
+    color:var(--gold);
+    font-family:"Noto Serif TC",serif;
+    font-size:14px;
+    font-weight:700;
+    letter-spacing:.08em;
+    text-decoration:none;
+  }
+  .nav-links{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;}
+  .nav-link{
+    color:var(--soft);
+    text-decoration:none;
+    font-size:12px;
+    padding:6px 12px;
+    border:1px solid transparent;
+    border-radius:999px;
+  }
+  .nav-link:hover{color:var(--paper);border-color:var(--line);}
+  .nav-link.active{color:var(--gold);border-color:var(--gold);background:rgba(201,168,76,.08);}
+  .wrap{
+    width:min(920px,100%);
+    margin:0 auto;
+    padding:70px 20px 40px;
+  }
+  header{
+    padding:48px 0 36px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:36px;
+  }
+  .eyebrow{
+    color:var(--violet);
+    font-size:11px;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+    margin-bottom:12px;
+  }
+  h1{
+    font-family:"Noto Serif TC",serif;
+    font-size:32px;
+    font-weight:900;
+    letter-spacing:0.02em;
+    line-height:1.2;
+    color:var(--white);
+    margin-bottom:10px;
+  }
+  h1 span{color:#DCC8FF;}
+  header p{color:var(--soft);font-size:14px;max-width:680px;}
+  main.wrap{display:flex;flex-direction:column;}
+  main.wrap > header{order:-1;}
+  section{margin-bottom:26px;}
+  .section-preset{order:0;}
+  .section-style{order:1;}
+  .section-composition{order:2;}
+  .section-garment{order:3;}
+  .section-body{order:4;}
+  .section-material{order:5;}
+  .section-pose{order:6;}
+  .section-camera{order:7;}
+  .section-lighting{order:8;}
+  .section-background{order:9;}
+  .section-extra{order:10;}
+  .section-ratio{order:11;}
+  .section-output{order:12;}
+  .section-header{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:10px;
+    margin-bottom:12px;
+  }
+  .section-label{
+    color:var(--violet);
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.16em;
+  }
+  .section-title{font-size:16px;font-weight:800;color:var(--white);}
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:8px;
+  }
+  .grid-3{grid-template-columns:repeat(3,1fr);}
+  .card{
+    position:relative;
+    border:1px solid var(--line);
+    background:var(--panel);
+    border-radius:8px;
+    padding:12px 13px;
+    cursor:pointer;
+    transition:.15s;
+    min-height:74px;
+  }
+  .card:hover{border-color:#554B67;background:var(--panel-2);}
+  .card input{position:absolute;opacity:0;pointer-events:none;}
+  .card .name{font-size:13px;font-weight:800;color:var(--paper);margin-bottom:3px;}
+  .card .desc{font-size:11px;color:var(--soft);line-height:1.45;}
+  .card.selected{border-color:var(--gold);background:var(--selected-bg);}
+  .card.selected .name{color:var(--gold);}
+  .pose-auto{margin-bottom:14px;}
+  .pose-group{margin-bottom:18px;}
+  .pose-group-label{
+    color:#DCC8FF;
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:.12em;
+    border-left:2px solid var(--violet);
+    padding-left:8px;
+    margin-bottom:8px;
+  }
+  .pose-group-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:8px;
+  }
+  .pose-card{
+    position:relative;
+    display:block;
+    border:1px solid var(--line);
+    background:var(--panel);
+    border-radius:8px;
+    padding:12px 13px;
+    cursor:pointer;
+    transition:.15s;
+    min-height:74px;
+  }
+  .pose-card:hover{border-color:#554B67;background:var(--panel-2);}
+  .pose-card input{position:absolute;opacity:0;pointer-events:none;}
+  .pose-name{font-size:13px;font-weight:800;color:var(--paper);margin-bottom:3px;}
+  .pose-desc{font-size:11px;color:var(--soft);line-height:1.45;}
+  .pose-card.selected{border-color:var(--gold);background:var(--selected-bg);}
+  .pose-card.selected .pose-name{color:var(--gold);}
+  .form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+  label.field{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    color:var(--soft);
+    font-size:12px;
+  }
+  label.field.custom-choice.selected{
+    color:var(--gold);
+  }
+  label.field.custom-choice.selected input{
+    border-color:var(--gold);
+    background:var(--selected-bg);
+    box-shadow:0 0 0 1px rgba(201,168,76,.22);
+  }
+  input[type="text"], textarea, select{
+    width:100%;
+    border:1px solid var(--line);
+    background:var(--panel);
+    color:var(--paper);
+    border-radius:8px;
+    padding:11px 12px;
+    font:inherit;
+    font-size:13px;
+    outline:none;
+  }
+  textarea{min-height:90px;resize:vertical;}
+  input:focus, textarea:focus, select:focus{border-color:var(--gold);}
+  .full{grid-column:1/-1;}
+  .actions{
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:10px;
+    align-items:center;
+    margin-top:18px;
+  }
+  button{
+    border:0;
+    border-radius:8px;
+    padding:13px 18px;
+    color:#120D18;
+    background:linear-gradient(135deg,#DCC8FF,#72E4D5);
+    font-weight:900;
+    letter-spacing:.08em;
+    cursor:pointer;
+  }
+  button.card{
+    display:block;
+    width:100%;
+    text-align:left;
+    color:inherit;
+    background:var(--panel);
+    border:1px solid var(--line);
+    letter-spacing:0;
+    font-weight:400;
+  }
+  button.card:hover{border-color:#554B67;background:var(--panel-2);}
+  .section-preset button.card.template-selected{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold);}
+  .generate-btn{
+    width:100%;
+    background:var(--gold);
+    color:var(--black);
+    border:none;
+    font-family:inherit;
+  }
+  .copy-btn{
+    background:transparent;
+    color:var(--gold);
+    border:1px solid var(--gold);
+  }
+  .copy-btn.copied{
+    background:var(--gold);
+    color:var(--black);
+  }
+  .output-stale-badge{
+    display:none;
+    margin-bottom:10px;
+    padding:10px 14px;
+    background:rgba(201,168,76,.12);
+    border:1px solid var(--gold);
+    border-radius:8px;
+    color:var(--gold);
+    font-size:13px;
+    font-weight:700;
+    text-align:center;
+  }
+  .output-wrap.stale .output-stale-badge{ display:block; }
+  .output-wrap.stale textarea{ opacity:.45; }
+  .output-wrap.stale .copy-btn{ opacity:.4; pointer-events:none; cursor:not-allowed; }
+  .output-wrap{
+    margin-top:28px;
+  }
+  .output-wrap textarea{
+    width:100%;
+    min-height:300px;
+    background:#0F0E13;
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:16px;
+    color:#EEE8F8;
+    font-family:monospace;
+    font-size:13px;
+    line-height:1.8;
+    resize:vertical;
+  }
+  .output-wrap .copy-btn{
+    width:100%;
+    margin-top:8px;
+  }
+  .hidden{display:none;}
+  .hint{color:var(--soft);font-size:12px;}
+  @media (max-width:760px){
+    nav{
+      position:sticky;
+      height:auto;
+      min-height:0;
+      align-items:stretch;
+      flex-direction:column;
+      padding:10px 14px 8px;
+      gap:8px;
+    }
+    .nav-logo{font-size:13px;line-height:1.2;}
+    .nav-links{
+      gap:6px;
+      flex-wrap:nowrap;
+      justify-content:flex-start;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      padding-bottom:2px;
+    }
+    .nav-link{
+      flex:0 0 auto;
+      font-size:11px;
+      padding:5px 9px;
+      white-space:nowrap;
+    }
+    .wrap{padding:20px 14px 36px;}
+    header{padding:22px 0 24px;margin-bottom:22px;}
+    .eyebrow{letter-spacing:.2em;}
+    .section-header{align-items:flex-start;flex-wrap:wrap;gap:6px 10px;}
+    .grid,.grid-3,.form-grid,.pose-group-grid{grid-template-columns:1fr 1fr;}
+    .actions{grid-template-columns:1fr;}
+    button{width:100%;}
+  }
+  @media (max-width:480px){
+    .grid,.grid-3,.form-grid,.pose-group-grid{grid-template-columns:1fr;}
+    .card,.pose-card{min-height:auto;padding:11px 12px;}
+    .output-wrap textarea{font-size:12px;padding:13px;overflow-wrap:anywhere;}
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">寫真引擎</a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">首頁</a>
+    <a class="nav-link" href="travel.html">寫真旅拍</a>
+    <a class="nav-link" href="magazine.html">雜誌棚拍</a>
+    <a class="nav-link" href="doll.html">公仔系列</a>
+    <a class="nav-link" href="fantasy-fashion.html">幻想廣告</a>
+    <a class="nav-link active" href="xianxia.html">中式仙俠</a>
+    <a class="nav-link" href="store-ad.html">店家廣告</a>
+  </div>
+</nav>
+
+<main class="wrap">
+  <header>
+    <div class="eyebrow">Chinese Xianxia Character Campaign</div>
+    <h1>中式仙俠<span>咒語產生器</span></h1>
+    <p>把仙門造型、法器靈獸材質、風格、構圖、姿態、鏡頭、光影、仙境背景與比例拆成清楚層級，讓仙俠人物美圖可以穩定生成成像一致、氣質統一的東方奇幻主視覺。</p>
+  </header>
+
+  <section class="section-preset">
+    <div class="section-header">
+      <div class="section-label">00</div>
+      <div class="section-title">一鍵主題模板</div>
+    </div>
+    <p class="hint">一鍵套用會同時填入適合的服裝、材質、姿勢、光線與背景；套用後仍可逐區改成自己的版本。</p>
+    <button class="card" type="button" id="xianxiaMoodPreset" style="width:100%;min-height:auto;margin-bottom:12px;background:linear-gradient(180deg,#17120b 0%,#22180f 100%);">
+      <div class="name">隨機套用</div>
+    </button>
+    <div class="grid grid-3">
+      <button class="card" type="button" id="sectMasterAscensionPreset">
+        <div class="name">掌門飛升</div>
+        <div class="desc">法袍御劍飛行、雲海仙境、電影感英雄視角</div>
+      </button>
+      <button class="card" type="button" data-template="nineTailFoxImmortal">
+        <div class="name">九尾狐仙</div>
+        <div class="desc">妖狐仙裾、狐火靈氣、竹林古風</div>
+      </button>
+      <button class="card" type="button" data-template="swordCultivatorDuel">
+        <div class="name">劍修對決</div>
+        <div class="desc">劍修常服、劍氣長虹、古廟遺跡</div>
+      </button>
+      <button class="card" type="button" data-template="lightningTribulationAscend">
+        <div class="name">天雷渡劫</div>
+        <div class="desc">靈甲戰袍、天雷降臨、渡劫史詩</div>
+      </button>
+      <button class="card" type="button" data-template="phoenixRebirth">
+        <div class="name">火鳳涅槃</div>
+        <div class="desc">火鳳戰裙、烈焰法陣、鳳凰廢墟聖殿</div>
+      </button>
+      <button class="card" type="button" data-template="moonlitMeditation">
+        <div class="name">月下靜修</div>
+        <div class="desc">月白仙裙、月下雲紗、靜坐修煉</div>
+      </button>
+      <button class="card" type="button" data-template="peachBlossomWedding">
+        <div class="name">桃花仙緣婚典</div>
+        <div class="desc">紅嫁衣廣袖、桃花漫天、輕撩面紗</div>
+      </button>
+      <button class="card" type="button" data-template="daoistAlchemist">
+        <div class="name">煉丹道姑</div>
+        <div class="desc">道姑法袍、地脈靈晶、藏經閣書卷</div>
+      </button>
+      <button class="card" type="button" data-template="jianghuWanderer">
+        <div class="name">江湖遊俠</div>
+        <div class="desc">遊俠斗篷勁裝、疾風靈紋、古鎮街景</div>
+      </button>
+      <button class="card" type="button" data-template="celestialCraneCompanion">
+        <div class="name">仙鶴相伴</div>
+        <div class="desc">鶴羽仙衣、仙鶴伴生、雲海日出</div>
+      </button>
+      <button class="card" type="button" data-template="azureDragonGuardian">
+        <div class="name">青龍守護</div>
+        <div class="desc">聖劍護肩戰裙、青龍盤旋、龍宮大殿</div>
+      </button>
+      <button class="card" type="button" data-template="bambooSwordDance">
+        <div class="name">竹林劍舞</div>
+        <div class="desc">弟子勁裝、劍氣長虹、竹林步道</div>
+      </button>
+      <button class="card" type="button" data-template="lotusSpellCasting">
+        <div class="name">蓮花法印</div>
+        <div class="desc">八卦道袍、蓮花法印、荷花水榭</div>
+      </button>
+      <button class="card" type="button" data-template="frostWhiteTiger">
+        <div class="name">白虎霜行</div>
+        <div class="desc">夜行輕甲、白虎相伴、冰瀑洞窟</div>
+      </button>
+      <button class="card" type="button" data-template="autumnScholarPoet">
+        <div class="name">楓葉書卷</div>
+        <div class="desc">書卷儒衫、楓葉秋思、秋楓谷地</div>
+      </button>
+      <button class="card" type="button" data-template="talismanNightHunt">
+        <div class="name">符紙夜巡</div>
+        <div class="desc">符紋道袍、擲符出手、夜市燈籠</div>
+      </button>
+    </div>
+  </section>
+
+  <section class="section-style">
+    <div class="section-header">
+      <div class="section-label">01</div>
+      <div class="section-title">成品用途 / 畫面語氣</div>
+    </div>
+    <p class="hint">先決定這張圖最後像哪一種作品；這裡只管商業語氣與版面感，服裝、姿勢、背景在後面分開選。</p>
+    <div class="grid grid-3" data-choice="style">
+      <label class="card selected"><input type="radio" name="style" value="luxury" checked><div class="name">仙門正統</div><div class="desc">像高級仙俠劇主視覺，精緻、莊重、儀式感</div></label>
+      <label class="card"><input type="radio" name="style" value="poster"><div class="name">電影海報</div><div class="desc">像仙俠電影海報或劇宣主視覺，適合留字空間</div></label>
+      <label class="card"><input type="radio" name="style" value="editorial"><div class="name">國風雜誌</div><div class="desc">像國風寫真雜誌封面，人物與服裝是重點</div></label>
+      <label class="card"><input type="radio" name="style" value="cinematic"><div class="name">仙俠史詩</div><div class="desc">像仙俠史詩電影，世界觀與戲劇感更重</div></label>
+      <label class="card"><input type="radio" name="style" value="blackGold"><div class="name">黑金奇緣</div><div class="desc">像暗黑仙俠奇緣廣告，成熟、女王感、黑金質感</div></label>
+      <label class="card"><input type="radio" name="style" value="clean"><div class="name">乾淨古風</div><div class="desc">像簡約古風寫真，留白乾淨</div></label>
+      <label class="card"><input type="radio" name="style" value="artExhibit"><div class="name">水墨展覽</div><div class="desc">像水墨藝術展覽海報，藝術感與構圖感強</div></label>
+      <label class="card"><input type="radio" name="style" value="huxia"><div class="name">江湖俠氣</div><div class="desc">像武俠電影劇照，動勢、粗獷、江湖感</div></label>
+      <label class="card"><input type="radio" name="style" value="beautyCampaign"><div class="name">美妝形象</div><div class="desc">像國風彩妝主視覺，臉、妝容、膚質更重要</div></label>
+    </div>
+  </section>
+
+  <section class="section-composition">
+    <div class="section-header">
+      <div class="section-label">02</div>
+      <div class="section-title">構圖取景</div>
+    </div>
+    <div class="pose-group">
+      <div class="pose-group-label">構圖選擇：只控制人物在畫面中的位置與版面安排</div>
+      <div class="grid grid-3" data-choice="composition">
+        <label class="card selected"><input type="radio" name="composition" value="centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout" checked><div class="name">人物置中主圖</div><div class="desc">人物放在畫面中央，左右平衡，適合穩定主視覺</div></label>
+        <label class="card"><input type="radio" name="composition" value="subject placed to one side, clean empty space reserved for headline and commercial layout"><div class="name">旁邊留空海報</div><div class="desc">人物偏左或偏右，另一側留乾淨空間放標題文字</div></label>
+        <label class="card"><input type="radio" name="composition" value="subject surrounded by selected material environment, material wraps around foreground and background, immersive fantasy advertisement layout"><div class="name">材質包圍人物</div><div class="desc">主題材質在前景和背景圍繞人物，畫面更有沉浸感</div></label>
+        <label class="card"><input type="radio" name="composition" value="diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner"><div class="name">斜線動態構圖</div><div class="desc">人物和材質沿斜線延伸，畫面比較有速度和張力</div></label>
+        <label class="card"><input type="radio" name="composition" value="symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout"><div class="name">對稱儀式主圖</div><div class="desc">人物和背景圖案左右對稱，適合婚嫁、王權、珠寶感</div></label>
+        <label class="card"><input type="radio" name="composition" value="foreground material frame composition, selected material appears close to camera around the edges, subject remains clear in the center"><div class="name">前景框景構圖</div><div class="desc">材質在畫面前方形成框，人物在中間更有層次</div></label>
+        <label class="card"><input type="radio" name="composition" value="body-art installation composition with four depth layers: small foreground elements of the selected material slightly overlap the frame edges without covering the subject, refined material patterns grow from the skin on neck shoulders collarbone and arms like living art rather than tattoos, the patterns extend outward and weave into a large installation surrounding the subject, and the far background is formed entirely by the same material so subject and world share one continuous visual language"><div class="name">人體藝術裝置構圖</div><div class="desc">材質從肌膚生長成裝置藝術，前景/人物/裝置/背景四層空間</div></label>
+      </div>
+    </div>
+    <div class="pose-group">
+      <div class="pose-group-label">人物入鏡比例：只控制拍到哪裡，角度請到 07 鏡頭語法選</div>
+      <div class="grid grid-3" data-choice="framing">
+        <label class="card selected"><input type="radio" name="framing" value="fullBody" checked><div class="name">全身入鏡</div><div class="desc">人物約35-50%，頭到腳完整出現，整套服裝最清楚</div></label>
+        <label class="card"><input type="radio" name="framing" value="threeQuarter"><div class="name">七分身</div><div class="desc">人物約50-65%，拍到膝上，臉和服裝都兼顧</div></label>
+        <label class="card"><input type="radio" name="framing" value="halfBody"><div class="name">半身廣告</div><div class="desc">人物約60-75%，拍到腰上，臉、肩頸和上身材質清楚</div></label>
+        <label class="card"><input type="radio" name="framing" value="closeUp"><div class="name">近景封面</div><div class="desc">人物約75-90%，臉部、妝容、頭飾、珠寶最明顯</div></label>
+        <label class="card"><input type="radio" name="framing" value="widePoster"><div class="name">海報全景</div><div class="desc">人物約25-40%，背景和留白更多，適合做商業海報</div></label>
+        <label class="card"><input type="radio" name="framing" value="bustPortrait"><div class="name">胸像近景</div><div class="desc">人物約70-85%，拍到胸口以上，適合臉、珠寶和頭飾</div></label>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-body">
+    <div class="section-header">
+      <div class="section-label">03</div>
+      <div class="section-title">身形輪廓</div>
+    </div>
+    <p class="hint">單選，控制人物比例與腰線。選「原圖自然比例」時，會以參考照身形為主要依據。</p>
+    <div class="grid grid-3" data-choice="bodyShape">
+      <label class="card selected"><input type="radio" name="bodyShape" value="original" checked><div class="name">原圖自然比例</div><div class="desc">以參考照身形為主</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="slight_waist"><div class="name">輕微纖腰</div><div class="desc">自然修飾腰線</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="curvy_waist"><div class="name">豐滿纖腰</div><div class="desc">明顯胸腰臀曲線</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="fashion_tall"><div class="name">高挑時裝比例</div><div class="desc">修長高級模特感</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="korean_idol"><div class="name">韓系偶像比例</div><div class="desc">修長腿線、俐落肩頸、舞台鏡頭平衡感</div></label>
+    </div>
+  </section>
+
+  <section class="section-garment">
+    <div class="section-header">
+      <div class="section-label">04</div>
+      <div class="section-title">服裝輪廓</div>
+    </div>
+    <p class="hint">這裡只決定衣服的外型，例如仙裙、道袍、戰甲或披風；材質效果請在下一個「主題材質與仙俠元素」選。</p>
+    <div class="grid grid-3" data-choice="garment">
+      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 仙門正裝基礎</div>
+      <label class="card selected"><input type="radio" name="garment" value="xianQipaoGauze" checked><div class="name">仙裙廣袖曲裾</div><div class="desc">寬袖交領仙裙、飄帶紗層、仙氣輪廓</div></label>
+      <label class="card"><input type="radio" name="garment" value="cloudShoulderCape"><div class="name">雲肩仙氅</div><div class="desc">雲肩披風、長外袍、儀式感十足</div></label>
+      <label class="card"><input type="radio" name="garment" value="discipleUniform"><div class="name">正宗弟子勁裝</div><div class="desc">束胸窄腰、劍術訓練輪廓</div></label>
+      <label class="card"><input type="radio" name="garment" value="sectMasterRobe"><div class="name">掌門法袍</div><div class="desc">寬袖層疊、胸前紋章、權威輪廓</div></label>
+      <label class="card"><input type="radio" name="garment" value="moonwhiteRobe"><div class="name">月白廣袖仙裙</div><div class="desc">月白薄紗、寬袖飄逸、仙子輪廓</div></label>
+      <label class="card"><input type="radio" name="garment" value="swordCultivatorAttire"><div class="name">青玄劍修常服</div><div class="desc">高領窄袖、束腰劍裝、俐落輪廓</div></label>
+      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 古典勁裝與遊俠</div>
+      <label class="card"><input type="radio" name="garment" value="nightRoamingArmor"><div class="name">夜行輕甲勁裝</div><div class="desc">輕甲夜行服、束腰帶、敏捷輪廓</div></label>
+      <label class="card"><input type="radio" name="garment" value="wandererCloakSuit"><div class="name">遊俠斗篷勁裝</div><div class="desc">風塵外袍、綁縛護臂、江湖輪廓</div></label>
+      <label class="card"><input type="radio" name="garment" value="legLeggedTrousers"><div class="name">束腿勁裝褲裙</div><div class="desc">綁腿長褲、短版上衣、俐落戰鬥輪廓</div></label>
+      <label class="card"><input type="radio" name="garment" value="swordsmanSash"><div class="name">劍客束腰長袍</div><div class="desc">寬帶束腰、側開衩、劍客輪廓</div></label>
+      <label class="card"><input type="radio" name="garment" value="huntressLeather"><div class="name">女俠皮甲輕裝</div><div class="desc">皮甲背心、飄逸內袍、俠女輪廓</div></label>
+      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 法袍道服</div>
+      <label class="card"><input type="radio" name="garment" value="baguaRobe"><div class="name">八卦道袍</div><div class="desc">八卦紋樣、寬袖繩帶、道者輪廓</div></label>
+      <label class="card"><input type="radio" name="garment" value="fiveElementRobe"><div class="name">五行法袍</div><div class="desc">五色分色下擺、高立領、法師輪廓</div></label>
+      <label class="card"><input type="radio" name="garment" value="alchemistRobe"><div class="name">煉丹道姑服</div><div class="desc">束腰罩衫、袖口綁縛、藥師輪廓</div></label>
+      <label class="card"><input type="radio" name="garment" value="talismanPriestRobe"><div class="name">符紋道長袍</div><div class="desc">符文刺繡、寬袖長袍、儀式輪廓</div></label>
+      <label class="card"><input type="radio" name="garment" value="celestialScholarRobe"><div class="name">藏經閣書卷袍</div><div class="desc">寬袖儒衫、腰間書卷袋、文人輪廓</div></label>
+      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 婚嫁儀式</div>
+      <label class="card"><input type="radio" name="garment" value="phoenixCoronet"><div class="name">鳳冠霞帔</div><div class="desc">鳳冠禮帔、層疊紅裙、大婚輪廓</div></label>
+      <label class="card"><input type="radio" name="garment" value="redWeddingRobe"><div class="name">紅嫁衣廣袖</div><div class="desc">大紅寬袖、金線刺繡、拖尾輪廓</div></label>
+      <label class="card"><input type="radio" name="garment" value="celestialBrideVeil"><div class="name">天姬婚服薄紗</div><div class="desc">素白薄紗、飄逸頭紗、仙姬輪廓</div></label>
+      <label class="card"><input type="radio" name="garment" value="unionSashRobe"><div class="name">同心結儀式袍</div><div class="desc">同心結腰帶、正式儀式輪廓</div></label>
+      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 戰鬥仙裝與聖器化</div>
+      <label class="card"><input type="radio" name="garment" value="spiritArmorRobe"><div class="name">靈甲戰袍</div><div class="desc">輕甲肩片融合長裙、戰鬥修士輪廓</div></label>
+      <label class="card"><input type="radio" name="garment" value="swordGuardGown"><div class="name">聖劍護肩戰裙</div><div class="desc">單肩護甲、高衩長裙、劍姬輪廓</div></label>
+      <label class="card"><input type="radio" name="garment" value="exorcistBattleArmor"><div class="name">破邪戰甲</div><div class="desc">符紋肩甲、高衩內袍、除魔輪廓</div></label>
+      <label class="card"><input type="radio" name="garment" value="ninthHeavenCape"><div class="name">九天戰神披風</div><div class="desc">長披風、貼身戰甲、戰神輪廓</div></label>
+      <label class="card"><input type="radio" name="garment" value="lightningSwordSuit"><div class="name">雷靈劍尊戰裝</div><div class="desc">雷紋刺繡戰裝、高衩長裙、劍尊輪廓</div></label>
+      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 妖靈與靈獸化裝束</div>
+      <label class="card"><input type="radio" name="garment" value="foxSpiritRobe"><div class="name">妖狐仙裾</div><div class="desc">狐尾拖尾裙擺、毛絨肩飾、妖姬輪廓</div></label>
+      <label class="card"><input type="radio" name="garment" value="craneFeatherRobe"><div class="name">鶴羽仙衣</div><div class="desc">羽翼寬袖、素白輪廓、仙鶴之姿</div></label>
+      <label class="card"><input type="radio" name="garment" value="serpentScaleGown"><div class="name">蛇靈鱗紋長裙</div><div class="desc">虹彩鱗紋緊身裙、靈蛇輪廓</div></label>
+      <label class="card"><input type="radio" name="garment" value="nineTailRobe"><div class="name">九尾狐后華服</div><div class="desc">多層拖尾裙擺、狐后輪廓</div></label>
+      <label class="card"><input type="radio" name="garment" value="phoenixSpiritGown"><div class="name">火鳳涅槃戰裙</div><div class="desc">火羽肩飾、長拖尾裙、鳳凰輪廓</div></label>
+    </div>
+    <div class="form-grid" style="margin-top:10px;">
+      <label class="field full custom-choice" data-custom-choice="garment">服裝自填
+        <input id="customGarment" type="text" placeholder="例如：漢唐華服、鎏金披肩、鶴氅道袍、雲紋劍裙">
+      </label>
+    </div>
+  </section>
+
+  <section class="section-material">
+    <div class="section-header">
+      <div class="section-label">05</div>
+      <div class="section-title">主題材質與奇幻元素</div>
+    </div>
+    <p class="hint">選擇要圍繞人物出現的仙俠元素，例如法器、靈獸、劍氣或雲霧仙境意象；這不是背景地點。</p>
+    <div class="grid" data-choice="material">
+      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 法器仙劍</div>
+      <label class="card selected"><input type="radio" name="material" value="immortalSword" checked><div class="name">仙劍靈氣</div><div class="desc">飄浮靈劍、藍白劍氣、修士配劍</div></label>
+      <label class="card"><input type="radio" name="material" value="talismanScroll"><div class="name">符紙法陣</div><div class="desc">發光符紙、環繞法陣、儀式靈力</div></label>
+      <label class="card"><input type="radio" name="material" value="qiEnergyAura"><div class="name">靈氣纏繞</div><div class="desc">流動靈氣絲帶、修煉能量顯化</div></label>
+      <label class="card"><input type="radio" name="material" value="fanWeapon"><div class="name">摺扇暗器</div><div class="desc">摺扇道具、金屬鋒銳邊緣、書生俠客感</div></label>
+      <label class="card"><input type="radio" name="material" value="qinFluteProp"><div class="name">玉簫法器</div><div class="desc">玉簫道具、樂音靈紋、仙樂氛圍</div></label>
+      <label class="card"><input type="radio" name="material" value="whiskDust"><div class="name">拂塵法器</div><div class="desc">拂塵道具、絲穗飄動、道長氣質</div></label>
+      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 靈獸神獸</div>
+      <label class="card"><input type="radio" name="material" value="nineTailFoxSpirit"><div class="name">九尾狐靈</div><div class="desc">九尾狐靈盤旋、狐火飄動、忠誠靈伴</div></label>
+      <label class="card"><input type="radio" name="material" value="craneCompanion"><div class="name">仙鶴伴生</div><div class="desc">飛翔仙鶴、羽光粒子、清雅伴生</div></label>
+      <label class="card"><input type="radio" name="material" value="azureDragonCoil"><div class="name">青龍盤旋</div><div class="desc">長身青龍盤旋天際、神獸守護</div></label>
+      <label class="card"><input type="radio" name="material" value="whiteTigerGuard"><div class="name">白虎相伴</div><div class="desc">白虎靈獸相伴、寒霜靈氣、守護感</div></label>
+      <label class="card"><input type="radio" name="material" value="vermilionBirdFlame"><div class="name">朱雀火羽</div><div class="desc">朱雀火羽翱翔、烈焰羽翼</div></label>
+      <label class="card"><input type="radio" name="material" value="koiAscension"><div class="name">錦鯉化龍</div><div class="desc">金色錦鯉群升騰化龍、飛昇意象</div></label>
+      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 劍氣仙氣特效</div>
+      <label class="card"><input type="radio" name="material" value="swordQiSlash"><div class="name">劍氣長虹</div><div class="desc">凌厲劍氣弧光、動態戰鬥光軌</div></label>
+      <label class="card"><input type="radio" name="material" value="immortalMistVeil"><div class="name">仙氣繚繞</div><div class="desc">柔霧修煉靈氣纏身、夢幻仙境</div></label>
+      <label class="card"><input type="radio" name="material" value="lightningTribulation"><div class="name">天雷渡劫</div><div class="desc">天雷降臨、渡劫飛昇能量</div></label>
+      <label class="card"><input type="radio" name="material" value="lotusFlameSpell"><div class="name">蓮花法印</div><div class="desc">掌心藍焰蓮花、施法印記</div></label>
+      <label class="card"><input type="radio" name="material" value="windBladeAura"><div class="name">御風劍罡</div><div class="desc">環身風刃能量、御風劍氣</div></label>
+      <label class="card"><input type="radio" name="material" value="goldenBarrierSeal"><div class="name">金光結界</div><div class="desc">金色結界光環、護體法陣</div></label>
+      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 雲霧仙境元素</div>
+      <label class="card"><input type="radio" name="material" value="cloudSeaDrift"><div class="name">雲海翻湧</div><div class="desc">腰身環繞翻湧雲海、仙境漂浮感</div></label>
+      <label class="card"><input type="radio" name="material" value="moonlitCloudVeil"><div class="name">月下雲紗</div><div class="desc">月光薄霧環繞、寧靜夜色</div></label>
+      <label class="card"><input type="radio" name="material" value="peachBlossomDrift"><div class="name">桃花漫天</div><div class="desc">粉色桃花瓣飄散、浪漫仙境</div></label>
+      <label class="card"><input type="radio" name="material" value="bambooMistGrove"><div class="name">竹林薄霧</div><div class="desc">竹林漫射光霧、清雅氛圍</div></label>
+      <label class="card"><input type="radio" name="material" value="goldenAutumnLeaves"><div class="name">楓葉秋思</div><div class="desc">紅金楓葉飄旋、詩意秋意</div></label>
+      <label class="card"><input type="radio" name="material" value="snowImmortalDrift"><div class="name">落雪仙姿</div><div class="desc">飄雪環繞、冷冽靜謐仙氣</div></label>
+      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 五行元素法術</div>
+      <label class="card"><input type="radio" name="material" value="fireElementBloom"><div class="name">烈焰法陣</div><div class="desc">紅橙火焰能量纏身、火屬性法力</div></label>
+      <label class="card"><input type="radio" name="material" value="waterElementRibbon"><div class="name">水靈絲帶</div><div class="desc">透明水流絲帶纏繞、水屬性法力</div></label>
+      <label class="card"><input type="radio" name="material" value="windElementSwirl"><div class="name">疾風靈紋</div><div class="desc">風螺旋紋路、袖擺翻飛、風屬性法力</div></label>
+      <label class="card"><input type="radio" name="material" value="earthElementCrystal"><div class="name">地脈靈晶</div><div class="desc">苔綠地脈水晶浮現、土屬性法力</div></label>
+      <label class="card"><input type="radio" name="material" value="metalElementBlade"><div class="name">金靈劍芒</div><div class="desc">銀白金屬劍芒、金屬性法力</div></label>
+      <label class="card"><input type="radio" name="material" value="woodElementVine"><div class="name">木靈藤蔓</div><div class="desc">發光藤蔓纏繞、小花點綴、木屬性法力</div></label>
+    </div>
+    <div class="form-grid" style="margin-top:10px;">
+      <label class="field custom-choice" data-custom-choice="material">材質自填
+        <input id="customMaterial" type="text" placeholder="例如：盛唐金粉、寒霜劍氣、丹爐藥氣、赤焰鳳羽">
+      </label>
+      <label class="field">材質呈現強度
+        <select id="intensity">
+          <option value="balanced material effects, elegant and luxurious">平衡高級</option>
+          <option value="massive explosive material splash, high speed frozen motion">強烈爆發</option>
+          <option value="subtle floating particles, refined couture details">細緻精修</option>
+        </select>
+      </label>
+    </div>
+  </section>
+
+  <section class="section-pose">
+    <div class="section-header">
+      <div class="section-label">06</div>
+      <div class="section-title">人物姿勢</div>
+    </div>
+    <p class="hint">單選；不確定時選「自動」，讓 AI 依服裝與主題安排較合適的姿勢。</p>
+    <div data-choice="pose">
+      <div class="pose-auto">
+        <label class="pose-card selected" data-value="auto" style="display:inline-block;min-width:170px;">
+          <input type="radio" name="pose" value="auto" checked>
+          <div class="pose-name">✦ 自動</div>
+          <div class="pose-desc">交給AI判斷最佳姿態</div>
+        </label>
+      </div>
+
+            <div class="pose-group">
+        <div class="pose-group-label">站姿仙儀：適合全身服裝與廣告主圖</div>
+        <div class="pose-group-grid">
+          <label class="pose-card"><input type="radio" name="pose" value="sword_stance_still"><div class="pose-name">持劍靜立</div><div class="pose-desc">劍尖朝下,沉穩修士氣場</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="windRobeStand"><div class="pose-name">御風立姿</div><div class="pose-desc">衣袖隨風揚起,身形沉穩</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="backHandsStand"><div class="pose-name">負手而立</div><div class="pose-desc">雙手背後,氣度不凡</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="fanCoverStand"><div class="pose-name">摺扇半掩立姿</div><div class="pose-desc">摺扇半遮面,書生俠客感</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="moonlightGazeStand"><div class="pose-name">望月而立</div><div class="pose-desc">仰望明月,靜謐出世感</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="discipleGreetStand"><div class="pose-name">抱拳行禮</div><div class="pose-desc">拱手行禮,弟子恭敬姿態</div></label>
+        </div>
+      </div>
+      <div class="pose-group">
+        <div class="pose-group-label">坐姿修煉：適合仙裙、法袍與敘事情境</div>
+        <div class="pose-group-grid">
+          <label class="pose-card"><input type="radio" name="pose" value="meditationSit"><div class="pose-name">盤坐修煉</div><div class="pose-desc">結印盤坐,靈氣凝聚</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="thronePavilionSit"><div class="pose-name">涼亭端坐</div><div class="pose-desc">亭中端坐,姿態挺拔</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="swordRestSit"><div class="pose-name">倚劍而坐</div><div class="pose-desc">劍靠肩側,鬆而不懈</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="lotusPoolSit"><div class="pose-name">水榭浮坐</div><div class="pose-desc">荷池邊坐,一手觸水</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="scrollReadSit"><div class="pose-name">展卷而坐</div><div class="pose-desc">展讀書卷,靜謐書卷氣</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="qinPlaySit"><div class="pose-name">撫琴而坐</div><div class="pose-desc">雙手撫琴,仙樂雅致</div></label>
+        </div>
+      </div>
+      <div class="pose-group">
+        <div class="pose-group-label">手勢與細節：適合要強調臉部、法器或畫面張力時</div>
+        <div class="pose-group-grid">
+          <label class="pose-card"><input type="radio" name="pose" value="handSealCast"><div class="pose-name">結印施法</div><div class="pose-desc">手結法印,靈氣浮現指尖</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="talismanThrow"><div class="pose-name">擲符出手</div><div class="pose-desc">出手擲符,神情專注</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="veilLiftGesture"><div class="pose-name">輕撩面紗</div><div class="pose-desc">輕掀薄紗,柔美神秘</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="windSleeveFlick"><div class="pose-name">水袖輕揚</div><div class="pose-desc">水袖甩動,東方舞韻</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="swordSheathe"><div class="pose-name">收劍入鞘</div><div class="pose-desc">收劍動作,內斂力量感</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="braidTwirl"><div class="pose-name">撥髮回眸</div><div class="pose-desc">撥髮回眸,柔美敘事感</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="lotusHold"><div class="pose-name">掌托蓮花</div><div class="pose-desc">雙手托起蓮花或靈焰,寧靜供奉感</div></label>
+        </div>
+      </div>
+      <div class="pose-group">
+        <div class="pose-group-label">御劍飛行與戰鬥：適合戰鬥仙裝、爆發力畫面</div>
+        <div class="pose-group-grid">
+          <label class="pose-card"><input type="radio" name="pose" value="swordFlightSoar"><div class="pose-name">御劍飛行</div><div class="pose-desc">御劍翱翔,衣髮飄揚,升空動勢</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="swordDanceArc"><div class="pose-name">劍舞回旋</div><div class="pose-desc">旋身劍舞,劍勢畫出弧線</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="duelReadyLunge"><div class="pose-name">對決蓄勢</div><div class="pose-desc">低姿蓄勢,握劍待發</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="aerialSlashDive"><div class="pose-name">凌空劈斬</div><div class="pose-desc">凌空俯衝劈劍,戲劇張力</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="tribulationStand"><div class="pose-name">渡劫傲立</div><div class="pose-desc">天雷中傲然而立,不屈氣魄</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="qiPalmStrike"><div class="pose-name">御氣掌擊</div><div class="pose-desc">掌心靈氣爆發,武打張力</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="flyingRibbonSpin"><div class="pose-name">迴風旋身</div><div class="pose-desc">空中旋身,綢帶與髮絲飛揚</div></label>
+        </div>
+      </div>
+    </div>
+    <div class="form-grid" style="margin-top:10px;">
+      <label class="field full custom-choice" data-custom-choice="pose">姿勢自填
+        <input id="customPose" type="text" placeholder="例如：仰躺花瓣堆中、單手撐傘回眸、盤坐懸浮冥想">
+      </label>
+    </div>
+  </section>
+
+  <section class="section-camera">
+    <div class="section-header">
+      <div class="section-label">07</div>
+      <div class="section-title">拍攝角度與鏡頭感</div>
+    </div>
+    <p class="hint">只改觀看角度、景深和鏡頭氣勢；人物拍到哪裡請回到 02 的「人物入鏡比例」。</p>
+    <div class="grid grid-3" data-choice="camera">
+      <label class="card selected"><input type="radio" name="camera" value="eyeLevelCover" checked><div class="name">自然平視</div><div class="desc">標準封面視角(預設)</div></label>
+      <label class="card"><input type="radio" name="camera" value="lowAngleHero"><div class="name">低角度仰拍</div><div class="desc">英雄感視角 / 鏡頭低於腰部</div></label>
+      <label class="card"><input type="radio" name="camera" value="highAngleOverhead"><div class="name">高角度俯拍</div><div class="desc">俯視角 / 鏡頭高於頭部</div></label>
+      <label class="card"><input type="radio" name="camera" value="softFocusGlow"><div class="name">柔焦光感</div><div class="desc">柔和光暈棚拍感</div></label>
+      <label class="card"><input type="radio" name="camera" value="beautyCloseUp"><div class="name">近距離美妝感</div><div class="desc">美妝特寫構圖</div></label>
+      <label class="card"><input type="radio" name="camera" value="sideProfile"><div class="name">側臉輪廓感</div><div class="desc">側臉輪廓 / 下顎線清楚</div></label>
+      <label class="card"><input type="radio" name="camera" value="threeQuarterSide"><div class="name">斜側角度</div><div class="desc">約45度側拍 / 臉和身形都有立體感</div></label>
+      <label class="card"><input type="radio" name="camera" value="topBeauty"><div class="name">高角度近景</div><div class="desc">從上方靠近拍臉與肩頸</div></label>
+      <label class="card"><input type="radio" name="camera" value="distantHero"><div class="name">遠距主視覺</div><div class="desc">人物與背景完整，廣告版面感強</div></label>
+    </div>
+  </section>
+
+  <section class="section-lighting">
+    <div class="section-header">
+      <div class="section-label">08</div>
+      <div class="section-title">光影色彩</div>
+    </div>
+    <p class="hint">單選，決定整張廣告的主色、光線方向與情緒；人物與背景會一起受影響。</p>
+    <div class="grid grid-3" data-choice="lighting">
+      <label class="card selected"><input type="radio" name="lighting" value="soft" checked><div class="name">柔光棚拍</div><div class="desc">柔和膚色與高級光感</div></label>
+      <label class="card"><input type="radio" name="lighting" value="hard"><div class="name">強對比硬光</div><div class="desc">強陰影、輪廓銳利</div></label>
+      <label class="card"><input type="radio" name="lighting" value="halo"><div class="name">逆光光暈</div><div class="desc">邊緣發光、神聖氣場</div></label>
+      <label class="card"><input type="radio" name="lighting" value="stage"><div class="name">舞台光束</div><div class="desc">聚光燈、戲劇舞台感</div></label>
+      <label class="card"><input type="radio" name="lighting" value="mist"><div class="name">夢幻霧光</div><div class="desc">柔霧、漂浮、空氣感</div></label>
+      <label class="card"><input type="radio" name="lighting" value="cold"><div class="name">冷調金屬光</div><div class="desc">冷冽反光、金屬質地</div></label>
+      <label class="card"><input type="radio" name="lighting" value="warmWindowSoft"><div class="name">柔暖窗影光</div><div class="desc">白棚日光、窗格陰影、紅色反射</div></label>
+      <label class="card"><input type="radio" name="lighting" value="jewelrySparkle"><div class="name">珠寶閃光</div><div class="desc">細小高光、切面反射、精品閃耀</div></label>
+      <label class="card"><input type="radio" name="lighting" value="prismaticColor"><div class="name">彩色棱鏡光</div><div class="desc">彩虹折射、臉身同光、夢幻廣告</div></label>
+      <label class="card"><input type="radio" name="lighting" value="amethystSparkle"><div class="name">紫晶閃光</div><div class="desc">紫色晶體反射、花瓣閃光、珠寶感</div></label>
+      <label class="card"><input type="radio" name="lighting" value="redWaterReflection"><div class="name">紅色水光反射</div><div class="desc">紅色水面反光、液態玻璃折射</div></label>
+      <label class="card"><input type="radio" name="lighting" value="rainNightCool"><div class="name">雨夜冷光</div><div class="desc">雨幕冷光、濕地反射、臉身同光</div></label>
+      <label class="card"><input type="radio" name="lighting" value="darkGoldMood"><div class="name">暗金情緒光</div><div class="desc">低調金光、深色背景、情緒美妝</div></label>
+      <label class="card"><input type="radio" name="lighting" value="palaceNightWarm"><div class="name">宮殿夜景暖光</div><div class="desc">夜景宮殿暖光、金箔與雪粒反射</div></label>
+      <label class="card"><input type="radio" name="lighting" value="foxfireGold"><div class="name">狐火金光</div><div class="desc">金色狐火、燈籠暖光、臉身同光</div></label>
+      <label class="card"><input type="radio" name="lighting" value="holyCathedralLight"><div class="name">聖殿神聖光</div><div class="desc">白金逆光、羽翼反射、聖殿柔光</div></label>
+      <label class="card"><input type="radio" name="lighting" value="pearlCathedralBacklight"><div class="name">珍珠聖殿逆光</div><div class="desc">白金背光、寶石反射、蝶翼高光</div></label>
+      <label class="card"><input type="radio" name="lighting" value="moonGlassSparkle"><div class="name">月光玻璃閃光</div><div class="desc">冷月光、玻璃水面、花冠晶亮反射</div></label>
+      <label class="card"><input type="radio" name="lighting" value="goldenSkyTempleLight"><div class="name">天空宮殿日落光</div><div class="desc">暖日落、雲端反光、白金聖劍光</div></label>
+      <label class="card"><input type="radio" name="lighting" value="bettaUnderwaterSpotlight"><div class="name">鬥魚水下聚光</div><div class="desc">水面頂光、紅白魚鰭反射、泡泡高光</div></label>
+      <label class="card"><input type="radio" name="lighting" value="amethystCandleGlow"><div class="name">紫晶燭光宮廷</div><div class="desc">暖金燭光、紫晶反射、柔亮宮廷膚色</div></label>
+      <label class="card"><input type="radio" name="lighting" value="circusLanternGold"><div class="name">馬戲燈串金光</div><div class="desc">黑白金燈串、旋轉木馬、夢幻舞台光</div></label>
+      <label class="card"><input type="radio" name="lighting" value="desertGoldTentLight"><div class="name">沙漠宮帳暗金光</div><div class="desc">暗金帳幕、寶石反射、野性低調光</div></label>
+      <label class="card"><input type="radio" name="lighting" value="underwaterSunbeam"><div class="name">海底陽光束</div><div class="desc">水面光束、藍綠折射、魚群同光</div></label>
+      <label class="card"><input type="radio" name="lighting" value="cloudRiftHolyLight"><div class="name">雲層裂縫聖光</div><div class="desc">雲縫逆光、白金羽毛、神聖高反差</div></label>
+      <label class="card"><input type="radio" name="lighting" value="darkIceBlue"><div class="name">暗藍冰晶冷光</div><div class="desc">冰藍反射、暗色背景、冷光一致</div></label>
+      <label class="card"><input type="radio" name="lighting" value="candyGlossLight"><div class="name">糖果透明高光</div><div class="desc">果凍反射、甜美棚光、商品廣告感</div></label>
+      <label class="card"><input type="radio" name="lighting" value="auroraPerfumeLight"><div class="name">極光香氛柔光</div><div class="desc">虹彩香霧、玻璃反射、臉身同光</div></label>
+      <label class="card"><input type="radio" name="lighting" value="dessertBeautyLight"><div class="name">甜點美妝柔光</div><div class="desc">粉白棚光、奶油反射、乾淨膚色</div></label>
+      <label class="card"><input type="radio" name="lighting" value="cherryPopLight"><div class="name">櫻桃氣泡亮光</div><div class="desc">紅色果凍反射、氣泡高光、潮流美妝</div></label>
+      <label class="card"><input type="radio" name="lighting" value="matchaSoftLight"><div class="name">抹茶柔霧茶光</div><div class="desc">淡綠茶粉反射、米白柔光、東方高級感</div></label>
+      <label class="card"><input type="radio" name="lighting" value="milkTeaAmberLight"><div class="name">奶茶琥珀撞色光</div><div class="desc">焦糖琥珀、奶白對撞、高飽和飲品廣告</div></label>
+      <label class="card"><input type="radio" name="lighting" value="silverScreenLight"><div class="name">銀色螢幕冷光</div><div class="desc">手機螢幕冷光、金屬反射、科技精品</div></label>
+      <label class="card"><input type="radio" name="lighting" value="blueAudioLight"><div class="name">藍色音波科技光</div><div class="desc">藍光音波、透明外殼反射、夜色科技</div></label>
+      <label class="card"><input type="radio" name="lighting" value="roseGoldTechLight"><div class="name">玫瑰金科技柔光</div><div class="desc">玫瑰金反射、錶面高光、精緻生活感</div></label>
+      <label class="card"><input type="radio" name="lighting" value="coldWhiteMechaLight"><div class="name">冷白機械反射光</div><div class="desc">冷白機甲燈、金屬反射、工業科技感</div></label>
+      <label class="card"><input type="radio" name="lighting" value="hologramScanLight"><div class="name">全息掃描虹彩光</div><div class="desc">透明投影、虹彩掃描、科技精品</div></label>
+      <label class="card"><input type="radio" name="lighting" value="bioGlowSoftLight"><div class="name">生物螢光柔光</div><div class="desc">花瓣螢光、水光保養、柔亮膚色</div></label>
+      <label class="card"><input type="radio" name="lighting" value="moonSilverReflect"><div class="name">月面冷銀反射</div><div class="desc">冷銀月光、珍珠金屬、香氛霧</div></label>
+      <label class="card"><input type="radio" name="lighting" value="maglevCrystalRefraction"><div class="name">磁浮水晶折射光</div><div class="desc">漂浮水晶、高光切面、精品主視覺</div></label>
+      <label class="card"><input type="radio" name="lighting" value="dataFlowBlueViolet"><div class="name">資料流藍紫光</div><div class="desc">藍紫資料線、黑鏡螢幕、未來廣告</div></label>
+      <label class="card"><input type="radio" name="lighting" value="blueEnergyWingLight"><div class="name">藍色能源翼光</div><div class="desc">藍色能源燈、機械翼反射、冷灰棚光</div></label>
+      <label class="card"><input type="radio" name="lighting" value="wastelandIndustrialSideLight"><div class="name">工業廢土側光</div><div class="desc">斜側硬光、老化金屬反射、廢土陰影</div></label>
+      <label class="card"><input type="radio" name="lighting" value="solarTempleGold"><div class="name">太陽神殿金光</div><div class="desc">晨光日輪、白金反射、肌膚與神殿同光</div></label>
+      <label class="card"><input type="radio" name="lighting" value="blueFlameGlow"><div class="name">藍焰法術光</div><div class="desc">藍色法術光+遠處火光、暗黑仙俠對比</div></label>
+      <label class="card"><input type="radio" name="lighting" value="moonlightCandle"><div class="name">月光燭火混合光</div><div class="desc">冷月光+暖燭光、詩意夜景</div></label>
+      <label class="card"><input type="radio" name="lighting" value="crystalDaylight"><div class="name">水晶日光</div><div class="desc">陽光穿透玻璃水晶、清透稜鏡碎光</div></label>
+      <label class="card"><input type="radio" name="lighting" value="tyndallBacklight"><div class="name">逆光丁達爾光束</div><div class="desc">逆光雲霧穿透、冷暖對比強烈</div></label>
+      <label class="card"><input type="radio" name="lighting" value="starfieldColdBlue"><div class="name">星光冷藍夢幻</div><div class="desc">星光點點、冷藍色調、夢幻氛圍</div></label>
+      <label class="card"><input type="radio" name="lighting" value="windColdMistBack"><div class="name">逆光冷霧強風</div><div class="desc">逆光冷霧、強風動勢感</div></label>
+      <label class="card"><input type="radio" name="lighting" value="candleStarContrast"><div class="name">燭光星空對比</div><div class="desc">燭光暖黃、星空冷藍對比</div></label>
+      <label class="card"><input type="radio" name="lighting" value="neonPurpleMoonlit"><div class="name">冷紫霓虹月光</div><div class="desc">冷紫霓虹光、月光剪影</div></label>
+      <label class="card"><input type="radio" name="lighting" value="holyMistBeam"><div class="name">逆光雲霧聖光</div><div class="desc">逆光雲霧、聖光穿透感</div></label>
+      <label class="card"><input type="radio" name="lighting" value="candleShadowGothic"><div class="name">燭光哥德暗影</div><div class="desc">搖曳燭光、深色陰影、儀式氛圍</div></label>
+      <label class="card"><input type="radio" name="lighting" value="bloodMoonGlow"><div class="name">血月冷光</div><div class="desc">暗紅月光、冷冽陰森氛圍</div></label>
+      <label class="card"><input type="radio" name="lighting" value="neonPinkCyanSplit"><div class="name">粉青霓虹雙色光</div><div class="desc">粉紫與青色撞色霓虹</div></label>
+      <label class="card"><input type="radio" name="lighting" value="glitchScanlineFlicker"><div class="name">故障掃描線閃光</div><div class="desc">數位雜訊閃爍、賽博故障感</div></label>
+    </div>
+    <div class="form-grid" style="margin-top:10px;">
+      <label class="field full">色彩補充
+        <input id="colorNote" type="text" placeholder="例如：黑金、草莓粉、奶油白、深紅背景、冷藍霧感">
+      </label>
+    </div>
+  </section>
+
+  <section class="section-background">
+    <div class="section-header">
+      <div class="section-label">09</div>
+      <div class="section-title">背景場景與留白</div>
+    </div>
+    <p class="hint">決定人物身後的仙俠世界、場景密度與是否保留放標題的空白區；不會替換你已選的主題材質。</p>
+    <div class="grid grid-3" data-choice="background">
+      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 仙山秘境</div>
+      <label class="card selected"><input type="radio" name="background" value="immortalMountainPeak" checked><div class="name">仙山雲霧絕頂</div><div class="desc">雲霧繚繞仙山、懸浮山石、古松</div></label>
+      <label class="card"><input type="radio" name="background" value="hiddenValleySanctuary"><div class="name">隱世秘境山谷</div><div class="desc">飛瀑碧潭、群山環抱、薄霧繚繞</div></label>
+      <label class="card"><input type="radio" name="background" value="celestialCloudTerrace"><div class="name">凌雲仙台</div><div class="desc">雲海上的石造平台、遠山剪影</div></label>
+      <label class="card"><input type="radio" name="background" value="sacredPineForest"><div class="name">古松聖林</div><div class="desc">古松盤根、光影斑駁、清幽氛圍</div></label>
+      <label class="card"><input type="radio" name="background" value="floatingIslandRealm"><div class="name">浮空仙島秘境</div><div class="desc">懸浮列島、石橋相連、深邃天空</div></label>
+      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 宗門山門與樓閣</div>
+      <label class="card"><input type="radio" name="background" value="sectGateEntrance"><div class="name">宗門山門</div><div class="desc">石造山門牌坊、雲霧石階</div></label>
+      <label class="card"><input type="radio" name="background" value="pavilionCourtyard"><div class="name">樓閣庭院</div><div class="desc">紅漆廊柱、飛簷屋瓦、書院氛圍</div></label>
+      <label class="card"><input type="radio" name="background" value="libraryPavilionInterior"><div class="name">藏經閣內部</div><div class="desc">高聳書架、捲軸典籍、柔和窗光</div></label>
+      <label class="card"><input type="radio" name="background" value="trainingGroundCourt"><div class="name">練武場</div><div class="desc">石地兵器架、開闊天空</div></label>
+      <label class="card"><input type="radio" name="background" value="bellTowerNight"><div class="name">夜色鐘樓</div><div class="desc">燈籠屋瓦、月下石徑、寧靜夜色</div></label>
+      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 雲海仙境與天象</div>
+      <label class="card"><input type="radio" name="background" value="cloudSeaSunrise"><div class="name">雲海日出</div><div class="desc">雲海翻湧、晨光穿透、遠山剪影</div></label>
+      <label class="card"><input type="radio" name="background" value="moonlitNightSky"><div class="name">月夜長空</div><div class="desc">滿月薄雲、銀輝灑落遠山</div></label>
+      <label class="card"><input type="radio" name="background" value="lightningTribulationSky"><div class="name">渡劫天象</div><div class="desc">暗雲密布、閃電交織、渡劫氣勢</div></label>
+      <label class="card"><input type="radio" name="background" value="auroraSpiritSky"><div class="name">靈光極夜天</div><div class="desc">流動極光、星空夜幕、仙靈氛圍</div></label>
+      <label class="card"><input type="radio" name="background" value="goldenDuskHorizon"><div class="name">金色暮色天際</div><div class="desc">暖橘夕陽、遠山稜線、寧靜收尾</div></label>
+      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 江湖市井與人間煙火</div>
+      <label class="card"><input type="radio" name="background" value="ancientTownStreet"><div class="name">古鎮石街</div><div class="desc">石板路、木造店鋪、紅燈籠</div></label>
+      <label class="card"><input type="radio" name="background" value="riversideWillowPath"><div class="name">河畔垂柳道</div><div class="desc">石橋流水、垂柳輕拂</div></label>
+      <label class="card"><input type="radio" name="background" value="teaHouseInterior"><div class="name">茶館內堂</div><div class="desc">木格窗、茶煙裊裊、溫潤氛圍</div></label>
+      <label class="card"><input type="radio" name="background" value="marketFestivalNight"><div class="name">夜市燈籠</div><div class="desc">成排燈籠、遠處人潮、江湖夜色</div></label>
+      <label class="card"><input type="radio" name="background" value="mountainInnCourtyard"><div class="name">山中客棧</div><div class="desc">木造陽台、懸掛燈籠、旅人歇息感</div></label>
+      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 神殿祭壇與秘境遺跡</div>
+      <label class="card"><input type="radio" name="background" value="ancientAltarRuins"><div class="name">古祭壇遺跡</div><div class="desc">苔痕石柱、地面隱隱符文</div></label>
+      <label class="card"><input type="radio" name="background" value="dragonPalaceHall"><div class="name">龍宮大殿</div><div class="desc">珊瑚般巨柱、深藍綠水下光</div></label>
+      <label class="card"><input type="radio" name="background" value="celestialTempleInterior"><div class="name">天庭神殿內部</div><div class="desc">金身巨像、香煙繚繞、光束穿透</div></label>
+      <label class="card"><input type="radio" name="background" value="forbiddenScrollVault"><div class="name">禁書秘境</div><div class="desc">漂浮古籍、幽藍靈火照明</div></label>
+      <label class="card"><input type="radio" name="background" value="risingPhoenixShrine"><div class="name">鳳凰祭壇廢墟</div><div class="desc">崩塌石鳳雕像、餘燼夜色</div></label>
+      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 竹林溪谷與四季</div>
+      <label class="card"><input type="radio" name="background" value="bambooForestPath"><div class="name">竹林步道</div><div class="desc">高聳翠竹、柔光穿透、清幽小徑</div></label>
+      <label class="card"><input type="radio" name="background" value="cherryBlossomCliff"><div class="name">櫻崖仙境</div><div class="desc">山崖櫻花、飄落花瓣、遠眺山谷</div></label>
+      <label class="card"><input type="radio" name="background" value="frozenWaterfallCavern"><div class="name">冰瀑洞窟</div><div class="desc">冰柱垂掛、霜白岩壁、冷調藍光</div></label>
+      <label class="card"><input type="radio" name="background" value="autumnMapleValley"><div class="name">秋楓谷地</div><div class="desc">滿山紅金楓葉、溫暖午後光</div></label>
+      <label class="card"><input type="radio" name="background" value="lotusPondPavilion"><div class="name">荷池水榭</div><div class="desc">滿池荷花、木造平台延伸水面</div></label>
+    </div>
+    <div class="form-grid" style="margin-top:10px;">
+      <label class="field full custom-choice" data-custom-choice="background">背景自填
+        <input id="customBackground" type="text" placeholder="例如：崑崙雪頂、桃源仙境瀑布、九重天雲闕">
+      </label>
+    </div>
+  </section>
+
+  <section class="section-extra">
+    <div class="section-header">
+      <div class="section-label">10</div>
+      <div class="section-title">自訂要求</div>
+    </div>
+    <p class="hint">只有需要指定道具、禁用元素、文字留白或特殊細節時再填寫，避免與前面選項重複描述。</p>
+    <div class="form-grid">
+      <label class="field full">額外要求
+        <textarea id="extraNote" placeholder="例如：這套仙裙是主打，完整呈現寬袖與裙擺；人物手持仙劍；不要額外靈獸；左側保留文案空間"></textarea>
+      </label>
+    </div>
+  </section>
+
+  <section class="section-ratio">
+    <div class="section-header">
+      <div class="section-label">11</div>
+      <div class="section-title">圖片比例</div>
+    </div>
+    <p class="hint">依發布用途選擇：直式適合人像與社群，橫式適合海報、橫幅或世界觀場景。</p>
+    <div class="grid" data-choice="ratio">
+      <label class="card selected"><input type="radio" name="ratio" value="vertical916" checked><div class="name">9:16 直式</div><div class="desc">短影音封面、限動</div></label>
+      <label class="card"><input type="radio" name="ratio" value="vertical45"><div class="name">4:5 直式</div><div class="desc">IG / 小紅書貼文</div></label>
+      <label class="card"><input type="radio" name="ratio" value="square"><div class="name">1:1 方形</div><div class="desc">社群貼文主圖</div></label>
+      <label class="card"><input type="radio" name="ratio" value="poster23"><div class="name">2:3 海報</div><div class="desc">商業海報感</div></label>
+      <label class="card"><input type="radio" name="ratio" value="vertical34"><div class="name">3:4 直式</div><div class="desc">寫真海報、人物主視覺</div></label>
+      <label class="card"><input type="radio" name="ratio" value="horizontal169"><div class="name">16:9 橫式</div><div class="desc">網站橫幅、影片封面</div></label>
+      <label class="card"><input type="radio" name="ratio" value="horizontal43"><div class="name">4:3 橫式</div><div class="desc">橫式廣告、場景更完整</div></label>
+      <label class="card"><input type="radio" name="ratio" value="wideBanner"><div class="name">21:9 寬幅</div><div class="desc">電影感橫幅、品牌主視覺</div></label>
+    </div>
+  </section>
+
+  <section class="section-output">
+    <div class="section-header">
+      <div class="section-label">12</div>
+      <div class="section-title">生成咒語</div>
+    </div>
+    <button class="generate-btn" id="generateBtn">生成完整咒語</button>
+    <p class="hint">建議搭配真人參考照使用，並在生圖模型中開啟身份/臉部參考。</p>
+    <div class="output-wrap hidden" id="outputWrap">
+      <div class="output-stale-badge">選項已變更，請重新按「生成完整咒語」</div>
+      <textarea id="outputText" readonly></textarea>
+      <button class="copy-btn" id="copyBtn">一鍵複製</button>
+    </div>
+  </section>
+</main>
+
+<script src="assets/core-prompt.js"></script>
+<script>
+const materialData = {
+  immortalSword: {
+    label: '仙劍靈氣',
+    prompt: 'an ornate spirit sword floating or held beside the body, faint blue-white qi energy trailing along the blade, ethereal cultivator weapon',
+    palette: 'cold steel silver, spirit blue glow, ivory hilt accent'
+  },
+  talismanScroll: {
+    label: '符紙法陣',
+    prompt: 'glowing talisman papers and a circular spirit array forming beneath or around the subject, mystical ritual energy',
+    palette: 'aged parchment gold, cinnabar red ink, faint white glow'
+  },
+  qiEnergyAura: {
+    label: '靈氣纏繞',
+    prompt: 'visible flowing qi energy wrapping around the arms and body like luminous ribbons, cultivator power manifestation',
+    palette: 'pale jade green, silver white, soft glow'
+  },
+  fanWeapon: {
+    label: '摺扇暗器',
+    prompt: 'an ornate folding fan held with subtle metallic edge detailing, elegant scholar-warrior prop',
+    palette: 'ink black, gold leaf, cream paper'
+  },
+  qinFluteProp: {
+    label: '玉簫法器',
+    prompt: 'a jade flute held delicately, faint musical energy ripples visible in the air, refined immortal musician mood',
+    palette: 'pale jade, ivory, soft silver shimmer'
+  },
+  whiskDust: {
+    label: '拂塵法器',
+    prompt: 'an ornate horsetail whisk held with elegant wrist rotation, flowing silk tassels, Taoist master prop',
+    palette: 'ivory white, pale gold trim, soft grey shadow'
+  },
+  nineTailFoxSpirit: {
+    label: '九尾狐靈',
+    prompt: 'a mythic nine-tailed fox spirit coiling near the subject, glowing fox-fire wisps, loyal companion energy',
+    palette: 'warm fox-red, gold ember glow, soft white fur highlight'
+  },
+  craneCompanion: {
+    label: '仙鶴伴生',
+    prompt: 'a graceful spirit crane in flight beside the subject, trailing feather-light energy particles',
+    palette: 'pure white, pale gold beak accent, soft sky blue'
+  },
+  azureDragonCoil: {
+    label: '青龍盤旋',
+    prompt: 'a long azure spirit dragon coiling through the sky behind the subject, mythic guardian presence',
+    palette: 'deep azure blue, silver scale highlight, storm-cloud grey'
+  },
+  whiteTigerGuard: {
+    label: '白虎相伴',
+    prompt: 'a spirit white tiger standing beside the subject, faint frost-energy along its fur, guardian beast presence',
+    palette: 'frost white, pale blue stripe, cold silver'
+  },
+  vermilionBirdFlame: {
+    label: '朱雀火羽',
+    prompt: 'a phoenix-like vermilion bird spirit with trailing flame feathers soaring near the subject',
+    palette: 'vivid vermilion red, ember gold, deep shadow black'
+  },
+  koiAscension: {
+    label: '錦鯉化龍',
+    prompt: 'a stream of golden koi fish spiraling upward transforming into dragon-like light near the subject, ascension mythology',
+    palette: 'golden koi orange, deep water blue, luminous white trail'
+  },
+  swordQiSlash: {
+    label: '劍氣長虹',
+    prompt: 'a visible arc of cutting sword energy slicing through the air near the subject, dynamic combat light trail',
+    palette: 'cold silver-blue, faint white core, dark backdrop contrast'
+  },
+  immortalMistVeil: {
+    label: '仙氣繚繞',
+    prompt: 'soft floating cultivation mist wrapping gently around the body, dreamlike immortal atmosphere',
+    palette: 'pale jade mist, soft white, faint gold undertone'
+  },
+  lightningTribulation: {
+    label: '天雷渡劫',
+    prompt: 'dramatic lightning bolts striking downward around the subject, tribulation ascension energy',
+    palette: 'electric violet-blue, stark white flash, deep storm grey'
+  },
+  lotusFlameSpell: {
+    label: '蓮花法印',
+    prompt: 'a glowing blue flame lotus blooming in the subject\'s open palm, elegant spellcasting detail',
+    palette: 'cerulean flame blue, soft white glow, dark contrast background'
+  },
+  windBladeAura: {
+    label: '御風劍罡',
+    prompt: 'visible wind-blade energy spiraling around the body, cutting gust motion trails',
+    palette: 'pale cyan, silver-white streaks, soft grey backdrop'
+  },
+  goldenBarrierSeal: {
+    label: '金光結界',
+    prompt: 'a glowing golden barrier seal forming an arc around the subject, protective spirit-ward energy',
+    palette: 'warm gold, faint amber glow, deep contrast shadow'
+  },
+  cloudSeaDrift: {
+    label: '雲海翻湧',
+    prompt: 'rolling sea of clouds surrounding the lower body, floating immortal-realm atmosphere',
+    palette: 'soft white, pale grey-blue shadow, warm sunrise edge'
+  },
+  moonlitCloudVeil: {
+    label: '月下雲紗',
+    prompt: 'sheer moonlit cloud mist drifting past the subject, serene nocturnal immortal mood',
+    palette: 'cool moon silver, deep indigo shadow, faint white glow'
+  },
+  peachBlossomDrift: {
+    label: '桃花漫天',
+    prompt: 'drifting pink peach blossom petals surrounding the subject, romantic immortal-realm atmosphere',
+    palette: 'soft peach pink, ivory white, warm gold light'
+  },
+  bambooMistGrove: {
+    label: '竹林薄霧',
+    prompt: 'misty bamboo grove atmosphere with soft diffused green light filtering through',
+    palette: 'jade green, pale mist white, soft gold filtered light'
+  },
+  goldenAutumnLeaves: {
+    label: '楓葉秋思',
+    prompt: 'drifting red-gold maple leaves swirling around the subject, poetic autumn immortal mood',
+    palette: 'deep maple red, warm gold, soft brown undertone'
+  },
+  snowImmortalDrift: {
+    label: '落雪仙姿',
+    prompt: 'gently falling snow drifting around the subject, cold serene immortal atmosphere',
+    palette: 'pure white, pale blue shadow, soft silver highlight'
+  },
+  fireElementBloom: {
+    label: '烈焰法陣',
+    prompt: 'swirling red-orange flame energy wrapping around the hand or body, fire-element cultivation power',
+    palette: 'deep ember red, warm orange glow, dark ash shadow'
+  },
+  waterElementRibbon: {
+    label: '水靈絲帶',
+    prompt: 'flowing translucent water ribbons wrapping gracefully around the body, water-element cultivation',
+    palette: 'aqua blue, pale teal, glassy white highlight'
+  },
+  windElementSwirl: {
+    label: '疾風靈紋',
+    prompt: 'visible wind-spiral patterns trailing from the sleeves and hem, wind-element cultivation energy',
+    palette: 'pale cyan, soft silver-grey, faint white streak'
+  },
+  earthElementCrystal: {
+    label: '地脈靈晶',
+    prompt: 'jagged glowing earth-spirit crystals rising subtly near the subject, earth-element cultivation',
+    palette: 'mossy green, warm amber crystal glow, deep brown shadow'
+  },
+  metalElementBlade: {
+    label: '金靈劍芒',
+    prompt: 'sharp metallic light-blade edges glowing faintly along the arms, metal-element cultivation power',
+    palette: 'cold silver, pale platinum glow, dark contrast shadow'
+  },
+  woodElementVine: {
+    label: '木靈藤蔓',
+    prompt: 'soft glowing vine tendrils with blooming small flowers wrapping around the arm, wood-element cultivation',
+    palette: 'soft jade green, gentle floral pink, warm gold accent'
+  }
+};
+
+const garmentData = {
+  xianQipaoGauze: 'flowing wide-sleeve xianxia gown with a crossed silk sash, layered chiffon under-robe, floating ribbon trails, elegant cultivator-immortal silhouette',
+  cloudShoulderCape: 'ornate cloud-collar cape draped over the shoulders, richly embroidered cloud-shoulder piece, long flowing outer robe, ceremonial immortal presence',
+  discipleUniform: 'fitted sect-disciple training uniform, crossed chest sash, narrow waist wrap, clean martial silhouette suited for sword practice',
+  sectMasterRobe: 'layered formal sect-master robe with wide dramatic sleeves, embroidered rank insignia at the chest, commanding authoritative silhouette',
+  moonwhiteRobe: 'pale moonlit-white wide-sleeve gown, sheer floating over-layer, delicate waist cord, serene immortal maiden silhouette',
+  swordCultivatorAttire: 'fitted blue-black sword-cultivator attire with a high collar, narrow tailored sleeves for blade work, sash-tied waist, disciplined elegant silhouette',
+  nightRoamingArmor: 'fitted dark light-armor training suit for night travel, minimal shoulder guards, cinched waist belt, agile wuxia silhouette',
+  wandererCloakSuit: 'fitted travel attire with a weathered outer cloak, wrapped forearm guards, dusty-road wanderer silhouette',
+  legLeggedTrousers: 'fitted martial trousers with wrapped shin bindings paired with a cropped fitted top, agile combat-ready silhouette',
+  swordsmanSash: 'long fitted swordsman robe with a wide sash and side slit for movement, refined martial elegance',
+  huntressLeather: 'light leather-accented huntress outfit, fitted vest over a flowing under-robe, practical yet elegant wuxia silhouette',
+  baguaRobe: 'flowing Taoist robe with subtle bagua trigram embroidery, wide dramatic sleeves, rope-tied waist, mystical scholar-immortal silhouette',
+  fiveElementRobe: 'ceremonial robe with five-element color panels along the hem, tall standing collar, elemental mystic silhouette',
+  alchemistRobe: 'fitted alchemist robe with a cinched apron-like overlay, practical sleeve wraps, herbal-scholar silhouette',
+  talismanPriestRobe: 'long flowing robe with faint glowing talisman embroidery along the sleeves and hem, solemn ritual silhouette',
+  celestialScholarRobe: 'refined scholar robe with wide sleeves and a sash-held scroll case, quiet intellectual immortal silhouette',
+  phoenixCoronet: 'ornate phoenix coronet paired with a richly embroidered ceremonial cape, layered red wedding silhouette, dramatic bridal train',
+  redWeddingRobe: 'deep red wide-sleeve bridal gown with gold embroidery, floating veil train, ceremonial wedding silhouette',
+  celestialBrideVeil: 'pale ethereal bridal gown with a sheer floating veil, delicate floral hairpiece, celestial wedding silhouette',
+  unionSashRobe: 'ceremonial robe tied with an ornate double-happiness knot sash, formal union-rite silhouette',
+  spiritArmorRobe: 'fitted spirit-armor robe with light plated shoulder guards fused into a flowing skirt, battle-ready cultivator silhouette',
+  swordGuardGown: 'elegant battle gown with a single ornate shoulder guard and a long high-slit skirt, sword-wielding heroine silhouette',
+  exorcistBattleArmor: 'dark ceremonial battle armor with talisman-lined pauldrons, high-slit under-robe, demon-quelling warrior silhouette',
+  ninthHeavenCape: 'dramatic long battle cape over a fitted armored bodice, wind-caught silhouette, celestial war-god presence',
+  lightningSwordSuit: 'fitted battle suit with faint glowing lightning-vein embroidery, high-slit skirt, thunder-cultivator silhouette',
+  foxSpiritRobe: 'flowing fox-spirit-inspired gown with a soft tail-like trailing hem, delicate fur-textured shoulder wrap, mythic vixen silhouette',
+  craneFeatherRobe: 'pale feather-textured robe with wide wing-like sleeves, graceful crane-immortal silhouette',
+  serpentScaleGown: 'fitted gown with subtle iridescent scale-pattern embroidery along the bodice and hem, mythic serpent-spirit silhouette',
+  nineTailRobe: 'opulent fox-queen gown with layered flowing tails formed from silk trailing panels, regal mythic silhouette',
+  phoenixSpiritGown: 'dramatic gown with flame-feather textured shoulder pieces and a long trailing skirt, phoenix-rebirth silhouette'
+};
+
+const styleData = {
+  luxury: 'orthodox sect prestige campaign, ceremonial cultivator hero visual, refined premium xianxia art direction, dignified brand-level presentation',
+  poster: 'premium xianxia film poster composition, clean negative space for headline, cinematic advertising layout, strong hero visual',
+  editorial: 'high fashion eastern-style editorial photography, guofeng magazine cover quality, dramatic cultivator styling, award winning fashion campaign',
+  cinematic: 'cinematic xianxia epic artwork, sweeping narrative mood, immersive cultivation-world worldbuilding, powerful visual storytelling',
+  blackGold: 'black gold mythic xianxia campaign, premium dark-fantasy advertisement mood, elegant opulence, strong luxury brand identity',
+  clean: 'clean guofeng brand campaign, minimal premium layout, elegant commercial beauty, refined negative space',
+  artExhibit: 'museum quality ink-wash art exhibition campaign, fine art poster presentation, gallery-grade composition, premium cultural artwork, refined negative space',
+  huxia: 'gritty wuxia film still mood, raw kinetic energy, dusty road atmosphere, weathered jianghu-world commercial artwork',
+  beautyCampaign: 'premium guofeng beauty campaign, cosmetic advertisement mood, polished face detail, refined skin texture, elegant makeup brand visual language'
+};
+
+const backgroundData = {
+  immortalMountainPeak: 'towering mist-shrouded immortal mountain peaks background, floating rock formations, ancient pine trees, ethereal cultivation-realm atmosphere',
+  hiddenValleySanctuary: 'hidden valley sanctuary background, waterfall cascading into a jade pool, surrounding cliffs wrapped in soft mist',
+  celestialCloudTerrace: 'floating cloud terrace background, ornate stone platform suspended above a sea of clouds, distant mountain silhouettes',
+  sacredPineForest: 'ancient sacred pine forest background, twisted old pine trees, dappled light through mist, tranquil cultivation atmosphere',
+  floatingIslandRealm: 'floating island realm background, chains of drifting rock islands connected by stone bridges, deep sky backdrop',
+  sectGateEntrance: 'grand sect mountain-gate entrance background, stone archway with carved calligraphy plaques, misty mountain steps leading upward',
+  pavilionCourtyard: 'traditional pavilion courtyard background, red lacquered pillars, tiled rooftops, quiet cultivation-academy atmosphere',
+  libraryPavilionInterior: 'ancient scripture library pavilion background, tall wooden shelves lined with scrolls, soft window light',
+  trainingGroundCourt: 'sect training-ground courtyard background, stone floor with wooden weapon racks, open sky above',
+  bellTowerNight: 'sect bell tower at night background, lantern-lit rooftops, quiet moonlit stone pathway',
+  cloudSeaSunrise: 'vast sea of clouds at sunrise background, golden light breaking through drifting cloud layers, distant peak silhouettes',
+  moonlitNightSky: 'deep moonlit night sky background, full moon behind thin clouds, silver light over distant mountains',
+  lightningTribulationSky: 'dramatic tribulation sky background, dark storm clouds with streaking lightning, intense ascension atmosphere',
+  auroraSpiritSky: 'aurora-lit spirit sky background, flowing colored light ribbons across a starry night, mystical ascension mood',
+  goldenDuskHorizon: 'golden dusk horizon background, warm sunset light over distant mountain ridgelines, peaceful closing-day atmosphere',
+  ancientTownStreet: 'ancient stone-paved town street background, wooden shopfronts, hanging red lanterns, bustling jianghu atmosphere',
+  riversideWillowPath: 'riverside willow-tree path background, stone bridge over a calm canal, drooping willow branches',
+  teaHouseInterior: 'traditional teahouse interior background, wooden lattice windows, steam rising from tea, warm quiet atmosphere',
+  marketFestivalNight: 'night market festival background, rows of glowing lanterns, distant crowd silhouettes, festive jianghu energy',
+  mountainInnCourtyard: 'remote mountain inn courtyard background, wooden balconies, hanging lanterns, quiet traveler\'s rest atmosphere',
+  ancientAltarRuins: 'ancient stone altar ruins background, moss-covered carved pillars, faint glowing runes on the ground',
+  dragonPalaceHall: 'mythic dragon palace hall background, towering coral-like pillars, deep aquatic blue-green ambient light',
+  celestialTempleInterior: 'celestial temple interior background, towering golden statues, incense smoke drifting through beams of light',
+  forbiddenScrollVault: 'forbidden scroll vault background, floating ancient tomes, faint blue spirit-fire illumination',
+  risingPhoenixShrine: 'phoenix shrine ruins background, crumbling stone phoenix statue, ember-lit night atmosphere',
+  bambooForestPath: 'dense bamboo forest path background, tall green stalks filtering soft daylight, tranquil cultivation walk atmosphere',
+  cherryBlossomCliff: 'cherry blossom cliffside background, drifting pink petals over a mountain ledge, distant valley view',
+  frozenWaterfallCavern: 'frozen waterfall cavern background, icicles and frost-covered rock, cold blue ambient light',
+  autumnMapleValley: 'autumn maple valley background, deep red-gold foliage covering the hillsides, soft warm afternoon light',
+  lotusPondPavilion: 'lotus pond pavilion background, blooming lotus flowers covering the water, wooden platform extending over the pond'
+};
+
+const lightingData = {
+  soft: 'soft studio lighting, smooth skin tones, refined luxury glow',
+  hard: 'hard contrast lighting, strong edge shadows, dramatic premium highlights',
+  halo: 'backlit halo lighting, glowing rim light, cinematic aura',
+  stage: 'stage beam lighting, theatrical spotlight, grand commercial mood',
+  mist: 'dream mist lighting, soft haze, floating luminous atmosphere',
+  cold: 'cold metallic lighting, crisp reflections, cool premium tone',
+  warmWindowSoft: 'soft warm sunlight through Chinese lattice window shadows, refined red paper bounce light, red paper reflections softly affecting the face, luxury bridal advertisement glow, delicate facial exposure, face softly lit but consistent with surrounding red paper reflections',
+  jewelrySparkle: 'luxury jewelry sparkle lighting, precise tiny specular highlights, faceted reflections, refined catchlights, premium gemstone advertisement shine',
+  prismaticColor: 'prismatic color lighting, subtle rainbow refractions across face body clothing and background, unified colorful light environment, dreamy commercial glow',
+  amethystSparkle: 'amethyst sparkle lighting, violet crystal reflections across face body jewelry clothing and background, controlled gemstone highlights, luxurious purple beauty campaign glow',
+  redWaterReflection: 'red aquatic reflection lighting, ruby water bounce light affecting face body hair and clothing, glossy liquid glass highlights, unified red water environment',
+  rainNightCool: 'cool rainy night lighting, wet ground reflection, soft blue gray rain atmosphere, face and body receive the same rainy environmental light, no separate studio relighting',
+  darkGoldMood: 'dark gold emotional lighting, low key warm gold highlights, deep shadows, cinematic beauty contrast, face remains visible within the same moody light',
+  palaceNightWarm: 'warm palace night lighting, glowing architectural backlight, falling snow and gold foil reflections affecting the entire subject, unified cinematic night environment',
+  foxfireGold: 'golden foxfire lighting, warm shrine lantern bounce light, foxfire reflections affect face body hair costume and background together, integrated mythic night lighting, no separate face relighting',
+  holyCathedralLight: 'holy cathedral lighting, white gold backlight, soft feather bounce light, sacred beams affect face body wings clothing and temple background consistently, no detached portrait lighting',
+  pearlCathedralBacklight: 'pearl cathedral backlight, warm white gold light from marble arches, crystal butterfly and opal gem reflections affect face body hair costume and background consistently, refined sacred sparkle without overexposure',
+  moonGlassSparkle: 'moon glass sparkle lighting, cool moonlight and glass water reflections affect face body hair gown and garden together, pale lavender crystal highlights, soft fantasy beauty exposure with consistent white balance',
+  goldenSkyTempleLight: 'golden sky temple sunset lighting, warm low sun and cloud bounce light affect skin fabric sword marble and sky palace consistently, bright celestial glow while keeping facial features readable',
+  bettaUnderwaterSpotlight: 'betta underwater spotlight lighting, surface beams and red white fin reflections affect face hair body gown and bubbles together, aquatic caustics remain elegant and do not flatten facial identity',
+  amethystCandleGlow: 'amethyst candle glow lighting, warm gold candlelight mixed with purple gemstone reflections, palace interior bounce light affects face shoulders jewelry lace and background consistently, refined court portrait shine',
+  circusLanternGold: 'monochrome circus lantern lighting, warm gold string lights and glossy black white ornament reflections affect face body costume and rabbit companion consistently, surreal carnival advertisement glow',
+  desertGoldTentLight: 'dark gold desert tent lighting, warm low key lantern light and gemstone reflections affect face skin veil jewelry and background together, powerful exotic queen mood, face remains readable',
+  underwaterSunbeam: 'underwater sunbeam lighting, blue green water caustics and surface rays affect face hair body tail and marine background consistently, clean aquatic exposure, no separate dry studio light',
+  cloudRiftHolyLight: 'cloud rift holy lighting, dramatic white gold sky beam behind feather wings, soft sacred bounce light on face body fabric and background, powerful celestial contrast without overexposure',
+  darkIceBlue: 'dark blue ice crystal lighting, cold reflections from black ice affect face body hair costume and background, unified frozen color temperature, face remains visible without beauty ring light',
+  solarTempleGold: 'solar temple gold lighting, warm morning sunlight through white marble columns, subtle gold ribbon and pearl reflections affect face body hair clothing throne and temple consistently, radiant sacred glow with clear natural facial detail',
+  candyGlossLight: 'glossy candy commercial lighting, transparent jelly highlights, soft colorful candy reflections affect face skin hair and outfit naturally, premium beauty product studio light, no overexposed face',
+  auroraPerfumeLight: 'aurora perfume lighting, soft fragrance mist glow, prismatic glass reflections affect face body hair outfit and background consistently, refined scent campaign fill light, no separate face relighting',
+  dessertBeautyLight: 'dessert beauty lighting, soft pink and ivory studio fill, strawberry cream bounce light affects face body hands and outfit naturally, clean cosmetic advertisement exposure, no flat overexposed face',
+  cherryPopLight: 'cherry soda pop lighting, glossy red jelly reflections and sparkling bubble highlights affect face body hair and outfit together, energetic beauty campaign light, skin tone remains consistent',
+  matchaSoftLight: 'matcha wagashi soft lighting, calm green tea powder reflections and ivory bounce light affect the entire subject, refined eastern commercial softness, face visible without whitening',
+  milkTeaAmberLight: 'vivid milk tea amber lighting, saturated caramel tea reflections and cream white milk bounce light affect face body hair outfit and splash skirt consistently, high impact beverage campaign contrast, glossy highlights without overexposed face',
+  silverScreenLight: 'silver smartphone screen lighting, cool glass screen glow and liquid metal reflections affect face hands body outfit and background consistently, premium technology campaign light, no detached portrait lighting',
+  blueAudioLight: 'blue audio technology lighting, translucent blue device glow and waveform reflections affect face hair outfit and background together, clean cyber commercial light, natural facial exposure',
+  roseGoldTechLight: 'rose gold wearable technology lighting, polished watch face highlights and warm rose gold bounce light affect hands face body and outfit consistently, elegant lifestyle tech campaign fill',
+  coldWhiteMechaLight: 'cold white mecha reflection lighting, large white robot panels and cool industrial lights reflect consistently on face body hair outfit and background, premium technology advertisement light, no separate beauty relighting',
+  hologramScanLight: 'hologram scan lighting, transparent cyan and violet projection light sweeps across face body outfit and background consistently, refined AI product campaign glow, no separate face relighting',
+  bioGlowSoftLight: 'bio glow soft lighting, gentle bioluminescent petals and serum reflections affect face body hair and outfit naturally, clean skincare campaign exposure, soft dewy highlights without overwhitening',
+  moonSilverReflect: 'moon silver reflective lighting, cold lunar pearl metal reflections affect the entire subject, soft fragrance mist fill, elegant perfume campaign light, face remains readable and consistent',
+  maglevCrystalRefraction: 'maglev crystal refraction lighting, floating crystal facets create controlled highlights across face hands outfit and background, premium product pedestal light, no overexposed face',
+  dataFlowBlueViolet: 'blue violet data flow lighting, black mirror screen glow and fine data lines reflect consistently on face hair outfit and background, futuristic luxury campaign light, natural facial exposure',
+  blueEnergyWingLight: 'blue energy wing lighting, electric blue lights from black mechanical wings reflect subtly on face shoulders hair outfit and background, cool gray studio exposure, face remains recognizable without overexposure',
+  wastelandIndustrialSideLight: 'wasteland industrial side lighting, hard angled workshop light, aged metal reflections and dusty shadow affect the entire subject consistently, gritty sci-fi commercial mood, no detached portrait lighting',
+  blueFlameGlow: 'arcane blue flame lighting, cool blue spell glow mixed with warm distant fire light, blue energy reflections affect face body hair gown and background consistently, dramatic sorceress contrast while facial features stay clearly readable, no overexposed face',
+  moonlightCandle: 'moonlight and candle mixed lighting, cool silver moonlight from above with warm lantern candle glow from below, both light sources affect face body veil fabric and architecture consistently, poetic night contrast with natural facial exposure',
+  crystalDaylight: 'crystal daylight lighting, bright natural sunlight refracted through glass and crystal structures, clean white-blue clarity with sparkling prismatic accents on face hair outfit and background, airy utopian exposure, face remains naturally lit without overexposure',
+  tyndallBacklight: 'tyndall backlight lighting, strong backlit mist beams cutting through haze, high contrast warm-cool split tone, dramatic god-ray atmosphere',
+  starfieldColdBlue: 'cold blue starfield lighting, scattered pinpoint starlight, cool blue dreamy ambient tone, soft glowing atmosphere',
+  windColdMistBack: 'cold backlit mist lighting, wind-driven haze glowing from behind, chilly high-tension atmosphere',
+  candleStarContrast: 'candle and starlight contrast lighting, warm amber candle glow on the subject against a cool blue starry background, romantic high-contrast atmosphere',
+  neonPurpleMoonlit: 'purple neon and moonlight lighting, cool violet neon glow blended with silver moonlight silhouette edges, night-city fantasy atmosphere',
+  holyMistBeam: 'holy backlit mist beam lighting, radiant light shafts piercing through soft haze, sacred cinematic glow',
+  candleShadowGothic: 'flickering candle gothic shadow lighting, warm candlelight against deep dark shadow pockets, ritualistic occult atmosphere',
+  bloodMoonGlow: 'blood moon cold glow lighting, deep red moonlight tone, chilling eerie atmosphere',
+  neonPinkCyanSplit: 'split neon pink and cyan lighting, dual-tone gel lighting clash across the subject, cyberpunk editorial contrast',
+  glitchScanlineFlicker: 'glitch scanline flicker lighting, flickering digital noise light bands, cyberpunk malfunction atmosphere'
+};
+
+const sharedXianxiaCore = window.HB_CORE_PROMPT?.page?.xianxia || {};
+
+const XIANXIA_ILLUSTRATION_MATERIAL_KEYS = new Set([]);
+
+const identityGuard = sharedXianxiaCore.identityGuard || `Facial Geometry Lock System:
+Preserve Original Forehead Height
+Preserve Original Face Width
+Preserve Original Eye Shape
+Preserve Original Eye Distance
+Preserve Original Nose Shape
+Preserve Original Nose Width
+Preserve Original Nose Bridge
+Preserve Original Lip Shape
+Preserve Original Jawline Width
+Preserve Original Chin Shape
+No Facial Reconstruction
+No Facial Redesign
+No Facial Beautification
+No Facial Stylization
+Identity Preservation Priority Above Costume
+Identity Preservation Priority Above Materials
+Identity Preservation Priority Above Environment
+Identity Preservation Priority Above Advertising Style
+Face Similarity Maximum
+Recognizable By Family And Friends At First Sight
+
+Identity Lock System:
+Use the uploaded person as the only subject.
+Use the reference photo for identity only.
+Same person face, same facial identity, identity recognition priority maximum.
+Preserve facial proportions, gaze, age impression and personal features.
+Style, costume, material, lighting and background must not overwrite or redesign the face.
+No face swap, no AI beauty template face, no celebrity face, no influencer face, no identity drift`;
+
+const anatomyGuard = sharedXianxiaCore.anatomyGuard || `Realistic Human Anatomy System:
+Realistic adult female anatomy, natural shoulder width, natural neck length, natural torso depth, natural limb proportions.
+Natural head to body ratio, head size follows the selected body framing and full-body scale whenever the body is visible.
+Body scale priority over beauty exaggeration, realistic commercial camera distance, full height human anatomy reconstruction when full body is selected.
+Preserve reference body type and mature natural body impression unless a selected body refinement explicitly requests subtle adjustment.
+No supermodel body replacement, no overlong legs, no ultra narrow waist, no fashion model body template.
+Head Neck Shoulder Spine Alignment Must Be Anatomically Coherent.
+Face And Head Must Belong Naturally To The Same Body Pose.
+Pose Must Match Head Direction And Facial Gaze.
+No Contradictory Head And Body Direction.
+Ignore original selfie perspective, ignore original lens distortion, not based on original camera distance.
+No oversized head, no big head small body effect, no doll proportions, no deformed body, no pasted-on face, no mismatched head and body angle, no twisted neck`;
+
+const poseNaturalityGuard = sharedXianxiaCore.poseGuard || `【姿勢自然性系統】
+
+Natural body mechanics: weight, gravity, hands, body turn and head angle.
+Head/gaze/shoulders/torso/arms/legs form one coherent moment.
+No contradictory head/body direction, stiff/robot pose or broken limbs.`;
+
+const BODY_SHAPES = {
+  original: `【身形輪廓｜原圖自然比例】
+
+Preserve The Reference Photo Natural Body Proportions
+Keep Original Body Shape, Height Impression, Shoulder Width, Waist-To-Hip Balance
+Natural Realistic Adult Female Anatomy
+Do Not Force A New Body Type
+Keep Face, Identity, Age Impression And Personal Features Unchanged`,
+  slight_waist: `【身形輪廓｜輕微纖腰】
+
+Subtle Narrow Waist Refinement
+Slightly More Defined Waistline While Keeping Natural Body Proportions
+Elegant Feminine Silhouette, Not Exaggerated
+Keep The Original Face, Identity And Personal Features Unchanged
+Natural Realistic Adult Female Anatomy`,
+  curvy_waist: `【身形輪廓｜豐滿纖腰】
+
+Curvy Narrow-Waist Adult Female Silhouette
+Full Bust, Slim Waist, Elegant Waist-To-Hip Curve
+Clearly Defined Feminine Body Line
+Keep The Original Face, Identity, Age Impression And Personal Features Unchanged
+Natural Realistic Body Proportions, No Exaggerated Fantasy Anatomy`,
+  fashion_tall: `【身形輪廓｜高挑時裝比例】
+
+Tall High-Fashion Model Silhouette
+Longer Leg Impression, Refined Shoulder And Neck Line, Slim Editorial Body Shape
+Elegant Runway Proportions While Staying Realistic
+Keep The Original Face, Identity And Personal Features Unchanged
+No Doll-Like Or Over-Stretched Anatomy`,
+  korean_idol: `【身形輪廓｜韓系偶像比例】
+
+Korean Idol Stage Proportions
+Balanced Adult Idol Silhouette With A Naturally Long-Leg Impression
+Refined Shoulder And Neck Line, Upright Posture, Toned Yet Soft Feminine Body Balance
+Camera-Friendly Proportions For Performance, Beauty And Editorial Photography
+Keep The Original Face, Identity And Personal Features Unchanged
+Natural Realistic Adult Anatomy, No Doll-Like Or Over-Stretched Body`
+};
+
+
+const compositionGuard = `Commercial Composition Control:
+Subject scale follows the selected framing ratio.
+Keep the subject clear inside the crop, with clean breathing room around the head and body.
+If the body is visible, keep the body proportion coherent and do not enlarge the head to preserve the face.
+Poster layout, negative space and material effects must support the model instead of crowding the face
+Full Body Identity Protection:
+When full body or wide poster framing is selected, keep the face readable and recognizable.
+Do not sacrifice facial identity for outfit, body silhouette, background, particles or material spectacle.
+Facial likeness remains the highest priority even when the face is small in frame`;
+
+const lightingConsistencyGuard = sharedXianxiaCore.lightingGuard || `【光線一致性系統】
+
+Unified Cinematic Lighting System
+Global Lighting Consistency
+Subject And Environment Share The Same Light Source
+Face Lighting Must Match Body Lighting
+Single Global Lighting Environment
+Same Light Direction Across Face Body And Background
+No Independent Beauty Light
+No Face Relighting
+No Separate Portrait Lighting
+Physically Accurate Light Interaction
+Environmental Lighting Affects Entire Subject
+Material Reflections Affect Facial Lighting
+Face Body Hair Costume Background Rendered Under The Same Lighting Conditions
+Lighting Consistency Priority Maximum`;
+
+const colorTemperatureGuard = `【色溫統一系統】
+
+Unified Skin Tone Rendering
+Face And Body Must Share The Same Color Temperature
+Face And Body Must Share The Same White Balance
+No Face Color Correction
+No Artificial Facial Whitening
+No Separate Facial Brightening
+No Separate Facial Skin Processing
+Consistent Skin Tone Across Entire Subject`;
+
+const subjectIntegrationGuard = `【人物融合系統】
+
+Integrated Subject Rendering System
+Face Is Part Of The Scene
+Face Must Not Be Rendered Separately
+No Independent Face Exposure
+No Separate Face Lighting
+No Portrait Mode Face Processing
+No Beauty Filter Rendering
+No Face Enhancement Pipeline
+Environmental Reflections Affect Face
+Material Reflections Affect Face
+Face Receives Light From Surrounding Materials
+Face Receives Light From Surrounding Environment
+Subject Interacts With Environment Naturally
+Integrated Subject Rendering Priority Maximum`;
+
+const faceFillGuard = `【高級補光系統】
+
+Luxury Face Fill Lighting
+Soft Facial Fill Light
+Natural Facial Bounce Light
+Subtle Eye Area Illumination
+Elegant Catchlights In Eyes
+Controlled Beauty Fill Light
+Refined Facial Exposure
+Premium Cosmetic Advertisement Fill Light
+Face Fill Must Follow The Global Lighting Environment
+Face Fill Must Preserve Shared White Balance And Color Temperature
+No Flat Lighting
+No Overexposed Face
+Natural Three Dimensional Facial Structure`;
+
+const poseData = {
+  auto: '',
+  sword_stance_still: 'standing sword-ready stance, blade held calmly downward at the side, composed poised cultivator presence',
+  windRobeStand: 'standing pose with robes and sleeves caught mid-breeze, calm centered stance amid flowing fabric motion',
+  backHandsStand: 'standing pose with both hands clasped behind the back, composed noble cultivator posture, chin slightly lifted',
+  fanCoverStand: 'standing pose with a folding fan partially covering the lower face, mysterious elegant scholar-warrior posture',
+  moonlightGazeStand: 'standing pose gazing upward toward the moon, serene contemplative immortal posture',
+  discipleGreetStand: 'standing pose with fists clasped in a respectful martial-arts greeting gesture, composed sect-disciple posture',
+  meditationSit: 'cross-legged meditation pose, hands resting in a mudra gesture on the lap, calm cultivating energy',
+  thronePavilionSit: 'seated formally within an open pavilion, upright poised posture, serene composed presence',
+  swordRestSit: 'seated pose with a sword resting against the shoulder, relaxed yet alert warrior posture',
+  lotusPoolSit: 'seated gracefully at the edge of a lotus pond platform, one hand trailing near the water, tranquil poise',
+  scrollReadSit: 'seated pose reading an unrolled scroll, calm scholarly cultivator posture',
+  qinPlaySit: 'seated pose with both hands positioned as if playing a guqin, elegant musical immortal posture',
+  handSealCast: 'hand-seal spellcasting gesture, fingers forming an intricate mudra, faint spirit energy gathering at the fingertips',
+  talismanThrow: 'dynamic gesture of throwing a talisman forward, sharp focused combat-ready expression',
+  veilLiftGesture: 'delicate gesture lifting a sheer veil near the face, soft mysterious beauty moment',
+  windSleeveFlick: 'classical dance-like gesture flicking long water sleeves outward, graceful eastern movement',
+  swordSheathe: 'gesture of sheathing the sword with a calm composed expression, controlled restrained power',
+  braidTwirl: 'gesture of gently twirling a hair strand while glancing back over the shoulder, soft narrative moment',
+  lotusHold: 'both hands cupped gently holding a glowing lotus or spirit flame, offering-like serene gesture',
+  swordFlightSoar: 'soaring pose riding atop a flying sword, robes and hair streaming behind, dynamic ascension energy',
+  swordDanceArc: 'dynamic sword-dance pose mid-spin, blade sweeping outward in a graceful arc, fabric trailing with the motion',
+  duelReadyLunge: 'low combat-ready lunge stance, one hand gripping the sword hilt, sharp focused pre-battle tension',
+  aerialSlashDive: 'mid-air diving slash pose, body angled downward with the blade cutting through the frame, dramatic wuxia energy',
+  tribulationStand: 'standing pose amid a lightning tribulation, arms slightly raised, defiant ascension energy',
+  qiPalmStrike: 'dynamic palm-strike pose with visible qi energy radiating from the palm, powerful martial impact',
+  flyingRibbonSpin: 'spinning mid-air pose with long ribbon sleeves and hair whirling outward, graceful combat elegance'
+};
+
+const framingData = {
+  fullBody: 'full body framing, subject occupies about 35 to 50 percent of the image height, entire body and outfit visible from head to toe',
+  threeQuarter: 'three-quarter body framing, subject occupies about 50 to 65 percent of the image height, cropped around the knees, face and clothing both clear',
+  halfBody: 'half body advertising framing, subject occupies about 60 to 75 percent of the image height, cropped above the waist, face shoulders and upper couture details emphasized',
+  closeUp: 'close-up cover framing, subject occupies about 75 to 90 percent of the image height, face makeup headdress and jewelry details emphasized',
+  widePoster: 'wide poster framing, subject occupies about 25 to 40 percent of the image height, more background and clean negative space for commercial layout',
+  bustPortrait: 'bust portrait framing, subject occupies about 70 to 85 percent of the image height, cropped around upper chest, face jewelry headdress and neckline emphasized'
+};
+
+const cameraData = {
+  eyeLevelCover: 'natural eye-level camera angle, standard magazine cover perspective, balanced face and body proportion, clean premium portrait framing',
+  lowAngleHero: 'low angle hero shot, camera below waist level, powerful upward perspective, elongated fashion silhouette, strong commanding presence',
+  highAngleOverhead: 'high angle view, camera above head level, elegant top-down perspective, refined fashion composition, clear subject shape',
+  softFocusGlow: 'soft focus glow camera language, gentle halo bloom, luminous studio beauty atmosphere, refined dreamy commercial portrait',
+  beautyCloseUp: 'close distance beauty photography, beauty close-up composition, face and makeup details emphasized, polished cosmetic campaign framing',
+  sideProfile: 'side profile portrait angle, clear jawline silhouette, elegant facial contour, refined profile lighting and fashion editorial framing',
+  threeQuarterSide: 'three-quarter side camera angle, about 45 degree side view, face and body both show dimensional structure, elegant advertising perspective',
+  topBeauty: 'high angle close beauty view, camera above the subject and slightly close, face shoulders neckline and headdress emphasized, elegant cosmetic perspective',
+  distantHero: 'distant hero advertising view, camera pulled back to show subject background and material environment together, spacious brand key visual perspective'
+};
+
+const ratioData = {
+  vertical916: 'aspect ratio 9:16, vertical social media cover composition',
+  vertical45: 'aspect ratio 4:5, vertical social media feed poster composition',
+  square: 'aspect ratio 1:1, square commercial campaign image',
+  poster23: 'aspect ratio 2:3, vertical luxury poster composition',
+  vertical34: 'aspect ratio 3:4, vertical portrait poster composition',
+  horizontal169: 'aspect ratio 16:9, horizontal website banner and video cover composition',
+  horizontal43: 'aspect ratio 4:3, horizontal commercial image with balanced subject and environment',
+  wideBanner: 'aspect ratio 21:9, cinematic wide luxury brand banner composition'
+};
+
+function selected(name){
+  return document.querySelector(`input[name="${name}"]:checked`).value;
+}
+
+function customKeywordList(value){
+  return value
+    .split(/[\s,，、;；/｜|]+/)
+    .map(item => item.trim())
+    .filter(Boolean);
+}
+
+function setRadioValue(name, value){
+  const input = document.querySelector(`input[name="${name}"][value="${value}"]`);
+  if(input){
+    input.checked = true;
+  }
+}
+
+function refreshCards(){
+  document.querySelectorAll('[data-choice]').forEach(group => {
+    const choiceName = group.dataset.choice;
+    const customField = document.querySelector(`[data-custom-choice="${choiceName}"]`);
+    const customInput = customField ? customField.querySelector('input') : null;
+    const customActive = customInput ? customInput.value.trim().length > 0 : false;
+
+    group.querySelectorAll('.card, .pose-card').forEach(card => {
+      card.classList.toggle('selected', !customActive && card.querySelector('input').checked);
+    });
+
+    if(customField){
+      customField.classList.toggle('selected', customActive);
+    }
+  });
+}
+
+const themeTemplates = {
+  sectMasterAscension: {
+    garment: 'sectMasterRobe', material: 'qiEnergyAura', style: 'cinematic',
+    composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
+    framing: 'threeQuarter', pose: 'swordFlightSoar', camera: 'lowAngleHero', lighting: 'halo', background: 'celestialCloudTerrace',
+    ratio: 'vertical916', intensity: 'balanced material effects, elegant and luxurious'
+  },
+  nineTailFoxImmortal: {
+    garment: 'foxSpiritRobe', material: 'nineTailFoxSpirit', style: 'editorial',
+    composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
+    framing: 'threeQuarter', pose: 'braidTwirl', camera: 'threeQuarterSide', lighting: 'foxfireGold', background: 'bambooForestPath',
+    ratio: 'vertical45', intensity: 'balanced material effects, elegant and luxurious'
+  },
+  swordCultivatorDuel: {
+    garment: 'swordCultivatorAttire', material: 'swordQiSlash', style: 'huxia',
+    composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
+    framing: 'fullBody', pose: 'duelReadyLunge', camera: 'lowAngleHero', lighting: 'hard', background: 'ancientAltarRuins',
+    ratio: 'vertical34', intensity: 'massive explosive material splash, high speed frozen motion'
+  },
+  lightningTribulationAscend: {
+    garment: 'spiritArmorRobe', material: 'lightningTribulation', style: 'cinematic',
+    composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
+    framing: 'threeQuarter', pose: 'tribulationStand', camera: 'lowAngleHero', lighting: 'cold', background: 'lightningTribulationSky',
+    ratio: 'vertical916', intensity: 'massive explosive material splash, high speed frozen motion'
+  },
+  phoenixRebirth: {
+    garment: 'phoenixSpiritGown', material: 'vermilionBirdFlame', style: 'blackGold',
+    composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
+    framing: 'threeQuarter', pose: 'aerialSlashDive', camera: 'lowAngleHero', lighting: 'hard', background: 'risingPhoenixShrine',
+    ratio: 'vertical916', intensity: 'massive explosive material splash, high speed frozen motion'
+  },
+  moonlitMeditation: {
+    garment: 'moonwhiteRobe', material: 'moonlitCloudVeil', style: 'clean',
+    composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
+    framing: 'bustPortrait', pose: 'meditationSit', camera: 'softFocusGlow', lighting: 'moonlightCandle', background: 'moonlitNightSky',
+    ratio: 'vertical45', intensity: 'subtle floating particles, refined couture details'
+  },
+  peachBlossomWedding: {
+    garment: 'redWeddingRobe', material: 'peachBlossomDrift', style: 'luxury',
+    composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
+    framing: 'threeQuarter', pose: 'veilLiftGesture', camera: 'eyeLevelCover', lighting: 'warmWindowSoft', background: 'cherryBlossomCliff',
+    ratio: 'vertical45', intensity: 'balanced material effects, elegant and luxurious'
+  },
+  daoistAlchemist: {
+    garment: 'alchemistRobe', material: 'earthElementCrystal', style: 'artExhibit',
+    composition: 'foreground material frame composition, selected material appears close to camera around the edges, subject remains clear in the center',
+    framing: 'halfBody', pose: 'scrollReadSit', camera: 'eyeLevelCover', lighting: 'soft', background: 'libraryPavilionInterior',
+    ratio: 'vertical45', intensity: 'subtle floating particles, refined couture details'
+  },
+  jianghuWanderer: {
+    garment: 'wandererCloakSuit', material: 'windElementSwirl', style: 'huxia',
+    composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
+    framing: 'fullBody', pose: 'backHandsStand', camera: 'threeQuarterSide', lighting: 'hard', background: 'ancientTownStreet',
+    ratio: 'vertical34', intensity: 'balanced material effects, elegant and luxurious'
+  },
+  celestialCraneCompanion: {
+    garment: 'craneFeatherRobe', material: 'craneCompanion', style: 'editorial',
+    composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
+    framing: 'threeQuarter', pose: 'windRobeStand', camera: 'eyeLevelCover', lighting: 'soft', background: 'cloudSeaSunrise',
+    ratio: 'vertical45', intensity: 'balanced material effects, elegant and luxurious'
+  },
+  azureDragonGuardian: {
+    garment: 'swordGuardGown', material: 'azureDragonCoil', style: 'cinematic',
+    composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
+    framing: 'threeQuarter', pose: 'qiPalmStrike', camera: 'lowAngleHero', lighting: 'cold', background: 'dragonPalaceHall',
+    ratio: 'vertical916', intensity: 'balanced material effects, elegant and luxurious'
+  },
+  bambooSwordDance: {
+    garment: 'discipleUniform', material: 'swordQiSlash', style: 'huxia',
+    composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
+    framing: 'fullBody', pose: 'swordDanceArc', camera: 'threeQuarterSide', lighting: 'soft', background: 'bambooForestPath',
+    ratio: 'vertical34', intensity: 'massive explosive material splash, high speed frozen motion'
+  },
+  lotusSpellCasting: {
+    garment: 'baguaRobe', material: 'lotusFlameSpell', style: 'artExhibit',
+    composition: 'foreground material frame composition, selected material appears close to camera around the edges, subject remains clear in the center',
+    framing: 'closeUp', pose: 'handSealCast', camera: 'beautyCloseUp', lighting: 'mist', background: 'lotusPondPavilion',
+    ratio: 'vertical45', intensity: 'subtle floating particles, refined couture details'
+  },
+  frostWhiteTiger: {
+    garment: 'nightRoamingArmor', material: 'whiteTigerGuard', style: 'cinematic',
+    composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
+    framing: 'fullBody', pose: 'duelReadyLunge', camera: 'lowAngleHero', lighting: 'cold', background: 'frozenWaterfallCavern',
+    ratio: 'vertical34', intensity: 'balanced material effects, elegant and luxurious'
+  },
+  autumnScholarPoet: {
+    garment: 'celestialScholarRobe', material: 'goldenAutumnLeaves', style: 'clean',
+    composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
+    framing: 'halfBody', pose: 'qinPlaySit', camera: 'eyeLevelCover', lighting: 'soft', background: 'autumnMapleValley',
+    ratio: 'vertical45', intensity: 'balanced material effects, elegant and luxurious'
+  },
+  talismanNightHunt: {
+    garment: 'talismanPriestRobe', material: 'talismanScroll', style: 'huxia',
+    composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
+    framing: 'fullBody', pose: 'talismanThrow', camera: 'threeQuarterSide', lighting: 'hard', background: 'marketFestivalNight',
+    ratio: 'vertical34', intensity: 'balanced material effects, elegant and luxurious'
+  }
+};
+
+function applyThemeTemplate(key){
+  const preset = themeTemplates[key];
+  if(!preset) return;
+
+  ['garment','material','style','composition','framing','pose','camera','lighting','background','ratio'].forEach(name => {
+    setRadioValue(name, preset[name]);
+  });
+
+  if(preset.intensity){
+    document.getElementById('intensity').value = preset.intensity;
+  }
+
+  ['customGarment','customMaterial','customBackground','customPose','colorNote','extraNote'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+
+  refreshCards();
+  generate({reveal:true});
+}
+
+function getRandomItem(values){
+  return values[Math.floor(Math.random() * values.length)];
+}
+
+function getAllRadioValues(name){
+  return Array.from(document.querySelectorAll(`input[name="${name}"]`)).map(el => el.value);
+}
+function getAllSelectValues(id){
+  const el = document.getElementById(id);
+  return el ? Array.from(el.options).map(o => o.value) : [];
+}
+
+// 元素級獨立隨機：服裝/材質/背景/光線/構圖/框景/姿勢/風格/鏡頭/比例/強度
+// 每一項各自從完整選項池抽一個，動態組合成結果，不是從預寫好的主題模板三選一。
+function applyFantasyRandomSelection(){
+  ['garment','material','background','lighting','composition','framing','pose','style','camera','ratio'].forEach(name => {
+    const values = getAllRadioValues(name);
+    if(values.length) setRadioValue(name, getRandomItem(values));
+  });
+  const intensityValues = getAllSelectValues('intensity');
+  if(intensityValues.length){
+    document.getElementById('intensity').value = getRandomItem(intensityValues);
+  }
+  ['customGarment','customMaterial','customBackground','customPose','colorNote','extraNote'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  refreshCards();
+  generate({reveal:true});
+}
+
+let fantasyOutputVisible = false;
+
+function resetCopyButton(){
+  document.getElementById('copyBtn').textContent = '一鍵複製';
+}
+
+function generate(options = {}){
+  const bodyShape = BODY_SHAPES[selected('bodyShape')];
+  const materialKey = selected('material');
+  const material = materialData[materialKey];
+  const customMaterial = document.getElementById('customMaterial').value.trim();
+  const customMaterials = customKeywordList(customMaterial);
+  const customMaterialText = customMaterials.join(', ');
+  const isIllustrationMaterial = XIANXIA_ILLUSTRATION_MATERIAL_KEYS.has(materialKey)
+    || /illustration|watercolor|anime|manga|oil painting|paper|ink/i.test(customMaterialText);
+  const resolvedAnatomyGuard = isIllustrationMaterial
+    ? (sharedXianxiaCore.illustrationSkeleton || anatomyGuard)
+    : anatomyGuard;
+  const materialText = customMaterials.length
+    ? `custom material system only: ${customMaterialText}; read and use every custom material keyword with equal priority, combine all custom materials into one coherent art system, do not include or blend any preset material option`
+    : material.prompt;
+  const materialPalette = customMaterials.length
+    ? `derive the color palette only from custom material keywords: ${customMaterialText}`
+    : material.palette;
+  const customGarment = document.getElementById('customGarment').value.trim();
+  const garmentText = customGarment
+    ? `custom garment form only: ${customGarment}; do not include or blend any preset garment option`
+    : garmentData[selected('garment')];
+  const customBackground = document.getElementById('customBackground').value.trim();
+  const background = customBackground
+    ? `custom background only: ${customBackground}; do not include or blend any preset background option`
+    : backgroundData[selected('background')];
+  const lighting = lightingData[selected('lighting')];
+  const colorNote = document.getElementById('colorNote').value.trim();
+  const extraNote = document.getElementById('extraNote').value.trim();
+  const composition = selected('composition');
+  const framing = framingData[selected('framing')];
+  const intensity = document.getElementById('intensity').value;
+  const customPose = document.getElementById('customPose').value.trim();
+  const poseText = customPose
+    ? `custom pose only: ${customPose}; do not include or blend any preset pose`
+    : poseData[selected('pose')];
+  const prompt = [
+    identityGuard + ',',
+    'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
+    resolvedAnatomyGuard + ',',
+    poseNaturalityGuard + ',',
+    bodyShape + ',',
+    lightingConsistencyGuard + ',',
+    colorTemperatureGuard + ',',
+    subjectIntegrationGuard + ',',
+    faceFillGuard + ',',
+    composition + ',',
+    compositionGuard + ',',
+    'appearance form: ' + garmentText + ',',
+    'theme material and art system: ' + materialText + ',',
+    'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',
+    intensity + ',',
+    'selected material appears as controlled clothing details, ornaments, particles and background accents without overpowering facial identity,',
+    styleData[selected('style')] + ',',
+    poseText ? poseText + ',' : '',
+    framing + ',',
+    cameraData[selected('camera')] + ',',
+    'lighting design: ' + lighting + ',',
+    'background design: ' + background + ',',
+    ratioData[selected('ratio')] + ',',
+    sharedXianxiaCore.output ? sharedXianxiaCore.output + ',' : '',
+    'hyper realistic, ultra detailed, premium advertising finish,',
+    'color palette: ' + (colorNote || materialPalette) + ',',
+    extraNote ? 'extra direction: ' + extraNote + ',' : '',
+    sharedXianxiaCore.negativePrompt ? sharedXianxiaCore.negativePrompt + ',' : '',
+    'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face'
+  ].filter(Boolean).join('\n');
+
+  const outputText = document.getElementById('outputText');
+  const outputWrap = document.getElementById('outputWrap');
+  outputText.value = prompt;
+  clearStale();
+  if(options.reveal || fantasyOutputVisible){
+    fantasyOutputVisible = true;
+    outputWrap.classList.remove('hidden');
+  }
+  resetCopyButton();
+}
+
+document.querySelectorAll('input[type="radio"]').forEach(input => {
+  input.addEventListener('change', () => {
+    refreshCards();
+  });
+});
+document.getElementById('generateBtn').addEventListener('click', () => generate({reveal:true}));
+document.getElementById('sectMasterAscensionPreset').addEventListener('click', () => {
+  applyThemeTemplate('sectMasterAscension');
+});
+document.getElementById('xianxiaMoodPreset').addEventListener('click', () => {
+  applyFantasyRandomSelection();
+});
+document.querySelectorAll('[data-template]').forEach(button => {
+  button.addEventListener('click', () => {
+    applyThemeTemplate(button.dataset.template);
+  });
+});
+document.querySelector('.section-preset').addEventListener('click', (event) => {
+  const btn = event.target.closest('button.card');
+  if(!btn) return;
+  document.querySelectorAll('.section-preset button.card.template-selected').forEach(b => b.classList.remove('template-selected'));
+  btn.classList.add('template-selected');
+});
+document.getElementById('copyBtn').addEventListener('click', () => {
+  if(document.getElementById('outputWrap').classList.contains('stale')) return;
+  const outputText = document.getElementById('outputText');
+  const text = outputText.value;
+  const btn = document.getElementById('copyBtn');
+  function showCopied(){
+    btn.textContent = '已複製!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = '一鍵複製';
+      btn.classList.remove('copied');
+    }, 1500);
+  }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(showCopied).catch(() => {
+      outputText.select();
+      document.execCommand('copy');
+      showCopied();
+    });
+  } else {
+    outputText.select();
+    document.execCommand('copy');
+    showCopied();
+  }
+});
+
+function markStale(){
+  const wrap=document.getElementById('outputWrap');
+  if(wrap && !wrap.classList.contains('hidden')) wrap.classList.add('stale');
+}
+function clearStale(){
+  const wrap=document.getElementById('outputWrap');
+  if(wrap) wrap.classList.remove('stale');
+}
+document.addEventListener('input',(event)=>{
+  if(event.target && event.target.closest && !event.target.closest('#outputWrap')) markStale();
+},true);
+document.addEventListener('change',(event)=>{
+  if(event.target && event.target.closest && !event.target.closest('#outputWrap')) markStale();
+},true);
+['customGarment','customMaterial','customBackground','customPose','intensity','colorNote','extraNote'].forEach(id => {
+  document.getElementById(id).addEventListener('input', () => {
+    refreshCards();
+  });
+  document.getElementById(id).addEventListener('change', () => {
+    refreshCards();
+  });
+});
+refreshCards();
+generate();
+</script>
+</body>
+</html>

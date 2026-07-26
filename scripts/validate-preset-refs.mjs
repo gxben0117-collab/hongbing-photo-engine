@@ -147,5 +147,25 @@ const issues = [];
   checkObject('fantasy-fashion.html', 'themeTemplates', extractObjectLiteral(src, 'themeTemplates'), fieldLive, issues);
 }
 
+// ===== xianxia.html =====
+{
+  const src = fs.readFileSync(path.join(root, 'xianxia.html'), 'utf8');
+  const fieldLive = {
+    garment: liveRadioValues(src, 'garment'),
+    material: liveRadioValues(src, 'material'),
+    style: liveRadioValues(src, 'style'),
+    composition: liveRadioValues(src, 'composition'),
+    framing: liveRadioValues(src, 'framing'),
+    pose: liveRadioValues(src, 'pose'),
+    camera: liveRadioValues(src, 'camera'),
+    lighting: liveRadioValues(src, 'lighting'),
+    background: liveRadioValues(src, 'background'),
+    ratio: liveRadioValues(src, 'ratio'),
+    bodyShape: liveRadioValues(src, 'bodyShape'),
+    intensity: liveSelectOptionValues(src, 'intensity'),
+  };
+  checkObject('xianxia.html', 'themeTemplates', extractObjectLiteral(src, 'themeTemplates'), fieldLive, issues);
+}
+
 console.log(`\nTotal issues found: ${issues.length}`);
 process.exit(issues.length === 0 ? 0 : 1);

@@ -267,6 +267,72 @@ function generateFantasy(core, data) {
   return prompt.filter(Boolean).join('\n');
 }
 
+function generateXianxia(core, data) {
+  const selection = {
+    bodyShape: 'original',
+    material: 'immortalSword',
+    garment: 'xianQipaoGauze',
+    background: 'immortalMountainPeak',
+    lighting: 'soft',
+    composition: 'centered luxury commercial portrait composition, clean premium poster layout, subject as the hero visual',
+    framing: 'threeQuarter',
+    intensity: 'balanced material effects, elegant and luxurious',
+    pose: 'sword_stance_still',
+    style: 'beautyCampaign',
+    camera: 'eyeLevelCover',
+    ratio: 'vertical45',
+    customMaterial: '',
+    customGarment: '',
+    colorNote: '',
+    extraNote: '',
+  };
+  const material = data.materialData[selection.material];
+  const materialText = material.prompt;
+  const materialPalette = material.palette;
+  const isIllustrationMaterial = data.XIANXIA_ILLUSTRATION_MATERIAL_KEYS?.has(selection.material)
+    || /illustration|watercolor|anime|manga|oil painting|paper|ink/i.test(selection.customMaterial);
+  const resolvedAnatomyGuard = isIllustrationMaterial
+    ? (core.page.xianxia.illustrationSkeleton || data.anatomyGuard)
+    : data.anatomyGuard;
+  const garmentText = data.garmentData[selection.garment];
+  const background = data.backgroundData[selection.background];
+  const lighting = data.lightingData[selection.lighting];
+  const bodyShape = data.BODY_SHAPES[selection.bodyShape];
+  const framing = data.framingData[selection.framing];
+  const poseText = data.poseData[selection.pose];
+  const prompt = [
+    data.identityGuard + ',',
+    'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
+    resolvedAnatomyGuard + ',',
+    data.poseNaturalityGuard + ',',
+    bodyShape + ',',
+    data.lightingConsistencyGuard + ',',
+    data.colorTemperatureGuard + ',',
+    data.subjectIntegrationGuard + ',',
+    data.faceFillGuard + ',',
+    selection.composition + ',',
+    data.compositionGuard + ',',
+    'appearance form: ' + garmentText + ',',
+    'theme material and art system: ' + materialText + ',',
+    'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',
+    selection.intensity + ',',
+    'selected material appears as controlled clothing details, ornaments, particles and background accents without overpowering facial identity,',
+    data.styleData[selection.style] + ',',
+    poseText ? poseText + ',' : '',
+    framing + ',',
+    data.cameraData[selection.camera] + ',',
+    'lighting design: ' + lighting + ',',
+    'background design: ' + background + ',',
+    data.ratioData[selection.ratio] + ',',
+    core.page.xianxia.output ? core.page.xianxia.output + ',' : '',
+    'hyper realistic, ultra detailed, premium advertising finish,',
+    'color palette: ' + materialPalette + ',',
+    core.page.xianxia.negativePrompt ? core.page.xianxia.negativePrompt + ',' : '',
+    'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face',
+  ];
+  return prompt.filter(Boolean).join('\n');
+}
+
 function loadRevision(label, sourceReader) {
   const coreSource = sourceReader('assets/core-prompt.js');
   const core = evalCore(coreSource);
@@ -297,17 +363,35 @@ function loadRevision(label, sourceReader) {
     endMarker: 'function setRadioValue',
     exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedFantasyCore, FANTASY_ILLUSTRATION_MATERIAL_KEYS: typeof FANTASY_ILLUSTRATION_MATERIAL_KEYS === "undefined" ? new Set(["paperOiran","paperSculpture","redPaperWedding","watercolorBloom","inkPeony","inkGold","whitePaperFlower"]) : FANTASY_ILLUSTRATION_MATERIAL_KEYS, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
   });
+  const prompts = {
+    'travel-realistic.txt': generateTravel(core, travelData, 'cinematic_realistic'),
+    'travel-watercolor.txt': generateTravel(core, travelData, 'watercolor_travel'),
+    'magazine-realistic.txt': generateMagazine(core, magazineData, 'realistic_studio'),
+    'magazine-illustration.txt': generateMagazine(core, magazineData, 'manga_cover'),
+    'fantasy-default.txt': generateFantasy(core, fantasyData),
+  };
+
+  // xianxia.html is new; older revisions may not have it yet, so skip gracefully.
+  try {
+    const xianxiaSource = sourceReader('xianxia.html');
+    const xianxiaData = evalDataSegment({
+      source: xianxiaSource,
+      core,
+      page: 'xianxia',
+      startMarker: 'const materialData = {',
+      endMarker: 'function setRadioValue',
+      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedXianxiaCore, XIANXIA_ILLUSTRATION_MATERIAL_KEYS: typeof XIANXIA_ILLUSTRATION_MATERIAL_KEYS === "undefined" ? new Set() : XIANXIA_ILLUSTRATION_MATERIAL_KEYS, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
+    });
+    prompts['xianxia-default.txt'] = generateXianxia(core, xianxiaData);
+  } catch (err) {
+    // Not present in this revision — skip.
+  }
+
   return {
     label,
     core,
     coreLengths: coreLengths(core),
-    prompts: {
-      'travel-realistic.txt': generateTravel(core, travelData, 'cinematic_realistic'),
-      'travel-watercolor.txt': generateTravel(core, travelData, 'watercolor_travel'),
-      'magazine-realistic.txt': generateMagazine(core, magazineData, 'realistic_studio'),
-      'magazine-illustration.txt': generateMagazine(core, magazineData, 'manga_cover'),
-      'fantasy-default.txt': generateFantasy(core, fantasyData),
-    },
+    prompts,
   };
 }
 
