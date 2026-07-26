@@ -28,7 +28,7 @@ Natural head to body ratio.
 Natural center of gravity.
 Head, neck, shoulders and spine alignment must be anatomically coherent.
 Face and head must belong naturally to the same body pose.
-Head and facial gaze direction take priority; body, shoulders and torso must rotate to naturally support the existing head direction — never rotate the head or face away from its natural front-facing angle just to match a body-direction instruction.
+Head pose may freely turn, tilt or gaze in whatever direction the selected pose requires; identity and facial geometry stay unchanged regardless of head direction. Neck, shoulders, torso and spine must always rotate to naturally follow and support the established head direction — never force the head or face to twist away from a natural angle just to match a body or pose direction instead.
 
 No oversized head, big head small body effect, deformed body, warped anatomy, extra limbs, extra arms, extra fingers or broken hands.
 No doll proportions unless doll page explicitly requires doll style.

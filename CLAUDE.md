@@ -113,6 +113,21 @@
   `build-prompt-preview.mjs` 的 base-vs-worktree 比較在舊 commit 上直接
   `ReferenceError`（因為舊版沒有這個變數），這種情況改用 jsdom 直接執行
   真實頁面驗證即可，不必依賴這支腳本。
+- **`CORE_REALISTIC_ANATOMY` 改寫成 Head Pose Mode A/B 邏輯**
+  （2026-07-25）：舊句子「never rotate the head or face away from its
+  natural front-facing angle just to match a body-direction instruction」
+  字面上暗示頭必須維持正臉，跟已存在的 `look_back`/`sword_draw_pose`
+  （鎖定畫面外目標的凝視）/`dual_spirit_guardian_throne`（抬下巴的威嚴
+  凝視）等姿勢有字面矛盾。新句子明確允許「頭可以自由轉動/傾斜/凝視任何
+  姿勢需要的方向，身份與臉部幾何不因頭部方向改變；頸肩軀幹脊椎永遠要
+  自然跟隨支撐已建立的頭部方向，絕不能反過來」——邏輯是 **Mode A（保留
+  原照片頭部角度）／Mode B（角色表演，頭自由轉動，身體跟著重新配合）**，
+  核心因果關係「頭先決定、身體才跟著建立」沒變，只是拿掉「頭必須維持
+  正臉」這個過度限制。這是 travel/magazine/fantasy 三頁共用的區塊，
+  doll.html 沒有接這塊不受影響。**這次只改這一句，其餘規劃中的補強
+  （身份不鎖照片澄清句、豐富 `CORE_POSE_NATURALITY` 具體重心/關節內容、
+  Anime/Xianxia 新頁待辦）owner 都表示先不動**，見開發日誌
+  2026-07-25（八）完整討論脈絡。
 - **共用核心**：`assets/core-prompt.js` 集中管理身份鎖定等保護區塊；核心文字經過
   兩輪瘦身（5,162 → 4,099 字元），語意零遺漏。
 - **travel / magazine / fantasy 操作模式已統一**：手動生成、stale 保護

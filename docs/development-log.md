@@ -1145,3 +1145,53 @@
   【真人骨架系統】之後、身份鎖定區塊完整、無 JS error；另外重跑先前那支
   55 項鎖臉稽核腳本，全部依然通過，證明這次新增沒有破壞任何既有模板/
   快速套用/自填欄位的鎖臉行為。
+
+## 2026-07-25（八）　骨架系統改寫成 Head Pose Mode A/B 邏輯
+
+- owner 拿了一份自己（找另一個 AI）整理的「真人身份人物美圖系統」規格書
+  來討論，內容是打算擴充到五大主題引擎（幻想／雜誌／旅拍／動漫／仙俠），
+  並提出一套「Head Pose 兩種模式」框架：Mode A（保留原照片頭部角度）／
+  Mode B（角色表演，頭可以自由轉動看鏡頭外、回眸、戰鬥凝視等，但身體要
+  跟著頭部重新配合），核心原則是「臉的身份不能換，頭可以重新演，頭一旦
+  重新演，身體就跟著重新建立」。
+- 分析後回報 owner：這份規格書方向正確，而且驗證了現有共用核心架構
+  （`core-prompt.js` 的 `CORE_IDENTITY_LOCK`/`CORE_FACE_GEOMETRY_LOCK`/
+  `CORE_REALISTIC_ANATOMY`/`CORE_POSE_NATURALITY` 各頁組裝）本來就是它說
+  的「五大引擎共用一套 FACE/IDENTITY CORE」做法；但整份文件太長太多重複
+  （身份鎖定概念在 17 個章節裡至少重複 6-7 次），適合當內部設計文件，不
+  適合整段當成實際咒語塞進生成邏輯，會重新引入上兩輪才清掉的無用重複
+  字詞問題。真正有價值、值得實際採納的是 Mode A/B 這個框架本身——因為
+  現有 `CORE_REALISTIC_ANATOMY` 裡原本那句「never rotate the head or face
+  away from its natural front-facing angle just to match a
+  body-direction instruction」字面上暗示頭必須維持正臉，但跟這個 session
+  已經加入的 `look_back`（回眸）、`sword_draw_pose`（"gaze locked on an
+  off-frame target"）、`dual_spirit_guardian_throne`（"chin lifted with
+  commanding gaze"）等姿勢字面上有矛盾——這些姿勢本來就需要頭轉/視線改變。
+- owner 把這份分析轉給另一個 AI 看，那個 AI 也同意大方向，但額外建議
+  (a) 把 `CORE_POSE_NATURALITY` 定位成「第二層驗證器」專門查重心/關節/
+  肩胯，並要加一句說明兩個區塊分工的文字；(b) 提醒 Anime/Xianxia 兩個
+  未來新頁記得同時掛上兩層防護。回報 owner 自己對這份二次分析的看法：
+  (a) 兩個區塊現在的文字其實是同一件事換句話說，不是真的分工，如果要做
+  到它說的分工，`CORE_POSE_NATURALITY` 需要真的補上重心/關節/支撐腳這類
+  具體內容，而不只是加一句「宣稱」分工的說明句；(b) 那句「說明句」本質上
+  是給維護者看的架構文件，不是給圖像模型的指令，如果真的 join 進實際輸出
+  會變成第三次重複同一個概念，不該進生成邏輯，應該寫成 code comment 或
+  開發日誌；(c) 圖示裡「頭部狀態」不是獨立程式區塊，是包在 ANATOMY 裡；
+  「主題姿勢」實際上排在服裝/材質/風格之後才出現，不是緊接在
+  POSE_NATURALITY 後面；(d) Anime/Xianxia 提醒這點是對的、值得先寫進
+  `CLAUDE.md` 當待辦，不要等到真的做那兩頁才想起來。
+- owner 確認這輪只做一件事：**把 `CORE_REALISTIC_ANATOMY` 那句話改寫成
+  Mode A/B 邏輯**，其餘（身份不鎖照片澄清句、豐富 POSE_NATURALITY 具體
+  內容、Anime/Xianxia 待辦）都先不動。
+- **修正**：`assets/core-prompt.js` 的 `CORE_REALISTIC_ANATOMY` 那句話從
+  「頭必須維持正臉，身體跟著頭轉」改寫成「頭可以自由轉動/傾斜/凝視任何
+  姿勢需要的方向，身份與臉部幾何不因頭部方向而改變；頸部/肩膀/軀幹/脊椎
+  永遠要自然跟隨並支撐已建立的頭部方向——絕不能反過來讓身體或姿勢方向
+  逼頭/臉扭轉成不自然的角度」。這是三頁（travel/magazine/fantasy）共用
+  的區塊，改一次三頁同時生效。
+- **驗證**：`check-static.mjs`／`validate-preset-refs.mjs`／
+  `audit-100x.mjs`（500 次模擬 0 issue）全過；額外寫 jsdom 測試確認新句子
+  逐字出現在 travel/magazine/fantasy 三頁的實際生成輸出裡（doll.html 本來
+  就沒有接 `CORE_REALISTIC_ANATOMY`，不受影響，屬預期）；重跑姿勢自然性
+  驗證腳本與 55 項鎖臉稽核腳本，全部依然通過，確認這次改寫沒有破壞鎖臉
+  或姿勢自然性防護。
