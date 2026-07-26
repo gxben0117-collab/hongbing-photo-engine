@@ -333,6 +333,67 @@ function generateXianxia(core, data) {
   return prompt.filter(Boolean).join('\n');
 }
 
+function generateAnime(core, data) {
+  const selection = {
+    bodyShape: 'original',
+    material: 'glowingMagicCircle',
+    garment: 'magicalGirlOutfit',
+    background: 'radiantMagicCircleBurst',
+    lighting: 'prismaticColor',
+    composition: 'subject surrounded by selected material environment, material wraps around foreground and background, immersive fantasy advertisement layout',
+    framing: 'fullBody',
+    intensity: 'massive explosive material splash, high speed frozen motion',
+    pose: 'transformationSequencePose',
+    style: 'moeCute',
+    camera: 'lowAngleHero',
+    ratio: 'vertical916',
+    customMaterial: '',
+    customGarment: '',
+    colorNote: '',
+    extraNote: '',
+  };
+  const material = data.materialData[selection.material];
+  const materialText = material.prompt;
+  const materialPalette = material.palette;
+  const garmentText = data.garmentData[selection.garment];
+  const background = data.backgroundData[selection.background];
+  const lighting = data.lightingData[selection.lighting];
+  const bodyShape = data.BODY_SHAPES[selection.bodyShape];
+  const framing = data.framingData[selection.framing];
+  const poseText = data.poseData[selection.pose];
+  const prompt = [
+    data.identityGuard + ',',
+    'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
+    data.anatomyGuard + ',',
+    data.poseNaturalityGuard + ',',
+    bodyShape + ',',
+    data.lightingConsistencyGuard + ',',
+    data.colorTemperatureGuard + ',',
+    data.subjectIntegrationGuard + ',',
+    data.faceFillGuard + ',',
+    selection.composition + ',',
+    data.compositionGuard + ',',
+    'appearance form: ' + garmentText + ',',
+    'theme material and art system: ' + materialText + ',',
+    'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',
+    selection.intensity + ',',
+    'selected material appears as controlled clothing details, ornaments, particles and background accents without overpowering facial identity,',
+    data.styleData[selection.style] + ',',
+    poseText ? poseText + ',' : '',
+    framing + ',',
+    data.cameraData[selection.camera] + ',',
+    'lighting design: ' + lighting + ',',
+    'background design: ' + background + ',',
+    data.ratioData[selection.ratio] + ',',
+    core.page.anime.output ? core.page.anime.output + ',' : '',
+    'hyper realistic, ultra detailed, premium advertising finish,',
+    'color palette: ' + materialPalette + ',',
+    core.page.anime.negativePrompt ? core.page.anime.negativePrompt + ',' : '',
+    'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face',
+  ];
+  return prompt.filter(Boolean).join('\n');
+}
+
 function loadRevision(label, sourceReader) {
   const coreSource = sourceReader('assets/core-prompt.js');
   const core = evalCore(coreSource);
@@ -383,6 +444,22 @@ function loadRevision(label, sourceReader) {
       exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedXianxiaCore, XIANXIA_ILLUSTRATION_MATERIAL_KEYS: typeof XIANXIA_ILLUSTRATION_MATERIAL_KEYS === "undefined" ? new Set() : XIANXIA_ILLUSTRATION_MATERIAL_KEYS, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
     });
     prompts['xianxia-default.txt'] = generateXianxia(core, xianxiaData);
+  } catch (err) {
+    // Not present in this revision — skip.
+  }
+
+  // anime-character.html is new; older revisions may not have it yet, so skip gracefully.
+  try {
+    const animeSource = sourceReader('anime-character.html');
+    const animeData = evalDataSegment({
+      source: animeSource,
+      core,
+      page: 'anime',
+      startMarker: 'const materialData = {',
+      endMarker: 'function setRadioValue',
+      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedAnimeCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
+    });
+    prompts['anime-default.txt'] = generateAnime(core, animeData);
   } catch (err) {
     // Not present in this revision — skip.
   }

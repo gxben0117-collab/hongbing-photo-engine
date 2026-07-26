@@ -20,7 +20,7 @@
 
 ### 現況摘要（2026-07-22）
 
-- 六個工具頁（travel / magazine / doll / fantasy-fashion / xianxia / store-ad）
+- 七個工具頁（travel / magazine / doll / fantasy-fashion / xianxia / anime-character / store-ad）
   皆已上線，正式站 <https://gxben0117-collab.github.io/hongbing-photo-engine/>。
   **`anime-hero.html`（動漫電影變身夥伴咒語產生器）已於 2026-07-24 整頁下架**：
   owner 對這系列不滿意，且該頁架構已疊到 10 層 monkey-patch 式的
@@ -162,11 +162,34 @@
   選用未使用過的翡翠綠 `#7ED9A8`，跟 fantasy 紫色／store-ad 薄荷綠區隔）、
   四支驗證腳本（`check-static`/`validate-preset-refs`/`audit-100x`/
   `build-prompt-preview`）都同步加入 xianxia 支援。**這是「四大提案方案」
-  的第一個**，另一個「動漫人物美圖（女）」`anime-character.html` 待建——
-  注意：那是全新的「單人動漫化」概念，跟已刪除的 `anime-hero.html`
-  （真人+變身夥伴/式神/機甲的雙角色關係敘事）是不同東西，不要混淆；
-  建置時務必比照這次做法，第一天就接上鎖臉三件套，並針對「動漫化保留
-  身份、不淪為模板動漫臉」這個新技術風險額外設計、測試核心文字。
+  的第一個**。
+- **新增 `anime-character.html`（動漫人物美圖咒語產生器）**（2026-07-26）：
+  「四大提案方案」的第二個，同樣選「方案A：獨立完整新頁」，複製
+  `fantasy-fashion.html` 當模板。注意：這是全新的「單人動漫化」概念，跟
+  已刪除的 `anime-hero.html`（真人+變身夥伴/式神/機甲的雙角色關係敘事）
+  是不同東西。內容：04 服裝（30項/6組：校園日常、魔法系、劍士戰鬥系、
+  機甲駕駛員、巫女和風、妖靈幻想種族，全走 archetype，不用任何 IP
+  角色名）、05 材質（30項/5組：賽璐璐上色線條、發光特效、元素能力
+  視覺化、髮色髮型特效、裝飾配件）、06 姿勢（26項/4組：日常站姿、戰鬥
+  蓄勢、魔法詠唱、情感表現）、09 背景（30項/6組：校園、異世界奇幻、
+  戰場都市、和風、星空宇宙、抽象特效）、00 一鍵模板（16組）、01 style
+  （9項：少女浪漫/少年熱血/成人劇情/萌系可愛/輕小說奇幻/復古賽璐璐/
+  遊戲CG/海報主視覺/動漫美妝特寫）；02 構圖／03 身形／07 鏡頭／08 光影
+  沿用 fantasy 原始內容不動（通用攝影概念）。
+  `core-prompt.js` 新增 `CORE_ANIME_IDENTITY_PRESERVATION` 專屬鎖定文字
+  （針對「動漫化保留身份、不淪為模板動漫臉」這個技術風險設計：明確禁止
+  「generic anime girl face」「template moe/bishoujo face」「oversized
+  template doe-eyes」，要求動漫風格只影響線條/上色/媒材而非重新設計
+  身份），與 `CORE_IDENTITY_LOCK`/`CORE_FACE_GEOMETRY_LOCK` 一起組成
+  `animeCore.identityGuard`；`animeCore.anatomyGuard` 直接寫死
+  `illustrationHumanCore`（不像 fantasy/xianxia 需要
+  photorealistic/illustration 條件判斷，因為動漫頁本來就永遠是插畫
+  風格），註冊到 `window.HB_CORE_PROMPT.page.anime`，從第一天就接上鎖臉
+  三件套與 `CORE_POSE_NATURALITY`。全站 nav（含 index.html 首頁卡片，
+  強調色選用未使用過的粉紅 `#FF7FB0`）、四支驗證腳本都同步加入 anime
+  支援。jsdom 63 項實測（含每個模板都驗證輸出含
+  「動漫化身份保留系統」標記字串）全過，`audit-100x` 700 次模擬（7頁
+  ×100）0 issue。
 - **共用核心**：`assets/core-prompt.js` 集中管理身份鎖定等保護區塊；核心文字經過
   兩輪瘦身（5,162 → 4,099 字元），語意零遺漏。
 - **travel / magazine / fantasy 操作模式已統一**：手動生成、stale 保護

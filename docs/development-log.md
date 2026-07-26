@@ -1288,3 +1288,63 @@
   鎖定系統、姿勢自然性系統、鎖身份不鎖照片澄清句都正確出現，無 JS
   error、無 undefined/NaN 洩漏。
 
+## 2026-07-26（十一）　新增 anime-character.html（動漫人物美圖咒語產生器）
+
+- 「四大提案方案」的第二個，同樣選「方案 A｜獨立完整新頁，比照
+  fantasy-fashion.html 全套規格」，`cp fantasy-fashion.html
+  anime-character.html` 建置，保留所有共用管線不動，只替換動漫專屬內容。
+  **注意**：這是全新的「單人動漫化」概念（把真人轉成賽璐璐上色的動漫
+  角色，沒有第二個角色），跟已刪除的 `anime-hero.html`（真人＋變身夥伴/
+  式神/機甲的雙角色關係敘事）是不同東西，不要混淆。
+- **內容替換**：
+  - **00 一鍵動漫模板**：16 組（魔法少女變身、巫女祈福、機甲駕駛員出擊、
+    劍士對決、精靈遊俠、夏日祭浴衣、聖騎士對峙、賽博都市追逐、月光魔女、
+    精靈花園幻想、校園天台告白、屠龍勝利、冰霜女王召喚、巫女神官儀式、
+    星際裂隙守護者、森林精靈覺醒）
+  - **01 成品用途風格**：9 項（少女浪漫、少年熱血、成人劇情、萌系可愛、
+    輕小說奇幻、復古賽璐璐、遊戲原畫CG、動畫海報主視覺、動漫美妝特寫）
+  - **04 服裝**：30 項/6 組（校園日常、魔法系、劍士/戰鬥系、機甲駕駛員、
+    巫女/和風、妖靈與幻想種族）——全走 archetype 描述，不使用任何 IP
+    角色名
+  - **05 材質與特效**：30 項/5 組（賽璐璐上色與線條、發光特效、元素能力
+    視覺化、髮色與髮型特效、裝飾配件）
+  - **06 姿勢**：26 項/4 組（日常站姿、戰鬥蓄勢、魔法詠唱、情感表現）
+  - **09 背景**：30 項/6 組（校園場景、異世界奇幻、戰場與都市、和風場景、
+    星空與宇宙、抽象特效背景）
+  - **02 構圖／03 身形／07 鏡頭／08 光影／11 比例**：完全沿用 fantasy 原始
+    內容不改（通用攝影概念，非動漫專屬）。
+- **核心接線（本頁最大技術風險）**：`assets/core-prompt.js` 新增專屬
+  `CORE_ANIME_IDENTITY_PRESERVATION` 鎖定文字，直接回應 owner 原本文件
+  裡強調的「動漫化的是視覺表現方式，不是重新設計這個人的身份」——
+  明確禁止「generic anime girl face」「template moe/bishoujo face」
+  「oversized template doe-eyes replacing the reference eye shape」
+  「exaggerated tiny pointed chin unless the reference face already has
+  that structure」，並要求動漫風格化後仍要能認出是同一個人。這段文字
+  跟 `CORE_IDENTITY_LOCK`／`CORE_FACE_GEOMETRY_LOCK` 一起組成
+  `animeCore.identityGuard`。`animeCore.anatomyGuard` 直接寫死
+  `illustrationHumanCore`（不像 fantasy/xianxia 需要
+  photorealistic/illustration 條件判斷——因為動漫頁本來就永遠是插畫
+  風格，沒有「真人材質」分支），註冊到 `window.HB_CORE_PROMPT.page.anime`，
+  從第一天就正確接上 `CORE_POSE_NATURALITY`。頁面內部把
+  `sharedFantasyCore` 改名 `sharedAnimeCore`、移除不需要的
+  `FANTASY_ILLUSTRATION_MATERIAL_KEYS`/`isIllustrationMaterial`/
+  `resolvedAnatomyGuard` 判斷邏輯（因為 anatomyGuard 已恆為插畫骨架，
+  判斷邏輯是死碼），`generate()` 直接用 `anatomyGuard`。
+- **全站接線**：travel/magazine/doll/fantasy-fashion/xianxia/store-ad 六頁
+  的 nav 都加上「動漫人物」連結；`index.html` 首頁在仙俠卡片後面新增動漫
+  卡片，強調色選用還沒用過的粉紅 `#FF7FB0`（跟 fantasy 紫色、xianxia
+  翡翠綠、store-ad 薄荷綠區隔）。
+- **驗證腳本同步**：`check-static.mjs`／`validate-preset-refs.mjs`
+  （新增 anime-character.html 的 themeTemplates 檢查，16 組全部 0
+  issue——過程中發現 composition/intensity 欄位必須是頁面既有的
+  select/radio 選項字面值而非自由文字，修正後才通過）／`audit-100x.mjs`
+  （新增 ANIME 模擬區塊，總模擬數 600→700，全部 0 issue）／
+  `build-prompt-preview.mjs`（新增 `generateAnime()`，`loadRevision()`
+  對 anime-character.html 的讀取包 try/catch，base revision 還沒有這個
+  檔案時優雅跳過，不影響其他既有 combo 的 0-diff 比對）。
+- **驗證**：63 項 jsdom 實測——預設生成、隨機套用按鈕、全部 16 個一鍵
+  模板、精選按鈕、4 個自填欄位同時填寫——全部確認身份鎖定系統
+  （身份鎖定系統/臉部幾何鎖定系統）、姿勢自然性系統、**動漫化身份保留
+  系統**標記字串在每一種輸出組合中都正確出現，無 JS error、無
+  undefined/NaN 洩漏。
+

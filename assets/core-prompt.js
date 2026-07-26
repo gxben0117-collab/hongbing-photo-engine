@@ -201,6 +201,29 @@ They must not change the person's facial structure, identity, age impression or 
     output: CORE_OUTPUT_QUALITY
   };
 
+  const CORE_ANIME_IDENTITY_PRESERVATION = `【動漫化身份保留系統】
+
+Anime style affects rendering technique only — line art, cel shading, color palette and visual medium; it must not redesign or replace the person's identity.
+
+Preserve: original face shape, eye shape and relative proportions, eyebrow shape, nose shape, lip shape, jawline, chin shape, age impression, personal temperament and recognizable identity — all translated into anime style, not overwritten by it.
+
+No generic anime girl face, no template moe/bishoujo face, no oversized template doe-eyes replacing the reference eye shape, no exaggerated tiny pointed chin unless the reference face already has that structure.
+
+The character must remain recognizable as the same person even after anime stylization.`;
+
+  const animeCore = {
+    identityGuard: [
+      CORE_IDENTITY_LOCK,
+      CORE_FACE_GEOMETRY_LOCK,
+      CORE_ANIME_IDENTITY_PRESERVATION
+    ].join("\n\n"),
+    anatomyGuard: illustrationHumanCore,
+    poseGuard: CORE_POSE_NATURALITY,
+    lightingGuard: CORE_LIGHTING_UNIFICATION,
+    negativePrompt: CORE_NEGATIVE_PROMPT,
+    output: CORE_OUTPUT_QUALITY
+  };
+
   const dollCore = {
     identityLock: [
       CORE_IDENTITY_LOCK,
@@ -245,6 +268,7 @@ Even in doll style, the character must remain recognizable as the uploaded perso
       magazine: magazineCore,
       fantasy: fantasyCore,
       xianxia: xianxiaCore,
+      anime: animeCore,
       doll: dollCore,
       storeAd: storeAdCore
     }
