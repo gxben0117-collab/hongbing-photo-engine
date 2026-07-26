@@ -1100,3 +1100,48 @@
   （500 次模擬 0 issue）全過；另外寫 jsdom 測試針對 store-ad.html 兩種
   情境（預設純設計版面 vs. 切換成上傳人物照）分別確認 negativePrompt
   正確地「無人物時不輸出、有人物時仍輸出」。
+
+## 2026-07-25（七）　鎖臉核心原則複查：補上 fantasy/magazine 缺的姿勢自然性防護
+
+- owner 再次要求全專案複查，並特別指定要檢查「身體姿勢必須配合已鎖定的
+  臉部角度、頭部方向與視線，再重建正常人體姿勢」這條核心原則有沒有落實。
+  先跑四支驗證腳本全過，再針對鎖臉這件事另外寫一支 55 項的 jsdom 稽核
+  （非鏡像模擬，是真的執行各頁 `generateBtn`）：travel/magazine/fantasy/
+  doll 預設生成、fantasy 四個自填欄位同時填寫、travel/magazine 自填欄位、
+  fantasy 抽樣 9 個模板、travel 全部 12 個快速模板、magazine 全部 23 個
+  快速模板、store-ad 四種 heroSource 狀態，全部確認鎖臉區塊在該有的地方
+  都有、不該有的地方（store-ad 無人物時）正確地沒有。另外逐句比對生成
+  文字跟 `CORE_IDENTITY_LOCK`／`CORE_FACE_GEOMETRY_LOCK` 原文完全一致，
+  確認上次的精簡沒有誤傷鎖臉文字本身。
+- **盤點後回報 owner 兩個發現**：(1) owner 想要的原則「臉與頭不去配合
+  Pose，Pose 必須配合已鎖定的臉與頭」其實已經寫在 `CORE_REALISTIC_ANATOMY`
+  （【真人骨架系統】，三頁共用）裡——"Head and facial gaze direction take
+  priority; body, shoulders and torso must rotate to naturally support the
+  existing head direction — never rotate the head or face away from its
+  natural front-facing angle just to match a body-direction instruction."；
+  (2) 但 `core-prompt.js` 另外定義了第二層加強防護
+  `CORE_POSE_NATURALITY`（【姿勢自然性系統】），**卻只接在
+  `travelCore.pose`，`magazineCore`／`fantasyCore` 完全沒有這個 key，
+  兩頁的 `generate()` 也從未引用**——這兩頁反而是姿勢風險最高的（fantasy
+  這次 session 才新增 8 個武打/動態姿勢；magazine 有 8 個標記
+  ⚠️ 高風險的複雜姿勢），卻只靠骨架系統裡那一句話單層防護。owner 確認
+  「只把 CORE_POSE_NATURALITY 接進 fantasy/magazine，不要整個重排優先
+  順序」（完整順序重排風險遠大於效益，且現有骨架系統合併呈現本來就已經
+  涵蓋頭部姿態/頸肩連接/人體骨架/重心，只是命名合併沒有拆開）。
+- **修正**：`assets/core-prompt.js` 的 `magazineCore` 加上
+  `pose: CORE_POSE_NATURALITY`，`fantasyCore` 加上
+  `poseGuard: CORE_POSE_NATURALITY`；`magazine.html` 的 `generate()`
+  sections 陣列在 `skeletonBlock` 後面插入 `CORE.pose`（跟 travel.html
+  的位置一致）；`fantasy-fashion.html` 新增頁面本地常數
+  `poseNaturalityGuard`（沿用既有 `sharedFantasyCore.xxx || fallback`
+  寫法），插入 `resolvedAnatomyGuard` 後面。
+  `build-prompt-preview.mjs`／`audit-100x.mjs` 兩支腳本的 fantasy／
+  magazine 鏡像邏輯同步補上這個新區塊，否則鏡像跟真實頁面邏輯會對不起來。
+- **驗證**：`check-static.mjs`／`validate-preset-refs.mjs`／
+  `audit-100x.mjs`（500 次模擬 0 issue）全過；`build-prompt-preview.mjs`
+  這次因為是新增變數，base（舊 commit）沒有這個變數會直接
+  `ReferenceError`，改用 jsdom 直接執行真實頁面驗證（比鏡像更可靠）：
+  確認 fantasy/magazine 兩頁的【姿勢自然性系統】都剛好出現 1 次、位置在
+  【真人骨架系統】之後、身份鎖定區塊完整、無 JS error；另外重跑先前那支
+  55 項鎖臉稽核腳本，全部依然通過，證明這次新增沒有破壞任何既有模板/
+  快速套用/自填欄位的鎖臉行為。

@@ -172,6 +172,7 @@ function generateMagazine(core, data, mediaKey) {
   const sections = [
     core.page.magazine.identity,
     skeletonBlock,
+    core.page.magazine.pose,
     bodyShapeBlock,
     data.MAGAZINE_LIGHTING_CONSISTENCY,
     data.MAGAZINE_SUBJECT_INTEGRATION,
@@ -237,6 +238,7 @@ function generateFantasy(core, data) {
     data.identityGuard + ',',
     'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
     resolvedAnatomyGuard + ',',
+    data.poseNaturalityGuard + ',',
     bodyShape + ',',
     data.lightingConsistencyGuard + ',',
     data.colorTemperatureGuard + ',',
@@ -293,7 +295,7 @@ function loadRevision(label, sourceReader) {
     page: 'fantasy',
     startMarker: 'const materialData = {',
     endMarker: 'function setRadioValue',
-    exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedFantasyCore, FANTASY_ILLUSTRATION_MATERIAL_KEYS: typeof FANTASY_ILLUSTRATION_MATERIAL_KEYS === "undefined" ? new Set(["paperOiran","paperSculpture","redPaperWedding","watercolorBloom","inkPeony","inkGold","whitePaperFlower"]) : FANTASY_ILLUSTRATION_MATERIAL_KEYS, identityGuard, anatomyGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
+    exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedFantasyCore, FANTASY_ILLUSTRATION_MATERIAL_KEYS: typeof FANTASY_ILLUSTRATION_MATERIAL_KEYS === "undefined" ? new Set(["paperOiran","paperSculpture","redPaperWedding","watercolorBloom","inkPeony","inkGold","whitePaperFlower"]) : FANTASY_ILLUSTRATION_MATERIAL_KEYS, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
   });
   return {
     label,

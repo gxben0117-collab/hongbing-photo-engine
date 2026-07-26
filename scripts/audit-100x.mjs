@@ -215,7 +215,7 @@ const core = evalCore(coreSource);
     const themeBlock = `【主題 / 服裝方向】\n\n${theme}`;
     const ratioBlock = `【輸出比例】\n\n${data.RATIOS[sel.ratioKey]}`;
     const sections = [
-      core.page.magazine.identity, skeletonBlock, bodyShapeBlock, data.MAGAZINE_LIGHTING_CONSISTENCY, data.MAGAZINE_SUBJECT_INTEGRATION,
+      core.page.magazine.identity, skeletonBlock, core.page.magazine.pose, bodyShapeBlock, data.MAGAZINE_LIGHTING_CONSISTENCY, data.MAGAZINE_SUBJECT_INTEGRATION,
       data.MAGAZINE_FACE_FILL, core.page.magazine.photographer, ...(poseBlock ? [poseBlock] : []), framingBlock,
       ...(cameraBlock ? [cameraBlock] : []), ...(motionBlock ? [motionBlock] : []), data.COVER_COMPOSITION, styleBlock, mediaBlock,
       bgBlock, themeBlock, costumeBlock, makeupBlock, resolvedSkinTextureBlock, jewelryBlock, expressionBlock, lightingToneBlock,
@@ -234,7 +234,7 @@ const core = evalCore(coreSource);
     source: html, core, page: 'fantasy',
     startMarker: 'const materialData = {',
     endMarker: 'function setRadioValue',
-    exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedFantasyCore, FANTASY_ILLUSTRATION_MATERIAL_KEYS: typeof FANTASY_ILLUSTRATION_MATERIAL_KEYS === "undefined" ? new Set() : FANTASY_ILLUSTRATION_MATERIAL_KEYS, identityGuard, anatomyGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
+    exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedFantasyCore, FANTASY_ILLUSTRATION_MATERIAL_KEYS: typeof FANTASY_ILLUSTRATION_MATERIAL_KEYS === "undefined" ? new Set() : FANTASY_ILLUSTRATION_MATERIAL_KEYS, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
   });
   const compositionValues = radioValues(html, 'composition');
   const intensityValues = selectValues(html, 'intensity');
@@ -271,7 +271,7 @@ const core = evalCore(coreSource);
     const poseText = data.poseData[sel.pose];
     const prompt = [
       data.identityGuard + ',', 'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
-      resolvedAnatomyGuard + ',', bodyShape + ',', data.lightingConsistencyGuard + ',', data.colorTemperatureGuard + ',',
+      resolvedAnatomyGuard + ',', data.poseNaturalityGuard + ',', bodyShape + ',', data.lightingConsistencyGuard + ',', data.colorTemperatureGuard + ',',
       data.subjectIntegrationGuard + ',', data.faceFillGuard + ',', sel.composition + ',', data.compositionGuard + ',',
       'appearance form: ' + garmentText + ',', 'theme material and art system: ' + materialText + ',',
       'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',

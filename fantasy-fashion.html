@@ -2208,6 +2208,12 @@ No Contradictory Head And Body Direction.
 Ignore original selfie perspective, ignore original lens distortion, not based on original camera distance.
 No oversized head, no big head small body effect, no doll proportions, no deformed body, no pasted-on face, no mismatched head and body angle, no twisted neck`;
 
+const poseNaturalityGuard = sharedFantasyCore.poseGuard || `【姿勢自然性系統】
+
+Natural body mechanics: weight, gravity, hands, body turn and head angle.
+Head/gaze/shoulders/torso/arms/legs form one coherent moment.
+No contradictory head/body direction, stiff/robot pose or broken limbs.`;
+
 const BODY_SHAPES = {
   original: `【身形輪廓｜原圖自然比例】
 
@@ -3188,6 +3194,7 @@ function generate(options = {}){
     identityGuard + ',',
     'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
     resolvedAnatomyGuard + ',',
+    poseNaturalityGuard + ',',
     bodyShape + ',',
     lightingConsistencyGuard + ',',
     colorTemperatureGuard + ',',

@@ -97,6 +97,22 @@
   屬於核心提示詞相關內容；`build-prompt-preview.mjs`/`audit-100x.mjs`
   兩支腳本各自維護一份 fantasy 生成邏輯鏡像，硬編碼引用了
   `styleScopeGuard`，改動後同步修正這兩支腳本，否則會直接報錯。
+- **姿勢自然性防護已補齊 fantasy/magazine**（2026-07-25）：owner 要的
+  「臉與頭不去配合 Pose，Pose 必須配合已鎖定的臉與頭」原則本來就寫在
+  `CORE_REALISTIC_ANATOMY`（三頁共用）裡，但 `core-prompt.js` 另外定義的
+  第二層加強防護 `CORE_POSE_NATURALITY`（【姿勢自然性系統】）過去**只接在
+  `travelCore.pose`，`magazineCore`/`fantasyCore` 完全沒有**——而這兩頁
+  才是姿勢風險最高的（fantasy 的武打/動態姿勢、magazine 的 8 個
+  ⚠️ 高風險複雜姿勢）。已在 `magazineCore`/`fantasyCore` 加上
+  `pose`/`poseGuard: CORE_POSE_NATURALITY`，並在兩頁 `generate()` 裡插入
+  骨架系統之後（跟 travel.html 位置一致）。**owner 明確表示不要整個重排
+  優先順序**（身份/臉部幾何/頭部姿態/頸肩/骨架/重心合併呈現在
+  `CORE_REALISTIC_ANATOMY` 一個區塊裡，不拆成獨立命名層），只補這一個
+  缺口。`build-prompt-preview.mjs`/`audit-100x.mjs` 的 fantasy/magazine
+  鏡像邏輯要同步加這個區塊，否則鏡像跟真實頁面對不起來；新增變數會讓
+  `build-prompt-preview.mjs` 的 base-vs-worktree 比較在舊 commit 上直接
+  `ReferenceError`（因為舊版沒有這個變數），這種情況改用 jsdom 直接執行
+  真實頁面驗證即可，不必依賴這支腳本。
 - **共用核心**：`assets/core-prompt.js` 集中管理身份鎖定等保護區塊；核心文字經過
   兩輪瘦身（5,162 → 4,099 字元），語意零遺漏。
 - **travel / magazine / fantasy 操作模式已統一**：手動生成、stale 保護

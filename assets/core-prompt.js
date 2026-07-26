@@ -155,6 +155,7 @@ Identity And Facial Features Remain Clearly Recognizable During Motion.`,
     identity: identityCore,
     skeleton: humanCore,
     illustrationSkeleton: illustrationHumanCore,
+    pose: CORE_POSE_NATURALITY,
     photographer: `【時尚攝影師模組】
 
 Human-Centered Editorial Composition.
@@ -176,6 +177,7 @@ They must not change the person's facial structure, identity, age impression or 
     ].join("\n\n"),
     anatomyGuard: humanCore,
     illustrationSkeleton: illustrationHumanCore,
+    poseGuard: CORE_POSE_NATURALITY,
     lightingGuard: CORE_LIGHTING_UNIFICATION,
     negativePrompt: CORE_NEGATIVE_PROMPT,
     output: CORE_OUTPUT_QUALITY
