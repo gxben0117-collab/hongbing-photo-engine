@@ -192,9 +192,15 @@
   ×100）0 issue。
 - **共用核心**：`assets/core-prompt.js` 集中管理身份鎖定等保護區塊；核心文字經過
   兩輪瘦身（5,162 → 4,099 字元），語意零遺漏。
-- **travel / magazine / fantasy 操作模式已統一**：手動生成、stale 保護
-  （改選項後輸出區標記過期，需重新生成）、套用即顯示、按鈕配色一致。
-  `doll.html` 尚未套用這套規則（見下方待辦）；`store-ad.html` 本質不同不適用。
+- **全部 7 個工具頁的生成互動已完全統一**（2026-07-27）：手動按「生成」才
+  顯示輸出、stale 保護（改選項後輸出區標記過期＋複製鈕鎖住，需重新生成
+  才解除）。`doll.html` 補上 stale 徽章＋額外攔截 `.chip`/`.auto-card` 點擊
+  （因為它的選項是純 click 切換 class，沒有底層 `<input>` 事件）；
+  `store-ad.html` 原本是「即時預覽」架構（任何欄位改動就直接重繪輸出，
+  永遠不會過期），已改成跟其餘 6 頁一樣的 click-to-generate + stale 模式
+  （拆開原本並排的 actions 按鈕、copy 鈕移進 output-wrap、拿掉載入時的
+  自動 generate()）。stale 徽章顏色沿用各頁自己的主色（金色系頁面用
+  `--gold`，store-ad 用自己的薄荷色 `--mint`），不是強制統一成同一色。
 - **隨機套用已改為元素級獨立隨機**（每欄位各自抽選再動態組合），不是預寫模板三選一。
 - **驗證工具**：四個腳本，改咒語相關邏輯後都應該跑：
   - `scripts/check-static.mjs`（結構：重複 id、本地連結、inline script 語法）
@@ -257,8 +263,6 @@
 
 - ChatGPT 出圖實測：核心瘦身 A/B、各波新選項與特效模板抽測、三頁 UI 統一後的
   手動點測（清單見開發日誌 2026-07-21/22 條目）。
-- `doll.html` 是否要套用 travel/magazine/fantasy 那套「stale 保護 + 套用即顯示」
-  規則，需 owner 確認。
 - L5：travel 風格模組加「主題與風格衝突時以主題為準」的裁決句——會改既有輸出
   文字，屬 `docs/core-prompt-contract.md` 管制範圍，需先出改前/改後對照。
 

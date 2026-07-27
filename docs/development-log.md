@@ -1405,3 +1405,51 @@
   工具，未能實際用瀏覽器肉眼複查窄螢幕下的視覺效果，僅完成程式化的
   結構與數值一致性驗證，之後若有瀏覽器工具應補做一次目視複查。
 
+## 2026-07-27（十三）　統一 7 個工具頁的「生成咒語」互動行為（補上 doll/store-ad 的變更通知）
+
+- owner 指出 `fantasy-fashion.html`（以及 travel/magazine/xianxia/
+  anime-character，共 5 頁共用同一套）的「生成」互動比較好：生成後只要
+  改動任何選項，輸出框會立刻變暗、跳出「選項已變更，請重新按『生成』」
+  徽章、複製鈕同時被鎖住（`pointer-events:none`），直到重新按生成才解除
+  （`markStale()`/`clearStale()` 配合 `.output-wrap.stale` 這個 CSS class）。
+  比對後發現 `doll.html`／`store-ad.html` 完全沒有這套機制，要求把 7 個
+  工具頁的生成互動行為統一。
+- **doll.html**：desktop 上 `generate-btn`／`copy-btn` 邏輯本來就是「按
+  生成才顯示」，只是缺變更通知。補上跟 fantasy 系一模一樣的
+  `.output-stale-badge` CSS／HTML（插在 `output-wrap` 裡、textarea 前）／
+  `markStale()`／`clearStale()`。這頁的选項介面比較特別——髮型/表情/姿勢/
+  底座是用 `<label class="chip">`／`<label class="auto-card">` 純 click
+  切換 class，沒有底層 `<input>` 觸發原生 `change`/`input` 事件，所以除了
+  沿用 fantasy 那套「document 層級攔截 input/change」的作法之外，額外加了
+  第三個 `click` 監聽器專門攔 `.chip`／`.auto-card`／`#autoAllBtn` 的點擊
+  來標記 stale，涵蓋所有互動元件。
+- **store-ad.html（改動較大）**：這頁原本的架構跟其他 6 頁完全不同——是
+  「即時預覽」模式：任何欄位一有 `input`/`change` 就直接呼叫 `generate()`
+  重新渲染輸出框，頁面載入時也會立刻 `generate()` 一次，所以輸出框從來
+  不會「過期」，一直跟表單同步。但這跟其他 6 頁「按生成才出現、改動後
+  才提示過期」的互動模式不一致，所以照 owner 的「完全一致」要求，把它
+  也改成 click-to-generate + stale 徽章模式：
+  - HTML 重構：原本 `.actions`（generateBtn + copyBtn 並排的 grid）拆開，
+    `generateBtn` 獨立在外層一直可按；`copyBtn` 移進新的
+    `output-wrap hidden`（跟 `.output-stale-badge`、`.output` 包在一起），
+    生成前整個輸出區塊是隱藏的，跟其他 6 頁行為一致。
+  - CSS：新增 `.output-stale-badge`（用這頁自己的薄荷色 `--mint`／
+    `#A4EFE4` 當強調色，跟其他頁用各自的金色 `--gold` 是同一個設計原則
+    ——用該頁自己的主色，而不是強制統一成金色）；`generateBtn`／
+    `.copy-btn` 補 `width:100%` 讓兩顆按鈕改成上下堆疊（原本是並排），
+    跟其他頁的垂直版面一致；順手移除變成死碼的 `.actions` grid 規則
+    （含手機版 media query 裡的那條）。
+  - JS：所有欄位監聽器從「直接呼叫 `generate()`」改成「呼叫
+    `markStale()`」，只有 `#generateBtn` 的 click 才真的呼叫 `generate()`
+    （`generate()` 內部最後加 `outputWrap.classList.remove('hidden')` +
+    `clearStale()`）；`copyBtn` click 加上 `if(...stale) return;` 的
+    guard；移除頁面載入時自動呼叫的 `generate();`（因為現在輸出框應該
+    保持隱藏直到第一次按生成，跟其他 6 頁一致）。
+- **驗證**：`check-static.mjs`／`audit-100x.mjs`（700 次模擬，0 issue，
+  確認拿掉即時預覽後 store-ad 的模擬邏輯仍正確）都過；CSS 大括號配對
+  逐頁計數確認 doll.html／store-ad.html 開合平衡。另外寫 17 項 jsdom
+  實測，涵蓋兩頁各自的「生成前輸出區隱藏」「按生成後顯示且不過期」
+  「改選項（含 doll 的 chip 點擊、store-ad 的文字輸入與 radio）後變
+  stale」「stale 時複製鈕被鎖住點了無效」「重新生成後 stale 解除且內容
+  更新」——全部通過。
+

@@ -303,6 +303,21 @@
   .generate-btn:active{ opacity:0.85; }
 
   /* ── OUTPUT ── */
+  .output-stale-badge{
+    display:none;
+    margin-bottom:10px;
+    padding:10px 14px;
+    background:rgba(201,168,76,.12);
+    border:1px solid var(--gold);
+    border-radius:8px;
+    color:var(--gold);
+    font-size:13px;
+    font-weight:700;
+    text-align:center;
+  }
+  .output-wrap.stale .output-stale-badge{ display:block; }
+  .output-wrap.stale textarea{ opacity:.45; }
+  .output-wrap.stale .copy-btn{ opacity:.4; pointer-events:none; cursor:not-allowed; }
   .output-wrap{ margin-top:24px; }
   .output-wrap textarea{
     width:100%;
@@ -634,6 +649,7 @@
   </section>
 
   <div class="output-wrap hidden" id="outputWrap">
+    <div class="output-stale-badge">選項已變更，請重新按「生成公仔咒語」</div>
     <textarea id="outputText" readonly></textarea>
     <button class="copy-btn" id="copyBtn">複製咒語</button>
   </div>
@@ -1091,14 +1107,34 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
 
   document.getElementById('outputText').value=sections.join('\n\n⸻\n\n');
   document.getElementById('outputWrap').classList.remove('hidden');
+  clearStale();
   document.getElementById('outputWrap').scrollIntoView({behavior:'smooth',block:'start'});
   const cb=document.getElementById('copyBtn');
   cb.textContent='複製咒語';
   cb.classList.remove('copied');
 });
 
+function markStale(){
+  const wrap=document.getElementById('outputWrap');
+  if(wrap && !wrap.classList.contains('hidden')) wrap.classList.add('stale');
+}
+function clearStale(){
+  const wrap=document.getElementById('outputWrap');
+  if(wrap) wrap.classList.remove('stale');
+}
+document.addEventListener('input',(event)=>{
+  if(event.target && event.target.closest && !event.target.closest('#outputWrap')) markStale();
+},true);
+document.addEventListener('change',(event)=>{
+  if(event.target && event.target.closest && !event.target.closest('#outputWrap')) markStale();
+},true);
+document.addEventListener('click',(event)=>{
+  if(event.target && event.target.closest && event.target.closest('.chip, .auto-card, #autoAllBtn') && !event.target.closest('#outputWrap')) markStale();
+},true);
+
 // 複製
 document.getElementById('copyBtn').addEventListener('click',()=>{
+  if(document.getElementById('outputWrap').classList.contains('stale')) return;
   const text=document.getElementById('outputText').value;
   const btn=document.getElementById('copyBtn');
   function ok(){ btn.textContent='已複製!'; btn.classList.add('copied'); setTimeout(()=>{ btn.textContent='複製咒語'; btn.classList.remove('copied'); },1500); }

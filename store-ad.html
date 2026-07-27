@@ -163,13 +163,6 @@
   textarea{min-height:86px;resize:vertical;}
   input:focus, textarea:focus, select:focus{border-color:var(--mint);}
   .full{grid-column:1/-1;}
-  .actions{
-    display:grid;
-    grid-template-columns:1fr auto;
-    gap:10px;
-    align-items:center;
-    margin-top:18px;
-  }
   button{
     border:0;
     border-radius:8px;
@@ -180,11 +173,31 @@
     letter-spacing:.08em;
     cursor:pointer;
   }
+  #generateBtn{ width:100%; margin-top:18px; }
   .copy-btn{
+    width:100%;
+    margin-top:8px;
     background:transparent;
     color:#A4EFE4;
     border:1px solid rgba(112,214,200,.45);
   }
+  .output-stale-badge{
+    display:none;
+    margin-bottom:10px;
+    padding:10px 14px;
+    background:rgba(112,214,200,.12);
+    border:1px solid var(--mint);
+    border-radius:8px;
+    color:#A4EFE4;
+    font-size:13px;
+    font-weight:700;
+    text-align:center;
+  }
+  .output-wrap.stale .output-stale-badge{ display:block; }
+  .output-wrap.stale .output{ opacity:.45; }
+  .output-wrap.stale .copy-btn{ opacity:.4; pointer-events:none; cursor:not-allowed; }
+  .output-wrap{ margin-top:14px; }
+  .hidden{ display:none; }
   .output{
     border:1px solid var(--line);
     background:#0F1111;
@@ -225,7 +238,6 @@
     }
     .wrap{padding:20px 14px 36px;}
     .grid,.form-grid{grid-template-columns:1fr 1fr;}
-    .actions{grid-template-columns:1fr;}
   }
   @media (max-width:480px){
     .grid,.form-grid{grid-template-columns:1fr;}
@@ -411,12 +423,13 @@
       <div class="section-label">05</div>
       <div class="section-title">生成海報企劃與咒語</div>
     </div>
-    <div class="actions">
-      <button id="generateBtn">生成店家廣告方案</button>
+    <button id="generateBtn">生成店家廣告方案</button>
+    <p class="hint">咒語會要求 AI 將填入的繁中內容與主視覺一起完成；請確認文字、日期與電話都已填正確。</p>
+    <div class="output-wrap hidden" id="outputWrap">
+      <div class="output-stale-badge">內容已變更，請重新按「生成店家廣告方案」</div>
+      <div class="output" id="output"></div>
       <button class="copy-btn" id="copyBtn">複製全部</button>
     </div>
-    <p class="hint">咒語會要求 AI 將填入的繁中內容與主視覺一起完成；請確認文字、日期與電話都已填正確。</p>
-    <div class="output" id="output"></div>
   </section>
 </main>
 
@@ -650,6 +663,8 @@ function generate(){
   ].join('\n');
 
   document.getElementById('output').textContent = posterText;
+  document.getElementById('outputWrap').classList.remove('hidden');
+  clearStale();
 }
 
 function makeSlogan(industry, campaign){
@@ -671,19 +686,29 @@ function makeSlogan(industry, campaign){
   return '用更好的體驗，留住每一次美好';
 }
 
+function markStale(){
+  const wrap=document.getElementById('outputWrap');
+  if(wrap && !wrap.classList.contains('hidden')) wrap.classList.add('stale');
+}
+function clearStale(){
+  const wrap=document.getElementById('outputWrap');
+  if(wrap) wrap.classList.remove('stale');
+}
+
 document.querySelectorAll('input[type="radio"]').forEach(input => {
   input.addEventListener('change', () => {
     refreshCards();
     updateFestivalVisibility();
-    generate();
+    markStale();
   });
 });
 document.querySelectorAll('input[type="text"], textarea, select').forEach(input => {
-  input.addEventListener('input', generate);
-  input.addEventListener('change', generate);
+  input.addEventListener('input', markStale);
+  input.addEventListener('change', markStale);
 });
 document.getElementById('generateBtn').addEventListener('click', generate);
 document.getElementById('copyBtn').addEventListener('click', () => {
+  if(document.getElementById('outputWrap').classList.contains('stale')) return;
   const output = document.getElementById('output');
   const text = output.textContent;
   const btn = document.getElementById('copyBtn');
@@ -711,7 +736,6 @@ document.getElementById('copyBtn').addEventListener('click', () => {
   }
 });
 refreshCards();
-generate();
 </script>
 </body>
 </html>
