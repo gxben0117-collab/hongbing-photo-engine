@@ -41,7 +41,7 @@
     background:rgba(9,9,11,.92);
     backdrop-filter:blur(12px);
     border-bottom:1px solid var(--line);
-    z-index:10;
+    z-index:100;
     display:flex;
     align-items:center;
     justify-content:space-between;
@@ -59,9 +59,10 @@
     color:var(--soft);
     text-decoration:none;
     font-size:12px;
-    padding:6px 12px;
+    padding:6px 14px;
     border:1px solid transparent;
     border-radius:999px;
+    transition:all .15s;
   }
   .nav-link:hover{color:var(--paper);border-color:var(--line);}
   .nav-link.active{color:var(--gold);border-color:var(--gold);background:rgba(201,168,76,.08);}

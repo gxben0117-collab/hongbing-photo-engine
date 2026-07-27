@@ -54,7 +54,7 @@
     font-family:"Noto Serif TC",serif;
     font-size:14px;
     font-weight:700;
-    color:var(--pink-deep);
+    color:var(--gold);
     letter-spacing:0.08em;
     text-decoration:none;
   }
@@ -70,15 +70,42 @@
   }
   .nav-link:hover{ color:var(--ink); border-color:var(--line); }
   .nav-link.active{
-    color:var(--pink-deep);
-    border-color:var(--pink);
-    background:var(--pink-soft);
+    color:var(--gold);
+    border-color:var(--gold);
+    background:rgba(201,168,76,0.08);
   }
 
   .wrap{
     max-width:660px;
     margin:0 auto;
     padding:70px 20px 40px;
+  }
+  @media (max-width:760px){
+    nav{
+      position:sticky;
+      height:auto;
+      min-height:0;
+      align-items:stretch;
+      flex-direction:column;
+      padding:10px 14px 8px;
+      gap:8px;
+    }
+    .nav-logo{font-size:13px;line-height:1.2;}
+    .nav-links{
+      gap:6px;
+      flex-wrap:nowrap;
+      justify-content:flex-start;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      padding-bottom:2px;
+    }
+    .nav-link{
+      flex:0 0 auto;
+      white-space:nowrap;
+      font-size:11px;
+      padding:5px 9px;
+    }
+    .wrap{padding:20px 14px 36px;}
   }
 
   /* ── HEADER ── */

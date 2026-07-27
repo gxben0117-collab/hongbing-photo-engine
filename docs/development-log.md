@@ -1348,3 +1348,60 @@
   系統**標記字串在每一種輸出組合中都正確出現，無 JS error、無
   undefined/NaN 洩漏。
 
+## 2026-07-27（十二）　統一全站 8 頁頂部導航排版
+
+- owner 要求：現在有七個工具頁（加首頁共 8 頁），針對首頁與每一頁的
+  頂部導航連結做一次統合整理排版，讓外觀與行為一致。先做全頁 nav CSS/
+  HTML 稽核，發現 8 個檔案在不同時期各自複製演化，已經產生明顯分歧：
+  - `z-index`：index/travel/magazine/doll 是 100，fantasy-fashion/xianxia/
+    anime-character/store-ad 卻是 10（較容易被其他絕對定位元素蓋住）。
+  - `.nav-link` 桌面版 padding：多數頁是 `6px 14px` 且有 `transition`，
+    fantasy 系三頁與 store-ad 卻是 `6px 12px` 且沒有 `transition`。
+  - **手機版導航策略完全分裂成兩派**：magazine/fantasy-fashion/xianxia/
+    anime-character 用「sticky + 垂直排列 + 連結列橫向捲動」；store-ad
+    用完全不同的「fixed 原地長高 + 內容 padding-top 硬推開」；index/
+    travel/doll **完全沒有手機版 nav media query**——在窄螢幕下 8 個
+    連結會被固定 54px 高的 nav 盒子裁切/重疊，是最需要優先修的問題。
+  - `.nav-link.active` 顏色：7 頁是金色 `var(--gold)`，只有 store-ad 是
+    薄荷/青色 `#A4EFE4`，跟其餘頁不一致。
+  - `.nav-logo` 顏色：travel.html 用 `--terracotta-deep`（#E8D5A3，較淺的
+    金色）、doll.html 用 `--pink-deep`（同樣是 #E8D5A3），跟其餘 6 頁的
+    `--gold`（#C9A84C，較深的金色）呈現出兩種不同深淺的金色字，肉眼可見
+    不一致。
+- **統一方案**：以 magazine.html／fantasy-fashion 系三頁已經驗證過的
+  sticky+橫向捲動手機版 pattern 當標準，套用到全部 8 頁：
+  - `z-index` 全部改 100；`.nav-link` 桌面版 padding 統一 `6px 14px` 並
+    補上 `transition:all .15s`（fantasy 系三頁＋store-ad 原本沒有）。
+  - 新增／取代 `@media (max-width:760px)` 手機版 nav 規則到全部 8 頁：
+    nav 變 `position:sticky` 且 `flex-direction:column`，`.nav-links`
+    變 `flex-wrap:nowrap` 搭配 `overflow-x:auto` 橫向捲動，`.nav-link`
+    縮小成 `font-size:11px;padding:5px 9px`。同步在同一個 media query
+    內把每頁自己原本的內容區 `.wrap`／`.hero` 頂部留白從桌面版的大留白
+    （70px～140px，用來閃避 fixed nav）縮小成手機版合理值（20px 或
+    32px），因為 sticky nav 改吃版面高度後不再需要那麼大的補償留白。
+    **注意順序**：CSS 疊層規則是「後面蓋前面」，所以這段 media query
+    必須寫在該頁原本的 `.wrap`／`.hero` 基礎規則「之後」，否則後面那條
+    沒有 media 條件限制的基礎規則會把 media query 的覆寫蓋掉——index.html
+    和 travel.html 一開始都不小心寫反了順序，檢查後有修正。
+  - store-ad.html 的 `.nav-link.active` 從薄荷色改回金色 `var(--gold)`，
+    手機版 nav 邏輯從「fixed 長高＋內容 padding-top:104px 硬推開」改成
+    跟其他頁一樣的「sticky＋橫向捲動」。
+  - travel.html／doll.html 的 `.nav-logo` 從各自的 `--terracotta-deep`／
+    `--pink-deep`（都是 #E8D5A3 淺金）改成 `var(--gold)`（#C9A84C），跟
+    其餘 6 頁的 logo 顏色一致；doll.html 的 `.nav-link.active` 同步從
+    三個獨立的 pink 系變數改成跟其他頁一致的單一 `var(--gold)` 寫法（doll
+    原本的 `--pink`/`--pink-deep`/`--pink-soft` 其實已經是金色的別名，
+    只是變數命名不同、且 active 文字與邊框用了兩種不同深淺的金色，統一
+    後改成跟其他頁完全相同的單一色調）。
+  - 刻意不動的部分：各頁 body 內文自己的品牌強調色系統（例如 store-ad
+    的薄荷綠 `--mint`、travel/doll 的淺金強調色用在其他非 nav 元件上、
+    fantasy/xianxia/anime/store-ad 各自的 `--soft`/`--paper` 等變數命名）
+    ——這次只統一「nav 本身」的排版與行為，不重做每頁各自的整體色彩
+    系統，避免範圍失控。
+- **驗證**：`node scripts/check-static.mjs` 全部 8 頁通過（無重複 id、
+  連結檢查、inline script 語法皆過）；另外寫一次性 node 腳本逐頁抓
+  `<style>` 內容做大括號配對計數，確認 8 個檔案全部 open===close，
+  沒有因為多處字串插入而破壞 CSS 結構。因為本次環境沒有瀏覽器截圖
+  工具，未能實際用瀏覽器肉眼複查窄螢幕下的視覺效果，僅完成程式化的
+  結構與數值一致性驗證，之後若有瀏覽器工具應補做一次目視複查。
+
