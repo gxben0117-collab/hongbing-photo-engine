@@ -1453,3 +1453,23 @@
   stale」「stale 時複製鈕被鎖住點了無效」「重新生成後 stale 解除且內容
   更新」——全部通過。
 
+## 2026-07-27（十四）　身形輪廓「豐滿纖腰」改寫身體描述為日本體型
+
+- owner 指出 fantasy-fashion／magazine／xianxia／anime-character 四頁
+  共用的「身形輪廓｜豐滿纖腰」選項，生成咒語裡的體型描述要從通用的
+  「明顯胸腰臀曲線」改寫成「日本豐滿瘦腰女性」這個具體體型參照。
+- **修正**：四個頁面的 `BODY_SHAPES.curvy_waist`（四份原本逐字相同）第一
+  行從 `Curvy Narrow-Waist Adult Female Silhouette` 改成
+  `Japanese Curvy Slim-Waist Adult Female Silhouette`，其餘描述句
+  （Full Bust, Slim Waist, Elegant Waist-To-Hip Curve／身份與年齡印象
+  保留／Natural Realistic Body Proportions 等安全防護句）完全不動。這個
+  改法跟頁面裡已經存在的 `korean_idol`（"Korean Idol Stage
+  Proportions"）是同一種「用文化/地域體型參照詞」的寫法，不是新發明的
+  模式。
+- **驗證**：`check-static.mjs`／`audit-100x.mjs`（700 次模擬 0 issue）
+  皆過；另外寫 12 項 jsdom 實測，對四頁各自勾選 `curvy_waist` 選項並
+  觸發真正的 `generateBtn` 點擊，確認四頁的生成結果都含新的
+  `Japanese Curvy Slim-Waist Adult Female Silhouette` 字串、不再含舊的
+  `Curvy Narrow-Waist Adult Female Silhouette` 字串，且身份鎖定系統
+  區塊依然完整——全部通過。
+
