@@ -1792,3 +1792,42 @@
   文字寫 bikini 不會誤觸發泳裝相關邏輯——全部通過；加上既有的 61 項
   jsdom 測試，這頁目前累計驗證項目達 987 項。
 
+## 2026-07-29（二十）　summer-island.html 下架刪除
+
+- owner 實測 summer-island.html 產出的咒語，即使經過（十六）用詞調整、
+  （十七）日系商業旅拍 DNA 固定層、（十八）泳裝觸發追加層、（十九）
+  Prompt Compatibility System 組合風險檢查層這四輪修正，圖像生成端仍然
+  持續回報「提示詞可能違反裸露、性或色情內容的防範機制」。owner 決定
+  放棄這個主題，明確要求：「把 夏日海島咒語產生器 刪除，包含在其他頁面
+  的連結 都刪除」。
+- **刪除範圍**：
+  - `summer-island.html` 本體檔案。
+  - 其餘 9 頁（index/travel/magazine/doll/fantasy-fashion/xianxia/
+    anime-character/flower-fairy/isekai-fantasy/store-ad）nav 裡的
+    「夏日海島」連結。
+  - `index.html` 首頁的夏日海島 tool-card（HTML 區塊）與對應 CSS
+    （`.tool-card.island` 系列規則：`::before`／`.tool-tag`／
+    `.tool-cta`，強調色珊瑚橘 `#FF9466`）。
+  - `assets/core-prompt.js` 的 `CORE_JAPANESE_SUMMER_EDITORIAL_DIRECTION`
+    ／`CORE_JAPANESE_SWIMWEAR_EDITORIAL_ADDENDUM`／`summerIslandCore`
+    三個宣告，以及 `window.HB_CORE_PROMPT.page` 註冊表裡的
+    `summerIsland` 項目。
+  - 四支驗證腳本（`check-static.mjs`／`validate-preset-refs.mjs`／
+    `audit-100x.mjs`／`build-prompt-preview.mjs`）裡所有 summer-island
+    相關的區塊、函式（`generateSummerIsland()`）與 try/catch 讀取邏輯。
+- **驗證**：`grep -rln "summer-island\|summerIsland\|SummerIsland"
+  scripts/ assets/ *.html` 確認全站 0 殘留引用；四支驗證腳本重跑，
+  `audit-100x.mjs` 模擬數從 1000 降回 900（9頁×100）0 issue，
+  `check-static.mjs`／`validate-preset-refs.mjs`／
+  `build-prompt-preview.mjs` 皆過；全站 nav 逐頁確認回到每頁 10 個連結
+  （首頁 + 9 個工具頁）。`assets/core-prompt.js` 用 `node -e` 直接載入
+  確認 `window.HB_CORE_PROMPT.page` 的 key 列表回到
+  `['travel','magazine','fantasy','xianxia','anime','flowerFairy',
+  'isekai','doll','storeAd']`，不再有 `summerIsland`。
+- **文件同步**：`CLAUDE.md` 拿掉三則 summer-island 建置/修正的詳細條目
+  （原本累加了「新增頁面」「日系 DNA」「Compatibility System」三則），
+  改成一則精簡的「已下架刪除」記錄，並把完整技術細節保留在本開發日誌
+  2026-07-29（十六）～（十九）條目裡，供之後若重啟同類主題參考「哪些
+  做法試過但仍不足以通過圖像生成端的內容防範機制」；`README.md` 的
+  工具頁清單、資料夾結構、頁數說明同步改回 9 個工具頁。
+

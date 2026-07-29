@@ -20,7 +20,7 @@
 
 ### 現況摘要（2026-07-22）
 
-- 十個工具頁（travel / magazine / doll / fantasy-fashion / xianxia / anime-character / flower-fairy / isekai-fantasy / summer-island / store-ad）
+- 九個工具頁（travel / magazine / doll / fantasy-fashion / xianxia / anime-character / flower-fairy / isekai-fantasy / store-ad）
   皆已上線，正式站 <https://gxben0117-collab.github.io/hongbing-photo-engine/>。
   **`anime-hero.html`（動漫電影變身夥伴咒語產生器）已於 2026-07-24 整頁下架**：
   owner 對這系列不滿意，且該頁架構已疊到 10 層 monkey-patch 式的
@@ -242,91 +242,19 @@
     guard 邏輯測試）、isekai-fantasy 45 項全過；`audit-100x` 900 次模擬
     （9頁×100）0 issue；`build-prompt-preview` 核心區塊長度 delta 全部
     為 0，確認沒有動到任何既有頁面的共用核心。
-- **新增 `summer-island.html`（夏日海島）**（2026-07-29）：owner 想再加「夏日
-  沙灘」主題，先貼了 AI 產出的規格書，範圍定義為「沙灘 × 水上 × 淺水玩水」
-  四大場景模組（明確排除深潛/水下世界，留給未來獨立主題）。分析後回報
-  owner：規格書裡「禁止自拍構圖」是全新類型的限制，目前任何頁面核心都
-  沒有這種構圖禁令，需要另外寫負面約束——owner 確認**不需要**特別寫入，
-  略過這條。其餘規格書內容（隨機組合系統對應現有元素級獨立隨機、
-  Realistic Ocean Physics 只是給圖像模型看的 prompt 文字不是真的物理
-  系統）分析後確認可行，owner 同意方向後直接建置。也發現這次不是從零
-  開始——`travel.html` 本來就有沖繩/墾丁/冰島黑沙灘等零星海邊內容，但
-  規格書要的「四大模組系統化」份量跟開一個新主題頁差不多大，所以還是
-  走獨立完整新頁路線而非塞進 travel.html。
-  - 一樣「方案A：獨立完整新頁」，複製 `fantasy-fashion.html` 當底。
-  - **04 服裝**：30 項/6 組（基礎泳裝、度假罩衫外搭、海島度假洋裝、水上
-    活動機能服、沙灘配件奢華款、沙灘裙裝與濕身質感）。
-  - **05 材質改稱為「水感與陽光氛圍」**：30 項/6 組（水花水珠系、陽光
-    光斑系、海水色澤系、沙灘質感系、熱帶氛圍系、度假奢華系）——這裡的
-    「Realistic Ocean Physics／水面折射／濕潤效果」都只是這層的英文
-    prompt 文字，沒有額外工程。
-  - **06 姿勢：這次選擇整組替換，不是延伸**（跟花仙子/日式異世界的「延伸
-    既有姿勢池」做法不同）——因為規格書明確要求四大場景模組（沙灘/水上/
-    淺水/玩水）系統化分類，這跟 fantasy 原本的戲劇感高訂姿勢語彙差異
-    太大，直接整組替換成 30 個新姿勢，剛好對應四模組分 4 組（沙灘 8、
-    水上 7、淺水 7、玩水 8），例如淺水組系統化涵蓋腳踝/膝蓋/腰部/大腿
-    不同深度的自然行走轉身。
-  - **09 背景**：30 項/6 組（白沙海灘、礁石海岸、度假村碼頭、熱帶椰林、
-    日落海岸、清澈淺水灘）。
-  - **00 一鍵模板 16 組**，跨四大模組混合（例如 SUP 晨光滑行、淺水漫步、
-    玩水嬉戲瞬間、獨木舟探索滑行）。
-  - `core-prompt.js` 新增 `summerIslandCore`（結構比照 `xianxiaCore`：
-    identityGuard 含 Style Scope Rule、`anatomyGuard` 用寫實
-    `humanCore`），拿掉了 fantasy 原本的 illustration-material 條件判斷
-    （材質庫不含插畫媒材），註冊到 `window.HB_CORE_PROMPT.page.summerIsland`。
-  - 全站 nav（10 頁互相連結）、index.html 首頁卡片（強調色選用未使用過的
-    珊瑚橘 `#FF9466`）、四支驗證腳本都同步加入支援。jsdom 實測 52 項全過
-    （含四大模組各抽一個姿勢直接測試都能正常生成）；`audit-100x` 1000
-    次模擬（10頁×100）0 issue；`build-prompt-preview` 核心區塊長度 delta
-    全部為 0。
-- **summer-island.html 新增「日系商業旅拍 DNA」固定層 + 泳裝觸發追加層**
-  （2026-07-29）：owner 找另一個 AI 討論後定案，在鎖臉核心之後固定插入
-  `CORE_JAPANESE_SUMMER_EDITORIAL_DIRECTION`（【日系商業旅拍美學方向】，
-  每次生成都出現），並新增 `SWIMWEAR_GARMENT_KEYS` 判斷集合（13 項服裝，
-  比照 `FANTASY_ILLUSTRATION_MATERIAL_KEYS` 的 Set 判斷模式）——選到
-  泳裝類服裝時才額外追加 `CORE_JAPANESE_SWIMWEAR_EDITORIAL_ADDENDUM`
-  一句話。三個關鍵決定：(1) 不寫 `Japanese woman`，只用「攝影美學」
-  描述，避免跟身份鎖定打架；(2) 拿掉 `gravure` 改用時尚產業通用的
-  `resort/swimwear editorial photography`；(3) 不重複姿勢/活動內容，
-  只加「攝影美學」這個原本沒有的維度，避免違背核心瘦身原則。插入順序：
-  identityGuard → photographyDirection（固定） →
-  isSwimwearGarment ? swimwearDirection : ''（條件式）→ anatomyGuard。
-  自填服裝文字不會觸發追加層（走 customGarment 分支，不比對 key）。
-  9 項新 jsdom 測試（固定層必現、泳裝觸發、非泳裝不觸發、自填文字不
-  誤觸發）全過，`audit-100x`／`build-prompt-preview` 同步更新確認無
-  regression。**這不是保證通過安全過濾器的技巧**，只是提高模型正確
-  辨識「合法商業編輯攝影題材」的機率，平台政策層級的限制仍然存在。
-- **summer-island.html 新增「Prompt Compatibility System」組合風險檢查層**
-  （2026-07-29）：owner 找另一個 AI 看了實際程式碼，定位出真正問題不是
-  鎖臉核心，是 `applyIslandRandomSelection()` 每個欄位各自獨立隨機抽取
-  ，沒有「抽完檢查整體組合」的機制，可能疊加出「泳裝+濕潤肌膚材質+
-  低角度+身形強調+爆發材質」這種單項都正常、疊加後過度聚焦身體呈現的
-  組合；手動逐一勾選同樣會踩到，所以 Safety Layer 要放在 `generate()`
-  本身，不能只修隨機函式。新增 `validatePromptCombination(sel)`：讀取
-  5 個風險因子（泳裝／身形是否為 `curvy_waist`/`korean_idol`／鏡頭是否
-  `lowAngleHero`／材質是否濕潤肌膚系／強度是否「強烈爆發」），達到
-  `SAFETY_RISK_THRESHOLD = 3` 才觸發，不是任何單一因子觸發，也不建立
-  單字黑名單。**隨機模式跟手動模式待遇不同**：隨機抽到的衝突欄位（鏡頭/
-  材質/強度）直接替換成安全預設值再 generate；**手動模式絕對不偷改
-  使用者自己勾的選項**，維持原選擇，只在咒語裡加一句中性化的
-  `SAFETY_MODERATING_PHRASE`，並在畫面用 `#safetyAdjustNotice`（不進
-  複製文字）明確告知「未變更您手動選擇的任何選項」。服裝/身形/主題
-  永遠不列入可替換清單。實作過程中自己抓到一個邏輯 bug——函式內部
-  「模擬套用替換後遞減的風險數」跟「回傳給呼叫端的原始風險數」原本共用
-  同一個變數，導致手動模式讀到的永遠是已經「假裝修正過」的數字，修成
-  分開回傳 `rawRiskCount`／內部 `remaining` 才修好。刻意**沒有**採用
-  對方額外提議的「依姿勢限制服裝類別」（例如 SUP 只配運動泳裝）——
-  評估後那是畫面合理性/創意多樣性問題，跟這次要解決的「風險因子疊加」
-  是兩件事，商業攝影本來就常見不完全符合活動情境的造型搭配，硬性限制
-  會犧牲既有隨機多樣性，屬於範圍外功能，先不做。新寫
-  `test-summer-island-safety.mjs`（926 項，含函式單元測試、手動模式
-  高/低風險組合、隨機模式跑 300 次確認最終狀態必過檢查）加上既有 61
-  項，這頁累計驗證 987 項全過；`check-static`／`audit-100x`（1000 次
-  模擬 0 issue）／`build-prompt-preview` 同步確認無 regression。
+- **`summer-island.html` 已下架刪除**（2026-07-29）：owner 實測時持續遇到
+  圖像生成端「可能違反裸露/性/色情內容防範機制」的拒絕判定，即使已經
+  做過材質用詞調整、日系商業旅拍 DNA 固定層、Prompt Compatibility
+  System 組合風險檢查層等多輪修正仍然常態性被擋，owner 決定放棄這個
+  主題，要求整頁刪除（含全站 nav 連結、index.html 卡片、
+  `core-prompt.js` 的 `summerIslandCore`、四支驗證腳本裡的對應區塊）。
+  完整的建置與修正過程記錄在開發日誌 2026-07-29（十六）～（十九）條目，
+  留供之後若重啟同類主題時參考「哪些做法試過但仍不夠」。目前工具頁
+  回到 9 個。
 - **共用核心**：`assets/core-prompt.js` 集中管理身份鎖定等保護區塊；核心文字經過
   兩輪瘦身（5,162 → 4,099 字元），語意零遺漏。
-- **全部 10 個工具頁的生成互動已完全統一**（2026-07-27；花仙子/日式異世界/
-  夏日海島複製 fantasy-fashion.html 建立時直接繼承這套機制，不需額外處理）：
+- **全部 9 個工具頁的生成互動已完全統一**（2026-07-27；花仙子/日式異世界
+  複製 fantasy-fashion.html 建立時直接繼承這套機制，不需額外處理）：
   手動按「生成」才
   顯示輸出、stale 保護（改選項後輸出區標記過期＋複製鈕鎖住，需重新生成
   才解除）。`doll.html` 補上 stale 徽章＋額外攔截 `.chip`/`.auto-card` 點擊
