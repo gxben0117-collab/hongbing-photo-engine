@@ -279,6 +279,23 @@
     （含四大模組各抽一個姿勢直接測試都能正常生成）；`audit-100x` 1000
     次模擬（10頁×100）0 issue；`build-prompt-preview` 核心區塊長度 delta
     全部為 0。
+- **summer-island.html 新增「日系商業旅拍 DNA」固定層 + 泳裝觸發追加層**
+  （2026-07-29）：owner 找另一個 AI 討論後定案，在鎖臉核心之後固定插入
+  `CORE_JAPANESE_SUMMER_EDITORIAL_DIRECTION`（【日系商業旅拍美學方向】，
+  每次生成都出現），並新增 `SWIMWEAR_GARMENT_KEYS` 判斷集合（13 項服裝，
+  比照 `FANTASY_ILLUSTRATION_MATERIAL_KEYS` 的 Set 判斷模式）——選到
+  泳裝類服裝時才額外追加 `CORE_JAPANESE_SWIMWEAR_EDITORIAL_ADDENDUM`
+  一句話。三個關鍵決定：(1) 不寫 `Japanese woman`，只用「攝影美學」
+  描述，避免跟身份鎖定打架；(2) 拿掉 `gravure` 改用時尚產業通用的
+  `resort/swimwear editorial photography`；(3) 不重複姿勢/活動內容，
+  只加「攝影美學」這個原本沒有的維度，避免違背核心瘦身原則。插入順序：
+  identityGuard → photographyDirection（固定） →
+  isSwimwearGarment ? swimwearDirection : ''（條件式）→ anatomyGuard。
+  自填服裝文字不會觸發追加層（走 customGarment 分支，不比對 key）。
+  9 項新 jsdom 測試（固定層必現、泳裝觸發、非泳裝不觸發、自填文字不
+  誤觸發）全過，`audit-100x`／`build-prompt-preview` 同步更新確認無
+  regression。**這不是保證通過安全過濾器的技巧**，只是提高模型正確
+  辨識「合法商業編輯攝影題材」的機率，平台政策層級的限制仍然存在。
 - **共用核心**：`assets/core-prompt.js` 集中管理身份鎖定等保護區塊；核心文字經過
   兩輪瘦身（5,162 → 4,099 字元），語意零遺漏。
 - **全部 10 個工具頁的生成互動已完全統一**（2026-07-27；花仙子/日式異世界/

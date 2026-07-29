@@ -1661,3 +1661,60 @@
   52 項 jsdom 實測全部重跑確認沒有破壞既有生成邏輯，改動範圍精準
   對應 owner 確認要修的 5 處，沒有動到其他材質或服裝內容。
 
+## 2026-07-29（十八）　summer-island.html 新增「日系商業旅拍 DNA」固定層 + 泳裝觸發追加層
+
+- owner 找另一個 AI 討論，想在 summer-island.html 鎖臉核心之後固定加入
+  「日本女性夏日海島沙灘拍攝」的調性；並提到選到泳裝題材時額外加日本
+  泳裝寫真語言比較不容易被出圖工具擋下來。逐輪來回討論後，最終定案：
+  1. **不寫 `Japanese woman`**——會被模型當成人物外貌條件，跟身份鎖定
+     打架；改用「Japanese commercial ... photography aesthetic」這種
+     **攝影語言**描述，不涉及人物長相。
+  2. **拿掉 `gravure`**——這個詞在日本媒體語境裡跟特定寫真/偶像產業綁得
+     較緊，改用時尚產業通用的 `resort editorial` / `swimwear editorial
+     photography`，措辭更乾淨、更不會把整頁調性帶偏。
+  3. **不重複姿勢/活動/場景內容**——第一版草稿裡列了一堆「走在沙灘上、
+     在淺水玩耍」之類的活動描述，這些跟 06 姿勢區的 30 個姿勢是同一件
+     事換句話說，違背這個專案一路在做的核心瘦身原則，最終版拿掉，只留
+     「攝影美學」這個原本沒有的資訊維度。
+  4. **固定層 + 條件式追加層，不是整頁寫死泳裝**——選到洋裝/罩衫等
+     非泳裝服裝時，不會被硬套用泳裝寫真語言；只有選到泳裝類服裝時才
+     追加「日本商業泳裝編輯攝影美學」這一句，避免模組互相污染（例如
+     選了洋裝卻讓核心一直暗示泳裝，導致模型把洋裝往貼身/泳裝方向拉）。
+  5. **老實告知效果上限**：這類語境描述能提高模型正確辨識「這是合法
+     商業編輯攝影題材」的機率，但不是保證通過安全過濾器的技巧，平台
+     政策層級的限制不會因為這段文字消失。
+- **實作**：`core-prompt.js` 新增兩個常量：
+  `CORE_JAPANESE_SUMMER_EDITORIAL_DIRECTION`（【日系商業旅拍美學方向】，
+  固定層，每次生成都會出現）與
+  `CORE_JAPANESE_SWIMWEAR_EDITORIAL_ADDENDUM`（一句話追加句，只在泳裝
+  服裝被選中時才附加），登錄到 `summerIslandCore.photographyDirection`／
+  `summerIslandCore.swimwearDirection`。
+- `summer-island.html` 新增 `SWIMWEAR_GARMENT_KEYS` 判斷集合（13 項，
+  比照 `FANTASY_ILLUSTRATION_MATERIAL_KEYS` 的 Set 判斷模式，這個做法
+  在專案裡不是新發明）：明確泳裝 11 項（`classicBikiniSet`／
+  `highWaistBikini`／`onePieceSwimsuit`／`cutoutOnePiece`／
+  `triangleBikiniWrap`／`sportySwimTop`／`highCutAthleticSwimsuit`／
+  `goldChainBikini`／`jeweledOnePiece`／`laceUpBikiniSet`／
+  `shellDetailSwimwear`）＋灰色地帶但判定為泳裝的 2 項（`rashguardSet`
+  防曬水母衣、`wetsuitTopShorty` 短版防寒衣，都是貼身水域運動服）；
+  `paddleboardShorts`（覆蓋度較高的機能短褲）跟其餘 17 項洋裝/罩衫/
+  裙裝類都**不算**泳裝，不會觸發追加層。
+- `generate()` 內插入順序：`identityGuard →`「Same adult woman...」→
+  `photographyDirection`（固定，永遠出現）→ `isSwimwearGarment ?
+  swimwearDirection : ''`（條件式）→ `anatomyGuard → ...`，剛好對應
+  owner 確認的「身份鎖定 → 臉部幾何 → 日系商業旅拍 DNA → 真人骨架 →
+  身形 → 使用者選擇的其餘模組」順序。`isSwimwearGarment` 判斷同時排除
+  「使用者自填服裝文字」的情況——就算自填文字裡寫了 `custom bikini`，
+  因為走的是 `customGarment` 分支不是預設服裝 key，不會觸發追加層
+  （避免自由文字被誤判）。`applyThemeTemplate()`／隨機套用都不需要額外
+  改動，因為兩者最後都會呼叫 `generate()`，會自動用當下選中的服裝 key
+  重新判斷。
+- **驗證**：`check-static.mjs`／`audit-100x.mjs`（1000 次模擬 0 issue，
+  `SUMMER ISLAND` 模擬區塊同步加上 `isSwimwearGarment` 判斷邏輯）／
+  `build-prompt-preview.mjs`（`generateSummerIsland()` 預設服裝改成
+  `classicBikiniSet` 讓預覽同時示範固定層與追加層都正確出現；核心區塊
+  長度 report 顯示 delta 全部為 0，沒有動到任何既有頁面的共用核心）都
+  過。另外寫 9 項新 jsdom 實測：固定層每次都出現、選泳裝時追加層正確
+  出現、選非泳裝服裝時追加層不出現但固定層仍在、自填服裝文字寫
+  「custom bikini」也不會觸發追加層——連同既有 52 項共 61 項全過。
+

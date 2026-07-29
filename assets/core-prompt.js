@@ -257,6 +257,15 @@ They must not change the person's facial structure, identity, age impression or 
     output: CORE_OUTPUT_QUALITY
   };
 
+  const CORE_JAPANESE_SUMMER_EDITORIAL_DIRECTION = `【日系商業旅拍美學方向】
+
+Japanese commercial summer resort editorial photography aesthetic.
+Refined, natural and premium Japanese summer magazine visual language.
+
+Affects photography aesthetic, composition mood and visual language only; never overrides subject identity, facial geometry, age impression or recognizable features.`;
+
+  const CORE_JAPANESE_SWIMWEAR_EDITORIAL_ADDENDUM = `Japanese commercial swimwear editorial photography aesthetic, refined summer resort magazine presentation.`;
+
   const summerIslandCore = {
     identityGuard: [
       CORE_IDENTITY_LOCK,
@@ -265,6 +274,8 @@ They must not change the person's facial structure, identity, age impression or 
 Commercial style, summer island material and art direction only affect clothing, ornaments, background, lighting, composition, mood and surface texture.
 They must not change the person's facial structure, identity, age impression or recognizable features.`
     ].join("\n\n"),
+    photographyDirection: CORE_JAPANESE_SUMMER_EDITORIAL_DIRECTION,
+    swimwearDirection: CORE_JAPANESE_SWIMWEAR_EDITORIAL_ADDENDUM,
     anatomyGuard: humanCore,
     illustrationSkeleton: illustrationHumanCore,
     poseGuard: CORE_POSE_NATURALITY,

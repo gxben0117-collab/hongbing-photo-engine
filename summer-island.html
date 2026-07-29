@@ -1195,6 +1195,31 @@ Preserve facial proportions, gaze, age impression and personal features.
 Style, costume, material, lighting and background must not overwrite or redesign the face.
 No face swap, no AI beauty template face, no celebrity face, no influencer face, no identity drift`;
 
+const photographyDirection = sharedSummerIslandCore.photographyDirection || `【日系商業旅拍美學方向】
+
+Japanese commercial summer resort editorial photography aesthetic.
+Refined, natural and premium Japanese summer magazine visual language.
+
+Affects photography aesthetic, composition mood and visual language only; never overrides subject identity, facial geometry, age impression or recognizable features.`;
+
+const swimwearDirection = sharedSummerIslandCore.swimwearDirection || `Japanese commercial swimwear editorial photography aesthetic, refined summer resort magazine presentation.`;
+
+const SWIMWEAR_GARMENT_KEYS = new Set([
+  'classicBikiniSet',
+  'highWaistBikini',
+  'onePieceSwimsuit',
+  'cutoutOnePiece',
+  'triangleBikiniWrap',
+  'sportySwimTop',
+  'rashguardSet',
+  'highCutAthleticSwimsuit',
+  'wetsuitTopShorty',
+  'goldChainBikini',
+  'jeweledOnePiece',
+  'laceUpBikiniSet',
+  'shellDetailSwimwear'
+]);
+
 const anatomyGuard = sharedSummerIslandCore.anatomyGuard || `Realistic Human Anatomy System:
 Realistic adult female anatomy, natural shoulder width, natural neck length, natural torso depth, natural limb proportions.
 Natural head to body ratio, head size follows the selected body framing and full-body scale whenever the body is visible.
@@ -1578,10 +1603,12 @@ function generate(options = {}){
   const materialPalette = customMaterials.length
     ? `derive the color palette only from custom material keywords: ${customMaterialText}`
     : material.palette;
+  const garmentKey = selected('garment');
   const customGarment = document.getElementById('customGarment').value.trim();
   const garmentText = customGarment
     ? `custom garment form only: ${customGarment}; do not include or blend any preset garment option`
-    : garmentData[selected('garment')];
+    : garmentData[garmentKey];
+  const isSwimwearGarment = !customGarment && SWIMWEAR_GARMENT_KEYS.has(garmentKey);
   const customBackground = document.getElementById('customBackground').value.trim();
   const background = customBackground
     ? `custom background only: ${customBackground}; do not include or blend any preset background option`
@@ -1599,6 +1626,8 @@ function generate(options = {}){
   const prompt = [
     identityGuard + ',',
     'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
+    photographyDirection + ',',
+    isSwimwearGarment ? swimwearDirection + ',' : '',
     anatomyGuard + ',',
     poseNaturalityGuard + ',',
     bodyShape + ',',

@@ -527,7 +527,7 @@ function generateSummerIsland(core, data) {
   const selection = {
     bodyShape: 'original',
     material: 'sunsetGoldenGlow',
-    garment: 'flowyMaxiDress',
+    garment: 'classicBikiniSet',
     background: 'goldenSunsetHorizon',
     lighting: 'darkGoldMood',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
@@ -551,9 +551,12 @@ function generateSummerIsland(core, data) {
   const bodyShape = data.BODY_SHAPES[selection.bodyShape];
   const framing = data.framingData[selection.framing];
   const poseText = data.poseData[selection.pose];
+  const isSwimwearGarment = data.SWIMWEAR_GARMENT_KEYS.has(selection.garment);
   const prompt = [
     data.identityGuard + ',',
     'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
+    data.photographyDirection + ',',
+    isSwimwearGarment ? data.swimwearDirection + ',' : '',
     data.anatomyGuard + ',',
     data.poseNaturalityGuard + ',',
     bodyShape + ',',
@@ -695,7 +698,7 @@ function loadRevision(label, sourceReader) {
       page: 'summerIsland',
       startMarker: 'const materialData = {',
       endMarker: 'function setRadioValue',
-      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedSummerIslandCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
+      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedSummerIslandCore, identityGuard, photographyDirection, swimwearDirection, SWIMWEAR_GARMENT_KEYS, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
     });
     prompts['summerisland-default.txt'] = generateSummerIsland(core, summerIslandData);
   } catch (err) {

@@ -541,7 +541,7 @@ const core = evalCore(coreSource);
     source: html, core, page: 'summerIsland',
     startMarker: 'const materialData = {',
     endMarker: 'function setRadioValue',
-    exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedSummerIslandCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
+    exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedSummerIslandCore, identityGuard, photographyDirection, swimwearDirection, SWIMWEAR_GARMENT_KEYS, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
   });
   const compositionValues = radioValues(html, 'composition');
   const intensityValues = selectValues(html, 'intensity');
@@ -568,6 +568,7 @@ const core = evalCore(coreSource);
       : material.prompt;
     const materialPalette = customMaterials.length ? `derive the color palette only from custom material keywords: ${customMaterialText}` : material.palette;
     const garmentText = sel.customGarment ? `custom garment form only: ${sel.customGarment}; do not include or blend any preset garment option` : data.garmentData[sel.garment];
+    const isSwimwearGarment = !sel.customGarment && data.SWIMWEAR_GARMENT_KEYS.has(sel.garment);
     const background = data.backgroundData[sel.background];
     const lighting = data.lightingData[sel.lighting];
     const bodyShape = data.BODY_SHAPES[sel.bodyShape];
@@ -575,6 +576,7 @@ const core = evalCore(coreSource);
     const poseText = data.poseData[sel.pose];
     const prompt = [
       data.identityGuard + ',', 'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
+      data.photographyDirection + ',', isSwimwearGarment ? data.swimwearDirection + ',' : '',
       data.anatomyGuard + ',', data.poseNaturalityGuard + ',', bodyShape + ',', data.lightingConsistencyGuard + ',', data.colorTemperatureGuard + ',',
       data.subjectIntegrationGuard + ',', data.faceFillGuard + ',', sel.composition + ',', data.compositionGuard + ',',
       'appearance form: ' + garmentText + ',', 'theme material and art system: ' + materialText + ',',
