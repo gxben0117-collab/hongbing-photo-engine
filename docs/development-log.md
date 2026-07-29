@@ -1638,3 +1638,26 @@
   直接勾選測試都能正常生成——全部通過；`audit-100x` 1000 次模擬
   （10頁×100）0 issue。
 
+## 2026-07-29（十七）　修正 summer-island.html 容易觸發圖像生成安全過濾的用詞
+
+- owner 實測 summer-island.html 生成的咒語拿去 ChatGPT 出圖，發現很容易
+  被擋。逐一檢查 `materialData`／`garmentData` 找出兩層問題：
+  1. `backlessBeachDress`（露背沙灘洋裝）材質描述裡有 `sultry`
+     （性感/挑逗）這個明顯的觸發詞。
+  2. 更根本的結構性問題：這頁的核心是「鎖定真人身份 + 泳裝」，這個
+     組合本身在 ChatGPT/DALL-E 這類工具的安全政策裡，就比奇幻服裝、
+     仙俠古裝這類「風格化角色」更敏感，是平台政策層級的差異，不是
+     咒語能完全解決的；另外材質庫裡有 4 組材質（`wetSkinGlow`／
+     `waterDripTrail`／`saltAirGlowSkin`／`coconutOilShimmer`）反覆把
+     描述焦點放在「wet/glossy skin」上，同一份咒語疊加多次「肌膚」相關
+     詞彙會提高被判定的機率。
+- **修正**：`sultry island silhouette` 改成 `elegant island silhouette`；
+  上述 4 組材質的英文 `prompt` 欄位拿掉 "the skin" 的直接聚焦，改成
+  描述水光/日光效果本身（例如 `wetSkinGlow` 從 "wet-glossy skin sheen"
+  改成 "sun-kissed glow...glossy highlight catching the light"）。
+  只動這 5 處 `prompt`/`palette` 英文字串，UI 上的中文 label/desc 完全
+  沒動（那些只是選單顯示文字，不會被送進實際生成的咒語）。
+- **驗證**：`check-static.mjs`／`audit-100x.mjs`（1000 次模擬 0 issue）／
+  52 項 jsdom 實測全部重跑確認沒有破壞既有生成邏輯，改動範圍精準
+  對應 owner 確認要修的 5 處，沒有動到其他材質或服裝內容。
+
