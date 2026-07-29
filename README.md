@@ -26,7 +26,7 @@ v4.3 之後陸續完成（詳見開發日誌）：
 ## 專案定位
 
 - `index.html` 是入口與工具導覽頁。
-- 七個工具頁（見下方「正式頁面」）各自包含 UI、選項資料與咒語組裝邏輯。
+- 九個工具頁（見下方「正式頁面」）各自包含 UI、選項資料與咒語組裝邏輯。
 - `assets/core-prompt.js` 集中管理 v4.3 共用身份鎖定、臉部幾何、真人骨架、鏡頭重建、光線一致、膚質、負面詞與輸出品質規則。
 - `scripts/` 底下有四個驗證腳本，見下方「上架前檢查」。
 - `docs/` 保存規格、流程、核心 prompt 契約與工程說明。
@@ -42,6 +42,8 @@ v4.3 之後陸續完成（詳見開發日誌）：
 - `fantasy-fashion.html` - 幻想廣告咒語產生器
 - `xianxia.html` - 中式仙俠咒語產生器
 - `anime-character.html` - 動漫人物美圖咒語產生器
+- `flower-fairy.html` - 花仙子咒語產生器
+- `isekai-fantasy.html` - 日式異世界咒語產生器
 - `store-ad.html` - 店家活動廣告產生器
 
 ## 建議資料夾分工
@@ -55,6 +57,8 @@ v4.3 之後陸續完成（詳見開發日誌）：
 ├─ fantasy-fashion.html        # 工具頁: 幻想廣告
 ├─ xianxia.html                # 工具頁: 中式仙俠
 ├─ anime-character.html        # 工具頁: 動漫人物美圖
+├─ flower-fairy.html           # 工具頁: 花仙子
+├─ isekai-fantasy.html         # 工具頁: 日式異世界
 ├─ store-ad.html               # 工具頁: 店家廣告
 ├─ assets/                     # 正式靜態資源與 core-prompt.js
 ├─ docs/                       # 規格與維護文件

@@ -13,6 +13,8 @@ const htmlFiles = [
   'fantasy-fashion.html',
   'xianxia.html',
   'anime-character.html',
+  'flower-fairy.html',
+  'isekai-fantasy.html',
   'store-ad.html',
 ];
 const requiredDirs = ['docs', 'assets'];

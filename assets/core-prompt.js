@@ -201,6 +201,23 @@ They must not change the person's facial structure, identity, age impression or 
     output: CORE_OUTPUT_QUALITY
   };
 
+  const isekaiCore = {
+    identityGuard: [
+      CORE_IDENTITY_LOCK,
+      CORE_FACE_GEOMETRY_LOCK,
+      `Style Scope Rule:
+Commercial style, Japanese isekai/JRPG costume design and art direction only affect clothing, ornaments, background, lighting, composition, mood and surface texture.
+They must not change the person's facial structure, identity, age impression or recognizable features.
+This is a photorealistic photography campaign, not an anime/illustration conversion — render skin, face and body with realistic photographic detail, not cel-shaded or illustrated medium.`
+    ].join("\n\n"),
+    anatomyGuard: humanCore,
+    illustrationSkeleton: illustrationHumanCore,
+    poseGuard: CORE_POSE_NATURALITY,
+    lightingGuard: CORE_LIGHTING_UNIFICATION,
+    negativePrompt: CORE_NEGATIVE_PROMPT,
+    output: CORE_OUTPUT_QUALITY
+  };
+
   const CORE_ANIME_IDENTITY_PRESERVATION = `【動漫化身份保留系統】
 
 Anime style affects rendering technique only — line art, cel shading, color palette and visual medium; it must not redesign or replace the person's identity.
@@ -218,6 +235,22 @@ The character must remain recognizable as the same person even after anime styli
       CORE_ANIME_IDENTITY_PRESERVATION
     ].join("\n\n"),
     anatomyGuard: illustrationHumanCore,
+    poseGuard: CORE_POSE_NATURALITY,
+    lightingGuard: CORE_LIGHTING_UNIFICATION,
+    negativePrompt: CORE_NEGATIVE_PROMPT,
+    output: CORE_OUTPUT_QUALITY
+  };
+
+  const flowerFairyCore = {
+    identityGuard: [
+      CORE_IDENTITY_LOCK,
+      CORE_FACE_GEOMETRY_LOCK,
+      `Style Scope Rule:
+Commercial style, floral material and art direction only affect clothing, ornaments, background, lighting, composition, mood and surface texture.
+They must not change the person's facial structure, identity, age impression or recognizable features.`
+    ].join("\n\n"),
+    anatomyGuard: humanCore,
+    illustrationSkeleton: illustrationHumanCore,
     poseGuard: CORE_POSE_NATURALITY,
     lightingGuard: CORE_LIGHTING_UNIFICATION,
     negativePrompt: CORE_NEGATIVE_PROMPT,
@@ -269,6 +302,8 @@ Even in doll style, the character must remain recognizable as the uploaded perso
       fantasy: fantasyCore,
       xianxia: xianxiaCore,
       anime: animeCore,
+      flowerFairy: flowerFairyCore,
+      isekai: isekaiCore,
       doll: dollCore,
       storeAd: storeAdCore
     }

@@ -394,6 +394,135 @@ function generateAnime(core, data) {
   return prompt.filter(Boolean).join('\n');
 }
 
+function generateFlowerFairy(core, data) {
+  const selection = {
+    bodyShape: 'original',
+    material: 'crimsonRosePetals',
+    garment: 'roseCrimsonGown',
+    background: 'roseGardenTwilight',
+    lighting: 'soft',
+    composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
+    framing: 'threeQuarter',
+    intensity: 'balanced material effects, elegant and luxurious',
+    pose: 'hold_flower',
+    style: 'luxury',
+    camera: 'eyeLevelCover',
+    ratio: 'vertical45',
+    wings: 'sheerFairyWings',
+    butterflies: 'fewButterflies',
+    customMaterial: '',
+    customGarment: '',
+    colorNote: '',
+    extraNote: '',
+  };
+  const material = data.materialData[selection.material];
+  const materialText = material.prompt;
+  const materialPalette = material.palette;
+  const garmentText = data.garmentData[selection.garment];
+  const background = data.backgroundData[selection.background];
+  const lighting = data.lightingData[selection.lighting];
+  const bodyShape = data.BODY_SHAPES[selection.bodyShape];
+  const framing = data.framingData[selection.framing];
+  const poseText = data.poseData[selection.pose];
+  const wingsText = data.wingsData[selection.wings];
+  const butterfliesText = data.butterfliesData[selection.butterflies];
+  const prompt = [
+    data.identityGuard + ',',
+    'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
+    data.anatomyGuard + ',',
+    data.poseNaturalityGuard + ',',
+    bodyShape + ',',
+    data.lightingConsistencyGuard + ',',
+    data.colorTemperatureGuard + ',',
+    data.subjectIntegrationGuard + ',',
+    data.faceFillGuard + ',',
+    selection.composition + ',',
+    data.compositionGuard + ',',
+    'appearance form: ' + garmentText + ',',
+    'theme material and art system: ' + materialText + ',',
+    'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',
+    wingsText ? wingsText + ',' : '',
+    butterfliesText ? butterfliesText + ',' : '',
+    (wingsText || butterfliesText) ? 'wings and butterflies stay clear of the face at all times, never overlapping or obscuring facial identity,' : '',
+    selection.intensity + ',',
+    'selected material appears as controlled clothing details, ornaments, particles and background accents without overpowering facial identity,',
+    data.styleData[selection.style] + ',',
+    poseText ? poseText + ',' : '',
+    framing + ',',
+    data.cameraData[selection.camera] + ',',
+    'lighting design: ' + lighting + ',',
+    'background design: ' + background + ',',
+    data.ratioData[selection.ratio] + ',',
+    core.page.flowerFairy.output ? core.page.flowerFairy.output + ',' : '',
+    'hyper realistic, ultra detailed, premium advertising finish,',
+    'color palette: ' + materialPalette + ',',
+    core.page.flowerFairy.negativePrompt ? core.page.flowerFairy.negativePrompt + ',' : '',
+    'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face',
+  ];
+  return prompt.filter(Boolean).join('\n');
+}
+
+function generateIsekai(core, data) {
+  const selection = {
+    bodyShape: 'original',
+    material: 'holyRadianceAura',
+    garment: 'heroTravelerTunic',
+    background: 'fantasyMarketStreet',
+    lighting: 'soft',
+    composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
+    framing: 'threeQuarter',
+    intensity: 'balanced material effects, elegant and luxurious',
+    pose: 'sword_sheathe_calm',
+    style: 'lightNovelAd',
+    camera: 'eyeLevelCover',
+    ratio: 'vertical45',
+    customMaterial: '',
+    customGarment: '',
+    colorNote: '',
+    extraNote: '',
+  };
+  const material = data.materialData[selection.material];
+  const materialText = material.prompt;
+  const materialPalette = material.palette;
+  const garmentText = data.garmentData[selection.garment];
+  const background = data.backgroundData[selection.background];
+  const lighting = data.lightingData[selection.lighting];
+  const bodyShape = data.BODY_SHAPES[selection.bodyShape];
+  const framing = data.framingData[selection.framing];
+  const poseText = data.poseData[selection.pose];
+  const prompt = [
+    data.identityGuard + ',',
+    'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
+    data.anatomyGuard + ',',
+    data.poseNaturalityGuard + ',',
+    bodyShape + ',',
+    data.lightingConsistencyGuard + ',',
+    data.colorTemperatureGuard + ',',
+    data.subjectIntegrationGuard + ',',
+    data.faceFillGuard + ',',
+    selection.composition + ',',
+    data.compositionGuard + ',',
+    'appearance form: ' + garmentText + ',',
+    'theme material and art system: ' + materialText + ',',
+    'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',
+    selection.intensity + ',',
+    'selected material appears as controlled clothing details, ornaments, particles and background accents without overpowering facial identity,',
+    data.styleData[selection.style] + ',',
+    poseText ? poseText + ',' : '',
+    framing + ',',
+    data.cameraData[selection.camera] + ',',
+    'lighting design: ' + lighting + ',',
+    'background design: ' + background + ',',
+    data.ratioData[selection.ratio] + ',',
+    core.page.isekai.output ? core.page.isekai.output + ',' : '',
+    'hyper realistic, ultra detailed, premium advertising finish,',
+    'color palette: ' + materialPalette + ',',
+    core.page.isekai.negativePrompt ? core.page.isekai.negativePrompt + ',' : '',
+    'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face',
+  ];
+  return prompt.filter(Boolean).join('\n');
+}
+
 function loadRevision(label, sourceReader) {
   const coreSource = sourceReader('assets/core-prompt.js');
   const core = evalCore(coreSource);
@@ -460,6 +589,38 @@ function loadRevision(label, sourceReader) {
       exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedAnimeCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
     });
     prompts['anime-default.txt'] = generateAnime(core, animeData);
+  } catch (err) {
+    // Not present in this revision — skip.
+  }
+
+  // flower-fairy.html is new; older revisions may not have it yet, so skip gracefully.
+  try {
+    const flowerFairySource = sourceReader('flower-fairy.html');
+    const flowerFairyData = evalDataSegment({
+      source: flowerFairySource,
+      core,
+      page: 'flowerFairy',
+      startMarker: 'const materialData = {',
+      endMarker: 'function setRadioValue',
+      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, wingsData, butterfliesData, sharedFlowerFairyCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
+    });
+    prompts['flowerfairy-default.txt'] = generateFlowerFairy(core, flowerFairyData);
+  } catch (err) {
+    // Not present in this revision — skip.
+  }
+
+  // isekai-fantasy.html is new; older revisions may not have it yet, so skip gracefully.
+  try {
+    const isekaiSource = sourceReader('isekai-fantasy.html');
+    const isekaiData = evalDataSegment({
+      source: isekaiSource,
+      core,
+      page: 'isekai',
+      startMarker: 'const materialData = {',
+      endMarker: 'function setRadioValue',
+      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedIsekaiCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
+    });
+    prompts['isekai-default.txt'] = generateIsekai(core, isekaiData);
   } catch (err) {
     // Not present in this revision — skip.
   }

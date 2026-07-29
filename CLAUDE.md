@@ -20,7 +20,7 @@
 
 ### 現況摘要（2026-07-22）
 
-- 七個工具頁（travel / magazine / doll / fantasy-fashion / xianxia / anime-character / store-ad）
+- 九個工具頁（travel / magazine / doll / fantasy-fashion / xianxia / anime-character / flower-fairy / isekai-fantasy / store-ad）
   皆已上線，正式站 <https://gxben0117-collab.github.io/hongbing-photo-engine/>。
   **`anime-hero.html`（動漫電影變身夥伴咒語產生器）已於 2026-07-24 整頁下架**：
   owner 對這系列不滿意，且該頁架構已疊到 10 層 monkey-patch 式的
@@ -190,9 +190,62 @@
   支援。jsdom 63 項實測（含每個模板都驗證輸出含
   「動漫化身份保留系統」標記字串）全過，`audit-100x` 700 次模擬（7頁
   ×100）0 issue。
+- **新增 `flower-fairy.html`（花仙子）與 `isekai-fantasy.html`（日式異世界）**
+  （2026-07-29）：owner 貼了一份 ChatGPT 產出的擴充規格書，先分析哪些
+  假設跟本專案實際架構對不上（規格書提到的「localStorage 狀態保存」
+  「圖片生成 API」不存在——這是純文字咒語產生器；「某項鎖定其餘隨機」
+  這個機制**現有系統完全沒有**，`applyFantasyRandomSelection` 系列函式
+  是全欄位無條件重抽，沒有 lock/pin 單一欄位的邏輯），owner 確認兩點：
+  (1) 用「一鍵模板」機制取代鎖定/隨機聯動即可，不用另開發鎖定功能；
+  (2) 鏤空服裝當成服裝選項本身（例如「水晶鏤空禮服」），不做鏤空強度
+  滑桿。兩頁都採「方案A：獨立完整新頁，比照 fantasy-fashion.html 全套
+  規格」，複製 fantasy-fashion.html 當底。
+  - **flower-fairy.html**：11 種花卉（玫瑰/百合/蓮花/紫薇/櫻花/牡丹/
+    紫藤/蘭花/山茶花/繡球花/薰衣草）。04 服裝（30項/6組：花瓣禮服基礎、
+    花冠飾品套裝、透紗羽翼花裙、藤蔓纏繞服、水晶花瓣鏤空禮服〔鏤空服裝
+    放在這裡〕、花卉主題訂製禮服）、05 材質（30項/6組，依花卉家族分組）、
+    09 背景（30項/6組，依花卉場景分組）、00 一鍵模板（16組，每種花卉至少
+    一組）皆全新替換；**06 姿勢刻意不整組替換**，沿用 fantasy 原本 74 個
+    姿勢池，只新增 5 個花仙子專屬姿勢（持花瓣風暴旋轉、仙境跪拜、蝴蝶
+    停手、花冠輕整、花瓣接取）——這是跟仙俠/動漫兩頁不同的做法，因為
+    ChatGPT 規格書明確要求「沿用現有姿勢系統，只加真正需要的新增」。
+    另外新增全站沒有過的「05b 翅膀與蝴蝶」全新維度（7種翅膀＋4種蝴蝶
+    密度），選了任一項會在生成的咒語裡自動加一句「wings and butterflies
+    stay clear of the face at all times」防止翅膀蝴蝶蓋住臉。
+    `core-prompt.js` 新增 `flowerFairyCore`（結構比照 `xianxiaCore`：
+    identityGuard 含 Style Scope Rule、anatomyGuard 用寫實 `humanCore`），
+    註冊到 `window.HB_CORE_PROMPT.page.flowerFairy`。
+  - **isekai-fantasy.html**：16 個角色陣營（光明中立8＋獸族3＋暗黑陣營5：
+    勇者/女劍士/魔法使/聖女/精靈/異世界貴族/公主/女王/獸娘/狐娘/貓娘/
+    暗黑魔法使/魔女/魅魔/魔族貴族/魔王），00 一鍵模板剛好 16 組、每個
+    陣營一組。04 服裝（30項/6組，按陣營分組）、05 材質（30項/6組：聖光
+    治癒/元素魔法/暗黑魔法/皇室珠寶/森林自然/獸族靈力）、09 背景（30項/
+    6組：王城宮廷/異世界城鎮/森林精靈秘境/魔法學院遺跡/魔界暗黑領域/
+    戰場冒險場景）皆全新替換；**06 姿勢同樣用「延伸不整組替換」做法**，
+    沿用 fantasy 姿勢池（本來就有 sword_draw_pose/spell_casting/
+    throne_cross_leg/beast_mount_look 等可直接用的姿勢），只新增 6 個
+    isekai 專屬姿勢（持杖引導魔力、王座統禦、獸耳蜷坐、收劍佇立、魔法陣
+    召喚跪姿、斗篷迎風前行）。**這頁刻意走寫實骨架而非插畫**（跟
+    anime-character.html 的關鍵差異）：`core-prompt.js` 新增 `isekaiCore`，
+    identityGuard 的 Style Scope Rule 額外加一句「This is a photorealistic
+    photography campaign, not an anime/illustration conversion」明確排除
+    插畫化，`anatomyGuard` 用寫實 `humanCore`；服裝/姿勢命名刻意跟
+    anime-character.html 的動漫插畫語彙錯開，避免兩頁選項字面重複。
+  - 兩頁都拿掉了 fantasy-fashion.html 原本的 illustration-material 條件
+    判斷（`isIllustrationMaterial`/`resolvedAnatomyGuard`），因為兩頁的
+    材質庫都不含插畫媒材，直接固定用寫實 `anatomyGuard`（比照
+    anime-character.html 拿掉判斷邏輯的做法，只是兩頁固定的方向相反：
+    anime 固定插畫、這兩頁固定寫實）。
+  - 全站 nav（9 頁互相連結）、index.html 首頁卡片（花仙子玫瑰粉
+    `#E8759A`、日式異世界靛藍 `#7C9EFF`，兩色都未使用過）、四支驗證腳本
+    都同步加入支援。jsdom 實測 flower-fairy 49 項（含翅膀/蝴蝶不蓋臉的
+    guard 邏輯測試）、isekai-fantasy 45 項全過；`audit-100x` 900 次模擬
+    （9頁×100）0 issue；`build-prompt-preview` 核心區塊長度 delta 全部
+    為 0，確認沒有動到任何既有頁面的共用核心。
 - **共用核心**：`assets/core-prompt.js` 集中管理身份鎖定等保護區塊；核心文字經過
   兩輪瘦身（5,162 → 4,099 字元），語意零遺漏。
-- **全部 7 個工具頁的生成互動已完全統一**（2026-07-27）：手動按「生成」才
+- **全部 9 個工具頁的生成互動已完全統一**（2026-07-27；花仙子/日式異世界
+  複製 fantasy-fashion.html 建立時直接繼承這套機制，不需額外處理）：手動按「生成」才
   顯示輸出、stale 保護（改選項後輸出區標記過期＋複製鈕鎖住，需重新生成
   才解除）。`doll.html` 補上 stale 徽章＋額外攔截 `.chip`/`.auto-card` 點擊
   （因為它的選項是純 click 切換 class，沒有底層 `<input>` 事件）；

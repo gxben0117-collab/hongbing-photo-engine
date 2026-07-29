@@ -1473,3 +1473,100 @@
   `Curvy Narrow-Waist Adult Female Silhouette` 字串，且身份鎖定系統
   區塊依然完整——全部通過。
 
+## 2026-07-29（十五）　新增 flower-fairy.html（花仙子）與 isekai-fantasy.html（日式異世界）
+
+- owner 提出想比照仙俠/動漫再擴充「花仙子」「日式異世界冒險 cos 角色」，
+  並貼了一份自己問 ChatGPT 產出的擴充規格書（要求沿用鎖臉三件套、身形/
+  姿勢/鏡頭/光線/比例等模組、不重做核心、複製既有頁面當底）。逐項分析
+  這份規格書後回報 owner 三個跟本專案實際狀況對不上的地方：(1) 規格書
+  提到的「localStorage 狀態保存」「圖片生成 API」不存在——這是純文字
+  咒語產生器；(2)「某項鎖定，其餘隨機」這個機制目前系統完全沒有，
+  `applyFantasyRandomSelection` 系列函式是全欄位無條件重抽，沒有 lock/
+  pin 單一欄位的邏輯，若要做是全新工程；(3)「鏤空/服裝強度」沒有獨立
+  參數化模組，只有零星帶鏤空描述的服裝選項。owner 確認：(1) 用「一鍵
+  模板」機制取代鎖定聯動即可，不用開發鎖定功能；(2) 鏤空當服裝選項本身
+  處理，不做強度滑桿。
+- 兩頁都採「方案A：獨立完整新頁，比照 fantasy-fashion.html 全套規格」，
+  `cp fantasy-fashion.html flower-fairy.html` / `cp fantasy-fashion.html
+  isekai-fantasy.html` 建置。
+- **flower-fairy.html**：
+  - **00 一鍵花仙子模板**：16 組，涵蓋 11 種花卉（玫瑰、百合、蓮花、
+    紫薇、櫻花、牡丹、紫藤、蘭花、山茶花、繡球花、薰衣草）加月光花園
+    守護者、蝴蝶花園幻想、晨露水晶花仙子、金粉日出花仙子、落英隨風之舞
+    等混合主題。
+  - **04 服裝**：30 項/6 組（花瓣禮服基礎、花冠飾品套裝、透紗羽翼花裙、
+    藤蔓纏繞服、水晶花瓣鏤空禮服、花卉主題訂製禮服）——鏤空服裝依照
+    owner 決定放在「水晶花瓣鏤空禮服」這組裡，是服裝選項本身，不是額外
+    強度參數。
+  - **05 材質**：30 項/6 組，依花卉家族分組（玫瑰系、百合蓮花系、紫薇
+    紫藤系、花粉光影系、山茶繡球系、蝴蝶粒子系）。過程中發現最初設計
+    漏掉了櫻花與牡丹兩種花卉的專屬材質/背景（只顧到 9/11 種），回頭把
+    「花粉光影系材質」組裡兩個較泛用的填充項目（風吹花瓣軌跡、螢火花園
+    閃光）換成專屬的「櫻花花瓣飄落」「牡丹金紅盛放」，背景也同樣置換
+    兩項補齊「櫻花大道」「牡丹御花園」，確保 11 種花卉都有實際對應內容
+    而不是只掛名在一鍵模板裡。
+  - **06 姿勢**：**刻意不整組替換**，沿用 fantasy-fashion.html 原本
+    74 個姿勢池（其中 `hold_flower`、`wide_wing_spread`、
+    `floating_ascension` 等本來就適合花仙子），只新增 5 個花仙子專屬
+    姿勢（花瓣風暴旋轉、仙境跪拜祈禱、蝴蝶停手、花冠輕整、花瓣接取
+    伸手）。這是跟仙俠/動漫兩頁「姿勢整組替換」不同的做法，直接對應
+    ChatGPT 規格書「沿用現有姿勢系統，只加真正需要的新增」的要求。
+  - **09 背景**：30 項/6 組，依花卉場景分組（玫瑰園、百合蓮花水景、
+    紫薇紫藤迴廊、山茶繡球庭院、夢幻仙境場景、抽象花境特效背景）。
+  - **新增全站沒有過的「05b 翅膀與蝴蝶」全新維度**：7 種翅膀（無/透明
+    精靈翼/水晶翼/蝴蝶翼/花瓣翼/光翼/虹彩翼）＋4 種蝴蝶密度（無/少量/
+    中量/大量）。這是規格書要求但既有架構完全沒有的新欄位，用
+    `wingsData`/`butterfliesData` 兩個新 JS 物件實作，選了任一項會在
+    生成的咒語裡自動加一句「wings and butterflies stay clear of the
+    face at all times, never overlapping or obscuring facial identity」
+    防止翅膀蝴蝶蓋住臉。
+  - `core-prompt.js` 新增 `flowerFairyCore`（結構比照 `xianxiaCore`：
+    identityGuard 含 Style Scope Rule、`anatomyGuard` 用寫實
+    `humanCore`），拿掉了 fantasy 原本的 illustration-material 條件
+    判斷（材質庫不含插畫媒材，直接固定寫實骨架），註冊到
+    `window.HB_CORE_PROMPT.page.flowerFairy`。
+- **isekai-fantasy.html**：
+  - **角色三大陣營共 16 個**：光明中立 8（勇者/女劍士/魔法使/聖女/精靈/
+    異世界貴族/公主/女王）、獸族 3（獸娘/狐娘/貓娘——只加獸耳尾巴不換
+    五官）、暗黑陣營 5（暗黑魔法使/魔女/魅魔/魔族貴族/魔王），**00 一鍵
+    模板剛好 16 組、每個陣營一組**。
+  - **04 服裝**：30 項/6 組，按陣營分組（勇者劍士系、魔法使聖女系、
+    異世界貴族與皇室、精靈與森林種族、獸族裝束、暗黑陣營裝束）——鏤空
+    服裝（魔族貴族鏤空禮服、魅魔蕾絲禮服）同樣是服裝選項本身。
+  - **05 材質**：30 項/6 組（聖光治癒系、元素魔法系、暗黑魔法系、皇室
+    珠寶系、森林自然系、獸族靈力系）。
+  - **06 姿勢**：跟花仙子一樣「延伸不整組替換」，沿用 fantasy 姿勢池
+    （本來就有 `sword_draw_pose`／`spell_casting`／`throne_cross_leg`／
+    `beast_mount_look` 等現成可用姿勢），只新增 6 個 isekai 專屬姿勢
+    （持杖引導魔力、王座統禦、獸耳蜷坐、收劍佇立、魔法陣召喚跪姿、斗篷
+    迎風前行）。
+  - **09 背景**：30 項/6 組（王城與宮廷、異世界城鎮、森林與精靈秘境、
+    魔法學院與遺跡、魔界與暗黑領域、戰場與冒險場景）。
+  - **這頁刻意走寫實骨架而非插畫**——跟 anime-character.html 的關鍵
+    差異：`core-prompt.js` 新增 `isekaiCore`，identityGuard 的 Style
+    Scope Rule 額外加一句「This is a photorealistic photography
+    campaign, not an anime/illustration conversion — render skin, face
+    and body with realistic photographic detail, not cel-shaded or
+    illustrated medium」明確排除插畫化，`anatomyGuard` 用寫實
+    `humanCore`；服裝/姿勢命名刻意跟 anime-character.html 的動漫插畫
+    語彙錯開（例如不叫 magicalGirlOutfit），避免兩頁選項字面重複，
+    註冊到 `window.HB_CORE_PROMPT.page.isekai`。
+  - 同樣拿掉了 illustration-material 條件判斷，直接固定寫實
+    `anatomyGuard`（跟 flower-fairy 做法一致，材質庫都不含插畫媒材）。
+- **全站接線**：travel/magazine/doll/fantasy-fashion/xianxia/
+  anime-character/store-ad 七頁的 nav 都加上「花仙子」「日式異世界」
+  連結；`index.html` 首頁在動漫卡片後面新增兩張卡片，強調色選用未使用過
+  的玫瑰粉 `#E8759A`（花仙子）與靛藍 `#7C9EFF`（日式異世界）。
+- **驗證腳本同步**：`check-static.mjs`／`validate-preset-refs.mjs`
+  （新增兩頁的 themeTemplates 檢查，16+16 組全部 0 issue；flower-fairy
+  的 fieldLive 額外加了 `wings`/`butterflies` 兩個欄位）／`audit-100x.mjs`
+  （新增 FLOWER FAIRY／ISEKAI 兩個模擬區塊，總模擬數 700→900，全部 0
+  issue）／`build-prompt-preview.mjs`（新增 `generateFlowerFairy()`／
+  `generateIsekai()`，`loadRevision()` 對兩個新檔案的讀取都包
+  try/catch，base revision 還沒有這兩個檔案時優雅跳過；核心區塊長度
+  report 顯示 delta 全部為 0，確認沒有動到任何既有頁面的共用核心）。
+- **驗證**：flower-fairy.html 49 項 jsdom 實測（含翅膀/蝴蝶不蓋臉的
+  guard 邏輯專屬測試：選翅膀或蝴蝶會出現防蓋臉句子，兩者都不選則不會
+  出現）、isekai-fantasy.html 45 項 jsdom 實測（含輸出確認寫實/非插畫
+  澄清句正確出現）全部通過；`audit-100x` 900 次模擬（9頁×100）0 issue。
+
