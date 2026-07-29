@@ -274,6 +274,19 @@
   .output-wrap.stale .output-stale-badge{ display:block; }
   .output-wrap.stale textarea{ opacity:.45; }
   .output-wrap.stale .copy-btn{ opacity:.4; pointer-events:none; cursor:not-allowed; }
+  .safety-adjust-notice{
+    display:none;
+    margin-bottom:10px;
+    padding:10px 14px;
+    background:rgba(112,158,214,.12);
+    border:1px solid #6FA0D6;
+    border-radius:8px;
+    color:#9DC0EA;
+    font-size:12px;
+    line-height:1.6;
+    text-align:center;
+  }
+  .safety-adjust-notice.visible{ display:block; }
   .output-wrap{
     margin-top:28px;
   }
@@ -864,6 +877,7 @@
     <p class="hint">建議搭配真人參考照使用，並在生圖模型中開啟身份/臉部參考。</p>
     <div class="output-wrap hidden" id="outputWrap">
       <div class="output-stale-badge">選項已變更，請重新按「生成完整咒語」</div>
+      <div class="safety-adjust-notice" id="safetyAdjustNotice"></div>
       <textarea id="outputText" readonly></textarea>
       <button class="copy-btn" id="copyBtn">一鍵複製</button>
     </div>
@@ -1219,6 +1233,70 @@ const SWIMWEAR_GARMENT_KEYS = new Set([
   'laceUpBikiniSet',
   'shellDetailSwimwear'
 ]);
+
+// ===== Prompt Compatibility System =====
+// No single value here is unsafe on its own — swimwear, water activities and
+// wet-skin material are all normal for this page. The risk is stacking several
+// body/skin-emphasis signals in the same generation at once. This system counts
+// how many risk signals are present in the CURRENT combination and, only past a
+// threshold, de-stacks it — never by banning a word, always by adjusting the
+// least deliberate, most swappable knobs first.
+const WET_SKIN_MATERIAL_KEYS = new Set([
+  'wetSkinGlow',
+  'freshWaterDroplets',
+  'waterDripTrail',
+  'saltAirGlowSkin',
+  'coconutOilShimmer'
+]);
+const BODY_EMPHASIS_SHAPE_KEYS = new Set(['curvy_waist', 'korean_idol']);
+const EXPLOSIVE_INTENSITY_TEXT = 'massive explosive material splash, high speed frozen motion';
+const BALANCED_INTENSITY_TEXT = 'balanced material effects, elegant and luxurious';
+const SAFETY_RISK_THRESHOLD = 3;
+const SAFETY_FALLBACK_CAMERA = 'eyeLevelCover';
+const SAFETY_FALLBACK_MATERIAL = 'goldenSunFlare';
+const SAFETY_MODERATING_PHRASE = 'balanced commercial travel editorial composition, natural candid moment, understated and tasteful framing';
+
+// Reads the current combination and returns which of the swappable knobs (camera,
+// material, intensity) would need to change to bring the stacked risk count below
+// threshold. Garment, body shape and theme are never included in `conflicts` —
+// they are the user's primary creative choice and are always preserved as-is.
+function validatePromptCombination(sel){
+  const factors = {
+    swimwear: !!sel.isSwimwearGarment,
+    bodyEmphasis: !sel.isCustomBodyShape && BODY_EMPHASIS_SHAPE_KEYS.has(sel.bodyShapeKey),
+    lowAngle: sel.cameraKey === 'lowAngleHero',
+    wetSkinMaterial: !sel.isCustomMaterial && WET_SKIN_MATERIAL_KEYS.has(sel.materialKey),
+    explosiveIntensity: sel.intensityText === EXPLOSIVE_INTENSITY_TEXT
+  };
+  const rawRiskCount = Object.values(factors).filter(Boolean).length;
+  const conflicts = [];
+  const replacements = {};
+  let remaining = rawRiskCount;
+
+  // These replacements are a SUGGESTION for callers that want to auto-correct
+  // (random selection uses them). They never get applied here, and manual
+  // generation ignores them entirely — it only reads `rawRiskCount` below to
+  // decide whether to append a moderating phrase, without touching any field.
+  if(remaining >= SAFETY_RISK_THRESHOLD){
+    if(factors.lowAngle){
+      conflicts.push('camera');
+      replacements.camera = SAFETY_FALLBACK_CAMERA;
+      remaining -= 1;
+    }
+    if(remaining >= SAFETY_RISK_THRESHOLD && factors.wetSkinMaterial){
+      conflicts.push('material');
+      replacements.material = SAFETY_FALLBACK_MATERIAL;
+      remaining -= 1;
+    }
+    if(remaining >= SAFETY_RISK_THRESHOLD && factors.explosiveIntensity){
+      conflicts.push('intensity');
+      replacements.intensity = BALANCED_INTENSITY_TEXT;
+      remaining -= 1;
+    }
+  }
+
+  return { valid: rawRiskCount < SAFETY_RISK_THRESHOLD, rawRiskCount, conflicts, replacements };
+}
 
 const anatomyGuard = sharedSummerIslandCore.anatomyGuard || `Realistic Human Anatomy System:
 Realistic adult female anatomy, natural shoulder width, natural neck length, natural torso depth, natural limb proportions.
@@ -1580,8 +1658,30 @@ function applyIslandRandomSelection(){
   ['customGarment','customMaterial','customBackground','customPose','colorNote','extraNote'].forEach(id => {
     document.getElementById(id).value = '';
   });
+
+  // Random draws never touch bodyShape, so isCustomBodyShape is always false here.
+  const check = validatePromptCombination({
+    isSwimwearGarment: SWIMWEAR_GARMENT_KEYS.has(selected('garment')),
+    isCustomBodyShape: false,
+    bodyShapeKey: selected('bodyShape'),
+    cameraKey: selected('camera'),
+    isCustomMaterial: false,
+    materialKey: selected('material'),
+    intensityText: document.getElementById('intensity').value
+  });
+  if(check.replacements.camera) setRadioValue('camera', check.replacements.camera);
+  if(check.replacements.material) setRadioValue('material', check.replacements.material);
+  if(check.replacements.intensity) document.getElementById('intensity').value = check.replacements.intensity;
+
   refreshCards();
-  generate({reveal:true});
+  const swappedLabels = { camera: '鏡頭角度', material: '材質效果', intensity: '材質強度' };
+  const swappedText = check.conflicts.map(key => swappedLabels[key]).join('、');
+  generate({
+    reveal: true,
+    safetyNote: check.conflicts.length
+      ? `隨機套用偵測到多項風格條件疊加，已自動重抽「${swappedText}」以維持穩定生成（服裝與主題維持原抽選結果）。`
+      : ''
+  });
 }
 
 let islandOutputVisible = false;
@@ -1623,11 +1723,29 @@ function generate(options = {}){
   const poseText = customPose
     ? `custom pose only: ${customPose}; do not include or blend any preset pose`
     : poseData[selected('pose')];
+
+  // Manual generation never overwrites what the user actually picked — the
+  // compatibility check here only decides whether to append a neutral
+  // moderating phrase. applyIslandRandomSelection() already de-stacks risky
+  // AUTO-picked combinations before it ever calls this function, so this branch
+  // mainly matters for combinations the user assembled by hand.
+  const combinationCheck = validatePromptCombination({
+    isSwimwearGarment,
+    isCustomBodyShape: false,
+    bodyShapeKey: selected('bodyShape'),
+    cameraKey: selected('camera'),
+    isCustomMaterial: customMaterials.length > 0,
+    materialKey,
+    intensityText: intensity
+  });
+  const needsModeration = !combinationCheck.valid;
+
   const prompt = [
     identityGuard + ',',
     'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
     photographyDirection + ',',
     isSwimwearGarment ? swimwearDirection + ',' : '',
+    needsModeration ? SAFETY_MODERATING_PHRASE + ',' : '',
     anatomyGuard + ',',
     poseNaturalityGuard + ',',
     bodyShape + ',',
@@ -1665,7 +1783,27 @@ function generate(options = {}){
     islandOutputVisible = true;
     outputWrap.classList.remove('hidden');
   }
+  if(options.safetyNote){
+    showSafetyNotice(options.safetyNote);
+  } else if(needsModeration){
+    showSafetyNotice('偵測到多項風格條件疊加，已在咒語中加入中性化的商業旅拍構圖語言（未變更您手動選擇的任何選項）。');
+  } else {
+    hideSafetyNotice();
+  }
   resetCopyButton();
+}
+
+function showSafetyNotice(message){
+  const notice = document.getElementById('safetyAdjustNotice');
+  if(!notice) return;
+  notice.textContent = message;
+  notice.classList.add('visible');
+}
+function hideSafetyNotice(){
+  const notice = document.getElementById('safetyAdjustNotice');
+  if(!notice) return;
+  notice.classList.remove('visible');
+  notice.textContent = '';
 }
 
 document.querySelectorAll('input[type="radio"]').forEach(input => {

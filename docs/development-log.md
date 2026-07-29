@@ -1718,3 +1718,77 @@
   出現、選非泳裝服裝時追加層不出現但固定層仍在、自填服裝文字寫
   「custom bikini」也不會觸發追加層——連同既有 52 項共 61 項全過。
 
+## 2026-07-29（十九）　summer-island.html 新增「Prompt Compatibility System」組合風險檢查層
+
+- owner 上傳實際程式碼給另一個 AI 分析，對方看完程式後修正了自己前一輪
+  的誤判（誤以為 `Korean Idol Stage Proportions` 是固定插入——查證後
+  確認**不是**，那只是 `BODY_SHAPES` 五選一裡使用者手動選或隨機抽到才會
+  出現的一個選項，本身沒有問題）。真正的問題定位在
+  `applyIslandRandomSelection()`：服裝/材質/背景/光線/構圖/框景/姿勢/
+  風格/鏡頭/比例是「每個欄位各自從完整選項池獨立隨機抽取」，沒有任何
+  「抽完之後檢查整體組合是否協調」的機制，所以可能抽出「泳裝 + 濕潤
+  肌膚材質 + 低角度仰拍 + 身形強調身材 + 強烈爆發材質」這種**單項都正常、
+  疊加後語意過度集中在身體呈現**的組合；而且這個問題不只發生在隨機
+  套用，手動逐一勾選同樣的組合也會踩到同一個坑，所以 Safety Layer 必須
+  放在 `generate()` 本身，不能只修 random 函式。
+- **設計原則**（owner 跟另一個 AI 討論後定案）：
+  1. **不建立單字黑名單**——泳裝、玩水、濕身效果、低角度都保留，判斷的
+     是「多項風格條件同時出現」而不是某個字本身。
+  2. **隨機模式跟手動模式待遇不同**：隨機抽到的衝突欄位（鏡頭/材質/
+     材質強度）可以直接被安全預設值取代，因為那些從來不是使用者刻意
+     選的；但**手動模式絕對不能偷偷改掉使用者自己勾選的選項**——如果
+     使用者手動組出高風險組合，維持他選的每一項，只在咒語裡另外加一句
+     中性化的「balanced commercial travel editorial composition」語言
+     去平衡整體語意，並在畫面上明確告知「未變更您手動選擇的任何選項」。
+  3. **服裝、身形、主題永遠不列入可替換清單**——這三項是使用者最核心的
+     創作決定，Safety Layer 只動最容易替換、最不影響主題的三個旋鈕：
+     鏡頭角度、材質效果、材質強度。
+- **實作**：新增 `validatePromptCombination(sel)` 函式，讀取
+  `isSwimwearGarment`／身形是否為 `curvy_waist`/`korean_idol`（新增
+  `BODY_EMPHASIS_SHAPE_KEYS`）／鏡頭是否為 `lowAngleHero`／材質是否為
+  濕潤肌膚系（新增 `WET_SKIN_MATERIAL_KEYS`，就是上次已經調整過用詞的
+  那 5 組材質）／材質強度是否為「強烈爆發」，5 個風險因子加總，
+  `SAFETY_RISK_THRESHOLD = 3`（達標才觸發，不是任何單一因子觸發）。
+  回傳 `{ valid, rawRiskCount, conflicts, replacements }`：`rawRiskCount`
+  是實際偵測到的風險因子數（給手動模式判斷要不要加中性語言用，絕對不
+  拿去覆寫任何欄位）；`conflicts`/`replacements` 是「如果要修正，建議
+  替換哪些欄位成什麼安全預設值」（鏡頭→`eyeLevelCover`、材質→
+  `goldenSunFlare`、強度→「平衡高級」文字），只給隨機模式使用。
+  - `applyIslandRandomSelection()`：抽完之後呼叫這個函式，把
+    `replacements` 直接套用到對應的 radio/select 上，再呼叫
+    `generate()`；並把「重抽了哪些欄位」組成通知文字傳給
+    `generate({safetyNote: ...})`。
+  - `generate()`：呼叫這個函式只讀 `rawRiskCount`，**完全不套用
+    replacements**——如果超標就在 prompt 陣列裡加一行
+    `SAFETY_MODERATING_PHRASE`（"balanced commercial travel editorial
+    composition, natural candid moment, understated and tasteful
+    framing"），使用者實際選的服裝/材質/鏡頭/身形文字全部原封不動送進
+    最終咒語。
+  - 新增 `#safetyAdjustNotice`（畫面上的提示區塊，不在複製出去的咒語
+    文字裡），依情境顯示「已自動重抽哪些欄位」（隨機模式）或「已加入
+    中性化語言，未變更您手動選擇的任何選項」（手動模式），沒有風險時
+    自動隱藏。
+- **修正一個實作過程中自己發現的邏輯 bug**：`validatePromptCombination`
+  第一版把「模擬套用 replacement 後遞減的風險數」跟「回傳給呼叫端的
+  風險數」用了同一個變數，導致手動模式永遠讀不到真正的原始風險數（因為
+  函式內部已經先「假裝修正過」再回傳）。改成分開回傳 `rawRiskCount`
+  （原始，給手動模式判斷用）跟 `remaining`（函式內部模擬用，不外流），
+  修正後才讓「手動高風險組合會加中性語言」這個分支真的能被觸發。
+- 未採用另一個 AI 額外提議的「Context Compatibility」（依姿勢分類自動
+  限制對應服裝類別，例如 SUP 只配運動泳裝、獨木舟只配機能水域服）——
+  評估後認為那是**畫面合理性/創意多樣性**的問題，跟這次真正要解決的
+  「風險因子疊加」是兩件不同的事；商業攝影本來就常出現「不完全符合
+  活動情境」的造型搭配（例如洋裝也可以站在 SUP 板上拍創意主視覺），
+  硬性限制反而會犧牲既有的隨機多樣性，屬於範圍外的功能擴充，這次先
+  不做，有需要再另外討論設計。
+- **驗證**：`check-static.mjs`／`validate-preset-refs.mjs`／
+  `audit-100x.mjs`（1000 次模擬 0 issue）／`build-prompt-preview.mjs`
+  都過，CSS 大括號配對確認平衡。另外寫一支全新的 926 項 jsdom 測試檔
+  （`test-summer-island-safety.mjs`）：`validatePromptCombination` 單元
+  測試（0/2/3/5 個風險因子的邊界行為、custom 欄位排除邏輯）、手動模式
+  高風險組合驗證「使用者選的鏡頭角度完全沒被改掉、只加了中性語言、
+  身份鎖定完整」、手動模式低風險組合驗證「不會平白加語言」、隨機模式
+  跑 300 次確認每次最終狀態都通過相容性檢查且不會產生空咒語、自填服裝
+  文字寫 bikini 不會誤觸發泳裝相關邏輯——全部通過；加上既有的 61 項
+  jsdom 測試，這頁目前累計驗證項目達 987 項。
+
