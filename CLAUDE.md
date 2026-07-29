@@ -20,7 +20,7 @@
 
 ### 現況摘要（2026-07-22）
 
-- 九個工具頁（travel / magazine / doll / fantasy-fashion / xianxia / anime-character / flower-fairy / isekai-fantasy / store-ad）
+- 十個工具頁（travel / magazine / doll / fantasy-fashion / xianxia / anime-character / flower-fairy / isekai-fantasy / summer-island / store-ad）
   皆已上線，正式站 <https://gxben0117-collab.github.io/hongbing-photo-engine/>。
   **`anime-hero.html`（動漫電影變身夥伴咒語產生器）已於 2026-07-24 整頁下架**：
   owner 對這系列不滿意，且該頁架構已疊到 10 層 monkey-patch 式的
@@ -242,10 +242,48 @@
     guard 邏輯測試）、isekai-fantasy 45 項全過；`audit-100x` 900 次模擬
     （9頁×100）0 issue；`build-prompt-preview` 核心區塊長度 delta 全部
     為 0，確認沒有動到任何既有頁面的共用核心。
+- **新增 `summer-island.html`（夏日海島）**（2026-07-29）：owner 想再加「夏日
+  沙灘」主題，先貼了 AI 產出的規格書，範圍定義為「沙灘 × 水上 × 淺水玩水」
+  四大場景模組（明確排除深潛/水下世界，留給未來獨立主題）。分析後回報
+  owner：規格書裡「禁止自拍構圖」是全新類型的限制，目前任何頁面核心都
+  沒有這種構圖禁令，需要另外寫負面約束——owner 確認**不需要**特別寫入，
+  略過這條。其餘規格書內容（隨機組合系統對應現有元素級獨立隨機、
+  Realistic Ocean Physics 只是給圖像模型看的 prompt 文字不是真的物理
+  系統）分析後確認可行，owner 同意方向後直接建置。也發現這次不是從零
+  開始——`travel.html` 本來就有沖繩/墾丁/冰島黑沙灘等零星海邊內容，但
+  規格書要的「四大模組系統化」份量跟開一個新主題頁差不多大，所以還是
+  走獨立完整新頁路線而非塞進 travel.html。
+  - 一樣「方案A：獨立完整新頁」，複製 `fantasy-fashion.html` 當底。
+  - **04 服裝**：30 項/6 組（基礎泳裝、度假罩衫外搭、海島度假洋裝、水上
+    活動機能服、沙灘配件奢華款、沙灘裙裝與濕身質感）。
+  - **05 材質改稱為「水感與陽光氛圍」**：30 項/6 組（水花水珠系、陽光
+    光斑系、海水色澤系、沙灘質感系、熱帶氛圍系、度假奢華系）——這裡的
+    「Realistic Ocean Physics／水面折射／濕潤效果」都只是這層的英文
+    prompt 文字，沒有額外工程。
+  - **06 姿勢：這次選擇整組替換，不是延伸**（跟花仙子/日式異世界的「延伸
+    既有姿勢池」做法不同）——因為規格書明確要求四大場景模組（沙灘/水上/
+    淺水/玩水）系統化分類，這跟 fantasy 原本的戲劇感高訂姿勢語彙差異
+    太大，直接整組替換成 30 個新姿勢，剛好對應四模組分 4 組（沙灘 8、
+    水上 7、淺水 7、玩水 8），例如淺水組系統化涵蓋腳踝/膝蓋/腰部/大腿
+    不同深度的自然行走轉身。
+  - **09 背景**：30 項/6 組（白沙海灘、礁石海岸、度假村碼頭、熱帶椰林、
+    日落海岸、清澈淺水灘）。
+  - **00 一鍵模板 16 組**，跨四大模組混合（例如 SUP 晨光滑行、淺水漫步、
+    玩水嬉戲瞬間、獨木舟探索滑行）。
+  - `core-prompt.js` 新增 `summerIslandCore`（結構比照 `xianxiaCore`：
+    identityGuard 含 Style Scope Rule、`anatomyGuard` 用寫實
+    `humanCore`），拿掉了 fantasy 原本的 illustration-material 條件判斷
+    （材質庫不含插畫媒材），註冊到 `window.HB_CORE_PROMPT.page.summerIsland`。
+  - 全站 nav（10 頁互相連結）、index.html 首頁卡片（強調色選用未使用過的
+    珊瑚橘 `#FF9466`）、四支驗證腳本都同步加入支援。jsdom 實測 52 項全過
+    （含四大模組各抽一個姿勢直接測試都能正常生成）；`audit-100x` 1000
+    次模擬（10頁×100）0 issue；`build-prompt-preview` 核心區塊長度 delta
+    全部為 0。
 - **共用核心**：`assets/core-prompt.js` 集中管理身份鎖定等保護區塊；核心文字經過
   兩輪瘦身（5,162 → 4,099 字元），語意零遺漏。
-- **全部 9 個工具頁的生成互動已完全統一**（2026-07-27；花仙子/日式異世界
-  複製 fantasy-fashion.html 建立時直接繼承這套機制，不需額外處理）：手動按「生成」才
+- **全部 10 個工具頁的生成互動已完全統一**（2026-07-27；花仙子/日式異世界/
+  夏日海島複製 fantasy-fashion.html 建立時直接繼承這套機制，不需額外處理）：
+  手動按「生成」才
   顯示輸出、stale 保護（改選項後輸出區標記過期＋複製鈕鎖住，需重新生成
   才解除）。`doll.html` 補上 stale 徽章＋額外攔截 `.chip`/`.auto-card` 點擊
   （因為它的選項是純 click 切換 class，沒有底層 `<input>` 事件）；

@@ -15,6 +15,7 @@ const htmlFiles = [
   'anime-character.html',
   'flower-fairy.html',
   'isekai-fantasy.html',
+  'summer-island.html',
   'store-ad.html',
 ];
 const requiredDirs = ['docs', 'assets'];

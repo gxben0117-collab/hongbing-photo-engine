@@ -1570,3 +1570,71 @@
   出現）、isekai-fantasy.html 45 項 jsdom 實測（含輸出確認寫實/非插畫
   澄清句正確出現）全部通過；`audit-100x` 900 次模擬（9頁×100）0 issue。
 
+## 2026-07-29（十六）　新增 summer-island.html（夏日海島）
+
+- owner 想再加「夏日沙灘」主題，先貼了一份 AI 產出的規格書，範圍定義為
+  「夏日海島・沙灘 × 水上 × 淺水玩水」四大場景模組，明確排除深潛/水下
+  世界，留給未來獨立主題。逐項分析後回報 owner：
+  1. 「隨機組合系統」（沙灘/水上/淺水/玩水 ＋ 環境 ＋ 動作 ＋ 鏡頭 ＋
+     光線 ＋ 造型）完全對應現有的元素級獨立隨機機制，不需要新工程。
+  2. 「Realistic Ocean Physics／水面折射／水花／濕潤效果」——這是純
+     文字咒語產生器不是接圖片生成引擎，這些描述都只是給 AI 繪圖模型看
+     的文字提示，不是本專案要實作的物理系統。
+  3. 「禁止自拍構圖／禁止伸手拿手機自拍」是全新類型的限制，目前任何
+     頁面核心區塊都沒有這種構圖禁令，需要另外寫一句新的負面約束——
+     **owner 確認不需要特別寫入**，這條直接略過，沒有加進最終的 prompt。
+  4. 水深隨機（腳踝/小腿/膝蓋/大腿/腰部）、明確排除深潛水下世界——都是
+     內容維度層次，不需要新的核心區塊，當一般姿勢池與範圍限制處理即可。
+  另外指出這次不是從零開始——`travel.html` 本來就有沖繩海岸／墾丁海岸／
+  冰島黑沙灘等地點 chip、沙灘夕陽暖金光等光影、beach_cover_bikini 等
+  服裝、以及兩組完整一鍵模板（沖繩海邊白裙旅拍、海邊城堡夕陽旅拍），
+  只是內容零散，不是規格書要的「四大模組系統化可隨機排列組合」。因為
+  規格書要的份量（四大模組各自要有足夠背景/姿勢/道具/服裝選項）跟開
+  一個新主題頁差不多大，遠超過在 travel.html 加幾個 chip 的規模，建議
+  走跟仙俠/動漫/花仙子/日式異世界一樣的「獨立完整新頁」路線，owner
+  同意後直接建置（不用先列細清單，直接動工）。
+- 一樣「方案A：獨立完整新頁，比照 fantasy-fashion.html 全套規格」，
+  `cp fantasy-fashion.html summer-island.html` 建置。
+- **00 一鍵模板**：16 組，跨四大模組混合（赤腳夕陽漫步、SUP 晨光滑行、
+  淺水漫步、玩水嬉戲瞬間、椰林吊床小憩、礁岸遠眺、漂浮平台夢幻時刻、
+  腰部淺水金色時刻、碼頭夕陽垂腳、獨木舟探索滑行、浪花玩鬧、度假潟湖
+  悠閒、晨曦沙灘獨行、海上鞦韆愜意、潮池礁岩探索、金色時刻淺水漫步）。
+- **04 服裝**：30 項/6 組（基礎泳裝、度假罩衫與外搭、海島度假洋裝、
+  水上活動機能服、沙灘配件與奢華款、沙灘裙裝與濕身質感）。
+- **05 材質改稱為「水感與陽光氛圍」**：30 項/6 組（水花水珠系、陽光
+  光斑系、海水色澤系、沙灘質感系、熱帶氛圍系、度假奢華系）——這裡的
+  「浪花飛濺」「濕潤肌膚光澤」「水滴滑落軌跡」等都只是這層的英文 prompt
+  文字內容，不是額外的物理引擎工程。
+- **06 姿勢：這次選擇整組替換，不是延伸**——跟花仙子/日式異世界「延伸
+  既有姿勢池、只加幾個新增」的做法不同，因為規格書明確要求四大場景
+  模組（沙灘/水上/淺水/玩水）系統化分類，這跟 fantasy 原本的戲劇感高訂
+  姿勢語彙差異太大，直接整組替換成 30 個新姿勢，剛好對應四模組分 4 組
+  （沙灘 8、水上 7、淺水 7、玩水 8）。淺水組系統化涵蓋腳踝/膝蓋/腰部/
+  大腿不同深度的自然行走與轉身（ankleDeepWade/kneeDeepWalk/
+  waistDeepTurn/thighDeepStride），對應規格書「水深可隨機變化」的要求。
+- **09 背景**：30 項/6 組（白沙海灘、礁石海岸、度假村碼頭、熱帶椰林、
+  日落海岸、清澈淺水灘）。
+- `core-prompt.js` 新增 `summerIslandCore`（結構比照 `xianxiaCore`：
+  identityGuard 含 Style Scope Rule、`anatomyGuard` 用寫實 `humanCore`），
+  拿掉了 fantasy 原本的 illustration-material 條件判斷（材質庫不含插畫
+  媒材，直接固定寫實骨架，比照 flower-fairy/isekai 的簡化做法），註冊到
+  `window.HB_CORE_PROMPT.page.summerIsland`。頁面內部把 `sharedFantasyCore`
+  改名 `sharedSummerIslandCore`；過程中發現按鈕 ID 重命名有一處疏漏
+  （`fantasyMoodPreset` 事件監聽器沒有跟著全域改名腳本一起改到，跟
+  isekai-fantasy.html 當時發生的同一種疏漏），檢查後手動補上修正。
+- **全站接線**：travel/magazine/doll/fantasy-fashion/xianxia/
+  anime-character/flower-fairy/isekai-fantasy/store-ad 九頁的 nav 都
+  加上「夏日海島」連結；`index.html` 首頁在日式異世界卡片後面新增卡片，
+  強調色選用未使用過的珊瑚橘 `#FF9466`。
+- **驗證腳本同步**：`check-static.mjs`／`validate-preset-refs.mjs`
+  （新增 themeTemplates 檢查，16 組 0 issue）／`audit-100x.mjs`（新增
+  SUMMER ISLAND 模擬區塊，總模擬數 900→1000，全部 0 issue）／
+  `build-prompt-preview.mjs`（新增 `generateSummerIsland()`，
+  `loadRevision()` 對新檔案的讀取包 try/catch；核心區塊長度 report
+  顯示 delta 全部為 0，確認沒有動到任何既有頁面的共用核心）。
+- **驗證**：52 項 jsdom 實測，涵蓋預設生成、隨機套用、全部 16 個一鍵
+  模板、精選按鈕、4 個自填欄位、以及四大模組各抽一個代表姿勢
+  （barefootSandWalk/supBoardStand/ankleDeepWade/kickingSplashPlay）
+  直接勾選測試都能正常生成——全部通過；`audit-100x` 1000 次模擬
+  （10頁×100）0 issue。
+
