@@ -434,6 +434,10 @@
         <div class="name">符紙夜巡</div>
         <div class="desc">符紋道袍、擲符出手、夜市燈籠</div>
       </button>
+      <button class="card" type="button" data-template="courtDancerLanternNight">
+        <div class="name">宮闕樂舞夜宴</div>
+        <div class="desc">樂舞飛天裝、靈蝶流光、宮闕燈籠夜宴</div>
+      </button>
     </div>
   </section>
 
@@ -544,6 +548,8 @@
       <label class="card"><input type="radio" name="garment" value="serpentScaleGown"><div class="name">蛇靈鱗紋長裙</div><div class="desc">虹彩鱗紋緊身裙、靈蛇輪廓</div></label>
       <label class="card"><input type="radio" name="garment" value="nineTailRobe"><div class="name">九尾狐后華服</div><div class="desc">多層拖尾裙擺、狐后輪廓</div></label>
       <label class="card"><input type="radio" name="garment" value="phoenixSpiritGown"><div class="name">火鳳涅槃戰裙</div><div class="desc">火羽肩飾、長拖尾裙、鳳凰輪廓</div></label>
+      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 樂舞伎與飛天樂舞</div>
+      <label class="card"><input type="radio" name="garment" value="courtDancerRobe"><div class="name">宮廷樂舞飛天裝</div><div class="desc">珠繡束胸、垂墜綢帶長袖、層疊刺繡裙擺、飛天舞姬輪廓</div></label>
     </div>
     <div class="form-grid" style="margin-top:10px;">
       <label class="field full custom-choice" data-custom-choice="garment">服裝自填
@@ -594,6 +600,8 @@
       <label class="card"><input type="radio" name="material" value="earthElementCrystal"><div class="name">地脈靈晶</div><div class="desc">苔綠地脈水晶浮現、土屬性法力</div></label>
       <label class="card"><input type="radio" name="material" value="metalElementBlade"><div class="name">金靈劍芒</div><div class="desc">銀白金屬劍芒、金屬性法力</div></label>
       <label class="card"><input type="radio" name="material" value="woodElementVine"><div class="name">木靈藤蔓</div><div class="desc">發光藤蔓纏繞、小花點綴、木屬性法力</div></label>
+      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 靈蝶祥瑞</div>
+      <label class="card"><input type="radio" name="material" value="spiritButterflyGlow"><div class="name">靈蝶流光</div><div class="desc">發光靈蝶伴飛、金色光粒環繞、祥瑞夢幻感</div></label>
     </div>
     <div class="form-grid" style="margin-top:10px;">
       <label class="field custom-choice" data-custom-choice="material">材質自填
@@ -656,6 +664,7 @@
           <label class="pose-card"><input type="radio" name="pose" value="swordSheathe"><div class="pose-name">收劍入鞘</div><div class="pose-desc">收劍動作,內斂力量感</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="braidTwirl"><div class="pose-name">撥髮回眸</div><div class="pose-desc">撥髮回眸,柔美敘事感</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="lotusHold"><div class="pose-name">掌托蓮花</div><div class="pose-desc">雙手托起蓮花或靈焰,寧靜供奉感</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="danceArmRaise"><div class="pose-name">揚袖起舞</div><div class="pose-desc">單臂高舉指尖上揚,綢帶隨身飛旋,樂舞伎韻律</div></label>
         </div>
       </div>
       <div class="pose-group">
@@ -812,6 +821,8 @@
       <label class="card"><input type="radio" name="background" value="frozenWaterfallCavern"><div class="name">冰瀑洞窟</div><div class="desc">冰柱垂掛、霜白岩壁、冷調藍光</div></label>
       <label class="card"><input type="radio" name="background" value="autumnMapleValley"><div class="name">秋楓谷地</div><div class="desc">滿山紅金楓葉、溫暖午後光</div></label>
       <label class="card"><input type="radio" name="background" value="lotusPondPavilion"><div class="name">荷池水榭</div><div class="desc">滿池荷花、木造平台延伸水面</div></label>
+      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 宮闕夜宴</div>
+      <label class="card"><input type="radio" name="background" value="lanternPalaceEaves"><div class="name">宮闕燈籠夜宴</div><div class="desc">飛簷宮殿、成串暖色燈籠、夜色散景、樂舞夜宴氛圍</div></label>
     </div>
     <div class="form-grid" style="margin-top:10px;">
       <label class="field full custom-choice" data-custom-choice="background">背景自填
@@ -1018,6 +1029,11 @@ const materialData = {
     label: '木靈藤蔓',
     prompt: 'soft glowing vine tendrils with blooming small flowers wrapping around the arm, wood-element cultivation',
     palette: 'soft jade green, gentle floral pink, warm gold accent'
+  },
+  spiritButterflyGlow: {
+    label: '靈蝶流光',
+    prompt: 'a single luminous spirit butterfly with translucent glowing wings hovering near the subject, trailing faint golden light particles, auspicious dreamlike companion',
+    palette: 'luminous amber gold, soft warm white glow, faint ember highlight'
   }
 };
 
@@ -1051,7 +1067,8 @@ const garmentData = {
   craneFeatherRobe: 'pale feather-textured robe with wide wing-like sleeves, graceful crane-immortal silhouette',
   serpentScaleGown: 'fitted gown with subtle iridescent scale-pattern embroidery along the bodice and hem, mythic serpent-spirit silhouette',
   nineTailRobe: 'opulent fox-queen gown with layered flowing tails formed from silk trailing panels, regal mythic silhouette',
-  phoenixSpiritGown: 'dramatic gown with flame-feather textured shoulder pieces and a long trailing skirt, phoenix-rebirth silhouette'
+  phoenixSpiritGown: 'dramatic gown with flame-feather textured shoulder pieces and a long trailing skirt, phoenix-rebirth silhouette',
+  courtDancerRobe: 'ornate court-dancer ceremonial costume with a jeweled embroidered bodice, long flowing chiffon streamer sleeves trailing from the shoulders, richly embroidered layered draped skirt, elaborate phoenix headdress with hanging pearl tassels, flying-apsara dancer silhouette'
 };
 
 const styleData = {
@@ -1096,7 +1113,8 @@ const backgroundData = {
   cherryBlossomCliff: 'cherry blossom cliffside background, drifting pink petals over a mountain ledge, distant valley view',
   frozenWaterfallCavern: 'frozen waterfall cavern background, icicles and frost-covered rock, cold blue ambient light',
   autumnMapleValley: 'autumn maple valley background, deep red-gold foliage covering the hillsides, soft warm afternoon light',
-  lotusPondPavilion: 'lotus pond pavilion background, blooming lotus flowers covering the water, wooden platform extending over the pond'
+  lotusPondPavilion: 'lotus pond pavilion background, blooming lotus flowers covering the water, wooden platform extending over the pond',
+  lanternPalaceEaves: 'grand palace eaves background at night, rows of glowing warm lanterns strung beneath ornate rooftop beams, deep bokeh light bloom, festive ceremonial dance-banquet atmosphere'
 };
 
 const lightingData = {
@@ -1350,7 +1368,8 @@ const poseData = {
   aerialSlashDive: 'mid-air diving slash pose, body angled downward with the blade cutting through the frame, dramatic wuxia energy',
   tribulationStand: 'standing pose amid a lightning tribulation, arms slightly raised, defiant ascension energy',
   qiPalmStrike: 'dynamic palm-strike pose with visible qi energy radiating from the palm, powerful martial impact',
-  flyingRibbonSpin: 'spinning mid-air pose with long ribbon sleeves and hair whirling outward, graceful combat elegance'
+  flyingRibbonSpin: 'spinning mid-air pose with long ribbon sleeves and hair whirling outward, graceful combat elegance',
+  danceArmRaise: 'graceful court-dance pose with one arm raised high in an elegant curved wrist gesture, torso gently turned, long streamer sleeves sweeping outward on both sides, flying-apsara dance elegance'
 };
 
 const framingData = {
@@ -1516,6 +1535,12 @@ const themeTemplates = {
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
     framing: 'fullBody', pose: 'talismanThrow', camera: 'threeQuarterSide', lighting: 'hard', background: 'marketFestivalNight',
     ratio: 'vertical34', intensity: 'balanced material effects, elegant and luxurious'
+  },
+  courtDancerLanternNight: {
+    garment: 'courtDancerRobe', material: 'spiritButterflyGlow', style: 'luxury',
+    composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
+    framing: 'threeQuarter', pose: 'danceArmRaise', camera: 'threeQuarterSide', lighting: 'foxfireGold', background: 'lanternPalaceEaves',
+    ratio: 'vertical45', intensity: 'balanced material effects, elegant and luxurious'
   }
 };
 
