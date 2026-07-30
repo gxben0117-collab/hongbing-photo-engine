@@ -2075,3 +2075,87 @@
   技術風險低，主要工作量在於重新設計貼合「日系校園戰鬥漫畫」主題的
   24+24+24+16 項內容。
 
+## 2026-07-30（三）　新增 freeform.html（自由生圖）：鎖臉核心固定＋單一自由輸入格
+
+- owner 先確認現況：「目前 鎖臉核心 算穩定了，剩下都是 衣服 背景 光線
+  圖片大小 姿勢的組合 對嗎」，Claude 確認並補充材質/鏡頭/構圖也屬於同一層
+  可替換組合。接著 owner 提出新頁面需求：「幫我在寫一個 自由生圖 骨子裡
+  是遵守 鎖臉核心固定 然後 介面上 給我一大格 讓我自由輸入 風格語氣/服裝
+  ／材質／姿勢/背景>>>給提示詞就好，鏡頭/比例 給我選項 讓我點選」。
+- **實作前用 `AskUserQuestion` 確認兩個規格缺口**：owner 的描述漏了「光線」
+  歸類（前一句才確認光線是可替換組合之一，這句卻沒放進自由輸入框或選項
+  清單），以及沒說明身形輪廓（03）與構圖取景（02，其他頁面這兩項也是
+  點選卡片）該怎麼處理。owner 回答：光線併入自由輸入框（採納 Claude 的
+  推薦選項）；身形輪廓與構圖取景**也**併入自由輸入框（比 Claude 建議的
+  「維持卡片」更徹底，owner 選了更簡化的路線）。最終確定架構：**只留
+  07 鏡頭角度、11 比例兩個點選區塊，其餘全部（風格語氣/服裝/材質/姿勢/
+  背景/光線/身形輪廓/構圖取景）併入同一個自由輸入大格**。
+- **建置方式**：複製 `flower-fairy.html` 當底（沿用 nav/CSS/stale 生成
+  機制骨架），但主體內容用 Node 腳本做整段行號 splice 取代（不是逐一
+  Edit 微調），因為要刪除的區塊（00 一鍵模板／01 style／02 構圖／03
+  身形／04 服裝／05 材質／05b 翅膀蝴蝶／06 姿勢／08 光影／09 背景／10
+  自訂要求，共約 585 行 HTML＋900 行 JS）遠大於要保留的內容，整段替換
+  比連續多次 Edit 更不容易出錯。
+  - **HTML**：只留 4 個 section——01 創作方向（自由輸入，一個
+    `<textarea id="customDirection" rows="10">`＋一顆「填入範例文字」
+    按鈕，點擊只是把一段範例段落塞進 textarea 讓使用者參考修改，不是
+    預寫組合套用）、02 拍攝角度與鏡頭感（`cameraData`，9 選項，原封不動
+    照抄其他頁）、03 圖片比例（`ratioData`，8 選項，原封不動照抄）、04
+    生成咒語（輸出/複製/stale 機制照抄）。CSS `order` 規則也同步從 13 條
+    精簡成 4 條（`.section-direction/camera/ratio/output`）。
+  - **JS**：只留 8 個鎖臉核心 guard 常數
+    （`identityGuard`/`anatomyGuard`/`poseNaturalityGuard`/
+    `compositionGuard`/`lightingConsistencyGuard`/`colorTemperatureGuard`/
+    `subjectIntegrationGuard`/`faceFillGuard`，逐字照抄其他頁的 fallback
+    文字，只有 `anatomyGuard` 裡一句「unless a selected body refinement
+    explicitly requests subtle adjustment」改成「unless the user's
+    creative direction explicitly requests a body adjustment」呼應
+    身形輪廓已經不是卡片選項）、`cameraData`/`ratioData`（原封不動）、
+    `EXAMPLE_DIRECTION` 範例文字常數。`materialData`/`garmentData`/
+    `styleData`/`backgroundData`/`lightingData`/`wingsData`/
+    `butterfliesData`/`BODY_SHAPES`/`poseData`/`framingData`/
+    `themeTemplates` 等資料物件與對應函式（`applyThemeTemplate`/
+    `applyFlowerRandomSelection`/`getRandomItem`/`getAllRadioValues`/
+    `getAllSelectValues`/`customKeywordList`）全部刪除。`generate()`
+    改成：8 個 guard 區塊照順序接上→插入使用者的 `customDirection`
+    原文（前面加標籤句「user's creative direction (style and mood,
+    garment, material, pose, background, lighting, body silhouette and
+    composition, all specified by the user): 」，後面加一句明確重申範圍
+    限制「...must not change the facial structure, identity, age
+    impression or recognizable features established by the identity
+    lock system」）→鏡頭→比例→輸出品質→負面約束，比其他頁的
+    `generate()` 短很多（不需要處理材質/服裝/背景三種 custom 欄位或
+    color palette 邏輯，因為使用者的自由輸入本身就是唯一輸入源）。
+  - `core-prompt.js` 新增 `freeformCore`，Style Scope Rule 改寫成
+    「The user's freeform creative direction (...) must not change the
+    person's facial structure, identity, age impression or recognizable
+    features, regardless of how the user's free text is phrased」——
+    特別加上「regardless of how the user's free text is phrased」這句，
+    是因為這頁的輸入完全開放（其他頁的服裝/材質是固定選項不會出現矛盾
+    或誤導性指令，這頁使用者可以打任何字，包含可能無意間寫出暗示改變
+    臉部的描述），需要更明確地重申「不管使用者怎麼寫都不能覆寫身份」。
+- **四支驗證腳本，只有三支適用**：`check-static.mjs` 正常加入
+  `freeform.html`；`validate-preset-refs.mjs` **刻意沒加區塊**——這頁沒有
+  `themeTemplates` 這類一鍵套用物件可檢查，跟 `doll.html`／
+  `store-ad.html`（同樣沒有 `themeTemplates` 結構）的既有慣例一致，不是
+  遺漏；`audit-100x.mjs` 仿造 `store-ad.html` 的 `textSamples` 手法寫一組
+  `directionSamples`（空字串、純空白、正常範例、600 字超長文字、含
+  emoji/引號/HTML標籤的特殊字元組合），跟隨機抽的鏡頭/比例組合一起跑
+  100 次模擬；`build-prompt-preview.mjs` 加 `generateFreeform()` 鏡像
+  函式＋`loadRevision()` 裡的 try/catch skip-gracefully 區塊，用固定的
+  範例創作方向文字做 0-diff 回歸基準。
+- **周邊整合**：全站 nav 用既有的 Node 批次腳本（`update-nav.mjs`，前一次
+  四頁上線時寫的）重跑一次，陣列加一筆 `['freeform.html', '自由生圖']`
+  即可自動處理全部 15 個檔案的 `.nav-links` 區塊，不需要手動逐頁補連結；
+  `index.html` 新增卡片，強調色選米白灰 `#D8D4CC`（象徵「留白／自由畫布」
+  的視覺語言，跟既有 12 個強調色都不同）。
+- **驗證結果**：`check-static.mjs` 全過；`audit-100x.mjs` 累計 1400 次
+  模擬（14頁×100）0 issue；`build-prompt-preview.mjs` 正常產出
+  `worktree-freeform-default.txt`，人工檢視內容確認 8 個 guard 區塊＋
+  使用者創作方向文字＋鏡頭／比例／輸出品質／負面約束的組裝順序正確；
+  `core-prompt.js` 用 `node -e` 確認語法與 14 個 page key
+  （多了 `freeform`）正常；全站 15 個檔案的 `nav-link` 數量逐一 `grep -c`
+  確認皆為 15。這頁是目前唯一「結構性比其他頁簡單」的工具頁——沒有
+  00/01/02/03/04/05/06/08/09/10 十個區塊，只有 4 個，這是刻意的設計
+  結果（owner 明確要求把大部分維度收斂成一個自由輸入格），不是遺漏。
+

@@ -334,6 +334,21 @@ This is a photorealistic live-action photography campaign, not an anime/illustra
     output: CORE_OUTPUT_QUALITY
   };
 
+  const freeformCore = {
+    identityGuard: [
+      CORE_IDENTITY_LOCK,
+      CORE_FACE_GEOMETRY_LOCK,
+      `Style Scope Rule:
+The user's freeform creative direction (style and mood, garment, material, pose, background, lighting, body silhouette and composition) only affects clothing, ornaments, background, lighting, composition, mood and surface texture.
+It must not change the person's facial structure, identity, age impression or recognizable features, regardless of how the user's free text is phrased.`
+    ].join("\n\n"),
+    anatomyGuard: humanCore,
+    poseGuard: CORE_POSE_NATURALITY,
+    lightingGuard: CORE_LIGHTING_UNIFICATION,
+    negativePrompt: CORE_NEGATIVE_PROMPT,
+    output: CORE_OUTPUT_QUALITY
+  };
+
   window.CORE_IDENTITY_LOCK = CORE_IDENTITY_LOCK;
   window.CORE_FACE_GEOMETRY_LOCK = CORE_FACE_GEOMETRY_LOCK;
   window.CORE_REALISTIC_ANATOMY = CORE_REALISTIC_ANATOMY;
@@ -370,7 +385,8 @@ This is a photorealistic live-action photography campaign, not an anime/illustra
       floralSweet: floralSweetCore,
       galaSocialite: galaSocialiteCore,
       kpopIdol: kpopIdolCore,
-      battleAcademy: battleAcademyCore
+      battleAcademy: battleAcademyCore,
+      freeform: freeformCore
     }
   };
 })();

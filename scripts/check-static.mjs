@@ -20,6 +20,7 @@ const htmlFiles = [
   'gala-socialite.html',
   'kpop-idol.html',
   'battle-academy.html',
+  'freeform.html',
 ];
 const requiredDirs = ['docs', 'assets'];
 let failures = 0;

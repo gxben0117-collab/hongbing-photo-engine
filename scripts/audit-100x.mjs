@@ -770,6 +770,61 @@ const core = evalCore(coreSource);
   report('battleAcademy', N);
 }
 
+// ===================== FREEFORM =====================
+{
+  const html = read('freeform.html');
+  const data = evalDataSegment({
+    source: html, core, page: 'freeform',
+    startMarker: 'const sharedFreeformCore = window.HB_CORE_PROMPT?.page?.freeform || {};',
+    endMarker: 'function selected',
+    exportExpression: '({ sharedFreeformCore, identityGuard, anatomyGuard, poseNaturalityGuard, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, cameraData, ratioData })',
+  });
+  const pools = {
+    camera: Object.keys(data.cameraData),
+    ratio: Object.keys(data.ratioData),
+  };
+  const directionSamples = [
+    '',
+    '  ',
+    '像高級珠寶晚宴廣告的氣氛，深酒紅絲緞禮服，露肩剪裁；姿勢是側身回眸；背景是暖色燭光宴會廳；人物七分身入鏡，構圖置中。',
+    'A'.repeat(600),
+    '測試主題 with émoji 🌸 and "quotes" and <tags> & symbols',
+    '  前後有空白的描述  ',
+  ];
+  for (let i = 0; i < N; i += 1) {
+    const sel = {
+      cameraKey: pick(pools.camera), ratioKey: pick(pools.ratio), direction: pick(directionSamples),
+    };
+    const directionText = sel.direction.trim()
+      ? sel.direction.trim()
+      : '(尚未輸入創作方向，建議描述風格語氣、服裝、材質、姿勢、背景、光線、身形輪廓與構圖取景)';
+    const camera = data.cameraData[sel.cameraKey];
+    const ratio = data.ratioData[sel.ratioKey];
+    const prompt = [
+      data.identityGuard + ',',
+      'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
+      data.anatomyGuard + ',',
+      data.poseNaturalityGuard + ',',
+      data.lightingConsistencyGuard + ',',
+      data.colorTemperatureGuard + ',',
+      data.subjectIntegrationGuard + ',',
+      data.faceFillGuard + ',',
+      data.compositionGuard + ',',
+      "user's creative direction (style and mood, garment, material, pose, background, lighting, body silhouette and composition, all specified by the user): " + directionText + ',',
+      'the creative direction above only affects clothing, ornaments, background, lighting, composition, mood and surface texture; it must not change the facial structure, identity, age impression or recognizable features established by the identity lock system,',
+      camera + ',',
+      ratio + ',',
+      core.page.freeform.output ? core.page.freeform.output + ',' : '',
+      'hyper realistic, ultra detailed, premium advertising finish,',
+      core.page.freeform.negativePrompt ? core.page.freeform.negativePrompt + ',' : '',
+      'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face',
+    ].filter(Boolean);
+    const output = prompt.join('\n');
+    checkOutput('freeform', i, sel, output, { requireIdentity: true, identityMarkers: ['身份鎖定系統'] });
+  }
+  report('freeform', N);
+}
+
 // ===================== DOLL =====================
 {
   const html = read('doll.html');
