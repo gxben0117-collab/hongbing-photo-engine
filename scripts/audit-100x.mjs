@@ -728,7 +728,7 @@ const core = evalCore(coreSource);
     framing: Object.keys(data.framingData), intensity: intensityValues, pose: Object.keys(data.poseData),
     style: Object.keys(data.styleData), camera: Object.keys(data.cameraData), ratio: Object.keys(data.ratioData),
   };
-  const customSamples = ['', '', 'exosuit joints', '手工訂製'];
+  const customSamples = ['', '', 'sakura petal battle damage', '手工訂製'];
   for (let i = 0; i < N; i += 1) {
     const sel = {
       bodyShape: pick(pools.bodyShape), material: pick(pools.material), garment: pick(pools.garment),

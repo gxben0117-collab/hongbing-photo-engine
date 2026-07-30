@@ -323,9 +323,9 @@ They must not change the person's facial structure, identity, age impression or 
       CORE_IDENTITY_LOCK,
       CORE_FACE_GEOMETRY_LOCK,
       `Style Scope Rule:
-Commercial style, tactical academy uniform and art direction only affect clothing, ornaments, background, lighting, composition, mood and surface texture.
+Commercial style, Japanese school-battle manga inspired uniform design (gakuran, sailor fuku, kimono reimagined as lightweight battle armor) and art direction only affect clothing, ornaments, background, lighting, composition, mood and surface texture.
 They must not change the person's facial structure, identity, age impression or recognizable features.
-This is a photorealistic photography campaign, not an anime/illustration conversion — render skin, face and body with realistic photographic detail, not cel-shaded or illustrated medium.`
+This is a photorealistic live-action photography campaign, not an anime/illustration conversion — render skin, face and body with realistic photographic detail, not cel-shaded or illustrated medium.`
     ].join("\n\n"),
     anatomyGuard: humanCore,
     poseGuard: CORE_POSE_NATURALITY,

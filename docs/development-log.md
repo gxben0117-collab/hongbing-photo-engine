@@ -1972,3 +1972,106 @@
   04/05/09 分組內容、強調色選色）；`README.md` 頁數說明、正式頁面清單、
   資料夾結構三處同步改為 13 個工具頁。
 
+## 2026-07-30（二）　battle-academy.html 風格修正：軍事戰術學院 → 日系校園戰鬥漫畫
+
+- owner 回報初版方向錯了：「戰鬥制服學園 風格你搞錯了，我要的的 類似日本
+  漫畫 真人學生服改良戰鬥服 和服改良戰鬥服 水手服改良戰鬥服 校園戰鬥
+  那種」。初版（同日稍早的條目）走「近未來軍事戰術學院」路線——戰術背心
+  西裝外套、科技面料風衣、全息指揮中心、飛行載具機庫、數據平板道具——
+  跟 owner 真正要的「日本漫畫真人化＋制服改良戰鬥服＋校園戰鬥」是完全
+  不同的兩個方向，雖然都叫「戰鬥制服學園」。
+- **04 服裝**：24 項全部重寫，5 組全部改成日系制服 archetype：學生服改良
+  戰鬥服（詰襟`gakuranBattleArmor`／西裝外套式`blazerBattleUniform`／
+  披風`gakuranCapeBattle`／護甲裙`blazerArmoredSkirtSet`／破損痕跡
+  `tornGakuranBattleWorn`）、水手服改良戰鬥服（護甲`sailorBattleArmor`／
+  緞帶`sailorRibbonBattleSuit`／護甲裙`sailorPleatedArmoredSkirt`／
+  披肩`sailorCapeGuardian`／臂甲`sailorGauntletBattleSet`）、和服改良
+  戰鬥服（護甲`kimonoBattleArmor`／袴裝`hakamaBattleWarrior`／劍道
+  `kendoBattleUniform`／振袖`furisodeArmoredBattle`／腰帶劍鞘
+  `kimonoObiBladeHolster`）、異能魔法系學園戰鬥服（`magicalBattleUniform`／
+  `espSchoolBattleSuit`／`ribbonArmorSchoolSet`／`capeSchoolGuardianUniform`／
+  `sentaiRangerSchoolSuit`）、隊長畢業進化服（`studentCouncilBattleUniform`／
+  `eliteSquadSchoolArmor`／`graduationBattleKimono`／
+  `legendarySchoolBattleRelic`）。
+- **05 材質**：24 項裡把明顯軍事科幻的 8 項換掉——
+  `dataTabletPropAccent`（數據平板）→`bentoBagPropAccent`（書包便當包，
+  刻意做「日常物件＋戰鬥制服」反差感）；`energyShieldGlow`／
+  `holographicMapGlow`／`circuitLinePulseGlow`／`plasmaTrailStreak`／
+  `scannerGridOverlay` 五個科技光效群組換成
+  `spiritPowerAuraGlow`（靈氣力量光暈）／`glowingSealCircle`（發光咒印
+  法陣）／`schoolCrestGlowLine`（校徽紋路發光線條）／
+  `bladeEnergyTrailStreak`（劍氣軌跡光紋）／`spiritSensorOverlay`
+  （靈力偵測網格投影，保留「偵測」概念但改成靈力而非科技掃描）；
+  `circuitEmbroideryDetail`（電路刺繡）→`tornFabricBattleDamage`
+  （破損布料戰鬥痕跡，很典型的戰鬥漫畫「制服殘破」敘事細節）；
+  `coldBlueTacticalLight`／`warningRedAlertGlow`／`hangarFloodLight`
+  三個光影氛圍換成`duskRooftopBattleGlow`（黃昏屋頂決戰光暈）／
+  `alertCrimsonGlow`（警戒緋紅警示光，概念相同但脫離軍事警報語彙）／
+  `gymnasiumFloodLight`（體育館強光照明）。其餘（塵土衝擊爆發／火花衝擊
+  閃光／氣流亂流動態／學院徽章／金屬滾邊等通用戰鬥/學院元素）維持不動。
+- **09 背景**：24 項裡「指揮與任務場景」整組 5 項（全息指揮中心／戰術
+  簡報室／飛行載具機庫／控制塔夜景／多螢幕作戰室）全部換成「校園決戰
+  場景」新分組：`schoolRooftopBattle`（學校屋頂決戰）／
+  `schoolGateSiege`（校門對峙戰場）／`gymnasiumBattleArena`（體育館決鬥
+  擂台）／`schoolCourtyardSakuraBattle`（校園中庭櫻花決戰）／
+  `schoolLibraryBattleAftermath`（圖書館戰鬥後現場）。學院訓練場景組把
+  「室內射擊訓練場」換成`kendoDojoInterior`（劍道場內部，更符合日系武道
+  設定）、「戰術裝備置物間」改名`studentLockerHallway`（學生置物櫃走廊）。
+  抽象科技背景組改名「抽象靈力背景」，`holographicGridVoid`→
+  `spiritEnergyVoidBackdrop`、`dataStreamAbstractBackdrop`→
+  `sealCircleAbstractBackdrop`、`neonTacticalStudioBackdrop`→
+  `sakuraPetalStudioBackdrop`（櫻花瓣棚拍背景）。校園日常場景組（圖書館／
+  中庭夕陽／宿舍走廊／屋頂日景）與城市廢墟組（廢墟／廢棄建築／夜間屋頂／
+  秘密基地／封鎖線，僅改名淡化軍事語彙）維持結構不動。
+- **01 style**：刻意**不改 9 個 value key**（`tacticalCampaign`／
+  `academyEditorial`／`cinematicMission`／`cleanFunctional`／
+  `darkTacticalMood`／`gameKeyVisual`／`trainingDocumentary`／
+  `beautyCampaign`／`squadPosterCampaign`），因為 16 個 themeTemplates
+  都用 key 參照 style，改 key 名要連帶改全部模板容易出錯；只改中文
+  label/desc 與 `styleData` 裡的英文 prompt 文字本身，把「戰術機能品牌」
+  「軍事」語彙換成「日系戰鬥漫畫真人化」「制服」語彙。
+- **06 姿勢刻意完全不動**：這是本次修正裡唯一「維持原判斷」的部分——
+  上一版 battle-academy.html 是四頁新頁裡唯一完整保留 fantasy 原始「電影
+  感動態／戰鬥瞬間」16 個姿勢（`sword_draw_pose`／`mid_air_slash`／
+  `hero_landing_pose`／`energy_burst`／`dual_spirit_guardian_throne` 等）
+  的頁面，這批姿勢本來就是為武打張力設計，剛好完全符合「校園戰鬥漫畫」
+  需求，不需要因為這次風格修正而更動。只做兩處小調整跟主題方向對齊：
+  「指揮官專屬」姿勢群組改名「隊長專屬」（更貼近學生會長/社團隊長的
+  校園語境而非軍事指揮官）；`mission_briefing_gaze` 的 pose prompt 文字
+  把「standing before a hologram map」改成「standing before a glowing
+  seal circle」，呼應新的咒印法陣異能設定，其餘 4 個新增姿勢
+  （敬禮預備／戰術掃視／小隊手勢指揮／裝備檢查）文字維持不變，本來就是
+  通用備戰動作，跟軍事或校園語境都不衝突。
+- **00 一鍵模板**：16 組全部依新服裝/材質/背景重新設計並改名，例如
+  「戰術簡報專注」→「學生服屋頂決鬥」（`gakuranRooftopDuel`）、
+  「機庫出發準備」→「和服櫻花斬擊」（`kimonoSakuraSlash`）、「圖書館
+  戰術閒暇」→「劍道場專注武者」（`hakamaKendoDojoFocus`）、「全息數據
+  疊層視覺」→「傳說聖裝能量爆發」（`legendaryRelicEnergyBurst`）。
+- **`core-prompt.js`**：`battleAcademyCore` 的 Style Scope Rule 第一句
+  從「Commercial style, tactical academy uniform...」改成「Commercial
+  style, Japanese school-battle manga inspired uniform design (gakuran,
+  sailor fuku, kimono reimagined as lightweight battle armor)...」，
+  「photorealistic photography campaign」補一個「live-action」強調
+  「真人化」而非單純「非插畫」。
+- **周邊同步**：`index.html` 卡片文案（tool-tag／h1／p／tool-features）
+  改寫成強調「日系漫畫風真人改良戰鬥服」；`scripts/audit-100x.mjs` 的
+  customSamples 陣列把殘留的 `'exosuit joints'`（機甲關節，明顯軍事科幻
+  用詞）換成 `'sakura petal battle damage'`；
+  `scripts/build-prompt-preview.mjs` 的 `generateBattleAcademy()` 預設
+  選項組合（garment/material/background/pose）同步改成新的 key，避免
+  用已刪除的舊 key 導致該函式直接 `undefined.prompt` 炸掉。
+- **驗證**：先用暫存目錄一次性腳本單獨驗證 `themeTemplates` 16 組欄位值
+  全部存在於新選項池（0 issue），再重跑四支正式腳本全過：
+  `check-static.mjs` 全過；`validate-preset-refs.mjs` 13 頁全過（含
+  battle-academy 16 組 0 issue）；`audit-100x.mjs` 累計 1300 次模擬
+  （13頁×100）0 issue；`build-prompt-preview.mjs` 正常產出
+  `worktree-battleacademy-default.txt`，人工檢視內容確認組裝結果正確
+  （`appearance form: stand-collar gakuran school uniform reinforced
+  with lightweight armor plating...`／`background design: school
+  rooftop background, wind-swept campus-battle atmosphere`），不再有
+  任何軍事科幻用詞殘留。`core-prompt.js` 用 `node -e` 確認語法與 13 個
+  page key 正常。這次修正沒有更動任何 HTML 結構、JS 函式邏輯或驗證腳本
+  的結構，純粹是內容值（服裝/材質/背景/style文字/一鍵模板）的全面替換，
+  技術風險低，主要工作量在於重新設計貼合「日系校園戰鬥漫畫」主題的
+  24+24+24+16 項內容。
+

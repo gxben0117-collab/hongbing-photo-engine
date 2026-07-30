@@ -709,14 +709,14 @@ function generateKpopIdol(core, data) {
 function generateBattleAcademy(core, data) {
   const selection = {
     bodyShape: 'original',
-    material: 'dataTabletPropAccent',
-    garment: 'tacticalBlazerVest',
-    background: 'briefingRoomTactical',
+    material: 'bladeEnergyTrailStreak',
+    garment: 'gakuranBattleArmor',
+    background: 'schoolRooftopBattle',
     lighting: 'hard',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
     framing: 'threeQuarter',
     intensity: 'balanced material effects, elegant and luxurious',
-    pose: 'mission_briefing_gaze',
+    pose: 'sword_draw_pose',
     style: 'tacticalCampaign',
     camera: 'eyeLevelCover',
     ratio: 'vertical45',

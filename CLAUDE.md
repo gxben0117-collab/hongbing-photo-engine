@@ -310,6 +310,38 @@
     模擬（13頁×100）0 issue；`build-prompt-preview` 四頁新增預覽輸出正常
     產出（無 base 版本可比對，因為是全新頁面，`loadRevision` 的
     try/catch skip-gracefully 機制正常運作）。
+- **`battle-academy.html` 風格修正**（2026-07-30）：owner 回報「戰鬥制服學園
+  風格你搞錯了」——初版走「近未來軍事戰術學院」方向（戰術背心、全息指揮
+  中心、機庫、數據平板），owner 要的其實是「日本漫畫 真人學生服改良戰鬥服
+  和服改良戰鬥服 水手服改良戰鬥服 校園戰鬥那種」。全面改寫 04/05/09/01：
+  04 服裝改成 5 組日系制服 archetype（學生服／水手服／和服改良戰鬥服、
+  異能魔法系學園戰鬥服、隊長畢業進化服），例如
+  `gakuranBattleArmor`(詰襟學生服戰鬥改裝)／`sailorBattleArmor`(水手服
+  護甲改裝)／`kimonoBattleArmor`(和服護甲改裝)；05 材質把過於軍事科幻的
+  項目（`dataTabletPropAccent`數據平板／`holographicMapGlow`全息地圖／
+  `scannerGridOverlay`掃描網格／`coldBlueTacticalLight`冷藍戰術光影等）
+  換成靈氣異能與校園戰鬥風味（`spiritPowerAuraGlow`靈氣力量光暈／
+  `glowingSealCircle`發光咒印法陣／`bladeEnergyTrailStreak`劍氣軌跡光紋／
+  `tornFabricBattleDamage`破損布料戰鬥痕跡）；09 背景把「指揮中心／機庫／
+  控制塔／作戰室」整組換成校園決戰場景（`schoolRooftopBattle`學校屋頂
+  決戰／`schoolGateSiege`校門對峙戰場／`gymnasiumBattleArena`體育館決鬥
+  擂台／`schoolCourtyardSakuraBattle`校園中庭櫻花決戰／
+  `kendoDojoInterior`劍道場內部）；01 style 保留原本 9 個 value key 不動
+  （避免動到 themeTemplates 的 style 參照），只改寫中英文描述文字移除
+  「戰術機能品牌／軍事」語彙、改用「日系戰鬥漫畫真人化」語彙。06 姿勢
+  沿用不變（前一版保留的「電影感動態/戰鬥瞬間」16 個姿勢正好完全符合
+  校園戰鬥主題，不需要調整），只把「指揮官專屬」群組改名「隊長專屬」、
+  `mission_briefing_gaze` 的 prompt 文字把「hologram map」改成
+  「glowing seal circle」貼合異能校園設定。00 一鍵模板 16 組全部依新
+  服裝/材質/背景重新設計（如「學生服屋頂決鬥」「水手服體育館擂台」
+  「和服櫻花斬擊」「劍道場專注武者」）。`core-prompt.js` 的
+  `battleAcademyCore` Style Scope Rule 文字同步更新為
+  「Japanese school-battle manga inspired uniform design (gakuran,
+  sailor fuku, kimono reimagined as lightweight battle armor)」；
+  index.html 卡片文案與 `audit-100x.mjs`/`build-prompt-preview.mjs`
+  裡殘留的舊 key 預設值（`tacticalBlazerVest`／`briefingRoomTactical`／
+  `'exosuit joints'` 等）一併同步更新。四支驗證腳本重跑全過（不需要改
+  腳本結構，因為都是動態讀 DOM／themeTemplates，key 改名會自動被抓到）。
 - **共用核心**：`assets/core-prompt.js` 集中管理身份鎖定等保護區塊；核心文字經過
   兩輪瘦身（5,162 → 4,099 字元），語意零遺漏。
 - **全部 13 個工具頁的生成互動已完全統一**（2026-07-27；花仙子/日式異世界/
