@@ -523,6 +523,250 @@ function generateIsekai(core, data) {
   return prompt.filter(Boolean).join('\n');
 }
 
+function generateFloralSweet(core, data) {
+  const selection = {
+    bodyShape: 'original',
+    material: 'handHeldBouquet',
+    garment: 'floralSundress',
+    background: 'vintageFlowerShopInterior',
+    lighting: 'soft',
+    composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
+    framing: 'threeQuarter',
+    intensity: 'balanced material effects, elegant and luxurious',
+    pose: 'floral_bouquet_hug',
+    style: 'sweetCampaign',
+    camera: 'eyeLevelCover',
+    ratio: 'vertical45',
+    customMaterial: '',
+    customGarment: '',
+    colorNote: '',
+    extraNote: '',
+  };
+  const material = data.materialData[selection.material];
+  const materialText = material.prompt;
+  const materialPalette = material.palette;
+  const garmentText = data.garmentData[selection.garment];
+  const background = data.backgroundData[selection.background];
+  const lighting = data.lightingData[selection.lighting];
+  const bodyShape = data.BODY_SHAPES[selection.bodyShape];
+  const framing = data.framingData[selection.framing];
+  const poseText = data.poseData[selection.pose];
+  const prompt = [
+    data.identityGuard + ',',
+    'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
+    data.anatomyGuard + ',',
+    data.poseNaturalityGuard + ',',
+    bodyShape + ',',
+    data.lightingConsistencyGuard + ',',
+    data.colorTemperatureGuard + ',',
+    data.subjectIntegrationGuard + ',',
+    data.faceFillGuard + ',',
+    selection.composition + ',',
+    data.compositionGuard + ',',
+    'appearance form: ' + garmentText + ',',
+    'theme material and art system: ' + materialText + ',',
+    'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',
+    selection.intensity + ',',
+    'selected material appears as controlled clothing details, ornaments, particles and background accents without overpowering facial identity,',
+    data.styleData[selection.style] + ',',
+    poseText ? poseText + ',' : '',
+    framing + ',',
+    data.cameraData[selection.camera] + ',',
+    'lighting design: ' + lighting + ',',
+    'background design: ' + background + ',',
+    data.ratioData[selection.ratio] + ',',
+    core.page.floralSweet.output ? core.page.floralSweet.output + ',' : '',
+    'hyper realistic, ultra detailed, premium advertising finish,',
+    'color palette: ' + materialPalette + ',',
+    core.page.floralSweet.negativePrompt ? core.page.floralSweet.negativePrompt + ',' : '',
+    'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face',
+  ];
+  return prompt.filter(Boolean).join('\n');
+}
+
+function generateGalaSocialite(core, data) {
+  const selection = {
+    bodyShape: 'original',
+    material: 'diamondNecklaceAccent',
+    garment: 'silkColumnGown',
+    background: 'redCarpetEntrance',
+    lighting: 'jewelrySparkle',
+    composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
+    framing: 'threeQuarter',
+    intensity: 'balanced material effects, elegant and luxurious',
+    pose: 'center_still',
+    style: 'galaCampaign',
+    camera: 'eyeLevelCover',
+    ratio: 'vertical45',
+    customMaterial: '',
+    customGarment: '',
+    colorNote: '',
+    extraNote: '',
+  };
+  const material = data.materialData[selection.material];
+  const materialText = material.prompt;
+  const materialPalette = material.palette;
+  const garmentText = data.garmentData[selection.garment];
+  const background = data.backgroundData[selection.background];
+  const lighting = data.lightingData[selection.lighting];
+  const bodyShape = data.BODY_SHAPES[selection.bodyShape];
+  const framing = data.framingData[selection.framing];
+  const poseText = data.poseData[selection.pose];
+  const prompt = [
+    data.identityGuard + ',',
+    'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
+    data.anatomyGuard + ',',
+    data.poseNaturalityGuard + ',',
+    bodyShape + ',',
+    data.lightingConsistencyGuard + ',',
+    data.colorTemperatureGuard + ',',
+    data.subjectIntegrationGuard + ',',
+    data.faceFillGuard + ',',
+    selection.composition + ',',
+    data.compositionGuard + ',',
+    'appearance form: ' + garmentText + ',',
+    'theme material and art system: ' + materialText + ',',
+    'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',
+    selection.intensity + ',',
+    'selected material appears as controlled clothing details, ornaments, particles and background accents without overpowering facial identity,',
+    data.styleData[selection.style] + ',',
+    poseText ? poseText + ',' : '',
+    framing + ',',
+    data.cameraData[selection.camera] + ',',
+    'lighting design: ' + lighting + ',',
+    'background design: ' + background + ',',
+    data.ratioData[selection.ratio] + ',',
+    core.page.galaSocialite.output ? core.page.galaSocialite.output + ',' : '',
+    'hyper realistic, ultra detailed, premium advertising finish,',
+    'color palette: ' + materialPalette + ',',
+    core.page.galaSocialite.negativePrompt ? core.page.galaSocialite.negativePrompt + ',' : '',
+    'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face',
+  ];
+  return prompt.filter(Boolean).join('\n');
+}
+
+function generateKpopIdol(core, data) {
+  const selection = {
+    bodyShape: 'original',
+    material: 'stageSpotBeamGlow',
+    garment: 'crystalStageBodysuit',
+    background: 'ledScreenStageBackdrop',
+    lighting: 'stage',
+    composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
+    framing: 'threeQuarter',
+    intensity: 'balanced material effects, elegant and luxurious',
+    pose: 'center_still',
+    style: 'idolTeaserCampaign',
+    camera: 'eyeLevelCover',
+    ratio: 'vertical45',
+    customMaterial: '',
+    customGarment: '',
+    colorNote: '',
+    extraNote: '',
+  };
+  const material = data.materialData[selection.material];
+  const materialText = material.prompt;
+  const materialPalette = material.palette;
+  const garmentText = data.garmentData[selection.garment];
+  const background = data.backgroundData[selection.background];
+  const lighting = data.lightingData[selection.lighting];
+  const bodyShape = data.BODY_SHAPES[selection.bodyShape];
+  const framing = data.framingData[selection.framing];
+  const poseText = data.poseData[selection.pose];
+  const prompt = [
+    data.identityGuard + ',',
+    'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
+    data.anatomyGuard + ',',
+    data.poseNaturalityGuard + ',',
+    bodyShape + ',',
+    data.lightingConsistencyGuard + ',',
+    data.colorTemperatureGuard + ',',
+    data.subjectIntegrationGuard + ',',
+    data.faceFillGuard + ',',
+    selection.composition + ',',
+    data.compositionGuard + ',',
+    'appearance form: ' + garmentText + ',',
+    'theme material and art system: ' + materialText + ',',
+    'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',
+    selection.intensity + ',',
+    'selected material appears as controlled clothing details, ornaments, particles and background accents without overpowering facial identity,',
+    data.styleData[selection.style] + ',',
+    poseText ? poseText + ',' : '',
+    framing + ',',
+    data.cameraData[selection.camera] + ',',
+    'lighting design: ' + lighting + ',',
+    'background design: ' + background + ',',
+    data.ratioData[selection.ratio] + ',',
+    core.page.kpopIdol.output ? core.page.kpopIdol.output + ',' : '',
+    'hyper realistic, ultra detailed, premium advertising finish,',
+    'color palette: ' + materialPalette + ',',
+    core.page.kpopIdol.negativePrompt ? core.page.kpopIdol.negativePrompt + ',' : '',
+    'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face',
+  ];
+  return prompt.filter(Boolean).join('\n');
+}
+
+function generateBattleAcademy(core, data) {
+  const selection = {
+    bodyShape: 'original',
+    material: 'dataTabletPropAccent',
+    garment: 'tacticalBlazerVest',
+    background: 'briefingRoomTactical',
+    lighting: 'hard',
+    composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
+    framing: 'threeQuarter',
+    intensity: 'balanced material effects, elegant and luxurious',
+    pose: 'mission_briefing_gaze',
+    style: 'tacticalCampaign',
+    camera: 'eyeLevelCover',
+    ratio: 'vertical45',
+    customMaterial: '',
+    customGarment: '',
+    colorNote: '',
+    extraNote: '',
+  };
+  const material = data.materialData[selection.material];
+  const materialText = material.prompt;
+  const materialPalette = material.palette;
+  const garmentText = data.garmentData[selection.garment];
+  const background = data.backgroundData[selection.background];
+  const lighting = data.lightingData[selection.lighting];
+  const bodyShape = data.BODY_SHAPES[selection.bodyShape];
+  const framing = data.framingData[selection.framing];
+  const poseText = data.poseData[selection.pose];
+  const prompt = [
+    data.identityGuard + ',',
+    'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
+    data.anatomyGuard + ',',
+    data.poseNaturalityGuard + ',',
+    bodyShape + ',',
+    data.lightingConsistencyGuard + ',',
+    data.colorTemperatureGuard + ',',
+    data.subjectIntegrationGuard + ',',
+    data.faceFillGuard + ',',
+    selection.composition + ',',
+    data.compositionGuard + ',',
+    'appearance form: ' + garmentText + ',',
+    'theme material and art system: ' + materialText + ',',
+    'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',
+    selection.intensity + ',',
+    'selected material appears as controlled clothing details, ornaments, particles and background accents without overpowering facial identity,',
+    data.styleData[selection.style] + ',',
+    poseText ? poseText + ',' : '',
+    framing + ',',
+    data.cameraData[selection.camera] + ',',
+    'lighting design: ' + lighting + ',',
+    'background design: ' + background + ',',
+    data.ratioData[selection.ratio] + ',',
+    core.page.battleAcademy.output ? core.page.battleAcademy.output + ',' : '',
+    'hyper realistic, ultra detailed, premium advertising finish,',
+    'color palette: ' + materialPalette + ',',
+    core.page.battleAcademy.negativePrompt ? core.page.battleAcademy.negativePrompt + ',' : '',
+    'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face',
+  ];
+  return prompt.filter(Boolean).join('\n');
+}
+
 function loadRevision(label, sourceReader) {
   const coreSource = sourceReader('assets/core-prompt.js');
   const core = evalCore(coreSource);
@@ -621,6 +865,70 @@ function loadRevision(label, sourceReader) {
       exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedIsekaiCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
     });
     prompts['isekai-default.txt'] = generateIsekai(core, isekaiData);
+  } catch (err) {
+    // Not present in this revision — skip.
+  }
+
+  // floral-sweet.html is new; older revisions may not have it yet, so skip gracefully.
+  try {
+    const floralSweetSource = sourceReader('floral-sweet.html');
+    const floralSweetData = evalDataSegment({
+      source: floralSweetSource,
+      core,
+      page: 'floralSweet',
+      startMarker: 'const materialData = {',
+      endMarker: 'function setRadioValue',
+      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedFloralSweetCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
+    });
+    prompts['floralsweet-default.txt'] = generateFloralSweet(core, floralSweetData);
+  } catch (err) {
+    // Not present in this revision — skip.
+  }
+
+  // gala-socialite.html is new; older revisions may not have it yet, so skip gracefully.
+  try {
+    const galaSocialiteSource = sourceReader('gala-socialite.html');
+    const galaSocialiteData = evalDataSegment({
+      source: galaSocialiteSource,
+      core,
+      page: 'galaSocialite',
+      startMarker: 'const materialData = {',
+      endMarker: 'function setRadioValue',
+      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedGalaSocialiteCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
+    });
+    prompts['galasocialite-default.txt'] = generateGalaSocialite(core, galaSocialiteData);
+  } catch (err) {
+    // Not present in this revision — skip.
+  }
+
+  // kpop-idol.html is new; older revisions may not have it yet, so skip gracefully.
+  try {
+    const kpopIdolSource = sourceReader('kpop-idol.html');
+    const kpopIdolData = evalDataSegment({
+      source: kpopIdolSource,
+      core,
+      page: 'kpopIdol',
+      startMarker: 'const materialData = {',
+      endMarker: 'function setRadioValue',
+      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedKpopIdolCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
+    });
+    prompts['kpopidol-default.txt'] = generateKpopIdol(core, kpopIdolData);
+  } catch (err) {
+    // Not present in this revision — skip.
+  }
+
+  // battle-academy.html is new; older revisions may not have it yet, so skip gracefully.
+  try {
+    const battleAcademySource = sourceReader('battle-academy.html');
+    const battleAcademyData = evalDataSegment({
+      source: battleAcademySource,
+      core,
+      page: 'battleAcademy',
+      startMarker: 'const materialData = {',
+      endMarker: 'function setRadioValue',
+      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedBattleAcademyCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
+    });
+    prompts['battleacademy-default.txt'] = generateBattleAcademy(core, battleAcademyData);
   } catch (err) {
     // Not present in this revision — skip.
   }

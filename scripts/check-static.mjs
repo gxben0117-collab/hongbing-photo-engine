@@ -16,6 +16,10 @@ const htmlFiles = [
   'flower-fairy.html',
   'isekai-fantasy.html',
   'store-ad.html',
+  'floral-sweet.html',
+  'gala-socialite.html',
+  'kpop-idol.html',
+  'battle-academy.html',
 ];
 const requiredDirs = ['docs', 'assets'];
 let failures = 0;

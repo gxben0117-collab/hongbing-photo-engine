@@ -534,6 +534,242 @@ const core = evalCore(coreSource);
   report('isekai', N);
 }
 
+// ===================== FLORAL SWEET =====================
+{
+  const html = read('floral-sweet.html');
+  const data = evalDataSegment({
+    source: html, core, page: 'floralSweet',
+    startMarker: 'const materialData = {',
+    endMarker: 'function setRadioValue',
+    exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedFloralSweetCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
+  });
+  const compositionValues = radioValues(html, 'composition');
+  const intensityValues = selectValues(html, 'intensity');
+  const pools = {
+    bodyShape: Object.keys(data.BODY_SHAPES), material: Object.keys(data.materialData), garment: Object.keys(data.garmentData),
+    background: Object.keys(data.backgroundData), lighting: Object.keys(data.lightingData), composition: compositionValues,
+    framing: Object.keys(data.framingData), intensity: intensityValues, pose: Object.keys(data.poseData),
+    style: Object.keys(data.styleData), camera: Object.keys(data.cameraData), ratio: Object.keys(data.ratioData),
+  };
+  const customSamples = ['', '', 'strawberry cream', '手工訂製'];
+  for (let i = 0; i < N; i += 1) {
+    const sel = {
+      bodyShape: pick(pools.bodyShape), material: pick(pools.material), garment: pick(pools.garment),
+      background: pick(pools.background), lighting: pick(pools.lighting), composition: pick(pools.composition),
+      framing: pick(pools.framing), intensity: pick(pools.intensity), pose: pick(pools.pose), style: pick(pools.style),
+      camera: pick(pools.camera), ratio: pick(pools.ratio), customMaterial: pick(customSamples), customGarment: pick(customSamples),
+      colorNote: pick(customSamples), extraNote: pick(customSamples),
+    };
+    const material = data.materialData[sel.material];
+    const customMaterials = sel.customMaterial ? [sel.customMaterial] : [];
+    const customMaterialText = customMaterials.join(', ');
+    const materialText = customMaterials.length
+      ? `custom material system only: ${customMaterialText}; read and use every custom material keyword with equal priority, combine all custom materials into one coherent art system, do not include or blend any preset material option`
+      : material.prompt;
+    const materialPalette = customMaterials.length ? `derive the color palette only from custom material keywords: ${customMaterialText}` : material.palette;
+    const garmentText = sel.customGarment ? `custom garment form only: ${sel.customGarment}; do not include or blend any preset garment option` : data.garmentData[sel.garment];
+    const background = data.backgroundData[sel.background];
+    const lighting = data.lightingData[sel.lighting];
+    const bodyShape = data.BODY_SHAPES[sel.bodyShape];
+    const framing = data.framingData[sel.framing];
+    const poseText = data.poseData[sel.pose];
+    const prompt = [
+      data.identityGuard + ',', 'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
+      data.anatomyGuard + ',', data.poseNaturalityGuard + ',', bodyShape + ',', data.lightingConsistencyGuard + ',', data.colorTemperatureGuard + ',',
+      data.subjectIntegrationGuard + ',', data.faceFillGuard + ',', sel.composition + ',', data.compositionGuard + ',',
+      'appearance form: ' + garmentText + ',', 'theme material and art system: ' + materialText + ',',
+      'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',
+      sel.intensity + ',', 'selected material appears as controlled clothing details, ornaments, particles and background accents without overpowering facial identity,',
+      data.styleData[sel.style] + ',', poseText ? poseText + ',' : '', framing + ',',
+      data.cameraData[sel.camera] + ',', 'lighting design: ' + lighting + ',', 'background design: ' + background + ',',
+      data.ratioData[sel.ratio] + ',', core.page.floralSweet.output ? core.page.floralSweet.output + ',' : '',
+      'hyper realistic, ultra detailed, premium advertising finish,', 'color palette: ' + (sel.colorNote || materialPalette) + ',',
+      sel.extraNote ? 'extra direction: ' + sel.extraNote + ',' : '', core.page.floralSweet.negativePrompt ? core.page.floralSweet.negativePrompt + ',' : '',
+      'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face',
+    ].filter(Boolean);
+    const output = prompt.join('\n');
+    checkOutput('floralSweet', i, sel, output, { requireIdentity: true, identityMarkers: ['身份鎖定系統'] });
+  }
+  report('floralSweet', N);
+}
+
+// ===================== GALA SOCIALITE =====================
+{
+  const html = read('gala-socialite.html');
+  const data = evalDataSegment({
+    source: html, core, page: 'galaSocialite',
+    startMarker: 'const materialData = {',
+    endMarker: 'function setRadioValue',
+    exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedGalaSocialiteCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
+  });
+  const compositionValues = radioValues(html, 'composition');
+  const intensityValues = selectValues(html, 'intensity');
+  const pools = {
+    bodyShape: Object.keys(data.BODY_SHAPES), material: Object.keys(data.materialData), garment: Object.keys(data.garmentData),
+    background: Object.keys(data.backgroundData), lighting: Object.keys(data.lightingData), composition: compositionValues,
+    framing: Object.keys(data.framingData), intensity: intensityValues, pose: Object.keys(data.poseData),
+    style: Object.keys(data.styleData), camera: Object.keys(data.cameraData), ratio: Object.keys(data.ratioData),
+  };
+  const customSamples = ['', '', 'ruby brooch', '手工訂製'];
+  for (let i = 0; i < N; i += 1) {
+    const sel = {
+      bodyShape: pick(pools.bodyShape), material: pick(pools.material), garment: pick(pools.garment),
+      background: pick(pools.background), lighting: pick(pools.lighting), composition: pick(pools.composition),
+      framing: pick(pools.framing), intensity: pick(pools.intensity), pose: pick(pools.pose), style: pick(pools.style),
+      camera: pick(pools.camera), ratio: pick(pools.ratio), customMaterial: pick(customSamples), customGarment: pick(customSamples),
+      colorNote: pick(customSamples), extraNote: pick(customSamples),
+    };
+    const material = data.materialData[sel.material];
+    const customMaterials = sel.customMaterial ? [sel.customMaterial] : [];
+    const customMaterialText = customMaterials.join(', ');
+    const materialText = customMaterials.length
+      ? `custom material system only: ${customMaterialText}; read and use every custom material keyword with equal priority, combine all custom materials into one coherent art system, do not include or blend any preset material option`
+      : material.prompt;
+    const materialPalette = customMaterials.length ? `derive the color palette only from custom material keywords: ${customMaterialText}` : material.palette;
+    const garmentText = sel.customGarment ? `custom garment form only: ${sel.customGarment}; do not include or blend any preset garment option` : data.garmentData[sel.garment];
+    const background = data.backgroundData[sel.background];
+    const lighting = data.lightingData[sel.lighting];
+    const bodyShape = data.BODY_SHAPES[sel.bodyShape];
+    const framing = data.framingData[sel.framing];
+    const poseText = data.poseData[sel.pose];
+    const prompt = [
+      data.identityGuard + ',', 'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
+      data.anatomyGuard + ',', data.poseNaturalityGuard + ',', bodyShape + ',', data.lightingConsistencyGuard + ',', data.colorTemperatureGuard + ',',
+      data.subjectIntegrationGuard + ',', data.faceFillGuard + ',', sel.composition + ',', data.compositionGuard + ',',
+      'appearance form: ' + garmentText + ',', 'theme material and art system: ' + materialText + ',',
+      'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',
+      sel.intensity + ',', 'selected material appears as controlled clothing details, ornaments, particles and background accents without overpowering facial identity,',
+      data.styleData[sel.style] + ',', poseText ? poseText + ',' : '', framing + ',',
+      data.cameraData[sel.camera] + ',', 'lighting design: ' + lighting + ',', 'background design: ' + background + ',',
+      data.ratioData[sel.ratio] + ',', core.page.galaSocialite.output ? core.page.galaSocialite.output + ',' : '',
+      'hyper realistic, ultra detailed, premium advertising finish,', 'color palette: ' + (sel.colorNote || materialPalette) + ',',
+      sel.extraNote ? 'extra direction: ' + sel.extraNote + ',' : '', core.page.galaSocialite.negativePrompt ? core.page.galaSocialite.negativePrompt + ',' : '',
+      'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face',
+    ].filter(Boolean);
+    const output = prompt.join('\n');
+    checkOutput('galaSocialite', i, sel, output, { requireIdentity: true, identityMarkers: ['身份鎖定系統'] });
+  }
+  report('galaSocialite', N);
+}
+
+// ===================== KPOP IDOL =====================
+{
+  const html = read('kpop-idol.html');
+  const data = evalDataSegment({
+    source: html, core, page: 'kpopIdol',
+    startMarker: 'const materialData = {',
+    endMarker: 'function setRadioValue',
+    exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedKpopIdolCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
+  });
+  const compositionValues = radioValues(html, 'composition');
+  const intensityValues = selectValues(html, 'intensity');
+  const pools = {
+    bodyShape: Object.keys(data.BODY_SHAPES), material: Object.keys(data.materialData), garment: Object.keys(data.garmentData),
+    background: Object.keys(data.backgroundData), lighting: Object.keys(data.lightingData), composition: compositionValues,
+    framing: Object.keys(data.framingData), intensity: intensityValues, pose: Object.keys(data.poseData),
+    style: Object.keys(data.styleData), camera: Object.keys(data.cameraData), ratio: Object.keys(data.ratioData),
+  };
+  const customSamples = ['', '', 'holographic visor', '手工訂製'];
+  for (let i = 0; i < N; i += 1) {
+    const sel = {
+      bodyShape: pick(pools.bodyShape), material: pick(pools.material), garment: pick(pools.garment),
+      background: pick(pools.background), lighting: pick(pools.lighting), composition: pick(pools.composition),
+      framing: pick(pools.framing), intensity: pick(pools.intensity), pose: pick(pools.pose), style: pick(pools.style),
+      camera: pick(pools.camera), ratio: pick(pools.ratio), customMaterial: pick(customSamples), customGarment: pick(customSamples),
+      colorNote: pick(customSamples), extraNote: pick(customSamples),
+    };
+    const material = data.materialData[sel.material];
+    const customMaterials = sel.customMaterial ? [sel.customMaterial] : [];
+    const customMaterialText = customMaterials.join(', ');
+    const materialText = customMaterials.length
+      ? `custom material system only: ${customMaterialText}; read and use every custom material keyword with equal priority, combine all custom materials into one coherent art system, do not include or blend any preset material option`
+      : material.prompt;
+    const materialPalette = customMaterials.length ? `derive the color palette only from custom material keywords: ${customMaterialText}` : material.palette;
+    const garmentText = sel.customGarment ? `custom garment form only: ${sel.customGarment}; do not include or blend any preset garment option` : data.garmentData[sel.garment];
+    const background = data.backgroundData[sel.background];
+    const lighting = data.lightingData[sel.lighting];
+    const bodyShape = data.BODY_SHAPES[sel.bodyShape];
+    const framing = data.framingData[sel.framing];
+    const poseText = data.poseData[sel.pose];
+    const prompt = [
+      data.identityGuard + ',', 'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
+      data.anatomyGuard + ',', data.poseNaturalityGuard + ',', bodyShape + ',', data.lightingConsistencyGuard + ',', data.colorTemperatureGuard + ',',
+      data.subjectIntegrationGuard + ',', data.faceFillGuard + ',', sel.composition + ',', data.compositionGuard + ',',
+      'appearance form: ' + garmentText + ',', 'theme material and art system: ' + materialText + ',',
+      'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',
+      sel.intensity + ',', 'selected material appears as controlled clothing details, ornaments, particles and background accents without overpowering facial identity,',
+      data.styleData[sel.style] + ',', poseText ? poseText + ',' : '', framing + ',',
+      data.cameraData[sel.camera] + ',', 'lighting design: ' + lighting + ',', 'background design: ' + background + ',',
+      data.ratioData[sel.ratio] + ',', core.page.kpopIdol.output ? core.page.kpopIdol.output + ',' : '',
+      'hyper realistic, ultra detailed, premium advertising finish,', 'color palette: ' + (sel.colorNote || materialPalette) + ',',
+      sel.extraNote ? 'extra direction: ' + sel.extraNote + ',' : '', core.page.kpopIdol.negativePrompt ? core.page.kpopIdol.negativePrompt + ',' : '',
+      'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face',
+    ].filter(Boolean);
+    const output = prompt.join('\n');
+    checkOutput('kpopIdol', i, sel, output, { requireIdentity: true, identityMarkers: ['身份鎖定系統'] });
+  }
+  report('kpopIdol', N);
+}
+
+// ===================== BATTLE ACADEMY =====================
+{
+  const html = read('battle-academy.html');
+  const data = evalDataSegment({
+    source: html, core, page: 'battleAcademy',
+    startMarker: 'const materialData = {',
+    endMarker: 'function setRadioValue',
+    exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedBattleAcademyCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
+  });
+  const compositionValues = radioValues(html, 'composition');
+  const intensityValues = selectValues(html, 'intensity');
+  const pools = {
+    bodyShape: Object.keys(data.BODY_SHAPES), material: Object.keys(data.materialData), garment: Object.keys(data.garmentData),
+    background: Object.keys(data.backgroundData), lighting: Object.keys(data.lightingData), composition: compositionValues,
+    framing: Object.keys(data.framingData), intensity: intensityValues, pose: Object.keys(data.poseData),
+    style: Object.keys(data.styleData), camera: Object.keys(data.cameraData), ratio: Object.keys(data.ratioData),
+  };
+  const customSamples = ['', '', 'exosuit joints', '手工訂製'];
+  for (let i = 0; i < N; i += 1) {
+    const sel = {
+      bodyShape: pick(pools.bodyShape), material: pick(pools.material), garment: pick(pools.garment),
+      background: pick(pools.background), lighting: pick(pools.lighting), composition: pick(pools.composition),
+      framing: pick(pools.framing), intensity: pick(pools.intensity), pose: pick(pools.pose), style: pick(pools.style),
+      camera: pick(pools.camera), ratio: pick(pools.ratio), customMaterial: pick(customSamples), customGarment: pick(customSamples),
+      colorNote: pick(customSamples), extraNote: pick(customSamples),
+    };
+    const material = data.materialData[sel.material];
+    const customMaterials = sel.customMaterial ? [sel.customMaterial] : [];
+    const customMaterialText = customMaterials.join(', ');
+    const materialText = customMaterials.length
+      ? `custom material system only: ${customMaterialText}; read and use every custom material keyword with equal priority, combine all custom materials into one coherent art system, do not include or blend any preset material option`
+      : material.prompt;
+    const materialPalette = customMaterials.length ? `derive the color palette only from custom material keywords: ${customMaterialText}` : material.palette;
+    const garmentText = sel.customGarment ? `custom garment form only: ${sel.customGarment}; do not include or blend any preset garment option` : data.garmentData[sel.garment];
+    const background = data.backgroundData[sel.background];
+    const lighting = data.lightingData[sel.lighting];
+    const bodyShape = data.BODY_SHAPES[sel.bodyShape];
+    const framing = data.framingData[sel.framing];
+    const poseText = data.poseData[sel.pose];
+    const prompt = [
+      data.identityGuard + ',', 'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
+      data.anatomyGuard + ',', data.poseNaturalityGuard + ',', bodyShape + ',', data.lightingConsistencyGuard + ',', data.colorTemperatureGuard + ',',
+      data.subjectIntegrationGuard + ',', data.faceFillGuard + ',', sel.composition + ',', data.compositionGuard + ',',
+      'appearance form: ' + garmentText + ',', 'theme material and art system: ' + materialText + ',',
+      'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',
+      sel.intensity + ',', 'selected material appears as controlled clothing details, ornaments, particles and background accents without overpowering facial identity,',
+      data.styleData[sel.style] + ',', poseText ? poseText + ',' : '', framing + ',',
+      data.cameraData[sel.camera] + ',', 'lighting design: ' + lighting + ',', 'background design: ' + background + ',',
+      data.ratioData[sel.ratio] + ',', core.page.battleAcademy.output ? core.page.battleAcademy.output + ',' : '',
+      'hyper realistic, ultra detailed, premium advertising finish,', 'color palette: ' + (sel.colorNote || materialPalette) + ',',
+      sel.extraNote ? 'extra direction: ' + sel.extraNote + ',' : '', core.page.battleAcademy.negativePrompt ? core.page.battleAcademy.negativePrompt + ',' : '',
+      'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face',
+    ].filter(Boolean);
+    const output = prompt.join('\n');
+    checkOutput('battleAcademy', i, sel, output, { requireIdentity: true, identityMarkers: ['身份鎖定系統'] });
+  }
+  report('battleAcademy', N);
+}
+
 // ===================== DOLL =====================
 {
   const html = read('doll.html');

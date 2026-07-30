@@ -273,6 +273,67 @@ Even in doll style, the character must remain recognizable as the uploaded perso
     lighting: CORE_LIGHTING_UNIFICATION
   };
 
+  const floralSweetCore = {
+    identityGuard: [
+      CORE_IDENTITY_LOCK,
+      CORE_FACE_GEOMETRY_LOCK,
+      `Style Scope Rule:
+Commercial style, sweet floral fashion and art direction only affect clothing, ornaments, background, lighting, composition, mood and surface texture.
+They must not change the person's facial structure, identity, age impression or recognizable features.`
+    ].join("\n\n"),
+    anatomyGuard: humanCore,
+    poseGuard: CORE_POSE_NATURALITY,
+    lightingGuard: CORE_LIGHTING_UNIFICATION,
+    negativePrompt: CORE_NEGATIVE_PROMPT,
+    output: CORE_OUTPUT_QUALITY
+  };
+
+  const galaSocialiteCore = {
+    identityGuard: [
+      CORE_IDENTITY_LOCK,
+      CORE_FACE_GEOMETRY_LOCK,
+      `Style Scope Rule:
+Commercial style, evening gala fashion and art direction only affect clothing, ornaments, background, lighting, composition, mood and surface texture.
+They must not change the person's facial structure, identity, age impression or recognizable features.`
+    ].join("\n\n"),
+    anatomyGuard: humanCore,
+    poseGuard: CORE_POSE_NATURALITY,
+    lightingGuard: CORE_LIGHTING_UNIFICATION,
+    negativePrompt: CORE_NEGATIVE_PROMPT,
+    output: CORE_OUTPUT_QUALITY
+  };
+
+  const kpopIdolCore = {
+    identityGuard: [
+      CORE_IDENTITY_LOCK,
+      CORE_FACE_GEOMETRY_LOCK,
+      `Style Scope Rule:
+Commercial style, Korean idol stage and street fashion art direction only affect clothing, ornaments, background, lighting, composition, mood and surface texture.
+They must not change the person's facial structure, identity, age impression or recognizable features.`
+    ].join("\n\n"),
+    anatomyGuard: humanCore,
+    poseGuard: CORE_POSE_NATURALITY,
+    lightingGuard: CORE_LIGHTING_UNIFICATION,
+    negativePrompt: CORE_NEGATIVE_PROMPT,
+    output: CORE_OUTPUT_QUALITY
+  };
+
+  const battleAcademyCore = {
+    identityGuard: [
+      CORE_IDENTITY_LOCK,
+      CORE_FACE_GEOMETRY_LOCK,
+      `Style Scope Rule:
+Commercial style, tactical academy uniform and art direction only affect clothing, ornaments, background, lighting, composition, mood and surface texture.
+They must not change the person's facial structure, identity, age impression or recognizable features.
+This is a photorealistic photography campaign, not an anime/illustration conversion — render skin, face and body with realistic photographic detail, not cel-shaded or illustrated medium.`
+    ].join("\n\n"),
+    anatomyGuard: humanCore,
+    poseGuard: CORE_POSE_NATURALITY,
+    lightingGuard: CORE_LIGHTING_UNIFICATION,
+    negativePrompt: CORE_NEGATIVE_PROMPT,
+    output: CORE_OUTPUT_QUALITY
+  };
+
   window.CORE_IDENTITY_LOCK = CORE_IDENTITY_LOCK;
   window.CORE_FACE_GEOMETRY_LOCK = CORE_FACE_GEOMETRY_LOCK;
   window.CORE_REALISTIC_ANATOMY = CORE_REALISTIC_ANATOMY;
@@ -305,7 +366,11 @@ Even in doll style, the character must remain recognizable as the uploaded perso
       flowerFairy: flowerFairyCore,
       isekai: isekaiCore,
       doll: dollCore,
-      storeAd: storeAdCore
+      storeAd: storeAdCore,
+      floralSweet: floralSweetCore,
+      galaSocialite: galaSocialiteCore,
+      kpopIdol: kpopIdolCore,
+      battleAcademy: battleAcademyCore
     }
   };
 })();

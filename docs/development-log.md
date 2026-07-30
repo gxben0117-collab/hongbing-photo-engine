@@ -1831,3 +1831,144 @@
   做法試過但仍不足以通過圖像生成端的內容防範機制」；`README.md` 的
   工具頁清單、資料夾結構、頁數說明同步改回 9 個工具頁。
 
+## 2026-07-30　新增 4 個時尚寫真主題頁：花漾甜美系／氣質名媛宴會／韓系氣質偶像風／戰鬥制服學園
+
+- **開放式腦力激盪過程**：owner 先請提 9 個以奇幻廣告為基礎的新主題方案，
+  接著陸續加碼「時尚風格呢」（9 個當代時尚流派方案）、「再天馬行空 20
+  個」（跨神話/元素/藝術風格）、「50 個 IP 主題或世界感」（原創世界觀，
+  避開真實既有 IP 名稱）。中途 owner 提供夏日海島當初的例子釐清「場景化
+  模組」跟「人物+服裝為主」兩種建頁思路的差異，最後明確收斂方向：「我要
+  的是 新潮 美人 漂亮 那種感覺」，回頭指向先前「時尚風格」那組方案。owner
+  從中選定 **花漾甜美系、氣質名媛宴會、戰鬥制服學園、韓系氣質偶像風**
+  四個，其中「戰鬥制服學園」是 owner 自己額外提的新主題（不在前面任何一批
+  清單裡），Claude 提醒這個主題跟既有 `anime-character.html`（動漫插畫風）
+  與 `isekai-fantasy.html`（異世界幻想）氣質相近，建議走「戰術改良制服＋
+  現代機能剪裁」的真人時尚路線做區隔，owner 認可後直接執行全部四頁。
+- **建頁方法論選擇**：四頁都以 `flower-fairy.html`（1864 行）而非
+  `fantasy-fashion.html`（3316 行，已累積 58 個模板）當複製底本——結構
+  完全相同（00 模板／01 style／02 構圖／03 身形／04 服裝／05 材質／05b
+  翅膀蝴蝶／06 姿勢／07 鏡頭／08 光影／09 背景／10 自訂／11 比例／12
+  輸出），但模板數剛好 16 組、內容量更適合當新頁起點，複製後省去大量
+  刪減既有 58 個模板的工作。四頁共通處理：拿掉 05b「翅膀與蝴蝶」維度（連
+  同 `wingsData`/`butterfliesData` 兩個 JS 物件、`applyThemeTemplate`／
+  `applyXxxRandomSelection` 裡的 `wings`/`butterflies` 欄位、`generate()`
+  裡組裝 wingsText/butterfliesText 的三行）；02 構圖／03 身形／07 鏡頭／
+  08 光影／`framingData`／`cameraData`／`ratioData`／`BODY_SHAPES`／五個
+  identityGuard 系列共用防護區塊（`identityGuard`/`anatomyGuard`/
+  `poseNaturalityGuard`/`compositionGuard`/`lightingConsistencyGuard`/
+  `colorTemperatureGuard`/`subjectIntegrationGuard`/`faceFillGuard`）
+  全部原樣沿用不改一字——這些都是全站共用的通用攝影概念與鎖臉防護層，不是
+  花仙子專屬內容。00 一鍵模板區塊順手做了一個小簡化：flower-fairy.html
+  原本第一顆模板按鈕是寫死的 `id="roseFairyRomancePreset"`（獨立
+  `addEventListener`），其餘 15 顆用通用的 `data-template` 屬性
+  （`querySelectorAll('[data-template]')` 統一綁定）——這正是先前
+  開發日誌記錄過的「複製頁面時容易漏改的按鈕 ID」風險來源之一，四個新頁
+  索性把全部 16 顆模板按鈕都改成 `data-template`，不再保留這個特例，
+  從源頭消除該風險。
+- **06 姿勢：依主題各自決定「精簡沿用」還是「整組保留」**，不是統一做法：
+  - **floral-sweet.html（花漾甜美系）**：站姿 16 個全留；坐姿刪
+    `throne_cross_leg`（寶座交腿，太貴氣不符甜美調性）與
+    `rock_stream_leg_extend`（溪石伸腿，太自然系）2 個；手勢刪
+    `water_sleeve`/`fan_cover`/`hold_mask_profile`/`calligraphy_brush`/
+    `umbrella_gaze`/`lift_veil` 6 個東方戲劇/神秘感手勢；整組拿掉「電影
+    感動態／戰鬥瞬間」16 個（甜美主題不需要武打張力姿勢）；新增「甜美
+    專屬」姿勢群組 7 個：`skirt_twirl_smile`（裙擺旋轉笑意）、
+    `floral_bouquet_hug`（抱花輕嗅）、`wink_finger_heart`（眨眼比心）、
+    `picnic_basket_sit`（野餐籃邊坐）、`window_light_lean`（窗邊倚靠）
+    ——另外重用 flower-fairy 原本「花仙子專屬」群組裡的
+    `flower_crown_adjust`（花冠輕整姿）與 `petal_catch_reach`（花瓣接取
+    伸手姿）這兩個本來就不含仙子元素、純粹是花卉互動動作的姿勢，一併
+    留在新群組裡。姿勢池總數 57（含 auto）。
+  - **gala-socialite.html（氣質名媛宴會）**：站姿 16 個全留；坐姿**刻意
+    保留 `throne_cross_leg`**（寶座交腿坐姿正好貼合名媛女王氣場），只刪
+    `rock_stream_leg_extend`；手勢刪同一批 6 個東方戲劇/神秘感手勢（`lift_veil`
+    掀頭紗改為保留，因為「珠寶美妝感」的描述跟晚宴珠寶主題契合）；整組
+    拿掉戰鬥瞬間 16 個；新增「名媛專屬」5 個：
+    `champagne_toast_glance`（香檳致意回眸）、`clutch_hip_hold`（手拿包
+    倚腰姿）、`masquerade_mask_reveal`（面具半遮姿）、
+    `staircase_descent_pose`（階梯優雅下行姿）、
+    `diamond_necklace_touch`（輕觸項鍊姿）。姿勢池總數 57。
+  - **kpop-idol.html（韓系氣質偶像風）**：站姿 16 個全留；坐姿刪
+    `throne_cross_leg`＋`rock_stream_leg_extend`；手勢刪同批 6 個東方
+    戲劇/神秘感手勢；整組拿掉戰鬥瞬間 16 個；新增「偶像專屬」5 個：
+    `mic_drop_confidence`（麥克風自信手勢）、`finger_heart_stage`（比心
+    舞台手勢）、`ear_monitor_adjust`（耳返調整動作）、
+    `dance_break_freeze`（舞蹈定格瞬間）、`backstage_candid_glance`
+    （後台隨性回眸）。姿勢池總數 55（比其餘三頁少 2 個，因為手勢群組
+    刪除範圍略有不同：多刪了 `hold_mask_profile`）。
+  - **battle-academy.html（戰鬥制服學園）**：四頁中唯一**完整保留「電影
+    感動態／戰鬥瞬間」16 個姿勢**（`arms_wide`/`bow_hero`/
+    `shield_guard_stand`/`hero_landing_pose`/`sword_draw_pose`/
+    `mid_air_slash`/`energy_burst`/`dual_spirit_guardian_throne` 等）
+    ——這頁主題本來就需要武打張力姿勢，是唯一跟這個姿勢群組天然契合的
+    新頁；坐姿只刪 `rock_stream_leg_extend`（`throne_cross_leg` 也保留，
+    符合指揮官威嚴站姿的需要）；手勢刪同批東方戲劇/神秘感手勢；新增
+    「指揮官專屬」5 個：`salute_ready_stance`（敬禮預備站姿）、
+    `tactical_scan_gesture`（戰術掃視手勢）、`squad_signal_hand`（小隊
+    手勢指揮）、`gear_check_moment`（裝備檢查瞬間）、
+    `mission_briefing_gaze`（任務簡報凝視）。姿勢池總數 71（四頁中
+    最大，含 auto），因為多保留了 16 個戰鬥瞬間姿勢。
+- **04/05/09 內容規劃**（每頁皆 24 服裝/5組＋24 材質/5組＋24 背景/5組＋
+  16 一鍵模板＋9 style，統一比 fantasy-fashion/xianxia 等頁常見的
+  30 項/6組略精簡，符合「新開一頁不需要一開始就疊到滿」的判斷）：
+  - floral-sweet：服裝＝花朵洋裝基礎／針織甜美上衣／蕾絲層次洋裝／緞帶
+    蝴蝶結套裝／甜美派對禮服；材質＝花束花飾／柔光泡泡／緞帶蝴蝶結細節／
+    甜點生活道具／光影氛圍；背景＝花店溫室／公園花園／甜美生活場景／
+    街景旅拍／夢幻抽象。
+  - gala-socialite：服裝＝晚宴禮服基礎／珠寶名媛套裝／俐落剪裁套裝／
+    蕾絲薄紗晚裝／高定訂製禮服；材質＝珠寶配飾／香檳金光影／緞面絲絨
+    質感／花藝宴會道具／光影氛圍；背景＝宴會廳／名流社交場景／燭光晚宴／
+    城市夜景／抽象奢華。
+  - kpop-idol：服裝＝舞台表演服／極簡高訂套裝／街頭潮流穿搭／機場時尚／
+    夢幻概念寫真服；材質＝舞台光影特效／造型配件／都會夜色光影／音樂
+    概念特效／柔焦色調氛圍；背景＝舞台表演／指揮任務／城市夜景／機場
+    旅行／極簡棚拍／生活時尚（6組，比其餘三頁多一組，因為機場與抽象
+    棚拍兩類都值得獨立成組）。
+  - battle-academy：服裝＝戰術改良制服／機能剪裁外套／訓練服運動剪裁／
+    制服配件套裝／指揮官隊長進化服；材質＝戰術裝備配件／能量光效／訓練
+    場景特效／學院徽章紋樣／光影氛圍；背景＝學院訓練場景／指揮任務場景／
+    城市與廢墟場景／校園日常場景／抽象科技背景。
+- **`core-prompt.js`**：新增 `floralSweetCore`／`galaSocialiteCore`／
+  `kpopIdolCore`／`battleAcademyCore`，結構比照 `flowerFairyCore`
+  （`identityGuard` 含 Style Scope Rule、`anatomyGuard` 用寫實
+  `humanCore`、`poseGuard`/`lightingGuard`/`negativePrompt`/`output`
+  接共用區塊），`battleAcademyCore` 的 Style Scope Rule 額外加一句
+  「This is a photorealistic photography campaign, not an
+  anime/illustration conversion」（比照 `isekaiCore` 的做法，因為
+  「戰鬥」「制服」字面容易讓人聯想動漫/遊戲插畫風，需要明確排除），
+  四個 Core 都註冊進 `window.HB_CORE_PROMPT.page`（`floralSweet`／
+  `galaSocialite`／`kpopIdol`／`battleAcademy`），用 `node -e` 直接
+  載入確認 13 個 key 全部正確存在。
+- **全站整合**：
+  - Nav：寫一支 Node 腳本統一重寫全部 14 個檔案（index.html＋13 工具頁）
+    的 `<div class="nav-links">` 區塊，用同一份 14 項清單陣列（含中文
+    label 與 href）逐檔案輸出、依檔名自動標記 `active`，避免手動逐頁
+    加 4 個連結時遺漏或順序不一致；跑完後逐檔 `grep -c` 確認全部 14 個
+    檔案都剛好有 14 個 `nav-link`。
+  - `index.html`：新增 4 張 tool-card（花漾甜美系珊瑚粉 `#FFB4A8`、
+    氣質名媛宴會香檳金 `#E0B978`、韓系氣質偶像風亮青 `#6FE7FF`、戰鬥
+    制服學園戰術灰藍 `#8FA1B3`，四色皆未使用過，跟既有 8 色區隔），
+    CSS 三段式規則（`::before` 卡片頂色條／`.tool-tag` 標籤色／
+    `.tool-cta` 行動呼籲色）比照既有卡片結構逐一補齊。
+  - 四支驗證腳本：`check-static.mjs` 的 `htmlFiles` 陣列＋4；
+    `validate-preset-refs.mjs` 依既有 isekai 區塊格式各加一段（含
+    `bodyShape`／`intensity` 欄位檢查）；`audit-100x.mjs` 依 isekai 區塊
+    格式各加一段模擬邏輯（不含 wings/butterflies 分支）；
+    `build-prompt-preview.mjs` 各加一個 `generateXxx()` 函式＋
+    `loadRevision()` 內的 try/catch skip-gracefully 區塊（沿用「新頁面
+    在舊 revision 不存在時優雅跳過」的既有模式）。
+- **驗證結果**：四頁各自先用暫存目錄的一次性 Node 腳本（沿用
+  `validate-preset-refs.mjs` 的 `liveRadioValues`/`extractObjectLiteral`
+  手法）單獨驗證 `themeTemplates` 16 組欄位值全部存在於當頁選項池、
+  無重複 id、inline script 語法合法，四頁皆 0 issue 後才進入全站整合。
+  整合後重跑四支正式腳本：`check-static.mjs` 全過；
+  `validate-preset-refs.mjs` 13 頁 `themeTemplates` 全過、新增 4 頁各
+  16 組 0 issue；`audit-100x.mjs` 累計 1300 次模擬（13頁×100）0 issue；
+  `build-prompt-preview.mjs` 四頁新增的 `worktree-*-default.txt` 正常
+  產出（無對應 `base-*` 版本可比對，因為是全新頁面，符合預期）。
+  `core-prompt.js` 用 `node -e` 直接載入驗證語法與 13 個 page key。
+- **文件同步**：`CLAUDE.md` 現況摘要日期更新為 2026-07-30、工具頁計數
+  9→13、新增一則完整記錄本次四頁建置的細節（含每頁姿勢池取捨差異、
+  04/05/09 分組內容、強調色選色）；`README.md` 頁數說明、正式頁面清單、
+  資料夾結構三處同步改為 13 個工具頁。
+

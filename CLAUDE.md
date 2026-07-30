@@ -18,9 +18,11 @@
 **完整逐日開發記錄在 [`docs/development-log.md`](docs/development-log.md)，本節只放
 現況摘要與待辦；不要在這裡繼續累加逐日流水帳，改記到開發日誌裡。**
 
-### 現況摘要（2026-07-22）
+### 現況摘要（2026-07-30）
 
-- 九個工具頁（travel / magazine / doll / fantasy-fashion / xianxia / anime-character / flower-fairy / isekai-fantasy / store-ad）
+- 十三個工具頁（travel / magazine / doll / fantasy-fashion / xianxia /
+  anime-character / flower-fairy / isekai-fantasy / store-ad /
+  floral-sweet / gala-socialite / kpop-idol / battle-academy）
   皆已上線，正式站 <https://gxben0117-collab.github.io/hongbing-photo-engine/>。
   **`anime-hero.html`（動漫電影變身夥伴咒語產生器）已於 2026-07-24 整頁下架**：
   owner 對這系列不滿意，且該頁架構已疊到 10 層 monkey-patch 式的
@@ -251,10 +253,68 @@
   完整的建置與修正過程記錄在開發日誌 2026-07-29（十六）～（十九）條目，
   留供之後若重啟同類主題時參考「哪些做法試過但仍不夠」。目前工具頁
   回到 9 個。
+- **新增 4 個「新潮/美人/漂亮」時尚頁**（2026-07-30）：owner 先做開放式腦力激盪
+  （9→9→20→50 個主題方案，橫跨奇幻世界觀與當代時尚兩條軸線），最後選定
+  「花漾甜美系」「氣質名媛宴會」「戰鬥制服學園」「韓系氣質偶像風」四個
+  真人時尚寫真方向（非奇幻插畫）執行。四頁都採「方案A：複製
+  flower-fairy.html 當底」（比 fantasy-fashion.html 精簡、模板數量剛好16個，
+  更適合當新頁起點），02 構圖／03 身形／07 鏡頭／08 光影／`BODY_SHAPES`／
+  五個 identityGuard 系列 guard 區塊全部沿用不動（全站共用的通用攝影概念與
+  防護層），拿掉 flower-fairy 專屬的「05b 翅膀與蝴蝶」維度。
+  - **floral-sweet.html（花漾甜美系）**：24 服裝/5組（花朵洋裝基礎、針織
+    甜美上衣、蕾絲層次洋裝、緞帶蝴蝶結套裝、甜美派對禮服）、24 材質/5組
+    （花束花飾、柔光泡泡、緞帶蝴蝶結細節、甜點生活道具、光影氛圍）、
+    24 背景/5組（花店溫室、公園花園、甜美生活場景、街景旅拍、夢幻抽象）、
+    16 一鍵模板、9 種 style。06 姿勢走「精簡再利用」：保留站姿全部16個、
+    坐姿刪 2 個(寶座交腿/溪石伸腿，不符甜美調性)、手勢刪 6 個(東方戲劇/
+    蒙面等不符)、整組拿掉「電影感動態/戰鬥瞬間」16 個(不需要武打張力)，
+    新增 7 個「甜美專屬」姿勢(裙擺旋轉/抱花輕嗅/眨眼比心/野餐籃邊坐/
+    窗邊倚靠，另外重用 flower-fairy 的花冠輕整/花瓣接取)。
+  - **gala-socialite.html（氣質名媛宴會）**：24 服裝/5組（晚宴禮服基礎、
+    珠寶名媛套裝、俐落剪裁套裝、蕾絲薄紗晚裝、高定訂製禮服）、24 材質/5組
+    （珠寶配飾、香檳金光影、緞面絲絨質感、花藝宴會道具、光影氛圍）、
+    24 背景/5組（宴會廳、名流社交場景、燭光晚宴、城市夜景、抽象奢華）、
+    16 一鍵模板。06 姿勢**保留「寶座交腿坐姿」**(貼合名媛氣場)、刪溪石
+    伸腿/東方戲劇類手勢，新增 5 個「名媛專屬」姿勢(香檳致意回眸/手拿包
+    倚腰/面具半遮/階梯優雅下行/輕觸項鍊)。
+  - **kpop-idol.html（韓系氣質偶像風）**：24 服裝/5組（舞台表演服、極簡
+    高訂套裝、街頭潮流穿搭、機場時尚、夢幻概念寫真服）、24 材質/5組
+    （舞台光影特效、造型配件、都會夜色光影、音樂概念特效、柔焦色調氛圍）、
+    24 背景/5組（舞台表演、指揮任務、城市夜景〔沿用 battle-academy 命名
+    習慣但內容各自獨立〕、機場旅行、極簡棚拍、生活時尚），16 一鍵模板。
+    06 姿勢刪寶座/溪石/東方戲劇類手勢，新增 5 個「偶像專屬」姿勢(麥克風
+    自信手勢/比心舞台手勢/耳返調整/舞蹈定格瞬間/後台隨性回眸)。
+  - **battle-academy.html（戰鬥制服學園）**：定位刻意跟 anime-character.html
+    （動漫插畫風）與 isekai-fantasy.html（異世界幻想）錯開——服裝走「戰術
+    改良制服+現代機能剪裁」，真人時尚寫實質感，identityGuard 明確加一句
+    「not an anime/illustration conversion」排除插畫化（比照 isekai 的
+    做法）。24 服裝/5組（戰術改良制服、機能剪裁外套、訓練服運動剪裁、制服
+    配件套裝、指揮官/隊長進化服）、24 材質/5組（戰術裝備配件、能量光效、
+    訓練場景特效、學院徽章紋樣、光影氛圍）、24 背景/5組（學院訓練場景、
+    指揮任務場景、城市與廢墟場景、校園日常場景、抽象科技背景）、16 一鍵
+    模板。06 姿勢是四頁中唯一**完整保留「電影感動態/戰鬥瞬間」16 個姿勢**
+    （宿主題本來就需要武打張力），只刪東方戲劇類手勢與溪石伸腿，新增 5 個
+    「指揮官專屬」姿勢(敬禮預備/戰術掃視/小隊手勢指揮/裝備檢查/任務簡報
+    凝視)，是四頁中姿勢池最大的一頁（71個，含 auto）。
+  - `core-prompt.js` 新增 `floralSweetCore`/`galaSocialiteCore`/
+    `kpopIdolCore`/`battleAcademyCore`，結構比照 `flowerFairyCore`
+    （identityGuard 含 Style Scope Rule、anatomyGuard 用寫實 `humanCore`，
+    battleAcademy 額外加插畫排除句），註冊到 `window.HB_CORE_PROMPT.page`。
+  - 全站 nav 改為 14 個連結互相連結（index.html 起 14 個檔案統一重寫
+    `.nav-links` 區塊）；index.html 新增 4 張 tool-card＋CSS 強調色
+    （花漾甜美系珊瑚粉 `#FFB4A8`、名媛宴會香檳金 `#E0B978`、韓系偶像亮青
+    `#6FE7FF`、戰鬥學園戰術灰藍 `#8FA1B3`，皆未使用過）；四支驗證腳本
+    （`check-static`/`validate-preset-refs`/`audit-100x`/
+    `build-prompt-preview`）同步加入四頁支援。`validate-preset-refs`
+    確認四頁 `themeTemplates` 各 16 組、0 issue；`audit-100x` 累計 1300 次
+    模擬（13頁×100）0 issue；`build-prompt-preview` 四頁新增預覽輸出正常
+    產出（無 base 版本可比對，因為是全新頁面，`loadRevision` 的
+    try/catch skip-gracefully 機制正常運作）。
 - **共用核心**：`assets/core-prompt.js` 集中管理身份鎖定等保護區塊；核心文字經過
   兩輪瘦身（5,162 → 4,099 字元），語意零遺漏。
-- **全部 9 個工具頁的生成互動已完全統一**（2026-07-27；花仙子/日式異世界
-  複製 fantasy-fashion.html 建立時直接繼承這套機制，不需額外處理）：
+- **全部 13 個工具頁的生成互動已完全統一**（2026-07-27；花仙子/日式異世界/
+  花漾甜美系/氣質名媛宴會/韓系氣質偶像風/戰鬥制服學園複製既有頁面建立時
+  直接繼承這套機制，不需額外處理）：
   手動按「生成」才
   顯示輸出、stale 保護（改選項後輸出區標記過期＋複製鈕鎖住，需重新生成
   才解除）。`doll.html` 補上 stale 徽章＋額外攔截 `.chip`/`.auto-card` 點擊
