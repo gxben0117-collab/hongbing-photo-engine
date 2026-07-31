@@ -718,7 +718,7 @@ const core = evalCore(coreSource);
     source: html, core, page: 'battleAcademy',
     startMarker: 'const schoolData = {',
     endMarker: 'function selected',
-    exportExpression: '({ schoolData, upperBodyData, waistData, lowerData, uniformTypeData, accessoryData, fantasyDetailData, armorModeData, capeModeData, emblemFocusData, styleData, backgroundData, lightingData, sharedBattleAcademyCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
+    exportExpression: '({ schoolData, upperBodyData, waistData, lowerData, uniformTypeData, accessoryData, fantasyDetailData, armorModeData, capeModeData, emblemFocusData, styleData, backgroundData, lightingData, sharedBattleAcademyCore, identityGuard, anatomyGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, poseData, framingData, cameraData, ratioData })',
   });
   const compositionValues = radioValues(html, 'composition');
   const intensityValues = selectValues(html, 'intensity');
@@ -764,8 +764,8 @@ const core = evalCore(coreSource);
     const poseText = data.poseData[sel.pose];
     const prompt = [
       data.identityGuard + ',', 'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
-      data.anatomyGuard + ',', data.poseNaturalityGuard + ',', bodyShape + ',', data.lightingConsistencyGuard + ',', data.colorTemperatureGuard + ',',
-      data.subjectIntegrationGuard + ',', data.faceFillGuard + ',', sel.composition + ',', data.compositionGuard + ',',
+      data.anatomyGuard + ',', bodyShape + ',', data.lightingConsistencyGuard + ',',
+      sel.composition + ',', data.compositionGuard + ',',
       'school identity: ' + schoolInfo.prompt + ',',
       'appearance form: ' + upperText + ', ' + waistText + ', ' + lowerText + ', ' + uniformTypeText + ',',
       'combat styling: ' + armorText + '; ' + capeText + ',',
@@ -778,7 +778,7 @@ const core = evalCore(coreSource);
       data.ratioData[sel.ratio] + ',', core.page.battleAcademy.output ? core.page.battleAcademy.output + ',' : '',
       'hyper realistic, ultra detailed, premium advertising finish,', 'color palette: ' + (sel.colorNote || schoolInfo.colorNote) + ',',
       sel.extraNote ? 'extra direction: ' + sel.extraNote + ',' : '', core.page.battleAcademy.negativePrompt ? core.page.battleAcademy.negativePrompt + ',' : '',
-      'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face',
+      'no logo artifacts, no distorted face',
     ].filter(Boolean);
     const output = prompt.join('\n');
     checkOutput('battleAcademy', i, sel, output, { requireIdentity: true, identityMarkers: ['身份鎖定系統'] });

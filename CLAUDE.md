@@ -50,6 +50,39 @@
   描述；`core-prompt.js` 新增的「Uniform Design Priority」段落從 3 句長
   說明濃縮成 1 句。結果：預覽輸出從 10,388 字元降到 9,152 字元（-12%），
   更接近同型頁面（kpop-idol 8,375／fantasy 8,636）的長度基準。
+  **owner 再貼一份更深入的技術分析**（同日第二輪跟進）：認為身份鎖臉不該
+  砍，該精簡的是中間 7 個高度重疊的共用技術核心（真人骨架/鏡頭重建/真實
+  膚質/姿勢自然/光線一致/色溫統一/人物融合/高級補光）合成 3 組；並指出
+  比「字數過長」更重要的問題是「隨機模組互相衝突」（例如跪姿+雙手撐地
+  抽到胸像近景框，或低角度仰拍抽到需要俯視的姿勢）、以及燈光池混入其他
+  主題（沙漠宮帳異域女王、鬥魚水下、馬戲團等）的殘留選項。我先用
+  Explore agent 查核四項技術主張全數屬實，並發現關鍵細節：`anatomyGuard`/
+  `poseNaturalityGuard`/`lightingConsistencyGuard` 是 `core-prompt.js`
+  裡「幾乎全部 13 頁共用同一份」的常數（`humanCore`/
+  `CORE_POSE_NATURALITY`/`CORE_LIGHTING_UNIFICATION`），合併精簡這三個
+  會同時影響全站輸出；而 `compositionGuard`/`colorTemperatureGuard`/
+  `subjectIntegrationGuard`/`faceFillGuard` 則是逐頁複製貼上的純本地
+  常數，改一頁不影響其他頁。用 `AskUserQuestion` 請 owner 決定範圍，
+  owner 選「先只改 battle-academy.html」。實作：battle-academy.html 的
+  這 7 個 guard（不再讀取 `sharedBattleAcademyCore.anatomyGuard`/
+  `.poseGuard`/`.lightingGuard`，改成頁面本地定義，**不動
+  `core-prompt.js` 任何共用常數，其餘 12 頁完全不受影響**）合併成 3 組
+  【真人骨架與姿勢】【鏡頭與人物比例】【真實質感與統一光影】；新增
+  `POSE_GROUPS`/`POSE_GROUP_FRAMING` 相容性表（站姿/坐姿與地面/手勢與
+  細節/電影感動態戰鬥瞬間/隊長專屬 5 組姿勢，各自對應合理的景別範圍），
+  **只套用在「隨機套用」按鈕**，手動選擇仍完全自由不做硬性阻擋（跟
+  `OUTFIT_COMBOS` 的既有設計哲學一致）；`lightingData` 砍掉 26 個跟
+  日系校園戰鬥完全無關的殘留選項（沙漠宮帳異域女王、鬥魚水下、馬戲團、
+  糖果甜點、奶茶、香氛保養、智慧手錶等其他主題頁遺留的通用大池子，
+  `palaceNightWarm`/`foxfireGold`/`moonGlassSparkle` 因為被既有模板引用
+  而保留），從 57 個降到 31 個；結尾負面約束行砍掉跟 `CORE_NEGATIVE_PROMPT`
+  重複的部分（`no random text`/`no watermark`/`no extra fingers`/
+  `no deformed body` 都已經在共用負面約束裡講過），只留真正沒講過的
+  `no logo artifacts, no distorted face`。結果：預覽輸出再降到 6,645
+  字元（總計比重構前的 10,388 字元下降 36%）。用一支一次性 Node 腳本
+  模擬 500 次隨機套用的姿勢/景別配對，確認相容性表 0 個不匹配、0 個空
+  候選池。四支驗證腳本同步更新（`audit-100x.mjs`/`build-prompt-preview.mjs`
+  的 exportExpression 拿掉已刪除的 4 個 guard 變數名）全部重跑通過。
   **`anime-hero.html`（動漫電影變身夥伴咒語產生器）已於 2026-07-24 整頁下架**：
   owner 對這系列不滿意，且該頁架構已疊到 10 層 monkey-patch 式的
   `generate = function(){ 上一版generate(); ... }`，難以維護；docs 底下留有一份

@@ -755,12 +755,8 @@ function generateBattleAcademy(core, data) {
     data.identityGuard + ',',
     'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
     data.anatomyGuard + ',',
-    data.poseNaturalityGuard + ',',
     bodyShape + ',',
     data.lightingConsistencyGuard + ',',
-    data.colorTemperatureGuard + ',',
-    data.subjectIntegrationGuard + ',',
-    data.faceFillGuard + ',',
     selection.composition + ',',
     data.compositionGuard + ',',
     'school identity: ' + schoolInfo.prompt + ',',
@@ -781,7 +777,7 @@ function generateBattleAcademy(core, data) {
     'hyper realistic, ultra detailed, premium advertising finish,',
     'color palette: ' + (selection.colorNote || schoolInfo.colorNote) + ',',
     core.page.battleAcademy.negativePrompt ? core.page.battleAcademy.negativePrompt + ',' : '',
-    'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face',
+    'no logo artifacts, no distorted face',
   ];
   return prompt.filter(Boolean).join('\n');
 }
@@ -945,7 +941,7 @@ function loadRevision(label, sourceReader) {
       page: 'battleAcademy',
       startMarker: 'const schoolData = {',
       endMarker: 'function selected',
-      exportExpression: '({ schoolData, upperBodyData, waistData, lowerData, uniformTypeData, accessoryData, fantasyDetailData, armorModeData, capeModeData, emblemFocusData, styleData, backgroundData, lightingData, sharedBattleAcademyCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
+      exportExpression: '({ schoolData, upperBodyData, waistData, lowerData, uniformTypeData, accessoryData, fantasyDetailData, armorModeData, capeModeData, emblemFocusData, styleData, backgroundData, lightingData, sharedBattleAcademyCore, identityGuard, anatomyGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, poseData, framingData, cameraData, ratioData })',
     });
     prompts['battleacademy-default.txt'] = generateBattleAcademy(core, battleAcademyData);
   } catch (err) {

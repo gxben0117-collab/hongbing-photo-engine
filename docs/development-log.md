@@ -2363,3 +2363,102 @@
   0 issue、`audit-100x` 1300 次模擬 0 issue、`build-prompt-preview` 正常
   產出，人工檢視輸出樣本確認組裝順序與文字正確、字數確實下降）。
 
+## 2026-07-31（五）　battle-academy.html：共用guard合併精簡＋姿勢/景別相容性規則＋燈光池清理
+
+- owner 針對「隨機套用」三次結果並排比較後，提出更深入的技術分析：
+  (1) 不該先砍身份鎖臉，該精簡的是中間 7 個高度重疊的共用技術核心；
+  (2) 更關鍵的問題是「隨機模組互相衝突」——例如「雙手撐地跪姿」抽到
+  「胸像近景」框，姿勢重點根本拍不到；(3) 燈光池混入了其他主題的殘留
+  選項（沙漠宮帳異域女王、鬥魚水下、馬戲團等），跟日系校園戰鬥完全
+  無關；(4) 結尾負面約束跟前面的共用負面約束大量重複，只留一份即可。
+  提案結構：Identity Core / Human Rendering Core / School Battle Uniform
+  Core / Random Design Result / Output+Negative 五大塊。
+- **先查核再動手**：用 Explore agent 逐一查核四項主張，全部確認屬實，
+  並發現一個關鍵架構細節——`anatomyGuard`/`poseNaturalityGuard`/
+  `lightingConsistencyGuard` 目前讀的是 `sharedBattleAcademyCore.xxx`，
+  實際內容來自 `core-prompt.js` 的 `humanCore`/`CORE_POSE_NATURALITY`/
+  `CORE_LIGHTING_UNIFICATION`，而這三個常數是**幾乎全部 13 頁共用同一份**
+  （每頁自己的 core 物件都寫 `anatomyGuard: humanCore` 這種寫法）；如果
+  照 owner 原始建議直接合併這三個，會同時改動全站 13 頁的輸出。相對地
+  `compositionGuard`/`colorTemperatureGuard`/`subjectIntegrationGuard`/
+  `faceFillGuard` 是逐頁複製貼上的純本地 `const`，沒有經過
+  `core-prompt.js`，改一頁不影響其他頁。專案自己的
+  `docs/core-prompt-contract.md` 也明文要求：改 prompt 文字、改段落
+  順序都要先取得 owner 同意，且要能講清楚「輸出是否完全相同」。用
+  `AskUserQuestion` 請 owner 決定範圍（只改 battle-academy.html／全站
+  13 頁一起做／先給改動方案對照再決定），owner 選「先只改
+  battle-academy.html」。
+- **7 個 guard 合併成 3 個**（範圍限定在 battle-academy.html 自己的
+  `<script>` 內，`anatomyGuard`/`poseNaturalityGuard`/
+  `lightingConsistencyGuard` 三個變數改成不再讀取
+  `sharedBattleAcademyCore.xxx`、直接定義本地精簡版文字，**完全不動
+  `core-prompt.js` 裡的 `humanCore`/`CORE_POSE_NATURALITY`/
+  `CORE_LIGHTING_UNIFICATION` 這些跨頁共用常數本身**，所以其餘 12 頁
+  的輸出逐字不變）：
+  - 【真人骨架與姿勢】＝原本的「真人骨架系統」核心內容＋「姿勢自然性
+    系統」合併，保留「頭部可自由轉動配合姿勢、但頸肩脊椎永遠跟隨頭部」
+    這條核心因果邏輯。
+  - 【鏡頭與人物比例】＝原本的「鏡頭重建系統」＋`compositionGuard`
+    （原本叫 Commercial Composition Control）的技術規則部分合併，注意
+    這裡合併的是「guard 規則文字」，使用者實際選的
+    構圖值（如「人物置中主圖」）在 `generate()` 裡仍是獨立一行，不受影響。
+  - 【真實質感與統一光影】＝原本的「真實膚質系統」＋「光線一致性系統」
+    ＋「色溫統一系統」＋「人物融合系統」＋「高級補光系統」五個系統合併，
+    這是最大瘦身點（原本 5 段各自獨立描述「臉不能單獨打光/單獨變白/
+    單獨處理」，現在濃縮成 1 段講完同一件事）。
+  - `generate()` 陣列同步移除 `poseNaturalityGuard`/`colorTemperatureGuard`/
+    `subjectIntegrationGuard`/`faceFillGuard` 這 4 個已刪除的變數引用。
+- **姿勢群組→景別相容性表**（新增 `POSE_GROUPS`/`POSE_GROUP_FRAMING`，
+  只用在「隨機套用」按鈕，手動選擇維持完全自由不做硬性阻擋，跟
+  `OUTFIT_COMBOS` 的既有設計哲學一致）：把 06 姿勢的 5 個既有分組（站姿
+  16／坐姿與地面姿勢 16／手勢與細節 17／電影感動態戰鬥瞬間 16／隊長專屬
+  5，共 70 個非 auto 姿勢）各自對應到合理的景別範圍——站姿→半身/七分身/
+  全身/海報全景；坐姿與地面→七分身/全身/海報全景（排除近景類，因為要
+  看到跪/躺/坐地的下半身姿態）；手勢與細節→胸像/近景/半身/七分身（排除
+  全身類，因為這組的重點是手部/臉部特寫細節）；電影感動態戰鬥瞬間→
+  七分身/全身/海報全景（排除近景類，因為要看到完整的動態張力）；隊長
+  專屬→半身/七分身/全身。`applyBattleRandomSelection()` 改成先抽姿勢、
+  再從對應的景別子集裡抽景別，而不是像以前一樣姿勢跟景別各自完全獨立
+  抽籤。用一支一次性 Node 腳本（`vm` 解析 `POSE_GROUPS`/
+  `POSE_GROUP_FRAMING` 物件字面量＋模擬 500 次隨機套用配對）驗證：70 個
+  姿勢全數有對應分組、相容性表引用的景別 key 全部合法、0 個空候選池、
+  500 次模擬配對 0 個不匹配。
+- **燈光池清理**：`lightingData`（原本 57 個選項，是很久以前建頁時從
+  其他主題頁複製貼上的共用大池子，`xianxia.html`/`isekai-fantasy.html`/
+  `fantasy-fashion.html` 都有幾乎一模一樣的內容）砍掉 26 個跟日系校園
+  戰鬥完全無關的殘留選項：沙漠宮帳異域女王
+  (`desertGoldTentLight`)、鬥魚水下 (`bettaUnderwaterSpotlight`)、
+  馬戲團 (`circusLanternGold`)、海底 (`underwaterSunbeam`)、糖果
+  (`candyGlossLight`)、甜點美妝 (`dessertBeautyLight`)、櫻桃氣泡
+  (`cherryPopLight`)、抹茶和菓子 (`matchaSoftLight`)、奶茶
+  (`milkTeaAmberLight`)、玫瑰金穿戴科技 (`roseGoldTechLight`)、生物
+  螢光保養 (`bioGlowSoftLight`)、香氛perfume (`moonSilverReflect`／
+  `auroraPerfumeLight`)、水晶產品攝影 (`maglevCrystalRefraction`)、
+  天空宮殿聖劍 (`goldenSkyTempleLight`)、太陽神殿
+  (`solarTempleGold`)、大教堂羽翼 (`pearlCathedralBacklight`／
+  `holyCathedralLight`／`cloudRiftHolyLight`)、宮廷燭光
+  (`amethystCandleGlow`)、白色機甲 (`coldWhiteMechaLight`)、全息AI產品
+  (`hologramScanLight`)、未來科技黑鏡 (`dataFlowBlueViolet`)、藍色
+  音響科技 (`blueAudioLight`)、手機螢幕科技 (`silverScreenLight`)、
+  機械翼 (`blueEnergyWingLight`)。**`palaceNightWarm`／`foxfireGold`／
+  `moonGlassSparkle` 雖然名稱聽起來也偏其他主題，但因為被既有的
+  「神樂儀式鈴舞獻禮」「神樂神社守護站姿」「白鷺披風法師詠唱」三個
+  一鍵模板引用，予以保留**（避免刪除後模板套用失效），同時 UI 卡片與
+  JS 資料物件同步移除（用一支一次性 Node 腳本，正則比對 key 名稱同時
+  處理 HTML `<label class="card">` 區塊與 JS `key: '...'` 資料列）。
+  `lightingData` 從 57 個選項降到 31 個。
+- **結尾負面約束去重**：`generate()` 最後那行手動補的
+  `'no random text, no watermark, no logo artifacts, no extra fingers,
+  no deformed body, no distorted face'` 跟共用的 `CORE_NEGATIVE_PROMPT`
+  （「No face swap/drift... No oversized head, extra limbs/arms/fingers,
+  broken hands, warped anatomy, ... random text or watermark.」）大量
+  重複，只留兩個真正沒講過的：`no logo artifacts, no distorted face`。
+- **結果**：預覽輸出從上一輪的 9,152 字元再降到 6,645 字元（-27%），
+  總計比重構剛完成時的 10,388 字元下降 36%。四支驗證腳本
+  （`check-static`/`validate-preset-refs`/`audit-100x`/
+  `build-prompt-preview`）的 exportExpression 同步拿掉已刪除的
+  `poseNaturalityGuard`/`colorTemperatureGuard`/`subjectIntegrationGuard`/
+  `faceFillGuard` 變數名，重跑全部通過（`validate-preset-refs` 16 個
+  `themeTemplates`＋13 個 `OUTFIT_COMBOS` 0 issue，確認燈光池裁剪沒有
+  誤刪任何模板引用的 key；`audit-100x` 1300 次模擬 0 issue）。
+
