@@ -301,7 +301,6 @@ const issues = [];
     accessory: liveRadioValues(src, 'accessory'),
     fantasyDetail: liveRadioValues(src, 'fantasyDetail'),
     armorMode: liveRadioValues(src, 'armorMode'),
-    capeMode: liveRadioValues(src, 'capeMode'),
     style: liveRadioValues(src, 'style'),
     composition: liveRadioValues(src, 'composition'),
     framing: liveRadioValues(src, 'framing'),

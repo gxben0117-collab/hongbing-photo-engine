@@ -2586,3 +2586,50 @@
 - 四支驗證腳本重跑全過（`check-static`/`validate-preset-refs` 21個模板
   +18組組合0issue/`audit-100x` 1300次模擬0issue）。
 
+## 2026-08-01（一）　battle-academy.html：披風完全移除＋裙裝禁止內搭褲型（限定本頁）
+
+- owner 提出兩條「制服戰鬥學園限定」規則：(1) 裙裝不可以自動加短褲／
+  安全褲／熱褲／褲裙這類內搭（「說是裙子了啊」——owner 選了裙子，生圖
+  結果卻常見加一層褲子遮擋，等於默默改成別的服裝）；(2) 披風預設完全
+  關閉，而且隨機也不能抽到（「不要披風」）。
+- **披風移除**：這次選擇不是「維持關閉但保留選項」，而是把 Cape Mode
+  整個維度從頁面拿掉，因為只要選項還在，manual 選擇跟未來擴充都有機會
+  重新出現披風，跟 owner「不要披風」的明確語氣不符。具體改動：
+  - HTML：`section-battlemode` 拿掉整個 Cape Mode 卡片群組，section
+    標題從「裝甲與披風強度」改回「裝甲強度」，hint 文字加一句「這頁固定
+    不使用披風／斗篷（不論手動或隨機都不會出現）」。
+  - JS：`capeModeData`（含 off/on 兩個選項）改成單一常數
+    `CAPE_TEXT_OFF = 'no cape, no cloak'`；`generate()` 的 `capeText`
+    直接固定引用這個常數，不再讀取任何 DOM 選項；`applyThemeTemplate`／
+    `applyBattleRandomSelection` 的欄位清單都拿掉 `capeMode`；21 個
+    `themeTemplates` 物件裡的 `capeMode: 'xxx'` 欄位全部移除（含原本
+    3 個設 `capeMode: 'on'` 的模板：神樂儀式鈴舞獻禮／白鷺披風法師詠唱／
+    神樂和風符咒儀式，連帶把中文卡片名稱與說明裡的「披風」字樣拿掉，
+    「白鷺披風法師詠唱」改名「白鷺法師詠唱」）。
+  - `core-prompt.js` 的 `battleAcademyCore`（只有這頁在用，改動不影響
+    其他 12 頁）Style Scope Rule 裡「armor and cape stay OFF by default
+    and only appear when explicitly selected」改成「armor stays OFF by
+    default and only appears when explicitly selected. No cape or cloak
+    is ever added.」，因為披風已經沒有「explicitly selected」這個可能性
+    了，原句會誤導。
+  - 06 姿勢裡的 `cape_wind`（披風揚起站姿）**刻意不改**：這是全站共用
+    姿勢庫的一部分，文字本身寫「cape or dress caught in wind」（披風
+    「或」裙擺），沒有強制一定要出現披風，屬於可以自行用裙擺/衣物詮釋
+    的模糊姿勢描述，跟 Cape Mode 這個獨立系統無關，動它會擴大改動範圍
+    到共用姿勢庫，不在這次的範圍內。
+- **裙裝禁止內搭褲型**：在 `generate()` 的負面約束區塊新增一行
+  `'the lower body garment stays a genuine skirt with nothing worn
+  underneath it — no shorts, no safety shorts, no biker shorts, no hot
+  pants, no culotte layer added beneath the skirt,'`，固定加在每次生成
+  的咒語裡（不特別判斷是否選到裙型下身，因為就算選到袴褲/寬褲裙這類
+  本來就是褲裝的選項，這句話也不衝突，維持簡單邏輯不用另外分支判斷）。
+- 四支驗證腳本全部同步更新（`validate-preset-refs.mjs` 拿掉
+  `capeMode: liveRadioValues(...)`；`audit-100x.mjs`／
+  `build-prompt-preview.mjs` 的 exportExpression 把 `capeModeData` 換成
+  `CAPE_TEXT_OFF`，選取/模擬邏輯拿掉 `capeMode` 相關欄位，兩支腳本的
+  組裝陣列也同步加上新的裙裝負面約束行）重跑全過（`check-static` 全過、
+  `validate-preset-refs` 21 個模板 0 issue、`audit-100x` 1300 次模擬
+  0 issue、`build-prompt-preview` 正常產出，人工檢視輸出樣本確認
+  `combat styling` 那行固定顯示 `no cape, no cloak`、負面約束區塊確實
+  多了裙裝限定那句）。
+

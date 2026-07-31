@@ -327,7 +327,7 @@ Commercial style, Japanese school-battle manga inspired uniform design (gakuran,
 They must not change the person's facial structure, identity, age impression or recognizable features.
 This is a photorealistic live-action photography campaign, not an anime/illustration conversion — render skin, face and body with realistic photographic detail, not cel-shaded or illustrated medium.
 
-Uniform battle-ification is not armor-ification: fashion first, school identity second, fantasy styling third; armor and cape stay OFF by default and only appear when explicitly selected. Fantasy details enhance the uniform, never replace it or its archetype.`
+Uniform battle-ification is not armor-ification: fashion first, school identity second, fantasy styling third; armor stays OFF by default and only appears when explicitly selected. No cape or cloak is ever added. Fantasy details enhance the uniform, never replace it or its archetype.`
     ].join("\n\n"),
     anatomyGuard: humanCore,
     poseGuard: CORE_POSE_NATURALITY,

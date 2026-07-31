@@ -717,7 +717,6 @@ function generateBattleAcademy(core, data) {
     accessory: 'swordSheathAccent',
     fantasyDetail: 'bladeEnergyTrailStreak',
     armorMode: 'off',
-    capeMode: 'off',
     emblemFocus: 'chestBadge',
     background: 'schoolRooftopBattle',
     lighting: 'hard',
@@ -742,7 +741,7 @@ function generateBattleAcademy(core, data) {
   const accessoryText = data.accessoryData[selection.accessory];
   const fantasyDetailText = data.fantasyDetailData[selection.fantasyDetail];
   const armorText = data.armorModeData[selection.armorMode];
-  const capeText = data.capeModeData[selection.capeMode];
+  const capeText = data.CAPE_TEXT_OFF;
   const emblemFocusText = selection.emblemFocus && selection.emblemFocus !== 'auto'
     ? data.emblemFocusData[selection.emblemFocus]
     : '';
@@ -777,6 +776,7 @@ function generateBattleAcademy(core, data) {
     'hyper realistic, ultra detailed, premium advertising finish,',
     'color palette: ' + (selection.colorNote || schoolInfo.colorNote) + ',',
     core.page.battleAcademy.negativePrompt ? core.page.battleAcademy.negativePrompt + ',' : '',
+    'the lower body garment stays a genuine skirt with nothing worn underneath it — no shorts, no safety shorts, no biker shorts, no hot pants, no culotte layer added beneath the skirt,',
     'no logo artifacts, no distorted face',
   ];
   return prompt.filter(Boolean).join('\n');
@@ -941,7 +941,7 @@ function loadRevision(label, sourceReader) {
       page: 'battleAcademy',
       startMarker: 'const schoolData = {',
       endMarker: 'function selected',
-      exportExpression: '({ schoolData, upperBodyData, waistData, lowerData, uniformTypeData, accessoryData, fantasyDetailData, armorModeData, capeModeData, emblemFocusData, styleData, backgroundData, lightingData, sharedBattleAcademyCore, identityGuard, anatomyGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, poseData, framingData, cameraData, ratioData })',
+      exportExpression: '({ schoolData, upperBodyData, waistData, lowerData, uniformTypeData, accessoryData, fantasyDetailData, armorModeData, CAPE_TEXT_OFF, emblemFocusData, styleData, backgroundData, lightingData, sharedBattleAcademyCore, identityGuard, anatomyGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, poseData, framingData, cameraData, ratioData })',
     });
     prompts['battleacademy-default.txt'] = generateBattleAcademy(core, battleAcademyData);
   } catch (err) {

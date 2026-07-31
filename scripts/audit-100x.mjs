@@ -718,7 +718,7 @@ const core = evalCore(coreSource);
     source: html, core, page: 'battleAcademy',
     startMarker: 'const schoolData = {',
     endMarker: 'function selected',
-    exportExpression: '({ schoolData, upperBodyData, waistData, lowerData, uniformTypeData, accessoryData, fantasyDetailData, armorModeData, capeModeData, emblemFocusData, styleData, backgroundData, lightingData, sharedBattleAcademyCore, identityGuard, anatomyGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, poseData, framingData, cameraData, ratioData })',
+    exportExpression: '({ schoolData, upperBodyData, waistData, lowerData, uniformTypeData, accessoryData, fantasyDetailData, armorModeData, CAPE_TEXT_OFF, emblemFocusData, styleData, backgroundData, lightingData, sharedBattleAcademyCore, identityGuard, anatomyGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, poseData, framingData, cameraData, ratioData })',
   });
   const compositionValues = radioValues(html, 'composition');
   const intensityValues = selectValues(html, 'intensity');
@@ -727,7 +727,7 @@ const core = evalCore(coreSource);
     bodyShape: Object.keys(data.BODY_SHAPES), school: Object.keys(data.schoolData), upperBody: Object.keys(data.upperBodyData),
     waist: Object.keys(data.waistData), lower: Object.keys(data.lowerData), uniformType: Object.keys(data.uniformTypeData),
     accessory: Object.keys(data.accessoryData), fantasyDetail: Object.keys(data.fantasyDetailData), armorMode: Object.keys(data.armorModeData),
-    capeMode: Object.keys(data.capeModeData), emblemFocus: emblemFocusValues,
+    emblemFocus: emblemFocusValues,
     background: Object.keys(data.backgroundData), lighting: Object.keys(data.lightingData), composition: compositionValues,
     framing: Object.keys(data.framingData), intensity: intensityValues, pose: Object.keys(data.poseData),
     style: Object.keys(data.styleData), camera: Object.keys(data.cameraData), ratio: Object.keys(data.ratioData),
@@ -737,7 +737,7 @@ const core = evalCore(coreSource);
     const sel = {
       bodyShape: pick(pools.bodyShape), school: pick(pools.school), upperBody: pick(pools.upperBody), waist: pick(pools.waist),
       lower: pick(pools.lower), uniformType: pick(pools.uniformType), accessory: pick(pools.accessory), fantasyDetail: pick(pools.fantasyDetail),
-      armorMode: pick(pools.armorMode), capeMode: pick(pools.capeMode), emblemFocus: pick(pools.emblemFocus),
+      armorMode: pick(pools.armorMode), emblemFocus: pick(pools.emblemFocus),
       background: pick(pools.background), lighting: pick(pools.lighting), composition: pick(pools.composition),
       framing: pick(pools.framing), intensity: pick(pools.intensity), pose: pick(pools.pose), style: pick(pools.style),
       camera: pick(pools.camera), ratio: pick(pools.ratio), customUpperBody: pick(customSamples), customLower: pick(customSamples),
@@ -753,7 +753,7 @@ const core = evalCore(coreSource);
       ? `custom fantasy detail system only: ${sel.customFantasyDetail}; combine all custom fantasy keywords into one coherent art system, do not include or blend any preset fantasy detail option`
       : data.fantasyDetailData[sel.fantasyDetail];
     const armorText = data.armorModeData[sel.armorMode];
-    const capeText = data.capeModeData[sel.capeMode];
+    const capeText = data.CAPE_TEXT_OFF;
     const emblemFocusText = sel.emblemFocus && sel.emblemFocus !== 'auto'
       ? data.emblemFocusData[sel.emblemFocus]
       : '';
@@ -778,6 +778,7 @@ const core = evalCore(coreSource);
       data.ratioData[sel.ratio] + ',', core.page.battleAcademy.output ? core.page.battleAcademy.output + ',' : '',
       'hyper realistic, ultra detailed, premium advertising finish,', 'color palette: ' + (sel.colorNote || schoolInfo.colorNote) + ',',
       sel.extraNote ? 'extra direction: ' + sel.extraNote + ',' : '', core.page.battleAcademy.negativePrompt ? core.page.battleAcademy.negativePrompt + ',' : '',
+      'the lower body garment stays a genuine skirt with nothing worn underneath it — no shorts, no safety shorts, no biker shorts, no hot pants, no culotte layer added beneath the skirt,',
       'no logo artifacts, no distorted face',
     ].filter(Boolean);
     const output = prompt.join('\n');
