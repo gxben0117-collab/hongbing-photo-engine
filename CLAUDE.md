@@ -20,9 +20,9 @@
 
 ### 現況摘要（2026-07-30）
 
-- 十四個工具頁（travel / magazine / doll / fantasy-fashion / xianxia /
+- 十三個工具頁（travel / magazine / doll / fantasy-fashion / xianxia /
   anime-character / flower-fairy / isekai-fantasy / store-ad /
-  floral-sweet / gala-socialite / kpop-idol / battle-academy / freeform）
+  floral-sweet / gala-socialite / kpop-idol / battle-academy）
   皆已上線，正式站 <https://gxben0117-collab.github.io/hongbing-photo-engine/>。
   **`anime-hero.html`（動漫電影變身夥伴咒語產生器）已於 2026-07-24 整頁下架**：
   owner 對這系列不滿意，且該頁架構已疊到 10 層 monkey-patch 式的
@@ -342,55 +342,17 @@
   裡殘留的舊 key 預設值（`tacticalBlazerVest`／`briefingRoomTactical`／
   `'exosuit joints'` 等）一併同步更新。四支驗證腳本重跑全過（不需要改
   腳本結構，因為都是動態讀 DOM／themeTemplates，key 改名會自動被抓到）。
-- **新增 `freeform.html`（自由生圖）**（2026-07-30）：owner 提議「鎖臉核心
-  固定，介面上給一大格自由輸入風格語氣/服裝/材質/姿勢/背景，鏡頭/比例
-  維持點選」。事先用 `AskUserQuestion` 確認兩個模糊點：光線併入自由輸入框
-  （而非另做卡片選單）、身形輪廓（03）與構圖取景（02）也併入自由輸入框
-  （owner 選擇比建議更徹底的簡化，這兩項在其他頁面本來是點選卡片）。
-  最終架構：**只保留 07 鏡頭角度、11 比例兩個點選區塊**，其餘（風格語氣/
-  服裝/材質/姿勢/背景/光線/身形輪廓/構圖取景）全部併入同一個
-  `<textarea id="customDirection">` 自由輸入格。頁面砍掉 00 一鍵模板
-  （改成一顆「填入範例文字」按鈕，點擊只是把範例段落塞進 textarea，不是
-  預寫組合套用）、01 style／02 構圖／03 身形／04 服裝／05 材質／05b
-  翅膀蝴蝶／06 姿勢／08 光影／09 背景／10 自訂要求全部移除，`materialData`/
-  `garmentData`/`styleData`/`backgroundData`/`lightingData`/`BODY_SHAPES`/
-  `poseData`/`framingData`/`themeTemplates` 等資料物件與對應函式
-  （`applyThemeTemplate`/`applyFlowerRandomSelection`/`getAllRadioValues`
-  等）全部刪除，只留 `cameraData`/`ratioData`（原封不動沿用其他頁）跟
-  8 個鎖臉核心 guard 區塊（`identityGuard`/`anatomyGuard`/
-  `poseNaturalityGuard`/`compositionGuard`/`lightingConsistencyGuard`/
-  `colorTemperatureGuard`/`subjectIntegrationGuard`/`faceFillGuard`，
-  compositionGuard 是技術性規則不是使用者選項，維持固定）。`generate()`
-  的組裝邏輯把 8 個 guard 區塊照舊順序接上，中間插入使用者的
-  `customDirection` 原文（前面加一句
-  「user's creative direction (...): 」標籤，後面加一句
-  「the creative direction above only affects clothing, ornaments,
-  background, lighting, composition, mood and surface texture; it must
-  not change the facial structure...」明確重申範圍限制），再接鏡頭/比例/
-  輸出品質/負面約束，比其他頁面的 `generate()` 短很多（不用處理
-  材質/服裝/背景三種 custom 欄位或 palette 邏輯）。`core-prompt.js` 新增
-  `freeformCore`，Style Scope Rule 改寫成「The user's freeform creative
-  direction ... must not change the person's facial structure ...
-  regardless of how the user's free text is phrased」，這句特別針對
-  自由輸入的不可預期性做防護（其他頁的服裝/材質是固定選項不會出現
-  惡意或矛盾指令，這頁使用者可以打任何字，guard 文字需要更明確排除
-  「不管怎麼寫都不能覆寫身份」）。**四支驗證腳本裡只有三支適用**：
-  `check-static.mjs` 正常加入；`validate-preset-refs.mjs` 刻意沒加區塊
-  （這頁沒有 `themeTemplates` 這類一鍵套用物件，跟 `doll.html`/
-  `store-ad.html` 的既有慣例一致，不是遺漏）；`audit-100x.mjs` 仿造
-  `store-ad.html` 的 `textSamples` 手法寫一組 `directionSamples`（含空白、
-  600字超長文字、emoji/引號/HTML標籤特殊字元），跟隨機鏡頭/比例組合做
-  100 次模擬；`build-prompt-preview.mjs` 加 `generateFreeform()` 鏡像
-  函式＋ `loadRevision()` 的 try/catch skip-gracefully 區塊。全站 nav
-  改為 15 頁互相連結；index.html 新增卡片（強調色米白灰 `#D8D4CC`，象徵
-  「留白/自由畫布」，跟既有 12 色皆不同）。驗證結果：`check-static`
-  全過；`audit-100x` 累計 1400 次模擬（14頁×100）0 issue；
-  `build-prompt-preview` 正常產出 `worktree-freeform-default.txt`；
-  `core-prompt.js` 用 `node -e` 確認 14 個 page key 正常。
+- **`freeform.html`（自由生圖）已於 2026-07-31 整頁下架刪除**：owner 實測後
+  決定不需要這頁，直接下架。完整建置記錄（鎖臉核心固定＋單一自由輸入格
+  架構）保留在開發日誌 2026-07-30 條目供之後參考。下架範圍：`freeform.html`
+  本檔、其餘 13 頁 nav-link、index.html tool-card/CSS、`core-prompt.js` 的
+  `freeformCore`、`check-static.mjs`/`audit-100x.mjs`/
+  `build-prompt-preview.mjs` 裡的專屬區塊（`validate-preset-refs.mjs`
+  本來就沒有這頁的區塊，因為它沒有 `themeTemplates`）。工具頁回到 13 個。
 - **共用核心**：`assets/core-prompt.js` 集中管理身份鎖定等保護區塊；核心文字經過
   兩輪瘦身（5,162 → 4,099 字元），語意零遺漏。
-- **全部 14 個工具頁的生成互動已完全統一**（2026-07-27；花仙子/日式異世界/
-  花漾甜美系/氣質名媛宴會/韓系氣質偶像風/戰鬥制服學園/自由生圖複製既有
+- **全部 13 個工具頁的生成互動已完全統一**（2026-07-27；花仙子/日式異世界/
+  花漾甜美系/氣質名媛宴會/韓系氣質偶像風/戰鬥制服學園複製既有
   頁面建立時直接繼承這套機制，不需額外處理）：
   手動按「生成」才
   顯示輸出、stale 保護（改選項後輸出區標記過期＋複製鈕鎖住，需重新生成

@@ -767,37 +767,6 @@ function generateBattleAcademy(core, data) {
   return prompt.filter(Boolean).join('\n');
 }
 
-function generateFreeform(core, data) {
-  const selection = {
-    camera: 'eyeLevelCover',
-    ratio: 'vertical45',
-    direction: '像高級珠寶晚宴廣告的氣氛，深酒紅絲緞禮服，露肩剪裁，搭配一條精緻項鍊；姿勢是側身回眸，一手輕觸鎖骨；背景是暖色燭光的宴會廳，柔和逆光；人物七分身入鏡，構圖置中；身形維持原圖自然比例。',
-  };
-  const directionText = selection.direction;
-  const camera = data.cameraData[selection.camera];
-  const ratio = data.ratioData[selection.ratio];
-  const prompt = [
-    data.identityGuard + ',',
-    'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
-    data.anatomyGuard + ',',
-    data.poseNaturalityGuard + ',',
-    data.lightingConsistencyGuard + ',',
-    data.colorTemperatureGuard + ',',
-    data.subjectIntegrationGuard + ',',
-    data.faceFillGuard + ',',
-    data.compositionGuard + ',',
-    "user's creative direction (style and mood, garment, material, pose, background, lighting, body silhouette and composition, all specified by the user): " + directionText + ',',
-    'the creative direction above only affects clothing, ornaments, background, lighting, composition, mood and surface texture; it must not change the facial structure, identity, age impression or recognizable features established by the identity lock system,',
-    camera + ',',
-    ratio + ',',
-    core.page.freeform.output ? core.page.freeform.output + ',' : '',
-    'hyper realistic, ultra detailed, premium advertising finish,',
-    core.page.freeform.negativePrompt ? core.page.freeform.negativePrompt + ',' : '',
-    'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face',
-  ];
-  return prompt.filter(Boolean).join('\n');
-}
-
 function loadRevision(label, sourceReader) {
   const coreSource = sourceReader('assets/core-prompt.js');
   const core = evalCore(coreSource);
@@ -963,23 +932,6 @@ function loadRevision(label, sourceReader) {
   } catch (err) {
     // Not present in this revision — skip.
   }
-
-  // freeform.html is new; older revisions may not have it yet, so skip gracefully.
-  try {
-    const freeformSource = sourceReader('freeform.html');
-    const freeformData = evalDataSegment({
-      source: freeformSource,
-      core,
-      page: 'freeform',
-      startMarker: 'const sharedFreeformCore = window.HB_CORE_PROMPT?.page?.freeform || {};',
-      endMarker: 'function selected',
-      exportExpression: '({ sharedFreeformCore, identityGuard, anatomyGuard, poseNaturalityGuard, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, cameraData, ratioData })',
-    });
-    prompts['freeform-default.txt'] = generateFreeform(core, freeformData);
-  } catch (err) {
-    // Not present in this revision — skip.
-  }
-
 
   return {
     label,

@@ -2159,3 +2159,32 @@
   00/01/02/03/04/05/06/08/09/10 十個區塊，只有 4 個，這是刻意的設計
   結果（owner 明確要求把大部分維度收斂成一個自由輸入格），不是遺漏。
 
+## 2026-07-31　freeform.html（自由生圖）下架刪除
+
+- owner 實測後決定不需要「自由生圖」這個工具，直接下架，指令：「自由生圖
+  咒語產生器 下架 連結都刪除」。比照前一次 `summer-island.html` 下架的
+  既定流程執行：(1) `rm freeform.html` 本體；(2) 用正規表示式從其餘 13 個
+  頁面（`index.html`/`travel.html`/`magazine.html`/`doll.html`/
+  `fantasy-fashion.html`/`xianxia.html`/`anime-character.html`/
+  `flower-fairy.html`/`isekai-fantasy.html`/`store-ad.html`/
+  `floral-sweet.html`/`gala-socialite.html`/`kpop-idol.html`/
+  `battle-academy.html`）移除 `<a class="nav-link" href="freeform.html">
+  自由生圖</a>` 連結；(3) `index.html` 移除 `.tool-card.freeform` HTML 區塊
+  與 3 組對應 CSS 規則（`::before`/`.tool-tag`/`.tool-cta`）；(4)
+  `assets/core-prompt.js` 移除 `freeformCore` 物件與 `page` 註冊表裡的
+  `freeform: freeformCore` 一行；(5) `scripts/check-static.mjs` 的
+  `htmlFiles` 陣列移除 `'freeform.html'`；`scripts/audit-100x.mjs` 移除整段
+  `FREEFORM` 模擬區塊（總模擬數從 1400 回到 1300）；
+  `scripts/build-prompt-preview.mjs` 移除 `generateFreeform()` 鏡像函式與
+  `loadRevision()` 裡對應的 try/catch skip-gracefully 區塊（
+  `validate-preset-refs.mjs` 原本就沒有 freeform 區塊，這頁沒有
+  `themeTemplates`，跟 `doll.html`/`store-ad.html` 的既有慣例一致，不用改）。
+- **驗證結果**：四支腳本全部重跑確認乾淨：`check-static.mjs` 13 個頁面全
+  PASS；`validate-preset-refs.mjs` 9 頁 `themeTemplates` 檢查 0 issue；
+  `audit-100x.mjs` 累計 1300 次模擬（13頁×100）0 issue；
+  `build-prompt-preview.mjs` 正常產出（無 `freeform-default.txt`，無錯誤）；
+  `core-prompt.js` 用 `node -e` 確認 `window.HB_CORE_PROMPT.page` 剩 13 個
+  key（無 `freeform`）。文件同步更新：`CLAUDE.md`/`README.md` 頁數
+  14→13、`freeform.html` 建置細節條目改寫成簡短下架記錄（本檔完整建置
+  歷史保留在 2026-07-30（三）條目供之後追溯）。工具頁回到 13 個。
+
