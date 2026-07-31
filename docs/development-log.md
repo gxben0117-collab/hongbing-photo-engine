@@ -2517,3 +2517,37 @@
   form（含新的深V/鏤空/高衩描述）/combat styling(light)/symbol focus/
   accessory(符咒)/fantasy detail」組裝順序與文字正確、無 undefined 洩漏。
 
+## 2026-07-31（七）　battle-academy.html：修正新增內容跑題問題（旗袍字樣／非校園背景）
+
+- owner 看完上一版新增內容後提醒：「因為是制服學園，衣服和背景盡量不要
+  跳脫制服和學園的範圍」。逐項檢查後修正兩處：
+  - `highSlitLongSkirt`（高衩長裙）的英文 prompt 文字原本寫
+    `'long skirt with a high side slit baring the leg, elegant
+    qipao-inspired silhouette'`，中文卡片說明也寫「旗袍靈感側邊高衩
+    長裙」——「qipao-inspired」這個詞會把生圖模型的聯想直接拉到旗袍
+    這種完全不同的服裝品類，不是「制服的高衩改良」。改成
+    `'long academy skirt with a high side slit baring the leg,
+    elegant tailored silhouette'`，中文改成「學院長裙側邊改良高衩
+    剪裁」，把落點釘回「這仍然是一件學院裙，只是側邊改衩」。
+  - 上一版新增的 5 個一鍵模板裡，`suzakuSailorTalismanKneel`（朱雀水手
+    符咒跪姿）背景選了 `sealCircleAbstractBackdrop`（抽象靈力背景／
+    咒印法陣虛空棚拍），`kaguraKimonoTalismanRite`（神樂和風符咒儀式）
+    背景選了 `sakuraPetalStudioBackdrop`（櫻花瓣棚拍背景）——這兩個都
+    屬於「抽象靈力背景」分類，是棚拍/虛空背景，不是真正的校園場景，
+    跟「制服學園」主題脫節。改成 `schoolGateSiege`（校門對峙戰場，呼應
+    跪地施法的戲劇張力）／`academyCourtyardSunset`（學院中庭夕陽，呼應
+    儀式感的溫暖光線），兩者都屬於既有的「校園決戰場景」／「校園日常
+    場景」分類，確保背景仍然讀得出是校園。另外 3 個模板
+    （`sakuraGakuranLayeredBloom`／`seiranBlazerLayeredPoise`／
+    `shirasagiShirtLayeredElegance`）原本就用校園背景，不需要改。
+  - 其餘上身/腰線/配件文字檢查後確認沒有類似問題：5 個新上身選項都以
+    既有制服 archetype 開頭（sailor-collar／kimono-inspired／gakuran
+    jacket／blazer／shirt），沒有出現脫離制服語彙的用詞；符咒配件與
+    法陣/靈氣類幻想細節本來就是這頁「異能/魔法系學園」既有分類的一部分
+    （`magicalSealCircleAwaken` 模板早就用過 `glowingSealCircle` 搭配
+    `sealCircleAbstractBackdrop`），不是這次新增才出現的跑題內容，予以
+    保留。
+- 四支驗證腳本重跑全過（`check-static`/`validate-preset-refs`
+  21個模板+18組組合0issue/`audit-100x` 1300次模擬0issue/
+  `build-prompt-preview` 正常產出）。
+

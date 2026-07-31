@@ -99,6 +99,15 @@
   櫻華學園敞領學生服疊搭、青嵐學園敞領外套、白鷺女學院敞領白襯衫），
   模板總數 16→21，`OUTFIT_COMBOS` 13→18。四支驗證腳本重跑全過
   （`validate-preset-refs` 確認 21 個模板／18 組組合 0 issue）。
+  **owner 隨即提醒**：「因為是制服學園，衣服和背景盡量不要跳脫制服和
+  學園的範圍」——修正兩處跑題內容：(1) `highSlitLongSkirt` 的英文描述
+  跟中文卡片說明拿掉「旗袍靈感／旗袍靈感側邊高衩」字樣，改成「學院長裙
+  改良高衩剪裁」，確保生圖模型讀到的是制服裙的改良款而非直接聯想到
+  旗袍這種完全不同的服裝；(2) 新增的 5 個模板裡有 2 個背景選到「抽象
+  靈力背景」分類（`sealCircleAbstractBackdrop`／`sakuraPetalStudioBackdrop`
+  都是棚拍/虛空背景，不是實際校園場景），改成 `schoolGateSiege`（校門
+  對峙戰場）／`academyCourtyardSunset`（學院中庭夕陽）這兩個真正的校園
+  場景。四支驗證腳本重跑全過。
   **`anime-hero.html`（動漫電影變身夥伴咒語產生器）已於 2026-07-24 整頁下架**：
   owner 對這系列不滿意，且該頁架構已疊到 10 層 monkey-patch 式的
   `generate = function(){ 上一版generate(); ... }`，難以維護；docs 底下留有一份
