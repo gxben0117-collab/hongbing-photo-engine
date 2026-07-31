@@ -2462,3 +2462,58 @@
   `themeTemplates`＋13 個 `OUTFIT_COMBOS` 0 issue，確認燈光池裁剪沒有
   誤刪任何模板引用的 key；`audit-100x` 1300 次模擬 0 issue）。
 
+## 2026-07-31（六）　battle-academy.html：新增旗袍改良戰鬥風5套服裝＋高衩/鏤空剪裁方向
+
+- owner 貼了一張黑紗紅花刺繡旗袍戰鬥風參考圖（削肩深V旗袍＋單肩護甲片＋
+  符咒道具＋身後守護武者與鳳凰特效＋哥德教堂背景），要求先分析服裝本身
+  再看能不能套進校服語彙。分析結論：(1) 護甲只在單肩局部出現，其餘全是
+  布料——正好對應這次重構才做的 `Armor Mode: light`；(2) 黑紗透膚打底＋
+  紅花纏枝刺繡＋金線滾邊是材質/圖紋語言，不是護甲；(3) 髮簪、大腿側
+  飾品、符咒道具都是裝飾/道具而非武裝；(4) 圖中真正的「戰鬥感」來自
+  後方的守護武者與法陣/鳳凰特效，不是女角色本人的服裝——呼應這次
+  重構反覆強調的「衣服負責漂亮，武器與特效負責戰鬥」原則，只是語彙
+  從校園偶像換成中式仙俠（符咒、法陣、鳳凰）。owner 確認這套分析後，
+  要求套進 5 種校服語彙（水手服/和服/學生服/高校服/白襯衫服）並各給
+  1 套方案，先給出設計說明（不寫代碼），owner 確認「1-5方案都收錄」，
+  並加碼一個新的剪裁方向：「別包得緊緊的，能V就V，腰能露就露...和大長腿」。
+- **剪裁尺度落地方式**：owner 問是否要另外加一個維度，考量到目前 9
+  個維度的模組化架構已經算複雜，另開一個「裸露強度」維度會讓 UI 更
+  臃腫，決定改成**把剪裁尺度直接寫進這 5 套新服裝本身的描述文字**
+  （deep-V neckline / one bare shoulder / bare-skin waist cutout /
+  high side slit baring the leg），不影響既有 9 套素面制服選項，也不
+  新增 UI 區塊。尺度拿捏比照 `summer-island.html` 下架的教訓（owner
+  當時因為生圖模型反覆判定「可能違反裸露/性/色情內容防範機制」而放棄
+  該主題）——抓在「時尚雜誌級削肩/深V/高衩」，不做泳裝或更裸露的
+  描述，降低重蹈覆轍的風險。
+- **新增內容**：
+  - 05 上身新增 5 項（`sailorSheerEmbroideredTop` 黑紗刺繡水手上衣、
+    `kimonoSheerEmbroideredTop` 黑紗刺繡和風上衣、`gakuranOpenSheerLayered`
+    敞領學生服疊搭、`blazerOpenSheerLayered` 敞領外套疊搭、
+    `shirtOpenSheerLayered` 敞領白襯衫疊搭——後三者是「制服外套/襯衫
+    敞開穿、內搭黑紗刺繡削肩打底」的疊搭描述，因為詰襟/西裝外套/正式
+    襯衫這幾種版型本身較硬挺，直接改削肩深V不合理，改成「外層制服敞開
+    ＋內層黑紗打底」的層次感更符合這幾種制服的材質特性）。
+  - 07 下身新增 1 項 `highSlitLongSkirt`（旗袍靈感側邊高衩長裙）。
+  - 06 腰線新增 1 項 `cutoutWaistWrap`（貼身腰封＋腰側露膚鏤空）。
+  - 09 配件新增 1 項 `talismanChargeAccent`（手持一疊硃砂符咒），呼應
+    參考圖的符咒道具。
+  - `OUTFIT_COMBOS` 新增 5 組相容組合，upperBody 分別搭配 `highSlitLongSkirt`
+    與各自合適的腰線（水手→鏤空腰線、和風→帶結腰線、學生服→高腰剪裁、
+    外套→窄腰帶、襯衫→綁繩腰線）。
+  - 00 一鍵模板新增 5 組，各自對應色系/氣質契合的學校：
+    `suzakuSailorTalismanKneel`（朱雀水手符咒跪姿，黑+深緋紅+金配色跟
+    參考圖最接近）、`kaguraKimonoTalismanRite`（神樂和風符咒儀式，唯一
+    開啟披風的新模板，呼應和風儀式感）、`sakuraGakuranLayeredBloom`
+    （櫻華敞領學生服疊搭，配劍鞘+劍氣特效+櫻花決戰背景）、
+    `seiranBlazerLayeredPoise`（青嵐敞領外套優雅，冷色調對比黑紗紅花
+    更搶眼）、`shirasagiShirtLayeredElegance`（白鷺敞領白襯衫優雅，
+    白色系跟校色同調）。模板總數 16→21，`OUTFIT_COMBOS` 13→18。
+- **驗證**：四支驗證腳本重跑全過（`check-static` 全過；
+  `validate-preset-refs` 21 個 `themeTemplates`＋18 組 `OUTFIT_COMBOS`
+  0 issue；`audit-100x` 1300 次模擬 0 issue，新增的 upperBody/waist/
+  lower/accessory 選項自動被動態讀取的隨機池吃進去，不需要改腳本結構）；
+  另外寫一支一次性 Node 腳本用 `vm` 模擬 `suzakuSailorTalismanKneel`
+  模板的完整組裝邏輯，人工檢視輸出確認「school identity/appearance
+  form（含新的深V/鏤空/高衩描述）/combat styling(light)/symbol focus/
+  accessory(符咒)/fantasy detail」組裝順序與文字正確、無 undefined 洩漏。
+
