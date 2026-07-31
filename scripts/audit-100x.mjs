@@ -743,17 +743,20 @@ const core = evalCore(coreSource);
       armorMode: pick(pools.armorMode), emblemFocus: pick(pools.emblemFocus),
       background: pick(pools.background), lighting: pick(pools.lighting), composition: pick(pools.composition),
       framing: pick(pools.framing), intensity: pick(pools.intensity), pose: pick(pools.pose), style: pick(pools.style),
-      camera: pick(pools.camera), ratio: pick(pools.ratio), customUpperBody: pick(customSamples), customLower: pick(customSamples),
+      camera: pick(pools.camera), ratio: pick(pools.ratio), customSchool: pick(customSamples), customUpperBody: pick(customSamples), customLower: pick(customSamples),
+      customChestDetail: pick(customSamples), customWaistSideDetail: pick(customSamples), customShoulderDetail: pick(customSamples),
       customFantasyDetail: pick(customSamples), colorNote: pick(customSamples), extraNote: pick(customSamples),
     };
     const schoolInfo = data.schoolData[sel.school];
+    const schoolPromptText = sel.customSchool ? `custom school identity only: ${sel.customSchool}; do not include or blend any preset school identity option` : schoolInfo.prompt;
+    const schoolColorNote = sel.customSchool ? '' : schoolInfo.colorNote;
     const upperText = sel.customUpperBody ? `custom upper body form only: ${sel.customUpperBody}; do not include or blend any preset upper body option` : data.upperBodyData[sel.upperBody];
     const waistText = data.waistData[sel.waist];
     const lowerText = sel.customLower ? `custom lower body form only: ${sel.customLower}; do not include or blend any preset lower body option` : data.lowerData[sel.lower];
     const uniformTypeText = data.uniformTypeData[sel.uniformType];
-    const chestDetailText = data.chestDetailData[sel.chestDetail];
-    const waistSideDetailText = data.waistSideDetailData[sel.waistSideDetail];
-    const shoulderDetailText = data.shoulderDetailData[sel.shoulderDetail];
+    const chestDetailText = sel.customChestDetail ? `custom chest surface detail only: ${sel.customChestDetail}` : data.chestDetailData[sel.chestDetail];
+    const waistSideDetailText = sel.customWaistSideDetail ? `custom waist side surface detail only: ${sel.customWaistSideDetail}` : data.waistSideDetailData[sel.waistSideDetail];
+    const shoulderDetailText = sel.customShoulderDetail ? `custom shoulder surface detail only: ${sel.customShoulderDetail}` : data.shoulderDetailData[sel.shoulderDetail];
     const garmentDetailParts = [chestDetailText, waistSideDetailText, shoulderDetailText].filter(Boolean);
     const garmentDetailText = garmentDetailParts.length
       ? 'garment surface detail: ' + garmentDetailParts.join(', ') + ' — structural surface accents only, the garment silhouette and archetype from the appearance form above stay unchanged,'
@@ -776,7 +779,7 @@ const core = evalCore(coreSource);
       data.identityGuard + ',', 'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
       data.anatomyGuard + ',', bodyShape + ',', data.lightingConsistencyGuard + ',',
       sel.composition + ',', data.compositionGuard + ',',
-      'school identity: ' + schoolInfo.prompt + ',',
+      'school identity: ' + schoolPromptText + ',',
       'appearance form: ' + upperText + ', ' + waistText + ', ' + lowerText + ', ' + uniformTypeText + ',',
       garmentDetailText,
       'combat styling: ' + armorText + '; ' + capeText + ',',
@@ -787,7 +790,7 @@ const core = evalCore(coreSource);
       data.styleData[sel.style] + ',', poseText ? poseText + ',' : '', framing + ',',
       data.cameraData[sel.camera] + ',', 'lighting design: ' + lighting + ',', 'background design: ' + background + ',',
       data.ratioData[sel.ratio] + ',', core.page.battleAcademy.output ? core.page.battleAcademy.output + ',' : '',
-      'hyper realistic, ultra detailed, premium advertising finish,', 'color palette: ' + (sel.colorNote || schoolInfo.colorNote) + ',',
+      'hyper realistic, ultra detailed, premium advertising finish,', (sel.colorNote || schoolColorNote) ? 'color palette: ' + (sel.colorNote || schoolColorNote) + ',' : '',
       sel.extraNote ? 'extra direction: ' + sel.extraNote + ',' : '', core.page.battleAcademy.negativePrompt ? core.page.battleAcademy.negativePrompt + ',' : '',
       'the lower body garment stays a genuine skirt with nothing worn underneath it — no shorts, no safety shorts, no biker shorts, no hot pants, no culotte layer added beneath the skirt,',
       'no logo artifacts, no distorted face',

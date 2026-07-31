@@ -2714,3 +2714,42 @@
   這類仙俠語彙，取代校服的「V形開叉／幾何鏤空」語彙），核心演算法不用
   重寫。
 
+## 2026-08-01（三）　battle-academy.html：04 學校身份加開 3 所＋自填，11 服裝改造核心加自填
+
+- owner 要求兩件事：(1) 04 學校身份再多加幾組學校，並加自填；(2) 11
+  服裝改造強度的三個部位細項也加自填。
+- **新增 3 所學校**：既有 6 所裡朱雀學院（黑+深緋紅+金，南方朱雀）已經
+  存在，這次補上四神剩下三個方位，湊成完整的四神主題系統：
+  `seiryuAcademy` 青龍學院（翡翠綠+墨藍+銀，東方青龍，靈動生機東方
+  學院）、`byakkoAcademy` 白虎學院（銀白+鋼灰+銀，西方白虎，剛毅肅殺
+  武道學院）、`genbuAcademy` 玄武學院（墨黑+深靛+古銅，北方玄武，沉穩
+  古老北境學院）。學校總數 6→9。
+- **04 學校身份自填**（`customSchool`）：`generate()` 新增
+  `schoolPromptText`／`schoolColorNote` 兩個變數——填了自填欄位就用
+  `custom school identity only: ...; do not include or blend any
+  preset school identity option` 取代 `schoolInfo.prompt`，色彩補充
+  的 fallback（`schoolInfo.colorNote`）同時歸零改用空字串，避免自填了
+  新學校卻在色票那行意外冒出某個預設學校的配色；如果使用者填自填欄位
+  但沒填 08 光影色彩區塊的「色彩補充」，`color palette:` 整行直接不
+  輸出（原本永遠輸出、只是內容可能是預設學校色票，這次順手把這行也
+  改成有內容才輸出，跟其他自填欄位的處理方式一致）。
+- **11 服裝改造核心三個部位自填**（`customChestDetail`／
+  `customWaistSideDetail`／`customShoulderDetail`）：跟其他部位一樣
+  用「custom X surface detail only: ...」格式取代該部位的預設選項
+  文字，三個欄位各自獨立，互不影響。
+- **清單同步**：`applyThemeTemplate()`／`applyBattleRandomSelection()`
+  的自填欄位清空清單、底部的 `input`/`change` 監聽註冊清單，都補上新增
+  的 4 個自填欄位 id（`customSchool`／`customChestDetail`／
+  `customWaistSideDetail`／`customShoulderDetail`），沿用既有慣例（一鍵
+  模板與隨機套用都會清空自填欄位，不會殘留舊字串跟新套用的內容混在
+  一起）；`refreshCards()` 是掃描 `[data-choice]`／`[data-custom-choice]`
+  的通用邏輯，新欄位掛好對應屬性後不用改這支函式。
+- **驗證**：`validate-preset-refs.mjs` 不需要改（既有 21 個模板/18 組
+  `OUTFIT_COMBOS` 都沒有用到新學校或部位自填欄位，`fieldLive.school`
+  是即時掃 DOM，新增的 3 所學校自動被涵蓋進驗證池）；`audit-100x.mjs`／
+  `build-prompt-preview.mjs` 同步加入 `customSchool` 與三個部位自填的
+  模擬/範例邏輯，四支腳本重跑全過（`check-static` 全過、
+  `validate-preset-refs` 21 模板/18 組合 0 issue、`audit-100x` 1300 次
+  模擬 0 issue、`build-prompt-preview` 正常產出，另外手動模擬自填覆蓋
+  邏輯確認輸出格式正確）。
+

@@ -730,20 +730,26 @@ function generateBattleAcademy(core, data) {
     style: 'tacticalCampaign',
     camera: 'eyeLevelCover',
     ratio: 'vertical45',
+    customSchool: '',
     customUpperBody: '',
     customLower: '',
+    customChestDetail: '',
+    customWaistSideDetail: '',
+    customShoulderDetail: '',
     customFantasyDetail: '',
     colorNote: '',
     extraNote: '',
   };
   const schoolInfo = data.schoolData[selection.school];
+  const schoolPromptText = selection.customSchool ? `custom school identity only: ${selection.customSchool}; do not include or blend any preset school identity option` : schoolInfo.prompt;
+  const schoolColorNote = selection.customSchool ? '' : schoolInfo.colorNote;
   const upperText = data.upperBodyData[selection.upperBody];
   const waistText = data.waistData[selection.waist];
   const lowerText = data.lowerData[selection.lower];
   const uniformTypeText = data.uniformTypeData[selection.uniformType];
-  const chestDetailText = data.chestDetailData[selection.chestDetail];
-  const waistSideDetailText = data.waistSideDetailData[selection.waistSideDetail];
-  const shoulderDetailText = data.shoulderDetailData[selection.shoulderDetail];
+  const chestDetailText = selection.customChestDetail ? `custom chest surface detail only: ${selection.customChestDetail}` : data.chestDetailData[selection.chestDetail];
+  const waistSideDetailText = selection.customWaistSideDetail ? `custom waist side surface detail only: ${selection.customWaistSideDetail}` : data.waistSideDetailData[selection.waistSideDetail];
+  const shoulderDetailText = selection.customShoulderDetail ? `custom shoulder surface detail only: ${selection.customShoulderDetail}` : data.shoulderDetailData[selection.shoulderDetail];
   const garmentDetailParts = [chestDetailText, waistSideDetailText, shoulderDetailText].filter(Boolean);
   const garmentDetailText = garmentDetailParts.length
     ? 'garment surface detail: ' + garmentDetailParts.join(', ') + ' — structural surface accents only, the garment silhouette and archetype from the appearance form above stay unchanged,'
@@ -768,7 +774,7 @@ function generateBattleAcademy(core, data) {
     data.lightingConsistencyGuard + ',',
     selection.composition + ',',
     data.compositionGuard + ',',
-    'school identity: ' + schoolInfo.prompt + ',',
+    'school identity: ' + schoolPromptText + ',',
     'appearance form: ' + upperText + ', ' + waistText + ', ' + lowerText + ', ' + uniformTypeText + ',',
     garmentDetailText,
     'combat styling: ' + armorText + '; ' + capeText + ',',
@@ -785,7 +791,7 @@ function generateBattleAcademy(core, data) {
     data.ratioData[selection.ratio] + ',',
     core.page.battleAcademy.output ? core.page.battleAcademy.output + ',' : '',
     'hyper realistic, ultra detailed, premium advertising finish,',
-    'color palette: ' + (selection.colorNote || schoolInfo.colorNote) + ',',
+    (selection.colorNote || schoolColorNote) ? 'color palette: ' + (selection.colorNote || schoolColorNote) + ',' : '',
     core.page.battleAcademy.negativePrompt ? core.page.battleAcademy.negativePrompt + ',' : '',
     'the lower body garment stays a genuine skirt with nothing worn underneath it — no shorts, no safety shorts, no biker shorts, no hot pants, no culotte layer added beneath the skirt,',
     'no logo artifacts, no distorted face',

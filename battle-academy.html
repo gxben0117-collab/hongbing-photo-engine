@@ -502,6 +502,14 @@
       <label class="card"><input type="radio" name="school" value="seiranAcademy"><div class="name">青嵐學園</div><div class="desc">白＋青藍／墨藍點綴，金屬銀，風羽校徽，清新現代airy</div></label>
       <label class="card"><input type="radio" name="school" value="tsukikageAcademy"><div class="name">月影學院</div><div class="desc">黑＋深紫，金屬銀，弦月校徽，神秘幽玄超自然感</div></label>
       <label class="card"><input type="radio" name="school" value="kaguraAcademy"><div class="name">神樂女學園</div><div class="desc">白＋朱紅，金屬金，神樂鈴與注連繩校徽，和風儀式傳統</div></label>
+      <label class="card"><input type="radio" name="school" value="seiryuAcademy"><div class="name">青龍學院</div><div class="desc">翡翠綠＋墨藍，金屬銀，青龍紋校徽，靈動生機東方學院</div></label>
+      <label class="card"><input type="radio" name="school" value="byakkoAcademy"><div class="name">白虎學院</div><div class="desc">銀白＋鋼灰，金屬銀，白虎紋校徽，剛毅肅殺武道學院</div></label>
+      <label class="card"><input type="radio" name="school" value="genbuAcademy"><div class="name">玄武學院</div><div class="desc">墨黑＋深靛，金屬古銅，玄武紋校徽，沉穩古老北境學院</div></label>
+    </div>
+    <div class="form-grid" style="margin-top:10px;">
+      <label class="field full custom-choice" data-custom-choice="school">學校身份自填
+        <input id="customSchool" type="text" placeholder="例如：琥珀色系煉金學院、雪白冰紋北國學院、深紫星辰占星學院">
+      </label>
     </div>
   </section>
 
@@ -709,6 +717,11 @@
         <label class="card"><input type="radio" name="chestDetail" value="laceInsert"><div class="name">蕾絲拼接</div><div class="desc">胸口蕾絲拼接細節</div></label>
         <label class="card"><input type="radio" name="chestDetail" value="asymmetricCut"><div class="name">不對稱切割</div><div class="desc">胸口不對稱切割細節</div></label>
       </div>
+      <div class="form-grid" style="margin-top:10px;">
+        <label class="field full custom-choice" data-custom-choice="chestDetail">胸口細節自填
+          <input id="customChestDetail" type="text" placeholder="例如：心形鏤空、雙層交叉綁帶、鎖骨處單顆珠飾扣">
+        </label>
+      </div>
     </div>
     <div class="pose-group">
       <div class="pose-group-label">腰側</div>
@@ -723,6 +736,11 @@
         <label class="card"><input type="radio" name="waistSideDetail" value="laceInsert"><div class="name">蕾絲拼接</div><div class="desc">腰側蕾絲拼接細節</div></label>
         <label class="card"><input type="radio" name="waistSideDetail" value="asymmetricCut"><div class="name">不對稱切割</div><div class="desc">腰側不對稱切割細節</div></label>
       </div>
+      <div class="form-grid" style="margin-top:10px;">
+        <label class="field full custom-choice" data-custom-choice="waistSideDetail">腰側細節自填
+          <input id="customWaistSideDetail" type="text" placeholder="例如：雙側交叉緞帶、金屬扣環腰封、螺旋纏繞剪裁">
+        </label>
+      </div>
     </div>
     <div class="pose-group">
       <div class="pose-group-label">肩部</div>
@@ -736,6 +754,11 @@
         <label class="card"><input type="radio" name="shoulderDetail" value="lacePanel"><div class="name">蕾絲肩片</div><div class="desc">肩部蕾絲肩片細節</div></label>
         <label class="card"><input type="radio" name="shoulderDetail" value="detachedPanel"><div class="name">分離肩片</div><div class="desc">肩部分離肩片細節</div></label>
         <label class="card"><input type="radio" name="shoulderDetail" value="asymmetricShoulder"><div class="name">不對稱肩部</div><div class="desc">肩部不對稱剪裁細節</div></label>
+      </div>
+      <div class="form-grid" style="margin-top:10px;">
+        <label class="field full custom-choice" data-custom-choice="shoulderDetail">肩部細節自填
+          <input id="customShoulderDetail" type="text" placeholder="例如：單肩流蘇垂墜、肩線鏤空幾何窗、肩帶交錯結構">
+        </label>
       </div>
     </div>
   </section>
@@ -1021,7 +1044,10 @@ const schoolData = {
   suzakuAcademy: { prompt: 'Suzaku Academy identity, black and deep crimson color scheme, gold metal accents, vermilion bird crest emblem, powerful energetic prestigious visual personality', colorNote: 'black and deep crimson with gold trim', metal: 'gold', emblem: 'vermilion bird crest' },
   seiranAcademy: { prompt: 'Seiran Academy identity, white and cyan blue color scheme with ink-blue accents, silver metal accents, wind feather crest emblem, clean youthful airy modern visual personality', colorNote: 'white and cyan blue with ink-blue accents and silver trim', metal: 'silver', emblem: 'wind feather crest' },
   tsukikageAcademy: { prompt: 'Tsukikage Academy identity, black and deep purple color scheme, silver metal accents, crescent moon crest emblem, mysterious elegant supernatural visual personality', colorNote: 'black and deep purple with silver trim', metal: 'silver', emblem: 'crescent moon crest' },
-  kaguraAcademy: { prompt: 'Kagura Girls Academy identity, white and vermilion color scheme, gold metal accents, kagura bell and sacred knot crest emblem, traditional Japanese ceremonial fantasy visual personality', colorNote: 'white and vermilion with gold trim', metal: 'gold', emblem: 'kagura bell and sacred knot crest' }
+  kaguraAcademy: { prompt: 'Kagura Girls Academy identity, white and vermilion color scheme, gold metal accents, kagura bell and sacred knot crest emblem, traditional Japanese ceremonial fantasy visual personality', colorNote: 'white and vermilion with gold trim', metal: 'gold', emblem: 'kagura bell and sacred knot crest' },
+  seiryuAcademy: { prompt: 'Seiryu Academy identity, jade green and ink blue color scheme, silver metal accents, azure dragon crest emblem, vital dynamic eastern academy visual personality', colorNote: 'jade green and ink blue with silver trim', metal: 'silver', emblem: 'azure dragon crest' },
+  byakkoAcademy: { prompt: 'Byakko Academy identity, silver white and steel gray color scheme, silver metal accents, white tiger crest emblem, disciplined fierce martial academy visual personality', colorNote: 'silver white and steel gray with silver trim', metal: 'silver', emblem: 'white tiger crest' },
+  genbuAcademy: { prompt: 'Genbu Academy identity, ink black and deep indigo color scheme, bronze metal accents, black tortoise crest emblem, stoic ancient northern academy visual personality', colorNote: 'ink black and deep indigo with bronze trim', metal: 'bronze', emblem: 'black tortoise crest' }
 };
 
 const upperBodyData = {
@@ -1680,7 +1706,7 @@ function applyThemeTemplate(key){
   setRadioValue('waistSideDetail', 'none');
   setRadioValue('shoulderDetail', 'none');
 
-  ['customUpperBody','customLower','customBackground','customPose','customFantasyDetail','colorNote','extraNote'].forEach(id => {
+  ['customSchool','customUpperBody','customLower','customChestDetail','customWaistSideDetail','customShoulderDetail','customBackground','customPose','customFantasyDetail','colorNote','extraNote'].forEach(id => {
     document.getElementById(id).value = '';
   });
 
@@ -1745,7 +1771,7 @@ function applyBattleRandomSelection(){
     if(pool.length) setRadioValue(name, getRandomItem(pool));
   });
 
-  ['customUpperBody','customLower','customBackground','customPose','customFantasyDetail','colorNote','extraNote'].forEach(id => {
+  ['customSchool','customUpperBody','customLower','customChestDetail','customWaistSideDetail','customShoulderDetail','customBackground','customPose','customFantasyDetail','colorNote','extraNote'].forEach(id => {
     document.getElementById(id).value = '';
   });
   refreshCards();
@@ -1762,6 +1788,11 @@ function generate(options = {}){
   const bodyShape = BODY_SHAPES[selected('bodyShape')];
   const school = selected('school');
   const schoolInfo = schoolData[school];
+  const customSchool = document.getElementById('customSchool').value.trim();
+  const schoolPromptText = customSchool
+    ? `custom school identity only: ${customSchool}; do not include or blend any preset school identity option`
+    : schoolInfo.prompt;
+  const schoolColorNote = customSchool ? '' : schoolInfo.colorNote;
 
   const customUpperBody = document.getElementById('customUpperBody').value.trim();
   const upperText = customUpperBody
@@ -1774,9 +1805,18 @@ function generate(options = {}){
     : lowerData[selected('lower')];
   const uniformTypeText = uniformTypeData[selected('uniformType')];
 
-  const chestDetailText = chestDetailData[selected('chestDetail')];
-  const waistSideDetailText = waistSideDetailData[selected('waistSideDetail')];
-  const shoulderDetailText = shoulderDetailData[selected('shoulderDetail')];
+  const customChestDetail = document.getElementById('customChestDetail').value.trim();
+  const chestDetailText = customChestDetail
+    ? `custom chest surface detail only: ${customChestDetail}`
+    : chestDetailData[selected('chestDetail')];
+  const customWaistSideDetail = document.getElementById('customWaistSideDetail').value.trim();
+  const waistSideDetailText = customWaistSideDetail
+    ? `custom waist side surface detail only: ${customWaistSideDetail}`
+    : waistSideDetailData[selected('waistSideDetail')];
+  const customShoulderDetail = document.getElementById('customShoulderDetail').value.trim();
+  const shoulderDetailText = customShoulderDetail
+    ? `custom shoulder surface detail only: ${customShoulderDetail}`
+    : shoulderDetailData[selected('shoulderDetail')];
   const garmentDetailParts = [chestDetailText, waistSideDetailText, shoulderDetailText].filter(Boolean);
   const garmentDetailText = garmentDetailParts.length
     ? 'garment surface detail: ' + garmentDetailParts.join(', ') + ' — structural surface accents only, the garment silhouette and archetype from the appearance form above stay unchanged,'
@@ -1820,7 +1860,7 @@ function generate(options = {}){
     lightingConsistencyGuard + ',',
     composition + ',',
     compositionGuard + ',',
-    'school identity: ' + schoolInfo.prompt + ',',
+    'school identity: ' + schoolPromptText + ',',
     'appearance form: ' + upperText + ', ' + waistText + ', ' + lowerText + ', ' + uniformTypeText + ',',
     garmentDetailText,
     'combat styling: ' + armorText + '; ' + capeText + ',',
@@ -1837,7 +1877,7 @@ function generate(options = {}){
     ratioData[selected('ratio')] + ',',
     sharedBattleAcademyCore.output ? sharedBattleAcademyCore.output + ',' : '',
     'hyper realistic, ultra detailed, premium advertising finish,',
-    'color palette: ' + (colorNote || schoolInfo.colorNote) + ',',
+    (colorNote || schoolColorNote) ? 'color palette: ' + (colorNote || schoolColorNote) + ',' : '',
     extraNote ? 'extra direction: ' + extraNote + ',' : '',
     sharedBattleAcademyCore.negativePrompt ? sharedBattleAcademyCore.negativePrompt + ',' : '',
     'the lower body garment stays a genuine skirt with nothing worn underneath it — no shorts, no safety shorts, no biker shorts, no hot pants, no culotte layer added beneath the skirt,',
@@ -1915,7 +1955,7 @@ document.addEventListener('input',(event)=>{
 document.addEventListener('change',(event)=>{
   if(event.target && event.target.closest && !event.target.closest('#outputWrap')) markStale();
 },true);
-['customUpperBody','customLower','customBackground','customPose','customFantasyDetail','intensity','colorNote','extraNote','emblemFocus'].forEach(id => {
+['customSchool','customUpperBody','customLower','customChestDetail','customWaistSideDetail','customShoulderDetail','customBackground','customPose','customFantasyDetail','intensity','colorNote','extraNote','emblemFocus'].forEach(id => {
   document.getElementById(id).addEventListener('input', () => {
     refreshCards();
   });

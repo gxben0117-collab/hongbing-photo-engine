@@ -156,6 +156,17 @@
   確認邏輯正確。四支驗證腳本同步更新重跑全過。這是 v1（3 部位、無跨
   部位相容性表），下一步可考慮擴大部位數或搬去 xianxia.html（換一份
   仙俠語彙、演算法不用重寫）。
+  **04 學校身份加開 3 所＋自填、11 服裝改造核心加自填**（2026-08-01）：
+  補齊四神主題（既有朱雀=南方，新增 `seiryuAcademy` 青龍=東方翡翠綠、
+  `byakkoAcademy` 白虎=西方銀白鋼灰、`genbuAcademy` 玄武=北方墨黑古銅），
+  學校總數 6→9；新增 `customSchool` 自填欄位，`generate()` 拆成
+  `schoolPromptText`/`schoolColorNote` 兩個變數處理覆蓋邏輯，`color
+  palette:` 那行順手改成沒內容就不輸出（原本永遠輸出）。服裝改造核心
+  三個部位（胸口/腰側/肩部）各自新增 `customChestDetail`/
+  `customWaistSideDetail`/`customShoulderDetail` 自填，套用跟其他自填
+  欄位一致的「custom X only: ...」覆蓋格式。一鍵模板/隨機套用的自填
+  清空清單、監聽註冊清單同步補上這 4 個新欄位 id。四支驗證腳本重跑
+  全過。
   **`anime-hero.html`（動漫電影變身夥伴咒語產生器）已於 2026-07-24 整頁下架**：
   owner 對這系列不滿意，且該頁架構已疊到 10 層 monkey-patch 式的
   `generate = function(){ 上一版generate(); ... }`，難以維護；docs 底下留有一份
