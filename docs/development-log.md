@@ -2753,3 +2753,40 @@
   模擬 0 issue、`build-prompt-preview` 正常產出，另外手動模擬自填覆蓋
   邏輯確認輸出格式正確）。
 
+## 2026-08-01（四）　battle-academy.html：一鍵主題模板同步新增3組（新學校＋服裝改造核心示範）
+
+- owner 要求「一鍵主題模板 請同步更新」——上一輪新增了 3 所學校（青龍/
+  白虎/玄武）跟服裝改造核心的自填欄位，但既有 21 個模板都還只涵蓋原本
+  6 所學校，也都沒有示範新的部位細節功能，所以新增 3 組模板，一校一組，
+  順便讓其中 2 組示範服裝改造核心：
+  - `seiryuDragonWindDojo`（青龍御風劍術）：青龍學院、學院外套＋合身
+    腰線＋及膝百褶裙、劍鞘配件、氣流亂流動態、學校屋頂決戰。服裝改造
+    核心維持 Layer 0（三部位皆無修改），當作新學校的乾淨基準示範。
+  - `byakkoTigerDojoFocus`（白虎道場專注）：白虎學院、詰襟學生服＋高腰
+    剪裁＋袴褲（社團活動制服類型，呼應白虎剛毅武道學院的定位）、腰側
+    縱向切割（示範服裝改造核心）、火花衝擊閃光、劍道場內部。
+  - `genbuAncientGuardianThrone`（玄武古老守護寶座）：玄武學院、現代
+    和風上衣＋帶結腰線＋長版百褶裙（儀式制服類型）、肩部蕾絲肩片（示範
+    服裝改造核心）、符咒配件、發光咒印法陣、雙靈守護寶座姿、現代學院
+    圖書館（刻意選校園場景而非抽象背景，呼應「不要跳脫制服和學園範圍」
+    那次的教訓）。
+- **`applyThemeTemplate()` 邏輯調整**：原本套用模板一律把服裝改造核心
+  的三個部位強制重置回 `none`（因為當時 21 個模板都沒規劃這幾個欄位）。
+  這次改成 `setRadioValue('chestDetail', preset.chestDetail || 'none')`
+  這種寫法——模板如果有指定部位細節就套用，沒指定的（絕大多數既有
+  模板）維持原本「重置回無修改」的行為，兩種模板可以並存不衝突。
+  `garmentLayer` 仍然固定重置回 `layer0`（Layer 只是給「隨機套用」用的
+  強度旋鈕，一鍵模板不需要顯示 Layer 選了什麼，模板裡是否有部位細節
+  已經直接反映在畫面上）。
+- **驗證補強**：順手發現 `validate-preset-refs.mjs` 的 battle-academy
+  區塊當初沒有把 `chestDetail`/`waistSideDetail`/`shoulderDetail` 加進
+  `fieldLive`，導致這兩個新模板裡用到的部位欄位值雖然沒問題，但實際上
+  完全沒被這支腳本驗證過（`checkObject` 只檢查 `fieldLive` 裡存在的
+  欄位名稱，不存在的欄位會被靜默略過、不是驗證通過而是根本沒驗證）。
+  補上這三個欄位後重跑，24 個模板全數 0 issue，這次才是真正驗證過。
+  四支驗證腳本（`check-static`/`validate-preset-refs`/`audit-100x`/
+  `build-prompt-preview`）全部重跑通過，另外手動模擬「白虎道場專注」
+  模板的完整組裝邏輯，確認 `school identity`/`appearance form`/
+  `garment surface detail`/`combat styling` 四行文字與順序正確。模板
+  總數 21→24。
+

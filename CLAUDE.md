@@ -167,6 +167,17 @@
   欄位一致的「custom X only: ...」覆蓋格式。一鍵模板/隨機套用的自填
   清空清單、監聽註冊清單同步補上這 4 個新欄位 id。四支驗證腳本重跑
   全過。
+  **一鍵主題模板同步新增 3 組**（2026-08-01）：owner 要求同步更新一鍵
+  模板，補上剛新增的 3 所學校（青龍/白虎/玄武），每校一組，其中 2 組
+  順便示範服裝改造核心的部位細節（`byakkoTigerDojoFocus` 腰側縱向切割、
+  `genbuAncientGuardianThrone` 肩部蕾絲肩片）。`applyThemeTemplate()`
+  改成 `preset.chestDetail || 'none'` 這種寫法，模板有指定部位就套用、
+  沒指定的維持原本重置回無修改，兩種模板並存不衝突；`garmentLayer`
+  維持固定重置 layer0（Layer 只是隨機套用用的強度旋鈕）。順手發現
+  `validate-preset-refs.mjs` 的 battle-academy 區塊沒把三個部位欄位
+  加進 `fieldLive`，導致新模板的部位值完全沒被驗證過（欄位不存在於
+  `fieldLive` 會被靜默略過），補上後 24 個模板真正驗證通過。模板
+  總數 21→24。
   **`anime-hero.html`（動漫電影變身夥伴咒語產生器）已於 2026-07-24 整頁下架**：
   owner 對這系列不滿意，且該頁架構已疊到 10 層 monkey-patch 式的
   `generate = function(){ 上一版generate(); ... }`，難以維護；docs 底下留有一份

@@ -422,6 +422,18 @@
         <div class="name">白鷺敞領襯衫優雅</div>
         <div class="desc">白鷺女學院、敞領白襯衫疊搭黑紗上衣＋綁繩腰線＋高衩長裙、手鍊配件、現代學院走廊</div>
       </button>
+      <button class="card" type="button" data-template="seiryuDragonWindDojo">
+        <div class="name">青龍御風劍術</div>
+        <div class="desc">青龍學院、學院外套＋合身腰線＋及膝百褶裙、劍鞘配件、氣流亂流動態、學校屋頂決戰</div>
+      </button>
+      <button class="card" type="button" data-template="byakkoTigerDojoFocus">
+        <div class="name">白虎道場專注</div>
+        <div class="desc">白虎學院、詰襟學生服＋高腰剪裁＋袴褲、腰側縱向切割、火花衝擊閃光、劍道場內部</div>
+      </button>
+      <button class="card" type="button" data-template="genbuAncientGuardianThrone">
+        <div class="name">玄武古老守護寶座</div>
+        <div class="desc">玄武學院、現代和風上衣＋帶結腰線＋長版百褶裙、肩部蕾絲肩片、發光咒印法陣、現代學院圖書館</div>
+      </button>
     </div>
   </section>
 
@@ -1675,6 +1687,24 @@ const themeTemplates = {
     accessory: 'braceletCharmAccent', fantasyDetail: 'spiritSensorOverlay', armorMode: 'light', emblemFocus: 'cuffEmbroidery',
     style: 'cleanFunctional', composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout', framing: 'halfBody', pose: 'crossed_leg_stand', camera: 'threeQuarterSide',
     lighting: 'moonGlassSparkle', background: 'academyCorridorModern', ratio: 'vertical45', intensity: 'subtle floating particles, refined couture details'
+  },
+  seiryuDragonWindDojo: {
+    school: 'seiryuAcademy', upperBody: 'academyBlazer', waist: 'fittedWaist', lower: 'kneeLengthPleatedSkirt', uniformType: 'standard',
+    accessory: 'swordSheathAccent', fantasyDetail: 'windTurbulenceMotion', armorMode: 'light', emblemFocus: 'chestBadge',
+    style: 'cinematicMission', composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner', framing: 'fullBody', pose: 'sword_draw_pose', camera: 'lowAngleHero',
+    lighting: 'crystalDaylight', background: 'schoolRooftopBattle', ratio: 'vertical916', intensity: 'balanced material effects, elegant and luxurious'
+  },
+  byakkoTigerDojoFocus: {
+    school: 'byakkoAcademy', upperBody: 'standCollarGakuranJacket', waist: 'highWaistTailoring', lower: 'hakamaWideTrousers', uniformType: 'clubActivity',
+    waistSideDetail: 'verticalSlit', accessory: 'swordSheathAccent', fantasyDetail: 'sparkImpactFlare', armorMode: 'light', emblemFocus: 'beltBuckle',
+    style: 'trainingDocumentary', composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout', framing: 'threeQuarter', pose: 'gear_check_moment', camera: 'eyeLevelCover',
+    lighting: 'hard', background: 'kendoDojoInterior', ratio: 'vertical45', intensity: 'balanced material effects, elegant and luxurious'
+  },
+  genbuAncientGuardianThrone: {
+    school: 'genbuAcademy', upperBody: 'modernKimonoSchoolTop', waist: 'obiInspiredWaistband', lower: 'longPleatedSkirt', uniformType: 'ceremonial',
+    shoulderDetail: 'lacePanel', accessory: 'talismanChargeAccent', fantasyDetail: 'glowingSealCircle', armorMode: 'off', emblemFocus: 'hairAccessory',
+    style: 'academyEditorial', composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout', framing: 'fullBody', pose: 'dual_spirit_guardian_throne', camera: 'lowAngleHero',
+    lighting: 'darkGoldMood', background: 'academyLibraryModern', ratio: 'vertical916', intensity: 'balanced material effects, elegant and luxurious'
   }
 };
 
@@ -1699,12 +1729,13 @@ function applyThemeTemplate(key){
     document.getElementById('emblemFocus').value = preset.emblemFocus;
   }
 
-  // 一鍵模板本身沒有規劃服裝改造核心的內容，套用模板時重置回 Layer 0／三個部位皆無修改，
-  // 避免殘留上一次手動或隨機設定的鏤空細節跟新套用的模板衝突。
+  // 服裝改造核心：多數模板沒有規劃這幾個欄位，套用時預設重置回 Layer 0／無修改，
+  // 避免殘留上一次手動或隨機設定的鏤空細節；少數模板（例如展示新學校的那幾組）
+  // 有明確指定部位細節時則直接套用，讓一鍵模板也能示範這個功能。
   setRadioValue('garmentLayer', 'layer0');
-  setRadioValue('chestDetail', 'none');
-  setRadioValue('waistSideDetail', 'none');
-  setRadioValue('shoulderDetail', 'none');
+  setRadioValue('chestDetail', preset.chestDetail || 'none');
+  setRadioValue('waistSideDetail', preset.waistSideDetail || 'none');
+  setRadioValue('shoulderDetail', preset.shoulderDetail || 'none');
 
   ['customSchool','customUpperBody','customLower','customChestDetail','customWaistSideDetail','customShoulderDetail','customBackground','customPose','customFantasyDetail','colorNote','extraNote'].forEach(id => {
     document.getElementById(id).value = '';
