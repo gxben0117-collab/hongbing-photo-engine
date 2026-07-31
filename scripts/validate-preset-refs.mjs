@@ -293,8 +293,15 @@ const issues = [];
 {
   const src = fs.readFileSync(path.join(root, 'battle-academy.html'), 'utf8');
   const fieldLive = {
-    garment: liveRadioValues(src, 'garment'),
-    material: liveRadioValues(src, 'material'),
+    school: liveRadioValues(src, 'school'),
+    upperBody: liveRadioValues(src, 'upperBody'),
+    waist: liveRadioValues(src, 'waist'),
+    lower: liveRadioValues(src, 'lower'),
+    uniformType: liveRadioValues(src, 'uniformType'),
+    accessory: liveRadioValues(src, 'accessory'),
+    fantasyDetail: liveRadioValues(src, 'fantasyDetail'),
+    armorMode: liveRadioValues(src, 'armorMode'),
+    capeMode: liveRadioValues(src, 'capeMode'),
     style: liveRadioValues(src, 'style'),
     composition: liveRadioValues(src, 'composition'),
     framing: liveRadioValues(src, 'framing'),
@@ -305,8 +312,23 @@ const issues = [];
     ratio: liveRadioValues(src, 'ratio'),
     bodyShape: liveRadioValues(src, 'bodyShape'),
     intensity: liveSelectOptionValues(src, 'intensity'),
+    emblemFocus: liveSelectOptionValues(src, 'emblemFocus'),
   };
   checkObject('battle-academy.html', 'themeTemplates', extractObjectLiteral(src, 'themeTemplates'), fieldLive, issues);
+
+  const comboStart = src.indexOf('const OUTFIT_COMBOS = [');
+  if (comboStart !== -1) {
+    const arrStart = comboStart + 'const OUTFIT_COMBOS = '.length;
+    let depth = 0, end = -1;
+    for (let i = arrStart; i < src.length; i += 1) {
+      if (src[i] === '[') depth += 1;
+      else if (src[i] === ']') { depth -= 1; if (depth === 0) { end = i; break; } }
+    }
+    const combos = vm.runInNewContext(`(${src.slice(arrStart, end + 1)});`, {});
+    const comboMap = Object.fromEntries(combos.map((c, i) => [`combo${i}`, c]));
+    const upperWaistLowerLive = { upperBody: fieldLive.upperBody, waist: fieldLive.waist, lower: fieldLive.lower };
+    checkObject('battle-academy.html', 'OUTFIT_COMBOS', comboMap, upperWaistLowerLive, issues);
+  }
 }
 
 

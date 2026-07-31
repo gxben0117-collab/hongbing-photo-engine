@@ -716,14 +716,18 @@ const core = evalCore(coreSource);
   const html = read('battle-academy.html');
   const data = evalDataSegment({
     source: html, core, page: 'battleAcademy',
-    startMarker: 'const materialData = {',
-    endMarker: 'function setRadioValue',
-    exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedBattleAcademyCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
+    startMarker: 'const schoolData = {',
+    endMarker: 'function selected',
+    exportExpression: '({ schoolData, upperBodyData, waistData, lowerData, uniformTypeData, accessoryData, fantasyDetailData, armorModeData, capeModeData, emblemFocusData, styleData, backgroundData, lightingData, sharedBattleAcademyCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
   });
   const compositionValues = radioValues(html, 'composition');
   const intensityValues = selectValues(html, 'intensity');
+  const emblemFocusValues = selectValues(html, 'emblemFocus');
   const pools = {
-    bodyShape: Object.keys(data.BODY_SHAPES), material: Object.keys(data.materialData), garment: Object.keys(data.garmentData),
+    bodyShape: Object.keys(data.BODY_SHAPES), school: Object.keys(data.schoolData), upperBody: Object.keys(data.upperBodyData),
+    waist: Object.keys(data.waistData), lower: Object.keys(data.lowerData), uniformType: Object.keys(data.uniformTypeData),
+    accessory: Object.keys(data.accessoryData), fantasyDetail: Object.keys(data.fantasyDetailData), armorMode: Object.keys(data.armorModeData),
+    capeMode: Object.keys(data.capeModeData), emblemFocus: emblemFocusValues,
     background: Object.keys(data.backgroundData), lighting: Object.keys(data.lightingData), composition: compositionValues,
     framing: Object.keys(data.framingData), intensity: intensityValues, pose: Object.keys(data.poseData),
     style: Object.keys(data.styleData), camera: Object.keys(data.cameraData), ratio: Object.keys(data.ratioData),
@@ -731,20 +735,28 @@ const core = evalCore(coreSource);
   const customSamples = ['', '', 'sakura petal battle damage', '手工訂製'];
   for (let i = 0; i < N; i += 1) {
     const sel = {
-      bodyShape: pick(pools.bodyShape), material: pick(pools.material), garment: pick(pools.garment),
+      bodyShape: pick(pools.bodyShape), school: pick(pools.school), upperBody: pick(pools.upperBody), waist: pick(pools.waist),
+      lower: pick(pools.lower), uniformType: pick(pools.uniformType), accessory: pick(pools.accessory), fantasyDetail: pick(pools.fantasyDetail),
+      armorMode: pick(pools.armorMode), capeMode: pick(pools.capeMode), emblemFocus: pick(pools.emblemFocus),
       background: pick(pools.background), lighting: pick(pools.lighting), composition: pick(pools.composition),
       framing: pick(pools.framing), intensity: pick(pools.intensity), pose: pick(pools.pose), style: pick(pools.style),
-      camera: pick(pools.camera), ratio: pick(pools.ratio), customMaterial: pick(customSamples), customGarment: pick(customSamples),
-      colorNote: pick(customSamples), extraNote: pick(customSamples),
+      camera: pick(pools.camera), ratio: pick(pools.ratio), customUpperBody: pick(customSamples), customLower: pick(customSamples),
+      customFantasyDetail: pick(customSamples), colorNote: pick(customSamples), extraNote: pick(customSamples),
     };
-    const material = data.materialData[sel.material];
-    const customMaterials = sel.customMaterial ? [sel.customMaterial] : [];
-    const customMaterialText = customMaterials.join(', ');
-    const materialText = customMaterials.length
-      ? `custom material system only: ${customMaterialText}; read and use every custom material keyword with equal priority, combine all custom materials into one coherent art system, do not include or blend any preset material option`
-      : material.prompt;
-    const materialPalette = customMaterials.length ? `derive the color palette only from custom material keywords: ${customMaterialText}` : material.palette;
-    const garmentText = sel.customGarment ? `custom garment form only: ${sel.customGarment}; do not include or blend any preset garment option` : data.garmentData[sel.garment];
+    const schoolInfo = data.schoolData[sel.school];
+    const upperText = sel.customUpperBody ? `custom upper body form only: ${sel.customUpperBody}; do not include or blend any preset upper body option` : data.upperBodyData[sel.upperBody];
+    const waistText = data.waistData[sel.waist];
+    const lowerText = sel.customLower ? `custom lower body form only: ${sel.customLower}; do not include or blend any preset lower body option` : data.lowerData[sel.lower];
+    const uniformTypeText = data.uniformTypeData[sel.uniformType];
+    const accessoryText = data.accessoryData[sel.accessory];
+    const fantasyDetailText = sel.customFantasyDetail
+      ? `custom fantasy detail system only: ${sel.customFantasyDetail}; combine all custom fantasy keywords into one coherent art system, do not include or blend any preset fantasy detail option`
+      : data.fantasyDetailData[sel.fantasyDetail];
+    const armorText = data.armorModeData[sel.armorMode];
+    const capeText = data.capeModeData[sel.capeMode];
+    const emblemFocusText = sel.emblemFocus && sel.emblemFocus !== 'auto'
+      ? `${data.emblemFocusData[sel.emblemFocus]}, rendered in the school's ${schoolInfo.metal} metal accent and ${schoolInfo.emblem}`
+      : '';
     const background = data.backgroundData[sel.background];
     const lighting = data.lightingData[sel.lighting];
     const bodyShape = data.BODY_SHAPES[sel.bodyShape];
@@ -754,13 +766,20 @@ const core = evalCore(coreSource);
       data.identityGuard + ',', 'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
       data.anatomyGuard + ',', data.poseNaturalityGuard + ',', bodyShape + ',', data.lightingConsistencyGuard + ',', data.colorTemperatureGuard + ',',
       data.subjectIntegrationGuard + ',', data.faceFillGuard + ',', sel.composition + ',', data.compositionGuard + ',',
-      'appearance form: ' + garmentText + ',', 'theme material and art system: ' + materialText + ',',
-      'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',
-      sel.intensity + ',', 'selected material appears as controlled clothing details, ornaments, particles and background accents without overpowering facial identity,',
+      'school identity: ' + schoolInfo.prompt + ',',
+      'appearance form: ' + upperText + ', ' + waistText + ', ' + lowerText + ',',
+      uniformTypeText + ',',
+      'armor styling: ' + armorText + ',',
+      'cape styling: ' + capeText + ',',
+      emblemFocusText ? emblemFocusText + ',' : '',
+      'accessory detail: ' + accessoryText + ',',
+      'fantasy battle detail and art system: ' + fantasyDetailText + ',',
+      'use the selected fantasy detail system to form ornaments, particles and background accents around the subject without replacing the uniform silhouette,',
+      sel.intensity + ',',
       data.styleData[sel.style] + ',', poseText ? poseText + ',' : '', framing + ',',
       data.cameraData[sel.camera] + ',', 'lighting design: ' + lighting + ',', 'background design: ' + background + ',',
       data.ratioData[sel.ratio] + ',', core.page.battleAcademy.output ? core.page.battleAcademy.output + ',' : '',
-      'hyper realistic, ultra detailed, premium advertising finish,', 'color palette: ' + (sel.colorNote || materialPalette) + ',',
+      'hyper realistic, ultra detailed, premium advertising finish,', 'color palette: ' + (sel.colorNote || schoolInfo.colorNote) + ',',
       sel.extraNote ? 'extra direction: ' + sel.extraNote + ',' : '', core.page.battleAcademy.negativePrompt ? core.page.battleAcademy.negativePrompt + ',' : '',
       'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face',
     ].filter(Boolean);

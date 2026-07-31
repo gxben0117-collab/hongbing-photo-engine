@@ -18,12 +18,27 @@
 **完整逐日開發記錄在 [`docs/development-log.md`](docs/development-log.md)，本節只放
 現況摘要與待辦；不要在這裡繼續累加逐日流水帳，改記到開發日誌裡。**
 
-### 現況摘要（2026-07-30）
+### 現況摘要（2026-07-31）
 
 - 十三個工具頁（travel / magazine / doll / fantasy-fashion / xianxia /
   anime-character / flower-fairy / isekai-fantasy / store-ad /
   floral-sweet / gala-socialite / kpop-idol / battle-academy）
   皆已上線，正式站 <https://gxben0117-collab.github.io/hongbing-photo-engine/>。
+- **全站導覽改為「首頁單向連結」**（2026-07-31）：owner 要求首頁保留所有
+  工具頁連結不變，但其餘 13 個工具頁互相之間、以及回首頁的連結全部拿掉。
+  做法：13 個工具頁的 `<nav>` 內 `<a class="nav-logo" href="index.html">`
+  改成不可點擊的 `<span class="nav-logo">`，`.nav-links` 整個 `<div>`
+  （含 14 個 `<a class="nav-link">`）整段移除；`index.html` 的 nav 完全
+  不動，仍是 14 個連結的完整導覽。四支驗證腳本重跑全過（`check-static`
+  的「本地連結檢查」本來就是找 `href` 出現的檔案是否存在，工具頁拿掉連結
+  後檢查範圍縮小，不會誤判）。
+- **`battle-academy.html` 全面重構為「模組化制服設計引擎」**（2026-07-31）：
+  owner 貼了一份完整規格書，核心原則「服裝戰鬥化 ≠ 服裝裝甲化」——舊版
+  04 服裝是「一張卡片＝一整套固定服裝」，容易把「真人×日系制服×異能學園」
+  做成「真人×制服元素×RPG戰士」。新版拆成 9 個獨立維度，比照方案C（完整
+  模組化引擎）執行，詳見下方「battle-academy 模組化重構」條目。這是全站
+  唯一一個「多維度拆件組合」的頁面架構，其餘 12 頁仍是扁平單選卡片模式，
+  刻意的架構差異、不是不一致。
   **`anime-hero.html`（動漫電影變身夥伴咒語產生器）已於 2026-07-24 整頁下架**：
   owner 對這系列不滿意，且該頁架構已疊到 10 層 monkey-patch 式的
   `generate = function(){ 上一版generate(); ... }`，難以維護；docs 底下留有一份
@@ -342,6 +357,76 @@
   裡殘留的舊 key 預設值（`tacticalBlazerVest`／`briefingRoomTactical`／
   `'exosuit joints'` 等）一併同步更新。四支驗證腳本重跑全過（不需要改
   腳本結構，因為都是動態讀 DOM／themeTemplates，key 改名會自動被抓到）。
+- **`battle-academy.html` 全面重構為「模組化制服設計引擎」**（2026-07-31）：
+  owner 貼了一份完整規格書，先要求「分析看看，給我3套方案」，提供 A（內容
+  重寫、架構不變）／B（新增學校身份為獨立維度、服裝維持整套造型）／C（完整
+  模組化拆件引擎，精確照規格書實作）三套方案，owner 選 C 執行。核心原則
+  「服裝戰鬥化 ≠ 服裝裝甲化」：舊版 04 服裝是「一張卡片＝一整套固定服裝」，
+  容易把「真人×日系制服×異能學園」做成「真人×制服元素×RPG戰士」；新版拆成
+  9 個獨立可組合維度：**04 學校身份**（6 校：櫻華學園深藍紫+金/白鷺女學院
+  象牙白+靛藍+銀/朱雀學院黑+深緋紅+金/青嵐學園白+青藍+銀/月影學院黑+深紫+銀/
+  神樂女學園白+朱紅+金，各校只帶主色/輔色/金屬色/校徽/氣質文字，不含服裝
+  版型）、**05 上身**（9 項：水手領上衣/詰襟學生外套/學院西裝外套/短版學院
+  外套/剪裁制服外套/正式學院襯衫/和風交領上衣/現代和風學院上衣/儀式感學院
+  上衣）、**06 腰線輪廓**（9 項純剪裁效果：自然腰線/高腰剪裁/合身腰線/寬版
+  學院腰封/窄腰帶/雙腰帶/和風帶結腰線/綁繩腰線/儀式腰帶，明確不是身形調整，
+  身形仍由 03 控制）、**07 下身**（10 項：百褶短裙/A字短裙/及膝百褶裙/中長
+  百褶裙/長版百褶裙/現代袴裙/袴褲/寬褲裙/不對稱裙擺/層次和風裙）、**08 制服
+  類型**（7 項季節/場合修飾詞：標準/夏季/冬季/儀式/學生會/社團活動/特殊部門）、
+  **09 配件與幻想戰鬥細節**（配件 7 項沿用舊材質庫的道具類：校徽徽章/護腕
+  綁帶/刀鞘/書包便當包/能量刃/新增髮飾緞帶/手鍊吊飾；幻想細節 15 項＝舊
+  「靈氣異能光效」5＋「戰鬥特效」6（含破損布料）＋「戰鬥情境光效」4，新增
+  「校徽強調位置」select 共 10 個位置選項）、**10 裝甲與披風強度**
+  （Armor Mode: off/light/full，**預設 off**；Cape Mode: off/on，**預設
+  off**——這是防止「戰鬥/幻想關鍵字自動變成 RPG 盔甲角色」的核心技術機制，
+  off 狀態會在咒語裡插入明確的「no heavy armor plating」「no cape, no
+  cloak」負面約束句，不是只是「沒選」而已）。**相容性規則**：不對手動選擇
+  做硬性阻擋（創作工具，尊重使用者自由組合），但新增 `OUTFIT_COMBOS`
+  （13 組已驗證過視覺協調的「上身+腰線+下身」組合，例如「和風交領上衣＋
+  帶結腰線＋現代袴裙」「學院西裝外套＋高腰剪裁＋及膝百褶裙」），00 一鍵
+  模板與隨機套用都優先從這個表抽選，落實 owner 說的「隨機 ≠ 無規則」。
+  **三種隨機模式**對應規格書的 Mode A/B/C：`battleRandomFixSchool`（固定
+  學校，服裝與其餘元素重新隨機）／`battleRandomFixOutfit`（固定上身/腰線/
+  下身，學校與其餘元素重新隨機）／`battleRandomFull`（全部重新隨機），
+  三顆按鈕取代舊版單一「隨機套用」。00 一鍵模板 16 組全部重新設計，每校
+  至少出現 2 次，涵蓋不同 armorMode/capeMode/uniformType 組合（例如「神樂
+  儀式鈴舞獻禮」用 capeMode:on 搭配儀式腰帶、「櫻華廢墟能量夜襲」是唯一
+  armorMode:full 的模板，刻意示範「重甲化只在明確需要騎士/機甲級設定時
+  才開」）。**`generate()` 組裝順序**：學校身份文字→appearance form
+  （上身+腰線+下身合併一行）→制服類型→armor styling→cape styling→
+  校徽強調位置（帶入該校金屬色與紋樣）→配件→幻想戰鬥細節，色彩補充欄位
+  留空時預設抓所選學校的 colorNote，不再依賴材質自帶調色盤。**不動的
+  部分**：01 style／02 構圖／03 身形／06(→11) 姿勢／07(→12) 鏡頭／
+  08(→13) 光影／09(→14) 背景／11(→16) 比例與全部共用 guard 區塊
+  （identityGuard/anatomyGuard/poseNaturalityGuard/compositionGuard/
+  lightingConsistencyGuard/colorTemperatureGuard/subjectIntegrationGuard/
+  faceFillGuard）完全沿用舊版文字，只是 section 編號因為新增 5 個區塊
+  往後平移（04-10 全部變成 04-17）。`core-prompt.js` 的 `battleAcademyCore`
+  Style Scope Rule 新增「Uniform Design Priority System」段落，明文寫
+  「Uniform battle-ification is not uniform armor-ification」與「Fantasy
+  details enhance the clothing; fantasy details must not replace the
+  clothing」，並把舊句「kimono reimagined as lightweight battle armor」
+  改成「kimono-inspired academy wear」（避免文字本身就預設要護甲化）。
+  **建置手法**：檔案改動幅度極大（新增 9 個維度、16 個模板全部重寫），
+  用 12 個 scratchpad 片段檔分別撃寫再用 `cat` 串接組合成完整檔案，
+  避免單次超大量輸出；過程中一度在 `themeTemplates` 裡用了
+  `COMPOSITION_CENTERED`/`INTENSITY_BALANCED` 這類本地常數縮寫，導致
+  `validate-preset-refs.mjs` 用獨立 vm context 解析物件時報
+  `ReferenceError`（物件字面量被抽出來單獨執行，抓不到外部常數）——修法
+  是寫一支一次性替換腳本把所有常數用法換回字面字串、拿掉常數宣告，這是
+  「新增資料物件時如果用了外部常數引用，四支驗證腳本的 vm 解析會失敗」
+  這個教訓，之後如果又想用常數簡化重複字串，要記得直接內嵌字面值而不是
+  宣告成獨立 const。**驗證**：jsdom 在本機環境有 ESM 模組解析衝突
+  （`lru-cache`／`@asamuzakjp/css-color` 的 exports 欄位跟目前 Node 版本
+  兜不起來，屬環境問題非程式碼問題，已放棄安裝並清理），改用專案既有的
+  純 `node:vm` 驗證慣例：`check-static.mjs`（JS 語法/重複 id）、
+  `validate-preset-refs.mjs`（16 個 `themeTemplates`＋13 個 `OUTFIT_COMBOS`
+  全數欄位對到即時選項池，0 issue）、`audit-100x.mjs`（100 次隨機模擬對
+  新的 9 個維度＋school/armorMode/capeMode/emblemFocus 全部欄位抽樣，0
+  issue）、`build-prompt-preview.mjs`（`generateBattleAcademy()` 鏡像函式
+  同步改寫，人工檢視輸出樣本確認「school identity/appearance form/armor
+  styling/cape styling/emblem focus/accessory/fantasy detail」組裝順序
+  與文字正確）全部重跑通過。
 - **`freeform.html`（自由生圖）已於 2026-07-31 整頁下架刪除**：owner 實測後
   決定不需要這頁，直接下架。完整建置記錄（鎖臉核心固定＋單一自由輸入格
   架構）保留在開發日誌 2026-07-30 條目供之後參考。下架範圍：`freeform.html`

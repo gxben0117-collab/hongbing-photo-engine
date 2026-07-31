@@ -709,8 +709,16 @@ function generateKpopIdol(core, data) {
 function generateBattleAcademy(core, data) {
   const selection = {
     bodyShape: 'original',
-    material: 'bladeEnergyTrailStreak',
-    garment: 'gakuranBattleArmor',
+    school: 'sakuraAcademy',
+    upperBody: 'croppedAcademyBlazer',
+    waist: 'highWaistTailoring',
+    lower: 'pleatedMiniSkirt',
+    uniformType: 'standard',
+    accessory: 'swordSheathAccent',
+    fantasyDetail: 'bladeEnergyTrailStreak',
+    armorMode: 'off',
+    capeMode: 'off',
+    emblemFocus: 'chestBadge',
     background: 'schoolRooftopBattle',
     lighting: 'hard',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
@@ -720,15 +728,24 @@ function generateBattleAcademy(core, data) {
     style: 'tacticalCampaign',
     camera: 'eyeLevelCover',
     ratio: 'vertical45',
-    customMaterial: '',
-    customGarment: '',
+    customUpperBody: '',
+    customLower: '',
+    customFantasyDetail: '',
     colorNote: '',
     extraNote: '',
   };
-  const material = data.materialData[selection.material];
-  const materialText = material.prompt;
-  const materialPalette = material.palette;
-  const garmentText = data.garmentData[selection.garment];
+  const schoolInfo = data.schoolData[selection.school];
+  const upperText = data.upperBodyData[selection.upperBody];
+  const waistText = data.waistData[selection.waist];
+  const lowerText = data.lowerData[selection.lower];
+  const uniformTypeText = data.uniformTypeData[selection.uniformType];
+  const accessoryText = data.accessoryData[selection.accessory];
+  const fantasyDetailText = data.fantasyDetailData[selection.fantasyDetail];
+  const armorText = data.armorModeData[selection.armorMode];
+  const capeText = data.capeModeData[selection.capeMode];
+  const emblemFocusText = selection.emblemFocus && selection.emblemFocus !== 'auto'
+    ? `${data.emblemFocusData[selection.emblemFocus]}, rendered in the school's ${schoolInfo.metal} metal accent and ${schoolInfo.emblem}`
+    : '';
   const background = data.backgroundData[selection.background];
   const lighting = data.lightingData[selection.lighting];
   const bodyShape = data.BODY_SHAPES[selection.bodyShape];
@@ -746,11 +763,16 @@ function generateBattleAcademy(core, data) {
     data.faceFillGuard + ',',
     selection.composition + ',',
     data.compositionGuard + ',',
-    'appearance form: ' + garmentText + ',',
-    'theme material and art system: ' + materialText + ',',
-    'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',
+    'school identity: ' + schoolInfo.prompt + ',',
+    'appearance form: ' + upperText + ', ' + waistText + ', ' + lowerText + ',',
+    uniformTypeText + ',',
+    'armor styling: ' + armorText + ',',
+    'cape styling: ' + capeText + ',',
+    emblemFocusText ? emblemFocusText + ',' : '',
+    'accessory detail: ' + accessoryText + ',',
+    'fantasy battle detail and art system: ' + fantasyDetailText + ',',
+    'use the selected fantasy detail system to form ornaments, particles and background accents around the subject without replacing the uniform silhouette,',
     selection.intensity + ',',
-    'selected material appears as controlled clothing details, ornaments, particles and background accents without overpowering facial identity,',
     data.styleData[selection.style] + ',',
     poseText ? poseText + ',' : '',
     framing + ',',
@@ -760,7 +782,7 @@ function generateBattleAcademy(core, data) {
     data.ratioData[selection.ratio] + ',',
     core.page.battleAcademy.output ? core.page.battleAcademy.output + ',' : '',
     'hyper realistic, ultra detailed, premium advertising finish,',
-    'color palette: ' + materialPalette + ',',
+    'color palette: ' + (selection.colorNote || schoolInfo.colorNote) + ',',
     core.page.battleAcademy.negativePrompt ? core.page.battleAcademy.negativePrompt + ',' : '',
     'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face',
   ];
@@ -924,9 +946,9 @@ function loadRevision(label, sourceReader) {
       source: battleAcademySource,
       core,
       page: 'battleAcademy',
-      startMarker: 'const materialData = {',
-      endMarker: 'function setRadioValue',
-      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedBattleAcademyCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
+      startMarker: 'const schoolData = {',
+      endMarker: 'function selected',
+      exportExpression: '({ schoolData, upperBodyData, waistData, lowerData, uniformTypeData, accessoryData, fantasyDetailData, armorModeData, capeModeData, emblemFocusData, styleData, backgroundData, lightingData, sharedBattleAcademyCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
     });
     prompts['battleacademy-default.txt'] = generateBattleAcademy(core, battleAcademyData);
   } catch (err) {
