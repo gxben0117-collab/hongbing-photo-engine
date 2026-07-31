@@ -332,21 +332,10 @@
       <div class="section-label">00</div>
       <div class="section-title">一鍵主題模板</div>
     </div>
-    <p class="hint">一鍵套用會同時設定學校身份、上身、腰線、下身、制服類型、配件、幻想細節、裝甲/披風強度、姿勢、光線與背景；套用後仍可逐區改成自己的版本。下方三顆隨機按鈕對應三種組合邏輯：固定學校只換服裝、固定服裝只換學校、或是全部重新隨機。</p>
-    <div class="grid grid-3" style="margin-bottom:12px;">
-      <button class="card" type="button" id="battleRandomFixSchool" style="min-height:auto;background:linear-gradient(180deg,#17120b 0%,#22180f 100%);">
-        <div class="name">隨機套用｜固定學校</div>
-        <div class="desc">學校身份不變，服裝與其餘元素重新隨機</div>
-      </button>
-      <button class="card" type="button" id="battleRandomFixOutfit" style="min-height:auto;background:linear-gradient(180deg,#17120b 0%,#22180f 100%);">
-        <div class="name">隨機套用｜固定服裝</div>
-        <div class="desc">上身/腰線/下身不變，學校與其餘元素重新隨機</div>
-      </button>
-      <button class="card" type="button" id="battleRandomFull" style="min-height:auto;background:linear-gradient(180deg,#17120b 0%,#22180f 100%);">
-        <div class="name">隨機套用｜全部隨機</div>
-        <div class="desc">學校、服裝與其餘元素全部重新隨機</div>
-      </button>
-    </div>
+    <p class="hint">一鍵套用會同時設定學校身份、上身、腰線、下身、制服類型、配件、幻想細節、裝甲/披風強度、姿勢、光線與背景；套用後仍可逐區改成自己的版本。</p>
+    <button class="card" type="button" id="battleRandomFull" style="width:100%;min-height:auto;margin-bottom:12px;background:linear-gradient(180deg,#17120b 0%,#22180f 100%);">
+      <div class="name">隨機套用</div>
+    </button>
     <div class="grid grid-3">
       <button class="card" type="button" data-template="sakuraCrestBladeBloom">
         <div class="name">櫻華校徽劍氣綻放</div>
@@ -979,102 +968,102 @@ const schoolData = {
 };
 
 const upperBodyData = {
-  sailorBlouseTop: 'Japanese sailor-collar blouse top, crisp collar and neckerchief, classic academy silhouette',
-  standCollarGakuranJacket: 'stand-collar gakuran jacket, structured stiff collar, disciplined academy silhouette',
-  academyBlazer: 'tailored academy blazer, structured shoulders, classic prep-school silhouette',
-  croppedAcademyBlazer: 'cropped academy blazer, shortened waist-length cut, modern fashion-forward silhouette',
-  tailoredSchoolJacket: 'tailored school jacket with clean lapels, sharp modern silhouette',
-  formalAcademyShirt: 'formal academy shirt with a tie, crisp minimal silhouette',
-  crossoverCollarTop: 'Japanese crossover-collar top, kimono-inspired wrap neckline, elegant academy silhouette',
-  modernKimonoSchoolTop: 'modern kimono-inspired school top, softened traditional silhouette with academy tailoring',
-  ceremonialAcademyTop: 'ceremonial academy top with a structured embroidered panel, formal-occasion silhouette'
+  sailorBlouseTop: 'Japanese sailor-collar blouse, crisp collar and neckerchief',
+  standCollarGakuranJacket: 'stand-collar gakuran jacket, structured stiff collar',
+  academyBlazer: 'tailored academy blazer, structured shoulders',
+  croppedAcademyBlazer: 'cropped academy blazer, waist-length cut',
+  tailoredSchoolJacket: 'tailored school jacket, clean lapels',
+  formalAcademyShirt: 'formal academy shirt with a tie',
+  crossoverCollarTop: 'Japanese crossover-collar top, kimono-inspired wrap neckline',
+  modernKimonoSchoolTop: 'modern kimono-inspired school top, softened traditional silhouette',
+  ceremonialAcademyTop: 'ceremonial academy top with a structured embroidered panel'
 };
 
 const waistData = {
-  naturalWaist: 'natural waist tailoring, unaltered relaxed waistline',
-  highWaistTailoring: 'high-waist tailoring, elevated waistline for a lengthened leg line, a tailoring silhouette effect only',
-  fittedWaist: 'fitted waist tailoring, gently contoured waistline that follows the body shape already established',
-  wideAcademyWaistband: 'wide academy waistband, structured broad belt-like waist panel',
-  narrowBelt: 'narrow belt accent at the waist, slim tailored waist definition',
-  doubleBeltDetail: 'double belt detail at the waist, layered structured tailoring accent',
-  obiInspiredWaistband: 'Japanese obi-inspired waistband, wrapped sash silhouette at the waist',
-  decorativeCordWaist: 'decorative cord waist tie, knotted cord accent at the waistline',
-  ceremonialSash: 'ceremonial sash at the waist, formal-occasion tailoring accent'
+  naturalWaist: 'natural waist tailoring',
+  highWaistTailoring: 'high-waist tailoring, a leg-lengthening cut only, not a body-shape change',
+  fittedWaist: 'fitted waist tailoring, following the established body shape',
+  wideAcademyWaistband: 'wide academy waistband',
+  narrowBelt: 'narrow belt accent at the waist',
+  doubleBeltDetail: 'double belt detail at the waist',
+  obiInspiredWaistband: 'Japanese obi-inspired waistband',
+  decorativeCordWaist: 'decorative cord waist tie',
+  ceremonialSash: 'ceremonial sash at the waist'
 };
 
 const lowerData = {
-  pleatedMiniSkirt: 'pleated mini skirt, short academy hem length',
-  aLineShortSkirt: 'A-line short skirt, clean flared academy hem',
-  kneeLengthPleatedSkirt: 'knee-length pleated skirt, classic academy hem',
-  midiPleatedSkirt: 'midi pleated skirt, elongated academy hem',
-  longPleatedSkirt: 'long pleated skirt, floor-grazing academy hem',
+  pleatedMiniSkirt: 'pleated mini skirt',
+  aLineShortSkirt: 'A-line short skirt',
+  kneeLengthPleatedSkirt: 'knee-length pleated skirt',
+  midiPleatedSkirt: 'midi pleated skirt',
+  longPleatedSkirt: 'long pleated skirt',
   modernHakama: 'modern hakama skirt, wide pleated Japanese silhouette',
-  hakamaWideTrousers: 'wide-leg hakama trousers, flowing Japanese trouser silhouette',
-  culotteSkirt: 'culotte-cut skirt, structured wide-leg academy silhouette',
-  asymmetricSkirt: 'asymmetric hem skirt, front-short-back-long academy silhouette',
-  layeredJapaneseSkirt: 'layered Japanese-style skirt, textured academy hem'
+  hakamaWideTrousers: 'wide-leg hakama trousers',
+  culotteSkirt: 'culotte-cut skirt, structured wide-leg silhouette',
+  asymmetricSkirt: 'asymmetric hem skirt, front-short-back-long',
+  layeredJapaneseSkirt: 'layered Japanese-style skirt'
 };
 
 const uniformTypeData = {
-  standard: 'standard academy uniform styling, everyday campus context',
-  summer: 'summer academy uniform styling, lighter fabric weight, warm-season context',
-  winter: 'winter academy uniform styling, layered fabric weight, cold-season context',
-  ceremonial: 'ceremonial academy uniform styling, formal occasion fabric and finishing',
-  studentCouncil: 'student council uniform styling, elevated formal detailing signaling leadership rank',
-  clubActivity: 'club activity uniform styling, athletic-adjacent practical detailing',
-  specialDepartment: 'special department uniform styling, distinct elevated department detailing'
+  standard: 'standard everyday uniform styling',
+  summer: 'summer uniform styling, lighter fabric',
+  winter: 'winter uniform styling, layered fabric',
+  ceremonial: 'ceremonial formal uniform styling',
+  studentCouncil: 'student council uniform styling, elevated formal detail',
+  clubActivity: 'club activity uniform styling, practical detail',
+  specialDepartment: 'special department uniform styling, distinct detail'
 };
 
 const accessoryData = {
-  schoolEmblemBadgeAccent: 'a small embroidered school emblem badge pinned at the chest, refined identity detail',
-  armGuardWrapAccent: 'fabric arm-guard wraps bound around the wrist and forearm, refined battle-ready detail',
-  swordSheathAccent: 'a sword sheath worn at the hip, refined battle-ready prop detail',
-  bentoBagPropAccent: 'a school bag or bento pouch carried in one hand, contrasting everyday-life detail against the uniform',
-  energyBladePropAccent: 'a glowing energy blade held in one hand, refined combat-ready prop detail',
-  hairRibbonAccent: 'a decorative hair ribbon accessory, refined academy detail',
-  braceletCharmAccent: 'a small charm bracelet accessory, refined personal detail'
+  schoolEmblemBadgeAccent: 'a small embroidered school emblem badge at the chest',
+  armGuardWrapAccent: 'fabric arm-guard wraps around the wrist and forearm',
+  swordSheathAccent: 'a sword sheath worn at the hip',
+  bentoBagPropAccent: 'a school bag or bento pouch carried in one hand',
+  energyBladePropAccent: 'a glowing energy blade held in one hand',
+  hairRibbonAccent: 'a decorative hair ribbon',
+  braceletCharmAccent: 'a small charm bracelet'
 };
 
 const fantasyDetailData = {
-  spiritPowerAuraGlow: 'a faint spirit-power aura glowing softly around the subject, awakened-power atmosphere',
-  glowingSealCircle: 'a glowing seal circle emblem appearing faintly beneath or beside the subject, spellcasting atmosphere',
-  schoolCrestGlowLine: 'glowing school-crest patterned lines pulsing faintly across the garment, sleek uniform-tech detail',
-  bladeEnergyTrailStreak: 'a blade-energy trail streak glowing dynamically near the subject, energetic combat motion',
-  spiritSensorOverlay: 'a faint spirit-sensing grid overlay projecting across the scene, reconnaissance atmosphere',
-  dustImpactBurst: 'dust and debris bursting outward from an impact near the subject, dynamic battle motion',
-  sparkImpactFlare: 'metallic sparks flaring outward from a blade clash, dynamic battle energy',
-  windTurbulenceMotion: 'strong wind turbulence catching hair and fabric dynamically, high-tension motion atmosphere',
-  rainBattleMist: 'fine rain mist drifting around the subject, somber battle-ready atmosphere',
-  smokeHaze: 'drifting smoke haze surrounding the subject thickly, dramatic battle atmosphere',
-  tornFabricBattleDamage: 'torn fabric and light battle-worn damage across the garment, dramatic narrative detail',
-  duskRooftopBattleGlow: 'warm dusk rooftop-battle glow wrapping the subject, somber dramatic atmosphere',
-  alertCrimsonGlow: 'a pulsing crimson alert glow affecting the scene, tense battle atmosphere',
-  gymnasiumFloodLight: 'strong gymnasium floodlights illuminating the scene, duel-ready atmosphere',
-  duskMissionAfterglow: 'warm dusk afterglow wrapping softly around the subject, poetic battle-ending atmosphere'
+  spiritPowerAuraGlow: 'a faint spirit-power aura glowing softly around the subject',
+  glowingSealCircle: 'a glowing seal circle beneath or beside the subject',
+  schoolCrestGlowLine: 'glowing school-crest patterned lines across the garment',
+  bladeEnergyTrailStreak: 'a blade-energy trail streak glowing near the subject',
+  spiritSensorOverlay: 'a faint spirit-sensing grid overlay across the scene',
+  dustImpactBurst: 'dust and debris bursting outward from an impact',
+  sparkImpactFlare: 'metallic sparks flaring outward from a blade clash',
+  windTurbulenceMotion: 'strong wind turbulence catching hair and fabric',
+  rainBattleMist: 'fine rain mist drifting around the subject',
+  smokeHaze: 'drifting smoke haze surrounding the subject',
+  tornFabricBattleDamage: 'torn fabric and light battle-worn damage on the garment',
+  duskRooftopBattleGlow: 'warm dusk rooftop-battle glow wrapping the subject',
+  alertCrimsonGlow: 'a pulsing crimson alert glow across the scene',
+  gymnasiumFloodLight: 'strong gymnasium floodlights illuminating the scene',
+  duskMissionAfterglow: 'warm dusk afterglow wrapping softly around the subject'
 };
 
 const armorModeData = {
-  off: 'no heavy armor plating, no RPG-style warrior armor, no exosuit segments added; the uniform silhouette stays clearly the primary garment with zero added armor pieces',
-  light: 'light armor accents only: one small decorative metallic ornament, a symbolic reinforced trim, or a ceremonial combat accessory; these stay small and decorative, the uniform silhouette remains clearly the primary garment and is not replaced by armor',
-  full: 'true heavy armor plating layered over the uniform silhouette, reserved for a knight, mecha or paladin-tier heavy-warrior concept; use only because a fully armored character concept is explicitly intended here'
+  off: 'no armor, uniform stays the primary garment',
+  light: 'light armor accents only, small decorative metallic trim, uniform stays primary',
+  full: 'heavy armor over the uniform, knight/mecha/paladin-tier concept'
 };
 
 const capeModeData = {
-  off: 'no cape, no cloak, no flowing mantle added to the outfit',
-  on: 'a flowing cape or cloak accent consistent with the chosen outfit and school identity, moving naturally with the pose and wind'
+  off: 'no cape, no cloak',
+  on: 'a flowing cape or cloak matching the outfit and school colors'
 };
 
 const emblemFocusData = {
   auto: '',
-  chestBadge: 'the school emblem is emphasized as a chest badge',
-  collarPin: 'the school emblem is emphasized as a collar pin',
-  beltBuckle: 'the school emblem is emphasized as a belt buckle',
-  cuffEmbroidery: 'the school emblem is emphasized as cuff embroidery',
-  tieEmbroidery: 'the school emblem is emphasized as tie embroidery',
-  skirtPattern: 'the school emblem is emphasized as a subtle skirt pattern',
-  hairAccessory: 'the school emblem is emphasized as a hair accessory',
-  weaponSheathOrnament: 'the school emblem is emphasized as a weapon sheath ornament',
-  bagCharm: 'the school emblem is emphasized as a bag charm'
+  chestBadge: 'school emblem as a chest badge',
+  collarPin: 'school emblem as a collar pin',
+  beltBuckle: 'school emblem as a belt buckle',
+  cuffEmbroidery: 'school emblem as cuff embroidery',
+  tieEmbroidery: 'school emblem as tie embroidery',
+  skirtPattern: 'school emblem as a subtle skirt pattern',
+  hairAccessory: 'school emblem as a hair accessory',
+  weaponSheathOrnament: 'school emblem as a weapon sheath ornament',
+  bagCharm: 'school emblem as a bag charm'
 };
 
 const styleData = {
@@ -1635,18 +1624,13 @@ function getAllSelectValues(id){
   return el ? Array.from(el.options).map(o => o.value) : [];
 }
 
-// 三種隨機模式：fixSchool固定學校只換服裝／fixOutfit固定服裝只換學校／full全部重新隨機
 // 上身/腰線/下身一律從 OUTFIT_COMBOS 相容組合表抽選，不是三個欄位各自獨立亂配，避免「隨機=無規則」。
-function applyBattleRandomSelection(mode){
-  if(mode !== 'fixOutfit'){
-    applyOutfitCombo(getRandomItem(OUTFIT_COMBOS));
-    const uniformTypeValues = getAllRadioValues('uniformType');
-    if(uniformTypeValues.length) setRadioValue('uniformType', getRandomItem(uniformTypeValues));
-  }
-  if(mode !== 'fixSchool'){
-    const schoolValues = getAllRadioValues('school');
-    if(schoolValues.length) setRadioValue('school', getRandomItem(schoolValues));
-  }
+function applyBattleRandomSelection(){
+  applyOutfitCombo(getRandomItem(OUTFIT_COMBOS));
+  const uniformTypeValues = getAllRadioValues('uniformType');
+  if(uniformTypeValues.length) setRadioValue('uniformType', getRandomItem(uniformTypeValues));
+  const schoolValues = getAllRadioValues('school');
+  if(schoolValues.length) setRadioValue('school', getRandomItem(schoolValues));
   ['accessory','fantasyDetail','armorMode','capeMode','background','lighting','composition','framing','pose','style','camera','ratio'].forEach(name => {
     const values = getAllRadioValues(name);
     if(values.length) setRadioValue(name, getRandomItem(values));
@@ -1700,7 +1684,7 @@ function generate(options = {}){
 
   const emblemFocusKey = document.getElementById('emblemFocus').value;
   const emblemFocusText = emblemFocusKey && emblemFocusKey !== 'auto'
-    ? `${emblemFocusData[emblemFocusKey]}, rendered in the school's ${schoolInfo.metal} metal accent and ${schoolInfo.emblem}`
+    ? emblemFocusData[emblemFocusKey]
     : '';
 
   const customBackground = document.getElementById('customBackground').value.trim();
@@ -1731,14 +1715,11 @@ function generate(options = {}){
     composition + ',',
     compositionGuard + ',',
     'school identity: ' + schoolInfo.prompt + ',',
-    'appearance form: ' + upperText + ', ' + waistText + ', ' + lowerText + ',',
-    uniformTypeText + ',',
-    'armor styling: ' + armorText + ',',
-    'cape styling: ' + capeText + ',',
+    'appearance form: ' + upperText + ', ' + waistText + ', ' + lowerText + ', ' + uniformTypeText + ',',
+    'combat styling: ' + armorText + '; ' + capeText + ',',
     emblemFocusText ? emblemFocusText + ',' : '',
-    'accessory detail: ' + accessoryText + ',',
-    'fantasy battle detail and art system: ' + fantasyDetailText + ',',
-    'use the selected fantasy detail system to form ornaments, particles and background accents around the subject without replacing the uniform silhouette,',
+    'accessory: ' + accessoryText + ',',
+    'fantasy battle detail: ' + fantasyDetailText + ',',
     intensity + ',',
     styleData[selected('style')] + ',',
     poseText ? poseText + ',' : '',
@@ -1772,14 +1753,8 @@ document.querySelectorAll('input[type="radio"]').forEach(input => {
   });
 });
 document.getElementById('generateBtn').addEventListener('click', () => generate({reveal:true}));
-document.getElementById('battleRandomFixSchool').addEventListener('click', () => {
-  applyBattleRandomSelection('fixSchool');
-});
-document.getElementById('battleRandomFixOutfit').addEventListener('click', () => {
-  applyBattleRandomSelection('fixOutfit');
-});
 document.getElementById('battleRandomFull').addEventListener('click', () => {
-  applyBattleRandomSelection('full');
+  applyBattleRandomSelection();
 });
 document.querySelectorAll('[data-template]').forEach(button => {
   button.addEventListener('click', () => {

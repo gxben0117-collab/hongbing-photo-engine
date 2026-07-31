@@ -2321,3 +2321,45 @@
   detail」的組裝順序與文字正確，armor off 狀態確實輸出「no heavy armor
   plating」等負面約束句）全部重跑通過。
 
+## 2026-07-31（四）　battle-academy.html 實測後修正：拿掉2顆隨機按鈕、精簡咒語字數
+
+- owner 實測模組化重構版後回報兩點：(1) 「隨機套用｜固定學校」「隨機
+  套用｜固定服裝」這 2 個功能不要，拿掉；(2) 產生的咒語文字數量過長，
+  需要優化精簡。
+- **拿掉 2 顆按鈕**：00 區只留單一「隨機套用」按鈕（對應原本的「全部
+  隨機」邏輯），`applyBattleRandomSelection()` 拿掉 `mode` 參數，固定
+  「學校＋上身/腰線/下身（走 OUTFIT_COMBOS）＋其餘所有欄位」全部重新
+  隨機；事件監聽只留 `battleRandomFull` 一個。
+- **精簡咒語字數**：預覽輸出從 10,388 字元降到 9,152 字元（-12%），
+  更接近同型頁面基準（kpop-idol 8,375／fantasy 8,636）。做法：
+  - `generate()` 組裝邏輯：armor styling／cape styling 合併成一行
+    `combat styling: {armor}; {cape},`；拿掉「use the selected fantasy
+    detail system to form ornaments...」這句純解釋、不帶新資訊的說明句；
+    `emblemFocusText` 不再重複帶出 `schoolInfo.metal`/`schoolInfo.emblem`
+    （這兩個資訊在 `school identity:` 那一行已經講過一次，屬於重複）；
+    `uniformType` 併入 `appearance form` 同一行（原本自己獨立一行）。
+  - 資料物件全面砍掉重複/裝飾性子句只留核心描述：`upperBodyData`（9項）/
+    `waistData`（9項）/`lowerData`（10項）從「主描述 + academy silhouette
+    這類重複收尾語」砍成只留主描述；`accessoryData`（7項）/
+    `fantasyDetailData`（15項）砍掉「refined XX detail」「XX atmosphere」
+    這類每項都有、資訊量低的裝飾性尾句；`armorModeData`/`capeModeData`/
+    `uniformTypeData`/`emblemFocusData` 全部重寫成更短的版本（例如
+    armorMode off 從「no heavy armor plating, no RPG-style warrior
+    armor, no exosuit segments added; the uniform silhouette stays
+    clearly the primary garment with zero added armor pieces」（172字元）
+    縮成「no armor, uniform stays the primary garment」（46字元））。
+  - `core-prompt.js` 的 `battleAcademyCore` 新增段落「Uniform Design
+    Priority」從 3 句、約 620 字元的完整說明濃縮成 1 句、約 250 字元，
+    保留「battle-ification≠armor-ification／優先順序／armor+cape預設關閉
+    需明確選才出現／幻想細節強化不取代」四個核心點，拿掉重複的舉例句。
+  - `waistData.highWaistTailoring` 保留「a leg-lengthening cut only, not
+    a body-shape change」這句提醒（雖然簡化過但語意保留），因為這是
+    owner 明確要求的「腰線輪廓是剪裁效果、不是身形調整」語意防呆，不能
+    因為精簡就砍掉。
+- **同步更新**：`scripts/audit-100x.mjs`/`scripts/build-prompt-preview.mjs`
+  的 battleAcademy 鏡像邏輯同步套用相同的行合併與欄位精簡，確保鏡像跟
+  真實頁面一致。四支驗證腳本全部重跑通過（`check-static` 全過、
+  `validate-preset-refs` 16 個 `themeTemplates`＋13 個 `OUTFIT_COMBOS`
+  0 issue、`audit-100x` 1300 次模擬 0 issue、`build-prompt-preview` 正常
+  產出，人工檢視輸出樣本確認組裝順序與文字正確、字數確實下降）。
+

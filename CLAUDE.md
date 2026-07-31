@@ -38,7 +38,18 @@
   做成「真人×制服元素×RPG戰士」。新版拆成 9 個獨立維度，比照方案C（完整
   模組化引擎）執行，詳見下方「battle-academy 模組化重構」條目。這是全站
   唯一一個「多維度拆件組合」的頁面架構，其餘 12 頁仍是扁平單選卡片模式，
-  刻意的架構差異、不是不一致。
+  刻意的架構差異、不是不一致。**重構完成後 owner 實測回報兩點**（同日
+  跟進修正）：(1) 拿掉「隨機套用｜固定學校」「隨機套用｜固定服裝」兩顆
+  按鈕，00 區只保留單一「隨機套用」（全部重新隨機）；(2) 生成的咒語字數
+  過長需要精簡——`generate()` 把 armor styling／cape styling 合併成一行
+  `combat styling`、拿掉重複解釋句、`emblemFocus` 不再重複帶出學校金屬色
+  /校徽（`schoolInfo.prompt` 已包含這些資訊）、`uniformType` 併入
+  appearance form 同一行；`upperBodyData`/`waistData`/`lowerData`/
+  `accessoryData`/`fantasyDetailData`/`armorModeData`/`capeModeData`/
+  `uniformTypeData`/`emblemFocusData` 全部砍掉重複的裝飾性子句只留核心
+  描述；`core-prompt.js` 新增的「Uniform Design Priority」段落從 3 句長
+  說明濃縮成 1 句。結果：預覽輸出從 10,388 字元降到 9,152 字元（-12%），
+  更接近同型頁面（kpop-idol 8,375／fantasy 8,636）的長度基準。
   **`anime-hero.html`（動漫電影變身夥伴咒語產生器）已於 2026-07-24 整頁下架**：
   owner 對這系列不滿意，且該頁架構已疊到 10 層 monkey-patch 式的
   `generate = function(){ 上一版generate(); ... }`，難以維護；docs 底下留有一份

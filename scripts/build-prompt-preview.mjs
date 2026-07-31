@@ -744,7 +744,7 @@ function generateBattleAcademy(core, data) {
   const armorText = data.armorModeData[selection.armorMode];
   const capeText = data.capeModeData[selection.capeMode];
   const emblemFocusText = selection.emblemFocus && selection.emblemFocus !== 'auto'
-    ? `${data.emblemFocusData[selection.emblemFocus]}, rendered in the school's ${schoolInfo.metal} metal accent and ${schoolInfo.emblem}`
+    ? data.emblemFocusData[selection.emblemFocus]
     : '';
   const background = data.backgroundData[selection.background];
   const lighting = data.lightingData[selection.lighting];
@@ -764,14 +764,11 @@ function generateBattleAcademy(core, data) {
     selection.composition + ',',
     data.compositionGuard + ',',
     'school identity: ' + schoolInfo.prompt + ',',
-    'appearance form: ' + upperText + ', ' + waistText + ', ' + lowerText + ',',
-    uniformTypeText + ',',
-    'armor styling: ' + armorText + ',',
-    'cape styling: ' + capeText + ',',
+    'appearance form: ' + upperText + ', ' + waistText + ', ' + lowerText + ', ' + uniformTypeText + ',',
+    'combat styling: ' + armorText + '; ' + capeText + ',',
     emblemFocusText ? emblemFocusText + ',' : '',
-    'accessory detail: ' + accessoryText + ',',
-    'fantasy battle detail and art system: ' + fantasyDetailText + ',',
-    'use the selected fantasy detail system to form ornaments, particles and background accents around the subject without replacing the uniform silhouette,',
+    'accessory: ' + accessoryText + ',',
+    'fantasy battle detail: ' + fantasyDetailText + ',',
     selection.intensity + ',',
     data.styleData[selection.style] + ',',
     poseText ? poseText + ',' : '',

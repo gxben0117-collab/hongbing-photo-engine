@@ -755,7 +755,7 @@ const core = evalCore(coreSource);
     const armorText = data.armorModeData[sel.armorMode];
     const capeText = data.capeModeData[sel.capeMode];
     const emblemFocusText = sel.emblemFocus && sel.emblemFocus !== 'auto'
-      ? `${data.emblemFocusData[sel.emblemFocus]}, rendered in the school's ${schoolInfo.metal} metal accent and ${schoolInfo.emblem}`
+      ? data.emblemFocusData[sel.emblemFocus]
       : '';
     const background = data.backgroundData[sel.background];
     const lighting = data.lightingData[sel.lighting];
@@ -767,14 +767,11 @@ const core = evalCore(coreSource);
       data.anatomyGuard + ',', data.poseNaturalityGuard + ',', bodyShape + ',', data.lightingConsistencyGuard + ',', data.colorTemperatureGuard + ',',
       data.subjectIntegrationGuard + ',', data.faceFillGuard + ',', sel.composition + ',', data.compositionGuard + ',',
       'school identity: ' + schoolInfo.prompt + ',',
-      'appearance form: ' + upperText + ', ' + waistText + ', ' + lowerText + ',',
-      uniformTypeText + ',',
-      'armor styling: ' + armorText + ',',
-      'cape styling: ' + capeText + ',',
+      'appearance form: ' + upperText + ', ' + waistText + ', ' + lowerText + ', ' + uniformTypeText + ',',
+      'combat styling: ' + armorText + '; ' + capeText + ',',
       emblemFocusText ? emblemFocusText + ',' : '',
-      'accessory detail: ' + accessoryText + ',',
-      'fantasy battle detail and art system: ' + fantasyDetailText + ',',
-      'use the selected fantasy detail system to form ornaments, particles and background accents around the subject without replacing the uniform silhouette,',
+      'accessory: ' + accessoryText + ',',
+      'fantasy battle detail: ' + fantasyDetailText + ',',
       sel.intensity + ',',
       data.styleData[sel.style] + ',', poseText ? poseText + ',' : '', framing + ',',
       data.cameraData[sel.camera] + ',', 'lighting design: ' + lighting + ',', 'background design: ' + background + ',',

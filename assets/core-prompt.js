@@ -327,10 +327,7 @@ Commercial style, Japanese school-battle manga inspired uniform design (gakuran,
 They must not change the person's facial structure, identity, age impression or recognizable features.
 This is a photorealistic live-action photography campaign, not an anime/illustration conversion — render skin, face and body with realistic photographic detail, not cel-shaded or illustrated medium.
 
-Uniform Design Priority System:
-Uniform battle-ification is not uniform armor-ification. Fashion and tailoring quality come first, school identity (color, emblem, motif) comes second, fantasy or heroic styling comes third, and combat armor is optional and OFF by default.
-Fantasy details enhance the clothing; fantasy details must not replace the clothing. The chosen upper body, waist and lower body garments must stay clearly identifiable as their own archetype (a sailor uniform still reads as a sailor uniform, a gakuran still reads as a gakuran, a hakama still reads as a hakama) even after fantasy or battle styling is applied.
-Do not add heavy armor plating, exosuit segments or a cape/cloak just because of battle, fantasy, energy or wind-related keywords — armor and cape only appear when the selected armor mode or cape mode explicitly calls for them.`
+Uniform battle-ification is not armor-ification: fashion first, school identity second, fantasy styling third; armor and cape stay OFF by default and only appear when explicitly selected. Fantasy details enhance the uniform, never replace it or its archetype.`
     ].join("\n\n"),
     anatomyGuard: humanCore,
     poseGuard: CORE_POSE_NATURALITY,
