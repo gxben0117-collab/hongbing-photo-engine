@@ -2633,3 +2633,84 @@
   `combat styling` 那行固定顯示 `no cape, no cloak`、負面約束區塊確實
   多了裙裝限定那句）。
 
+## 2026-08-01（二）　battle-academy.html：新增「服裝改造核心」（Garment Detail Core）
+
+- owner 花了約 10 小時在另一個 AI 對話裡發展出一套構想，貼過來要求先
+  「分析可行性」：把「制服局部結構化改造」拆成 Layer（改造強度）× 部位
+  （改哪裡）× 設計（怎麼改）× 隨機，讓同一所學校、同一套核心制服能大量
+  產生視覺不同的變體，而不必像這幾輪一樣每次都手動新增一個具名的新
+  服裝組合。owner 原始構想是 5 個部位（胸口/肩部/上臂/腰側/裙身）各 9
+  選 1（含無修改），Layer 從 1-9 九級或 3/6/9 三級或 0/3/6/9 四級都考慮
+  過，最後定案 0/3/6/9 四級（Layer 0 = 原始版全無修改）。
+- **可行性分析**（先分析、不直接實作）：技術上可行，跟當天稍早才做的
+  `POSE_GROUPS`/`POSE_GROUP_FRAMING`「先抽一個、再從相容子集抽另一個」
+  邏輯是同一種模式。但指出兩個風險：(1) 5 部位 × 9 選 1 = 59,049 種
+  組合，Layer 9 時最多同時命中 5 個部位，各部位設計風格互相不保證搭配，
+  容易變成「隨機=無規則」的鏤空大拼盤，跟這幾輪剛建立的 OUTFIT_COMBOS
+  相容性把關精神衝突；(2) 5 部位同時大幅改造容易讓詰襟外套這類制服
+  archetype 認不出原本版型，跟同一批修正裡才寫進 core-prompt.js 的
+  「archetype 必須維持可辨識」原則正面衝突。建議：先縮小到 2-3 個部位、
+  Layer 0/3/6/9 定案沒有意見、先不做部位間相容性表（範圍已經比 5 部位
+  小很多，先上線觀察）、這個功能不要塞進今天已經很大量的既有改動、先做
+  小範圍原型驗證可行再考慮擴大或搬去其他頁面。owner 採納，選定 3 個
+  部位（胸口／腰側／肩部），確認可以開始實作，並提出把這套機制做成
+  「服裝改造核心」（Garment Detail Core）——類似鎖臉核心的獨立模組概念
+  （owner 原話：「鎖臉核心 服裝改造核心」，確認要用這個命名），之後驗證
+  有效可以套用到仙俠頁。
+- **實作內容**：
+  - **UI**：新增「11 服裝改造強度」section（原本的 11-17 依序往後平移
+    成 12-18，CSS order 同步調整）。內含 Layer 選單（`garmentLayer`：
+    layer0/layer3/layer6/layer9/random 共 5 選 1，預設 layer0）與三組
+    部位選單（`chestDetail`／`waistSideDetail`／`shoulderDetail`，各
+    9 選 1，預設 none／無修改，選項內容沿用 owner 原始草案的中文命名：
+    胸口 V形開叉/弧形鏤空/菱形鏤空/水滴鏤空/幾何鏤空/交叉帶/蕾絲拼接/
+    不對稱切割；腰側 櫻花幾何鏤空/弧形鏤空/菱形鏤空/側腰開窗/交叉束帶/
+    縱向切割/蕾絲拼接/不對稱切割；肩部 弧形鏤空/露肩切割/單肩結構/
+    幾何鏤空/帶狀連接/蕾絲肩片/分離肩片/不對稱肩部）。
+  - **資料結構**：`chestDetailData`／`waistSideDetailData`／
+    `shoulderDetailData` 三個物件（英文 prompt 文字，`none` 對應空字串）
+    ＋ `GARMENT_DETAIL_LAYER_ZONES = { layer0:0, layer3:1, layer6:2,
+    layer9:3 }` 對照表（Layer→隨機套用時要命中幾個部位）。
+  - **`generate()` 組裝**：在 appearance form 之後、combat styling 之前
+    新增一行 `garment surface detail: {已選部位的設計文字}, — structural
+    surface accents only, the garment silhouette and archetype from the
+    appearance form above stay unchanged,`；三個部位裡選了「無修改」的
+    直接不輸出該部位描述（用 `.filter(Boolean)` 拿掉），全部無修改時
+    整行都不出現。防呆句明確重申「這是表面結構細節，不是重新設計整件
+    制服」，呼應之前定的 archetype 可辨識原則。
+  - **`applyBattleRandomSelection()` 隨機邏輯**（這是這次的核心）：讀取
+    目前 `garmentLayer` 選值，若是 `random` 就先從 layer0/3/6/9 四個裡
+    抽一個當作「有效 Layer」（並把選單同步顯示成抽到的那個，讓使用者
+    看得到實際套用的強度）；接著檢查三個部位「目前已經是非 none」的
+    有幾個（視為使用者手動設定過、隨機套用不能覆蓋），跟「目前是 none」
+    的有幾個（可被隨機填入的候選池）；有效 Layer 對照出的目標命中數
+    減掉已經手動設定的數量、再跟候選池大小取最小值，得到這次要隨機填入
+    幾個部位；從候選池隨機挑出這些部位，各自從該部位 9 選 1（排除
+    none）裡再隨機挑一個設計。這個邏輯完全對應 owner 說的「手動選了
+    哪個部位，隨機套用不會覆蓋掉」——用一支一次性 Node 腳本模擬 4 種
+    情境（全部 none+Layer9／已手動設 1 個+Layer9／已手動設 2 個+Layer3
+    超過目標／Layer=random）各跑 200 次，0 issue，確認手動保留、目標
+    命中數、random 解析都正確。
+  - **`applyThemeTemplate()`**：套用一鍵模板時，服裝改造核心的 4 個
+    欄位（Layer＋3 部位）強制重置回 layer0／全部 none，因為 21 個既有
+    模板本來就沒有規劃這幾個新欄位，避免殘留上一次的鏤空設定跟新套用
+    的模板混在一起變得不協調（這次刻意不修改任何既有模板去搭配新的
+    改造欄位，維持既有模板穩定）。
+  - `refreshCards()` 是通用邏輯（掃描所有 `[data-choice]` 群組），新的
+    4 個選單群組都掛了 `data-choice` 屬性，不需要額外改這支函式。
+- **驗證**：`validate-preset-refs.mjs` 不需要改（21 個既有模板都沒有用
+  到新欄位，沒有新的參照需要驗證）；`audit-100x.mjs`／
+  `build-prompt-preview.mjs` 的 exportExpression 與組裝邏輯同步加入
+  三個新資料物件與 `garmentDetailText` 組裝，四支腳本重跑全過
+  （`check-static` 全過、`validate-preset-refs` 21 模板/18 組合 0
+  issue、`audit-100x` 1300 次模擬 0 issue、`build-prompt-preview` 正常
+  產出，人工檢視輸出樣本確認 `garment surface detail` 那行組裝順序與
+  文字正確）。
+- **後續**：這是「服裝改造核心」的 v1（3 部位，無跨部位相容性表），
+  owner 之後如果覺得 3 部位效果好，下一步是考慮要不要擴大部位數量、
+  加跨部位風格家族配對，以及把 `GARMENT_DETAIL_LAYER_ZONES` 對照表和
+  `applyBattleRandomSelection()` 裡的部位隨機邏輯複製到 `xianxia.html`，
+  換一份仙俠專屬的部位/設計詞彙表（例如「雲紋鏤空／流蘇垂墜／飄帶結構」
+  這類仙俠語彙，取代校服的「V形開叉／幾何鏤空」語彙），核心演算法不用
+  重寫。
+

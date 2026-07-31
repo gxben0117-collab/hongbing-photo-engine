@@ -96,13 +96,14 @@
   .section-uniformtype{order:8;}
   .section-accessory{order:9;}
   .section-battlemode{order:10;}
-  .section-pose{order:11;}
-  .section-camera{order:12;}
-  .section-lighting{order:13;}
-  .section-background{order:14;}
-  .section-extra{order:15;}
-  .section-ratio{order:16;}
-  .section-output{order:17;}
+  .section-garmentdetail{order:11;}
+  .section-pose{order:12;}
+  .section-camera{order:13;}
+  .section-lighting{order:14;}
+  .section-background{order:15;}
+  .section-extra{order:16;}
+  .section-ratio{order:17;}
+  .section-output{order:18;}
   .section-header{
     display:flex;
     align-items:baseline;
@@ -679,9 +680,69 @@
     </div>
   </section>
 
-  <section class="section-pose">
+  <section class="section-garmentdetail">
     <div class="section-header">
       <div class="section-label">11</div>
+      <div class="section-title">服裝改造強度</div>
+    </div>
+    <p class="hint">這些是制服表面的結構化細節（鏤空／切割／拼接），不是重新設計整件制服，剪裁輪廓仍以 05-08 選定的內容為準。Layer 只決定「隨機套用」時要改幾個部位；手動選了哪個部位，隨機套用不會覆蓋掉。</p>
+    <div class="pose-group">
+      <div class="pose-group-label">改造強度 Layer</div>
+      <div class="grid grid-3" data-choice="garmentLayer">
+        <label class="card selected"><input type="radio" name="garmentLayer" value="layer0" checked><div class="name">Layer 0（原始版）</div><div class="desc">三個部位皆無修改</div></label>
+        <label class="card"><input type="radio" name="garmentLayer" value="layer3"><div class="name">Layer 3（輕度）</div><div class="desc">隨機套用時約改 1 個部位</div></label>
+        <label class="card"><input type="radio" name="garmentLayer" value="layer6"><div class="name">Layer 6（中度）</div><div class="desc">隨機套用時約改 2 個部位</div></label>
+        <label class="card"><input type="radio" name="garmentLayer" value="layer9"><div class="name">Layer 9（高度）</div><div class="desc">隨機套用時三個部位全改</div></label>
+        <label class="card"><input type="radio" name="garmentLayer" value="random"><div class="name">隨機 Layer</div><div class="desc">隨機套用時連強度一起重新抽</div></label>
+      </div>
+    </div>
+    <div class="pose-group">
+      <div class="pose-group-label">胸口</div>
+      <div class="grid grid-3" data-choice="chestDetail">
+        <label class="card selected"><input type="radio" name="chestDetail" value="none" checked><div class="name">無修改</div><div class="desc">維持原本上身版型</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="vCutout"><div class="name">V形開叉</div><div class="desc">胸口V形開叉細節</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="archCutout"><div class="name">弧形鏤空</div><div class="desc">胸口弧形鏤空細節</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="diamondCutout"><div class="name">菱形鏤空</div><div class="desc">胸口菱形鏤空細節</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="teardropCutout"><div class="name">水滴鏤空</div><div class="desc">胸口水滴鏤空細節</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="geometricCutout"><div class="name">幾何鏤空</div><div class="desc">胸口幾何鏤空細節</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="crossStraps"><div class="name">交叉帶</div><div class="desc">胸口交叉帶細節</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="laceInsert"><div class="name">蕾絲拼接</div><div class="desc">胸口蕾絲拼接細節</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="asymmetricCut"><div class="name">不對稱切割</div><div class="desc">胸口不對稱切割細節</div></label>
+      </div>
+    </div>
+    <div class="pose-group">
+      <div class="pose-group-label">腰側</div>
+      <div class="grid grid-3" data-choice="waistSideDetail">
+        <label class="card selected"><input type="radio" name="waistSideDetail" value="none" checked><div class="name">無修改</div><div class="desc">維持原本腰線版型</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="sakuraGeoCutout"><div class="name">櫻花幾何鏤空</div><div class="desc">腰側櫻花幾何鏤空細節</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="archCutout"><div class="name">弧形鏤空</div><div class="desc">腰側弧形鏤空細節</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="diamondCutout"><div class="name">菱形鏤空</div><div class="desc">腰側菱形鏤空細節</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="windowCutout"><div class="name">側腰開窗</div><div class="desc">腰側開窗鏤空細節</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="crossBind"><div class="name">交叉束帶</div><div class="desc">腰側交叉束帶細節</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="verticalSlit"><div class="name">縱向切割</div><div class="desc">腰側縱向切割細節</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="laceInsert"><div class="name">蕾絲拼接</div><div class="desc">腰側蕾絲拼接細節</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="asymmetricCut"><div class="name">不對稱切割</div><div class="desc">腰側不對稱切割細節</div></label>
+      </div>
+    </div>
+    <div class="pose-group">
+      <div class="pose-group-label">肩部</div>
+      <div class="grid grid-3" data-choice="shoulderDetail">
+        <label class="card selected"><input type="radio" name="shoulderDetail" value="none" checked><div class="name">無修改</div><div class="desc">維持原本肩部版型</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="archCutout"><div class="name">弧形鏤空</div><div class="desc">肩部弧形鏤空細節</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="offShoulderCut"><div class="name">露肩切割</div><div class="desc">肩部露肩切割細節</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="singleStructure"><div class="name">單肩結構</div><div class="desc">單邊肩部結構化細節</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="geometricCutout"><div class="name">幾何鏤空</div><div class="desc">肩部幾何鏤空細節</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="strapConnector"><div class="name">帶狀連接</div><div class="desc">肩部帶狀連接細節</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="lacePanel"><div class="name">蕾絲肩片</div><div class="desc">肩部蕾絲肩片細節</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="detachedPanel"><div class="name">分離肩片</div><div class="desc">肩部分離肩片細節</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="asymmetricShoulder"><div class="name">不對稱肩部</div><div class="desc">肩部不對稱剪裁細節</div></label>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pose">
+    <div class="section-header">
+      <div class="section-label">12</div>
       <div class="section-title">人物姿勢</div>
     </div>
     <p class="hint">單選；不確定時選「自動」，讓 AI 依服裝與主題安排較合適的姿勢。</p>
@@ -799,7 +860,7 @@
 
   <section class="section-camera">
     <div class="section-header">
-      <div class="section-label">12</div>
+      <div class="section-label">13</div>
       <div class="section-title">拍攝角度與鏡頭感</div>
     </div>
     <p class="hint">只改觀看角度、景深和鏡頭氣勢；人物拍到哪裡請回到 02 的「人物入鏡比例」。</p>
@@ -818,7 +879,7 @@
 
   <section class="section-lighting">
     <div class="section-header">
-      <div class="section-label">13</div>
+      <div class="section-label">14</div>
       <div class="section-title">光影色彩</div>
     </div>
     <p class="hint">單選，決定整張廣告的主色、光線方向與情緒；人物與背景會一起受影響。</p>
@@ -864,7 +925,7 @@
 
   <section class="section-background">
     <div class="section-header">
-      <div class="section-label">14</div>
+      <div class="section-label">15</div>
       <div class="section-title">背景場景與留白</div>
     </div>
     <p class="hint">決定人物身後的世界、場景密度與是否保留放標題的空白區；不會替換你已選的配件與幻想戰鬥細節。</p>
@@ -908,7 +969,7 @@
 
   <section class="section-extra">
     <div class="section-header">
-      <div class="section-label">15</div>
+      <div class="section-label">16</div>
       <div class="section-title">自訂要求</div>
     </div>
     <p class="hint">只有需要指定道具、禁用元素、文字留白或特殊細節時再填寫，避免與前面選項重複描述。</p>
@@ -921,7 +982,7 @@
 
   <section class="section-ratio">
     <div class="section-header">
-      <div class="section-label">16</div>
+      <div class="section-label">17</div>
       <div class="section-title">圖片比例</div>
     </div>
     <p class="hint">依發布用途選擇：直式適合人像與社群，橫式適合海報、橫幅或世界觀場景。</p>
@@ -939,7 +1000,7 @@
 
   <section class="section-output">
     <div class="section-header">
-      <div class="section-label">17</div>
+      <div class="section-label">18</div>
       <div class="section-title">生成咒語</div>
     </div>
     <button class="generate-btn" id="generateBtn">生成完整咒語</button>
@@ -1067,6 +1128,48 @@ const emblemFocusData = {
   weaponSheathOrnament: 'school emblem as a weapon sheath ornament',
   bagCharm: 'school emblem as a bag charm'
 };
+
+// ===== 服裝改造核心（Garment Detail Core） =====
+// 獨立模組：Layer(0/3/6/9) 決定「隨機套用」時要改幾個部位，3 個部位（胸口/腰側/肩部）
+// 各自 9 選 1（含無修改）。這些是制服表面的結構化細節，不是重新設計整件制服——剪裁
+// 輪廓仍以 05-08（上身/腰線/下身/制服類型）為準。之後若要套用到其他頁面（例如仙俠），
+// 只需複製 GARMENT_DETAIL_LAYER_ZONES 對照表與 applyBattleRandomSelection() 裡的部位
+// 隨機邏輯，換一份部位/設計詞彙表即可，演算法不用重寫。
+const chestDetailData = {
+  none: '',
+  vCutout: 'a V-shaped cutout at the chest',
+  archCutout: 'an arc-shaped cutout at the chest',
+  diamondCutout: 'a diamond-shaped cutout at the chest',
+  teardropCutout: 'a teardrop-shaped cutout at the chest',
+  geometricCutout: 'a geometric cutout pattern at the chest',
+  crossStraps: 'crossed strap detailing at the chest',
+  laceInsert: 'a lace panel insert at the chest',
+  asymmetricCut: 'an asymmetric cut at the chest'
+};
+const waistSideDetailData = {
+  none: '',
+  sakuraGeoCutout: 'a sakura-motif geometric cutout at the waist side',
+  archCutout: 'an arc-shaped cutout at the waist side',
+  diamondCutout: 'a diamond-shaped cutout at the waist side',
+  windowCutout: 'a window-shaped cutout at the waist side',
+  crossBind: 'crossed binding straps at the waist side',
+  verticalSlit: 'a vertical slit cut at the waist side',
+  laceInsert: 'a lace panel insert at the waist side',
+  asymmetricCut: 'an asymmetric cut at the waist side'
+};
+const shoulderDetailData = {
+  none: '',
+  archCutout: 'an arc-shaped cutout at the shoulder',
+  offShoulderCut: 'an off-shoulder cut',
+  singleStructure: 'a single structured shoulder accent',
+  geometricCutout: 'a geometric cutout pattern at the shoulder',
+  strapConnector: 'a strap connector detail at the shoulder',
+  lacePanel: 'a lace panel at the shoulder',
+  detachedPanel: 'a detached shoulder panel',
+  asymmetricShoulder: 'an asymmetric shoulder cut'
+};
+// Layer → 隨機套用時要命中幾個部位（0-3 個，從胸口/腰側/肩部三個部位裡抽）
+const GARMENT_DETAIL_LAYER_ZONES = { layer0: 0, layer3: 1, layer6: 2, layer9: 3 };
 
 const styleData = {
   tacticalCampaign: 'Japanese school-battle manga inspired advertising campaign, live-action adaptation key visual, stylish uniform-battle product visual, refined premium brand hero art direction',
@@ -1570,6 +1673,13 @@ function applyThemeTemplate(key){
     document.getElementById('emblemFocus').value = preset.emblemFocus;
   }
 
+  // 一鍵模板本身沒有規劃服裝改造核心的內容，套用模板時重置回 Layer 0／三個部位皆無修改，
+  // 避免殘留上一次手動或隨機設定的鏤空細節跟新套用的模板衝突。
+  setRadioValue('garmentLayer', 'layer0');
+  setRadioValue('chestDetail', 'none');
+  setRadioValue('waistSideDetail', 'none');
+  setRadioValue('shoulderDetail', 'none');
+
   ['customUpperBody','customLower','customBackground','customPose','customFantasyDetail','colorNote','extraNote'].forEach(id => {
     document.getElementById(id).value = '';
   });
@@ -1617,6 +1727,24 @@ function applyBattleRandomSelection(){
   if(emblemFocusValues.length){
     document.getElementById('emblemFocus').value = getRandomItem(emblemFocusValues);
   }
+
+  // 服裝改造核心：Layer 決定要命中幾個部位，但已經手動設定過（不是「無修改」）的部位維持
+  // 原樣不被覆蓋，只有還在「無修改」的部位才會被納入這次隨機的候選池。
+  const layerKeys = ['layer0', 'layer3', 'layer6', 'layer9'];
+  const selectedLayer = selected('garmentLayer');
+  const effectiveLayer = selectedLayer === 'random' ? getRandomItem(layerKeys) : selectedLayer;
+  setRadioValue('garmentLayer', effectiveLayer);
+  const zoneFields = { chestDetail: chestDetailData, waistSideDetail: waistSideDetailData, shoulderDetail: shoulderDetailData };
+  const alreadyActiveZones = Object.keys(zoneFields).filter(name => selected(name) !== 'none');
+  const freeZones = Object.keys(zoneFields).filter(name => selected(name) === 'none');
+  const targetZoneCount = GARMENT_DETAIL_LAYER_ZONES[effectiveLayer] ?? 0;
+  const zonesToFill = Math.max(0, Math.min(targetZoneCount - alreadyActiveZones.length, freeZones.length));
+  const shuffledFreeZones = freeZones.slice().sort(() => Math.random() - 0.5).slice(0, zonesToFill);
+  shuffledFreeZones.forEach(name => {
+    const pool = Object.keys(zoneFields[name]).filter(k => k !== 'none');
+    if(pool.length) setRadioValue(name, getRandomItem(pool));
+  });
+
   ['customUpperBody','customLower','customBackground','customPose','customFantasyDetail','colorNote','extraNote'].forEach(id => {
     document.getElementById(id).value = '';
   });
@@ -1645,6 +1773,14 @@ function generate(options = {}){
     ? `custom lower body form only: ${customLower}; do not include or blend any preset lower body option`
     : lowerData[selected('lower')];
   const uniformTypeText = uniformTypeData[selected('uniformType')];
+
+  const chestDetailText = chestDetailData[selected('chestDetail')];
+  const waistSideDetailText = waistSideDetailData[selected('waistSideDetail')];
+  const shoulderDetailText = shoulderDetailData[selected('shoulderDetail')];
+  const garmentDetailParts = [chestDetailText, waistSideDetailText, shoulderDetailText].filter(Boolean);
+  const garmentDetailText = garmentDetailParts.length
+    ? 'garment surface detail: ' + garmentDetailParts.join(', ') + ' — structural surface accents only, the garment silhouette and archetype from the appearance form above stay unchanged,'
+    : '';
 
   const accessoryText = accessoryData[selected('accessory')];
   const customFantasyDetail = document.getElementById('customFantasyDetail').value.trim();
@@ -1686,6 +1822,7 @@ function generate(options = {}){
     compositionGuard + ',',
     'school identity: ' + schoolInfo.prompt + ',',
     'appearance form: ' + upperText + ', ' + waistText + ', ' + lowerText + ', ' + uniformTypeText + ',',
+    garmentDetailText,
     'combat styling: ' + armorText + '; ' + capeText + ',',
     emblemFocusText ? emblemFocusText + ',' : '',
     'accessory: ' + accessoryText + ',',

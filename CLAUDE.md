@@ -134,6 +134,29 @@
   （披風揚起站姿）刻意不動，因為文字本身是「cape or dress」的模糊
   詮釋，不是 Cape Mode 系統的一部分，牽動共用姿勢庫超出這次範圍。四支
   驗證腳本同步更新並重跑全過。
+  **新增「服裝改造核心」（Garment Detail Core）**（2026-08-01）：owner
+  貼了一份自己跟另一個 AI 花約 10 小時發展的構想——把「制服局部結構化
+  改造」拆成 Layer（改造強度）× 部位（改哪裡）× 設計（怎麼改）× 隨機，
+  要求先分析可行性。分析結論：技術可行（跟 `POSE_GROUPS`/
+  `POSE_GROUP_FRAMING` 同一種「先抽一個再從相容子集抽另一個」模式），
+  但原始構想的 5 部位×9 選 1（59,049 種組合）風險太高——容易變成
+  「隨機=無規則」的鏤空拼盤，也容易讓制服 archetype 認不出原本版型，
+  建議先縮小到 2-3 個部位。owner 採納，選定 3 部位（胸口／腰側／肩部），
+  Layer 定案 0/3/6/9 四級，確認要做成「獨立、類似鎖臉核心」的模組
+  （owner 原話：「鎖臉核心 服裝改造核心」）。實作：新增 `chestDetailData`
+  /`waistSideDetailData`/`shoulderDetailData`（各 9 選 1，含 none）與
+  `GARMENT_DETAIL_LAYER_ZONES` 對照表；`generate()` 在 appearance form
+  後新增 `garment surface detail` 行，並附「這是表面結構細節、不是重新
+  設計整件制服」防呆句；`applyBattleRandomSelection()` 新增部位隨機
+  邏輯——Layer 決定要命中幾個部位、已手動設定過的部位（非 none）不會
+  被隨機覆蓋、`random` Layer 會先解析成實際的 0/3/6/9 再套用；
+  `applyThemeTemplate()` 套用模板時把這 4 個新欄位重置回 layer0/全
+  none（21 個既有模板都沒規劃這幾個欄位）。用一次性 Node 腳本模擬 4 種
+  情境（全 none+L9／已手動1個+L9／已手動2個+L3超標／random）各 200 次
+  確認邏輯正確。四支驗證腳本同步更新重跑全過。這是 v1（3 部位、無跨
+  部位相容性表），下一步可考慮擴大部位數或搬去 xianxia.html（換一份
+  仙俠語彙、演算法不用重寫）。
+  **`anime-hero.html`（動漫電影變身夥伴咒語產生器）已於 2026-07-24 整頁下架**：
   owner 對這系列不滿意，且該頁架構已疊到 10 層 monkey-patch 式的
   `generate = function(){ 上一版generate(); ... }`，難以維護；docs 底下留有一份
   「開發規格 v2（整理版）」規劃改用 fantasy-fashion.html 的乾淨版型從零重建，

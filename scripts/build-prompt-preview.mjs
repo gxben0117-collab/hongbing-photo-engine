@@ -714,6 +714,9 @@ function generateBattleAcademy(core, data) {
     waist: 'highWaistTailoring',
     lower: 'pleatedMiniSkirt',
     uniformType: 'standard',
+    chestDetail: 'vCutout',
+    waistSideDetail: 'none',
+    shoulderDetail: 'archCutout',
     accessory: 'swordSheathAccent',
     fantasyDetail: 'bladeEnergyTrailStreak',
     armorMode: 'off',
@@ -738,6 +741,13 @@ function generateBattleAcademy(core, data) {
   const waistText = data.waistData[selection.waist];
   const lowerText = data.lowerData[selection.lower];
   const uniformTypeText = data.uniformTypeData[selection.uniformType];
+  const chestDetailText = data.chestDetailData[selection.chestDetail];
+  const waistSideDetailText = data.waistSideDetailData[selection.waistSideDetail];
+  const shoulderDetailText = data.shoulderDetailData[selection.shoulderDetail];
+  const garmentDetailParts = [chestDetailText, waistSideDetailText, shoulderDetailText].filter(Boolean);
+  const garmentDetailText = garmentDetailParts.length
+    ? 'garment surface detail: ' + garmentDetailParts.join(', ') + ' — structural surface accents only, the garment silhouette and archetype from the appearance form above stay unchanged,'
+    : '';
   const accessoryText = data.accessoryData[selection.accessory];
   const fantasyDetailText = data.fantasyDetailData[selection.fantasyDetail];
   const armorText = data.armorModeData[selection.armorMode];
@@ -760,6 +770,7 @@ function generateBattleAcademy(core, data) {
     data.compositionGuard + ',',
     'school identity: ' + schoolInfo.prompt + ',',
     'appearance form: ' + upperText + ', ' + waistText + ', ' + lowerText + ', ' + uniformTypeText + ',',
+    garmentDetailText,
     'combat styling: ' + armorText + '; ' + capeText + ',',
     emblemFocusText ? emblemFocusText + ',' : '',
     'accessory: ' + accessoryText + ',',
@@ -941,7 +952,7 @@ function loadRevision(label, sourceReader) {
       page: 'battleAcademy',
       startMarker: 'const schoolData = {',
       endMarker: 'function selected',
-      exportExpression: '({ schoolData, upperBodyData, waistData, lowerData, uniformTypeData, accessoryData, fantasyDetailData, armorModeData, CAPE_TEXT_OFF, emblemFocusData, styleData, backgroundData, lightingData, sharedBattleAcademyCore, identityGuard, anatomyGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, poseData, framingData, cameraData, ratioData })',
+      exportExpression: '({ schoolData, upperBodyData, waistData, lowerData, uniformTypeData, chestDetailData, waistSideDetailData, shoulderDetailData, accessoryData, fantasyDetailData, armorModeData, CAPE_TEXT_OFF, emblemFocusData, styleData, backgroundData, lightingData, sharedBattleAcademyCore, identityGuard, anatomyGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, poseData, framingData, cameraData, ratioData })',
     });
     prompts['battleacademy-default.txt'] = generateBattleAcademy(core, battleAcademyData);
   } catch (err) {
