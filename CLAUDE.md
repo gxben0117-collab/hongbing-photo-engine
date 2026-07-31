@@ -108,7 +108,21 @@
   都是棚拍/虛空背景，不是實際校園場景），改成 `schoolGateSiege`（校門
   對峙戰場）／`academyCourtyardSunset`（學院中庭夕陽）這兩個真正的校園
   場景。四支驗證腳本重跑全過。
-  **`anime-hero.html`（動漫電影變身夥伴咒語產生器）已於 2026-07-24 整頁下架**：
+  **owner 實測「敞領疊搭」3 個模板後回報**：出圖結果是「上衣鈕扣全開、
+  完全的胸罩外露」，跟 owner 要的「性感微露、不是完全露內衣」方向不符，
+  owner 給了明確替代方案：「鈕扣上面少扣2~3個、微露胸部深V」或「身穿
+  上衣沒胸罩但不外露」。把 `gakuranOpenSheerLayered`／
+  `blazerOpenSheerLayered`／`shirtOpenSheerLayered` 三個上身選項的英文
+  描述從「worn open over a sheer black lace red-floral-embroidered
+  underlayer」（外套敞開＋內搭透紗打底，生圖模型讀成「整件敞開、內衣
+  外露」）改成「only the top two or three buttons undone, a subtle
+  deep-V opening at the collarbone, smooth bare skin with no visible
+  undergarment, jacket otherwise fully closed and worn normally」（只解
+  上方2-3顆釦子、鎖骨處微露深V、沒有內衣痕跡、其餘部分維持正常穿著），
+  中文卡片說明同步從「敞開穿+內搭打底」改成「上方鈕扣微解2-3顆+微露
+  鎖骨深V+不露內衣」。這是本輪第二次因為 owner 實測出圖才發現的落差
+  （上一次是模板背景跑題），提醒之後新增服裝描述要更保守估計生圖模型
+  對「open/layered/underlayer」這類詞的解讀傾向，容易被誇大成完全敞開。
   owner 對這系列不滿意，且該頁架構已疊到 10 層 monkey-patch 式的
   `generate = function(){ 上一版generate(); ... }`，難以維護；docs 底下留有一份
   「開發規格 v2（整理版）」規劃改用 fantasy-fashion.html 的乾淨版型從零重建，

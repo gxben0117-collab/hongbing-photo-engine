@@ -2551,3 +2551,38 @@
   21個模板+18組組合0issue/`audit-100x` 1300次模擬0issue/
   `build-prompt-preview` 正常產出）。
 
+## 2026-07-31（八）　battle-academy.html：修正「敞領疊搭」出圖尺度過大問題
+
+- owner 實測「櫻華敞領疊搭綻放」「青嵐敞領外套優雅」「白鷺敞領襯衫
+  優雅」這三個模板後回報：出圖結果是「上衣鈕扣全開，基本上是完全的
+  胸罩外露」，跟要的「性感、微微露，不是完全露內衣」方向不符。owner
+  給了明確的替代描述方向：「可以上衣鈕扣上面少扣2~3個，微露胸部深V」
+  或「身穿上衣沒胸罩的方式」。
+- **根因判斷**：三個上身選項（`gakuranOpenSheerLayered`／
+  `blazerOpenSheerLayered`／`shirtOpenSheerLayered`）原本的英文描述是
+  「jacket worn open over a sheer black lace red-floral-embroidered
+  underlayer, deep-V neckline, one bare shoulder」——「worn open over
+  ... underlayer」這個措辭對生圖模型來說很容易被放大解讀成「外套完全
+  敞開＋底下是一件獨立的內搭（甚至被當成內衣）」，這比原本設計意圖
+  （只是若隱若現的深V層次）誇張得多，這也是為什麼上一輪的「不要跳脫
+  制服/校園範圍」修正只處理了文字語意跑題，但沒有預先抓到這個「敞開
+  程度被誇大」的獨立問題——兩者是不同性質的落差，前者是「說錯詞彙
+  導向錯誤品類」，後者是「詞彙本身的曝露程度被生圖模型過度放大」。
+- **修正**：三個選項的英文描述改寫成「with only the top two or three
+  buttons undone, a subtle deep-V opening at the collarbone, smooth
+  bare skin with no visible undergarment, jacket/blazer/shirt
+  otherwise fully closed and worn normally」——拿掉「worn open over an
+  underlayer」這個容易被誇大的框架，改成「明確只解開上方2-3顆釦子、
+  鎖骨處微露深V、沒有內衣痕跡、其餘部分維持正常穿著」的具體限定描述；
+  中文卡片說明同步從「敞開穿＋內搭打底」改成「上方鈕扣微解2-3顆＋微露
+  鎖骨深V＋不露內衣」，UI 卡片名稱也從「敞領學生服疊搭」等改成「微解領
+  學生服」等，更精準對應新的曝露尺度。
+- **教訓**：這是本輪第二次因為 owner 實際出圖測試才發現的落差（上一次
+  是模板背景/服裝語彙跑題出校園範圍，這次是曝露尺度被生圖模型誇大），
+  說明「文字描述在人類讀起來合理」不代表「生圖模型解讀出來的畫面合理」，
+  之後新增涉及「open/layered/underlayer/敞開/疊搭」這類措辭的服裝描述，
+  應該預設生圖模型會往更暴露的方向解讀，寫得更具體保守（例如明確講
+  「只解開幾顆釦子」而不是籠統講「敞開穿」），比事後再修正更有效率。
+- 四支驗證腳本重跑全過（`check-static`/`validate-preset-refs` 21個模板
+  +18組組合0issue/`audit-100x` 1300次模擬0issue）。
+
