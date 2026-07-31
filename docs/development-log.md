@@ -2790,3 +2790,82 @@
   `garment surface detail`/`combat styling` 四行文字與順序正確。模板
   總數 21→24。
 
+## 2026-08-01（五）　服裝改造核心移植到 xianxia／anime-character／isekai-fantasy／kpop-idol
+
+- owner 問「中式仙俠／動漫人物／日式異世界／韓系氣質偶像風也可以用服裝
+  改造核心嗎」。先確認可行性：這四頁跟 battle-academy.html 是同一批「四頁
+  新潮/美人/漂亮時尚頁」＋「四大提案方案」共同祖先（都複製自
+  fantasy-fashion.html 系），section 排序/編號、`applyThemeTemplate`/
+  `applyXxxRandomSelection`/`generate()` 的骨架逐行相同，battle-academy
+  已經驗證過的 Layer 隨機演算法（4 情境×200 次模擬 0 issue）可以直接
+  複製，不需要重新設計或重新驗證演算法本身。用 `AskUserQuestion` 問排程
+  （逐頁上線 vs 一次全上），owner 選「四頁一起上（同一輪全部做完）」。
+- **對四頁分別執行同一套機械化流程**（跟 battle-academy 的實作完全一致，
+  只換每頁自己的鏤空/剪裁語彙）：
+  1. CSS：插入 `.section-garmentdetail{order:6;}`，原本 `.section-pose`
+     （6）到 `.section-output`（12）依序順移一格變成 7～13。
+  2. 逐行重編 7 個 `<div class="section-label">` 文字（06~12 → 07~13），
+     用行號索引的一次性 Node 腳本處理（不能用簡單字串替換，因為新舊
+     數字會互相碰撞）。
+  3. 在 `section-material` 結束、`section-pose` 開始之間插入新的「06
+     服裝改造核心」HTML 區塊：Layer 5 選項（0/3/6/9/隨機）＋ 3 個部位
+     （胸口/腰側/肩部）各 9 選 1（含 none）＋各自一個自填欄位。四頁語彙：
+     - xianxia：雲紋鏤空/如意鏤空/水滴鏤空/水袖交疊等仙俠剪裁詞彙。
+     - anime-character：魔法陣鏤空/星形鏤空/緞帶蝴蝶結/發光符文滾邊等
+       動漫插畫詞彙。
+     - isekai-fantasy：V形開叉/寶石鑲嵌/精靈蕾絲拼接/符文發光滾邊/
+       羽毛裝飾等異世界奇幻詞彙。
+     - kpop-idol：V形開叉/水鑽網紗拼接/幾何鏤空/鏈條肩帶/單肩帶結構等
+       時尚舞台詞彙。
+  4. 在 `materialData` 結束、`garmentData` 開始之間插入
+     `chestDetailData`/`waistSideDetailData`/`shoulderDetailData`/
+     `GARMENT_DETAIL_LAYER_ZONES`——結構與 battle-academy 逐字相同，只換
+     英文 prompt 文字內容。
+  5. `applyThemeTemplate()`：套用模板時 `garmentLayer` 固定重置回
+     `layer0`，三個部位用 `preset.chestDetail || 'none'` 寫法（模板有
+     指定就套用、沒指定維持重置為 none），四頁既有的 16 個模板都還沒
+     規劃這幾個新欄位，所以套用後全部維持 none，沒有破壞既有模板輸出。
+  6. 隨機套用函式（`applyFantasyRandomSelection`／`applyAnimeRandomSelection`
+     ／`applyIsekaiRandomSelection`／`applyIdolRandomSelection`，各頁
+     沿用各自原本命名）：插入跟 battle-academy 完全相同的 Layer 驅動部位
+     隨機邏輯——`random` Layer 會先解析成實際的 0/3/6/9，已手動設定過
+     （非 none）的部位不會被隨機覆蓋，只有還在 none 的部位才進入這次
+     隨機候選池，`zonesToFill = max(0, min(目標數-已手動數, 可填數))`。
+  7. `generate()`：插入 `chestDetailText`/`waistSideDetailText`/
+     `shoulderDetailText`（各自的自填欄位優先於預設值）與組合出的
+     `garmentDetailText`，插在 `'appearance form: ' + garmentText + ','`
+     行後面、`'theme material and art system: ...'` 行之前；三個部位都是
+     none 且無自填時 `garmentDetailText` 是空字串，靠 `.filter(Boolean)`
+     自動從輸出裡消失。
+  8. 補上 3 個新自填欄位 id 到底部 `input`/`change` 事件監聽註冊清單。
+- **驗證**：每頁做完後先用 Node 腳本抽出所有 `<script>` 內容跑
+  `new Function(...)` 語法檢查，通過才繼續。四支驗證腳本
+  （`check-static.mjs`/`audit-100x.mjs`/`validate-preset-refs.mjs`/
+  `build-prompt-preview.mjs`）逐頁同步更新：`exportExpression` 加
+  `chestDetailData, waistSideDetailData, shoulderDetailData`；`pools`/
+  `sel`（`audit-100x.mjs`）與 `selection`（`build-prompt-preview.mjs`）
+  加對應的部位欄位與自填樣本；文字組裝邏輯插入 `garmentDetailText,`。
+  四頁全部做完後一次跑全部四支腳本（涵蓋全站 13 頁）：`check-static`
+  全過、`audit-100x` 累計 1300 次模擬（13頁×100）0 issue、
+  `validate-preset-refs` 0 issue（四頁本輪未新增模板，沒有新的模板
+  部位參照需要驗證）、`build-prompt-preview` 四頁預覽輸出都正確含
+  `garment surface detail: ...` 行（逐一 grep 確認：xianxia 雲紋+小
+  披肩、anime-character 魔法陣+緞帶蝴蝶結、isekai-fantasy 寶石鑲嵌+
+  小披肩、kpop-idol 水鑽網紗+鏈條肩帶）。
+- **踩坑教訓（記錄供之後參考）**：用 `Bash` 工具執行
+  `node -e "...含反引號 template literal 的 JS..."` 時，bash 會把雙引號
+  字串內的反引號當成 command substitution 處理，即使外層是雙引號也一樣，
+  導致反引號包住的內容被靜默替換成（通常是空字串的）指令執行結果。
+  這在改 `build-prompt-preview.mjs` 的 `generateAnime()` 函式時發生過：
+  3 行 `` `custom X surface detail only: ${...}` `` 的反引號段落內容整段
+  消失，變成 `selection.customChestDetail ?  : data.chestDetailData[...]`
+  這種殘缺程式碼，靠事後 `grep`/`sed -n` 比對才發現，改用 `Edit` 工具
+  直接修復。**之後任何含反引號的 JS 片段一律用 `Edit` 工具直接編輯，
+  不透過 `Bash`/`node -e`**；不含反引號的純轉換腳本（例如行號索引的
+  section-label 重編號）仍可安全用 `Bash`/`node -e`。
+- 本輪只是把「能力」接上四頁，四頁既有的 16 個一鍵模板都沒有新增、也
+  沒有示範新的部位細節（跟 battle-academy 那次不同，battle-academy 是
+  先做完核心才另外追加 3 組示範模板）；如果之後 owner 想看示範效果，
+  下一步可以在四頁裡各挑 1-2 組模板追加部位細節，比照 battle-academy
+  的 `byakkoTigerDojoFocus`/`genbuAncientGuardianThrone` 做法。
+

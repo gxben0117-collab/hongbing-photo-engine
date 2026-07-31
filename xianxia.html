@@ -103,13 +103,14 @@
   .section-garment{order:3;}
   .section-body{order:4;}
   .section-material{order:5;}
-  .section-pose{order:6;}
-  .section-camera{order:7;}
-  .section-lighting{order:8;}
-  .section-background{order:9;}
-  .section-extra{order:10;}
-  .section-ratio{order:11;}
-  .section-output{order:12;}
+  .section-garmentdetail{order:6;}
+  .section-pose{order:7;}
+  .section-camera{order:8;}
+  .section-lighting{order:9;}
+  .section-background{order:10;}
+  .section-extra{order:11;}
+  .section-ratio{order:12;}
+  .section-output{order:13;}
   .section-header{
     display:flex;
     align-items:baseline;
@@ -605,9 +606,83 @@
     </div>
   </section>
 
-  <section class="section-pose">
+  <section class="section-garmentdetail">
     <div class="section-header">
       <div class="section-label">06</div>
+      <div class="section-title">服裝改造核心</div>
+    </div>
+    <p class="hint">這些是服裝表面的結構化細節（鏤空／垂墜／拼接），不是重新設計整件服裝，剪裁輪廓仍以 03 服裝輪廓為準。Layer 只決定「隨機套用」時要改幾個部位；手動選了哪個部位，隨機套用不會覆蓋掉。</p>
+    <div class="pose-group">
+      <div class="pose-group-label">改造強度 Layer</div>
+      <div class="grid grid-3" data-choice="garmentLayer">
+        <label class="card selected"><input type="radio" name="garmentLayer" value="layer0" checked><div class="name">Layer 0（原始版）</div><div class="desc">三個部位皆無修改</div></label>
+        <label class="card"><input type="radio" name="garmentLayer" value="layer3"><div class="name">Layer 3（輕度）</div><div class="desc">隨機套用時約改 1 個部位</div></label>
+        <label class="card"><input type="radio" name="garmentLayer" value="layer6"><div class="name">Layer 6（中度）</div><div class="desc">隨機套用時約改 2 個部位</div></label>
+        <label class="card"><input type="radio" name="garmentLayer" value="layer9"><div class="name">Layer 9（高度）</div><div class="desc">隨機套用時三個部位全改</div></label>
+        <label class="card"><input type="radio" name="garmentLayer" value="random"><div class="name">隨機 Layer</div><div class="desc">隨機套用時連強度一起重新抽</div></label>
+      </div>
+    </div>
+    <div class="pose-group">
+      <div class="pose-group-label">胸口</div>
+      <div class="grid grid-3" data-choice="chestDetail">
+        <label class="card selected"><input type="radio" name="chestDetail" value="none" checked><div class="name">無修改</div><div class="desc">維持原本服裝版型</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="cloudCutout"><div class="name">雲紋鏤空</div><div class="desc">胸口雲紋鏤空細節</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="ruyiCutout"><div class="name">如意鏤空</div><div class="desc">胸口如意紋鏤空細節</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="teardropCutout"><div class="name">水滴鏤空</div><div class="desc">胸口水滴鏤空細節</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="geometricCutout"><div class="name">幾何鏤空</div><div class="desc">胸口幾何鏤空細節</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="crossSash"><div class="name">交叉束帶</div><div class="desc">胸口交叉束帶細節</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="gauzeInsert"><div class="name">紗羅拼接</div><div class="desc">胸口輕紗拼接細節</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="waterSleeveOverlay"><div class="name">水袖交疊</div><div class="desc">胸口前襟水袖交疊細節</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="asymmetricCut"><div class="name">不對稱斜裁</div><div class="desc">胸口不對稱斜裁細節</div></label>
+      </div>
+      <div class="form-grid" style="margin-top:10px;">
+        <label class="field full custom-choice" data-custom-choice="chestDetail">胸口細節自填
+          <input id="customChestDetail" type="text" placeholder="例如：盤扣裝飾開襟、心形鏤空、雙層交領交疊">
+        </label>
+      </div>
+    </div>
+    <div class="pose-group">
+      <div class="pose-group-label">腰側</div>
+      <div class="grid grid-3" data-choice="waistSideDetail">
+        <label class="card selected"><input type="radio" name="waistSideDetail" value="none" checked><div class="name">無修改</div><div class="desc">維持原本腰線版型</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="cloudCutout"><div class="name">雲紋鏤空</div><div class="desc">腰側雲紋鏤空細節</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="ruyiCutout"><div class="name">如意鏤空</div><div class="desc">腰側如意紋鏤空細節</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="sideSlitWindow"><div class="name">側腰開窗</div><div class="desc">腰側開窗鏤空細節</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="crossSash"><div class="name">交叉束帶</div><div class="desc">腰側交叉束帶細節</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="tasselDrape"><div class="name">流蘇垂墜</div><div class="desc">腰側流蘇垂墜細節</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="gauzeInsert"><div class="name">紗羅拼接</div><div class="desc">腰側輕紗拼接細節</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="asymmetricCut"><div class="name">不對稱斜裁</div><div class="desc">腰側不對稱斜裁細節</div></label>
+      </div>
+      <div class="form-grid" style="margin-top:10px;">
+        <label class="field full custom-choice" data-custom-choice="waistSideDetail">腰側細節自填
+          <input id="customWaistSideDetail" type="text" placeholder="例如：雙層腰封交疊、玉環腰飾、螺旋纏繞絲帶">
+        </label>
+      </div>
+    </div>
+    <div class="pose-group">
+      <div class="pose-group-label">肩部</div>
+      <div class="grid grid-3" data-choice="shoulderDetail">
+        <label class="card selected"><input type="radio" name="shoulderDetail" value="none" checked><div class="name">無修改</div><div class="desc">維持原本肩部版型</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="cloudCutout"><div class="name">雲紋鏤空</div><div class="desc">肩部雲紋鏤空細節</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="offShoulderCut"><div class="name">露肩剪裁</div><div class="desc">肩部露肩剪裁細節</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="capeletDrape"><div class="name">小披肩垂墜</div><div class="desc">肩部小披肩垂墜細節</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="geometricCutout"><div class="name">幾何鏤空</div><div class="desc">肩部幾何鏤空細節</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="tasselStrap"><div class="name">流蘇肩帶</div><div class="desc">肩部流蘇肩帶細節</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="gauzePanel"><div class="name">紗羅肩片</div><div class="desc">肩部輕紗肩片細節</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="detachedSleeve"><div class="name">分離袖片</div><div class="desc">肩部分離袖片細節</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="asymmetricShoulder"><div class="name">不對稱肩部</div><div class="desc">肩部不對稱剪裁細節</div></label>
+      </div>
+      <div class="form-grid" style="margin-top:10px;">
+        <label class="field full custom-choice" data-custom-choice="shoulderDetail">肩部細節自填
+          <input id="customShoulderDetail" type="text" placeholder="例如：單肩雲紋垂墜、肩線鏤空幾何窗、肩帶交錯結構">
+        </label>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pose">
+    <div class="section-header">
+      <div class="section-label">07</div>
       <div class="section-title">人物姿勢</div>
     </div>
     <p class="hint">單選；不確定時選「自動」，讓 AI 依服裝與主題安排較合適的姿勢。</p>
@@ -677,7 +752,7 @@
 
   <section class="section-camera">
     <div class="section-header">
-      <div class="section-label">07</div>
+      <div class="section-label">08</div>
       <div class="section-title">拍攝角度與鏡頭感</div>
     </div>
     <p class="hint">只改觀看角度、景深和鏡頭氣勢；人物拍到哪裡請回到 02 的「人物入鏡比例」。</p>
@@ -696,7 +771,7 @@
 
   <section class="section-lighting">
     <div class="section-header">
-      <div class="section-label">08</div>
+      <div class="section-label">09</div>
       <div class="section-title">光影色彩</div>
     </div>
     <p class="hint">單選，決定整張廣告的主色、光線方向與情緒；人物與背景會一起受影響。</p>
@@ -768,7 +843,7 @@
 
   <section class="section-background">
     <div class="section-header">
-      <div class="section-label">09</div>
+      <div class="section-label">10</div>
       <div class="section-title">背景場景與留白</div>
     </div>
     <p class="hint">決定人物身後的仙俠世界、場景密度與是否保留放標題的空白區；不會替換你已選的主題材質。</p>
@@ -821,7 +896,7 @@
 
   <section class="section-extra">
     <div class="section-header">
-      <div class="section-label">10</div>
+      <div class="section-label">11</div>
       <div class="section-title">自訂要求</div>
     </div>
     <p class="hint">只有需要指定道具、禁用元素、文字留白或特殊細節時再填寫，避免與前面選項重複描述。</p>
@@ -834,7 +909,7 @@
 
   <section class="section-ratio">
     <div class="section-header">
-      <div class="section-label">11</div>
+      <div class="section-label">12</div>
       <div class="section-title">圖片比例</div>
     </div>
     <p class="hint">依發布用途選擇：直式適合人像與社群，橫式適合海報、橫幅或世界觀場景。</p>
@@ -852,7 +927,7 @@
 
   <section class="section-output">
     <div class="section-header">
-      <div class="section-label">12</div>
+      <div class="section-label">13</div>
       <div class="section-title">生成咒語</div>
     </div>
     <button class="generate-btn" id="generateBtn">生成完整咒語</button>
@@ -1024,6 +1099,45 @@ const materialData = {
     palette: 'luminous amber gold, soft warm white glow, faint ember highlight'
   }
 };
+
+// ===== 服裝改造核心（Garment Detail Core） =====
+// 跟 battle-academy.html 同一套演算法：Layer(0/3/6/9/random) 決定「隨機套用」時要改幾個
+// 部位，3 個部位（胸口/腰側/肩部）各自 9 選 1（含無修改）。這些是服裝表面的結構化細節，
+// 不是重新設計整件服裝——剪裁輪廓仍以 03 服裝輪廓為準。
+const chestDetailData = {
+  none: '',
+  cloudCutout: 'a cloud-motif cutout at the chest',
+  ruyiCutout: 'a ruyi-motif cutout at the chest',
+  teardropCutout: 'a teardrop-shaped cutout at the chest',
+  geometricCutout: 'a geometric cutout pattern at the chest',
+  crossSash: 'crossed sash detailing at the chest',
+  gauzeInsert: 'a sheer gauze panel insert at the chest',
+  waterSleeveOverlay: 'an overlapping water-sleeve fold at the chest',
+  asymmetricCut: 'an asymmetric diagonal cut at the chest'
+};
+const waistSideDetailData = {
+  none: '',
+  cloudCutout: 'a cloud-motif cutout at the waist side',
+  ruyiCutout: 'a ruyi-motif cutout at the waist side',
+  sideSlitWindow: 'a window-shaped cutout at the waist side',
+  crossSash: 'crossed sash binding at the waist side',
+  tasselDrape: 'a draped tassel accent at the waist side',
+  gauzeInsert: 'a sheer gauze panel insert at the waist side',
+  asymmetricCut: 'an asymmetric diagonal cut at the waist side'
+};
+const shoulderDetailData = {
+  none: '',
+  cloudCutout: 'a cloud-motif cutout at the shoulder',
+  offShoulderCut: 'an off-shoulder cut',
+  capeletDrape: 'a small draped capelet accent at the shoulder',
+  geometricCutout: 'a geometric cutout pattern at the shoulder',
+  tasselStrap: 'a tasseled strap detail at the shoulder',
+  gauzePanel: 'a sheer gauze panel at the shoulder',
+  detachedSleeve: 'a detached sleeve panel',
+  asymmetricShoulder: 'an asymmetric shoulder cut'
+};
+// Layer → 隨機套用時要命中幾個部位（0-3 個，從胸口/腰側/肩部三個部位裡抽）
+const GARMENT_DETAIL_LAYER_ZONES = { layer0: 0, layer3: 1, layer6: 2, layer9: 3 };
 
 const garmentData = {
   xianQipaoGauze: 'flowing wide-sleeve xianxia gown with a crossed silk sash, layered chiffon under-robe, floating ribbon trails, elegant cultivator-immortal silhouette',
@@ -1544,7 +1658,14 @@ function applyThemeTemplate(key){
     document.getElementById('intensity').value = preset.intensity;
   }
 
-  ['customGarment','customMaterial','customBackground','customPose','colorNote','extraNote'].forEach(id => {
+  // 服裝改造核心：模板本身沒有規劃這幾個欄位時重置回 Layer 0／無修改，
+  // 若模板有指定部位細節則直接套用（preset.chestDetail 等）。
+  setRadioValue('garmentLayer', 'layer0');
+  setRadioValue('chestDetail', preset.chestDetail || 'none');
+  setRadioValue('waistSideDetail', preset.waistSideDetail || 'none');
+  setRadioValue('shoulderDetail', preset.shoulderDetail || 'none');
+
+  ['customGarment','customMaterial','customChestDetail','customWaistSideDetail','customShoulderDetail','customBackground','customPose','colorNote','extraNote'].forEach(id => {
     document.getElementById(id).value = '';
   });
 
@@ -1575,7 +1696,25 @@ function applyFantasyRandomSelection(){
   if(intensityValues.length){
     document.getElementById('intensity').value = getRandomItem(intensityValues);
   }
-  ['customGarment','customMaterial','customBackground','customPose','colorNote','extraNote'].forEach(id => {
+
+  // 服裝改造核心：Layer 決定要命中幾個部位，已經手動設定過（非「無修改」）的部位維持
+  // 原樣不被覆蓋，只有還在「無修改」的部位才會被納入這次隨機的候選池。
+  const layerKeys = ['layer0', 'layer3', 'layer6', 'layer9'];
+  const selectedLayer = selected('garmentLayer');
+  const effectiveLayer = selectedLayer === 'random' ? getRandomItem(layerKeys) : selectedLayer;
+  setRadioValue('garmentLayer', effectiveLayer);
+  const zoneFields = { chestDetail: chestDetailData, waistSideDetail: waistSideDetailData, shoulderDetail: shoulderDetailData };
+  const alreadyActiveZones = Object.keys(zoneFields).filter(name => selected(name) !== 'none');
+  const freeZones = Object.keys(zoneFields).filter(name => selected(name) === 'none');
+  const targetZoneCount = GARMENT_DETAIL_LAYER_ZONES[effectiveLayer] ?? 0;
+  const zonesToFill = Math.max(0, Math.min(targetZoneCount - alreadyActiveZones.length, freeZones.length));
+  const shuffledFreeZones = freeZones.slice().sort(() => Math.random() - 0.5).slice(0, zonesToFill);
+  shuffledFreeZones.forEach(name => {
+    const pool = Object.keys(zoneFields[name]).filter(k => k !== 'none');
+    if(pool.length) setRadioValue(name, getRandomItem(pool));
+  });
+
+  ['customGarment','customMaterial','customChestDetail','customWaistSideDetail','customShoulderDetail','customBackground','customPose','colorNote','extraNote'].forEach(id => {
     document.getElementById(id).value = '';
   });
   refreshCards();
@@ -1603,6 +1742,22 @@ function generate(options = {}){
   const materialText = customMaterials.length
     ? `custom material system only: ${customMaterialText}; read and use every custom material keyword with equal priority, combine all custom materials into one coherent art system, do not include or blend any preset material option`
     : material.prompt;
+  const customChestDetail = document.getElementById('customChestDetail').value.trim();
+  const chestDetailText = customChestDetail
+    ? `custom chest surface detail only: ${customChestDetail}`
+    : chestDetailData[selected('chestDetail')];
+  const customWaistSideDetail = document.getElementById('customWaistSideDetail').value.trim();
+  const waistSideDetailText = customWaistSideDetail
+    ? `custom waist side surface detail only: ${customWaistSideDetail}`
+    : waistSideDetailData[selected('waistSideDetail')];
+  const customShoulderDetail = document.getElementById('customShoulderDetail').value.trim();
+  const shoulderDetailText = customShoulderDetail
+    ? `custom shoulder surface detail only: ${customShoulderDetail}`
+    : shoulderDetailData[selected('shoulderDetail')];
+  const garmentDetailParts = [chestDetailText, waistSideDetailText, shoulderDetailText].filter(Boolean);
+  const garmentDetailText = garmentDetailParts.length
+    ? 'garment surface detail: ' + garmentDetailParts.join(', ') + ' — structural surface accents only, the garment silhouette from the appearance form above stays unchanged,'
+    : '';
   const materialPalette = customMaterials.length
     ? `derive the color palette only from custom material keywords: ${customMaterialText}`
     : material.palette;
@@ -1637,6 +1792,7 @@ function generate(options = {}){
     composition + ',',
     compositionGuard + ',',
     'appearance form: ' + garmentText + ',',
+    garmentDetailText,
     'theme material and art system: ' + materialText + ',',
     'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',
     intensity + ',',
@@ -1730,7 +1886,7 @@ document.addEventListener('input',(event)=>{
 document.addEventListener('change',(event)=>{
   if(event.target && event.target.closest && !event.target.closest('#outputWrap')) markStale();
 },true);
-['customGarment','customMaterial','customBackground','customPose','intensity','colorNote','extraNote'].forEach(id => {
+['customGarment','customMaterial','customChestDetail','customWaistSideDetail','customShoulderDetail','customBackground','customPose','intensity','colorNote','extraNote'].forEach(id => {
   document.getElementById(id).addEventListener('input', () => {
     refreshCards();
   });

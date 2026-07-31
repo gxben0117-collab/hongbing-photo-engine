@@ -178,6 +178,37 @@
   加進 `fieldLive`，導致新模板的部位值完全沒被驗證過（欄位不存在於
   `fieldLive` 會被靜默略過），補上後 24 個模板真正驗證通過。模板
   總數 21→24。
+- **服裝改造核心（Garment Detail Core）移植到 4 個頁面**（2026-08-01）：
+  owner 問「中式仙俠/動漫人物/日式異世界/韓系氣質偶像風也可以用服裝改造
+  核心嗎」，評估四頁架構跟 battle-academy.html 逐行相同（相同 section
+  排序/編號、相同 `applyThemeTemplate`/`applyXxxRandomSelection`/
+  `generate()` 骨架），技術可行且可完全複製 battle-academy 的實作與已
+  驗證過的 Layer 隨機演算法。用 `AskUserQuestion` 詢問排程，owner 選
+  「四頁一起上（同一輪全部做完）」。依序在 `xianxia.html`／
+  `anime-character.html`／`isekai-fantasy.html`／`kpop-idol.html` 複製
+  同一套流程：CSS `order` 插入 `.section-garmentdetail{order:6}` 並把
+  06~12 順移到 07~13、逐行重編 `section-label` 文字、插入新的「06 服裝
+  改造核心」HTML 區塊（各頁自己的鏤空/剪裁語彙——仙俠走雲紋/如意/水袖，
+  動漫走魔法陣/星形/緞帶，isekai 走精靈蕾絲/符文/寶石鑲嵌，kpop 走水鑽
+  網紗/幾何鏤空/鏈條肩帶）、插入 `chestDetailData`/`waistSideDetailData`/
+  `shoulderDetailData`/`GARMENT_DETAIL_LAYER_ZONES`（結構與 battle-academy
+  逐字相同，只換文字內容）、`applyThemeTemplate()`/隨機套用函式/
+  `generate()` 三處邏輯全部逐字複製 battle-academy 已驗證過的版本（Layer
+  決定命中幾個部位、已手動設定的部位不被隨機覆蓋、`garmentDetailText`
+  插在 `appearance form` 行後面）。四支驗證腳本（`check-static`/
+  `audit-100x`/`validate-preset-refs`/`build-prompt-preview`）逐頁同步
+  更新 exportExpression／pools／sel／文字組裝邏輯後全部重跑，最終四頁
+  一起跑（連同其餘 9 頁共 13 頁）全部通過：`audit-100x` 累計 1300 次模擬
+  0 issue、`validate-preset-refs` 0 issue、`build-prompt-preview` 四頁
+  預覽輸出皆正確含 `garment surface detail:` 行。**教訓**：用
+  `Bash`＋`node -e` 執行含 template literal（反引號）的 JS 片段時，反引號
+  會被 bash 當成 command substitution 處理、內容被靜默吃掉（在
+  `build-prompt-preview.mjs` 修改 anime 區塊時發生過，3 行 `` `custom X
+  detail only: ${...}` `` 的內容整段消失），之後含反引號的 JS 一律改用
+  `Edit` 工具直接編輯，不再透過 `Bash`/`node -e`。四頁的一鍵模板本輪未
+  新增新模板（既有 16 組模板套用時這 3 個部位自動重置為 layer0/none，
+  沿用既有 `preset.chestDetail || 'none'` 寫法），本輪只是把「能力」
+  接上，示範用法留給下一輪視 owner 需求再決定要不要新增模板展示。
   **`anime-hero.html`（動漫電影變身夥伴咒語產生器）已於 2026-07-24 整頁下架**：
   owner 對這系列不滿意，且該頁架構已疊到 10 層 monkey-patch 式的
   `generate = function(){ 上一版generate(); ... }`，難以維護；docs 底下留有一份

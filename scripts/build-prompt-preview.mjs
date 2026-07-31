@@ -283,6 +283,12 @@ function generateXianxia(core, data) {
     ratio: 'vertical45',
     customMaterial: '',
     customGarment: '',
+    chestDetail: 'cloudCutout',
+    waistSideDetail: 'none',
+    shoulderDetail: 'capeletDrape',
+    customChestDetail: '',
+    customWaistSideDetail: '',
+    customShoulderDetail: '',
     colorNote: '',
     extraNote: '',
   };
@@ -295,6 +301,13 @@ function generateXianxia(core, data) {
     ? (core.page.xianxia.illustrationSkeleton || data.anatomyGuard)
     : data.anatomyGuard;
   const garmentText = data.garmentData[selection.garment];
+  const chestDetailText = selection.customChestDetail ? `custom chest surface detail only: ${selection.customChestDetail}` : data.chestDetailData[selection.chestDetail];
+  const waistSideDetailText = selection.customWaistSideDetail ? `custom waist side surface detail only: ${selection.customWaistSideDetail}` : data.waistSideDetailData[selection.waistSideDetail];
+  const shoulderDetailText = selection.customShoulderDetail ? `custom shoulder surface detail only: ${selection.customShoulderDetail}` : data.shoulderDetailData[selection.shoulderDetail];
+  const garmentDetailParts = [chestDetailText, waistSideDetailText, shoulderDetailText].filter(Boolean);
+  const garmentDetailText = garmentDetailParts.length
+    ? 'garment surface detail: ' + garmentDetailParts.join(', ') + ' — structural surface accents only, the garment silhouette from the appearance form above stays unchanged,'
+    : '';
   const background = data.backgroundData[selection.background];
   const lighting = data.lightingData[selection.lighting];
   const bodyShape = data.BODY_SHAPES[selection.bodyShape];
@@ -313,6 +326,7 @@ function generateXianxia(core, data) {
     selection.composition + ',',
     data.compositionGuard + ',',
     'appearance form: ' + garmentText + ',',
+    garmentDetailText,
     'theme material and art system: ' + materialText + ',',
     'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',
     selection.intensity + ',',
@@ -349,6 +363,12 @@ function generateAnime(core, data) {
     ratio: 'vertical916',
     customMaterial: '',
     customGarment: '',
+    chestDetail: 'magicCircleCutout',
+    waistSideDetail: 'none',
+    shoulderDetail: 'ribbonBow',
+    customChestDetail: '',
+    customWaistSideDetail: '',
+    customShoulderDetail: '',
     colorNote: '',
     extraNote: '',
   };
@@ -356,6 +376,13 @@ function generateAnime(core, data) {
   const materialText = material.prompt;
   const materialPalette = material.palette;
   const garmentText = data.garmentData[selection.garment];
+  const chestDetailText = selection.customChestDetail ? `custom chest surface detail only: ${selection.customChestDetail}` : data.chestDetailData[selection.chestDetail];
+  const waistSideDetailText = selection.customWaistSideDetail ? `custom waist side surface detail only: ${selection.customWaistSideDetail}` : data.waistSideDetailData[selection.waistSideDetail];
+  const shoulderDetailText = selection.customShoulderDetail ? `custom shoulder surface detail only: ${selection.customShoulderDetail}` : data.shoulderDetailData[selection.shoulderDetail];
+  const garmentDetailParts = [chestDetailText, waistSideDetailText, shoulderDetailText].filter(Boolean);
+  const garmentDetailText = garmentDetailParts.length
+    ? 'garment surface detail: ' + garmentDetailParts.join(', ') + ' — structural surface accents only, the garment silhouette from the appearance form above stays unchanged,'
+    : '';
   const background = data.backgroundData[selection.background];
   const lighting = data.lightingData[selection.lighting];
   const bodyShape = data.BODY_SHAPES[selection.bodyShape];
@@ -374,6 +401,7 @@ function generateAnime(core, data) {
     selection.composition + ',',
     data.compositionGuard + ',',
     'appearance form: ' + garmentText + ',',
+    garmentDetailText,
     'theme material and art system: ' + materialText + ',',
     'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',
     selection.intensity + ',',
@@ -478,6 +506,12 @@ function generateIsekai(core, data) {
     ratio: 'vertical45',
     customMaterial: '',
     customGarment: '',
+    chestDetail: 'gemInlay',
+    waistSideDetail: 'none',
+    shoulderDetail: 'capeletDrape',
+    customChestDetail: '',
+    customWaistSideDetail: '',
+    customShoulderDetail: '',
     colorNote: '',
     extraNote: '',
   };
@@ -485,6 +519,13 @@ function generateIsekai(core, data) {
   const materialText = material.prompt;
   const materialPalette = material.palette;
   const garmentText = data.garmentData[selection.garment];
+  const chestDetailText = selection.customChestDetail ? `custom chest surface detail only: ${selection.customChestDetail}` : data.chestDetailData[selection.chestDetail];
+  const waistSideDetailText = selection.customWaistSideDetail ? `custom waist side surface detail only: ${selection.customWaistSideDetail}` : data.waistSideDetailData[selection.waistSideDetail];
+  const shoulderDetailText = selection.customShoulderDetail ? `custom shoulder surface detail only: ${selection.customShoulderDetail}` : data.shoulderDetailData[selection.shoulderDetail];
+  const garmentDetailParts = [chestDetailText, waistSideDetailText, shoulderDetailText].filter(Boolean);
+  const garmentDetailText = garmentDetailParts.length
+    ? 'garment surface detail: ' + garmentDetailParts.join(', ') + ' — structural surface accents only, the garment silhouette from the appearance form above stays unchanged,'
+    : '';
   const background = data.backgroundData[selection.background];
   const lighting = data.lightingData[selection.lighting];
   const bodyShape = data.BODY_SHAPES[selection.bodyShape];
@@ -503,6 +544,7 @@ function generateIsekai(core, data) {
     selection.composition + ',',
     data.compositionGuard + ',',
     'appearance form: ' + garmentText + ',',
+    garmentDetailText,
     'theme material and art system: ' + materialText + ',',
     'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',
     selection.intensity + ',',
@@ -661,6 +703,12 @@ function generateKpopIdol(core, data) {
     ratio: 'vertical45',
     customMaterial: '',
     customGarment: '',
+    chestDetail: 'crystalMesh',
+    waistSideDetail: 'none',
+    shoulderDetail: 'chainStrap',
+    customChestDetail: '',
+    customWaistSideDetail: '',
+    customShoulderDetail: '',
     colorNote: '',
     extraNote: '',
   };
@@ -668,6 +716,13 @@ function generateKpopIdol(core, data) {
   const materialText = material.prompt;
   const materialPalette = material.palette;
   const garmentText = data.garmentData[selection.garment];
+  const chestDetailText = selection.customChestDetail ? `custom chest surface detail only: ${selection.customChestDetail}` : data.chestDetailData[selection.chestDetail];
+  const waistSideDetailText = selection.customWaistSideDetail ? `custom waist side surface detail only: ${selection.customWaistSideDetail}` : data.waistSideDetailData[selection.waistSideDetail];
+  const shoulderDetailText = selection.customShoulderDetail ? `custom shoulder surface detail only: ${selection.customShoulderDetail}` : data.shoulderDetailData[selection.shoulderDetail];
+  const garmentDetailParts = [chestDetailText, waistSideDetailText, shoulderDetailText].filter(Boolean);
+  const garmentDetailText = garmentDetailParts.length
+    ? 'garment surface detail: ' + garmentDetailParts.join(', ') + ' — structural surface accents only, the garment silhouette from the appearance form above stays unchanged,'
+    : '';
   const background = data.backgroundData[selection.background];
   const lighting = data.lightingData[selection.lighting];
   const bodyShape = data.BODY_SHAPES[selection.bodyShape];
@@ -686,6 +741,7 @@ function generateKpopIdol(core, data) {
     selection.composition + ',',
     data.compositionGuard + ',',
     'appearance form: ' + garmentText + ',',
+    garmentDetailText,
     'theme material and art system: ' + materialText + ',',
     'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',
     selection.intensity + ',',
@@ -846,7 +902,7 @@ function loadRevision(label, sourceReader) {
       page: 'xianxia',
       startMarker: 'const materialData = {',
       endMarker: 'function setRadioValue',
-      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedXianxiaCore, XIANXIA_ILLUSTRATION_MATERIAL_KEYS: typeof XIANXIA_ILLUSTRATION_MATERIAL_KEYS === "undefined" ? new Set() : XIANXIA_ILLUSTRATION_MATERIAL_KEYS, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
+      exportExpression: '({ materialData, garmentData, chestDetailData, waistSideDetailData, shoulderDetailData, styleData, backgroundData, lightingData, sharedXianxiaCore, XIANXIA_ILLUSTRATION_MATERIAL_KEYS: typeof XIANXIA_ILLUSTRATION_MATERIAL_KEYS === "undefined" ? new Set() : XIANXIA_ILLUSTRATION_MATERIAL_KEYS, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
     });
     prompts['xianxia-default.txt'] = generateXianxia(core, xianxiaData);
   } catch (err) {
@@ -862,7 +918,7 @@ function loadRevision(label, sourceReader) {
       page: 'anime',
       startMarker: 'const materialData = {',
       endMarker: 'function setRadioValue',
-      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedAnimeCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
+      exportExpression: '({ materialData, garmentData, chestDetailData, waistSideDetailData, shoulderDetailData, styleData, backgroundData, lightingData, sharedAnimeCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
     });
     prompts['anime-default.txt'] = generateAnime(core, animeData);
   } catch (err) {
@@ -894,7 +950,7 @@ function loadRevision(label, sourceReader) {
       page: 'isekai',
       startMarker: 'const materialData = {',
       endMarker: 'function setRadioValue',
-      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedIsekaiCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
+      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedIsekaiCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData, chestDetailData, waistSideDetailData, shoulderDetailData })',
     });
     prompts['isekai-default.txt'] = generateIsekai(core, isekaiData);
   } catch (err) {
@@ -942,7 +998,7 @@ function loadRevision(label, sourceReader) {
       page: 'kpopIdol',
       startMarker: 'const materialData = {',
       endMarker: 'function setRadioValue',
-      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedKpopIdolCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
+      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedKpopIdolCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData, chestDetailData, waistSideDetailData, shoulderDetailData })',
     });
     prompts['kpopidol-default.txt'] = generateKpopIdol(core, kpopIdolData);
   } catch (err) {

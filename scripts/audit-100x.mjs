@@ -296,12 +296,13 @@ const core = evalCore(coreSource);
     source: html, core, page: 'xianxia',
     startMarker: 'const materialData = {',
     endMarker: 'function setRadioValue',
-    exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedXianxiaCore, XIANXIA_ILLUSTRATION_MATERIAL_KEYS: typeof XIANXIA_ILLUSTRATION_MATERIAL_KEYS === "undefined" ? new Set() : XIANXIA_ILLUSTRATION_MATERIAL_KEYS, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
+    exportExpression: '({ materialData, garmentData, chestDetailData, waistSideDetailData, shoulderDetailData, styleData, backgroundData, lightingData, sharedXianxiaCore, XIANXIA_ILLUSTRATION_MATERIAL_KEYS: typeof XIANXIA_ILLUSTRATION_MATERIAL_KEYS === "undefined" ? new Set() : XIANXIA_ILLUSTRATION_MATERIAL_KEYS, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
   });
   const compositionValues = radioValues(html, 'composition');
   const intensityValues = selectValues(html, 'intensity');
   const pools = {
     bodyShape: Object.keys(data.BODY_SHAPES), material: Object.keys(data.materialData), garment: Object.keys(data.garmentData),
+    chestDetail: Object.keys(data.chestDetailData), waistSideDetail: Object.keys(data.waistSideDetailData), shoulderDetail: Object.keys(data.shoulderDetailData),
     background: Object.keys(data.backgroundData), lighting: Object.keys(data.lightingData), composition: compositionValues,
     framing: Object.keys(data.framingData), intensity: intensityValues, pose: Object.keys(data.poseData),
     style: Object.keys(data.styleData), camera: Object.keys(data.cameraData), ratio: Object.keys(data.ratioData),
@@ -310,9 +311,11 @@ const core = evalCore(coreSource);
   for (let i = 0; i < N; i += 1) {
     const sel = {
       bodyShape: pick(pools.bodyShape), material: pick(pools.material), garment: pick(pools.garment),
+      chestDetail: pick(pools.chestDetail), waistSideDetail: pick(pools.waistSideDetail), shoulderDetail: pick(pools.shoulderDetail),
       background: pick(pools.background), lighting: pick(pools.lighting), composition: pick(pools.composition),
       framing: pick(pools.framing), intensity: pick(pools.intensity), pose: pick(pools.pose), style: pick(pools.style),
       camera: pick(pools.camera), ratio: pick(pools.ratio), customMaterial: pick(customSamples), customGarment: pick(customSamples),
+      customChestDetail: pick(customSamples), customWaistSideDetail: pick(customSamples), customShoulderDetail: pick(customSamples),
       colorNote: pick(customSamples), extraNote: pick(customSamples),
     };
     const material = data.materialData[sel.material];
@@ -326,6 +329,13 @@ const core = evalCore(coreSource);
       : material.prompt;
     const materialPalette = customMaterials.length ? `derive the color palette only from custom material keywords: ${customMaterialText}` : material.palette;
     const garmentText = sel.customGarment ? `custom garment form only: ${sel.customGarment}; do not include or blend any preset garment option` : data.garmentData[sel.garment];
+    const chestDetailText = sel.customChestDetail ? `custom chest surface detail only: ${sel.customChestDetail}` : data.chestDetailData[sel.chestDetail];
+    const waistSideDetailText = sel.customWaistSideDetail ? `custom waist side surface detail only: ${sel.customWaistSideDetail}` : data.waistSideDetailData[sel.waistSideDetail];
+    const shoulderDetailText = sel.customShoulderDetail ? `custom shoulder surface detail only: ${sel.customShoulderDetail}` : data.shoulderDetailData[sel.shoulderDetail];
+    const garmentDetailParts = [chestDetailText, waistSideDetailText, shoulderDetailText].filter(Boolean);
+    const garmentDetailText = garmentDetailParts.length
+      ? 'garment surface detail: ' + garmentDetailParts.join(', ') + ' — structural surface accents only, the garment silhouette from the appearance form above stays unchanged,'
+      : '';
     const background = data.backgroundData[sel.background];
     const lighting = data.lightingData[sel.lighting];
     const bodyShape = data.BODY_SHAPES[sel.bodyShape];
@@ -335,7 +345,7 @@ const core = evalCore(coreSource);
       data.identityGuard + ',', 'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
       resolvedAnatomyGuard + ',', data.poseNaturalityGuard + ',', bodyShape + ',', data.lightingConsistencyGuard + ',', data.colorTemperatureGuard + ',',
       data.subjectIntegrationGuard + ',', data.faceFillGuard + ',', sel.composition + ',', data.compositionGuard + ',',
-      'appearance form: ' + garmentText + ',', 'theme material and art system: ' + materialText + ',',
+      'appearance form: ' + garmentText + ',', garmentDetailText, 'theme material and art system: ' + materialText + ',',
       'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',
       sel.intensity + ',', 'selected material appears as controlled clothing details, ornaments, particles and background accents without overpowering facial identity,',
       data.styleData[sel.style] + ',', poseText ? poseText + ',' : '', framing + ',',
@@ -358,12 +368,13 @@ const core = evalCore(coreSource);
     source: html, core, page: 'anime',
     startMarker: 'const materialData = {',
     endMarker: 'function setRadioValue',
-    exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedAnimeCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
+    exportExpression: '({ materialData, garmentData, chestDetailData, waistSideDetailData, shoulderDetailData, styleData, backgroundData, lightingData, sharedAnimeCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
   });
   const compositionValues = radioValues(html, 'composition');
   const intensityValues = selectValues(html, 'intensity');
   const pools = {
     bodyShape: Object.keys(data.BODY_SHAPES), material: Object.keys(data.materialData), garment: Object.keys(data.garmentData),
+    chestDetail: Object.keys(data.chestDetailData), waistSideDetail: Object.keys(data.waistSideDetailData), shoulderDetail: Object.keys(data.shoulderDetailData),
     background: Object.keys(data.backgroundData), lighting: Object.keys(data.lightingData), composition: compositionValues,
     framing: Object.keys(data.framingData), intensity: intensityValues, pose: Object.keys(data.poseData),
     style: Object.keys(data.styleData), camera: Object.keys(data.cameraData), ratio: Object.keys(data.ratioData),
@@ -372,9 +383,11 @@ const core = evalCore(coreSource);
   for (let i = 0; i < N; i += 1) {
     const sel = {
       bodyShape: pick(pools.bodyShape), material: pick(pools.material), garment: pick(pools.garment),
+      chestDetail: pick(pools.chestDetail), waistSideDetail: pick(pools.waistSideDetail), shoulderDetail: pick(pools.shoulderDetail),
       background: pick(pools.background), lighting: pick(pools.lighting), composition: pick(pools.composition),
       framing: pick(pools.framing), intensity: pick(pools.intensity), pose: pick(pools.pose), style: pick(pools.style),
       camera: pick(pools.camera), ratio: pick(pools.ratio), customMaterial: pick(customSamples), customGarment: pick(customSamples),
+      customChestDetail: pick(customSamples), customWaistSideDetail: pick(customSamples), customShoulderDetail: pick(customSamples),
       colorNote: pick(customSamples), extraNote: pick(customSamples),
     };
     const material = data.materialData[sel.material];
@@ -385,6 +398,13 @@ const core = evalCore(coreSource);
       : material.prompt;
     const materialPalette = customMaterials.length ? `derive the color palette only from custom material keywords: ${customMaterialText}` : material.palette;
     const garmentText = sel.customGarment ? `custom garment form only: ${sel.customGarment}; do not include or blend any preset garment option` : data.garmentData[sel.garment];
+    const chestDetailText = sel.customChestDetail ? `custom chest surface detail only: ${sel.customChestDetail}` : data.chestDetailData[sel.chestDetail];
+    const waistSideDetailText = sel.customWaistSideDetail ? `custom waist side surface detail only: ${sel.customWaistSideDetail}` : data.waistSideDetailData[sel.waistSideDetail];
+    const shoulderDetailText = sel.customShoulderDetail ? `custom shoulder surface detail only: ${sel.customShoulderDetail}` : data.shoulderDetailData[sel.shoulderDetail];
+    const garmentDetailParts = [chestDetailText, waistSideDetailText, shoulderDetailText].filter(Boolean);
+    const garmentDetailText = garmentDetailParts.length
+      ? 'garment surface detail: ' + garmentDetailParts.join(', ') + ' — structural surface accents only, the garment silhouette from the appearance form above stays unchanged,'
+      : '';
     const background = data.backgroundData[sel.background];
     const lighting = data.lightingData[sel.lighting];
     const bodyShape = data.BODY_SHAPES[sel.bodyShape];
@@ -394,7 +414,7 @@ const core = evalCore(coreSource);
       data.identityGuard + ',', 'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
       data.anatomyGuard + ',', data.poseNaturalityGuard + ',', bodyShape + ',', data.lightingConsistencyGuard + ',', data.colorTemperatureGuard + ',',
       data.subjectIntegrationGuard + ',', data.faceFillGuard + ',', sel.composition + ',', data.compositionGuard + ',',
-      'appearance form: ' + garmentText + ',', 'theme material and art system: ' + materialText + ',',
+      'appearance form: ' + garmentText + ',', garmentDetailText, 'theme material and art system: ' + materialText + ',',
       'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',
       sel.intensity + ',', 'selected material appears as controlled clothing details, ornaments, particles and background accents without overpowering facial identity,',
       data.styleData[sel.style] + ',', poseText ? poseText + ',' : '', framing + ',',
@@ -482,7 +502,7 @@ const core = evalCore(coreSource);
     source: html, core, page: 'isekai',
     startMarker: 'const materialData = {',
     endMarker: 'function setRadioValue',
-    exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedIsekaiCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
+    exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedIsekaiCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData, chestDetailData, waistSideDetailData, shoulderDetailData })',
   });
   const compositionValues = radioValues(html, 'composition');
   const intensityValues = selectValues(html, 'intensity');
@@ -491,6 +511,7 @@ const core = evalCore(coreSource);
     background: Object.keys(data.backgroundData), lighting: Object.keys(data.lightingData), composition: compositionValues,
     framing: Object.keys(data.framingData), intensity: intensityValues, pose: Object.keys(data.poseData),
     style: Object.keys(data.styleData), camera: Object.keys(data.cameraData), ratio: Object.keys(data.ratioData),
+    chestDetail: Object.keys(data.chestDetailData), waistSideDetail: Object.keys(data.waistSideDetailData), shoulderDetail: Object.keys(data.shoulderDetailData),
   };
   const customSamples = ['', '', 'glowing runes', '手工訂製'];
   for (let i = 0; i < N; i += 1) {
@@ -499,6 +520,8 @@ const core = evalCore(coreSource);
       background: pick(pools.background), lighting: pick(pools.lighting), composition: pick(pools.composition),
       framing: pick(pools.framing), intensity: pick(pools.intensity), pose: pick(pools.pose), style: pick(pools.style),
       camera: pick(pools.camera), ratio: pick(pools.ratio), customMaterial: pick(customSamples), customGarment: pick(customSamples),
+      chestDetail: pick(pools.chestDetail), waistSideDetail: pick(pools.waistSideDetail), shoulderDetail: pick(pools.shoulderDetail),
+      customChestDetail: pick(customSamples), customWaistSideDetail: pick(customSamples), customShoulderDetail: pick(customSamples),
       colorNote: pick(customSamples), extraNote: pick(customSamples),
     };
     const material = data.materialData[sel.material];
@@ -509,6 +532,13 @@ const core = evalCore(coreSource);
       : material.prompt;
     const materialPalette = customMaterials.length ? `derive the color palette only from custom material keywords: ${customMaterialText}` : material.palette;
     const garmentText = sel.customGarment ? `custom garment form only: ${sel.customGarment}; do not include or blend any preset garment option` : data.garmentData[sel.garment];
+    const chestDetailText = sel.customChestDetail ? `custom chest surface detail only: ${sel.customChestDetail}` : data.chestDetailData[sel.chestDetail];
+    const waistSideDetailText = sel.customWaistSideDetail ? `custom waist side surface detail only: ${sel.customWaistSideDetail}` : data.waistSideDetailData[sel.waistSideDetail];
+    const shoulderDetailText = sel.customShoulderDetail ? `custom shoulder surface detail only: ${sel.customShoulderDetail}` : data.shoulderDetailData[sel.shoulderDetail];
+    const garmentDetailParts = [chestDetailText, waistSideDetailText, shoulderDetailText].filter(Boolean);
+    const garmentDetailText = garmentDetailParts.length
+      ? 'garment surface detail: ' + garmentDetailParts.join(', ') + ' — structural surface accents only, the garment silhouette from the appearance form above stays unchanged,'
+      : '';
     const background = data.backgroundData[sel.background];
     const lighting = data.lightingData[sel.lighting];
     const bodyShape = data.BODY_SHAPES[sel.bodyShape];
@@ -518,7 +548,7 @@ const core = evalCore(coreSource);
       data.identityGuard + ',', 'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
       data.anatomyGuard + ',', data.poseNaturalityGuard + ',', bodyShape + ',', data.lightingConsistencyGuard + ',', data.colorTemperatureGuard + ',',
       data.subjectIntegrationGuard + ',', data.faceFillGuard + ',', sel.composition + ',', data.compositionGuard + ',',
-      'appearance form: ' + garmentText + ',', 'theme material and art system: ' + materialText + ',',
+      'appearance form: ' + garmentText + ',', garmentDetailText, 'theme material and art system: ' + materialText + ',',
       'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',
       sel.intensity + ',', 'selected material appears as controlled clothing details, ornaments, particles and background accents without overpowering facial identity,',
       data.styleData[sel.style] + ',', poseText ? poseText + ',' : '', framing + ',',
@@ -659,7 +689,7 @@ const core = evalCore(coreSource);
     source: html, core, page: 'kpopIdol',
     startMarker: 'const materialData = {',
     endMarker: 'function setRadioValue',
-    exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedKpopIdolCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
+    exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedKpopIdolCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData, chestDetailData, waistSideDetailData, shoulderDetailData })',
   });
   const compositionValues = radioValues(html, 'composition');
   const intensityValues = selectValues(html, 'intensity');
@@ -668,6 +698,7 @@ const core = evalCore(coreSource);
     background: Object.keys(data.backgroundData), lighting: Object.keys(data.lightingData), composition: compositionValues,
     framing: Object.keys(data.framingData), intensity: intensityValues, pose: Object.keys(data.poseData),
     style: Object.keys(data.styleData), camera: Object.keys(data.cameraData), ratio: Object.keys(data.ratioData),
+    chestDetail: Object.keys(data.chestDetailData), waistSideDetail: Object.keys(data.waistSideDetailData), shoulderDetail: Object.keys(data.shoulderDetailData),
   };
   const customSamples = ['', '', 'holographic visor', '手工訂製'];
   for (let i = 0; i < N; i += 1) {
@@ -676,6 +707,8 @@ const core = evalCore(coreSource);
       background: pick(pools.background), lighting: pick(pools.lighting), composition: pick(pools.composition),
       framing: pick(pools.framing), intensity: pick(pools.intensity), pose: pick(pools.pose), style: pick(pools.style),
       camera: pick(pools.camera), ratio: pick(pools.ratio), customMaterial: pick(customSamples), customGarment: pick(customSamples),
+      chestDetail: pick(pools.chestDetail), waistSideDetail: pick(pools.waistSideDetail), shoulderDetail: pick(pools.shoulderDetail),
+      customChestDetail: pick(customSamples), customWaistSideDetail: pick(customSamples), customShoulderDetail: pick(customSamples),
       colorNote: pick(customSamples), extraNote: pick(customSamples),
     };
     const material = data.materialData[sel.material];
@@ -686,6 +719,13 @@ const core = evalCore(coreSource);
       : material.prompt;
     const materialPalette = customMaterials.length ? `derive the color palette only from custom material keywords: ${customMaterialText}` : material.palette;
     const garmentText = sel.customGarment ? `custom garment form only: ${sel.customGarment}; do not include or blend any preset garment option` : data.garmentData[sel.garment];
+    const chestDetailText = sel.customChestDetail ? `custom chest surface detail only: ${sel.customChestDetail}` : data.chestDetailData[sel.chestDetail];
+    const waistSideDetailText = sel.customWaistSideDetail ? `custom waist side surface detail only: ${sel.customWaistSideDetail}` : data.waistSideDetailData[sel.waistSideDetail];
+    const shoulderDetailText = sel.customShoulderDetail ? `custom shoulder surface detail only: ${sel.customShoulderDetail}` : data.shoulderDetailData[sel.shoulderDetail];
+    const garmentDetailParts = [chestDetailText, waistSideDetailText, shoulderDetailText].filter(Boolean);
+    const garmentDetailText = garmentDetailParts.length
+      ? 'garment surface detail: ' + garmentDetailParts.join(', ') + ' — structural surface accents only, the garment silhouette from the appearance form above stays unchanged,'
+      : '';
     const background = data.backgroundData[sel.background];
     const lighting = data.lightingData[sel.lighting];
     const bodyShape = data.BODY_SHAPES[sel.bodyShape];
@@ -695,7 +735,7 @@ const core = evalCore(coreSource);
       data.identityGuard + ',', 'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
       data.anatomyGuard + ',', data.poseNaturalityGuard + ',', bodyShape + ',', data.lightingConsistencyGuard + ',', data.colorTemperatureGuard + ',',
       data.subjectIntegrationGuard + ',', data.faceFillGuard + ',', sel.composition + ',', data.compositionGuard + ',',
-      'appearance form: ' + garmentText + ',', 'theme material and art system: ' + materialText + ',',
+      'appearance form: ' + garmentText + ',', garmentDetailText, 'theme material and art system: ' + materialText + ',',
       'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',
       sel.intensity + ',', 'selected material appears as controlled clothing details, ornaments, particles and background accents without overpowering facial identity,',
       data.styleData[sel.style] + ',', poseText ? poseText + ',' : '', framing + ',',
