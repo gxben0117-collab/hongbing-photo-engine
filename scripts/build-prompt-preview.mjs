@@ -440,6 +440,12 @@ function generateFlowerFairy(core, data) {
     butterflies: 'fewButterflies',
     customMaterial: '',
     customGarment: '',
+    chestDetail: 'petalCutout',
+    waistSideDetail: 'none',
+    shoulderDetail: 'petalCapelet',
+    customChestDetail: '',
+    customWaistSideDetail: '',
+    customShoulderDetail: '',
     colorNote: '',
     extraNote: '',
   };
@@ -447,6 +453,13 @@ function generateFlowerFairy(core, data) {
   const materialText = material.prompt;
   const materialPalette = material.palette;
   const garmentText = data.garmentData[selection.garment];
+  const chestDetailText = selection.customChestDetail ? `custom chest surface detail only: ${selection.customChestDetail}` : data.chestDetailData[selection.chestDetail];
+  const waistSideDetailText = selection.customWaistSideDetail ? `custom waist side surface detail only: ${selection.customWaistSideDetail}` : data.waistSideDetailData[selection.waistSideDetail];
+  const shoulderDetailText = selection.customShoulderDetail ? `custom shoulder surface detail only: ${selection.customShoulderDetail}` : data.shoulderDetailData[selection.shoulderDetail];
+  const garmentDetailParts = [chestDetailText, waistSideDetailText, shoulderDetailText].filter(Boolean);
+  const garmentDetailText = garmentDetailParts.length
+    ? 'garment surface detail: ' + garmentDetailParts.join(', ') + ' — structural surface accents only, the garment silhouette from the appearance form above stays unchanged,'
+    : '';
   const background = data.backgroundData[selection.background];
   const lighting = data.lightingData[selection.lighting];
   const bodyShape = data.BODY_SHAPES[selection.bodyShape];
@@ -467,6 +480,7 @@ function generateFlowerFairy(core, data) {
     selection.composition + ',',
     data.compositionGuard + ',',
     'appearance form: ' + garmentText + ',',
+    garmentDetailText,
     'theme material and art system: ' + materialText + ',',
     'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',
     wingsText ? wingsText + ',' : '',
@@ -581,6 +595,12 @@ function generateFloralSweet(core, data) {
     ratio: 'vertical45',
     customMaterial: '',
     customGarment: '',
+    chestDetail: 'ribbonBow',
+    waistSideDetail: 'none',
+    shoulderDetail: 'frillTrim',
+    customChestDetail: '',
+    customWaistSideDetail: '',
+    customShoulderDetail: '',
     colorNote: '',
     extraNote: '',
   };
@@ -588,6 +608,13 @@ function generateFloralSweet(core, data) {
   const materialText = material.prompt;
   const materialPalette = material.palette;
   const garmentText = data.garmentData[selection.garment];
+  const chestDetailText = selection.customChestDetail ? `custom chest surface detail only: ${selection.customChestDetail}` : data.chestDetailData[selection.chestDetail];
+  const waistSideDetailText = selection.customWaistSideDetail ? `custom waist side surface detail only: ${selection.customWaistSideDetail}` : data.waistSideDetailData[selection.waistSideDetail];
+  const shoulderDetailText = selection.customShoulderDetail ? `custom shoulder surface detail only: ${selection.customShoulderDetail}` : data.shoulderDetailData[selection.shoulderDetail];
+  const garmentDetailParts = [chestDetailText, waistSideDetailText, shoulderDetailText].filter(Boolean);
+  const garmentDetailText = garmentDetailParts.length
+    ? 'garment surface detail: ' + garmentDetailParts.join(', ') + ' — structural surface accents only, the garment silhouette from the appearance form above stays unchanged,'
+    : '';
   const background = data.backgroundData[selection.background];
   const lighting = data.lightingData[selection.lighting];
   const bodyShape = data.BODY_SHAPES[selection.bodyShape];
@@ -606,6 +633,7 @@ function generateFloralSweet(core, data) {
     selection.composition + ',',
     data.compositionGuard + ',',
     'appearance form: ' + garmentText + ',',
+    garmentDetailText,
     'theme material and art system: ' + materialText + ',',
     'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',
     selection.intensity + ',',
@@ -642,6 +670,12 @@ function generateGalaSocialite(core, data) {
     ratio: 'vertical45',
     customMaterial: '',
     customGarment: '',
+    chestDetail: 'gemInlay',
+    waistSideDetail: 'none',
+    shoulderDetail: 'beadedTrim',
+    customChestDetail: '',
+    customWaistSideDetail: '',
+    customShoulderDetail: '',
     colorNote: '',
     extraNote: '',
   };
@@ -649,6 +683,13 @@ function generateGalaSocialite(core, data) {
   const materialText = material.prompt;
   const materialPalette = material.palette;
   const garmentText = data.garmentData[selection.garment];
+  const chestDetailText = selection.customChestDetail ? `custom chest surface detail only: ${selection.customChestDetail}` : data.chestDetailData[selection.chestDetail];
+  const waistSideDetailText = selection.customWaistSideDetail ? `custom waist side surface detail only: ${selection.customWaistSideDetail}` : data.waistSideDetailData[selection.waistSideDetail];
+  const shoulderDetailText = selection.customShoulderDetail ? `custom shoulder surface detail only: ${selection.customShoulderDetail}` : data.shoulderDetailData[selection.shoulderDetail];
+  const garmentDetailParts = [chestDetailText, waistSideDetailText, shoulderDetailText].filter(Boolean);
+  const garmentDetailText = garmentDetailParts.length
+    ? 'garment surface detail: ' + garmentDetailParts.join(', ') + ' — structural surface accents only, the garment silhouette from the appearance form above stays unchanged,'
+    : '';
   const background = data.backgroundData[selection.background];
   const lighting = data.lightingData[selection.lighting];
   const bodyShape = data.BODY_SHAPES[selection.bodyShape];
@@ -667,6 +708,7 @@ function generateGalaSocialite(core, data) {
     selection.composition + ',',
     data.compositionGuard + ',',
     'appearance form: ' + garmentText + ',',
+    garmentDetailText,
     'theme material and art system: ' + materialText + ',',
     'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',
     selection.intensity + ',',
@@ -934,7 +976,7 @@ function loadRevision(label, sourceReader) {
       page: 'flowerFairy',
       startMarker: 'const materialData = {',
       endMarker: 'function setRadioValue',
-      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, wingsData, butterfliesData, sharedFlowerFairyCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
+      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, wingsData, butterfliesData, sharedFlowerFairyCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData, chestDetailData, waistSideDetailData, shoulderDetailData })',
     });
     prompts['flowerfairy-default.txt'] = generateFlowerFairy(core, flowerFairyData);
   } catch (err) {
@@ -966,7 +1008,7 @@ function loadRevision(label, sourceReader) {
       page: 'floralSweet',
       startMarker: 'const materialData = {',
       endMarker: 'function setRadioValue',
-      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedFloralSweetCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
+      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedFloralSweetCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData, chestDetailData, waistSideDetailData, shoulderDetailData })',
     });
     prompts['floralsweet-default.txt'] = generateFloralSweet(core, floralSweetData);
   } catch (err) {
@@ -982,7 +1024,7 @@ function loadRevision(label, sourceReader) {
       page: 'galaSocialite',
       startMarker: 'const materialData = {',
       endMarker: 'function setRadioValue',
-      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedGalaSocialiteCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
+      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedGalaSocialiteCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData, chestDetailData, waistSideDetailData, shoulderDetailData })',
     });
     prompts['galasocialite-default.txt'] = generateGalaSocialite(core, galaSocialiteData);
   } catch (err) {

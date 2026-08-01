@@ -20,6 +20,40 @@
 
 ### 現況摘要（2026-07-31）
 
+- **服裝改造核心再擴 3 頁（花仙子/花漫甜美系/氣質名媛宴會）＋七頁主題適合度
+  審查與 lightingData 大清理**（2026-08-01）：owner 先確認 `flower-fairy.html`/
+  `floral-sweet.html`/`gala-socialite.html` 也適合加服裝改造核心（跟
+  kpop-idol.html 同一條「複製 flower-fairy.html 當底」架構），三頁依照
+  已驗證過的機械化流程完成（花仙子走花瓣/藤蔓/紗透語彙，甜美系走蕾絲/
+  緞帶/荷葉邊語彙，名媛宴會走珠寶/薄紗/珠繡語彙），四支驗證腳本重跑全過。
+  服裝改造核心的頁面總數：battle-academy／xianxia／anime-character／
+  isekai-fantasy／kpop-idol／flower-fairy／floral-sweet／gala-socialite
+  共 8 頁；仍缺 travel／magazine／doll／fantasy-fashion／store-ad 5 頁
+  （這 5 頁不是這批「新潮/美人/漂亮」系列頁面，架構不同，未列入本輪範圍）。
+  同一輪 owner 回報「韓系氣質偶像風今天出圖，背景有血月，感覺怪怪的」，
+  順勢請求把 8 個非仙俠頁（動漫人物/花仙子/日式異世界/花漫甜美系/氣質
+  名媛宴會/韓系偶像風/戰鬥制服學園，共 7 頁，不含已處理過的 xianxia）都
+  比照 xianxia 的「法袍道服」修正方式做一次主題適合度審查。派 7 個
+  general-purpose agent 並行審查每頁的 `garmentData`/`materialData`/
+  `backgroundData`/`lightingData`，回報結果：**garment／material／
+  background 全部乾淨**，問題完全集中在 `lightingData`——這是一個跨頁
+  共用、從未依主題篩選過的大型燈光選項池（57 個左右），每頁都混入其他
+  主題頁遺留的選項（血月／哥德儀式陰影／狐火／宮殿寶座／鬥魚水下／馬戲團
+  ／沙漠宮帳／賽博龐克／科技產品／甜點飲料廣告燈光等），跟 battle-academy
+  先前發現並清理過的問題（57→31）是同一種歷史成因。逐頁確認移除清單是否
+  被任何 `themeTemplates` 引用（kpop-idol 2 組模板、anime-character 2 組
+  模板、floral-sweet 2 組模板引用到即將移除的值，改指向清理後仍保留的
+  相近選項如 `soft`/`halo`/`hard`），其餘頁面移除清單皆無模板引用。清理
+  結果（JS 條目與對應 HTML 卡片同步移除）：kpop-idol 57→25（移除 32，
+  含血月）、gala-socialite 移除 32、floral-sweet 移除 29、isekai-fantasy
+  移除 22、flower-fairy 移除 20、anime-character 移除 15、battle-academy
+  移除 6（這頁先前已清理過一輪，這次只是抓漏網之魚）。四支驗證腳本
+  （`check-static`/`audit-100x` 1300 次模擬/`validate-preset-refs`/
+  `build-prompt-preview`）全部重跑 0 issue，並額外用 `grep` 逐頁確認
+  預覽輸出裡不再出現「blood moon」字樣。**教訓**：跨頁共用的大型選項池
+  （尤其是 `lightingData` 這種沒有依主題分類、直接複製貼上的長列表）是
+  最容易累積跨主題殘留的地方，新頁面上線時應該優先檢查這類欄位是否真的
+  依主題篩選過，而不是假設「反正選項多總是好事」。
 - **`xianxia.html` 04 服裝拿掉「法袍道服」道士向分類，換成「仙靈妖精裝束」**
   （2026-08-01）：owner 明確表示「道士類的就不要了，我其實想要的是美美的
   仙女俠女妖狐妖精之類的」。原本 5 個選項（八卦道袍/五行法袍/煉丹道姑服/

@@ -103,13 +103,14 @@
   .section-garment{order:3;}
   .section-body{order:4;}
   .section-material{order:5;}
-  .section-pose{order:6;}
-  .section-camera{order:7;}
-  .section-lighting{order:8;}
-  .section-background{order:9;}
-  .section-extra{order:10;}
-  .section-ratio{order:11;}
-  .section-output{order:12;}
+  .section-garmentdetail{order:6;}
+  .section-pose{order:7;}
+  .section-camera{order:8;}
+  .section-lighting{order:9;}
+  .section-background{order:10;}
+  .section-extra{order:11;}
+  .section-ratio{order:12;}
+  .section-output{order:13;}
   .section-header{
     display:flex;
     align-items:baseline;
@@ -584,9 +585,84 @@
     </div>
   </section>
 
-  <section class="section-pose">
+  <section class="section-garmentdetail">
     <div class="section-header">
       <div class="section-label">06</div>
+      <div class="section-title">服裝改造核心</div>
+    </div>
+    <p class="hint">這些是服裝表面的結構化細節（蕾絲／緞帶／荷葉邊），不是重新設計整件服裝，剪裁輪廓仍以 03 服裝輪廓為準。Layer 只決定「隨機套用」時要改幾個部位；手動選了哪個部位，隨機套用不會覆蓋掉。</p>
+    <div class="pose-group">
+      <div class="pose-group-label">改造強度 Layer</div>
+      <div class="grid grid-3" data-choice="garmentLayer">
+        <label class="card selected"><input type="radio" name="garmentLayer" value="layer0" checked><div class="name">Layer 0（原始版）</div><div class="desc">三個部位皆無修改</div></label>
+        <label class="card"><input type="radio" name="garmentLayer" value="layer3"><div class="name">Layer 3（輕度）</div><div class="desc">隨機套用時約改 1 個部位</div></label>
+        <label class="card"><input type="radio" name="garmentLayer" value="layer6"><div class="name">Layer 6（中度）</div><div class="desc">隨機套用時約改 2 個部位</div></label>
+        <label class="card"><input type="radio" name="garmentLayer" value="layer9"><div class="name">Layer 9（高度）</div><div class="desc">隨機套用時三個部位全改</div></label>
+        <label class="card"><input type="radio" name="garmentLayer" value="random"><div class="name">隨機 Layer</div><div class="desc">隨機套用時連強度一起重新抽</div></label>
+      </div>
+    </div>
+    <div class="pose-group">
+      <div class="pose-group-label">胸口</div>
+      <div class="grid grid-3" data-choice="chestDetail">
+        <label class="card selected"><input type="radio" name="chestDetail" value="none" checked><div class="name">無修改</div><div class="desc">維持原本服裝版型</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="heartCutout"><div class="name">愛心鏤空</div><div class="desc">胸口愛心鏤空細節</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="archCutout"><div class="name">弧形鏤空</div><div class="desc">胸口弧形鏤空細節</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="ribbonBow"><div class="name">緞帶蝴蝶結</div><div class="desc">胸口緞帶蝴蝶結細節</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="frillTrim"><div class="name">荷葉邊裝飾</div><div class="desc">胸口荷葉邊裝飾細節</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="laceInsert"><div class="name">蕾絲拼接</div><div class="desc">胸口蕾絲拼接細節</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="pearlButtonTrim"><div class="name">珍珠釦飾滾邊</div><div class="desc">胸口珍珠釦飾滾邊細節</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="gauzeInsert"><div class="name">紗透拼接</div><div class="desc">胸口紗透拼接細節</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="asymmetricCut"><div class="name">不對稱切割</div><div class="desc">胸口不對稱切割細節</div></label>
+      </div>
+      <div class="form-grid" style="margin-top:10px;">
+        <label class="field full custom-choice" data-custom-choice="chestDetail">胸口細節自填
+          <input id="customChestDetail" type="text" placeholder="例如：心形鎖骨鏈、雙層領口交疊、緞帶花結貼布">
+        </label>
+      </div>
+    </div>
+    <div class="pose-group">
+      <div class="pose-group-label">腰側</div>
+      <div class="grid grid-3" data-choice="waistSideDetail">
+        <label class="card selected"><input type="radio" name="waistSideDetail" value="none" checked><div class="name">無修改</div><div class="desc">維持原本腰線版型</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="archCutout"><div class="name">弧形鏤空</div><div class="desc">腰側弧形鏤空細節</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="sideSlit"><div class="name">側腰開衩</div><div class="desc">腰側開衩細節</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="ribbonSash"><div class="name">緞帶垂墜</div><div class="desc">腰側緞帶垂墜細節</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="frillTrim"><div class="name">荷葉邊裝飾</div><div class="desc">腰側荷葉邊裝飾細節</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="laceInsert"><div class="name">蕾絲拼接</div><div class="desc">腰側蕾絲拼接細節</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="pearlButtonTrim"><div class="name">珍珠釦飾滾邊</div><div class="desc">腰側珍珠釦飾滾邊細節</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="gauzeInsert"><div class="name">紗透拼接</div><div class="desc">腰側紗透拼接細節</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="asymmetricCut"><div class="name">不對稱切割</div><div class="desc">腰側不對稱切割細節</div></label>
+      </div>
+      <div class="form-grid" style="margin-top:10px;">
+        <label class="field full custom-choice" data-custom-choice="waistSideDetail">腰側細節自填
+          <input id="customWaistSideDetail" type="text" placeholder="例如：雙層蝴蝶結腰帶、蕾絲垂墜腰飾、荷葉邊鏤空腰封">
+        </label>
+      </div>
+    </div>
+    <div class="pose-group">
+      <div class="pose-group-label">肩部</div>
+      <div class="grid grid-3" data-choice="shoulderDetail">
+        <label class="card selected"><input type="radio" name="shoulderDetail" value="none" checked><div class="name">無修改</div><div class="desc">維持原本肩部版型</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="offShoulderCut"><div class="name">露肩剪裁</div><div class="desc">肩部露肩剪裁細節</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="ribbonBow"><div class="name">緞帶蝴蝶結</div><div class="desc">肩部緞帶蝴蝶結細節</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="frillTrim"><div class="name">荷葉邊裝飾</div><div class="desc">肩部荷葉邊裝飾細節</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="laceInsert"><div class="name">蕾絲拼接</div><div class="desc">肩部蕾絲拼接細節</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="pearlButtonTrim"><div class="name">珍珠釦飾滾邊</div><div class="desc">肩部珍珠釦飾滾邊細節</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="gauzePanel"><div class="name">紗透肩片</div><div class="desc">肩部紗透肩片細節</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="detachedSleeve"><div class="name">分離袖片</div><div class="desc">肩部分離袖片細節</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="asymmetricShoulder"><div class="name">不對稱肩部</div><div class="desc">肩部不對稱剪裁細節</div></label>
+      </div>
+      <div class="form-grid" style="margin-top:10px;">
+        <label class="field full custom-choice" data-custom-choice="shoulderDetail">肩部細節自填
+          <input id="customShoulderDetail" type="text" placeholder="例如：單肩緞帶垂墜、肩線蕾絲鏤空窗、肩帶交錯結構">
+        </label>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pose">
+    <div class="section-header">
+      <div class="section-label">07</div>
       <div class="section-title">人物姿勢</div>
     </div>
     <p class="hint">單選；不確定時選「自動」，讓 AI 依服裝與主題安排較合適的姿勢。</p>
@@ -685,7 +761,7 @@
 
   <section class="section-camera">
     <div class="section-header">
-      <div class="section-label">07</div>
+      <div class="section-label">08</div>
       <div class="section-title">拍攝角度與鏡頭感</div>
     </div>
     <p class="hint">只改觀看角度、景深和鏡頭氣勢；人物拍到哪裡請回到 02 的「人物入鏡比例」。</p>
@@ -704,7 +780,7 @@
 
   <section class="section-lighting">
     <div class="section-header">
-      <div class="section-label">08</div>
+      <div class="section-label">09</div>
       <div class="section-title">光影色彩</div>
     </div>
     <p class="hint">單選，決定整張廣告的主色、光線方向與情緒；人物與背景會一起受影響。</p>
@@ -715,57 +791,28 @@
       <label class="card"><input type="radio" name="lighting" value="stage"><div class="name">舞台光束</div><div class="desc">聚光燈、戲劇舞台感</div></label>
       <label class="card"><input type="radio" name="lighting" value="mist"><div class="name">夢幻霧光</div><div class="desc">柔霧、漂浮、空氣感</div></label>
       <label class="card"><input type="radio" name="lighting" value="cold"><div class="name">冷調金屬光</div><div class="desc">冷冽反光、金屬質地</div></label>
-      <label class="card"><input type="radio" name="lighting" value="warmWindowSoft"><div class="name">柔暖窗影光</div><div class="desc">白棚日光、窗格陰影、紅色反射</div></label>
       <label class="card"><input type="radio" name="lighting" value="jewelrySparkle"><div class="name">珠寶閃光</div><div class="desc">細小高光、切面反射、精品閃耀</div></label>
       <label class="card"><input type="radio" name="lighting" value="prismaticColor"><div class="name">彩色棱鏡光</div><div class="desc">彩虹折射、臉身同光、夢幻廣告</div></label>
       <label class="card"><input type="radio" name="lighting" value="amethystSparkle"><div class="name">紫晶閃光</div><div class="desc">紫色晶體反射、花瓣閃光、珠寶感</div></label>
       <label class="card"><input type="radio" name="lighting" value="redWaterReflection"><div class="name">紅色水光反射</div><div class="desc">紅色水面反光、液態玻璃折射</div></label>
       <label class="card"><input type="radio" name="lighting" value="rainNightCool"><div class="name">雨夜冷光</div><div class="desc">雨幕冷光、濕地反射、臉身同光</div></label>
       <label class="card"><input type="radio" name="lighting" value="darkGoldMood"><div class="name">暗金情緒光</div><div class="desc">低調金光、深色背景、情緒美妝</div></label>
-      <label class="card"><input type="radio" name="lighting" value="palaceNightWarm"><div class="name">宮殿夜景暖光</div><div class="desc">夜景宮殿暖光、金箔與雪粒反射</div></label>
-      <label class="card"><input type="radio" name="lighting" value="foxfireGold"><div class="name">狐火金光</div><div class="desc">金色狐火、燈籠暖光、臉身同光</div></label>
-      <label class="card"><input type="radio" name="lighting" value="holyCathedralLight"><div class="name">聖殿神聖光</div><div class="desc">白金逆光、羽翼反射、聖殿柔光</div></label>
-      <label class="card"><input type="radio" name="lighting" value="pearlCathedralBacklight"><div class="name">珍珠聖殿逆光</div><div class="desc">白金背光、寶石反射、蝶翼高光</div></label>
       <label class="card"><input type="radio" name="lighting" value="moonGlassSparkle"><div class="name">月光玻璃閃光</div><div class="desc">冷月光、玻璃水面、花冠晶亮反射</div></label>
-      <label class="card"><input type="radio" name="lighting" value="goldenSkyTempleLight"><div class="name">天空宮殿日落光</div><div class="desc">暖日落、雲端反光、白金聖劍光</div></label>
-      <label class="card"><input type="radio" name="lighting" value="bettaUnderwaterSpotlight"><div class="name">鬥魚水下聚光</div><div class="desc">水面頂光、紅白魚鰭反射、泡泡高光</div></label>
-      <label class="card"><input type="radio" name="lighting" value="amethystCandleGlow"><div class="name">紫晶燭光宮廷</div><div class="desc">暖金燭光、紫晶反射、柔亮宮廷膚色</div></label>
-      <label class="card"><input type="radio" name="lighting" value="circusLanternGold"><div class="name">馬戲燈串金光</div><div class="desc">黑白金燈串、旋轉木馬、夢幻舞台光</div></label>
-      <label class="card"><input type="radio" name="lighting" value="desertGoldTentLight"><div class="name">沙漠宮帳暗金光</div><div class="desc">暗金帳幕、寶石反射、野性低調光</div></label>
-      <label class="card"><input type="radio" name="lighting" value="underwaterSunbeam"><div class="name">海底陽光束</div><div class="desc">水面光束、藍綠折射、魚群同光</div></label>
-      <label class="card"><input type="radio" name="lighting" value="cloudRiftHolyLight"><div class="name">雲層裂縫聖光</div><div class="desc">雲縫逆光、白金羽毛、神聖高反差</div></label>
-      <label class="card"><input type="radio" name="lighting" value="darkIceBlue"><div class="name">暗藍冰晶冷光</div><div class="desc">冰藍反射、暗色背景、冷光一致</div></label>
       <label class="card"><input type="radio" name="lighting" value="candyGlossLight"><div class="name">糖果透明高光</div><div class="desc">果凍反射、甜美棚光、商品廣告感</div></label>
       <label class="card"><input type="radio" name="lighting" value="auroraPerfumeLight"><div class="name">極光香氛柔光</div><div class="desc">虹彩香霧、玻璃反射、臉身同光</div></label>
       <label class="card"><input type="radio" name="lighting" value="dessertBeautyLight"><div class="name">甜點美妝柔光</div><div class="desc">粉白棚光、奶油反射、乾淨膚色</div></label>
       <label class="card"><input type="radio" name="lighting" value="cherryPopLight"><div class="name">櫻桃氣泡亮光</div><div class="desc">紅色果凍反射、氣泡高光、潮流美妝</div></label>
       <label class="card"><input type="radio" name="lighting" value="matchaSoftLight"><div class="name">抹茶柔霧茶光</div><div class="desc">淡綠茶粉反射、米白柔光、東方高級感</div></label>
       <label class="card"><input type="radio" name="lighting" value="milkTeaAmberLight"><div class="name">奶茶琥珀撞色光</div><div class="desc">焦糖琥珀、奶白對撞、高飽和飲品廣告</div></label>
-      <label class="card"><input type="radio" name="lighting" value="silverScreenLight"><div class="name">銀色螢幕冷光</div><div class="desc">手機螢幕冷光、金屬反射、科技精品</div></label>
-      <label class="card"><input type="radio" name="lighting" value="blueAudioLight"><div class="name">藍色音波科技光</div><div class="desc">藍光音波、透明外殼反射、夜色科技</div></label>
-      <label class="card"><input type="radio" name="lighting" value="roseGoldTechLight"><div class="name">玫瑰金科技柔光</div><div class="desc">玫瑰金反射、錶面高光、精緻生活感</div></label>
-      <label class="card"><input type="radio" name="lighting" value="coldWhiteMechaLight"><div class="name">冷白機械反射光</div><div class="desc">冷白機甲燈、金屬反射、工業科技感</div></label>
-      <label class="card"><input type="radio" name="lighting" value="hologramScanLight"><div class="name">全息掃描虹彩光</div><div class="desc">透明投影、虹彩掃描、科技精品</div></label>
       <label class="card"><input type="radio" name="lighting" value="bioGlowSoftLight"><div class="name">生物螢光柔光</div><div class="desc">花瓣螢光、水光保養、柔亮膚色</div></label>
       <label class="card"><input type="radio" name="lighting" value="moonSilverReflect"><div class="name">月面冷銀反射</div><div class="desc">冷銀月光、珍珠金屬、香氛霧</div></label>
-      <label class="card"><input type="radio" name="lighting" value="maglevCrystalRefraction"><div class="name">磁浮水晶折射光</div><div class="desc">漂浮水晶、高光切面、精品主視覺</div></label>
-      <label class="card"><input type="radio" name="lighting" value="dataFlowBlueViolet"><div class="name">資料流藍紫光</div><div class="desc">藍紫資料線、黑鏡螢幕、未來廣告</div></label>
-      <label class="card"><input type="radio" name="lighting" value="blueEnergyWingLight"><div class="name">藍色能源翼光</div><div class="desc">藍色能源燈、機械翼反射、冷灰棚光</div></label>
-      <label class="card"><input type="radio" name="lighting" value="wastelandIndustrialSideLight"><div class="name">工業廢土側光</div><div class="desc">斜側硬光、老化金屬反射、廢土陰影</div></label>
-      <label class="card"><input type="radio" name="lighting" value="solarTempleGold"><div class="name">太陽神殿金光</div><div class="desc">晨光日輪、白金反射、肌膚與神殿同光</div></label>
-      <label class="card"><input type="radio" name="lighting" value="blueFlameGlow"><div class="name">藍焰法術光</div><div class="desc">藍色法術光+遠處火光、暗黑仙俠對比</div></label>
       <label class="card"><input type="radio" name="lighting" value="moonlightCandle"><div class="name">月光燭火混合光</div><div class="desc">冷月光+暖燭光、詩意夜景</div></label>
       <label class="card"><input type="radio" name="lighting" value="crystalDaylight"><div class="name">水晶日光</div><div class="desc">陽光穿透玻璃水晶、清透稜鏡碎光</div></label>
       <label class="card"><input type="radio" name="lighting" value="tyndallBacklight"><div class="name">逆光丁達爾光束</div><div class="desc">逆光雲霧穿透、冷暖對比強烈</div></label>
       <label class="card"><input type="radio" name="lighting" value="starfieldColdBlue"><div class="name">星光冷藍夢幻</div><div class="desc">星光點點、冷藍色調、夢幻氛圍</div></label>
       <label class="card"><input type="radio" name="lighting" value="windColdMistBack"><div class="name">逆光冷霧強風</div><div class="desc">逆光冷霧、強風動勢感</div></label>
       <label class="card"><input type="radio" name="lighting" value="candleStarContrast"><div class="name">燭光星空對比</div><div class="desc">燭光暖黃、星空冷藍對比</div></label>
-      <label class="card"><input type="radio" name="lighting" value="neonPurpleMoonlit"><div class="name">冷紫霓虹月光</div><div class="desc">冷紫霓虹光、月光剪影</div></label>
       <label class="card"><input type="radio" name="lighting" value="holyMistBeam"><div class="name">逆光雲霧聖光</div><div class="desc">逆光雲霧、聖光穿透感</div></label>
-      <label class="card"><input type="radio" name="lighting" value="candleShadowGothic"><div class="name">燭光哥德暗影</div><div class="desc">搖曳燭光、深色陰影、儀式氛圍</div></label>
-      <label class="card"><input type="radio" name="lighting" value="bloodMoonGlow"><div class="name">血月冷光</div><div class="desc">暗紅月光、冷冽陰森氛圍</div></label>
-      <label class="card"><input type="radio" name="lighting" value="neonPinkCyanSplit"><div class="name">粉青霓虹雙色光</div><div class="desc">粉紫與青色撞色霓虹</div></label>
-      <label class="card"><input type="radio" name="lighting" value="glitchScanlineFlicker"><div class="name">故障掃描線閃光</div><div class="desc">數位雜訊閃爍、賽博故障感</div></label>
     </div>
     <div class="form-grid" style="margin-top:10px;">
       <label class="field full">色彩補充
@@ -776,7 +823,7 @@
 
   <section class="section-background">
     <div class="section-header">
-      <div class="section-label">09</div>
+      <div class="section-label">10</div>
       <div class="section-title">背景場景與留白</div>
     </div>
     <p class="hint">決定人物身後的世界、場景密度與是否保留放標題的空白區；不會替換你已選的主題材質。</p>
@@ -820,7 +867,7 @@
 
   <section class="section-extra">
     <div class="section-header">
-      <div class="section-label">10</div>
+      <div class="section-label">11</div>
       <div class="section-title">自訂要求</div>
     </div>
     <p class="hint">只有需要指定道具、禁用元素、文字留白或特殊細節時再填寫，避免與前面選項重複描述。</p>
@@ -833,7 +880,7 @@
 
   <section class="section-ratio">
     <div class="section-header">
-      <div class="section-label">11</div>
+      <div class="section-label">12</div>
       <div class="section-title">圖片比例</div>
     </div>
     <p class="hint">依發布用途選擇：直式適合人像與社群，橫式適合海報、橫幅或世界觀場景。</p>
@@ -851,7 +898,7 @@
 
   <section class="section-output">
     <div class="section-header">
-      <div class="section-label">12</div>
+      <div class="section-label">13</div>
       <div class="section-title">生成咒語</div>
     </div>
     <button class="generate-btn" id="generateBtn">生成完整咒語</button>
@@ -989,6 +1036,41 @@ const materialData = {
   }
 };
 
+const chestDetailData = {
+  none: '',
+  heartCutout: 'a heart-shaped cutout at the chest',
+  archCutout: 'an arc-shaped cutout at the chest',
+  ribbonBow: 'a delicate ribbon bow accent at the chest',
+  frillTrim: 'a soft ruffled frill trim at the chest',
+  laceInsert: 'a lace panel insert at the chest',
+  pearlButtonTrim: 'a pearl-button trim at the chest',
+  gauzeInsert: 'a sheer gauze panel insert at the chest',
+  asymmetricCut: 'an asymmetric cut at the chest'
+};
+const waistSideDetailData = {
+  none: '',
+  archCutout: 'an arc-shaped cutout at the waist side',
+  sideSlit: 'a side slit cut at the waist',
+  ribbonSash: 'a trailing ribbon sash accent at the waist side',
+  frillTrim: 'a soft ruffled frill trim at the waist side',
+  laceInsert: 'a lace panel insert at the waist side',
+  pearlButtonTrim: 'a pearl-button trim at the waist side',
+  gauzeInsert: 'a sheer gauze panel insert at the waist side',
+  asymmetricCut: 'an asymmetric cut at the waist side'
+};
+const shoulderDetailData = {
+  none: '',
+  offShoulderCut: 'an off-shoulder cut',
+  ribbonBow: 'a delicate ribbon bow accent at the shoulder',
+  frillTrim: 'a soft ruffled frill trim at the shoulder',
+  laceInsert: 'a lace panel insert at the shoulder',
+  pearlButtonTrim: 'a pearl-button trim at the shoulder',
+  gauzePanel: 'a sheer gauze panel at the shoulder',
+  detachedSleeve: 'a detached sleeve panel',
+  asymmetricShoulder: 'an asymmetric shoulder cut'
+};
+const GARMENT_DETAIL_LAYER_ZONES = { layer0: 0, layer3: 1, layer6: 2, layer9: 3 };
+
 const garmentData = {
   floralSundress: 'light floral print sundress, fitted bodice with a gently flared skirt, fresh girl-next-door silhouette',
   offShoulderFloralDress: 'off-shoulder floral dress, soft puff sleeves, sweet romantic silhouette',
@@ -1062,57 +1144,28 @@ const lightingData = {
   stage: 'stage beam lighting, theatrical spotlight, grand commercial mood',
   mist: 'dream mist lighting, soft haze, floating luminous atmosphere',
   cold: 'cold metallic lighting, crisp reflections, cool premium tone',
-  warmWindowSoft: 'soft warm sunlight through Chinese lattice window shadows, refined red paper bounce light, red paper reflections softly affecting the face, luxury bridal advertisement glow, delicate facial exposure, face softly lit but consistent with surrounding red paper reflections',
   jewelrySparkle: 'luxury jewelry sparkle lighting, precise tiny specular highlights, faceted reflections, refined catchlights, premium gemstone advertisement shine',
   prismaticColor: 'prismatic color lighting, subtle rainbow refractions across face body clothing and background, unified colorful light environment, dreamy commercial glow',
   amethystSparkle: 'amethyst sparkle lighting, violet crystal reflections across face body jewelry clothing and background, controlled gemstone highlights, luxurious purple beauty campaign glow',
   redWaterReflection: 'red aquatic reflection lighting, ruby water bounce light affecting face body hair and clothing, glossy liquid glass highlights, unified red water environment',
   rainNightCool: 'cool rainy night lighting, wet ground reflection, soft blue gray rain atmosphere, face and body receive the same rainy environmental light, no separate studio relighting',
   darkGoldMood: 'dark gold emotional lighting, low key warm gold highlights, deep shadows, cinematic beauty contrast, face remains visible within the same moody light',
-  palaceNightWarm: 'warm palace night lighting, glowing architectural backlight, falling snow and gold foil reflections affecting the entire subject, unified cinematic night environment',
-  foxfireGold: 'golden foxfire lighting, warm shrine lantern bounce light, foxfire reflections affect face body hair costume and background together, integrated mythic night lighting, no separate face relighting',
-  holyCathedralLight: 'holy cathedral lighting, white gold backlight, soft feather bounce light, sacred beams affect face body wings clothing and temple background consistently, no detached portrait lighting',
-  pearlCathedralBacklight: 'pearl cathedral backlight, warm white gold light from marble arches, crystal butterfly and opal gem reflections affect face body hair costume and background consistently, refined sacred sparkle without overexposure',
   moonGlassSparkle: 'moon glass sparkle lighting, cool moonlight and glass water reflections affect face body hair gown and garden together, pale lavender crystal highlights, soft fantasy beauty exposure with consistent white balance',
-  goldenSkyTempleLight: 'golden sky temple sunset lighting, warm low sun and cloud bounce light affect skin fabric sword marble and sky palace consistently, bright celestial glow while keeping facial features readable',
-  bettaUnderwaterSpotlight: 'betta underwater spotlight lighting, surface beams and red white fin reflections affect face hair body gown and bubbles together, aquatic caustics remain elegant and do not flatten facial identity',
-  amethystCandleGlow: 'amethyst candle glow lighting, warm gold candlelight mixed with purple gemstone reflections, palace interior bounce light affects face shoulders jewelry lace and background consistently, refined court portrait shine',
-  circusLanternGold: 'monochrome circus lantern lighting, warm gold string lights and glossy black white ornament reflections affect face body costume and rabbit companion consistently, surreal carnival advertisement glow',
-  desertGoldTentLight: 'dark gold desert tent lighting, warm low key lantern light and gemstone reflections affect face skin veil jewelry and background together, powerful exotic queen mood, face remains readable',
-  underwaterSunbeam: 'underwater sunbeam lighting, blue green water caustics and surface rays affect face hair body tail and marine background consistently, clean aquatic exposure, no separate dry studio light',
-  cloudRiftHolyLight: 'cloud rift holy lighting, dramatic white gold sky beam behind feather wings, soft sacred bounce light on face body fabric and background, powerful celestial contrast without overexposure',
-  darkIceBlue: 'dark blue ice crystal lighting, cold reflections from black ice affect face body hair costume and background, unified frozen color temperature, face remains visible without beauty ring light',
-  solarTempleGold: 'solar temple gold lighting, warm morning sunlight through white marble columns, subtle gold ribbon and pearl reflections affect face body hair clothing throne and temple consistently, radiant sacred glow with clear natural facial detail',
   candyGlossLight: 'glossy candy commercial lighting, transparent jelly highlights, soft colorful candy reflections affect face skin hair and outfit naturally, premium beauty product studio light, no overexposed face',
   auroraPerfumeLight: 'aurora perfume lighting, soft fragrance mist glow, prismatic glass reflections affect face body hair outfit and background consistently, refined scent campaign fill light, no separate face relighting',
   dessertBeautyLight: 'dessert beauty lighting, soft pink and ivory studio fill, strawberry cream bounce light affects face body hands and outfit naturally, clean cosmetic advertisement exposure, no flat overexposed face',
   cherryPopLight: 'cherry soda pop lighting, glossy red jelly reflections and sparkling bubble highlights affect face body hair and outfit together, energetic beauty campaign light, skin tone remains consistent',
   matchaSoftLight: 'matcha wagashi soft lighting, calm green tea powder reflections and ivory bounce light affect the entire subject, refined eastern commercial softness, face visible without whitening',
   milkTeaAmberLight: 'vivid milk tea amber lighting, saturated caramel tea reflections and cream white milk bounce light affect face body hair outfit and splash skirt consistently, high impact beverage campaign contrast, glossy highlights without overexposed face',
-  silverScreenLight: 'silver smartphone screen lighting, cool glass screen glow and liquid metal reflections affect face hands body outfit and background consistently, premium technology campaign light, no detached portrait lighting',
-  blueAudioLight: 'blue audio technology lighting, translucent blue device glow and waveform reflections affect face hair outfit and background together, clean cyber commercial light, natural facial exposure',
-  roseGoldTechLight: 'rose gold wearable technology lighting, polished watch face highlights and warm rose gold bounce light affect hands face body and outfit consistently, elegant lifestyle tech campaign fill',
-  coldWhiteMechaLight: 'cold white mecha reflection lighting, large white robot panels and cool industrial lights reflect consistently on face body hair outfit and background, premium technology advertisement light, no separate beauty relighting',
-  hologramScanLight: 'hologram scan lighting, transparent cyan and violet projection light sweeps across face body outfit and background consistently, refined AI product campaign glow, no separate face relighting',
   bioGlowSoftLight: 'bio glow soft lighting, gentle bioluminescent petals and serum reflections affect face body hair and outfit naturally, clean skincare campaign exposure, soft dewy highlights without overwhitening',
   moonSilverReflect: 'moon silver reflective lighting, cold lunar pearl metal reflections affect the entire subject, soft fragrance mist fill, elegant perfume campaign light, face remains readable and consistent',
-  maglevCrystalRefraction: 'maglev crystal refraction lighting, floating crystal facets create controlled highlights across face hands outfit and background, premium product pedestal light, no overexposed face',
-  dataFlowBlueViolet: 'blue violet data flow lighting, black mirror screen glow and fine data lines reflect consistently on face hair outfit and background, futuristic luxury campaign light, natural facial exposure',
-  blueEnergyWingLight: 'blue energy wing lighting, electric blue lights from black mechanical wings reflect subtly on face shoulders hair outfit and background, cool gray studio exposure, face remains recognizable without overexposure',
-  wastelandIndustrialSideLight: 'wasteland industrial side lighting, hard angled workshop light, aged metal reflections and dusty shadow affect the entire subject consistently, gritty sci-fi commercial mood, no detached portrait lighting',
-  blueFlameGlow: 'arcane blue flame lighting, cool blue spell glow mixed with warm distant fire light, blue energy reflections affect face body hair gown and background consistently, dramatic sorceress contrast while facial features stay clearly readable, no overexposed face',
   moonlightCandle: 'moonlight and candle mixed lighting, cool silver moonlight from above with warm lantern candle glow from below, both light sources affect face body veil fabric and architecture consistently, poetic night contrast with natural facial exposure',
   crystalDaylight: 'crystal daylight lighting, bright natural sunlight refracted through glass and crystal structures, clean white-blue clarity with sparkling prismatic accents on face hair outfit and background, airy utopian exposure, face remains naturally lit without overexposure',
   tyndallBacklight: 'tyndall backlight lighting, strong backlit mist beams cutting through haze, high contrast warm-cool split tone, dramatic god-ray atmosphere',
   starfieldColdBlue: 'cold blue starfield lighting, scattered pinpoint starlight, cool blue dreamy ambient tone, soft glowing atmosphere',
   windColdMistBack: 'cold backlit mist lighting, wind-driven haze glowing from behind, chilly high-tension atmosphere',
   candleStarContrast: 'candle and starlight contrast lighting, warm amber candle glow on the subject against a cool blue starry background, romantic high-contrast atmosphere',
-  neonPurpleMoonlit: 'purple neon and moonlight lighting, cool violet neon glow blended with silver moonlight silhouette edges, night-city fantasy atmosphere',
   holyMistBeam: 'holy backlit mist beam lighting, radiant light shafts piercing through soft haze, sacred cinematic glow',
-  candleShadowGothic: 'flickering candle gothic shadow lighting, warm candlelight against deep dark shadow pockets, ritualistic occult atmosphere',
-  bloodMoonGlow: 'blood moon cold glow lighting, deep red moonlight tone, chilling eerie atmosphere',
-  neonPinkCyanSplit: 'split neon pink and cyan lighting, dual-tone gel lighting clash across the subject, cyberpunk editorial contrast',
-  glitchScanlineFlicker: 'glitch scanline flicker lighting, flickering digital noise light bands, cyberpunk malfunction atmosphere'
 };
 
 const sharedFloralSweetCore = window.HB_CORE_PROMPT?.page?.floralSweet || {};
@@ -1433,7 +1486,7 @@ const themeTemplates = {
   teaTimeElegance: {
     garment: 'laceCollarKnitTop', material: 'teacupPropDetail', style: 'vintageRomance',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'halfBody', pose: 'table_appreciation', camera: 'eyeLevelCover', lighting: 'warmWindowSoft', background: 'bakeryCafeInterior', ratio: 'vertical45', intensity: 'subtle floating particles, refined couture details'
+    framing: 'halfBody', pose: 'table_appreciation', camera: 'eyeLevelCover', lighting: 'soft', background: 'bakeryCafeInterior', ratio: 'vertical45', intensity: 'subtle floating particles, refined couture details'
   },
   sunlitWindowNook: {
     garment: 'floralCamiDress', material: 'sunlightLeakGlow', style: 'beautyCampaign',
@@ -1468,7 +1521,7 @@ const themeTemplates = {
   europeanCafeDate: {
     garment: 'wrapFloralDress', material: 'silkRibbonFlutter', style: 'vintageRomance',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'chin_rest', camera: 'eyeLevelCover', lighting: 'warmWindowSoft', background: 'europeanAlleyCafe', ratio: 'vertical45', intensity: 'subtle floating particles, refined couture details'
+    framing: 'threeQuarter', pose: 'chin_rest', camera: 'eyeLevelCover', lighting: 'soft', background: 'europeanAlleyCafe', ratio: 'vertical45', intensity: 'subtle floating particles, refined couture details'
   },
   glitterPartyPrincess: {
     garment: 'tulleSkirtPartyDress', material: 'glitterDustShimmer', style: 'luxuryBloom',
@@ -1499,7 +1552,12 @@ function applyThemeTemplate(key){
     document.getElementById('intensity').value = preset.intensity;
   }
 
-  ['customGarment','customMaterial','customBackground','customPose','colorNote','extraNote'].forEach(id => {
+  setRadioValue('garmentLayer', 'layer0');
+  setRadioValue('chestDetail', preset.chestDetail || 'none');
+  setRadioValue('waistSideDetail', preset.waistSideDetail || 'none');
+  setRadioValue('shoulderDetail', preset.shoulderDetail || 'none');
+
+  ['customGarment','customMaterial','customChestDetail','customWaistSideDetail','customShoulderDetail','customBackground','customPose','colorNote','extraNote'].forEach(id => {
     document.getElementById(id).value = '';
   });
 
@@ -1530,7 +1588,25 @@ function applyFloralRandomSelection(){
   if(intensityValues.length){
     document.getElementById('intensity').value = getRandomItem(intensityValues);
   }
-  ['customGarment','customMaterial','customBackground','customPose','colorNote','extraNote'].forEach(id => {
+
+  // 服裝改造核心：Layer 決定要命中幾個部位，已經手動設定過（非「無修改」）的部位維持
+  // 原樣不被覆蓋，只有還在「無修改」的部位才會被納入這次隨機的候選池。
+  const layerKeys = ['layer0', 'layer3', 'layer6', 'layer9'];
+  const selectedLayer = selected('garmentLayer');
+  const effectiveLayer = selectedLayer === 'random' ? getRandomItem(layerKeys) : selectedLayer;
+  setRadioValue('garmentLayer', effectiveLayer);
+  const zoneFields = { chestDetail: chestDetailData, waistSideDetail: waistSideDetailData, shoulderDetail: shoulderDetailData };
+  const alreadyActiveZones = Object.keys(zoneFields).filter(name => selected(name) !== 'none');
+  const freeZones = Object.keys(zoneFields).filter(name => selected(name) === 'none');
+  const targetZoneCount = GARMENT_DETAIL_LAYER_ZONES[effectiveLayer] ?? 0;
+  const zonesToFill = Math.max(0, Math.min(targetZoneCount - alreadyActiveZones.length, freeZones.length));
+  const shuffledFreeZones = freeZones.slice().sort(() => Math.random() - 0.5).slice(0, zonesToFill);
+  shuffledFreeZones.forEach(name => {
+    const pool = Object.keys(zoneFields[name]).filter(k => k !== 'none');
+    if(pool.length) setRadioValue(name, getRandomItem(pool));
+  });
+
+  ['customGarment','customMaterial','customChestDetail','customWaistSideDetail','customShoulderDetail','customBackground','customPose','colorNote','extraNote'].forEach(id => {
     document.getElementById(id).value = '';
   });
   refreshCards();
@@ -1560,6 +1636,22 @@ function generate(options = {}){
   const garmentText = customGarment
     ? `custom garment form only: ${customGarment}; do not include or blend any preset garment option`
     : garmentData[selected('garment')];
+  const customChestDetail = document.getElementById('customChestDetail').value.trim();
+  const chestDetailText = customChestDetail
+    ? `custom chest surface detail only: ${customChestDetail}`
+    : chestDetailData[selected('chestDetail')];
+  const customWaistSideDetail = document.getElementById('customWaistSideDetail').value.trim();
+  const waistSideDetailText = customWaistSideDetail
+    ? `custom waist side surface detail only: ${customWaistSideDetail}`
+    : waistSideDetailData[selected('waistSideDetail')];
+  const customShoulderDetail = document.getElementById('customShoulderDetail').value.trim();
+  const shoulderDetailText = customShoulderDetail
+    ? `custom shoulder surface detail only: ${customShoulderDetail}`
+    : shoulderDetailData[selected('shoulderDetail')];
+  const garmentDetailParts = [chestDetailText, waistSideDetailText, shoulderDetailText].filter(Boolean);
+  const garmentDetailText = garmentDetailParts.length
+    ? 'garment surface detail: ' + garmentDetailParts.join(', ') + ' — structural surface accents only, the garment silhouette from the appearance form above stays unchanged,'
+    : '';
   const customBackground = document.getElementById('customBackground').value.trim();
   const background = customBackground
     ? `custom background only: ${customBackground}; do not include or blend any preset background option`
@@ -1587,6 +1679,7 @@ function generate(options = {}){
     composition + ',',
     compositionGuard + ',',
     'appearance form: ' + garmentText + ',',
+    garmentDetailText,
     'theme material and art system: ' + materialText + ',',
     'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',
     intensity + ',',
@@ -1677,7 +1770,7 @@ document.addEventListener('input',(event)=>{
 document.addEventListener('change',(event)=>{
   if(event.target && event.target.closest && !event.target.closest('#outputWrap')) markStale();
 },true);
-['customGarment','customMaterial','customBackground','customPose','intensity','colorNote','extraNote'].forEach(id => {
+['customGarment','customMaterial','customChestDetail','customWaistSideDetail','customShoulderDetail','customBackground','customPose','intensity','colorNote','extraNote'].forEach(id => {
   document.getElementById(id).addEventListener('input', () => {
     refreshCards();
   });

@@ -2926,3 +2926,85 @@
   `audit-100x` 累計 1300 次模擬（13頁×100）0 issue、`build-prompt-preview`
   正常產出新的 xianxia 預覽輸出。
 
+## 2026-08-01（七）　服裝改造核心擴至 3 頁 + 全站 7 頁主題適合度審查 + lightingData 大清理
+
+- **服裝改造核心擴至 flower-fairy／floral-sweet／gala-socialite**：owner
+  先確認這三頁跟已完成的 kpop-idol.html 是同一批「複製 flower-fairy.html
+  當底」架構（`.section-material{order:5}`／`.section-pose{order:6}`、
+  `materialData`→`garmentData` 插入點、`applyThemeTemplate`/
+  `apply×××RandomSelection`/`generate()` 骨架完全相同），三頁依序執行跟
+  isekai-fantasy／kpop-idol 完全一致的機械化流程（CSS order 插入、
+  section-label 重編號、新增「06 服裝改造核心」HTML 區塊、插入
+  `chestDetailData`/`waistSideDetailData`/`shoulderDetailData`/
+  `GARMENT_DETAIL_LAYER_ZONES`、三處函式邏輯、底部監聽清單），各頁語彙：
+  - flower-fairy：花瓣鏤空/月光紗/蝶翼薄紗/藤蔓滾邊/紗透拼接
+  - floral-sweet：愛心鏤空/緞帶蝴蝶結/荷葉邊裝飾/珍珠釦飾滾邊/蕾絲拼接
+  - gala-socialite：珠寶鑲嵌/薄紗拼接/珠繡滾邊/交叉細帶/鏈條肩帶
+  三頁的 `applyThemeTemplate()`/`applyXxxRandomSelection()`/`generate()`
+  改動與 flower-fairy 的 wings/butterflies 特殊邏輯（僅該頁有）互不衝突。
+  `scripts/audit-100x.mjs`／`scripts/build-prompt-preview.mjs` 同步更新
+  三頁的 exportExpression／pools／sel／selection／文字組裝邏輯，四支
+  驗證腳本全過（`audit-100x` 1300 次模擬 0 issue、`build-prompt-preview`
+  三頁預覽輸出正確含 `garment surface detail:` 行）。服裝改造核心目前
+  共 8 頁擁有：battle-academy／xianxia／anime-character／isekai-fantasy／
+  kpop-idol／flower-fairy／floral-sweet／gala-socialite；travel／
+  magazine／doll／fantasy-fashion／store-ad 5 頁架構不同（非本系列頁面），
+  未列入本輪範圍。
+- **owner 回報具體問題引發全站審查**：「韓系氣質偶像風今天我出圖，背景
+  有血月，感覺怪怪的」。同一則訊息也問「中式仙俠/動漫人物/花仙子/日式
+  異世界/花漫甜美系/氣質名媛宴會/韓系氣質偶像風/戰鬥制服學園，可以都
+  跟中式仙俠一樣在分析介面的要素配合主題做修正嗎」——呼應同一天稍早
+  才完成的 xianxia「法袍道服」→「仙靈妖精裝束」修正（見上一條記錄）。
+  派 7 個 general-purpose agent（xianxia 已處理過不重複審查）並行審查
+  anime-character／flower-fairy／isekai-fantasy／floral-sweet／
+  gala-socialite／kpop-idol／battle-academy 各頁的 `garmentData`/
+  `materialData`/`backgroundData`/`lightingData`（或 battle-academy 對應
+  的 `upperBodyData`/`waistData`/`lowerData`/`accessoryData`/
+  `fantasyDetailData`），逐項判斷是否符合該頁主題。**回報結果高度一致**：
+  garment／material／background 全部乾淨，問題完全集中在 `lightingData`
+  ——這是一個跨頁共用、從未依主題篩選過的大型燈光選項池（各頁約 57～58
+  個選項），混入其他主題頁遺留的選項：血月／哥德儀式陰影／狐火／宮殿
+  寶座／鬥魚水下聚光／馬戲團燈串／沙漠宮帳／賽博龐克霓虹／科技產品
+  （智慧手錶/全息掃描/音響）／甜點飲料廣告燈光（抹茶/奶茶/糖果/櫻桃）等，
+  是 battle-academy 先前已經處理過一次的同一種歷史成因（複製貼上共用
+  大池子、未依主題個別篩選）。isekai-fantasy 頁面因為本身橫跨光明/獸族/
+  暗黑三大陣營，agent 特別排除了合理屬於暗黑奇幻的選項（血月戰場、哥德
+  暗影等在該頁語境下是正常內容，不算殘留）。
+- **逐頁清理執行**：先用 `grep` 確認每頁「移除清單」是否被任何
+  `themeTemplates` 引用，發現 3 頁有衝突需要重新指向：
+  - kpop-idol：`vintageRecordStoreVibe`／`cafeWindowCandidPortrait` 兩組
+    模板引用 `warmWindowSoft`（其實是「中式窗欞紅紙反光、奢華婚紗廣告光」
+    的仙俠婚禮殘留字句），改指向 `soft`。
+  - anime-character：`swordDrawBattleStance`（戰場姿勢）引用 `bloodMoonGlow`
+    改指向 `hard`；`dramaticWindSweptCapePose`（校園屋頂姿勢）引用
+    `warmWindowSoft` 改指向 `halo`。
+  - floral-sweet：`bakeryCafeInterior`／`europeanAlleyCafe` 兩組模板引用
+    `warmWindowSoft`，改指向 `soft`（原描述本身就是奢華婚紗廣告光，跟
+    甜點店/歐式小巷咖啡館場景不搭）。
+  其餘頁面的移除清單皆無模板引用，可直接刪除不需要重新指向。用一支共用
+  邏輯的一次性 Node 腳本（每頁各自傳入專屬移除清單，逐行過濾
+  `^\s{2}KEY:\s*'` 格式的 JS 條目與 `name="lighting" value="KEY"` 格式的
+  HTML 卡片，兩處同步刪除，確保 JS 資料與 UI 選項不會兜不起來）逐頁執行，
+  清理結果：
+  - kpop-idol：57→25（移除 32 個，含 owner 明確指出的血月問題）
+  - gala-socialite：移除 32 個
+  - floral-sweet：移除 29 個
+  - isekai-fantasy：移除 22 個
+  - flower-fairy：移除 20 個
+  - anime-character：移除 15 個
+  - battle-academy：移除 6 個（先前已清理過一輪 57→31，這次是抓漏網之魚：
+    `warmWindowSoft`/`jewelrySparkle`/`amethystSparkle`/`redWaterReflection`/
+    `blueFlameGlow`/`candleShadowGothic`，皆確認未被任何模板引用）
+- **驗證**：每頁清理後先個別跑語法檢查（抽出 `<script>` 內容跑
+  `new Function(...)`），全部 7 頁通過後一次跑全站四支驗證腳本：
+  `check-static` 全過、`audit-100x` 累計 1300 次模擬（13頁×100）0 issue、
+  `validate-preset-refs` 全部頁面 0 issue（確認重新指向的模板欄位值仍然
+  合法），`build-prompt-preview` 全站預覽輸出正常產出，另外用 `grep` 對
+  7 頁的預覽輸出逐一確認不再出現「blood moon」字樣。
+- **教訓**：跨頁共用、直接複製貼上、從未依主題個別篩選過的大型選項池
+  （`lightingData` 是目前發現的唯一一個，各頁材質/服裝/背景欄位都是
+  頁面專屬設計、不會有這個問題）是最容易累積跨主題殘留內容的地方。新頁面
+  上線或既有頁面內容審查時，這類欄位應該優先檢查是否真的依主題篩選過，
+  不能假設「選項多總是好事」；本次也再次印證了先前 battle-academy
+  lightingData 清理（57→31）記錄下的判斷方法論同樣適用於其他頁面，是
+  可重複執行的標準流程，不需要每次重新設計判斷標準。
