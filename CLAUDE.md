@@ -20,6 +20,42 @@
 
 ### 現況摘要（2026-07-31）
 
+- **讀取 `風格範例` 參考圖庫，分析並補充 8 個工具頁的服裝/材質/背景/姿勢選項**
+  （2026-08-01）：owner 提供 56 張 AI 生圖風格範例（存放於本機
+  `C:\Users\User\Desktop\ai生圖\風格範例`，非本專案目錄），要求分析內容
+  並分類補充到各工具頁。派 5 個 general-purpose agent 並行檢視全部圖片，
+  逐張比對 13 個工具頁的主題並提出新增選項建議，同時依網站既有的內容
+  尺度準則（過去 summer-island.html 下架、battle-academy「微解領」
+  修正）篩掉過度裸露／泳裝級曝光的素材——56 張中有 17 張被跳過，39 張
+  產出建議，命中 8 個頁面：fantasy-fashion（9張）、xianxia／flower-fairy
+  （各7張）、travel（6張）、gala-socialite（4張）、magazine（3張）、
+  floral-sweet（2張）、anime-character（1張）；kpop-idol／
+  battle-academy／isekai-fantasy／doll／store-ad 這批素材沒有對應內容。
+  彙整成一份 Artifact 文件供 owner 逐項檢視，owner 確認「全做」。
+  **實作前逐頁比對現有選項池，過濾掉近似重複的建議**（這是最重要的
+  執行原則）：`fantasy-fashion.html` 本身材質/背景已經非常飽和
+  （100+ 材質、75+ 背景，幾乎任何新概念都能在裡面找到高度相似的既有
+  條目，例如「水晶香水瓶」≈既有 `auroraGlassPerfume`、「機械義體」≈
+  既有 `whiteMechaExoskeleton`），9 個建議裡只有 2 個是真正的新點子
+  （冰火二重漸層禮服材質、水島莊園無邊際泳池日落背景），其餘 7 個
+  全部跳過；`travel.html` 的服裝方向欄位也發現「改良旗袍」「蕾絲削肩
+  露腰上衣」等既有選項，去重後只新增 3 個服裝方向；其餘頁面重疊度較低，
+  多數建議都保留。**逐頁最終落地內容**：xianxia（+2材質+2服裝+5背景，
+  含新增「青花瓷機械神龍座騎」座騎概念與「宮廷茶會廳堂」等場景）、
+  flower-fairy（+3材質+1服裝+3背景+1姿勢，含新增「動物樂團伴奏」
+  童話夥伴元素）、travel（+1地點chip+3服裝方向+1姿勢，新增「底片相機
+  持拍」姿勢）、gala-socialite（+3服裝+2背景）、magazine（+1光線+1
+  背景+1姿勢，新增「窗格光影棚拍」）、floral-sweet（+1提籃道具+2背景）、
+  anime-character（+1「水墨飛白」抽象背景）、fantasy-fashion（+1材質
+  +1背景）。**架構差異踩坑記錄**：travel.html／magazine.html 是本站
+  最早期的架構，服裝/姿勢是獨立命名的英文模板物件（`COSTUME_DIRECTIONS`
+  / `POSE_STYLES` / magazine 的巢狀 `DETAIL_BLOCKS.lighting`），跟
+  其餘 11 頁統一的 `garmentData`/`materialData`/`backgroundData`/
+  `poseData` 命名慣例不同，travel.html 的地點欄位（`themePreset`）甚至
+  完全不需要 JS 對照表、純粹把中文字直接塞進自由文字框；magazine.html
+  的服裝方向欄位是全自由文字，沒有固定選項可以加。四支驗證腳本全數
+  重跑通過（`check-static`/`audit-100x` 1300 次模擬/`validate-preset-refs`
+  /`build-prompt-preview`，全部 0 issue）。
 - **`index.html` 首頁導覽重新設計：拿掉頂部小連結，工具卡片依主題分 4 類**
   （2026-08-01）：owner 指出首頁上方那排 14 個小圓角連結（`.nav-links`）
   跟下方的工具卡片區是重複的兩套連結，且工具數已成長到 13 個，要求拿掉

@@ -3052,3 +3052,100 @@
   `href="*.html"` 全部還在；確認 `<div>` 開合標籤數量相等（54/54），排除
   搬移過程中漏掉或多加閉合標籤的可能。因為環境沒有瀏覽器截圖工具，這次
   是純結構驗證，沒有真的用瀏覽器看過渲染效果。
+
+## 2026-08-01（九）　讀取風格範例圖庫，分析並補充 8 個工具頁的選項
+
+- owner 要求讀取本機 `C:\Users\User\Desktop\ai生圖\風格範例\`（56 張圖
+  ＋1 個文字檔，**不在本專案 repo 目錄內**，是 owner 桌面上的獨立參考
+  素材夾），分析內容並分類補充到各工具出圖專案的選項裡。
+- **分析階段**：56 張圖片橫跨多種風格（東方仙俠茶會、花仙子奇幻禮服、
+  歐式旅拍、韓系街拍、高奢晚宴等），數量太大不適合自己逐張看完再判斷，
+  派 5 個 `general-purpose` agent 並行處理（每個負責約 11 張），給每個
+  agent 相同的 13 頁主題對照表 + 明確的內容安全準則（引用本專案過去
+  兩次真實案例：`summer-island.html` 因泳裝級裸露風險整頁下架、
+  battle-academy 把「上衣鈕扣全開完全露胸罩」改成「微解2-3顆釦不露
+  內衣」的保守寫法），要求圖片內容若涉及濕透透視/深乳溝/泳裝級曝光就
+  直接跳過不提供建議。**結果**：56 張中 17 張被跳過（其中一張是我自己
+  先看過並明確指出的可口可樂濕身透視商業照，另外 16 張是 agent 自行
+  判斷跳過的）；39 張產出建議，命中 8 個頁面，命中數：
+  fantasy-fashion（9）> xianxia／flower-fairy（各7）> travel（6）>
+  gala-socialite（4）> magazine（3）> floral-sweet（2）>
+  anime-character（1）；kpop-idol／battle-academy／isekai-fantasy／
+  doll／store-ad 這批素材完全沒有對應內容（這批參考圖偏東方奇幻/
+  高定禮服/旅拍風，不是這幾頁的方向）。彙整成一份 Markdown 文件用
+  `Artifact` 工具發布給 owner 逐項檢視（依命中數排序、每項附中英文
+  描述與來源檔名），owner 回覆「全做吧」。
+- **實作前的關鍵動作：逐頁比對現有選項池，過濾重複建議**——這是本輪
+  最重要的執行紀律，因為 agent 產生建議時只拿到每頁主題的一行摘要，
+  不知道該頁實際上已經有哪些選項，容易建議出「這個頁面可能還沒有」但
+  實際上已經存在的近似內容：
+  - **`fantasy-fashion.html` 嚴重飽和**：這頁材質庫已經有 100+ 條目、
+    背景庫 75+ 條目（是全站規模最大的頁面），逐條比對後發現 9 個建議
+    裡有 7 個明顯重疊——「水晶香水瓶場景」≈既有 `auroraGlassPerfume`
+    (極光玻璃香氛) / `perfumeGlassStudio`；「機械義體材質」≈既有
+    `whiteMechaExoskeleton`/`wastelandCyberMetal`/`blackMechanicalWings`
+    三個變體；「宣紙水墨拼接」≈既有 `paperOiran`/`inkPeony`/
+    `inkWaterBloom`/`inkCalligraphyButterflyGown` 四個變體；「星河
+    背景/星塵禮服」≈既有 `deepSpaceStardust`/`galaxyOceanDrape`/
+    `stardustLightSilk`；「維多利亞蕾絲羽帽」≈既有 `laceCouture`/
+    `amethystRococoLace`；「碎鏡星塵背景」≈既有 `shatteredMirrorBurst`/
+    `maglevProductStage`。用 `AskUserQuestion` 跟 owner 確認這頁的
+    處理方式，owner 選「只加真正新的 2 個」——只留下確實找不到既有
+    對應的「冰火二重漸層禮服」（材質，一半冰晶紗質一半烈焰刺繡的中線
+    漸層效果，跟既有的純冰或純火材質都不同）與「水島莊園無邊際泳池
+    日落」（背景，這頁完全沒有現代度假村類型的背景）。
+  - **`travel.html` 中度重疊**：服裝方向欄位（`costume`）已有「旗袍」
+    「蕾絲削肩露腰上衣」，跟建議的「改良旗袍鏤空禮服」「蕾絲削肩短版
+    上衣+牛仔短褲」重疊度高，跳過；姿勢欄位已有「撩髮側望」「整理
+    衣領垂眸」，跟建議的「迎風撩髮回眸」「回眸露背和服」重疊，跳過；
+    地點欄位（`themePreset`）已有「希臘聖托里尼」「南法薰衣草田」等
+    30+ 個具體地標 chip，「地中海山城」「黃昏花海」跟這些太接近也
+    跳過。最終只留下：1 個新地點 chip（夜櫻石燈籠神社參道，跟既有
+    「古町運河櫻花小徑」的白天運河場景不同）、3 個服裝方向（波希米亞
+    單肩民族裙裝、麻花披肩針織外套、波希米亞蕾絲婚紗）、1 個姿勢
+    （底片相機持拍，全站目前沒有任何「拿相機」的姿勢）。
+  - **其餘 6 頁重疊度低**：xianxia／flower-fairy／gala-socialite／
+    magazine／floral-sweet／anime-character 個別檢查後只各自濾掉 1-2
+    個近似重複的建議（例如 xianxia 的「緙絲雲肩織錦漢服」跟既有
+    `cloudShoulderCape`太像、flower-fairy 的「伸手邀請鏡頭」跟既有
+    `reach_camera`姿勢太像、magazine 的「倚凳沉思坐姿」就是既有
+    `chin_rest`姿勢本身），大部分建議都保留落地。
+- **架構差異踩坑**：實作 travel.html／magazine.html 時發現這兩頁是
+  本站最早期建立的架構，跟後來 11 頁統一的 `garmentData`/
+  `materialData`/`backgroundData`/`poseData` 命名慣例不同——
+  travel.html 的服裝方向是 `COSTUME_DIRECTIONS`、姿勢是 `POSE_STYLES`、
+  光線是 `TRAVEL_LIGHTING_STYLES`，且地點欄位（`themePreset`）**完全
+  不需要 JS 對照表**，點擊 chip 直接把中文字塞進自由文字主題框；
+  magazine.html 的服裝方向欄位**是純自由文字輸入**，沒有固定選項系統
+  可以加（所以「蕾絲高領婚紗禮服」「一字肩碎花高低裙」這類服裝建議
+  在 magazine.html 完全沒有落地空間，只能加背景/光線/姿勢），光線資料
+  也是巢狀在 `DETAIL_BLOCKS.lighting` 底下而不是頂層常數。這個發現
+  避免了誤用其他頁的模式硬套過去、產生不存在的欄位。
+- **各頁最終新增內容**：
+  - `fantasy-fashion.html`：+1 材質（冰火二重漸層禮服）+1 背景（水島
+    莊園無邊際泳池日落）
+  - `xianxia.html`：+2 材質（青花瓷機械神龍座騎、珠簾步搖釵）+2 服裝
+    （金屬蓮花甲胄紗裙、鎏金牡丹廣袖袍）+5 背景（宮廷茶會廳堂、剪紙
+    花窗織錦、木格窗雕花回廊、御空俯瞰宗門天際、落櫻古寺庭院）
+  - `flower-fairy.html`：+3 材質（剪紙浮雕禮服質感、皇冠靠枕道具、
+    動物樂團伴奏）+1 服裝（蝴蝶珍珠蕾絲裙）+3 背景（森林燭光水鏡、
+    鏡面梳妝閨房、圓窗遠山寶塔夢境）+1 姿勢（指揮手勢姿）
+  - `travel.html`：+1 地點 chip（夜櫻石燈籠神社參道）+3 服裝方向
+    （波希米亞單肩民族裙裝、麻花披肩針織外套、波希米亞蕾絲婚紗）+1
+    姿勢（底片相機持拍）
+  - `gala-socialite.html`：+3 服裝（鏤空腰身羽毛禮服、寶石腰封垂墜
+    禮服、蕾絲改良旗袍晚裝）+2 背景（復古酒吧吧檯、古典庭院花窗門廊）
+  - `magazine.html`：+1 光線（窗格光影棚拍）+1 背景（現代辦公室桌景）
+    +1 姿勢（倚桌翹腳坐姿）
+  - `floral-sweet.html`：+1 材質/道具（提籃配飾）+2 背景（九重葛花藤
+    拱廊庭院、老街花燈夜景）
+  - `anime-character.html`：+1 背景（水墨飛白背景）
+- **驗證**：每頁改完先個別跑語法檢查，8 頁全過後一次跑全站四支驗證
+  腳本：`check-static` 全過、`audit-100x` 累計 1300 次模擬（13頁×100）
+  0 issue、`validate-preset-refs` 全部頁面 0 issue、`build-prompt-preview`
+  正常產出。
+- **教訓**：跨頁批次補充內容時，「先看完整個頁面現有選項池再決定加
+  什麼」比「agent 建議什麼就加什麼」重要得多——尤其是像
+  fantasy-fashion.html 這種已經發展很久、選項池早已飽和的頁面，不做
+  比對直接照單全收，很容易把同一個概念用不同名字重複堆疊三四次，
+  讓選單越來越長卻沒有真正增加多樣性。

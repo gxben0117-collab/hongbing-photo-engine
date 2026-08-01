@@ -508,6 +508,7 @@
       <label class="card"><input type="radio" name="garment" value="sectMasterRobe"><div class="name">掌門法袍</div><div class="desc">寬袖層疊、胸前紋章、權威輪廓</div></label>
       <label class="card"><input type="radio" name="garment" value="moonwhiteRobe"><div class="name">月白廣袖仙裙</div><div class="desc">月白薄紗、寬袖飄逸、仙子輪廓</div></label>
       <label class="card"><input type="radio" name="garment" value="swordCultivatorAttire"><div class="name">青玄劍修常服</div><div class="desc">高領窄袖、束腰劍裝、俐落輪廓</div></label>
+      <label class="card"><input type="radio" name="garment" value="giltPeonyRobe"><div class="name">鎏金牡丹廣袖袍</div><div class="desc">牡丹金線刺繡、垂墜紅色腰帶、雍容綻放輪廓</div></label>
       <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 古典勁裝與遊俠</div>
       <label class="card"><input type="radio" name="garment" value="nightRoamingArmor"><div class="name">夜行輕甲勁裝</div><div class="desc">輕甲夜行服、束腰帶、敏捷輪廓</div></label>
       <label class="card"><input type="radio" name="garment" value="wandererCloakSuit"><div class="name">遊俠斗篷勁裝</div><div class="desc">風塵外袍、綁縛護臂、江湖輪廓</div></label>
@@ -531,6 +532,7 @@
       <label class="card"><input type="radio" name="garment" value="exorcistBattleArmor"><div class="name">破邪戰甲</div><div class="desc">符紋肩甲、高衩內袍、除魔輪廓</div></label>
       <label class="card"><input type="radio" name="garment" value="ninthHeavenCape"><div class="name">九天戰神披風</div><div class="desc">長披風、貼身戰甲、戰神輪廓</div></label>
       <label class="card"><input type="radio" name="garment" value="lightningSwordSuit"><div class="name">雷靈劍尊戰裝</div><div class="desc">雷紋刺繡戰裝、高衩長裙、劍尊輪廓</div></label>
+      <label class="card"><input type="radio" name="garment" value="lotusArmorCrystalGown"><div class="name">金屬蓮花甲胄紗裙</div><div class="desc">蓮瓣塑形胸甲、水晶紗質高衩長裙、俐落戰意輪廓</div></label>
       <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 妖靈與靈獸化裝束</div>
       <label class="card"><input type="radio" name="garment" value="foxSpiritRobe"><div class="name">妖狐仙裾</div><div class="desc">狐尾拖尾裙擺、毛絨肩飾、妖姬輪廓</div></label>
       <label class="card"><input type="radio" name="garment" value="craneFeatherRobe"><div class="name">鶴羽仙衣</div><div class="desc">羽翼寬袖、素白輪廓、仙鶴之姿</div></label>
@@ -568,6 +570,7 @@
       <label class="card"><input type="radio" name="material" value="whiteTigerGuard"><div class="name">白虎相伴</div><div class="desc">白虎靈獸相伴、寒霜靈氣、守護感</div></label>
       <label class="card"><input type="radio" name="material" value="vermilionBirdFlame"><div class="name">朱雀火羽</div><div class="desc">朱雀火羽翱翔、烈焰羽翼</div></label>
       <label class="card"><input type="radio" name="material" value="koiAscension"><div class="name">錦鯉化龍</div><div class="desc">金色錦鯉群升騰化龍、飛昇意象</div></label>
+      <label class="card"><input type="radio" name="material" value="porcelainDragonMount"><div class="name">青花瓷機械神龍座騎</div><div class="desc">青花瓷紋機關神龍、可乘座騎、靈匠巧藝</div></label>
       <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 劍氣仙氣特效</div>
       <label class="card"><input type="radio" name="material" value="swordQiSlash"><div class="name">劍氣長虹</div><div class="desc">凌厲劍氣弧光、動態戰鬥光軌</div></label>
       <label class="card"><input type="radio" name="material" value="immortalMistVeil"><div class="name">仙氣繚繞</div><div class="desc">柔霧修煉靈氣纏身、夢幻仙境</div></label>
@@ -591,6 +594,7 @@
       <label class="card"><input type="radio" name="material" value="woodElementVine"><div class="name">木靈藤蔓</div><div class="desc">發光藤蔓纏繞、小花點綴、木屬性法力</div></label>
       <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 靈蝶祥瑞</div>
       <label class="card"><input type="radio" name="material" value="spiritButterflyGlow"><div class="name">靈蝶流光</div><div class="desc">發光靈蝶伴飛、金色光粒環繞、祥瑞夢幻感</div></label>
+      <label class="card"><input type="radio" name="material" value="pearlTasselHairpin"><div class="name">珠簾步搖釵</div><div class="desc">垂墜珍珠金鍊髮釵、隨動作輕晃生輝</div></label>
     </div>
     <div class="form-grid" style="margin-top:10px;">
       <label class="field custom-choice" data-custom-choice="material">材質自填
@@ -860,8 +864,11 @@
       <label class="card"><input type="radio" name="background" value="libraryPavilionInterior"><div class="name">藏經閣內部</div><div class="desc">高聳書架、捲軸典籍、柔和窗光</div></label>
       <label class="card"><input type="radio" name="background" value="trainingGroundCourt"><div class="name">練武場</div><div class="desc">石地兵器架、開闊天空</div></label>
       <label class="card"><input type="radio" name="background" value="bellTowerNight"><div class="name">夜色鐘樓</div><div class="desc">燈籠屋瓦、月下石徑、寧靜夜色</div></label>
+      <label class="card"><input type="radio" name="background" value="papercutLatticeTapestry"><div class="name">剪紙花窗織錦</div><div class="desc">層疊剪紙雲花紋樣、柔光透紙、精緻手作感</div></label>
+      <label class="card"><input type="radio" name="background" value="carvedLatticeCorridor"><div class="name">木格窗雕花回廊</div><div class="desc">雕花木窗回廊、垂枝花影、書院清幽</div></label>
       <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 雲海仙境與天象</div>
       <label class="card"><input type="radio" name="background" value="cloudSeaSunrise"><div class="name">雲海日出</div><div class="desc">雲海翻湧、晨光穿透、遠山剪影</div></label>
+      <label class="card"><input type="radio" name="background" value="cloudSoaringSkylineView"><div class="name">御空俯瞰宗門天際</div><div class="desc">御風翱翔雲海之上、俯瞰遠方層疊宗門樓閣</div></label>
       <label class="card"><input type="radio" name="background" value="moonlitNightSky"><div class="name">月夜長空</div><div class="desc">滿月薄雲、銀輝灑落遠山</div></label>
       <label class="card"><input type="radio" name="background" value="lightningTribulationSky"><div class="name">渡劫天象</div><div class="desc">暗雲密布、閃電交織、渡劫氣勢</div></label>
       <label class="card"><input type="radio" name="background" value="auroraSpiritSky"><div class="name">靈光極夜天</div><div class="desc">流動極光、星空夜幕、仙靈氛圍</div></label>
@@ -878,6 +885,7 @@
       <label class="card"><input type="radio" name="background" value="celestialTempleInterior"><div class="name">天庭神殿內部</div><div class="desc">金身巨像、香煙繚繞、光束穿透</div></label>
       <label class="card"><input type="radio" name="background" value="forbiddenScrollVault"><div class="name">禁書秘境</div><div class="desc">漂浮古籍、幽藍靈火照明</div></label>
       <label class="card"><input type="radio" name="background" value="risingPhoenixShrine"><div class="name">鳳凰祭壇廢墟</div><div class="desc">崩塌石鳳雕像、餘燼夜色</div></label>
+      <label class="card"><input type="radio" name="background" value="ancientTempleCherryCourtyard"><div class="name">落櫻古寺庭院</div><div class="desc">古寺石階、雕花石柱、滿地落櫻</div></label>
       <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 竹林溪谷與四季</div>
       <label class="card"><input type="radio" name="background" value="bambooForestPath"><div class="name">竹林步道</div><div class="desc">高聳翠竹、柔光穿透、清幽小徑</div></label>
       <label class="card"><input type="radio" name="background" value="cherryBlossomCliff"><div class="name">櫻崖仙境</div><div class="desc">山崖櫻花、飄落花瓣、遠眺山谷</div></label>
@@ -886,6 +894,7 @@
       <label class="card"><input type="radio" name="background" value="lotusPondPavilion"><div class="name">荷池水榭</div><div class="desc">滿池荷花、木造平台延伸水面</div></label>
       <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 宮闕夜宴</div>
       <label class="card"><input type="radio" name="background" value="lanternPalaceEaves"><div class="name">宮闕燈籠夜宴</div><div class="desc">飛簷宮殿、成串暖色燈籠、夜色散景、樂舞夜宴氛圍</div></label>
+      <label class="card"><input type="radio" name="background" value="palaceTeaHall"><div class="name">宮廷茶會廳堂</div><div class="desc">鎏金花窗、燭光暖影、案上茶點小憩</div></label>
     </div>
     <div class="form-grid" style="margin-top:10px;">
       <label class="field full custom-choice" data-custom-choice="background">背景自填
@@ -1097,6 +1106,16 @@ const materialData = {
     label: '靈蝶流光',
     prompt: 'a single luminous spirit butterfly with translucent glowing wings hovering near the subject, trailing faint golden light particles, auspicious dreamlike companion',
     palette: 'luminous amber gold, soft warm white glow, faint ember highlight'
+  },
+  porcelainDragonMount: {
+    label: '青花瓷機械神龍座騎',
+    prompt: 'an ornate blue-and-white porcelain mechanical dragon serving as a mount beside or beneath the subject, articulated joints painted with traditional porcelain motifs, faint spirit-energy glow along its seams, mythic artificer craftsmanship',
+    palette: 'porcelain blue-white, cobalt glaze pattern, soft spirit glow, warm gold joint accent'
+  },
+  pearlTasselHairpin: {
+    label: '珠簾步搖釵',
+    prompt: 'an ornate cascading hairpin with dangling pearl-and-gold tassel chains, delicate headpiece ornament catching the light with each small movement',
+    palette: 'pearl white, warm gold chain, soft amber highlight'
   }
 };
 
@@ -1170,7 +1189,9 @@ const garmentData = {
   serpentScaleGown: 'fitted gown with subtle iridescent scale-pattern embroidery along the bodice and hem, mythic serpent-spirit silhouette',
   nineTailRobe: 'opulent fox-queen gown with layered flowing tails formed from silk trailing panels, regal mythic silhouette',
   phoenixSpiritGown: 'dramatic gown with flame-feather textured shoulder pieces and a long trailing skirt, phoenix-rebirth silhouette',
-  courtDancerRobe: 'ornate court-dancer ceremonial costume with a jeweled embroidered bodice, long flowing chiffon streamer sleeves trailing from the shoulders, richly embroidered layered draped skirt, elaborate phoenix headdress with hanging pearl tassels, flying-apsara dancer silhouette'
+  courtDancerRobe: 'ornate court-dancer ceremonial costume with a jeweled embroidered bodice, long flowing chiffon streamer sleeves trailing from the shoulders, richly embroidered layered draped skirt, elaborate phoenix headdress with hanging pearl tassels, flying-apsara dancer silhouette',
+  lotusArmorCrystalGown: 'metallic lotus-petal armor bodice with sculpted floral plating at the chest, paired with a crystalline gauze skirt featuring a high slit, sharp yet elegant cultivator-warrior silhouette',
+  giltPeonyRobe: 'gilded peony-embroidered wide-sleeve immortal robe with a trailing red sash, rich floral gold thread work across the chest and hem, dignified blossoming silhouette'
 };
 
 const styleData = {
@@ -1216,7 +1237,12 @@ const backgroundData = {
   frozenWaterfallCavern: 'frozen waterfall cavern background, icicles and frost-covered rock, cold blue ambient light',
   autumnMapleValley: 'autumn maple valley background, deep red-gold foliage covering the hillsides, soft warm afternoon light',
   lotusPondPavilion: 'lotus pond pavilion background, blooming lotus flowers covering the water, wooden platform extending over the pond',
-  lanternPalaceEaves: 'grand palace eaves background at night, rows of glowing warm lanterns strung beneath ornate rooftop beams, deep bokeh light bloom, festive ceremonial dance-banquet atmosphere'
+  lanternPalaceEaves: 'grand palace eaves background at night, rows of glowing warm lanterns strung beneath ornate rooftop beams, deep bokeh light bloom, festive ceremonial dance-banquet atmosphere',
+  palaceTeaHall: 'ornate palace tea-hall background, gilded lattice archway windows, warm candlelight, a low table set with tea and delicate pastries, tall vases of purple flowers framing the scene, intimate ceremonial atmosphere',
+  papercutLatticeTapestry: 'layered papercut floral lattice tapestry backdrop, intricate cloud and blossom cutout patterns, soft backlight glowing through the paper, refined handcraft immortal-realm atmosphere',
+  carvedLatticeCorridor: 'carved wooden lattice courtyard corridor background, ornate wood-frame windows, blossom branches reaching into the walkway, soft filtered daylight, quiet sect-academy atmosphere',
+  cloudSoaringSkylineView: 'soaring above a sea of clouds overlooking a distant mountain sect kingdom skyline, ancient tiered towers and floating halls rising through the mist below, expansive immortal-realm aerial atmosphere',
+  ancientTempleCherryCourtyard: 'ancient temple courtyard background swept with falling cherry blossoms, weathered stone steps and carved pillars, soft petal-strewn ground, serene sacred spring atmosphere'
 };
 
 const lightingData = {

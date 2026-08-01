@@ -807,6 +807,7 @@
       <label class="card"><input type="radio" name="material" value="blizzardSnowstormCloak"><div class="name">暴風雪斗篷</div><div class="desc">狂風暴雪、冰晶飛舞、凜冽動態感</div></label>
       <label class="card"><input type="radio" name="material" value="inkCalligraphyButterflyGown"><div class="name">水墨書法蝶舞裙</div><div class="desc">水墨書法暈染、蝴蝶群飛、留白詩意</div></label>
       <label class="card"><input type="radio" name="material" value="dragonflyScaleWingGown"><div class="name">蜻蜓鱗翅紗裙</div><div class="desc">虹彩蜻蜓翅膀、層疊透翅裙擺</div></label>
+      <label class="card"><input type="radio" name="material" value="iceFlameDuality"><div class="name">冰火二重漸層禮服</div><div class="desc">一半冰晶紗質、一半烈焰刺繡，中線銳利漸層對比</div></label>
 <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 暗黑哥德巫術</div>
       <label class="card"><input type="radio" name="material" value="thornVineLace"><div class="name">荊棘藤蔓黑紗</div><div class="desc">黑色荊棘纏繞、尖刺輪廓、巫術禮服</div></label>
       <label class="card"><input type="radio" name="material" value="spiderSilkVeil"><div class="name">蛛絲網紗</div><div class="desc">銀灰蛛絲網紗、破損蕾絲邊、哥德氛圍</div></label>
@@ -1134,6 +1135,7 @@
       <label class="card"><input type="radio" name="background" value="glassCrystalCity"><div class="name">透明水晶城市</div><div class="desc">玻璃高塔、懸浮球體、鏡面步道藍天</div></label>
       <label class="card"><input type="radio" name="background" value="goldenCarriageSquare"><div class="name">哥德馬車廣場</div><div class="desc">黑金馬車、教堂廣場、鵝卵石街道</div></label>
       <label class="card"><input type="radio" name="background" value="rockyCoastTidepool"><div class="name">礁岩海岸潮池</div><div class="desc">海蝕礁岩、清澈潮池、藍天海風</div></label>
+      <label class="card"><input type="radio" name="background" value="cliffsideInfinityPoolSunset"><div class="name">水島莊園無邊際泳池日落</div><div class="desc">懸崖無邊際泳池、金色日落海平線、精品度假莊園</div></label>
       <label class="card"><input type="radio" name="background" value="crystalForestPath"><div class="name">水晶森林步道</div><div class="desc">水晶樹、垂墜吊墜、玻璃棧道聖光</div></label>
       <label class="card"><input type="radio" name="background" value="rainbowCloudSky"><div class="name">彩虹雲海天空</div><div class="desc">彩虹拱、泡泡、粉彩雲海陽光</div></label>
       <label class="card"><input type="radio" name="background" value="industrialSteamFactory"><div class="name">廢棄工業廠房</div><div class="desc">蒸氣管線、機械手臂、煙霧瀰漫</div></label>
@@ -1928,6 +1930,11 @@ const materialData = {
     label: '蜻蜓鱗翅紗裙',
     prompt: 'dragonfly wing scale material system, iridescent teal and violet dragonfly-wing panels layered as translucent sleeves and a tiered skirt, fine vein-like tracery catching the light, mystical woodland couture',
     palette: 'iridescent teal, deep violet sheen, dark emerald undertone'
+  },
+  iceFlameDuality: {
+    label: '冰火二重漸層禮服',
+    prompt: 'ice and flame duality material system, a single gown split down the center — one half formed of icy crystalline chiffon with frost-blue faceted shards, the other half of molten flame-embroidered silk with ember glow, the two elements meeting in a sharp seamless gradient at the centerline, dramatic elemental contrast couture',
+    palette: 'ice blue crystal, frost white, molten ember orange, deep flame red, dark contrast seam'
   }
 };
 
@@ -2083,7 +2090,8 @@ const backgroundData = {
   forestStreamMossyRock: 'forest stream mossy rock background, a moss-covered boulder beside a clear woodland stream, soft light beams filtering through dense trees, mystical natural atmosphere',
   crescentMoonGoldfishSky: 'crescent moon goldfish sky background, an ornate golden crescent-moon swing suspended among blue sky and clouds, glowing koi goldfish swimming weightlessly through the air around the swing, dreamlike floating fantasy atmosphere',
   blossomGardenRainbowFlare: 'backlit blossom garden background, sunlight streaming through blooming branches, soft rainbow lens flare and floating light particles, dreamy warm romantic atmosphere',
-  phoenixDragonThroneHall: 'ornate throne hall background, an ancient palace throne flanked by a blazing fire phoenix spirit coiling on one side and a crystalline ice-and-lightning dragon spirit guarding the other side, epic dual-elemental guardian atmosphere'
+  phoenixDragonThroneHall: 'ornate throne hall background, an ancient palace throne flanked by a blazing fire phoenix spirit coiling on one side and a crystalline ice-and-lightning dragon spirit guarding the other side, epic dual-elemental guardian atmosphere',
+  cliffsideInfinityPoolSunset: 'cliffside infinity-pool resort background, sweeping ocean horizon at golden sunset, sleek modern villa architecture framing the pool edge, warm reflective water surface, luxury travel-editorial atmosphere'
 };
 
 const lightingData = {
