@@ -2869,3 +2869,60 @@
   下一步可以在四頁裡各挑 1-2 組模板追加部位細節，比照 battle-academy
   的 `byakkoTigerDojoFocus`/`genbuAncientGuardianThrone` 做法。
 
+## 2026-08-01（六）　xianxia.html：04 服裝拿掉「法袍道服」道士分類，換成「仙靈妖精裝束」
+
+- owner 貼出「法袍道服」分類的 5 個選項（八卦道袍/五行法袍/煉丹道姑服/
+  符紋道長袍/藏經閣書卷袍）並明確表示：「道士類的就不要了，我其實想要的
+  是美美的仙女俠女妖狐妖精之類的」。
+- **盤點既有分類，確認缺口在哪**：xianxia.html 04 服裝共 7 組——仙門正裝
+  基礎、古典勁裝與遊俠、法袍道服（要移除）、婚嫁儀式、戰鬥仙裝與聖器化、
+  妖靈與靈獸化裝束（已含 foxSpiritRobe/nineTailRobe 等狐靈選項）、樂舞伎
+  與飛天樂舞。owner 提到的「妖狐」「俠女」其實已經有分類涵蓋，真正缺的是
+  「仙女／妖精」這種空靈輕盈的美型，所以新分類鎖定這個方向，避免跟既有
+  分類語意重疊。
+- **新增「✦ 仙靈妖精裝束」5 個選項**（取代原「✦ 法袍道服」）：
+  - `flowerSpiritPetalDress`（花靈瓣裙）：花瓣層疊薄紗、輕盈精靈輪廓
+  - `moonSpiritGauzeRobe`（月靈綃衣）：月光薄紗曳地、銀線滾邊、月靈仙子輪廓
+  - `butterflySpriteGown`（蝶靈羽紗裙）：蝶翼薄紗袖、七彩滾邊、俏皮精靈輪廓
+  - `rosyCloudFairyDress`（霞雲輕紗裙）：漸層雲霞紗裙、飄逸仙子輪廓
+  - `charmSpriteTrailDress`（精怪綴飾裙）：綴飾垂鈴、俏皮精怪輪廓
+  英文 prompt 沿用既有 `garmentData` 條目的寫法慣例（"...silhouette" 結尾、
+  描述剪裁細節而非角色設定），跟同頁其他服裝條目風格一致。`fiveElementRobe`
+  沒有被任何一鍵模板引用，直接移除不留殘值；其餘 4 個舊值（`baguaRobe`/
+  `alchemistRobe`/`talismanPriestRobe`/`celestialScholarRobe`）各被一組
+  模板引用，需要一併處理（見下）。
+- **重新設計 4 組引用到舊服裝值的一鍵模板**（沒有留舊 key 指向新服裝這種
+  半吊子做法，因為這 4 組模板的中文卡片名稱/描述本身就是道士向文案，例如
+  「煉丹道姑」「符紙夜巡」，光換服裝值不換文案會變成「新服裝、舊道士標題」
+  的錯位）：
+  - `daoistAlchemist`（煉丹道姑）→ `flowerSpiritGarden`（花靈庭園）：
+    服裝 `flowerSpiritPetalDress`、材質沿用桃花飄落 `peachBlossomDrift`、
+    姿勢從讀書卷坐姿 `scrollReadSit` 換成持花 `lotusHold`、背景從藏經閣
+    `libraryPavilionInterior` 換成庭園 `pavilionCourtyard`、style 從偏
+    學術的 `artExhibit` 換成 `beautyCampaign`。
+  - `lotusSpellCasting`（蓮花法印）→ `moonSpiritLotusPond`（月靈蓮池）：
+    服裝 `moonSpiritGauzeRobe`、材質從法印 `lotusFlameSpell` 換成月華雲紗
+    `moonlitCloudVeil`、姿勢從結印手勢 `handSealCast` 換成蓮花池畔坐姿
+    `lotusPoolSit`，背景/光線（荷花水榭、霧氣）維持不變因為場景本身跟
+    月靈仙子很搭。
+  - `autumnScholarPoet`（楓葉書卷）→ `mapleSpriteAutumn`（楓蝶精靈）：
+    服裝 `butterflySpriteGown`、姿勢從撫琴坐姿 `qinPlaySit` 換成辮髮撚轉
+    `braidTwirl`，材質/背景（楓葉秋思、秋楓谷地）維持不變。
+  - `talismanNightHunt`（符紙夜巡）→ `duskFairyLantern`（精怪夜市）：
+    服裝 `charmSpriteTrailDress`、材質從符紙法陣 `talismanScroll` 換成
+    靈蝶流光 `spiritButterflyGlow`、姿勢從擲符出手 `talismanThrow` 換成
+    飛舞綢帶旋轉 `flyingRibbonSpin`、光線從 `hard` 換成暖金狐火光
+    `foxfireGold`（借用 `courtDancerLanternNight` 模板已驗證過的夜市燈籠
+    暖光效果）、style 從 `huxia` 換成 `editorial`，背景維持夜市燈籠
+    `marketFestivalNight` 不變。
+  - 全部 4 組模板改用的材質/背景/姿勢/光線/style 都是**既有選項**，沒有
+    新增任何 `materialData`/`backgroundData`/`poseData`/`lightingData`
+    條目，純粹是重新排列組合搭配新服裝的美感方向，模板總數維持 17 組
+    不變。
+- **驗證**：`grep` 確認舊 9 個 key（5 服裝值＋4 模板 key）在檔案裡完全
+  無殘留引用；抽出 `<script>` 內容跑 `new Function(...)` 語法檢查通過；
+  四支驗證腳本重跑全過——`check-static` 全過、`validate-preset-refs`
+  確認 xianxia.html 17 組模板 0 issue（模板數量沒變，只是內容換了）、
+  `audit-100x` 累計 1300 次模擬（13頁×100）0 issue、`build-prompt-preview`
+  正常產出新的 xianxia 預覽輸出。
+
