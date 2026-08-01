@@ -509,6 +509,7 @@
       <label class="card"><input type="radio" name="garment" value="moonwhiteRobe"><div class="name">月白廣袖仙裙</div><div class="desc">月白薄紗、寬袖飄逸、仙子輪廓</div></label>
       <label class="card"><input type="radio" name="garment" value="swordCultivatorAttire"><div class="name">青玄劍修常服</div><div class="desc">高領窄袖、束腰劍裝、俐落輪廓</div></label>
       <label class="card"><input type="radio" name="garment" value="giltPeonyRobe"><div class="name">鎏金牡丹廣袖袍</div><div class="desc">牡丹金線刺繡、垂墜紅色腰帶、雍容綻放輪廓</div></label>
+      <label class="card"><input type="radio" name="garment" value="inkWashLinenRobe"><div class="name">水墨暈染麻布仙裝</div><div class="desc">水墨暈染麻布、皮革束腰帶、質樸雲遊輪廓</div></label>
       <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 古典勁裝與遊俠</div>
       <label class="card"><input type="radio" name="garment" value="nightRoamingArmor"><div class="name">夜行輕甲勁裝</div><div class="desc">輕甲夜行服、束腰帶、敏捷輪廓</div></label>
       <label class="card"><input type="radio" name="garment" value="wandererCloakSuit"><div class="name">遊俠斗篷勁裝</div><div class="desc">風塵外袍、綁縛護臂、江湖輪廓</div></label>
@@ -595,6 +596,7 @@
       <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 靈蝶祥瑞</div>
       <label class="card"><input type="radio" name="material" value="spiritButterflyGlow"><div class="name">靈蝶流光</div><div class="desc">發光靈蝶伴飛、金色光粒環繞、祥瑞夢幻感</div></label>
       <label class="card"><input type="radio" name="material" value="pearlTasselHairpin"><div class="name">珠簾步搖釵</div><div class="desc">垂墜珍珠金鍊髮釵、隨動作輕晃生輝</div></label>
+      <label class="card"><input type="radio" name="material" value="spiderLilyProp"><div class="name">石蒜彼岸花道具</div><div class="desc">手持一枝血紅彼岸花、幽異靈氣感</div></label>
     </div>
     <div class="form-grid" style="margin-top:10px;">
       <label class="field custom-choice" data-custom-choice="material">材質自填
@@ -886,6 +888,8 @@
       <label class="card"><input type="radio" name="background" value="forbiddenScrollVault"><div class="name">禁書秘境</div><div class="desc">漂浮古籍、幽藍靈火照明</div></label>
       <label class="card"><input type="radio" name="background" value="risingPhoenixShrine"><div class="name">鳳凰祭壇廢墟</div><div class="desc">崩塌石鳳雕像、餘燼夜色</div></label>
       <label class="card"><input type="radio" name="background" value="ancientTempleCherryCourtyard"><div class="name">落櫻古寺庭院</div><div class="desc">古寺石階、雕花石柱、滿地落櫻</div></label>
+      <label class="card"><input type="radio" name="background" value="lotusPondBathingScene"><div class="name">落花浴池</div><div class="desc">人物立於荷池水中、飄落白花瓣、迷濛逆光</div></label>
+      <label class="card"><input type="radio" name="background" value="desertRuinsOasis"><div class="name">大漠遺跡</div><div class="desc">風蝕古城斷崖、金色沙丘、遠方駝隊剪影</div></label>
       <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 竹林溪谷與四季</div>
       <label class="card"><input type="radio" name="background" value="bambooForestPath"><div class="name">竹林步道</div><div class="desc">高聳翠竹、柔光穿透、清幽小徑</div></label>
       <label class="card"><input type="radio" name="background" value="cherryBlossomCliff"><div class="name">櫻崖仙境</div><div class="desc">山崖櫻花、飄落花瓣、遠眺山谷</div></label>
@@ -1116,6 +1120,11 @@ const materialData = {
     label: '珠簾步搖釵',
     prompt: 'an ornate cascading hairpin with dangling pearl-and-gold tassel chains, delicate headpiece ornament catching the light with each small movement',
     palette: 'pearl white, warm gold chain, soft amber highlight'
+  },
+  spiderLilyProp: {
+    label: '石蒜彼岸花道具',
+    prompt: 'holding a single blood-red spider lily (higanbana) flower with delicate curved stamens, an otherworldly floral prop with quiet mystic symbolism',
+    palette: 'blood red petal, deep green stem, soft ambient glow'
   }
 };
 
@@ -1191,7 +1200,8 @@ const garmentData = {
   phoenixSpiritGown: 'dramatic gown with flame-feather textured shoulder pieces and a long trailing skirt, phoenix-rebirth silhouette',
   courtDancerRobe: 'ornate court-dancer ceremonial costume with a jeweled embroidered bodice, long flowing chiffon streamer sleeves trailing from the shoulders, richly embroidered layered draped skirt, elaborate phoenix headdress with hanging pearl tassels, flying-apsara dancer silhouette',
   lotusArmorCrystalGown: 'metallic lotus-petal armor bodice with sculpted floral plating at the chest, paired with a crystalline gauze skirt featuring a high slit, sharp yet elegant cultivator-warrior silhouette',
-  giltPeonyRobe: 'gilded peony-embroidered wide-sleeve immortal robe with a trailing red sash, rich floral gold thread work across the chest and hem, dignified blossoming silhouette'
+  giltPeonyRobe: 'gilded peony-embroidered wide-sleeve immortal robe with a trailing red sash, rich floral gold thread work across the chest and hem, dignified blossoming silhouette',
+  inkWashLinenRobe: 'ink-wash dyed rough linen hanfu robe with abstract sumi-e style patterns bleeding across the fabric, leather binding sash at the waist, artisan rustic wanderer silhouette'
 };
 
 const styleData = {
@@ -1242,7 +1252,9 @@ const backgroundData = {
   papercutLatticeTapestry: 'layered papercut floral lattice tapestry backdrop, intricate cloud and blossom cutout patterns, soft backlight glowing through the paper, refined handcraft immortal-realm atmosphere',
   carvedLatticeCorridor: 'carved wooden lattice courtyard corridor background, ornate wood-frame windows, blossom branches reaching into the walkway, soft filtered daylight, quiet sect-academy atmosphere',
   cloudSoaringSkylineView: 'soaring above a sea of clouds overlooking a distant mountain sect kingdom skyline, ancient tiered towers and floating halls rising through the mist below, expansive immortal-realm aerial atmosphere',
-  ancientTempleCherryCourtyard: 'ancient temple courtyard background swept with falling cherry blossoms, weathered stone steps and carved pillars, soft petal-strewn ground, serene sacred spring atmosphere'
+  ancientTempleCherryCourtyard: 'ancient temple courtyard background swept with falling cherry blossoms, weathered stone steps and carved pillars, soft petal-strewn ground, serene sacred spring atmosphere',
+  lotusPondBathingScene: 'lotus pond bathing scene background, the subject standing waist-deep in a tranquil lotus pond scattered with floating white blossoms, soft misty backlight, serene immortal bathing atmosphere',
+  desertRuinsOasis: 'desert dune ruins background, wind-carved ancient cliff-cut city ruins rising from golden sand dunes, a distant camel caravan silhouette, vast arid cultivation-realm horizon'
 };
 
 const lightingData = {
