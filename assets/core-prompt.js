@@ -336,6 +336,21 @@ Uniform battle-ification is not armor-ification: fashion first, school identity 
     output: CORE_OUTPUT_QUALITY
   };
 
+  const ancientGoddessCore = {
+    identityGuard: [
+      CORE_IDENTITY_LOCK,
+      CORE_FACE_GEOMETRY_LOCK,
+      `Style Scope Rule:
+Commercial style, ancient-civilization and mythological goddess fashion (Greco-Roman temple attire, Dunhuang mural apsara costume) and art direction only affect clothing, ornaments, background, lighting, composition, mood and surface texture.
+They must not change the person's facial structure, identity, age impression or recognizable features.`
+    ].join("\n\n"),
+    anatomyGuard: humanCore,
+    poseGuard: CORE_POSE_NATURALITY,
+    lightingGuard: CORE_LIGHTING_UNIFICATION,
+    negativePrompt: CORE_NEGATIVE_PROMPT,
+    output: CORE_OUTPUT_QUALITY
+  };
+
   window.CORE_IDENTITY_LOCK = CORE_IDENTITY_LOCK;
   window.CORE_FACE_GEOMETRY_LOCK = CORE_FACE_GEOMETRY_LOCK;
   window.CORE_REALISTIC_ANATOMY = CORE_REALISTIC_ANATOMY;
@@ -372,7 +387,8 @@ Uniform battle-ification is not armor-ification: fashion first, school identity 
       floralSweet: floralSweetCore,
       galaSocialite: galaSocialiteCore,
       kpopIdol: kpopIdolCore,
-      battleAcademy: battleAcademyCore
+      battleAcademy: battleAcademyCore,
+      ancientGoddess: ancientGoddessCore
     }
   };
 })();

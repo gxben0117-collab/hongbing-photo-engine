@@ -729,6 +729,81 @@ function generateGalaSocialite(core, data) {
   return prompt.filter(Boolean).join('\n');
 }
 
+function generateAncientGoddess(core, data) {
+  const selection = {
+    bodyShape: 'original',
+    material: 'divineHaloGlow',
+    garment: 'goldLaurelArmorGown',
+    background: 'marbleTempleColumnHall',
+    lighting: 'halo',
+    composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
+    framing: 'threeQuarter',
+    intensity: 'balanced material effects, elegant and luxurious',
+    pose: 'offering_gesture_goddess',
+    style: 'mythologyEpicPoster',
+    camera: 'eyeLevelCover',
+    ratio: 'vertical45',
+    customMaterial: '',
+    customGarment: '',
+    chestDetail: 'gemInlay',
+    waistSideDetail: 'none',
+    shoulderDetail: 'beadedTrim',
+    customChestDetail: '',
+    customWaistSideDetail: '',
+    customShoulderDetail: '',
+    colorNote: '',
+    extraNote: '',
+  };
+  const material = data.materialData[selection.material];
+  const materialText = material.prompt;
+  const materialPalette = material.palette;
+  const garmentText = data.garmentData[selection.garment];
+  const chestDetailText = selection.customChestDetail ? `custom chest surface detail only: ${selection.customChestDetail}` : data.chestDetailData[selection.chestDetail];
+  const waistSideDetailText = selection.customWaistSideDetail ? `custom waist side surface detail only: ${selection.customWaistSideDetail}` : data.waistSideDetailData[selection.waistSideDetail];
+  const shoulderDetailText = selection.customShoulderDetail ? `custom shoulder surface detail only: ${selection.customShoulderDetail}` : data.shoulderDetailData[selection.shoulderDetail];
+  const garmentDetailParts = [chestDetailText, waistSideDetailText, shoulderDetailText].filter(Boolean);
+  const garmentDetailText = garmentDetailParts.length
+    ? 'garment surface detail: ' + garmentDetailParts.join(', ') + ' — structural surface accents only, the garment silhouette from the appearance form above stays unchanged,'
+    : '';
+  const background = data.backgroundData[selection.background];
+  const lighting = data.lightingData[selection.lighting];
+  const bodyShape = data.BODY_SHAPES[selection.bodyShape];
+  const framing = data.framingData[selection.framing];
+  const poseText = data.poseData[selection.pose];
+  const prompt = [
+    data.identityGuard + ',',
+    'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
+    data.anatomyGuard + ',',
+    data.poseNaturalityGuard + ',',
+    bodyShape + ',',
+    data.lightingConsistencyGuard + ',',
+    data.colorTemperatureGuard + ',',
+    data.subjectIntegrationGuard + ',',
+    data.faceFillGuard + ',',
+    selection.composition + ',',
+    data.compositionGuard + ',',
+    'appearance form: ' + garmentText + ',',
+    garmentDetailText,
+    'theme material and art system: ' + materialText + ',',
+    'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',
+    selection.intensity + ',',
+    'selected material appears as controlled clothing details, ornaments, particles and background accents without overpowering facial identity,',
+    data.styleData[selection.style] + ',',
+    poseText ? poseText + ',' : '',
+    framing + ',',
+    data.cameraData[selection.camera] + ',',
+    'lighting design: ' + lighting + ',',
+    'background design: ' + background + ',',
+    data.ratioData[selection.ratio] + ',',
+    core.page.ancientGoddess.output ? core.page.ancientGoddess.output + ',' : '',
+    'hyper realistic, ultra detailed, premium advertising finish,',
+    'color palette: ' + materialPalette + ',',
+    core.page.ancientGoddess.negativePrompt ? core.page.ancientGoddess.negativePrompt + ',' : '',
+    'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face',
+  ];
+  return prompt.filter(Boolean).join('\n');
+}
+
 function generateKpopIdol(core, data) {
   const selection = {
     bodyShape: 'original',
@@ -1059,6 +1134,22 @@ function loadRevision(label, sourceReader) {
       exportExpression: '({ schoolData, upperBodyData, waistData, lowerData, uniformTypeData, chestDetailData, waistSideDetailData, shoulderDetailData, accessoryData, fantasyDetailData, armorModeData, CAPE_TEXT_OFF, emblemFocusData, styleData, backgroundData, lightingData, sharedBattleAcademyCore, identityGuard, anatomyGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, poseData, framingData, cameraData, ratioData })',
     });
     prompts['battleacademy-default.txt'] = generateBattleAcademy(core, battleAcademyData);
+  } catch (err) {
+    // Not present in this revision — skip.
+  }
+
+  // ancient-goddess.html is new; older revisions may not have it yet, so skip gracefully.
+  try {
+    const ancientGoddessSource = sourceReader('ancient-goddess.html');
+    const ancientGoddessData = evalDataSegment({
+      source: ancientGoddessSource,
+      core,
+      page: 'ancientGoddess',
+      startMarker: 'const materialData = {',
+      endMarker: 'function setRadioValue',
+      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedAncientGoddessCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData, chestDetailData, waistSideDetailData, shoulderDetailData })',
+    });
+    prompts['ancientgoddess-default.txt'] = generateAncientGoddess(core, ancientGoddessData);
   } catch (err) {
     // Not present in this revision — skip.
   }
