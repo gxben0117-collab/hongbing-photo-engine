@@ -40,7 +40,6 @@
     height:54px;
     display:flex;
     align-items:center;
-    justify-content:space-between;
   }
   .nav-logo{
     font-family:"Noto Serif TC",serif;
@@ -48,32 +47,6 @@
     font-weight:700;
     color:var(--gold);
     letter-spacing:0.08em;
-    text-decoration:none;
-  }
-  .nav-links{
-    display:flex;
-    gap:6px;
-    flex-wrap:wrap;
-    justify-content:flex-end;
-  }
-  .nav-link{
-    font-size:12px;
-    color:var(--soft);
-    text-decoration:none;
-    padding:6px 14px;
-    border-radius:999px;
-    border:1px solid transparent;
-    transition:all .15s;
-    letter-spacing:0.03em;
-  }
-  .nav-link:hover{
-    color:var(--paper);
-    border-color:var(--line);
-  }
-  .nav-link.active{
-    color:var(--gold);
-    border-color:var(--gold);
-    background:rgba(201,168,76,0.08);
   }
   /* ── HERO ── */
   .hero{
@@ -83,30 +56,8 @@
     margin:0 auto;
   }
   @media (max-width:760px){
-    nav{
-      position:sticky;
-      height:auto;
-      min-height:0;
-      align-items:stretch;
-      flex-direction:column;
-      padding:10px 14px 8px;
-      gap:8px;
-    }
-    .nav-logo{font-size:13px;line-height:1.2;}
-    .nav-links{
-      gap:6px;
-      flex-wrap:nowrap;
-      justify-content:flex-start;
-      overflow-x:auto;
-      -webkit-overflow-scrolling:touch;
-      padding-bottom:2px;
-    }
-    .nav-link{
-      flex:0 0 auto;
-      white-space:nowrap;
-      font-size:11px;
-      padding:5px 9px;
-    }
+    nav{ height:48px; padding:0 16px; }
+    .nav-logo{font-size:13px;}
     .hero{padding:32px 20px 48px;}
   }
   .hero-eyebrow{
@@ -137,13 +88,38 @@
   }
 
   /* ── CARDS ── */
+  .tools-wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 24px 80px;
+  }
+  .tools-category{
+    margin-bottom:48px;
+  }
+  .tools-category:last-child{
+    margin-bottom:0;
+  }
+  .tools-category-label{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:12px;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:700;
+    margin-bottom:20px;
+  }
+  .tools-category-label::after{
+    content:'';
+    flex:1;
+    height:1px;
+    background:var(--line);
+  }
   .tools{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
     gap:16px;
-    max-width:700px;
-    margin:0 auto;
-    padding:0 24px 80px;
   }
   .tool-card{
     display:block;
@@ -328,23 +304,7 @@
 <body>
 
 <nav>
-  <a class="nav-logo" href="index.html">寫真引擎</a>
-  <div class="nav-links">
-    <a class="nav-link active" href="index.html">首頁</a>
-    <a class="nav-link" href="travel.html">寫真旅拍</a>
-    <a class="nav-link" href="magazine.html">雜誌棚拍</a>
-    <a class="nav-link" href="doll.html">公仔系列</a>
-    <a class="nav-link" href="fantasy-fashion.html">幻想廣告</a>
-    <a class="nav-link" href="xianxia.html">中式仙俠</a>
-    <a class="nav-link" href="anime-character.html">動漫人物</a>
-    <a class="nav-link" href="flower-fairy.html">花仙子</a>
-    <a class="nav-link" href="isekai-fantasy.html">日式異世界</a>
-    <a class="nav-link" href="store-ad.html">店家廣告</a>
-    <a class="nav-link" href="floral-sweet.html">花漾甜美系</a>
-    <a class="nav-link" href="gala-socialite.html">氣質名媛宴會</a>
-    <a class="nav-link" href="kpop-idol.html">韓系氣質偶像風</a>
-    <a class="nav-link" href="battle-academy.html">戰鬥制服學園</a>
-  </div>
+  <span class="nav-logo">寫真引擎</span>
 </nav>
 
 <div class="hero">
@@ -353,111 +313,139 @@
   <p>身份鎖定 × 真人旅拍感 × 雜誌封面氣場<br>選擇你要的風格,生成完整咒語,一鍵複製</p>
 </div>
 
-<div class="tools">
+<div class="tools-wrap">
 
-  <a class="tool-card travel" href="travel.html">
-    <div class="tool-tag">Travel Portrait</div>
-    <h2>寫真旅拍風格<br>咒語產生器</h2>
-    <p>把人物放進真實旅途場景，控制地點、旅拍風格、取景、光線與畫面節奏。想要「在某個地方」的戶外實景故事感，選這裡。</p>
-    <div class="tool-features"><span class="tool-feature">地點</span><span class="tool-feature">旅拍風格</span><span class="tool-feature">光線</span></div>
-    <div class="tool-cta">開始製作 <span class="tool-cta-arrow">→</span></div>
-  </a>
+  <div class="tools-category">
+    <div class="tools-category-label">真人時尚寫真</div>
+    <div class="tools">
 
-  <a class="tool-card studio" href="magazine.html">
-    <div class="tool-tag">Magazine Studio</div>
-    <h2>雜誌棚拍風格<br>咒語產生器</h2>
-    <p>以人物為主，組合雜誌類型、服裝主題、姿勢、背景與封面級細節。想要棚拍版面與人像張力的封面大片，選這裡。</p>
-    <div class="tool-features"><span class="tool-feature">棚拍</span><span class="tool-feature">服裝</span><span class="tool-feature">姿勢</span></div>
-    <div class="tool-cta">開始製作 <span class="tool-cta-arrow">→</span></div>
-  </a>
+      <a class="tool-card travel" href="travel.html">
+        <div class="tool-tag">Travel Portrait</div>
+        <h2>寫真旅拍風格<br>咒語產生器</h2>
+        <p>把人物放進真實旅途場景，控制地點、旅拍風格、取景、光線與畫面節奏。想要「在某個地方」的戶外實景故事感，選這裡。</p>
+        <div class="tool-features"><span class="tool-feature">地點</span><span class="tool-feature">旅拍風格</span><span class="tool-feature">光線</span></div>
+        <div class="tool-cta">開始製作 <span class="tool-cta-arrow">→</span></div>
+      </a>
 
-  <a class="tool-card doll" href="doll.html">
-    <div class="tool-tag">Figure Studio</div>
-    <h2>公仔系列</h2>
-    <p>把真人參考照轉成可收藏的公仔，選擇主題、玩具形式、展示方式與底座。</p>
-    <div class="tool-features"><span class="tool-feature">公仔材質</span><span class="tool-feature">包裝</span><span class="tool-feature">底座</span></div>
-    <div class="tool-cta">開始製作 <span class="tool-cta-arrow">→</span></div>
-  </a>
+      <a class="tool-card studio" href="magazine.html">
+        <div class="tool-tag">Magazine Studio</div>
+        <h2>雜誌棚拍風格<br>咒語產生器</h2>
+        <p>以人物為主，組合雜誌類型、服裝主題、姿勢、背景與封面級細節。想要棚拍版面與人像張力的封面大片，選這裡。</p>
+        <div class="tool-features"><span class="tool-feature">棚拍</span><span class="tool-feature">服裝</span><span class="tool-feature">姿勢</span></div>
+        <div class="tool-cta">開始製作 <span class="tool-cta-arrow">→</span></div>
+      </a>
 
-  <a class="tool-card fantasy" href="fantasy-fashion.html">
-    <div class="tool-tag">Fantasy Campaign</div>
-    <h2>幻想廣告<br>咒語產生器</h2>
-    <p>將人物、奇幻服裝與特殊材質組成品牌級廣告主視覺，適合強世界觀作品。想要材質藝術與非現實世界觀，選這裡。</p>
-    <div class="tool-features"><span class="tool-feature">奇幻材質</span><span class="tool-feature">廣告構圖</span><span class="tool-feature">世界觀</span></div>
-    <div class="tool-cta">開始製作 <span class="tool-cta-arrow">→</span></div>
-  </a>
+      <a class="tool-card floralsweet" href="floral-sweet.html">
+        <div class="tool-tag">Sweet Floral Campaign</div>
+        <h2>花漾甜美系<br>咒語產生器</h2>
+        <p>甜美穿搭、花束配飾、生活感場景，24種服裝與24種背景，走真人時尚寫真質感，主打青春討喜的甜美形象。</p>
+        <div class="tool-features"><span class="tool-feature">甜美穿搭</span><span class="tool-feature">花束配飾</span><span class="tool-feature">生活場景</span></div>
+        <div class="tool-cta">開始製作 <span class="tool-cta-arrow">→</span></div>
+      </a>
 
-  <a class="tool-card xianxia" href="xianxia.html">
-    <div class="tool-tag">Xianxia Campaign</div>
-    <h2>中式仙俠<br>咒語產生器</h2>
-    <p>將人物、仙門造型與法器靈獸材質組成東方奇幻主視覺，適合仙俠電影海報與國風寫真。想要御劍飛行與東方世界觀，選這裡。</p>
-    <div class="tool-features"><span class="tool-feature">仙俠服裝</span><span class="tool-feature">法器靈獸</span><span class="tool-feature">仙境背景</span></div>
-    <div class="tool-cta">開始製作 <span class="tool-cta-arrow">→</span></div>
-  </a>
+      <a class="tool-card gala" href="gala-socialite.html">
+        <div class="tool-tag">Gala Socialite Campaign</div>
+        <h2>氣質名媛宴會<br>咒語產生器</h2>
+        <p>晚宴禮服、珠寶配飾、宴會廳與紅毯場景，24種服裝與24種背景，主打成熟優雅的名媛社交形象。</p>
+        <div class="tool-features"><span class="tool-feature">晚宴禮服</span><span class="tool-feature">珠寶配飾</span><span class="tool-feature">宴會場景</span></div>
+        <div class="tool-cta">開始製作 <span class="tool-cta-arrow">→</span></div>
+      </a>
 
-  <a class="tool-card anime" href="anime-character.html">
-    <div class="tool-tag">Anime Character Campaign</div>
-    <h2>動漫人物美圖<br>咒語產生器</h2>
-    <p>把人物轉換成賽璐璐上色的動漫角色，服裝走校園、魔法少女、劍士、機甲、巫女、精靈等原創造型。動漫化只改變畫風，不會重新設計你的身份與五官。</p>
-    <div class="tool-features"><span class="tool-feature">賽璐璐上色</span><span class="tool-feature">發光特效</span><span class="tool-feature">身份保留</span></div>
-    <div class="tool-cta">開始製作 <span class="tool-cta-arrow">→</span></div>
-  </a>
+      <a class="tool-card kpopidol" href="kpop-idol.html">
+        <div class="tool-tag">Korean Idol Campaign</div>
+        <h2>韓系氣質偶像風<br>咒語產生器</h2>
+        <p>舞台表演服、機場穿搭、都會夜景場景，24種服裝與24種背景，走真人時尚寫真質感，主打潮流偶像形象。</p>
+        <div class="tool-features"><span class="tool-feature">舞台造型</span><span class="tool-feature">機場穿搭</span><span class="tool-feature">都會場景</span></div>
+        <div class="tool-cta">開始製作 <span class="tool-cta-arrow">→</span></div>
+      </a>
 
-  <a class="tool-card flowerfairy" href="flower-fairy.html">
-    <div class="tool-tag">Flower Fairy Campaign</div>
-    <h2>花仙子<br>咒語產生器</h2>
-    <p>把人物轉換成花卉主題仙子，服裝走玫瑰、百合、蓮花、紫薇等11種花卉訂製禮服，可加翅膀與蝴蝶點綴。花卉只改變服裝與氛圍，不會重新設計你的身份與五官。</p>
-    <div class="tool-features"><span class="tool-feature">花卉禮服</span><span class="tool-feature">翅膀蝴蝶</span><span class="tool-feature">夢幻寫真</span></div>
-    <div class="tool-cta">開始製作 <span class="tool-cta-arrow">→</span></div>
-  </a>
+    </div>
+  </div>
 
-  <a class="tool-card isekai" href="isekai-fantasy.html">
-    <div class="tool-tag">Isekai Fantasy Campaign</div>
-    <h2>日式異世界<br>咒語產生器</h2>
-    <p>把人物轉換成日式輕小說/JRPG世界觀角色，勇者、魔法使、精靈、獸娘、魔王等16種陣營造型，走真人寫實質感，不是動漫插畫風。</p>
-    <div class="tool-features"><span class="tool-feature">JRPG造型</span><span class="tool-feature">寫實質感</span><span class="tool-feature">16種陣營</span></div>
-    <div class="tool-cta">開始製作 <span class="tool-cta-arrow">→</span></div>
-  </a>
+  <div class="tools-category">
+    <div class="tools-category-label">奇幻世界觀寫真</div>
+    <div class="tools">
 
-  <a class="tool-card store" href="store-ad.html">
-    <div class="tool-tag">Store Campaign</div>
-    <h2>店家活動廣告<br>產生器</h2>
-    <p>輸入活動資訊後，取得主視覺咒語與後製文案配置建議，適合店家宣傳使用。</p>
-    <div class="tool-features"><span class="tool-feature">活動海報</span><span class="tool-feature">主視覺</span><span class="tool-feature">文案建議</span></div>
-    <div class="tool-cta">開始製作 <span class="tool-cta-arrow">→</span></div>
-  </a>
+      <a class="tool-card fantasy" href="fantasy-fashion.html">
+        <div class="tool-tag">Fantasy Campaign</div>
+        <h2>幻想廣告<br>咒語產生器</h2>
+        <p>將人物、奇幻服裝與特殊材質組成品牌級廣告主視覺，適合強世界觀作品。想要材質藝術與非現實世界觀，選這裡。</p>
+        <div class="tool-features"><span class="tool-feature">奇幻材質</span><span class="tool-feature">廣告構圖</span><span class="tool-feature">世界觀</span></div>
+        <div class="tool-cta">開始製作 <span class="tool-cta-arrow">→</span></div>
+      </a>
 
-  <a class="tool-card floralsweet" href="floral-sweet.html">
-    <div class="tool-tag">Sweet Floral Campaign</div>
-    <h2>花漾甜美系<br>咒語產生器</h2>
-    <p>甜美穿搭、花束配飾、生活感場景，24種服裝與24種背景，走真人時尚寫真質感，主打青春討喜的甜美形象。</p>
-    <div class="tool-features"><span class="tool-feature">甜美穿搭</span><span class="tool-feature">花束配飾</span><span class="tool-feature">生活場景</span></div>
-    <div class="tool-cta">開始製作 <span class="tool-cta-arrow">→</span></div>
-  </a>
+      <a class="tool-card xianxia" href="xianxia.html">
+        <div class="tool-tag">Xianxia Campaign</div>
+        <h2>中式仙俠<br>咒語產生器</h2>
+        <p>將人物、仙門造型與法器靈獸材質組成東方奇幻主視覺，適合仙俠電影海報與國風寫真。想要御劍飛行與東方世界觀，選這裡。</p>
+        <div class="tool-features"><span class="tool-feature">仙俠服裝</span><span class="tool-feature">法器靈獸</span><span class="tool-feature">仙境背景</span></div>
+        <div class="tool-cta">開始製作 <span class="tool-cta-arrow">→</span></div>
+      </a>
 
-  <a class="tool-card gala" href="gala-socialite.html">
-    <div class="tool-tag">Gala Socialite Campaign</div>
-    <h2>氣質名媛宴會<br>咒語產生器</h2>
-    <p>晚宴禮服、珠寶配飾、宴會廳與紅毯場景，24種服裝與24種背景，主打成熟優雅的名媛社交形象。</p>
-    <div class="tool-features"><span class="tool-feature">晚宴禮服</span><span class="tool-feature">珠寶配飾</span><span class="tool-feature">宴會場景</span></div>
-    <div class="tool-cta">開始製作 <span class="tool-cta-arrow">→</span></div>
-  </a>
+      <a class="tool-card isekai" href="isekai-fantasy.html">
+        <div class="tool-tag">Isekai Fantasy Campaign</div>
+        <h2>日式異世界<br>咒語產生器</h2>
+        <p>把人物轉換成日式輕小說/JRPG世界觀角色，勇者、魔法使、精靈、獸娘、魔王等16種陣營造型，走真人寫實質感，不是動漫插畫風。</p>
+        <div class="tool-features"><span class="tool-feature">JRPG造型</span><span class="tool-feature">寫實質感</span><span class="tool-feature">16種陣營</span></div>
+        <div class="tool-cta">開始製作 <span class="tool-cta-arrow">→</span></div>
+      </a>
 
-  <a class="tool-card kpopidol" href="kpop-idol.html">
-    <div class="tool-tag">Korean Idol Campaign</div>
-    <h2>韓系氣質偶像風<br>咒語產生器</h2>
-    <p>舞台表演服、機場穿搭、都會夜景場景，24種服裝與24種背景，走真人時尚寫真質感，主打潮流偶像形象。</p>
-    <div class="tool-features"><span class="tool-feature">舞台造型</span><span class="tool-feature">機場穿搭</span><span class="tool-feature">都會場景</span></div>
-    <div class="tool-cta">開始製作 <span class="tool-cta-arrow">→</span></div>
-  </a>
+      <a class="tool-card flowerfairy" href="flower-fairy.html">
+        <div class="tool-tag">Flower Fairy Campaign</div>
+        <h2>花仙子<br>咒語產生器</h2>
+        <p>把人物轉換成花卉主題仙子，服裝走玫瑰、百合、蓮花、紫薇等11種花卉訂製禮服，可加翅膀與蝴蝶點綴。花卉只改變服裝與氛圍，不會重新設計你的身份與五官。</p>
+        <div class="tool-features"><span class="tool-feature">花卉禮服</span><span class="tool-feature">翅膀蝴蝶</span><span class="tool-feature">夢幻寫真</span></div>
+        <div class="tool-cta">開始製作 <span class="tool-cta-arrow">→</span></div>
+      </a>
 
-  <a class="tool-card battle" href="battle-academy.html">
-    <div class="tool-tag">Campus Battle Uniform Campaign</div>
-    <h2>戰鬥制服學園<br>咒語產生器</h2>
-    <p>日系漫畫風真人改良戰鬥服（學生服／水手服／和服），24種服裝與24種校園決戰背景，走真人寫實質感，不是動漫插畫風。</p>
-    <div class="tool-features"><span class="tool-feature">改良戰鬥服</span><span class="tool-feature">校園決戰</span><span class="tool-feature">日系漫畫感</span></div>
-    <div class="tool-cta">開始製作 <span class="tool-cta-arrow">→</span></div>
-  </a>
+      <a class="tool-card battle" href="battle-academy.html">
+        <div class="tool-tag">Campus Battle Uniform Campaign</div>
+        <h2>戰鬥制服學園<br>咒語產生器</h2>
+        <p>日系漫畫風真人改良戰鬥服（學生服／水手服／和服），24種服裝與24種校園決戰背景，走真人寫實質感，不是動漫插畫風。</p>
+        <div class="tool-features"><span class="tool-feature">改良戰鬥服</span><span class="tool-feature">校園決戰</span><span class="tool-feature">日系漫畫感</span></div>
+        <div class="tool-cta">開始製作 <span class="tool-cta-arrow">→</span></div>
+      </a>
+
+    </div>
+  </div>
+
+  <div class="tools-category">
+    <div class="tools-category-label">動漫插畫風</div>
+    <div class="tools">
+
+      <a class="tool-card anime" href="anime-character.html">
+        <div class="tool-tag">Anime Character Campaign</div>
+        <h2>動漫人物美圖<br>咒語產生器</h2>
+        <p>把人物轉換成賽璐璐上色的動漫角色，服裝走校園、魔法少女、劍士、機甲、巫女、精靈等原創造型。動漫化只改變畫風，不會重新設計你的身份與五官。</p>
+        <div class="tool-features"><span class="tool-feature">賽璐璐上色</span><span class="tool-feature">發光特效</span><span class="tool-feature">身份保留</span></div>
+        <div class="tool-cta">開始製作 <span class="tool-cta-arrow">→</span></div>
+      </a>
+
+    </div>
+  </div>
+
+  <div class="tools-category">
+    <div class="tools-category-label">特殊工具</div>
+    <div class="tools">
+
+      <a class="tool-card doll" href="doll.html">
+        <div class="tool-tag">Figure Studio</div>
+        <h2>公仔系列</h2>
+        <p>把真人參考照轉成可收藏的公仔，選擇主題、玩具形式、展示方式與底座。</p>
+        <div class="tool-features"><span class="tool-feature">公仔材質</span><span class="tool-feature">包裝</span><span class="tool-feature">底座</span></div>
+        <div class="tool-cta">開始製作 <span class="tool-cta-arrow">→</span></div>
+      </a>
+
+      <a class="tool-card store" href="store-ad.html">
+        <div class="tool-tag">Store Campaign</div>
+        <h2>店家活動廣告<br>產生器</h2>
+        <p>輸入活動資訊後，取得主視覺咒語與後製文案配置建議，適合店家宣傳使用。</p>
+        <div class="tool-features"><span class="tool-feature">活動海報</span><span class="tool-feature">主視覺</span><span class="tool-feature">文案建議</span></div>
+        <div class="tool-cta">開始製作 <span class="tool-cta-arrow">→</span></div>
+      </a>
+
+    </div>
+  </div>
 
 </div>
 
