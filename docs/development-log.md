@@ -3363,3 +3363,34 @@
   issue）、`build-prompt-preview.mjs`（新增 `generateAncientGoddess()`
   + `loadRevision` try/catch 區塊，輸出 `ancientgoddess-default.txt`
   人工核對咒語組裝正確、身份鎖定完整）。
+
+## 2026-08-02（二）　xianxia.html：服裝改造核心三區塊詞彙擴充，作為「9-layer」提案試點
+
+- **背景**：owner 讀完 `docs/要素不被採用的.md` 後，提出一套「9-layer」服裝要素分類
+  構想（服裝款式/胸口領口/肩部/腰部/裙身/材質/配件/背景/姿勢+光線），想知道能不能
+  把這套抽象拿去套用在 Magazine、Fantasy、戰鬥制服學園、古風(xianxia)、旅遊五個頁面
+  上共用。研究後發現材質/背景/姿勢/光線四層本來就已經是各頁獨立的完整選項池，服裝
+  款式（`garmentData`）也已經是完整預設輪廓字串；唯一密度不夠的是「服裝改造核心」
+  （`chestDetailData`/`waistSideDetailData`/`shoulderDetailData`）每區塊只有 8~9 個選項。
+  owner 接著直接給出三個區塊各自的完整新選項清單（每區塊 20~30 個之間），指定先在
+  xianxia.html（既有「古風」試點頁、且已內建這套 Layer 機制）落地驗證。
+- **範圍調整**：owner 給的胸口清單裡含「深V剪裁」「超深V剪裁」兩項——這兩個詞在
+  `docs/要素不被採用的.md` 三輪記錄裡都是「因裸露尺度被排除」的典型判定用語，且全站
+  任何一頁的 `chestDetailData` 從未出現過這種強調曝光加深的詞彙（只有溫和的單一 V
+  形鏤空）。這兩項未採納，其餘 23 項（含清單裡本來就有、跟既有 `vCutout` 同尺度的
+  「V形開叉」）與腰側 18 項、肩部 19 項清單原樣採用。
+- **改動範圍**：只整批替換三個 `xxxDetailData` JS 物件內容（8~9→19~23 個選項）與
+  對應 HTML 06 區塊的 radio 卡片 markup；`GARMENT_DETAIL_LAYER_ZONES`、
+  `applyFantasyRandomSelection()` 隨機抽選邏輯、`generate()` 組裝邏輯、`themeTemplates`
+  完全不用改（選項池大小變動這些機制都是動態讀取，本來就會自動適應）。另外修正
+  `scripts/build-prompt-preview.mjs` 的 `generateXianxia()` 固定範例（`chestDetail`/
+  `shoulderDetail` 原本用的 `cloudCutout`/`capeletDrape` 這兩個 key 已被整批替換掉，
+  改成新清單裡的 `archCutout`/`capeShoulderLine`）。
+- **驗證**：四支驗證腳本全數重跑通過（`check-static`/`validate-preset-refs`
+  （xianxia.html 17 組 themeTemplates 0 issue）/`audit-100x`（全站 1400 次模擬 0
+  issue）/`build-prompt-preview`，並人工核對 `xianxia-default.txt` 產出正確帶入新的
+  chest/shoulder 細節文字）。
+- **後續**：這次改動範圍刻意只限定 xianxia.html 一頁，不擴散到其餘四個目標頁面——
+  等這頁的組合密度與使用體驗驗證過後，再決定「9-layer」提案是否要推廣，以及要怎麼
+  處理 Magazine/Travel 這兩頁跟其餘頁面不同的舊架構（`COSTUME_DIRECTIONS`/
+  `POSE_STYLES`/巢狀 `DETAIL_BLOCKS`）落差。
