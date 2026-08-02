@@ -3394,20 +3394,3 @@
   等這頁的組合密度與使用體驗驗證過後，再決定「9-layer」提案是否要推廣，以及要怎麼
   處理 Magazine/Travel 這兩頁跟其餘頁面不同的舊架構（`COSTUME_DIRECTIONS`/
   `POSE_STYLES`/巢狀 `DETAIL_BLOCKS`）落差。
-
-## 2026-08-02（三）　服裝改造核心：9 頁胸口新增「胸口 V 形開叉鏤空」
-
-- owner 明確指定在「06 服裝改造核心」的胸口區增加「胸口 V 形開叉鏤空」，
-  並指定出圖咒語必須為 `a deep V-neck cutout exposing cleavage at the chest`。
-- 套用範圍：目前全站含 `服裝改造核心` / `chestDetailData` 的 9 個出圖頁面：
-  `xianxia.html`、`anime-character.html`、`flower-fairy.html`、
-  `isekai-fantasy.html`、`floral-sweet.html`、`gala-socialite.html`、
-  `ancient-goddess.html`、`kpop-idol.html`、`battle-academy.html`。
-- 實作方式：不覆蓋既有溫和版 `V形開叉` / `vCutout` / `vSlitCutout`，
-  另新增獨立 key `deepVChestCutout`；每頁皆同時補 HTML radio 卡片與
-  `chestDetailData.deepVChestCutout`，確保手動選擇、隨機 Layer 抽選、
-  模板套用後的 generate 組裝都走既有機制。
-- **驗證**：`check-static.mjs` 全站 15 頁全過；`validate-preset-refs.mjs`
-  全部預設/模板引用 0 issue；`audit-100x.mjs` 全站 14 組 generator 共
-  1400 次模擬 0 issue；`build-prompt-preview.mjs` 正常產出
-  `output/ab-test-2026-08-02`；`git diff --check` 無空白錯誤。

@@ -1029,12 +1029,5 @@
   讓隨機與一鍵套用都會保留可見的 02 選中狀態。驗證：`check-static.mjs` 全過、
   `validate-preset-refs.mjs` 全過、`audit-100x.mjs` 500 次模擬 0 issue、
   `build-prompt-preview.mjs` 正常產出 `output/ab-test-2026-07-22`。
-- 2026-08-02：依 owner 明確指定，9 個含「06 服裝改造核心」的出圖頁面胸口區新增
-  「胸口 V 形開叉鏤空」；實作為獨立 key `deepVChestCutout`，不覆蓋既有溫和版
-  `V形開叉`，出圖咒語固定為 `a deep V-neck cutout exposing cleavage at the chest`。
-  套用頁面：xianxia / anime-character / flower-fairy / isekai-fantasy / floral-sweet /
-  gala-socialite / ancient-goddess / kpop-idol / battle-academy。驗證：`check-static.mjs`
-  全站 15 頁全過、`validate-preset-refs.mjs` 0 issue、`audit-100x.mjs` 1400 次模擬
-  0 issue、`build-prompt-preview.mjs` 正常產出 `output/ab-test-2026-08-02`。
 
 </details>
