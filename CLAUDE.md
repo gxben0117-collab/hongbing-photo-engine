@@ -28,6 +28,9 @@
   留白/語言/文字自填/比例），8 組一鍵範例。`core-prompt.js` 新增輕量
   `editorialCore`；`index.html` 新卡片歸入「特殊工具」分類；四支驗證腳本全數
   新增支援並全過（詳見開發日誌）。
+- **服裝改造核心補強：胸口新增「深 V至腰」**（2026-08-02）：9 個已有「服裝改造核心」
+  的正式頁同步新增胸口選項 `waistDeepVNeckline`，UI 為「深 V至腰」，prompt data 為
+  `waist-deep V neckline, deep V cut extending to the waist`。
 - **服裝改造核心：性感剪裁要素推到 9 個正式頁**（2026-08-02）：owner 先在內部
   「性感仙俠」頁確認深 V、交叉綁帶、開衩裙、削肩等服裝剪裁詞可用後，正式同步到
   9 個已有「服裝改造核心」的頁面（ancient-goddess/anime-character/

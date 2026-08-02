@@ -3467,6 +3467,19 @@
   露肩針織造型、側臉大字遮擋構圖。禁止吸收：`VOGUE`、作品名、角色名、仿品牌
   雜誌文字。
 
+## 2026-08-02（六）　服裝改造核心：胸口新增「深 V至腰」
+
+- **背景**：owner 在已定稿的胸口性感剪裁組（深 V／交領深 V 結構胸衣／交叉綁帶
+  深 V／深 V 大開襟）後，要求再新增一個更明確的「深 V至腰」。
+- **改動範圍**：9 個已有「服裝改造核心」的正式頁同步新增：
+  `ancient-goddess.html`、`anime-character.html`、`battle-academy.html`、
+  `floral-sweet.html`、`flower-fairy.html`、`gala-socialite.html`、
+  `isekai-fantasy.html`、`kpop-idol.html`、`xianxia.html`。
+- **新增選項**：UI 顯示「深 V至腰」，說明為「深 V 領口延伸至腰線」；
+  prompt data 為 `waist-deep V neckline, deep V cut extending to the waist`。
+- **驗證**：重跑 `check-static.mjs`、`validate-preset-refs.mjs`、
+  `audit-100x.mjs`、`build-prompt-preview.mjs` 與 `git diff --check`。
+
 ## 2026-08-02（四）　新增第 15 個工具頁：editorial-identity.html（編輯視覺設計，後製排版工具）
 
 - **背景**：owner 提出一份完整的「Visual Identity Card」專案設計文件（Project
