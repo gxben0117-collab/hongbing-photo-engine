@@ -478,15 +478,15 @@
   <section class="section-body">
     <div class="section-header">
       <div class="section-label">03</div>
-      <div class="section-title">身形輪廓</div>
+      <div class="section-title">體態核心</div>
     </div>
-    <p class="hint">單選，控制人物比例與腰線。選「原圖自然比例」時，會以參考照身形為主要依據。</p>
+    <p class="hint">單選，控制身形比例、腰線與整體體態。選「原圖自然比例」時，會以參考照身形為主要依據。</p>
     <div class="grid grid-3" data-choice="bodyShape">
-      <label class="card selected"><input type="radio" name="bodyShape" value="original" checked><div class="name">原圖自然比例</div><div class="desc">以參考照身形為主</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="slight_waist"><div class="name">輕微纖腰</div><div class="desc">自然修飾腰線</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="curvy_waist"><div class="name">豐滿纖腰</div><div class="desc">明顯胸腰臀曲線</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="fashion_tall"><div class="name">高挑時裝比例</div><div class="desc">修長高級模特感</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="korean_idol"><div class="name">韓系偶像比例</div><div class="desc">修長腿線、俐落肩頸、舞台鏡頭平衡感</div></label>
+      <label class="card selected"><input type="radio" name="bodyShape" value="original" checked><div class="name">原圖自然比例</div><div class="desc">保留參考照身形</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="slight_waist"><div class="name">輕微纖腰</div><div class="desc">自然美化、輕度修腰</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="curvy_waist"><div class="name">豐滿纖腰</div><div class="desc">性感寫真、強烈 S 曲線</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="fashion_tall"><div class="name">高挑時裝比例</div><div class="desc">精品大片、時裝模特身形</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="korean_idol"><div class="name">韓系偶像比例</div><div class="desc">偶像舞台、長腿小臉比例</div></label>
     </div>
   </section>
 
@@ -1234,42 +1234,31 @@ Head/gaze/shoulders/torso/arms/legs form one coherent moment.
 No contradictory head/body direction, stiff/robot pose or broken limbs.`;
 
 const BODY_SHAPES = {
-  original: `【身形輪廓｜原圖自然比例】
+  original: `【體態核心｜原圖自然比例】
 
-Preserve The Reference Photo Natural Body Proportions
-Keep Original Body Shape, Height Impression, Shoulder Width, Waist-To-Hip Balance
-Natural Realistic Adult Female Anatomy
-Do Not Force A New Body Type
-Keep Face, Identity, Age Impression And Personal Features Unchanged`,
-  slight_waist: `【身形輪廓｜輕微纖腰】
+original natural body proportion, preserve the reference photo body shape, no body reshaping
+Preserve height impression, shoulder width, waist-to-hip balance and realistic adult anatomy
+Keep face, identity, age impression and personal features unchanged`,
+  slight_waist: `【體態核心｜輕微纖腰】
 
-Subtle Narrow Waist Refinement
-Slightly More Defined Waistline While Keeping Natural Body Proportions
-Elegant Feminine Silhouette, Not Exaggerated
-Keep The Original Face, Identity And Personal Features Unchanged
-Natural Realistic Adult Female Anatomy`,
-  curvy_waist: `【身形輪廓｜豐滿纖腰】
+subtle slim waistline, natural waist refinement, preserve realistic body proportion
+Elegant feminine silhouette, not exaggerated
+Keep the original face, identity and personal features unchanged`,
+  curvy_waist: `【體態核心｜豐滿纖腰】
 
-Japanese Curvy Slim-Waist Adult Female Silhouette
-Full Bust, Slim Waist, Elegant Waist-To-Hip Curve
-Clearly Defined Feminine Body Line
-Keep The Original Face, Identity, Age Impression And Personal Features Unchanged
-Natural Realistic Body Proportions, No Exaggerated Fantasy Anatomy`,
-  fashion_tall: `【身形輪廓｜高挑時裝比例】
+prominent fuller bust curve, narrow slim waistline, dramatic feminine S-curve silhouette, strong bust-waist-hip contrast
+Keep the original face, identity, age impression and personal features unchanged
+Natural realistic adult body proportion, no distorted or exaggerated fantasy anatomy`,
+  fashion_tall: `【體態核心｜高挑時裝比例】
 
-Tall High-Fashion Model Silhouette
-Longer Leg Impression, Refined Shoulder And Neck Line, Slim Editorial Body Shape
-Elegant Runway Proportions While Staying Realistic
-Keep The Original Face, Identity And Personal Features Unchanged
-No Doll-Like Or Over-Stretched Anatomy`,
-  korean_idol: `【身形輪廓｜韓系偶像比例】
+tall editorial fashion proportion, elongated legs, refined shoulder-neck line, runway model silhouette, elegant slim frame
+Keep the original face, identity and personal features unchanged
+No doll-like or over-stretched anatomy`,
+  korean_idol: `【體態核心｜韓系偶像比例】
 
-Korean Idol Stage Proportions
-Balanced Adult Idol Silhouette With A Naturally Long-Leg Impression
-Refined Shoulder And Neck Line, Upright Posture, Toned Yet Soft Feminine Body Balance
-Camera-Friendly Proportions For Performance, Beauty And Editorial Photography
-Keep The Original Face, Identity And Personal Features Unchanged
-Natural Realistic Adult Anatomy, No Doll-Like Or Over-Stretched Body`
+K-pop idol inspired proportion, long legs, upright confident posture, toned yet soft body line, youthful stage-ready silhouette
+Keep the original face, identity and personal features unchanged
+Natural realistic adult anatomy, no doll-like or over-stretched body`
 };
 
 
