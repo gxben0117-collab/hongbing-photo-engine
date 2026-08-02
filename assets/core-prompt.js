@@ -48,12 +48,19 @@ Head size follows selected framing.
 If full body or wide poster framing is selected, keep body proportion coherent and do not enlarge the head to preserve the face.
 Face remains readable and recognizable even when the face is smaller in frame.`;
 
-  const CORE_LIGHTING_UNIFICATION = `【光線一致性系統】
+  const CORE_LIGHTING_UNIFICATION = `【光線與膚色一致性系統】
 
-Unified light: one global source, direction, color temp and exposure apply to face, body, outfit and background.
-Environmental/material reflections affect the entire subject, including face.
-Render face/body/outfit/background as one integrated photograph with natural shadows.
-No independent face/beauty/portrait light, face relighting, pasted/separately rendered face or floating subject.`;
+Unified light: one global source, direction, color temperature and exposure apply to face, body, outfit and background.
+Environmental and material reflections affect the entire subject, including the face; face and body share the same color temperature, white balance and skin tone rendering.
+The face is part of the scene and must be rendered within the same integrated photograph, not processed, relit or exposed separately.
+No independent beauty/portrait light, no face relighting, no artificial facial whitening or separate facial brightening, no beauty filter or face enhancement pipeline, no pasted/separately-rendered face or floating subject.
+A natural, subtle facial fill and eye catchlight are allowed, but only as part of the same global lighting environment — never flat, never overexposed, never breaking the shared white balance.`;
+
+  const CORE_COMPOSITION_CONTROL = `Commercial Composition Control:
+Subject scale follows the selected framing ratio.
+Keep the subject clear inside the crop, with clean breathing room around the head and body.
+If the body is visible, keep the body proportion coherent and do not enlarge the head to preserve the face; facial likeness stays readable even when the face is small in frame.
+Poster layout, negative space and material effects must support the model instead of crowding the face.`;
 
   const CORE_SKIN_TEXTURE = `【真實膚質系統】
 
@@ -181,6 +188,7 @@ They must not change the person's facial structure, identity, age impression or 
     illustrationSkeleton: illustrationHumanCore,
     poseGuard: CORE_POSE_NATURALITY,
     lightingGuard: CORE_LIGHTING_UNIFICATION,
+    compositionGuard: CORE_COMPOSITION_CONTROL,
     negativePrompt: CORE_NEGATIVE_PROMPT,
     output: CORE_OUTPUT_QUALITY
   };
@@ -197,6 +205,7 @@ They must not change the person's facial structure, identity, age impression or 
     illustrationSkeleton: illustrationHumanCore,
     poseGuard: CORE_POSE_NATURALITY,
     lightingGuard: CORE_LIGHTING_UNIFICATION,
+    compositionGuard: CORE_COMPOSITION_CONTROL,
     negativePrompt: CORE_NEGATIVE_PROMPT,
     output: CORE_OUTPUT_QUALITY
   };
@@ -214,6 +223,7 @@ This is a photorealistic photography campaign, not an anime/illustration convers
     illustrationSkeleton: illustrationHumanCore,
     poseGuard: CORE_POSE_NATURALITY,
     lightingGuard: CORE_LIGHTING_UNIFICATION,
+    compositionGuard: CORE_COMPOSITION_CONTROL,
     negativePrompt: CORE_NEGATIVE_PROMPT,
     output: CORE_OUTPUT_QUALITY
   };
@@ -237,6 +247,7 @@ The character must remain recognizable as the same person even after anime styli
     anatomyGuard: illustrationHumanCore,
     poseGuard: CORE_POSE_NATURALITY,
     lightingGuard: CORE_LIGHTING_UNIFICATION,
+    compositionGuard: CORE_COMPOSITION_CONTROL,
     negativePrompt: CORE_NEGATIVE_PROMPT,
     output: CORE_OUTPUT_QUALITY
   };
@@ -253,6 +264,7 @@ They must not change the person's facial structure, identity, age impression or 
     illustrationSkeleton: illustrationHumanCore,
     poseGuard: CORE_POSE_NATURALITY,
     lightingGuard: CORE_LIGHTING_UNIFICATION,
+    compositionGuard: CORE_COMPOSITION_CONTROL,
     negativePrompt: CORE_NEGATIVE_PROMPT,
     output: CORE_OUTPUT_QUALITY
   };
@@ -284,6 +296,7 @@ They must not change the person's facial structure, identity, age impression or 
     anatomyGuard: humanCore,
     poseGuard: CORE_POSE_NATURALITY,
     lightingGuard: CORE_LIGHTING_UNIFICATION,
+    compositionGuard: CORE_COMPOSITION_CONTROL,
     negativePrompt: CORE_NEGATIVE_PROMPT,
     output: CORE_OUTPUT_QUALITY
   };
@@ -299,6 +312,7 @@ They must not change the person's facial structure, identity, age impression or 
     anatomyGuard: humanCore,
     poseGuard: CORE_POSE_NATURALITY,
     lightingGuard: CORE_LIGHTING_UNIFICATION,
+    compositionGuard: CORE_COMPOSITION_CONTROL,
     negativePrompt: CORE_NEGATIVE_PROMPT,
     output: CORE_OUTPUT_QUALITY
   };
@@ -314,6 +328,7 @@ They must not change the person's facial structure, identity, age impression or 
     anatomyGuard: humanCore,
     poseGuard: CORE_POSE_NATURALITY,
     lightingGuard: CORE_LIGHTING_UNIFICATION,
+    compositionGuard: CORE_COMPOSITION_CONTROL,
     negativePrompt: CORE_NEGATIVE_PROMPT,
     output: CORE_OUTPUT_QUALITY
   };
@@ -347,6 +362,7 @@ They must not change the person's facial structure, identity, age impression or 
     anatomyGuard: humanCore,
     poseGuard: CORE_POSE_NATURALITY,
     lightingGuard: CORE_LIGHTING_UNIFICATION,
+    compositionGuard: CORE_COMPOSITION_CONTROL,
     negativePrompt: CORE_NEGATIVE_PROMPT,
     output: CORE_OUTPUT_QUALITY
   };

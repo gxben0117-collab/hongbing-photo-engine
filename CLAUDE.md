@@ -20,6 +20,14 @@
 
 ### 現況摘要（2026-08-02）
 
+- **咒語瘦身：合併 9 頁重複的光線/膚色/構圖 guard 區塊**（2026-08-02）：發現單份
+  生成咒語約 75% 是固定系統防呆文字，其中 `CORE_LIGHTING_UNIFICATION` +
+  `colorTemperatureGuard`/`subjectIntegrationGuard`/`faceFillGuard` 四個區塊在
+  9 個頁面（ancient-goddess/anime-character/flower-fairy/floral-sweet/
+  gala-socialite/isekai-fantasy/kpop-idol/fantasy-fashion/xianxia）逐字元
+  完全相同、內容高度重疊，合併成一個精簡版塞進 `assets/core-prompt.js` 集中管理
+  （不動 battle-academy／travel／magazine，架構不同）。每頁咒語字數減少 1082
+  字元（約 12.3%~12.6%），guard 邏輯無遺漏，四支驗證腳本全過（詳見開發日誌）。
 - **xianxia.html：服裝改造核心三區塊詞彙擴充，作為「9-layer」提案試點**
   （2026-08-02）：owner 提出跨頁共用的「9-layer」服裝要素分類構想；盤點後發現
   材質/背景/姿勢/光線/服裝款式都已經是獨立完整選項池，唯一該加密度的是「服裝

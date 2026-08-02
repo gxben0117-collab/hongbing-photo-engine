@@ -1255,76 +1255,19 @@ Natural Realistic Adult Anatomy, No Doll-Like Or Over-Stretched Body`
 };
 
 
-const compositionGuard = `Commercial Composition Control:
+const compositionGuard = sharedKpopIdolCore.compositionGuard || `Commercial Composition Control:
 Subject scale follows the selected framing ratio.
 Keep the subject clear inside the crop, with clean breathing room around the head and body.
-If the body is visible, keep the body proportion coherent and do not enlarge the head to preserve the face.
-Poster layout, negative space and material effects must support the model instead of crowding the face
-Full Body Identity Protection:
-When full body or wide poster framing is selected, keep the face readable and recognizable.
-Do not sacrifice facial identity for outfit, body silhouette, background, particles or material spectacle.
-Facial likeness remains the highest priority even when the face is small in frame`;
+If the body is visible, keep the body proportion coherent and do not enlarge the head to preserve the face; facial likeness stays readable even when the face is small in frame.
+Poster layout, negative space and material effects must support the model instead of crowding the face.`;
 
-const lightingConsistencyGuard = sharedKpopIdolCore.lightingGuard || `【光線一致性系統】
+const lightingConsistencyGuard = sharedKpopIdolCore.lightingGuard || `【光線與膚色一致性系統】
 
-Unified Cinematic Lighting System
-Global Lighting Consistency
-Subject And Environment Share The Same Light Source
-Face Lighting Must Match Body Lighting
-Single Global Lighting Environment
-Same Light Direction Across Face Body And Background
-No Independent Beauty Light
-No Face Relighting
-No Separate Portrait Lighting
-Physically Accurate Light Interaction
-Environmental Lighting Affects Entire Subject
-Material Reflections Affect Facial Lighting
-Face Body Hair Costume Background Rendered Under The Same Lighting Conditions
-Lighting Consistency Priority Maximum`;
-
-const colorTemperatureGuard = `【色溫統一系統】
-
-Unified Skin Tone Rendering
-Face And Body Must Share The Same Color Temperature
-Face And Body Must Share The Same White Balance
-No Face Color Correction
-No Artificial Facial Whitening
-No Separate Facial Brightening
-No Separate Facial Skin Processing
-Consistent Skin Tone Across Entire Subject`;
-
-const subjectIntegrationGuard = `【人物融合系統】
-
-Integrated Subject Rendering System
-Face Is Part Of The Scene
-Face Must Not Be Rendered Separately
-No Independent Face Exposure
-No Separate Face Lighting
-No Portrait Mode Face Processing
-No Beauty Filter Rendering
-No Face Enhancement Pipeline
-Environmental Reflections Affect Face
-Material Reflections Affect Face
-Face Receives Light From Surrounding Materials
-Face Receives Light From Surrounding Environment
-Subject Interacts With Environment Naturally
-Integrated Subject Rendering Priority Maximum`;
-
-const faceFillGuard = `【高級補光系統】
-
-Luxury Face Fill Lighting
-Soft Facial Fill Light
-Natural Facial Bounce Light
-Subtle Eye Area Illumination
-Elegant Catchlights In Eyes
-Controlled Beauty Fill Light
-Refined Facial Exposure
-Premium Cosmetic Advertisement Fill Light
-Face Fill Must Follow The Global Lighting Environment
-Face Fill Must Preserve Shared White Balance And Color Temperature
-No Flat Lighting
-No Overexposed Face
-Natural Three Dimensional Facial Structure`;
+Unified light: one global source, direction, color temperature and exposure apply to face, body, outfit and background.
+Environmental and material reflections affect the entire subject, including the face; face and body share the same color temperature, white balance and skin tone rendering.
+The face is part of the scene and must be rendered within the same integrated photograph, not processed, relit or exposed separately.
+No independent beauty/portrait light, no face relighting, no artificial facial whitening or separate facial brightening, no beauty filter or face enhancement pipeline, no pasted/separately-rendered face or floating subject.
+A natural, subtle facial fill and eye catchlight are allowed, but only as part of the same global lighting environment — never flat, never overexposed, never breaking the shared white balance.`;
 
 const poseData = {
   auto: '',
@@ -1667,9 +1610,6 @@ function generate(options = {}){
     poseNaturalityGuard + ',',
     bodyShape + ',',
     lightingConsistencyGuard + ',',
-    colorTemperatureGuard + ',',
-    subjectIntegrationGuard + ',',
-    faceFillGuard + ',',
     composition + ',',
     compositionGuard + ',',
     'appearance form: ' + garmentText + ',',

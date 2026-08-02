@@ -241,9 +241,6 @@ function generateFantasy(core, data) {
     data.poseNaturalityGuard + ',',
     bodyShape + ',',
     data.lightingConsistencyGuard + ',',
-    data.colorTemperatureGuard + ',',
-    data.subjectIntegrationGuard + ',',
-    data.faceFillGuard + ',',
     selection.composition + ',',
     data.compositionGuard + ',',
     'appearance form: ' + garmentText + ',',
@@ -320,9 +317,6 @@ function generateXianxia(core, data) {
     data.poseNaturalityGuard + ',',
     bodyShape + ',',
     data.lightingConsistencyGuard + ',',
-    data.colorTemperatureGuard + ',',
-    data.subjectIntegrationGuard + ',',
-    data.faceFillGuard + ',',
     selection.composition + ',',
     data.compositionGuard + ',',
     'appearance form: ' + garmentText + ',',
@@ -395,9 +389,6 @@ function generateAnime(core, data) {
     data.poseNaturalityGuard + ',',
     bodyShape + ',',
     data.lightingConsistencyGuard + ',',
-    data.colorTemperatureGuard + ',',
-    data.subjectIntegrationGuard + ',',
-    data.faceFillGuard + ',',
     selection.composition + ',',
     data.compositionGuard + ',',
     'appearance form: ' + garmentText + ',',
@@ -474,9 +465,6 @@ function generateFlowerFairy(core, data) {
     data.poseNaturalityGuard + ',',
     bodyShape + ',',
     data.lightingConsistencyGuard + ',',
-    data.colorTemperatureGuard + ',',
-    data.subjectIntegrationGuard + ',',
-    data.faceFillGuard + ',',
     selection.composition + ',',
     data.compositionGuard + ',',
     'appearance form: ' + garmentText + ',',
@@ -552,9 +540,6 @@ function generateIsekai(core, data) {
     data.poseNaturalityGuard + ',',
     bodyShape + ',',
     data.lightingConsistencyGuard + ',',
-    data.colorTemperatureGuard + ',',
-    data.subjectIntegrationGuard + ',',
-    data.faceFillGuard + ',',
     selection.composition + ',',
     data.compositionGuard + ',',
     'appearance form: ' + garmentText + ',',
@@ -627,9 +612,6 @@ function generateFloralSweet(core, data) {
     data.poseNaturalityGuard + ',',
     bodyShape + ',',
     data.lightingConsistencyGuard + ',',
-    data.colorTemperatureGuard + ',',
-    data.subjectIntegrationGuard + ',',
-    data.faceFillGuard + ',',
     selection.composition + ',',
     data.compositionGuard + ',',
     'appearance form: ' + garmentText + ',',
@@ -702,9 +684,6 @@ function generateGalaSocialite(core, data) {
     data.poseNaturalityGuard + ',',
     bodyShape + ',',
     data.lightingConsistencyGuard + ',',
-    data.colorTemperatureGuard + ',',
-    data.subjectIntegrationGuard + ',',
-    data.faceFillGuard + ',',
     selection.composition + ',',
     data.compositionGuard + ',',
     'appearance form: ' + garmentText + ',',
@@ -777,9 +756,6 @@ function generateAncientGoddess(core, data) {
     data.poseNaturalityGuard + ',',
     bodyShape + ',',
     data.lightingConsistencyGuard + ',',
-    data.colorTemperatureGuard + ',',
-    data.subjectIntegrationGuard + ',',
-    data.faceFillGuard + ',',
     selection.composition + ',',
     data.compositionGuard + ',',
     'appearance form: ' + garmentText + ',',
@@ -852,9 +828,6 @@ function generateKpopIdol(core, data) {
     data.poseNaturalityGuard + ',',
     bodyShape + ',',
     data.lightingConsistencyGuard + ',',
-    data.colorTemperatureGuard + ',',
-    data.subjectIntegrationGuard + ',',
-    data.faceFillGuard + ',',
     selection.composition + ',',
     data.compositionGuard + ',',
     'appearance form: ' + garmentText + ',',
@@ -1000,7 +973,7 @@ function loadRevision(label, sourceReader) {
     page: 'fantasy',
     startMarker: 'const materialData = {',
     endMarker: 'function setRadioValue',
-    exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedFantasyCore, FANTASY_ILLUSTRATION_MATERIAL_KEYS: typeof FANTASY_ILLUSTRATION_MATERIAL_KEYS === "undefined" ? new Set(["paperOiran","paperSculpture","redPaperWedding","watercolorBloom","inkPeony","inkGold","whitePaperFlower"]) : FANTASY_ILLUSTRATION_MATERIAL_KEYS, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
+    exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedFantasyCore, FANTASY_ILLUSTRATION_MATERIAL_KEYS: typeof FANTASY_ILLUSTRATION_MATERIAL_KEYS === "undefined" ? new Set(["paperOiran","paperSculpture","redPaperWedding","watercolorBloom","inkPeony","inkGold","whitePaperFlower"]) : FANTASY_ILLUSTRATION_MATERIAL_KEYS, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, poseData, framingData, cameraData, ratioData })',
   });
   const prompts = {
     'travel-realistic.txt': generateTravel(core, travelData, 'cinematic_realistic'),
@@ -1019,7 +992,7 @@ function loadRevision(label, sourceReader) {
       page: 'xianxia',
       startMarker: 'const materialData = {',
       endMarker: 'function setRadioValue',
-      exportExpression: '({ materialData, garmentData, chestDetailData, waistSideDetailData, shoulderDetailData, styleData, backgroundData, lightingData, sharedXianxiaCore, XIANXIA_ILLUSTRATION_MATERIAL_KEYS: typeof XIANXIA_ILLUSTRATION_MATERIAL_KEYS === "undefined" ? new Set() : XIANXIA_ILLUSTRATION_MATERIAL_KEYS, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
+      exportExpression: '({ materialData, garmentData, chestDetailData, waistSideDetailData, shoulderDetailData, styleData, backgroundData, lightingData, sharedXianxiaCore, XIANXIA_ILLUSTRATION_MATERIAL_KEYS: typeof XIANXIA_ILLUSTRATION_MATERIAL_KEYS === "undefined" ? new Set() : XIANXIA_ILLUSTRATION_MATERIAL_KEYS, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, poseData, framingData, cameraData, ratioData })',
     });
     prompts['xianxia-default.txt'] = generateXianxia(core, xianxiaData);
   } catch (err) {
@@ -1035,7 +1008,7 @@ function loadRevision(label, sourceReader) {
       page: 'anime',
       startMarker: 'const materialData = {',
       endMarker: 'function setRadioValue',
-      exportExpression: '({ materialData, garmentData, chestDetailData, waistSideDetailData, shoulderDetailData, styleData, backgroundData, lightingData, sharedAnimeCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData })',
+      exportExpression: '({ materialData, garmentData, chestDetailData, waistSideDetailData, shoulderDetailData, styleData, backgroundData, lightingData, sharedAnimeCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, poseData, framingData, cameraData, ratioData })',
     });
     prompts['anime-default.txt'] = generateAnime(core, animeData);
   } catch (err) {
@@ -1051,7 +1024,7 @@ function loadRevision(label, sourceReader) {
       page: 'flowerFairy',
       startMarker: 'const materialData = {',
       endMarker: 'function setRadioValue',
-      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, wingsData, butterfliesData, sharedFlowerFairyCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData, chestDetailData, waistSideDetailData, shoulderDetailData })',
+      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, wingsData, butterfliesData, sharedFlowerFairyCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, poseData, framingData, cameraData, ratioData, chestDetailData, waistSideDetailData, shoulderDetailData })',
     });
     prompts['flowerfairy-default.txt'] = generateFlowerFairy(core, flowerFairyData);
   } catch (err) {
@@ -1067,7 +1040,7 @@ function loadRevision(label, sourceReader) {
       page: 'isekai',
       startMarker: 'const materialData = {',
       endMarker: 'function setRadioValue',
-      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedIsekaiCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData, chestDetailData, waistSideDetailData, shoulderDetailData })',
+      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedIsekaiCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, poseData, framingData, cameraData, ratioData, chestDetailData, waistSideDetailData, shoulderDetailData })',
     });
     prompts['isekai-default.txt'] = generateIsekai(core, isekaiData);
   } catch (err) {
@@ -1083,7 +1056,7 @@ function loadRevision(label, sourceReader) {
       page: 'floralSweet',
       startMarker: 'const materialData = {',
       endMarker: 'function setRadioValue',
-      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedFloralSweetCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData, chestDetailData, waistSideDetailData, shoulderDetailData })',
+      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedFloralSweetCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, poseData, framingData, cameraData, ratioData, chestDetailData, waistSideDetailData, shoulderDetailData })',
     });
     prompts['floralsweet-default.txt'] = generateFloralSweet(core, floralSweetData);
   } catch (err) {
@@ -1099,7 +1072,7 @@ function loadRevision(label, sourceReader) {
       page: 'galaSocialite',
       startMarker: 'const materialData = {',
       endMarker: 'function setRadioValue',
-      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedGalaSocialiteCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData, chestDetailData, waistSideDetailData, shoulderDetailData })',
+      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedGalaSocialiteCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, poseData, framingData, cameraData, ratioData, chestDetailData, waistSideDetailData, shoulderDetailData })',
     });
     prompts['galasocialite-default.txt'] = generateGalaSocialite(core, galaSocialiteData);
   } catch (err) {
@@ -1115,7 +1088,7 @@ function loadRevision(label, sourceReader) {
       page: 'kpopIdol',
       startMarker: 'const materialData = {',
       endMarker: 'function setRadioValue',
-      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedKpopIdolCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData, chestDetailData, waistSideDetailData, shoulderDetailData })',
+      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedKpopIdolCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, poseData, framingData, cameraData, ratioData, chestDetailData, waistSideDetailData, shoulderDetailData })',
     });
     prompts['kpopidol-default.txt'] = generateKpopIdol(core, kpopIdolData);
   } catch (err) {
@@ -1147,7 +1120,7 @@ function loadRevision(label, sourceReader) {
       page: 'ancientGoddess',
       startMarker: 'const materialData = {',
       endMarker: 'function setRadioValue',
-      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedAncientGoddessCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, colorTemperatureGuard, subjectIntegrationGuard, faceFillGuard, poseData, framingData, cameraData, ratioData, chestDetailData, waistSideDetailData, shoulderDetailData })',
+      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedAncientGoddessCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, poseData, framingData, cameraData, ratioData, chestDetailData, waistSideDetailData, shoulderDetailData })',
     });
     prompts['ancientgoddess-default.txt'] = generateAncientGoddess(core, ancientGoddessData);
   } catch (err) {

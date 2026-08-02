@@ -3394,3 +3394,41 @@
   等這頁的組合密度與使用體驗驗證過後，再決定「9-layer」提案是否要推廣，以及要怎麼
   處理 Magazine/Travel 這兩頁跟其餘頁面不同的舊架構（`COSTUME_DIRECTIONS`/
   `POSE_STYLES`/巢狀 `DETAIL_BLOCKS`）落差。
+
+## 2026-08-02（三）　咒語瘦身：合併 9 頁重複的光線/膚色/構圖 guard 區塊
+
+- **背景**：owner 要求全專案檢查生成咒語字數，並提出精簡方案。量測 14 頁固定範例
+  輸出發現單份咒語約 75% 是固定系統防呆文字，真正跟使用者選項有關的內容不到 18%。
+  進一步拆解找到最大冗餘來源：`CORE_LIGHTING_UNIFICATION`（光線一致性系統，在
+  `assets/core-prompt.js` 共用）+ 三個各頁本地定義的 `colorTemperatureGuard`
+  （色溫統一系統）/`subjectIntegrationGuard`（人物融合系統）/`faceFillGuard`
+  （高級補光系統）——四個區塊合計約 2020 字元、佔單份咒語 23%，內容高度重疊
+  （都在講「臉不能單獨打光/單獨修圖，要跟環境同一套光」），其中 `faceFillGuard`
+  甚至跟 `subjectIntegrationGuard` 語意微妙矛盾（一邊禁止獨立臉部補光，一邊允許
+  精緻臉部補光）。用 Explore agent 逐檔比對確認：這四個區塊在 9 個頁面
+  （ancient-goddess／anime-character／flower-fairy／floral-sweet／
+  gala-socialite／isekai-fantasy／kpop-idol／fantasy-fashion／xianxia）裡
+  **逐字元完全相同**，純粹複製貼上、不在共用檔案管理。
+- **合併方案**：把四個區塊的所有不重複指令合併進擴充版的 `CORE_LIGHTING_UNIFICATION`
+  （改標題為【光線與膚色一致性系統】，保留：統一光源/色溫/白平衡、臉是場景一部分
+  不單獨處理、禁止美顏濾鏡與臉部強化管線、禁止人工美白、允許受控自然補光與眼神光
+  但仍在同一光源環境下、禁止平光/過曝），塞進 `assets/core-prompt.js` 集中管理並
+  註冊到 9 個頁面的 Core 物件（新增 `compositionGuard: CORE_COMPOSITION_CONTROL`
+  欄位）。同時修剪 `compositionGuard` 尾端「Full Body Identity Protection」跟
+  身份鎖定重複的整段敘述。9 個頁面各自：刪除三個本地重複定義、`compositionGuard`
+  改成「共用核心優先、本地 fallback 備援」既有寫法（跟 identityGuard/anatomyGuard
+  一致）、同步過時的 `lightingConsistencyGuard` fallback 文字、`generate()` 的
+  `prompt` 陣列刪掉三行已併入的 guard。`battle-academy.html`（架構已不同，先前
+  自己合併過）、`travel.html`／`magazine.html`（更早期架構，本來就沒有這四個
+  區塊）不在範圍內，`temp/` 下的 lab 檔案也排除。
+- **腳本連動修正**：`scripts/audit-100x.mjs`／`scripts/build-prompt-preview.mjs`
+  在這 9 頁各自的 `exportExpression`／固定範例組裝邏輯裡也硬編了
+  `colorTemperatureGuard`/`subjectIntegrationGuard`/`faceFillGuard` 這三個
+  變數名，頁面刪掉後兩支腳本會直接噴 `ReferenceError`，一併同步移除。
+- **實測結果**：9 個頁面咒語字數全部減少 **1082 字元**（每頁減幅一致，因為換掉的
+  區塊文字長度固定），減幅約 12.3%~12.6%（例如 xianxia 從 8741→7659、
+  ancient-goddess 從 8692→7610、anime-character 從 9227→8145）。人工抽查多份
+  輸出確認：guard 邏輯完整無遺漏、無 `undefined`、無舊版區塊標題殘留。
+- **驗證**：四支驗證腳本全數重跑通過（`check-static`／`validate-preset-refs`
+  （18 組模板 0 issue）／`audit-100x`（全站 1400 次模擬 0 issue）／
+  `build-prompt-preview`，人工核對輸出）。
