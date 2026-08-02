@@ -285,6 +285,11 @@ Even in doll style, the character must remain recognizable as the uploaded perso
     lighting: CORE_LIGHTING_UNIFICATION
   };
 
+  const editorialCore = {
+    negativePrompt: CORE_NEGATIVE_PROMPT,
+    output: CORE_OUTPUT_QUALITY
+  };
+
   const floralSweetCore = {
     identityGuard: [
       CORE_IDENTITY_LOCK,
@@ -404,7 +409,8 @@ They must not change the person's facial structure, identity, age impression or 
       galaSocialite: galaSocialiteCore,
       kpopIdol: kpopIdolCore,
       battleAcademy: battleAcademyCore,
-      ancientGoddess: ancientGoddessCore
+      ancientGoddess: ancientGoddessCore,
+      editorial: editorialCore
     }
   };
 })();

@@ -289,6 +289,22 @@ const issues = [];
   checkObject('ancient-goddess.html', 'themeTemplates', extractObjectLiteral(src, 'themeTemplates'), fieldLive, issues);
 }
 
+// ===== editorial-identity.html =====
+{
+  const src = fs.readFileSync(path.join(root, 'editorial-identity.html'), 'utf8');
+  const fieldLive = {
+    layout: liveRadioValues(src, 'layout'),
+    typography: liveRadioValues(src, 'typography'),
+    graphic: liveRadioValues(src, 'graphic'),
+    color: liveRadioValues(src, 'color'),
+    placement: liveRadioValues(src, 'placement'),
+    whitespace: liveRadioValues(src, 'whitespace'),
+    language: liveRadioValues(src, 'language'),
+    ratio: liveRadioValues(src, 'ratio'),
+  };
+  checkObject('editorial-identity.html', 'themeTemplates', extractObjectLiteral(src, 'themeTemplates'), fieldLive, issues);
+}
+
 // ===== kpop-idol.html =====
 {
   const src = fs.readFileSync(path.join(root, 'kpop-idol.html'), 'utf8');

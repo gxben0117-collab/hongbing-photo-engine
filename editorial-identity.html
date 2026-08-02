@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>編輯視覺設計咒語產生器｜寫真引擎</title>
+<meta name="description" content="編輯視覺設計咒語產生器，把已經生成完成的人像照片轉成雜誌封面、人物介紹卡、收藏卡等編輯排版設計，不重新生成人物本身。">
+<meta property="og:title" content="編輯視覺設計咒語產生器｜寫真引擎">
+<meta property="og:description" content="編輯視覺設計咒語產生器，把已經生成完成的人像照片轉成雜誌封面、人物介紹卡、收藏卡等編輯排版設計，不重新生成人物本身。">
+<meta name="twitter:title" content="編輯視覺設計咒語產生器｜寫真引擎">
+<meta name="twitter:description" content="編輯視覺設計咒語產生器，把已經生成完成的人像照片轉成雜誌封面、人物介紹卡、收藏卡等編輯排版設計，不重新生成人物本身。">
+<style>
+  :root{
+    --black:#09090B;
+    --panel:#15131A;
+    --panel-2:#1D1924;
+    --line:#322D3C;
+    --paper:#F7F4EF;
+    --soft:#A7A0B5;
+    --white:#FFFFFF;
+    --gold:#C9A84C;
+    --selected-bg:#1E1A14;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    min-height:100vh;
+    background:var(--black);
+    color:var(--paper);
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    line-height:1.6;
+    padding-bottom:72px;
+  }
+  nav{
+    position:fixed;
+    top:0;left:0;right:0;
+    height:54px;
+    padding:0 24px;
+    background:rgba(9,9,11,.92);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+    z-index:100;
+    display:flex;
+    align-items:center;
+  }
+  .nav-logo{
+    color:var(--gold);
+    font-family:"Noto Serif TC",serif;
+    font-size:14px;
+    font-weight:700;
+    letter-spacing:.08em;
+  }
+  .wrap{
+    width:min(920px,100%);
+    margin:0 auto;
+    padding:70px 20px 40px;
+  }
+  header{
+    padding:48px 0 36px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:36px;
+  }
+  .eyebrow{
+    color:var(--gold);
+    font-size:11px;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+    margin-bottom:14px;
+  }
+  h1{
+    font-family:"Noto Serif TC",serif;
+    font-size:clamp(28px,5vw,42px);
+    font-weight:900;
+    line-height:1.3;
+    margin-bottom:16px;
+  }
+  h1 span{display:block;color:var(--gold);font-size:.55em;letter-spacing:.06em;margin-top:6px;}
+  header p{color:var(--soft);font-size:14px;max-width:640px;}
+  .workflow-note{
+    margin-top:20px;
+    padding:16px 18px;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-left:3px solid var(--gold);
+    border-radius:6px;
+    font-size:13px;
+    color:var(--soft);
+    line-height:1.8;
+  }
+  .workflow-note b{color:var(--paper);}
+  section{margin-bottom:40px;}
+  .section-header{display:flex;align-items:baseline;gap:10px;margin-bottom:6px;}
+  .section-label{color:var(--gold);font-family:"Noto Serif TC",serif;font-weight:900;font-size:14px;}
+  .section-title{font-size:17px;font-weight:700;}
+  .hint{color:var(--soft);font-size:12.5px;margin-bottom:14px;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;}
+  .grid-3{grid-template-columns:repeat(3,1fr);}
+  @media (max-width:640px){.grid-3{grid-template-columns:repeat(2,1fr);}}
+  .card{
+    position:relative;
+    display:block;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:13px 14px;
+    cursor:pointer;
+    transition:border-color .15s, background .15s;
+    min-height:64px;
+  }
+  .card input{position:absolute;opacity:0;pointer-events:none;}
+  .card:hover{border-color:var(--gold);}
+  .card.selected{border-color:var(--gold);background:var(--selected-bg);}
+  .card .name{font-size:13.5px;font-weight:700;margin-bottom:3px;}
+  .card .desc{font-size:11.5px;color:var(--soft);line-height:1.5;}
+  .card.template-selected{border-color:var(--gold);background:var(--selected-bg);}
+  button.card{width:100%;text-align:left;border:1px solid var(--line);font-family:inherit;color:inherit;}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  @media (max-width:640px){.form-grid{grid-template-columns:1fr;}}
+  .field{display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:var(--soft);}
+  .field.full{grid-column:1/-1;}
+  .field input, .field textarea, .field select{
+    background:var(--panel-2);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:10px 12px;
+    color:var(--paper);
+    font-family:inherit;
+    font-size:13px;
+  }
+  .field textarea{min-height:64px;resize:vertical;}
+  .field input:focus, .field textarea:focus, .field select:focus{outline:none;border-color:var(--gold);}
+  .generate-btn{
+    width:100%;
+    padding:16px;
+    background:var(--gold);
+    color:#1A1408;
+    border:none;
+    border-radius:10px;
+    font-size:15px;
+    font-weight:900;
+    cursor:pointer;
+    letter-spacing:.04em;
+  }
+  .generate-btn:hover{filter:brightness(1.08);}
+  .output-wrap{margin-top:16px;position:relative;}
+  .output-wrap.hidden{display:none;}
+  .output-stale-badge{display:none;color:var(--gold);font-size:12px;margin-bottom:8px;}
+  .output-wrap.stale .output-stale-badge{display:block;}
+  #outputText{
+    width:100%;
+    min-height:280px;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:16px;
+    color:var(--paper);
+    font-size:12.5px;
+    line-height:1.7;
+    font-family:ui-monospace,"SFMono-Regular",Consolas,monospace;
+    white-space:pre-wrap;
+  }
+  .copy-btn{
+    margin-top:10px;
+    padding:11px 18px;
+    background:var(--panel-2);
+    border:1px solid var(--gold);
+    color:var(--gold);
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:700;
+    font-size:13px;
+  }
+  .copy-btn.copied{background:var(--gold);color:#1A1408;}
+</style>
+</head>
+<body>
+<nav>
+  <span class="nav-logo">寫真引擎</span>
+</nav>
+
+<main class="wrap">
+  <header>
+    <div class="eyebrow">Editorial Identity System</div>
+    <h1>編輯視覺設計<span>咒語產生器</span></h1>
+    <p>把一張已經生成完成的人像照片，轉成雜誌封面、人物介紹卡、收藏卡或 artbook 頁面——這頁不重新生成人物、服裝或場景，只負責在照片上疊加字體、圖形與版面設計。</p>
+    <div class="workflow-note">
+      <b>使用方式跟其他頁面不同：</b>先用任何一頁工具（仙俠、名媛、韓系偶像…不限主題）生成一張你喜歡的完整照片，<b>把那張照片存下來</b>。接著回到這頁，選好版型/字體/圖形/色彩，按「生成完整咒語」→ 複製文字 → 到 ChatGPT（或其他支援圖片＋文字輸入的生圖工具）<b>把剛才那張照片一起附上</b>，貼上這段咒語。人物、服裝、場景會被鎖住不重畫，只會在上面加編輯設計。
+    </div>
+  </header>
+
+  <section class="section-preset">
+    <div class="section-header">
+      <div class="section-label">00</div>
+      <div class="section-title">一鍵版型模板</div>
+    </div>
+    <p class="hint">一鍵套用會同時填入版型、字體、圖形、色彩、人物版位、留白密度、語言比例與比例；套用後仍可逐區改成自己的版本。</p>
+    <div class="grid grid-3">
+      <button class="card" type="button" data-template="classicMagazineCover">
+        <div class="name">經典雜誌封面</div>
+        <div class="desc">大刊頭logo、側欄專欄文字、條碼標籤</div>
+      </button>
+      <button class="card" type="button" data-template="verticalTypography">
+        <div class="name">直式巨字排版</div>
+        <div class="desc">貫穿全高的直式大字、速寫線稿疊加</div>
+      </button>
+      <button class="card" type="button" data-template="characterProfile">
+        <div class="name">人物介紹卡</div>
+        <div class="desc">結構化資訊欄、極簡字距、密集資訊版面</div>
+      </button>
+      <button class="card" type="button" data-template="swissEditorial">
+        <div class="name">瑞士編輯風</div>
+        <div class="desc">大量留白、粗黑無襯線字、幾何色塊</div>
+      </button>
+      <button class="card" type="button" data-template="collectorCard">
+        <div class="name">收藏卡版型</div>
+        <div class="desc">幾何邊框、方形比例、金色系收藏質感</div>
+      </button>
+      <button class="card" type="button" data-template="animeFeature">
+        <div class="name">動漫特輯跨頁</div>
+        <div class="desc">漫畫風字體、速寫拼貼、中英日混排</div>
+      </button>
+      <button class="card" type="button" data-template="luxuryFashion">
+        <div class="name">奢侈時尚編輯</div>
+        <div class="desc">襯線字體、黑白攝影感、極簡留白</div>
+      </button>
+      <button class="card" type="button" data-template="artbookPage">
+        <div class="name">Artbook 頁面</div>
+        <div class="desc">復古打字機說明文字、拼貼剪貼質感</div>
+      </button>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <div class="section-label">01</div>
+      <div class="section-title">版型類型</div>
+    </div>
+    <p class="hint">決定整體版面結構——標題怎麼擺、資訊欄怎麼分布、人物跟文字的主從關係。</p>
+    <div class="grid grid-3" data-choice="layout">
+      <label class="card selected"><input type="radio" name="layout" value="classicMagazineCover" checked><div class="name">經典雜誌封面</div><div class="desc">大刊頭、側欄文字、角落期號</div></label>
+      <label class="card"><input type="radio" name="layout" value="verticalTypography"><div class="name">直式巨字排版</div><div class="desc">貫穿全高直式大字</div></label>
+      <label class="card"><input type="radio" name="layout" value="characterProfile"><div class="name">人物介紹卡</div><div class="desc">結構化資訊欄與故事區塊</div></label>
+      <label class="card"><input type="radio" name="layout" value="swissEditorial"><div class="name">瑞士編輯風</div><div class="desc">留白網格、幾何構圖</div></label>
+      <label class="card"><input type="radio" name="layout" value="collectorCard"><div class="name">收藏卡版型</div><div class="desc">系列編號、圖形邊框</div></label>
+      <label class="card"><input type="radio" name="layout" value="animeFeature"><div class="name">動漫特輯跨頁</div><div class="desc">漫畫分格、速寫拼貼</div></label>
+      <label class="card"><input type="radio" name="layout" value="luxuryFashion"><div class="name">奢侈時尚編輯</div><div class="desc">精緻襯線、高端時裝感</div></label>
+      <label class="card"><input type="radio" name="layout" value="artbookPage"><div class="name">Artbook 頁面</div><div class="desc">設計註記、收藏編號</div></label>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <div class="section-label">02</div>
+      <div class="section-title">字體風格</div>
+    </div>
+    <div class="grid grid-3" data-choice="typography">
+      <label class="card selected"><input type="radio" name="typography" value="editorialSerif" checked><div class="name">編輯襯線標準字</div><div class="desc">經典時尚雜誌字體感</div></label>
+      <label class="card"><input type="radio" name="typography" value="hugeMaskedType"><div class="name">巨大遮罩疊加字</div><div class="desc">超大字體疊在人物上、內含線稿紋理</div></label>
+      <label class="card"><input type="radio" name="typography" value="boldSansHeadline"><div class="name">粗黑無襯線大字</div><div class="desc">強烈現代圖形感標題</div></label>
+      <label class="card"><input type="radio" name="typography" value="mangaOverlayType"><div class="name">漫畫風疊字</div><div class="desc">傾斜動態標題＋小日文說明字</div></label>
+      <label class="card"><input type="radio" name="typography" value="minimalTracked"><div class="name">極簡寬字距</div><div class="desc">小型大寫、寬字距、安靜氣質</div></label>
+      <label class="card"><input type="radio" name="typography" value="vintageTypewriter"><div class="name">復古打字機字</div><div class="desc">打字機說明字＋乾淨標題對比</div></label>
+      <label class="card"><input type="radio" name="typography" value="handwrittenAccent"><div class="name">手寫簽名點綴</div><div class="desc">手寫短句搭配結構化標題</div></label>
+      <label class="card"><input type="radio" name="typography" value="multilingualCollage"><div class="name">多語言拼貼字</div><div class="desc">中英日文字層疊當圖形素材</div></label>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <div class="section-label">03</div>
+      <div class="section-title">圖形元素</div>
+    </div>
+    <div class="grid grid-3" data-choice="graphic">
+      <label class="card selected"><input type="radio" name="graphic" value="barcodeLabel" checked><div class="name">條碼與標籤</div><div class="desc">角落條碼、商品標籤感</div></label>
+      <label class="card"><input type="radio" name="graphic" value="lineGrid"><div class="name">線條與網格</div><div class="desc">細線結構、網格輔助線</div></label>
+      <label class="card"><input type="radio" name="graphic" value="geometricBlocks"><div class="name">色塊幾何</div><div class="desc">平面色塊圖形層疊</div></label>
+      <label class="card"><input type="radio" name="graphic" value="halftoneDots"><div class="name">半色調點紋</div><div class="desc">印刷感網點紋理</div></label>
+      <label class="card"><input type="radio" name="graphic" value="geometricFrame"><div class="name">幾何邊框</div><div class="desc">細線框住部分畫面</div></label>
+      <label class="card"><input type="radio" name="graphic" value="collageClip"><div class="name">拼貼剪貼感</div><div class="desc">紙感剪貼層疊元素</div></label>
+      <label class="card"><input type="radio" name="graphic" value="sketchLineArt"><div class="name">手繪速寫疊加</div><div class="desc">概念草稿/線稿圖形點綴</div></label>
+      <label class="card"><input type="radio" name="graphic" value="minimalIcon"><div class="name">極簡圖標</div><div class="desc">小型符號當標點裝飾</div></label>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <div class="section-label">04</div>
+      <div class="section-title">色彩系統</div>
+    </div>
+    <p class="hint">整頁只用一個主導色統一字體、圖形與版面，這是編輯設計維持高級感的關鍵。</p>
+    <div class="grid grid-3" data-choice="color">
+      <label class="card selected"><input type="radio" name="color" value="dominantBlack" checked><div class="name">純黑主導</div><div class="desc">黑色統一字體與圖形</div></label>
+      <label class="card"><input type="radio" name="color" value="dominantWhite"><div class="name">純白極簡</div><div class="desc">近白極簡色調</div></label>
+      <label class="card"><input type="radio" name="color" value="dominantOrange"><div class="name">亮橘活力</div><div class="desc">高彩度橘色主導</div></label>
+      <label class="card"><input type="radio" name="color" value="dominantGold"><div class="name">香檳金奢華</div><div class="desc">暖金色統一調性</div></label>
+      <label class="card"><input type="radio" name="color" value="dominantSilver"><div class="name">銀灰科技感</div><div class="desc">冷調銀灰主導</div></label>
+      <label class="card"><input type="radio" name="color" value="dominantIndigo"><div class="name">靛藍冷調</div><div class="desc">深藍色主導</div></label>
+      <label class="card"><input type="radio" name="color" value="dominantWine"><div class="name">酒紅復古</div><div class="desc">深紅色主導</div></label>
+      <label class="card"><input type="radio" name="color" value="monochromePhoto"><div class="name">黑白攝影感</div><div class="desc">黑白照片＋單一強調色</div></label>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <div class="section-label">05</div>
+      <div class="section-title">人物版位</div>
+    </div>
+    <div class="grid grid-3" data-choice="placement">
+      <label class="card selected"><input type="radio" name="placement" value="centeredClose" checked><div class="name">置中特寫</div><div class="desc">人物置中、近景到半身</div></label>
+      <label class="card"><input type="radio" name="placement" value="leftHalfBody"><div class="name">偏左半身</div><div class="desc">人物偏左、右側留給文字</div></label>
+      <label class="card"><input type="radio" name="placement" value="rightFullBody"><div class="name">偏右全身</div><div class="desc">人物偏右、左側留給文字</div></label>
+      <label class="card"><input type="radio" name="placement" value="topCrop"><div class="name">頂部裁切</div><div class="desc">人物偏上、下方留給資訊欄</div></label>
+      <label class="card"><input type="radio" name="placement" value="bottomAnchor"><div class="name">底部延伸</div><div class="desc">人物貼底延伸出畫面、上方留給刊頭</div></label>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <div class="section-label">06</div>
+      <div class="section-title">留白密度</div>
+    </div>
+    <div class="grid grid-3" data-choice="whitespace">
+      <label class="card"><input type="radio" name="whitespace" value="generousWhitespace"><div class="name">大量留白</div><div class="desc">極簡呼吸感、高級雜誌感</div></label>
+      <label class="card selected"><input type="radio" name="whitespace" value="balancedWhitespace" checked><div class="name">適中留白</div><div class="desc">資訊與留白平衡</div></label>
+      <label class="card"><input type="radio" name="whitespace" value="denseInformation"><div class="name">資訊密集</div><div class="desc">多個文字與圖形區塊填滿版面</div></label>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <div class="section-label">07</div>
+      <div class="section-title">文字語言比例</div>
+    </div>
+    <div class="grid grid-3" data-choice="language">
+      <label class="card"><input type="radio" name="language" value="chineseOnly"><div class="name">純中文</div><div class="desc">全部文字使用繁體中文</div></label>
+      <label class="card selected"><input type="radio" name="language" value="bilingualEnglishChinese" checked><div class="name">中英混合</div><div class="desc">英文為主要大字，中文為輔</div></label>
+      <label class="card"><input type="radio" name="language" value="trilingualEditorial"><div class="name">中英日混排</div><div class="desc">英日中文字拼貼，當圖形素材使用</div></label>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <div class="section-label">08</div>
+      <div class="section-title">文字內容自填</div>
+    </div>
+    <p class="hint">全部留空的話，AI 會直接看你附上的照片內容自行填寫適合的標題與文案；填了的話就照你填的用。</p>
+    <div class="form-grid">
+      <label class="field">大標題／角色名
+        <input id="mainTitle" type="text" placeholder="例如：MAKIMA、LUMINA、留空由AI決定">
+      </label>
+      <label class="field">副標／期號
+        <input id="subtitle" type="text" placeholder="例如：SPECIAL FEATURE、ISSUE 08">
+      </label>
+      <label class="field full">標語／引言句
+        <input id="tagline" type="text" placeholder="例如：Domination isn't power, it's nature.">
+      </label>
+      <label class="field full">資訊欄標題（可多行，例如 PROFILE / FEATURE / STYLE）
+        <textarea id="infoLabels" placeholder="每行一個，例如：&#10;PROFILE&#10;FEATURE&#10;STYLE"></textarea>
+      </label>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <div class="section-label">09</div>
+      <div class="section-title">輸出比例</div>
+    </div>
+    <p class="hint">預設偏向雜誌封面／直式海報比例。</p>
+    <div class="grid grid-3" data-choice="ratio">
+      <label class="card selected"><input type="radio" name="ratio" value="magazine23" checked><div class="name">2:3 雜誌封面</div><div class="desc">經典雜誌封面比例</div></label>
+      <label class="card"><input type="radio" name="ratio" value="poster34"><div class="name">3:4 直式海報</div><div class="desc">編輯海報比例</div></label>
+      <label class="card"><input type="radio" name="ratio" value="feed45"><div class="name">4:5 直式貼文</div><div class="desc">IG／小紅書貼文</div></label>
+      <label class="card"><input type="radio" name="ratio" value="square11"><div class="name">1:1 方形收藏卡</div><div class="desc">收藏卡／方形貼文</div></label>
+      <label class="card"><input type="radio" name="ratio" value="story916"><div class="name">9:16 限動封面</div><div class="desc">短影音／限動比例</div></label>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <div class="section-label">10</div>
+      <div class="section-title">額外要求</div>
+    </div>
+    <div class="form-grid">
+      <label class="field full">額外要求
+        <textarea id="extraNote" placeholder="例如：主色只用黑金兩色、標題要用中文、保留右下角留白放品牌logo"></textarea>
+      </label>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <div class="section-label">11</div>
+      <div class="section-title">生成咒語</div>
+    </div>
+    <button class="generate-btn" id="generateBtn">生成完整咒語</button>
+    <p class="hint">生成後複製文字，到 ChatGPT 等支援圖片輸入的工具，把你已經生成好的照片一起附上再貼上這段文字。</p>
+    <div class="output-wrap hidden" id="outputWrap">
+      <div class="output-stale-badge">選項已變更，請重新按「生成完整咒語」</div>
+      <textarea id="outputText" readonly></textarea>
+      <button class="copy-btn" id="copyBtn">一鍵複製</button>
+    </div>
+  </section>
+</main>
+
+<script src="assets/core-prompt.js"></script>
+<script>
+const layoutData = {
+  classicMagazineCover: 'classic magazine cover layout, large masthead logo across the top, portrait as the dominant visual, sidebar column with headline text blocks, issue number in a corner, clean magazine cover structure',
+  verticalTypography: 'vertical typography layout, huge vertical stacked title text running the full height of the frame beside the portrait, minimal information column on the opposite side',
+  characterProfile: 'character profile page layout, portrait paired with structured profile information blocks, story and statistics sections, official character-introduction page structure',
+  swissEditorial: 'Swiss editorial layout, large white negative space, minimal grid-based typography, geometric composition, modern international graphic design style',
+  collectorCard: 'collector card layout, series and edition number, graphic frame border around the portrait, compact trading-card-like information structure',
+  animeFeature: 'anime feature spread layout, character sketch panel and concept-art fragments collaged beside the portrait, manga-style panel divisions, Japanese editorial magazine structure',
+  luxuryFashion: 'luxury fashion editorial layout, minimal refined serif typography, premium negative space, high-end fashion magazine structure',
+  artbookPage: 'artbook page layout, large portrait with small design-note annotations and a collection number, concept-art book page structure'
+};
+
+const typographyData = {
+  editorialSerif: 'refined editorial serif typography for the masthead and headline, classic fashion-magazine type style',
+  hugeMaskedType: 'huge masking-textured display type overlapping the portrait, character name rendered oversized with subtle line-art texture inside the letterforms',
+  boldSansHeadline: 'bold heavy sans-serif headline typography, strong modern graphic impact',
+  mangaOverlayType: 'manga-style overlay typography, dynamic angled headline text combined with small Japanese caption text, comic-editorial hybrid type treatment',
+  minimalTracked: 'minimal small-caps typography with wide letter spacing, quiet refined editorial tone',
+  vintageTypewriter: 'vintage typewriter-style caption typography mixed with a clean modern headline, retro editorial contrast',
+  handwrittenAccent: 'a small handwritten signature-style accent phrase paired with clean structured headline typography',
+  multilingualCollage: 'multilingual typography collage mixing English, Japanese and Chinese text fragments as layered graphic elements, text functions as visual texture as much as language'
+};
+
+const graphicData = {
+  barcodeLabel: 'a barcode and small label tags placed in a corner, product/collectible packaging detail',
+  lineGrid: 'thin structural lines and a subtle grid overlay across the composition',
+  geometricBlocks: 'flat geometric color blocks and shapes layered behind and beside the portrait',
+  halftoneDots: 'halftone dot pattern texture accents, print-editorial graphic texture',
+  geometricFrame: 'a thin geometric frame or border enclosing part of the composition',
+  collageClip: 'collaged cut-paper clipping elements, layered magazine-collage texture',
+  sketchLineArt: 'hand-drawn concept sketch or line-art fragments layered as a graphic accent',
+  minimalIcon: 'small minimal icon or symbol accents placed as graphic punctuation'
+};
+
+const colorData = {
+  dominantBlack: 'dominant black color system, black typography and graphic elements unifying the page',
+  dominantWhite: 'dominant white and off-white color system, ultra-clean minimal palette',
+  dominantOrange: 'dominant vivid orange color system, energetic bold accent unifying typography and graphics',
+  dominantGold: 'dominant champagne gold color system, luxurious warm accent unifying the page',
+  dominantSilver: 'dominant cool silver-grey color system, sleek technical accent',
+  dominantIndigo: 'dominant deep indigo-blue color system, cool refined accent',
+  dominantWine: 'dominant deep wine-red color system, rich vintage accent',
+  monochromePhoto: 'monochrome black-and-white photographic treatment with a single accent color reserved only for typography'
+};
+
+const placementData = {
+  centeredClose: 'portrait centered in frame, close-up to half-body crop',
+  leftHalfBody: 'portrait positioned to the left side, half-body framing, right side reserved for typography and graphics',
+  rightFullBody: 'portrait positioned to the right side, full or three-quarter body framing, left side reserved for typography and graphics',
+  topCrop: 'portrait cropped toward the top of the frame, lower area reserved for information blocks',
+  bottomAnchor: 'portrait anchored toward the bottom of the frame extending off the lower edge, upper area reserved for masthead and headline'
+};
+
+const whitespaceData = {
+  generousWhitespace: 'generous negative space, minimal editorial breathing room, premium quiet composition',
+  balancedWhitespace: 'balanced negative space, moderate information density',
+  denseInformation: 'dense information layout, multiple text and graphic blocks filling the page, maximal editorial detail'
+};
+
+const languageData = {
+  chineseOnly: 'all typography in Traditional Chinese',
+  bilingualEnglishChinese: 'typography mixing English and Traditional Chinese, English as the dominant large display text, Chinese as supporting text',
+  trilingualEditorial: 'typography mixing English, Japanese and Traditional Chinese as layered editorial text collage, roughly English 50 percent, Japanese 30 percent, Chinese 20 percent, text functions as visual design as much as literal language — perfect grammatical accuracy is not required'
+};
+
+const ratioData = {
+  magazine23: 'aspect ratio 2:3, vertical magazine cover composition',
+  poster34: 'aspect ratio 3:4, vertical editorial poster composition',
+  feed45: 'aspect ratio 4:5, vertical social media feed composition',
+  square11: 'aspect ratio 1:1, square collector card composition',
+  story916: 'aspect ratio 9:16, vertical story cover composition'
+};
+
+const sharedEditorialCore = window.HB_CORE_PROMPT?.page?.editorial || {};
+
+const sourceImageLockGuard = `【原圖鎖定系統｜最高優先級】
+
+Use the attached photo as the complete and final visual source for the person.
+Do not regenerate, redesign, reinterpret or re-render the person, face, expression, hairstyle, costume, pose, lighting, camera angle or background — the attached photograph is the finished artwork, not a reference for a new render.
+This is a graphic design and editorial layout task applied on top of the existing photograph, not a new image generation.
+Only add typography, graphic elements, color treatment and layout structure around and over the existing photo; the photographic content itself must remain unchanged.`;
+
+const outputQualityGuard = sharedEditorialCore.output || `【輸出規格】
+
+4K Quality.
+Ultra Detailed.
+High-End Commercial Photography.
+Magazine Quality.
+Cinematic Photography.
+Sharp focus.
+Professional color grading.`;
+
+const negativeGuard = sharedEditorialCore.negativePrompt || `【通用負面約束】
+
+No face swap/drift, AI/influencer/celebrity/template face, duplicated/pasted face.
+No oversized head, extra limbs/arms/fingers, broken hands, warped anatomy, inconsistent/independent face light, random text or watermark.`;
+
+const themeTemplates = {
+  classicMagazineCover: { layout: 'classicMagazineCover', typography: 'editorialSerif', graphic: 'barcodeLabel', color: 'dominantBlack', placement: 'rightFullBody', whitespace: 'balancedWhitespace', language: 'bilingualEnglishChinese', ratio: 'magazine23' },
+  verticalTypography: { layout: 'verticalTypography', typography: 'hugeMaskedType', graphic: 'sketchLineArt', color: 'dominantOrange', placement: 'rightFullBody', whitespace: 'generousWhitespace', language: 'bilingualEnglishChinese', ratio: 'poster34' },
+  characterProfile: { layout: 'characterProfile', typography: 'minimalTracked', graphic: 'lineGrid', color: 'dominantWhite', placement: 'centeredClose', whitespace: 'denseInformation', language: 'bilingualEnglishChinese', ratio: 'magazine23' },
+  swissEditorial: { layout: 'swissEditorial', typography: 'boldSansHeadline', graphic: 'geometricBlocks', color: 'dominantWhite', placement: 'leftHalfBody', whitespace: 'generousWhitespace', language: 'bilingualEnglishChinese', ratio: 'poster34' },
+  collectorCard: { layout: 'collectorCard', typography: 'boldSansHeadline', graphic: 'geometricFrame', color: 'dominantGold', placement: 'centeredClose', whitespace: 'balancedWhitespace', language: 'bilingualEnglishChinese', ratio: 'square11' },
+  animeFeature: { layout: 'animeFeature', typography: 'mangaOverlayType', graphic: 'sketchLineArt', color: 'dominantOrange', placement: 'rightFullBody', whitespace: 'denseInformation', language: 'trilingualEditorial', ratio: 'magazine23' },
+  luxuryFashion: { layout: 'luxuryFashion', typography: 'editorialSerif', graphic: 'lineGrid', color: 'monochromePhoto', placement: 'centeredClose', whitespace: 'generousWhitespace', language: 'bilingualEnglishChinese', ratio: 'poster34' },
+  artbookPage: { layout: 'artbookPage', typography: 'vintageTypewriter', graphic: 'collageClip', color: 'dominantSilver', placement: 'leftHalfBody', whitespace: 'balancedWhitespace', language: 'bilingualEnglishChinese', ratio: 'feed45' }
+};
+
+function selected(name){
+  return document.querySelector(`input[name="${name}"]:checked`).value;
+}
+
+function setRadioValue(name, value){
+  const input = document.querySelector(`input[name="${name}"][value="${value}"]`);
+  if(input){ input.checked = true; }
+}
+
+function refreshCards(){
+  document.querySelectorAll('[data-choice]').forEach(group => {
+    group.querySelectorAll('.card').forEach(card => {
+      card.classList.toggle('selected', card.querySelector('input').checked);
+    });
+  });
+}
+
+function applyThemeTemplate(key){
+  const preset = themeTemplates[key];
+  if(!preset) return;
+  ['layout','typography','graphic','color','placement','whitespace','language','ratio'].forEach(name => {
+    setRadioValue(name, preset[name]);
+  });
+  refreshCards();
+  generate({reveal:true});
+}
+
+let editorialOutputVisible = false;
+
+function resetCopyButton(){
+  document.getElementById('copyBtn').textContent = '一鍵複製';
+}
+
+function generate(options = {}){
+  const mainTitle = document.getElementById('mainTitle').value.trim();
+  const subtitle = document.getElementById('subtitle').value.trim();
+  const tagline = document.getElementById('tagline').value.trim();
+  const infoLabelsRaw = document.getElementById('infoLabels').value.trim();
+  const infoLabels = infoLabelsRaw ? infoLabelsRaw.split('\n').map(s => s.trim()).filter(Boolean) : [];
+  const extraNote = document.getElementById('extraNote').value.trim();
+
+  const hasAnyText = mainTitle || subtitle || tagline || infoLabels.length;
+  let textContentBlock;
+  if(hasAnyText){
+    const parts = [];
+    if(mainTitle) parts.push(`main title / character name: "${mainTitle}"`);
+    if(subtitle) parts.push(`subtitle / issue text: "${subtitle}"`);
+    if(tagline) parts.push(`tagline / quote line: "${tagline}"`);
+    if(infoLabels.length) parts.push(`information block headers: ${infoLabels.map(l => `"${l}"`).join(', ')}`);
+    textContentBlock = 'text content to use: ' + parts.join('; ') + (hasAnyText && (!mainTitle || !subtitle || !tagline || !infoLabels.length) ? '; for any of these left unspecified, infer an appropriate short editorial phrase directly from the attached photo\'s mood, theme and styling,' : ',');
+  } else {
+    textContentBlock = 'no text content specified — infer an appropriate title, subtitle, tagline and information block headers directly from the attached photo\'s mood, theme and styling, keep them short and editorial in tone,';
+  }
+
+  const prompt = [
+    sourceImageLockGuard + ',',
+    layoutData[selected('layout')] + ',',
+    typographyData[selected('typography')] + ',',
+    graphicData[selected('graphic')] + ',',
+    colorData[selected('color')] + ',',
+    placementData[selected('placement')] + ',',
+    whitespaceData[selected('whitespace')] + ',',
+    languageData[selected('language')] + ',',
+    textContentBlock,
+    ratioData[selected('ratio')] + ',',
+    outputQualityGuard + ',',
+    'do not alter the photographed person, outfit, pose, lighting or background in any way — apply editorial graphic design on top only,',
+    extraNote ? 'extra direction: ' + extraNote + ',' : '',
+    negativeGuard + ',',
+    'no random text errors, no watermark artifacts, no distorted or illegible typography,',
+    '— Attach your already-generated reference photo together with this text when submitting to the image editing model.'
+  ].filter(Boolean).join('\n');
+
+  const outputText = document.getElementById('outputText');
+  const outputWrap = document.getElementById('outputWrap');
+  outputText.value = prompt;
+  clearStale();
+  if(options.reveal || editorialOutputVisible){
+    editorialOutputVisible = true;
+    outputWrap.classList.remove('hidden');
+  }
+  resetCopyButton();
+}
+
+document.querySelectorAll('input[type="radio"]').forEach(input => {
+  input.addEventListener('change', () => { refreshCards(); });
+});
+document.getElementById('generateBtn').addEventListener('click', () => generate({reveal:true}));
+document.querySelectorAll('[data-template]').forEach(button => {
+  button.addEventListener('click', () => { applyThemeTemplate(button.dataset.template); });
+});
+document.querySelector('.section-preset').addEventListener('click', (event) => {
+  const btn = event.target.closest('button.card');
+  if(!btn) return;
+  document.querySelectorAll('.section-preset button.card.template-selected').forEach(b => b.classList.remove('template-selected'));
+  btn.classList.add('template-selected');
+});
+document.getElementById('copyBtn').addEventListener('click', () => {
+  if(document.getElementById('outputWrap').classList.contains('stale')) return;
+  const outputText = document.getElementById('outputText');
+  const text = outputText.value;
+  const btn = document.getElementById('copyBtn');
+  function showCopied(){
+    btn.textContent = '已複製!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '一鍵複製'; btn.classList.remove('copied'); }, 1500);
+  }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(showCopied).catch(() => {
+      outputText.select();
+      document.execCommand('copy');
+      showCopied();
+    });
+  } else {
+    outputText.select();
+    document.execCommand('copy');
+    showCopied();
+  }
+});
+
+function markStale(){
+  const wrap=document.getElementById('outputWrap');
+  if(wrap && !wrap.classList.contains('hidden')) wrap.classList.add('stale');
+}
+function clearStale(){
+  const wrap=document.getElementById('outputWrap');
+  if(wrap) wrap.classList.remove('stale');
+}
+document.addEventListener('input',(event)=>{
+  if(event.target && event.target.closest && !event.target.closest('#outputWrap')) markStale();
+},true);
+document.addEventListener('change',(event)=>{
+  if(event.target && event.target.closest && !event.target.closest('#outputWrap')) markStale();
+},true);
+['mainTitle','subtitle','tagline','infoLabels','extraNote'].forEach(id => {
+  document.getElementById(id).addEventListener('input', () => { refreshCards(); });
+});
+refreshCards();
+generate();
+</script>
+</body>
+</html>

@@ -21,6 +21,7 @@ const htmlFiles = [
   'kpop-idol.html',
   'battle-academy.html',
   'ancient-goddess.html',
+  'editorial-identity.html',
 ];
 const requiredDirs = ['docs', 'assets'];
 let failures = 0;

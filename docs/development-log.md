@@ -3451,6 +3451,23 @@
 - **驗證**：重跑 `check-static.mjs`、`validate-preset-refs.mjs`、
   `audit-100x.mjs`、`build-prompt-preview.mjs` 與 `git diff --check`。
 
+## 2026-08-02（七）　風格範例資料夾：新版 12 類工具頁重分類
+
+- **背景**：owner 要求重新讀取 `C:\Users\User\Desktop\ai生圖\風格範例`，
+  並指出舊分類不應再只有「世界旅拍 / 雜誌棚拍 / 幻想廣告」三類，因為目前正式
+  版已擴充到 travel / magazine / fantasy-fashion / xianxia / isekai /
+  anime / flower-fairy / floral-sweet / gala-socialite / kpop-idol /
+  battle-academy / ancient-goddess 等 12 個工具頁。
+- **執行結果**：資料夾目前 49 張 JPG；前 47 張已在 2026-08-01 第二輪與第三輪
+  分析/落地/研究保留過，本次不重複新增正式 UI，而是建立新版歸屬分類表
+  `docs/style-example-reclassification-2026-08-02.md`。真正新增的 2 張
+  `2026-08-02 00.19.26.jpg`、`2026-08-02 00.19.32.jpg` 歸類到
+  magazine.html，但含明確仿雜誌品牌/作品文字與偏高性感尺度，因此只補進
+  `docs/要素不被採用的.md` 第四輪研究保留，不採納到正式頁。
+- **可保留技法**：紅黑金雜誌封面大字側欄、白底高調棚拍、幾何玫瑰裝飾、紅色
+  露肩針織造型、側臉大字遮擋構圖。禁止吸收：`VOGUE`、作品名、角色名、仿品牌
+  雜誌文字。
+
 ## 2026-08-02（六）　服裝改造核心：胸口新增「深 V至腰」
 
 - **背景**：owner 在已定稿的胸口性感剪裁組（深 V／交領深 V 結構胸衣／交叉綁帶
@@ -3482,3 +3499,39 @@
   posture、toned yet soft body line。
 - **驗證**：重跑 `check-static.mjs`、`validate-preset-refs.mjs`、
   `audit-100x.mjs`、`build-prompt-preview.mjs` 與 `git diff --check`。
+
+## 2026-08-02（四）　新增第 15 個工具頁：editorial-identity.html（編輯視覺設計，後製排版工具）
+
+- **背景**：owner 提出一份完整的「Visual Identity Card」專案設計文件（Project
+  Design Document），構想是把「拍照」跟「編輯設計」拆成兩階段——現有 14 頁都在做
+  Stage 1（生成人像），這頁做全新的 Stage 2：把已經生成完成的照片轉成雜誌封面、
+  人物介紹卡、收藏卡等編輯設計成品，不重新生成人物本身。owner 也提供
+  `風格範例\時尚雜誌封面拼貼与寫實人像攝影與平面視覺設計` 資料夾兩張真實案例
+  （MAKIMA 動漫特輯風格、LUMINA 雜誌封面風格），內容皆為服裝完整、純粹排版/字體/
+  圖形設計參考，無尺度疑慮。
+- **關鍵架構決策**：確認實際使用情境是「先用任何一頁工具生成一張照片存下來，
+  這頁產生一段新咒語，複製後連同那張照片一起貼給 ChatGPT（支援圖片+文字輸入
+  的生圖工具）」——這代表完全不需要 Canvas/上傳/字型渲染這些新技術，維持現有站
+  「純文字咒語產生器」的架構，只是內容類別從「服裝/材質/背景」換成「版型/字體/
+  圖形/色彩」。
+- **核心 guard 方向要反過來寫**：其他 14 頁的身份鎖定是「用參考照抽取五官身份，
+  其餘全部重新生成」；這頁新增的「【原圖鎖定系統｜最高優先級】」guard 方向相反
+  ——整張附圖（人物/服裝/姿勢/光線/背景全部）都要求原封不動保留，只准在上面疊加
+  編輯設計元素，明確告知這是「後製圖像設計任務，不是重新生成圖像」。
+- **頁面結構**（10 個區塊，刻意不含服裝/材質/背景/姿勢/光線/身形這些）：
+  00 一鍵版型模板（8組）、01 版型類型、02 字體風格、03 圖形元素、04 色彩系統
+  （單一主導色）、05 人物版位、06 留白密度、07 文字語言比例（純中文/中英混合/
+  中英日混排）、08 文字內容自填（大標題/副標/標語/資訊欄標題，全部可留空——
+  留空的話咒語會明確指示 AI 直接看附圖內容自行填寫適合文案）、09 輸出比例
+  （預設 2:3 雜誌封面比例）。應 owner 要求，文件裡的「07 系列編號」章節本次
+  不實作，先跳過。
+- **`assets/core-prompt.js` 新增輕量 `editorialCore`**：只重用 `output`/
+  `negativePrompt`（跟 `storeAdCore` 同一種簡化模式），不掛身份/骨架/光線
+  guard——因為這頁不生成新的人物或光線，那些guard不適用。
+- **`index.html`**：新卡片放進「特殊工具」分類（跟公仔系列/店家活動廣告同組），
+  新配色 `#E8E2D0`（米白/象牙色，呼應編輯設計的留白調性）。
+- **四支驗證腳本全數新增支援並全過**：`check-static.mjs`、
+  `validate-preset-refs.mjs`（8組themeTemplates 0 issue）、`audit-100x.mjs`
+  （新增 EDITORIAL IDENTITY 模擬區塊，含文字自填欄位留空/填寫兩種情境隨機測試，
+  全站累計 1500 次模擬 0 issue）、`build-prompt-preview.mjs`（新增
+  `generateEditorial()`，輸出與 MAKIMA 參考圖風格一致，人工核對正確）。

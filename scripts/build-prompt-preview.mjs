@@ -780,6 +780,40 @@ function generateAncientGoddess(core, data) {
   return prompt.filter(Boolean).join('\n');
 }
 
+function generateEditorial(core, data) {
+  const sel = {
+    layout: 'classicMagazineCover', typography: 'editorialSerif', graphic: 'barcodeLabel',
+    color: 'dominantBlack', placement: 'rightFullBody', whitespace: 'balancedWhitespace',
+    language: 'bilingualEnglishChinese', ratio: 'magazine23',
+    mainTitle: 'MAKIMA', subtitle: 'SPECIAL FEATURE', tagline: "Domination isn't power, it's nature.",
+    infoLabels: ['PROFILE', 'PSYCHOLOGY'], extraNote: '',
+  };
+  const parts = [];
+  parts.push(`main title / character name: "${sel.mainTitle}"`);
+  parts.push(`subtitle / issue text: "${sel.subtitle}"`);
+  parts.push(`tagline / quote line: "${sel.tagline}"`);
+  parts.push(`information block headers: ${sel.infoLabels.map((l) => `"${l}"`).join(', ')}`);
+  const textContentBlock = 'text content to use: ' + parts.join('; ') + ',';
+  const prompt = [
+    data.sourceImageLockGuard + ',',
+    data.layoutData[sel.layout] + ',',
+    data.typographyData[sel.typography] + ',',
+    data.graphicData[sel.graphic] + ',',
+    data.colorData[sel.color] + ',',
+    data.placementData[sel.placement] + ',',
+    data.whitespaceData[sel.whitespace] + ',',
+    data.languageData[sel.language] + ',',
+    textContentBlock,
+    data.ratioData[sel.ratio] + ',',
+    data.outputQualityGuard + ',',
+    'do not alter the photographed person, outfit, pose, lighting or background in any way — apply editorial graphic design on top only,',
+    data.negativeGuard + ',',
+    'no random text errors, no watermark artifacts, no distorted or illegible typography,',
+    '— Attach your already-generated reference photo together with this text when submitting to the image editing model.',
+  ];
+  return prompt.filter(Boolean).join('\n');
+}
+
 function generateKpopIdol(core, data) {
   const selection = {
     bodyShape: 'original',
@@ -1123,6 +1157,22 @@ function loadRevision(label, sourceReader) {
       exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedAncientGoddessCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, poseData, framingData, cameraData, ratioData, chestDetailData, waistSideDetailData, shoulderDetailData })',
     });
     prompts['ancientgoddess-default.txt'] = generateAncientGoddess(core, ancientGoddessData);
+  } catch (err) {
+    // Not present in this revision — skip.
+  }
+
+  // editorial-identity.html is new; older revisions may not have it yet, so skip gracefully.
+  try {
+    const editorialSource = sourceReader('editorial-identity.html');
+    const editorialData = evalDataSegment({
+      source: editorialSource,
+      core,
+      page: 'editorial',
+      startMarker: 'const layoutData = {',
+      endMarker: 'function selected(name)',
+      exportExpression: '({ layoutData, typographyData, graphicData, colorData, placementData, whitespaceData, languageData, ratioData, sourceImageLockGuard, outputQualityGuard, negativeGuard, themeTemplates })',
+    });
+    prompts['editorial-default.txt'] = generateEditorial(core, editorialData);
   } catch (err) {
     // Not present in this revision — skip.
   }

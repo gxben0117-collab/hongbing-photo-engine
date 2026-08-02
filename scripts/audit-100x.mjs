@@ -1078,6 +1078,66 @@ const core = evalCore(coreSource);
   report('store-ad', N);
 }
 
+// ===================== EDITORIAL IDENTITY =====================
+{
+  const html = read('editorial-identity.html');
+  const data = evalDataSegment({
+    source: html, core, page: 'editorial',
+    startMarker: 'const layoutData = {',
+    endMarker: 'function selected(name)',
+    exportExpression: '({ layoutData, typographyData, graphicData, colorData, placementData, whitespaceData, languageData, ratioData, sourceImageLockGuard, outputQualityGuard, negativeGuard, themeTemplates })',
+  });
+  const pools = {
+    layout: Object.keys(data.layoutData), typography: Object.keys(data.typographyData),
+    graphic: Object.keys(data.graphicData), color: Object.keys(data.colorData),
+    placement: Object.keys(data.placementData), whitespace: Object.keys(data.whitespaceData),
+    language: Object.keys(data.languageData), ratio: Object.keys(data.ratioData),
+  };
+  const textSamples = ['', '', 'MAKIMA', '測試主題 with émoji 🌸'];
+  for (let i = 0; i < N; i += 1) {
+    const sel = {
+      layout: pick(pools.layout), typography: pick(pools.typography), graphic: pick(pools.graphic),
+      color: pick(pools.color), placement: pick(pools.placement), whitespace: pick(pools.whitespace),
+      language: pick(pools.language), ratio: pick(pools.ratio),
+      mainTitle: pick(textSamples), subtitle: pick(textSamples), tagline: pick(textSamples),
+      infoLabels: pick([[], ['PROFILE'], ['PROFILE', 'FEATURE', 'STYLE']]),
+      extraNote: pick(textSamples),
+    };
+    const hasAnyText = sel.mainTitle || sel.subtitle || sel.tagline || sel.infoLabels.length;
+    let textContentBlock;
+    if (hasAnyText) {
+      const parts = [];
+      if (sel.mainTitle) parts.push(`main title / character name: "${sel.mainTitle}"`);
+      if (sel.subtitle) parts.push(`subtitle / issue text: "${sel.subtitle}"`);
+      if (sel.tagline) parts.push(`tagline / quote line: "${sel.tagline}"`);
+      if (sel.infoLabels.length) parts.push(`information block headers: ${sel.infoLabels.map((l) => `"${l}"`).join(', ')}`);
+      textContentBlock = 'text content to use: ' + parts.join('; ') + (!sel.mainTitle || !sel.subtitle || !sel.tagline || !sel.infoLabels.length ? "; for any of these left unspecified, infer an appropriate short editorial phrase directly from the attached photo's mood, theme and styling," : ',');
+    } else {
+      textContentBlock = "no text content specified — infer an appropriate title, subtitle, tagline and information block headers directly from the attached photo's mood, theme and styling, keep them short and editorial in tone,";
+    }
+    const prompt = [
+      data.sourceImageLockGuard + ',',
+      data.layoutData[sel.layout] + ',',
+      data.typographyData[sel.typography] + ',',
+      data.graphicData[sel.graphic] + ',',
+      data.colorData[sel.color] + ',',
+      data.placementData[sel.placement] + ',',
+      data.whitespaceData[sel.whitespace] + ',',
+      data.languageData[sel.language] + ',',
+      textContentBlock,
+      data.ratioData[sel.ratio] + ',',
+      data.outputQualityGuard + ',',
+      'do not alter the photographed person, outfit, pose, lighting or background in any way — apply editorial graphic design on top only,',
+      sel.extraNote ? 'extra direction: ' + sel.extraNote + ',' : '',
+      data.negativeGuard + ',',
+      'no random text errors, no watermark artifacts, no distorted or illegible typography,',
+      '— Attach your already-generated reference photo together with this text when submitting to the image editing model.',
+    ].filter(Boolean).join('\n');
+    checkOutput('editorial', i, sel, prompt, { requireIdentity: true, identityMarkers: ['原圖鎖定系統'] });
+  }
+  report('editorial', N);
+}
+
 // ===================== BANNED-NAME STATIC SCAN (source files, not simulation) =====================
 const bannedNames = ['不知火舞', '月野うさぎ', '胡蝶しのぶ', '麻宮アテナ', 'ボア・ハンコック', 'ニコ・ロビン', '真三國無雙', '月英', '練師', '孫尚香'];
 for (const file of ['travel.html', 'magazine.html', 'fantasy-fashion.html', 'doll.html', 'store-ad.html']) {
