@@ -20,11 +20,6 @@
 
 ### 現況摘要（2026-08-02）
 
-- **身形輪廓正式整理為「體態核心」**（2026-08-02）：11 個已有 `bodyShape` 的正式頁
-  統一把 03 區塊命名為「體態核心」，維持 5 個選項不新增健康/緊實類型；`豐滿纖腰`
-  的 UI 名稱不變，但實際出圖咒語改成 owner 指定的
-  `prominent fuller bust curve, narrow slim waistline, dramatic feminine S-curve silhouette,
-  strong bust-waist-hip contrast`，讓它明確控制上圍曲線＋纖腰 S 曲線。
 - **服裝改造核心：性感剪裁要素推到 9 個正式頁**（2026-08-02）：owner 先在內部
   「性感仙俠」頁確認深 V、交叉綁帶、開衩裙、削肩等服裝剪裁詞可用後，正式同步到
   9 個已有「服裝改造核心」的頁面（ancient-goddess/anime-character/

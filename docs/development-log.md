@@ -3450,7 +3450,6 @@
   時沒有文字。
 - **驗證**：重跑 `check-static.mjs`、`validate-preset-refs.mjs`、
   `audit-100x.mjs`、`build-prompt-preview.mjs` 與 `git diff --check`。
-
 ## 2026-08-02（七）　風格範例資料夾：新版 12 類工具頁重分類
 
 - **背景**：owner 要求重新讀取 `C:\Users\User\Desktop\ai生圖\風格範例`，
@@ -3467,25 +3466,6 @@
 - **可保留技法**：紅黑金雜誌封面大字側欄、白底高調棚拍、幾何玫瑰裝飾、紅色
   露肩針織造型、側臉大字遮擋構圖。禁止吸收：`VOGUE`、作品名、角色名、仿品牌
   雜誌文字。
-
-## 2026-08-02（五）　身形輪廓正式整理為「體態核心」
-
-- **背景**：owner 重新審查「原圖自然比例／輕微纖腰／豐滿纖腰／高挑時裝比例／
-  韓系偶像比例」5 個身材相關選項，確認不新增「健康勻稱／緊實勻稱」類型，因為
-  這套工具主軸是拍美美的寫真，不希望語感偏向健身房或運動形體。
-- **正式定義**：把 11 個已有 `bodyShape` 的正式頁統一命名為「03 體態核心」
-  （欄位 key 仍保留 `bodyShape` 以免破壞 preset 與驗證腳本）：`magazine.html`、
-  `fantasy-fashion.html`、`ancient-goddess.html`、`anime-character.html`、
-  `battle-academy.html`、`floral-sweet.html`、`flower-fairy.html`、
-  `gala-socialite.html`、`isekai-fantasy.html`、`kpop-idol.html`、`xianxia.html`。
-- **咒語更新**：5 個體態核心全部重寫成更明確的英文 prompt。`豐滿纖腰` 的 UI 名稱
-  維持乾淨，但實際出圖咒語改成 owner 指定的強曲線版本：
-  `prominent fuller bust curve, narrow slim waistline, dramatic feminine S-curve silhouette,
-  strong bust-waist-hip contrast`。`高挑時裝比例` 與 `韓系偶像比例` 也拆開語意，
-  前者走 runway/editorial model silhouette，後者走 K-pop idol、upright confident
-  posture、toned yet soft body line。
-- **驗證**：重跑 `check-static.mjs`、`validate-preset-refs.mjs`、
-  `audit-100x.mjs`、`build-prompt-preview.mjs` 與 `git diff --check`。
 
 ## 2026-08-02（四）　新增第 15 個工具頁：editorial-identity.html（編輯視覺設計，後製排版工具）
 
