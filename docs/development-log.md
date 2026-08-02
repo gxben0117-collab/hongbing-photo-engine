@@ -3432,6 +3432,24 @@
 - **驗證**：四支驗證腳本全數重跑通過（`check-static`／`validate-preset-refs`
   （18 組模板 0 issue）／`audit-100x`（全站 1400 次模擬 0 issue）／
   `build-prompt-preview`，人工核對輸出）。
+
+## 2026-08-02（四）　服裝改造核心：性感剪裁要素推到 9 個正式頁
+
+- **背景**：owner 先用內部「性感仙俠」測試確認幾組服裝剪裁語彙能穩定出圖，
+  並要求把正式版本裡所有已有「服裝改造核心」的頁面同步增加同一組選項，不再只
+  停留在 xianxia 試點。
+- **改動範圍**：9 個正式頁同步更新：
+  `ancient-goddess.html`、`anime-character.html`、`battle-academy.html`、
+  `floral-sweet.html`、`flower-fairy.html`、`gala-socialite.html`、
+  `isekai-fantasy.html`、`kpop-idol.html`、`xianxia.html`。`temp/` 內部研究頁
+  不進正式版本。
+- **新增選項**：胸口新增「深 V」「交領深 V 結構胸衣」「交叉綁帶深 V」
+  「深 V 大開襟」；腰側新增「纏裙側開衩」「高衩開裙」「裙擺敞開」；
+  肩部確認保留/統一「露肩剪裁」，並新增「單肩斜裁」「掛脖削肩」。
+  每個 UI radio 卡片都同步補上對應的英文 prompt data，避免只顯示卡片但生成
+  時沒有文字。
+- **驗證**：重跑 `check-static.mjs`、`validate-preset-refs.mjs`、
+  `audit-100x.mjs`、`build-prompt-preview.mjs` 與 `git diff --check`。
 ## 2026-08-02（七）　風格範例資料夾：新版 12 類工具頁重分類
 
 - **背景**：owner 要求重新讀取 `C:\Users\User\Desktop\ai生圖\風格範例`，

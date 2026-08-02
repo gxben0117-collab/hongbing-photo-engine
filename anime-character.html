@@ -618,6 +618,10 @@
       <div class="pose-group-label">胸口</div>
       <div class="grid grid-3" data-choice="chestDetail">
         <label class="card selected"><input type="radio" name="chestDetail" value="none" checked><div class="name">無修改</div><div class="desc">維持原本服裝版型</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="deepVNeckline"><div class="name">深 V</div><div class="desc">胸口深 V 領口</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="crossCollarDeepVStructured"><div class="name">交領深 V 結構胸衣</div><div class="desc">交領深 V + 結構式胸衣</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="crossLacingDeepV"><div class="name">交叉綁帶深 V</div><div class="desc">胸口交叉綁帶與深 V 領口</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="openFrontDeepV"><div class="name">深 V 大開襟</div><div class="desc">交領深 V 大開襟</div></label>
         <label class="card"><input type="radio" name="chestDetail" value="magicCircleCutout"><div class="name">魔法陣鏤空</div><div class="desc">胸口魔法陣鏤空細節</div></label>
         <label class="card"><input type="radio" name="chestDetail" value="vCutout"><div class="name">V形開叉</div><div class="desc">胸口V形開叉細節</div></label>
         <label class="card"><input type="radio" name="chestDetail" value="starCutout"><div class="name">星形鏤空</div><div class="desc">胸口星形鏤空細節</div></label>
@@ -637,6 +641,9 @@
       <div class="pose-group-label">腰側</div>
       <div class="grid grid-3" data-choice="waistSideDetail">
         <label class="card selected"><input type="radio" name="waistSideDetail" value="none" checked><div class="name">無修改</div><div class="desc">維持原本腰線版型</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="wrapSkirtSideSlit"><div class="name">纏裙側開衩</div><div class="desc">高腰纏裙與優雅側開衩</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="highSideSlitSkirt"><div class="name">高衩開裙</div><div class="desc">側邊高衩開裙</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="openSkirtPanel"><div class="name">裙擺敞開</div><div class="desc">裙擺敞開露出腿部線條</div></label>
         <label class="card"><input type="radio" name="waistSideDetail" value="magicCircleCutout"><div class="name">魔法陣鏤空</div><div class="desc">腰側魔法陣鏤空細節</div></label>
         <label class="card"><input type="radio" name="waistSideDetail" value="archCutout"><div class="name">弧形鏤空</div><div class="desc">腰側弧形鏤空細節</div></label>
         <label class="card"><input type="radio" name="waistSideDetail" value="ribbonBow"><div class="name">緞帶蝴蝶結</div><div class="desc">腰側緞帶蝴蝶結細節</div></label>
@@ -656,6 +663,8 @@
       <div class="pose-group-label">肩部</div>
       <div class="grid grid-3" data-choice="shoulderDetail">
         <label class="card selected"><input type="radio" name="shoulderDetail" value="none" checked><div class="name">無修改</div><div class="desc">維持原本肩部版型</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="singleShoulder"><div class="name">單肩斜裁</div><div class="desc">單肩不對稱斜裁</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="halterNeckCutaway"><div class="name">掛脖削肩</div><div class="desc">掛脖削肩設計</div></label>
         <label class="card"><input type="radio" name="shoulderDetail" value="offShoulderCut"><div class="name">露肩剪裁</div><div class="desc">肩部露肩剪裁細節</div></label>
         <label class="card"><input type="radio" name="shoulderDetail" value="ribbonBow"><div class="name">緞帶蝴蝶結</div><div class="desc">肩部緞帶蝴蝶結細節</div></label>
         <label class="card"><input type="radio" name="shoulderDetail" value="starCutout"><div class="name">星形鏤空</div><div class="desc">肩部星形鏤空細節</div></label>
@@ -1077,6 +1086,10 @@ const materialData = {
 // 不是重新設計整件服裝——剪裁輪廓仍以 03 服裝輪廓為準。
 const chestDetailData = {
   none: '',
+  deepVNeckline: 'deep V neckline',
+  crossCollarDeepVStructured: 'cross-collar deep V neckline with a structured fitted bodice',
+  crossLacingDeepV: 'cross-wrap lacing across the bodice, deep V-shaped neckline',
+  openFrontDeepV: 'cross-collar deep V open-front robe',
   magicCircleCutout: 'a magic-circle motif cutout at the chest',
   vCutout: 'a V-shaped cutout at the chest',
   starCutout: 'a star-shaped cutout at the chest',
@@ -1088,6 +1101,9 @@ const chestDetailData = {
 };
 const waistSideDetailData = {
   none: '',
+  wrapSkirtSideSlit: 'high-waisted wrap skirt with an elegant side slit',
+  highSideSlitSkirt: 'flowing skirt with a high side slit',
+  openSkirtPanel: 'open skirt panel, skirt front opened to reveal the leg line',
   magicCircleCutout: 'a magic-circle motif cutout at the waist side',
   archCutout: 'an arc-shaped cutout at the waist side',
   ribbonBow: 'a decorative ribbon bow at the waist side',
@@ -1099,6 +1115,8 @@ const waistSideDetailData = {
 };
 const shoulderDetailData = {
   none: '',
+  singleShoulder: 'one-shoulder asymmetric cut',
+  halterNeckCutaway: 'halter-neck cutaway shoulder design',
   offShoulderCut: 'an off-shoulder cut',
   ribbonBow: 'a decorative ribbon bow at the shoulder',
   starCutout: 'a star-shaped cutout at the shoulder',
