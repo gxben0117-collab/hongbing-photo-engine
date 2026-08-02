@@ -20,12 +20,6 @@
 
 ### 現況摘要（2026-08-02）
 
-- **服裝改造核心：性感剪裁要素推到 9 個正式頁**（2026-08-02）：owner 先在內部
-  「性感仙俠」頁確認深 V、交叉綁帶、開衩裙、削肩等服裝剪裁詞可用後，正式同步到
-  9 個已有「服裝改造核心」的頁面（ancient-goddess/anime-character/
-  battle-academy/floral-sweet/flower-fairy/gala-socialite/isekai-fantasy/
-  kpop-idol/xianxia）。新增胸口 4 項、腰側 3 項、肩部補齊/統一 3 項，並同步補
-  JS prompt data，避免 UI 有選項但生成不生效。
 - **咒語瘦身：合併 9 頁重複的光線/膚色/構圖 guard 區塊**（2026-08-02）：發現單份
   生成咒語約 75% 是固定系統防呆文字，其中 `CORE_LIGHTING_UNIFICATION` +
   `colorTemperatureGuard`/`subjectIntegrationGuard`/`faceFillGuard` 四個區塊在
