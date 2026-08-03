@@ -883,6 +883,74 @@ auditClassicalCulturePage({
   report('galaSocialite', N);
 }
 
+// ===================== BRIDAL EDITORIAL =====================
+{
+  const html = read('bridal-editorial.html');
+  const data = evalDataSegment({
+    source: html, core, page: 'bridalEditorial',
+    startMarker: 'const CORE = window.HB_CORE_PROMPT.page.bridalEditorial;',
+    endMarker: 'function selected',
+    exportExpression: '({ CORE, BRIDAL_EDITORIAL_CORE, BRIDAL_VEIL_IDENTITY_PROTECTION, styleData, compositionData, framingData, garmentData, materialData, chestDetailData, waistSideDetailData, shoulderDetailData, veilData, accessoryData, bodyShapes, poseData, makeupData, hairstyleData, skinData, lightingData, colorData, backgroundData, cameraData, ratioData, GARMENT_DETAIL_LAYER_ZONES, GARMENT_DETAIL_RANDOM_POOLS })',
+  });
+  const pools = {
+    style: Object.keys(data.styleData), composition: radioValues(html, 'composition'), framing: radioValues(html, 'framing'),
+    garment: Object.keys(data.garmentData), materials: radioValues(html, 'materials'), garmentLayer: radioValues(html, 'garmentLayer'),
+    chestDetail: Object.keys(data.chestDetailData), waistSideDetail: Object.keys(data.waistSideDetailData), shoulderDetail: Object.keys(data.shoulderDetailData),
+    veil: Object.keys(data.veilData).filter(key => key !== 'transparentFaceVeil'), accessories: radioValues(html, 'accessories'), bodyShape: Object.keys(data.bodyShapes),
+    pose: Object.keys(data.poseData), makeup: radioValues(html, 'makeup'), hairstyle: Object.keys(data.hairstyleData),
+    skinTexture: Object.keys(data.skinData), lighting: Object.keys(data.lightingData), color: Object.keys(data.colorData),
+    background: Object.keys(data.backgroundData), camera: Object.keys(data.cameraData), ratio: Object.keys(data.ratioData),
+    intensity: selectValues(html, 'intensity'),
+  };
+  const customSamples = ['', '', 'pearl hair accessory', '手工蕾絲細節'];
+  const unique = values => Array.from(new Set(values.filter(Boolean)));
+  for (let i = 0; i < N; i += 1) {
+    const sel = {
+      style: pick(pools.style), composition: pick(pools.composition), framing: pick(pools.framing),
+      garment: pick(pools.garment), materials: pickSome(pools.materials, 2), garmentLayer: pick(pools.garmentLayer),
+      chestDetail: pick(pools.chestDetail), waistSideDetail: pick(pools.waistSideDetail), shoulderDetail: pick(pools.shoulderDetail),
+      veil: pick(pools.veil), accessories: pickSome(pools.accessories, 2), bodyShape: pick(pools.bodyShape),
+      pose: pick(pools.pose), makeup: pickSome(pools.makeup, 2), hairstyle: pick(pools.hairstyle),
+      skinTexture: pick(pools.skinTexture), lighting: pick(pools.lighting), color: pick(pools.color),
+      background: pick(pools.background), camera: pick(pools.camera), ratio: pick(pools.ratio),
+      intensity: pick(pools.intensity), customGarment: pick(customSamples), customMaterial: pick(customSamples),
+      customPose: pick(customSamples), customBackground: pick(customSamples), extraNote: pick(customSamples),
+    };
+    if (!sel.makeup.length) sel.makeup = [pick(pools.makeup)];
+    const materialText = sel.customMaterial
+      ? 'custom material system only: ' + sel.customMaterial + '; do not blend preset material options'
+      : sel.materials.map(key => data.materialData[key]).join(', ');
+    const garmentText = sel.customGarment
+      ? 'custom garment form only: ' + sel.customGarment + '; do not blend preset garment options'
+      : data.garmentData[sel.garment];
+    const details = unique([
+      data.chestDetailData[sel.chestDetail], data.waistSideDetailData[sel.waistSideDetail], data.shoulderDetailData[sel.shoulderDetail],
+    ]);
+    const veil = data.veilData[sel.veil];
+    const veilProtection = sel.veil !== 'none' ? data.BRIDAL_VEIL_IDENTITY_PROTECTION : '';
+    const accessories = sel.accessories.map(key => data.accessoryData[key]).join(', ');
+    const styling = [
+      sel.makeup.map(key => data.makeupData[key]).join(', '), data.hairstyleData[sel.hairstyle], data.skinData[sel.skinTexture],
+    ].filter(Boolean).join(', ');
+    const parts = [
+      data.CORE.identityGuard, data.CORE.anatomyGuard, data.CORE.poseGuard, data.CORE.lightingGuard,
+      data.CORE.compositionGuard, data.BRIDAL_EDITORIAL_CORE, data.styleData[sel.style], data.compositionData[sel.composition],
+      data.framingData[sel.framing], 'gown silhouette: ' + garmentText,
+      materialText ? 'bridal gown materials: ' + materialText : '',
+      details.length ? 'garment surface detail: ' + details.join(', ') : '',
+      veil ? 'veil design: ' + veil : '', accessories ? 'bridal accessories: ' + accessories : '',
+      veilProtection, data.bodyShapes[sel.bodyShape], sel.customPose ? 'custom pose only: ' + sel.customPose : data.poseData[sel.pose],
+      'bridal styling: ' + styling, 'lighting: ' + data.lightingData[sel.lighting], 'color palette: ' + data.colorData[sel.color],
+      sel.customBackground ? 'custom background only: ' + sel.customBackground : data.backgroundData[sel.background],
+      data.cameraData[sel.camera], data.ratioData[sel.ratio], sel.intensity, data.CORE.output, data.CORE.negativePrompt,
+      sel.extraNote ? 'additional direction: ' + sel.extraNote : '',
+      'No random text, no watermark, no logo artifacts, no extra person, no distorted face, no deformed hands.',
+    ];
+    checkOutput('bridalEditorial', i, sel, unique(parts).join('\n\n'), { requireIdentity: true, identityMarkers: ['身份鎖定系統'] });
+  }
+  report('bridalEditorial', N);
+}
+
 // ===================== ANCIENT GODDESS =====================
 {
   const html = read('ancient-goddess.html');
@@ -1362,6 +1430,7 @@ const garmentThemeContracts = [
   { file: 'floral-sweet.html', pool: 'GARMENT_DETAIL_RANDOM_POOLS', fields: ['chestDetail', 'waistSideDetail', 'shoulderDetail'], keys: ['ruffledSweetheart', 'ribbonBowFrontPanel', 'lacePeterPanCollar', 'ruchedFloralBodice', 'statementBowSash', 'laceFittedWaistband', 'gatheredOverskirtPanel', 'floralRufflePanel', 'ribbonTiedStraps', 'flowerBudPuffSleeves', 'layeredRuffleShoulders', 'pearlShoulderStraps'], presets: ['sweetBouquetGirl', 'picnicMeadowSweetheart', 'cherryBlossomTwirl'] },
   { file: 'flower-fairy.html', pool: 'GARMENT_DETAIL_RANDOM_POOLS', fields: ['chestDetail', 'waistSideDetail', 'shoulderDetail'], keys: ['petalLayeredNeckline', 'vineWovenBodice', 'flowerCenterBodice', 'translucentPetalInset', 'organicVineWrap', 'petalOverskirtPanel', 'flowerClusterWaist', 'leafCoutureCutout', 'petalShoulderFins', 'vineShoulderStraps', 'floralGarlandCape', 'mistFloralSleeves'], presets: ['roseFairyRomance', 'lilyFairyPurity', 'lotusFairyPond'] },
   { file: 'gala-socialite.html', pool: 'GARMENT_DETAIL_RANDOM_POOLS', fields: ['chestDetail', 'waistSideDetail', 'shoulderDetail'], keys: ['satinCowlNeckline', 'jeweledPortraitCollar', 'sculptedEveningCorset', 'velvetLapelNeckline', 'satinGatheredWaist', 'gemstoneWaistBelt', 'sculpturalPeplumWaist', 'drapedSidePanel', 'operaShoulderCape', 'featherTrimShoulderLine', 'gemstoneShoulderClasp', 'sculpturalOneShoulder'], presets: ['redCarpetEntrance', 'crystalBallroomWaltz', 'champagneToastMoment'] },
+  { file: 'bridal-editorial.html', pool: 'GARMENT_DETAIL_RANDOM_POOLS', fields: ['chestDetail', 'waistSideDetail', 'shoulderDetail'], keys: ['sweetheartCorset', 'deepVBridalNeckline', 'laceIllusionBodice', 'drapedOffShoulderBodice', 'sculptedWaistCorsetry', 'pearlWaistApplique', 'drapedWaistPleats', 'detachableOverskirtWaist', 'softOffShoulderTulle', 'singleShoulderBridalCut', 'laceCapSleeve', 'detachableTulleSleeve'], presets: ['koreanCreamStudio', 'royalCathedralTrain', 'pearlVeilBeautyCloseup'] },
   { file: 'isekai-fantasy.html', pool: 'GARMENT_DETAIL_RANDOM_POOLS', fields: ['chestDetail', 'waistSideDetail', 'shoulderDetail'], keys: ['leatherCrossStraps', 'runeProtectiveChest', 'saintessLayeredCollar', 'royalJeweledFront', 'adventurerUtilityBelt', 'potionSidePouches', 'layeredBattleSkirtArmor', 'runeEmbroideredSash', 'lightPauldron', 'shortCapeShoulderClasp', 'saintessMantle', 'elvenLeafShoulderGuard'], presets: ['heroTravelerJourney', 'swordmaidenDuelReady', 'archmageSpellcast'] },
   { file: 'kpop-idol.html', pool: 'GARMENT_DETAIL_RANDOM_POOLS', fields: ['chestDetail', 'waistSideDetail', 'shoulderDetail'], keys: ['stageZipperBodice', 'rhinestoneStrapBodice', 'asymmetricCroppedTop', 'sequinedHalterBodice', 'rhinestoneWaistChain', 'stageCorsetBelt', 'pleatedPerformanceWaist', 'fringeWaistAccent', 'oneSleevePerformance', 'croppedBoleroShoulder', 'rhinestoneShoulderStrap', 'fringedEpaulettes'], presets: ['comebackTeaserPoster', 'livePerformanceEnergy', 'minimalRunwayChic'] },
   { file: 'chinese-classical.html', pool: 'GARMENT_VARIATION_RANDOM_POOLS', fields: ['garmentChestVariation', 'garmentWaistVariation', 'garmentShoulderVariation'], keys: ['layeredCrossCollar', 'standingCollarKnots', 'embroideredCollarGuard', 'cloudCollarPanel', 'wovenSilkSash', 'jadePendantDrop', 'mamianSidePleats', 'layeredWrapWaist', 'cloudShoulderOverlay', 'silkShawlDrape', 'wideSleeveShoulderLine', 'modernChineseCapelet'], presets: ['hanCourtyard', 'hanModernCouture', 'songScholarStudy'] },

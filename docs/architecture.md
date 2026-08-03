@@ -21,7 +21,7 @@
 - `xianxia.html` / `anime-character.html` / `flower-fairy.html` - 仙俠、動漫人物、花仙子
 - `isekai-fantasy.html` / `floral-sweet.html` / `gala-socialite.html` - 異世界、花漾甜美、晚宴名媛
 - `kpop-idol.html` / `battle-academy.html` - 韓系偶像、戰鬥制服學園
-- `ancient-goddess.html` / `editorial-identity.html` - 古代女神、編輯視覺設計
+- `ancient-goddess.html` / `bridal-editorial.html` / `editorial-identity.html` - 古代女神、婚紗藝術寫真、編輯視覺設計
 - `assets/core-prompt.js` - 共用身份鎖定與保護核心（`window.HB_CORE_PROMPT`）
 - `docs/` - 使用方式、核心邏輯、各頁流程、工程維護文件
   - `docs/development-log.md` - 依時間排序的完整開發記錄（唯一時間軸來源）
@@ -29,10 +29,10 @@
 - `scripts/` - 本地檢查與維護腳本
   - `check-static.mjs` - 結構檢查（重複 id、本地連結、inline script 語法）
   - `build-prompt-preview.mjs` - 重建改前/改後完整咒語，比對固定選項組合輸出
-  - `audit-100x.mjs` - 重建 18 頁組裝邏輯，隨機模擬 100×18 組選項，檢查內容問題
+  - `audit-100x.mjs` - 重建 19 頁組裝邏輯，隨機模擬 100×19 組選項，檢查內容問題
   - `validate-preset-refs.mjs` - 檢查各頁「一鍵套用/預設連動」物件（QUICK_*_PRESETS、
     *_DEFAULTS、fantasy 的 themeTemplates）引用的欄位值是否都存在於當下選項池
-  - `check-ui-flows.mjs` - 檢查 18 頁必要控制項、初始值、helper 引用、輸出寫入與一鍵映射
+  - `check-ui-flows.mjs` - 檢查 19 頁必要控制項、初始值、helper 引用、輸出寫入與一鍵映射
 - `assets/` - 共用圖片、圖示、未來靜態資產
 - `experiments/` - 不屬於正式網站流程的實驗腳本
 - `output/` - 使用者生成結果、匯出稿、截圖、`build-prompt-preview.mjs` 的對照輸出

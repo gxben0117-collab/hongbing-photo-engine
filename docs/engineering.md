@@ -69,11 +69,11 @@ node scripts\\check-static.mjs
 - `git status --short`
 - `git diff --check`
 - `node scripts\check-static.mjs`（HTML 本地連結、重複 id、inline JavaScript 語法）
-- `node scripts\check-ui-flows.mjs`（18 頁控制項、初始值、生成／複製與一鍵映射）
+- `node scripts\check-ui-flows.mjs`（19 頁控制項、初始值、生成／複製與一鍵映射）
 - 若動到咒語組裝邏輯或新增/調整選項：
   - `node scripts\build-prompt-preview.mjs`（固定選項組合 0-diff 迴歸檢查）
-  - `node scripts\audit-100x.mjs`（18 頁各隨機 100 組選項，內容稽核）
+  - `node scripts\audit-100x.mjs`（19 頁各隨機 100 組選項，內容稽核）
   - `node scripts\validate-preset-refs.mjs`（各頁一鍵套用/預設連動物件引用的
     欄位值是否都存在於當下選項池，抓 composition/intensity 這類靜默失效）
-- 18 頁至少各走一次主要生成或即時預覽流程；旅拍／雜誌／幻想廣告再確認一鍵套用後
+- 19 頁至少各走一次主要生成或即時預覽流程；旅拍／雜誌／幻想廣告再確認一鍵套用後
   會立即生成，並在手動改動後正確標記 stale

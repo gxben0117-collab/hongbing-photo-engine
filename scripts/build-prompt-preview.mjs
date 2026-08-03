@@ -826,6 +826,67 @@ function generateGalaSocialite(core, data) {
   return prompt.filter(Boolean).join('\n');
 }
 
+function generateBridalEditorial(core, data) {
+  const selection = {
+    style: 'koreanBridalStudio',
+    composition: 'rightSubjectLeftSpace',
+    framing: 'waistUp',
+    garment: 'coutureMermaid',
+    materials: ['frenchLace', 'pearlBeading'],
+    chestDetail: 'sweetheartCorset',
+    waistSideDetail: 'sculptedWaistCorsetry',
+    shoulderDetail: 'softOffShoulderTulle',
+    veil: 'pearlVeil',
+    accessories: ['pearlHairpiece', 'pearlEarrings'],
+    bodyShape: 'original',
+    pose: 'downcastThreeQuarter',
+    makeup: ['clearBridalMakeup', 'naturalRose'],
+    hairstyle: 'lowBridalUpdo',
+    skinTexture: 'luxuryAdSkin',
+    lighting: 'koreanCreamSoftLight',
+    color: 'ivoryCream',
+    background: 'creamSeamlessStudio',
+    camera: 'bridal85mm',
+    ratio: 'vertical916',
+    intensity: 'balanced luxury bridal styling, visible couture craftsmanship, refined editorial presence',
+  };
+  const details = [
+    data.chestDetailData[selection.chestDetail],
+    data.waistSideDetailData[selection.waistSideDetail],
+    data.shoulderDetailData[selection.shoulderDetail],
+  ].filter(Boolean).join(', ');
+  const prompt = [
+    data.CORE.identityGuard,
+    data.CORE.anatomyGuard,
+    data.CORE.poseGuard,
+    data.CORE.lightingGuard,
+    data.CORE.compositionGuard,
+    data.BRIDAL_EDITORIAL_CORE,
+    data.styleData[selection.style],
+    data.compositionData[selection.composition],
+    data.framingData[selection.framing],
+    'gown silhouette: ' + data.garmentData[selection.garment],
+    'bridal gown materials and craftsmanship: ' + selection.materials.map(key => data.materialData[key]).join(', '),
+    'garment surface detail: ' + details + ' — structural surface accents only, the gown silhouette stays unchanged',
+    'veil design: ' + data.veilData[selection.veil],
+    'bridal accessories: ' + selection.accessories.map(key => data.accessoryData[key]).join(', '),
+    data.BRIDAL_VEIL_IDENTITY_PROTECTION,
+    data.bodyShapes[selection.bodyShape],
+    data.poseData[selection.pose],
+    'bridal styling: ' + selection.makeup.map(key => data.makeupData[key]).join(', ') + ', ' + data.hairstyleData[selection.hairstyle] + ', ' + data.skinData[selection.skinTexture],
+    'lighting: ' + data.lightingData[selection.lighting],
+    'color palette: ' + data.colorData[selection.color],
+    'background: ' + data.backgroundData[selection.background],
+    data.cameraData[selection.camera],
+    data.ratioData[selection.ratio],
+    selection.intensity,
+    data.CORE.output,
+    data.CORE.negativePrompt,
+    'No random text, no watermark, no logo artifacts, no extra person, no distorted face, no deformed hands.',
+  ];
+  return prompt.filter(Boolean).join('\n');
+}
+
 function generateAncientGoddess(core, data) {
   const selection = {
     bodyShape: 'original',
@@ -1343,6 +1404,22 @@ function loadRevision(label, sourceReader) {
       exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedGalaSocialiteCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, poseData, framingData, cameraData, ratioData, chestDetailData, waistSideDetailData, shoulderDetailData })',
     });
     prompts['galasocialite-default.txt'] = generateGalaSocialite(core, galaSocialiteData);
+  } catch (err) {
+    // Not present in this revision — skip.
+  }
+
+  // bridal-editorial.html is new; older revisions may not have it yet, so skip gracefully.
+  try {
+    const bridalSource = sourceReader('bridal-editorial.html');
+    const bridalData = evalDataSegment({
+      source: bridalSource,
+      core,
+      page: 'bridalEditorial',
+      startMarker: 'const CORE = window.HB_CORE_PROMPT.page.bridalEditorial;',
+      endMarker: 'function selected',
+      exportExpression: '({ CORE, BRIDAL_EDITORIAL_CORE, BRIDAL_VEIL_IDENTITY_PROTECTION, styleData, compositionData, framingData, garmentData, materialData, chestDetailData, waistSideDetailData, shoulderDetailData, veilData, accessoryData, bodyShapes, poseData, makeupData, hairstyleData, skinData, lightingData, colorData, backgroundData, cameraData, ratioData })',
+    });
+    prompts['bridal-editorial-default.txt'] = generateBridalEditorial(core, bridalData);
   } catch (err) {
     // Not present in this revision — skip.
   }

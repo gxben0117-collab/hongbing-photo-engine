@@ -7,12 +7,13 @@
 
 ## 檢查範圍
 
-目前共 18 個正式工具頁：
+目前共 19 個正式工具頁：
 
 `travel.html`、`magazine.html`、`doll.html`、`fantasy-fashion.html`、`chinese-classical.html`、
 `japanese-kimono.html`、`korean-hanbok.html`、`xianxia.html`、
 `anime-character.html`、`flower-fairy.html`、`isekai-fantasy.html`、`store-ad.html`、
 `floral-sweet.html`、`gala-socialite.html`、`kpop-idol.html`、`battle-academy.html`、
+ `bridal-editorial.html`、
 `ancient-goddess.html`、`editorial-identity.html`。
 
 ## 上線前命令
@@ -57,6 +58,9 @@ git diff --check
 
 ## 咒語與一鍵契約
 
+- 婚紗藝術寫真頁固定有 12 組一鍵模板；每組必須完整回填婚紗、材質、頭紗、配件、妝髮、姿勢、光影、背景、鏡頭與比例。覆面頭紗只能手動選擇，不進一般隨機池。
+- 婚紗頁的頭紗身份保護只在選擇頭紗時追加，無頭紗時不得輸出 veil 保護段落；構圖留白不得生成文字。
+
 - 手動改選項後，既有輸出會標記 stale；重新生成前不可複製舊咒語。
 - 旅拍、雜誌、幻想廣告的具名一鍵與隨機套用會同步寫入選項、立即生成並顯示結果。
 - preset 的每個欄位值必須存在於當頁選項池；沒有對應值時驗證直接失敗，不允許靜默退回。
@@ -71,6 +75,9 @@ git diff --check
   `illustrationHumanCore` 進入正式頁生成輸出，不建立平行核心。
 
 ## 目前頁面順序基準
+
+- 婚紗藝術寫真：成品語氣 → 構圖 → 婚紗輪廓 → 工藝材質 → 服裝改造 → 頭紗配件 → 身形 → 姿勢 → 妝髮膚質 → 光影配色 → 背景 → 自訂 → 鏡頭 → 比例 → 生成。
+- 婚紗頁採單人新娘範圍；不得由模板或隨機套用加入新郎、伴郎、伴娘或第二位人物。
 
 - 共同世界觀頁：版型／構圖 → 服裝輪廓 → 主題材質 → 服裝改造 → 身形 → 姿勢 →
   自訂 → 光影 → 背景 → 鏡頭 → 比例 → 生成。
@@ -91,17 +98,17 @@ git diff --check
 
 ## 2026-08-03 回歸結果
 
-- UI flow contract：18 頁，0 issue。
+- UI flow contract：19 頁，0 issue。
 - preset 引用驗證：0 issue。
-- 隨機生成稽核：18 頁 × 100 組，共 1800 組，0 issue。
-- 服裝改造主題契約：14 頁，UI／資料／隨機池／代表模板與共用 helper 全部通過。
+- 隨機生成稽核：19 頁 × 100 組，共 1900 組，0 issue。
+- 服裝改造主題契約：15 頁，UI／資料／隨機池／代表模板與共用 helper 全部通過。
 - 編輯視覺設計模板稽核：6 分類、31 組模板全部通過按鈕／資料池／生成輸出對照。
 - 固定提示詞預覽：完成；結構與生成輸出可重建。
 - `check-static.mjs` 與 `git diff --check`：完成。
 - 瀏覽器煙霧檢查：六分類切換、31 組數量、模板套用、文字保留、桌機與手機版面、生成輸出與
   console error 均通過。
-- 介面文案回歸：首頁 18 張工具卡、18 個正式工具頁的主題文案與手機版長提示均通過，無水平
-  溢出、無 console error/warning。
+- 介面文案回歸：首頁 19 張工具卡、19 個正式工具頁的主題文案與手機版長提示均通過，無水平
+溢出、無 console error/warning。
 
 這是靜態與 Node `vm` 回歸檢查；若要確認瀏覽器實際像素、剪貼簿權限或 GitHub Pages
 快取，仍需在發布後開啟線上入口做一次人工點擊確認。

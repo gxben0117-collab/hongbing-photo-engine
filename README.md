@@ -4,7 +4,7 @@
 
 ## 版本
 
-v4.34 起持續迭代中；完整逐日開發記錄見 [docs/development-log.md](docs/development-log.md)。
+v4.35 起持續迭代中；完整逐日開發記錄見 [docs/development-log.md](docs/development-log.md)。
 
 v4.3 基礎重點：
 
@@ -26,7 +26,7 @@ v4.3 之後陸續完成（詳見開發日誌）：
 ## 專案定位
 
 - `index.html` 是入口與工具導覽頁。
-- 十八個工具頁（見下方「正式頁面」）各自包含 UI、選項資料與咒語組裝邏輯。
+- 十九個工具頁（見下方「正式頁面」）各自包含 UI、選項資料與咒語組裝邏輯。
 - `assets/core-prompt.js` 集中管理 v4.3 共用身份鎖定、臉部幾何、真人骨架、鏡頭重建、光線一致、膚質、負面詞與輸出品質規則。
 - `scripts/` 底下有五個驗證腳本，見下方「上架前檢查」。
 - `docs/` 保存規格、流程、核心 prompt 契約與工程說明。
@@ -50,6 +50,7 @@ v4.3 之後陸續完成（詳見開發日誌）：
 - `store-ad.html` - 店家活動廣告產生器
 - `floral-sweet.html` - 花漾甜美系咒語產生器
 - `gala-socialite.html` - 氣質名媛宴會咒語產生器
+- `bridal-editorial.html` - 婚紗藝術寫真咒語產生器
 - `kpop-idol.html` - 韓系氣質偶像風咒語產生器
 - `battle-academy.html` - 戰鬥制服學園咒語產生器
 - `ancient-goddess.html` - 神話古文明女神咒語產生器
@@ -74,6 +75,7 @@ v4.3 之後陸續完成（詳見開發日誌）：
 ├─ store-ad.html               # 工具頁: 店家廣告
 ├─ floral-sweet.html           # 工具頁: 花漾甜美系
 ├─ gala-socialite.html         # 工具頁: 氣質名媛宴會
+├─ bridal-editorial.html      # 工具頁: 婚紗藝術寫真
 ├─ kpop-idol.html              # 工具頁: 韓系氣質偶像風
 ├─ battle-academy.html         # 工具頁: 戰鬥制服學園
 ├─ ancient-goddess.html        # 工具頁: 神話古文明女神
@@ -98,6 +100,7 @@ v4.3 之後陸續完成（詳見開發日誌）：
 [寫真旅拍流程](docs/travel-workflow.md)｜[雜誌棚拍流程](docs/magazine-workflow.md)｜
 [中式古典美學流程](docs/chinese-classical-workflow.md)｜
 [日本和服美學流程](docs/japanese-kimono-workflow.md)｜[韓國韓服美學流程](docs/korean-hanbok-workflow.md)｜
+[婚紗藝術寫真流程](docs/bridal-editorial-workflow.md)｜
 [幻想廣告分類表](docs/fantasy-ad-workflow.md)｜[公仔工作流程](docs/doll-workflow.md)｜
 [專案架構](docs/architecture.md)｜[完整程式規格邏輯文件](docs/full-program-spec.md)｜
 [歷史交接文件歸檔](docs/history/)
@@ -130,7 +133,7 @@ git diff --check
 
 ```powershell
 node scripts\build-prompt-preview.mjs   # 固定選項組合，改前/改後 0 diff 迴歸檢查
-node scripts\audit-100x.mjs             # 18 個正式工具頁各隨機 100 組，共 1800 組內容稽核
+node scripts\audit-100x.mjs             # 19 個正式工具頁各隨機 100 組，共 1900 組內容稽核
 node scripts\validate-preset-refs.mjs   # 各頁一鍵套用/預設連動物件引用的選項值是否都存在
 ```
 

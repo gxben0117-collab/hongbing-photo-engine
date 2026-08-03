@@ -434,6 +434,23 @@ Uniform battle-ification is not armor-ification: fashion first, school identity 
     output: CORE_OUTPUT_QUALITY
   };
 
+  const bridalEditorialCore = {
+    identityGuard: [
+      CORE_IDENTITY_LOCK,
+      CORE_FACE_GEOMETRY_LOCK,
+      "Style Scope Rule:\nBridal fashion, veil, wedding accessories and fine-art editorial direction only affect clothing, ornaments, background, lighting, composition, mood and textile surface.\nThey must not change the person's facial structure, identity, age impression or recognizable features.\nThis is a solo bridal portrait, not a multi-person wedding scene."
+    ].join("\n\n"),
+    anatomyGuard: humanCore,
+    poseGuard: CORE_POSE_NATURALITY,
+    lightingGuard: CORE_LIGHTING_UNIFICATION,
+    compositionGuard: CORE_COMPOSITION_CONTROL,
+    negativePrompt: [
+      CORE_NEGATIVE_PROMPT,
+      "Bridal page scope:\nNo extra person, no groom, no bridal party, no duplicated bride, no wedding text, no random lettering,\nno generic fantasy costume, no magical effects, no futuristic technology, no cyberpunk, no armor.\nKeep the visual language grounded in premium bridal fashion photography and coherent wedding couture."
+    ].join("\n\n"),
+    output: CORE_OUTPUT_QUALITY
+  };
+
   const ancientGoddessCore = {
     identityGuard: [
       CORE_IDENTITY_LOCK,
@@ -488,6 +505,7 @@ They must not change the person's facial structure, identity, age impression or 
       storeAd: storeAdCore,
       floralSweet: floralSweetCore,
       galaSocialite: galaSocialiteCore,
+      bridalEditorial: bridalEditorialCore,
       kpopIdol: kpopIdolCore,
       battleAcademy: battleAcademyCore,
       ancientGoddess: ancientGoddessCore,

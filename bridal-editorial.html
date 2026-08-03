@@ -1,0 +1,917 @@
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>婚紗藝術寫真咒語產生器｜寫真引擎</title>
+<meta name="description" content="婚紗藝術寫真咒語產生器，整合高訂婚紗、頭紗、姿勢、妝髮、光影、背景與身份鎖定核心。">
+<meta property="og:title" content="婚紗藝術寫真咒語產生器｜寫真引擎">
+<meta property="og:description" content="以真人參考照製作精品婚紗棚拍、婚紗廣告與婚紗雜誌寫真咒語。">
+<meta name="twitter:title" content="婚紗藝術寫真咒語產生器｜寫真引擎">
+<meta name="twitter:description" content="以真人參考照製作精品婚紗棚拍、婚紗廣告與婚紗雜誌寫真咒語。">
+<style>
+  :root{
+    --black:#09090B;
+    --panel:#15131A;
+    --panel-2:#201A22;
+    --line:#342C38;
+    --paper:#F7F4EF;
+    --soft:#AAA1AB;
+    --white:#FFFFFF;
+    --gold:#D5B46A;
+    --rose:#E7A2B5;
+    --selected:#241B1E;
+    --blue:#A9C8D7;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    min-height:100vh;
+    padding-bottom:72px;
+    background:var(--black);
+    color:var(--paper);
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    line-height:1.6;
+  }
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    height:54px;padding:0 24px;
+    display:flex;align-items:center;justify-content:space-between;
+    background:rgba(9,9,11,.93);
+    border-bottom:1px solid var(--line);
+    backdrop-filter:blur(12px);
+  }
+  .nav-logo{color:var(--gold);font-family:"Noto Serif TC",serif;font-size:14px;font-weight:700;letter-spacing:.08em;}
+  .nav-link{color:var(--soft);font-size:12px;text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:6px;}
+  .nav-link:hover{color:var(--paper);border-color:var(--gold);}
+  .wrap{width:min(960px,100%);margin:0 auto;padding:70px 20px 40px;display:flex;flex-direction:column;}
+  header{order:-1;padding:46px 0 34px;margin-bottom:30px;border-bottom:1px solid var(--line);}
+  .eyebrow{margin-bottom:12px;color:var(--rose);font-size:11px;letter-spacing:.28em;text-transform:uppercase;}
+  h1{margin-bottom:12px;color:var(--white);font-family:"Noto Serif TC",serif;font-size:32px;line-height:1.25;letter-spacing:.02em;}
+  h1 span{color:var(--rose);}
+  header p{max-width:720px;color:var(--soft);font-size:14px;}
+  section{margin-bottom:28px;}
+  .section-preset{order:0;}
+  .section-style{order:1;}
+  .section-composition{order:2;}
+  .section-garment{order:3;}
+  .section-material{order:4;}
+  .section-garment-variation{order:5;}
+  .section-veil{order:6;}
+  .section-body{order:7;}
+  .section-pose{order:8;}
+  .section-styling{order:9;}
+  .section-lighting{order:10;}
+  .section-background{order:11;}
+  .section-extra{order:12;}
+  .section-camera{order:13;}
+  .section-ratio{order:14;}
+  .section-output{order:15;}
+  .section-header{display:flex;align-items:baseline;gap:10px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--line);}
+  .section-label{color:var(--rose);font-size:12px;font-weight:800;letter-spacing:.16em;}
+  .section-title{color:var(--white);font-size:16px;font-weight:800;}
+  .hint{margin:0 0 12px;color:var(--soft);font-size:12px;line-height:1.7;}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+  .grid-3{grid-template-columns:repeat(3,1fr);}
+  .card{
+    position:relative;min-height:74px;padding:12px 13px;
+    border:1px solid var(--line);border-radius:8px;
+    background:var(--panel);cursor:pointer;transition:.15s;
+  }
+  .card:hover{border-color:#66505B;background:var(--panel-2);}
+  .card input{position:absolute;opacity:0;pointer-events:none;}
+  .card .name{margin-bottom:3px;color:var(--paper);font-size:13px;font-weight:800;}
+  .card .desc{color:var(--soft);font-size:11px;line-height:1.45;}
+  .card.selected{border-color:var(--gold);background:var(--selected);}
+  .card.selected .name{color:var(--gold);}
+  .template-selected{box-shadow:0 0 0 1px var(--rose);}
+  .group-title{grid-column:1/-1;margin:9px 0 1px;color:var(--gold);font-size:12px;font-weight:700;}
+  .field-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px;}
+  .field{display:flex;flex-direction:column;gap:6px;color:var(--soft);font-size:12px;}
+  .field.full{grid-column:1/-1;}
+  .field input,.field textarea,.field select{
+    width:100%;padding:10px 11px;color:var(--paper);
+    border:1px solid var(--line);border-radius:6px;
+    background:#111015;font:inherit;outline:none;
+  }
+  .field textarea{min-height:86px;resize:vertical;}
+  .field input:focus,.field textarea:focus,.field select:focus{border-color:var(--gold);}
+  .custom-choice input{margin-top:2px;}
+  .layer-wrap{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:12px;}
+  .layer-card{min-height:62px;}
+  .limit-note{margin-top:8px;color:var(--rose);font-size:11px;}
+  .generate-btn,.copy-btn{
+    width:100%;padding:13px 16px;border:1px solid var(--gold);border-radius:6px;
+    color:#17130B;background:var(--gold);font:inherit;font-weight:800;cursor:pointer;
+  }
+  .generate-btn:hover{background:#E6C982;}
+  .output-wrap{position:relative;margin-top:14px;}
+  .output-wrap.hidden{display:none;}
+  .output-wrap.stale textarea{opacity:.56;}
+  .output-stale-badge{display:none;margin-bottom:8px;padding:7px 10px;color:#F1C5CE;background:#2B191F;border:1px solid #6C3745;border-radius:5px;font-size:11px;}
+  .output-wrap.stale .output-stale-badge{display:block;}
+  #outputText{width:100%;min-height:420px;padding:15px;color:#EDE7E2;background:#111015;border:1px solid var(--line);border-radius:6px;font:12px/1.65 "Cascadia Mono","Consolas",monospace;resize:vertical;overflow-wrap:anywhere;}
+  .copy-btn{margin-top:9px;color:var(--paper);background:#2C2027;border-color:#6A4E5A;}
+  .copy-btn:hover,.copy-btn.copied{background:#3A2630;border-color:var(--rose);color:#FFE9EF;}
+  @media (max-width:760px){
+    nav{height:50px;padding:0 16px;}
+    .wrap{padding:62px 14px 30px;}
+    header{padding:34px 0 26px;}
+    h1{font-size:26px;}
+    .grid,.grid-3{grid-template-columns:repeat(2,1fr);}
+    .layer-wrap{grid-template-columns:repeat(3,1fr);}
+  }
+  @media (max-width:480px){
+    .grid,.grid-3,.field-grid{grid-template-columns:1fr;}
+    .layer-wrap{grid-template-columns:repeat(2,1fr);}
+    .card{min-height:auto;padding:11px 12px;}
+    #outputText{min-height:360px;font-size:11px;}
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">寫真引擎</a>
+  <a class="nav-link" href="index.html">返回工具總覽</a>
+</nav>
+
+<main class="wrap">
+  <header>
+    <div class="eyebrow">Bridal Editorial Collection</div>
+    <h1>婚紗藝術寫真<span>咒語產生器</span></h1>
+    <p>以真人參考照建立單人新娘的精品婚紗寫真，控制高訂婚紗、頭紗、姿態、妝髮、光影與場景；身份鎖定核心優先，婚紗只改變造型與攝影語氣。</p>
+  </header>
+
+  <section class="section-preset">
+    <div class="section-header"><div class="section-label">00</div><div class="section-title">一鍵婚紗模板</div></div>
+    <p class="hint">一鍵套用會完整填入婚紗、頭紗、姿勢、光線、背景與比例，套用後仍可逐區修改。</p>
+    <button class="card" id="bridalRandomPreset" type="button" style="width:100%;min-height:auto;margin-bottom:10px;background:linear-gradient(180deg,#24181E 0%,#171218 100%);">
+      <div class="name">隨機套用｜婚紗藝術寫真</div><div class="desc">重新抽取風格、婚紗、頭紗、姿勢、光線與背景</div>
+    </button>
+    <div class="grid grid-3">
+      <button class="card" type="button" data-template="koreanCreamStudio"><div class="name">韓系奶油精品棚拍</div><div class="desc">參考圖同款：偏右留白、蕾絲魚尾、珍珠長頭紗</div></button>
+      <button class="card" type="button" data-template="pearlVeilBeautyCloseup"><div class="name">珍珠頭紗美妝特寫</div><div class="desc">胸像構圖、清透妝容、珍珠與頭紗框景</div></button>
+      <button class="card" type="button" data-template="frenchLaceCouture"><div class="name">法式蕾絲高訂新娘</div><div class="desc">立體蕾絲、低盤髮、精品婚紗工作室</div></button>
+      <button class="card" type="button" data-template="minimalSatinBride"><div class="name">極簡絲緞婚紗</div><div class="desc">直身絲緞、純白棚景、低對比高級留白</div></button>
+      <button class="card" type="button" data-template="royalCathedralTrain"><div class="name">皇家長拖尾婚紗</div><div class="desc">蓬裙長拖尾、教堂長頭紗、端正全身主視覺</div></button>
+      <button class="card" type="button" data-template="whiteGardenMorning"><div class="name">白花庭園晨光</div><div class="desc">白花庭園、柔霧晨光、浪漫自然姿態</div></button>
+      <button class="card" type="button" data-template="coastalSunsetVeil"><div class="name">海岸夕陽長頭紗</div><div class="desc">海岸風、飄動頭紗、夕陽暖金逆光</div></button>
+      <button class="card" type="button" data-template="cathedralWindowBride"><div class="name">教堂彩窗婚紗</div><div class="desc">彩窗投影、蕾絲婚紗、電影感肅靜氣氛</div></button>
+      <button class="card" type="button" data-template="champagneCoutureBride"><div class="name">香檳金高訂婚紗</div><div class="desc">香檳金、珠繡與高訂棚拍質感</div></button>
+      <button class="card" type="button" data-template="pinkFloralBride"><div class="name">粉霧立體花卉婚紗</div><div class="desc">粉霧色、立體花卉與柔和浪漫光線</div></button>
+      <button class="card" type="button" data-template="blueCrystalBride"><div class="name">冰藍水晶婚紗</div><div class="desc">冰藍水晶、冷調柔光、精緻高訂畫面</div></button>
+      <button class="card" type="button" data-template="bridalMagazineKeyVisual"><div class="name">婚紗雜誌主視覺</div><div class="desc">右側人物、左側乾淨排版空間、封面級人像</div></button>
+    </div>
+  </section>
+
+  <section class="section-style">
+    <div class="section-header"><div class="section-label">01</div><div class="section-title">成品用途 / 畫面語氣</div></div>
+    <p class="hint">只決定最後像婚紗廣告、棚拍寫真或雜誌主視覺，不直接改變婚紗款式。</p>
+    <div class="grid grid-3" data-choice="style">
+      <label class="card selected"><input type="radio" name="style" value="bridalEditorial" checked><div class="name">婚紗藝術寫真</div><div class="desc">細膩、安靜、像高級婚紗攝影作品</div></label>
+      <label class="card"><input type="radio" name="style" value="bridalCampaign"><div class="name">精品婚紗廣告</div><div class="desc">清楚展示婚紗工藝與高訂質感</div></label>
+      <label class="card"><input type="radio" name="style" value="koreanBridalStudio"><div class="name">韓系精品棚拍</div><div class="desc">奶油背景、柔光、乾淨新娘妝</div></label>
+      <label class="card"><input type="radio" name="style" value="fineArtWedding"><div class="name">Fine Art 婚紗</div><div class="desc">自然光、細膩色調與藝術人像感</div></label>
+      <label class="card"><input type="radio" name="style" value="cinematicBridal"><div class="name">電影感婚紗故事</div><div class="desc">環境敘事、情緒光線與婚紗動態</div></label>
+      <label class="card"><input type="radio" name="style" value="bridalMagazine"><div class="name">婚紗雜誌大片</div><div class="desc">時尚構圖、封面張力與高訂 editorial 語氣</div></label>
+    </div>
+  </section>
+
+  <section class="section-composition">
+    <div class="section-header"><div class="section-label">02</div><div class="section-title">構圖取景</div></div>
+    <p class="hint">人物位置與入鏡比例分開控制；留白只代表乾淨排版空間，不生成文字。</p>
+    <div class="grid grid-3" data-choice="composition">
+      <label class="card selected"><input type="radio" name="composition" value="centeredBridalPortrait" checked><div class="name">人物置中主視覺</div><div class="desc">人物穩定置中，適合婚紗品牌主圖</div></label>
+      <label class="card"><input type="radio" name="composition" value="rightSubjectLeftSpace"><div class="name">人物偏右左側留白</div><div class="desc">接近參考圖，左側保留乾淨排版空間</div></label>
+      <label class="card"><input type="radio" name="composition" value="leftSubjectRightSpace"><div class="name">人物偏左右側留白</div><div class="desc">人物偏左，右側保留乾淨空間</div></label>
+      <label class="card"><input type="radio" name="composition" value="veilFramedPortrait"><div class="name">頭紗框景構圖</div><div class="desc">頭紗在人物周圍形成柔和框景</div></label>
+      <label class="card"><input type="radio" name="composition" value="symmetricalCeremonialBride"><div class="name">對稱儀式主圖</div><div class="desc">人物、拱門或教堂空間左右平衡</div></label>
+      <label class="card"><input type="radio" name="composition" value="foregroundFlowerFrame"><div class="name">花卉前景框景</div><div class="desc">白花或花園前景增加景深，不遮住臉</div></label>
+      <label class="card"><input type="radio" name="composition" value="flowingTrainComposition"><div class="name">裙襬展開構圖</div><div class="desc">讓長拖尾與薄紗動態成為畫面主線</div></label>
+      <label class="card"><input type="radio" name="composition" value="environmentalBridalPortrait"><div class="name">環境婚紗構圖</div><div class="desc">人物與教堂、庭園或海岸共同敘事</div></label>
+    </div>
+    <div class="grid grid-3" data-choice="framing" style="margin-top:10px;">
+      <label class="card selected"><input type="radio" name="framing" value="closePortrait" checked><div class="name">臉部新娘特寫</div><div class="desc">重點放在臉、妝容與頭紗</div></label>
+      <label class="card"><input type="radio" name="framing" value="bustPortrait"><div class="name">胸像美妝特寫</div><div class="desc">頭部、肩頸與婚紗胸口清楚</div></label>
+      <label class="card"><input type="radio" name="framing" value="waistUp"><div class="name">腰部以上</div><div class="desc">接近參考圖，兼顧臉與婚紗工藝</div></label>
+      <label class="card"><input type="radio" name="framing" value="threeQuarter"><div class="name">七分身</div><div class="desc">展示腰線與裙身細節</div></label>
+      <label class="card"><input type="radio" name="framing" value="fullBody"><div class="name">全身婚紗</div><div class="desc">完整展示婚紗、裙襬與頭紗</div></label>
+      <label class="card"><input type="radio" name="framing" value="wideScene"><div class="name">遠景婚紗主視覺</div><div class="desc">環境與人物共同構成故事畫面</div></label>
+    </div>
+  </section>
+
+  <section class="section-garment">
+    <div class="section-header"><div class="section-label">03</div><div class="section-title">婚紗輪廓</div></div>
+    <p class="hint">只決定整件婚紗的外型與裙身比例，胸口、腰側、肩部細節請到 05 服裝改造核心。</p>
+    <div class="grid grid-3" data-choice="garment">
+      <label class="card selected"><input type="radio" name="garment" value="coutureMermaid" checked><div class="name">高訂魚尾婚紗</div><div class="desc">貼合身形、膝下展開的高訂魚尾線條</div></label>
+      <label class="card"><input type="radio" name="garment" value="classicALine"><div class="name">經典 A 字婚紗</div><div class="desc">上身俐落、裙身自然向下展開</div></label>
+      <label class="card"><input type="radio" name="garment" value="royalBallgown"><div class="name">皇家蓬裙婚紗</div><div class="desc">豐盈裙身、正式華麗的婚紗比例</div></label>
+      <label class="card"><input type="radio" name="garment" value="minimalColumn"><div class="name">極簡直身婚紗</div><div class="desc">乾淨垂直線條、低調高級</div></label>
+      <label class="card"><input type="radio" name="garment" value="frenchDrapedGown"><div class="name">法式垂墜婚紗</div><div class="desc">斜裁垂墜、柔和自然的布料流動</div></label>
+      <label class="card"><input type="radio" name="garment" value="floralSculptureGown"><div class="name">立體花卉婚紗</div><div class="desc">立體花朵與高訂結構融為一體</div></label>
+      <label class="card"><input type="radio" name="garment" value="detachableTrainGown"><div class="name">可拆式長拖尾婚紗</div><div class="desc">主裙與延伸拖尾層次清楚</div></label>
+      <label class="card"><input type="radio" name="garment" value="modernShortBridal"><div class="name">現代短版婚紗</div><div class="desc">俐落短裙、輕盈現代婚紗感</div></label>
+      <label class="card"><input type="radio" name="garment" value="champagneCoutureGown"><div class="name">香檳金高訂婚紗</div><div class="desc">香檳金色調與珠繡高訂輪廓</div></label>
+      <label class="card"><input type="radio" name="garment" value="blueCrystalGown"><div class="name">冰藍水晶婚紗</div><div class="desc">冰藍色高訂輪廓與晶體細節</div></label>
+      <label class="field full custom-choice">婚紗自填
+        <input id="customGarment" type="text" placeholder="例如：貼身蕾絲魚尾婚紗，肩後連接一片長薄紗拖尾">
+      </label>
+    </div>
+  </section>
+
+  <section class="section-material">
+    <div class="section-header"><div class="section-label">04</div><div class="section-title">婚紗工藝與材質</div></div>
+    <p class="hint">最多選 2 個，控制表面工藝與布料質感，不會改變 03 婚紗輪廓。</p>
+    <div class="grid grid-3" data-choice="materials">
+      <label class="card"><input type="checkbox" name="materials" value="frenchLace"><div class="name">法式蕾絲</div><div class="desc">細密蕾絲與柔和花紋層次</div></label>
+      <label class="card"><input type="checkbox" name="materials" value="floralEmbroidery"><div class="name">立體花卉刺繡</div><div class="desc">立體花朵、刺繡與高訂工藝</div></label>
+      <label class="card"><input type="checkbox" name="materials" value="pearlBeading"><div class="name">珍珠珠繡</div><div class="desc">珍珠沿胸口、裙身或頭紗細節排列</div></label>
+      <label class="card"><input type="checkbox" name="materials" value="crystalBeading"><div class="name">水晶亮片</div><div class="desc">細緻晶體反光，不做誇張閃爍特效</div></label>
+      <label class="card"><input type="checkbox" name="materials" value="silkSatin"><div class="name">絲緞垂墜</div><div class="desc">柔滑絲緞、自然斜裁與光澤</div></label>
+      <label class="card"><input type="checkbox" name="materials" value="layeredTulle"><div class="name">多層薄紗</div><div class="desc">輕盈薄紗、裙襬與頭紗層次</div></label>
+      <label class="card"><input type="checkbox" name="materials" value="illusionMesh"><div class="name">透膚結構網紗</div><div class="desc">以服裝結構呈現精緻透視，不裸露</div></label>
+      <label class="card"><input type="checkbox" name="materials" value="sculptedCorsetry"><div class="name">精緻束身結構</div><div class="desc">高訂胸衣骨架與布料支撐</div></label>
+      <label class="card"><input type="checkbox" name="materials" value="handPleats"><div class="name">手工褶襉</div><div class="desc">細密手工褶襉與布料節奏</div></label>
+      <label class="card"><input type="checkbox" name="materials" value="pearlWaistDetail"><div class="name">珠寶腰飾</div><div class="desc">腰線上的細緻珠飾與光點</div></label>
+    </div>
+    <div class="limit-note" id="materialsLimit">已選 0 / 2</div>
+    <label class="field full custom-choice" style="margin-top:10px;">材質自填
+      <input id="customMaterial" type="text" placeholder="例如：霧面絲綢與細密珍珠刺繡">
+    </label>
+  </section>
+
+  <section class="section-garment-variation">
+    <div class="section-header"><div class="section-label">05</div><div class="section-title">服裝改造核心</div></div>
+    <p class="hint">這些是婚紗表面的結構化細節，不是重新設計整件婚紗；Layer 只控制隨機套用時要改幾個部位，手動選擇會被保留。</p>
+    <div class="layer-wrap" data-choice="garmentLayer">
+      <label class="card layer-card selected"><input type="radio" name="garmentLayer" value="layer0" checked><div class="name">Layer 0</div><div class="desc">原始版</div></label>
+      <label class="card layer-card"><input type="radio" name="garmentLayer" value="layer3"><div class="name">Layer 3</div><div class="desc">輕度，約 1 區</div></label>
+      <label class="card layer-card"><input type="radio" name="garmentLayer" value="layer6"><div class="name">Layer 6</div><div class="desc">中度，約 2 區</div></label>
+      <label class="card layer-card"><input type="radio" name="garmentLayer" value="layer9"><div class="name">Layer 9</div><div class="desc">高度，3 區全改</div></label>
+      <label class="card layer-card"><input type="radio" name="garmentLayer" value="random"><div class="name">隨機 Layer</div><div class="desc">隨機重抽強度</div></label>
+    </div>
+    <div class="grid grid-3">
+      <div>
+        <div class="group-title">胸口</div>
+        <label class="card selected"><input type="radio" name="chestDetail" value="none" checked><div class="name">原婚紗一致</div><div class="desc">維持 03 婚紗胸口版型</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="sweetheartCorset"><div class="name">心形束身領口</div><div class="desc">高訂心形領口與束身胸衣</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="deepVBridalNeckline"><div class="name">深 V 高訂領口</div><div class="desc">深 V 領線，維持婚紗結構</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="laceIllusionBodice"><div class="name">蕾絲幻影胸衣</div><div class="desc">蕾絲與透明結構網紗</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="drapedOffShoulderBodice"><div class="name">垂墜露肩胸衣</div><div class="desc">肩側薄紗連接胸衣線條</div></label>
+        <label class="field custom-choice">胸口自填<input id="customChestDetail" type="text" placeholder="例如：珍珠沿心形領口細密排列"></label>
+      </div>
+      <div>
+        <div class="group-title">腰側</div>
+        <label class="card selected"><input type="radio" name="waistSideDetail" value="none" checked><div class="name">原婚紗一致</div><div class="desc">維持 03 婚紗腰線版型</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="sculptedWaistCorsetry"><div class="name">雕塑感纖腰結構</div><div class="desc">高訂胸衣與腰線支撐</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="pearlWaistApplique"><div class="name">珍珠刺繡腰線</div><div class="desc">珍珠工藝沿腰線分布</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="drapedWaistPleats"><div class="name">斜向垂墜腰褶</div><div class="desc">腰側布料自然向下流動</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="detachableOverskirtWaist"><div class="name">可拆式外裙腰封</div><div class="desc">外裙與主裙形成高訂層次</div></label>
+        <label class="field custom-choice">腰側自填<input id="customWaistSideDetail" type="text" placeholder="例如：腰側以細密蕾絲形成自然收腰線"></label>
+      </div>
+      <div>
+        <div class="group-title">肩部</div>
+        <label class="card selected"><input type="radio" name="shoulderDetail" value="none" checked><div class="name">原婚紗一致</div><div class="desc">維持 03 婚紗肩部版型</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="softOffShoulderTulle"><div class="name">垂墜露肩薄紗</div><div class="desc">薄紗自然落在上臂外側</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="singleShoulderBridalCut"><div class="name">單肩婚紗剪裁</div><div class="desc">現代不對稱肩線</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="laceCapSleeve"><div class="name">蕾絲短袖</div><div class="desc">精緻蕾絲覆蓋肩部</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="detachableTulleSleeve"><div class="name">可拆式薄紗長袖</div><div class="desc">輕盈長袖與婚紗連接</div></label>
+        <label class="field custom-choice">肩部自填<input id="customShoulderDetail" type="text" placeholder="例如：肩後連接透明薄紗長袖"></label>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-veil">
+    <div class="section-header"><div class="section-label">06</div><div class="section-title">頭紗、髮飾與新娘配件</div></div>
+    <p class="hint">預設頭紗位於臉後或臉側，保持五官清楚；透明覆面頭紗屬高風險選項，建議多生成幾次挑選。</p>
+    <div class="grid grid-3" data-choice="veil">
+      <label class="card selected"><input type="radio" name="veil" value="none" checked><div class="name">無頭紗</div><div class="desc">不加入頭紗</div></label>
+      <label class="card"><input type="radio" name="veil" value="shoulderLengthVeil"><div class="name">肩長頭紗</div><div class="desc">輕盈、適合近景與半身</div></label>
+      <label class="card"><input type="radio" name="veil" value="fingertipVeil"><div class="name">指尖頭紗</div><div class="desc">自然垂落至手部附近</div></label>
+      <label class="card"><input type="radio" name="veil" value="chapelVeil"><div class="name">教堂長頭紗</div><div class="desc">適合全身婚紗與正式畫面</div></label>
+      <label class="card"><input type="radio" name="veil" value="cathedralVeil"><div class="name">皇家大教堂頭紗</div><div class="desc">長拖尾、莊重婚紗氣勢</div></label>
+      <label class="card"><input type="radio" name="veil" value="pearlVeil"><div class="name">珍珠長頭紗</div><div class="desc">珍珠沿頭紗邊緣細緻排列</div></label>
+      <label class="card"><input type="radio" name="veil" value="laceEdgeVeil"><div class="name">蕾絲滾邊頭紗</div><div class="desc">蕾絲邊框柔和包圍人物</div></label>
+      <label class="card"><input type="radio" name="veil" value="shortBlusherVeil"><div class="name">短面紗</div><div class="desc">復古、俐落的臉側薄紗</div></label>
+      <label class="card"><input type="radio" name="veil" value="transparentFaceVeil"><div class="name">透明覆面頭紗</div><div class="desc">高風險：薄紗可輕微覆面</div></label>
+    </div>
+    <div class="grid grid-3" data-choice="accessories" style="margin-top:10px;">
+      <label class="card"><input type="checkbox" name="accessories" value="pearlHairpiece"><div class="name">珍珠髮飾</div><div class="desc">低調珍珠與髮型融合</div></label>
+      <label class="card"><input type="checkbox" name="accessories" value="crystalTiara"><div class="name">水晶髮冠</div><div class="desc">細緻晶體髮冠，不誇張王冠</div></label>
+      <label class="card"><input type="checkbox" name="accessories" value="minimalCrown"><div class="name">極簡皇冠</div><div class="desc">低調皇室感頭飾</div></label>
+      <label class="card"><input type="checkbox" name="accessories" value="whiteBouquet"><div class="name">白色手捧花</div><div class="desc">白花與婚紗保持同色系</div></label>
+      <label class="card"><input type="checkbox" name="accessories" value="coloredBouquet"><div class="name">彩色花束</div><div class="desc">以柔和花色增加畫面焦點</div></label>
+      <label class="card"><input type="checkbox" name="accessories" value="pearlEarrings"><div class="name">珍珠耳環</div><div class="desc">臉側細緻珠寶亮點</div></label>
+      <label class="card"><input type="checkbox" name="accessories" value="bridalGloves"><div class="name">新娘長手套</div><div class="desc">優雅高訂配件</div></label>
+      <label class="card"><input type="checkbox" name="accessories" value="tulleShoulderWrap"><div class="name">婚紗薄紗披肩</div><div class="desc">輕盈肩部層次</div></label>
+    </div>
+    <div class="limit-note" id="accessoriesLimit">配件已選 0 / 2</div>
+    <div class="field-grid">
+      <label class="field">頭紗自填<input id="customVeil" type="text" placeholder="例如：珍珠沿邊的透明長頭紗，位於臉後方"></label>
+      <label class="field">配件自填<input id="customAccessories" type="text" placeholder="例如：一小束白色鈴蘭手捧花"></label>
+    </div>
+  </section>
+
+  <section class="section-body">
+    <div class="section-header"><div class="section-label">07</div><div class="section-title">身形輪廓</div></div>
+    <p class="hint">單選，控制人物比例與腰線；原圖自然比例會以參考照身形為主要依據。</p>
+    <div class="grid grid-3" data-choice="bodyShape">
+      <label class="card selected"><input type="radio" name="bodyShape" value="original" checked><div class="name">原圖自然比例</div><div class="desc">以參考照身形為主</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="slightWaist"><div class="name">輕微纖腰</div><div class="desc">自然修飾腰線</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="curvyWaist"><div class="name">豐滿纖腰</div><div class="desc">明顯胸腰臀曲線</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="fashionTall"><div class="name">高挑時裝比例</div><div class="desc">修長高級模特感</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="koreanIdol"><div class="name">韓系偶像比例</div><div class="desc">修長腿線、俐落肩頸與挺拔姿態</div></label>
+    </div>
+  </section>
+
+  <section class="section-pose">
+    <div class="section-header"><div class="section-label">08</div><div class="section-title">新娘姿勢與婚紗互動</div></div>
+    <p class="hint">姿勢會依入鏡比例搭配；手勢保持放鬆，婚紗與頭紗只在被選到時加入動態。</p>
+    <div class="grid grid-3" data-choice="pose">
+      <label class="card selected"><input type="radio" name="pose" value="naturalBridalStand" checked><div class="name">自然端正婚紗站姿</div><div class="desc">肩線放鬆、身形挺拔、安靜高級</div></label>
+      <label class="card"><input type="radio" name="pose" value="downcastThreeQuarter"><div class="name">低頭側望</div><div class="desc">柔和視線、修長頸線與肩線</div></label>
+      <label class="card"><input type="radio" name="pose" value="overShoulderGlance"><div class="name">肩後回眸</div><div class="desc">展示頭紗、肩部與側臉線條</div></label>
+      <label class="card"><input type="radio" name="pose" value="handsAtWaist"><div class="name">雙手輕放腰前</div><div class="desc">自然手勢、適合婚紗胸衣與腰線</div></label>
+      <label class="card"><input type="radio" name="pose" value="adjustingVeil"><div class="name">單手整理頭紗</div><div class="desc">手部與頭紗產生自然互動</div></label>
+      <label class="card"><input type="radio" name="pose" value="holdingBouquet"><div class="name">手持花束自然站立</div><div class="desc">花束位於身前，不遮住臉</div></label>
+      <label class="card"><input type="radio" name="pose" value="sideProfileGown"><div class="name">側身展示魚尾線條</div><div class="desc">突出婚紗剪裁與腰臀線條</div></label>
+      <label class="card"><input type="radio" name="pose" value="trainSpread"><div class="name">展開長拖尾</div><div class="desc">全身畫面展示裙襬與薄紗流動</div></label>
+      <label class="card"><input type="radio" name="pose" value="windowContemplation"><div class="name">窗邊側身凝望</div><div class="desc">自然光與婚紗故事感</div></label>
+      <label class="card"><input type="radio" name="pose" value="walkingVeilMotion"><div class="name">緩步婚紗動態</div><div class="desc">輕微步行、裙襬與頭紗自然移動</div></label>
+      <label class="card"><input type="radio" name="pose" value="seatedBridalPortrait"><div class="name">坐姿婚紗肖像</div><div class="desc">端雅坐姿與裙身層次</div></label>
+      <label class="field full custom-choice">姿勢自填<input id="customPose" type="text" placeholder="例如：人物側身站在窗邊，一手輕扶頭紗，視線微微向下"></label>
+    </div>
+  </section>
+
+  <section class="section-styling">
+    <div class="section-header"><div class="section-label">09</div><div class="section-title">妝容、髮型與膚質</div></div>
+    <p class="hint">妝容最多 2 個；髮型與膚質各單選。妝髮只改變造型，不重新設計身份。</p>
+    <div class="grid grid-3" data-choice="makeup">
+      <label class="card"><input type="checkbox" name="makeup" value="clearBridalMakeup"><div class="name">高級清透新娘妝</div><div class="desc">乾淨底妝、柔和眼妝與自然唇色</div></label>
+      <label class="card"><input type="checkbox" name="makeup" value="koreanSoftMatte"><div class="name">韓系柔霧新娘妝</div><div class="desc">柔霧膚質、淡玫瑰色與細緻眼線</div></label>
+      <label class="card"><input type="checkbox" name="makeup" value="naturalRose"><div class="name">自然玫瑰色妝容</div><div class="desc">柔和玫瑰色腮紅與唇色</div></label>
+      <label class="card"><input type="checkbox" name="makeup" value="refinedBridalBeauty"><div class="name">精緻婚紗美妝</div><div class="desc">適合近景與婚紗品牌廣告</div></label>
+      <label class="card"><input type="checkbox" name="makeup" value="sculptedContour"><div class="name">立體輪廓妝</div><div class="desc">提升光影層次，不改變原有五官</div></label>
+      <label class="card"><input type="checkbox" name="makeup" value="coutureRedLip"><div class="name">紅唇高訂新娘妝</div><div class="desc">成熟時尚的高訂婚紗語氣</div></label>
+    </div>
+    <div class="limit-note" id="makeupLimit">妝容已選 0 / 2</div>
+    <div class="grid grid-3" data-choice="hairstyle" style="margin-top:10px;">
+      <label class="card selected"><input type="radio" name="hairstyle" value="lowBridalUpdo" checked><div class="name">低盤髮</div><div class="desc">韓系與法式婚紗最穩定</div></label>
+      <label class="card"><input type="radio" name="hairstyle" value="highBridalUpdo"><div class="name">高盤髮</div><div class="desc">展示肩頸與頭紗結構</div></label>
+      <label class="card"><input type="radio" name="hairstyle" value="softFrenchUpdo"><div class="name">法式鬆散盤髮</div><div class="desc">自然髮絲與柔和浪漫感</div></label>
+      <label class="card"><input type="radio" name="hairstyle" value="romanticWaves"><div class="name">浪漫長捲髮</div><div class="desc">適合花園、海岸與戶外婚紗</div></label>
+      <label class="card"><input type="radio" name="hairstyle" value="retroWaves"><div class="name">復古波浪髮</div><div class="desc">適合高訂與電影感婚紗</div></label>
+      <label class="card"><input type="radio" name="hairstyle" value="originalHair"><div class="name">原圖髮型</div><div class="desc">保留參考照髮型，只加入婚紗配件</div></label>
+    </div>
+    <div class="grid grid-3" data-choice="skinTexture" style="margin-top:10px;">
+      <label class="card selected"><input type="radio" name="skinTexture" value="naturalReal" checked><div class="name">自然真實皮膚</div><div class="desc">保留細緻膚質與自然光澤</div></label>
+      <label class="card"><input type="radio" name="skinTexture" value="luxuryAdSkin"><div class="name">高級廣告皮膚</div><div class="desc">精緻、乾淨、保留真實結構</div></label>
+      <label class="card"><input type="radio" name="skinTexture" value="softFocusSkin"><div class="name">柔焦細膚</div><div class="desc">柔和浪漫，不過度磨皮</div></label>
+      <label class="card"><input type="radio" name="skinTexture" value="realPores"><div class="name">真實毛孔</div><div class="desc">適合近距離婚紗美妝特寫</div></label>
+      <label class="card"><input type="radio" name="skinTexture" value="dewySkin"><div class="name">水光透亮肌</div><div class="desc">清透柔亮的保養品廣告感</div></label>
+    </div>
+    <label class="field full custom-choice" style="margin-top:10px;">妝髮自填<input id="customStyling" type="text" placeholder="例如：低盤髮搭配幾縷自然碎髮，妝容偏清透玫瑰色"></label>
+  </section>
+
+  <section class="section-lighting">
+    <div class="section-header"><div class="section-label">10</div><div class="section-title">光影與配色</div></div>
+    <p class="hint">光影與配色分開選擇，人物、婚紗與背景共用同一套光線邏輯。</p>
+    <div class="grid grid-3" data-choice="lighting">
+      <label class="card selected"><input type="radio" name="lighting" value="koreanCreamSoftLight" checked><div class="name">韓系奶油柔光</div><div class="desc">低對比、乾淨、柔和膚色</div></label>
+      <label class="card"><input type="radio" name="lighting" value="luxuryStudioSoftbox"><div class="name">精品棚拍柔光</div><div class="desc">均勻高級、清楚表現婚紗工藝</div></label>
+      <label class="card"><input type="radio" name="lighting" value="afternoonWindowLight"><div class="name">午後窗邊柔光</div><div class="desc">自然方向光與細緻影子</div></label>
+      <label class="card"><input type="radio" name="lighting" value="gardenMorningMist"><div class="name">花園晨霧光</div><div class="desc">柔霧、白花與細緻逆光</div></label>
+      <label class="card"><input type="radio" name="lighting" value="goldenHourBacklight"><div class="name">黃昏暖金逆光</div><div class="desc">海岸與戶外婚紗的暖色輪廓光</div></label>
+      <label class="card"><input type="radio" name="lighting" value="cathedralWindowProjection"><div class="name">教堂彩窗光</div><div class="desc">彩窗光影投射於婚紗與背景</div></label>
+      <label class="card"><input type="radio" name="lighting" value="cinematicLowContrast"><div class="name">電影感低對比光</div><div class="desc">安靜、沉穩、帶有故事感</div></label>
+    </div>
+    <div class="grid grid-3" data-choice="color" style="margin-top:10px;">
+      <label class="card selected"><input type="radio" name="color" value="ivoryCream" checked><div class="name">象牙白與奶油色</div><div class="desc">最接近參考圖的高級暖白</div></label>
+      <label class="card"><input type="radio" name="color" value="purePearlWhite"><div class="name">純白與珍珠色</div><div class="desc">乾淨、明亮、空靈</div></label>
+      <label class="card"><input type="radio" name="color" value="champagneWarmWhite"><div class="name">香檳金與暖白</div><div class="desc">成熟、華麗、高訂感</div></label>
+      <label class="card"><input type="radio" name="color" value="mistyPinkIvory"><div class="name">煙粉與象牙白</div><div class="desc">浪漫柔和的花卉婚紗色系</div></label>
+      <label class="card"><input type="radio" name="color" value="iceBlueCrystalWhite"><div class="name">冰藍與水晶白</div><div class="desc">冷調、清透、精緻</div></label>
+      <label class="card"><input type="radio" name="color" value="whitePlatinumGray"><div class="name">白金與淡灰</div><div class="desc">現代高訂、低飽和精品感</div></label>
+    </div>
+    <label class="field full custom-choice" style="margin-top:10px;">指定配色自填<input id="colorNote" type="text" placeholder="例如：奶油白、珍珠白、非常淡的香檳金"></label>
+  </section>
+
+  <section class="section-background">
+    <div class="section-header"><div class="section-label">11</div><div class="section-title">背景場景</div></div>
+    <p class="hint">背景只提供婚紗故事與空間感；純棚景適合展示服裝，戶外場景適合裙襬與頭紗動態。</p>
+    <div class="grid grid-3" data-choice="background">
+      <label class="card selected"><input type="radio" name="background" value="creamSeamlessStudio" checked><div class="name">奶油色無縫攝影棚</div><div class="desc">參考圖同款，乾淨、柔和、主體清楚</div></label>
+      <label class="card"><input type="radio" name="background" value="pureWhiteStudio"><div class="name">純白攝影棚</div><div class="desc">高亮、極簡、婚紗品牌感</div></label>
+      <label class="card"><input type="radio" name="background" value="luxuryBridalStudio"><div class="name">精品婚紗工作室</div><div class="desc">高級室內、布景與柔和窗光</div></label>
+      <label class="card"><input type="radio" name="background" value="frenchInterior"><div class="name">法式室內空間</div><div class="desc">高窗、淡色牆面與細膩古典家具</div></label>
+      <label class="card"><input type="radio" name="background" value="europeanCathedral"><div class="name">歐式教堂</div><div class="desc">高拱頂、彩窗與莊重婚紗氛圍</div></label>
+      <label class="card"><input type="radio" name="background" value="palaceWeddingHall"><div class="name">宮殿宴會廳</div><div class="desc">皇家高訂婚紗與長拖尾背景</div></label>
+      <label class="card"><input type="radio" name="background" value="whiteFlowerGarden"><div class="name">白花庭園</div><div class="desc">白花、綠葉與自然婚紗浪漫</div></label>
+      <label class="card"><input type="radio" name="background" value="roseGardenPath"><div class="name">玫瑰花園</div><div class="desc">柔和花色與浪漫步行場景</div></label>
+      <label class="card"><input type="radio" name="background" value="coastalSunset"><div class="name">海岸夕陽</div><div class="desc">風、長頭紗與暖金天色</div></label>
+      <label class="card"><input type="radio" name="background" value="windowLightRoom"><div class="name">窗邊自然光空間</div><div class="desc">安靜、親密、適合寫真肖像</div></label>
+      <label class="card"><input type="radio" name="background" value="softGrayWall"><div class="name">極簡灰白牆面</div><div class="desc">現代婚紗雜誌與高訂留白</div></label>
+    </div>
+    <label class="field full custom-choice" style="margin-top:10px;">背景自填<input id="customBackground" type="text" placeholder="例如：白色花園拱門前，背景有柔焦樹影"></label>
+  </section>
+
+  <section class="section-extra">
+    <div class="section-header"><div class="section-label">12</div><div class="section-title">自訂要求</div></div>
+    <p class="hint">只填寫前面選項沒有涵蓋的畫面強度或其他要求，避免重複堆疊婚紗詞彙。</p>
+    <div class="field-grid">
+      <label class="field">畫面強度
+        <select id="intensity">
+          <option value="balanced luxury bridal styling, visible couture craftsmanship, refined editorial presence">平衡高級</option>
+          <option value="restrained luxury bridal styling, delicate couture detail, quiet premium mood">精緻克制</option>
+          <option value="dramatic couture bridal styling, pronounced train and veil movement, strong fashion editorial presence">高訂戲劇感</option>
+        </select>
+      </label>
+      <label class="field">其他要求
+        <textarea id="extraNote" placeholder="例如：人物是唯一人物，不要伴郎伴娘；頭紗不要遮住眼睛；婚紗細節要清楚"></textarea>
+      </label>
+    </div>
+  </section>
+
+  <section class="section-camera">
+    <div class="section-header"><div class="section-label">13</div><div class="section-title">拍攝角度與鏡頭感</div></div>
+    <p class="hint">決定鏡頭距離與角度；不會覆寫 02 構圖取景。</p>
+    <div class="grid grid-3" data-choice="camera">
+      <label class="card selected"><input type="radio" name="camera" value="bridal85mm" checked><div class="name">85mm 婚紗人像</div><div class="desc">自然壓縮、適合臉與婚紗細節</div></label>
+      <label class="card"><input type="radio" name="camera" value="beautyCloseupLens"><div class="name">美妝特寫鏡頭</div><div class="desc">強調妝容、膚質、頭紗與五官</div></label>
+      <label class="card"><input type="radio" name="camera" value="eyeLevelEditorial"><div class="name">平視編輯角度</div><div class="desc">自然、穩定、高級雜誌感</div></label>
+      <label class="card"><input type="radio" name="camera" value="threeQuarterFashion"><div class="name">斜側時裝角度</div><div class="desc">增加婚紗立體度與身形線條</div></label>
+      <label class="card"><input type="radio" name="camera" value="lowAngleTrainView"><div class="name">低角度拖尾視角</div><div class="desc">適合皇家長拖尾與全身婚紗</div></label>
+      <label class="card"><input type="radio" name="camera" value="wideEnvironmentalLens"><div class="name">環境廣角視角</div><div class="desc">讓教堂、花園或海岸加入故事</div></label>
+    </div>
+  </section>
+
+  <section class="section-ratio">
+    <div class="section-header"><div class="section-label">14</div><div class="section-title">圖片比例</div></div>
+    <p class="hint">參考圖建議使用 9:16；全身婚紗與婚紗海報也可使用 2:3 或 4:5。</p>
+    <div class="grid grid-3" data-choice="ratio">
+      <label class="card selected"><input type="radio" name="ratio" value="vertical916" checked><div class="name">9:16 直式</div><div class="desc">長頭紗、社群封面、直式婚紗寫真</div></label>
+      <label class="card"><input type="radio" name="ratio" value="vertical45"><div class="name">4:5 直式</div><div class="desc">婚紗貼文與人物主視覺</div></label>
+      <label class="card"><input type="radio" name="ratio" value="poster23"><div class="name">2:3 海報</div><div class="desc">完整婚紗與品牌海報</div></label>
+      <label class="card"><input type="radio" name="ratio" value="vertical34"><div class="name">3:4 直式</div><div class="desc">寫真集與婚紗型錄</div></label>
+      <label class="card"><input type="radio" name="ratio" value="square"><div class="name">1:1 方形</div><div class="desc">社群貼文與婚紗小卡</div></label>
+      <label class="card"><input type="radio" name="ratio" value="horizontal169"><div class="name">16:9 橫式</div><div class="desc">婚紗故事封面與網站橫幅</div></label>
+    </div>
+  </section>
+
+  <section class="section-output">
+    <div class="section-header"><div class="section-label">15</div><div class="section-title">生成咒語</div></div>
+    <button class="generate-btn" id="generateBtn" type="button">生成完整咒語</button>
+    <p class="hint">建議搭配單人真人參考照使用。頭紗覆面屬高風險畫面，請多生成幾次挑選身份穩定的結果。</p>
+    <div class="output-wrap hidden" id="outputWrap">
+      <div class="output-stale-badge">選項已變更，請重新按「生成完整咒語」</div>
+      <textarea id="outputText" readonly></textarea>
+      <button class="copy-btn" id="copyBtn" type="button">一鍵複製</button>
+    </div>
+  </section>
+</main>
+
+<script src="assets/core-prompt.js"></script>
+<script src="assets/garment-core.js"></script>
+<script>
+const CORE = window.HB_CORE_PROMPT.page.bridalEditorial;
+const GARMENT_DETAIL_LAYER_ZONES = { layer0: 0, layer3: 1, layer6: 2, layer9: 3 };
+const GARMENT_DETAIL_RANDOM_POOLS = {
+  chestDetail: ['sweetheartCorset', 'deepVBridalNeckline', 'laceIllusionBodice', 'drapedOffShoulderBodice'],
+  waistSideDetail: ['sculptedWaistCorsetry', 'pearlWaistApplique', 'drapedWaistPleats', 'detachableOverskirtWaist'],
+  shoulderDetail: ['softOffShoulderTulle', 'singleShoulderBridalCut', 'laceCapSleeve', 'detachableTulleSleeve']
+};
+
+const BRIDAL_EDITORIAL_CORE = [
+  'Bridal Editorial Language: premium bridal fashion photography, refined couture bridal posture, graceful natural hand placement, relaxed shoulders, elongated neck, coherent head and body direction.',
+  'The wedding gown must remain a complete functional garment with coherent construction, fitted support, natural fabric weight and realistic seams.',
+  'Use elegant bridal emotion, soft gaze and calm refined presence; do not replace the reference identity with a generic bride face.',
+  'Dress movement and veil movement must follow gravity, wind and the selected pose naturally; no chaotic fabric explosion.'
+].join('\n\n');
+
+const BRIDAL_VEIL_IDENTITY_PROTECTION = [
+  'The veil is a translucent bridal accessory, not part of the face.',
+  'Preserve all visible facial geometry and recognizable identity cues.',
+  'Veil overlap may affect visibility but must not redesign the visible eyes, nose, lips, jawline or facial proportions.',
+  'Render the face and veil under one coherent scene lighting system.'
+].join('\n');
+
+const styleData = {
+  bridalEditorial: 'fine-art bridal editorial photography, quiet luxury, delicate emotional presence, premium wedding portrait quality',
+  bridalCampaign: 'high-end bridal campaign photography, couture gown craftsmanship clearly presented, polished luxury advertising direction',
+  koreanBridalStudio: 'Korean luxury bridal studio photography, clean cream-toned set, soft beauty lighting, refined modern bride styling',
+  fineArtWedding: 'fine-art wedding photography, natural luminous atmosphere, restrained color grading, graceful timeless bridal portrait',
+  cinematicBridal: 'cinematic bridal story photography, emotionally quiet narrative, environmental depth, elegant filmic color grading',
+  bridalMagazine: 'high-fashion bridal magazine editorial, sophisticated cover composition, couture styling, premium fashion photography'
+};
+
+const compositionData = {
+  centeredBridalPortrait: 'centered bridal portrait composition, subject placed in the middle with balanced premium wedding advertising layout',
+  rightSubjectLeftSpace: 'subject placed toward the right side of the frame, clean soft negative space reserved on the left, no generated text or lettering',
+  leftSubjectRightSpace: 'subject placed toward the left side of the frame, clean soft negative space reserved on the right, no generated text or lettering',
+  veilFramedPortrait: 'bridal veil forming a soft frame around the subject while the face remains clearly visible',
+  symmetricalCeremonialBride: 'symmetrical ceremonial bridal composition, subject aligned with the architecture and a calm central visual hierarchy',
+  foregroundFlowerFrame: 'soft white flowers in the near foreground create depth around the frame without covering the face',
+  flowingTrainComposition: 'composition follows the flowing bridal train and veil from the subject into the lower frame, coherent fabric direction',
+  environmentalBridalPortrait: 'environmental bridal portrait composition, subject integrated with the selected wedding location while remaining the clear focal point'
+};
+
+const framingData = {
+  closePortrait: 'close bridal beauty portrait framing, face and upper veil details are the primary visual focus',
+  bustPortrait: 'bust portrait framing, head shoulders neckline and bridal beauty details clearly visible',
+  waistUp: 'waist-up bridal portrait framing, face shoulders bodice and waist craftsmanship clearly visible',
+  threeQuarter: 'three-quarter body bridal framing, face waist and upper skirt balanced in the composition',
+  fullBody: 'full-body bridal fashion framing, complete gown silhouette, train and veil visible',
+  wideScene: 'wide environmental bridal framing, bride remains clear while the wedding location contributes to the story'
+};
+
+const garmentData = {
+  coutureMermaid: 'high-fashion mermaid bridal gown, fitted couture silhouette opening below the knees, refined sculptural proportion',
+  classicALine: 'classic A-line bridal gown, fitted upper bodice and naturally widening skirt, timeless bridal silhouette',
+  royalBallgown: 'royal bridal ballgown, structured bodice and voluminous layered skirt, majestic couture proportion',
+  minimalColumn: 'minimal satin column bridal gown, clean vertical line, restrained luxury and elegant fabric fall',
+  frenchDrapedGown: 'French draped bridal gown, bias-cut flowing fabric, relaxed couture drape and refined movement',
+  floralSculptureGown: 'sculptural floral bridal gown, dimensional floral couture construction integrated into the gown',
+  detachableTrainGown: 'bridal gown with a detachable cathedral train, clear main dress and extended couture train structure',
+  modernShortBridal: 'modern short bridal dress, precise contemporary tailoring, light youthful couture bridal proportion',
+  champagneCoutureGown: 'champagne-toned couture bridal gown, elegant fitted construction with refined formal volume',
+  blueCrystalGown: 'ice-blue crystal bridal gown, elegant couture structure with cool luminous crystal detailing'
+};
+
+const materialData = {
+  frenchLace: 'delicate French lace appliqué with fine floral motifs and couture embroidery',
+  floralEmbroidery: 'dimensional floral embroidery applied with precise hand-finished couture detail',
+  pearlBeading: 'fine pearl beadwork arranged along the gown with restrained bridal luster',
+  crystalBeading: 'delicate crystal beadwork catching controlled highlights, no excessive glitter effects',
+  silkSatin: 'smooth silk satin with natural soft directional sheen and elegant drape',
+  layeredTulle: 'multiple lightweight tulle layers with believable translucency and graceful movement',
+  illusionMesh: 'refined illusion mesh integrated into the garment construction, tasteful couture transparency',
+  sculptedCorsetry: 'structured couture corsetry with realistic internal support and clean tailoring',
+  handPleats: 'fine hand-pressed pleats creating controlled textile rhythm and movement',
+  pearlWaistDetail: 'subtle pearl jewelry detailing tracing the waistline and couture seams'
+};
+
+const chestDetailData = {
+  none: '',
+  sweetheartCorset: 'a structured sweetheart corset neckline',
+  deepVBridalNeckline: 'a refined deep V bridal neckline with couture support',
+  laceIllusionBodice: 'a lace illusion bodice panel integrated into the bridal construction',
+  drapedOffShoulderBodice: 'a soft draped off-shoulder bodice with translucent tulle connected to the gown'
+};
+const waistSideDetailData = {
+  none: '',
+  sculptedWaistCorsetry: 'sculpted waist corsetry integrated into the gown seams',
+  pearlWaistApplique: 'fine pearl appliqué following the natural waistline',
+  drapedWaistPleats: 'diagonal draped pleats flowing naturally from the waist',
+  detachableOverskirtWaist: 'a detachable overskirt waist fastening with a refined couture layer'
+};
+const shoulderDetailData = {
+  none: '',
+  softOffShoulderTulle: 'soft off-shoulder tulle drapes resting naturally along the upper arms',
+  singleShoulderBridalCut: 'a modern asymmetric one-shoulder bridal construction',
+  laceCapSleeve: 'delicate lace cap sleeves covering the shoulders',
+  detachableTulleSleeve: 'detachable translucent tulle sleeves attached to the bridal gown'
+};
+
+const veilData = {
+  none: '',
+  shoulderLengthVeil: 'a lightweight shoulder-length bridal veil placed behind the head and shoulders',
+  fingertipVeil: 'a delicate fingertip-length veil falling behind the shoulders, face unobstructed',
+  chapelVeil: 'a graceful chapel-length veil flowing behind the bride, face clearly visible',
+  cathedralVeil: 'a long cathedral bridal veil and train extending behind the bride with realistic fabric weight',
+  pearlVeil: 'a long translucent veil with fine pearls along the edge, framing the face from behind without covering facial landmarks',
+  laceEdgeVeil: 'a translucent lace-edge veil framing the face from the side and behind',
+  shortBlusherVeil: 'a short vintage blusher veil positioned beside the face, visible eyes nose and lips unobstructed',
+  transparentFaceVeil: 'a very light transparent face veil softly crossing part of the face, visible facial landmarks preserved, high-risk occlusion'
+};
+
+const accessoryData = {
+  pearlHairpiece: 'a refined pearl hairpiece integrated with the bridal hairstyle',
+  crystalTiara: 'a delicate crystal tiara with restrained bridal sparkle',
+  minimalCrown: 'a minimal elegant bridal crown, refined rather than oversized',
+  whiteBouquet: 'a small white bridal bouquet held naturally below the face',
+  coloredBouquet: 'a soft pastel bridal bouquet held naturally below the face',
+  pearlEarrings: 'small pearl earrings adding a refined highlight near the face',
+  bridalGloves: 'elegant bridal opera gloves with realistic fabric fit',
+  tulleShoulderWrap: 'a lightweight tulle bridal shoulder wrap'
+};
+
+const bodyShapes = {
+  original: 'preserve the reference photo natural body proportions, original body shape, height impression, shoulder width and waist-to-hip balance',
+  slightWaist: 'subtle narrow waist refinement while keeping natural adult body proportions and the reference body impression',
+  curvyWaist: 'prominent fuller bust curve, narrow slim waistline, dramatic feminine S-curve silhouette, strong bust-waist-hip contrast, natural realistic adult anatomy',
+  fashionTall: 'tall high-fashion model silhouette, refined shoulder and neck line, long leg impression, realistic couture proportion',
+  koreanIdol: 'balanced Korean idol-inspired adult silhouette, naturally long-leg impression, refined shoulder and neck line, upright posture, toned yet soft body balance'
+};
+
+const poseData = {
+  naturalBridalStand: 'natural dignified bridal standing pose, relaxed shoulders, balanced weight and elegant restrained posture',
+  downcastThreeQuarter: 'gentle downcast three-quarter pose, lowered gaze, elongated neck, relaxed shoulder line and quiet bridal emotion',
+  overShoulderGlance: 'graceful over-the-shoulder bridal glance, body turned naturally with coherent head and torso direction',
+  handsAtWaist: 'both hands gently resting near the waist, relaxed fingers, natural wrists and refined bridal posture',
+  adjustingVeil: 'one hand gently adjusting the veil, relaxed fingers, natural wrist curve and soft bridal interaction',
+  holdingBouquet: 'holding a bridal bouquet naturally below the face with relaxed hands and graceful shoulder line',
+  sideProfileGown: 'side-profile bridal pose showing the gown silhouette, clean neck shoulder waist and hip line',
+  trainSpread: 'full-body bridal pose with the train spreading naturally behind the subject, realistic gown weight and fabric direction',
+  windowContemplation: 'standing beside a window in a quiet side-facing pose, soft gaze toward the light and calm bridal presence',
+  walkingVeilMotion: 'slow graceful walking bridal pose, veil and skirt moving gently with the step, natural body mechanics',
+  seatedBridalPortrait: 'elegant seated bridal portrait, upright posture, relaxed hands and carefully arranged gown volume'
+};
+
+const makeupData = {
+  clearBridalMakeup: 'high-end clear bridal makeup, clean luminous base, soft eyes and natural refined lip color',
+  koreanSoftMatte: 'Korean soft matte bridal makeup, delicate rosy tones, refined eyeliner and controlled skin texture',
+  naturalRose: 'natural rose bridal makeup, soft rose blush and understated romantic lip tone',
+  refinedBridalBeauty: 'refined bridal beauty makeup designed for close portrait photography',
+  sculptedContour: 'subtle sculpted contour makeup enhancing natural facial structure without redesigning the face',
+  coutureRedLip: 'couture bridal makeup with a refined red lip and elegant high-fashion restraint'
+};
+const hairstyleData = {
+  lowBridalUpdo: 'low bridal updo with a few natural loose strands, refined and identity-preserving',
+  highBridalUpdo: 'clean high bridal updo exposing the neck and supporting the veil',
+  softFrenchUpdo: 'soft French bridal updo with natural texture and delicate loose strands',
+  romanticWaves: 'romantic long waves with controlled movement and refined bridal styling',
+  retroWaves: 'polished retro waves with classic cinematic bridal glamour',
+  originalHair: 'preserve the reference hairstyle while adding only the selected bridal accessory'
+};
+const skinData = {
+  naturalReal: 'natural realistic skin texture, fine pores, natural tone and restrained bridal retouching',
+  luxuryAdSkin: 'premium bridal campaign skin, refined surface, soft skin reflection, delicate pore detail',
+  softFocusSkin: 'soft-focus refined skin with gentle romantic diffusion and no plastic smoothing',
+  realPores: 'realistic fine pores and natural close-up skin micro-detail',
+  dewySkin: 'clean dewy luminous skin with controlled bridal beauty highlights'
+};
+
+const lightingData = {
+  koreanCreamSoftLight: 'soft Korean cream-toned beauty light, low contrast, gentle facial fill and quiet shadow',
+  luxuryStudioSoftbox: 'premium studio softbox lighting, balanced exposure and clear couture textile detail',
+  afternoonWindowLight: 'soft afternoon window light with natural directional shadow and coherent scene exposure',
+  gardenMorningMist: 'soft misty morning garden light, delicate backlight and natural white balance',
+  goldenHourBacklight: 'warm golden-hour backlight with a gentle veil rim light and natural skin tone',
+  cathedralWindowProjection: 'soft cathedral stained-glass window projection across the gown and background',
+  cinematicLowContrast: 'cinematic low-contrast lighting with quiet shadows and refined filmic tonal depth'
+};
+const colorData = {
+  ivoryCream: 'ivory white, warm cream and soft pearl highlights',
+  purePearlWhite: 'pure bridal white, pearl white and clean neutral highlights',
+  champagneWarmWhite: 'soft champagne gold, warm white and restrained pearl sheen',
+  mistyPinkIvory: 'misty blush pink, ivory white and delicate warm rose accents',
+  iceBlueCrystalWhite: 'pale ice blue, crystal white and cool silver highlights',
+  whitePlatinumGray: 'bridal white, platinum gray and soft neutral shadows'
+};
+const backgroundData = {
+  creamSeamlessStudio: 'a seamless warm cream bridal studio backdrop, clean and softly graded',
+  pureWhiteStudio: 'a clean pure white bridal photography studio with subtle tonal separation',
+  luxuryBridalStudio: 'a premium bridal studio interior with refined pale furnishings and soft window light',
+  frenchInterior: 'an elegant French interior with tall windows, pale walls and restrained classical furniture',
+  europeanCathedral: 'a grand European cathedral interior with high arches and softly colored stained glass',
+  palaceWeddingHall: 'a refined palace wedding hall with elegant architecture and controlled empty space',
+  whiteFlowerGarden: 'a white flower garden with soft greenery, gentle depth and a refined bridal atmosphere',
+  roseGardenPath: 'a romantic rose garden path with soft flowers and natural perspective depth',
+  coastalSunset: 'a calm coastal setting at sunset with natural wind and open atmospheric depth',
+  windowLightRoom: 'a quiet pale room beside a large window with soft natural bridal portrait light',
+  softGrayWall: 'a minimal soft gray-white wall and refined editorial studio environment'
+};
+const cameraData = {
+  bridal85mm: '85mm bridal portrait lens, natural perspective compression, refined focus separation',
+  beautyCloseupLens: 'premium beauty close-up lens, delicate facial detail and controlled shallow depth of field',
+  eyeLevelEditorial: 'eye-level editorial camera, natural perspective and stable high-fashion portrait framing',
+  threeQuarterFashion: 'three-quarter fashion camera angle, sculptural view of the gown and graceful body line',
+  lowAngleTrainView: 'slightly low bridal fashion angle, elegant long train perspective without enlarging the head',
+  wideEnvironmentalLens: 'wide environmental wedding lens with coherent body proportions and location depth'
+};
+const ratioData = {
+  vertical916: 'vertical 9:16 composition',
+  vertical45: 'vertical 4:5 composition',
+  poster23: 'vertical 2:3 poster composition',
+  vertical34: 'vertical 3:4 portrait composition',
+  square: 'square 1:1 composition',
+  horizontal169: 'horizontal 16:9 composition'
+};
+
+const themeTemplates = {
+  koreanCreamStudio: { style: 'koreanBridalStudio', composition: 'rightSubjectLeftSpace', framing: 'waistUp', garment: 'coutureMermaid', materials: ['frenchLace', 'pearlBeading'], garmentLayer: 'layer0', chestDetail: 'sweetheartCorset', waistSideDetail: 'sculptedWaistCorsetry', shoulderDetail: 'softOffShoulderTulle', veil: 'pearlVeil', accessories: ['pearlHairpiece', 'pearlEarrings'], bodyShape: 'original', pose: 'downcastThreeQuarter', makeup: ['clearBridalMakeup', 'naturalRose'], hairstyle: 'lowBridalUpdo', skinTexture: 'luxuryAdSkin', lighting: 'koreanCreamSoftLight', color: 'ivoryCream', background: 'creamSeamlessStudio', camera: 'bridal85mm', ratio: 'vertical916', intensity: 'balanced luxury bridal styling, visible couture craftsmanship, refined editorial presence' },
+  pearlVeilBeautyCloseup: { style: 'bridalEditorial', composition: 'veilFramedPortrait', framing: 'bustPortrait', garment: 'minimalColumn', materials: ['pearlBeading', 'layeredTulle'], garmentLayer: 'layer3', chestDetail: 'laceIllusionBodice', waistSideDetail: 'none', shoulderDetail: 'softOffShoulderTulle', veil: 'pearlVeil', accessories: ['pearlHairpiece', 'pearlEarrings'], bodyShape: 'original', pose: 'adjustingVeil', makeup: ['clearBridalMakeup', 'refinedBridalBeauty'], hairstyle: 'softFrenchUpdo', skinTexture: 'realPores', lighting: 'luxuryStudioSoftbox', color: 'purePearlWhite', background: 'pureWhiteStudio', camera: 'beautyCloseupLens', ratio: 'vertical45', intensity: 'restrained luxury bridal styling, delicate couture detail, quiet premium mood' },
+  frenchLaceCouture: { style: 'fineArtWedding', composition: 'centeredBridalPortrait', framing: 'threeQuarter', garment: 'frenchDrapedGown', materials: ['frenchLace', 'floralEmbroidery'], garmentLayer: 'layer6', chestDetail: 'deepVBridalNeckline', waistSideDetail: 'pearlWaistApplique', shoulderDetail: 'laceCapSleeve', veil: 'laceEdgeVeil', accessories: ['pearlEarrings'], bodyShape: 'fashionTall', pose: 'sideProfileGown', makeup: ['naturalRose', 'refinedBridalBeauty'], hairstyle: 'softFrenchUpdo', skinTexture: 'naturalReal', lighting: 'afternoonWindowLight', color: 'ivoryCream', background: 'frenchInterior', camera: 'threeQuarterFashion', ratio: 'vertical45', intensity: 'balanced luxury bridal styling, visible couture craftsmanship, refined editorial presence' },
+  minimalSatinBride: { style: 'bridalCampaign', composition: 'leftSubjectRightSpace', framing: 'waistUp', garment: 'minimalColumn', materials: ['silkSatin'], garmentLayer: 'layer0', chestDetail: 'sweetheartCorset', waistSideDetail: 'drapedWaistPleats', shoulderDetail: 'none', veil: 'shoulderLengthVeil', accessories: [], bodyShape: 'original', pose: 'naturalBridalStand', makeup: ['clearBridalMakeup'], hairstyle: 'originalHair', skinTexture: 'luxuryAdSkin', lighting: 'luxuryStudioSoftbox', color: 'purePearlWhite', background: 'softGrayWall', camera: 'eyeLevelEditorial', ratio: 'vertical45', intensity: 'restrained luxury bridal styling, delicate couture detail, quiet premium mood' },
+  royalCathedralTrain: { style: 'bridalCampaign', composition: 'flowingTrainComposition', framing: 'fullBody', garment: 'detachableTrainGown', materials: ['layeredTulle', 'crystalBeading'], garmentLayer: 'layer9', chestDetail: 'sweetheartCorset', waistSideDetail: 'detachableOverskirtWaist', shoulderDetail: 'detachableTulleSleeve', veil: 'cathedralVeil', accessories: ['minimalCrown'], bodyShape: 'fashionTall', pose: 'trainSpread', makeup: ['refinedBridalBeauty'], hairstyle: 'highBridalUpdo', skinTexture: 'naturalReal', lighting: 'luxuryStudioSoftbox', color: 'purePearlWhite', background: 'palaceWeddingHall', camera: 'lowAngleTrainView', ratio: 'poster23', intensity: 'dramatic couture bridal styling, pronounced train and veil movement, strong fashion editorial presence' },
+  whiteGardenMorning: { style: 'fineArtWedding', composition: 'foregroundFlowerFrame', framing: 'threeQuarter', garment: 'floralSculptureGown', materials: ['floralEmbroidery', 'layeredTulle'], garmentLayer: 'layer6', chestDetail: 'laceIllusionBodice', waistSideDetail: 'pearlWaistApplique', shoulderDetail: 'softOffShoulderTulle', veil: 'fingertipVeil', accessories: ['whiteBouquet'], bodyShape: 'original', pose: 'holdingBouquet', makeup: ['naturalRose', 'clearBridalMakeup'], hairstyle: 'romanticWaves', skinTexture: 'softFocusSkin', lighting: 'gardenMorningMist', color: 'purePearlWhite', background: 'whiteFlowerGarden', camera: 'bridal85mm', ratio: 'vertical916', intensity: 'balanced luxury bridal styling, visible couture craftsmanship, refined editorial presence' },
+  coastalSunsetVeil: { style: 'cinematicBridal', composition: 'environmentalBridalPortrait', framing: 'fullBody', garment: 'detachableTrainGown', materials: ['layeredTulle', 'silkSatin'], garmentLayer: 'layer3', chestDetail: 'drapedOffShoulderBodice', waistSideDetail: 'drapedWaistPleats', shoulderDetail: 'softOffShoulderTulle', veil: 'chapelVeil', accessories: [], bodyShape: 'original', pose: 'walkingVeilMotion', makeup: ['naturalRose'], hairstyle: 'romanticWaves', skinTexture: 'naturalReal', lighting: 'goldenHourBacklight', color: 'champagneWarmWhite', background: 'coastalSunset', camera: 'wideEnvironmentalLens', ratio: 'vertical916', intensity: 'dramatic couture bridal styling, pronounced train and veil movement, strong fashion editorial presence' },
+  cathedralWindowBride: { style: 'cinematicBridal', composition: 'symmetricalCeremonialBride', framing: 'threeQuarter', garment: 'classicALine', materials: ['frenchLace', 'crystalBeading'], garmentLayer: 'layer3', chestDetail: 'laceIllusionBodice', waistSideDetail: 'sculptedWaistCorsetry', shoulderDetail: 'laceCapSleeve', veil: 'chapelVeil', accessories: ['pearlHairpiece'], bodyShape: 'original', pose: 'windowContemplation', makeup: ['refinedBridalBeauty'], hairstyle: 'lowBridalUpdo', skinTexture: 'naturalReal', lighting: 'cathedralWindowProjection', color: 'whitePlatinumGray', background: 'europeanCathedral', camera: 'eyeLevelEditorial', ratio: 'poster23', intensity: 'balanced luxury bridal styling, visible couture craftsmanship, refined editorial presence' },
+  champagneCoutureBride: { style: 'bridalCampaign', composition: 'centeredBridalPortrait', framing: 'fullBody', garment: 'champagneCoutureGown', materials: ['pearlBeading', 'crystalBeading'], garmentLayer: 'layer6', chestDetail: 'sweetheartCorset', waistSideDetail: 'pearlWaistApplique', shoulderDetail: 'singleShoulderBridalCut', veil: 'cathedralVeil', accessories: ['crystalTiara'], bodyShape: 'fashionTall', pose: 'naturalBridalStand', makeup: ['sculptedContour', 'coutureRedLip'], hairstyle: 'highBridalUpdo', skinTexture: 'luxuryAdSkin', lighting: 'luxuryStudioSoftbox', color: 'champagneWarmWhite', background: 'palaceWeddingHall', camera: 'bridal85mm', ratio: 'poster23', intensity: 'dramatic couture bridal styling, pronounced train and veil movement, strong fashion editorial presence' },
+  pinkFloralBride: { style: 'fineArtWedding', composition: 'foregroundFlowerFrame', framing: 'waistUp', garment: 'floralSculptureGown', materials: ['floralEmbroidery', 'pearlBeading'], garmentLayer: 'layer3', chestDetail: 'laceIllusionBodice', waistSideDetail: 'pearlWaistApplique', shoulderDetail: 'laceCapSleeve', veil: 'laceEdgeVeil', accessories: ['coloredBouquet'], bodyShape: 'original', pose: 'downcastThreeQuarter', makeup: ['naturalRose', 'clearBridalMakeup'], hairstyle: 'romanticWaves', skinTexture: 'softFocusSkin', lighting: 'gardenMorningMist', color: 'mistyPinkIvory', background: 'roseGardenPath', camera: 'bridal85mm', ratio: 'vertical916', intensity: 'restrained luxury bridal styling, delicate couture detail, quiet premium mood' },
+  blueCrystalBride: { style: 'bridalMagazine', composition: 'rightSubjectLeftSpace', framing: 'threeQuarter', garment: 'blueCrystalGown', materials: ['crystalBeading', 'silkSatin'], garmentLayer: 'layer3', chestDetail: 'deepVBridalNeckline', waistSideDetail: 'sculptedWaistCorsetry', shoulderDetail: 'singleShoulderBridalCut', veil: 'shoulderLengthVeil', accessories: ['crystalTiara'], bodyShape: 'fashionTall', pose: 'sideProfileGown', makeup: ['refinedBridalBeauty'], hairstyle: 'softFrenchUpdo', skinTexture: 'luxuryAdSkin', lighting: 'cinematicLowContrast', color: 'iceBlueCrystalWhite', background: 'softGrayWall', camera: 'threeQuarterFashion', ratio: 'vertical45', intensity: 'balanced luxury bridal styling, visible couture craftsmanship, refined editorial presence' },
+  bridalMagazineKeyVisual: { style: 'bridalMagazine', composition: 'rightSubjectLeftSpace', framing: 'waistUp', garment: 'coutureMermaid', materials: ['frenchLace', 'pearlBeading'], garmentLayer: 'layer0', chestDetail: 'sweetheartCorset', waistSideDetail: 'sculptedWaistCorsetry', shoulderDetail: 'softOffShoulderTulle', veil: 'pearlVeil', accessories: ['pearlEarrings'], bodyShape: 'original', pose: 'downcastThreeQuarter', makeup: ['clearBridalMakeup', 'koreanSoftMatte'], hairstyle: 'lowBridalUpdo', skinTexture: 'luxuryAdSkin', lighting: 'koreanCreamSoftLight', color: 'ivoryCream', background: 'creamSeamlessStudio', camera: 'bridal85mm', ratio: 'vertical916', intensity: 'balanced luxury bridal styling, visible couture craftsmanship, refined editorial presence' }
+};
+
+function selected(name){
+  const item = document.querySelector('input[name="' + name + '"]:checked');
+  return item ? item.value : '';
+}
+function selectedMany(name){
+  return Array.from(document.querySelectorAll('input[name="' + name + '"]:checked')).map(item => item.value);
+}
+function setRadioValue(name, value){
+  const item = document.querySelector('input[name="' + name + '"][value="' + CSS.escape(value) + '"]');
+  if(item) item.checked = true;
+}
+function setCheckboxValues(name, values){
+  const wanted = new Set(values || []);
+  document.querySelectorAll('input[name="' + name + '"]').forEach(item => { item.checked = wanted.has(item.value); });
+}
+function getRadioValues(name){
+  return Array.from(document.querySelectorAll('input[name="' + name + '"]')).map(item => item.value);
+}
+function getCheckboxValues(name){
+  return Array.from(document.querySelectorAll('input[name="' + name + '"]')).map(item => item.value);
+}
+function pick(values){
+  return values[Math.floor(Math.random() * values.length)];
+}
+function pickSome(values, max){
+  const pool = values.slice();
+  const count = Math.floor(Math.random() * (max + 1));
+  const output = [];
+  while(output.length < count && pool.length) output.push(pool.splice(Math.floor(Math.random() * pool.length), 1)[0]);
+  return output;
+}
+function clearCustomFields(){
+  ['customGarment','customMaterial','customChestDetail','customWaistSideDetail','customShoulderDetail','customVeil','customAccessories','customPose','customStyling','customBackground','colorNote','extraNote'].forEach(id => {
+    const item = document.getElementById(id);
+    if(item) item.value = '';
+  });
+}
+function refreshCards(){
+  document.querySelectorAll('.card').forEach(card => {
+    const input = card.querySelector('input');
+    if(input) card.classList.toggle('selected', input.checked);
+  });
+  updateCount('materials', 'materialsLimit', '已選');
+  updateCount('accessories', 'accessoriesLimit', '配件已選');
+  updateCount('makeup', 'makeupLimit', '妝容已選');
+}
+function updateCount(name, id, prefix){
+  const target = document.getElementById(id);
+  if(target) target.textContent = prefix + ' ' + document.querySelectorAll('input[name="' + name + '"]:checked').length + ' / 2';
+}
+function applyMaxTwo(name){
+  document.querySelectorAll('input[name="' + name + '"]').forEach(item => {
+    item.addEventListener('change', () => {
+      const checked = document.querySelectorAll('input[name="' + name + '"]:checked');
+      if(checked.length > 2){
+        item.checked = false;
+        window.alert('最多選擇 2 個');
+      }
+      refreshCards();
+    });
+  });
+}
+function applyThemeTemplate(key){
+  const preset = themeTemplates[key];
+  if(!preset) return;
+  ['style','composition','framing','garment','garmentLayer','chestDetail','waistSideDetail','shoulderDetail','veil','bodyShape','pose','hairstyle','skinTexture','lighting','color','background','camera','ratio'].forEach(name => {
+    if(preset[name] !== undefined) setRadioValue(name, preset[name]);
+  });
+  setCheckboxValues('materials', preset.materials || []);
+  setCheckboxValues('accessories', preset.accessories || []);
+  setCheckboxValues('makeup', preset.makeup || []);
+  document.getElementById('intensity').value = preset.intensity || document.getElementById('intensity').value;
+  clearCustomFields();
+  refreshCards();
+  generate({ reveal: true });
+}
+function applyRandomSelection(){
+  ['style','composition','framing','garment','bodyShape','pose','hairstyle','skinTexture','lighting','color','background','camera','ratio'].forEach(name => setRadioValue(name, pick(getRadioValues(name))));
+  const veilRandomPool = getRadioValues('veil').filter(value => value !== 'transparentFaceVeil');
+  setRadioValue('veil', pick(veilRandomPool));
+ setCheckboxValues('materials', pickSome(getCheckboxValues('materials'), 2));
+  setCheckboxValues('accessories', pickSome(getCheckboxValues('accessories'), 2));
+  const makeup = pickSome(getCheckboxValues('makeup'), 2);
+  setCheckboxValues('makeup', makeup.length ? makeup : [pick(getCheckboxValues('makeup'))]);
+  setRadioValue('garmentLayer', 'random');
+  const layer = HB_GARMENT_CORE.resolveLayer('random', ['layer0','layer3','layer6','layer9'], GARMENT_DETAIL_LAYER_ZONES);
+  setRadioValue('garmentLayer', layer.key);
+  const fields = { chestDetail: chestDetailData, waistSideDetail: waistSideDetailData, shoulderDetail: shoulderDetailData };
+  const freeZones = HB_GARMENT_CORE.chooseFreeZones(fields, name => selected(name), layer.targetCount).zones;
+  freeZones.forEach(name => {
+    const keys = HB_GARMENT_CORE.randomKeys(fields[name], GARMENT_DETAIL_RANDOM_POOLS[name]);
+    if(keys.length) setRadioValue(name, pick(keys));
+  });
+  clearCustomFields();
+  refreshCards();
+  generate({ reveal: true });
+}
+function customText(id){
+  const item = document.getElementById(id);
+  return item ? item.value.trim() : '';
+}
+function buildCustom(value, label){
+  return value ? 'custom ' + label + ' only: ' + value + '; do not blend any preset ' + label + ' option' : '';
+}
+function generate(options){
+  const materialKeys = selectedMany('materials');
+  const makeupKeys = selectedMany('makeup');
+  const accessoryKeys = selectedMany('accessories');
+  const customMaterials = customText('customMaterial');
+  const customGarment = customText('customGarment');
+  const customVeil = customText('customVeil');
+  const customAccessories = customText('customAccessories');
+  const customPose = customText('customPose');
+  const customStyling = customText('customStyling');
+  const customBackground = customText('customBackground');
+  const customColor = customText('colorNote');
+  const customExtra = customText('extraNote');
+  const garmentText = buildCustom(customGarment, 'garment form') || garmentData[selected('garment')];
+  const materialsText = customMaterials
+    ? buildCustom(customMaterials, 'material system')
+    : materialKeys.map(key => materialData[key]).join(', ');
+  const detailParts = [
+    customText('customChestDetail') ? buildCustom(customText('customChestDetail'), 'chest surface detail') : chestDetailData[selected('chestDetail')],
+    customText('customWaistSideDetail') ? buildCustom(customText('customWaistSideDetail'), 'waist surface detail') : waistSideDetailData[selected('waistSideDetail')],
+    customText('customShoulderDetail') ? buildCustom(customText('customShoulderDetail'), 'shoulder surface detail') : shoulderDetailData[selected('shoulderDetail')]
+  ];
+  const garmentDetail = HB_GARMENT_CORE.compactPromptParts(detailParts).length
+    ? 'garment surface detail: ' + HB_GARMENT_CORE.compactPromptParts(detailParts).join(', ') + ' — structural surface accents only, the gown silhouette above stays unchanged'
+    : '';
+  const veilText = customVeil ? buildCustom(customVeil, 'veil design') : veilData[selected('veil')];
+  const accessoryText = customAccessories ? buildCustom(customAccessories, 'bridal accessory system') : accessoryKeys.map(key => accessoryData[key]).join(', ');
+  const veilProtection = selected('veil') !== 'none' || customVeil ? BRIDAL_VEIL_IDENTITY_PROTECTION : '';
+  const poseText = customPose ? buildCustom(customPose, 'pose') : poseData[selected('pose')];
+  const stylingText = [
+    makeupKeys.map(key => makeupData[key]).join(', '),
+    hairstyleData[selected('hairstyle')],
+    skinData[selected('skinTexture')],
+    customStyling ? buildCustom(customStyling, 'bridal styling') : ''
+  ].filter(Boolean).join(', ');
+  const backgroundText = customBackground ? buildCustom(customBackground, 'background') : backgroundData[selected('background')];
+  const colorText = customColor ? buildCustom(customColor, 'color palette') : colorData[selected('color')];
+  const parts = [
+    CORE.identityGuard,
+    CORE.anatomyGuard,
+    CORE.poseGuard,
+    CORE.lightingGuard,
+    CORE.compositionGuard,
+    BRIDAL_EDITORIAL_CORE,
+    styleData[selected('style')],
+    compositionData[selected('composition')],
+    framingData[selected('framing')],
+    'gown silhouette: ' + garmentText,
+    materialsText ? 'bridal gown materials and craftsmanship: ' + materialsText : '',
+    garmentDetail,
+    veilText ? 'veil design: ' + veilText : '',
+    accessoryText ? 'bridal accessories: ' + accessoryText : '',
+    veilProtection,
+    bodyShapes[selected('bodyShape')],
+    poseText,
+    'bridal styling: ' + stylingText,
+    'lighting: ' + lightingData[selected('lighting')],
+    'color palette: ' + colorText,
+    'background: ' + backgroundText,
+    customExtra ? 'additional direction: ' + customExtra : '',
+    cameraData[selected('camera')],
+    ratioData[selected('ratio')],
+    document.getElementById('intensity').value,
+    CORE.output,
+    CORE.negativePrompt,
+    'No random text, no watermark, no logo artifacts, no extra person, no distorted face, no deformed hands.'
+  ].filter(Boolean);
+  const output = HB_GARMENT_CORE.compactPromptParts(parts).join('\n\n⸻\n\n');
+  document.getElementById('outputText').value = output;
+  clearStale();
+  if(options && options.reveal){
+    document.getElementById('outputWrap').classList.remove('hidden');
+  }
+}
+function markStale(){
+  const wrap = document.getElementById('outputWrap');
+  if(wrap && !wrap.classList.contains('hidden')) wrap.classList.add('stale');
+}
+function clearStale(){
+  const wrap = document.getElementById('outputWrap');
+  if(wrap) wrap.classList.remove('stale');
+}
+document.querySelectorAll('input[type="radio"],input[type="checkbox"]').forEach(input => input.addEventListener('change', () => { refreshCards(); markStale(); }));
+document.querySelectorAll('input[type="text"],textarea,select').forEach(input => input.addEventListener('input', () => { refreshCards(); markStale(); }));
+applyMaxTwo('materials');
+applyMaxTwo('accessories');
+applyMaxTwo('makeup');
+document.getElementById('generateBtn').addEventListener('click', () => generate({ reveal: true }));
+document.getElementById('bridalRandomPreset').addEventListener('click', applyRandomSelection);
+document.querySelectorAll('[data-template]').forEach(button => button.addEventListener('click', () => applyThemeTemplate(button.dataset.template)));
+document.querySelector('.section-preset').addEventListener('click', event => {
+  const button = event.target.closest('button.card');
+  if(!button) return;
+  document.querySelectorAll('.section-preset button.card.template-selected').forEach(item => item.classList.remove('template-selected'));
+  button.classList.add('template-selected');
+});
+document.getElementById('copyBtn').addEventListener('click', () => {
+  if(document.getElementById('outputWrap').classList.contains('stale')) return;
+  const output = document.getElementById('outputText');
+  const button = document.getElementById('copyBtn');
+  const done = () => { button.textContent = '已複製'; button.classList.add('copied'); setTimeout(() => { button.textContent = '一鍵複製'; button.classList.remove('copied'); }, 1500); };
+  if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(output.value).then(done).catch(() => { output.select(); document.execCommand('copy'); done(); });
+  else { output.select(); document.execCommand('copy'); done(); }
+});
+refreshCards();
+generate({});
+</script>
+</body>
+</html>

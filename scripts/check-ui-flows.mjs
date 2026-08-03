@@ -11,7 +11,7 @@ const pages = [
   'chinese-classical.html', 'japanese-kimono.html', 'korean-hanbok.html',
   'xianxia.html', 'anime-character.html', 'flower-fairy.html',
   'isekai-fantasy.html', 'store-ad.html', 'floral-sweet.html',
-  'gala-socialite.html', 'kpop-idol.html', 'battle-academy.html',
+  'gala-socialite.html', 'bridal-editorial.html', 'kpop-idol.html', 'battle-academy.html',
   'ancient-goddess.html', 'editorial-identity.html',
 ];
 
@@ -84,6 +84,15 @@ for (const page of ['xianxia.html', 'anime-character.html', 'isekai-fantasy.html
     'section-ratio': 12, 'section-output': 13,
   };
 }
+
+visualOrderContracts['bridal-editorial.html'] = {
+  'section-preset': 0, 'section-style': 1, 'section-composition': 2,
+  'section-garment': 3, 'section-material': 4, 'section-garment-variation': 5,
+  'section-veil': 6, 'section-body': 7, 'section-pose': 8,
+  'section-styling': 9, 'section-lighting': 10, 'section-background': 11,
+  'section-extra': 12, 'section-camera': 13, 'section-ratio': 14,
+  'section-output': 15,
+};
 
 const issues = [];
 
@@ -237,15 +246,15 @@ function checkChoiceGroups(page, source, groups) {
 }
 
 function checkCheckboxContracts(page, source) {
-  if (!['chinese-classical.html', 'japanese-kimono.html', 'korean-hanbok.html'].includes(page)) return;
+  if (!['chinese-classical.html', 'japanese-kimono.html', 'korean-hanbok.html', 'bridal-editorial.html'].includes(page)) return;
   const materialInputs = tags(source, 'input').filter(tag => (
     (attr(tag, 'type') || '').toLowerCase() === 'checkbox' && attr(tag, 'name') === 'materials'
   ));
   if (materialInputs.length < 2) issue(page, 'materials checkbox group is incomplete');
-  if (!source.includes("selectedCheckboxes('materials')")) {
+  if (!source.includes("selectedCheckboxes('materials')") && !source.includes("selectedMany('materials')")) {
     issue(page, 'materials checkbox group is not read by generation logic');
   }
-  if (!/selectedCheckboxes\('materials'\)\.length\s*>\s*2/.test(source)) {
+  if (!/selectedCheckboxes\('materials'\)\.length\s*>\s*2/.test(source) && !source.includes("applyMaxTwo('materials')")) {
     issue(page, 'materials checkbox group has no max-two selection guard');
   }
 }
@@ -343,6 +352,14 @@ function checkGarmentDetailLayerContract(page, source, groups) {
   for (const field of detailGroups) {
     if (!source.includes(`name="${field}" value="none"`)) issue(page, `${field} is missing the none option`);
   }
+  if (page === 'bridal-editorial.html') {
+    if (!source.includes("getRadioValues('veil').filter(value => value !== 'transparentFaceVeil')")) {
+      issue(page, 'transparentFaceVeil must be excluded from the normal random pool');
+    }
+    if (!source.includes('BRIDAL_VEIL_IDENTITY_PROTECTION')) {
+      issue(page, 'bridal veil identity protection is missing');
+    }
+  }
 }
 
 function checkPresetButtons(page, source) {
@@ -426,6 +443,7 @@ const themeCopyContracts = {
   'ancient-goddess.html': '神話材質與古文明元素',
   'japanese-kimono.html': '日本材質與和風元素',
   'korean-hanbok.html': '韓國材質與韓服元素',
+  'bridal-editorial.html': '婚紗工藝與材質',
 };
 
 function checkThemeCopyContract(page, source) {
