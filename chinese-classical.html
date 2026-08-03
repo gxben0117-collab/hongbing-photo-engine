@@ -297,7 +297,7 @@
   </section>
 
   <section class="section-background">
-    <div class="section-header"><div class="section-label">10</div><div class="section-title">背景場景與留白</div></div>
+    <div class="section-header"><div class="section-label">10</div><div class="section-title">背景場景</div></div>
     <div class="group-title">10A｜背景場景</div>
     <div class="grid grid-3" data-choice="background">
       <label class="card selected"><input type="radio" name="background" value="hanCourtyard" checked><div class="name">漢代古樸庭院</div><div class="desc">木構、石階、古樸安靜</div></label>
@@ -319,17 +319,6 @@
       <label class="card"><input type="radio" name="background" value="suzhouCorridor"><div class="name">蘇式園林長廊</div><div class="desc">白牆、黛瓦與框景長廊</div></label>
       <label class="card"><input type="radio" name="background" value="palaceWallShadow"><div class="name">宮牆樹影</div><div class="desc">簡潔牆面與自然樹影</div></label>
       <label class="card"><input type="radio" name="background" value="paperBackdrop"><div class="name">宣紙水墨背景</div><div class="desc">紙張纖維、淡墨與乾淨留白</div></label>
-    </div>
-    <div class="group-title">10B｜留白方向</div>
-    <p class="hint">單選畫面保留空間；只保留乾淨區域，不生成文字。</p>
-    <div class="grid grid-3" data-choice="whitespace">
-      <label class="card selected"><input type="radio" name="whitespace" value="none" checked><div class="name">無特別留白</div><div class="desc">平衡呈現人物與場景</div></label>
-      <label class="card"><input type="radio" name="whitespace" value="left"><div class="name">左側留白</div><div class="desc">左側保留後製排版空間</div></label>
-      <label class="card"><input type="radio" name="whitespace" value="right"><div class="name">右側留白</div><div class="desc">右側保留後製排版空間</div></label>
-      <label class="card"><input type="radio" name="whitespace" value="top"><div class="name">上方標題留白</div><div class="desc">上方保留乾淨呼吸空間</div></label>
-      <label class="card"><input type="radio" name="whitespace" value="bottom"><div class="name">下方資訊留白</div><div class="desc">下方保留後製資訊空間</div></label>
-      <label class="card"><input type="radio" name="whitespace" value="balanced"><div class="name">左右平衡留白</div><div class="desc">兩側保留均衡空間</div></label>
-      <label class="card"><input type="radio" name="whitespace" value="paper"><div class="name">大面積宣紙留白</div><div class="desc">大範圍紙墨空間，不生成文字</div></label>
     </div>
   </section>
 
@@ -489,16 +478,6 @@ const colorPaletteData = {
   inkMuted: 'low-saturation ink black, paper white and smoky blue'
 };
 
-const whitespaceData = {
-  none: 'balanced breathing room around the subject with no specially reserved text area',
-  left: 'clean negative space reserved on the left side for later editorial layout, no text rendered',
-  right: 'clean negative space reserved on the right side for later editorial layout, no text rendered',
-  top: 'clean negative space reserved above the subject for later editorial layout, no text rendered',
-  bottom: 'clean negative space reserved below the subject for later editorial layout, no text rendered',
-  balanced: 'balanced clean negative space on both sides for later editorial layout, no text rendered',
-  paper: 'large xuan-paper-like negative space around the subject, no text rendered'
-};
-
 const poseData = {
   naturalStanding: 'natural relaxed standing pose with balanced weight, calm gaze and hands resting naturally',
   handsAtWaist: 'standing with both hands gently folded at the waist, relaxed fingers and dignified posture',
@@ -582,18 +561,18 @@ const ratioData = {
 const sharedClassicalCore = window.HB_CORE_PROMPT?.page?.chineseClassical || {};
 
 const themeTemplates = {
-  hanCourtyard: { style: 'classicalPortrait', composition: 'centered classical portrait composition, subject placed in the center with balanced Chinese architectural framing', garment: 'hanClassical', materials: ['plainSilk'], accessory: 'none', chest: 'none', waist: 'none', shoulder: 'none', body: 'original', pose: 'naturalStanding', lighting: 'morningCourtyard', color: 'ivoryTea', background: 'hanCourtyard', whitespace: 'none', framing: 'threeQuarter', camera: 'eyeLevel', ratio: 'vertical34' },
-  hanBambooPortrait: { style: 'culturePortrait', composition: 'wooden lattice window framing around the subject, layered foreground and background depth, intimate Chinese portrait composition', garment: 'hanCurvedWrap', materials: ['ramieLinen', 'plumOrchidBamboo'], accessory: 'woodHairpin', chest: 'none', waist: 'none', shoulder: 'none', body: 'slightWaist', pose: 'windowTurn', lighting: 'bambooShadow', color: 'bambooGray', background: 'bambooCourtyard', whitespace: 'balanced', framing: 'halfBody', camera: 'threeQuarterSide', ratio: 'vertical45' },
-  hanModernCouture: { style: 'modernCouture', composition: 'asymmetrical composition with the subject placed to one side, balanced visual weight and clean surrounding space', garment: 'hanModern', materials: ['wovenBrocade', 'windowLatticePattern'], accessory: 'jadePendant', chest: 'crossCollarDeepV', waist: 'none', shoulder: 'singleShoulder', body: 'tallFashion', pose: 'sideLongLine', lighting: 'modernStudio', color: 'daiJade', background: 'modernChineseStudio', whitespace: 'right', framing: 'threeQuarter', camera: 'eyeLevel', ratio: 'vertical45' },
-  hanWindowEditorial: { style: 'fashionEditorial', composition: 'wooden lattice window framing around the subject, layered foreground and background depth, intimate Chinese portrait composition', garment: 'hanModern', materials: ['lightGauze', 'calligraphySeal'], accessory: 'pearlHairOrnament', chest: 'crossWrapDeepV', waist: 'wrapSideSlit', shoulder: 'none', body: 'slightWaist', pose: 'sleeveHold', lighting: 'floralWindowProjection', color: 'smokeBlue', background: 'latticeRoom', whitespace: 'left', framing: 'threeQuarter', camera: 'sideProfile', ratio: 'vertical34' },
-  tangPalaceGown: { style: 'courtLuxury', composition: 'symmetrical classical composition with balanced windows, courtyard lines and ceremonial visual order', garment: 'tangClassical', materials: ['goldEmbroidery', 'peonyPattern'], accessory: 'goldHairpin', chest: 'none', waist: 'none', shoulder: 'none', body: 'tallFashion', pose: 'naturalStanding', lighting: 'tangGold', color: 'rougeGold', background: 'tangPalace', whitespace: 'none', framing: 'fullBody', camera: 'eyeLevel', ratio: 'vertical23' },
-  tangGoldPeony: { style: 'courtLuxury', composition: 'flowing sleeves and fabric edges create a soft foreground frame while the face remains clearly unobstructed', garment: 'tangChestHighSkirt', materials: ['goldEmbroidery', 'lotusVinePattern'], accessory: 'pearlHairOrnament', chest: 'deepV', waist: 'none', shoulder: 'none', body: 'curvy', pose: 'flowerBranch', lighting: 'warmLantern', color: 'rougeGold', background: 'redLacquerHall', whitespace: 'balanced', framing: 'threeQuarter', camera: 'lowAngle', ratio: 'vertical45' },
-  tangModernGown: { style: 'modernCouture', composition: 'garment silhouette and sleeve movement remain visually prominent within the surrounding classical space', garment: 'tangModern', materials: ['wovenBrocade', 'darkPatternJacquard'], accessory: 'wovenWaistSash', chest: 'crossCollarDeepV', waist: 'highSideSlit', shoulder: 'singleShoulder', body: 'tallFashion', pose: 'courtyardWalk', lighting: 'modernStudio', color: 'cinnabarInk', background: 'modernChineseStudio', whitespace: 'right', framing: 'fullBody', camera: 'threeQuarterSide', ratio: 'vertical23' },
-  tangModernCover: { style: 'fashionEditorial', composition: 'asymmetrical composition with the subject placed to one side, balanced visual weight and clean surrounding space', garment: 'tangLapelRobe', materials: ['lightGauze', 'ruyiPattern'], accessory: 'goldHairpin', chest: 'waistDeepV', waist: 'openSkirtPanel', shoulder: 'offShoulder', body: 'kpopIdol', pose: 'waterSleeve', lighting: 'tangGold', color: 'cinnabarInk', background: 'tangPalace', whitespace: 'left', framing: 'threeQuarter', camera: 'lowAngle', ratio: 'vertical45' },
-  songScholarStudy: { style: 'classicalPortrait', composition: 'garment detail-focused composition with collar construction, textile texture and refined craftsmanship as visual priorities', garment: 'songOpenFrontBeizi', materials: ['ramieLinen', 'calligraphySeal'], accessory: 'woodHairpin', chest: 'none', waist: 'none', shoulder: 'none', body: 'original', pose: 'scrollSeated', lighting: 'paperWindowSoft', color: 'ivoryTea', background: 'songStudy', whitespace: 'right', framing: 'halfBody', camera: 'beautyPortrait', ratio: 'vertical34' },
-  songJiangnanInk: { style: 'inkFineArt', composition: 'full environmental portrait with subject integrated into a Chinese courtyard, study or waterside garden with clear spatial layers', garment: 'songShortTopLongSkirt', materials: ['inkLandscapePattern', 'blueWhitePorcelain'], accessory: 'none', chest: 'none', waist: 'none', shoulder: 'none', body: 'slightWaist', pose: 'railingGaze', lighting: 'inkMist', color: 'inkMuted', background: 'jiangnanWater', whitespace: 'paper', framing: 'environment', camera: 'highAngle', ratio: 'landscape169' },
-  songModernMinimal: { style: 'fashionEditorial', composition: 'asymmetrical composition with the subject placed to one side, balanced visual weight and clean surrounding space', garment: 'songModern', materials: ['plainSilk', 'kesiTexture'], accessory: 'jadePendant', chest: 'crossWrapDeepV', waist: 'wrapSideSlit', shoulder: 'halter', body: 'tallFashion', pose: 'sideLongLine', lighting: 'modernStudio', color: 'daiJade', background: 'modernChineseStudio', whitespace: 'left', framing: 'threeQuarter', camera: 'sideProfile', ratio: 'vertical45' },
-  songModernStudio: { style: 'modernCouture', composition: 'garment detail-focused composition with collar construction, textile texture and refined craftsmanship as visual priorities', garment: 'ancientFormalGown', materials: ['plainSilk', 'xiangyunSilk'], accessory: 'pearlHairOrnament', chest: 'deepV', waist: 'none', shoulder: 'singleShoulder', body: 'slightWaist', pose: 'sleeveHold', lighting: 'paperWindowSoft', color: 'porcelainBlue', background: 'latticeRoom', whitespace: 'right', framing: 'halfBody', camera: 'threeQuarterSide', ratio: 'vertical45' }
+  hanCourtyard: { style: 'classicalPortrait', composition: 'centered classical portrait composition, subject placed in the center with balanced Chinese architectural framing', garment: 'hanClassical', materials: ['plainSilk'], accessory: 'none', chest: 'none', waist: 'none', shoulder: 'none', body: 'original', pose: 'naturalStanding', lighting: 'morningCourtyard', color: 'ivoryTea', background: 'hanCourtyard', framing: 'threeQuarter', camera: 'eyeLevel', ratio: 'vertical34' },
+  hanBambooPortrait: { style: 'culturePortrait', composition: 'wooden lattice window framing around the subject, layered foreground and background depth, intimate Chinese portrait composition', garment: 'hanCurvedWrap', materials: ['ramieLinen', 'plumOrchidBamboo'], accessory: 'woodHairpin', chest: 'none', waist: 'none', shoulder: 'none', body: 'slightWaist', pose: 'windowTurn', lighting: 'bambooShadow', color: 'bambooGray', background: 'bambooCourtyard', framing: 'halfBody', camera: 'threeQuarterSide', ratio: 'vertical45' },
+  hanModernCouture: { style: 'modernCouture', composition: 'asymmetrical composition with the subject placed to one side, balanced visual weight and clean surrounding space', garment: 'hanModern', materials: ['wovenBrocade', 'windowLatticePattern'], accessory: 'jadePendant', chest: 'crossCollarDeepV', waist: 'none', shoulder: 'singleShoulder', body: 'tallFashion', pose: 'sideLongLine', lighting: 'modernStudio', color: 'daiJade', background: 'modernChineseStudio', framing: 'threeQuarter', camera: 'eyeLevel', ratio: 'vertical45' },
+  hanWindowEditorial: { style: 'fashionEditorial', composition: 'wooden lattice window framing around the subject, layered foreground and background depth, intimate Chinese portrait composition', garment: 'hanModern', materials: ['lightGauze', 'calligraphySeal'], accessory: 'pearlHairOrnament', chest: 'crossWrapDeepV', waist: 'wrapSideSlit', shoulder: 'none', body: 'slightWaist', pose: 'sleeveHold', lighting: 'floralWindowProjection', color: 'smokeBlue', background: 'latticeRoom', framing: 'threeQuarter', camera: 'sideProfile', ratio: 'vertical34' },
+  tangPalaceGown: { style: 'courtLuxury', composition: 'symmetrical classical composition with balanced windows, courtyard lines and ceremonial visual order', garment: 'tangClassical', materials: ['goldEmbroidery', 'peonyPattern'], accessory: 'goldHairpin', chest: 'none', waist: 'none', shoulder: 'none', body: 'tallFashion', pose: 'naturalStanding', lighting: 'tangGold', color: 'rougeGold', background: 'tangPalace', framing: 'fullBody', camera: 'eyeLevel', ratio: 'vertical23' },
+  tangGoldPeony: { style: 'courtLuxury', composition: 'flowing sleeves and fabric edges create a soft foreground frame while the face remains clearly unobstructed', garment: 'tangChestHighSkirt', materials: ['goldEmbroidery', 'lotusVinePattern'], accessory: 'pearlHairOrnament', chest: 'deepV', waist: 'none', shoulder: 'none', body: 'curvy', pose: 'flowerBranch', lighting: 'warmLantern', color: 'rougeGold', background: 'redLacquerHall', framing: 'threeQuarter', camera: 'lowAngle', ratio: 'vertical45' },
+  tangModernGown: { style: 'modernCouture', composition: 'garment silhouette and sleeve movement remain visually prominent within the surrounding classical space', garment: 'tangModern', materials: ['wovenBrocade', 'darkPatternJacquard'], accessory: 'wovenWaistSash', chest: 'crossCollarDeepV', waist: 'highSideSlit', shoulder: 'singleShoulder', body: 'tallFashion', pose: 'courtyardWalk', lighting: 'modernStudio', color: 'cinnabarInk', background: 'modernChineseStudio', framing: 'fullBody', camera: 'threeQuarterSide', ratio: 'vertical23' },
+  tangModernCover: { style: 'fashionEditorial', composition: 'asymmetrical composition with the subject placed to one side, balanced visual weight and clean surrounding space', garment: 'tangLapelRobe', materials: ['lightGauze', 'ruyiPattern'], accessory: 'goldHairpin', chest: 'waistDeepV', waist: 'openSkirtPanel', shoulder: 'offShoulder', body: 'kpopIdol', pose: 'waterSleeve', lighting: 'tangGold', color: 'cinnabarInk', background: 'tangPalace', framing: 'threeQuarter', camera: 'lowAngle', ratio: 'vertical45' },
+  songScholarStudy: { style: 'classicalPortrait', composition: 'garment detail-focused composition with collar construction, textile texture and refined craftsmanship as visual priorities', garment: 'songOpenFrontBeizi', materials: ['ramieLinen', 'calligraphySeal'], accessory: 'woodHairpin', chest: 'none', waist: 'none', shoulder: 'none', body: 'original', pose: 'scrollSeated', lighting: 'paperWindowSoft', color: 'ivoryTea', background: 'songStudy', framing: 'halfBody', camera: 'beautyPortrait', ratio: 'vertical34' },
+  songJiangnanInk: { style: 'inkFineArt', composition: 'full environmental portrait with subject integrated into a Chinese courtyard, study or waterside garden with clear spatial layers', garment: 'songShortTopLongSkirt', materials: ['inkLandscapePattern', 'blueWhitePorcelain'], accessory: 'none', chest: 'none', waist: 'none', shoulder: 'none', body: 'slightWaist', pose: 'railingGaze', lighting: 'inkMist', color: 'inkMuted', background: 'jiangnanWater', framing: 'environment', camera: 'highAngle', ratio: 'landscape169' },
+  songModernMinimal: { style: 'fashionEditorial', composition: 'asymmetrical composition with the subject placed to one side, balanced visual weight and clean surrounding space', garment: 'songModern', materials: ['plainSilk', 'kesiTexture'], accessory: 'jadePendant', chest: 'crossWrapDeepV', waist: 'wrapSideSlit', shoulder: 'halter', body: 'tallFashion', pose: 'sideLongLine', lighting: 'modernStudio', color: 'daiJade', background: 'modernChineseStudio', framing: 'threeQuarter', camera: 'sideProfile', ratio: 'vertical45' },
+  songModernStudio: { style: 'modernCouture', composition: 'garment detail-focused composition with collar construction, textile texture and refined craftsmanship as visual priorities', garment: 'ancientFormalGown', materials: ['plainSilk', 'xiangyunSilk'], accessory: 'pearlHairOrnament', chest: 'deepV', waist: 'none', shoulder: 'singleShoulder', body: 'slightWaist', pose: 'sleeveHold', lighting: 'paperWindowSoft', color: 'porcelainBlue', background: 'latticeRoom', framing: 'halfBody', camera: 'threeQuarterSide', ratio: 'vertical45' }
 };
 
 function selected(name){
@@ -655,7 +634,6 @@ function applyThemeTemplate(key){
   setRadioValue('lighting', preset.lighting);
   setRadioValue('colorPalette', preset.color);
   setRadioValue('background', preset.background);
-  setRadioValue('whitespace', preset.whitespace);
   setRadioValue('framing', preset.framing);
   setRadioValue('camera', preset.camera);
   setRadioValue('ratio', preset.ratio);
@@ -664,7 +642,7 @@ function applyThemeTemplate(key){
   generate({ reveal: true });
 }
 function applyClassicalRandomSelection(){
-  ['style','composition','garment','accessory','garmentChestVariation','garmentWaistVariation','garmentShoulderVariation','bodyShape','pose','lighting','colorPalette','background','whitespace','framing','camera','ratio'].forEach(name => setRadioValue(name, getRandomItem(getAllRadioValues(name))));
+  ['style','composition','garment','accessory','garmentChestVariation','garmentWaistVariation','garmentShoulderVariation','bodyShape','pose','lighting','colorPalette','background','framing','camera','ratio'].forEach(name => setRadioValue(name, getRandomItem(getAllRadioValues(name))));
   const materialValues = shuffle(getAllRadioValues('materials'));
   setCheckboxValues('materials', materialValues.slice(0, Math.random() < .5 ? 1 : 2));
   document.getElementById('intensity').value = getRandomItem(getAllSelectValues('intensity'));
@@ -695,7 +673,6 @@ function generate(options){
   ].filter(Boolean);
   const customBackground = document.getElementById('customBackground').value.trim();
   const background = customBackground ? 'custom background only: ' + customBackground + '; keep the Chinese classical visual language' : backgroundData[selected('background')];
-  const whitespace = whitespaceData[selected('whitespace')];
   const customPose = document.getElementById('customPose').value.trim();
   const poseText = customPose ? 'custom pose only: ' + customPose + '; keep natural human anatomy and a coherent moment' : poseData[selected('pose')];
   const colorNote = document.getElementById('colorNote').value.trim();
@@ -722,7 +699,6 @@ function generate(options){
     'lighting design: ' + lightingData[selected('lighting')] + ',',
     'color palette: ' + (colorNote || colorPaletteData[selected('colorPalette')] || materialPalette) + ',',
     'background design: ' + background + ',',
-    'whitespace direction: ' + whitespace + ',',
     ratioData[selected('ratio')] + ',',
     sharedClassicalCore.output + ',',
     document.getElementById('intensity').value + ',',

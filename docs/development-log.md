@@ -6,6 +6,16 @@
 每筆記錄盡量只留：**做了什麼 → 為什麼 → 驗證方式**，實作細節（哪一行、哪個函式）
 留在對應的 commit diff 或 `docs/history/` 底下的原始交接文件。
 
+## 2026-08-03　移除中式古典、和服、韓服三頁的 10B 留白方向
+
+- **改動**：`chinese-classical.html`、`japanese-kimono.html`、`korean-hanbok.html` 的 10
+  區只保留背景場景，移除 10B 留白方向的 UI 與所有留白選項。
+- **生成同步**：刪除 `whitespaceData`、模板中的 `whitespace` 欄位、隨機套用欄位與生成
+  Prompt 的 `whitespace direction` 片段；編輯視覺設計頁的留白資料維持不變。
+- **文件同步**：更新三頁流程、使用方式、QA 頁面與 v4.29 維護摘要。
+- **驗證**：重新執行 UI flow、preset 引用、100 次隨機模擬、固定 Prompt 預覽、靜態檢查與
+  `git diff --check`。
+
 ## 2026-08-03　新增日本和服與韓國韓服兩個獨立工具頁
 
 - **改動**：新增 `japanese-kimono.html`（日本和服美學）與 `korean-hanbok.html`（韓國韓服

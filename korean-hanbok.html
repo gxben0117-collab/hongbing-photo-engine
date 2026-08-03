@@ -293,7 +293,7 @@
   </section>
 
   <section class="section-background">
-    <div class="section-header"><div class="section-label">10</div><div class="section-title">韓國背景場景與留白</div></div>
+    <div class="section-header"><div class="section-label">10</div><div class="section-title">韓國背景場景</div></div>
     <div class="group-title">10A｜韓國背景場景</div>
     <div class="grid grid-3" data-choice="background">
       <label class="card selected"><input type="radio" name="background" value="hanokCourtyard" checked><div class="name">韓屋木造庭院</div><div class="desc">木構、石階、古樸安靜</div></label>
@@ -315,17 +315,6 @@
       <label class="card"><input type="radio" name="background" value="wisteriaKoreanPavilion"><div class="name">紫藤亭台</div><div class="desc">藤花、木亭與春日景深</div></label>
       <label class="card"><input type="radio" name="background" value="plainHanbokStudio"><div class="name">純色韓服棚拍</div><div class="desc">極簡背景與服裝主視覺</div></label>
       <label class="card"><input type="radio" name="background" value="inkKoreanBackdrop"><div class="name">韓紙淡墨背景</div><div class="desc">韓紙纖維、淡色與乾淨留白</div></label>
-    </div>
-    <div class="group-title">10B｜留白方向</div>
-    <p class="hint">單選畫面保留空間；只保留乾淨區域，不生成文字。</p>
-    <div class="grid grid-3" data-choice="whitespace">
-      <label class="card selected"><input type="radio" name="whitespace" value="none" checked><div class="name">無特別留白</div><div class="desc">平衡呈現人物與場景</div></label>
-      <label class="card"><input type="radio" name="whitespace" value="left"><div class="name">左側留白</div><div class="desc">左側保留後製排版空間</div></label>
-      <label class="card"><input type="radio" name="whitespace" value="right"><div class="name">右側留白</div><div class="desc">右側保留後製排版空間</div></label>
-      <label class="card"><input type="radio" name="whitespace" value="top"><div class="name">上方標題留白</div><div class="desc">上方保留乾淨呼吸空間</div></label>
-      <label class="card"><input type="radio" name="whitespace" value="bottom"><div class="name">下方資訊留白</div><div class="desc">下方保留後製資訊空間</div></label>
-      <label class="card"><input type="radio" name="whitespace" value="balanced"><div class="name">左右平衡留白</div><div class="desc">兩側保留均衡空間</div></label>
-      <label class="card"><input type="radio" name="whitespace" value="paper"><div class="name">大面積宣紙留白</div><div class="desc">大範圍紙墨空間，不生成文字</div></label>
     </div>
   </section>
 
@@ -484,16 +473,6 @@ const colorPaletteData = {
   mutedHanbok: 'low-saturation pastel hanbok colors, hanji white and smoky blue'
 };
 
-const whitespaceData = {
-  none: 'balanced breathing room around the subject with no specially reserved text area',
-  left: 'clean negative space reserved on the left side for later editorial layout, no text rendered',
-  right: 'clean negative space reserved on the right side for later editorial layout, no text rendered',
-  top: 'clean negative space reserved above the subject for later editorial layout, no text rendered',
-  bottom: 'clean negative space reserved below the subject for later editorial layout, no text rendered',
-  balanced: 'balanced clean negative space on both sides for later editorial layout, no text rendered',
-  paper: 'large hanji-paper-like negative space around the subject, no text rendered'
-};
-
 const poseData = {
   naturalStanding: 'natural relaxed standing pose with balanced weight, calm gaze and hands resting naturally',
   handsAtWaist: 'standing with both hands gently folded near the chima waist, relaxed fingers and dignified posture',
@@ -577,18 +556,18 @@ const ratioData = {
 const sharedClassicalCore = window.HB_CORE_PROMPT?.page?.koreanHanbok || {};
 
 const themeTemplates = {
-  classicHanok: { style: 'classicalPortrait', composition: 'centered formal portrait composition with balanced Korean architectural framing', garment: 'classicJeogoriChima', materials: ['plainSilk'], accessory: 'none', chest: 'none', waist: 'none', shoulder: 'none', body: 'original', pose: 'naturalStanding', lighting: 'hanokPaperSoft', color: 'pastelPinkIvory', background: 'hanokCourtyard', whitespace: 'none', framing: 'threeQuarter', camera: 'eyeLevel', ratio: 'vertical34' },
-  scholarPastelStudy: { style: 'culturePortrait', composition: 'hanok paper-door framing around the subject with layered foreground and background depth', garment: 'scholarPastelHanbok', materials: ['ramieLinen', 'plumBambooPattern'], accessory: 'binyeo', chest: 'none', waist: 'none', shoulder: 'none', body: 'slightWaist', pose: 'scrollSeated', lighting: 'morningHanok', color: 'sageLinen', background: 'hanokStudy', whitespace: 'right', framing: 'halfBody', camera: 'threeQuarterSide', ratio: 'vertical45' },
-  winterFurSnow: { style: 'inkFineArt', composition: 'full environmental portrait integrated into a hanok courtyard, palace corridor or traditional garden with clear spatial layers', garment: 'winterFurHanbok', materials: ['matteSatin', 'plumBambooPattern'], accessory: 'jadeBinyeo', chest: 'none', waist: 'none', shoulder: 'none', body: 'original', pose: 'railingGaze', lighting: 'mistPalace', color: 'plumSnow', background: 'snowHanok', whitespace: 'paper', framing: 'environment', camera: 'highAngle', ratio: 'landscape169' },
-  royalDanguiPalace: { style: 'courtLuxury', composition: 'symmetrical composition with hanok lines, palace corridors and balanced ceremonial order', garment: 'royalDangui', materials: ['hanbokBrocade', 'goldLeafHanbok'], accessory: 'binyeo', chest: 'none', waist: 'none', shoulder: 'none', body: 'tallFashion', pose: 'naturalStanding', lighting: 'goldLeafLight', color: 'royalGreenGold', background: 'palaceCorridor', whitespace: 'none', framing: 'fullBody', camera: 'eyeLevel', ratio: 'vertical23' },
-  courtWonsamGarden: { style: 'courtLuxury', composition: 'flowing hanbok sleeves and skirt edges create a soft foreground frame while the face remains unobstructed', garment: 'courtWonsam', materials: ['hanbokBrocade', 'floralEmbroidery'], accessory: 'flowerCrown', chest: 'none', waist: 'none', shoulder: 'none', body: 'curvy', pose: 'flowerBranch', lighting: 'palaceWarm', color: 'royalGreenGold', background: 'palaceGarden', whitespace: 'balanced', framing: 'threeQuarter', camera: 'lowAngle', ratio: 'vertical45' },
-  bridalHwarot: { style: 'fashionEditorial', composition: 'hanbok detail-focused composition with jeogori collar, goreum ribbons, embroidery and refined craftsmanship as priorities', garment: 'bridalHwarot', materials: ['floralEmbroidery', 'phoenixPattern'], accessory: 'jokduri', chest: 'none', waist: 'none', shoulder: 'none', body: 'original', pose: 'handsAtWaist', lighting: 'hanbokStudio', color: 'vermilionInk', background: 'royalBanquetHall', whitespace: 'right', framing: 'threeQuarter', camera: 'beautyPortrait', ratio: 'vertical34' },
-  greenWonsamWedding: { style: 'classicalPortrait', composition: 'wide composition with the broad hanbok sleeves opening outward and the layered garment construction clearly visible', garment: 'greenBridalWonsam', materials: ['plainSilk', 'goldLeafHanbok'], accessory: 'flowerCrown', chest: 'none', waist: 'none', shoulder: 'none', body: 'tallFashion', pose: 'raiseSleeve', lighting: 'blossomBacklight', color: 'royalGreenGold', background: 'springBlossomHanok', whitespace: 'none', framing: 'fullBody', camera: 'eyeLevel', ratio: 'vertical23' },
-  goldLeafRoyal: { style: 'courtLuxury', composition: 'traditional Korean folding screen and architectural planes create elegant layered framing around the subject', garment: 'goldLeafRoyalHanbok', materials: ['goldLeafHanbok', 'dancheongGeometry'], accessory: 'norigae', chest: 'none', waist: 'none', shoulder: 'none', body: 'tallFashion', pose: 'holdNorigae', lighting: 'goldLeafLight', color: 'dancheongColor', background: 'traditionalScreenRoom', whitespace: 'left', framing: 'threeQuarter', camera: 'eyeLevel', ratio: 'vertical45' },
-  courtDancePortrait: { style: 'culturePortrait', composition: 'hanbok silhouette and sleeve movement remain visually prominent within the surrounding Korean classical space', garment: 'courtDanceHanbok', materials: ['nobangGauze', 'cloudPattern'], accessory: 'norigae', chest: 'none', waist: 'none', shoulder: 'none', body: 'kpopIdol', pose: 'waterSleeve', lighting: 'hanbokSideLight', color: 'jadeBlueCream', background: 'traditionalPavilion', whitespace: 'none', framing: 'fullBody', camera: 'threeQuarterSide', ratio: 'vertical45' },
-  modernDailyHanbok: { style: 'classicalPortrait', composition: 'hanok paper-door framing around the subject with layered foreground and background depth', garment: 'modernDailyHanbok', materials: ['ramieLinen', 'jogakboPatchwork'], accessory: 'embroideredPouch', chest: 'none', waist: 'none', shoulder: 'none', body: 'original', pose: 'teaCup', lighting: 'paperDoorProjection', color: 'sageLinen', background: 'paperDoorInterior', whitespace: 'right', framing: 'halfBody', camera: 'beautyPortrait', ratio: 'vertical34' },
-  hanbokPhotoCouture: { style: 'fashionEditorial', composition: 'hanbok detail-focused composition with jeogori collar, goreum ribbons, embroidery and refined craftsmanship as priorities', garment: 'hanbokPhotoCouture', materials: ['matteSatin', 'floralEmbroidery'], accessory: 'daenggi', chest: 'crossCollarDeepV', waist: 'wrapSideSlit', shoulder: 'none', body: 'kpopIdol', pose: 'sideLongLine', lighting: 'hanbokStudio', color: 'smokeBlueRose', background: 'modernKoreanStudio', whitespace: 'left', framing: 'threeQuarter', camera: 'sideProfile', ratio: 'vertical45' },
-  hanbokHauteCouture: { style: 'modernCouture', composition: 'asymmetrical Korean editorial composition with the subject placed to one side and clean surrounding space', garment: 'hanbokHauteCouture', materials: ['hanbokBrocade', 'layeredOrganza'], accessory: 'jadeBinyeo', chest: 'waistDeepV', waist: 'openSkirtPanel', shoulder: 'singleShoulder', body: 'tallFashion', pose: 'sleeveHold', lighting: 'hanbokStudio', color: 'royalGreenGold', background: 'plainHanbokStudio', whitespace: 'right', framing: 'halfBody', camera: 'threeQuarterSide', ratio: 'vertical45' }
+  classicHanok: { style: 'classicalPortrait', composition: 'centered formal portrait composition with balanced Korean architectural framing', garment: 'classicJeogoriChima', materials: ['plainSilk'], accessory: 'none', chest: 'none', waist: 'none', shoulder: 'none', body: 'original', pose: 'naturalStanding', lighting: 'hanokPaperSoft', color: 'pastelPinkIvory', background: 'hanokCourtyard', framing: 'threeQuarter', camera: 'eyeLevel', ratio: 'vertical34' },
+  scholarPastelStudy: { style: 'culturePortrait', composition: 'hanok paper-door framing around the subject with layered foreground and background depth', garment: 'scholarPastelHanbok', materials: ['ramieLinen', 'plumBambooPattern'], accessory: 'binyeo', chest: 'none', waist: 'none', shoulder: 'none', body: 'slightWaist', pose: 'scrollSeated', lighting: 'morningHanok', color: 'sageLinen', background: 'hanokStudy', framing: 'halfBody', camera: 'threeQuarterSide', ratio: 'vertical45' },
+  winterFurSnow: { style: 'inkFineArt', composition: 'full environmental portrait integrated into a hanok courtyard, palace corridor or traditional garden with clear spatial layers', garment: 'winterFurHanbok', materials: ['matteSatin', 'plumBambooPattern'], accessory: 'jadeBinyeo', chest: 'none', waist: 'none', shoulder: 'none', body: 'original', pose: 'railingGaze', lighting: 'mistPalace', color: 'plumSnow', background: 'snowHanok', framing: 'environment', camera: 'highAngle', ratio: 'landscape169' },
+  royalDanguiPalace: { style: 'courtLuxury', composition: 'symmetrical composition with hanok lines, palace corridors and balanced ceremonial order', garment: 'royalDangui', materials: ['hanbokBrocade', 'goldLeafHanbok'], accessory: 'binyeo', chest: 'none', waist: 'none', shoulder: 'none', body: 'tallFashion', pose: 'naturalStanding', lighting: 'goldLeafLight', color: 'royalGreenGold', background: 'palaceCorridor', framing: 'fullBody', camera: 'eyeLevel', ratio: 'vertical23' },
+  courtWonsamGarden: { style: 'courtLuxury', composition: 'flowing hanbok sleeves and skirt edges create a soft foreground frame while the face remains unobstructed', garment: 'courtWonsam', materials: ['hanbokBrocade', 'floralEmbroidery'], accessory: 'flowerCrown', chest: 'none', waist: 'none', shoulder: 'none', body: 'curvy', pose: 'flowerBranch', lighting: 'palaceWarm', color: 'royalGreenGold', background: 'palaceGarden', framing: 'threeQuarter', camera: 'lowAngle', ratio: 'vertical45' },
+  bridalHwarot: { style: 'fashionEditorial', composition: 'hanbok detail-focused composition with jeogori collar, goreum ribbons, embroidery and refined craftsmanship as priorities', garment: 'bridalHwarot', materials: ['floralEmbroidery', 'phoenixPattern'], accessory: 'jokduri', chest: 'none', waist: 'none', shoulder: 'none', body: 'original', pose: 'handsAtWaist', lighting: 'hanbokStudio', color: 'vermilionInk', background: 'royalBanquetHall', framing: 'threeQuarter', camera: 'beautyPortrait', ratio: 'vertical34' },
+  greenWonsamWedding: { style: 'classicalPortrait', composition: 'wide composition with the broad hanbok sleeves opening outward and the layered garment construction clearly visible', garment: 'greenBridalWonsam', materials: ['plainSilk', 'goldLeafHanbok'], accessory: 'flowerCrown', chest: 'none', waist: 'none', shoulder: 'none', body: 'tallFashion', pose: 'raiseSleeve', lighting: 'blossomBacklight', color: 'royalGreenGold', background: 'springBlossomHanok', framing: 'fullBody', camera: 'eyeLevel', ratio: 'vertical23' },
+  goldLeafRoyal: { style: 'courtLuxury', composition: 'traditional Korean folding screen and architectural planes create elegant layered framing around the subject', garment: 'goldLeafRoyalHanbok', materials: ['goldLeafHanbok', 'dancheongGeometry'], accessory: 'norigae', chest: 'none', waist: 'none', shoulder: 'none', body: 'tallFashion', pose: 'holdNorigae', lighting: 'goldLeafLight', color: 'dancheongColor', background: 'traditionalScreenRoom', framing: 'threeQuarter', camera: 'eyeLevel', ratio: 'vertical45' },
+  courtDancePortrait: { style: 'culturePortrait', composition: 'hanbok silhouette and sleeve movement remain visually prominent within the surrounding Korean classical space', garment: 'courtDanceHanbok', materials: ['nobangGauze', 'cloudPattern'], accessory: 'norigae', chest: 'none', waist: 'none', shoulder: 'none', body: 'kpopIdol', pose: 'waterSleeve', lighting: 'hanbokSideLight', color: 'jadeBlueCream', background: 'traditionalPavilion', framing: 'fullBody', camera: 'threeQuarterSide', ratio: 'vertical45' },
+  modernDailyHanbok: { style: 'classicalPortrait', composition: 'hanok paper-door framing around the subject with layered foreground and background depth', garment: 'modernDailyHanbok', materials: ['ramieLinen', 'jogakboPatchwork'], accessory: 'embroideredPouch', chest: 'none', waist: 'none', shoulder: 'none', body: 'original', pose: 'teaCup', lighting: 'paperDoorProjection', color: 'sageLinen', background: 'paperDoorInterior', framing: 'halfBody', camera: 'beautyPortrait', ratio: 'vertical34' },
+  hanbokPhotoCouture: { style: 'fashionEditorial', composition: 'hanbok detail-focused composition with jeogori collar, goreum ribbons, embroidery and refined craftsmanship as priorities', garment: 'hanbokPhotoCouture', materials: ['matteSatin', 'floralEmbroidery'], accessory: 'daenggi', chest: 'crossCollarDeepV', waist: 'wrapSideSlit', shoulder: 'none', body: 'kpopIdol', pose: 'sideLongLine', lighting: 'hanbokStudio', color: 'smokeBlueRose', background: 'modernKoreanStudio', framing: 'threeQuarter', camera: 'sideProfile', ratio: 'vertical45' },
+  hanbokHauteCouture: { style: 'modernCouture', composition: 'asymmetrical Korean editorial composition with the subject placed to one side and clean surrounding space', garment: 'hanbokHauteCouture', materials: ['hanbokBrocade', 'layeredOrganza'], accessory: 'jadeBinyeo', chest: 'waistDeepV', waist: 'openSkirtPanel', shoulder: 'singleShoulder', body: 'tallFashion', pose: 'sleeveHold', lighting: 'hanbokStudio', color: 'royalGreenGold', background: 'plainHanbokStudio', framing: 'halfBody', camera: 'threeQuarterSide', ratio: 'vertical45' }
 };
 
 function selected(name){
@@ -650,7 +629,6 @@ function applyThemeTemplate(key){
   setRadioValue('lighting', preset.lighting);
   setRadioValue('colorPalette', preset.color);
   setRadioValue('background', preset.background);
-  setRadioValue('whitespace', preset.whitespace);
   setRadioValue('framing', preset.framing);
   setRadioValue('camera', preset.camera);
   setRadioValue('ratio', preset.ratio);
@@ -659,7 +637,7 @@ function applyThemeTemplate(key){
   generate({ reveal: true });
 }
 function applyClassicalRandomSelection(){
-  ['style','composition','garment','accessory','garmentChestVariation','garmentWaistVariation','garmentShoulderVariation','bodyShape','pose','lighting','colorPalette','background','whitespace','framing','camera','ratio'].forEach(name => setRadioValue(name, getRandomItem(getAllRadioValues(name))));
+  ['style','composition','garment','accessory','garmentChestVariation','garmentWaistVariation','garmentShoulderVariation','bodyShape','pose','lighting','colorPalette','background','framing','camera','ratio'].forEach(name => setRadioValue(name, getRandomItem(getAllRadioValues(name))));
   const materialValues = shuffle(getAllRadioValues('materials'));
   setCheckboxValues('materials', materialValues.slice(0, Math.random() < .5 ? 1 : 2));
   document.getElementById('intensity').value = getRandomItem(getAllSelectValues('intensity'));
@@ -690,7 +668,6 @@ function generate(options){
   ].filter(Boolean);
   const customBackground = document.getElementById('customBackground').value.trim();
   const background = customBackground ? 'custom background only: ' + customBackground + '; keep the Korean hanbok visual language' : backgroundData[selected('background')];
-  const whitespace = whitespaceData[selected('whitespace')];
   const customPose = document.getElementById('customPose').value.trim();
   const poseText = customPose ? 'custom pose only: ' + customPose + '; keep natural human anatomy and a coherent moment' : poseData[selected('pose')];
   const colorNote = document.getElementById('colorNote').value.trim();
@@ -717,7 +694,6 @@ function generate(options){
     'lighting design: ' + lightingData[selected('lighting')] + ',',
     'color palette: ' + (colorNote || colorPaletteData[selected('colorPalette')] || materialPalette) + ',',
     'background design: ' + background + ',',
-    'whitespace direction: ' + whitespace + ',',
     ratioData[selected('ratio')] + ',',
     sharedClassicalCore.output + ',',
     document.getElementById('intensity').value + ',',

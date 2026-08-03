@@ -296,7 +296,7 @@
   </section>
 
   <section class="section-background">
-    <div class="section-header"><div class="section-label">10</div><div class="section-title">日本背景場景與留白</div></div>
+    <div class="section-header"><div class="section-label">10</div><div class="section-title">日本背景場景</div></div>
     <div class="group-title">10A｜日本背景場景</div>
     <div class="grid grid-3" data-choice="background">
       <label class="card selected"><input type="radio" name="background" value="machiyaInterior" checked><div class="name">町家木造室內</div><div class="desc">木作、紙門、古樸安靜</div></label>
@@ -318,17 +318,6 @@
       <label class="card"><input type="radio" name="background" value="shrineGarden"><div class="name">古典神社庭院</div><div class="desc">木造門廊、石階與自然樹影</div></label>
       <label class="card"><input type="radio" name="background" value="wisteriaPavilion"><div class="name">紫藤亭台</div><div class="desc">藤花、木亭與柔和春日景深</div></label>
       <label class="card"><input type="radio" name="background" value="plainJapaneseStudio"><div class="name">純色和風棚拍</div><div class="desc">極簡背景與服裝主視覺</div></label>
-    </div>
-    <div class="group-title">10B｜留白方向</div>
-    <p class="hint">單選畫面保留空間；只保留乾淨區域，不生成文字。</p>
-    <div class="grid grid-3" data-choice="whitespace">
-      <label class="card selected"><input type="radio" name="whitespace" value="none" checked><div class="name">無特別留白</div><div class="desc">平衡呈現人物與場景</div></label>
-      <label class="card"><input type="radio" name="whitespace" value="left"><div class="name">左側留白</div><div class="desc">左側保留後製排版空間</div></label>
-      <label class="card"><input type="radio" name="whitespace" value="right"><div class="name">右側留白</div><div class="desc">右側保留後製排版空間</div></label>
-      <label class="card"><input type="radio" name="whitespace" value="top"><div class="name">上方標題留白</div><div class="desc">上方保留乾淨呼吸空間</div></label>
-      <label class="card"><input type="radio" name="whitespace" value="bottom"><div class="name">下方資訊留白</div><div class="desc">下方保留後製資訊空間</div></label>
-      <label class="card"><input type="radio" name="whitespace" value="balanced"><div class="name">左右平衡留白</div><div class="desc">兩側保留均衡空間</div></label>
-      <label class="card"><input type="radio" name="whitespace" value="paper"><div class="name">大面積和紙留白</div><div class="desc">大範圍和紙空間，不生成文字</div></label>
     </div>
   </section>
 
@@ -487,16 +476,6 @@ const colorPaletteData = {
   indigoMuted: 'low-saturation indigo, washi white and smoky blue'
 };
 
-const whitespaceData = {
-  none: 'balanced breathing room around the subject with no specially reserved text area',
-  left: 'clean negative space reserved on the left side for later editorial layout, no text rendered',
-  right: 'clean negative space reserved on the right side for later editorial layout, no text rendered',
-  top: 'clean negative space reserved above the subject for later editorial layout, no text rendered',
-  bottom: 'clean negative space reserved below the subject for later editorial layout, no text rendered',
-  balanced: 'balanced clean negative space on both sides for later editorial layout, no text rendered',
-  paper: 'large washi-paper-like negative space around the subject, no text rendered'
-};
-
 const poseData = {
   naturalStanding: 'natural relaxed standing pose with balanced weight, calm gaze and hands resting naturally',
   handsAtWaist: 'standing with both hands gently folded at the obi, relaxed fingers and dignified posture',
@@ -580,18 +559,18 @@ const ratioData = {
 const sharedClassicalCore = window.HB_CORE_PROMPT?.page?.japaneseKimono || {};
 
 const themeTemplates = {
-  heianCourt: { style: 'courtLuxury', composition: 'centered formal portrait composition with balanced Japanese architectural framing', garment: 'heianJunihitoe', materials: ['plainSilk', 'chrysanthemumPattern'], accessory: 'kanzashi', chest: 'none', waist: 'none', shoulder: 'none', body: 'original', pose: 'naturalStanding', lighting: 'shojiSoft', color: 'sakuraIvory', background: 'machiyaInterior', whitespace: 'none', framing: 'threeQuarter', camera: 'eyeLevel', ratio: 'vertical34' },
-  heianKouchigi: { style: 'culturePortrait', composition: 'engawa and shoji framing around the subject with layered foreground and background depth', garment: 'heianKouchigi', materials: ['rinzuSilk', 'plumPattern'], accessory: 'tsumamiKanzashi', chest: 'none', waist: 'none', shoulder: 'none', body: 'slightWaist', pose: 'windowTurn', lighting: 'morningGarden', color: 'smokeRose', background: 'engawaGarden', whitespace: 'balanced', framing: 'halfBody', camera: 'threeQuarterSide', ratio: 'vertical45' },
-  edoFurisodeSakura: { style: 'fashionEditorial', composition: 'wide composition with long kimono sleeves opening outward and the layered garment construction clearly visible', garment: 'edoFurisode', materials: ['yuzenDye', 'sakuraPattern'], accessory: 'tsumamiKanzashi', chest: 'none', waist: 'none', shoulder: 'none', body: 'japaneseElegance', pose: 'raiseSleeve', lighting: 'sakuraBacklight', color: 'sakuraIvory', background: 'sakuraGarden', whitespace: 'none', framing: 'fullBody', camera: 'eyeLevel', ratio: 'vertical23' },
-  blackTomesodeGold: { style: 'fashionEditorial', composition: 'gold folding screen and Japanese architectural planes create elegant layered framing around the subject', garment: 'blackTomesode', materials: ['nishijinBrocade', 'goldLeafKimono'], accessory: 'tortoiseshellComb', chest: 'none', waist: 'none', shoulder: 'none', body: 'tallFashion', pose: 'handsAtWaist', lighting: 'goldScreen', color: 'goldScreenBlack', background: 'goldScreenRoom', whitespace: 'right', framing: 'threeQuarter', camera: 'eyeLevel', ratio: 'vertical45' },
-  whiteShiromukuSnow: { style: 'classicalPortrait', composition: 'symmetrical composition with shoji panels, garden lines and balanced ceremonial order', garment: 'whiteShiromuku', materials: ['plainSilk', 'cranePattern'], accessory: 'kanzashi', chest: 'none', waist: 'none', shoulder: 'none', body: 'original', pose: 'formalKneel', lighting: 'mistGarden', color: 'plumSnow', background: 'snowJapaneseGarden', whitespace: 'balanced', framing: 'threeQuarter', camera: 'beautyPortrait', ratio: 'vertical34' },
-  colorUchikakeGarden: { style: 'courtLuxury', composition: 'flowing kimono sleeves and fabric edges create a soft foreground frame while the face remains unobstructed', garment: 'colorUchikake', materials: ['nishijinBrocade', 'goldLeafKimono'], accessory: 'pearlComb', chest: 'none', waist: 'none', shoulder: 'none', body: 'curvy', pose: 'flowerBranch', lighting: 'lanternWarm', color: 'goldCrimson', background: 'pondGarden', whitespace: 'none', framing: 'threeQuarter', camera: 'lowAngle', ratio: 'vertical45' },
-  summerYukataFireworks: { style: 'culturePortrait', composition: 'full environmental portrait integrated into a machiya, garden or traditional Japanese interior with clear spatial layers', garment: 'summerYukata', materials: ['chirimenCrepe', 'asanohaPattern'], accessory: 'roundFan', chest: 'none', waist: 'none', shoulder: 'none', body: 'original', pose: 'fanPortrait', lighting: 'lanternWarm', color: 'indigoIvory', background: 'lanternStreet', whitespace: 'left', framing: 'threeQuarter', camera: 'eyeLevel', ratio: 'vertical45' },
-  komonMachiya: { style: 'classicalPortrait', composition: 'kimono detail-focused composition with collar overlap, obi construction, textile texture and refined craftsmanship as priorities', garment: 'everydayKomon', materials: ['rinzuSilk', 'maplePattern'], accessory: 'obiJime', chest: 'none', waist: 'none', shoulder: 'none', body: 'slightWaist', pose: 'teaCup', lighting: 'shojiProjection', color: 'mossCream', background: 'machiyaInterior', whitespace: 'right', framing: 'halfBody', camera: 'beautyPortrait', ratio: 'vertical34' },
-  womensHakamaAutumn: { style: 'inkFineArt', composition: 'composition with the kimono hem, obi ribbon and layered fabric creating a graceful lower-frame rhythm', garment: 'womensHakama', materials: ['shiboriTexture', 'maplePattern'], accessory: 'pearlComb', chest: 'none', waist: 'none', shoulder: 'none', body: 'japaneseElegance', pose: 'courtyardWalk', lighting: 'bambooFiltered', color: 'vermilionInk', background: 'autumnMapleGarden', whitespace: 'paper', framing: 'fullBody', camera: 'threeQuarterSide', ratio: 'vertical23' },
-  taishoRomanCover: { style: 'fashionEditorial', composition: 'asymmetrical Japanese editorial composition with the subject placed to one side and clean surrounding space', garment: 'taishoRoman', materials: ['yuzenDye', 'asanohaPattern'], accessory: 'pearlComb', chest: 'none', waist: 'none', shoulder: 'none', body: 'tallFashion', pose: 'sideLongLine', lighting: 'japaneseSideLight', color: 'smokeRose', background: 'modernJapaneseStudio', whitespace: 'left', framing: 'threeQuarter', camera: 'sideProfile', ratio: 'vertical45' },
-  modernKimonoStudio: { style: 'modernCouture', composition: 'kimono silhouette and sleeve movement remain visually prominent within the surrounding Japanese classical space', garment: 'modernKimono', materials: ['rinzuSilk', 'seigaihaPattern'], accessory: 'obiJime', chest: 'deepV', waist: 'wrapSideSlit', shoulder: 'singleShoulder', body: 'japaneseElegance', pose: 'sideLongLine', lighting: 'kimonoStudio', color: 'indigoMuted', background: 'modernJapaneseStudio', whitespace: 'right', framing: 'threeQuarter', camera: 'eyeLevel', ratio: 'vertical45' },
-  kimonoHauteCouture: { style: 'modernCouture', composition: 'kimono detail-focused composition with collar overlap, obi construction, textile texture and refined craftsmanship as priorities', garment: 'kimonoHauteCouture', materials: ['nishijinBrocade', 'lightObiGauze'], accessory: 'kanzashi', chest: 'waistDeepV', waist: 'openSkirtPanel', shoulder: 'halter', body: 'tallFashion', pose: 'sleeveHold', lighting: 'kimonoStudio', color: 'goldScreenBlack', background: 'plainJapaneseStudio', whitespace: 'right', framing: 'halfBody', camera: 'threeQuarterSide', ratio: 'vertical45' }
+  heianCourt: { style: 'courtLuxury', composition: 'centered formal portrait composition with balanced Japanese architectural framing', garment: 'heianJunihitoe', materials: ['plainSilk', 'chrysanthemumPattern'], accessory: 'kanzashi', chest: 'none', waist: 'none', shoulder: 'none', body: 'original', pose: 'naturalStanding', lighting: 'shojiSoft', color: 'sakuraIvory', background: 'machiyaInterior', framing: 'threeQuarter', camera: 'eyeLevel', ratio: 'vertical34' },
+  heianKouchigi: { style: 'culturePortrait', composition: 'engawa and shoji framing around the subject with layered foreground and background depth', garment: 'heianKouchigi', materials: ['rinzuSilk', 'plumPattern'], accessory: 'tsumamiKanzashi', chest: 'none', waist: 'none', shoulder: 'none', body: 'slightWaist', pose: 'windowTurn', lighting: 'morningGarden', color: 'smokeRose', background: 'engawaGarden', framing: 'halfBody', camera: 'threeQuarterSide', ratio: 'vertical45' },
+  edoFurisodeSakura: { style: 'fashionEditorial', composition: 'wide composition with long kimono sleeves opening outward and the layered garment construction clearly visible', garment: 'edoFurisode', materials: ['yuzenDye', 'sakuraPattern'], accessory: 'tsumamiKanzashi', chest: 'none', waist: 'none', shoulder: 'none', body: 'japaneseElegance', pose: 'raiseSleeve', lighting: 'sakuraBacklight', color: 'sakuraIvory', background: 'sakuraGarden', framing: 'fullBody', camera: 'eyeLevel', ratio: 'vertical23' },
+  blackTomesodeGold: { style: 'fashionEditorial', composition: 'gold folding screen and Japanese architectural planes create elegant layered framing around the subject', garment: 'blackTomesode', materials: ['nishijinBrocade', 'goldLeafKimono'], accessory: 'tortoiseshellComb', chest: 'none', waist: 'none', shoulder: 'none', body: 'tallFashion', pose: 'handsAtWaist', lighting: 'goldScreen', color: 'goldScreenBlack', background: 'goldScreenRoom', framing: 'threeQuarter', camera: 'eyeLevel', ratio: 'vertical45' },
+  whiteShiromukuSnow: { style: 'classicalPortrait', composition: 'symmetrical composition with shoji panels, garden lines and balanced ceremonial order', garment: 'whiteShiromuku', materials: ['plainSilk', 'cranePattern'], accessory: 'kanzashi', chest: 'none', waist: 'none', shoulder: 'none', body: 'original', pose: 'formalKneel', lighting: 'mistGarden', color: 'plumSnow', background: 'snowJapaneseGarden', framing: 'threeQuarter', camera: 'beautyPortrait', ratio: 'vertical34' },
+  colorUchikakeGarden: { style: 'courtLuxury', composition: 'flowing kimono sleeves and fabric edges create a soft foreground frame while the face remains unobstructed', garment: 'colorUchikake', materials: ['nishijinBrocade', 'goldLeafKimono'], accessory: 'pearlComb', chest: 'none', waist: 'none', shoulder: 'none', body: 'curvy', pose: 'flowerBranch', lighting: 'lanternWarm', color: 'goldCrimson', background: 'pondGarden', framing: 'threeQuarter', camera: 'lowAngle', ratio: 'vertical45' },
+  summerYukataFireworks: { style: 'culturePortrait', composition: 'full environmental portrait integrated into a machiya, garden or traditional Japanese interior with clear spatial layers', garment: 'summerYukata', materials: ['chirimenCrepe', 'asanohaPattern'], accessory: 'roundFan', chest: 'none', waist: 'none', shoulder: 'none', body: 'original', pose: 'fanPortrait', lighting: 'lanternWarm', color: 'indigoIvory', background: 'lanternStreet', framing: 'threeQuarter', camera: 'eyeLevel', ratio: 'vertical45' },
+  komonMachiya: { style: 'classicalPortrait', composition: 'kimono detail-focused composition with collar overlap, obi construction, textile texture and refined craftsmanship as priorities', garment: 'everydayKomon', materials: ['rinzuSilk', 'maplePattern'], accessory: 'obiJime', chest: 'none', waist: 'none', shoulder: 'none', body: 'slightWaist', pose: 'teaCup', lighting: 'shojiProjection', color: 'mossCream', background: 'machiyaInterior', framing: 'halfBody', camera: 'beautyPortrait', ratio: 'vertical34' },
+  womensHakamaAutumn: { style: 'inkFineArt', composition: 'composition with the kimono hem, obi ribbon and layered fabric creating a graceful lower-frame rhythm', garment: 'womensHakama', materials: ['shiboriTexture', 'maplePattern'], accessory: 'pearlComb', chest: 'none', waist: 'none', shoulder: 'none', body: 'japaneseElegance', pose: 'courtyardWalk', lighting: 'bambooFiltered', color: 'vermilionInk', background: 'autumnMapleGarden', framing: 'fullBody', camera: 'threeQuarterSide', ratio: 'vertical23' },
+  taishoRomanCover: { style: 'fashionEditorial', composition: 'asymmetrical Japanese editorial composition with the subject placed to one side and clean surrounding space', garment: 'taishoRoman', materials: ['yuzenDye', 'asanohaPattern'], accessory: 'pearlComb', chest: 'none', waist: 'none', shoulder: 'none', body: 'tallFashion', pose: 'sideLongLine', lighting: 'japaneseSideLight', color: 'smokeRose', background: 'modernJapaneseStudio', framing: 'threeQuarter', camera: 'sideProfile', ratio: 'vertical45' },
+  modernKimonoStudio: { style: 'modernCouture', composition: 'kimono silhouette and sleeve movement remain visually prominent within the surrounding Japanese classical space', garment: 'modernKimono', materials: ['rinzuSilk', 'seigaihaPattern'], accessory: 'obiJime', chest: 'deepV', waist: 'wrapSideSlit', shoulder: 'singleShoulder', body: 'japaneseElegance', pose: 'sideLongLine', lighting: 'kimonoStudio', color: 'indigoMuted', background: 'modernJapaneseStudio', framing: 'threeQuarter', camera: 'eyeLevel', ratio: 'vertical45' },
+  kimonoHauteCouture: { style: 'modernCouture', composition: 'kimono detail-focused composition with collar overlap, obi construction, textile texture and refined craftsmanship as priorities', garment: 'kimonoHauteCouture', materials: ['nishijinBrocade', 'lightObiGauze'], accessory: 'kanzashi', chest: 'waistDeepV', waist: 'openSkirtPanel', shoulder: 'halter', body: 'tallFashion', pose: 'sleeveHold', lighting: 'kimonoStudio', color: 'goldScreenBlack', background: 'plainJapaneseStudio', framing: 'halfBody', camera: 'threeQuarterSide', ratio: 'vertical45' }
 };
 
 function selected(name){
@@ -653,7 +632,6 @@ function applyThemeTemplate(key){
   setRadioValue('lighting', preset.lighting);
   setRadioValue('colorPalette', preset.color);
   setRadioValue('background', preset.background);
-  setRadioValue('whitespace', preset.whitespace);
   setRadioValue('framing', preset.framing);
   setRadioValue('camera', preset.camera);
   setRadioValue('ratio', preset.ratio);
@@ -662,7 +640,7 @@ function applyThemeTemplate(key){
   generate({ reveal: true });
 }
 function applyClassicalRandomSelection(){
-  ['style','composition','garment','accessory','garmentChestVariation','garmentWaistVariation','garmentShoulderVariation','bodyShape','pose','lighting','colorPalette','background','whitespace','framing','camera','ratio'].forEach(name => setRadioValue(name, getRandomItem(getAllRadioValues(name))));
+  ['style','composition','garment','accessory','garmentChestVariation','garmentWaistVariation','garmentShoulderVariation','bodyShape','pose','lighting','colorPalette','background','framing','camera','ratio'].forEach(name => setRadioValue(name, getRandomItem(getAllRadioValues(name))));
   const materialValues = shuffle(getAllRadioValues('materials'));
   setCheckboxValues('materials', materialValues.slice(0, Math.random() < .5 ? 1 : 2));
   document.getElementById('intensity').value = getRandomItem(getAllSelectValues('intensity'));
@@ -693,7 +671,6 @@ function generate(options){
   ].filter(Boolean);
   const customBackground = document.getElementById('customBackground').value.trim();
   const background = customBackground ? 'custom background only: ' + customBackground + '; keep the Japanese kimono visual language' : backgroundData[selected('background')];
-  const whitespace = whitespaceData[selected('whitespace')];
   const customPose = document.getElementById('customPose').value.trim();
   const poseText = customPose ? 'custom pose only: ' + customPose + '; keep natural human anatomy and a coherent moment' : poseData[selected('pose')];
   const colorNote = document.getElementById('colorNote').value.trim();
@@ -720,7 +697,6 @@ function generate(options){
     'lighting design: ' + lightingData[selected('lighting')] + ',',
     'color palette: ' + (colorNote || colorPaletteData[selected('colorPalette')] || materialPalette) + ',',
     'background design: ' + background + ',',
-    'whitespace direction: ' + whitespace + ',',
     ratioData[selected('ratio')] + ',',
     sharedClassicalCore.output + ',',
     document.getElementById('intensity').value + ',',

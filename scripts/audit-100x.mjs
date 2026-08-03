@@ -312,7 +312,7 @@ const core = evalCore(coreSource);
     source: html, core, page: 'chineseClassical',
     startMarker: 'const materialData = {',
     endMarker: 'function selected',
-    exportExpression: '({ materialData, accessoryData, garmentData, styleData, backgroundData, lightingData, colorPaletteData, whitespaceData, sharedClassicalCore, identityGuard: sharedClassicalCore.identityGuard, anatomyGuard: sharedClassicalCore.anatomyGuard, poseNaturalityGuard: sharedClassicalCore.poseGuard, BODY_SHAPES, GARMENT_VARIATIONS, compositionGuard: sharedClassicalCore.compositionGuard, lightingConsistencyGuard: sharedClassicalCore.lightingGuard, poseData, framingData, cameraData, ratioData })',
+    exportExpression: '({ materialData, accessoryData, garmentData, styleData, backgroundData, lightingData, colorPaletteData, sharedClassicalCore, identityGuard: sharedClassicalCore.identityGuard, anatomyGuard: sharedClassicalCore.anatomyGuard, poseNaturalityGuard: sharedClassicalCore.poseGuard, BODY_SHAPES, GARMENT_VARIATIONS, compositionGuard: sharedClassicalCore.compositionGuard, lightingConsistencyGuard: sharedClassicalCore.lightingGuard, poseData, framingData, cameraData, ratioData })',
   });
   const compositionValues = [...radioValues(html, 'composition')];
   const pools = {
@@ -326,7 +326,6 @@ const core = evalCore(coreSource);
     background: Object.keys(data.backgroundData),
     lighting: Object.keys(data.lightingData),
     color: Object.keys(data.colorPaletteData),
-    whitespace: Object.keys(data.whitespaceData),
     composition: compositionValues,
     framing: Object.keys(data.framingData),
     pose: Object.keys(data.poseData),
@@ -347,7 +346,6 @@ const core = evalCore(coreSource);
       background: pick(pools.background),
       lighting: pick(pools.lighting),
       color: pick(pools.color),
-      whitespace: pick(pools.whitespace),
       composition: pick(pools.composition),
       framing: pick(pools.framing),
       pose: pick(pools.pose),
@@ -386,7 +384,6 @@ const core = evalCore(coreSource);
       'lighting design: ' + data.lightingData[sel.lighting] + ',',
       'color palette: ' + (data.colorPaletteData[sel.color] || materialPalette) + ',',
       'background design: ' + data.backgroundData[sel.background] + ',',
-      'whitespace direction: ' + data.whitespaceData[sel.whitespace] + ',',
       data.ratioData[sel.ratio] + ',',
       data.sharedClassicalCore.output + ',',
       'balanced traditional details, refined and luxurious,',
@@ -408,21 +405,21 @@ function auditClassicalCulturePage({ file, pageKey, label, cultureLine, material
     source: html, core, page: pageKey,
     startMarker: 'const materialData = {',
     endMarker: 'function selected',
-    exportExpression: '({ materialData, accessoryData, garmentData, styleData, backgroundData, lightingData, colorPaletteData, whitespaceData, sharedClassicalCore, identityGuard: sharedClassicalCore.identityGuard, anatomyGuard: sharedClassicalCore.anatomyGuard, poseNaturalityGuard: sharedClassicalCore.poseGuard, BODY_SHAPES, GARMENT_VARIATIONS, compositionGuard: sharedClassicalCore.compositionGuard, lightingConsistencyGuard: sharedClassicalCore.lightingGuard, poseData, framingData, cameraData, ratioData })',
+    exportExpression: '({ materialData, accessoryData, garmentData, styleData, backgroundData, lightingData, colorPaletteData, sharedClassicalCore, identityGuard: sharedClassicalCore.identityGuard, anatomyGuard: sharedClassicalCore.anatomyGuard, poseNaturalityGuard: sharedClassicalCore.poseGuard, BODY_SHAPES, GARMENT_VARIATIONS, compositionGuard: sharedClassicalCore.compositionGuard, lightingConsistencyGuard: sharedClassicalCore.lightingGuard, poseData, framingData, cameraData, ratioData })',
   });
   const compositionValues = [...radioValues(html, 'composition')];
   const pools = {
     bodyShape: Object.keys(data.BODY_SHAPES), material: Object.keys(data.materialData), accessory: Object.keys(data.accessoryData),
     garment: Object.keys(data.garmentData), chest: Object.keys(data.GARMENT_VARIATIONS.chest), waist: Object.keys(data.GARMENT_VARIATIONS.waist),
     shoulder: Object.keys(data.GARMENT_VARIATIONS.shoulder), background: Object.keys(data.backgroundData), lighting: Object.keys(data.lightingData),
-    color: Object.keys(data.colorPaletteData), whitespace: Object.keys(data.whitespaceData), composition: compositionValues,
+    color: Object.keys(data.colorPaletteData), composition: compositionValues,
     framing: Object.keys(data.framingData), pose: Object.keys(data.poseData), style: Object.keys(data.styleData), camera: Object.keys(data.cameraData), ratio: Object.keys(data.ratioData),
   };
   for (let i = 0; i < N; i += 1) {
     const sel = {
       bodyShape: pick(pools.bodyShape), material: pick(pools.material), material2: pick(pools.material), accessory: pick(pools.accessory), garment: pick(pools.garment),
       chest: pick(pools.chest), waist: pick(pools.waist), shoulder: pick(pools.shoulder), background: pick(pools.background), lighting: pick(pools.lighting),
-      color: pick(pools.color), whitespace: pick(pools.whitespace), composition: pick(pools.composition), framing: pick(pools.framing), pose: pick(pools.pose),
+      color: pick(pools.color), composition: pick(pools.composition), framing: pick(pools.framing), pose: pick(pools.pose),
       style: pick(pools.style), camera: pick(pools.camera), ratio: pick(pools.ratio),
     };
     const materialKeys = sel.material2 === sel.material ? [sel.material] : [sel.material, sel.material2];
@@ -439,7 +436,7 @@ function auditClassicalCulturePage({ file, pageKey, label, cultureLine, material
       variationParts.length ? 'garment variation details: ' + variationParts.join('; ') + ', ' + preserveLine + ',' : '',
       data.poseData[sel.pose] + ',', data.framingData[sel.framing] + ',', data.cameraData[sel.camera] + ',', 'lighting design: ' + data.lightingData[sel.lighting] + ',',
       'color palette: ' + (data.colorPaletteData[sel.color] || materialPalette) + ',', 'background design: ' + data.backgroundData[sel.background] + ',',
-      'whitespace direction: ' + data.whitespaceData[sel.whitespace] + ',', data.ratioData[sel.ratio] + ',', data.sharedClassicalCore.output + ',',
+      data.ratioData[sel.ratio] + ',', data.sharedClassicalCore.output + ',',
       'balanced traditional details, refined and luxurious,', data.sharedClassicalCore.negativePrompt + ',', 'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face',
     ].filter(Boolean).join('\n');
     checkOutput(label, i, sel, output, { requireIdentity: true, identityMarkers: ['身份鎖定系統'] });

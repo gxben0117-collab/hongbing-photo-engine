@@ -274,7 +274,6 @@ function generateChineseClassical(core, data) {
     lighting: 'paperWindowSoft',
     color: 'smokeBlue',
     composition: 'asymmetrical composition with the subject placed to one side, balanced visual weight and clean surrounding space',
-    whitespace: 'left',
     framing: 'threeQuarter',
     pose: 'sleeveHold',
     style: 'modernCouture',
@@ -312,7 +311,6 @@ function generateChineseClassical(core, data) {
     'lighting design: ' + data.lightingData[selection.lighting] + ',',
     'color palette: ' + data.colorPaletteData[selection.color] + ',',
     'background design: ' + data.backgroundData[selection.background] + ',',
-    'whitespace direction: ' + data.whitespaceData[selection.whitespace] + ',',
     data.ratioData[selection.ratio] + ',',
     data.sharedClassicalCore.output + ',',
     'balanced traditional details, refined and luxurious,',
@@ -353,7 +351,6 @@ function generateCulturalClassical(core, data, config) {
     'lighting design: ' + data.lightingData[selection.lighting] + ',',
     'color palette: ' + data.colorPaletteData[selection.color] + ',',
     'background design: ' + data.backgroundData[selection.background] + ',',
-    'whitespace direction: ' + data.whitespaceData[selection.whitespace] + ',',
     data.ratioData[selection.ratio] + ',',
     pageCore.output + ',',
     'balanced traditional details, refined and luxurious,',
@@ -1120,7 +1117,7 @@ function loadRevision(label, sourceReader) {
       page: 'chineseClassical',
       startMarker: 'const materialData = {',
       endMarker: 'function selected',
-      exportExpression: '({ materialData, accessoryData, garmentData, styleData, backgroundData, lightingData, colorPaletteData, whitespaceData, sharedClassicalCore, BODY_SHAPES, GARMENT_VARIATIONS, poseData, framingData, cameraData, ratioData })',
+      exportExpression: '({ materialData, accessoryData, garmentData, styleData, backgroundData, lightingData, colorPaletteData, sharedClassicalCore, BODY_SHAPES, GARMENT_VARIATIONS, poseData, framingData, cameraData, ratioData })',
     });
   } catch (err) {
     // New page is absent in older base revisions.
@@ -1134,7 +1131,7 @@ function loadRevision(label, sourceReader) {
       page: 'japaneseKimono',
       startMarker: 'const materialData = {',
       endMarker: 'function selected',
-      exportExpression: '({ materialData, accessoryData, garmentData, styleData, backgroundData, lightingData, colorPaletteData, whitespaceData, sharedClassicalCore, BODY_SHAPES, GARMENT_VARIATIONS, poseData, framingData, cameraData, ratioData })',
+      exportExpression: '({ materialData, accessoryData, garmentData, styleData, backgroundData, lightingData, colorPaletteData, sharedClassicalCore, BODY_SHAPES, GARMENT_VARIATIONS, poseData, framingData, cameraData, ratioData })',
     });
   } catch (err) {
     // New page is absent in older base revisions.
@@ -1148,7 +1145,7 @@ function loadRevision(label, sourceReader) {
       page: 'koreanHanbok',
       startMarker: 'const materialData = {',
       endMarker: 'function selected',
-      exportExpression: '({ materialData, accessoryData, garmentData, styleData, backgroundData, lightingData, colorPaletteData, whitespaceData, sharedClassicalCore, BODY_SHAPES, GARMENT_VARIATIONS, poseData, framingData, cameraData, ratioData })',
+      exportExpression: '({ materialData, accessoryData, garmentData, styleData, backgroundData, lightingData, colorPaletteData, sharedClassicalCore, BODY_SHAPES, GARMENT_VARIATIONS, poseData, framingData, cameraData, ratioData })',
     });
   } catch (err) {
     // New page is absent in older base revisions.
@@ -1179,7 +1176,6 @@ function loadRevision(label, sourceReader) {
         lighting: 'sakuraBacklight',
         color: 'sakuraIvory',
         composition: 'flowing kimono sleeves and fabric edges create a soft foreground frame while the face remains unobstructed',
-        whitespace: 'left',
         framing: 'threeQuarter',
         pose: 'raiseSleeve',
         style: 'fashionEditorial',
@@ -1207,7 +1203,6 @@ function loadRevision(label, sourceReader) {
         lighting: 'hanbokStudio',
         color: 'smokeBlueRose',
         composition: 'asymmetrical Korean editorial composition with the subject placed to one side and clean surrounding space',
-        whitespace: 'right',
         framing: 'threeQuarter',
         pose: 'sleeveHold',
         style: 'modernCouture',
