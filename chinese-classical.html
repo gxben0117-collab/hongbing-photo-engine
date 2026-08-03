@@ -80,7 +80,7 @@
       <button class="card" type="button" data-template="songScholarStudy"><div class="name">宋韻書齋清雅</div><div class="desc">褙子線條、書齋窗影、文人氣質</div></button>
       <button class="card" type="button" data-template="songJiangnanInk"><div class="name">宋韻江南水墨</div><div class="desc">淡雅配色、白牆黑瓦、柔和留白</div></button>
       <button class="card" type="button" data-template="songModernMinimal"><div class="name">宋韻新式極簡</div><div class="desc">宋韻留白、現代比例、極簡高級</div></button>
-      <button class="card" type="button" data-template="songModernStudio"><div class="name">宋韻改良精品棚拍</div><div class="desc">現代褙子、絲麻質感、精品棚拍</div></button>
+      <button class="card" type="button" data-template="songModernStudio"><div class="name">新式古風精品禮服</div><div class="desc">古典元素、現代剪裁、精品棚拍</div></button>
     </div>
   </section>
 
@@ -117,13 +117,32 @@
 
   <section class="section-garment">
     <div class="section-header"><div class="section-label">03</div><div class="section-title">服裝主題</div></div>
+    <div class="group-title">漢風</div>
     <div class="grid grid-3" data-choice="garment">
       <label class="card selected"><input type="radio" name="garment" value="hanClassical" checked><div class="name">漢風古雅</div><div class="desc">交領右衽、層疊衣襟、寬袖、樸雅莊重</div></label>
       <label class="card"><input type="radio" name="garment" value="hanModern"><div class="name">漢風新式改良</div><div class="desc">漢風交領邏輯與現代高訂收腰</div></label>
+      <label class="card"><input type="radio" name="garment" value="hanStraightRobe"><div class="name">漢風直裾深衣</div><div class="desc">直線衣襟、長袍垂墜、端正古雅</div></label>
+      <label class="card"><input type="radio" name="garment" value="hanCurvedWrap"><div class="name">漢風曲裾繞襟</div><div class="desc">繞襟層疊、曲線衣襬、寬袖流動</div></label>
+    </div>
+    <div class="group-title">盛唐</div>
+    <div class="grid grid-3" data-choice="garment">
       <label class="card"><input type="radio" name="garment" value="tangClassical"><div class="name">盛唐華裳</div><div class="desc">高腰、大袖、金線、雍容華麗</div></label>
       <label class="card"><input type="radio" name="garment" value="tangModern"><div class="name">盛唐新式改良</div><div class="desc">唐風高腰輪廓與現代禮服剪裁</div></label>
+      <label class="card"><input type="radio" name="garment" value="tangChestHighSkirt"><div class="name">盛唐齊胸襦裙</div><div class="desc">齊胸高腰、短襦、長裙、大袖</div></label>
+      <label class="card"><input type="radio" name="garment" value="tangLapelRobe"><div class="name">盛唐翻領胡服</div><div class="desc">翻領、腰帶、俐落長袍與唐風氣場</div></label>
+    </div>
+    <div class="group-title">宋韻</div>
+    <div class="grid grid-3" data-choice="garment">
       <label class="card"><input type="radio" name="garment" value="songClassical"><div class="name">宋韻清雅</div><div class="desc">褙子、窄袖、直線層次、淡雅留白</div></label>
       <label class="card"><input type="radio" name="garment" value="songModern"><div class="name">宋韻新式改良</div><div class="desc">宋韻極簡與現代精品比例</div></label>
+      <label class="card"><input type="radio" name="garment" value="songOpenFrontBeizi"><div class="name">宋韻對襟褙子</div><div class="desc">對襟長衫、直線層次、文人清雅</div></label>
+      <label class="card"><input type="radio" name="garment" value="songShortTopLongSkirt"><div class="name">宋韻短衫長裙</div><div class="desc">短衫、長裙、窄袖與柔和比例</div></label>
+    </div>
+    <div class="group-title">新式古風</div>
+    <div class="grid grid-3" data-choice="garment">
+      <label class="card"><input type="radio" name="garment" value="ancientPhotoCouture"><div class="name">古風寫真華服</div><div class="desc">精緻層疊、飄帶、唯美上鏡</div></label>
+      <label class="card"><input type="radio" name="garment" value="ancientSocialCouture"><div class="name">網紅古風華服</div><div class="desc">修身輪廓、飄帶層次、短影音風格</div></label>
+      <label class="card"><input type="radio" name="garment" value="ancientFormalGown"><div class="name">新式古風禮服</div><div class="desc">古典元素、現代剪裁、精品禮服感</div></label>
     </div>
   </section>
 
@@ -396,10 +415,19 @@ const accessoryData = {
 const garmentData = {
   hanClassical: 'Han-inspired cross-collar layered robes, right-over-left closure, wide flowing sleeves, restrained silk textures, dignified classical proportions, subtle woven details',
   hanModern: 'Han-inspired cross-collar construction, modern layered wrap tailoring, refined fitted waist, wide flowing sleeves, premium silk textiles, contemporary Chinese couture styling',
+  hanStraightRobe: 'Han-inspired straight-hem deep robe, structured cross-collar construction, long clean vertical silhouette, layered inner robe, restrained silk drape, historically grounded Chinese classical styling',
+  hanCurvedWrap: 'Han-inspired curved wrap-front deep robe, layered overlapping closure, curved hem structure, wide sleeves, elegant silk drape, refined early Chinese garment silhouette',
   tangClassical: 'Tang-inspired high-waisted robe ensemble, wide elegant sleeves, rich layered silk textures, ornate gold embroidery, graceful flowing silhouette, majestic courtly elegance',
   tangModern: 'Tang-inspired high-waisted silhouette, modern formal gown construction, sculpted couture bodice, flowing wide sleeves, luxurious silk and gold embroidery, high-fashion Chinese editorial styling',
+  tangChestHighSkirt: 'Tang-inspired chest-high ruqun ensemble, high-waisted long skirt, short fitted upper garment, broad flowing sleeves, rich silk drape, graceful feminine courtly silhouette',
+  tangLapelRobe: 'Tang-inspired front-lapel long robe, structured lapel collar, refined waist sash, elegant long sleeves, luxurious silk fabric, poised Chinese fashion editorial styling',
   songClassical: 'Song-inspired layered garments, refined beizi-style silhouette, clean restrained lines, delicate silk and linen fabrics, soft understated palette, scholarly Chinese elegance',
-  songModern: 'Song-inspired minimalist silhouette, modern beizi-inspired tailoring, clean contemporary proportions, delicate silk and linen textiles, restrained luxury styling, minimal Chinese couture aesthetic'
+  songModern: 'Song-inspired minimalist silhouette, modern beizi-inspired tailoring, clean contemporary proportions, delicate silk and linen textiles, restrained luxury styling, minimal Chinese couture aesthetic',
+  songOpenFrontBeizi: 'Song-inspired front-opening beizi-style long robe, symmetrical front panels, straight relaxed lines, narrow sleeves, quiet silk and linen textures, scholarly elegance',
+  songShortTopLongSkirt: 'Song-inspired short upper garment with a long flowing skirt, clean layered proportions, narrow sleeves, restrained silk and linen textiles, elegant feminine Song-style silhouette',
+  ancientPhotoCouture: 'Chinese-inspired high-end portrait costume, layered gauze and silk, refined decorative details, flowing ribbons, camera-friendly silhouette, cinematic classical beauty editorial styling',
+  ancientSocialCouture: 'trend-driven social-media Chinese costume styling, camera-ready fitted garment silhouette, flowing ribbon layers, polished short-form fashion visual language, refined Chinese beauty editorial styling, clothing styling only',
+  ancientFormalGown: 'modern Chinese-inspired formal gown, structured couture tailoring, elegant traditional collar details, restrained embroidery, refined eveningwear silhouette, luxury fashion editorial styling'
 };
 
 const styleData = {
@@ -555,17 +583,17 @@ const sharedClassicalCore = window.HB_CORE_PROMPT?.page?.chineseClassical || {};
 
 const themeTemplates = {
   hanCourtyard: { style: 'classicalPortrait', composition: 'centered classical portrait composition, subject placed in the center with balanced Chinese architectural framing', garment: 'hanClassical', materials: ['plainSilk'], accessory: 'none', chest: 'none', waist: 'none', shoulder: 'none', body: 'original', pose: 'naturalStanding', lighting: 'morningCourtyard', color: 'ivoryTea', background: 'hanCourtyard', whitespace: 'none', framing: 'threeQuarter', camera: 'eyeLevel', ratio: 'vertical34' },
-  hanBambooPortrait: { style: 'culturePortrait', composition: 'wooden lattice window framing around the subject, layered foreground and background depth, intimate Chinese portrait composition', garment: 'hanClassical', materials: ['ramieLinen', 'plumOrchidBamboo'], accessory: 'woodHairpin', chest: 'none', waist: 'none', shoulder: 'none', body: 'slightWaist', pose: 'windowTurn', lighting: 'bambooShadow', color: 'bambooGray', background: 'bambooCourtyard', whitespace: 'balanced', framing: 'halfBody', camera: 'threeQuarterSide', ratio: 'vertical45' },
+  hanBambooPortrait: { style: 'culturePortrait', composition: 'wooden lattice window framing around the subject, layered foreground and background depth, intimate Chinese portrait composition', garment: 'hanCurvedWrap', materials: ['ramieLinen', 'plumOrchidBamboo'], accessory: 'woodHairpin', chest: 'none', waist: 'none', shoulder: 'none', body: 'slightWaist', pose: 'windowTurn', lighting: 'bambooShadow', color: 'bambooGray', background: 'bambooCourtyard', whitespace: 'balanced', framing: 'halfBody', camera: 'threeQuarterSide', ratio: 'vertical45' },
   hanModernCouture: { style: 'modernCouture', composition: 'asymmetrical composition with the subject placed to one side, balanced visual weight and clean surrounding space', garment: 'hanModern', materials: ['wovenBrocade', 'windowLatticePattern'], accessory: 'jadePendant', chest: 'crossCollarDeepV', waist: 'none', shoulder: 'singleShoulder', body: 'tallFashion', pose: 'sideLongLine', lighting: 'modernStudio', color: 'daiJade', background: 'modernChineseStudio', whitespace: 'right', framing: 'threeQuarter', camera: 'eyeLevel', ratio: 'vertical45' },
   hanWindowEditorial: { style: 'fashionEditorial', composition: 'wooden lattice window framing around the subject, layered foreground and background depth, intimate Chinese portrait composition', garment: 'hanModern', materials: ['lightGauze', 'calligraphySeal'], accessory: 'pearlHairOrnament', chest: 'crossWrapDeepV', waist: 'wrapSideSlit', shoulder: 'none', body: 'slightWaist', pose: 'sleeveHold', lighting: 'floralWindowProjection', color: 'smokeBlue', background: 'latticeRoom', whitespace: 'left', framing: 'threeQuarter', camera: 'sideProfile', ratio: 'vertical34' },
   tangPalaceGown: { style: 'courtLuxury', composition: 'symmetrical classical composition with balanced windows, courtyard lines and ceremonial visual order', garment: 'tangClassical', materials: ['goldEmbroidery', 'peonyPattern'], accessory: 'goldHairpin', chest: 'none', waist: 'none', shoulder: 'none', body: 'tallFashion', pose: 'naturalStanding', lighting: 'tangGold', color: 'rougeGold', background: 'tangPalace', whitespace: 'none', framing: 'fullBody', camera: 'eyeLevel', ratio: 'vertical23' },
-  tangGoldPeony: { style: 'courtLuxury', composition: 'flowing sleeves and fabric edges create a soft foreground frame while the face remains clearly unobstructed', garment: 'tangClassical', materials: ['goldEmbroidery', 'lotusVinePattern'], accessory: 'pearlHairOrnament', chest: 'deepV', waist: 'none', shoulder: 'none', body: 'curvy', pose: 'flowerBranch', lighting: 'warmLantern', color: 'rougeGold', background: 'redLacquerHall', whitespace: 'balanced', framing: 'threeQuarter', camera: 'lowAngle', ratio: 'vertical45' },
+  tangGoldPeony: { style: 'courtLuxury', composition: 'flowing sleeves and fabric edges create a soft foreground frame while the face remains clearly unobstructed', garment: 'tangChestHighSkirt', materials: ['goldEmbroidery', 'lotusVinePattern'], accessory: 'pearlHairOrnament', chest: 'deepV', waist: 'none', shoulder: 'none', body: 'curvy', pose: 'flowerBranch', lighting: 'warmLantern', color: 'rougeGold', background: 'redLacquerHall', whitespace: 'balanced', framing: 'threeQuarter', camera: 'lowAngle', ratio: 'vertical45' },
   tangModernGown: { style: 'modernCouture', composition: 'garment silhouette and sleeve movement remain visually prominent within the surrounding classical space', garment: 'tangModern', materials: ['wovenBrocade', 'darkPatternJacquard'], accessory: 'wovenWaistSash', chest: 'crossCollarDeepV', waist: 'highSideSlit', shoulder: 'singleShoulder', body: 'tallFashion', pose: 'courtyardWalk', lighting: 'modernStudio', color: 'cinnabarInk', background: 'modernChineseStudio', whitespace: 'right', framing: 'fullBody', camera: 'threeQuarterSide', ratio: 'vertical23' },
-  tangModernCover: { style: 'fashionEditorial', composition: 'asymmetrical composition with the subject placed to one side, balanced visual weight and clean surrounding space', garment: 'tangModern', materials: ['lightGauze', 'ruyiPattern'], accessory: 'goldHairpin', chest: 'waistDeepV', waist: 'openSkirtPanel', shoulder: 'offShoulder', body: 'kpopIdol', pose: 'waterSleeve', lighting: 'tangGold', color: 'cinnabarInk', background: 'tangPalace', whitespace: 'left', framing: 'threeQuarter', camera: 'lowAngle', ratio: 'vertical45' },
-  songScholarStudy: { style: 'classicalPortrait', composition: 'garment detail-focused composition with collar construction, textile texture and refined craftsmanship as visual priorities', garment: 'songClassical', materials: ['ramieLinen', 'calligraphySeal'], accessory: 'woodHairpin', chest: 'none', waist: 'none', shoulder: 'none', body: 'original', pose: 'scrollSeated', lighting: 'paperWindowSoft', color: 'ivoryTea', background: 'songStudy', whitespace: 'right', framing: 'halfBody', camera: 'beautyPortrait', ratio: 'vertical34' },
-  songJiangnanInk: { style: 'inkFineArt', composition: 'full environmental portrait with subject integrated into a Chinese courtyard, study or waterside garden with clear spatial layers', garment: 'songClassical', materials: ['inkLandscapePattern', 'blueWhitePorcelain'], accessory: 'none', chest: 'none', waist: 'none', shoulder: 'none', body: 'slightWaist', pose: 'railingGaze', lighting: 'inkMist', color: 'inkMuted', background: 'jiangnanWater', whitespace: 'paper', framing: 'environment', camera: 'highAngle', ratio: 'landscape169' },
+  tangModernCover: { style: 'fashionEditorial', composition: 'asymmetrical composition with the subject placed to one side, balanced visual weight and clean surrounding space', garment: 'tangLapelRobe', materials: ['lightGauze', 'ruyiPattern'], accessory: 'goldHairpin', chest: 'waistDeepV', waist: 'openSkirtPanel', shoulder: 'offShoulder', body: 'kpopIdol', pose: 'waterSleeve', lighting: 'tangGold', color: 'cinnabarInk', background: 'tangPalace', whitespace: 'left', framing: 'threeQuarter', camera: 'lowAngle', ratio: 'vertical45' },
+  songScholarStudy: { style: 'classicalPortrait', composition: 'garment detail-focused composition with collar construction, textile texture and refined craftsmanship as visual priorities', garment: 'songOpenFrontBeizi', materials: ['ramieLinen', 'calligraphySeal'], accessory: 'woodHairpin', chest: 'none', waist: 'none', shoulder: 'none', body: 'original', pose: 'scrollSeated', lighting: 'paperWindowSoft', color: 'ivoryTea', background: 'songStudy', whitespace: 'right', framing: 'halfBody', camera: 'beautyPortrait', ratio: 'vertical34' },
+  songJiangnanInk: { style: 'inkFineArt', composition: 'full environmental portrait with subject integrated into a Chinese courtyard, study or waterside garden with clear spatial layers', garment: 'songShortTopLongSkirt', materials: ['inkLandscapePattern', 'blueWhitePorcelain'], accessory: 'none', chest: 'none', waist: 'none', shoulder: 'none', body: 'slightWaist', pose: 'railingGaze', lighting: 'inkMist', color: 'inkMuted', background: 'jiangnanWater', whitespace: 'paper', framing: 'environment', camera: 'highAngle', ratio: 'landscape169' },
   songModernMinimal: { style: 'fashionEditorial', composition: 'asymmetrical composition with the subject placed to one side, balanced visual weight and clean surrounding space', garment: 'songModern', materials: ['plainSilk', 'kesiTexture'], accessory: 'jadePendant', chest: 'crossWrapDeepV', waist: 'wrapSideSlit', shoulder: 'halter', body: 'tallFashion', pose: 'sideLongLine', lighting: 'modernStudio', color: 'daiJade', background: 'modernChineseStudio', whitespace: 'left', framing: 'threeQuarter', camera: 'sideProfile', ratio: 'vertical45' },
-  songModernStudio: { style: 'modernCouture', composition: 'garment detail-focused composition with collar construction, textile texture and refined craftsmanship as visual priorities', garment: 'songModern', materials: ['plainSilk', 'xiangyunSilk'], accessory: 'pearlHairOrnament', chest: 'deepV', waist: 'none', shoulder: 'singleShoulder', body: 'slightWaist', pose: 'sleeveHold', lighting: 'paperWindowSoft', color: 'porcelainBlue', background: 'latticeRoom', whitespace: 'right', framing: 'halfBody', camera: 'threeQuarterSide', ratio: 'vertical45' }
+  songModernStudio: { style: 'modernCouture', composition: 'garment detail-focused composition with collar construction, textile texture and refined craftsmanship as visual priorities', garment: 'ancientFormalGown', materials: ['plainSilk', 'xiangyunSilk'], accessory: 'pearlHairOrnament', chest: 'deepV', waist: 'none', shoulder: 'singleShoulder', body: 'slightWaist', pose: 'sleeveHold', lighting: 'paperWindowSoft', color: 'porcelainBlue', background: 'latticeRoom', whitespace: 'right', framing: 'halfBody', camera: 'threeQuarterSide', ratio: 'vertical45' }
 };
 
 function selected(name){
