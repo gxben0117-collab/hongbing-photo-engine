@@ -20,7 +20,7 @@
   生成共 1500 組 0 issue；固定提示詞預覽、靜態結構檢查與 `git diff --check` 完成。
 - **發布目標修正**：正式網站只使用 GitHub Pages，入口為
   [https://gxben0117-collab.github.io/hongbing-photo-engine/](https://gxben0117-collab.github.io/hongbing-photo-engine/)。
-  Vercel 不列入正式發布，舊的 Vercel 專案將移除。
+    Vercel 不列入正式發布，舊的 Vercel 專案已移除。
 
 ## 2026-08-03　全工具頁依工作流重排與編輯視覺設計擴充
 
