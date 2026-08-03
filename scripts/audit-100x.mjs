@@ -305,6 +305,93 @@ const core = evalCore(coreSource);
   report('fantasy', N);
 }
 
+// ===================== CHINESE CLASSICAL =====================
+{
+  const html = read('chinese-classical.html');
+  const data = evalDataSegment({
+    source: html, core, page: 'chineseClassical',
+    startMarker: 'const materialData = {',
+    endMarker: 'function selected',
+    exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedClassicalCore, identityGuard: sharedClassicalCore.identityGuard, anatomyGuard: sharedClassicalCore.anatomyGuard, poseNaturalityGuard: sharedClassicalCore.poseGuard, BODY_SHAPES, GARMENT_VARIATIONS, compositionGuard: sharedClassicalCore.compositionGuard, lightingConsistencyGuard: sharedClassicalCore.lightingGuard, poseData, framingData, cameraData, ratioData })',
+  });
+  const compositionValues = [...radioValues(html, 'composition')];
+  const pools = {
+    bodyShape: Object.keys(data.BODY_SHAPES),
+    material: Object.keys(data.materialData),
+    garment: Object.keys(data.garmentData),
+    chest: Object.keys(data.GARMENT_VARIATIONS.chest),
+    waist: Object.keys(data.GARMENT_VARIATIONS.waist),
+    shoulder: Object.keys(data.GARMENT_VARIATIONS.shoulder),
+    background: Object.keys(data.backgroundData),
+    lighting: Object.keys(data.lightingData),
+    composition: compositionValues,
+    framing: Object.keys(data.framingData),
+    pose: Object.keys(data.poseData),
+    style: Object.keys(data.styleData),
+    camera: Object.keys(data.cameraData),
+    ratio: Object.keys(data.ratioData),
+  };
+  for (let i = 0; i < N; i += 1) {
+    const sel = {
+      bodyShape: pick(pools.bodyShape),
+      material: pick(pools.material),
+      material2: pick(pools.material),
+      garment: pick(pools.garment),
+      chest: pick(pools.chest),
+      waist: pick(pools.waist),
+      shoulder: pick(pools.shoulder),
+      background: pick(pools.background),
+      lighting: pick(pools.lighting),
+      composition: pick(pools.composition),
+      framing: pick(pools.framing),
+      pose: pick(pools.pose),
+      style: pick(pools.style),
+      camera: pick(pools.camera),
+      ratio: pick(pools.ratio),
+    };
+    const materialKeys = sel.material2 === sel.material ? [sel.material] : [sel.material, sel.material2];
+    const materialText = materialKeys.map(key => data.materialData[key].prompt).join('; ');
+    const materialPalette = materialKeys.map(key => data.materialData[key].palette).join(', ');
+    const variationParts = [
+      data.GARMENT_VARIATIONS.chest[sel.chest],
+      data.GARMENT_VARIATIONS.waist[sel.waist],
+      data.GARMENT_VARIATIONS.shoulder[sel.shoulder],
+    ].filter(Boolean);
+    const output = [
+      data.identityGuard + ',',
+      'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
+      data.anatomyGuard + ',',
+      data.poseNaturalityGuard + ',',
+      data.BODY_SHAPES[sel.bodyShape] + ',',
+      data.lightingConsistencyGuard + ',',
+      data.styleData[sel.style] + ',',
+      sel.composition + ',',
+      data.compositionGuard + ',',
+      'refined Chinese clothing aesthetics, period-informed Chinese silhouette, elegant fabric drape, traditional Chinese design language,',
+      'appearance form: ' + data.garmentData[sel.garment] + ',',
+      'traditional materials and Chinese elements: ' + materialText + ',',
+      variationParts.length ? 'garment variation details: ' + variationParts.join('; ') + ', preserve the selected period-informed Chinese silhouette,' : '',
+      data.poseData[sel.pose] + ',',
+      data.framingData[sel.framing] + ',',
+      data.cameraData[sel.camera] + ',',
+      'lighting design: ' + data.lightingData[sel.lighting] + ',',
+      'background design: ' + data.backgroundData[sel.background] + ',',
+      data.ratioData[sel.ratio] + ',',
+      data.sharedClassicalCore.output + ',',
+      'balanced traditional details, refined and luxurious,',
+      'color palette: ' + materialPalette + ',',
+      data.sharedClassicalCore.negativePrompt + ',',
+      'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face',
+    ].filter(Boolean).join('\n');
+    checkOutput('chineseClassical', i, sel, output, { requireIdentity: true, identityMarkers: ['身份鎖定系統'] });
+    const positiveOutput = output.split(data.sharedClassicalCore.negativePrompt)[0];
+    if (/(xianxia|cultivator|magical aura|futuristic technology|cyberpunk|mechanical armor|technology interface)/i.test(positiveOutput)) {
+      ISSUES.push({ page: 'chineseClassical', iteration: i, selection: sel, problems: ['正向 Prompt 含禁用幻想語彙'] });
+    }
+  }
+  report('chineseClassical', N);
+}
+
 // ===================== XIANXIA =====================
 {
   const html = read('xianxia.html');
@@ -1178,5 +1265,5 @@ if (ISSUES.length) {
   }
   process.exitCode = 1;
 } else {
-  console.log('\n✅ ALL SIMULATIONS PASS — 全部 100x15（1500 組）隨機模擬皆無 undefined/NaN/[object Object]/null 洩漏、身份鎖定完整、無相鄰重複行、無禁用角色名。');
+  console.log('\n✅ ALL SIMULATIONS PASS — 全部 100x16（1600 組）隨機模擬皆無 undefined/NaN/[object Object]/null 洩漏、身份鎖定完整、無相鄰重複行、無禁用角色名。');
 }

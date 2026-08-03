@@ -8,6 +8,7 @@ import { fileURLToPath } from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const pages = [
   'travel.html', 'magazine.html', 'doll.html', 'fantasy-fashion.html',
+  'chinese-classical.html',
   'xianxia.html', 'anime-character.html', 'flower-fairy.html',
   'isekai-fantasy.html', 'store-ad.html', 'floral-sweet.html',
   'gala-socialite.html', 'kpop-idol.html', 'battle-academy.html',
@@ -29,6 +30,13 @@ const visualOrderContracts = {
     'magazine-media': 12, 'magazine-output': 13,
   },
   'fantasy-fashion.html': {
+    'section-preset': 0, 'section-style': 1, 'section-composition': 2,
+    'section-garment': 3, 'section-material': 4, 'section-garment-variation': 5,
+    'section-body': 6, 'section-pose': 7, 'section-extra': 8,
+    'section-lighting': 9, 'section-background': 10, 'section-camera': 11,
+    'section-ratio': 12, 'section-output': 13,
+  },
+  'chinese-classical.html': {
     'section-preset': 0, 'section-style': 1, 'section-composition': 2,
     'section-garment': 3, 'section-material': 4, 'section-garment-variation': 5,
     'section-body': 6, 'section-pose': 7, 'section-extra': 8,
@@ -214,6 +222,20 @@ function checkChoiceGroups(page, source, groups) {
   }
 }
 
+function checkCheckboxContracts(page, source) {
+  if (page !== 'chinese-classical.html') return;
+  const materialInputs = tags(source, 'input').filter(tag => (
+    (attr(tag, 'type') || '').toLowerCase() === 'checkbox' && attr(tag, 'name') === 'materials'
+  ));
+  if (materialInputs.length < 2) issue(page, 'materials checkbox group is incomplete');
+  if (!source.includes("selectedCheckboxes('materials')")) {
+    issue(page, 'materials checkbox group is not read by generation logic');
+  }
+  if (!/selectedCheckboxes\('materials'\)\.length\s*>\s*2/.test(source)) {
+    issue(page, 'materials checkbox group has no max-two selection guard');
+  }
+}
+
 function checkPresetButtons(page, source) {
   const mappings = [
     ['data-template', 'themeTemplates'],
@@ -254,6 +276,7 @@ for (const page of pages) {
   checkRadioReferences(page, source, groups, inputNames, idSet, selectValues(source));
   checkInitialRadioState(page, groups);
   checkChoiceGroups(page, source, groups);
+  checkCheckboxContracts(page, source);
   checkPresetButtons(page, source);
   checkVisualOrder(page, source);
   console.log(`checked ${page}: ${groups.size} radio groups, ${idSet.size} ids`);

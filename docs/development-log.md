@@ -6,30 +6,31 @@
 每筆記錄盡量只留：**做了什麼 → 為什麼 → 驗證方式**，實作細節（哪一行、哪個函式）
 留在對應的 commit diff 或 `docs/history/` 底下的原始交接文件。
 
-## 2026-08-03　雜誌棚拍新增漢服美學主題
+## 2026-08-03　新增中式古典美學獨立工具頁
 
-- **改動**：`magazine.html` 的 02「主題 / 服裝方向」新增「漢服美學」chip，以及
-  「一鍵套用｜漢服美學古典融合」；既有「新式漢服」保留，仙俠頁不混入本主題。
-- **生成咒語**：新增精簡中國風核心，融合漢風交領、宋韻收斂、盛唐優雅、江南水墨與
-  新中式高訂；同時明確排除 futuristic、cyberpunk、mechanical elements，未改身份鎖定、
-  臉部幾何與最終輸出段落順序。
-- **預設聯動**：選取主題會套用時尚芭莎、書房背景、水袖姿態、側面鏡頭、自然高級妝與
-  自然真實膚質；相關漢服姿態會顯示為推薦搭配。
-- **驗證**：`check-static.mjs`、`check-ui-flows.mjs`、`validate-preset-refs.mjs` 與
-  `git diff --check` 通過。
+- **改動**：新增 chinese-classical.html，以 fantasy-fashion.html 的 UI 與資料組裝結構
+  為範本，建立漢風古雅、漢風新式改良、盛唐華裳、盛唐新式改良、宋韻清雅與
+  宋韻新式改良六組服裝主題。
+- **選項**：新增最多兩項的傳統材質 checkbox、胸口／腰側／肩部服裝變化核心、
+  中國古典姿勢、江南水墨背景與 12 組完整一鍵模板。
+- **核心隔離**：新增 chineseClassical 頁面核心；正向 Prompt 不加入仙俠或科技幻想
+  語彙，江南水墨只作背景與氣氛，未修改既有身份鎖定與臉部幾何核心。
+- **修正**：移除先前誤加在 magazine.html 的漢服美學選項、preset、推薦聯動與
+  Prompt 對照資料，保留原有新式漢服主題。
+- **驗證**：新增頁面接入靜態檢查、UI flow、preset 引用、100 次模擬與固定 Prompt 預覽。
 
 ## 2026-08-03　全專案 UI、生成咒語與一鍵設定回歸檢查
 
-- **改動**：新增 `scripts/check-ui-flows.mjs`，逐頁檢查 15 個正式工具頁的必要控制項、
+- **改動**：新增 `scripts/check-ui-flows.mjs`，逐頁檢查 16 個正式工具頁的必要控制項、
   radio 初始值、helper 與 DOM id 引用、生成／複製／輸出流程，以及旅拍、雜誌、幻想廣告
   與編輯視覺設計的一鍵資料映射；並把旅拍、雜誌、幻想廣告、共同世界觀頁、花仙子與
   戰鬥學院的 CSS 視覺排序列入契約。`validate-preset-refs.mjs` 補上公仔與編輯視覺預設，
   `audit-100x.mjs`／`build-prompt-preview.mjs` 補上編輯視覺的影像處理與印刷質感欄位。
 - **文件整理**：README、AGENTS、CLAUDE、核心邏輯、架構、工程、使用方式與三份頁面流程
-  文件同步到目前 15 頁與實際視覺順序；新增 `docs/qa-ui-and-prompt.md` 作為發布前單一
+  文件同步到目前 16 頁與實際視覺順序；新增 `docs/qa-ui-and-prompt.md` 作為發布前單一
   檢查清單。
-- **驗證**：UI flow contract 15 頁 0 issue；preset 引用 0 issue；15 頁 × 100 組隨機
-  生成共 1500 組 0 issue；固定提示詞預覽、靜態結構檢查與 `git diff --check` 完成。
+- **驗證**：UI flow contract 16 頁 0 issue；preset 引用 0 issue；16 頁 × 100 組隨機
+  生成共 1600 組 0 issue；固定提示詞預覽、靜態結構檢查與 `git diff --check` 完成。
 - **發布目標修正**：正式網站只使用 GitHub Pages，入口為
   [https://gxben0117-collab.github.io/hongbing-photo-engine/](https://gxben0117-collab.github.io/hongbing-photo-engine/)。
     Vercel 不列入正式發布，舊的 Vercel 專案已移除。

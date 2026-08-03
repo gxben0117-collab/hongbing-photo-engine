@@ -193,6 +193,31 @@ They must not change the person's facial structure, identity, age impression or 
     output: CORE_OUTPUT_QUALITY
   };
 
+  const chineseClassicalCore = {
+    identityGuard: [
+      CORE_IDENTITY_LOCK,
+      CORE_FACE_GEOMETRY_LOCK,
+      `Style Scope Rule:
+Traditional Chinese clothing aesthetics and editorial art direction only affect clothing, ornaments, background, lighting, composition, mood and textile surface.
+They must not change the person's facial structure, identity, age impression or recognizable features.`
+    ].join("\n\n"),
+    anatomyGuard: humanCore,
+    illustrationSkeleton: illustrationHumanCore,
+    poseGuard: CORE_POSE_NATURALITY,
+    lightingGuard: CORE_LIGHTING_UNIFICATION,
+    compositionGuard: CORE_COMPOSITION_CONTROL,
+    negativePrompt: [
+      CORE_NEGATIVE_PROMPT,
+      `Chinese classical page scope:
+No xianxia fantasy, no cultivator identity, no magical aura, no spell effects,
+no futuristic technology, no cyberpunk, no sci-fi, no mecha,
+no mechanical armor, no technology interface, no generic Western fantasy costume.
+Keep the positive visual language grounded in traditional Chinese clothing,
+period-informed Chinese silhouettes and refined Chinese editorial photography.`
+    ].join("\n\n"),
+    output: CORE_OUTPUT_QUALITY
+  };
+
   const xianxiaCore = {
     identityGuard: [
       CORE_IDENTITY_LOCK,
@@ -399,6 +424,7 @@ They must not change the person's facial structure, identity, age impression or 
       travel: travelCore,
       magazine: magazineCore,
       fantasy: fantasyCore,
+      chineseClassical: chineseClassicalCore,
       xianxia: xianxiaCore,
       anime: animeCore,
       flowerFairy: flowerFairyCore,

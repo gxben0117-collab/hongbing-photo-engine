@@ -264,6 +264,59 @@ function generateFantasy(core, data) {
   return prompt.filter(Boolean).join('\n');
 }
 
+function generateChineseClassical(core, data) {
+  const selection = {
+    bodyShape: 'original',
+    materialKeys: ['plainSilk', 'calligraphySeal'],
+    garment: 'hanModern',
+    background: 'latticeRoom',
+    lighting: 'paperWindowSoft',
+    composition: 'subject placed to one side with clean negative space for a refined editorial layout',
+    framing: 'threeQuarter',
+    pose: 'sleeveHold',
+    style: 'modernCouture',
+    camera: 'threeQuarterSide',
+    ratio: 'vertical45',
+    chest: 'crossCollarDeepV',
+    waist: 'none',
+    shoulder: 'none',
+  };
+  const materialText = selection.materialKeys.map(key => data.materialData[key].prompt).join('; ');
+  const materialPalette = selection.materialKeys.map(key => data.materialData[key].palette).join(', ');
+  const variationParts = [
+    data.GARMENT_VARIATIONS.chest[selection.chest],
+    data.GARMENT_VARIATIONS.waist[selection.waist],
+    data.GARMENT_VARIATIONS.shoulder[selection.shoulder],
+  ].filter(Boolean);
+  const prompt = [
+    data.sharedClassicalCore.identityGuard + ',',
+    'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
+    data.sharedClassicalCore.anatomyGuard + ',',
+    data.sharedClassicalCore.poseGuard + ',',
+    data.BODY_SHAPES[selection.bodyShape] + ',',
+    data.sharedClassicalCore.lightingGuard + ',',
+    data.styleData[selection.style] + ',',
+    selection.composition + ',',
+    data.sharedClassicalCore.compositionGuard + ',',
+    'refined Chinese clothing aesthetics, period-informed Chinese silhouette, elegant fabric drape, traditional Chinese design language,',
+    'appearance form: ' + data.garmentData[selection.garment] + ',',
+    'traditional materials and Chinese elements: ' + materialText + ',',
+    'garment variation details: ' + variationParts.join('; ') + ', preserve the selected period-informed Chinese silhouette,',
+    data.poseData[selection.pose] + ',',
+    data.framingData[selection.framing] + ',',
+    data.cameraData[selection.camera] + ',',
+    'lighting design: ' + data.lightingData[selection.lighting] + ',',
+    'background design: ' + data.backgroundData[selection.background] + ',',
+    data.ratioData[selection.ratio] + ',',
+    data.sharedClassicalCore.output + ',',
+    'balanced traditional details, refined and luxurious,',
+    'color palette: ' + materialPalette + ',',
+    data.sharedClassicalCore.negativePrompt + ',',
+    'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face',
+  ];
+  return prompt.filter(Boolean).join('\n');
+}
+
 function generateXianxia(core, data) {
   const selection = {
     bodyShape: 'original',
@@ -1012,6 +1065,20 @@ function loadRevision(label, sourceReader) {
     endMarker: 'function setRadioValue',
     exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedFantasyCore, FANTASY_ILLUSTRATION_MATERIAL_KEYS: typeof FANTASY_ILLUSTRATION_MATERIAL_KEYS === "undefined" ? new Set(["paperOiran","paperSculpture","redPaperWedding","watercolorBloom","inkPeony","inkGold","whitePaperFlower"]) : FANTASY_ILLUSTRATION_MATERIAL_KEYS, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, poseData, framingData, cameraData, ratioData })',
   });
+  let chineseClassicalData = null;
+  try {
+    const chineseClassicalSource = sourceReader('chinese-classical.html');
+    chineseClassicalData = evalDataSegment({
+      source: chineseClassicalSource,
+      core,
+      page: 'chineseClassical',
+      startMarker: 'const materialData = {',
+      endMarker: 'function selected',
+      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedClassicalCore, BODY_SHAPES, GARMENT_VARIATIONS, poseData, framingData, cameraData, ratioData })',
+    });
+  } catch (err) {
+    // New page is absent in older base revisions.
+  }
   const prompts = {
     'travel-realistic.txt': generateTravel(core, travelData, 'cinematic_realistic'),
     'travel-watercolor.txt': generateTravel(core, travelData, 'watercolor_travel'),
@@ -1019,6 +1086,9 @@ function loadRevision(label, sourceReader) {
     'magazine-illustration.txt': generateMagazine(core, magazineData, 'manga_cover'),
     'fantasy-default.txt': generateFantasy(core, fantasyData),
   };
+  if (chineseClassicalData) {
+    prompts['chinese-classical-default.txt'] = generateChineseClassical(core, chineseClassicalData);
+  }
 
   // xianxia.html is new; older revisions may not have it yet, so skip gracefully.
   try {

@@ -7,9 +7,9 @@
 
 ## 檢查範圍
 
-目前共 15 個正式工具頁：
+目前共 16 個正式工具頁：
 
-`travel.html`、`magazine.html`、`doll.html`、`fantasy-fashion.html`、`xianxia.html`、
+`travel.html`、`magazine.html`、`doll.html`、`fantasy-fashion.html`、`chinese-classical.html`、`xianxia.html`、
 `anime-character.html`、`flower-fairy.html`、`isekai-fantasy.html`、`store-ad.html`、
 `floral-sweet.html`、`gala-socialite.html`、`kpop-idol.html`、`battle-academy.html`、
 `ancient-goddess.html`、`editorial-identity.html`。
@@ -54,6 +54,8 @@ git diff --check
 
 - 共同世界觀頁：版型／構圖 → 服裝輪廓 → 主題材質 → 服裝變化 → 身形 → 姿勢 →
   自訂 → 光影 → 背景 → 鏡頭 → 比例 → 生成。
+- 中式古典美學：成品語氣 → 構圖 → 六組漢唐宋服裝主題 → 傳統材質 → 服裝變化 →
+  身形 → 姿勢 → 自訂 → 光影 → 背景 → 鏡頭 → 比例 → 生成；材質最多 2 個。
 - 寫真旅拍：主風格與地點／旅拍情境提前，再進入構圖、服裝、姿勢與攝影控制。
 - 雜誌棚拍：封面成品類型與主題／服裝方向提前，妝容、膚質、配飾與光線集中在封面
   細節區。
@@ -63,9 +65,9 @@ git diff --check
 
 ## 2026-08-03 回歸結果
 
-- UI flow contract：15 頁，0 issue。
+- UI flow contract：16 頁，0 issue。
 - preset 引用驗證：0 issue。
-- 隨機生成稽核：15 頁 × 100 組，共 1500 組，0 issue。
+- 隨機生成稽核：16 頁 × 100 組，共 1600 組，0 issue。
 - 固定提示詞預覽：完成；結構與生成輸出可重建。
 - `check-static.mjs` 與 `git diff --check`：完成。
 

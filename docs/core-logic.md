@@ -119,12 +119,12 @@ fantasy 40 個）是刻意保留的「設計師精選組合」，跟隨機按鈕
 - `scripts/check-static.mjs`：結構檢查（重複 id、本地連結、inline script 語法）。
 - `scripts/build-prompt-preview.mjs`：用 `node:vm` 重建改前/改後的完整咒語，
   比對固定選項組合的輸出是否有變化（0 diff = 純行為/UI 調整，沒有動到 prompt 文字）。
-- `scripts/audit-100x.mjs`：重建 15 個正式頁的實際組裝邏輯，每頁隨機抽 100 組選項模擬，
+- `scripts/audit-100x.mjs`：重建 16 個正式頁的實際組裝邏輯，每頁隨機抽 100 組選項模擬，
   檢查 `undefined`/`NaN`/`[object Object]` 洩漏、身份鎖定是否存在、相鄰重複行、
   禁用角色名靜態掃描。新增選項或改組裝邏輯後都應該重跑。
 - `scripts/validate-preset-refs.mjs`：檢查各頁一鍵套用／預設資料引用的欄位值是否存在
   於當下選項池，避免 UI 看似套用成功但 prompt 靜默退回。
-- `scripts/check-ui-flows.mjs`：檢查 15 頁必要控制項、初始值、helper 引用、輸出寫入與
+- `scripts/check-ui-flows.mjs`：檢查 16 頁必要控制項、初始值、helper 引用、輸出寫入與
   一鍵按鈕資料映射。
 
 五個腳本合起來覆蓋「結構對不對」「UI 流程對不對」「preset 值存在嗎」「固定輸出有沒有

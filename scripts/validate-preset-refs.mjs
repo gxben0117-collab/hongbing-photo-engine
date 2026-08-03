@@ -53,6 +53,14 @@ function liveRadioValues(source, fieldName) {
   return values;
 }
 
+function liveInputValues(source, fieldName) {
+  const re = new RegExp(`name="${fieldName}"\\s+value="([^"]+)"`, 'g');
+  const values = new Set();
+  let m;
+  while ((m = re.exec(source))) values.add(m[1]);
+  return values;
+}
+
 function liveSelectOptionValues(source, selectId) {
   const selectMatch = source.match(new RegExp(`<select id="${selectId}">([\\s\\S]*?)</select>`));
   const values = new Set();
@@ -176,6 +184,28 @@ const issues = [];
     intensity: liveSelectOptionValues(src, 'intensity'),
   };
   checkObject('xianxia.html', 'themeTemplates', extractObjectLiteral(src, 'themeTemplates'), fieldLive, issues);
+}
+
+// ===== chinese-classical.html =====
+{
+  const src = fs.readFileSync(path.join(root, 'chinese-classical.html'), 'utf8');
+  const fieldLive = {
+    style: liveRadioValues(src, 'style'),
+    composition: liveRadioValues(src, 'composition'),
+    garment: liveRadioValues(src, 'garment'),
+    materials: liveInputValues(src, 'materials'),
+    chest: liveRadioValues(src, 'garmentChestVariation'),
+    waist: liveRadioValues(src, 'garmentWaistVariation'),
+    shoulder: liveRadioValues(src, 'garmentShoulderVariation'),
+    body: liveRadioValues(src, 'bodyShape'),
+    pose: liveRadioValues(src, 'pose'),
+    lighting: liveRadioValues(src, 'lighting'),
+    background: liveRadioValues(src, 'background'),
+    framing: liveRadioValues(src, 'framing'),
+    camera: liveRadioValues(src, 'camera'),
+    ratio: liveRadioValues(src, 'ratio'),
+  };
+  checkObject('chinese-classical.html', 'themeTemplates', extractObjectLiteral(src, 'themeTemplates'), fieldLive, issues);
 }
 
 // ===== anime-character.html =====

@@ -14,6 +14,7 @@
 - `magazine.html` - 雜誌棚拍生成器
 - `doll.html` - 公仔生成器
 - `fantasy-fashion.html` - 幻想廣告生成器
+- `chinese-classical.html` - 中式古典美學生成器
 - `store-ad.html` - 店家活動廣告生成器
 - `xianxia.html` / `anime-character.html` / `flower-fairy.html` - 仙俠、動漫人物、花仙子
 - `isekai-fantasy.html` / `floral-sweet.html` / `gala-socialite.html` - 異世界、花漾甜美、晚宴名媛
@@ -26,10 +27,10 @@
 - `scripts/` - 本地檢查與維護腳本
   - `check-static.mjs` - 結構檢查（重複 id、本地連結、inline script 語法）
   - `build-prompt-preview.mjs` - 重建改前/改後完整咒語，比對固定選項組合輸出
-  - `audit-100x.mjs` - 重建 15 頁組裝邏輯，隨機模擬 100×15 組選項，檢查內容問題
+  - `audit-100x.mjs` - 重建 16 頁組裝邏輯，隨機模擬 100×16 組選項，檢查內容問題
   - `validate-preset-refs.mjs` - 檢查各頁「一鍵套用/預設連動」物件（QUICK_*_PRESETS、
     *_DEFAULTS、fantasy 的 themeTemplates）引用的欄位值是否都存在於當下選項池
-  - `check-ui-flows.mjs` - 檢查 15 頁必要控制項、初始值、helper 引用、輸出寫入與一鍵映射
+  - `check-ui-flows.mjs` - 檢查 16 頁必要控制項、初始值、helper 引用、輸出寫入與一鍵映射
 - `assets/` - 共用圖片、圖示、未來靜態資產
 - `experiments/` - 不屬於正式網站流程的實驗腳本
 - `output/` - 使用者生成結果、匯出稿、截圖、`build-prompt-preview.mjs` 的對照輸出

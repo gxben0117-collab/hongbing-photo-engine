@@ -12,7 +12,7 @@
 - [使用方式](usage.md)
 - [核心咒語邏輯](core-logic.md) — 共用核心區塊、輸出段落順序、插畫媒材條件化、
   stale 保護、元素級獨立隨機、版權角色名規則、五個驗證腳本的用途
-- [UI 與咒語回歸檢查](qa-ui-and-prompt.md) — 15 個工具頁的控制項、初始值、生成／複製、
+- [UI 與咒語回歸檢查](qa-ui-and-prompt.md) — 16 個工具頁的控制項、初始值、生成／複製、
   一鍵套用與上線前完整檢查清單
 - [底層保護核心](shared-protection-core.md) — travel/magazine/fantasy 共用的
   身份保護語意細節（最高優先順序、必要語意範本）
@@ -24,6 +24,7 @@
 
 - [寫真旅拍流程](travel-workflow.md)
 - [雜誌棚拍流程](magazine-workflow.md)
+- [中式古典美學流程](chinese-classical-workflow.md)
 - [幻想廣告咒語產生器分類表](fantasy-ad-workflow.md)
 - [公仔工作流程](doll-workflow.md)
 

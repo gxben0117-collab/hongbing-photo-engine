@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中式古典美學咒語產生器｜寫真引擎</title>
+<meta name="description" content="漢風、盛唐、宋韻與新式改良漢服的中式古典美學咒語產生器。">
+<meta property="og:title" content="中式古典美學咒語產生器｜寫真引擎">
+<meta property="og:description" content="漢風、盛唐、宋韻與新式改良漢服的中式古典美學咒語產生器。">
+<style>
+  :root{
+    --black:#09090B;--panel:#15131A;--panel-2:#1D1924;--line:#322D3C;
+    --paper:#F7F4EF;--soft:#A7A0B5;--white:#FFF;--gold:#C9A84C;
+    --selected-bg:#1E1A14;--jade:#72C7B8;--rose:#E895A9;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{min-height:100vh;background:var(--black);color:var(--paper);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.6;padding-bottom:72px}
+  nav{position:fixed;top:0;left:0;right:0;height:54px;padding:0 24px;background:rgba(9,9,11,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);z-index:100;display:flex;align-items:center}
+  .nav-logo{color:var(--gold);font-family:"Noto Serif TC",serif;font-size:14px;font-weight:700;letter-spacing:.08em}
+  .wrap{width:min(920px,100%);margin:0 auto;padding:70px 20px 40px}
+  header{padding:48px 0 36px;border-bottom:1px solid var(--line);margin-bottom:36px}
+  .eyebrow{color:var(--jade);font-size:11px;letter-spacing:.3em;text-transform:uppercase;margin-bottom:12px}
+  h1{font-family:"Noto Serif TC",serif;font-size:32px;font-weight:900;line-height:1.2;color:var(--white);margin-bottom:10px}
+  h1 span{color:#C9E4DC} header p{color:var(--soft);font-size:14px;max-width:720px}
+  main.wrap{display:flex;flex-direction:column} main.wrap>header{order:-1}
+  section{margin-bottom:26px}
+  .section-preset{order:0;}.section-style{order:1;}.section-composition{order:2;}
+  .section-garment{order:3;}.section-material{order:4;}.section-garment-variation{order:5;}
+  .section-body{order:6;}.section-pose{order:7;}.section-extra{order:8;}
+  .section-lighting{order:9;}.section-background{order:10;}.section-camera{order:11;}
+  .section-ratio{order:12;}.section-output{order:13;}
+  .section-header{display:flex;align-items:baseline;gap:10px;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:12px}
+  .section-label{color:var(--jade);font-size:12px;font-weight:700;letter-spacing:.16em}
+  .section-title{font-size:16px;font-weight:800;color:var(--white)}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.grid-3{grid-template-columns:repeat(3,1fr)}
+  .card{position:relative;border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:12px 13px;cursor:pointer;transition:.15s;min-height:74px}
+  .card:hover{border-color:#5B746E;background:var(--panel-2)}.card input{position:absolute;opacity:0;pointer-events:none}
+  .card .name{font-size:13px;font-weight:800;color:var(--paper);margin-bottom:3px}.card .desc{font-size:11px;color:var(--soft);line-height:1.45}
+  .card.selected{border-color:var(--gold);background:var(--selected-bg)}.card.selected .name{color:var(--gold)}
+  .section-preset button.card.template-selected{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
+  .hint{color:var(--soft);font-size:12px;margin-bottom:12px}.group-title{color:#C9E4DC;font-size:12px;font-weight:800;letter-spacing:.12em;border-left:2px solid var(--jade);padding-left:8px;margin:16px 0 8px}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}label.field{display:flex;flex-direction:column;gap:6px;color:var(--soft);font-size:12px}
+  input[type="text"],textarea,select{width:100%;border:1px solid var(--line);background:var(--panel);color:var(--paper);border-radius:8px;padding:11px 12px;font:inherit;font-size:13px;outline:none}
+  textarea{min-height:88px;resize:vertical}input:focus,textarea:focus,select:focus{border-color:var(--gold)}.full{grid-column:1/-1}
+  .actions{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;margin-top:18px}
+  button{border:0;border-radius:8px;padding:13px 18px;color:#120D18;background:linear-gradient(135deg,#D7EEE8,#C9A84C);font-weight:900;letter-spacing:.08em;cursor:pointer}
+  button.card{display:block;width:100%;text-align:left;color:inherit;background:var(--panel);border:1px solid var(--line);letter-spacing:0;font-weight:400}
+  .generate-btn{width:100%;background:var(--gold);color:var(--black);border:none;font-family:inherit}.copy-btn{background:transparent;color:var(--gold);border:1px solid var(--gold)}
+  .copy-btn.copied{background:var(--gold);color:var(--black)}
+  .output-wrap{margin-top:28px}.output-wrap textarea{width:100%;min-height:300px;background:#0F0E13;border:1px solid var(--line);border-radius:8px;padding:16px;color:#EEE8F8;font-family:monospace;font-size:13px;line-height:1.8;resize:vertical}
+  .output-wrap .copy-btn{width:100%;margin-top:8px}.output-stale-badge{display:none;margin-bottom:10px;padding:10px 14px;background:rgba(201,168,76,.12);border:1px solid var(--gold);border-radius:8px;color:var(--gold);font-size:13px;font-weight:700;text-align:center}
+  .output-wrap.stale .output-stale-badge{display:block}.output-wrap.stale textarea{opacity:.45}.output-wrap.stale .copy-btn{opacity:.4;pointer-events:none;cursor:not-allowed}
+  .hidden{display:none}.limit-note{color:var(--rose);font-size:12px;min-height:18px;margin-top:6px}
+  @media(max-width:760px){nav{position:sticky;height:auto;padding:10px 14px}.wrap{padding:20px 14px 36px}header{padding:22px 0 24px;margin-bottom:22px}.grid,.grid-3,.form-grid{grid-template-columns:1fr 1fr}.actions{grid-template-columns:1fr}button{width:100%}}
+  @media(max-width:480px){.grid,.grid-3,.form-grid{grid-template-columns:1fr}.card{min-height:auto;padding:11px 12px}.output-wrap textarea{font-size:12px;padding:13px;overflow-wrap:anywhere}}
+</style>
+</head>
+<body>
+<nav><span class="nav-logo">寫真引擎</span></nav>
+<main class="wrap">
+  <header>
+    <div class="eyebrow">Chinese Classical Aesthetic Campaign</div>
+    <h1>中式古典美學<span>咒語產生器</span></h1>
+    <p>以漢風、盛唐、宋韻為服裝骨架，加入各自的新式改良方向，再搭配中國傳統材質、庭院、書齋與江南水墨場景，做出保有文化辨識度又不古板的高級寫真。</p>
+  </header>
+
+  <section class="section-preset">
+    <div class="section-header"><div class="section-label">00</div><div class="section-title">一鍵主題模板</div></div>
+    <p class="hint">一鍵套用會同步填入服裝、材質、姿勢、光線、背景、鏡頭與比例，套用後仍可逐區修改。</p>
+    <button class="card" type="button" id="classicalMoodPreset" style="width:100%;min-height:auto;margin-bottom:12px;background:linear-gradient(180deg,#101B1A 0%,#1A2118 100%);"><div class="name">隨機套用</div><div class="desc">各欄位獨立隨機組合，保留完整中式古典美學方向</div></button>
+    <div class="grid grid-3">
+      <button class="card" type="button" data-template="hanCourtyard"><div class="name">漢風古雅庭院</div><div class="desc">交領層疊、寬袖、古樸庭院</div></button>
+      <button class="card" type="button" data-template="hanBambooPortrait"><div class="name">漢風竹影肖像</div><div class="desc">漢風衣襟、竹林窗影、文化感</div></button>
+      <button class="card" type="button" data-template="hanModernCouture"><div class="name">漢風新式高訂</div><div class="desc">交領邏輯、現代收腰、高級剪裁</div></button>
+      <button class="card" type="button" data-template="hanWindowEditorial"><div class="name">漢風改良花窗棚拍</div><div class="desc">新式漢服、花窗光影、時裝封面</div></button>
+      <button class="card" type="button" data-template="tangPalaceGown"><div class="name">盛唐宮苑華裳</div><div class="desc">高腰大袖、宮苑金光、雍容華麗</div></button>
+      <button class="card" type="button" data-template="tangGoldPeony"><div class="name">盛唐金線牡丹</div><div class="desc">金線刺繡、牡丹、富麗絲綢</div></button>
+      <button class="card" type="button" data-template="tangModernGown"><div class="name">盛唐新式禮服</div><div class="desc">唐風高腰、現代禮服、高訂比例</div></button>
+      <button class="card" type="button" data-template="tangModernCover"><div class="name">盛唐改良封面大片</div><div class="desc">大袖動勢、封面留白、金色光影</div></button>
+      <button class="card" type="button" data-template="songScholarStudy"><div class="name">宋韻書齋清雅</div><div class="desc">褙子線條、書齋窗影、文人氣質</div></button>
+      <button class="card" type="button" data-template="songJiangnanInk"><div class="name">宋韻江南水墨</div><div class="desc">淡雅配色、白牆黑瓦、柔和留白</div></button>
+      <button class="card" type="button" data-template="songModernMinimal"><div class="name">宋韻新式極簡</div><div class="desc">宋韻留白、現代比例、極簡高級</div></button>
+      <button class="card" type="button" data-template="songModernStudio"><div class="name">宋韻改良精品棚拍</div><div class="desc">現代褙子、絲麻質感、精品棚拍</div></button>
+    </div>
+  </section>
+
+  <section class="section-style">
+    <div class="section-header"><div class="section-label">01</div><div class="section-title">成品用途 / 畫面語氣</div></div>
+    <div class="grid grid-3" data-choice="style">
+      <label class="card selected"><input type="radio" name="style" value="classicalPortrait" checked><div class="name">古典人像</div><div class="desc">莊重、雅致、文化感</div></label>
+      <label class="card"><input type="radio" name="style" value="culturePortrait"><div class="name">文化寫真</div><div class="desc">像傳統美學攝影專題</div></label>
+      <label class="card"><input type="radio" name="style" value="courtLuxury"><div class="name">宮廷華服大片</div><div class="desc">華麗、雍容、主視覺感強</div></label>
+      <label class="card"><input type="radio" name="style" value="inkFineArt"><div class="name">水墨藝術人像</div><div class="desc">留白、柔霧、詩意畫面</div></label>
+      <label class="card"><input type="radio" name="style" value="fashionEditorial"><div class="name">高級時裝封面</div><div class="desc">現代剪裁、封面與精品感</div></label>
+      <label class="card"><input type="radio" name="style" value="modernCouture"><div class="name">新中式精品廣告</div><div class="desc">高訂材質、現代品牌語氣</div></label>
+    </div>
+  </section>
+
+  <section class="section-composition">
+    <div class="section-header"><div class="section-label">02</div><div class="section-title">構圖取景</div></div>
+    <div class="grid grid-3" data-choice="composition">
+      <label class="card selected"><input type="radio" name="composition" value="centered classical portrait composition, subject placed in the center with balanced Chinese architectural framing" checked><div class="name">人物置中主圖</div><div class="desc">穩定、莊重、適合主視覺</div></label>
+      <label class="card"><input type="radio" name="composition" value="subject placed to one side with clean negative space for a refined editorial layout"><div class="name">側邊留白海報</div><div class="desc">人物偏側，保留題字空間</div></label>
+      <label class="card"><input type="radio" name="composition" value="symmetrical classical composition with balanced windows, courtyard lines and ceremonial visual order"><div class="name">古典對稱構圖</div><div class="desc">中軸、門窗與人物平衡</div></label>
+      <label class="card"><input type="radio" name="composition" value="wooden lattice window framing around the subject, layered foreground and background depth, intimate Chinese portrait composition"><div class="name">花窗框景</div><div class="desc">用花窗建立前後景</div></label>
+      <label class="card"><input type="radio" name="composition" value="flowing sleeves and fabric edges create a soft foreground frame while the face remains clearly unobstructed"><div class="name">前景絲袖框景</div><div class="desc">袖線形成柔和前景</div></label>
+      <label class="card"><input type="radio" name="composition" value="full environmental portrait with subject integrated into a Chinese courtyard, study or waterside garden with clear spatial layers"><div class="name">庭院層次人像</div><div class="desc">人物與環境共同敘事</div></label>
+      <label class="card"><input type="radio" name="composition" value="close editorial crop emphasizing facial identity, collar construction, textile texture and refined garment details"><div class="name">服裝近距離特寫</div><div class="desc">臉部、領口與材質為主</div></label>
+      <label class="card"><input type="radio" name="composition" value="full-body fashion portrait showing the complete garment silhouette, sleeve movement and surrounding classical space"><div class="name">全身環境人像</div><div class="desc">完整呈現服裝輪廓</div></label>
+    </div>
+  </section>
+
+  <section class="section-garment">
+    <div class="section-header"><div class="section-label">03</div><div class="section-title">服裝主題</div></div>
+    <div class="grid grid-3" data-choice="garment">
+      <label class="card selected"><input type="radio" name="garment" value="hanClassical" checked><div class="name">漢風古雅</div><div class="desc">交領右衽、層疊衣襟、寬袖、樸雅莊重</div></label>
+      <label class="card"><input type="radio" name="garment" value="hanModern"><div class="name">漢風新式改良</div><div class="desc">漢風交領邏輯與現代高訂收腰</div></label>
+      <label class="card"><input type="radio" name="garment" value="tangClassical"><div class="name">盛唐華裳</div><div class="desc">高腰、大袖、金線、雍容華麗</div></label>
+      <label class="card"><input type="radio" name="garment" value="tangModern"><div class="name">盛唐新式改良</div><div class="desc">唐風高腰輪廓與現代禮服剪裁</div></label>
+      <label class="card"><input type="radio" name="garment" value="songClassical"><div class="name">宋韻清雅</div><div class="desc">褙子、窄袖、直線層次、淡雅留白</div></label>
+      <label class="card"><input type="radio" name="garment" value="songModern"><div class="name">宋韻新式改良</div><div class="desc">宋韻極簡與現代精品比例</div></label>
+    </div>
+  </section>
+
+  <section class="section-material">
+    <div class="section-header"><div class="section-label">04</div><div class="section-title">傳統材質與中式元素</div></div>
+    <p class="hint">最多選擇 2 個，材質會影響服裝、配飾與畫面色彩語言。</p>
+    <div class="limit-note" id="materialsNotice"></div>
+    <div class="grid grid-3" data-choice="materials">
+      <label class="card selected"><input type="checkbox" name="materials" value="plainSilk" checked><div class="name">素色絲綢</div><div class="desc">柔和垂墜、乾淨高級</div></label>
+      <label class="card"><input type="checkbox" name="materials" value="wovenBrocade"><div class="name">織錦緞面</div><div class="desc">細密織紋與沉穩光澤</div></label>
+      <label class="card"><input type="checkbox" name="materials" value="goldEmbroidery"><div class="name">金線刺繡</div><div class="desc">宮廷華服與細緻金線</div></label>
+      <label class="card"><input type="checkbox" name="materials" value="kesiTexture"><div class="name">緙絲紋理</div><div class="desc">古典織物細節</div></label>
+      <label class="card"><input type="checkbox" name="materials" value="lightGauze"><div class="name">輕紗疊層</div><div class="desc">袖線與裙擺的空氣感</div></label>
+      <label class="card"><input type="checkbox" name="materials" value="ramieLinen"><div class="name">苧麻棉麻</div><div class="desc">自然、清淡、文人氣質</div></label>
+      <label class="card"><input type="checkbox" name="materials" value="jadePendant"><div class="name">玉佩禁步</div><div class="desc">行走時的中式配飾</div></label>
+      <label class="card"><input type="checkbox" name="materials" value="pearlHairOrnament"><div class="name">珍珠髮飾</div><div class="desc">柔和細緻的頭部點綴</div></label>
+      <label class="card"><input type="checkbox" name="materials" value="cloudPattern"><div class="name">祥雲暗紋</div><div class="desc">低調傳統紋樣</div></label>
+      <label class="card"><input type="checkbox" name="materials" value="birdFlowerEmbroidery"><div class="name">花鳥刺繡</div><div class="desc">細膩自然題材</div></label>
+      <label class="card"><input type="checkbox" name="materials" value="inkLandscapePattern"><div class="name">山水水墨紋</div><div class="desc">墨色山水與服裝融合</div></label>
+      <label class="card"><input type="checkbox" name="materials" value="blueWhitePorcelain"><div class="name">瓷器青花紋</div><div class="desc">白底青花的清冷質感</div></label>
+      <label class="card"><input type="checkbox" name="materials" value="peonyPattern"><div class="name">牡丹紋樣</div><div class="desc">盛唐華麗與富貴感</div></label>
+      <label class="card"><input type="checkbox" name="materials" value="plumOrchidBamboo"><div class="name">梅蘭竹菊</div><div class="desc">文人四君子意象</div></label>
+      <label class="card"><input type="checkbox" name="materials" value="calligraphySeal"><div class="name">書法印章元素</div><div class="desc">書齋、紙墨與文化感</div></label>
+    </div>
+  </section>
+
+  <section class="section-garment-variation">
+    <div class="section-header"><div class="section-label">05</div><div class="section-title">服裝變化核心</div></div>
+    <div class="group-title">胸口</div>
+    <div class="grid grid-3" data-choice="garmentChestVariation">
+      <label class="card selected"><input type="radio" name="garmentChestVariation" value="none" checked><div class="name">原服裝一致</div><div class="desc">保留所選服裝原始領型</div></label>
+      <label class="card"><input type="radio" name="garmentChestVariation" value="deepV"><div class="name">深 V</div><div class="desc">deep V-shaped neckline</div></label>
+      <label class="card"><input type="radio" name="garmentChestVariation" value="waistDeepV"><div class="name">深 V 至腰</div><div class="desc">深 V 延伸至腰部的高訂剪裁</div></label>
+      <label class="card"><input type="radio" name="garmentChestVariation" value="crossCollarDeepV"><div class="name">交領深 V 結構胸衣</div><div class="desc">交領與結構胸衣融合</div></label>
+      <label class="card"><input type="radio" name="garmentChestVariation" value="crossWrapDeepV"><div class="name">交叉綁帶深 V</div><div class="desc">交叉胸帶與深 V 領口</div></label>
+      <label class="card"><input type="radio" name="garmentChestVariation" value="openFrontDeepV"><div class="name">深 V 大開襟</div><div class="desc">交領大開襟的現代改良</div></label>
+    </div>
+    <div class="group-title">腰側</div>
+    <div class="grid grid-3" data-choice="garmentWaistVariation">
+      <label class="card selected"><input type="radio" name="garmentWaistVariation" value="none" checked><div class="name">原服裝一致</div><div class="desc">保留原本腰部與裙型</div></label>
+      <label class="card"><input type="radio" name="garmentWaistVariation" value="wrapSideSlit"><div class="name">纏裙側開衩</div><div class="desc">wrap skirt with an elegant side slit</div></label>
+      <label class="card"><input type="radio" name="garmentWaistVariation" value="highSideSlit"><div class="name">高衩開裙</div><div class="desc">high side slit skirt with controlled drape</div></label>
+      <label class="card"><input type="radio" name="garmentWaistVariation" value="openSkirtPanel"><div class="name">裙擺敞開</div><div class="desc">open front skirt panel with flowing layers</div></label>
+    </div>
+    <div class="group-title">肩部</div>
+    <div class="grid grid-3" data-choice="garmentShoulderVariation">
+      <label class="card selected"><input type="radio" name="garmentShoulderVariation" value="none" checked><div class="name">原服裝一致</div><div class="desc">保留原本肩部與袖型</div></label>
+      <label class="card"><input type="radio" name="garmentShoulderVariation" value="offShoulder"><div class="name">露肩剪裁</div><div class="desc">off-shoulder garment construction</div></label>
+      <label class="card"><input type="radio" name="garmentShoulderVariation" value="singleShoulder"><div class="name">單肩斜裁</div><div class="desc">single-shoulder diagonal cut</div></label>
+      <label class="card"><input type="radio" name="garmentShoulderVariation" value="halter"><div class="name">掛脖削肩</div><div class="desc">halter neckline with clean shoulder lines</div></label>
+    </div>
+  </section>
+
+  <section class="section-body">
+    <div class="section-header"><div class="section-label">06</div><div class="section-title">身形輪廓</div></div>
+    <div class="grid grid-3" data-choice="bodyShape">
+      <label class="card selected"><input type="radio" name="bodyShape" value="original" checked><div class="name">原圖自然比例</div><div class="desc">以參考照身形為主</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="slightWaist"><div class="name">輕微纖腰</div><div class="desc">自然修飾腰線，其餘保持自然</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="curvy"><div class="name">豐滿纖腰</div><div class="desc">明顯胸腰臀曲線與 S 曲線</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="tallFashion"><div class="name">高挑時裝比例</div><div class="desc">修長高級模特感</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="kpopIdol"><div class="name">韓系偶像比例</div><div class="desc">挺拔、修長、舞台偶像感</div></label>
+    </div>
+  </section>
+
+  <section class="section-pose">
+    <div class="section-header"><div class="section-label">07</div><div class="section-title">人物姿勢</div></div>
+    <div class="grid grid-3" data-choice="pose">
+      <label class="card selected"><input type="radio" name="pose" value="naturalStanding" checked><div class="name">自然站姿</div><div class="desc">放鬆站立，視線自然</div></label>
+      <label class="card"><input type="radio" name="pose" value="sleeveHold"><div class="name">持袖站姿</div><div class="desc">雙手整理袖口，呈現衣料層次</div></label>
+      <label class="card"><input type="radio" name="pose" value="fanPortrait"><div class="name">手持團扇</div><div class="desc">團扇位於胸前或身側，不遮臉</div></label>
+      <label class="card"><input type="radio" name="pose" value="jadePendant"><div class="name">輕扶玉佩</div><div class="desc">手部與玉佩形成細節焦點</div></label>
+      <label class="card"><input type="radio" name="pose" value="windowTurn"><div class="name">花窗回眸</div><div class="desc">站在花窗旁自然回頭</div></label>
+      <label class="card"><input type="radio" name="pose" value="courtyardWalk"><div class="name">庭院緩步</div><div class="desc">裙擺與袖線有輕微動勢</div></label>
+      <label class="card"><input type="radio" name="pose" value="sideLongLine"><div class="name">側身長線條</div><div class="desc">肩頸、腰線與衣襬形成長線</div></label>
+      <label class="card"><input type="radio" name="pose" value="teaSeated"><div class="name">坐姿茶席</div><div class="desc">中式茶席的安靜坐姿</div></label>
+      <label class="card"><input type="radio" name="pose" value="scrollSeated"><div class="name">坐姿書卷</div><div class="desc">書桌、書卷與側面光線</div></label>
+      <label class="card"><input type="radio" name="pose" value="calligraphy"><div class="name">書法雅集</div><div class="desc">執筆或整理宣紙的文人姿態</div></label>
+      <label class="card"><input type="radio" name="pose" value="waterSleeve"><div class="name">水袖展開</div><div class="desc">袖線自然展開，不遮擋臉部</div></label>
+      <label class="card"><input type="radio" name="pose" value="flowerBranch"><div class="name">手持花枝</div><div class="desc">梅、蘭、竹或牡丹的低調點綴</div></label>
+      <label class="card"><input type="radio" name="pose" value="railingGaze"><div class="name">倚欄遠望</div><div class="desc">手扶欄杆，望向庭院遠處</div></label>
+      <label class="card"><input type="radio" name="pose" value="formalKneel"><div class="name">端莊跪坐</div><div class="desc">安靜端坐，保持自然骨架</div></label>
+    </div>
+  </section>
+
+  <section class="section-extra">
+    <div class="section-header"><div class="section-label">08</div><div class="section-title">自訂要求</div></div>
+    <div class="form-grid">
+      <label class="field">自訂服裝<input id="customGarment" type="text" placeholder="例如：杏色絲紗改良漢服"></label>
+      <label class="field">自訂材質<input id="customMaterial" type="text" placeholder="例如：淡青色緙絲"></label>
+      <label class="field">自訂背景<input id="customBackground" type="text" placeholder="例如：雨後蘇州園林"></label>
+      <label class="field">自訂姿勢<input id="customPose" type="text" placeholder="例如：手扶木格窗回頭"></label>
+      <label class="field">指定配色<input id="colorNote" type="text" placeholder="例如：月白、黛青、少量金色"></label>
+      <label class="field">畫面強度<select id="intensity"><option value="restrained classical detail, elegant and quiet">清雅克制</option><option value="balanced traditional details, refined and luxurious">平衡高級</option><option value="rich textile details, graceful movement and stronger editorial presence">華麗大片</option></select></label>
+      <label class="field full">其他要求<textarea id="extraNote" placeholder="補充畫面、表情、留白或服裝細節"></textarea></label>
+    </div>
+  </section>
+
+  <section class="section-lighting">
+    <div class="section-header"><div class="section-label">09</div><div class="section-title">光影色彩</div></div>
+    <div class="grid grid-3" data-choice="lighting">
+      <label class="card selected"><input type="radio" name="lighting" value="paperWindowSoft" checked><div class="name">宣紙窗影柔光</div><div class="desc">柔和、清透、適合宋韻</div></label>
+      <label class="card"><input type="radio" name="lighting" value="morningCourtyard"><div class="name">晨間庭院自然光</div><div class="desc">自然日光與淡雅色彩</div></label>
+      <label class="card"><input type="radio" name="lighting" value="bambooShadow"><div class="name">午後竹影</div><div class="desc">竹葉影子與柔和對比</div></label>
+      <label class="card"><input type="radio" name="lighting" value="warmLantern"><div class="name">溫暖宮燈</div><div class="desc">暖金、絲綢與宮苑氣質</div></label>
+      <label class="card"><input type="radio" name="lighting" value="candleStudy"><div class="name">燭光書齋</div><div class="desc">安靜、深色、文人氛圍</div></label>
+      <label class="card"><input type="radio" name="lighting" value="inkMist"><div class="name">柔霧水墨光</div><div class="desc">低對比、留白與薄霧</div></label>
+      <label class="card"><input type="radio" name="lighting" value="tangGold"><div class="name">盛唐金色宮苑光</div><div class="desc">華麗但保持人物自然曝光</div></label>
+      <label class="card"><input type="radio" name="lighting" value="modernStudio"><div class="name">現代新中式棚拍光</div><div class="desc">乾淨高訂、商業時裝感</div></label>
+    </div>
+  </section>
+
+  <section class="section-background">
+    <div class="section-header"><div class="section-label">10</div><div class="section-title">背景場景與留白</div></div>
+    <div class="grid grid-3" data-choice="background">
+      <label class="card selected"><input type="radio" name="background" value="hanCourtyard" checked><div class="name">漢代古樸庭院</div><div class="desc">木構、石階、古樸安靜</div></label>
+      <label class="card"><input type="radio" name="background" value="tangPalace"><div class="name">盛唐宮苑</div><div class="desc">宮牆、金色、富麗層次</div></label>
+      <label class="card"><input type="radio" name="background" value="songStudy"><div class="name">宋式書齋</div><div class="desc">木桌、書卷、花窗、清雅</div></label>
+      <label class="card"><input type="radio" name="background" value="songGarden"><div class="name">宋式園林</div><div class="desc">石庭、竹影、簡潔留白</div></label>
+      <label class="card"><input type="radio" name="background" value="jiangnanWater"><div class="name">江南水鄉</div><div class="desc">白牆黑瓦、小橋與湖面</div></label>
+      <label class="card"><input type="radio" name="background" value="bambooCourtyard"><div class="name">竹林庭院</div><div class="desc">竹影、青石與柔和景深</div></label>
+      <label class="card"><input type="radio" name="background" value="teaTable"><div class="name">中式茶席</div><div class="desc">茶具、木桌、安靜生活感</div></label>
+      <label class="card"><input type="radio" name="background" value="latticeRoom"><div class="name">木格花窗室內</div><div class="desc">窗影與服裝近景</div></label>
+      <label class="card"><input type="radio" name="background" value="redLacquerHall"><div class="name">紅漆宮殿長廊</div><div class="desc">朱紅、長廊、華裳氛圍</div></label>
+      <label class="card"><input type="radio" name="background" value="silkWorkshop"><div class="name">絲綢工坊</div><div class="desc">織物、木架與工藝細節</div></label>
+      <label class="card"><input type="radio" name="background" value="inkLandscape"><div class="name">水墨山水留白</div><div class="desc">霧山、紙墨、簡潔背景</div></label>
+      <label class="card"><input type="radio" name="background" value="plumSnow"><div class="name">梅雪庭院</div><div class="desc">梅枝、白雪與冷靜留白</div></label>
+      <label class="card"><input type="radio" name="background" value="modernChineseStudio"><div class="name">現代新中式攝影棚</div><div class="desc">精品品牌與現代高訂</div></label>
+    </div>
+  </section>
+
+  <section class="section-camera">
+    <div class="section-header"><div class="section-label">11</div><div class="section-title">拍攝角度與鏡頭感</div></div>
+    <div class="group-title">框景比例</div>
+    <div class="grid grid-3" data-choice="framing">
+      <label class="card"><input type="radio" name="framing" value="faceCloseup"><div class="name">臉部特寫</div><div class="desc">臉部與領口材質為主</div></label>
+      <label class="card selected"><input type="radio" name="framing" value="halfBody" checked><div class="name">半身</div><div class="desc">妝容、肩線與服裝細節</div></label>
+      <label class="card"><input type="radio" name="framing" value="threeQuarter"><div class="name">四分之三身</div><div class="desc">人物與服裝比例平衡</div></label>
+      <label class="card"><input type="radio" name="framing" value="fullBody"><div class="name">全身</div><div class="desc">完整呈現衣襬與袖型</div></label>
+      <label class="card"><input type="radio" name="framing" value="environment"><div class="name">環境遠景</div><div class="desc">人物與場景共同敘事</div></label>
+    </div>
+    <div class="group-title">拍攝角度</div>
+    <div class="grid grid-3" data-choice="camera">
+      <label class="card selected"><input type="radio" name="camera" value="eyeLevel" checked><div class="name">平視封面鏡頭</div><div class="desc">自然、穩定、適合人像</div></label>
+      <label class="card"><input type="radio" name="camera" value="threeQuarterSide"><div class="name">三分之四側面</div><div class="desc">兼顧臉部與衣襟線條</div></label>
+      <label class="card"><input type="radio" name="camera" value="sideProfile"><div class="name">側面輪廓</div><div class="desc">突出肩頸、袖型與花窗</div></label>
+      <label class="card"><input type="radio" name="camera" value="lowAngle"><div class="name">微低角度</div><div class="desc">增加華服與人物氣場</div></label>
+      <label class="card"><input type="radio" name="camera" value="highAngle"><div class="name">微高角度</div><div class="desc">清淡、柔和、生活感</div></label>
+      <label class="card"><input type="radio" name="camera" value="beautyPortrait"><div class="name">自然人像鏡頭</div><div class="desc">保持臉部辨識度與親近感</div></label>
+    </div>
+  </section>
+
+  <section class="section-ratio">
+    <div class="section-header"><div class="section-label">12</div><div class="section-title">圖片比例</div></div>
+    <div class="grid grid-3" data-choice="ratio">
+      <label class="card"><input type="radio" name="ratio" value="square"><div class="name">1:1</div><div class="desc">方形頭像與社群主圖</div></label>
+      <label class="card selected"><input type="radio" name="ratio" value="vertical45" checked><div class="name">4:5</div><div class="desc">人物封面與精品廣告</div></label>
+      <label class="card"><input type="radio" name="ratio" value="vertical34"><div class="name">3:4</div><div class="desc">傳統人像與寫真</div></label>
+      <label class="card"><input type="radio" name="ratio" value="vertical23"><div class="name">2:3</div><div class="desc">全身服裝大片</div></label>
+      <label class="card"><input type="radio" name="ratio" value="vertical916"><div class="name">9:16</div><div class="desc">手機直幅與限時動態</div></label>
+      <label class="card"><input type="radio" name="ratio" value="landscape169"><div class="name">16:9</div><div class="desc">橫幅場景與電影感</div></label>
+    </div>
+  </section>
+
+  <section class="section-output">
+    <div class="section-header"><div class="section-label">13</div><div class="section-title">生成咒語</div></div>
+    <button class="generate-btn" id="generateBtn">生成完整咒語</button>
+    <div class="output-wrap hidden" id="outputWrap">
+      <div class="output-stale-badge">選項已變更，請重新生成咒語</div>
+      <textarea id="outputText" readonly></textarea>
+      <button class="copy-btn" id="copyBtn" type="button">一鍵複製</button>
+    </div>
+  </section>
+</main>
+
+<script src="assets/core-prompt.js"></script>
+<script>
+const materialData = {
+  plainSilk: { prompt: 'plain silk fabric with elegant natural drape and a restrained premium surface', palette: 'ivory, moon white and soft muted jade' },
+  wovenBrocade: { prompt: 'woven brocade textile with subtle traditional pattern and refined satin depth', palette: 'deep teal, muted plum and antique gold' },
+  goldEmbroidery: { prompt: 'fine gold-thread embroidery placed with controlled traditional ornament', palette: 'warm gold, cinnabar red and deep ink black' },
+  kesiTexture: { prompt: 'delicate kesi-inspired woven textile texture with precise craft detail', palette: 'pale blue, ivory and muted bronze' },
+  lightGauze: { prompt: 'light layered gauze and softly translucent silk sleeves with graceful movement', palette: 'mist white, pale rose and light celadon' },
+  ramieLinen: { prompt: 'natural ramie and linen texture with quiet handmade refinement', palette: 'linen white, sage green and warm gray' },
+  jadePendant: { prompt: 'small carved jade pendant and restrained traditional waist ornament', palette: 'celadon jade, ivory and ink gray' },
+  pearlHairOrnament: { prompt: 'delicate pearl hair ornament with restrained classical craftsmanship', palette: 'pearl white, champagne and pale pink' },
+  cloudPattern: { prompt: 'subtle cloud pattern woven into the garment surface, quiet and elegant', palette: 'ink blue, ivory and muted gold' },
+  birdFlowerEmbroidery: { prompt: 'delicate bird and flower embroidery with fine controlled stitching', palette: 'plum red, sage and ivory' },
+  inkLandscapePattern: { prompt: 'restrained ink landscape pattern integrated into silk textile panels', palette: 'ink black, paper white and smoky blue' },
+  blueWhitePorcelain: { prompt: 'blue-and-white porcelain inspired pattern with clean ceramic contrast', palette: 'porcelain white, cobalt blue and soft gray' },
+  peonyPattern: { prompt: 'refined peony pattern embroidery with graceful ceremonial richness', palette: 'peony red, warm gold and dark green' },
+  plumOrchidBamboo: { prompt: 'plum blossom, orchid and bamboo motifs with literati restraint', palette: 'ink black, bamboo green and pale plum' },
+  calligraphySeal: { prompt: 'calligraphy brushwork and small seal-inspired graphic accents used as refined textile details', palette: 'paper white, ink black and cinnabar red' }
+};
+
+const garmentData = {
+  hanClassical: 'Han-inspired cross-collar layered robes, right-over-left closure, wide flowing sleeves, restrained silk textures, dignified classical proportions, subtle woven details',
+  hanModern: 'Han-inspired cross-collar construction, modern layered wrap tailoring, refined fitted waist, wide flowing sleeves, premium silk textiles, contemporary Chinese couture styling',
+  tangClassical: 'Tang-inspired high-waisted robe ensemble, wide elegant sleeves, rich layered silk textures, ornate gold embroidery, graceful flowing silhouette, majestic courtly elegance',
+  tangModern: 'Tang-inspired high-waisted silhouette, modern formal gown construction, sculpted couture bodice, flowing wide sleeves, luxurious silk and gold embroidery, high-fashion Chinese editorial styling',
+  songClassical: 'Song-inspired layered garments, refined beizi-style silhouette, clean restrained lines, delicate silk and linen fabrics, soft understated palette, scholarly Chinese elegance',
+  songModern: 'Song-inspired minimalist silhouette, modern beizi-inspired tailoring, clean contemporary proportions, delicate silk and linen textiles, restrained luxury styling, minimal Chinese couture aesthetic'
+};
+
+const styleData = {
+  classicalPortrait: 'classical Chinese portrait photography, composed and culturally grounded, quiet dignity',
+  culturePortrait: 'Chinese cultural portrait editorial, refined historical atmosphere, thoughtful and human-centered',
+  courtLuxury: 'luxurious Chinese courtly fashion campaign, graceful opulence and premium textile presentation',
+  inkFineArt: 'ink-wash fine art portrait photography, poetic negative space, soft restrained visual rhythm',
+  fashionEditorial: 'high-fashion editorial photography, contemporary styling while preserving Chinese garment identity',
+  modernCouture: 'premium modern Chinese couture campaign, sophisticated tailoring, polished commercial finish'
+};
+
+const backgroundData = {
+  hanCourtyard: 'a restrained Han-inspired wooden courtyard with stone steps, aged timber and quiet cultural atmosphere',
+  tangPalace: 'a grand Tang-inspired palace courtyard with layered corridors, warm lacquered wood and elegant ceremonial depth',
+  songStudy: 'a Song-inspired scholar study with wooden desk, scrolls, ceramic vessel and lattice window light',
+  songGarden: 'a quiet Song-inspired garden with bamboo, rocks, moss and carefully controlled negative space',
+  jiangnanWater: 'Jiangnan ink-wash atmosphere, misty waterside garden, white walls and dark tiled roofs, traditional stone bridge, soft poetic scenery, restrained monochrome palette',
+  bambooCourtyard: 'a bamboo courtyard with pale stone flooring, filtered leaf shadows and calm Chinese garden depth',
+  teaTable: 'a refined Chinese tea table with ceramic teaware, dark wood and a quiet intimate interior',
+  latticeRoom: 'a traditional room with wooden lattice windows, paper screens and layered window shadows',
+  redLacquerHall: 'a red lacquer palace corridor with carved wood panels, long perspective lines and restrained ceremonial richness',
+  silkWorkshop: 'a traditional silk workshop with folded textiles, wooden looms and visible craftsmanship',
+  inkLandscape: 'a minimal ink landscape backdrop with misty mountains, paper-like negative space and soft monochrome depth',
+  plumSnow: 'a quiet plum blossom courtyard in light snow with dark branches, pale stone and ample negative space',
+  modernChineseStudio: 'a modern Chinese fashion studio with warm gray plaster, wood panels and carefully controlled editorial space'
+};
+
+const lightingData = {
+  paperWindowSoft: 'soft paper-window light with gentle face exposure and subtle textile highlights',
+  morningCourtyard: 'clear morning courtyard daylight with natural skin tone and soft architectural shadows',
+  bambooShadow: 'afternoon bamboo shadows with delicate broken light across the garment and background',
+  warmLantern: 'warm lantern light with elegant amber highlights on silk and controlled facial exposure',
+  candleStudy: 'quiet candlelit study illumination with soft warm contrast and intimate literary mood',
+  inkMist: 'diffused misty ink-wash light with low contrast, soft edges and delicate pale colors',
+  tangGold: 'rich golden palace light with refined warm highlights and natural face exposure',
+  modernStudio: 'clean premium studio lighting with soft key light, subtle rim definition and polished fashion contrast'
+};
+
+const poseData = {
+  naturalStanding: 'natural relaxed standing pose with balanced weight, calm gaze and hands resting naturally',
+  sleeveHold: 'standing while gently holding the flowing sleeve edge, showing layered garment construction',
+  fanPortrait: 'holding a traditional folding fan near the torso without covering the face, poised portrait gesture',
+  jadePendant: 'one hand gently touching a jade pendant at the waist, restrained elegant gesture',
+  windowTurn: 'standing beside a lattice window and turning back naturally toward the camera',
+  courtyardWalk: 'captured during a slow graceful walk through the courtyard, subtle sleeve and hem movement',
+  sideLongLine: 'side-facing long-line pose with aligned neck, shoulder, waist and flowing garment silhouette',
+  teaSeated: 'seated calmly at a Chinese tea table with relaxed shoulders and natural hand placement',
+  scrollSeated: 'seated beside a scholar desk while holding a scroll, quiet thoughtful portrait moment',
+  calligraphy: 'writing calligraphy at a traditional desk with natural hand position and composed posture',
+  waterSleeve: 'graceful water-sleeve gesture with fabric opening outward while the face remains unobstructed',
+  flowerBranch: 'holding a plum, orchid, bamboo or peony branch beside the body, gentle literary gesture',
+  railingGaze: 'standing beside a garden railing and gazing into the distance with natural posture',
+  formalKneel: 'formal seated kneeling pose with aligned spine, relaxed shoulders and dignified stillness'
+};
+
+const BODY_SHAPES = {
+  original: 'preserve the reference photo body proportions, natural height, shoulder width, waist and hip relationship',
+  slightWaist: 'subtle natural waist refinement while preserving the reference photo body proportions and overall anatomy',
+  curvy: 'prominent fuller bust curve, narrow slim waistline, dramatic feminine S-curve silhouette, strong bust-waist-hip contrast',
+  tallFashion: 'tall fashion proportion, elongated legs, refined shoulder-to-neck line and graceful editorial model presence',
+  kpopIdol: 'Korean idol-inspired proportion, upright posture, elongated leg impression, toned yet soft fashion silhouette'
+};
+
+const GARMENT_VARIATIONS = {
+  chest: {
+    none: '',
+    deepV: 'deep V-shaped neckline',
+    waistDeepV: 'a deep V-shaped cut extending toward the waist, tailored garment construction',
+    crossCollarDeepV: 'cross-collar deep V neckline with a structured fitted bodice',
+    crossWrapDeepV: 'cross-wrap lacing across the bodice, deep V-shaped neckline',
+    openFrontDeepV: 'cross-collar deep V open-front robe'
+  },
+  waist: {
+    none: '',
+    wrapSideSlit: 'wrap skirt with an elegant side slit and controlled layered drape',
+    highSideSlit: 'high side slit skirt with controlled drape and preserved Chinese garment structure',
+    openSkirtPanel: 'open front skirt panel with flowing layered fabric and a clear traditional wrap logic'
+  },
+  shoulder: {
+    none: '',
+    offShoulder: 'off-shoulder garment construction while preserving the selected Chinese silhouette',
+    singleShoulder: 'single-shoulder diagonal cut with refined couture tailoring',
+    halter: 'halter neckline with clean shoulder lines and restrained modern Chinese styling'
+  }
+};
+
+const framingData = {
+  faceCloseup: 'face close-up framing with collar and textile texture visible',
+  halfBody: 'half-body fashion portrait framing',
+  threeQuarter: 'three-quarter body framing showing garment construction and natural pose',
+  fullBody: 'full-body fashion portrait framing showing the complete sleeve and hem silhouette',
+  environment: 'wide environmental portrait framing with the subject integrated into the classical scene'
+};
+
+const cameraData = {
+  eyeLevel: 'eye-level cover camera, natural perspective and clear identity',
+  threeQuarterSide: 'three-quarter side camera angle balancing face recognition and garment lines',
+  sideProfile: 'side profile camera angle emphasizing shoulder, sleeve and architectural lines',
+  lowAngle: 'slightly low fashion camera angle giving the garment elegant presence without distortion',
+  highAngle: 'slightly high camera angle with a gentle intimate portrait feeling',
+  beautyPortrait: 'natural beauty portrait lens with refined facial detail and realistic perspective'
+};
+
+const ratioData = {
+  square: 'square 1:1 image composition',
+  vertical45: 'vertical 4:5 image composition',
+  vertical34: 'vertical 3:4 image composition',
+  vertical23: 'vertical 2:3 image composition',
+  vertical916: 'vertical 9:16 image composition',
+  landscape169: 'landscape 16:9 image composition'
+};
+
+const sharedClassicalCore = window.HB_CORE_PROMPT?.page?.chineseClassical || {};
+
+const themeTemplates = {
+  hanCourtyard: { style: 'classicalPortrait', composition: 'centered classical portrait composition, subject placed in the center with balanced Chinese architectural framing', garment: 'hanClassical', materials: ['plainSilk'], chest: 'none', waist: 'none', shoulder: 'none', body: 'original', pose: 'naturalStanding', lighting: 'morningCourtyard', background: 'hanCourtyard', framing: 'threeQuarter', camera: 'eyeLevel', ratio: 'vertical34' },
+  hanBambooPortrait: { style: 'culturePortrait', composition: 'wooden lattice window framing around the subject, layered foreground and background depth, intimate Chinese portrait composition', garment: 'hanClassical', materials: ['ramieLinen', 'plumOrchidBamboo'], chest: 'none', waist: 'none', shoulder: 'none', body: 'slightWaist', pose: 'windowTurn', lighting: 'bambooShadow', background: 'bambooCourtyard', framing: 'halfBody', camera: 'threeQuarterSide', ratio: 'vertical45' },
+  hanModernCouture: { style: 'modernCouture', composition: 'subject placed to one side with clean negative space for a refined editorial layout', garment: 'hanModern', materials: ['wovenBrocade', 'jadePendant'], chest: 'crossCollarDeepV', waist: 'none', shoulder: 'singleShoulder', body: 'tallFashion', pose: 'sideLongLine', lighting: 'modernStudio', background: 'modernChineseStudio', framing: 'threeQuarter', camera: 'eyeLevel', ratio: 'vertical45' },
+  hanWindowEditorial: { style: 'fashionEditorial', composition: 'wooden lattice window framing around the subject, layered foreground and background depth, intimate Chinese portrait composition', garment: 'hanModern', materials: ['lightGauze', 'calligraphySeal'], chest: 'crossWrapDeepV', waist: 'wrapSideSlit', shoulder: 'none', body: 'slightWaist', pose: 'sleeveHold', lighting: 'paperWindowSoft', background: 'latticeRoom', framing: 'threeQuarter', camera: 'sideProfile', ratio: 'vertical34' },
+  tangPalaceGown: { style: 'courtLuxury', composition: 'symmetrical classical composition with balanced windows, courtyard lines and ceremonial visual order', garment: 'tangClassical', materials: ['goldEmbroidery', 'peonyPattern'], chest: 'none', waist: 'none', shoulder: 'none', body: 'tallFashion', pose: 'naturalStanding', lighting: 'tangGold', background: 'tangPalace', framing: 'fullBody', camera: 'eyeLevel', ratio: 'vertical23' },
+  tangGoldPeony: { style: 'courtLuxury', composition: 'flowing sleeves and fabric edges create a soft foreground frame while the face remains clearly unobstructed', garment: 'tangClassical', materials: ['goldEmbroidery', 'peonyPattern'], chest: 'deepV', waist: 'none', shoulder: 'none', body: 'curvy', pose: 'flowerBranch', lighting: 'warmLantern', background: 'redLacquerHall', framing: 'threeQuarter', camera: 'lowAngle', ratio: 'vertical45' },
+  tangModernGown: { style: 'modernCouture', composition: 'full-body fashion portrait showing the complete garment silhouette, sleeve movement and surrounding classical space', garment: 'tangModern', materials: ['wovenBrocade', 'goldEmbroidery'], chest: 'crossCollarDeepV', waist: 'highSideSlit', shoulder: 'singleShoulder', body: 'tallFashion', pose: 'courtyardWalk', lighting: 'modernStudio', background: 'modernChineseStudio', framing: 'fullBody', camera: 'threeQuarterSide', ratio: 'vertical23' },
+  tangModernCover: { style: 'fashionEditorial', composition: 'subject placed to one side with clean negative space for a refined editorial layout', garment: 'tangModern', materials: ['lightGauze', 'pearlHairOrnament'], chest: 'waistDeepV', waist: 'openSkirtPanel', shoulder: 'offShoulder', body: 'kpopIdol', pose: 'waterSleeve', lighting: 'tangGold', background: 'tangPalace', framing: 'threeQuarter', camera: 'lowAngle', ratio: 'vertical45' },
+  songScholarStudy: { style: 'classicalPortrait', composition: 'close editorial crop emphasizing facial identity, collar construction, textile texture and refined garment details', garment: 'songClassical', materials: ['ramieLinen', 'calligraphySeal'], chest: 'none', waist: 'none', shoulder: 'none', body: 'original', pose: 'scrollSeated', lighting: 'paperWindowSoft', background: 'songStudy', framing: 'halfBody', camera: 'beautyPortrait', ratio: 'vertical34' },
+  songJiangnanInk: { style: 'inkFineArt', composition: 'full environmental portrait with subject integrated into a Chinese courtyard, study or waterside garden with clear spatial layers', garment: 'songClassical', materials: ['inkLandscapePattern', 'blueWhitePorcelain'], chest: 'none', waist: 'none', shoulder: 'none', body: 'slightWaist', pose: 'railingGaze', lighting: 'inkMist', background: 'jiangnanWater', framing: 'environment', camera: 'highAngle', ratio: 'landscape169' },
+  songModernMinimal: { style: 'fashionEditorial', composition: 'subject placed to one side with clean negative space for a refined editorial layout', garment: 'songModern', materials: ['plainSilk', 'kesiTexture'], chest: 'crossWrapDeepV', waist: 'wrapSideSlit', shoulder: 'halter', body: 'tallFashion', pose: 'sideLongLine', lighting: 'modernStudio', background: 'modernChineseStudio', framing: 'threeQuarter', camera: 'sideProfile', ratio: 'vertical45' },
+  songModernStudio: { style: 'modernCouture', composition: 'close editorial crop emphasizing facial identity, collar construction, textile texture and refined garment details', garment: 'songModern', materials: ['plainSilk', 'jadePendant'], chest: 'deepV', waist: 'none', shoulder: 'singleShoulder', body: 'slightWaist', pose: 'sleeveHold', lighting: 'paperWindowSoft', background: 'latticeRoom', framing: 'halfBody', camera: 'threeQuarterSide', ratio: 'vertical45' }
+};
+
+function selected(name){
+  const input = document.querySelector('input[name="' + name + '"]:checked');
+  return input ? input.value : '';
+}
+function selectedCheckboxes(name){
+  return Array.from(document.querySelectorAll('input[name="' + name + '"]:checked')).map(input => input.value);
+}
+function setRadioValue(name, value){
+  const input = Array.from(document.querySelectorAll('input[name="' + name + '"]')).find(item => item.value === value);
+  if(input) input.checked = true;
+}
+function setCheckboxValues(name, values){
+  const wanted = new Set(values || []);
+  document.querySelectorAll('input[name="' + name + '"]').forEach(input => { input.checked = wanted.has(input.value); });
+}
+function getAllRadioValues(name){
+  return Array.from(document.querySelectorAll('input[name="' + name + '"]')).map(input => input.value);
+}
+function getAllSelectValues(id){
+  const el = document.getElementById(id);
+  return el ? Array.from(el.options).map(option => option.value) : [];
+}
+function getRandomItem(values){
+  return values[Math.floor(Math.random() * values.length)];
+}
+function shuffle(values){
+  return values.slice().sort(() => Math.random() - 0.5);
+}
+function customKeywordList(value){
+  return value.split(/[,，、\n]/).map(item => item.trim()).filter(Boolean);
+}
+function refreshCards(){
+  document.querySelectorAll('.card').forEach(card => {
+    const input = card.querySelector('input');
+    if(input) card.classList.toggle('selected', input.checked);
+  });
+  const count = selectedCheckboxes('materials').length;
+  const notice = document.getElementById('materialsNotice');
+  notice.textContent = count >= 2 ? '最多選擇 2 個材質；已達上限。' : '';
+}
+function clearCustomFields(){
+  ['customGarment','customMaterial','customBackground','customPose','colorNote','extraNote'].forEach(id => { document.getElementById(id).value = ''; });
+}
+function applyThemeTemplate(key){
+  const preset = themeTemplates[key];
+  if(!preset) return;
+  setRadioValue('style', preset.style);
+  setRadioValue('composition', preset.composition);
+  setRadioValue('garment', preset.garment);
+  setCheckboxValues('materials', preset.materials);
+  setRadioValue('garmentChestVariation', preset.chest);
+  setRadioValue('garmentWaistVariation', preset.waist);
+  setRadioValue('garmentShoulderVariation', preset.shoulder);
+  setRadioValue('bodyShape', preset.body);
+  setRadioValue('pose', preset.pose);
+  setRadioValue('lighting', preset.lighting);
+  setRadioValue('background', preset.background);
+  setRadioValue('framing', preset.framing);
+  setRadioValue('camera', preset.camera);
+  setRadioValue('ratio', preset.ratio);
+  clearCustomFields();
+  refreshCards();
+  generate({ reveal: true });
+}
+function applyClassicalRandomSelection(){
+  ['style','composition','garment','garmentChestVariation','garmentWaistVariation','garmentShoulderVariation','bodyShape','pose','lighting','background','framing','camera','ratio'].forEach(name => setRadioValue(name, getRandomItem(getAllRadioValues(name))));
+  const materialValues = shuffle(getAllRadioValues('materials'));
+  setCheckboxValues('materials', materialValues.slice(0, Math.random() < .5 ? 1 : 2));
+  document.getElementById('intensity').value = getRandomItem(getAllSelectValues('intensity'));
+  clearCustomFields();
+  refreshCards();
+  generate({ reveal: true });
+}
+let outputVisible = false;
+function markStale(){
+  const wrap = document.getElementById('outputWrap');
+  if(wrap && !wrap.classList.contains('hidden')) wrap.classList.add('stale');
+}
+function clearStale(){ document.getElementById('outputWrap').classList.remove('stale'); }
+function generate(options){
+  const bodyShape = BODY_SHAPES[selected('bodyShape')];
+  const selectedMaterials = selectedCheckboxes('materials');
+  const customMaterial = document.getElementById('customMaterial').value.trim();
+  const customMaterialParts = customKeywordList(customMaterial);
+  const materialParts = customMaterialParts.length ? customMaterialParts.map(item => 'custom traditional material: ' + item) : selectedMaterials.map(key => materialData[key].prompt);
+  const materialPalette = customMaterialParts.length ? customMaterialParts.join(', ') : selectedMaterials.map(key => materialData[key].palette).join(', ');
+  const customGarment = document.getElementById('customGarment').value.trim();
+  const garmentText = customGarment ? 'custom Chinese garment form only: ' + customGarment + '; preserve the selected period-informed Chinese silhouette' : garmentData[selected('garment')];
+  const garmentVariationParts = [
+    GARMENT_VARIATIONS.chest[selected('garmentChestVariation')],
+    GARMENT_VARIATIONS.waist[selected('garmentWaistVariation')],
+    GARMENT_VARIATIONS.shoulder[selected('garmentShoulderVariation')]
+  ].filter(Boolean);
+  const customBackground = document.getElementById('customBackground').value.trim();
+  const background = customBackground ? 'custom background only: ' + customBackground + '; keep the Chinese classical visual language' : backgroundData[selected('background')];
+  const customPose = document.getElementById('customPose').value.trim();
+  const poseText = customPose ? 'custom pose only: ' + customPose + '; keep natural human anatomy and a coherent moment' : poseData[selected('pose')];
+  const colorNote = document.getElementById('colorNote').value.trim();
+  const extraNote = document.getElementById('extraNote').value.trim();
+  const prompt = [
+    sharedClassicalCore.identityGuard + ',',
+    'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
+    sharedClassicalCore.anatomyGuard + ',',
+    sharedClassicalCore.poseGuard + ',',
+    bodyShape + ',',
+    sharedClassicalCore.lightingGuard + ',',
+    styleData[selected('style')] + ',',
+    selected('composition') + ',',
+    sharedClassicalCore.compositionGuard + ',',
+    'refined Chinese clothing aesthetics, period-informed Chinese silhouette, elegant fabric drape, traditional Chinese design language, culturally grounded styling, refined craftsmanship,',
+    'appearance form: ' + garmentText + ',',
+    materialParts.length ? 'traditional materials and Chinese elements: ' + materialParts.join('; ') + ',' : '',
+    garmentVariationParts.length ? 'garment variation details: ' + garmentVariationParts.join('; ') + ', preserve the selected period-informed Chinese silhouette,' : '',
+    poseText + ',',
+    framingData[selected('framing')] + ',',
+    cameraData[selected('camera')] + ',',
+    'lighting design: ' + lightingData[selected('lighting')] + ',',
+    'background design: ' + background + ',',
+    ratioData[selected('ratio')] + ',',
+    sharedClassicalCore.output + ',',
+    document.getElementById('intensity').value + ',',
+    'color palette: ' + (colorNote || materialPalette) + ',',
+    extraNote ? 'extra direction: ' + extraNote + ',' : '',
+    sharedClassicalCore.negativePrompt + ',',
+    'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face'
+  ].filter(Boolean).join('\n');
+  document.getElementById('outputText').value = prompt;
+  clearStale();
+  if(options && options.reveal){
+    outputVisible = true;
+    document.getElementById('outputWrap').classList.remove('hidden');
+  }
+  document.getElementById('copyBtn').textContent = '一鍵複製';
+}
+document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(input => input.addEventListener('change', refreshCards));
+document.querySelectorAll('input[name="materials"]').forEach(input => input.addEventListener('change', event => {
+  if(selectedCheckboxes('materials').length > 2){
+    event.target.checked = false;
+    document.getElementById('materialsNotice').textContent = '最多選擇 2 個材質；這次選取已取消。';
+  }
+  refreshCards();
+}));
+document.getElementById('generateBtn').addEventListener('click', () => generate({ reveal: true }));
+document.getElementById('classicalMoodPreset').addEventListener('click', applyClassicalRandomSelection);
+document.querySelectorAll('[data-template]').forEach(button => button.addEventListener('click', () => applyThemeTemplate(button.dataset.template)));
+document.querySelector('.section-preset').addEventListener('click', event => {
+  const button = event.target.closest('button.card');
+  if(!button) return;
+  document.querySelectorAll('.section-preset button.card.template-selected').forEach(item => item.classList.remove('template-selected'));
+  button.classList.add('template-selected');
+});
+document.getElementById('copyBtn').addEventListener('click', () => {
+  if(document.getElementById('outputWrap').classList.contains('stale')) return;
+  const outputText = document.getElementById('outputText');
+  const button = document.getElementById('copyBtn');
+  const showCopied = () => { button.textContent = '已複製!'; button.classList.add('copied'); setTimeout(() => { button.textContent = '一鍵複製'; button.classList.remove('copied'); }, 1500); };
+  if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(outputText.value).then(showCopied).catch(() => { outputText.select(); document.execCommand('copy'); showCopied(); });
+  else { outputText.select(); document.execCommand('copy'); showCopied(); }
+});
+document.addEventListener('input', event => { if(event.target && event.target.closest && !event.target.closest('#outputWrap')) markStale(); }, true);
+document.addEventListener('change', event => { if(event.target && event.target.closest && !event.target.closest('#outputWrap')) markStale(); }, true);
+['customGarment','customMaterial','customBackground','customPose','colorNote','extraNote','intensity'].forEach(id => {
+  document.getElementById(id).addEventListener('input', refreshCards);
+  document.getElementById(id).addEventListener('change', refreshCards);
+});
+refreshCards();
+generate({});
+</script>
+</body>
+</html>

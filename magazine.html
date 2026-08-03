@@ -621,7 +621,6 @@
       <button type="button" class="preset-btn" data-magazine-preset="balletStairEditorial">一鍵套用｜芭蕾粉紗樓梯</button>
       <button type="button" class="preset-btn" data-magazine-preset="jewelryGlovePortrait">一鍵套用｜珠寶手套特寫</button>
       <button type="button" class="preset-btn" data-magazine-preset="hanfuWindowEditorial">一鍵套用｜新式漢服花窗</button>
-      <button type="button" class="preset-btn" data-magazine-preset="hanfuAestheticEditorial">一鍵套用｜漢服美學古典融合</button>
       <button type="button" class="preset-btn" data-magazine-preset="rainMirrorBeauty">一鍵套用｜雨夜鏡面美妝</button>
       <button type="button" class="preset-btn" data-magazine-preset="crystalBallroomToast">一鍵套用｜水晶晚宴陽台</button>
       <button type="button" class="preset-btn" data-magazine-preset="cherryRedHairBeauty">一鍵套用｜紅髮櫻桃美妝</button>
@@ -861,7 +860,6 @@
       <label class="chip" data-value="清宮格格"><input type="radio" name="themePreset" value="清宮格格">清宮格格</label>
       <label class="chip" data-value="古風仙女"><input type="radio" name="themePreset" value="古風仙女">古風仙女</label>
       <label class="chip" data-value="新式漢服"><input type="radio" name="themePreset" value="新式漢服">新式漢服</label>
-      <label class="chip" data-value="漢服美學"><input type="radio" name="themePreset" value="漢服美學">漢服美學</label>
       <label class="chip" data-value="宋制溫婉"><input type="radio" name="themePreset" value="宋制溫婉">宋制溫婉</label>
       <label class="chip" data-value="亂世紅顏"><input type="radio" name="themePreset" value="亂世紅顏">亂世紅顏</label>
       <label class="chip" data-value="古風軍師"><input type="radio" name="themePreset" value="古風軍師">古風軍師</label>
@@ -4379,7 +4377,6 @@ const THEME_PRESET_DEFAULTS = {
   '濕髮皮革': { style: 'fashion_ad', bg: 'dark_metal', framing: 'bust', camera: 'side_profile', motion: 'breeze', makeup: ['smoky_glam', 'glossy_lip'], skinTexture: 'dewy_glow', jewelry: ['earrings'], expression: 'cool_stare', lighting: 'rim_light', ratio: '4:5' },
   '紗裙芭蕾': { style: 'beauty_cover', bg: 'gallery_white_wall', framing: 'full_body', camera: 'soft_focus', motion: 'flow', makeup: ['natural_highend', 'glossy_lip'], skinTexture: 'soft_focus', jewelry: ['none'], expression: 'lower_gaze', lighting: 'window_soft', ratio: '2:3' },
   '新式漢服': { style: 'bazaar_cn', bg: 'drape', pose: 'lift_skirt_edge', framing: 'three_quarter', camera: 'side_profile', motion: 'flow', makeup: ['natural_highend', 'precise_eyeliner'], skinTexture: 'natural_real', jewelry: ['earrings'], expression: 'lower_gaze', lighting: 'window_soft', ratio: '3:4' },
-  '漢服美學': { style: 'bazaar_cn', bg: 'scholar_study', pose: 'water_sleeve', framing: 'three_quarter', camera: 'side_profile', motion: 'flow', makeup: ['natural_highend', 'precise_eyeliner'], skinTexture: 'natural_real', jewelry: ['earrings'], expression: 'lower_gaze', lighting: 'window_soft', ratio: '3:4' },
   '宋制溫婉': { style: 'lofficiel', bg: 'window_light', pose: 'sleeve_hide_smile', framing: 'half_body', camera: 'soft_focus', motion: 'breeze', makeup: ['natural_highend', 'matte_base'], skinTexture: 'natural_real', jewelry: ['none'], expression: 'lower_gaze', lighting: 'window_soft', ratio: '3:4' },
   '和服寫真': { style: 'japanese_photo_magazine', bg: 'gallery_white_wall', pose: 'fan_cover', framing: 'three_quarter', camera: 'soft_focus', motion: 'still', makeup: ['natural_highend', 'precise_eyeliner'], skinTexture: 'natural_real', jewelry: ['earrings'], expression: 'lower_gaze', lighting: 'window_soft', ratio: '3:4' },
   '浴衣夏日': { style: 'japanese_photo_magazine', bg: 'soft_gradient', pose: 'umbrella_gaze', framing: 'half_body', camera: 'neutral', motion: 'breeze', makeup: ['natural_highend', 'glossy_lip'], skinTexture: 'dewy_glow', jewelry: ['none'], expression: 'allure_smile', lighting: 'beauty_fill', ratio: '3:4' },
@@ -4425,10 +4422,6 @@ const THEME_PRESET_DEFAULTS = {
   '古風軍師': { style: 'inner_story', bg: 'scholar_study', pose: 'calligraphy_brush', framing: 'half_body', camera: 'neutral', motion: 'still', makeup: ['natural_highend', 'matte_base'], skinTexture: 'natural_real', jewelry: ['none'], expression: 'calm_direct', lighting: 'window_soft', ratio: '3:4' },
   '絳紗夜宴': { style: 'bazaar_cn', bg: 'red_curtain', pose: 'water_sleeve', framing: 'full_body', camera: 'low', motion: 'flow', makeup: ['red_lip', 'precise_eyeliner'], skinTexture: 'luxury_campaign', jewelry: ['statement'], expression: 'distant_chic', lighting: 'black_gold', ratio: '2:3' },
   '昆蟲女王圖鑑': { style: 'magazine_masthead', bg: 'gallery_white_wall', pose: 'center_still', framing: 'three_quarter', camera: 'neutral', motion: 'still', makeup: ['smoky_glam', 'red_lip'], skinTexture: 'luxury_campaign', jewelry: ['statement'], expression: 'queen_smirk', lighting: 'mixed_studio', ratio: '3:4' }
-};
-
-const THEME_PROMPT_TEXT = {
-  '漢服美學': 'refined Chinese hanfu aesthetics, Han-inspired cross-collar layers, elegant silk drape, subtle traditional embroidery, Song-inspired restraint, Tang-inspired grace, Jiangnan ink-wash mood, modern couture finish; no futuristic, cyberpunk or mechanical elements'
 };
 
 function applyThemePresetDefaults(value){
@@ -4500,14 +4493,14 @@ const POSE_THEME_MAP = {
   hip:         ['現代時尚','奢華晚裝','米蘭時裝週','度假風尚','黑色西裝女王','紅毯女星'],
   lean:        ['復古膠片','極簡主義','巴黎時尚','度假風尚','極簡白襯衫','濕髮皮革'],
   turn:        ['復古膠片','巴黎時尚','米蘭時裝週','復古名伶','紗裙芭蕾'],
-  guifei:      ['清宮格格','唐朝盛世','改良式漢服','漢服美學','奢華晚裝'],
-  kneel:       ['清宮格格','唐朝盛世','改良式漢服','漢服美學','奢華晚裝'],
+  guifei:      ['清宮格格','唐朝盛世','改良式漢服','奢華晚裝'],
+  kneel:       ['清宮格格','唐朝盛世','改良式漢服','奢華晚裝'],
   lunge:       ['九尾妖狐','女武神','暗黑哥德'],
   vogue_hands: ['現代時尚','巴黎時尚','米蘭時裝週','未來銀色高訂','羽毛高訂'],
   arms_wide:   ['夢幻仙氣','敦煌飛天','古風仙女'],
   chin_rest:   ['奢華晚裝','極簡主義','復古膠片','霧面裸色高級感','珠寶禮服'],
-  water_sleeve:['唐朝盛世','敦煌飛天','西域舞姬','中式古典','古風仙女','改良式漢服','漢服美學'],
-  fan_cover:   ['唐朝盛世','清宮格格','中式古典','和風雅韻','改良式漢服','漢服美學'],
+  water_sleeve:['唐朝盛世','敦煌飛天','西域舞姬','中式古典','古風仙女','改良式漢服'],
+  fan_cover:   ['唐朝盛世','清宮格格','中式古典','和風雅韻','改良式漢服'],
   tiptoe:      ['敦煌飛天','古風仙女','夢幻仙氣','紗裙芭蕾','羽毛高訂'],
   jojo_twist:  ['九尾妖狐','女武神','暗黑女王','暗黑哥德'],
   jojo_cross:  ['九尾妖狐','女武神','暗黑女王'],
@@ -4520,7 +4513,7 @@ const POSE_THEME_MAP = {
   step_up:     ['女武神','九尾妖狐','暗黑女王','洛可可宮廷'],
   hug_knees:   ['復古膠片','水下夢境','夢幻仙氣','極簡主義'],
   prone_chin:  ['度假風尚','奢華晚裝','復古膠片'],
-  hold_flower: ['古風仙女','敦煌飛天','中式古典','水下夢境','夢幻仙氣','改良式漢服','漢服美學'],
+  hold_flower: ['古風仙女','敦煌飛天','中式古典','水下夢境','夢幻仙氣','改良式漢服'],
   hair_flip:   ['現代時尚','巴黎時尚','米蘭時裝週','度假風尚','濕髮皮革','紅毯女星'],
   eye_cover:   ['血月魔女','暗黑哥德','賽博龐克','九尾妖狐','水下夢境']
 };
@@ -4586,7 +4579,6 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
 
   let theme = themeInputEl.value.trim();
   if(!theme) theme = "(請填寫主題或服裝方向)";
-  theme = THEME_PROMPT_TEXT[theme] || theme;
 
   const style = STYLES[styleKey];
   const isInkFlower = styleKey === 'ink_flower';
@@ -4935,11 +4927,6 @@ const QUICK_MAGAZINE_PRESETS = {
     label: '新式漢服花窗',
     themeText: '新式漢服、花窗光影與飄逸袖線，呈現當代東方時裝肖像',
     style: 'bazaar_cn', bg: 'window_light', pose: 'sleeve_hide_smile', framing: 'three_quarter', camera: 'side_profile', motion: 'flow', makeup: ['natural_highend', 'precise_eyeliner'], skinTexture: 'natural_real', jewelry: ['earrings'], expression: 'lower_gaze', lighting: 'window_soft', media: 'realistic_studio', ratio: '3:4'
-  },
-  hanfuAestheticEditorial: {
-    label: '漢服美學古典融合',
-    themeText: 'refined Chinese hanfu aesthetics, Han-inspired cross-collar layers, elegant silk drape, subtle traditional embroidery, Song-inspired restraint, Tang-inspired grace, Jiangnan ink-wash mood, modern couture finish; no futuristic, cyberpunk or mechanical elements',
-    style: 'bazaar_cn', bg: 'scholar_study', pose: 'water_sleeve', framing: 'three_quarter', camera: 'side_profile', motion: 'flow', makeup: ['natural_highend', 'precise_eyeliner'], skinTexture: 'natural_real', jewelry: ['earrings'], expression: 'lower_gaze', lighting: 'window_soft', media: 'realistic_studio', ratio: '3:4'
   },
   rainMirrorBeauty: {
     label: '雨夜鏡面美妝',
