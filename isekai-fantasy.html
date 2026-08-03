@@ -101,14 +101,14 @@
   .section-style{order:1;}
   .section-composition{order:2;}
   .section-garment{order:3;}
-  .section-body{order:4;}
-  .section-material{order:5;}
-  .section-garmentdetail{order:6;}
+  .section-material{order:4;}
+  .section-garmentdetail{order:5;}
+  .section-body{order:6;}
   .section-pose{order:7;}
-  .section-camera{order:8;}
+  .section-extra{order:8;}
   .section-lighting{order:9;}
   .section-background{order:10;}
-  .section-extra{order:11;}
+  .section-camera{order:11;}
   .section-ratio{order:12;}
   .section-output{order:13;}
   .section-header{
@@ -462,7 +462,7 @@
       </div>
     </div>
     <div class="pose-group">
-      <div class="pose-group-label">人物入鏡比例：只控制拍到哪裡，角度請到 07 鏡頭語法選</div>
+      <div class="pose-group-label">人物入鏡比例：只控制拍到哪裡，角度請到 11 鏡頭語法選</div>
       <div class="grid grid-3" data-choice="framing">
         <label class="card selected"><input type="radio" name="framing" value="fullBody" checked><div class="name">全身入鏡</div><div class="desc">人物約35-50%，頭到腳完整出現，整套服裝最清楚</div></label>
         <label class="card"><input type="radio" name="framing" value="threeQuarter"><div class="name">七分身</div><div class="desc">人物約50-65%，拍到膝上，臉和服裝都兼顧</div></label>
@@ -476,7 +476,7 @@
 
   <section class="section-body">
     <div class="section-header">
-      <div class="section-label">03</div>
+      <div class="section-label">06</div>
       <div class="section-title">身形輪廓</div>
     </div>
     <p class="hint">單選，控制人物比例與腰線。選「原圖自然比例」時，會以參考照身形為主要依據。</p>
@@ -491,7 +491,7 @@
 
   <section class="section-garment">
     <div class="section-header">
-      <div class="section-label">04</div>
+      <div class="section-label">03</div>
       <div class="section-title">服裝輪廓</div>
     </div>
     <p class="hint">這裡只決定衣服的外型，例如禮服、和服、披風或肩甲；材質效果請在下一個「主題材質」選。</p>
@@ -542,7 +542,7 @@
 
   <section class="section-material">
     <div class="section-header">
-      <div class="section-label">05</div>
+      <div class="section-label">04</div>
       <div class="section-title">主題材質與奇幻元素</div>
     </div>
     <p class="hint">選擇要圍繞人物出現的魔法或世界觀元素，例如聖光、元素魔法、暗影或皇室珠寶；這不是背景地點。</p>
@@ -600,7 +600,7 @@
 
   <section class="section-garmentdetail">
     <div class="section-header">
-      <div class="section-label">06</div>
+      <div class="section-label">05</div>
       <div class="section-title">服裝改造核心</div>
     </div>
     <p class="hint">這些是服裝表面的結構化細節（鏤空／寶石鑲嵌／符文滾邊），不是重新設計整件服裝，剪裁輪廓仍以 03 服裝輪廓為準。Layer 只決定「隨機套用」時要改幾個部位；手動選了哪個部位，隨機套用不會覆蓋掉。</p>
@@ -812,7 +812,7 @@
 
   <section class="section-camera">
     <div class="section-header">
-      <div class="section-label">08</div>
+      <div class="section-label">11</div>
       <div class="section-title">拍攝角度與鏡頭感</div>
     </div>
     <p class="hint">只改觀看角度、景深和鏡頭氣勢；人物拍到哪裡請回到 02 的「人物入鏡比例」。</p>
@@ -933,7 +933,7 @@
 
   <section class="section-extra">
     <div class="section-header">
-      <div class="section-label">11</div>
+      <div class="section-label">08</div>
       <div class="section-title">自訂要求</div>
     </div>
     <p class="hint">只有需要指定道具、禁用元素、文字留白或特殊細節時再填寫，避免與前面選項重複描述。</p>

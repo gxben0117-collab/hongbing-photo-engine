@@ -85,7 +85,26 @@
     max-width:660px;
     margin:0 auto;
     padding:70px 20px 40px;
+    display:flex;
+    flex-direction:column;
   }
+  .wrap > header{order:-3;}
+  .wrap > .note{order:-2;}
+  .travel-random{order:0;}
+  .travel-preset{order:1;}
+  .travel-style{order:2;}
+  .travel-theme{order:3;}
+  .travel-composition{order:4;}
+  .travel-costume{order:5;}
+  .travel-adorn{order:6;}
+  .travel-pose{order:7;}
+  .travel-motion{order:8;}
+  .travel-lighting{order:9;}
+  .travel-camera{order:10;}
+  .travel-ratio{order:11;}
+  .travel-media{order:12;}
+  .travel-output{order:13;}
+  .wrap > .output-wrap{order:99;}
   @media (max-width:760px){
     nav{
       position:sticky;
@@ -333,12 +352,12 @@
     💡 產生咒語後，使用時請附上人物參考照片。身份鎖定系統需要照片才能生效。
   </div>
 
-  <section>
+  <section class="travel-random">
     <button class="generate-btn" id="travelMoodPreset" style="margin-bottom:18px;background:linear-gradient(180deg,#17120b 0%,#22180f 100%);color:var(--gold);border:1px solid var(--gold);">隨機套用｜旅拍動感感覺</button>
   </section>
 
   <!-- 00 一鍵模板 -->
-  <section>
+  <section class="travel-preset">
     <div class="step">
       <div class="num">00</div>
       <div class="title">一鍵旅拍模板</div>
@@ -360,10 +379,10 @@
     </div>
   </section>
 
-  <!-- 01 構圖 -->
-  <section>
+  <!-- 03 構圖 -->
+  <section class="travel-composition">
     <div class="step">
-      <div class="num">01</div>
+      <div class="num">03</div>
       <div class="title">人物取景方式</div>
       <div class="sub">單選，決定人物拍多近、景點占多少畫面</div>
     </div>
@@ -401,10 +420,10 @@
     </div>
   </section>
 
-  <!-- 02 風格 -->
-  <section>
+  <!-- 01 風格 -->
+  <section class="travel-style">
     <div class="step">
-      <div class="num">02</div>
+      <div class="num">01</div>
       <div class="title">選擇旅拍風格</div>
       <div class="sub">單選，決定整體光線與氛圍</div>
     </div>
@@ -487,10 +506,10 @@
     </div>
   </section>
 
-  <!-- 03 主題地點 -->
-  <section>
+  <!-- 02 主題地點 -->
+  <section class="travel-theme">
     <div class="step">
-      <div class="num">03</div>
+      <div class="num">02</div>
       <div class="title">選擇旅拍地點 / 主題</div>
       <div class="sub">決定拍攝地點與故事主題；先選快選，再用下方文字補充細節</div>
     </div>
@@ -591,10 +610,10 @@
     <input type="text" class="theme-input" id="themeInput" placeholder="例如：東京原宿cosplay貓女">
   </section>
 
-  <!-- 04 比例 -->
-  <section>
+  <!-- 10 比例 -->
+  <section class="travel-ratio">
     <div class="step">
-      <div class="num">04</div>
+      <div class="num">10</div>
       <div class="title">圖片比例</div>
       <div class="sub">單選，依用途選擇直式人像、社群貼文或橫幅風景</div>
     </div>
@@ -662,10 +681,10 @@
     </div>
   </section>
 
-  <!-- 05 鏡頭氣場 -->
-  <section>
+  <!-- 09 鏡頭氣場 -->
+  <section class="travel-camera">
     <div class="step">
-      <div class="num">05</div>
+      <div class="num">09</div>
       <div class="title">拍攝角度與鏡頭感</div>
       <div class="sub">單選，只改觀看角度與景深；人物入鏡大小請在 01 選</div>
     </div>
@@ -738,10 +757,10 @@
     </div>
   </section>
 
-  <!-- 06 光影色彩 -->
-  <section>
+  <!-- 08 光影色彩 -->
+  <section class="travel-lighting">
     <div class="step">
-      <div class="num">06</div>
+      <div class="num">08</div>
       <div class="title">光影色彩</div>
       <div class="sub">單選，讓人物與旅途背景處在同一種光線與色溫中</div>
     </div>
@@ -874,7 +893,7 @@
   </section>
 
   <!-- 07 動態節奏 -->
-  <section>
+  <section class="travel-motion">
     <div class="step">
       <div class="num">07</div>
       <div class="title">動態節奏</div>
@@ -904,10 +923,10 @@
     </div>
   </section>
 
-  <!-- 08 姿勢 -->
-  <section>
+  <!-- 06 姿勢 -->
+  <section class="travel-pose">
     <div class="step">
-      <div class="num">08</div>
+      <div class="num">06</div>
       <div class="title">姿勢</div>
       <div class="sub">單選，指定明確姿勢；「交給導演」維持原本的動作氛圍自動安排</div>
     </div>
@@ -1031,10 +1050,10 @@
     <input type="text" class="theme-input" id="customPose" placeholder="例如：單手撐傘回眸、坐在窗邊托腮望向遠方">
   </section>
 
-  <!-- 09 服裝方向 -->
-  <section>
+  <!-- 04 服裝方向 -->
+  <section class="travel-costume">
     <div class="step">
-      <div class="num">09</div>
+      <div class="num">04</div>
       <div class="title">服裝方向</div>
       <div class="sub">單選，指定服裝主軸；「主題自動」維持原本依主題自動設計</div>
     </div>
@@ -1172,10 +1191,10 @@
     </div>
   </section>
 
-  <!-- 10 裝扮細節 -->
-  <section>
+  <!-- 05 裝扮細節 -->
+  <section class="travel-adorn">
     <div class="step">
-      <div class="num">10</div>
+      <div class="num">05</div>
       <div class="title">裝扮細節</div>
       <div class="sub">髮型與隨身配件各選一項；裝扮只改造型，不改臉部與身份</div>
     </div>
@@ -1248,7 +1267,7 @@
   </section>
 
   <!-- 11 輸出風格 -->
-  <section>
+  <section class="travel-media">
     <div class="step">
       <div class="num">11</div>
       <div class="title">輸出風格 / 畫面媒材</div>
@@ -1292,7 +1311,7 @@
       </label></div>
   </section>
   <!-- 12 生成 -->
-  <section>
+  <section class="travel-output">
     <div class="step">
       <div class="num">12</div>
       <div class="title">生成咒語</div>

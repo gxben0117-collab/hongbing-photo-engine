@@ -15,6 +15,10 @@
 - `doll.html` - 公仔生成器
 - `fantasy-fashion.html` - 幻想廣告生成器
 - `store-ad.html` - 店家活動廣告生成器
+- `xianxia.html` / `anime-character.html` / `flower-fairy.html` - 仙俠、動漫人物、花仙子
+- `isekai-fantasy.html` / `floral-sweet.html` / `gala-socialite.html` - 異世界、花漾甜美、晚宴名媛
+- `kpop-idol.html` / `battle-academy.html` - 韓系偶像、戰鬥制服學園
+- `ancient-goddess.html` / `editorial-identity.html` - 古代女神、編輯視覺設計
 - `assets/core-prompt.js` - 共用身份鎖定與保護核心（`window.HB_CORE_PROMPT`）
 - `docs/` - 使用方式、核心邏輯、各頁流程、工程維護文件
   - `docs/development-log.md` - 依時間排序的完整開發記錄（唯一時間軸來源）
@@ -22,9 +26,10 @@
 - `scripts/` - 本地檢查與維護腳本
   - `check-static.mjs` - 結構檢查（重複 id、本地連結、inline script 語法）
   - `build-prompt-preview.mjs` - 重建改前/改後完整咒語，比對固定選項組合輸出
-  - `audit-100x.mjs` - 重建五頁組裝邏輯，隨機模擬 100×5 組選項，檢查內容問題
-  - `validate-preset-refs.mjs` - 檢查三頁「一鍵套用/預設連動」物件（QUICK_*_PRESETS、
+  - `audit-100x.mjs` - 重建 15 頁組裝邏輯，隨機模擬 100×15 組選項，檢查內容問題
+  - `validate-preset-refs.mjs` - 檢查各頁「一鍵套用/預設連動」物件（QUICK_*_PRESETS、
     *_DEFAULTS、fantasy 的 themeTemplates）引用的欄位值是否都存在於當下選項池
+  - `check-ui-flows.mjs` - 檢查 15 頁必要控制項、初始值、helper 引用、輸出寫入與一鍵映射
 - `assets/` - 共用圖片、圖示、未來靜態資產
 - `experiments/` - 不屬於正式網站流程的實驗腳本
 - `output/` - 使用者生成結果、匯出稿、截圖、`build-prompt-preview.mjs` 的對照輸出
@@ -44,10 +49,9 @@
 - 保持 HTML 入口檔在根目錄，避免 GitHub Pages 路徑變動
 - 新增的規則或流程先寫進 `docs/`，重大改動記一筆到 `docs/development-log.md`
 - 上架前執行 `node scripts\check-static.mjs`；若動到咒語組裝邏輯或新增選項，
-  再跑 `node scripts\build-prompt-preview.mjs` 確認 0 diff、
-  `node scripts\audit-100x.mjs` 確認沒有內容問題、以及
-  `node scripts\validate-preset-refs.mjs` 確認沒有一鍵套用/預設連動物件
-  引用到不存在的選項值
+  再跑 `node scripts\check-ui-flows.mjs`、`node scripts\build-prompt-preview.mjs`、
+  `node scripts\audit-100x.mjs`、`node scripts\validate-preset-refs.mjs` 與
+  `git diff --check`，確認 UI 流程、固定輸出、隨機內容與一鍵套用引用都沒有問題
 - 若未來加入 JS 模組化或套件管理，再補 `package.json`
 - 核心咒語內容受 `docs/core-prompt-contract.md` 保護，未經同意不得修改
 - 新增正式 HTML 工具頁時，需同步更新 `index.html`、`scripts/check-static.mjs`、`README.md` 與相關流程文件

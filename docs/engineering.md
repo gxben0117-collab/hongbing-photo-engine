@@ -4,11 +4,13 @@
 
 專案目前是純靜態 GitHub Pages，入口檔直接放在根目錄。這個設計部署成本低、相容性高，短期應保留。
 
-主要技術債不是部署，而是三個工具頁逐漸變成大型單檔：
+主要技術債不是部署，而是幾個互動密度高的工具頁逐漸變成大型單檔：
 
 - `travel.html`：旅拍工具，規模中等
 - `magazine.html`：棚拍工具，資料與互動最多，維護風險最高
 - `doll.html`：公仔工具，互動相對獨立
+- `fantasy-fashion.html`：幻想廣告工具，選項與主題模板較多
+- `editorial-identity.html`：編輯後製工具，控制層與一鍵版型較集中
 
 ## 建議模組方向
 
@@ -67,9 +69,11 @@ node scripts\\check-static.mjs
 - `git status --short`
 - `git diff --check`
 - `node scripts\check-static.mjs`（HTML 本地連結、重複 id、inline JavaScript 語法）
+- `node scripts\check-ui-flows.mjs`（15 頁控制項、初始值、生成／複製與一鍵映射）
 - 若動到咒語組裝邏輯或新增/調整選項：
   - `node scripts\build-prompt-preview.mjs`（固定選項組合 0-diff 迴歸檢查）
-  - `node scripts\audit-100x.mjs`（五頁各隨機 100 組選項，內容稽核）
-  - `node scripts\validate-preset-refs.mjs`（三頁一鍵套用/預設連動物件引用的
+  - `node scripts\audit-100x.mjs`（15 頁各隨機 100 組選項，內容稽核）
+  - `node scripts\validate-preset-refs.mjs`（各頁一鍵套用/預設連動物件引用的
     欄位值是否都存在於當下選項池，抓 composition/intensity 這類靜默失效）
-- 五頁手動生成一次咒語，確認生成/複製正常
+- 15 頁至少各走一次主要生成或即時預覽流程；旅拍／雜誌／幻想廣告再確認一鍵套用後
+  會立即生成，並在手動改動後正確標記 stale

@@ -88,20 +88,20 @@
   .section-preset{order:0;}
   .section-style{order:1;}
   .section-composition{order:2;}
-  .section-body{order:3;}
-  .section-school{order:4;}
-  .section-upper{order:5;}
-  .section-waist{order:6;}
-  .section-lower{order:7;}
-  .section-uniformtype{order:8;}
-  .section-accessory{order:9;}
-  .section-battlemode{order:10;}
-  .section-garmentdetail{order:11;}
+  .section-school{order:3;}
+  .section-upper{order:4;}
+  .section-waist{order:5;}
+  .section-lower{order:6;}
+  .section-uniformtype{order:7;}
+  .section-accessory{order:8;}
+  .section-battlemode{order:9;}
+  .section-garmentdetail{order:10;}
+  .section-body{order:11;}
   .section-pose{order:12;}
-  .section-camera{order:13;}
+  .section-extra{order:13;}
   .section-lighting{order:14;}
   .section-background{order:15;}
-  .section-extra{order:16;}
+  .section-camera{order:16;}
   .section-ratio{order:17;}
   .section-output{order:18;}
   .section-header{
@@ -474,7 +474,7 @@
       </div>
     </div>
     <div class="pose-group">
-      <div class="pose-group-label">人物入鏡比例：只控制拍到哪裡，角度請到 12 鏡頭語法選</div>
+      <div class="pose-group-label">人物入鏡比例：只控制拍到哪裡，角度請到 16 鏡頭語法選</div>
       <div class="grid grid-3" data-choice="framing">
         <label class="card selected"><input type="radio" name="framing" value="fullBody" checked><div class="name">全身入鏡</div><div class="desc">人物約35-50%，頭到腳完整出現，整套服裝最清楚</div></label>
         <label class="card"><input type="radio" name="framing" value="threeQuarter"><div class="name">七分身</div><div class="desc">人物約50-65%，拍到膝上，臉和服裝都兼顧</div></label>
@@ -488,7 +488,7 @@
 
   <section class="section-body">
     <div class="section-header">
-      <div class="section-label">03</div>
+      <div class="section-label">11</div>
       <div class="section-title">身形輪廓</div>
     </div>
     <p class="hint">單選，控制人物實際比例與腰線。選「原圖自然比例」時，會以參考照身形為主要依據；後面的「腰線輪廓」是服裝剪裁效果，不會改變這裡設定的身形。</p>
@@ -503,7 +503,7 @@
 
   <section class="section-school">
     <div class="section-header">
-      <div class="section-label">04</div>
+      <div class="section-label">03</div>
       <div class="section-title">學校身份</div>
     </div>
     <p class="hint">學校身份只決定主色、輔色、金屬色與校徽紋樣，不會改變服裝版型；同一套服裝換到不同學校，剪裁不變、只換色彩與校徽識別。</p>
@@ -527,7 +527,7 @@
 
   <section class="section-upper">
     <div class="section-header">
-      <div class="section-label">05</div>
+      <div class="section-label">04</div>
       <div class="section-title">上身</div>
     </div>
     <p class="hint">只決定上身版型，剪裁本身已經時尚化、不是護甲；腰線與下身在後面兩區單獨選，可以自由排列組合。</p>
@@ -557,10 +557,10 @@
 
   <section class="section-waist">
     <div class="section-header">
-      <div class="section-label">06</div>
+      <div class="section-label">05</div>
       <div class="section-title">腰線輪廓</div>
     </div>
-    <p class="hint">單選，這是「服裝剪裁」效果，不是身形調整——身形由 03 身形輪廓控制，這裡只決定腰部視覺剪裁。</p>
+    <p class="hint">單選，這是「服裝剪裁」效果，不是身形調整——身形由 11 身形輪廓控制，這裡只決定腰部視覺剪裁。</p>
     <div class="grid grid-3" data-choice="waist">
       <label class="card selected"><input type="radio" name="waist" value="naturalWaist" checked><div class="name">自然腰線</div><div class="desc">未特別強調的自然腰線剪裁</div></label>
       <label class="card"><input type="radio" name="waist" value="highWaistTailoring"><div class="name">高腰剪裁</div><div class="desc">提高腰線位置，拉長腿部視覺比例的剪裁效果</div></label>
@@ -577,7 +577,7 @@
 
   <section class="section-lower">
     <div class="section-header">
-      <div class="section-label">07</div>
+      <div class="section-label">06</div>
       <div class="section-title">下身</div>
     </div>
     <p class="hint">只決定下身版型；可以和上面「上身」「腰線輪廓」自由排列組合，套用一鍵模板時會挑選相容性較高的組合。</p>
@@ -603,7 +603,7 @@
 
   <section class="section-uniformtype">
     <div class="section-header">
-      <div class="section-label">08</div>
+      <div class="section-label">07</div>
       <div class="section-title">制服類型</div>
     </div>
     <p class="hint">單選，這是季節/場合的正式度修飾詞，不改變上身/腰線/下身選好的版型。</p>
@@ -620,10 +620,10 @@
 
   <section class="section-accessory">
     <div class="section-header">
-      <div class="section-label">09</div>
+      <div class="section-label">08</div>
       <div class="section-title">配件與幻想戰鬥細節</div>
     </div>
-    <p class="hint">配件是隨身道具與細節，不是護甲；幻想戰鬥細節負責靈氣、法陣與戰鬥氛圍特效。這兩者都不會取代 05-08 選好的制服本身，也不會自動加裝甲——裝甲強度在下一區單獨控制。</p>
+    <p class="hint">配件是隨身道具與細節，不是護甲；幻想戰鬥細節負責靈氣、法陣與戰鬥氛圍特效。這兩者都不會取代 04-07 選好的制服本身，也不會自動加裝甲——裝甲強度在下一區單獨控制。</p>
     <div class="grid" data-choice="accessory">
       <label class="card selected"><input type="radio" name="accessory" value="schoolEmblemBadgeAccent" checked><div class="name">校徽徽章配件</div><div class="desc">胸口校徽徽章點綴、身分識別細節</div></label>
       <label class="card"><input type="radio" name="accessory" value="armGuardWrapAccent"><div class="name">護腕綁帶配件</div><div class="desc">護腕綁帶纏繞、備戰焦點細節</div></label>
@@ -686,7 +686,7 @@
 
   <section class="section-battlemode">
     <div class="section-header">
-      <div class="section-label">10</div>
+      <div class="section-label">09</div>
       <div class="section-title">裝甲強度</div>
     </div>
     <p class="hint">預設關閉：一般制服不會因為「戰鬥／幻想」關鍵字自動變成重甲角色，需要時才手動開啟。這頁固定不使用披風／斗篷（不論手動或隨機都不會出現）。</p>
@@ -702,10 +702,10 @@
 
   <section class="section-garmentdetail">
     <div class="section-header">
-      <div class="section-label">11</div>
+      <div class="section-label">10</div>
       <div class="section-title">服裝改造強度</div>
     </div>
-    <p class="hint">這些是制服表面的結構化細節（鏤空／切割／拼接），不是重新設計整件制服，剪裁輪廓仍以 05-08 選定的內容為準。Layer 只決定「隨機套用」時要改幾個部位；手動選了哪個部位，隨機套用不會覆蓋掉。</p>
+    <p class="hint">這些是制服表面的結構化細節（鏤空／切割／拼接），不是重新設計整件制服，剪裁輪廓仍以 04-07 選定的內容為準。Layer 只決定「隨機套用」時要改幾個部位；手動選了哪個部位，隨機套用不會覆蓋掉。</p>
     <div class="pose-group">
       <div class="pose-group-label">改造強度 Layer</div>
       <div class="grid grid-3" data-choice="garmentLayer">
@@ -905,7 +905,7 @@
 
   <section class="section-camera">
     <div class="section-header">
-      <div class="section-label">13</div>
+      <div class="section-label">16</div>
       <div class="section-title">拍攝角度與鏡頭感</div>
     </div>
     <p class="hint">只改觀看角度、景深和鏡頭氣勢；人物拍到哪裡請回到 02 的「人物入鏡比例」。</p>
@@ -1008,7 +1008,7 @@
 
   <section class="section-extra">
     <div class="section-header">
-      <div class="section-label">16</div>
+      <div class="section-label">13</div>
       <div class="section-title">自訂要求</div>
     </div>
     <p class="hint">只有需要指定道具、禁用元素、文字留白或特殊細節時再填寫，避免與前面選項重複描述。</p>
@@ -1174,7 +1174,7 @@ const emblemFocusData = {
 // ===== 服裝改造核心（Garment Detail Core） =====
 // 獨立模組：Layer(0/3/6/9) 決定「隨機套用」時要改幾個部位，3 個部位（胸口/腰側/肩部）
 // 各自 9 選 1（含無修改）。這些是制服表面的結構化細節，不是重新設計整件制服——剪裁
-// 輪廓仍以 05-08（上身/腰線/下身/制服類型）為準。之後若要套用到其他頁面（例如仙俠），
+// 輪廓仍以 04-07（上身/腰線/下身/制服類型）為準。之後若要套用到其他頁面（例如仙俠），
 // 只需複製 GARMENT_DETAIL_LAYER_ZONES 對照表與 applyBattleRandomSelection() 裡的部位
 // 隨機邏輯，換一份部位/設計詞彙表即可，演算法不用重寫。
 const chestDetailData = {

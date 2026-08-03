@@ -1,0 +1,268 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import vm from 'node:vm';
+import { fileURLToPath } from 'node:url';
+
+// Static regression checks for the contract between visible controls and the
+// one-click / generation code. This intentionally avoids a browser dependency.
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const pages = [
+  'travel.html', 'magazine.html', 'doll.html', 'fantasy-fashion.html',
+  'xianxia.html', 'anime-character.html', 'flower-fairy.html',
+  'isekai-fantasy.html', 'store-ad.html', 'floral-sweet.html',
+  'gala-socialite.html', 'kpop-idol.html', 'battle-academy.html',
+  'ancient-goddess.html', 'editorial-identity.html',
+];
+
+const visualOrderContracts = {
+  'travel.html': {
+    'travel-random': 0, 'travel-preset': 1, 'travel-style': 2, 'travel-theme': 3,
+    'travel-composition': 4, 'travel-costume': 5, 'travel-adorn': 6,
+    'travel-pose': 7, 'travel-motion': 8, 'travel-lighting': 9, 'travel-camera': 10,
+    'travel-ratio': 11, 'travel-media': 12, 'travel-output': 13,
+  },
+  'magazine.html': {
+    'magazine-preset': 0, 'magazine-style': 1, 'magazine-theme': 2,
+    'magazine-garment-variation': 3, 'magazine-details': 4, 'magazine-body': 5,
+    'magazine-pose': 6, 'magazine-framing': 7, 'magazine-background': 8,
+    'magazine-motion': 9, 'magazine-camera': 10, 'magazine-ratio': 11,
+    'magazine-media': 12, 'magazine-output': 13,
+  },
+  'fantasy-fashion.html': {
+    'section-preset': 0, 'section-style': 1, 'section-composition': 2,
+    'section-garment': 3, 'section-material': 4, 'section-garment-variation': 5,
+    'section-body': 6, 'section-pose': 7, 'section-extra': 8,
+    'section-lighting': 9, 'section-background': 10, 'section-camera': 11,
+    'section-ratio': 12, 'section-output': 13,
+  },
+  'flower-fairy.html': {
+    'section-preset': 0, 'section-style': 1, 'section-composition': 2,
+    'section-garment': 3, 'section-material': 4, 'section-wings': 5,
+    'section-garmentdetail': 6, 'section-body': 7, 'section-pose': 8,
+    'section-extra': 9, 'section-lighting': 10, 'section-background': 11,
+    'section-camera': 12, 'section-ratio': 13, 'section-output': 14,
+  },
+  'battle-academy.html': {
+    'section-preset': 0, 'section-style': 1, 'section-composition': 2,
+    'section-school': 3, 'section-upper': 4, 'section-waist': 5,
+    'section-lower': 6, 'section-uniformtype': 7, 'section-accessory': 8,
+    'section-battlemode': 9, 'section-garmentdetail': 10, 'section-body': 11,
+    'section-pose': 12, 'section-extra': 13, 'section-lighting': 14,
+    'section-background': 15, 'section-camera': 16, 'section-ratio': 17,
+    'section-output': 18,
+  },
+};
+
+for (const page of ['xianxia.html', 'anime-character.html', 'isekai-fantasy.html', 'floral-sweet.html', 'gala-socialite.html', 'kpop-idol.html', 'ancient-goddess.html']) {
+  visualOrderContracts[page] = {
+    'section-preset': 0, 'section-style': 1, 'section-composition': 2,
+    'section-garment': 3, 'section-material': 4, 'section-garmentdetail': 5,
+    'section-body': 6, 'section-pose': 7, 'section-extra': 8,
+    'section-lighting': 9, 'section-background': 10, 'section-camera': 11,
+    'section-ratio': 12, 'section-output': 13,
+  };
+}
+
+const issues = [];
+
+function issue(page, message) {
+  issues.push(`${page}: ${message}`);
+}
+
+function attr(tag, name) {
+  const match = tag.match(new RegExp(`\\b${name}\\s*=\\s*["']([^"']*)["']`, 'i'));
+  return match ? match[1] : null;
+}
+
+function tags(source, tagName) {
+  return [...source.matchAll(new RegExp(`<${tagName}\\b[^>]*>`, 'gi'))].map(match => match[0]);
+}
+
+function idsIn(source) {
+  return new Set([...source.matchAll(/\bid\s*=\s*["']([^"']+)["']/gi)].map(match => match[1]));
+}
+
+function sliceBalanced(source, openIndex) {
+  let depth = 0;
+  let quote = null;
+  let escaped = false;
+  for (let i = openIndex; i < source.length; i += 1) {
+    const char = source[i];
+    if (quote) {
+      if (escaped) escaped = false;
+      else if (char === '\\') escaped = true;
+      else if (char === quote) quote = null;
+      continue;
+    }
+    if (char === '"' || char === "'") {
+      quote = char;
+      continue;
+    }
+    if (char === '{') depth += 1;
+    else if (char === '}') {
+      depth -= 1;
+      if (depth === 0) return source.slice(openIndex, i + 1);
+    }
+  }
+  return null;
+}
+
+function objectKeys(source, variableName) {
+  const marker = `const ${variableName} = {`;
+  const start = source.indexOf(marker);
+  if (start === -1) return null;
+  const literal = sliceBalanced(source, start + marker.length - 1);
+  if (!literal) return null;
+  try {
+    const keys = new Set(Object.keys(vm.runInNewContext(`(${literal});`, {})));
+    const appendRe = new RegExp(`${variableName}\\.([A-Za-z0-9_]+)\\s*=\\s*\\{`, 'g');
+    let match;
+    while ((match = appendRe.exec(source))) keys.add(match[1]);
+    return keys;
+  } catch {
+    return null;
+  }
+}
+
+function radioGroups(source) {
+  const groups = new Map();
+  for (const tag of tags(source, 'input')) {
+    if ((attr(tag, 'type') || '').toLowerCase() !== 'radio') continue;
+    const name = attr(tag, 'name');
+    const value = attr(tag, 'value');
+    if (!name || value === null) continue;
+    if (!groups.has(name)) groups.set(name, { values: new Set(), checked: 0 });
+    const group = groups.get(name);
+    group.values.add(value);
+    if (/\bchecked\b/i.test(tag)) group.checked += 1;
+  }
+  return groups;
+}
+
+function selectValues(source) {
+  const values = new Map();
+  for (const match of source.matchAll(/<select\b([^>]*)>([\s\S]*?)<\/select>/gi)) {
+    const id = attr(match[0].slice(0, match[0].indexOf('>') + 1), 'id');
+    if (!id) continue;
+    values.set(id, new Set([...match[2].matchAll(/<option\b[^>]*value\s*=\s*["']([^"']+)["']/gi)].map(item => item[1])));
+  }
+  return values;
+}
+
+function checkRequiredNodes(page, source, idSet) {
+  for (const id of ['generateBtn', 'copyBtn', 'outputWrap']) {
+    if (!idSet.has(id)) issue(page, `missing required UI id #${id}`);
+  }
+  if (!idSet.has('outputText') && !idSet.has('output')) issue(page, 'missing output target (#outputText or #output)');
+  for (const id of ['generateBtn', 'copyBtn', 'outputWrap']) {
+    const count = (source.match(new RegExp(`\\bid\\s*=\\s*["']${id}["']`, 'g')) || []).length;
+    if (count !== 1) issue(page, `UI id #${id} appears ${count} times`);
+  }
+  if (!source.includes(`getElementById('generateBtn').addEventListener`)
+    && !source.includes('getElementById("generateBtn").addEventListener')) {
+    issue(page, 'generate button has no click handler');
+  }
+  if (!source.includes(`getElementById('copyBtn').addEventListener`)
+    && !source.includes('getElementById("copyBtn").addEventListener')) {
+    issue(page, 'copy button has no click handler');
+  }
+  const writesOutput = /\b(?:outputText|output)\.(?:value|textContent|innerHTML)\s*=/.test(source)
+    || /getElementById\(['"](?:outputText|output)['"]\)\.(?:value|textContent|innerHTML)\s*=/.test(source);
+  if (!writesOutput) {
+    issue(page, 'generation code does not assign an output value');
+  }
+}
+
+function checkRadioReferences(page, source, groups, inputNames, idSet, selects) {
+  const checkName = (name, origin) => {
+    if (!inputNames.has(name)) issue(page, `${origin} references missing input group "${name}"`);
+  };
+  for (const match of source.matchAll(/(?:selected|getAllRadioValues)\(['"]([^'"]+)['"]\)/g)) {
+    checkName(match[1], 'radio helper');
+  }
+  for (const match of source.matchAll(/setRadioValue\(['"]([^'"]+)['"]\s*,/g)) {
+    checkName(match[1], 'setRadioValue');
+  }
+  for (const match of source.matchAll(/input\[name=["']([^"'$]+)["'][^\]]*\]:checked/g)) {
+    checkName(match[1], 'querySelector');
+  }
+  for (const match of source.matchAll(/(?:setRadioCardValue|setSelectedCardValue|setSelectedPoseValue|setSelectedChipValue|setMultiChipValues)\(['"]([^'"]+)['"]/g)) {
+    if (!idSet.has(match[1])) issue(page, `card helper references missing container #${match[1]}`);
+  }
+  for (const match of source.matchAll(/document\.getElementById\(['"]([^'"]+)['"]\)/g)) {
+    if (!idSet.has(match[1])) issue(page, `script references missing DOM id #${match[1]}`);
+  }
+  for (const [id, values] of selects) {
+    if (!values.size) issue(page, `select #${id} has no option values`);
+  }
+}
+
+function checkInitialRadioState(page, groups) {
+  const optionalGroups = new Set(['themePreset', 'riskThemePreset']);
+  for (const [name, group] of groups) {
+    if (optionalGroups.has(name)) continue;
+    if (group.checked !== 1) issue(page, `radio group "${name}" has ${group.checked} initial checked values`);
+  }
+}
+
+function checkChoiceGroups(page, source, groups) {
+  for (const match of source.matchAll(/data-choice\s*=\s*["']([^"']+)["']/gi)) {
+    const name = match[1];
+    if (!groups.has(name) && !source.includes(`name="${name}"`)) {
+      issue(page, `data-choice group "${name}" has no matching input name`);
+    }
+  }
+}
+
+function checkPresetButtons(page, source) {
+  const mappings = [
+    ['data-template', 'themeTemplates'],
+    ['data-travel-preset', 'QUICK_TRAVEL_PRESETS'],
+    ['data-magazine-preset', 'QUICK_MAGAZINE_PRESETS'],
+  ];
+  for (const [attribute, variableName] of mappings) {
+    const keys = objectKeys(source, variableName);
+    for (const tag of tags(source, 'button')) {
+      const key = attr(tag, attribute);
+      if (key && (!keys || !keys.has(key))) issue(page, `${attribute}="${key}" has no ${variableName} entry`);
+    }
+  }
+}
+
+function checkVisualOrder(page, source) {
+  const contract = visualOrderContracts[page];
+  if (!contract) return;
+  for (const [className, expectedOrder] of Object.entries(contract)) {
+    const match = source.match(new RegExp(`\\.${className}\\s*\\{\\s*order\\s*:\\s*(-?\\d+)\\s*;`));
+    if (!match) {
+      issue(page, `missing visual order rule for .${className}`);
+      continue;
+    }
+    const actualOrder = Number(match[1]);
+    if (actualOrder !== expectedOrder) {
+      issue(page, `visual order .${className} is ${actualOrder}, expected ${expectedOrder}`);
+    }
+  }
+}
+
+for (const page of pages) {
+  const source = fs.readFileSync(path.join(root, page), 'utf8');
+  const idSet = idsIn(source);
+  const groups = radioGroups(source);
+  const inputNames = new Set(tags(source, 'input').map(tag => attr(tag, 'name')).filter(Boolean));
+  checkRequiredNodes(page, source, idSet);
+  checkRadioReferences(page, source, groups, inputNames, idSet, selectValues(source));
+  checkInitialRadioState(page, groups);
+  checkChoiceGroups(page, source, groups);
+  checkPresetButtons(page, source);
+  checkVisualOrder(page, source);
+  console.log(`checked ${page}: ${groups.size} radio groups, ${idSet.size} ids`);
+}
+
+console.log(`\nUI flow issues: ${issues.length}`);
+if (issues.length) {
+  for (const item of issues) console.log(`ISSUE: ${item}`);
+  process.exitCode = 1;
+} else {
+  console.log('PASS UI flow contract: required controls, radio references, initial state, and one-click mappings are consistent.');
+}

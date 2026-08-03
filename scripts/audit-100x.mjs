@@ -234,7 +234,7 @@ const core = evalCore(coreSource);
     source: html, core, page: 'fantasy',
     startMarker: 'const materialData = {',
     endMarker: 'function setRadioValue',
-    exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedFantasyCore, FANTASY_ILLUSTRATION_MATERIAL_KEYS: typeof FANTASY_ILLUSTRATION_MATERIAL_KEYS === "undefined" ? new Set() : FANTASY_ILLUSTRATION_MATERIAL_KEYS, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, poseData, framingData, cameraData, ratioData })',
+    exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedFantasyCore, FANTASY_ILLUSTRATION_MATERIAL_KEYS: typeof FANTASY_ILLUSTRATION_MATERIAL_KEYS === "undefined" ? new Set() : FANTASY_ILLUSTRATION_MATERIAL_KEYS, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, FANTASY_GARMENT_VARIATIONS, compositionGuard, lightingConsistencyGuard, poseData, framingData, cameraData, ratioData })',
   });
   const compositionValues = radioValues(html, 'composition');
   const intensityValues = selectValues(html, 'intensity');
@@ -243,6 +243,9 @@ const core = evalCore(coreSource);
     background: Object.keys(data.backgroundData), lighting: Object.keys(data.lightingData), composition: compositionValues,
     framing: Object.keys(data.framingData), intensity: intensityValues, pose: Object.keys(data.poseData),
     style: Object.keys(data.styleData), camera: Object.keys(data.cameraData), ratio: Object.keys(data.ratioData),
+    garmentChestVariation: Object.keys(data.FANTASY_GARMENT_VARIATIONS.chest),
+    garmentWaistVariation: Object.keys(data.FANTASY_GARMENT_VARIATIONS.waist),
+    garmentShoulderVariation: Object.keys(data.FANTASY_GARMENT_VARIATIONS.shoulder),
   };
   const customSamples = ['', '', 'watercolor splash', '手工訂製'];
   for (let i = 0; i < N; i += 1) {
@@ -250,7 +253,11 @@ const core = evalCore(coreSource);
       bodyShape: pick(pools.bodyShape), material: pick(pools.material), garment: pick(pools.garment),
       background: pick(pools.background), lighting: pick(pools.lighting), composition: pick(pools.composition),
       framing: pick(pools.framing), intensity: pick(pools.intensity), pose: pick(pools.pose), style: pick(pools.style),
-      camera: pick(pools.camera), ratio: pick(pools.ratio), customMaterial: pick(customSamples), customGarment: pick(customSamples),
+      camera: pick(pools.camera), ratio: pick(pools.ratio),
+      garmentChestVariation: pick(pools.garmentChestVariation),
+      garmentWaistVariation: pick(pools.garmentWaistVariation),
+      garmentShoulderVariation: pick(pools.garmentShoulderVariation),
+      customMaterial: pick(customSamples), customGarment: pick(customSamples),
       colorNote: pick(customSamples), extraNote: pick(customSamples),
     };
     const material = data.materialData[sel.material];
@@ -264,6 +271,14 @@ const core = evalCore(coreSource);
       : material.prompt;
     const materialPalette = customMaterials.length ? `derive the color palette only from custom material keywords: ${customMaterialText}` : material.palette;
     const garmentText = sel.customGarment ? `custom garment form only: ${sel.customGarment}; do not include or blend any preset garment option` : data.garmentData[sel.garment];
+    const garmentVariationParts = [
+      data.FANTASY_GARMENT_VARIATIONS.chest[sel.garmentChestVariation],
+      data.FANTASY_GARMENT_VARIATIONS.waist[sel.garmentWaistVariation],
+      data.FANTASY_GARMENT_VARIATIONS.shoulder[sel.garmentShoulderVariation],
+    ].filter(Boolean);
+    const garmentVariationBlock = garmentVariationParts.length
+      ? `【服裝變化核心】\n\n${garmentVariationParts.join('\n')}`
+      : '';
     const background = data.backgroundData[sel.background];
     const lighting = data.lightingData[sel.lighting];
     const bodyShape = data.BODY_SHAPES[sel.bodyShape];
@@ -273,7 +288,8 @@ const core = evalCore(coreSource);
       data.identityGuard + ',', 'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
       resolvedAnatomyGuard + ',', data.poseNaturalityGuard + ',', bodyShape + ',', data.lightingConsistencyGuard + ',',
       sel.composition + ',', data.compositionGuard + ',',
-      'appearance form: ' + garmentText + ',', 'theme material and art system: ' + materialText + ',',
+      'appearance form: ' + garmentText + ',', garmentVariationBlock ? garmentVariationBlock + ',' : '',
+      'theme material and art system: ' + materialText + ',',
       'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',
       sel.intensity + ',', 'selected material appears as controlled clothing details, ornaments, particles and background accents without overpowering facial identity,',
       data.styleData[sel.style] + ',', poseText ? poseText + ',' : '', framing + ',',
@@ -1085,11 +1101,12 @@ const core = evalCore(coreSource);
     source: html, core, page: 'editorial',
     startMarker: 'const layoutData = {',
     endMarker: 'function selected(name)',
-    exportExpression: '({ layoutData, typographyData, graphicData, colorData, placementData, whitespaceData, languageData, ratioData, sourceImageLockGuard, outputQualityGuard, negativeGuard, themeTemplates })',
+    exportExpression: '({ layoutData, typographyData, graphicData, colorData, imageTreatmentData, printFinishData, placementData, whitespaceData, languageData, ratioData, sourceImageLockGuard, outputQualityGuard, negativeGuard, themeTemplates })',
   });
   const pools = {
     layout: Object.keys(data.layoutData), typography: Object.keys(data.typographyData),
     graphic: Object.keys(data.graphicData), color: Object.keys(data.colorData),
+    imageTreatment: Object.keys(data.imageTreatmentData), printFinish: Object.keys(data.printFinishData),
     placement: Object.keys(data.placementData), whitespace: Object.keys(data.whitespaceData),
     language: Object.keys(data.languageData), ratio: Object.keys(data.ratioData),
   };
@@ -1097,7 +1114,8 @@ const core = evalCore(coreSource);
   for (let i = 0; i < N; i += 1) {
     const sel = {
       layout: pick(pools.layout), typography: pick(pools.typography), graphic: pick(pools.graphic),
-      color: pick(pools.color), placement: pick(pools.placement), whitespace: pick(pools.whitespace),
+      color: pick(pools.color), imageTreatment: pick(pools.imageTreatment), printFinish: pick(pools.printFinish),
+      placement: pick(pools.placement), whitespace: pick(pools.whitespace),
       language: pick(pools.language), ratio: pick(pools.ratio),
       mainTitle: pick(textSamples), subtitle: pick(textSamples), tagline: pick(textSamples),
       infoLabels: pick([[], ['PROFILE'], ['PROFILE', 'FEATURE', 'STYLE']]),
@@ -1119,12 +1137,14 @@ const core = evalCore(coreSource);
       data.sourceImageLockGuard + ',',
       data.layoutData[sel.layout] + ',',
       data.typographyData[sel.typography] + ',',
+      data.placementData[sel.placement] + ',',
+      textContentBlock,
+      data.languageData[sel.language] + ',',
       data.graphicData[sel.graphic] + ',',
       data.colorData[sel.color] + ',',
-      data.placementData[sel.placement] + ',',
+      data.imageTreatmentData[sel.imageTreatment] + ',',
+      data.printFinishData[sel.printFinish] + ',',
       data.whitespaceData[sel.whitespace] + ',',
-      data.languageData[sel.language] + ',',
-      textContentBlock,
       data.ratioData[sel.ratio] + ',',
       data.outputQualityGuard + ',',
       'do not alter the photographed person, outfit, pose, lighting or background in any way — apply editorial graphic design on top only,',
@@ -1158,5 +1178,5 @@ if (ISSUES.length) {
   }
   process.exitCode = 1;
 } else {
-  console.log('\n✅ ALL SIMULATIONS PASS — 全部 100x5 隨機模擬皆無 undefined/NaN/[object Object]/null 洩漏、身份鎖定完整、無相鄰重複行、無禁用角色名。');
+  console.log('\n✅ ALL SIMULATIONS PASS — 全部 100x15（1500 組）隨機模擬皆無 undefined/NaN/[object Object]/null 洩漏、身份鎖定完整、無相鄰重複行、無禁用角色名。');
 }

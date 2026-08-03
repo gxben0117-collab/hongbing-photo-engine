@@ -4,7 +4,7 @@
 
 ## 版本
 
-v4.22 起持續迭代中；完整逐日開發記錄見 [docs/development-log.md](docs/development-log.md)。
+v4.23 起持續迭代中；完整逐日開發記錄見 [docs/development-log.md](docs/development-log.md)。
 
 v4.3 基礎重點：
 
@@ -26,9 +26,9 @@ v4.3 之後陸續完成（詳見開發日誌）：
 ## 專案定位
 
 - `index.html` 是入口與工具導覽頁。
-- 十三個工具頁（見下方「正式頁面」）各自包含 UI、選項資料與咒語組裝邏輯。
+- 十五個工具頁（見下方「正式頁面」）各自包含 UI、選項資料與咒語組裝邏輯。
 - `assets/core-prompt.js` 集中管理 v4.3 共用身份鎖定、臉部幾何、真人骨架、鏡頭重建、光線一致、膚質、負面詞與輸出品質規則。
-- `scripts/` 底下有四個驗證腳本，見下方「上架前檢查」。
+- `scripts/` 底下有五個驗證腳本，見下方「上架前檢查」。
 - `docs/` 保存規格、流程、核心 prompt 契約與工程說明。
 - `assets/` 預留給正式共用靜態資源。
 - `output/` 與 `temp/` 是本地產物與暫存區，不應提交生成內容。
@@ -49,6 +49,8 @@ v4.3 之後陸續完成（詳見開發日誌）：
 - `gala-socialite.html` - 氣質名媛宴會咒語產生器
 - `kpop-idol.html` - 韓系氣質偶像風咒語產生器
 - `battle-academy.html` - 戰鬥制服學園咒語產生器
+- `ancient-goddess.html` - 神話古文明女神咒語產生器
+- `editorial-identity.html` - 編輯視覺設計咒語產生器
 
 ## 建議資料夾分工
 
@@ -68,6 +70,8 @@ v4.3 之後陸續完成（詳見開發日誌）：
 ├─ gala-socialite.html         # 工具頁: 氣質名媛宴會
 ├─ kpop-idol.html              # 工具頁: 韓系氣質偶像風
 ├─ battle-academy.html         # 工具頁: 戰鬥制服學園
+├─ ancient-goddess.html        # 工具頁: 神話古文明女神
+├─ editorial-identity.html     # 工具頁: 編輯視覺設計
 ├─ assets/                     # 正式靜態資源與 core-prompt.js
 ├─ docs/                       # 規格與維護文件
 ├─ experiments/                # 實驗稿與非正式工具
@@ -92,7 +96,8 @@ v4.3 之後陸續完成（詳見開發日誌）：
 
 ## 執行方式
 
-直接打開 `index.html`，或使用 GitHub Pages 網址。
+直接打開 `index.html`，或使用正式 GitHub Pages 網址：
+<https://gxben0117-collab.github.io/hongbing-photo-engine/>
 
 本專案沒有 `package.json`、`requirements.txt` 或 `pyproject.toml`。如果未來引入打包工具或 Python 自動化腳本，需同步補上正式依賴檔與檢查命令。
 
@@ -102,6 +107,7 @@ v4.3 之後陸續完成（詳見開發日誌）：
 
 ```powershell
 node scripts\check-static.mjs
+node scripts\check-ui-flows.mjs
 git diff --check
 ```
 
@@ -116,8 +122,8 @@ git diff --check
 
 ```powershell
 node scripts\build-prompt-preview.mjs   # 固定選項組合，改前/改後 0 diff 迴歸檢查
-node scripts\audit-100x.mjs             # 五頁各隨機 100 組選項，檢查內容問題
-node scripts\validate-preset-refs.mjs   # 三頁一鍵套用/預設連動物件引用的選項值是否都存在
+node scripts\audit-100x.mjs             # 15 個正式工具頁各隨機 100 組，共 1500 組內容稽核
+node scripts\validate-preset-refs.mjs   # 各頁一鍵套用/預設連動物件引用的選項值是否都存在
 ```
 
 ## 維護原則

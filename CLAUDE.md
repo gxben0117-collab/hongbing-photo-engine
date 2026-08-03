@@ -9,7 +9,7 @@
 - 目標：AI 寫真旅拍咒語產生器；舊「紅兵風格寫真咒語產生器」的正式後繼。
 - 技術棧：純靜態 HTML，GitHub Pages 直接部署，**不需要 npm 或 Python 套件**。
 - 主入口：`index.html`；另有 doll / fantasy-fashion / magazine 等子頁。
-- 目前版本：v4.3 穩定版（統一身份鎖定核心、臉部幾何鎖定）。
+- 目前版本：v4.23；共用身份／臉部幾何核心基準仍為 v4.3。
 - 特殊禁區：`核心資料/` 不進 Git（私有提示詞資產）；`backup_original/`、`output/` 不進 Git。
 - 001 完成區的「員工借支」「家庭水電瓦斯記帳」由本專案拆分，此處同名 HTML 為歷史殘留。
 
@@ -18,15 +18,29 @@
 **完整逐日開發記錄在 [`docs/development-log.md`](docs/development-log.md)，本節只放
 現況摘要與待辦；不要在這裡繼續累加逐日流水帳，改記到開發日誌裡。**
 
-### 現況摘要（2026-08-02）
+### 現況摘要（2026-08-03）
+
+- **全專案 UI、生成咒語與一鍵設定回歸檢查**（2026-08-03）：新增
+  `scripts/check-ui-flows.mjs`，靜態檢查 15 個工具頁的必要控制項、radio 初始值、
+  helper 引用、生成／複製／輸出流程，以及 `data-template`、旅拍／雜誌 preset 與
+  實際選項池的對應。`validate-preset-refs.mjs` 同步補上公仔與編輯視覺預設欄位，
+  `audit-100x.mjs` 與 `build-prompt-preview.mjs` 同步覆蓋編輯視覺的影像處理／印刷質感。
+  上線前完整結果記錄於 [`docs/qa-ui-and-prompt.md`](docs/qa-ui-and-prompt.md)。
+- **工作流順序文件同步**（2026-08-03）：共同頁面依「版型／構圖 → 服裝輪廓 →
+  主題材質 → 服裝變化 → 身形 → 姿勢 → 自訂 → 光影 → 背景 → 鏡頭 → 比例 →
+  生成」排列；旅拍、雜誌、戰鬥學院依各自核心決策順序保留特例，實際 CSS 視覺順序與
+  生成函式綁定維持一致。
+- **編輯視覺設計補齊控制層**：現在是 12 個編輯控制區塊加生成區，包含影像處理與
+  印刷／材質質感；八組一鍵範例會同步填入這兩個欄位，套用後立即更新預覽咒語。
 
 - **新增第 15 個工具頁 `editorial-identity.html`（編輯視覺設計，後製排版工具）**
   （2026-08-02）：全新的 Stage 2 概念——把已經生成完成的照片（來自其他任一頁）
   轉成雜誌封面/人物介紹卡/收藏卡，不重新生成人物。核心 guard 方向跟其他頁相反：
   「【原圖鎖定系統】」要求整張附圖原封不動保留，只加編輯設計。使用方式是產生咒語
-  後連同已生成的照片一起貼給 ChatGPT。10 個區塊（版型/字體/圖形/色彩/人物版位/
+  後連同已生成的照片一起貼給 ChatGPT。12 個控制區塊（版型/字體/圖形/色彩/影像處理/
+  印刷與材質/人物版位/
   留白/語言/文字自填/比例），8 組一鍵範例。`core-prompt.js` 新增輕量
-  `editorialCore`；`index.html` 新卡片歸入「特殊工具」分類；四支驗證腳本全數
+  `editorialCore`；`index.html` 新卡片歸入「特殊工具」分類；驗證腳本全數
   新增支援並全過（詳見開發日誌）。
 - **服裝改造核心補強：胸口新增「深 V至腰」**（2026-08-02）：9 個已有「服裝改造核心」
   的正式頁同步新增胸口選項 `waistDeepVNeckline`，UI 為「深 V至腰」，prompt data 為
@@ -221,16 +235,17 @@
   `talismanThrow` 換成飛舞綢帶旋轉 `flyingRibbonSpin`），模板總數維持 17 組
   不變（4 組重新設計、不是新增）。四支驗證腳本重跑全過（`validate-preset-refs`
   17 組模板 0 issue、`audit-100x` 1300 次模擬 0 issue）。
-- 十三個工具頁（travel / magazine / doll / fantasy-fashion / xianxia /
+- 十五個工具頁（travel / magazine / doll / fantasy-fashion / xianxia /
   anime-character / flower-fairy / isekai-fantasy / store-ad /
-  floral-sweet / gala-socialite / kpop-idol / battle-academy）
+  floral-sweet / gala-socialite / kpop-idol / battle-academy /
+  ancient-goddess / editorial-identity）
   皆已上線，正式站 <https://gxben0117-collab.github.io/hongbing-photo-engine/>。
 - **全站導覽改為「首頁單向連結」**（2026-07-31）：owner 要求首頁保留所有
-  工具頁連結不變，但其餘 13 個工具頁互相之間、以及回首頁的連結全部拿掉。
-  做法：13 個工具頁的 `<nav>` 內 `<a class="nav-logo" href="index.html">`
+  工具頁連結不變，但其餘 15 個工具頁互相之間、以及回首頁的連結全部拿掉。
+  做法：15 個工具頁的 `<nav>` 內 `<a class="nav-logo" href="index.html">`
   改成不可點擊的 `<span class="nav-logo">`，`.nav-links` 整個 `<div>`
-  （含 14 個 `<a class="nav-link">`）整段移除；`index.html` 的 nav 完全
-  不動，仍是 14 個連結的完整導覽。四支驗證腳本重跑全過（`check-static`
+  （含首頁導覽連結）整段移除；`index.html` 的 nav 完全不動，仍是 15 個工具
+  連結的完整導覽。驗證腳本重跑全過（`check-static`
   的「本地連結檢查」本來就是找 `href` 出現的檔案是否存在，工具頁拿掉連結
   後檢查範圍縮小，不會誤判）。
 - **`battle-academy.html` 全面重構為「模組化制服設計引擎」**（2026-07-31）：
@@ -820,10 +835,10 @@
   自動 generate()）。stale 徽章顏色沿用各頁自己的主色（金色系頁面用
   `--gold`，store-ad 用自己的薄荷色 `--mint`），不是強制統一成同一色。
 - **隨機套用已改為元素級獨立隨機**（每欄位各自抽選再動態組合），不是預寫模板三選一。
-- **驗證工具**：四個腳本，改咒語相關邏輯後都應該跑：
+- **驗證工具**：五個腳本，改咒語相關邏輯後都應該跑：
   - `scripts/check-static.mjs`（結構：重複 id、本地連結、inline script 語法）
   - `scripts/build-prompt-preview.mjs`（固定選項組合 0-diff 迴歸）
-  - `scripts/audit-100x.mjs`（五頁各 100 組隨機模擬內容稽核）
+  - `scripts/audit-100x.mjs`（15 頁各 100 組、共 1500 組隨機模擬內容稽核）
   - `scripts/validate-preset-refs.mjs`（2026-07-22（十一）新增：檢查
     `QUICK_TRAVEL_PRESETS`/`TRAVEL_STYLE_PRESET_DEFAULTS`、
     `QUICK_MAGAZINE_PRESETS`/`STYLE_PRESET_DEFAULTS`/`THEME_PRESET_DEFAULTS`、
@@ -831,6 +846,7 @@
     每個欄位值是不是真的存在於該頁當下的選項池——**這是專門為了抓
     composition/intensity 那種靜默失效問題而寫的**，跟 node:vm 解析＋正規
     表示式讀值，不需要 jsdom，維持專案零 npm 依賴。
+  - `scripts/check-ui-flows.mjs`（15 頁控制項、初始值、生成／複製與一鍵映射靜態稽核）
   **重要限制**：`audit-100x.mjs` 是重新實作一份組裝邏輯直接讀 DOM 文字來模擬，
   不是真的執行頁面上的 `generate()`，測不出「新增選項卡但忘記同步補頁面自己
   維護的文字對照表」這類問題（2026-07-22（五）就是這樣被漏掉，導致 fantasy

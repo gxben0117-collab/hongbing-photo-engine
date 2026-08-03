@@ -53,7 +53,24 @@
     width:min(920px,100%);
     margin:0 auto;
     padding:70px 20px 40px;
+    display:flex;
+    flex-direction:column;
   }
+  .wrap > header{order:-1;}
+  .editorial-preset{order:0;}
+  .editorial-layout{order:1;}
+  .editorial-placement{order:2;}
+  .editorial-typography{order:3;}
+  .editorial-text{order:4;}
+  .editorial-language{order:5;}
+  .editorial-graphic{order:6;}
+  .editorial-color{order:7;}
+  .editorial-image-treatment{order:8;}
+  .editorial-print-finish{order:9;}
+  .editorial-whitespace{order:10;}
+  .editorial-ratio{order:11;}
+  .editorial-extra{order:12;}
+  .editorial-output{order:13;}
   header{
     padding:48px 0 36px;
     border-bottom:1px solid var(--line);
@@ -187,12 +204,12 @@
     </div>
   </header>
 
-  <section class="section-preset">
+  <section class="section-preset editorial-preset">
     <div class="section-header">
       <div class="section-label">00</div>
       <div class="section-title">一鍵版型模板</div>
     </div>
-    <p class="hint">一鍵套用會同時填入版型、字體、圖形、色彩、人物版位、留白密度、語言比例與比例；套用後仍可逐區改成自己的版本。</p>
+    <p class="hint">一鍵套用會同時填入版型、字體、圖形、色彩、影像處理、印刷質感、人物版位、留白密度、語言比例與比例；套用後仍可逐區改成自己的版本。</p>
     <div class="grid grid-3">
       <button class="card" type="button" data-template="classicMagazineCover">
         <div class="name">經典雜誌封面</div>
@@ -229,7 +246,7 @@
     </div>
   </section>
 
-  <section>
+  <section class="editorial-layout">
     <div class="section-header">
       <div class="section-label">01</div>
       <div class="section-title">版型類型</div>
@@ -247,9 +264,9 @@
     </div>
   </section>
 
-  <section>
+  <section class="editorial-typography">
     <div class="section-header">
-      <div class="section-label">02</div>
+      <div class="section-label">03</div>
       <div class="section-title">字體風格</div>
     </div>
     <div class="grid grid-3" data-choice="typography">
@@ -264,9 +281,9 @@
     </div>
   </section>
 
-  <section>
+  <section class="editorial-graphic">
     <div class="section-header">
-      <div class="section-label">03</div>
+      <div class="section-label">06</div>
       <div class="section-title">圖形元素</div>
     </div>
     <div class="grid grid-3" data-choice="graphic">
@@ -281,9 +298,9 @@
     </div>
   </section>
 
-  <section>
+  <section class="editorial-color">
     <div class="section-header">
-      <div class="section-label">04</div>
+      <div class="section-label">07</div>
       <div class="section-title">色彩系統</div>
     </div>
     <p class="hint">整頁只用一個主導色統一字體、圖形與版面，這是編輯設計維持高級感的關鍵。</p>
@@ -299,9 +316,42 @@
     </div>
   </section>
 
-  <section>
+  <section class="editorial-image-treatment">
     <div class="section-header">
-      <div class="section-label">05</div>
+      <div class="section-label">08</div>
+      <div class="section-title">影像處理</div>
+    </div>
+    <p class="hint">只調整附加照片的整體色調與印象，不重新繪製人物、服裝或背景。</p>
+    <div class="grid grid-3" data-choice="imageTreatment">
+      <label class="card selected"><input type="radio" name="imageTreatment" value="originalEditorial" checked><div class="name">原圖編輯保留</div><div class="desc">保留原照片色彩，只做版面整合</div></label>
+      <label class="card"><input type="radio" name="imageTreatment" value="highContrastStudio"><div class="name">高對比棚拍</div><div class="desc">清晰明暗層次、封面攝影張力</div></label>
+      <label class="card"><input type="radio" name="imageTreatment" value="softFilmEditorial"><div class="name">柔霧底片</div><div class="desc">柔和高光、細緻膠片顆粒</div></label>
+      <label class="card"><input type="radio" name="imageTreatment" value="monochromeEditorial"><div class="name">高級黑白</div><div class="desc">黑白影像、保留人物輪廓與質感</div></label>
+      <label class="card"><input type="radio" name="imageTreatment" value="duotoneAccent"><div class="name">品牌雙色調</div><div class="desc">以主色系做克制雙色影像處理</div></label>
+      <label class="card"><input type="radio" name="imageTreatment" value="mutedLuxury"><div class="name">低飽和奢華</div><div class="desc">降低色彩喧鬧感、突出材質與版面</div></label>
+      <label class="card"><input type="radio" name="imageTreatment" value="glossyBeauty"><div class="name">亮面美妝廣告</div><div class="desc">清透高光、精緻商業肌理</div></label>
+    </div>
+  </section>
+
+  <section class="editorial-print-finish">
+    <div class="section-header">
+      <div class="section-label">09</div>
+      <div class="section-title">印刷與材質質感</div>
+    </div>
+    <p class="hint">材質效果主要作用於字體、圖形與版面裝飾；人物照片維持原有內容。</p>
+    <div class="grid grid-3" data-choice="printFinish">
+      <label class="card selected"><input type="radio" name="printFinish" value="cleanDigital" checked><div class="name">乾淨數位精印</div><div class="desc">銳利清晰、現代編輯出版感</div></label>
+      <label class="card"><input type="radio" name="printFinish" value="matteArtPaper"><div class="name">霧面藝術紙</div><div class="desc">細緻紙纖維、低反光高級質感</div></label>
+      <label class="card"><input type="radio" name="printFinish" value="selectiveGloss"><div class="name">局部亮膜</div><div class="desc">刊頭、標籤或圖形有克制亮面反射</div></label>
+      <label class="card"><input type="radio" name="printFinish" value="metallicFoil"><div class="name">金屬箔壓印</div><div class="desc">金銀箔字體與細線裝飾</div></label>
+      <label class="card"><input type="radio" name="printFinish" value="offsetPrintGrain"><div class="name">膠印顆粒</div><div class="desc">細微印刷網點與紙上油墨感</div></label>
+      <label class="card"><input type="radio" name="printFinish" value="risographInk"><div class="name">孔版套色</div><div class="desc">微妙套色偏移、藝術出版物質感</div></label>
+    </div>
+  </section>
+
+  <section class="editorial-placement">
+    <div class="section-header">
+      <div class="section-label">02</div>
       <div class="section-title">人物版位</div>
     </div>
     <div class="grid grid-3" data-choice="placement">
@@ -313,9 +363,9 @@
     </div>
   </section>
 
-  <section>
+  <section class="editorial-whitespace">
     <div class="section-header">
-      <div class="section-label">06</div>
+      <div class="section-label">10</div>
       <div class="section-title">留白密度</div>
     </div>
     <div class="grid grid-3" data-choice="whitespace">
@@ -325,9 +375,9 @@
     </div>
   </section>
 
-  <section>
+  <section class="editorial-language">
     <div class="section-header">
-      <div class="section-label">07</div>
+      <div class="section-label">05</div>
       <div class="section-title">文字語言比例</div>
     </div>
     <div class="grid grid-3" data-choice="language">
@@ -337,9 +387,9 @@
     </div>
   </section>
 
-  <section>
+  <section class="editorial-text">
     <div class="section-header">
-      <div class="section-label">08</div>
+      <div class="section-label">04</div>
       <div class="section-title">文字內容自填</div>
     </div>
     <p class="hint">全部留空的話，AI 會直接看你附上的照片內容自行填寫適合的標題與文案；填了的話就照你填的用。</p>
@@ -359,9 +409,9 @@
     </div>
   </section>
 
-  <section>
+  <section class="editorial-ratio">
     <div class="section-header">
-      <div class="section-label">09</div>
+      <div class="section-label">11</div>
       <div class="section-title">輸出比例</div>
     </div>
     <p class="hint">預設偏向雜誌封面／直式海報比例。</p>
@@ -374,9 +424,9 @@
     </div>
   </section>
 
-  <section>
+  <section class="editorial-extra">
     <div class="section-header">
-      <div class="section-label">10</div>
+      <div class="section-label">12</div>
       <div class="section-title">額外要求</div>
     </div>
     <div class="form-grid">
@@ -386,9 +436,9 @@
     </div>
   </section>
 
-  <section>
+  <section class="editorial-output">
     <div class="section-header">
-      <div class="section-label">11</div>
+      <div class="section-label">13</div>
       <div class="section-title">生成咒語</div>
     </div>
     <button class="generate-btn" id="generateBtn">生成完整咒語</button>
@@ -447,6 +497,25 @@ const colorData = {
   monochromePhoto: 'monochrome black-and-white photographic treatment with a single accent color reserved only for typography'
 };
 
+const imageTreatmentData = {
+  originalEditorial: 'preserve the attached photo original color and skin tone, apply only a refined editorial color balance without changing photographic content',
+  highContrastStudio: 'high-contrast studio editorial color grade with controlled blacks and clean highlight separation, applied to the existing photo only',
+  softFilmEditorial: 'soft film editorial treatment with gentle highlight roll-off and fine restrained film grain, applied to the existing photo only',
+  monochromeEditorial: 'premium black-and-white editorial photo treatment with rich tonal separation, preserve the person and photographed scene',
+  duotoneAccent: 'controlled duotone editorial treatment using the selected dominant color as a restrained image accent, preserve photographic detail',
+  mutedLuxury: 'low-saturation luxury editorial color treatment that emphasizes fabric, skin texture and typography without repainting the photo',
+  glossyBeauty: 'clean glossy beauty-campaign color treatment with refined highlights and polished commercial clarity, preserve the original person'
+};
+
+const printFinishData = {
+  cleanDigital: 'clean high-resolution digital print finish, crisp typography and precise graphic edges',
+  matteArtPaper: 'subtle matte art-paper fiber texture applied to typography and graphic elements only',
+  selectiveGloss: 'selective gloss varnish reflections on masthead, labels and chosen graphic accents, never on the person as a replacement texture',
+  metallicFoil: 'refined metallic foil stamping on selected typography and fine graphic lines, controlled luxury print detail',
+  offsetPrintGrain: 'fine offset-print grain and restrained ink registration texture across the editorial graphics',
+  risographInk: 'controlled risograph-style layered ink texture with slight artistic color registration on the graphic design elements'
+};
+
 const placementData = {
   centeredClose: 'portrait centered in frame, close-up to half-body crop',
   leftHalfBody: 'portrait positioned to the left side, half-body framing, right side reserved for typography and graphics',
@@ -500,14 +569,14 @@ No face swap/drift, AI/influencer/celebrity/template face, duplicated/pasted fac
 No oversized head, extra limbs/arms/fingers, broken hands, warped anatomy, inconsistent/independent face light, random text or watermark.`;
 
 const themeTemplates = {
-  classicMagazineCover: { layout: 'classicMagazineCover', typography: 'editorialSerif', graphic: 'barcodeLabel', color: 'dominantBlack', placement: 'rightFullBody', whitespace: 'balancedWhitespace', language: 'bilingualEnglishChinese', ratio: 'magazine23' },
-  verticalTypography: { layout: 'verticalTypography', typography: 'hugeMaskedType', graphic: 'sketchLineArt', color: 'dominantOrange', placement: 'rightFullBody', whitespace: 'generousWhitespace', language: 'bilingualEnglishChinese', ratio: 'poster34' },
-  characterProfile: { layout: 'characterProfile', typography: 'minimalTracked', graphic: 'lineGrid', color: 'dominantWhite', placement: 'centeredClose', whitespace: 'denseInformation', language: 'bilingualEnglishChinese', ratio: 'magazine23' },
-  swissEditorial: { layout: 'swissEditorial', typography: 'boldSansHeadline', graphic: 'geometricBlocks', color: 'dominantWhite', placement: 'leftHalfBody', whitespace: 'generousWhitespace', language: 'bilingualEnglishChinese', ratio: 'poster34' },
-  collectorCard: { layout: 'collectorCard', typography: 'boldSansHeadline', graphic: 'geometricFrame', color: 'dominantGold', placement: 'centeredClose', whitespace: 'balancedWhitespace', language: 'bilingualEnglishChinese', ratio: 'square11' },
-  animeFeature: { layout: 'animeFeature', typography: 'mangaOverlayType', graphic: 'sketchLineArt', color: 'dominantOrange', placement: 'rightFullBody', whitespace: 'denseInformation', language: 'trilingualEditorial', ratio: 'magazine23' },
-  luxuryFashion: { layout: 'luxuryFashion', typography: 'editorialSerif', graphic: 'lineGrid', color: 'monochromePhoto', placement: 'centeredClose', whitespace: 'generousWhitespace', language: 'bilingualEnglishChinese', ratio: 'poster34' },
-  artbookPage: { layout: 'artbookPage', typography: 'vintageTypewriter', graphic: 'collageClip', color: 'dominantSilver', placement: 'leftHalfBody', whitespace: 'balancedWhitespace', language: 'bilingualEnglishChinese', ratio: 'feed45' }
+  classicMagazineCover: { layout: 'classicMagazineCover', typography: 'editorialSerif', graphic: 'barcodeLabel', color: 'dominantBlack', imageTreatment: 'originalEditorial', printFinish: 'cleanDigital', placement: 'rightFullBody', whitespace: 'balancedWhitespace', language: 'bilingualEnglishChinese', ratio: 'magazine23' },
+  verticalTypography: { layout: 'verticalTypography', typography: 'hugeMaskedType', graphic: 'sketchLineArt', color: 'dominantOrange', imageTreatment: 'highContrastStudio', printFinish: 'selectiveGloss', placement: 'rightFullBody', whitespace: 'generousWhitespace', language: 'bilingualEnglishChinese', ratio: 'poster34' },
+  characterProfile: { layout: 'characterProfile', typography: 'minimalTracked', graphic: 'lineGrid', color: 'dominantWhite', imageTreatment: 'originalEditorial', printFinish: 'matteArtPaper', placement: 'centeredClose', whitespace: 'denseInformation', language: 'bilingualEnglishChinese', ratio: 'magazine23' },
+  swissEditorial: { layout: 'swissEditorial', typography: 'boldSansHeadline', graphic: 'geometricBlocks', color: 'dominantWhite', imageTreatment: 'mutedLuxury', printFinish: 'cleanDigital', placement: 'leftHalfBody', whitespace: 'generousWhitespace', language: 'bilingualEnglishChinese', ratio: 'poster34' },
+  collectorCard: { layout: 'collectorCard', typography: 'boldSansHeadline', graphic: 'geometricFrame', color: 'dominantGold', imageTreatment: 'monochromeEditorial', printFinish: 'metallicFoil', placement: 'centeredClose', whitespace: 'balancedWhitespace', language: 'bilingualEnglishChinese', ratio: 'square11' },
+  animeFeature: { layout: 'animeFeature', typography: 'mangaOverlayType', graphic: 'sketchLineArt', color: 'dominantOrange', imageTreatment: 'softFilmEditorial', printFinish: 'offsetPrintGrain', placement: 'rightFullBody', whitespace: 'denseInformation', language: 'trilingualEditorial', ratio: 'magazine23' },
+  luxuryFashion: { layout: 'luxuryFashion', typography: 'editorialSerif', graphic: 'lineGrid', color: 'monochromePhoto', imageTreatment: 'highContrastStudio', printFinish: 'metallicFoil', placement: 'centeredClose', whitespace: 'generousWhitespace', language: 'bilingualEnglishChinese', ratio: 'poster34' },
+  artbookPage: { layout: 'artbookPage', typography: 'vintageTypewriter', graphic: 'collageClip', color: 'dominantSilver', imageTreatment: 'softFilmEditorial', printFinish: 'risographInk', placement: 'leftHalfBody', whitespace: 'balancedWhitespace', language: 'bilingualEnglishChinese', ratio: 'feed45' }
 };
 
 function selected(name){
@@ -530,7 +599,7 @@ function refreshCards(){
 function applyThemeTemplate(key){
   const preset = themeTemplates[key];
   if(!preset) return;
-  ['layout','typography','graphic','color','placement','whitespace','language','ratio'].forEach(name => {
+  ['layout','typography','graphic','color','imageTreatment','printFinish','placement','whitespace','language','ratio'].forEach(name => {
     setRadioValue(name, preset[name]);
   });
   refreshCards();
@@ -568,12 +637,14 @@ function generate(options = {}){
     sourceImageLockGuard + ',',
     layoutData[selected('layout')] + ',',
     typographyData[selected('typography')] + ',',
+    placementData[selected('placement')] + ',',
+    textContentBlock,
+    languageData[selected('language')] + ',',
     graphicData[selected('graphic')] + ',',
     colorData[selected('color')] + ',',
-    placementData[selected('placement')] + ',',
+    imageTreatmentData[selected('imageTreatment')] + ',',
+    printFinishData[selected('printFinish')] + ',',
     whitespaceData[selected('whitespace')] + ',',
-    languageData[selected('language')] + ',',
-    textContentBlock,
     ratioData[selected('ratio')] + ',',
     outputQualityGuard + ',',
     'do not alter the photographed person, outfit, pose, lighting or background in any way — apply editorial graphic design on top only,',

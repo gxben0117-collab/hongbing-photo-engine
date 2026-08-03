@@ -783,7 +783,8 @@ function generateAncientGoddess(core, data) {
 function generateEditorial(core, data) {
   const sel = {
     layout: 'classicMagazineCover', typography: 'editorialSerif', graphic: 'barcodeLabel',
-    color: 'dominantBlack', placement: 'rightFullBody', whitespace: 'balancedWhitespace',
+    color: 'dominantBlack', imageTreatment: 'originalEditorial', printFinish: 'cleanDigital',
+    placement: 'rightFullBody', whitespace: 'balancedWhitespace',
     language: 'bilingualEnglishChinese', ratio: 'magazine23',
     mainTitle: 'MAKIMA', subtitle: 'SPECIAL FEATURE', tagline: "Domination isn't power, it's nature.",
     infoLabels: ['PROFILE', 'PSYCHOLOGY'], extraNote: '',
@@ -798,12 +799,14 @@ function generateEditorial(core, data) {
     data.sourceImageLockGuard + ',',
     data.layoutData[sel.layout] + ',',
     data.typographyData[sel.typography] + ',',
+    data.placementData[sel.placement] + ',',
+    textContentBlock,
+    data.languageData[sel.language] + ',',
     data.graphicData[sel.graphic] + ',',
     data.colorData[sel.color] + ',',
-    data.placementData[sel.placement] + ',',
+    data.imageTreatmentData[sel.imageTreatment] + ',',
+    data.printFinishData[sel.printFinish] + ',',
     data.whitespaceData[sel.whitespace] + ',',
-    data.languageData[sel.language] + ',',
-    textContentBlock,
     data.ratioData[sel.ratio] + ',',
     data.outputQualityGuard + ',',
     'do not alter the photographed person, outfit, pose, lighting or background in any way — apply editorial graphic design on top only,',
@@ -1170,7 +1173,7 @@ function loadRevision(label, sourceReader) {
       page: 'editorial',
       startMarker: 'const layoutData = {',
       endMarker: 'function selected(name)',
-      exportExpression: '({ layoutData, typographyData, graphicData, colorData, placementData, whitespaceData, languageData, ratioData, sourceImageLockGuard, outputQualityGuard, negativeGuard, themeTemplates })',
+      exportExpression: '({ layoutData, typographyData, graphicData, colorData, imageTreatmentData, printFinishData, placementData, whitespaceData, languageData, ratioData, sourceImageLockGuard, outputQualityGuard, negativeGuard, themeTemplates })',
     });
     prompts['editorial-default.txt'] = generateEditorial(core, editorialData);
   } catch (err) {
@@ -1219,9 +1222,13 @@ const report = [
   ``,
   `## Generated Files`,
   ``,
-  ...Object.keys(base.prompts).flatMap((fileName) => [
-    `- \`base-${fileName}\``,
-    `- \`worktree-${fileName}\``,
+  ...Array.from(new Set([...Object.keys(base.prompts), ...Object.keys(worktree.prompts)])).sort().flatMap((fileName) => [
+    base.prompts[fileName]
+      ? `- \`base-${fileName}\``
+      : `- \`base-${fileName}\` (base revision not present)`,
+    worktree.prompts[fileName]
+      ? `- \`worktree-${fileName}\``
+      : `- \`worktree-${fileName}\` (worktree not present)`,
   ]),
   ``,
 ].join('\n');

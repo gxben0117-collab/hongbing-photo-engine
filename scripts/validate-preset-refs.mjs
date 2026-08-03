@@ -104,6 +104,17 @@ const issues = [];
   checkObject('travel.html', 'TRAVEL_STYLE_PRESET_DEFAULTS', extractObjectLiteral(src, 'TRAVEL_STYLE_PRESET_DEFAULTS'), fieldLive, issues);
 }
 
+// ===== doll.html =====
+{
+  const src = fs.readFileSync(path.join(root, 'doll.html'), 'utf8');
+  const fieldLive = {
+    composition: liveRadioValues(src, 'composition'),
+    media: liveRadioValues(src, 'media'),
+    ratio: liveRadioValues(src, 'ratio'),
+  };
+  checkObject('doll.html', 'DOLL_STYLE_PRESET_DEFAULTS', extractObjectLiteral(src, 'DOLL_STYLE_PRESET_DEFAULTS'), fieldLive, issues);
+}
+
 // ===== magazine.html =====
 {
   const src = fs.readFileSync(path.join(root, 'magazine.html'), 'utf8');
@@ -297,6 +308,8 @@ const issues = [];
     typography: liveRadioValues(src, 'typography'),
     graphic: liveRadioValues(src, 'graphic'),
     color: liveRadioValues(src, 'color'),
+    imageTreatment: liveRadioValues(src, 'imageTreatment'),
+    printFinish: liveRadioValues(src, 'printFinish'),
     placement: liveRadioValues(src, 'placement'),
     whitespace: liveRadioValues(src, 'whitespace'),
     language: liveRadioValues(src, 'language'),

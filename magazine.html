@@ -37,7 +37,25 @@
     max-width:660px;
     margin:0 auto;
     padding:70px 20px 40px;
+    display:flex;
+    flex-direction:column;
   }
+  .wrap > header{order:-2;}
+  .wrap > .note{order:-1;}
+  .magazine-preset{order:0;}
+  .magazine-style{order:1;}
+  .magazine-theme{order:2;}
+  .magazine-garment-variation{order:3;}
+  .magazine-details{order:4;}
+  .magazine-body{order:5;}
+  .magazine-pose{order:6;}
+  .magazine-framing{order:7;}
+  .magazine-background{order:8;}
+  .magazine-motion{order:9;}
+  .magazine-camera{order:10;}
+  .magazine-ratio{order:11;}
+  .magazine-media{order:12;}
+  .magazine-output{order:13;}
 
   /* ── NAV ── */
   nav{
@@ -582,7 +600,7 @@
   </div>
 
   <!-- 00 一鍵組合 -->
-  <section>
+  <section class="magazine-preset">
     <button class="generate-btn" id="magazineMoodPreset" style="margin-bottom:18px;background:linear-gradient(180deg,#17120b 0%,#22180f 100%);color:var(--gold);border:1px solid var(--gold);">隨機套用｜棚拍封面感覺</button>
     <div class="preset-grid">
       <button type="button" class="preset-btn primary" data-magazine-preset="blackGoldBeauty">一鍵套用｜黑金高訂美妝特寫</button>
@@ -612,7 +630,7 @@
   </section>
 
   <!-- 01 封面風格 -->
-  <section>
+  <section class="magazine-style">
     <div class="section-header">
       <span class="section-label">01</span>
       <span class="section-title">雜誌成品類型</span>
@@ -808,7 +826,7 @@
         </div>
       </div>
     </div>  <!-- 02 主題/服裝方向 -->
-  <section>
+  <section class="magazine-theme">
     <div class="section-header">
       <span class="section-label">02</span>
       <span class="section-title">主題 / 服裝方向</span>
@@ -962,10 +980,108 @@
     </div>
   </section>
 
-  <!-- 03 身形輪廓 -->
-  <section>
+  <!-- 03 服裝變化核心 -->
+  <section class="magazine-garment-variation">
     <div class="section-header">
       <span class="section-label">03</span>
+      <span class="section-title">服裝變化核心</span>
+      <span class="section-sub">各部位單選；只改變服裝剪裁，不改變主題方向</span>
+    </div>
+    <p style="font-size:12px;color:var(--soft);margin:-6px 0 14px;">預設維持原本服裝。選擇後，對應剪裁會加入生成咒語，主題服裝仍以 02 主題 / 服裝方向為基礎。</p>
+
+    <div class="pose-group">
+      <div class="pose-group-label">胸口</div>
+      <div class="cards" id="garmentChestVariationCards">
+        <label class="card selected" data-value="none">
+          <input type="radio" name="garmentChestVariation" value="none" checked>
+          <div class="name">無修改</div>
+          <div class="desc">維持主題原本胸口版型</div>
+        </label>
+        <label class="card" data-value="deepVNeckline">
+          <input type="radio" name="garmentChestVariation" value="deepVNeckline">
+          <div class="name">深 V</div>
+          <div class="desc">胸口深 V 領口</div>
+        </label>
+        <label class="card" data-value="waistDeepVNeckline">
+          <input type="radio" name="garmentChestVariation" value="waistDeepVNeckline">
+          <div class="name">深 V至腰</div>
+          <div class="desc">深 V 領口延伸至腰線</div>
+        </label>
+        <label class="card" data-value="crossCollarDeepVStructured">
+          <input type="radio" name="garmentChestVariation" value="crossCollarDeepVStructured">
+          <div class="name">交領深 V 結構胸衣</div>
+          <div class="desc">交領深 V 與結構式胸衣</div>
+        </label>
+        <label class="card" data-value="crossLacingDeepV">
+          <input type="radio" name="garmentChestVariation" value="crossLacingDeepV">
+          <div class="name">交叉綁帶深 V</div>
+          <div class="desc">胸口交叉綁帶與深 V 領口</div>
+        </label>
+        <label class="card" data-value="openFrontDeepV">
+          <input type="radio" name="garmentChestVariation" value="openFrontDeepV">
+          <div class="name">深 V 大開襟</div>
+          <div class="desc">交領深 V 大開襟</div>
+        </label>
+      </div>
+    </div>
+
+    <div class="pose-group">
+      <div class="pose-group-label">腰側</div>
+      <div class="cards" id="garmentWaistVariationCards">
+        <label class="card selected" data-value="none">
+          <input type="radio" name="garmentWaistVariation" value="none" checked>
+          <div class="name">無修改</div>
+          <div class="desc">維持主題原本腰線版型</div>
+        </label>
+        <label class="card" data-value="wrapSkirtSideSlit">
+          <input type="radio" name="garmentWaistVariation" value="wrapSkirtSideSlit">
+          <div class="name">纏裙側開衩</div>
+          <div class="desc">高腰纏裙與優雅側開衩</div>
+        </label>
+        <label class="card" data-value="highSideSlitSkirt">
+          <input type="radio" name="garmentWaistVariation" value="highSideSlitSkirt">
+          <div class="name">高衩開裙</div>
+          <div class="desc">側邊高衩開裙</div>
+        </label>
+        <label class="card" data-value="openSkirtPanel">
+          <input type="radio" name="garmentWaistVariation" value="openSkirtPanel">
+          <div class="name">裙擺敞開</div>
+          <div class="desc">裙擺敞開，呈現腿部線條</div>
+        </label>
+      </div>
+    </div>
+
+    <div class="pose-group">
+      <div class="pose-group-label">肩部</div>
+      <div class="cards" id="garmentShoulderVariationCards">
+        <label class="card selected" data-value="none">
+          <input type="radio" name="garmentShoulderVariation" value="none" checked>
+          <div class="name">無修改</div>
+          <div class="desc">維持主題原本肩部版型</div>
+        </label>
+        <label class="card" data-value="offShoulderCut">
+          <input type="radio" name="garmentShoulderVariation" value="offShoulderCut">
+          <div class="name">露肩剪裁</div>
+          <div class="desc">肩部露肩剪裁</div>
+        </label>
+        <label class="card" data-value="singleShoulder">
+          <input type="radio" name="garmentShoulderVariation" value="singleShoulder">
+          <div class="name">單肩斜裁</div>
+          <div class="desc">單肩不對稱斜裁</div>
+        </label>
+        <label class="card" data-value="halterNeckCutaway">
+          <input type="radio" name="garmentShoulderVariation" value="halterNeckCutaway">
+          <div class="name">掛脖削肩</div>
+          <div class="desc">掛脖削肩設計</div>
+        </label>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 身形輪廓 -->
+  <section class="magazine-body">
+    <div class="section-header">
+      <span class="section-label">05</span>
       <span class="section-title">身形輪廓</span>
       <span class="section-sub">單選，只調整人物比例，不會改變雜誌風格</span>
     </div>
@@ -998,10 +1114,10 @@
     </div>
   </section>
 
-  <!-- 04 背景設定 -->
-  <section>
+  <!-- 08 背景設定 -->
+  <section class="magazine-background">
     <div class="section-header">
-      <span class="section-label">04</span>
+      <span class="section-label">08</span>
       <span class="section-title">拍攝場景與背景</span>
       <span class="section-sub">單選，決定人物身後出現什麼，不改服裝主題</span>
     </div>
@@ -1292,10 +1408,10 @@
     <div style="font-size:12px;color:var(--soft);margin:10px 0 4px;">背景自填（填寫後會取代上方所有選項）</div>
     <input type="text" class="text-input" id="customBg" placeholder="例如：老式書房壁爐、廢棄溫室玻璃屋、深夜便利商店">
   </section>
-  <!-- 05 姿態模組 -->
-  <section>
+  <!-- 06 姿態模組 -->
+  <section class="magazine-pose">
     <div class="section-header">
-      <span class="section-label">05</span>
+      <span class="section-label">06</span>
       <span class="section-title">人物姿勢</span>
       <span class="section-sub">單選；不確定時選「自動」，由 AI 依服裝和主題挑選</span>
     </div>
@@ -1771,10 +1887,10 @@
 
   </section>
 
-  <!-- 06 人物入鏡比例 -->
-  <section>
+  <!-- 07 人物入鏡比例 -->
+  <section class="magazine-framing">
     <div class="section-header">
-      <span class="section-label">06</span>
+      <span class="section-label">07</span>
       <span class="section-title">人物入鏡比例</span>
       <span class="section-sub">單選，只控制拍到身體哪裡與人物占畫面的比例</span>
     </div>
@@ -1812,12 +1928,12 @@
     </div>
   </section>
 
-  <!-- 07 鏡頭氣場 -->
-  <section>
+  <!-- 10 鏡頭氣場 -->
+  <section class="magazine-camera">
     <div class="section-header">
-      <span class="section-label">07</span>
+      <span class="section-label">10</span>
       <span class="section-title">拍攝角度與鏡頭感</span>
-      <span class="section-sub">單選，只改觀看角度；人物大小請在上一區調整</span>
+      <span class="section-sub">單選，只改觀看角度；人物大小請回到 07「人物入鏡比例」調整</span>
     </div>
     <div class="cards" id="cameraCards">
       <label class="card selected" data-value="neutral">
@@ -1867,10 +1983,10 @@
       </label>
     </div>
   </section>
-  <!-- 08 動態節奏 -->
-  <section>
+  <!-- 09 動態節奏 -->
+  <section class="magazine-motion">
     <div class="section-header">
-      <span class="section-label">08</span>
+      <span class="section-label">09</span>
       <span class="section-title">動態節奏</span>
       <span class="section-sub">單選，控制畫面是穩定定格、微風流動或強烈封面張力</span>
     </div>
@@ -1898,11 +2014,11 @@
     </div>
   </section>
 
-  <!-- 09 封面細節 -->
-  <section>
+  <!-- 04 妝容、膚質、配飾與光線細節 -->
+  <section class="magazine-details">
     <div class="section-header">
-      <span class="section-label">09</span>
-      <span class="section-title">臉部、配飾與光線細節</span>
+      <span class="section-label">04</span>
+      <span class="section-title">妝容、膚質、配飾與光線細節</span>
       <span class="section-sub">依序調整妝容、膚質、珠寶、表情與光線；不必每項都改</span>
     </div>
     <div style="margin-bottom:14px;">
@@ -2034,10 +2150,10 @@
 
 
 
-  <!-- 10 圖片比例 -->
-  <section>
+  <!-- 11 圖片比例 -->
+  <section class="magazine-ratio">
     <div class="section-header">
-      <span class="section-label">10</span>
+      <span class="section-label">11</span>
       <span class="section-title">圖片比例</span>
       <span class="section-sub">單選，依手機、社群、封面或橫幅用途選擇</span>
     </div>
@@ -2105,10 +2221,10 @@
     </div>
   </section>
 
-  <!-- 11 輸出風格 -->
-  <section>
+  <!-- 12 輸出風格 -->
+  <section class="magazine-media">
     <div class="section-header">
-      <span class="section-label">11</span>
+      <span class="section-label">12</span>
       <span class="section-title">最後呈現媒材</span>
       <span class="section-sub">單選，決定成品要像真人棚拍、插畫、油畫、漫畫或動畫</span>
     </div>
@@ -2154,10 +2270,10 @@
         <div class="desc">動畫角色感 / 清透色彩</div>
       </label></div>
   </section>
-  <!-- 12 生成 -->
-  <section>
+  <!-- 13 生成 -->
+  <section class="magazine-output">
     <div class="section-header">
-      <span class="section-label">12</span>
+      <span class="section-label">13</span>
       <span class="section-title">生成咒語</span>
     </div>
     <button class="generate-btn" id="generateBtn">生成完整咒語</button>
@@ -3813,6 +3929,29 @@ Keep The Original Face, Identity And Personal Features Unchanged
 Natural Realistic Adult Anatomy, No Doll-Like Or Over-Stretched Body`
 };
 
+const MAGAZINE_GARMENT_VARIATIONS = {
+  chest: {
+    none: '',
+    deepVNeckline: 'deep V neckline',
+    waistDeepVNeckline: 'waist-deep V neckline, deep V cut extending to the waist',
+    crossCollarDeepVStructured: 'cross-collar deep V neckline with a structured fitted bodice',
+    crossLacingDeepV: 'cross-wrap lacing across the bodice, deep V-shaped neckline',
+    openFrontDeepV: 'cross-collar deep V open-front robe'
+  },
+  waist: {
+    none: '',
+    wrapSkirtSideSlit: 'high-waisted wrap skirt with an elegant side slit',
+    highSideSlitSkirt: 'flowing skirt with a high side slit',
+    openSkirtPanel: 'open skirt panel, skirt front opened to reveal the leg line'
+  },
+  shoulder: {
+    none: '',
+    offShoulderCut: 'an off-shoulder cut',
+    singleShoulder: 'one-shoulder asymmetric cut',
+    halterNeckCutaway: 'halter-neck cutaway shoulder design'
+  }
+};
+
 const FRAMING_RATIOS = {
 face_closeup:`【人物入鏡比例｜臉部特寫】
 
@@ -3947,6 +4086,9 @@ function setupRadioCards(containerId){
   });
 }
 setupRadioCards('styleCards');
+setupRadioCards('garmentChestVariationCards');
+setupRadioCards('garmentWaistVariationCards');
+setupRadioCards('garmentShoulderVariationCards');
 setupRadioCards('bodyShapeCards');
 setupRadioCards('bgCards');
 setupRadioCards('framingCards');
@@ -4070,6 +4212,9 @@ function clearCustomChoiceFields(){
 function applyVisualPresetDefaults(preset){
   if(!preset) return;
   clearCustomChoiceFields();
+  setSelectedCardValue('garmentChestVariationCards', 'none');
+  setSelectedCardValue('garmentWaistVariationCards', 'none');
+  setSelectedCardValue('garmentShoulderVariationCards', 'none');
   if(preset.style) setSelectedCardValue('styleCards', preset.style);
   if(preset.bg) setSelectedCardValue('bgCards', preset.bg);
   if(preset.pose) setSelectedPoseValue(preset.pose);
@@ -4415,6 +4560,9 @@ document.addEventListener('change',(event)=>{
 
 document.getElementById('generateBtn').addEventListener('click',()=>{
   const styleKey = document.querySelector('input[name="style"]:checked').value;
+  const garmentChestVariationKey = document.querySelector('input[name="garmentChestVariation"]:checked').value;
+  const garmentWaistVariationKey = document.querySelector('input[name="garmentWaistVariation"]:checked').value;
+  const garmentShoulderVariationKey = document.querySelector('input[name="garmentShoulderVariation"]:checked').value;
   const bodyShapeKey = document.querySelector('input[name="bodyShape"]:checked').value;
   const bgKey = document.querySelector('input[name="bg"]:checked').value;
   const poseKey = document.querySelector('input[name="pose"]:checked').value;
@@ -4458,6 +4606,15 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
     ? `【服裝邏輯模組｜花墨染專屬】\n\n服裝依主題「${theme}」或AI自動決定\n薄紗半透明材質為主\nSheer Translucent Fabric\nOrganza Or Thin Silk Texture\n服裝與花卉自然融合`
     : `【服裝邏輯模組｜動態造型系統】\n\n根據主題「${theme}」自動設計服裝層次\n服裝層數依主題自動增減,通常2~5層\n優先封面大片感\n優先${style.label}的視覺語言\n服裝符合主題世界觀與材質質感\nPremium Fabric / Luxury Material Detail\n\n避免過度Cosplay化\n避免遊戲角色盔甲化`;
 
+  const garmentVariationParts = [
+    MAGAZINE_GARMENT_VARIATIONS.chest[garmentChestVariationKey],
+    MAGAZINE_GARMENT_VARIATIONS.waist[garmentWaistVariationKey],
+    MAGAZINE_GARMENT_VARIATIONS.shoulder[garmentShoulderVariationKey]
+  ].filter(Boolean);
+  const garmentVariationBlock = garmentVariationParts.length
+    ? `【服裝變化核心】\n\n${garmentVariationParts.join('\n')}`
+    : null;
+
   const makeupBlock = `【妝容】\n\n${makeupKeys.map(key=>DETAIL_BLOCKS.makeup[key]).filter(Boolean).join('\n\n')}`;
   const skinTextureBlock = `【膚質質感】\n\n${DETAIL_BLOCKS.skinTexture[skinTextureKey]}`;
   const jewelryBlock = `【珠寶配飾】\n\n${jewelryKeys.map(key=>DETAIL_BLOCKS.jewelry[key]).filter(Boolean).join('\n\n')}`;
@@ -4489,6 +4646,7 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
     bgBlock,
     themeBlock,
     costumeBlock,
+    ...(garmentVariationBlock ? [garmentVariationBlock] : []),
     makeupBlock,
     resolvedSkinTextureBlock,
     jewelryBlock,
@@ -4853,7 +5011,7 @@ function pickWeightedChipSelection(values, exclusiveValue, maxCount){
   return picked;
 }
 
-// 元素級獨立隨機：風格/背景/姿態/框景/鏡頭/動態/媒材/比例/妝容/珠寶/表情/光線
+// 元素級獨立隨機：風格/服裝變化/背景/姿態/框景/鏡頭/動態/媒材/比例/妝容/珠寶/表情/光線
 // 每一項各自從完整選項池抽一個，動態組合成結果，不是從既有一鍵套用清單三選一。
 function applyMagazineRandomSelection(){
   clearCustomChoiceFields();
@@ -4869,9 +5027,15 @@ function applyMagazineRandomSelection(){
   const jewelryValues = getAllRadioValues('jewelry');
   const expressionValues = getAllRadioValues('expression');
   const lightingValues = getAllRadioValues('lighting');
+  const garmentChestVariationValues = getAllRadioValues('garmentChestVariation');
+  const garmentWaistVariationValues = getAllRadioValues('garmentWaistVariation');
+  const garmentShoulderVariationValues = getAllRadioValues('garmentShoulderVariation');
   const themePresetChips = Array.from(document.querySelectorAll('#themeChips .chip'));
 
   if(styleValues.length) setSelectedCardValue('styleCards', getRandomItem(styleValues));
+  if(garmentChestVariationValues.length) setSelectedCardValue('garmentChestVariationCards', getRandomItem(garmentChestVariationValues));
+  if(garmentWaistVariationValues.length) setSelectedCardValue('garmentWaistVariationCards', getRandomItem(garmentWaistVariationValues));
+  if(garmentShoulderVariationValues.length) setSelectedCardValue('garmentShoulderVariationCards', getRandomItem(garmentShoulderVariationValues));
   if(bgValues.length) setSelectedCardValue('bgCards', getRandomItem(bgValues));
   if(poseValues.length) setSelectedPoseValue(getRandomItem(poseValues));
   if(framingValues.length) setSelectedCardValue('framingCards', getRandomItem(framingValues));

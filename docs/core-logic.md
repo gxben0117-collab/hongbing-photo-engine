@@ -12,7 +12,7 @@
 
 ## 共用核心（`assets/core-prompt.js`）
 
-`window.HB_CORE_PROMPT` 集中管理五頁共用的區塊：
+`window.HB_CORE_PROMPT` 集中管理正式工具頁共用的核心區塊：
 
 | 區塊 | 用途 |
 | --- | --- |
@@ -28,9 +28,12 @@
 | `poseNaturality` | 姿勢自然性系統 |
 | `cleanFrame` | 畫面淨化（單人、無雜訊） |
 
-`page.travel` / `page.magazine` / `page.fantasy` / `page.doll` / `page.storeAd`
+`page.travel` / `page.magazine` / `page.fantasy` / `page.xianxia` / `page.anime` /
+`page.flowerFairy` / `page.isekai` / `page.doll` / `page.storeAd` /
+`page.floralSweet` / `page.galaSocialite` / `page.kpopIdol` /
+`page.battleAcademy` / `page.ancientGoddess` / `page.editorial`
 是把上面的區塊組合成各頁需要的子集（例如 doll 不需要 `poseNaturality`，
-store-ad 只在人物照模式才掛 `identityLock`）。
+store-ad 與 editorial 只取適合其工作流的核心）。
 
 ## 插畫媒材條件化
 
@@ -73,6 +76,18 @@ travel 的「水彩旅行插畫」、magazine 的「日系動畫畫風」、fant
 `store-ad.html` 是完全不同的設計（表單邊填邊即時看到海報企劃，沒有「生成」這個
 獨立動作），不適用這套規則。
 
+## UI 與一鍵套用契約
+
+- 每個可選欄位都必須同時具備可見控制項、選取讀取函式與 prompt 組裝入口；只新增
+  UI 文案而沒有資料映射，視為功能未完成。
+- 具名 preset 的欄位值必須存在於當頁選項池；套用時先寫入控制項，再刷新卡片狀態，
+  最後立即生成並顯示，避免畫面值與輸出值不同步。
+- 手動變更任何生成欄位後，輸出標記 stale 並停用複製；重新生成才恢復可複製狀態。
+- 對有多選上限的欄位（例如雜誌妝容、珠寶）要同時檢查上限、覆蓋型「原圖一致／無」
+  選項與 preset 的清空行為。
+- `scripts/check-ui-flows.mjs` 負責 DOM／helper／一鍵引用的靜態契約，不能取代
+  `audit-100x.mjs` 的輸出內容稽核或 `validate-preset-refs.mjs` 的資料值稽核。
+
 ## 隨機套用：元素級獨立隨機
 
 三頁的「隨機套用｜⋯」按鈕（2026-07-22 起）都是**每個欄位各自從完整選項池獨立抽選，
@@ -104,9 +119,14 @@ fantasy 40 個）是刻意保留的「設計師精選組合」，跟隨機按鈕
 - `scripts/check-static.mjs`：結構檢查（重複 id、本地連結、inline script 語法）。
 - `scripts/build-prompt-preview.mjs`：用 `node:vm` 重建改前/改後的完整咒語，
   比對固定選項組合的輸出是否有變化（0 diff = 純行為/UI 調整，沒有動到 prompt 文字）。
-- `scripts/audit-100x.mjs`：重建五頁的實際組裝邏輯，每頁隨機抽 100 組選項模擬，
+- `scripts/audit-100x.mjs`：重建 15 個正式頁的實際組裝邏輯，每頁隨機抽 100 組選項模擬，
   檢查 `undefined`/`NaN`/`[object Object]` 洩漏、身份鎖定是否存在、相鄰重複行、
   禁用角色名靜態掃描。新增選項或改組裝邏輯後都應該重跑。
+- `scripts/validate-preset-refs.mjs`：檢查各頁一鍵套用／預設資料引用的欄位值是否存在
+  於當下選項池，避免 UI 看似套用成功但 prompt 靜默退回。
+- `scripts/check-ui-flows.mjs`：檢查 15 頁必要控制項、初始值、helper 引用、輸出寫入與
+  一鍵按鈕資料映射。
 
-三個腳本合起來覆蓋「結構對不對」「舊輸出有沒有被動到」「新輸出有沒有內容問題」
-三個不同的驗證面向，任何一波咒語相關的改動都應該三個都跑過。
+五個腳本合起來覆蓋「結構對不對」「UI 流程對不對」「preset 值存在嗎」「固定輸出有沒有
+被動到」「隨機輸出有沒有內容問題」五個驗證面向，任何一波咒語或選項相關改動都應該
+全部跑過。
