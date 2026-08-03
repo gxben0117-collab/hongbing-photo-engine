@@ -291,6 +291,30 @@ function checkClassicalPageContract(page, source) {
   }
 }
 
+function checkGarmentVariationLayerContract(page, source, groups) {
+  const variationGroups = ['garmentChestVariation', 'garmentWaistVariation', 'garmentShoulderVariation'];
+  if (!variationGroups.every(name => groups.has(name))) return;
+
+  const layerGroup = groups.get('garmentLayer');
+  const expectedLayers = ['layer0', 'layer3', 'layer6', 'layer9', 'random'];
+  if (!layerGroup) {
+    issue(page, 'three-zone garment core is missing garmentLayer');
+    return;
+  }
+  for (const value of expectedLayers) {
+    if (!layerGroup.values.has(value)) issue(page, `garmentLayer is missing "${value}"`);
+  }
+  if (!source.includes('GARMENT_VARIATION_LAYER_ZONES')) {
+    issue(page, 'garmentLayer has no layer-to-zone mapping');
+  }
+  if (!source.includes('activeZones') || !source.includes('freeZones') || !source.includes('zonesToFill')) {
+    issue(page, 'garmentLayer random logic does not preserve active zones and fill only free zones');
+  }
+  if (!source.includes('服裝改造核心')) {
+    issue(page, 'three-zone garment UI is not labeled 服裝改造核心');
+  }
+}
+
 function checkPresetButtons(page, source) {
   const mappings = [
     ['data-template', 'themeTemplates'],
@@ -333,6 +357,7 @@ for (const page of pages) {
   checkChoiceGroups(page, source, groups);
   checkCheckboxContracts(page, source);
   checkClassicalPageContract(page, source);
+  checkGarmentVariationLayerContract(page, source, groups);
   checkPresetButtons(page, source);
   checkVisualOrder(page, source);
   console.log(`checked ${page}: ${groups.size} radio groups, ${idSet.size} ids`);

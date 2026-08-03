@@ -189,7 +189,16 @@
   </section>
 
   <section class="section-garment-variation">
-    <div class="section-header"><div class="section-label">05</div><div class="section-title">服裝變化核心</div></div>
+    <div class="section-header"><div class="section-label">05</div><div class="section-title">服裝改造核心</div></div>
+    <p class="hint">這些是服裝表面的結構化細節，不是重新設計整件服裝，剪裁輪廓仍以 03 服裝主題為準。Layer 只決定「隨機套用」時要改幾個部位；手動選了哪個部位，隨機套用不會覆蓋掉。</p>
+    <div class="group-title">改造強度 Layer</div>
+    <div class="grid grid-3" data-choice="garmentLayer">
+      <label class="card selected"><input type="radio" name="garmentLayer" value="layer0" checked><div class="name">Layer 0（原始版）</div><div class="desc">三個部位皆無修改</div></label>
+      <label class="card"><input type="radio" name="garmentLayer" value="layer3"><div class="name">Layer 3（輕度）</div><div class="desc">隨機套用時約改 1 個部位</div></label>
+      <label class="card"><input type="radio" name="garmentLayer" value="layer6"><div class="name">Layer 6（中度）</div><div class="desc">隨機套用時約改 2 個部位</div></label>
+      <label class="card"><input type="radio" name="garmentLayer" value="layer9"><div class="name">Layer 9（高度）</div><div class="desc">隨機套用時三個部位全改</div></label>
+      <label class="card"><input type="radio" name="garmentLayer" value="random"><div class="name">隨機 Layer</div><div class="desc">隨機套用時連強度一起重新抽</div></label>
+    </div>
     <div class="group-title">胸口</div>
     <div class="grid grid-3" data-choice="garmentChestVariation">
       <label class="card selected"><input type="radio" name="garmentChestVariation" value="none" checked><div class="name">原服裝一致</div><div class="desc">保留所選服裝原始領型</div></label>
@@ -533,6 +542,8 @@ const GARMENT_VARIATIONS = {
   }
 };
 
+const GARMENT_VARIATION_LAYER_ZONES = { layer0: 0, layer3: 1, layer6: 2, layer9: 3 };
+
 const framingData = {
   faceCloseup: 'face close-up framing with collar and textile texture visible',
   halfBody: 'half-body fashion portrait framing',
@@ -630,6 +641,8 @@ function applyThemeTemplate(key){
   setRadioValue('garmentChestVariation', preset.chest);
   setRadioValue('garmentWaistVariation', preset.waist);
   setRadioValue('garmentShoulderVariation', preset.shoulder);
+  const activeVariationCount = [preset.chest, preset.waist, preset.shoulder].filter(value => value && value !== 'none').length;
+  setRadioValue('garmentLayer', ['layer0', 'layer3', 'layer6', 'layer9'][activeVariationCount]);
   setRadioValue('bodyShape', preset.body);
   setRadioValue('pose', preset.pose);
   setRadioValue('lighting', preset.lighting);
@@ -643,10 +656,28 @@ function applyThemeTemplate(key){
   generate({ reveal: true });
 }
 function applyClassicalRandomSelection(){
-  ['style','composition','garment','accessory','garmentChestVariation','garmentWaistVariation','garmentShoulderVariation','bodyShape','pose','lighting','colorPalette','background','framing','camera','ratio'].forEach(name => setRadioValue(name, getRandomItem(getAllRadioValues(name))));
+  ['style','composition','garment','accessory','bodyShape','pose','lighting','colorPalette','background','framing','camera','ratio'].forEach(name => setRadioValue(name, getRandomItem(getAllRadioValues(name))));
   const materialValues = shuffle(getAllRadioValues('materials'));
   setCheckboxValues('materials', materialValues.slice(0, Math.random() < .5 ? 1 : 2));
   document.getElementById('intensity').value = getRandomItem(getAllSelectValues('intensity'));
+
+  const layerKeys = ['layer0', 'layer3', 'layer6', 'layer9'];
+  const selectedLayer = selected('garmentLayer');
+  const effectiveLayer = selectedLayer === 'random' ? getRandomItem(layerKeys) : selectedLayer;
+  setRadioValue('garmentLayer', effectiveLayer);
+  const zoneFields = {
+    garmentChestVariation: GARMENT_VARIATIONS.chest,
+    garmentWaistVariation: GARMENT_VARIATIONS.waist,
+    garmentShoulderVariation: GARMENT_VARIATIONS.shoulder
+  };
+  const activeZones = Object.keys(zoneFields).filter(name => selected(name) !== 'none');
+  const freeZones = Object.keys(zoneFields).filter(name => selected(name) === 'none');
+  const targetZoneCount = GARMENT_VARIATION_LAYER_ZONES[effectiveLayer] ?? 0;
+  const zonesToFill = Math.max(0, Math.min(targetZoneCount - activeZones.length, freeZones.length));
+  shuffle(freeZones).slice(0, zonesToFill).forEach(name => {
+    const pool = Object.keys(zoneFields[name]).filter(value => value !== 'none');
+    if(pool.length) setRadioValue(name, getRandomItem(pool));
+  });
   clearCustomFields();
   refreshCards();
   generate({ reveal: true });

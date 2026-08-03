@@ -277,7 +277,7 @@ const core = evalCore(coreSource);
       data.FANTASY_GARMENT_VARIATIONS.shoulder[sel.garmentShoulderVariation],
     ].filter(Boolean);
     const garmentVariationBlock = garmentVariationParts.length
-      ? `【服裝變化核心】\n\n${garmentVariationParts.join('\n')}`
+      ? `【服裝改造核心】\n\n${garmentVariationParts.join('\n')}`
       : '';
     const background = data.backgroundData[sel.background];
     const lighting = data.lightingData[sel.lighting];

@@ -677,9 +677,20 @@
   <section class="section-garment-variation">
     <div class="section-header">
       <div class="section-label">05</div>
-      <div class="section-title">服裝變化核心</div>
+      <div class="section-title">服裝改造核心</div>
     </div>
-    <p class="hint">各部位單選；以 03 服裝輪廓為基礎，只改變胸口、腰側或肩部剪裁，不重新設計整套服裝。預設為無修改。</p>
+    <p class="hint">這些是服裝表面的結構化細節，不是重新設計整件服裝，剪裁輪廓仍以 03 服裝輪廓為準。Layer 只決定「隨機套用」時要改幾個部位；手動選了哪個部位，隨機套用不會覆蓋掉。</p>
+
+    <div class="pose-group">
+      <div class="pose-group-label">改造強度 Layer</div>
+      <div class="grid grid-3" data-choice="garmentLayer">
+        <label class="card selected"><input type="radio" name="garmentLayer" value="layer0" checked><div class="name">Layer 0（原始版）</div><div class="desc">三個部位皆無修改</div></label>
+        <label class="card"><input type="radio" name="garmentLayer" value="layer3"><div class="name">Layer 3（輕度）</div><div class="desc">隨機套用時約改 1 個部位</div></label>
+        <label class="card"><input type="radio" name="garmentLayer" value="layer6"><div class="name">Layer 6（中度）</div><div class="desc">隨機套用時約改 2 個部位</div></label>
+        <label class="card"><input type="radio" name="garmentLayer" value="layer9"><div class="name">Layer 9（高度）</div><div class="desc">隨機套用時三個部位全改</div></label>
+        <label class="card"><input type="radio" name="garmentLayer" value="random"><div class="name">隨機 Layer</div><div class="desc">隨機套用時連強度一起重新抽</div></label>
+      </div>
+    </div>
 
     <div class="pose-group">
       <div class="pose-group-label">胸口</div>
@@ -2324,6 +2335,8 @@ const FANTASY_GARMENT_VARIATIONS = {
   }
 };
 
+const GARMENT_VARIATION_LAYER_ZONES = { layer0: 0, layer3: 1, layer6: 2, layer9: 3 };
+
 
 const compositionGuard = sharedFantasyCore.compositionGuard || `Commercial Composition Control:
 Subject scale follows the selected framing ratio.
@@ -3131,6 +3144,7 @@ function applyThemeTemplate(key){
   setRadioValue('garmentChestVariation', 'none');
   setRadioValue('garmentWaistVariation', 'none');
   setRadioValue('garmentShoulderVariation', 'none');
+  setRadioValue('garmentLayer', 'layer0');
   refreshCards();
   generate({reveal:true});
 }
@@ -3147,16 +3161,29 @@ function getAllSelectValues(id){
   return el ? Array.from(el.options).map(o => o.value) : [];
 }
 
-// 元素級獨立隨機：服裝/服裝變化/材質/背景/光線/構圖/框景/姿勢/風格/鏡頭/比例/強度
+// 元素級獨立隨機：服裝/服裝改造 Layer/材質/背景/光線/構圖/框景/姿勢/風格/鏡頭/比例/強度
 // 每一項各自從完整選項池抽一個，動態組合成結果，不是從預寫好的主題模板三選一。
 function applyFantasyRandomSelection(){
   ['garment','material','background','lighting','composition','framing','pose','style','camera','ratio'].forEach(name => {
     const values = getAllRadioValues(name);
     if(values.length) setRadioValue(name, getRandomItem(values));
   });
-  ['garmentChestVariation','garmentWaistVariation','garmentShoulderVariation'].forEach(name => {
-    const values = getAllRadioValues(name);
-    if(values.length) setRadioValue(name, getRandomItem(values));
+  const layerKeys = ['layer0', 'layer3', 'layer6', 'layer9'];
+  const selectedLayer = selected('garmentLayer');
+  const effectiveLayer = selectedLayer === 'random' ? getRandomItem(layerKeys) : selectedLayer;
+  setRadioValue('garmentLayer', effectiveLayer);
+  const zoneFields = {
+    garmentChestVariation: FANTASY_GARMENT_VARIATIONS.chest,
+    garmentWaistVariation: FANTASY_GARMENT_VARIATIONS.waist,
+    garmentShoulderVariation: FANTASY_GARMENT_VARIATIONS.shoulder
+  };
+  const activeZones = Object.keys(zoneFields).filter(name => selected(name) !== 'none');
+  const freeZones = Object.keys(zoneFields).filter(name => selected(name) === 'none');
+  const targetZoneCount = GARMENT_VARIATION_LAYER_ZONES[effectiveLayer] ?? 0;
+  const zonesToFill = Math.max(0, Math.min(targetZoneCount - activeZones.length, freeZones.length));
+  freeZones.slice().sort(() => Math.random() - 0.5).slice(0, zonesToFill).forEach(name => {
+    const pool = Object.keys(zoneFields[name]).filter(value => value !== 'none');
+    if(pool.length) setRadioValue(name, getRandomItem(pool));
   });
   const intensityValues = getAllSelectValues('intensity');
   if(intensityValues.length){
@@ -3203,7 +3230,7 @@ function generate(options = {}){
     FANTASY_GARMENT_VARIATIONS.shoulder[selected('garmentShoulderVariation')]
   ].filter(Boolean);
   const garmentVariationBlock = garmentVariationParts.length
-    ? `【服裝變化核心】\n\n${garmentVariationParts.join('\n')}`
+    ? `【服裝改造核心】\n\n${garmentVariationParts.join('\n')}`
     : '';
   const customBackground = document.getElementById('customBackground').value.trim();
   const background = customBackground

@@ -980,14 +980,25 @@
     </div>
   </section>
 
-  <!-- 03 服裝變化核心 -->
+  <!-- 03 服裝改造核心 -->
   <section class="magazine-garment-variation">
     <div class="section-header">
       <span class="section-label">03</span>
-      <span class="section-title">服裝變化核心</span>
-      <span class="section-sub">各部位單選；只改變服裝剪裁，不改變主題方向</span>
+      <span class="section-title">服裝改造核心</span>
+      <span class="section-sub">Layer 控制隨機改造數量；手動選擇不會被覆蓋</span>
     </div>
-    <p style="font-size:12px;color:var(--soft);margin:-6px 0 14px;">預設維持原本服裝。選擇後，對應剪裁會加入生成咒語，主題服裝仍以 02 主題 / 服裝方向為基礎。</p>
+    <p style="font-size:12px;color:var(--soft);margin:-6px 0 14px;">這些是服裝表面的結構化細節，不是重新設計整件服裝，剪裁輪廓仍以 02 主題 / 服裝方向為準。Layer 只決定「隨機套用」時要改幾個部位；手動選了哪個部位，隨機套用不會覆蓋掉。</p>
+
+    <div class="pose-group">
+      <div class="pose-group-label">改造強度 Layer</div>
+      <div class="cards" id="garmentLayerCards">
+        <label class="card selected" data-value="layer0"><input type="radio" name="garmentLayer" value="layer0" checked><div class="name">Layer 0（原始版）</div><div class="desc">三個部位皆無修改</div></label>
+        <label class="card" data-value="layer3"><input type="radio" name="garmentLayer" value="layer3"><div class="name">Layer 3（輕度）</div><div class="desc">隨機套用時約改 1 個部位</div></label>
+        <label class="card" data-value="layer6"><input type="radio" name="garmentLayer" value="layer6"><div class="name">Layer 6（中度）</div><div class="desc">隨機套用時約改 2 個部位</div></label>
+        <label class="card" data-value="layer9"><input type="radio" name="garmentLayer" value="layer9"><div class="name">Layer 9（高度）</div><div class="desc">隨機套用時三個部位全改</div></label>
+        <label class="card" data-value="random"><input type="radio" name="garmentLayer" value="random"><div class="name">隨機 Layer</div><div class="desc">隨機套用時連強度一起重新抽</div></label>
+      </div>
+    </div>
 
     <div class="pose-group">
       <div class="pose-group-label">胸口</div>
@@ -3952,6 +3963,8 @@ const MAGAZINE_GARMENT_VARIATIONS = {
   }
 };
 
+const GARMENT_VARIATION_LAYER_ZONES = { layer0: 0, layer3: 1, layer6: 2, layer9: 3 };
+
 const FRAMING_RATIOS = {
 face_closeup:`【人物入鏡比例｜臉部特寫】
 
@@ -4086,6 +4099,7 @@ function setupRadioCards(containerId){
   });
 }
 setupRadioCards('styleCards');
+setupRadioCards('garmentLayerCards');
 setupRadioCards('garmentChestVariationCards');
 setupRadioCards('garmentWaistVariationCards');
 setupRadioCards('garmentShoulderVariationCards');
@@ -4212,6 +4226,7 @@ function clearCustomChoiceFields(){
 function applyVisualPresetDefaults(preset){
   if(!preset) return;
   clearCustomChoiceFields();
+  setSelectedCardValue('garmentLayerCards', 'layer0');
   setSelectedCardValue('garmentChestVariationCards', 'none');
   setSelectedCardValue('garmentWaistVariationCards', 'none');
   setSelectedCardValue('garmentShoulderVariationCards', 'none');
@@ -4612,7 +4627,7 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
     MAGAZINE_GARMENT_VARIATIONS.shoulder[garmentShoulderVariationKey]
   ].filter(Boolean);
   const garmentVariationBlock = garmentVariationParts.length
-    ? `【服裝變化核心】\n\n${garmentVariationParts.join('\n')}`
+    ? `【服裝改造核心】\n\n${garmentVariationParts.join('\n')}`
     : null;
 
   const makeupBlock = `【妝容】\n\n${makeupKeys.map(key=>DETAIL_BLOCKS.makeup[key]).filter(Boolean).join('\n\n')}`;
@@ -4999,6 +5014,11 @@ function getAllRadioValues(name){
   return Array.from(document.querySelectorAll(`input[name="${name}"]`)).map(el => el.value);
 }
 
+function getSelectedRadioValue(name){
+  const input = document.querySelector(`input[name="${name}"]:checked`);
+  return input ? input.value : '';
+}
+
 function pickWeightedChipSelection(values, exclusiveValue, maxCount){
   const pool = values.filter(v => v !== exclusiveValue);
   if(!pool.length || Math.random() < 0.3) return [exclusiveValue];
@@ -5011,7 +5031,7 @@ function pickWeightedChipSelection(values, exclusiveValue, maxCount){
   return picked;
 }
 
-// 元素級獨立隨機：風格/服裝變化/背景/姿態/框景/鏡頭/動態/媒材/比例/妝容/珠寶/表情/光線
+// 元素級獨立隨機：風格/服裝改造 Layer/背景/姿態/框景/鏡頭/動態/媒材/比例/妝容/珠寶/表情/光線
 // 每一項各自從完整選項池抽一個，動態組合成結果，不是從既有一鍵套用清單三選一。
 function applyMagazineRandomSelection(){
   clearCustomChoiceFields();
@@ -5027,15 +5047,27 @@ function applyMagazineRandomSelection(){
   const jewelryValues = getAllRadioValues('jewelry');
   const expressionValues = getAllRadioValues('expression');
   const lightingValues = getAllRadioValues('lighting');
-  const garmentChestVariationValues = getAllRadioValues('garmentChestVariation');
-  const garmentWaistVariationValues = getAllRadioValues('garmentWaistVariation');
-  const garmentShoulderVariationValues = getAllRadioValues('garmentShoulderVariation');
   const themePresetChips = Array.from(document.querySelectorAll('#themeChips .chip'));
 
   if(styleValues.length) setSelectedCardValue('styleCards', getRandomItem(styleValues));
-  if(garmentChestVariationValues.length) setSelectedCardValue('garmentChestVariationCards', getRandomItem(garmentChestVariationValues));
-  if(garmentWaistVariationValues.length) setSelectedCardValue('garmentWaistVariationCards', getRandomItem(garmentWaistVariationValues));
-  if(garmentShoulderVariationValues.length) setSelectedCardValue('garmentShoulderVariationCards', getRandomItem(garmentShoulderVariationValues));
+  const layerKeys = ['layer0', 'layer3', 'layer6', 'layer9'];
+  const selectedLayer = getSelectedRadioValue('garmentLayer');
+  const effectiveLayer = selectedLayer === 'random' ? getRandomItem(layerKeys) : selectedLayer;
+  setSelectedCardValue('garmentLayerCards', effectiveLayer);
+  const zoneFields = {
+    garmentChestVariation: { container: 'garmentChestVariationCards', data: MAGAZINE_GARMENT_VARIATIONS.chest },
+    garmentWaistVariation: { container: 'garmentWaistVariationCards', data: MAGAZINE_GARMENT_VARIATIONS.waist },
+    garmentShoulderVariation: { container: 'garmentShoulderVariationCards', data: MAGAZINE_GARMENT_VARIATIONS.shoulder }
+  };
+  const activeZones = Object.keys(zoneFields).filter(name => getSelectedRadioValue(name) !== 'none');
+  const freeZones = Object.keys(zoneFields).filter(name => getSelectedRadioValue(name) === 'none');
+  const targetZoneCount = GARMENT_VARIATION_LAYER_ZONES[effectiveLayer] ?? 0;
+  const zonesToFill = Math.max(0, Math.min(targetZoneCount - activeZones.length, freeZones.length));
+  freeZones.slice().sort(() => Math.random() - 0.5).slice(0, zonesToFill).forEach(name => {
+    const zone = zoneFields[name];
+    const pool = Object.keys(zone.data).filter(value => value !== 'none');
+    if(pool.length) setSelectedCardValue(zone.container, getRandomItem(pool));
+  });
   if(bgValues.length) setSelectedCardValue('bgCards', getRandomItem(bgValues));
   if(poseValues.length) setSelectedPoseValue(getRandomItem(poseValues));
   if(framingValues.length) setSelectedCardValue('framingCards', getRandomItem(framingValues));
