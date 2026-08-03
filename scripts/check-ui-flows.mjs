@@ -307,11 +307,41 @@ function checkGarmentVariationLayerContract(page, source, groups) {
   if (!source.includes('GARMENT_VARIATION_LAYER_ZONES')) {
     issue(page, 'garmentLayer has no layer-to-zone mapping');
   }
-  if (!source.includes('activeZones') || !source.includes('freeZones') || !source.includes('zonesToFill')) {
+  if (!source.includes('HB_GARMENT_CORE.chooseFreeZones') && (!source.includes('activeZones') || !source.includes('freeZones'))) {
     issue(page, 'garmentLayer random logic does not preserve active zones and fill only free zones');
   }
   if (!source.includes('服裝改造核心')) {
     issue(page, 'three-zone garment UI is not labeled 服裝改造核心');
+  }
+}
+
+function checkGarmentDetailLayerContract(page, source, groups) {
+  const detailGroups = ['chestDetail', 'waistSideDetail', 'shoulderDetail'];
+  if (!detailGroups.every(name => groups.has(name))) return;
+
+  const layerGroup = groups.get('garmentLayer');
+  const expectedLayers = ['layer0', 'layer3', 'layer6', 'layer9', 'random'];
+  if (!layerGroup) {
+    issue(page, 'three-zone garment detail core is missing garmentLayer');
+    return;
+  }
+  for (const value of expectedLayers) {
+    if (!layerGroup.values.has(value)) issue(page, `garmentLayer is missing "${value}"`);
+  }
+  if (!source.includes('GARMENT_DETAIL_LAYER_ZONES')) {
+    issue(page, 'garment detail Layer has no layer-to-zone mapping');
+  }
+  if (!source.includes('GARMENT_DETAIL_RANDOM_POOLS')) {
+    issue(page, 'garment detail random pool is missing');
+  }
+  if (!source.includes('HB_GARMENT_CORE.randomKeys') || !source.includes('HB_GARMENT_CORE.chooseFreeZones')) {
+    issue(page, 'garment detail random logic is not using the shared garment-core helper');
+  }
+  if (!source.includes('服裝改造核心')) {
+    issue(page, 'three-zone garment detail UI is not labeled 服裝改造核心');
+  }
+  for (const field of detailGroups) {
+    if (!source.includes(`name="${field}" value="none"`)) issue(page, `${field} is missing the none option`);
   }
 }
 
@@ -451,6 +481,7 @@ for (const page of pages) {
   checkCheckboxContracts(page, source);
   checkClassicalPageContract(page, source);
   checkGarmentVariationLayerContract(page, source, groups);
+  checkGarmentDetailLayerContract(page, source, groups);
   checkPresetButtons(page, source);
   checkEditorialTemplateContract(page, source, groups);
   checkChineseClassicalTemplateContract(page, source);

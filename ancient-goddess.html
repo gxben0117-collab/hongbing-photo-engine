@@ -616,6 +616,11 @@
         <label class="card"><input type="radio" name="chestDetail" value="laceInsert"><div class="name">蕾絲拼接</div><div class="desc">胸口蕾絲拼接細節</div></label>
         <label class="card"><input type="radio" name="chestDetail" value="beadedTrim"><div class="name">珠繡滾邊</div><div class="desc">胸口珠繡滾邊細節</div></label>
         <label class="card"><input type="radio" name="chestDetail" value="asymmetricCut"><div class="name">不對稱切割</div><div class="desc">胸口不對稱切割細節</div></label>
+        <div class="pose-group-label" style="grid-column:1/-1">古文明女神專屬結構</div>
+        <label class="card"><input type="radio" name="chestDetail" value="engravedPectoral"><div class="name">金屬護胸片</div><div class="desc">古典雕紋儀式護胸片</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="pleatedSculpturalBodice"><div class="name">褶襉垂墜胸衣</div><div class="desc">古典雕像感垂墜褶襉</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="laurelLinkedNeckline"><div class="name">月桂鏈飾領</div><div class="desc">月桂葉與鏈飾框住領口</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="shellSculpturalBodice"><div class="name">貝殼雕塑胸衣</div><div class="desc">海洋女神感雕塑胸衣</div></label>
       </div>
       <div class="form-grid" style="margin-top:10px;">
         <label class="field full custom-choice" data-custom-choice="chestDetail">胸口細節自填
@@ -638,6 +643,11 @@
         <label class="card"><input type="radio" name="waistSideDetail" value="laceInsert"><div class="name">蕾絲拼接</div><div class="desc">腰側蕾絲拼接細節</div></label>
         <label class="card"><input type="radio" name="waistSideDetail" value="beadedTrim"><div class="name">珠繡滾邊</div><div class="desc">腰側珠繡滾邊細節</div></label>
         <label class="card"><input type="radio" name="waistSideDetail" value="asymmetricCut"><div class="name">不對稱切割</div><div class="desc">腰側不對稱切割細節</div></label>
+        <div class="pose-group-label" style="grid-column:1/-1">古文明女神腰部結構</div>
+        <label class="card"><input type="radio" name="waistSideDetail" value="braidedCeremonialBelt"><div class="name">古典繩結腰帶</div><div class="desc">編織儀式繩結束腰</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="goldLeafWaistBand"><div class="name">金葉寬腰封</div><div class="desc">雕紋金葉形成寬版腰封</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="classicalSideDrapery"><div class="name">垂布側褶</div><div class="desc">古典垂布在腰側聚褶</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="ceremonialGemWaistChain"><div class="name">寶石祭典腰鍊</div><div class="desc">克制的祭典寶石腰鍊</div></label>
       </div>
       <div class="form-grid" style="margin-top:10px;">
         <label class="field full custom-choice" data-custom-choice="waistSideDetail">腰側細節自填
@@ -659,6 +669,11 @@
         <label class="card"><input type="radio" name="shoulderDetail" value="chainStrap"><div class="name">鏈條肩帶</div><div class="desc">肩部鏈條肩帶細節</div></label>
         <label class="card"><input type="radio" name="shoulderDetail" value="detachedSleeve"><div class="name">分離袖片</div><div class="desc">肩部分離袖片細節</div></label>
         <label class="card"><input type="radio" name="shoulderDetail" value="asymmetricShoulder"><div class="name">不對稱肩部</div><div class="desc">肩部不對稱剪裁細節</div></label>
+        <div class="pose-group-label" style="grid-column:1/-1">古文明女神肩部結構</div>
+        <label class="card"><input type="radio" name="shoulderDetail" value="engravedOneShoulder"><div class="name">單肩扣袍</div><div class="desc">雕紋扣飾固定的單肩袍</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="laurelShoulderMantle"><div class="name">月桂披肩</div><div class="desc">月桂邊飾儀式披肩</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="classicalDrapePin"><div class="name">古典披帛肩帶</div><div class="desc">以古典垂布扣在肩部</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="warriorGoddessShoulder"><div class="name">女戰神護肩</div><div class="desc">雕塑儀式護肩整合禮服</div></label>
       </div>
       <div class="form-grid" style="margin-top:10px;">
         <label class="field full custom-choice" data-custom-choice="shoulderDetail">肩部細節自填
@@ -917,6 +932,7 @@
 </main>
 
 <script src="assets/core-prompt.js"></script>
+<script src="assets/garment-core.js"></script>
 <script>
 const materialData = {
   goldLeafShimmer: {
@@ -1055,7 +1071,11 @@ const chestDetailData = {
   crossStraps: 'crossed strap detailing at the chest',
   laceInsert: 'a lace panel insert at the chest',
   beadedTrim: 'a beaded embroidery trim at the chest',
-  asymmetricCut: 'an asymmetric cut at the chest'
+  asymmetricCut: 'an asymmetric cut at the chest',
+  engravedPectoral: 'an engraved ceremonial pectoral plate',
+  pleatedSculpturalBodice: 'a pleated draped bodice inspired by classical sculpture',
+  laurelLinkedNeckline: 'a laurel-linked ornamental neckline',
+  shellSculpturalBodice: 'a shell-inspired sculptural bodice'
 };
 const waistSideDetailData = {
   none: '',
@@ -1069,7 +1089,11 @@ const waistSideDetailData = {
   crossBind: 'crossed binding straps at the waist side',
   laceInsert: 'a lace panel insert at the waist side',
   beadedTrim: 'a beaded embroidery trim at the waist side',
-  asymmetricCut: 'an asymmetric cut at the waist side'
+  asymmetricCut: 'an asymmetric cut at the waist side',
+  braidedCeremonialBelt: 'a braided ceremonial cord belt',
+  goldLeafWaistBand: 'a broad engraved gold-leaf waist band',
+  classicalSideDrapery: 'classical side drapery gathered at the waist',
+  ceremonialGemWaistChain: 'a restrained gemstone ceremonial waist chain'
 };
 const shoulderDetailData = {
   none: '',
@@ -1082,9 +1106,18 @@ const shoulderDetailData = {
   beadedTrim: 'a beaded embroidery trim at the shoulder',
   chainStrap: 'a chain strap accent at the shoulder',
   detachedSleeve: 'a detached sleeve panel',
-  asymmetricShoulder: 'an asymmetric shoulder cut'
+  asymmetricShoulder: 'an asymmetric shoulder cut',
+  engravedOneShoulder: 'a one-shoulder robe secured by an engraved clasp',
+  laurelShoulderMantle: 'a laurel-trimmed ceremonial shoulder mantle',
+  classicalDrapePin: 'classical drapery pinned naturally at the shoulders',
+  warriorGoddessShoulder: 'sculpted ceremonial shoulder armor integrated into the gown'
 };
 const GARMENT_DETAIL_LAYER_ZONES = { layer0: 0, layer3: 1, layer6: 2, layer9: 3 };
+const GARMENT_DETAIL_RANDOM_POOLS = {
+  chestDetail: ['engravedPectoral', 'pleatedSculpturalBodice', 'laurelLinkedNeckline', 'shellSculpturalBodice'],
+  waistSideDetail: ['braidedCeremonialBelt', 'goldLeafWaistBand', 'classicalSideDrapery', 'ceremonialGemWaistChain'],
+  shoulderDetail: ['engravedOneShoulder', 'laurelShoulderMantle', 'classicalDrapePin', 'warriorGoddessShoulder'],
+};
 
 const garmentData = {
   drapedChitonTogaGown: 'flowing draped Greek chiton toga gown, soft gathered folds, classical goddess silhouette',
@@ -1415,11 +1448,13 @@ function refreshCards(){
 const themeTemplates = {
   olympianGoddessDescent: {
     garment: 'goldLaurelArmorGown', material: 'divineHaloGlow', style: 'mythologyEpicPoster',
+    chestDetail: 'engravedPectoral', waistSideDetail: 'goldLeafWaistBand', shoulderDetail: 'engravedOneShoulder',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
     framing: 'threeQuarter', pose: 'offering_gesture_goddess', camera: 'eyeLevelCover', lighting: 'halo', background: 'marbleTempleColumnHall', ratio: 'vertical45', intensity: 'balanced material effects, elegant and luxurious'
   },
   marbleTempleAltar: {
     garment: 'drapedChitonTogaGown', material: 'ancientBronzePatina', style: 'archaeologicalArtGallery',
+    chestDetail: 'pleatedSculpturalBodice', waistSideDetail: 'classicalSideDrapery', shoulderDetail: 'classicalDrapePin',
     composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
     framing: 'fullBody', pose: 'temple_column_lean', camera: 'lowAngleHero', lighting: 'hard', background: 'mediterraneanTempleTwilight', ratio: 'vertical916', intensity: 'balanced material effects, elegant and luxurious'
   },
@@ -1450,6 +1485,7 @@ const themeTemplates = {
   },
   goldenBattleArmorGoddess: {
     garment: 'crystalStarforgeArmorGown', material: 'ancientSwordProp', style: 'cinematicMythEpic',
+    chestDetail: 'shellSculpturalBodice', waistSideDetail: 'ceremonialGemWaistChain', shoulderDetail: 'warriorGoddessShoulder',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
     framing: 'fullBody', pose: 'sword_guard_stance', camera: 'lowAngleHero', lighting: 'cold', background: 'mountOlympusCloudPeak', ratio: 'vertical916', intensity: 'balanced material effects, elegant and luxurious'
   },
@@ -1547,17 +1583,13 @@ function applyAncientGoddessRandomSelection(){
   // 服裝改造核心：Layer 決定要命中幾個部位，已經手動設定過（非「無修改」）的部位維持
   // 原樣不被覆蓋，只有還在「無修改」的部位才會被納入這次隨機的候選池。
   const layerKeys = ['layer0', 'layer3', 'layer6', 'layer9'];
-  const selectedLayer = selected('garmentLayer');
-  const effectiveLayer = selectedLayer === 'random' ? getRandomItem(layerKeys) : selectedLayer;
+  const layerSelection = HB_GARMENT_CORE.resolveLayer(selected('garmentLayer'), layerKeys, GARMENT_DETAIL_LAYER_ZONES);
+  const effectiveLayer = layerSelection.key;
   setRadioValue('garmentLayer', effectiveLayer);
   const zoneFields = { chestDetail: chestDetailData, waistSideDetail: waistSideDetailData, shoulderDetail: shoulderDetailData };
-  const alreadyActiveZones = Object.keys(zoneFields).filter(name => selected(name) !== 'none');
-  const freeZones = Object.keys(zoneFields).filter(name => selected(name) === 'none');
-  const targetZoneCount = GARMENT_DETAIL_LAYER_ZONES[effectiveLayer] ?? 0;
-  const zonesToFill = Math.max(0, Math.min(targetZoneCount - alreadyActiveZones.length, freeZones.length));
-  const shuffledFreeZones = freeZones.slice().sort(() => Math.random() - 0.5).slice(0, zonesToFill);
-  shuffledFreeZones.forEach(name => {
-    const pool = Object.keys(zoneFields[name]).filter(k => k !== 'none');
+  const { zones } = HB_GARMENT_CORE.chooseFreeZones(zoneFields, name => selected(name), layerSelection.targetCount);
+  zones.forEach(name => {
+    const pool = HB_GARMENT_CORE.randomKeys(zoneFields[name], GARMENT_DETAIL_RANDOM_POOLS[name]);
     if(pool.length) setRadioValue(name, getRandomItem(pool));
   });
 
@@ -1603,7 +1635,7 @@ function generate(options = {}){
   const shoulderDetailText = customShoulderDetail
     ? `custom shoulder surface detail only: ${customShoulderDetail}`
     : shoulderDetailData[selected('shoulderDetail')];
-  const garmentDetailParts = [chestDetailText, waistSideDetailText, shoulderDetailText].filter(Boolean);
+  const garmentDetailParts = HB_GARMENT_CORE.compactPromptParts([chestDetailText, waistSideDetailText, shoulderDetailText]);
   const garmentDetailText = garmentDetailParts.length
     ? 'garment surface detail: ' + garmentDetailParts.join(', ') + ' — structural surface accents only, the garment silhouette from the appearance form above stays unchanged,'
     : '';

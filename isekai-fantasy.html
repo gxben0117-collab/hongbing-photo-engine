@@ -631,6 +631,10 @@
         <label class="card"><input type="radio" name="chestDetail" value="crossStraps"><div class="name">交叉束帶</div><div class="desc">胸口交叉束帶細節</div></label>
         <label class="card"><input type="radio" name="chestDetail" value="featherTrim"><div class="name">羽毛裝飾</div><div class="desc">胸口羽毛裝飾細節</div></label>
         <label class="card"><input type="radio" name="chestDetail" value="asymmetricCut"><div class="name">不對稱切割</div><div class="desc">胸口不對稱切割細節</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="leatherCrossStraps"><div class="name">皮革交叉束帶</div><div class="desc">冒險者皮革交叉束帶</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="runeProtectiveChest"><div class="name">符文護胸片</div><div class="desc">符文滾邊的防護胸前結構</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="saintessLayeredCollar"><div class="name">聖女層疊領</div><div class="desc">儀式感層疊領口</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="royalJeweledFront"><div class="name">王室寶石胸襟</div><div class="desc">融入禮服的王室寶石胸前片</div></label>
       </div>
       <div class="form-grid" style="margin-top:10px;">
         <label class="field full custom-choice" data-custom-choice="chestDetail">胸口細節自填
@@ -653,6 +657,10 @@
         <label class="card"><input type="radio" name="waistSideDetail" value="elvenLaceInsert"><div class="name">精靈蕾絲拼接</div><div class="desc">腰側精靈蕾絲拼接細節</div></label>
         <label class="card"><input type="radio" name="waistSideDetail" value="runeGlowTrim"><div class="name">符文發光滾邊</div><div class="desc">腰側符文發光滾邊細節</div></label>
         <label class="card"><input type="radio" name="waistSideDetail" value="asymmetricCut"><div class="name">不對稱切割</div><div class="desc">腰側不對稱切割細節</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="adventurerUtilityBelt"><div class="name">冒險者功能腰帶</div><div class="desc">可收納道具的功能腰帶</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="potionSidePouches"><div class="name">藥劑側袋</div><div class="desc">腰側小型藥劑收納袋</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="layeredBattleSkirtArmor"><div class="name">戰鬥裙甲層</div><div class="desc">保留腿部活動性的層疊裙甲</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="runeEmbroideredSash"><div class="name">符文刺繡腰帶</div><div class="desc">環繞長袍腰線的符文刺繡腰帶</div></label>
       </div>
       <div class="form-grid" style="margin-top:10px;">
         <label class="field full custom-choice" data-custom-choice="waistSideDetail">腰側細節自填
@@ -674,6 +682,10 @@
         <label class="card"><input type="radio" name="shoulderDetail" value="runeGlowTrim"><div class="name">符文發光滾邊</div><div class="desc">肩部符文發光滾邊細節</div></label>
         <label class="card"><input type="radio" name="shoulderDetail" value="detachedSleeve"><div class="name">分離袖片</div><div class="desc">肩部分離袖片細節</div></label>
         <label class="card"><input type="radio" name="shoulderDetail" value="asymmetricShoulder"><div class="name">不對稱肩部</div><div class="desc">肩部不對稱剪裁細節</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="lightPauldron"><div class="name">輕型肩甲</div><div class="desc">冒險服裝的單側輕型肩甲</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="shortCapeShoulderClasp"><div class="name">短披風肩扣</div><div class="desc">固定於肩後的短披風</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="saintessMantle"><div class="name">聖女披肩</div><div class="desc">儀式感聖女肩部披肩</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="elvenLeafShoulderGuard"><div class="name">精靈葉紋肩護</div><div class="desc">葉紋雕刻的精靈肩部護具</div></label>
       </div>
       <div class="form-grid" style="margin-top:10px;">
         <label class="field full custom-choice" data-custom-choice="shoulderDetail">肩部細節自填
@@ -978,6 +990,7 @@
 </main>
 
 <script src="assets/core-prompt.js"></script>
+<script src="assets/garment-core.js"></script>
 <script>
 const materialData = {
   holyRadianceAura: {
@@ -1150,7 +1163,11 @@ const chestDetailData = {
   runeGlowTrim: 'a glowing rune trim at the chest',
   crossStraps: 'crossed strap detailing at the chest',
   featherTrim: 'a feather trim accent at the chest',
-  asymmetricCut: 'an asymmetric cut at the chest'
+  asymmetricCut: 'an asymmetric cut at the chest',
+  leatherCrossStraps: 'functional leather cross-straps over the bodice',
+  runeProtectiveChest: 'a rune-trimmed protective chest panel',
+  saintessLayeredCollar: 'a layered ceremonial priestess collar',
+  royalJeweledFront: 'a jeweled royal front panel integrated into the gown'
 };
 const waistSideDetailData = {
   none: '',
@@ -1164,7 +1181,11 @@ const waistSideDetailData = {
   crossBind: 'crossed binding straps at the waist side',
   elvenLaceInsert: 'an elven lace panel insert at the waist side',
   runeGlowTrim: 'a glowing rune trim at the waist side',
-  asymmetricCut: 'an asymmetric cut at the waist side'
+  asymmetricCut: 'an asymmetric cut at the waist side',
+  adventurerUtilityBelt: 'a functional adventurer utility belt',
+  potionSidePouches: 'small potion pouches secured at the side waist',
+  layeredBattleSkirtArmor: 'layered battle-skirt armor at the waist',
+  runeEmbroideredSash: 'an embroidered rune sash around the robe waist'
 };
 const shoulderDetailData = {
   none: '',
@@ -1177,10 +1198,19 @@ const shoulderDetailData = {
   elvenLaceInsert: 'an elven lace panel insert at the shoulder',
   runeGlowTrim: 'a glowing rune trim at the shoulder',
   detachedSleeve: 'a detached sleeve panel',
-  asymmetricShoulder: 'an asymmetric shoulder cut'
+  asymmetricShoulder: 'an asymmetric shoulder cut',
+  lightPauldron: 'a single light pauldron for an adventurer outfit',
+  shortCapeShoulderClasp: 'a short cape secured behind the shoulders',
+  saintessMantle: 'a ceremonial saintess shoulder mantle',
+  elvenLeafShoulderGuard: 'leaf-engraved elven shoulder guards'
 };
 // Layer → 隨機套用時要命中幾個部位（0-3 個，從胸口/腰側/肩部三個部位裡抽）
 const GARMENT_DETAIL_LAYER_ZONES = { layer0: 0, layer3: 1, layer6: 2, layer9: 3 };
+const GARMENT_DETAIL_RANDOM_POOLS = {
+  chestDetail: ['leatherCrossStraps', 'runeProtectiveChest', 'saintessLayeredCollar', 'royalJeweledFront'],
+  waistSideDetail: ['adventurerUtilityBelt', 'potionSidePouches', 'layeredBattleSkirtArmor', 'runeEmbroideredSash'],
+  shoulderDetail: ['lightPauldron', 'shortCapeShoulderClasp', 'saintessMantle', 'elvenLeafShoulderGuard'],
+};
 
 const garmentData = {
   heroTravelerTunic: 'Japanese isekai fantasy hero traveler tunic, fitted leather-accented adventurer outfit, cinched belt and utility straps, JRPG protagonist silhouette',
@@ -1557,16 +1587,19 @@ function refreshCards(){
 const themeTemplates = {
   heroTravelerJourney: {
     garment: 'heroTravelerTunic', material: 'holyRadianceAura', style: 'lightNovelAd',
+    chestDetail: 'leatherCrossStraps', waistSideDetail: 'adventurerUtilityBelt', shoulderDetail: 'lightPauldron',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
     framing: 'threeQuarter', pose: 'sword_sheathe_calm', camera: 'eyeLevelCover', lighting: 'soft', background: 'fantasyMarketStreet', ratio: 'vertical45', intensity: 'balanced material effects, elegant and luxurious'
   },
   swordmaidenDuelReady: {
     garment: 'swordmaidenPlateSkirt', material: 'thunderSparkArc', style: 'cinematic',
+    chestDetail: 'runeProtectiveChest', waistSideDetail: 'layeredBattleSkirtArmor', shoulderDetail: 'shortCapeShoulderClasp',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
     framing: 'threeQuarter', pose: 'sword_draw_pose', camera: 'lowAngleHero', lighting: 'hard', background: 'ancientBattleArena', ratio: 'vertical916', intensity: 'massive explosive material splash, high speed frozen motion'
   },
   archmageSpellcast: {
     garment: 'archmageRobeEnsemble', material: 'arcaneFireWisp', style: 'lightNovelAd',
+    chestDetail: 'saintessLayeredCollar', waistSideDetail: 'runeEmbroideredSash', shoulderDetail: 'saintessMantle',
     composition: 'subject surrounded by selected material environment, material wraps around foreground and background, immersive fantasy advertisement layout',
     framing: 'threeQuarter', pose: 'spell_casting', camera: 'eyeLevelCover', lighting: 'mist', background: 'arcaneLibraryHall', ratio: 'vertical45', intensity: 'balanced material effects, elegant and luxurious'
   },
@@ -1689,17 +1722,13 @@ function applyIsekaiRandomSelection(){
   // 服裝改造核心：Layer 決定要命中幾個部位，已經手動設定過（非「無修改」）的部位維持
   // 原樣不被覆蓋，只有還在「無修改」的部位才會被納入這次隨機的候選池。
   const layerKeys = ['layer0', 'layer3', 'layer6', 'layer9'];
-  const selectedLayer = selected('garmentLayer');
-  const effectiveLayer = selectedLayer === 'random' ? getRandomItem(layerKeys) : selectedLayer;
+  const layerSelection = HB_GARMENT_CORE.resolveLayer(selected('garmentLayer'), layerKeys, GARMENT_DETAIL_LAYER_ZONES);
+  const effectiveLayer = layerSelection.key;
   setRadioValue('garmentLayer', effectiveLayer);
   const zoneFields = { chestDetail: chestDetailData, waistSideDetail: waistSideDetailData, shoulderDetail: shoulderDetailData };
-  const alreadyActiveZones = Object.keys(zoneFields).filter(name => selected(name) !== 'none');
-  const freeZones = Object.keys(zoneFields).filter(name => selected(name) === 'none');
-  const targetZoneCount = GARMENT_DETAIL_LAYER_ZONES[effectiveLayer] ?? 0;
-  const zonesToFill = Math.max(0, Math.min(targetZoneCount - alreadyActiveZones.length, freeZones.length));
-  const shuffledFreeZones = freeZones.slice().sort(() => Math.random() - 0.5).slice(0, zonesToFill);
-  shuffledFreeZones.forEach(name => {
-    const pool = Object.keys(zoneFields[name]).filter(k => k !== 'none');
+  const { zones } = HB_GARMENT_CORE.chooseFreeZones(zoneFields, name => selected(name), layerSelection.targetCount);
+  zones.forEach(name => {
+    const pool = HB_GARMENT_CORE.randomKeys(zoneFields[name], GARMENT_DETAIL_RANDOM_POOLS[name]);
     if(pool.length) setRadioValue(name, getRandomItem(pool));
   });
 
@@ -1745,7 +1774,7 @@ function generate(options = {}){
   const shoulderDetailText = customShoulderDetail
     ? `custom shoulder surface detail only: ${customShoulderDetail}`
     : shoulderDetailData[selected('shoulderDetail')];
-  const garmentDetailParts = [chestDetailText, waistSideDetailText, shoulderDetailText].filter(Boolean);
+  const garmentDetailParts = HB_GARMENT_CORE.compactPromptParts([chestDetailText, waistSideDetailText, shoulderDetailText]);
   const garmentDetailText = garmentDetailParts.length
     ? 'garment surface detail: ' + garmentDetailParts.join(', ') + ' — structural surface accents only, the garment silhouette from the appearance form above stays unchanged,'
     : '';

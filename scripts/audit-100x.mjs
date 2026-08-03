@@ -1350,6 +1350,57 @@ auditClassicalCulturePage({
   report('editorial', N);
 }
 
+// ===================== GARMENT CORE THEME CONTRACT =====================
+// The runtime simulations above exercise prompt assembly. This companion
+// contract checks that every formal garment page also exposes its theme-owned
+// options in the UI, data map, random pool and representative presets.
+const garmentThemeContracts = [
+  { file: 'xianxia.html', pool: 'GARMENT_DETAIL_RANDOM_POOLS', fields: ['chestDetail', 'waistSideDetail', 'shoulderDetail'], keys: ['cloudCrossCollarPanels', 'jadeProtectivePanel', 'flowingSilkChestDrape', 'sectEmbroideredChest', 'cloudEmbroideredSash', 'jadePendantSash', 'trailingRibbonKnot', 'lightArmorWaistGuard', 'cloudShoulderOverlayX', 'piboShoulderDrape', 'sectCeremonialMantle', 'robeLightPauldron'], presets: ['sectMasterAscension', 'swordCultivatorDuel', 'flowerSpiritGarden'] },
+  { file: 'ancient-goddess.html', pool: 'GARMENT_DETAIL_RANDOM_POOLS', fields: ['chestDetail', 'waistSideDetail', 'shoulderDetail'], keys: ['engravedPectoral', 'pleatedSculpturalBodice', 'laurelLinkedNeckline', 'shellSculpturalBodice', 'braidedCeremonialBelt', 'goldLeafWaistBand', 'classicalSideDrapery', 'ceremonialGemWaistChain', 'engravedOneShoulder', 'laurelShoulderMantle', 'classicalDrapePin', 'warriorGoddessShoulder'], presets: ['olympianGoddessDescent', 'marbleTempleAltar', 'goldenBattleArmorGoddess'] },
+  { file: 'anime-character.html', pool: 'GARMENT_DETAIL_RANDOM_POOLS', fields: ['chestDetail', 'waistSideDetail', 'shoulderDetail'], keys: ['layeredSailorCollar', 'statementRibbonBow', 'graphicColorBlockBodice', 'heroUniformZipper', 'pleatedSkirtWaistband', 'utilityPouchesWaist', 'magicalGirlBowSash', 'pilotHarnessWaist', 'puffedRibbonSleeves', 'characterDetachedSleeves', 'heroLightArmorShoulder', 'shortCapeClasp'], presets: ['magicalGirlTransform', 'mechaPilotLaunch', 'swordfighterDuel'] },
+  { file: 'battle-academy.html', pool: 'GARMENT_DETAIL_RANDOM_POOLS', fields: ['chestDetail', 'waistSideDetail', 'shoulderDetail'], keys: ['highCollarReinforcedPanel', 'academyTieModule', 'insigniaChestPanel', 'tacticalZipperFront', 'academyUtilityBelt', 'equipmentWaistClasps', 'armoredSkirtPanels', 'doubleUniformWaistband', 'academyEpaulettes', 'lightProtectiveShoulder', 'commanderMantle', 'functionalDetachedSleeves'], presets: ['sakuraCrestBladeBloom', 'shirasagiFrostFencerDuel', 'suzakuCrimsonChargeGate'] },
+  { file: 'floral-sweet.html', pool: 'GARMENT_DETAIL_RANDOM_POOLS', fields: ['chestDetail', 'waistSideDetail', 'shoulderDetail'], keys: ['ruffledSweetheart', 'ribbonBowFrontPanel', 'lacePeterPanCollar', 'ruchedFloralBodice', 'statementBowSash', 'laceFittedWaistband', 'gatheredOverskirtPanel', 'floralRufflePanel', 'ribbonTiedStraps', 'flowerBudPuffSleeves', 'layeredRuffleShoulders', 'pearlShoulderStraps'], presets: ['sweetBouquetGirl', 'picnicMeadowSweetheart', 'cherryBlossomTwirl'] },
+  { file: 'flower-fairy.html', pool: 'GARMENT_DETAIL_RANDOM_POOLS', fields: ['chestDetail', 'waistSideDetail', 'shoulderDetail'], keys: ['petalLayeredNeckline', 'vineWovenBodice', 'flowerCenterBodice', 'translucentPetalInset', 'organicVineWrap', 'petalOverskirtPanel', 'flowerClusterWaist', 'leafCoutureCutout', 'petalShoulderFins', 'vineShoulderStraps', 'floralGarlandCape', 'mistFloralSleeves'], presets: ['roseFairyRomance', 'lilyFairyPurity', 'lotusFairyPond'] },
+  { file: 'gala-socialite.html', pool: 'GARMENT_DETAIL_RANDOM_POOLS', fields: ['chestDetail', 'waistSideDetail', 'shoulderDetail'], keys: ['satinCowlNeckline', 'jeweledPortraitCollar', 'sculptedEveningCorset', 'velvetLapelNeckline', 'satinGatheredWaist', 'gemstoneWaistBelt', 'sculpturalPeplumWaist', 'drapedSidePanel', 'operaShoulderCape', 'featherTrimShoulderLine', 'gemstoneShoulderClasp', 'sculpturalOneShoulder'], presets: ['redCarpetEntrance', 'crystalBallroomWaltz', 'champagneToastMoment'] },
+  { file: 'isekai-fantasy.html', pool: 'GARMENT_DETAIL_RANDOM_POOLS', fields: ['chestDetail', 'waistSideDetail', 'shoulderDetail'], keys: ['leatherCrossStraps', 'runeProtectiveChest', 'saintessLayeredCollar', 'royalJeweledFront', 'adventurerUtilityBelt', 'potionSidePouches', 'layeredBattleSkirtArmor', 'runeEmbroideredSash', 'lightPauldron', 'shortCapeShoulderClasp', 'saintessMantle', 'elvenLeafShoulderGuard'], presets: ['heroTravelerJourney', 'swordmaidenDuelReady', 'archmageSpellcast'] },
+  { file: 'kpop-idol.html', pool: 'GARMENT_DETAIL_RANDOM_POOLS', fields: ['chestDetail', 'waistSideDetail', 'shoulderDetail'], keys: ['stageZipperBodice', 'rhinestoneStrapBodice', 'asymmetricCroppedTop', 'sequinedHalterBodice', 'rhinestoneWaistChain', 'stageCorsetBelt', 'pleatedPerformanceWaist', 'fringeWaistAccent', 'oneSleevePerformance', 'croppedBoleroShoulder', 'rhinestoneShoulderStrap', 'fringedEpaulettes'], presets: ['comebackTeaserPoster', 'livePerformanceEnergy', 'minimalRunwayChic'] },
+  { file: 'chinese-classical.html', pool: 'GARMENT_VARIATION_RANDOM_POOLS', fields: ['garmentChestVariation', 'garmentWaistVariation', 'garmentShoulderVariation'], keys: ['layeredCrossCollar', 'standingCollarKnots', 'embroideredCollarGuard', 'cloudCollarPanel', 'wovenSilkSash', 'jadePendantDrop', 'mamianSidePleats', 'layeredWrapWaist', 'cloudShoulderOverlay', 'silkShawlDrape', 'wideSleeveShoulderLine', 'modernChineseCapelet'], presets: ['hanCourtyard', 'hanModernCouture', 'songScholarStudy'] },
+  { file: 'japanese-kimono.html', pool: 'GARMENT_VARIATION_RANDOM_POOLS', fields: ['garmentChestVariation', 'garmentWaistVariation', 'garmentShoulderVariation'], keys: ['eriLayeredCollar', 'haneriInsert', 'dateEriLayer', 'modernAsymKimonoCollar', 'maruObiStructure', 'obijimeKnot', 'obiageFold', 'sideTaikoObi', 'furisodeSleeveLine', 'haoriLayer', 'sheerKimonoSleeve', 'modernKimonoCapelet'], presets: ['heianCourt', 'edoFurisodeSakura', 'modernKimonoStudio'] },
+  { file: 'korean-hanbok.html', pool: 'GARMENT_VARIATION_RANDOM_POOLS', fields: ['garmentChestVariation', 'garmentWaistVariation', 'garmentShoulderVariation'], keys: ['dongjeongCollar', 'goreumKnot', 'jeogoriEmbroideryPanel', 'modernSquareJeogori', 'chimaHighWaist', 'norigaeWaistDrop', 'layeredChimaBand', 'modernHanbokWaistband', 'roundedSleeveShoulder', 'baejaLayer', 'wonsamSheerLayer', 'modernHanbokCapelet'], presets: ['scholarPastelStudy', 'royalDanguiPalace', 'modernDailyHanbok'] },
+  { file: 'fantasy-fashion.html', pool: 'GARMENT_VARIATION_RANDOM_POOLS', fields: ['garmentChestVariation', 'garmentWaistVariation', 'garmentShoulderVariation'], keys: ['liquidMetalBodice', 'facetedCrystalNeckline', 'resinInset', 'suspendedMaterialBodice', 'mirroredMetalWaist', 'sculpturalMaterialWaist', 'crystalWaistBelt', 'asymMaterialDrape', 'architecturalShoulder', 'crystalShoulderGuard', 'materialPetalShoulder', 'floatingRingShoulder'], presets: ['redPaperWedding', 'obsidianRoseJewelry', 'pearlMoonBridal'] },
+  { file: 'magazine.html', pool: 'GARMENT_VARIATION_RANDOM_POOLS', fields: ['garmentChestVariation', 'garmentWaistVariation', 'garmentShoulderVariation'], keys: ['cowlNeckline', 'portraitCollar', 'editorialCorset', 'sculpturalAsymNeckline', 'tailoredLapelBodice', 'coutureWaistDrape', 'sculpturalWaistBelt', 'architecturalPeplum', 'statementMetalBelt', 'asymmetricDrapedPanel', 'coutureShoulderCape', 'statementShoulderLine', 'featherShoulderAccent', 'structuredPuffSleeve', 'jewelShoulderStrap'], presets: ['blackGoldBeauty', 'jewelryCoolCover', 'hanfuWindowEditorial'] },
+];
+
+for (const contract of garmentThemeContracts) {
+  const html = read(contract.file);
+  if (!html.includes('assets/garment-core.js')) {
+    ISSUES.push({ page: contract.file, iteration: 'garment-contract', selection: null, problems: ['缺少共用 garment-core script'] });
+  }
+  if (!html.includes(`const ${contract.pool} =`)) {
+    ISSUES.push({ page: contract.file, iteration: 'garment-contract', selection: null, problems: [`缺少 ${contract.pool}`] });
+  }
+  if (!html.includes('HB_GARMENT_CORE.resolveLayer') || !html.includes('HB_GARMENT_CORE.chooseFreeZones')) {
+    ISSUES.push({ page: contract.file, iteration: 'garment-contract', selection: null, problems: ['未接入共用 Layer 行為'] });
+  }
+  for (const field of contract.fields) {
+    if (!html.includes(`name="${field}" value="none"`)) {
+      ISSUES.push({ page: contract.file, iteration: 'garment-contract', selection: null, problems: [`${field} 缺少 none 選項`] });
+    }
+  }
+  for (const key of contract.keys) {
+    const occurrences = html.split(key).length - 1;
+    if (occurrences < 3) {
+      ISSUES.push({ page: contract.file, iteration: 'garment-contract', selection: null, problems: [`主題選項 ${key} 未完整連接 UI／資料／隨機池`] });
+    }
+  }
+  for (const preset of contract.presets) {
+    if (!html.includes(`${preset}: {`)) {
+      ISSUES.push({ page: contract.file, iteration: 'garment-contract', selection: null, problems: [`代表模板 ${preset} 不存在`] });
+    }
+  }
+  console.log(`garment contract checked: ${contract.file}`);
+}
+
 // ===================== BANNED-NAME STATIC SCAN (source files, not simulation) =====================
 const bannedNames = ['不知火舞', '月野うさぎ', '胡蝶しのぶ', '麻宮アテナ', 'ボア・ハンコック', 'ニコ・ロビン', '真三國無雙', '月英', '練師', '孫尚香'];
 for (const file of ['travel.html', 'magazine.html', 'fantasy-fashion.html', 'doll.html', 'store-ad.html']) {

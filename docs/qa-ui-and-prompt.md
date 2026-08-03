@@ -46,6 +46,10 @@ git diff --check
 - 任何同時具備 `garmentChestVariation`、`garmentWaistVariation`、`garmentShoulderVariation`
   的頁面，都必須提供 `garmentLayer` 的 layer0／layer3／layer6／layer9／random 五個值、
   Layer 對照常數，以及保留已選部位後再補足未選部位的隨機邏輯。
+- 任何同時具備 `chestDetail`、`waistSideDetail`、`shoulderDetail` 的頁面，都必須提供同一組
+  Layer 值、`GARMENT_DETAIL_LAYER_ZONES`、主題專屬 `GARMENT_DETAIL_RANDOM_POOLS`，並透過
+  `assets/garment-core.js` 的共用 helper 保留手動部位、只補未選區域；每個主題專屬 key 必須同時
+  出現在 UI、英文資料、隨機池與至少一組代表模板或資料契約中。
 - 編輯視覺設計必須有六個模板分類，數量固定為時尚編輯 6、美業廣告 4、動漫電玩 4、電影海報 7、
   寫真書 5、旅遊設計 5，總數 31；不得出現運動競技、犯罪、恐怖或心理驚悚模板。
 - 首頁與主題頁的可見文案必須符合主題契約：材質區標題、服裝示例、坐姿情境與首頁工具數量
@@ -60,6 +64,7 @@ git diff --check
   preset／隨機測試。
 - Layer 只影響隨機套用，不得成為 Prompt 片段；使用者手動選取的胸口、腰側、肩部不得被
   隨機套用覆蓋。中式古典、和服、韓服模板的 Layer 顯示必須與實際啟用部位數一致。
+- 服裝改造三區的完全相同英文片段只保留一次；`none` 不輸出片段，主題專屬隨機池不得跨頁抽取。
 - 生成輸出不得出現 `undefined`、`NaN`、`[object Object]`，身份鎖定與頁面必要核心
   guard 必須保留。
 - `CORE_REALISTIC_ANATOMY` 的連續頭頸肩脊椎與非合成臉部約束，必須透過 `humanCore` 或
@@ -89,6 +94,7 @@ git diff --check
 - UI flow contract：18 頁，0 issue。
 - preset 引用驗證：0 issue。
 - 隨機生成稽核：18 頁 × 100 組，共 1800 組，0 issue。
+- 服裝改造主題契約：14 頁，UI／資料／隨機池／代表模板與共用 helper 全部通過。
 - 編輯視覺設計模板稽核：6 分類、31 組模板全部通過按鈕／資料池／生成輸出對照。
 - 固定提示詞預覽：完成；結構與生成輸出可重建。
 - `check-static.mjs` 與 `git diff --check`：完成。

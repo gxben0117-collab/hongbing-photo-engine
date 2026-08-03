@@ -622,6 +622,11 @@
         <label class="card"><input type="radio" name="chestDetail" value="laceInsert"><div class="name">蕾絲拼接</div><div class="desc">胸口蕾絲拼接細節</div></label>
         <label class="card"><input type="radio" name="chestDetail" value="beadedTrim"><div class="name">珠繡滾邊</div><div class="desc">胸口珠繡滾邊細節</div></label>
         <label class="card"><input type="radio" name="chestDetail" value="asymmetricCut"><div class="name">不對稱切割</div><div class="desc">胸口不對稱切割細節</div></label>
+        <div class="pose-group-label" style="grid-column:1/-1">宴會高訂專屬結構</div>
+        <label class="card"><input type="radio" name="chestDetail" value="satinCowlNeckline"><div class="name">垂墜緞面領</div><div class="desc">緞面自然垂墜的宴會領口</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="jeweledPortraitCollar"><div class="name">珠寶肖像領</div><div class="desc">珠寶框住臉部與肩頸</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="sculptedEveningCorset"><div class="name">立體馬甲胸衣</div><div class="desc">正式晚宴立體胸衣結構</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="velvetLapelNeckline"><div class="name">絲絨翻領</div><div class="desc">絲絨翻領與晚禮服融合</div></label>
       </div>
       <div class="form-grid" style="margin-top:10px;">
         <label class="field full custom-choice" data-custom-choice="chestDetail">胸口細節自填
@@ -644,6 +649,11 @@
         <label class="card"><input type="radio" name="waistSideDetail" value="laceInsert"><div class="name">蕾絲拼接</div><div class="desc">腰側蕾絲拼接細節</div></label>
         <label class="card"><input type="radio" name="waistSideDetail" value="beadedTrim"><div class="name">珠繡滾邊</div><div class="desc">腰側珠繡滾邊細節</div></label>
         <label class="card"><input type="radio" name="waistSideDetail" value="asymmetricCut"><div class="name">不對稱切割</div><div class="desc">腰側不對稱切割細節</div></label>
+        <div class="pose-group-label" style="grid-column:1/-1">宴會高訂腰部結構</div>
+        <label class="card"><input type="radio" name="waistSideDetail" value="satinGatheredWaist"><div class="name">抓褶緞面腰線</div><div class="desc">緞面在腰部優雅聚褶</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="gemstoneWaistBelt"><div class="name">珠寶腰封</div><div class="desc">宴會寶石主題腰封</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="sculpturalPeplumWaist"><div class="name">立體裙腰</div><div class="desc">雕塑感 peplum 腰部結構</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="drapedSidePanel"><div class="name">垂墜側裙片</div><div class="desc">從腰部延伸的長垂墜裙片</div></label>
       </div>
       <div class="form-grid" style="margin-top:10px;">
         <label class="field full custom-choice" data-custom-choice="waistSideDetail">腰側細節自填
@@ -665,6 +675,11 @@
         <label class="card"><input type="radio" name="shoulderDetail" value="chainStrap"><div class="name">鏈條肩帶</div><div class="desc">肩部鏈條肩帶細節</div></label>
         <label class="card"><input type="radio" name="shoulderDetail" value="detachedSleeve"><div class="name">分離袖片</div><div class="desc">肩部分離袖片細節</div></label>
         <label class="card"><input type="radio" name="shoulderDetail" value="asymmetricShoulder"><div class="name">不對稱肩部</div><div class="desc">肩部不對稱剪裁細節</div></label>
+        <div class="pose-group-label" style="grid-column:1/-1">宴會高訂肩部結構</div>
+        <label class="card"><input type="radio" name="shoulderDetail" value="operaShoulderCape"><div class="name">歌劇披肩</div><div class="desc">正式宴會歌劇式披肩</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="featherTrimShoulderLine"><div class="name">羽毛披肩線</div><div class="desc">克制的羽毛肩部線條</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="gemstoneShoulderClasp"><div class="name">珠寶肩扣</div><div class="desc">以寶石扣固定肩部垂布</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="sculpturalOneShoulder"><div class="name">雕塑單肩</div><div class="desc">正式晚禮服雕塑單肩結構</div></label>
       </div>
       <div class="form-grid" style="margin-top:10px;">
         <label class="field full custom-choice" data-custom-choice="shoulderDetail">肩部細節自填
@@ -925,6 +940,7 @@
 </main>
 
 <script src="assets/core-prompt.js"></script>
+<script src="assets/garment-core.js"></script>
 <script>
 const materialData = {
   diamondNecklaceAccent: {
@@ -1063,7 +1079,11 @@ const chestDetailData = {
   crossStraps: 'crossed strap detailing at the chest',
   laceInsert: 'a lace panel insert at the chest',
   beadedTrim: 'a beaded embroidery trim at the chest',
-  asymmetricCut: 'an asymmetric cut at the chest'
+  asymmetricCut: 'an asymmetric cut at the chest',
+  satinCowlNeckline: 'a softly draped satin cowl neckline',
+  jeweledPortraitCollar: 'a jeweled portrait collar',
+  sculptedEveningCorset: 'a sculpted evening corset bodice',
+  velvetLapelNeckline: 'a refined velvet lapel neckline'
 };
 const waistSideDetailData = {
   none: '',
@@ -1077,7 +1097,11 @@ const waistSideDetailData = {
   crossBind: 'crossed binding straps at the waist side',
   laceInsert: 'a lace panel insert at the waist side',
   beadedTrim: 'a beaded embroidery trim at the waist side',
-  asymmetricCut: 'an asymmetric cut at the waist side'
+  asymmetricCut: 'an asymmetric cut at the waist side',
+  satinGatheredWaist: 'satin drapery gathered elegantly at the waist',
+  gemstoneWaistBelt: 'a gemstone statement waist belt',
+  sculpturalPeplumWaist: 'a sculptural peplum waist structure',
+  drapedSidePanel: 'a long draped side panel from the waist'
 };
 const shoulderDetailData = {
   none: '',
@@ -1090,9 +1114,18 @@ const shoulderDetailData = {
   beadedTrim: 'a beaded embroidery trim at the shoulder',
   chainStrap: 'a chain strap accent at the shoulder',
   detachedSleeve: 'a detached sleeve panel',
-  asymmetricShoulder: 'an asymmetric shoulder cut'
+  asymmetricShoulder: 'an asymmetric shoulder cut',
+  operaShoulderCape: 'an elegant opera-style shoulder cape',
+  featherTrimShoulderLine: 'a restrained feather-trimmed shoulder line',
+  gemstoneShoulderClasp: 'gemstone clasps securing the shoulder drape',
+  sculpturalOneShoulder: 'a sculptural one-shoulder evening construction'
 };
 const GARMENT_DETAIL_LAYER_ZONES = { layer0: 0, layer3: 1, layer6: 2, layer9: 3 };
+const GARMENT_DETAIL_RANDOM_POOLS = {
+  chestDetail: ['satinCowlNeckline', 'jeweledPortraitCollar', 'sculptedEveningCorset', 'velvetLapelNeckline'],
+  waistSideDetail: ['satinGatheredWaist', 'gemstoneWaistBelt', 'sculpturalPeplumWaist', 'drapedSidePanel'],
+  shoulderDetail: ['operaShoulderCape', 'featherTrimShoulderLine', 'gemstoneShoulderClasp', 'sculpturalOneShoulder'],
+};
 
 const garmentData = {
   silkColumnGown: 'sleek satin column gown with a fitted mermaid silhouette, sophisticated evening elegance',
@@ -1429,16 +1462,19 @@ function refreshCards(){
 const themeTemplates = {
   redCarpetEntrance: {
     garment: 'silkColumnGown', material: 'diamondNecklaceAccent', style: 'galaCampaign',
+    chestDetail: 'jeweledPortraitCollar', waistSideDetail: 'gemstoneWaistBelt', shoulderDetail: 'gemstoneShoulderClasp',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
     framing: 'threeQuarter', pose: 'center_still', camera: 'eyeLevelCover', lighting: 'jewelrySparkle', background: 'redCarpetEntrance', ratio: 'vertical45', intensity: 'balanced material effects, elegant and luxurious'
   },
   crystalBallroomWaltz: {
     garment: 'offShoulderEveningGown', material: 'chandelierSparkle', style: 'eleganceMagazine',
+    chestDetail: 'satinCowlNeckline', waistSideDetail: 'satinGatheredWaist', shoulderDetail: 'operaShoulderCape',
     composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
     framing: 'threeQuarter', pose: 'one_hand_waist', camera: 'eyeLevelCover', lighting: 'soft', background: 'crystalChandelierHall', ratio: 'vertical45', intensity: 'balanced material effects, elegant and luxurious'
   },
   champagneToastMoment: {
     garment: 'sequinEveningGown', material: 'champagneBubbleGlow', style: 'blackTieGlam',
+    chestDetail: 'sculptedEveningCorset', waistSideDetail: 'sculpturalPeplumWaist', shoulderDetail: 'sculpturalOneShoulder',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
     framing: 'threeQuarter', pose: 'champagne_toast_glance', camera: 'eyeLevelCover', lighting: 'jewelrySparkle', background: 'grandBallroomInterior', ratio: 'vertical45', intensity: 'balanced material effects, elegant and luxurious'
   },
@@ -1561,17 +1597,13 @@ function applyGalaRandomSelection(){
   // 服裝改造核心：Layer 決定要命中幾個部位，已經手動設定過（非「無修改」）的部位維持
   // 原樣不被覆蓋，只有還在「無修改」的部位才會被納入這次隨機的候選池。
   const layerKeys = ['layer0', 'layer3', 'layer6', 'layer9'];
-  const selectedLayer = selected('garmentLayer');
-  const effectiveLayer = selectedLayer === 'random' ? getRandomItem(layerKeys) : selectedLayer;
+  const layerSelection = HB_GARMENT_CORE.resolveLayer(selected('garmentLayer'), layerKeys, GARMENT_DETAIL_LAYER_ZONES);
+  const effectiveLayer = layerSelection.key;
   setRadioValue('garmentLayer', effectiveLayer);
   const zoneFields = { chestDetail: chestDetailData, waistSideDetail: waistSideDetailData, shoulderDetail: shoulderDetailData };
-  const alreadyActiveZones = Object.keys(zoneFields).filter(name => selected(name) !== 'none');
-  const freeZones = Object.keys(zoneFields).filter(name => selected(name) === 'none');
-  const targetZoneCount = GARMENT_DETAIL_LAYER_ZONES[effectiveLayer] ?? 0;
-  const zonesToFill = Math.max(0, Math.min(targetZoneCount - alreadyActiveZones.length, freeZones.length));
-  const shuffledFreeZones = freeZones.slice().sort(() => Math.random() - 0.5).slice(0, zonesToFill);
-  shuffledFreeZones.forEach(name => {
-    const pool = Object.keys(zoneFields[name]).filter(k => k !== 'none');
+  const { zones } = HB_GARMENT_CORE.chooseFreeZones(zoneFields, name => selected(name), layerSelection.targetCount);
+  zones.forEach(name => {
+    const pool = HB_GARMENT_CORE.randomKeys(zoneFields[name], GARMENT_DETAIL_RANDOM_POOLS[name]);
     if(pool.length) setRadioValue(name, getRandomItem(pool));
   });
 
@@ -1617,7 +1649,7 @@ function generate(options = {}){
   const shoulderDetailText = customShoulderDetail
     ? `custom shoulder surface detail only: ${customShoulderDetail}`
     : shoulderDetailData[selected('shoulderDetail')];
-  const garmentDetailParts = [chestDetailText, waistSideDetailText, shoulderDetailText].filter(Boolean);
+  const garmentDetailParts = HB_GARMENT_CORE.compactPromptParts([chestDetailText, waistSideDetailText, shoulderDetailText]);
   const garmentDetailText = garmentDetailParts.length
     ? 'garment surface detail: ' + garmentDetailParts.join(', ') + ' — structural surface accents only, the garment silhouette from the appearance form above stays unchanged,'
     : '';

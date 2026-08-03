@@ -631,6 +631,11 @@
         <label class="card"><input type="radio" name="chestDetail" value="laceInsert"><div class="name">蕾絲拼接</div><div class="desc">胸口蕾絲拼接細節</div></label>
         <label class="card"><input type="radio" name="chestDetail" value="glowRuneTrim"><div class="name">發光符文滾邊</div><div class="desc">胸口發光符文滾邊細節</div></label>
         <label class="card"><input type="radio" name="chestDetail" value="asymmetricCut"><div class="name">不對稱切割</div><div class="desc">胸口不對稱切割細節</div></label>
+        <div class="pose-group-label" style="grid-column:1/-1">動漫角色專屬結構</div>
+        <label class="card"><input type="radio" name="chestDetail" value="layeredSailorCollar"><div class="name">水手領疊片</div><div class="desc">動畫水手領的層疊胸片</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="statementRibbonBow"><div class="name">大型蝴蝶結胸飾</div><div class="desc">角色識別用大型蝴蝶結</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="graphicColorBlockBodice"><div class="name">動畫色塊胸片</div><div class="desc">乾淨明確的角色色塊分區</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="heroUniformZipper"><div class="name">英雄制服拉鍊襟</div><div class="desc">俐落英雄制服拉鍊前襟</div></label>
       </div>
       <div class="form-grid" style="margin-top:10px;">
         <label class="field full custom-choice" data-custom-choice="chestDetail">胸口細節自填
@@ -653,6 +658,11 @@
         <label class="card"><input type="radio" name="waistSideDetail" value="laceInsert"><div class="name">蕾絲拼接</div><div class="desc">腰側蕾絲拼接細節</div></label>
         <label class="card"><input type="radio" name="waistSideDetail" value="glowRuneTrim"><div class="name">發光符文滾邊</div><div class="desc">腰側發光符文滾邊細節</div></label>
         <label class="card"><input type="radio" name="waistSideDetail" value="asymmetricCut"><div class="name">不對稱切割</div><div class="desc">腰側不對稱切割細節</div></label>
+        <div class="pose-group-label" style="grid-column:1/-1">動漫角色腰部結構</div>
+        <label class="card"><input type="radio" name="waistSideDetail" value="pleatedSkirtWaistband"><div class="name">百褶裙腰片</div><div class="desc">清楚的角色百褶裙腰部</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="utilityPouchesWaist"><div class="name">角色腰包系統</div><div class="desc">小型角色裝備腰包組</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="magicalGirlBowSash"><div class="name">魔法少女蝴蝶結腰封</div><div class="desc">多層蝴蝶結腰封與飄帶</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="pilotHarnessWaist"><div class="name">飛行員束帶腰封</div><div class="desc">機能飛行員束帶結構</div></label>
       </div>
       <div class="form-grid" style="margin-top:10px;">
         <label class="field full custom-choice" data-custom-choice="waistSideDetail">腰側細節自填
@@ -674,6 +684,11 @@
         <label class="card"><input type="radio" name="shoulderDetail" value="glowRuneTrim"><div class="name">發光符文滾邊</div><div class="desc">肩部發光符文滾邊細節</div></label>
         <label class="card"><input type="radio" name="shoulderDetail" value="detachedSleeve"><div class="name">分離袖片</div><div class="desc">肩部分離袖片細節</div></label>
         <label class="card"><input type="radio" name="shoulderDetail" value="asymmetricShoulder"><div class="name">不對稱肩部</div><div class="desc">肩部不對稱剪裁細節</div></label>
+        <div class="pose-group-label" style="grid-column:1/-1">動漫角色肩部結構</div>
+        <label class="card"><input type="radio" name="shoulderDetail" value="puffedRibbonSleeves"><div class="name">泡袖蝴蝶結肩</div><div class="desc">泡袖與角色蝴蝶結肩飾</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="characterDetachedSleeves"><div class="name">分離角色袖</div><div class="desc">與手臂對齊的分離袖片</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="heroLightArmorShoulder"><div class="name">英雄輕甲肩片</div><div class="desc">輕型英雄肩甲，不取代手臂</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="shortCapeClasp"><div class="name">短披風肩扣</div><div class="desc">肩後固定的短披風</div></label>
       </div>
       <div class="form-grid" style="margin-top:10px;">
         <label class="field full custom-choice" data-custom-choice="shoulderDetail">肩部細節自填
@@ -927,6 +942,7 @@
 </main>
 
 <script src="assets/core-prompt.js"></script>
+<script src="assets/garment-core.js"></script>
 <script>
 const materialData = {
   celShadingFlat: {
@@ -1099,7 +1115,11 @@ const chestDetailData = {
   heartCutout: 'a heart-shaped cutout at the chest',
   laceInsert: 'a lace panel insert at the chest',
   glowRuneTrim: 'a glowing rune trim at the chest',
-  asymmetricCut: 'an asymmetric cut at the chest'
+  asymmetricCut: 'an asymmetric cut at the chest',
+  layeredSailorCollar: 'a layered sailor-collar panel',
+  statementRibbonBow: 'a structured statement ribbon bow at the chest',
+  graphicColorBlockBodice: 'clean graphic color-block bodice panels',
+  heroUniformZipper: 'a fitted hero-uniform zipper front'
 };
 const waistSideDetailData = {
   none: '',
@@ -1113,7 +1133,11 @@ const waistSideDetailData = {
   sideSlit: 'a side slit cut at the waist',
   laceInsert: 'a lace panel insert at the waist side',
   glowRuneTrim: 'a glowing rune trim at the waist side',
-  asymmetricCut: 'an asymmetric cut at the waist side'
+  asymmetricCut: 'an asymmetric cut at the waist side',
+  pleatedSkirtWaistband: 'a structured pleated-skirt waistband',
+  utilityPouchesWaist: 'compact character utility pouches secured at the waist',
+  magicalGirlBowSash: 'a layered magical-girl bow sash',
+  pilotHarnessWaist: 'a functional pilot harness around the waist'
 };
 const shoulderDetailData = {
   none: '',
@@ -1126,10 +1150,19 @@ const shoulderDetailData = {
   laceInsert: 'a lace panel insert at the shoulder',
   glowRuneTrim: 'a glowing rune trim at the shoulder',
   detachedSleeve: 'a detached sleeve panel',
-  asymmetricShoulder: 'an asymmetric shoulder cut'
+  asymmetricShoulder: 'an asymmetric shoulder cut',
+  puffedRibbonSleeves: 'puffed sleeves with ribbon shoulder accents',
+  characterDetachedSleeves: 'detached character sleeves aligned with the arms',
+  heroLightArmorShoulder: 'light hero armor at the shoulders',
+  shortCapeClasp: 'a short cape secured behind the shoulders'
 };
 // Layer → 隨機套用時要命中幾個部位（0-3 個，從胸口/腰側/肩部三個部位裡抽）
 const GARMENT_DETAIL_LAYER_ZONES = { layer0: 0, layer3: 1, layer6: 2, layer9: 3 };
+const GARMENT_DETAIL_RANDOM_POOLS = {
+  chestDetail: ['layeredSailorCollar', 'statementRibbonBow', 'graphicColorBlockBodice', 'heroUniformZipper'],
+  waistSideDetail: ['pleatedSkirtWaistband', 'utilityPouchesWaist', 'magicalGirlBowSash', 'pilotHarnessWaist'],
+  shoulderDetail: ['puffedRibbonSleeves', 'characterDetachedSleeves', 'heroLightArmorShoulder', 'shortCapeClasp'],
+};
 
 const garmentData = {
   blazerUniform: 'classic anime school blazer uniform, fitted blazer jacket over a pleated skirt, ribbon tie accent, clean schoolgirl silhouette',
@@ -1460,6 +1493,7 @@ function refreshCards(){
 const themeTemplates = {
   magicalGirlTransform: {
     garment: 'magicalGirlOutfit', material: 'glowingMagicCircle', style: 'moeCute',
+    chestDetail: 'statementRibbonBow', waistSideDetail: 'magicalGirlBowSash', shoulderDetail: 'puffedRibbonSleeves',
     composition: 'subject surrounded by selected material environment, material wraps around foreground and background, immersive fantasy advertisement layout',
     framing: 'fullBody', pose: 'transformationSequencePose', camera: 'lowAngleHero', lighting: 'prismaticColor', background: 'radiantMagicCircleBurst', ratio: 'vertical916', intensity: 'massive explosive material splash, high speed frozen motion'
   },
@@ -1470,11 +1504,13 @@ const themeTemplates = {
   },
   mechaPilotLaunch: {
     garment: 'mechaPilotBodysuit', material: 'neonTechGlowLines', style: 'gameCG',
+    chestDetail: 'heroUniformZipper', waistSideDetail: 'pilotHarnessWaist', shoulderDetail: 'heroLightArmorShoulder',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
     framing: 'threeQuarter', pose: 'dashForwardAttackPose', camera: 'lowAngleHero', lighting: 'coldWhiteMechaLight', background: 'mechaHangarBay', ratio: 'vertical916', intensity: 'massive explosive material splash, high speed frozen motion'
   },
   swordfighterDuel: {
     garment: 'fantasySwordTunic', material: 'lightningArcEffect', style: 'shonenAction',
+    chestDetail: 'graphicColorBlockBodice', waistSideDetail: 'pleatedSkirtWaistband', shoulderDetail: 'shortCapeClasp',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
     framing: 'threeQuarter', pose: 'swordDrawBattleStance', camera: 'lowAngleHero', lighting: 'hard', background: 'ruinedBattlefield', ratio: 'vertical916', intensity: 'massive explosive material splash, high speed frozen motion'
   },
@@ -1594,17 +1630,13 @@ function applyAnimeRandomSelection(){
   // 服裝改造核心：Layer 決定要命中幾個部位，已經手動設定過（非「無修改」）的部位維持
   // 原樣不被覆蓋，只有還在「無修改」的部位才會被納入這次隨機的候選池。
   const layerKeys = ['layer0', 'layer3', 'layer6', 'layer9'];
-  const selectedLayer = selected('garmentLayer');
-  const effectiveLayer = selectedLayer === 'random' ? getRandomItem(layerKeys) : selectedLayer;
+  const layerSelection = HB_GARMENT_CORE.resolveLayer(selected('garmentLayer'), layerKeys, GARMENT_DETAIL_LAYER_ZONES);
+  const effectiveLayer = layerSelection.key;
   setRadioValue('garmentLayer', effectiveLayer);
   const zoneFields = { chestDetail: chestDetailData, waistSideDetail: waistSideDetailData, shoulderDetail: shoulderDetailData };
-  const alreadyActiveZones = Object.keys(zoneFields).filter(name => selected(name) !== 'none');
-  const freeZones = Object.keys(zoneFields).filter(name => selected(name) === 'none');
-  const targetZoneCount = GARMENT_DETAIL_LAYER_ZONES[effectiveLayer] ?? 0;
-  const zonesToFill = Math.max(0, Math.min(targetZoneCount - alreadyActiveZones.length, freeZones.length));
-  const shuffledFreeZones = freeZones.slice().sort(() => Math.random() - 0.5).slice(0, zonesToFill);
-  shuffledFreeZones.forEach(name => {
-    const pool = Object.keys(zoneFields[name]).filter(k => k !== 'none');
+  const { zones } = HB_GARMENT_CORE.chooseFreeZones(zoneFields, name => selected(name), layerSelection.targetCount);
+  zones.forEach(name => {
+    const pool = HB_GARMENT_CORE.randomKeys(zoneFields[name], GARMENT_DETAIL_RANDOM_POOLS[name]);
     if(pool.length) setRadioValue(name, getRandomItem(pool));
   });
 
@@ -1650,7 +1682,7 @@ function generate(options = {}){
   const shoulderDetailText = customShoulderDetail
     ? `custom shoulder surface detail only: ${customShoulderDetail}`
     : shoulderDetailData[selected('shoulderDetail')];
-  const garmentDetailParts = [chestDetailText, waistSideDetailText, shoulderDetailText].filter(Boolean);
+  const garmentDetailParts = HB_GARMENT_CORE.compactPromptParts([chestDetailText, waistSideDetailText, shoulderDetailText]);
   const garmentDetailText = garmentDetailParts.length
     ? 'garment surface detail: ' + garmentDetailParts.join(', ') + ' — structural surface accents only, the garment silhouette from the appearance form above stays unchanged,'
     : '';

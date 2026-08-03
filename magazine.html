@@ -1033,6 +1033,32 @@
           <div class="name">深 V 大開襟</div>
           <div class="desc">交領深 V 大開襟</div>
         </label>
+        <div class="pose-group-label" style="grid-column:1/-1">編輯高訂胸口結構</div>
+        <label class="card" data-value="cowlNeckline">
+          <input type="radio" name="garmentChestVariation" value="cowlNeckline">
+          <div class="name">垂墜領</div>
+          <div class="desc">柔和緞面垂墜領</div>
+        </label>
+        <label class="card" data-value="portraitCollar">
+          <input type="radio" name="garmentChestVariation" value="portraitCollar">
+          <div class="name">肖像領</div>
+          <div class="desc">框住肩頸的寬版高訂領</div>
+        </label>
+        <label class="card" data-value="editorialCorset">
+          <input type="radio" name="garmentChestVariation" value="editorialCorset">
+          <div class="name">結構馬甲胸衣</div>
+          <div class="desc">高級編輯時裝胸衣結構</div>
+        </label>
+        <label class="card" data-value="sculpturalAsymNeckline">
+          <input type="radio" name="garmentChestVariation" value="sculpturalAsymNeckline">
+          <div class="name">雕塑不對稱領口</div>
+          <div class="desc">雕塑感不對稱高訂領型</div>
+        </label>
+        <label class="card" data-value="tailoredLapelBodice">
+          <input type="radio" name="garmentChestVariation" value="tailoredLapelBodice">
+          <div class="name">西裝翻領胸衣</div>
+          <div class="desc">俐落翻領與胸衣結構融合</div>
+        </label>
       </div>
     </div>
 
@@ -1059,6 +1085,32 @@
           <div class="name">裙擺敞開</div>
           <div class="desc">裙擺敞開，呈現腿部線條</div>
         </label>
+        <div class="pose-group-label" style="grid-column:1/-1">編輯高訂腰部結構</div>
+        <label class="card" data-value="coutureWaistDrape">
+          <input type="radio" name="garmentWaistVariation" value="coutureWaistDrape">
+          <div class="name">高訂抓褶腰線</div>
+          <div class="desc">高訂布料在腰部自然聚褶</div>
+        </label>
+        <label class="card" data-value="sculpturalWaistBelt">
+          <input type="radio" name="garmentWaistVariation" value="sculpturalWaistBelt">
+          <div class="name">雕塑腰封</div>
+          <div class="desc">胸腰線條清楚的高訂腰封</div>
+        </label>
+        <label class="card" data-value="architecturalPeplum">
+          <input type="radio" name="garmentWaistVariation" value="architecturalPeplum">
+          <div class="name">立體荷葉腰片</div>
+          <div class="desc">建築感荷葉腰片</div>
+        </label>
+        <label class="card" data-value="statementMetalBelt">
+          <input type="radio" name="garmentWaistVariation" value="statementMetalBelt">
+          <div class="name">金屬腰帶</div>
+          <div class="desc">拋光金屬主題腰帶</div>
+        </label>
+        <label class="card" data-value="asymmetricDrapedPanel">
+          <input type="radio" name="garmentWaistVariation" value="asymmetricDrapedPanel">
+          <div class="name">不對稱垂墜裙片</div>
+          <div class="desc">從腰部延伸的垂墜裙片</div>
+        </label>
       </div>
     </div>
 
@@ -1084,6 +1136,32 @@
           <input type="radio" name="garmentShoulderVariation" value="halterNeckCutaway">
           <div class="name">掛脖削肩</div>
           <div class="desc">掛脖削肩設計</div>
+        </label>
+        <div class="pose-group-label" style="grid-column:1/-1">編輯高訂肩部結構</div>
+        <label class="card" data-value="coutureShoulderCape">
+          <input type="radio" name="garmentShoulderVariation" value="coutureShoulderCape">
+          <div class="name">高訂披肩</div>
+          <div class="desc">精品封面感肩部披搭</div>
+        </label>
+        <label class="card" data-value="statementShoulderLine">
+          <input type="radio" name="garmentShoulderVariation" value="statementShoulderLine">
+          <div class="name">雕塑誇張肩線</div>
+          <div class="desc">高級時裝雕塑肩線</div>
+        </label>
+        <label class="card" data-value="featherShoulderAccent">
+          <input type="radio" name="garmentShoulderVariation" value="featherShoulderAccent">
+          <div class="name">羽毛肩飾</div>
+          <div class="desc">精緻羽毛肩部點綴</div>
+        </label>
+        <label class="card" data-value="structuredPuffSleeve">
+          <input type="radio" name="garmentShoulderVariation" value="structuredPuffSleeve">
+          <div class="name">立體泡袖</div>
+          <div class="desc">有結構感的立體泡袖</div>
+        </label>
+        <label class="card" data-value="jewelShoulderStrap">
+          <input type="radio" name="garmentShoulderVariation" value="jewelShoulderStrap">
+          <div class="name">珠寶肩帶</div>
+          <div class="desc">珠寶嵌飾高訂肩帶</div>
         </label>
       </div>
     </div>
@@ -2298,6 +2376,7 @@
 </div>
 
 <script src="assets/core-prompt.js"></script>
+<script src="assets/garment-core.js"></script>
 <script>
 // ====== 固定核心引擎(與旅拍引擎共用) ======
 const CORE = window.HB_CORE_PROMPT.page.magazine;
@@ -3947,23 +4026,43 @@ const MAGAZINE_GARMENT_VARIATIONS = {
     waistDeepVNeckline: 'waist-deep V neckline, deep V cut extending to the waist',
     crossCollarDeepVStructured: 'cross-collar deep V neckline with a structured fitted bodice',
     crossLacingDeepV: 'cross-wrap lacing across the bodice, deep V-shaped neckline',
-    openFrontDeepV: 'cross-collar deep V open-front robe'
+    openFrontDeepV: 'cross-collar deep V open-front robe',
+    cowlNeckline: 'a refined cowl neckline',
+    portraitCollar: 'a wide portrait collar framing the shoulders',
+    editorialCorset: 'a structured editorial corset bodice',
+    sculpturalAsymNeckline: 'a sculptural asymmetric editorial neckline',
+    tailoredLapelBodice: 'a sharply tailored lapel-front bodice'
   },
   waist: {
     none: '',
     wrapSkirtSideSlit: 'high-waisted wrap skirt with an elegant side slit',
     highSideSlitSkirt: 'flowing skirt with a high side slit',
-    openSkirtPanel: 'open skirt panel, skirt front opened to reveal the leg line'
+    openSkirtPanel: 'open skirt panel, skirt front opened to reveal the leg line',
+    coutureWaistDrape: 'couture draping gathered at the waist',
+    sculpturalWaistBelt: 'a sculptural corset-inspired waist belt',
+    architecturalPeplum: 'an architectural peplum waist panel',
+    statementMetalBelt: 'a polished statement metal belt',
+    asymmetricDrapedPanel: 'an asymmetric draped skirt panel from the waist'
   },
   shoulder: {
     none: '',
     offShoulderCut: 'an off-shoulder cut',
     singleShoulder: 'one-shoulder asymmetric cut',
-    halterNeckCutaway: 'halter-neck cutaway shoulder design'
+    halterNeckCutaway: 'halter-neck cutaway shoulder design',
+    coutureShoulderCape: 'a couture shoulder cape',
+    statementShoulderLine: 'a sculptural statement shoulder line',
+    featherShoulderAccent: 'a refined feather shoulder accent',
+    structuredPuffSleeve: 'structured voluminous sleeves at the shoulders',
+    jewelShoulderStrap: 'jewel-set shoulder straps integrated into the garment'
   }
 };
 
 const GARMENT_VARIATION_LAYER_ZONES = { layer0: 0, layer3: 1, layer6: 2, layer9: 3 };
+const GARMENT_VARIATION_RANDOM_POOLS = {
+  garmentChestVariation: ['cowlNeckline', 'portraitCollar', 'editorialCorset', 'sculpturalAsymNeckline', 'tailoredLapelBodice'],
+  garmentWaistVariation: ['coutureWaistDrape', 'sculpturalWaistBelt', 'architecturalPeplum', 'statementMetalBelt', 'asymmetricDrapedPanel'],
+  garmentShoulderVariation: ['coutureShoulderCape', 'statementShoulderLine', 'featherShoulderAccent', 'structuredPuffSleeve', 'jewelShoulderStrap']
+};
 
 const FRAMING_RATIOS = {
 face_closeup:`【人物入鏡比例｜臉部特寫】
@@ -4227,9 +4326,11 @@ function applyVisualPresetDefaults(preset){
   if(!preset) return;
   clearCustomChoiceFields();
   setSelectedCardValue('garmentLayerCards', 'layer0');
-  setSelectedCardValue('garmentChestVariationCards', 'none');
-  setSelectedCardValue('garmentWaistVariationCards', 'none');
-  setSelectedCardValue('garmentShoulderVariationCards', 'none');
+  setSelectedCardValue('garmentChestVariationCards', preset.garmentChestVariation || 'none');
+  setSelectedCardValue('garmentWaistVariationCards', preset.garmentWaistVariation || 'none');
+  setSelectedCardValue('garmentShoulderVariationCards', preset.garmentShoulderVariation || 'none');
+  const activeGarmentVariationCount = [preset.garmentChestVariation, preset.garmentWaistVariation, preset.garmentShoulderVariation].filter(Boolean).length;
+  setSelectedCardValue('garmentLayerCards', ['layer0', 'layer3', 'layer6', 'layer9'][activeGarmentVariationCount] || 'layer0');
   if(preset.style) setSelectedCardValue('styleCards', preset.style);
   if(preset.bg) setSelectedCardValue('bgCards', preset.bg);
   if(preset.pose) setSelectedPoseValue(preset.pose);
@@ -4621,11 +4722,11 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
     ? `【服裝邏輯模組｜花墨染專屬】\n\n服裝依主題「${theme}」或AI自動決定\n薄紗半透明材質為主\nSheer Translucent Fabric\nOrganza Or Thin Silk Texture\n服裝與花卉自然融合`
     : `【服裝邏輯模組｜動態造型系統】\n\n根據主題「${theme}」自動設計服裝層次\n服裝層數依主題自動增減,通常2~5層\n優先封面大片感\n優先${style.label}的視覺語言\n服裝符合主題世界觀與材質質感\nPremium Fabric / Luxury Material Detail\n\n避免過度Cosplay化\n避免遊戲角色盔甲化`;
 
-  const garmentVariationParts = [
+  const garmentVariationParts = HB_GARMENT_CORE.compactPromptParts([
     MAGAZINE_GARMENT_VARIATIONS.chest[garmentChestVariationKey],
     MAGAZINE_GARMENT_VARIATIONS.waist[garmentWaistVariationKey],
     MAGAZINE_GARMENT_VARIATIONS.shoulder[garmentShoulderVariationKey]
-  ].filter(Boolean);
+  ]);
   const garmentVariationBlock = garmentVariationParts.length
     ? `【服裝改造核心】\n\n${garmentVariationParts.join('\n')}`
     : null;
@@ -4722,7 +4823,8 @@ const QUICK_MAGAZINE_PRESETS = {
     expression: 'allure_smile',
     lighting: 'black_gold',
     media: 'realistic_studio',
-    ratio: '4:5'
+    ratio: '4:5',
+    garmentChestVariation: 'editorialCorset', garmentWaistVariation: 'sculpturalWaistBelt', garmentShoulderVariation: 'statementShoulderLine'
   },
   jewelryCoolCover: {
     label: '珠寶冷光封面',
@@ -4738,7 +4840,8 @@ const QUICK_MAGAZINE_PRESETS = {
     expression: 'cool_stare',
     lighting: 'jewelry_sparkle',
     media: 'realistic_studio',
-    ratio: '4:5'
+    ratio: '4:5',
+    garmentChestVariation: 'portraitCollar', garmentWaistVariation: 'statementMetalBelt', garmentShoulderVariation: 'jewelShoulderStrap'
   },
   perfumeMistCover: {
     label: '夢幻香氛柔霧',
@@ -4941,7 +5044,8 @@ const QUICK_MAGAZINE_PRESETS = {
   hanfuWindowEditorial: {
     label: '新式漢服花窗',
     themeText: '新式漢服、花窗光影與飄逸袖線，呈現當代東方時裝肖像',
-    style: 'bazaar_cn', bg: 'window_light', pose: 'sleeve_hide_smile', framing: 'three_quarter', camera: 'side_profile', motion: 'flow', makeup: ['natural_highend', 'precise_eyeliner'], skinTexture: 'natural_real', jewelry: ['earrings'], expression: 'lower_gaze', lighting: 'window_soft', media: 'realistic_studio', ratio: '3:4'
+    style: 'bazaar_cn', bg: 'window_light', pose: 'sleeve_hide_smile', framing: 'three_quarter', camera: 'side_profile', motion: 'flow', makeup: ['natural_highend', 'precise_eyeliner'], skinTexture: 'natural_real', jewelry: ['earrings'], expression: 'lower_gaze', lighting: 'window_soft', media: 'realistic_studio', ratio: '3:4',
+    garmentChestVariation: 'portraitCollar', garmentWaistVariation: 'coutureWaistDrape', garmentShoulderVariation: 'coutureShoulderCape'
   },
   rainMirrorBeauty: {
     label: '雨夜鏡面美妝',
@@ -5051,21 +5155,18 @@ function applyMagazineRandomSelection(){
 
   if(styleValues.length) setSelectedCardValue('styleCards', getRandomItem(styleValues));
   const layerKeys = ['layer0', 'layer3', 'layer6', 'layer9'];
-  const selectedLayer = getSelectedRadioValue('garmentLayer');
-  const effectiveLayer = selectedLayer === 'random' ? getRandomItem(layerKeys) : selectedLayer;
+  const layerSelection = HB_GARMENT_CORE.resolveLayer(getSelectedRadioValue('garmentLayer'), layerKeys, GARMENT_VARIATION_LAYER_ZONES);
+  const effectiveLayer = layerSelection.key;
   setSelectedCardValue('garmentLayerCards', effectiveLayer);
   const zoneFields = {
     garmentChestVariation: { container: 'garmentChestVariationCards', data: MAGAZINE_GARMENT_VARIATIONS.chest },
     garmentWaistVariation: { container: 'garmentWaistVariationCards', data: MAGAZINE_GARMENT_VARIATIONS.waist },
     garmentShoulderVariation: { container: 'garmentShoulderVariationCards', data: MAGAZINE_GARMENT_VARIATIONS.shoulder }
   };
-  const activeZones = Object.keys(zoneFields).filter(name => getSelectedRadioValue(name) !== 'none');
-  const freeZones = Object.keys(zoneFields).filter(name => getSelectedRadioValue(name) === 'none');
-  const targetZoneCount = GARMENT_VARIATION_LAYER_ZONES[effectiveLayer] ?? 0;
-  const zonesToFill = Math.max(0, Math.min(targetZoneCount - activeZones.length, freeZones.length));
-  freeZones.slice().sort(() => Math.random() - 0.5).slice(0, zonesToFill).forEach(name => {
+  const { zones } = HB_GARMENT_CORE.chooseFreeZones(zoneFields, name => getSelectedRadioValue(name), layerSelection.targetCount);
+  zones.forEach(name => {
     const zone = zoneFields[name];
-    const pool = Object.keys(zone.data).filter(value => value !== 'none');
+    const pool = HB_GARMENT_CORE.randomKeys(zone.data, GARMENT_VARIATION_RANDOM_POOLS[name]);
     if(pool.length) setSelectedCardValue(zone.container, getRandomItem(pool));
   });
   if(bgValues.length) setSelectedCardValue('bgCards', getRandomItem(bgValues));

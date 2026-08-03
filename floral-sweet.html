@@ -621,6 +621,11 @@
         <label class="card"><input type="radio" name="chestDetail" value="pearlButtonTrim"><div class="name">珍珠釦飾滾邊</div><div class="desc">胸口珍珠釦飾滾邊細節</div></label>
         <label class="card"><input type="radio" name="chestDetail" value="gauzeInsert"><div class="name">紗透拼接</div><div class="desc">胸口紗透拼接細節</div></label>
         <label class="card"><input type="radio" name="chestDetail" value="asymmetricCut"><div class="name">不對稱切割</div><div class="desc">胸口不對稱切割細節</div></label>
+        <div class="pose-group-label" style="grid-column:1/-1">甜美花漾專屬結構</div>
+        <label class="card"><input type="radio" name="chestDetail" value="ruffledSweetheart"><div class="name">荷葉邊心形領</div><div class="desc">心形領口搭配柔和荷葉邊</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="ribbonBowFrontPanel"><div class="name">蝴蝶結胸襟</div><div class="desc">緞帶蝴蝶結形成胸前層次</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="lacePeterPanCollar"><div class="name">蕾絲娃娃領</div><div class="desc">精緻蕾絲娃娃領</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="ruchedFloralBodice"><div class="name">花卉抓褶胸衣</div><div class="desc">柔和抓褶與花卉上身結構</div></label>
       </div>
       <div class="form-grid" style="margin-top:10px;">
         <label class="field full custom-choice" data-custom-choice="chestDetail">胸口細節自填
@@ -643,6 +648,11 @@
         <label class="card"><input type="radio" name="waistSideDetail" value="pearlButtonTrim"><div class="name">珍珠釦飾滾邊</div><div class="desc">腰側珍珠釦飾滾邊細節</div></label>
         <label class="card"><input type="radio" name="waistSideDetail" value="gauzeInsert"><div class="name">紗透拼接</div><div class="desc">腰側紗透拼接細節</div></label>
         <label class="card"><input type="radio" name="waistSideDetail" value="asymmetricCut"><div class="name">不對稱切割</div><div class="desc">腰側不對稱切割細節</div></label>
+        <div class="pose-group-label" style="grid-column:1/-1">甜美花漾腰部結構</div>
+        <label class="card"><input type="radio" name="waistSideDetail" value="statementBowSash"><div class="name">蝴蝶結腰封</div><div class="desc">柔和的大蝴蝶結腰封</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="laceFittedWaistband"><div class="name">花邊束腰</div><div class="desc">蕾絲滾邊的合身腰帶</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="gatheredOverskirtPanel"><div class="name">輕蓬裙腰片</div><div class="desc">腰部延伸柔和蓬度裙片</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="floralRufflePanel"><div class="name">花卉荷葉裙片</div><div class="desc">層疊花卉荷葉邊裙片</div></label>
       </div>
       <div class="form-grid" style="margin-top:10px;">
         <label class="field full custom-choice" data-custom-choice="waistSideDetail">腰側細節自填
@@ -664,6 +674,11 @@
         <label class="card"><input type="radio" name="shoulderDetail" value="gauzePanel"><div class="name">紗透肩片</div><div class="desc">肩部紗透肩片細節</div></label>
         <label class="card"><input type="radio" name="shoulderDetail" value="detachedSleeve"><div class="name">分離袖片</div><div class="desc">肩部分離袖片細節</div></label>
         <label class="card"><input type="radio" name="shoulderDetail" value="asymmetricShoulder"><div class="name">不對稱肩部</div><div class="desc">肩部不對稱剪裁細節</div></label>
+        <div class="pose-group-label" style="grid-column:1/-1">甜美花漾肩部結構</div>
+        <label class="card"><input type="radio" name="shoulderDetail" value="ribbonTiedStraps"><div class="name">蝴蝶結肩帶</div><div class="desc">緞帶繫結的細肩帶</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="flowerBudPuffSleeves"><div class="name">花苞泡袖</div><div class="desc">柔和花苞形泡袖</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="layeredRuffleShoulders"><div class="name">荷葉肩片</div><div class="desc">層疊荷葉邊肩部結構</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="pearlShoulderStraps"><div class="name">珍珠肩帶</div><div class="desc">珍珠點綴的精緻肩帶</div></label>
       </div>
       <div class="form-grid" style="margin-top:10px;">
         <label class="field full custom-choice" data-custom-choice="shoulderDetail">肩部細節自填
@@ -930,6 +945,7 @@
 </main>
 
 <script src="assets/core-prompt.js"></script>
+<script src="assets/garment-core.js"></script>
 <script>
 const materialData = {
   handHeldBouquet: {
@@ -1073,7 +1089,11 @@ const chestDetailData = {
   laceInsert: 'a lace panel insert at the chest',
   pearlButtonTrim: 'a pearl-button trim at the chest',
   gauzeInsert: 'a sheer gauze panel insert at the chest',
-  asymmetricCut: 'an asymmetric cut at the chest'
+  asymmetricCut: 'an asymmetric cut at the chest',
+  ruffledSweetheart: 'a sweetheart neckline framed by soft ruffles',
+  ribbonBowFrontPanel: 'a ribbon-bow front panel',
+  lacePeterPanCollar: 'a delicate lace Peter Pan collar',
+  ruchedFloralBodice: 'a softly ruched floral bodice'
 };
 const waistSideDetailData = {
   none: '',
@@ -1087,7 +1107,11 @@ const waistSideDetailData = {
   laceInsert: 'a lace panel insert at the waist side',
   pearlButtonTrim: 'a pearl-button trim at the waist side',
   gauzeInsert: 'a sheer gauze panel insert at the waist side',
-  asymmetricCut: 'an asymmetric cut at the waist side'
+  asymmetricCut: 'an asymmetric cut at the waist side',
+  statementBowSash: 'a soft statement bow sash at the waist',
+  laceFittedWaistband: 'a lace-trimmed fitted waistband',
+  gatheredOverskirtPanel: 'a softly gathered overskirt panel',
+  floralRufflePanel: 'layered floral ruffles descending from the waist'
 };
 const shoulderDetailData = {
   none: '',
@@ -1100,9 +1124,18 @@ const shoulderDetailData = {
   pearlButtonTrim: 'a pearl-button trim at the shoulder',
   gauzePanel: 'a sheer gauze panel at the shoulder',
   detachedSleeve: 'a detached sleeve panel',
-  asymmetricShoulder: 'an asymmetric shoulder cut'
+  asymmetricShoulder: 'an asymmetric shoulder cut',
+  ribbonTiedStraps: 'ribbon-tied shoulder straps',
+  flowerBudPuffSleeves: 'soft flower-bud puff sleeves',
+  layeredRuffleShoulders: 'layered ruffle shoulder panels',
+  pearlShoulderStraps: 'delicate pearl-accented shoulder straps'
 };
 const GARMENT_DETAIL_LAYER_ZONES = { layer0: 0, layer3: 1, layer6: 2, layer9: 3 };
+const GARMENT_DETAIL_RANDOM_POOLS = {
+  chestDetail: ['ruffledSweetheart', 'ribbonBowFrontPanel', 'lacePeterPanCollar', 'ruchedFloralBodice'],
+  waistSideDetail: ['statementBowSash', 'laceFittedWaistband', 'gatheredOverskirtPanel', 'floralRufflePanel'],
+  shoulderDetail: ['ribbonTiedStraps', 'flowerBudPuffSleeves', 'layeredRuffleShoulders', 'pearlShoulderStraps'],
+};
 
 const garmentData = {
   floralSundress: 'light floral print sundress, fitted bodice with a gently flared skirt, fresh girl-next-door silhouette',
@@ -1443,16 +1476,19 @@ function refreshCards(){
 const themeTemplates = {
   sweetBouquetGirl: {
     garment: 'floralSundress', material: 'handHeldBouquet', style: 'sweetCampaign',
+    chestDetail: 'ribbonBowFrontPanel', waistSideDetail: 'statementBowSash', shoulderDetail: 'ribbonTiedStraps',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
     framing: 'threeQuarter', pose: 'floral_bouquet_hug', camera: 'eyeLevelCover', lighting: 'soft', background: 'vintageFlowerShopInterior', ratio: 'vertical45', intensity: 'balanced material effects, elegant and luxurious'
   },
   picnicMeadowSweetheart: {
     garment: 'babydollFloralDress', material: 'strawFloralBasket', style: 'floralMagazine',
+    chestDetail: 'ruffledSweetheart', waistSideDetail: 'gatheredOverskirtPanel', shoulderDetail: 'flowerBudPuffSleeves',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
     framing: 'threeQuarter', pose: 'picnic_basket_sit', camera: 'eyeLevelCover', lighting: 'soft', background: 'picnicLawnMeadow', ratio: 'vertical45', intensity: 'subtle floating particles, refined couture details'
   },
   cherryBlossomTwirl: {
     garment: 'pastelChiffonDress', material: 'petalDriftLight', style: 'romanticCinematic',
+    chestDetail: 'ruchedFloralBodice', waistSideDetail: 'floralRufflePanel', shoulderDetail: 'layeredRuffleShoulders',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
     framing: 'fullBody', pose: 'skirt_twirl_smile', camera: 'lowAngleHero', lighting: 'soft', background: 'cherryBlossomParkPath', ratio: 'vertical916', intensity: 'subtle floating particles, refined couture details'
   },
@@ -1575,17 +1611,13 @@ function applyFloralRandomSelection(){
   // 服裝改造核心：Layer 決定要命中幾個部位，已經手動設定過（非「無修改」）的部位維持
   // 原樣不被覆蓋，只有還在「無修改」的部位才會被納入這次隨機的候選池。
   const layerKeys = ['layer0', 'layer3', 'layer6', 'layer9'];
-  const selectedLayer = selected('garmentLayer');
-  const effectiveLayer = selectedLayer === 'random' ? getRandomItem(layerKeys) : selectedLayer;
+  const layerSelection = HB_GARMENT_CORE.resolveLayer(selected('garmentLayer'), layerKeys, GARMENT_DETAIL_LAYER_ZONES);
+  const effectiveLayer = layerSelection.key;
   setRadioValue('garmentLayer', effectiveLayer);
   const zoneFields = { chestDetail: chestDetailData, waistSideDetail: waistSideDetailData, shoulderDetail: shoulderDetailData };
-  const alreadyActiveZones = Object.keys(zoneFields).filter(name => selected(name) !== 'none');
-  const freeZones = Object.keys(zoneFields).filter(name => selected(name) === 'none');
-  const targetZoneCount = GARMENT_DETAIL_LAYER_ZONES[effectiveLayer] ?? 0;
-  const zonesToFill = Math.max(0, Math.min(targetZoneCount - alreadyActiveZones.length, freeZones.length));
-  const shuffledFreeZones = freeZones.slice().sort(() => Math.random() - 0.5).slice(0, zonesToFill);
-  shuffledFreeZones.forEach(name => {
-    const pool = Object.keys(zoneFields[name]).filter(k => k !== 'none');
+  const { zones } = HB_GARMENT_CORE.chooseFreeZones(zoneFields, name => selected(name), layerSelection.targetCount);
+  zones.forEach(name => {
+    const pool = HB_GARMENT_CORE.randomKeys(zoneFields[name], GARMENT_DETAIL_RANDOM_POOLS[name]);
     if(pool.length) setRadioValue(name, getRandomItem(pool));
   });
 
@@ -1631,7 +1663,7 @@ function generate(options = {}){
   const shoulderDetailText = customShoulderDetail
     ? `custom shoulder surface detail only: ${customShoulderDetail}`
     : shoulderDetailData[selected('shoulderDetail')];
-  const garmentDetailParts = [chestDetailText, waistSideDetailText, shoulderDetailText].filter(Boolean);
+  const garmentDetailParts = HB_GARMENT_CORE.compactPromptParts([chestDetailText, waistSideDetailText, shoulderDetailText]);
   const garmentDetailText = garmentDetailParts.length
     ? 'garment surface detail: ' + garmentDetailParts.join(', ') + ' — structural surface accents only, the garment silhouette from the appearance form above stays unchanged,'
     : '';

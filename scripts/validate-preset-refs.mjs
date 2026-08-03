@@ -140,6 +140,9 @@ const issues = [];
     ratio: liveRadioValues(src, 'ratio'),
     makeup: liveRadioValues(src, 'makeup'),
     jewelry: liveRadioValues(src, 'jewelry'),
+    garmentChestVariation: liveRadioValues(src, 'garmentChestVariation'),
+    garmentWaistVariation: liveRadioValues(src, 'garmentWaistVariation'),
+    garmentShoulderVariation: liveRadioValues(src, 'garmentShoulderVariation'),
   };
   checkObject('magazine.html', 'QUICK_MAGAZINE_PRESETS', extractObjectLiteral(src, 'QUICK_MAGAZINE_PRESETS'), fieldLive, issues);
   checkObject('magazine.html', 'STYLE_PRESET_DEFAULTS', extractObjectLiteral(src, 'STYLE_PRESET_DEFAULTS'), fieldLive, issues);
@@ -162,6 +165,9 @@ const issues = [];
     ratio: liveRadioValues(src, 'ratio'),
     bodyShape: liveRadioValues(src, 'bodyShape'),
     intensity: liveSelectOptionValues(src, 'intensity'),
+    chestVariation: liveRadioValues(src, 'garmentChestVariation'),
+    waistVariation: liveRadioValues(src, 'garmentWaistVariation'),
+    shoulderVariation: liveRadioValues(src, 'garmentShoulderVariation'),
   };
   checkObject('fantasy-fashion.html', 'themeTemplates', extractObjectLiteral(src, 'themeTemplates'), fieldLive, issues);
 }
@@ -182,6 +188,9 @@ const issues = [];
     ratio: liveRadioValues(src, 'ratio'),
     bodyShape: liveRadioValues(src, 'bodyShape'),
     intensity: liveSelectOptionValues(src, 'intensity'),
+    chestDetail: liveRadioValues(src, 'chestDetail'),
+    waistSideDetail: liveRadioValues(src, 'waistSideDetail'),
+    shoulderDetail: liveRadioValues(src, 'shoulderDetail'),
   };
   checkObject('xianxia.html', 'themeTemplates', extractObjectLiteral(src, 'themeTemplates'), fieldLive, issues);
 }
@@ -274,6 +283,9 @@ const issues = [];
     ratio: liveRadioValues(src, 'ratio'),
     bodyShape: liveRadioValues(src, 'bodyShape'),
     intensity: liveSelectOptionValues(src, 'intensity'),
+    chestDetail: liveRadioValues(src, 'chestDetail'),
+    waistSideDetail: liveRadioValues(src, 'waistSideDetail'),
+    shoulderDetail: liveRadioValues(src, 'shoulderDetail'),
   };
   checkObject('anime-character.html', 'themeTemplates', extractObjectLiteral(src, 'themeTemplates'), fieldLive, issues);
 }
@@ -296,6 +308,9 @@ const issues = [];
     wings: liveRadioValues(src, 'wings'),
     butterflies: liveRadioValues(src, 'butterflies'),
     intensity: liveSelectOptionValues(src, 'intensity'),
+    chestDetail: liveRadioValues(src, 'chestDetail'),
+    waistSideDetail: liveRadioValues(src, 'waistSideDetail'),
+    shoulderDetail: liveRadioValues(src, 'shoulderDetail'),
   };
   checkObject('flower-fairy.html', 'themeTemplates', extractObjectLiteral(src, 'themeTemplates'), fieldLive, issues);
 }
@@ -316,6 +331,9 @@ const issues = [];
     ratio: liveRadioValues(src, 'ratio'),
     bodyShape: liveRadioValues(src, 'bodyShape'),
     intensity: liveSelectOptionValues(src, 'intensity'),
+    chestDetail: liveRadioValues(src, 'chestDetail'),
+    waistSideDetail: liveRadioValues(src, 'waistSideDetail'),
+    shoulderDetail: liveRadioValues(src, 'shoulderDetail'),
   };
   checkObject('isekai-fantasy.html', 'themeTemplates', extractObjectLiteral(src, 'themeTemplates'), fieldLive, issues);
 }
@@ -336,6 +354,9 @@ const issues = [];
     ratio: liveRadioValues(src, 'ratio'),
     bodyShape: liveRadioValues(src, 'bodyShape'),
     intensity: liveSelectOptionValues(src, 'intensity'),
+    chestDetail: liveRadioValues(src, 'chestDetail'),
+    waistSideDetail: liveRadioValues(src, 'waistSideDetail'),
+    shoulderDetail: liveRadioValues(src, 'shoulderDetail'),
   };
   checkObject('floral-sweet.html', 'themeTemplates', extractObjectLiteral(src, 'themeTemplates'), fieldLive, issues);
 }
@@ -356,6 +377,9 @@ const issues = [];
     ratio: liveRadioValues(src, 'ratio'),
     bodyShape: liveRadioValues(src, 'bodyShape'),
     intensity: liveSelectOptionValues(src, 'intensity'),
+    chestDetail: liveRadioValues(src, 'chestDetail'),
+    waistSideDetail: liveRadioValues(src, 'waistSideDetail'),
+    shoulderDetail: liveRadioValues(src, 'shoulderDetail'),
   };
   checkObject('gala-socialite.html', 'themeTemplates', extractObjectLiteral(src, 'themeTemplates'), fieldLive, issues);
 }
@@ -376,6 +400,9 @@ const issues = [];
     ratio: liveRadioValues(src, 'ratio'),
     bodyShape: liveRadioValues(src, 'bodyShape'),
     intensity: liveSelectOptionValues(src, 'intensity'),
+    chestDetail: liveRadioValues(src, 'chestDetail'),
+    waistSideDetail: liveRadioValues(src, 'waistSideDetail'),
+    shoulderDetail: liveRadioValues(src, 'shoulderDetail'),
   };
   checkObject('ancient-goddess.html', 'themeTemplates', extractObjectLiteral(src, 'themeTemplates'), fieldLive, issues);
 }
@@ -416,6 +443,9 @@ const issues = [];
     ratio: liveRadioValues(src, 'ratio'),
     bodyShape: liveRadioValues(src, 'bodyShape'),
     intensity: liveSelectOptionValues(src, 'intensity'),
+    chestDetail: liveRadioValues(src, 'chestDetail'),
+    waistSideDetail: liveRadioValues(src, 'waistSideDetail'),
+    shoulderDetail: liveRadioValues(src, 'shoulderDetail'),
   };
   checkObject('kpop-idol.html', 'themeTemplates', extractObjectLiteral(src, 'themeTemplates'), fieldLive, issues);
 }

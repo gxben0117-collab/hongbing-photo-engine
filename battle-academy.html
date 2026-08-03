@@ -733,6 +733,11 @@
         <label class="card"><input type="radio" name="chestDetail" value="crossStraps"><div class="name">交叉帶</div><div class="desc">胸口交叉帶細節</div></label>
         <label class="card"><input type="radio" name="chestDetail" value="laceInsert"><div class="name">蕾絲拼接</div><div class="desc">胸口蕾絲拼接細節</div></label>
         <label class="card"><input type="radio" name="chestDetail" value="asymmetricCut"><div class="name">不對稱切割</div><div class="desc">胸口不對稱切割細節</div></label>
+        <div class="pose-group-label" style="grid-column:1/-1">戰鬥制服專屬結構</div>
+        <label class="card"><input type="radio" name="chestDetail" value="highCollarReinforcedPanel"><div class="name">高領制服護片</div><div class="desc">高領與制服護片一體結構</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="academyTieModule"><div class="name">領帶領結模組</div><div class="desc">校徽制服的領帶或領結模組</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="insigniaChestPanel"><div class="name">徽章胸甲</div><div class="desc">帶校徽的輕型胸甲</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="tacticalZipperFront"><div class="name">戰術拉鍊襟</div><div class="desc">功能性制服拉鍊前襟</div></label>
       </div>
       <div class="form-grid" style="margin-top:10px;">
         <label class="field full custom-choice" data-custom-choice="chestDetail">胸口細節自填
@@ -755,6 +760,11 @@
         <label class="card"><input type="radio" name="waistSideDetail" value="verticalSlit"><div class="name">縱向切割</div><div class="desc">腰側縱向切割細節</div></label>
         <label class="card"><input type="radio" name="waistSideDetail" value="laceInsert"><div class="name">蕾絲拼接</div><div class="desc">腰側蕾絲拼接細節</div></label>
         <label class="card"><input type="radio" name="waistSideDetail" value="asymmetricCut"><div class="name">不對稱切割</div><div class="desc">腰側不對稱切割細節</div></label>
+        <div class="pose-group-label" style="grid-column:1/-1">戰鬥制服腰部結構</div>
+        <label class="card"><input type="radio" name="waistSideDetail" value="academyUtilityBelt"><div class="name">制服寬腰帶</div><div class="desc">校園戰術制服的功能腰帶</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="equipmentWaistClasps"><div class="name">側掛裝備扣</div><div class="desc">腰側的輕量裝備扣</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="armoredSkirtPanels"><div class="name">裝甲裙片</div><div class="desc">保留腿部活動性的分層裙甲</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="doubleUniformWaistband"><div class="name">雙層制服腰封</div><div class="desc">加強制服結構的雙層腰封</div></label>
       </div>
       <div class="form-grid" style="margin-top:10px;">
         <label class="field full custom-choice" data-custom-choice="waistSideDetail">腰側細節自填
@@ -776,6 +786,11 @@
         <label class="card"><input type="radio" name="shoulderDetail" value="lacePanel"><div class="name">蕾絲肩片</div><div class="desc">肩部蕾絲肩片細節</div></label>
         <label class="card"><input type="radio" name="shoulderDetail" value="detachedPanel"><div class="name">分離肩片</div><div class="desc">肩部分離肩片細節</div></label>
         <label class="card"><input type="radio" name="shoulderDetail" value="asymmetricShoulder"><div class="name">不對稱肩部</div><div class="desc">肩部不對稱剪裁細節</div></label>
+        <div class="pose-group-label" style="grid-column:1/-1">戰鬥制服肩部結構</div>
+        <label class="card"><input type="radio" name="shoulderDetail" value="academyEpaulettes"><div class="name">校徽肩章</div><div class="desc">帶識別徽章的制服肩章</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="lightProtectiveShoulder"><div class="name">輕型護肩</div><div class="desc">保護性輕裝甲肩部結構</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="commanderMantle"><div class="name">指揮官披肩</div><div class="desc">肩後固定的短指揮披肩</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="functionalDetachedSleeves"><div class="name">機能分離袖</div><div class="desc">與手臂自然對齊的功能袖片</div></label>
       </div>
       <div class="form-grid" style="margin-top:10px;">
         <label class="field full custom-choice" data-custom-choice="shoulderDetail">肩部細節自填
@@ -1053,6 +1068,7 @@
 </main>
 
 <script src="assets/core-prompt.js"></script>
+<script src="assets/garment-core.js"></script>
 <script>
 const schoolData = {
   sakuraAcademy: { prompt: 'Sakura Academy identity, deep navy and violet-purple color scheme, gold metal accents, five-petal sakura crest emblem, elegant refined classic Japanese academy visual personality', colorNote: 'deep navy and violet-purple with gold trim', metal: 'gold', emblem: 'five-petal sakura crest' },
@@ -1191,7 +1207,11 @@ const chestDetailData = {
   geometricCutout: 'a geometric cutout pattern at the chest',
   crossStraps: 'crossed strap detailing at the chest',
   laceInsert: 'a lace panel insert at the chest',
-  asymmetricCut: 'an asymmetric cut at the chest'
+  asymmetricCut: 'an asymmetric cut at the chest',
+  highCollarReinforcedPanel: 'a high-collar reinforced uniform chest panel',
+  academyTieModule: 'a clean academy tie or ribbon module',
+  insigniaChestPanel: 'a light armored chest panel with a school insignia',
+  tacticalZipperFront: 'a functional tactical zipper front'
 };
 const waistSideDetailData = {
   none: '',
@@ -1205,7 +1225,11 @@ const waistSideDetailData = {
   crossBind: 'crossed binding straps at the waist side',
   verticalSlit: 'a vertical slit cut at the waist side',
   laceInsert: 'a lace panel insert at the waist side',
-  asymmetricCut: 'an asymmetric cut at the waist side'
+  asymmetricCut: 'an asymmetric cut at the waist side',
+  academyUtilityBelt: 'a structured academy utility belt',
+  equipmentWaistClasps: 'compact equipment clasps positioned at the waist',
+  armoredSkirtPanels: 'layered armored skirt panels preserving leg movement',
+  doubleUniformWaistband: 'a reinforced double-layer uniform waistband'
 };
 const shoulderDetailData = {
   none: '',
@@ -1218,10 +1242,19 @@ const shoulderDetailData = {
   strapConnector: 'a strap connector detail at the shoulder',
   lacePanel: 'a lace panel at the shoulder',
   detachedPanel: 'a detached shoulder panel',
-  asymmetricShoulder: 'an asymmetric shoulder cut'
+  asymmetricShoulder: 'an asymmetric shoulder cut',
+  academyEpaulettes: 'structured academy epaulettes with insignia',
+  lightProtectiveShoulder: 'light protective shoulder guards',
+  commanderMantle: 'a short commander mantle secured behind the shoulders',
+  functionalDetachedSleeves: 'functional detached sleeves aligned with the arms'
 };
 // Layer → 隨機套用時要命中幾個部位（0-3 個，從胸口/腰側/肩部三個部位裡抽）
 const GARMENT_DETAIL_LAYER_ZONES = { layer0: 0, layer3: 1, layer6: 2, layer9: 3 };
+const GARMENT_DETAIL_RANDOM_POOLS = {
+  chestDetail: ['highCollarReinforcedPanel', 'academyTieModule', 'insigniaChestPanel', 'tacticalZipperFront'],
+  waistSideDetail: ['academyUtilityBelt', 'equipmentWaistClasps', 'armoredSkirtPanels', 'doubleUniformWaistband'],
+  shoulderDetail: ['academyEpaulettes', 'lightProtectiveShoulder', 'commanderMantle', 'functionalDetachedSleeves'],
+};
 
 const styleData = {
   tacticalCampaign: 'Japanese school-battle manga inspired advertising campaign, live-action adaptation key visual, stylish uniform-battle product visual, refined premium brand hero art direction',
@@ -1572,18 +1605,21 @@ function findPoseGroup(poseKey){
 const themeTemplates = {
   sakuraCrestBladeBloom: {
     school: 'sakuraAcademy', upperBody: 'croppedAcademyBlazer', waist: 'highWaistTailoring', lower: 'pleatedMiniSkirt', uniformType: 'standard',
+    chestDetail: 'academyTieModule', waistSideDetail: 'doubleUniformWaistband', shoulderDetail: 'academyEpaulettes',
     accessory: 'swordSheathAccent', fantasyDetail: 'bladeEnergyTrailStreak', armorMode: 'off', emblemFocus: 'chestBadge',
     style: 'tacticalCampaign', composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout', framing: 'fullBody', pose: 'sword_draw_pose', camera: 'lowAngleHero',
     lighting: 'hard', background: 'schoolCourtyardSakuraBattle', ratio: 'vertical916', intensity: 'balanced material effects, elegant and luxurious'
   },
   shirasagiFrostFencerDuel: {
     school: 'shirasagiAcademy', upperBody: 'sailorBlouseTop', waist: 'fittedWaist', lower: 'kneeLengthPleatedSkirt', uniformType: 'standard',
+    chestDetail: 'highCollarReinforcedPanel', waistSideDetail: 'equipmentWaistClasps', shoulderDetail: 'lightProtectiveShoulder',
     accessory: 'swordSheathAccent', fantasyDetail: 'spiritPowerAuraGlow', armorMode: 'off', emblemFocus: 'collarPin',
     style: 'cinematicMission', composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner', framing: 'fullBody', pose: 'mid_air_slash', camera: 'lowAngleHero',
     lighting: 'cold', background: 'schoolRooftopBattle', ratio: 'vertical916', intensity: 'balanced material effects, elegant and luxurious'
   },
   suzakuCrimsonChargeGate: {
     school: 'suzakuAcademy', upperBody: 'standCollarGakuranJacket', waist: 'wideAcademyWaistband', lower: 'hakamaWideTrousers', uniformType: 'standard',
+    chestDetail: 'insigniaChestPanel', waistSideDetail: 'armoredSkirtPanels', shoulderDetail: 'commanderMantle',
     accessory: 'energyBladePropAccent', fantasyDetail: 'dustImpactBurst', armorMode: 'light', emblemFocus: 'beltBuckle',
     style: 'darkTacticalMood', composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner', framing: 'fullBody', pose: 'running_charge', camera: 'threeQuarterSide',
     lighting: 'hard', background: 'schoolGateSiege', ratio: 'vertical34', intensity: 'balanced material effects, elegant and luxurious'
@@ -1796,17 +1832,13 @@ function applyBattleRandomSelection(){
   // 服裝改造核心：Layer 決定要命中幾個部位，但已經手動設定過（不是「無修改」）的部位維持
   // 原樣不被覆蓋，只有還在「無修改」的部位才會被納入這次隨機的候選池。
   const layerKeys = ['layer0', 'layer3', 'layer6', 'layer9'];
-  const selectedLayer = selected('garmentLayer');
-  const effectiveLayer = selectedLayer === 'random' ? getRandomItem(layerKeys) : selectedLayer;
+  const layerSelection = HB_GARMENT_CORE.resolveLayer(selected('garmentLayer'), layerKeys, GARMENT_DETAIL_LAYER_ZONES);
+  const effectiveLayer = layerSelection.key;
   setRadioValue('garmentLayer', effectiveLayer);
   const zoneFields = { chestDetail: chestDetailData, waistSideDetail: waistSideDetailData, shoulderDetail: shoulderDetailData };
-  const alreadyActiveZones = Object.keys(zoneFields).filter(name => selected(name) !== 'none');
-  const freeZones = Object.keys(zoneFields).filter(name => selected(name) === 'none');
-  const targetZoneCount = GARMENT_DETAIL_LAYER_ZONES[effectiveLayer] ?? 0;
-  const zonesToFill = Math.max(0, Math.min(targetZoneCount - alreadyActiveZones.length, freeZones.length));
-  const shuffledFreeZones = freeZones.slice().sort(() => Math.random() - 0.5).slice(0, zonesToFill);
-  shuffledFreeZones.forEach(name => {
-    const pool = Object.keys(zoneFields[name]).filter(k => k !== 'none');
+  const { zones } = HB_GARMENT_CORE.chooseFreeZones(zoneFields, name => selected(name), layerSelection.targetCount);
+  zones.forEach(name => {
+    const pool = HB_GARMENT_CORE.randomKeys(zoneFields[name], GARMENT_DETAIL_RANDOM_POOLS[name]);
     if(pool.length) setRadioValue(name, getRandomItem(pool));
   });
 
@@ -1856,7 +1888,7 @@ function generate(options = {}){
   const shoulderDetailText = customShoulderDetail
     ? `custom shoulder surface detail only: ${customShoulderDetail}`
     : shoulderDetailData[selected('shoulderDetail')];
-  const garmentDetailParts = [chestDetailText, waistSideDetailText, shoulderDetailText].filter(Boolean);
+  const garmentDetailParts = HB_GARMENT_CORE.compactPromptParts([chestDetailText, waistSideDetailText, shoulderDetailText]);
   const garmentDetailText = garmentDetailParts.length
     ? 'garment surface detail: ' + garmentDetailParts.join(', ') + ' — structural surface accents only, the garment silhouette and archetype from the appearance form above stay unchanged,'
     : '';

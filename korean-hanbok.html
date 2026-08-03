@@ -203,6 +203,11 @@
       <label class="card"><input type="radio" name="garmentChestVariation" value="crossCollarDeepV"><div class="name">交領深 V 結構胸衣</div><div class="desc">交領與結構胸衣融合</div></label>
       <label class="card"><input type="radio" name="garmentChestVariation" value="crossWrapDeepV"><div class="name">交叉綁帶深 V</div><div class="desc">交叉胸帶與深 V 領口</div></label>
       <label class="card"><input type="radio" name="garmentChestVariation" value="openFrontDeepV"><div class="name">深 V 大開襟</div><div class="desc">交領大開襟的現代改良</div></label>
+      <div class="pose-group-label" style="grid-column:1/-1">韓服襟帶結構</div>
+      <label class="card"><input type="radio" name="garmentChestVariation" value="dongjeongCollar"><div class="name">東正領緣</div><div class="desc">對比色東正領沿衣襟收邊</div></label>
+      <label class="card"><input type="radio" name="garmentChestVariation" value="goreumKnot"><div class="name">衣帶結胸襟</div><div class="desc">衣帶結自然整合在短襦前襟</div></label>
+      <label class="card"><input type="radio" name="garmentChestVariation" value="jeogoriEmbroideryPanel"><div class="name">刺繡短襦胸片</div><div class="desc">沿短襦結構增加細緻胸片刺繡</div></label>
+      <label class="card"><input type="radio" name="garmentChestVariation" value="modernSquareJeogori"><div class="name">現代方領短襦</div><div class="desc">保留韓服比例的現代方領改良</div></label>
     </div>
     <div class="group-title">腰側</div>
     <div class="grid grid-3" data-choice="garmentWaistVariation">
@@ -210,6 +215,11 @@
       <label class="card"><input type="radio" name="garmentWaistVariation" value="wrapSideSlit"><div class="name">纏裙側開衩</div><div class="desc">wrap skirt with an elegant side slit</div></label>
       <label class="card"><input type="radio" name="garmentWaistVariation" value="highSideSlit"><div class="name">高衩開裙</div><div class="desc">high side slit skirt with controlled drape</div></label>
       <label class="card"><input type="radio" name="garmentWaistVariation" value="openSkirtPanel"><div class="name">裙擺敞開</div><div class="desc">open front skirt panel with flowing layers</div></label>
+      <div class="pose-group-label" style="grid-column:1/-1">韓服裙腰結構</div>
+      <label class="card"><input type="radio" name="garmentWaistVariation" value="chimaHighWaist"><div class="name">高腰裙結</div><div class="desc">以高腰裙結整理韓服裙身</div></label>
+      <label class="card"><input type="radio" name="garmentWaistVariation" value="norigaeWaistDrop"><div class="name">垂墜佩飾</div><div class="desc">衣帶前方垂掛克制 norigae</div></label>
+      <label class="card"><input type="radio" name="garmentWaistVariation" value="layeredChimaBand"><div class="name">雙層裙腰</div><div class="desc">增加柔和蓬度的雙層裙腰</div></label>
+      <label class="card"><input type="radio" name="garmentWaistVariation" value="modernHanbokWaistband"><div class="name">現代收腰帶</div><div class="desc">保留完整裙身的現代收腰帶</div></label>
     </div>
     <div class="group-title">肩部</div>
     <div class="grid grid-3" data-choice="garmentShoulderVariation">
@@ -217,6 +227,11 @@
       <label class="card"><input type="radio" name="garmentShoulderVariation" value="offShoulder"><div class="name">露肩剪裁</div><div class="desc">off-shoulder garment construction</div></label>
       <label class="card"><input type="radio" name="garmentShoulderVariation" value="singleShoulder"><div class="name">單肩斜裁</div><div class="desc">single-shoulder diagonal cut</div></label>
       <label class="card"><input type="radio" name="garmentShoulderVariation" value="halter"><div class="name">掛脖削肩</div><div class="desc">halter neckline with clean shoulder lines</div></label>
+      <div class="pose-group-label" style="grid-column:1/-1">韓服袖肩結構</div>
+      <label class="card"><input type="radio" name="garmentShoulderVariation" value="roundedSleeveShoulder"><div class="name">圓弧袖肩</div><div class="desc">自然圓弧肩線連接傳統袖型</div></label>
+      <label class="card"><input type="radio" name="garmentShoulderVariation" value="baejaLayer"><div class="name">褙子疊搭</div><div class="desc">無袖褙子覆於短襦肩部</div></label>
+      <label class="card"><input type="radio" name="garmentShoulderVariation" value="wonsamSheerLayer"><div class="name">圓衫薄覆層</div><div class="desc">沿圓衫結構增加薄透外層</div></label>
+      <label class="card"><input type="radio" name="garmentShoulderVariation" value="modernHanbokCapelet"><div class="name">現代短披肩</div><div class="desc">保留韓服領線的極簡披肩</div></label>
     </div>
   </section>
 
@@ -372,6 +387,7 @@
 </main>
 
 <script src="assets/core-prompt.js"></script>
+<script src="assets/garment-core.js"></script>
 <script>
 const materialData = {
   plainSilk: { prompt: 'high-grade Korean silk with elegant natural drape and a restrained premium surface', palette: 'ivory, pale pink and soft cream' },
@@ -521,23 +537,40 @@ const GARMENT_VARIATIONS = {
     waistDeepV: 'a deep V-shaped cut extending toward the waist, tailored garment construction',
     crossCollarDeepV: 'cross-collar deep V neckline with a structured fitted bodice',
     crossWrapDeepV: 'cross-wrap lacing across the bodice, deep V-shaped neckline',
-    openFrontDeepV: 'cross-collar deep V open-front robe'
+    openFrontDeepV: 'cross-collar deep V open-front robe',
+    dongjeongCollar: 'a crisp contrasting dongjeong collar edge',
+    goreumKnot: 'a refined goreum ribbon knot integrated into the jeogori front',
+    jeogoriEmbroideryPanel: 'an embroidered chest panel following the jeogori construction',
+    modernSquareJeogori: 'a modern square-neck jeogori interpretation preserving hanbok proportions'
   },
   waist: {
     none: '',
     wrapSideSlit: 'wrap skirt with an elegant side slit and controlled layered drape',
     highSideSlit: 'high side slit skirt with controlled drape and preserved Korean hanbok structure',
-    openSkirtPanel: 'open front skirt panel with flowing layered fabric and a clear traditional Korean wrap logic'
+    openSkirtPanel: 'open front skirt panel with flowing layered fabric and a clear traditional Korean wrap logic',
+    chimaHighWaist: 'a high-waisted chima fastening with a clean ribbon structure',
+    norigaeWaistDrop: 'a restrained norigae ornament suspended from the front tie',
+    layeredChimaBand: 'a layered chima waistband with soft volume',
+    modernHanbokWaistband: 'a modern fitted waist band preserving the full chima silhouette'
   },
   shoulder: {
     none: '',
     offShoulder: 'off-shoulder garment construction while preserving the selected Korean hanbok silhouette',
     singleShoulder: 'single-shoulder diagonal cut with refined couture tailoring',
-    halter: 'halter neckline with clean shoulder lines and restrained modern Korean styling'
+    halter: 'halter neckline with clean shoulder lines and restrained modern Korean styling',
+    roundedSleeveShoulder: 'soft curved shoulders flowing into traditional rounded sleeves',
+    baejaLayer: 'a sleeveless baeja vest layer over the jeogori',
+    wonsamSheerLayer: 'a translucent ceremonial outer robe layer',
+    modernHanbokCapelet: 'a minimal modern capelet retaining hanbok collar geometry'
   }
 };
 
 const GARMENT_VARIATION_LAYER_ZONES = { layer0: 0, layer3: 1, layer6: 2, layer9: 3 };
+const GARMENT_VARIATION_RANDOM_POOLS = {
+  garmentChestVariation: ['dongjeongCollar', 'goreumKnot', 'jeogoriEmbroideryPanel', 'modernSquareJeogori'],
+  garmentWaistVariation: ['chimaHighWaist', 'norigaeWaistDrop', 'layeredChimaBand', 'modernHanbokWaistband'],
+  garmentShoulderVariation: ['roundedSleeveShoulder', 'baejaLayer', 'wonsamSheerLayer', 'modernHanbokCapelet']
+};
 
 const framingData = {
   faceCloseup: 'face close-up framing with collar and textile texture visible',
@@ -569,15 +602,15 @@ const sharedClassicalCore = window.HB_CORE_PROMPT?.page?.koreanHanbok || {};
 
 const themeTemplates = {
   classicHanok: { style: 'classicalPortrait', composition: 'centered formal portrait composition with balanced Korean architectural framing', garment: 'classicJeogoriChima', materials: ['plainSilk'], accessory: 'none', chest: 'none', waist: 'none', shoulder: 'none', body: 'original', pose: 'naturalStanding', lighting: 'hanokPaperSoft', color: 'pastelPinkIvory', background: 'hanokCourtyard', framing: 'threeQuarter', camera: 'eyeLevel', ratio: 'vertical34' },
-  scholarPastelStudy: { style: 'culturePortrait', composition: 'hanok paper-door framing around the subject with layered foreground and background depth', garment: 'scholarPastelHanbok', materials: ['ramieLinen', 'plumBambooPattern'], accessory: 'binyeo', chest: 'none', waist: 'none', shoulder: 'none', body: 'slightWaist', pose: 'scrollSeated', lighting: 'morningHanok', color: 'sageLinen', background: 'hanokStudy', framing: 'halfBody', camera: 'threeQuarterSide', ratio: 'vertical45' },
+  scholarPastelStudy: { style: 'culturePortrait', composition: 'hanok paper-door framing around the subject with layered foreground and background depth', garment: 'scholarPastelHanbok', materials: ['ramieLinen', 'plumBambooPattern'], accessory: 'binyeo', chest: 'dongjeongCollar', waist: 'norigaeWaistDrop', shoulder: 'roundedSleeveShoulder', body: 'slightWaist', pose: 'scrollSeated', lighting: 'morningHanok', color: 'sageLinen', background: 'hanokStudy', framing: 'halfBody', camera: 'threeQuarterSide', ratio: 'vertical45' },
   winterFurSnow: { style: 'inkFineArt', composition: 'full environmental portrait integrated into a hanok courtyard, palace corridor or traditional garden with clear spatial layers', garment: 'winterFurHanbok', materials: ['matteSatin', 'plumBambooPattern'], accessory: 'jadeBinyeo', chest: 'none', waist: 'none', shoulder: 'none', body: 'original', pose: 'railingGaze', lighting: 'mistPalace', color: 'plumSnow', background: 'snowHanok', framing: 'environment', camera: 'highAngle', ratio: 'landscape169' },
-  royalDanguiPalace: { style: 'courtLuxury', composition: 'symmetrical composition with hanok lines, palace corridors and balanced ceremonial order', garment: 'royalDangui', materials: ['hanbokBrocade', 'goldLeafHanbok'], accessory: 'binyeo', chest: 'none', waist: 'none', shoulder: 'none', body: 'tallFashion', pose: 'naturalStanding', lighting: 'goldLeafLight', color: 'royalGreenGold', background: 'palaceCorridor', framing: 'fullBody', camera: 'eyeLevel', ratio: 'vertical23' },
+  royalDanguiPalace: { style: 'courtLuxury', composition: 'symmetrical composition with hanok lines, palace corridors and balanced ceremonial order', garment: 'royalDangui', materials: ['hanbokBrocade', 'goldLeafHanbok'], accessory: 'binyeo', chest: 'jeogoriEmbroideryPanel', waist: 'layeredChimaBand', shoulder: 'baejaLayer', body: 'tallFashion', pose: 'naturalStanding', lighting: 'goldLeafLight', color: 'royalGreenGold', background: 'palaceCorridor', framing: 'fullBody', camera: 'eyeLevel', ratio: 'vertical23' },
   courtWonsamGarden: { style: 'courtLuxury', composition: 'flowing hanbok sleeves and skirt edges create a soft foreground frame while the face remains unobstructed', garment: 'courtWonsam', materials: ['hanbokBrocade', 'floralEmbroidery'], accessory: 'flowerCrown', chest: 'none', waist: 'none', shoulder: 'none', body: 'curvy', pose: 'flowerBranch', lighting: 'palaceWarm', color: 'royalGreenGold', background: 'palaceGarden', framing: 'threeQuarter', camera: 'lowAngle', ratio: 'vertical45' },
   bridalHwarot: { style: 'fashionEditorial', composition: 'hanbok detail-focused composition with jeogori collar, goreum ribbons, embroidery and refined craftsmanship as priorities', garment: 'bridalHwarot', materials: ['floralEmbroidery', 'phoenixPattern'], accessory: 'jokduri', chest: 'none', waist: 'none', shoulder: 'none', body: 'original', pose: 'handsAtWaist', lighting: 'hanbokStudio', color: 'vermilionInk', background: 'royalBanquetHall', framing: 'threeQuarter', camera: 'beautyPortrait', ratio: 'vertical34' },
   greenWonsamWedding: { style: 'classicalPortrait', composition: 'wide composition with the broad hanbok sleeves opening outward and the layered garment construction clearly visible', garment: 'greenBridalWonsam', materials: ['plainSilk', 'goldLeafHanbok'], accessory: 'flowerCrown', chest: 'none', waist: 'none', shoulder: 'none', body: 'tallFashion', pose: 'raiseSleeve', lighting: 'blossomBacklight', color: 'royalGreenGold', background: 'springBlossomHanok', framing: 'fullBody', camera: 'eyeLevel', ratio: 'vertical23' },
   goldLeafRoyal: { style: 'courtLuxury', composition: 'traditional Korean folding screen and architectural planes create elegant layered framing around the subject', garment: 'goldLeafRoyalHanbok', materials: ['goldLeafHanbok', 'dancheongGeometry'], accessory: 'norigae', chest: 'none', waist: 'none', shoulder: 'none', body: 'tallFashion', pose: 'holdNorigae', lighting: 'goldLeafLight', color: 'dancheongColor', background: 'traditionalScreenRoom', framing: 'threeQuarter', camera: 'eyeLevel', ratio: 'vertical45' },
   courtDancePortrait: { style: 'culturePortrait', composition: 'hanbok silhouette and sleeve movement remain visually prominent within the surrounding Korean classical space', garment: 'courtDanceHanbok', materials: ['nobangGauze', 'cloudPattern'], accessory: 'norigae', chest: 'none', waist: 'none', shoulder: 'none', body: 'kpopIdol', pose: 'waterSleeve', lighting: 'hanbokSideLight', color: 'jadeBlueCream', background: 'traditionalPavilion', framing: 'fullBody', camera: 'threeQuarterSide', ratio: 'vertical45' },
-  modernDailyHanbok: { style: 'classicalPortrait', composition: 'hanok paper-door framing around the subject with layered foreground and background depth', garment: 'modernDailyHanbok', materials: ['ramieLinen', 'jogakboPatchwork'], accessory: 'embroideredPouch', chest: 'none', waist: 'none', shoulder: 'none', body: 'original', pose: 'teaCup', lighting: 'paperDoorProjection', color: 'sageLinen', background: 'paperDoorInterior', framing: 'halfBody', camera: 'beautyPortrait', ratio: 'vertical34' },
+  modernDailyHanbok: { style: 'classicalPortrait', composition: 'hanok paper-door framing around the subject with layered foreground and background depth', garment: 'modernDailyHanbok', materials: ['ramieLinen', 'jogakboPatchwork'], accessory: 'embroideredPouch', chest: 'modernSquareJeogori', waist: 'modernHanbokWaistband', shoulder: 'modernHanbokCapelet', body: 'original', pose: 'teaCup', lighting: 'paperDoorProjection', color: 'sageLinen', background: 'paperDoorInterior', framing: 'halfBody', camera: 'beautyPortrait', ratio: 'vertical34' },
   hanbokPhotoCouture: { style: 'fashionEditorial', composition: 'hanbok detail-focused composition with jeogori collar, goreum ribbons, embroidery and refined craftsmanship as priorities', garment: 'hanbokPhotoCouture', materials: ['matteSatin', 'floralEmbroidery'], accessory: 'daenggi', chest: 'crossCollarDeepV', waist: 'wrapSideSlit', shoulder: 'none', body: 'kpopIdol', pose: 'sideLongLine', lighting: 'hanbokStudio', color: 'smokeBlueRose', background: 'modernKoreanStudio', framing: 'threeQuarter', camera: 'sideProfile', ratio: 'vertical45' },
   hanbokHauteCouture: { style: 'modernCouture', composition: 'asymmetrical Korean editorial composition with the subject placed to one side and clean surrounding space', garment: 'hanbokHauteCouture', materials: ['hanbokBrocade', 'layeredOrganza'], accessory: 'jadeBinyeo', chest: 'waistDeepV', waist: 'openSkirtPanel', shoulder: 'singleShoulder', body: 'tallFashion', pose: 'sleeveHold', lighting: 'hanbokStudio', color: 'royalGreenGold', background: 'plainHanbokStudio', framing: 'halfBody', camera: 'threeQuarterSide', ratio: 'vertical45' }
 };
@@ -657,20 +690,17 @@ function applyClassicalRandomSelection(){
   document.getElementById('intensity').value = getRandomItem(getAllSelectValues('intensity'));
 
   const layerKeys = ['layer0', 'layer3', 'layer6', 'layer9'];
-  const selectedLayer = selected('garmentLayer');
-  const effectiveLayer = selectedLayer === 'random' ? getRandomItem(layerKeys) : selectedLayer;
+  const layerSelection = HB_GARMENT_CORE.resolveLayer(selected('garmentLayer'), layerKeys, GARMENT_VARIATION_LAYER_ZONES);
+  const effectiveLayer = layerSelection.key;
   setRadioValue('garmentLayer', effectiveLayer);
   const zoneFields = {
     garmentChestVariation: GARMENT_VARIATIONS.chest,
     garmentWaistVariation: GARMENT_VARIATIONS.waist,
     garmentShoulderVariation: GARMENT_VARIATIONS.shoulder
   };
-  const activeZones = Object.keys(zoneFields).filter(name => selected(name) !== 'none');
-  const freeZones = Object.keys(zoneFields).filter(name => selected(name) === 'none');
-  const targetZoneCount = GARMENT_VARIATION_LAYER_ZONES[effectiveLayer] ?? 0;
-  const zonesToFill = Math.max(0, Math.min(targetZoneCount - activeZones.length, freeZones.length));
-  shuffle(freeZones).slice(0, zonesToFill).forEach(name => {
-    const pool = Object.keys(zoneFields[name]).filter(value => value !== 'none');
+  const { zones } = HB_GARMENT_CORE.chooseFreeZones(zoneFields, name => selected(name), layerSelection.targetCount);
+  zones.forEach(name => {
+    const pool = HB_GARMENT_CORE.randomKeys(zoneFields[name], GARMENT_VARIATION_RANDOM_POOLS[name]);
     if(pool.length) setRadioValue(name, getRandomItem(pool));
   });
   clearCustomFields();
@@ -693,11 +723,11 @@ function generate(options){
   const materialPalette = customMaterialParts.length ? customMaterialParts.join(', ') : selectedMaterials.map(key => materialData[key].palette).join(', ');
   const customGarment = document.getElementById('customGarment').value.trim();
   const garmentText = customGarment ? 'custom Korean hanbok form only: ' + customGarment + '; preserve the selected Korean hanbok silhouette' : garmentData[selected('garment')];
-  const garmentVariationParts = [
+  const garmentVariationParts = HB_GARMENT_CORE.compactPromptParts([
     GARMENT_VARIATIONS.chest[selected('garmentChestVariation')],
     GARMENT_VARIATIONS.waist[selected('garmentWaistVariation')],
     GARMENT_VARIATIONS.shoulder[selected('garmentShoulderVariation')]
-  ].filter(Boolean);
+  ]);
   const customBackground = document.getElementById('customBackground').value.trim();
   const background = customBackground ? 'custom background only: ' + customBackground + '; keep the Korean hanbok visual language' : backgroundData[selected('background')];
   const customPose = document.getElementById('customPose').value.trim();

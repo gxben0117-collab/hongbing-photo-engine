@@ -659,6 +659,11 @@
         <label class="card"><input type="radio" name="chestDetail" value="collarboneJewelChain"><div class="name">鎖骨珠寶鏈</div><div class="desc">鎖骨珠寶鏈垂墜細節</div></label>
         <label class="card"><input type="radio" name="chestDetail" value="centerPendant"><div class="name">中央吊墜</div><div class="desc">胸口中央吊墜細節</div></label>
         <label class="card"><input type="radio" name="chestDetail" value="asymmetricCut"><div class="name">不對稱切割</div><div class="desc">胸口不對稱切割細節</div></label>
+        <div class="pose-group-label" style="grid-column:1/-1">仙衣專屬結構</div>
+        <label class="card"><input type="radio" name="chestDetail" value="cloudCrossCollarPanels"><div class="name">雲紋交領疊襟</div><div class="desc">雲紋交領與多層前襟</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="jadeProtectivePanel"><div class="name">玉扣護心襟</div><div class="desc">玉扣固定的護心胸襟</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="flowingSilkChestDrape"><div class="name">流紗垂襟</div><div class="desc">絲紗從領口自然向下垂墜</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="sectEmbroideredChest"><div class="name">仙門刺繡胸襟</div><div class="desc">融入仙門識別的胸襟刺繡</div></label>
       </div>
       <div class="form-grid" style="margin-top:10px;">
         <label class="field full custom-choice" data-custom-choice="chestDetail">胸口細節自填
@@ -691,6 +696,11 @@
         <label class="card"><input type="radio" name="waistSideDetail" value="crystalChain"><div class="name">水晶腰鍊</div><div class="desc">水晶腰鍊垂墜細節</div></label>
         <label class="card"><input type="radio" name="waistSideDetail" value="floralAccent"><div class="name">花朵腰飾</div><div class="desc">腰側花朵裝飾細節</div></label>
         <label class="card"><input type="radio" name="waistSideDetail" value="asymmetricCut"><div class="name">不對稱切割</div><div class="desc">腰側不對稱切割細節</div></label>
+        <div class="pose-group-label" style="grid-column:1/-1">仙衣腰部結構</div>
+        <label class="card"><input type="radio" name="waistSideDetail" value="cloudEmbroideredSash"><div class="name">雲紋寬腰封</div><div class="desc">雲紋刺繡寬腰封</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="jadePendantSash"><div class="name">玉佩垂帶腰封</div><div class="desc">玉佩與絲帶在腰側自然垂掛</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="trailingRibbonKnot"><div class="name">飛帶結腰</div><div class="desc">結腰後延伸輕盈飄帶</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="lightArmorWaistGuard"><div class="name">輕甲束腰</div><div class="desc">輕型護腰整合流動袍層</div></label>
       </div>
       <div class="form-grid" style="margin-top:10px;">
         <label class="field full custom-choice" data-custom-choice="waistSideDetail">腰側細節自填
@@ -722,6 +732,11 @@
         <label class="card"><input type="radio" name="shoulderDetail" value="epaulette"><div class="name">肩章設計</div><div class="desc">肩章式裝飾設計</div></label>
         <label class="card"><input type="radio" name="shoulderDetail" value="gemClasp"><div class="name">肩扣寶石</div><div class="desc">肩部寶石扣飾細節</div></label>
         <label class="card"><input type="radio" name="shoulderDetail" value="asymmetricShoulder"><div class="name">不對稱肩部</div><div class="desc">肩部不對稱剪裁細節</div></label>
+        <div class="pose-group-label" style="grid-column:1/-1">仙衣肩部結構</div>
+        <label class="card"><input type="radio" name="shoulderDetail" value="cloudShoulderOverlayX"><div class="name">雲肩疊搭</div><div class="desc">刺繡雲肩覆於仙衣肩線</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="piboShoulderDrape"><div class="name">披帛繞肩</div><div class="desc">披帛沿肩臂自然繞行</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="sectCeremonialMantle"><div class="name">仙門披肩</div><div class="desc">仙門儀式感外層披肩</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="robeLightPauldron"><div class="name">輕甲護肩</div><div class="desc">輕型護肩整合在流動袍層</div></label>
       </div>
       <div class="form-grid" style="margin-top:10px;">
         <label class="field full custom-choice" data-custom-choice="shoulderDetail">肩部細節自填
@@ -999,6 +1014,7 @@
 </main>
 
 <script src="assets/core-prompt.js"></script>
+<script src="assets/garment-core.js"></script>
 <script>
 const materialData = {
   immortalSword: {
@@ -1205,7 +1221,11 @@ const chestDetailData = {
   metalPlating: 'metallic plate accents at the chest',
   collarboneJewelChain: 'a jeweled chain draped along the collarbone',
   centerPendant: 'a central pendant ornament at the chest',
-  asymmetricCut: 'an asymmetric cut at the chest'
+  asymmetricCut: 'an asymmetric cut at the chest',
+  cloudCrossCollarPanels: 'layered cloud-pattern cross-collar panels',
+  jadeProtectivePanel: 'a jade-clasped protective center panel',
+  flowingSilkChestDrape: 'flowing silk drapery descending from the collar',
+  sectEmbroideredChest: 'an embroidered sect-style chest panel integrated into the robe'
 };
 const waistSideDetailData = {
   none: '',
@@ -1229,7 +1249,11 @@ const waistSideDetailData = {
   tasselChain: 'a tasseled waist chain',
   crystalChain: 'a crystal waist chain',
   floralAccent: 'a floral ornament at the waist',
-  asymmetricCut: 'an asymmetric cut at the waist side'
+  asymmetricCut: 'an asymmetric cut at the waist side',
+  cloudEmbroideredSash: 'a broad cloud-pattern embroidered sash',
+  jadePendantSash: 'a layered sash with jade pendants and hanging silk cords',
+  trailingRibbonKnot: 'a knotted waist sash with trailing ribbon ends',
+  lightArmorWaistGuard: 'a fitted light-armor waist guard over flowing robe layers'
 };
 const shoulderDetailData = {
   none: '',
@@ -1252,10 +1276,19 @@ const shoulderDetailData = {
   featherAccent: 'a feather accent at the shoulder',
   epaulette: 'an epaulette-style shoulder ornament',
   gemClasp: 'a gemstone clasp at the shoulder',
-  asymmetricShoulder: 'an asymmetric shoulder cut'
+  asymmetricShoulder: 'an asymmetric shoulder cut',
+  cloudShoulderOverlayX: 'a layered embroidered cloud-shoulder overlay',
+  piboShoulderDrape: 'a long silk pibo draped naturally around the shoulders and arms',
+  sectCeremonialMantle: 'a ceremonial sect mantle over the shoulders',
+  robeLightPauldron: 'light sculpted shoulder guards integrated into the robe'
 };
 // Layer → 隨機套用時要命中幾個部位（0-3 個，從胸口/腰側/肩部三個部位裡抽）
 const GARMENT_DETAIL_LAYER_ZONES = { layer0: 0, layer3: 1, layer6: 2, layer9: 3 };
+const GARMENT_DETAIL_RANDOM_POOLS = {
+  chestDetail: ['cloudCrossCollarPanels', 'jadeProtectivePanel', 'flowingSilkChestDrape', 'sectEmbroideredChest'],
+  waistSideDetail: ['cloudEmbroideredSash', 'jadePendantSash', 'trailingRibbonKnot', 'lightArmorWaistGuard'],
+  shoulderDetail: ['cloudShoulderOverlayX', 'piboShoulderDrape', 'sectCeremonialMantle', 'robeLightPauldron'],
+};
 
 const garmentData = {
   xianQipaoGauze: 'flowing wide-sleeve xianxia gown with a crossed silk sash, layered chiffon under-robe, floating ribbon trails, elegant cultivator-immortal silhouette',
@@ -1615,6 +1648,7 @@ function refreshCards(){
 const themeTemplates = {
   sectMasterAscension: {
     garment: 'sectMasterRobe', material: 'qiEnergyAura', style: 'cinematic',
+    chestDetail: 'cloudCrossCollarPanels', waistSideDetail: 'cloudEmbroideredSash', shoulderDetail: 'cloudShoulderOverlayX',
     composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
     framing: 'threeQuarter', pose: 'swordFlightSoar', camera: 'lowAngleHero', lighting: 'halo', background: 'celestialCloudTerrace',
     ratio: 'vertical916', intensity: 'balanced material effects, elegant and luxurious'
@@ -1627,6 +1661,7 @@ const themeTemplates = {
   },
   swordCultivatorDuel: {
     garment: 'swordCultivatorAttire', material: 'swordQiSlash', style: 'huxia',
+    chestDetail: 'sectEmbroideredChest', waistSideDetail: 'lightArmorWaistGuard', shoulderDetail: 'robeLightPauldron',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
     framing: 'fullBody', pose: 'duelReadyLunge', camera: 'lowAngleHero', lighting: 'hard', background: 'ancientAltarRuins',
     ratio: 'vertical34', intensity: 'massive explosive material splash, high speed frozen motion'
@@ -1657,6 +1692,7 @@ const themeTemplates = {
   },
   flowerSpiritGarden: {
     garment: 'flowerSpiritPetalDress', material: 'peachBlossomDrift', style: 'beautyCampaign',
+    chestDetail: 'flowingSilkChestDrape', waistSideDetail: 'jadePendantSash', shoulderDetail: 'piboShoulderDrape',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
     framing: 'threeQuarter', pose: 'lotusHold', camera: 'eyeLevelCover', lighting: 'soft', background: 'pavilionCourtyard',
     ratio: 'vertical45', intensity: 'subtle floating particles, refined couture details'
@@ -1771,17 +1807,13 @@ function applyFantasyRandomSelection(){
   // 服裝改造核心：Layer 決定要命中幾個部位，已經手動設定過（非「無修改」）的部位維持
   // 原樣不被覆蓋，只有還在「無修改」的部位才會被納入這次隨機的候選池。
   const layerKeys = ['layer0', 'layer3', 'layer6', 'layer9'];
-  const selectedLayer = selected('garmentLayer');
-  const effectiveLayer = selectedLayer === 'random' ? getRandomItem(layerKeys) : selectedLayer;
+  const layerSelection = HB_GARMENT_CORE.resolveLayer(selected('garmentLayer'), layerKeys, GARMENT_DETAIL_LAYER_ZONES);
+  const effectiveLayer = layerSelection.key;
   setRadioValue('garmentLayer', effectiveLayer);
   const zoneFields = { chestDetail: chestDetailData, waistSideDetail: waistSideDetailData, shoulderDetail: shoulderDetailData };
-  const alreadyActiveZones = Object.keys(zoneFields).filter(name => selected(name) !== 'none');
-  const freeZones = Object.keys(zoneFields).filter(name => selected(name) === 'none');
-  const targetZoneCount = GARMENT_DETAIL_LAYER_ZONES[effectiveLayer] ?? 0;
-  const zonesToFill = Math.max(0, Math.min(targetZoneCount - alreadyActiveZones.length, freeZones.length));
-  const shuffledFreeZones = freeZones.slice().sort(() => Math.random() - 0.5).slice(0, zonesToFill);
-  shuffledFreeZones.forEach(name => {
-    const pool = Object.keys(zoneFields[name]).filter(k => k !== 'none');
+  const { zones } = HB_GARMENT_CORE.chooseFreeZones(zoneFields, name => selected(name), layerSelection.targetCount);
+  zones.forEach(name => {
+    const pool = HB_GARMENT_CORE.randomKeys(zoneFields[name], GARMENT_DETAIL_RANDOM_POOLS[name]);
     if(pool.length) setRadioValue(name, getRandomItem(pool));
   });
 
@@ -1825,7 +1857,7 @@ function generate(options = {}){
   const shoulderDetailText = customShoulderDetail
     ? `custom shoulder surface detail only: ${customShoulderDetail}`
     : shoulderDetailData[selected('shoulderDetail')];
-  const garmentDetailParts = [chestDetailText, waistSideDetailText, shoulderDetailText].filter(Boolean);
+  const garmentDetailParts = HB_GARMENT_CORE.compactPromptParts([chestDetailText, waistSideDetailText, shoulderDetailText]);
   const garmentDetailText = garmentDetailParts.length
     ? 'garment surface detail: ' + garmentDetailParts.join(', ') + ' — structural surface accents only, the garment silhouette from the appearance form above stays unchanged,'
     : '';

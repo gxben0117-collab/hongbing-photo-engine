@@ -701,6 +701,11 @@
         <label class="card"><input type="radio" name="garmentChestVariation" value="crossCollarDeepVStructured"><div class="name">交領深 V 結構胸衣</div><div class="desc">交領深 V 與結構式胸衣</div></label>
         <label class="card"><input type="radio" name="garmentChestVariation" value="crossLacingDeepV"><div class="name">交叉綁帶深 V</div><div class="desc">胸口交叉綁帶與深 V 領口</div></label>
         <label class="card"><input type="radio" name="garmentChestVariation" value="openFrontDeepV"><div class="name">深 V 大開襟</div><div class="desc">交領深 V 大開襟</div></label>
+        <div class="pose-group-label" style="grid-column:1/-1">幻想材質專屬結構</div>
+        <label class="card"><input type="radio" name="garmentChestVariation" value="liquidMetalBodice"><div class="name">液態金屬框架胸衣</div><div class="desc">液態金屬形成高訂胸衣框架</div></label>
+        <label class="card"><input type="radio" name="garmentChestVariation" value="facetedCrystalNeckline"><div class="name">晶體切面領口</div><div class="desc">晶體切面整合在服裝領口</div></label>
+        <label class="card"><input type="radio" name="garmentChestVariation" value="resinInset"><div class="name">透明樹脂拼接</div><div class="desc">透明樹脂嵌片與乾淨高訂邊緣</div></label>
+        <label class="card"><input type="radio" name="garmentChestVariation" value="suspendedMaterialBodice"><div class="name">材質懸浮胸襟</div><div class="desc">由可見結構支撐的懸浮材質胸襟</div></label>
       </div>
     </div>
 
@@ -711,6 +716,11 @@
         <label class="card"><input type="radio" name="garmentWaistVariation" value="wrapSkirtSideSlit"><div class="name">纏裙側開衩</div><div class="desc">高腰纏裙與優雅側開衩</div></label>
         <label class="card"><input type="radio" name="garmentWaistVariation" value="highSideSlitSkirt"><div class="name">高衩開裙</div><div class="desc">側邊高衩開裙</div></label>
         <label class="card"><input type="radio" name="garmentWaistVariation" value="openSkirtPanel"><div class="name">裙擺敞開</div><div class="desc">裙擺敞開，呈現腿部線條</div></label>
+        <div class="pose-group-label" style="grid-column:1/-1">幻想材質腰部結構</div>
+        <label class="card"><input type="radio" name="garmentWaistVariation" value="mirroredMetalWaist"><div class="name">鏡面金屬腰甲</div><div class="desc">鏡面金屬形成腰部雕塑結構</div></label>
+        <label class="card"><input type="radio" name="garmentWaistVariation" value="sculpturalMaterialWaist"><div class="name">流體雕塑腰線</div><div class="desc">選定材質形成流動雕塑腰線</div></label>
+        <label class="card"><input type="radio" name="garmentWaistVariation" value="crystalWaistBelt"><div class="name">晶體環腰</div><div class="desc">切面晶體腰帶整合服裝輪廓</div></label>
+        <label class="card"><input type="radio" name="garmentWaistVariation" value="asymMaterialDrape"><div class="name">不對稱材質垂片</div><div class="desc">材質垂片從腰部自然向下延伸</div></label>
       </div>
     </div>
 
@@ -721,6 +731,11 @@
         <label class="card"><input type="radio" name="garmentShoulderVariation" value="offShoulderCut"><div class="name">露肩剪裁</div><div class="desc">肩部露肩剪裁</div></label>
         <label class="card"><input type="radio" name="garmentShoulderVariation" value="singleShoulder"><div class="name">單肩斜裁</div><div class="desc">單肩不對稱斜裁</div></label>
         <label class="card"><input type="radio" name="garmentShoulderVariation" value="halterNeckCutaway"><div class="name">掛脖削肩</div><div class="desc">掛脖削肩設計</div></label>
+        <div class="pose-group-label" style="grid-column:1/-1">幻想材質肩部結構</div>
+        <label class="card"><input type="radio" name="garmentShoulderVariation" value="architecturalShoulder"><div class="name">建築式肩線</div><div class="desc">建築雕塑感高訂肩線</div></label>
+        <label class="card"><input type="radio" name="garmentShoulderVariation" value="crystalShoulderGuard"><div class="name">晶體肩甲</div><div class="desc">切面晶體整合在肩部</div></label>
+        <label class="card"><input type="radio" name="garmentShoulderVariation" value="materialPetalShoulder"><div class="name">材質花瓣肩片</div><div class="desc">選定材質形成層疊花瓣肩線</div></label>
+        <label class="card"><input type="radio" name="garmentShoulderVariation" value="floatingRingShoulder"><div class="name">懸浮環形肩飾</div><div class="desc">肩後懸浮環飾，保持手臂清楚</div></label>
       </div>
     </div>
   </section>
@@ -1267,6 +1282,7 @@
 </main>
 
 <script src="assets/core-prompt.js"></script>
+<script src="assets/garment-core.js"></script>
 <script>
 const materialData = {
   milkTea: {
@@ -2319,23 +2335,40 @@ const FANTASY_GARMENT_VARIATIONS = {
     waistDeepVNeckline: 'waist-deep V neckline, deep V cut extending to the waist',
     crossCollarDeepVStructured: 'cross-collar deep V neckline with a structured fitted bodice',
     crossLacingDeepV: 'cross-wrap lacing across the bodice, deep V-shaped neckline',
-    openFrontDeepV: 'cross-collar deep V open-front robe'
+    openFrontDeepV: 'cross-collar deep V open-front robe',
+    liquidMetalBodice: 'a sculptural liquid-metal bodice frame',
+    facetedCrystalNeckline: 'a faceted crystal neckline integrated into the garment',
+    resinInset: 'transparent resin insets with clean couture edges',
+    suspendedMaterialBodice: 'a suspended material-panel bodice supported by visible couture structure'
   },
   waist: {
     none: '',
     wrapSkirtSideSlit: 'high-waisted wrap skirt with an elegant side slit',
     highSideSlitSkirt: 'flowing skirt with a high side slit',
-    openSkirtPanel: 'open skirt panel, skirt front opened to reveal the leg line'
+    openSkirtPanel: 'open skirt panel, skirt front opened to reveal the leg line',
+    mirroredMetalWaist: 'a mirrored metallic waist structure',
+    sculpturalMaterialWaist: 'a flowing sculptural waist form made from the selected material',
+    crystalWaistBelt: 'a faceted crystal belt integrated into the silhouette',
+    asymMaterialDrape: 'asymmetric material drapery descending from the waist'
   },
   shoulder: {
     none: '',
     offShoulderCut: 'an off-shoulder cut',
     singleShoulder: 'one-shoulder asymmetric cut',
-    halterNeckCutaway: 'halter-neck cutaway shoulder design'
+    halterNeckCutaway: 'halter-neck cutaway shoulder design',
+    architecturalShoulder: 'an architectural couture shoulder structure',
+    crystalShoulderGuard: 'faceted crystal shoulder guards integrated into the outfit',
+    materialPetalShoulder: 'layered material petals forming the shoulder line',
+    floatingRingShoulder: 'a floating ring-like shoulder ornament positioned behind and clear of the arms'
   }
 };
 
 const GARMENT_VARIATION_LAYER_ZONES = { layer0: 0, layer3: 1, layer6: 2, layer9: 3 };
+const GARMENT_VARIATION_RANDOM_POOLS = {
+  garmentChestVariation: ['liquidMetalBodice', 'facetedCrystalNeckline', 'resinInset', 'suspendedMaterialBodice'],
+  garmentWaistVariation: ['mirroredMetalWaist', 'sculpturalMaterialWaist', 'crystalWaistBelt', 'asymMaterialDrape'],
+  garmentShoulderVariation: ['architecturalShoulder', 'crystalShoulderGuard', 'materialPetalShoulder', 'floatingRingShoulder']
+};
 
 
 const compositionGuard = sharedFantasyCore.compositionGuard || `Commercial Composition Control:
@@ -2508,7 +2541,8 @@ const themeTemplates = {
     lighting: 'warmWindowSoft',
     background: 'chineseWindowShadow',
     ratio: 'vertical916',
-    intensity: 'balanced material effects, elegant and luxurious'
+    intensity: 'balanced material effects, elegant and luxurious',
+    chestVariation: 'resinInset', waistVariation: 'asymMaterialDrape', shoulderVariation: 'materialPetalShoulder'
   },
   auroraBubbleChampagne: {
     garment: 'cloudGauze',
@@ -2534,7 +2568,8 @@ const themeTemplates = {
     lighting: 'hard',
     background: 'materialWall',
     ratio: 'vertical45',
-    intensity: 'balanced material effects, elegant and luxurious'
+    intensity: 'balanced material effects, elegant and luxurious',
+    chestVariation: 'facetedCrystalNeckline', waistVariation: 'crystalWaistBelt', shoulderVariation: 'architecturalShoulder'
   },
   watercolorBeauty: {
     garment: 'petalShoulder',
@@ -2573,7 +2608,8 @@ const themeTemplates = {
     lighting: 'halo',
     background: 'mistSpace',
     ratio: 'poster23',
-    intensity: 'balanced material effects, elegant and luxurious'
+    intensity: 'balanced material effects, elegant and luxurious',
+    chestVariation: 'suspendedMaterialBodice', waistVariation: 'sculpturalMaterialWaist', shoulderVariation: 'floatingRingShoulder'
   },
   amethystRoseJewelry: {
     garment: 'petalShoulder',
@@ -3141,10 +3177,11 @@ function applyThemeTemplate(key){
     document.getElementById(id).value = '';
   });
 
-  setRadioValue('garmentChestVariation', 'none');
-  setRadioValue('garmentWaistVariation', 'none');
-  setRadioValue('garmentShoulderVariation', 'none');
-  setRadioValue('garmentLayer', 'layer0');
+  setRadioValue('garmentChestVariation', preset.chestVariation || 'none');
+  setRadioValue('garmentWaistVariation', preset.waistVariation || 'none');
+  setRadioValue('garmentShoulderVariation', preset.shoulderVariation || 'none');
+  const activeVariationCount = [preset.chestVariation, preset.waistVariation, preset.shoulderVariation].filter(Boolean).length;
+  setRadioValue('garmentLayer', ['layer0', 'layer3', 'layer6', 'layer9'][activeVariationCount] || 'layer0');
   refreshCards();
   generate({reveal:true});
 }
@@ -3169,20 +3206,17 @@ function applyFantasyRandomSelection(){
     if(values.length) setRadioValue(name, getRandomItem(values));
   });
   const layerKeys = ['layer0', 'layer3', 'layer6', 'layer9'];
-  const selectedLayer = selected('garmentLayer');
-  const effectiveLayer = selectedLayer === 'random' ? getRandomItem(layerKeys) : selectedLayer;
+  const layerSelection = HB_GARMENT_CORE.resolveLayer(selected('garmentLayer'), layerKeys, GARMENT_VARIATION_LAYER_ZONES);
+  const effectiveLayer = layerSelection.key;
   setRadioValue('garmentLayer', effectiveLayer);
   const zoneFields = {
     garmentChestVariation: FANTASY_GARMENT_VARIATIONS.chest,
     garmentWaistVariation: FANTASY_GARMENT_VARIATIONS.waist,
     garmentShoulderVariation: FANTASY_GARMENT_VARIATIONS.shoulder
   };
-  const activeZones = Object.keys(zoneFields).filter(name => selected(name) !== 'none');
-  const freeZones = Object.keys(zoneFields).filter(name => selected(name) === 'none');
-  const targetZoneCount = GARMENT_VARIATION_LAYER_ZONES[effectiveLayer] ?? 0;
-  const zonesToFill = Math.max(0, Math.min(targetZoneCount - activeZones.length, freeZones.length));
-  freeZones.slice().sort(() => Math.random() - 0.5).slice(0, zonesToFill).forEach(name => {
-    const pool = Object.keys(zoneFields[name]).filter(value => value !== 'none');
+  const { zones } = HB_GARMENT_CORE.chooseFreeZones(zoneFields, name => selected(name), layerSelection.targetCount);
+  zones.forEach(name => {
+    const pool = HB_GARMENT_CORE.randomKeys(zoneFields[name], GARMENT_VARIATION_RANDOM_POOLS[name]);
     if(pool.length) setRadioValue(name, getRandomItem(pool));
   });
   const intensityValues = getAllSelectValues('intensity');
@@ -3224,11 +3258,11 @@ function generate(options = {}){
   const garmentText = customGarment
     ? `custom garment form only: ${customGarment}; do not include or blend any preset garment option`
     : garmentData[selected('garment')];
-  const garmentVariationParts = [
+  const garmentVariationParts = HB_GARMENT_CORE.compactPromptParts([
     FANTASY_GARMENT_VARIATIONS.chest[selected('garmentChestVariation')],
     FANTASY_GARMENT_VARIATIONS.waist[selected('garmentWaistVariation')],
     FANTASY_GARMENT_VARIATIONS.shoulder[selected('garmentShoulderVariation')]
-  ].filter(Boolean);
+  ]);
   const garmentVariationBlock = garmentVariationParts.length
     ? `【服裝改造核心】\n\n${garmentVariationParts.join('\n')}`
     : '';

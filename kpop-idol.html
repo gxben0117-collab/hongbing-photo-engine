@@ -620,6 +620,10 @@
         <label class="card"><input type="radio" name="chestDetail" value="geometricCutout"><div class="name">幾何鏤空</div><div class="desc">胸口幾何鏤空細節</div></label>
         <label class="card"><input type="radio" name="chestDetail" value="laceInsert"><div class="name">蕾絲拼接</div><div class="desc">胸口蕾絲拼接細節</div></label>
         <label class="card"><input type="radio" name="chestDetail" value="asymmetricCut"><div class="name">不對稱切割</div><div class="desc">胸口不對稱切割細節</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="stageZipperBodice"><div class="name">舞台拉鍊胸衣</div><div class="desc">拋光拉鍊前襟的修身舞台胸衣</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="rhinestoneStrapBodice"><div class="name">水鑽細帶胸衣</div><div class="desc">整合水鑽肩帶結構的舞台上衣</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="asymmetricCroppedTop"><div class="name">不對稱短版上衣</div><div class="desc">表演用不對稱短版上衣</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="sequinedHalterBodice"><div class="name">亮片掛脖胸衣</div><div class="desc">亮片裝飾的掛脖舞台胸衣</div></label>
       </div>
       <div class="form-grid" style="margin-top:10px;">
         <label class="field full custom-choice" data-custom-choice="chestDetail">胸口細節自填
@@ -642,6 +646,10 @@
         <label class="card"><input type="radio" name="waistSideDetail" value="crystalMesh"><div class="name">水鑽網紗拼接</div><div class="desc">腰側水鑽網紗拼接細節</div></label>
         <label class="card"><input type="radio" name="waistSideDetail" value="laceInsert"><div class="name">蕾絲拼接</div><div class="desc">腰側蕾絲拼接細節</div></label>
         <label class="card"><input type="radio" name="waistSideDetail" value="asymmetricCut"><div class="name">不對稱切割</div><div class="desc">腰側不對稱切割細節</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="rhinestoneWaistChain"><div class="name">水鑽腰鏈</div><div class="desc">精緻水鑽腰鏈與舞台服裝融合</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="stageCorsetBelt"><div class="name">舞台馬甲腰帶</div><div class="desc">修身舞台馬甲式腰帶</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="pleatedPerformanceWaist"><div class="name">百褶表演腰頭</div><div class="desc">俐落百褶表演裙腰頭</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="fringeWaistAccent"><div class="name">流蘇腰部點綴</div><div class="desc">隨舞台動作產生流動感的腰部流蘇</div></label>
       </div>
       <div class="form-grid" style="margin-top:10px;">
         <label class="field full custom-choice" data-custom-choice="waistSideDetail">腰側細節自填
@@ -663,6 +671,10 @@
         <label class="card"><input type="radio" name="shoulderDetail" value="detachedSleeve"><div class="name">分離袖片</div><div class="desc">肩部分離袖片細節</div></label>
         <label class="card"><input type="radio" name="shoulderDetail" value="chainStrap"><div class="name">鏈條肩帶</div><div class="desc">肩部鏈條肩帶細節</div></label>
         <label class="card"><input type="radio" name="shoulderDetail" value="asymmetricShoulder"><div class="name">不對稱肩部</div><div class="desc">肩部不對稱剪裁細節</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="oneSleevePerformance"><div class="name">單袖舞台結構</div><div class="desc">表演服的單袖肩部結構</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="croppedBoleroShoulder"><div class="name">短版披肩外套</div><div class="desc">塑造肩線的短版舞台披肩外套</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="rhinestoneShoulderStrap"><div class="name">水鑽肩帶</div><div class="desc">精緻水鑽肩帶細節</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="fringedEpaulettes"><div class="name">流蘇肩章</div><div class="desc">舞台表演感流蘇肩章</div></label>
       </div>
       <div class="form-grid" style="margin-top:10px;">
         <label class="field full custom-choice" data-custom-choice="shoulderDetail">肩部細節自填
@@ -919,6 +931,7 @@
 </main>
 
 <script src="assets/core-prompt.js"></script>
+<script src="assets/garment-core.js"></script>
 <script>
 const materialData = {
   stageSpotBeamGlow: {
@@ -1057,7 +1070,11 @@ const chestDetailData = {
   crossStraps: 'crossed strap detailing at the chest',
   geometricCutout: 'a geometric cutout at the chest',
   laceInsert: 'a lace panel insert at the chest',
-  asymmetricCut: 'an asymmetric cut at the chest'
+  asymmetricCut: 'an asymmetric cut at the chest',
+  stageZipperBodice: 'a fitted stage bodice with a polished zipper front',
+  rhinestoneStrapBodice: 'a rhinestone strap structure integrated into the stage top',
+  asymmetricCroppedTop: 'an asymmetric cropped performance top',
+  sequinedHalterBodice: 'a sequined halter stage bodice'
 };
 const waistSideDetailData = {
   none: '',
@@ -1071,7 +1088,11 @@ const waistSideDetailData = {
   geometricCutout: 'a geometric cutout at the waist side',
   crystalMesh: 'a crystal mesh panel accent at the waist side',
   laceInsert: 'a lace panel insert at the waist side',
-  asymmetricCut: 'an asymmetric cut at the waist side'
+  asymmetricCut: 'an asymmetric cut at the waist side',
+  rhinestoneWaistChain: 'a refined rhinestone waist chain',
+  stageCorsetBelt: 'a fitted stage corset belt',
+  pleatedPerformanceWaist: 'a crisp pleated performance-skirt waistband',
+  fringeWaistAccent: 'fringe accents attached at the waist for stage movement'
 };
 const shoulderDetailData = {
   none: '',
@@ -1084,9 +1105,18 @@ const shoulderDetailData = {
   laceInsert: 'a lace panel insert at the shoulder',
   detachedSleeve: 'a detached sleeve panel',
   chainStrap: 'a chain strap accent at the shoulder',
-  asymmetricShoulder: 'an asymmetric shoulder cut'
+  asymmetricShoulder: 'an asymmetric shoulder cut',
+  oneSleevePerformance: 'a one-sleeve performance construction',
+  croppedBoleroShoulder: 'a cropped bolero jacket shaping the shoulders',
+  rhinestoneShoulderStrap: 'rhinestone shoulder straps',
+  fringedEpaulettes: 'fringed performance epaulettes'
 };
 const GARMENT_DETAIL_LAYER_ZONES = { layer0: 0, layer3: 1, layer6: 2, layer9: 3 };
+const GARMENT_DETAIL_RANDOM_POOLS = {
+  chestDetail: ['stageZipperBodice', 'rhinestoneStrapBodice', 'asymmetricCroppedTop', 'sequinedHalterBodice'],
+  waistSideDetail: ['rhinestoneWaistChain', 'stageCorsetBelt', 'pleatedPerformanceWaist', 'fringeWaistAccent'],
+  shoulderDetail: ['oneSleevePerformance', 'croppedBoleroShoulder', 'rhinestoneShoulderStrap', 'fringedEpaulettes'],
+};
 
 const garmentData = {
   crystalStageBodysuit: 'crystal-embellished fitted stage bodysuit, sharp sculpted performance silhouette',
@@ -1417,16 +1447,19 @@ function refreshCards(){
 const themeTemplates = {
   comebackTeaserPoster: {
     garment: 'crystalStageBodysuit', material: 'stageSpotBeamGlow', style: 'idolTeaserCampaign',
+    chestDetail: 'stageZipperBodice', waistSideDetail: 'rhinestoneWaistChain', shoulderDetail: 'rhinestoneShoulderStrap',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
     framing: 'threeQuarter', pose: 'center_still', camera: 'eyeLevelCover', lighting: 'stage', background: 'ledScreenStageBackdrop', ratio: 'vertical45', intensity: 'balanced material effects, elegant and luxurious'
   },
   livePerformanceEnergy: {
     garment: 'fringeStageDress', material: 'confettiBurstSparkle', style: 'stageLiveCampaign',
+    chestDetail: 'sequinedHalterBodice', waistSideDetail: 'fringeWaistAccent', shoulderDetail: 'fringedEpaulettes',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
     framing: 'fullBody', pose: 'dance_break_freeze', camera: 'lowAngleHero', lighting: 'stage', background: 'concertStageSpotlight', ratio: 'vertical916', intensity: 'balanced material effects, elegant and luxurious'
   },
   minimalRunwayChic: {
     garment: 'monochromeSuitSet', material: 'softFilmGrainMood', style: 'minimalHighFashion',
+    chestDetail: 'asymmetricCroppedTop', waistSideDetail: 'stageCorsetBelt', shoulderDetail: 'croppedBoleroShoulder',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
     framing: 'threeQuarter', pose: 'runway_stride', camera: 'threeQuarterSide', lighting: 'soft', background: 'minimalWhiteStudioCyc', ratio: 'vertical45', intensity: 'subtle floating particles, refined couture details'
   },
@@ -1549,17 +1582,13 @@ function applyIdolRandomSelection(){
   // 服裝改造核心：Layer 決定要命中幾個部位，已經手動設定過（非「無修改」）的部位維持
   // 原樣不被覆蓋，只有還在「無修改」的部位才會被納入這次隨機的候選池。
   const layerKeys = ['layer0', 'layer3', 'layer6', 'layer9'];
-  const selectedLayer = selected('garmentLayer');
-  const effectiveLayer = selectedLayer === 'random' ? getRandomItem(layerKeys) : selectedLayer;
+  const layerSelection = HB_GARMENT_CORE.resolveLayer(selected('garmentLayer'), layerKeys, GARMENT_DETAIL_LAYER_ZONES);
+  const effectiveLayer = layerSelection.key;
   setRadioValue('garmentLayer', effectiveLayer);
   const zoneFields = { chestDetail: chestDetailData, waistSideDetail: waistSideDetailData, shoulderDetail: shoulderDetailData };
-  const alreadyActiveZones = Object.keys(zoneFields).filter(name => selected(name) !== 'none');
-  const freeZones = Object.keys(zoneFields).filter(name => selected(name) === 'none');
-  const targetZoneCount = GARMENT_DETAIL_LAYER_ZONES[effectiveLayer] ?? 0;
-  const zonesToFill = Math.max(0, Math.min(targetZoneCount - alreadyActiveZones.length, freeZones.length));
-  const shuffledFreeZones = freeZones.slice().sort(() => Math.random() - 0.5).slice(0, zonesToFill);
-  shuffledFreeZones.forEach(name => {
-    const pool = Object.keys(zoneFields[name]).filter(k => k !== 'none');
+  const { zones } = HB_GARMENT_CORE.chooseFreeZones(zoneFields, name => selected(name), layerSelection.targetCount);
+  zones.forEach(name => {
+    const pool = HB_GARMENT_CORE.randomKeys(zoneFields[name], GARMENT_DETAIL_RANDOM_POOLS[name]);
     if(pool.length) setRadioValue(name, getRandomItem(pool));
   });
 
@@ -1605,7 +1634,7 @@ function generate(options = {}){
   const shoulderDetailText = customShoulderDetail
     ? `custom shoulder surface detail only: ${customShoulderDetail}`
     : shoulderDetailData[selected('shoulderDetail')];
-  const garmentDetailParts = [chestDetailText, waistSideDetailText, shoulderDetailText].filter(Boolean);
+  const garmentDetailParts = HB_GARMENT_CORE.compactPromptParts([chestDetailText, waistSideDetailText, shoulderDetailText]);
   const garmentDetailText = garmentDetailParts.length
     ? 'garment surface detail: ' + garmentDetailParts.join(', ') + ' — structural surface accents only, the garment silhouette from the appearance form above stays unchanged,'
     : '';
