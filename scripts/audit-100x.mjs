@@ -1256,27 +1256,28 @@ auditClassicalCulturePage({
     source: html, core, page: 'editorial',
     startMarker: 'const layoutData = {',
     endMarker: 'function selected(name)',
-    exportExpression: '({ layoutData, typographyData, graphicData, colorData, imageTreatmentData, printFinishData, placementData, whitespaceData, languageData, ratioData, sourceImageLockGuard, outputQualityGuard, negativeGuard, themeTemplates })',
+    exportExpression: '({ layoutData, typographyData, graphicData, graphicAccentData, colorData, imageTreatmentData, printFinishData, placementData, whitespaceData, languageData, copyStyleData, ratioData, sourceImageLockGuard, outputQualityGuard, negativeGuard, themeTemplates })',
   });
   const pools = {
     layout: Object.keys(data.layoutData), typography: Object.keys(data.typographyData),
-    graphic: Object.keys(data.graphicData), color: Object.keys(data.colorData),
+    graphic: Object.keys(data.graphicData), graphicAccent: Object.keys(data.graphicAccentData), color: Object.keys(data.colorData),
     imageTreatment: Object.keys(data.imageTreatmentData), printFinish: Object.keys(data.printFinishData),
     placement: Object.keys(data.placementData), whitespace: Object.keys(data.whitespaceData),
-    language: Object.keys(data.languageData), ratio: Object.keys(data.ratioData),
+    language: Object.keys(data.languageData), copyStyle: Object.keys(data.copyStyleData), ratio: Object.keys(data.ratioData),
   };
-  const textSamples = ['', '', 'MAKIMA', '測試主題 with émoji 🌸'];
+  const textSamples = ['', '', 'LUMINA', '測試主題 with émoji 🌸'];
   for (let i = 0; i < N; i += 1) {
     const sel = {
-      layout: pick(pools.layout), typography: pick(pools.typography), graphic: pick(pools.graphic),
+      layout: pick(pools.layout), typography: pick(pools.typography), graphic: pick(pools.graphic), graphicAccent: pick(pools.graphicAccent),
       color: pick(pools.color), imageTreatment: pick(pools.imageTreatment), printFinish: pick(pools.printFinish),
       placement: pick(pools.placement), whitespace: pick(pools.whitespace),
-      language: pick(pools.language), ratio: pick(pools.ratio),
+      language: pick(pools.language), copyStyle: pick(pools.copyStyle), ratio: pick(pools.ratio),
       mainTitle: pick(textSamples), subtitle: pick(textSamples), tagline: pick(textSamples),
       infoLabels: pick([[], ['PROFILE'], ['PROFILE', 'FEATURE', 'STYLE']]),
+      metadata: pick(textSamples), creditLine: pick(textSamples),
       extraNote: pick(textSamples),
     };
-    const hasAnyText = sel.mainTitle || sel.subtitle || sel.tagline || sel.infoLabels.length;
+    const hasAnyText = sel.mainTitle || sel.subtitle || sel.tagline || sel.infoLabels.length || sel.metadata || sel.creditLine;
     let textContentBlock;
     if (hasAnyText) {
       const parts = [];
@@ -1284,25 +1285,30 @@ auditClassicalCulturePage({
       if (sel.subtitle) parts.push(`subtitle / issue text: "${sel.subtitle}"`);
       if (sel.tagline) parts.push(`tagline / quote line: "${sel.tagline}"`);
       if (sel.infoLabels.length) parts.push(`information block headers: ${sel.infoLabels.map((l) => `"${l}"`).join(', ')}`);
-      textContentBlock = 'text content to use: ' + parts.join('; ') + (!sel.mainTitle || !sel.subtitle || !sel.tagline || !sel.infoLabels.length ? "; for any of these left unspecified, infer an appropriate short editorial phrase directly from the attached photo's mood, theme and styling," : ',');
+      if (sel.metadata) parts.push(`editorial metadata: "${sel.metadata}"`);
+      if (sel.creditLine) parts.push(`credit or series line: "${sel.creditLine}"`);
+      textContentBlock = 'text content to use: ' + parts.join('; ') + '; for unspecified text, infer only short non-factual editorial labels or leave the area blank,';
     } else {
-      textContentBlock = "no text content specified — infer an appropriate title, subtitle, tagline and information block headers directly from the attached photo's mood, theme and styling, keep them short and editorial in tone,";
+      textContentBlock = "no text content specified — infer only a short original editorial title and minimal labels from the attached photo's mood, keep all factual metadata areas blank,";
     }
     const prompt = [
       data.sourceImageLockGuard + ',',
       data.layoutData[sel.layout] + ',',
+      data.copyStyleData[sel.copyStyle] + ',',
       data.typographyData[sel.typography] + ',',
       data.placementData[sel.placement] + ',',
       textContentBlock,
       data.languageData[sel.language] + ',',
       data.graphicData[sel.graphic] + ',',
+      sel.graphicAccent !== 'none' ? data.graphicAccentData[sel.graphicAccent] + ',' : '',
       data.colorData[sel.color] + ',',
       data.imageTreatmentData[sel.imageTreatment] + ',',
       data.printFinishData[sel.printFinish] + ',',
       data.whitespaceData[sel.whitespace] + ',',
       data.ratioData[sel.ratio] + ',',
       data.outputQualityGuard + ',',
-      'do not alter the photographed person, outfit, pose, lighting or background in any way — apply editorial graphic design on top only,',
+      'do not alter the photographed person, face, hairstyle, makeup, outfit, body proportions, pose, lighting, camera perspective or background in any way — apply non-destructive editorial graphic design on top only,',
+      'do not invent products, ingredients, medical claims, destinations, coordinates, credits, release dates, additional people or factual metadata that were not supplied,',
       sel.extraNote ? 'extra direction: ' + sel.extraNote + ',' : '',
       data.negativeGuard + ',',
       'no random text errors, no watermark artifacts, no distorted or illegible typography,',
@@ -1310,6 +1316,37 @@ auditClassicalCulturePage({
     ].filter(Boolean).join('\n');
     checkOutput('editorial', i, sel, prompt, { requireIdentity: true, identityMarkers: ['原圖鎖定系統'] });
   }
+  for (const [templateKey, preset] of Object.entries(data.themeTemplates)) {
+    const sel = {
+      ...preset,
+      mainTitle: 'LUMINA', subtitle: 'SPECIAL FEATURE', tagline: 'A study in presence and style.',
+      infoLabels: ['PROFILE', 'FEATURE'], metadata: 'ISSUE 08', creditLine: 'EDITORIAL SERIES', extraNote: '',
+    };
+    const prompt = [
+      data.sourceImageLockGuard + ',',
+      data.layoutData[sel.layout] + ',',
+      data.copyStyleData[sel.copyStyle] + ',',
+      data.typographyData[sel.typography] + ',',
+      data.placementData[sel.placement] + ',',
+      `text content to use: main title / character name: "${sel.mainTitle}"; subtitle / issue text: "${sel.subtitle}"; tagline / quote line: "${sel.tagline}"; information block headers: "PROFILE", "FEATURE"; editorial metadata: "${sel.metadata}"; credit or series line: "${sel.creditLine}",`,
+      data.languageData[sel.language] + ',',
+      data.graphicData[sel.graphic] + ',',
+      sel.graphicAccent !== 'none' ? data.graphicAccentData[sel.graphicAccent] + ',' : '',
+      data.colorData[sel.color] + ',',
+      data.imageTreatmentData[sel.imageTreatment] + ',',
+      data.printFinishData[sel.printFinish] + ',',
+      data.whitespaceData[sel.whitespace] + ',',
+      data.ratioData[sel.ratio] + ',',
+      data.outputQualityGuard + ',',
+      'do not alter the photographed person, face, hairstyle, makeup, outfit, body proportions, pose, lighting, camera perspective or background in any way — apply non-destructive editorial graphic design on top only,',
+      'do not invent products, ingredients, medical claims, destinations, coordinates, credits, release dates, additional people or factual metadata that were not supplied,',
+      data.negativeGuard + ',',
+      'no random text errors, no watermark artifacts, no distorted or illegible typography,',
+      '— Attach your already-generated reference photo together with this text when submitting to the image editing model.',
+    ].filter(Boolean).join('\n');
+    checkOutput('editorial-template', templateKey, sel, prompt, { requireIdentity: true, identityMarkers: ['原圖鎖定系統'] });
+  }
+  console.log(`editorial templates checked: ${Object.keys(data.themeTemplates).length}`);
   report('editorial', N);
 }
 

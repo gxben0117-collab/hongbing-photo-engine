@@ -61,9 +61,11 @@
   .editorial-layout{order:1;}
   .editorial-placement{order:2;}
   .editorial-typography{order:3;}
+  .editorial-copy-style{order:4;}
   .editorial-text{order:4;}
   .editorial-language{order:5;}
   .editorial-graphic{order:6;}
+  .editorial-graphic-accent{order:6;}
   .editorial-color{order:7;}
   .editorial-image-treatment{order:8;}
   .editorial-print-finish{order:9;}
@@ -129,6 +131,12 @@
   .card .name{font-size:13.5px;font-weight:700;margin-bottom:3px;}
   .card .desc{font-size:11.5px;color:var(--soft);line-height:1.5;}
   .card.template-selected{border-color:var(--gold);background:var(--selected-bg);}
+  .template-tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:14px;scrollbar-width:thin;}
+  .template-tab{flex:0 0 auto;padding:9px 13px;border:1px solid var(--line);border-radius:7px;background:var(--panel-2);color:var(--soft);font:inherit;font-size:12px;font-weight:700;cursor:pointer;}
+  .template-tab.active{border-color:var(--gold);background:var(--selected-bg);color:var(--paper);}
+  .template-group[hidden]{display:none;}
+  .template-group-title{font-size:12px;color:var(--gold);font-weight:800;letter-spacing:.08em;margin:4px 0 9px;}
+  .template-card .fit{display:block;color:var(--gold);font-size:10.5px;margin-top:7px;}
   button.card{width:100%;text-align:left;border:1px solid var(--line);font-family:inherit;color:inherit;}
   .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
   @media (max-width:640px){.form-grid{grid-template-columns:1fr;}}
@@ -209,40 +217,77 @@
       <div class="section-label">00</div>
       <div class="section-title">一鍵版型模板</div>
     </div>
-    <p class="hint">一鍵套用會同時填入版型、字體、圖形、色彩、影像處理、印刷質感、人物版位、留白密度、語言比例與比例；套用後仍可逐區改成自己的版本。</p>
-    <div class="grid grid-3">
-      <button class="card" type="button" data-template="classicMagazineCover">
-        <div class="name">經典雜誌封面</div>
-        <div class="desc">大刊頭logo、側欄專欄文字、條碼標籤</div>
-      </button>
-      <button class="card" type="button" data-template="verticalTypography">
-        <div class="name">直式巨字排版</div>
-        <div class="desc">貫穿全高的直式大字、速寫線稿疊加</div>
-      </button>
-      <button class="card" type="button" data-template="characterProfile">
-        <div class="name">人物介紹卡</div>
-        <div class="desc">結構化資訊欄、極簡字距、密集資訊版面</div>
-      </button>
-      <button class="card" type="button" data-template="swissEditorial">
-        <div class="name">瑞士編輯風</div>
-        <div class="desc">大量留白、粗黑無襯線字、幾何色塊</div>
-      </button>
-      <button class="card" type="button" data-template="collectorCard">
-        <div class="name">收藏卡版型</div>
-        <div class="desc">幾何邊框、方形比例、金色系收藏質感</div>
-      </button>
-      <button class="card" type="button" data-template="animeFeature">
-        <div class="name">動漫特輯跨頁</div>
-        <div class="desc">漫畫風字體、速寫拼貼、中英日混排</div>
-      </button>
-      <button class="card" type="button" data-template="luxuryFashion">
-        <div class="name">奢侈時尚編輯</div>
-        <div class="desc">襯線字體、黑白攝影感、極簡留白</div>
-      </button>
-      <button class="card" type="button" data-template="artbookPage">
-        <div class="name">Artbook 頁面</div>
-        <div class="desc">復古打字機說明文字、拼貼剪貼質感</div>
-      </button>
+    <p class="hint">共 31 組一鍵模板；套用會同步填入版型、版位、字體、文案語氣、主／輔圖形、色彩、影像處理、印刷質感、留白、語言與比例。自訂文字會保留。</p>
+    <div class="template-tabs" role="tablist" aria-label="模板分類">
+      <button class="template-tab active" type="button" data-template-tab="fashion">時尚編輯</button>
+      <button class="template-tab" type="button" data-template-tab="beauty">美業廣告</button>
+      <button class="template-tab" type="button" data-template-tab="animeGame">動漫電玩</button>
+      <button class="template-tab" type="button" data-template-tab="cinema">電影海報</button>
+      <button class="template-tab" type="button" data-template-tab="photobook">寫真書</button>
+      <button class="template-tab" type="button" data-template-tab="travel">旅遊設計</button>
+    </div>
+    <div id="templateGroups">
+      <div class="template-group" data-template-group="fashion">
+        <div class="template-group-title">時尚編輯｜6 組</div>
+        <div class="grid grid-3">
+          <button class="card template-card" type="button" data-template="classicMagazineCover"><div class="name">經典雜誌封面</div><div class="desc">大刊頭、側欄文章、期號與條碼</div><span class="fit">適合：半身／胸像</span></button>
+          <button class="card template-card" type="button" data-template="verticalTypography"><div class="name">直式巨字排版</div><div class="desc">巨型直排英文穿插人物</div><span class="fit">適合：半身／全身</span></button>
+          <button class="card template-card" type="button" data-template="characterProfile"><div class="name">人物情報檔案</div><div class="desc">編號、局部切片與人物資料欄</div><span class="fit">適合：半身／胸像</span></button>
+          <button class="card template-card" type="button" data-template="swissEditorial"><div class="name">瑞士幾何編輯</div><div class="desc">網格、幾何色塊與理性留白</div><span class="fit">適合：不限</span></button>
+          <button class="card template-card" type="button" data-template="collectorCard"><div class="name">精品收藏卡</div><div class="desc">系列編號、細緻邊框與收藏標籤</div><span class="fit">適合：半身／全身</span></button>
+          <button class="card template-card" type="button" data-template="luxuryFashion"><div class="name">精品時尚人物封面</div><div class="desc">象牙白、暖金、細襯線與精品留白</div><span class="fit">適合：半身／全身</span></button>
+        </div>
+      </div>
+      <div class="template-group" data-template-group="beauty" hidden>
+        <div class="template-group-title">美業廣告｜4 組</div>
+        <div class="grid grid-3">
+          <button class="card template-card" type="button" data-template="luxuryBeautyCampaign"><div class="name">高級美顏精華廣告</div><div class="desc">成分標註、清透明亮精品排版</div><span class="fit">適合：臉部特寫</span></button>
+          <button class="card template-card" type="button" data-template="hairSalonCampaign"><div class="name">時尚美髮沙龍廣告</div><div class="desc">髮絲曲線、髮色名稱與沙龍資訊</div><span class="fit">適合：胸像／半身</span></button>
+          <button class="card template-card" type="button" data-template="makeupLaunchCampaign"><div class="name">彩妝新品形象廣告</div><div class="desc">眼唇切片、色票與新品標題</div><span class="fit">適合：臉部特寫</span></button>
+          <button class="card template-card" type="button" data-template="skincareIngredientCampaign"><div class="name">保養成分研究廣告</div><div class="desc">成分索引、細線標註與純淨版面</div><span class="fit">適合：臉部特寫</span></button>
+        </div>
+      </div>
+      <div class="template-group" data-template-group="animeGame" hidden>
+        <div class="template-group-title">動漫電玩｜4 組</div>
+        <div class="grid grid-3">
+          <button class="card template-card" type="button" data-template="animeFeature"><div class="name">動漫特輯跨頁</div><div class="desc">漫畫分格、網點、線稿與多語混排</div><span class="fit">適合：不限</span></button>
+          <button class="card template-card" type="button" data-template="liveActionAnimeDual"><div class="name">真人動漫雙生特刊</div><div class="desc">寫實人物、衍生線稿與巨型名字遮罩</div><span class="fit">適合：胸像／半身</span></button>
+          <button class="card template-card" type="button" data-template="gameKeyArt"><div class="name">電玩主視覺封面</div><div class="desc">遊戲標題、平台資訊與介面圖形</div><span class="fit">適合：半身／全身</span></button>
+          <button class="card template-card" type="button" data-template="characterSelectInterface"><div class="name">角色選擇介面</div><div class="desc">角色框、編號及屬性欄</div><span class="fit">適合：半身／全身</span></button>
+        </div>
+      </div>
+      <div class="template-group" data-template-group="cinema" hidden>
+        <div class="template-group-title">電影海報｜7 組</div>
+        <div class="grid grid-3">
+          <button class="card template-card" type="button" data-template="urbanAerialHeroPoster"><div class="name">都市空中英雄海報</div><div class="desc">城市透視、紅藍動態線與高速構圖</div><span class="fit">適合：動態／全身</span></button>
+          <button class="card template-card" type="button" data-template="scifiEnsemblePoster"><div class="name">科幻群像史詩海報</div><div class="desc">中央主角、局部切片與銀藍光線</div><span class="fit">適合：半身／全身</span></button>
+          <button class="card template-card" type="button" data-template="romanceDoubleExposure"><div class="name">浪漫雙重曝光海報</div><div class="desc">柔光人像、風景疊影與優雅片名</div><span class="fit">適合：胸像／半身</span></button>
+          <button class="card template-card" type="button" data-template="retroActionCinema"><div class="name">復古動作電影海報</div><div class="desc">手繪印刷、斜向構圖與復古色</div><span class="fit">適合：全身／動態</span></button>
+          <button class="card template-card" type="button" data-template="fantasyEpicPoster"><div class="name">奇幻史詩電影海報</div><div class="desc">金色片名、環境切片與宏大層次</div><span class="fit">適合：半身／全身</span></button>
+          <button class="card template-card" type="button" data-template="musicalStagePoster"><div class="name">音樂舞台電影海報</div><div class="desc">聚光圖形、節奏線與演出文字</div><span class="fit">適合：半身／全身</span></button>
+          <button class="card template-card" type="button" data-template="adventureQuestPoster"><div class="name">冒險旅程電影海報</div><div class="desc">地圖紋理、目的地標記與陽光色彩</div><span class="fit">適合：人物與環境</span></button>
+        </div>
+      </div>
+      <div class="template-group" data-template-group="photobook" hidden>
+        <div class="template-group-title">寫真書｜5 組</div>
+        <div class="grid grid-3">
+          <button class="card template-card" type="button" data-template="artbookPage"><div class="name">藝術寫真書頁面</div><div class="desc">作品編號、短文與收藏書頁</div><span class="fit">適合：不限</span></button>
+          <button class="card template-card" type="button" data-template="softPortraitPhotobook"><div class="name">清透人像寫真書</div><div class="desc">柔和留白、日期與細襯線字</div><span class="fit">適合：胸像／半身</span></button>
+          <button class="card template-card" type="button" data-template="fashionLookbook"><div class="name">時裝造型 Lookbook</div><div class="desc">造型編號、系列名稱與規格網格</div><span class="fit">適合：半身／全身</span></button>
+          <button class="card template-card" type="button" data-template="filmDiaryPhotobook"><div class="name">底片日記寫真書</div><div class="desc">底片框、日期、接觸表與手寫短句</div><span class="fit">適合：不限</span></button>
+          <button class="card template-card" type="button" data-template="seasonalStoryPhotobook"><div class="name">四季故事寫真書</div><div class="desc">季節色彩、章節標題與詩意文字</div><span class="fit">適合：人物與環境</span></button>
+        </div>
+      </div>
+      <div class="template-group" data-template-group="travel" hidden>
+        <div class="template-group-title">旅遊設計｜5 組</div>
+        <div class="grid grid-3">
+          <button class="card template-card" type="button" data-template="destinationMagazineCover"><div class="name">世界目的地雜誌封面</div><div class="desc">地點大標、專欄與目的地資訊</div><span class="fit">適合：人物與環境</span></button>
+          <button class="card template-card" type="button" data-template="postcardCollage"><div class="name">旅行明信片拼貼</div><div class="desc">郵戳、票券、照片角與手寫地名</div><span class="fit">適合：人物與環境</span></button>
+          <button class="card template-card" type="button" data-template="travelDiarySpread"><div class="name">旅遊日記跨頁</div><div class="desc">日期、短文、多格相框與旅程章節</div><span class="fit">適合：人物與環境</span></button>
+          <button class="card template-card" type="button" data-template="routeMapEditorial"><div class="name">路線地圖旅遊特輯</div><div class="desc">路線、城市節點、座標與行程資訊</div><span class="fit">適合：人物與環境</span></button>
+          <button class="card template-card" type="button" data-template="cinematicJourneyPoster"><div class="name">電影感旅行海報</div><div class="desc">大景、目的地片名與電影式留白</div><span class="fit">適合：人物與環境</span></button>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -261,6 +306,29 @@
       <label class="card"><input type="radio" name="layout" value="animeFeature"><div class="name">動漫特輯跨頁</div><div class="desc">漫畫分格、速寫拼貼</div></label>
       <label class="card"><input type="radio" name="layout" value="luxuryFashion"><div class="name">奢侈時尚編輯</div><div class="desc">精緻襯線、高端時裝感</div></label>
       <label class="card"><input type="radio" name="layout" value="artbookPage"><div class="name">Artbook 頁面</div><div class="desc">設計註記、收藏編號</div></label>
+      <label class="card"><input type="radio" name="layout" value="beautyCampaign"><div class="name">美顏廣告版型</div><div class="desc">臉部主視覺、產品資訊欄</div></label>
+      <label class="card"><input type="radio" name="layout" value="hairCampaign"><div class="name">美髮廣告版型</div><div class="desc">髮型主視覺、沙龍資訊</div></label>
+      <label class="card"><input type="radio" name="layout" value="makeupCampaign"><div class="name">彩妝新品版型</div><div class="desc">局部彩妝、色票與標題</div></label>
+      <label class="card"><input type="radio" name="layout" value="ingredientStudy"><div class="name">成分研究版型</div><div class="desc">細線標註、清透資訊欄</div></label>
+      <label class="card"><input type="radio" name="layout" value="liveActionAnimeDual"><div class="name">真人動漫雙生</div><div class="desc">真人、線稿與巨字分欄</div></label>
+      <label class="card"><input type="radio" name="layout" value="gameKeyArt"><div class="name">電玩主視覺</div><div class="desc">主角、標題與世界觀圖形</div></label>
+      <label class="card"><input type="radio" name="layout" value="characterSelectInterface"><div class="name">角色選擇介面</div><div class="desc">角色框、屬性與編號</div></label>
+      <label class="card"><input type="radio" name="layout" value="urbanAerialHeroPoster"><div class="name">都市英雄海報</div><div class="desc">城市透視與動態標題</div></label>
+      <label class="card"><input type="radio" name="layout" value="scifiEnsemblePoster"><div class="name">科幻史詩海報</div><div class="desc">中央主角與銀藍層次</div></label>
+      <label class="card"><input type="radio" name="layout" value="romanceDoubleExposure"><div class="name">浪漫雙重曝光</div><div class="desc">人像、風景與透明疊影</div></label>
+      <label class="card"><input type="radio" name="layout" value="retroActionCinema"><div class="name">復古動作海報</div><div class="desc">手繪印刷與斜向構圖</div></label>
+      <label class="card"><input type="radio" name="layout" value="fantasyEpicPoster"><div class="name">奇幻史詩海報</div><div class="desc">金色片名與宏大層次</div></label>
+      <label class="card"><input type="radio" name="layout" value="musicalStagePoster"><div class="name">音樂舞台海報</div><div class="desc">聚光、節奏線與演出標題</div></label>
+      <label class="card"><input type="radio" name="layout" value="adventureQuestPoster"><div class="name">冒險旅程海報</div><div class="desc">地圖、目的地與陽光色彩</div></label>
+      <label class="card"><input type="radio" name="layout" value="photobookPortrait"><div class="name">寫真書人像頁</div><div class="desc">章節標題與收藏註記</div></label>
+      <label class="card"><input type="radio" name="layout" value="lookbookGrid"><div class="name">Lookbook 網格</div><div class="desc">造型編號與系列規格</div></label>
+      <label class="card"><input type="radio" name="layout" value="filmDiarySpread"><div class="name">底片日記跨頁</div><div class="desc">接觸表與拍攝序號</div></label>
+      <label class="card"><input type="radio" name="layout" value="seasonalStorySpread"><div class="name">四季故事跨頁</div><div class="desc">季節章節與環境人像</div></label>
+      <label class="card"><input type="radio" name="layout" value="destinationCover"><div class="name">目的地雜誌封面</div><div class="desc">地點標題與旅遊專欄</div></label>
+      <label class="card"><input type="radio" name="layout" value="postcardCollage"><div class="name">旅行明信片拼貼</div><div class="desc">郵戳、票券與照片角</div></label>
+      <label class="card"><input type="radio" name="layout" value="travelDiarySpread"><div class="name">旅遊日記跨頁</div><div class="desc">日期、旅程章節與相框</div></label>
+      <label class="card"><input type="radio" name="layout" value="routeMapEditorial"><div class="name">路線地圖編輯</div><div class="desc">城市節點與方向線</div></label>
+      <label class="card"><input type="radio" name="layout" value="cinematicJourneyPoster"><div class="name">電影感旅行海報</div><div class="desc">大景、地點與電影式標題</div></label>
     </div>
   </section>
 
@@ -278,6 +346,12 @@
       <label class="card"><input type="radio" name="typography" value="vintageTypewriter"><div class="name">復古打字機字</div><div class="desc">打字機說明字＋乾淨標題對比</div></label>
       <label class="card"><input type="radio" name="typography" value="handwrittenAccent"><div class="name">手寫簽名點綴</div><div class="desc">手寫短句搭配結構化標題</div></label>
       <label class="card"><input type="radio" name="typography" value="multilingualCollage"><div class="name">多語言拼貼字</div><div class="desc">中英日文字層疊當圖形素材</div></label>
+      <label class="card"><input type="radio" name="typography" value="beautySerif"><div class="name">精品美妝襯線字</div><div class="desc">清潔、精緻的產品型標題</div></label>
+      <label class="card"><input type="radio" name="typography" value="cinemaDisplay"><div class="name">電影片名展示字</div><div class="desc">原創電影標題層級</div></label>
+      <label class="card"><input type="radio" name="typography" value="gameDisplay"><div class="name">電玩主視覺標題字</div><div class="desc">標題、版本與介面層級</div></label>
+      <label class="card"><input type="radio" name="typography" value="photobookSerif"><div class="name">寫真書細襯線字</div><div class="desc">章節、日期與收藏氣質</div></label>
+      <label class="card"><input type="radio" name="typography" value="travelHandwritten"><div class="name">旅行手寫標記字</div><div class="desc">地名與旅行筆記感</div></label>
+      <label class="card"><input type="radio" name="typography" value="dataMono"><div class="name">資料等寬字</div><div class="desc">日期、座標與編號資料</div></label>
     </div>
   </section>
 
@@ -295,6 +369,39 @@
       <label class="card"><input type="radio" name="graphic" value="collageClip"><div class="name">拼貼剪貼感</div><div class="desc">紙感剪貼層疊元素</div></label>
       <label class="card"><input type="radio" name="graphic" value="sketchLineArt"><div class="name">手繪速寫疊加</div><div class="desc">概念草稿/線稿圖形點綴</div></label>
       <label class="card"><input type="radio" name="graphic" value="minimalIcon"><div class="name">極簡圖標</div><div class="desc">小型符號當標點裝飾</div></label>
+      <label class="card"><input type="radio" name="graphic" value="beautyCallouts"><div class="name">美妝成分標註</div><div class="desc">細線與產品類別標籤</div></label>
+      <label class="card"><input type="radio" name="graphic" value="hairCurves"><div class="name">髮絲曲線</div><div class="desc">髮型廣告的流動線條</div></label>
+      <label class="card"><input type="radio" name="graphic" value="colorSwatches"><div class="name">彩妝色票</div><div class="desc">局部彩妝與色彩索引</div></label>
+      <label class="card"><input type="radio" name="graphic" value="animeLineCollage"><div class="name">動漫線稿拼貼</div><div class="desc">由原圖延伸的線稿圖形</div></label>
+      <label class="card"><input type="radio" name="graphic" value="mangaPanels"><div class="name">漫畫分格網點</div><div class="desc">漫畫框線與印刷網點</div></label>
+      <label class="card"><input type="radio" name="graphic" value="gameInterface"><div class="name">遊戲介面框</div><div class="desc">狀態列與世界觀圖形</div></label>
+      <label class="card"><input type="radio" name="graphic" value="characterStats"><div class="name">角色屬性介面</div><div class="desc">屬性條、序號與資料框</div></label>
+      <label class="card"><input type="radio" name="graphic" value="cinemaLightBeams"><div class="name">電影光束構圖</div><div class="desc">城市透視與電影動態線</div></label>
+      <label class="card"><input type="radio" name="graphic" value="doubleExposureFrames"><div class="name">雙重曝光框</div><div class="desc">透明風景輪廓與疊影框</div></label>
+      <label class="card"><input type="radio" name="graphic" value="retroPrintShapes"><div class="name">復古印刷色塊</div><div class="desc">明亮套色與斜向動勢</div></label>
+      <label class="card"><input type="radio" name="graphic" value="filmContactSheet"><div class="name">底片接觸表</div><div class="desc">影格、序號與檔案標記</div></label>
+      <label class="card"><input type="radio" name="graphic" value="postcardCollage"><div class="name">明信片拼貼</div><div class="desc">票券、郵戳與紙張圖形</div></label>
+      <label class="card"><input type="radio" name="graphic" value="routeMap"><div class="name">旅行路線地圖</div><div class="desc">城市節點、箭頭與路線</div></label>
+    </div>
+  </section>
+
+  <section class="editorial-graphic-accent">
+    <div class="section-header">
+      <div class="section-label">06A</div>
+      <div class="section-title">輔助標記</div>
+    </div>
+    <p class="hint">在主圖形之外加一種小型資訊標記；選「無」時不加入額外標籤。</p>
+    <div class="grid grid-3" data-choice="graphicAccent">
+      <label class="card selected"><input type="radio" name="graphicAccent" value="none" checked><div class="name">無</div><div class="desc">只保留主圖形系統</div></label>
+      <label class="card"><input type="radio" name="graphicAccent" value="barcode"><div class="name">條碼</div><div class="desc">角落條碼與出版細節</div></label>
+      <label class="card"><input type="radio" name="graphicAccent" value="issueNumber"><div class="name">期號</div><div class="desc">Issue、Volume 與日期</div></label>
+      <label class="card"><input type="radio" name="graphicAccent" value="seriesNumber"><div class="name">系列編號</div><div class="desc">收藏卡與角色編號</div></label>
+      <label class="card"><input type="radio" name="graphicAccent" value="coordinates"><div class="name">座標</div><div class="desc">旅遊位置與方向標記</div></label>
+      <label class="card"><input type="radio" name="graphicAccent" value="postmark"><div class="name">郵戳</div><div class="desc">明信片旅行標記</div></label>
+      <label class="card"><input type="radio" name="graphicAccent" value="colorSwatches"><div class="name">色票</div><div class="desc">美妝或設計色彩索引</div></label>
+      <label class="card"><input type="radio" name="graphicAccent" value="platformLabel"><div class="name">平台標籤</div><div class="desc">電玩平台與版本標籤</div></label>
+      <label class="card"><input type="radio" name="graphicAccent" value="filmNumber"><div class="name">底片編號</div><div class="desc">底片格與拍攝序號</div></label>
+      <label class="card"><input type="radio" name="graphicAccent" value="chapterNumber"><div class="name">章節編號</div><div class="desc">寫真書與旅程章節</div></label>
     </div>
   </section>
 
@@ -313,6 +420,17 @@
       <label class="card"><input type="radio" name="color" value="dominantIndigo"><div class="name">靛藍冷調</div><div class="desc">深藍色主導</div></label>
       <label class="card"><input type="radio" name="color" value="dominantWine"><div class="name">酒紅復古</div><div class="desc">深紅色主導</div></label>
       <label class="card"><input type="radio" name="color" value="monochromePhoto"><div class="name">黑白攝影感</div><div class="desc">黑白照片＋單一強調色</div></label>
+      <label class="card"><input type="radio" name="color" value="ivoryGold"><div class="name">象牙白與暖金</div><div class="desc">明亮精品與高級封面感</div></label>
+      <label class="card"><input type="radio" name="color" value="coralWhite"><div class="name">珊瑚紅與純白</div><div class="desc">清透美業與明亮廣告感</div></label>
+      <label class="card"><input type="radio" name="color" value="powderSilver"><div class="name">清透粉與銀白</div><div class="desc">柔和美妝與精緻光感</div></label>
+      <label class="card"><input type="radio" name="color" value="porcelainBlue"><div class="name">青花藍與瓷白</div><div class="desc">清雅文化與旅行出版感</div></label>
+      <label class="card"><input type="radio" name="color" value="mangaPrimary"><div class="name">漫畫三原色</div><div class="desc">明亮線稿與漫畫圖形</div></label>
+      <label class="card"><input type="radio" name="color" value="cinematicSilverBlue"><div class="name">科幻銀藍</div><div class="desc">清冷未來電影版面</div></label>
+      <label class="card"><input type="radio" name="color" value="sunsetGold"><div class="name">電影夕陽金</div><div class="desc">溫暖冒險與旅程氛圍</div></label>
+      <label class="card"><input type="radio" name="color" value="coastalBlueWhite"><div class="name">海岸藍白</div><div class="desc">明亮海邊旅遊出版感</div></label>
+      <label class="card"><input type="radio" name="color" value="forestIvory"><div class="name">森林綠與米白</div><div class="desc">自然旅拍與季節寫真感</div></label>
+      <label class="card"><input type="radio" name="color" value="filmWarm"><div class="name">底片暖色</div><div class="desc">寫真書與生活紀錄色調</div></label>
+      <label class="card"><input type="radio" name="color" value="postcardColor"><div class="name">旅行明信片彩色</div><div class="desc">郵票、地圖與旅遊拼貼</div></label>
     </div>
   </section>
 
@@ -330,6 +448,13 @@
       <label class="card"><input type="radio" name="imageTreatment" value="duotoneAccent"><div class="name">品牌雙色調</div><div class="desc">以主色系做克制雙色影像處理</div></label>
       <label class="card"><input type="radio" name="imageTreatment" value="mutedLuxury"><div class="name">低飽和奢華</div><div class="desc">降低色彩喧鬧感、突出材質與版面</div></label>
       <label class="card"><input type="radio" name="imageTreatment" value="glossyBeauty"><div class="name">亮面美妝廣告</div><div class="desc">清透高光、精緻商業肌理</div></label>
+      <label class="card"><input type="radio" name="imageTreatment" value="hairCampaignGloss"><div class="name">美髮廣告光澤</div><div class="desc">保留原髮型的商業光感整合</div></label>
+      <label class="card"><input type="radio" name="imageTreatment" value="beautyBright"><div class="name">明亮美業編輯</div><div class="desc">保留膚色的清透商業亮度</div></label>
+      <label class="card"><input type="radio" name="imageTreatment" value="animeLineTreatment"><div class="name">真人線稿雙媒材</div><div class="desc">只增加衍生線稿與拼貼圖形</div></label>
+      <label class="card"><input type="radio" name="imageTreatment" value="cinemaColorGrade"><div class="name">電影色彩編輯</div><div class="desc">只調整整體色彩層次與標題對比</div></label>
+      <label class="card"><input type="radio" name="imageTreatment" value="contactSheetFilm"><div class="name">底片接觸表色調</div><div class="desc">保留原圖的檔案與膠片感</div></label>
+      <label class="card"><input type="radio" name="imageTreatment" value="postcardFade"><div class="name">明信片褪色色調</div><div class="desc">柔和紙張印刷與旅行色彩</div></label>
+      <label class="card"><input type="radio" name="imageTreatment" value="journeyWarm"><div class="name">溫暖旅程調色</div><div class="desc">保留原景的陽光電影感</div></label>
     </div>
   </section>
 
@@ -346,6 +471,14 @@
       <label class="card"><input type="radio" name="printFinish" value="metallicFoil"><div class="name">金屬箔壓印</div><div class="desc">金銀箔字體與細線裝飾</div></label>
       <label class="card"><input type="radio" name="printFinish" value="offsetPrintGrain"><div class="name">膠印顆粒</div><div class="desc">細微印刷網點與紙上油墨感</div></label>
       <label class="card"><input type="radio" name="printFinish" value="risographInk"><div class="name">孔版套色</div><div class="desc">微妙套色偏移、藝術出版物質感</div></label>
+      <label class="card"><input type="radio" name="printFinish" value="beautyGloss"><div class="name">美業局部亮膜</div><div class="desc">字體、色票與圖形的局部亮面</div></label>
+      <label class="card"><input type="radio" name="printFinish" value="magazineCoated"><div class="name">銅版雜誌紙</div><div class="desc">清晰字邊與細緻表面光澤</div></label>
+      <label class="card"><input type="radio" name="printFinish" value="gameGloss"><div class="name">電玩收藏亮面</div><div class="desc">介面與標題的收藏盒光澤</div></label>
+      <label class="card"><input type="radio" name="printFinish" value="cinemaPaper"><div class="name">電影海報紙材</div><div class="desc">細緻紙張與標題油墨邊緣</div></label>
+      <label class="card"><input type="radio" name="printFinish" value="photobookMatte"><div class="name">寫真書霧膜</div><div class="desc">柔和紙纖維與低反光質感</div></label>
+      <label class="card"><input type="radio" name="printFinish" value="filmPaper"><div class="name">底片相紙</div><div class="desc">接觸表與影格的相紙質感</div></label>
+      <label class="card"><input type="radio" name="printFinish" value="postcardFiber"><div class="name">明信片纖維紙</div><div class="desc">郵戳、邊框與文字的紙材質感</div></label>
+      <label class="card"><input type="radio" name="printFinish" value="travelTicket"><div class="name">旅行票券印刷</div><div class="desc">行程與路線圖的票券印刷感</div></label>
     </div>
   </section>
 
@@ -360,6 +493,13 @@
       <label class="card"><input type="radio" name="placement" value="rightFullBody"><div class="name">偏右全身</div><div class="desc">人物偏右、左側留給文字</div></label>
       <label class="card"><input type="radio" name="placement" value="topCrop"><div class="name">頂部裁切</div><div class="desc">人物偏上、下方留給資訊欄</div></label>
       <label class="card"><input type="radio" name="placement" value="bottomAnchor"><div class="name">底部延伸</div><div class="desc">人物貼底延伸出畫面、上方留給刊頭</div></label>
+      <label class="card"><input type="radio" name="placement" value="rightFaceHero"><div class="name">右側臉部主視覺</div><div class="desc">右側特寫、左側放美業標註</div></label>
+      <label class="card"><input type="radio" name="placement" value="leftFaceHero"><div class="name">左側臉部主視覺</div><div class="desc">左側特寫、右側放美業標註</div></label>
+      <label class="card"><input type="radio" name="placement" value="centeredFullBody"><div class="name">中央全高人物</div><div class="desc">人物完整置中、圖形環繞</div></label>
+      <label class="card"><input type="radio" name="placement" value="textOverlapHero"><div class="name">人物穿插巨型文字</div><div class="desc">標題與人物形成前後層次</div></label>
+      <label class="card"><input type="radio" name="placement" value="cinemaCenter"><div class="name">電影中心人物</div><div class="desc">中央主視覺、上下安排標題</div></label>
+      <label class="card"><input type="radio" name="placement" value="photobookSide"><div class="name">寫真書跨頁偏側</div><div class="desc">人物靠側、另一側保留章節文字</div></label>
+      <label class="card"><input type="radio" name="placement" value="travelEnvironment"><div class="name">旅遊環境人物</div><div class="desc">保留景色、人物融入環境</div></label>
     </div>
   </section>
 
@@ -372,6 +512,11 @@
       <label class="card"><input type="radio" name="whitespace" value="generousWhitespace"><div class="name">大量留白</div><div class="desc">極簡呼吸感、高級雜誌感</div></label>
       <label class="card selected"><input type="radio" name="whitespace" value="balancedWhitespace" checked><div class="name">適中留白</div><div class="desc">資訊與留白平衡</div></label>
       <label class="card"><input type="radio" name="whitespace" value="denseInformation"><div class="name">資訊密集</div><div class="desc">多個文字與圖形區塊填滿版面</div></label>
+      <label class="card"><input type="radio" name="whitespace" value="fullBleedPoster"><div class="name">滿版海報</div><div class="desc">圖形與標題延伸至頁面邊緣</div></label>
+      <label class="card"><input type="radio" name="whitespace" value="cinemaInfoBottom"><div class="name">底部電影資訊留白</div><div class="desc">下方保留片名與資訊帶</div></label>
+      <label class="card"><input type="radio" name="whitespace" value="productSideColumn"><div class="name">產品側欄留白</div><div class="desc">側邊保留成分與產品標籤</div></label>
+      <label class="card"><input type="radio" name="whitespace" value="photobookChapter"><div class="name">寫真書章節留白</div><div class="desc">安靜留白、少量收藏註記</div></label>
+      <label class="card"><input type="radio" name="whitespace" value="travelTitleSpace"><div class="name">旅遊地點標題留白</div><div class="desc">景色周圍保留地點與路線文字</div></label>
     </div>
   </section>
 
@@ -384,6 +529,31 @@
       <label class="card"><input type="radio" name="language" value="chineseOnly"><div class="name">純中文</div><div class="desc">全部文字使用繁體中文</div></label>
       <label class="card selected"><input type="radio" name="language" value="bilingualEnglishChinese" checked><div class="name">中英混合</div><div class="desc">英文為主要大字，中文為輔</div></label>
       <label class="card"><input type="radio" name="language" value="trilingualEditorial"><div class="name">中英日混排</div><div class="desc">英日中文字拼貼，當圖形素材使用</div></label>
+      <label class="card"><input type="radio" name="language" value="englishBrandDominant"><div class="name">英文品牌主導</div><div class="desc">英文大標、中文小型輔助資訊</div></label>
+      <label class="card"><input type="radio" name="language" value="chineseTitleDominant"><div class="name">中文標題主導</div><div class="desc">繁體中文大標、英文小字輔助</div></label>
+      <label class="card"><input type="radio" name="language" value="japaneseAccent"><div class="name">日文點綴</div><div class="desc">英文與中文搭配少量日文標記</div></label>
+      <label class="card"><input type="radio" name="language" value="koreanAccent"><div class="name">韓文點綴</div><div class="desc">英文與中文搭配少量韓文標記</div></label>
+      <label class="card"><input type="radio" name="language" value="dataDominant"><div class="name">數字與資料主導</div><div class="desc">日期、座標、編號成為主要圖形</div></label>
+      <label class="card"><input type="radio" name="language" value="cinemaMinimal"><div class="name">電影片名極簡</div><div class="desc">只保留片名與少量副標</div></label>
+      <label class="card"><input type="radio" name="language" value="travelPlaceDate"><div class="name">地名與日期主導</div><div class="desc">目的地、日期與旅遊筆記</div></label>
+    </div>
+  </section>
+
+  <section class="editorial-copy-style">
+    <div class="section-header">
+      <div class="section-label">04A</div>
+      <div class="section-title">文案語氣</div>
+    </div>
+    <p class="hint">決定未填寫文字時的標題與短句方向；不會捏造真實產品、地址、座標或出版資料。</p>
+    <div class="grid grid-3" data-choice="copyStyle">
+      <label class="card selected"><input type="radio" name="copyStyle" value="fashionEditorial" checked><div class="name">時尚雜誌</div><div class="desc">短標題、刊物標籤與精品語氣</div></label>
+      <label class="card"><input type="radio" name="copyStyle" value="beautyCampaign"><div class="name">精品美業</div><div class="desc">清楚、明亮、精緻的廣告短句</div></label>
+      <label class="card"><input type="radio" name="copyStyle" value="animeCharacter"><div class="name">動漫角色</div><div class="desc">角色名、章節與設定標籤</div></label>
+      <label class="card"><input type="radio" name="copyStyle" value="gameWorld"><div class="name">電玩世界觀</div><div class="desc">角色名稱、版本與世界觀標記</div></label>
+      <label class="card"><input type="radio" name="copyStyle" value="cinemaTrailer"><div class="name">電影預告</div><div class="desc">片名感主標與一句宣傳短句</div></label>
+      <label class="card"><input type="radio" name="copyStyle" value="photobookNarrative"><div class="name">寫真敘事</div><div class="desc">日期、章節與安靜的短文語氣</div></label>
+      <label class="card"><input type="radio" name="copyStyle" value="travelColumn"><div class="name">旅遊專欄</div><div class="desc">地點、旅程章節與旅行筆記</div></label>
+      <label class="card"><input type="radio" name="copyStyle" value="minimalNoCopy"><div class="name">極簡無內文</div><div class="desc">只保留必要標題與小型標記</div></label>
     </div>
   </section>
 
@@ -395,16 +565,22 @@
     <p class="hint">全部留空的話，AI 會直接看你附上的照片內容自行填寫適合的標題與文案；填了的話就照你填的用。</p>
     <div class="form-grid">
       <label class="field">大標題／角色名
-        <input id="mainTitle" type="text" placeholder="例如：MAKIMA、LUMINA、留空由AI決定">
+        <input id="mainTitle" type="text" placeholder="例如：LUMINA、SPECIAL FEATURE、留空由AI決定">
       </label>
       <label class="field">副標／期號
         <input id="subtitle" type="text" placeholder="例如：SPECIAL FEATURE、ISSUE 08">
       </label>
       <label class="field full">標語／引言句
-        <input id="tagline" type="text" placeholder="例如：Domination isn't power, it's nature.">
+        <input id="tagline" type="text" placeholder="例如：A study in presence and style.">
       </label>
       <label class="field full">資訊欄標題（可多行，例如 PROFILE / FEATURE / STYLE）
         <textarea id="infoLabels" placeholder="每行一個，例如：&#10;PROFILE&#10;FEATURE&#10;STYLE"></textarea>
+      </label>
+      <label class="field full">資料標記（可選，例如日期、地點、期號、章節）
+        <input id="metadata" type="text" placeholder="例如：MAY 2024、KYOTO NOTES、VOL. 03">
+      </label>
+      <label class="field full">署名／製作資訊（可選）
+        <input id="creditLine" type="text" placeholder="例如：PHOTO STUDY、EDITORIAL SERIES、CHAPTER 01">
       </label>
     </div>
   </section>
@@ -421,6 +597,10 @@
       <label class="card"><input type="radio" name="ratio" value="feed45"><div class="name">4:5 直式貼文</div><div class="desc">IG／小紅書貼文</div></label>
       <label class="card"><input type="radio" name="ratio" value="square11"><div class="name">1:1 方形收藏卡</div><div class="desc">收藏卡／方形貼文</div></label>
       <label class="card"><input type="radio" name="ratio" value="story916"><div class="name">9:16 限動封面</div><div class="desc">短影音／限動比例</div></label>
+      <label class="card"><input type="radio" name="ratio" value="landscape43"><div class="name">4:3 橫式寫真頁</div><div class="desc">寫真書與橫式照片</div></label>
+      <label class="card"><input type="radio" name="ratio" value="landscape32"><div class="name">3:2 橫式旅遊攝影</div><div class="desc">旅遊環境與攝影作品</div></label>
+      <label class="card"><input type="radio" name="ratio" value="cinema169"><div class="name">16:9 電影橫幅</div><div class="desc">電影橫幅與旅程海報</div></label>
+      <label class="card"><input type="radio" name="ratio" value="spread21"><div class="name">2:1 寫真書跨頁</div><div class="desc">跨頁排版，中央保留書脊</div></label>
     </div>
   </section>
 
@@ -461,7 +641,30 @@ const layoutData = {
   collectorCard: 'collector card layout, series and edition number, graphic frame border around the portrait, compact trading-card-like information structure',
   animeFeature: 'anime feature spread layout, character sketch panel and concept-art fragments collaged beside the portrait, manga-style panel divisions, Japanese editorial magazine structure',
   luxuryFashion: 'luxury fashion editorial layout, minimal refined serif typography, premium negative space, high-end fashion magazine structure',
-  artbookPage: 'artbook page layout, large portrait with small design-note annotations and a collection number, concept-art book page structure'
+  artbookPage: 'artbook page layout, large portrait with small design-note annotations and a collection number, concept-art book page structure',
+  beautyCampaign: 'premium beauty campaign layout, close portrait as the hero, clean ingredient or product-information column, refined commercial advertising structure',
+  hairCampaign: 'fashion hair campaign layout, portrait with elegant hair-detail callouts, salon editorial information column and clean beauty-ad structure',
+  makeupCampaign: 'makeup launch editorial layout, beauty portrait with small eye and lip detail panels, color-swatch area and premium product-campaign structure',
+  ingredientStudy: 'clean skincare ingredient editorial layout, portrait paired with thin annotation lines, ingredient index and bright clinical-luxury composition',
+  liveActionAnimeDual: 'live-action and anime dual-media editorial layout, realistic portrait on one side, derived line-art fragments and a large masked title through the center, split information column',
+  gameKeyArt: 'original game key-art cover layout, portrait as the main character visual with interface panels, platform label and controlled world-building graphics',
+  characterSelectInterface: 'character selection interface layout, one preserved portrait in a hero slot with empty supporting character frames, identifier panel and attribute interface graphics',
+  urbanAerialHeroPoster: 'original urban aerial hero film-poster layout, existing portrait framed by city perspective lines, kinetic arcs and a large cinematic title area',
+  scifiEnsemblePoster: 'science-fiction ensemble poster layout, preserved portrait as the central hero with surrounding graphic panels, silver-blue architecture lines and cinematic title hierarchy',
+  romanceDoubleExposure: 'romantic double-exposure poster layout, preserved portrait paired with translucent landscape-shaped graphic overlays, elegant title and quiet supporting text',
+  retroActionCinema: 'bright retro action cinema poster layout, diagonal composition, hand-printed blocks, illustrated motion accents and large vintage display title',
+  fantasyEpicPoster: 'fantasy epic poster layout, preserved portrait with layered landscape graphics, luminous gold title and grand atmospheric editorial framing',
+  musicalStagePoster: 'musical stage film-poster layout, portrait surrounded by spotlight geometry, rhythm lines, performance title and elegant show information',
+  adventureQuestPoster: 'sunlit adventure journey poster layout, portrait paired with map-like route graphics, destination markers and bright cinematic title structure',
+  photobookPortrait: 'quiet portrait photobook page layout, large image with restrained chapter title, date and small archival notes',
+  lookbookGrid: 'fashion lookbook grid layout, portrait placed in a clean modular catalogue grid with collection number and garment-study notes',
+  filmDiarySpread: 'film diary photobook spread layout, preserved image framed as a contact-sheet page with date, frame number and handwritten note areas',
+  seasonalStorySpread: 'seasonal story photobook spread layout, portrait and environmental image space arranged as a calm chapter page with seasonal editorial typography',
+  destinationCover: 'destination travel magazine cover layout, environmental portrait with large place title, travel-column blocks and clean location information',
+  postcardCollage: 'travel postcard collage layout, preserved photograph framed with postcard edges, stamp-like graphic accents, route marks and handwritten destination title',
+  travelDiarySpread: 'travel diary spread layout, environmental photograph paired with date, short journal blocks, small photo-frame shapes and chapter marker',
+  routeMapEditorial: 'travel route-map editorial layout, preserved photograph paired with clean route lines, city nodes, directional markers and itinerary-style typography',
+  cinematicJourneyPoster: 'cinematic travel poster layout, environmental portrait with large destination title, warm horizon graphics and spacious journey-poster hierarchy'
 };
 
 const typographyData = {
@@ -472,7 +675,13 @@ const typographyData = {
   minimalTracked: 'minimal small-caps typography with wide letter spacing, quiet refined editorial tone',
   vintageTypewriter: 'vintage typewriter-style caption typography mixed with a clean modern headline, retro editorial contrast',
   handwrittenAccent: 'a small handwritten signature-style accent phrase paired with clean structured headline typography',
-  multilingualCollage: 'multilingual typography collage mixing English, Japanese and Chinese text fragments as layered graphic elements, text functions as visual texture as much as language'
+  multilingualCollage: 'multilingual typography collage mixing English, Japanese and Chinese text fragments as layered graphic elements, text functions as visual texture as much as language',
+  beautySerif: 'clean premium beauty-campaign serif typography, elegant restrained headline with compact product-style supporting labels',
+  cinemaDisplay: 'cinematic display typography with a distinctive original film-title hierarchy, large title and restrained trailer-style supporting copy',
+  gameDisplay: 'original game title display typography with structured interface labels, version markers and controlled character-profile hierarchy',
+  photobookSerif: 'quiet fine-art photobook serif typography, small chapter title, archival date and generous refined tracking',
+  travelHandwritten: 'travel-journal typography combining a clear destination title with a restrained handwritten location annotation',
+  dataMono: 'precise monospaced editorial typography for dates, coordinates, edition numbers and small archival information'
 };
 
 const graphicData = {
@@ -483,7 +692,33 @@ const graphicData = {
   geometricFrame: 'a thin geometric frame or border enclosing part of the composition',
   collageClip: 'collaged cut-paper clipping elements, layered magazine-collage texture',
   sketchLineArt: 'hand-drawn concept sketch or line-art fragments layered as a graphic accent',
-  minimalIcon: 'small minimal icon or symbol accents placed as graphic punctuation'
+  minimalIcon: 'small minimal icon or symbol accents placed as graphic punctuation',
+  beautyCallouts: 'delicate beauty-campaign callout lines pointing to non-destructive editorial labels around the portrait',
+  hairCurves: 'elegant flowing hair-curve graphics and restrained salon-style detail lines around the existing portrait',
+  colorSwatches: 'small curated color swatches and clean beauty palette chips placed beside the portrait',
+  animeLineCollage: 'derived anime-inspired line-art fragments and clean illustrated panels used as graphic collage elements only',
+  mangaPanels: 'manga panel divisions, halftone fields and dynamic comic framing around the preserved photo',
+  gameInterface: 'original game interface panels, status bars and controlled world-building symbols around the preserved portrait',
+  characterStats: 'original character profile panels with attribute bars, serial labels and small interface markers',
+  cinemaLightBeams: 'graphic cinematic light-beam shapes, city perspective lines and restrained action arcs around the photo',
+  doubleExposureFrames: 'translucent landscape-shaped frames and elegant overlay contours suggesting double exposure without altering the photo',
+  retroPrintShapes: 'bright retro print blocks, hand-printed shapes and diagonal motion accents around the preserved photo',
+  filmContactSheet: 'film contact-sheet frames, frame numbers and archival registration marks around the photo',
+  postcardCollage: 'postcard borders, stamp-like shapes, route marks and travel-collage paper elements',
+  routeMap: 'clean travel route lines, city nodes, directional arrows and map-inspired editorial markers'
+};
+
+const graphicAccentData = {
+  none: '',
+  barcode: 'a small decorative barcode used only as an editorial graphic marker',
+  issueNumber: 'a compact issue, volume and date marker placed in a quiet corner',
+  seriesNumber: 'a refined series or character identification number',
+  coordinates: 'a small location coordinate marker, using only user-supplied or generic editorial coordinates',
+  postmark: 'a decorative postcard postmark and travel stamp motif',
+  colorSwatches: 'a compact row of curated color swatches as a design index',
+  platformLabel: 'a generic platform and edition label without invented brand claims',
+  filmNumber: 'small film frame and archival sequence numbers',
+  chapterNumber: 'a restrained chapter or journey sequence marker'
 };
 
 const colorData = {
@@ -494,7 +729,18 @@ const colorData = {
   dominantSilver: 'dominant cool silver-grey color system, sleek technical accent',
   dominantIndigo: 'dominant deep indigo-blue color system, cool refined accent',
   dominantWine: 'dominant deep wine-red color system, rich vintage accent',
-  monochromePhoto: 'monochrome black-and-white photographic treatment with a single accent color reserved only for typography'
+  monochromePhoto: 'monochrome black-and-white photographic treatment with a single accent color reserved only for typography',
+  ivoryGold: 'bright ivory white and warm champagne gold color system, refined luxury editorial palette',
+  coralWhite: 'clean coral red and white color system, bright premium beauty-campaign palette',
+  powderSilver: 'soft powder pink and silver-white color system, delicate beauty editorial palette',
+  porcelainBlue: 'porcelain white and cobalt blue color system, clean cultural and travel-publication palette',
+  mangaPrimary: 'bright primary color system with red, blue and yellow graphic accents, controlled comic-editorial energy',
+  cinematicSilverBlue: 'cool silver and clear blue color system, polished original science-fiction editorial palette',
+  sunsetGold: 'warm sunset gold, sky blue and ivory color system, optimistic cinematic journey palette',
+  coastalBlueWhite: 'coastal blue and white color system with clean maritime travel-editorial brightness',
+  forestIvory: 'forest green and ivory color system, calm natural travel and seasonal photobook palette',
+  filmWarm: 'warm analog film color system with honey, muted red and soft cream accents',
+  postcardColor: 'bright travel-postcard color system combining clear blue, coral, sun yellow and paper white'
 };
 
 const imageTreatmentData = {
@@ -504,7 +750,14 @@ const imageTreatmentData = {
   monochromeEditorial: 'premium black-and-white editorial photo treatment with rich tonal separation, preserve the person and photographed scene',
   duotoneAccent: 'controlled duotone editorial treatment using the selected dominant color as a restrained image accent, preserve photographic detail',
   mutedLuxury: 'low-saturation luxury editorial color treatment that emphasizes fabric, skin texture and typography without repainting the photo',
-  glossyBeauty: 'clean glossy beauty-campaign color treatment with refined highlights and polished commercial clarity, preserve the original person'
+  glossyBeauty: 'clean glossy beauty-campaign color treatment with refined highlights and polished commercial clarity, preserve the original person',
+  hairCampaignGloss: 'refined hair-campaign color integration with clean tonal separation and restrained hair-light graphic emphasis, preserve the original photo content',
+  beautyBright: 'bright premium beauty editorial treatment with clear skin-tone fidelity and clean commercial highlights, preserve the original person',
+  animeLineTreatment: 'controlled clean line-art and photographic collage treatment, derive only graphic fragments and preserve the attached photo',
+  cinemaColorGrade: 'polished cinematic color grade applied to the existing photo only, preserve the person, lighting and environment while adding editorial title contrast',
+  contactSheetFilm: 'restrained archival film treatment with fine grain and consistent frame color, preserve the original photographed content',
+  postcardFade: 'soft faded postcard color treatment applied to the existing photo only, preserve the original person and travel environment',
+  journeyWarm: 'warm optimistic journey color treatment with gentle horizon tones, preserve the existing photograph without replacing its background'
 };
 
 const printFinishData = {
@@ -513,7 +766,15 @@ const printFinishData = {
   selectiveGloss: 'selective gloss varnish reflections on masthead, labels and chosen graphic accents, never on the person as a replacement texture',
   metallicFoil: 'refined metallic foil stamping on selected typography and fine graphic lines, controlled luxury print detail',
   offsetPrintGrain: 'fine offset-print grain and restrained ink registration texture across the editorial graphics',
-  risographInk: 'controlled risograph-style layered ink texture with slight artistic color registration on the graphic design elements'
+  risographInk: 'controlled risograph-style layered ink texture with slight artistic color registration on the graphic design elements',
+  beautyGloss: 'selective beauty-ad gloss and smooth coated-paper finish applied to typography and graphic elements only',
+  magazineCoated: 'premium coated magazine-paper finish with crisp type and restrained surface sheen',
+  gameGloss: 'clean collectible game-box gloss applied to interface graphics and title elements only',
+  cinemaPaper: 'fine cinematic poster-paper texture with precise ink edges and controlled title contrast',
+  photobookMatte: 'soft photobook matte paper with subtle fiber texture applied to the page design only',
+  filmPaper: 'fine photographic paper and contact-sheet surface texture around the existing photo',
+  postcardFiber: 'light postcard paper fiber and ink texture applied to borders, stamps and typography',
+  travelTicket: 'restrained travel-ticket and printed itinerary texture applied to graphic elements only'
 };
 
 const placementData = {
@@ -522,18 +783,48 @@ const placementData = {
   rightFullBody: 'portrait positioned to the right side, full or three-quarter body framing, left side reserved for typography and graphics',
   topCrop: 'portrait cropped toward the top of the frame, lower area reserved for information blocks',
   bottomAnchor: 'portrait anchored toward the bottom of the frame extending off the lower edge, upper area reserved for masthead and headline'
+  ,rightFaceHero: 'portrait positioned to the right with a close-up face hero, left side reserved for beauty labels and typography',
+  leftFaceHero: 'portrait positioned to the left with a close-up face hero, right side reserved for beauty labels and typography',
+  centeredFullBody: 'preserved portrait centered as a full-height visual with typography and graphic elements arranged around the figure',
+  textOverlapHero: 'portrait placed to one side while a large title intentionally overlaps the surrounding image boundary as a graphic layer',
+  cinemaCenter: 'portrait centered as the primary cinematic hero with title and supporting graphic structure around it',
+  photobookSide: 'portrait placed to one side of a wide page with chapter text and archival notes in the open area',
+  travelEnvironment: 'portrait kept smaller within the environmental photograph, with location typography and map graphics around the scene'
 };
 
 const whitespaceData = {
   generousWhitespace: 'generous negative space, minimal editorial breathing room, premium quiet composition',
   balancedWhitespace: 'balanced negative space, moderate information density',
   denseInformation: 'dense information layout, multiple text and graphic blocks filling the page, maximal editorial detail'
+  ,fullBleedPoster: 'full-bleed poster density with controlled title and graphic overlays reaching the page edges',
+  cinemaInfoBottom: 'cinematic breathing room with a reserved lower information band',
+  productSideColumn: 'clean side-column breathing room reserved for product or ingredient labels',
+  photobookChapter: 'quiet chapter-page spacing with generous breathing room and small archival notes',
+  travelTitleSpace: 'open environmental spacing reserved for destination title and route markers'
 };
 
 const languageData = {
   chineseOnly: 'all typography in Traditional Chinese',
   bilingualEnglishChinese: 'typography mixing English and Traditional Chinese, English as the dominant large display text, Chinese as supporting text',
   trilingualEditorial: 'typography mixing English, Japanese and Traditional Chinese as layered editorial text collage, roughly English 50 percent, Japanese 30 percent, Chinese 20 percent, text functions as visual design as much as literal language — perfect grammatical accuracy is not required'
+  ,englishBrandDominant: 'English brand-led typography with restrained Traditional Chinese supporting labels',
+  chineseTitleDominant: 'Traditional Chinese as the primary display title with small English supporting labels',
+  japaneseAccent: 'English and Traditional Chinese typography with restrained Japanese accent labels',
+  koreanAccent: 'English and Traditional Chinese typography with restrained Korean accent labels',
+  dataDominant: 'numbers, dates and compact archival metadata as the dominant graphic typography',
+  cinemaMinimal: 'minimal film-title typography with very limited supporting copy',
+  travelPlaceDate: 'destination name and date as the primary typography with concise travel-note support'
+};
+
+const copyStyleData = {
+  fashionEditorial: 'copy style: concise fashion-editorial headlines, issue labels and short refined supporting phrases; avoid invented factual claims',
+  beautyCampaign: 'copy style: concise premium beauty-campaign language focused on visual mood and product-category labels; never invent product claims or ingredients',
+  animeCharacter: 'copy style: concise original character-editorial labels, chapter markers and profile headings; do not name copyrighted characters or franchises',
+  gameWorld: 'copy style: concise original game-world labels, edition markers and character-profile headings; do not invent official platform or franchise claims',
+  cinemaTrailer: 'copy style: concise original cinematic title, short trailer-like tagline and restrained credit-style labels; do not imitate an official film title or studio credit',
+  photobookNarrative: 'copy style: quiet photobook narration using short chapter titles, dates and archival notes; omit unsupported facts',
+  travelColumn: 'copy style: concise travel-column language using only user-supplied or generic destination labels, dates and route notes',
+  minimalNoCopy: 'copy style: use only a short title and necessary small marker text; leave larger copy areas clean and quiet'
 };
 
 const ratioData = {
@@ -541,7 +832,11 @@ const ratioData = {
   poster34: 'aspect ratio 3:4, vertical editorial poster composition',
   feed45: 'aspect ratio 4:5, vertical social media feed composition',
   square11: 'aspect ratio 1:1, square collector card composition',
-  story916: 'aspect ratio 9:16, vertical story cover composition'
+  story916: 'aspect ratio 9:16, vertical story cover composition',
+  landscape43: 'aspect ratio 4:3, horizontal photobook page composition',
+  landscape32: 'aspect ratio 3:2, horizontal travel photography composition',
+  cinema169: 'aspect ratio 16:9, horizontal cinematic banner composition',
+  spread21: 'aspect ratio 2:1, wide photobook spread composition with the center kept clear for the book spine'
 };
 
 const sharedEditorialCore = window.HB_CORE_PROMPT?.page?.editorial || {};
@@ -569,14 +864,37 @@ No face swap/drift, AI/influencer/celebrity/template face, duplicated/pasted fac
 No oversized head, extra limbs/arms/fingers, broken hands, warped anatomy, inconsistent/independent face light, random text or watermark.`;
 
 const themeTemplates = {
-  classicMagazineCover: { layout: 'classicMagazineCover', typography: 'editorialSerif', graphic: 'barcodeLabel', color: 'dominantBlack', imageTreatment: 'originalEditorial', printFinish: 'cleanDigital', placement: 'rightFullBody', whitespace: 'balancedWhitespace', language: 'bilingualEnglishChinese', ratio: 'magazine23' },
-  verticalTypography: { layout: 'verticalTypography', typography: 'hugeMaskedType', graphic: 'sketchLineArt', color: 'dominantOrange', imageTreatment: 'highContrastStudio', printFinish: 'selectiveGloss', placement: 'rightFullBody', whitespace: 'generousWhitespace', language: 'bilingualEnglishChinese', ratio: 'poster34' },
-  characterProfile: { layout: 'characterProfile', typography: 'minimalTracked', graphic: 'lineGrid', color: 'dominantWhite', imageTreatment: 'originalEditorial', printFinish: 'matteArtPaper', placement: 'centeredClose', whitespace: 'denseInformation', language: 'bilingualEnglishChinese', ratio: 'magazine23' },
-  swissEditorial: { layout: 'swissEditorial', typography: 'boldSansHeadline', graphic: 'geometricBlocks', color: 'dominantWhite', imageTreatment: 'mutedLuxury', printFinish: 'cleanDigital', placement: 'leftHalfBody', whitespace: 'generousWhitespace', language: 'bilingualEnglishChinese', ratio: 'poster34' },
-  collectorCard: { layout: 'collectorCard', typography: 'boldSansHeadline', graphic: 'geometricFrame', color: 'dominantGold', imageTreatment: 'monochromeEditorial', printFinish: 'metallicFoil', placement: 'centeredClose', whitespace: 'balancedWhitespace', language: 'bilingualEnglishChinese', ratio: 'square11' },
-  animeFeature: { layout: 'animeFeature', typography: 'mangaOverlayType', graphic: 'sketchLineArt', color: 'dominantOrange', imageTreatment: 'softFilmEditorial', printFinish: 'offsetPrintGrain', placement: 'rightFullBody', whitespace: 'denseInformation', language: 'trilingualEditorial', ratio: 'magazine23' },
-  luxuryFashion: { layout: 'luxuryFashion', typography: 'editorialSerif', graphic: 'lineGrid', color: 'monochromePhoto', imageTreatment: 'highContrastStudio', printFinish: 'metallicFoil', placement: 'centeredClose', whitespace: 'generousWhitespace', language: 'bilingualEnglishChinese', ratio: 'poster34' },
-  artbookPage: { layout: 'artbookPage', typography: 'vintageTypewriter', graphic: 'collageClip', color: 'dominantSilver', imageTreatment: 'softFilmEditorial', printFinish: 'risographInk', placement: 'leftHalfBody', whitespace: 'balancedWhitespace', language: 'bilingualEnglishChinese', ratio: 'feed45' }
+  classicMagazineCover: { category: 'fashion', fit: 'halfBody', layout: 'classicMagazineCover', typography: 'editorialSerif', copyStyle: 'fashionEditorial', graphic: 'barcodeLabel', graphicAccent: 'issueNumber', color: 'ivoryGold', imageTreatment: 'originalEditorial', printFinish: 'cleanDigital', placement: 'rightFullBody', whitespace: 'balancedWhitespace', language: 'englishBrandDominant', ratio: 'magazine23' },
+  verticalTypography: { category: 'fashion', fit: 'fullBody', layout: 'verticalTypography', typography: 'hugeMaskedType', copyStyle: 'fashionEditorial', graphic: 'sketchLineArt', graphicAccent: 'seriesNumber', color: 'dominantOrange', imageTreatment: 'highContrastStudio', printFinish: 'selectiveGloss', placement: 'textOverlapHero', whitespace: 'generousWhitespace', language: 'bilingualEnglishChinese', ratio: 'poster34' },
+  characterProfile: { category: 'fashion', fit: 'halfBody', layout: 'characterProfile', typography: 'minimalTracked', copyStyle: 'fashionEditorial', graphic: 'lineGrid', graphicAccent: 'seriesNumber', color: 'dominantWhite', imageTreatment: 'originalEditorial', printFinish: 'matteArtPaper', placement: 'centeredClose', whitespace: 'denseInformation', language: 'bilingualEnglishChinese', ratio: 'magazine23' },
+  swissEditorial: { category: 'fashion', fit: 'any', layout: 'swissEditorial', typography: 'boldSansHeadline', copyStyle: 'fashionEditorial', graphic: 'geometricBlocks', graphicAccent: 'none', color: 'dominantWhite', imageTreatment: 'mutedLuxury', printFinish: 'cleanDigital', placement: 'leftHalfBody', whitespace: 'generousWhitespace', language: 'englishBrandDominant', ratio: 'poster34' },
+  collectorCard: { category: 'fashion', fit: 'halfBody', layout: 'collectorCard', typography: 'boldSansHeadline', copyStyle: 'fashionEditorial', graphic: 'geometricFrame', graphicAccent: 'seriesNumber', color: 'dominantGold', imageTreatment: 'originalEditorial', printFinish: 'metallicFoil', placement: 'centeredClose', whitespace: 'balancedWhitespace', language: 'bilingualEnglishChinese', ratio: 'square11' },
+  luxuryFashion: { category: 'fashion', fit: 'halfBody', layout: 'luxuryFashion', typography: 'editorialSerif', copyStyle: 'fashionEditorial', graphic: 'lineGrid', graphicAccent: 'issueNumber', color: 'ivoryGold', imageTreatment: 'originalEditorial', printFinish: 'metallicFoil', placement: 'centeredClose', whitespace: 'generousWhitespace', language: 'englishBrandDominant', ratio: 'poster34' },
+  luxuryBeautyCampaign: { category: 'beauty', fit: 'closeup', layout: 'beautyCampaign', typography: 'beautySerif', copyStyle: 'beautyCampaign', graphic: 'beautyCallouts', graphicAccent: 'colorSwatches', color: 'coralWhite', imageTreatment: 'beautyBright', printFinish: 'beautyGloss', placement: 'rightFaceHero', whitespace: 'productSideColumn', language: 'englishBrandDominant', ratio: 'poster34' },
+  hairSalonCampaign: { category: 'beauty', fit: 'halfBody', layout: 'hairCampaign', typography: 'beautySerif', copyStyle: 'beautyCampaign', graphic: 'hairCurves', graphicAccent: 'colorSwatches', color: 'ivoryGold', imageTreatment: 'hairCampaignGloss', printFinish: 'magazineCoated', placement: 'leftFaceHero', whitespace: 'productSideColumn', language: 'bilingualEnglishChinese', ratio: 'feed45' },
+  makeupLaunchCampaign: { category: 'beauty', fit: 'closeup', layout: 'makeupCampaign', typography: 'beautySerif', copyStyle: 'beautyCampaign', graphic: 'colorSwatches', graphicAccent: 'issueNumber', color: 'powderSilver', imageTreatment: 'glossyBeauty', printFinish: 'beautyGloss', placement: 'centeredClose', whitespace: 'productSideColumn', language: 'englishBrandDominant', ratio: 'poster34' },
+  skincareIngredientCampaign: { category: 'beauty', fit: 'closeup', layout: 'ingredientStudy', typography: 'minimalTracked', copyStyle: 'beautyCampaign', graphic: 'beautyCallouts', graphicAccent: 'none', color: 'dominantWhite', imageTreatment: 'beautyBright', printFinish: 'cleanDigital', placement: 'leftFaceHero', whitespace: 'productSideColumn', language: 'bilingualEnglishChinese', ratio: 'poster34' },
+  animeFeature: { category: 'animeGame', fit: 'any', layout: 'animeFeature', typography: 'mangaOverlayType', copyStyle: 'animeCharacter', graphic: 'animeLineCollage', graphicAccent: 'chapterNumber', color: 'mangaPrimary', imageTreatment: 'softFilmEditorial', printFinish: 'offsetPrintGrain', placement: 'rightFullBody', whitespace: 'denseInformation', language: 'trilingualEditorial', ratio: 'magazine23' },
+  liveActionAnimeDual: { category: 'animeGame', fit: 'halfBody', layout: 'liveActionAnimeDual', typography: 'hugeMaskedType', copyStyle: 'animeCharacter', graphic: 'animeLineCollage', graphicAccent: 'seriesNumber', color: 'dominantOrange', imageTreatment: 'animeLineTreatment', printFinish: 'offsetPrintGrain', placement: 'textOverlapHero', whitespace: 'denseInformation', language: 'trilingualEditorial', ratio: 'magazine23' },
+  gameKeyArt: { category: 'animeGame', fit: 'fullBody', layout: 'gameKeyArt', typography: 'gameDisplay', copyStyle: 'gameWorld', graphic: 'gameInterface', graphicAccent: 'platformLabel', color: 'cinematicSilverBlue', imageTreatment: 'cinemaColorGrade', printFinish: 'gameGloss', placement: 'centeredFullBody', whitespace: 'fullBleedPoster', language: 'englishBrandDominant', ratio: 'poster34' },
+  characterSelectInterface: { category: 'animeGame', fit: 'halfBody', layout: 'characterSelectInterface', typography: 'gameDisplay', copyStyle: 'gameWorld', graphic: 'characterStats', graphicAccent: 'seriesNumber', color: 'dominantSilver', imageTreatment: 'originalEditorial', printFinish: 'gameGloss', placement: 'centeredFullBody', whitespace: 'denseInformation', language: 'dataDominant', ratio: 'square11' },
+  urbanAerialHeroPoster: { category: 'cinema', fit: 'action', layout: 'urbanAerialHeroPoster', typography: 'cinemaDisplay', copyStyle: 'cinemaTrailer', graphic: 'cinemaLightBeams', graphicAccent: 'none', color: 'cinematicSilverBlue', imageTreatment: 'cinemaColorGrade', printFinish: 'cinemaPaper', placement: 'cinemaCenter', whitespace: 'fullBleedPoster', language: 'cinemaMinimal', ratio: 'cinema169' },
+  scifiEnsemblePoster: { category: 'cinema', fit: 'fullBody', layout: 'scifiEnsemblePoster', typography: 'cinemaDisplay', copyStyle: 'cinemaTrailer', graphic: 'cinemaLightBeams', graphicAccent: 'issueNumber', color: 'cinematicSilverBlue', imageTreatment: 'cinemaColorGrade', printFinish: 'cinemaPaper', placement: 'cinemaCenter', whitespace: 'cinemaInfoBottom', language: 'cinemaMinimal', ratio: 'poster34' },
+  romanceDoubleExposure: { category: 'cinema', fit: 'halfBody', layout: 'romanceDoubleExposure', typography: 'editorialSerif', copyStyle: 'cinemaTrailer', graphic: 'doubleExposureFrames', graphicAccent: 'none', color: 'sunsetGold', imageTreatment: 'softFilmEditorial', printFinish: 'matteArtPaper', placement: 'centeredClose', whitespace: 'generousWhitespace', language: 'cinemaMinimal', ratio: 'poster34' },
+  retroActionCinema: { category: 'cinema', fit: 'action', layout: 'retroActionCinema', typography: 'cinemaDisplay', copyStyle: 'cinemaTrailer', graphic: 'retroPrintShapes', graphicAccent: 'issueNumber', color: 'dominantOrange', imageTreatment: 'duotoneAccent', printFinish: 'risographInk', placement: 'centeredFullBody', whitespace: 'fullBleedPoster', language: 'bilingualEnglishChinese', ratio: 'poster34' },
+  fantasyEpicPoster: { category: 'cinema', fit: 'fullBody', layout: 'fantasyEpicPoster', typography: 'cinemaDisplay', copyStyle: 'cinemaTrailer', graphic: 'cinemaLightBeams', graphicAccent: 'chapterNumber', color: 'sunsetGold', imageTreatment: 'cinemaColorGrade', printFinish: 'metallicFoil', placement: 'cinemaCenter', whitespace: 'fullBleedPoster', language: 'cinemaMinimal', ratio: 'poster34' },
+  musicalStagePoster: { category: 'cinema', fit: 'fullBody', layout: 'musicalStagePoster', typography: 'cinemaDisplay', copyStyle: 'cinemaTrailer', graphic: 'geometricBlocks', graphicAccent: 'issueNumber', color: 'dominantWine', imageTreatment: 'highContrastStudio', printFinish: 'selectiveGloss', placement: 'centeredFullBody', whitespace: 'fullBleedPoster', language: 'bilingualEnglishChinese', ratio: 'poster34' },
+  adventureQuestPoster: { category: 'cinema', fit: 'environment', layout: 'adventureQuestPoster', typography: 'cinemaDisplay', copyStyle: 'cinemaTrailer', graphic: 'routeMap', graphicAccent: 'coordinates', color: 'sunsetGold', imageTreatment: 'journeyWarm', printFinish: 'matteArtPaper', placement: 'travelEnvironment', whitespace: 'travelTitleSpace', language: 'travelPlaceDate', ratio: 'poster34' },
+  artbookPage: { category: 'photobook', fit: 'any', layout: 'artbookPage', typography: 'vintageTypewriter', copyStyle: 'photobookNarrative', graphic: 'collageClip', graphicAccent: 'chapterNumber', color: 'dominantSilver', imageTreatment: 'softFilmEditorial', printFinish: 'risographInk', placement: 'leftHalfBody', whitespace: 'balancedWhitespace', language: 'bilingualEnglishChinese', ratio: 'feed45' },
+  softPortraitPhotobook: { category: 'photobook', fit: 'halfBody', layout: 'photobookPortrait', typography: 'photobookSerif', copyStyle: 'photobookNarrative', graphic: 'minimalIcon', graphicAccent: 'issueNumber', color: 'filmWarm', imageTreatment: 'softFilmEditorial', printFinish: 'photobookMatte', placement: 'photobookSide', whitespace: 'photobookChapter', language: 'chineseTitleDominant', ratio: 'landscape43' },
+  fashionLookbook: { category: 'photobook', fit: 'fullBody', layout: 'lookbookGrid', typography: 'dataMono', copyStyle: 'fashionEditorial', graphic: 'lineGrid', graphicAccent: 'seriesNumber', color: 'ivoryGold', imageTreatment: 'originalEditorial', printFinish: 'magazineCoated', placement: 'leftHalfBody', whitespace: 'denseInformation', language: 'dataDominant', ratio: 'landscape43' },
+  filmDiaryPhotobook: { category: 'photobook', fit: 'any', layout: 'filmDiarySpread', typography: 'vintageTypewriter', copyStyle: 'photobookNarrative', graphic: 'filmContactSheet', graphicAccent: 'filmNumber', color: 'filmWarm', imageTreatment: 'contactSheetFilm', printFinish: 'filmPaper', placement: 'photobookSide', whitespace: 'balancedWhitespace', language: 'bilingualEnglishChinese', ratio: 'landscape43' },
+  seasonalStoryPhotobook: { category: 'photobook', fit: 'environment', layout: 'seasonalStorySpread', typography: 'photobookSerif', copyStyle: 'photobookNarrative', graphic: 'collageClip', graphicAccent: 'chapterNumber', color: 'forestIvory', imageTreatment: 'softFilmEditorial', printFinish: 'photobookMatte', placement: 'photobookSide', whitespace: 'photobookChapter', language: 'chineseTitleDominant', ratio: 'spread21' },
+  destinationMagazineCover: { category: 'travel', fit: 'environment', layout: 'destinationCover', typography: 'editorialSerif', copyStyle: 'travelColumn', graphic: 'routeMap', graphicAccent: 'coordinates', color: 'coastalBlueWhite', imageTreatment: 'originalEditorial', printFinish: 'magazineCoated', placement: 'travelEnvironment', whitespace: 'travelTitleSpace', language: 'travelPlaceDate', ratio: 'magazine23' },
+  postcardCollage: { category: 'travel', fit: 'environment', layout: 'postcardCollage', typography: 'travelHandwritten', copyStyle: 'travelColumn', graphic: 'postcardCollage', graphicAccent: 'postmark', color: 'postcardColor', imageTreatment: 'postcardFade', printFinish: 'postcardFiber', placement: 'travelEnvironment', whitespace: 'balancedWhitespace', language: 'travelPlaceDate', ratio: 'landscape32' },
+  travelDiarySpread: { category: 'travel', fit: 'environment', layout: 'travelDiarySpread', typography: 'travelHandwritten', copyStyle: 'travelColumn', graphic: 'postcardCollage', graphicAccent: 'chapterNumber', color: 'forestIvory', imageTreatment: 'postcardFade', printFinish: 'postcardFiber', placement: 'photobookSide', whitespace: 'photobookChapter', language: 'travelPlaceDate', ratio: 'spread21' },
+  routeMapEditorial: { category: 'travel', fit: 'environment', layout: 'routeMapEditorial', typography: 'dataMono', copyStyle: 'travelColumn', graphic: 'routeMap', graphicAccent: 'coordinates', color: 'porcelainBlue', imageTreatment: 'originalEditorial', printFinish: 'travelTicket', placement: 'travelEnvironment', whitespace: 'travelTitleSpace', language: 'dataDominant', ratio: 'landscape32' },
+  cinematicJourneyPoster: { category: 'travel', fit: 'environment', layout: 'cinematicJourneyPoster', typography: 'cinemaDisplay', copyStyle: 'travelColumn', graphic: 'cinemaLightBeams', graphicAccent: 'coordinates', color: 'sunsetGold', imageTreatment: 'journeyWarm', printFinish: 'cinemaPaper', placement: 'travelEnvironment', whitespace: 'cinemaInfoBottom', language: 'cinemaMinimal', ratio: 'cinema169' }
 };
 
 function selected(name){
@@ -599,7 +917,7 @@ function refreshCards(){
 function applyThemeTemplate(key){
   const preset = themeTemplates[key];
   if(!preset) return;
-  ['layout','typography','graphic','color','imageTreatment','printFinish','placement','whitespace','language','ratio'].forEach(name => {
+  ['layout','typography','copyStyle','graphic','graphicAccent','color','imageTreatment','printFinish','placement','whitespace','language','ratio'].forEach(name => {
     setRadioValue(name, preset[name]);
   });
   refreshCards();
@@ -618,9 +936,11 @@ function generate(options = {}){
   const tagline = document.getElementById('tagline').value.trim();
   const infoLabelsRaw = document.getElementById('infoLabels').value.trim();
   const infoLabels = infoLabelsRaw ? infoLabelsRaw.split('\n').map(s => s.trim()).filter(Boolean) : [];
+  const metadata = document.getElementById('metadata').value.trim();
+  const creditLine = document.getElementById('creditLine').value.trim();
   const extraNote = document.getElementById('extraNote').value.trim();
 
-  const hasAnyText = mainTitle || subtitle || tagline || infoLabels.length;
+  const hasAnyText = mainTitle || subtitle || tagline || infoLabels.length || metadata || creditLine;
   let textContentBlock;
   if(hasAnyText){
     const parts = [];
@@ -628,26 +948,32 @@ function generate(options = {}){
     if(subtitle) parts.push(`subtitle / issue text: "${subtitle}"`);
     if(tagline) parts.push(`tagline / quote line: "${tagline}"`);
     if(infoLabels.length) parts.push(`information block headers: ${infoLabels.map(l => `"${l}"`).join(', ')}`);
-    textContentBlock = 'text content to use: ' + parts.join('; ') + (hasAnyText && (!mainTitle || !subtitle || !tagline || !infoLabels.length) ? '; for any of these left unspecified, infer an appropriate short editorial phrase directly from the attached photo\'s mood, theme and styling,' : ',');
+    if(metadata) parts.push(`editorial metadata: "${metadata}"`);
+    if(creditLine) parts.push(`credit or series line: "${creditLine}"`);
+    textContentBlock = 'text content to use: ' + parts.join('; ') + '; for unspecified text, infer only short non-factual editorial labels or leave the area blank,';
   } else {
-    textContentBlock = 'no text content specified — infer an appropriate title, subtitle, tagline and information block headers directly from the attached photo\'s mood, theme and styling, keep them short and editorial in tone,';
+    textContentBlock = 'no text content specified — infer only a short original editorial title and minimal labels from the attached photo\'s mood, keep all factual metadata areas blank,';
   }
 
+  const selectedGraphicAccent = selected('graphicAccent');
   const prompt = [
     sourceImageLockGuard + ',',
     layoutData[selected('layout')] + ',',
+    copyStyleData[selected('copyStyle')] + ',',
     typographyData[selected('typography')] + ',',
     placementData[selected('placement')] + ',',
     textContentBlock,
     languageData[selected('language')] + ',',
     graphicData[selected('graphic')] + ',',
+    selectedGraphicAccent !== 'none' ? graphicAccentData[selectedGraphicAccent] + ',' : '',
     colorData[selected('color')] + ',',
     imageTreatmentData[selected('imageTreatment')] + ',',
     printFinishData[selected('printFinish')] + ',',
     whitespaceData[selected('whitespace')] + ',',
     ratioData[selected('ratio')] + ',',
     outputQualityGuard + ',',
-    'do not alter the photographed person, outfit, pose, lighting or background in any way — apply editorial graphic design on top only,',
+    'do not alter the photographed person, face, hairstyle, makeup, outfit, body proportions, pose, lighting, camera perspective or background in any way — apply non-destructive editorial graphic design on top only,',
+    'do not invent products, ingredients, medical claims, destinations, coordinates, credits, release dates, additional people or factual metadata that were not supplied,',
     extraNote ? 'extra direction: ' + extraNote + ',' : '',
     negativeGuard + ',',
     'no random text errors, no watermark artifacts, no distorted or illegible typography,',
@@ -671,6 +997,15 @@ document.querySelectorAll('input[type="radio"]').forEach(input => {
 document.getElementById('generateBtn').addEventListener('click', () => generate({reveal:true}));
 document.querySelectorAll('[data-template]').forEach(button => {
   button.addEventListener('click', () => { applyThemeTemplate(button.dataset.template); });
+});
+document.querySelectorAll('[data-template-tab]').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const category = tab.dataset.templateTab;
+    document.querySelectorAll('[data-template-tab]').forEach(item => item.classList.toggle('active', item === tab));
+    document.querySelectorAll('[data-template-group]').forEach(group => {
+      group.hidden = group.dataset.templateGroup !== category;
+    });
+  });
 });
 document.querySelector('.section-preset').addEventListener('click', (event) => {
   const btn = event.target.closest('button.card');
@@ -715,7 +1050,7 @@ document.addEventListener('input',(event)=>{
 document.addEventListener('change',(event)=>{
   if(event.target && event.target.closest && !event.target.closest('#outputWrap')) markStale();
 },true);
-['mainTitle','subtitle','tagline','infoLabels','extraNote'].forEach(id => {
+['mainTitle','subtitle','tagline','infoLabels','metadata','creditLine','extraNote'].forEach(id => {
   document.getElementById(id).addEventListener('input', () => { refreshCards(); });
 });
 refreshCards();

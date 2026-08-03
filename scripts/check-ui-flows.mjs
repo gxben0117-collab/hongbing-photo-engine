@@ -330,6 +330,41 @@ function checkPresetButtons(page, source) {
   }
 }
 
+function checkEditorialTemplateContract(page, source, groups) {
+  if (page !== 'editorial-identity.html') return;
+  const expectedCounts = { fashion: 6, beauty: 4, animeGame: 4, cinema: 7, photobook: 5, travel: 5 };
+  const templateButtons = tags(source, 'button').filter(tag => attr(tag, 'data-template'));
+  const templateKeys = new Set(templateButtons.map(tag => attr(tag, 'data-template')));
+  const presetKeys = objectKeys(source, 'themeTemplates');
+  if (templateButtons.length !== 31) issue(page, `expected 31 template buttons, found ${templateButtons.length}`);
+  if (!presetKeys || presetKeys.size !== 31) issue(page, `expected 31 themeTemplates entries, found ${presetKeys ? presetKeys.size : 0}`);
+  for (const key of templateKeys) {
+    if (!presetKeys?.has(key)) issue(page, `template button "${key}" has no themeTemplates entry`);
+  }
+  for (const key of presetKeys || []) {
+    if (!templateKeys.has(key)) issue(page, `themeTemplates entry "${key}" has no template button`);
+  }
+  const groupMatches = [...source.matchAll(/<div class="template-group" data-template-group="([^"]+)"/g)];
+  if (groupMatches.length !== Object.keys(expectedCounts).length) issue(page, `expected ${Object.keys(expectedCounts).length} template groups, found ${groupMatches.length}`);
+  for (let i = 0; i < groupMatches.length; i += 1) {
+    const category = groupMatches[i][1];
+    const start = groupMatches[i].index;
+    const end = i + 1 < groupMatches.length ? groupMatches[i + 1].index : source.length;
+    const count = (source.slice(start, end).match(/data-template="[^"]+"/g) || []).length;
+    if (expectedCounts[category] === undefined) issue(page, `unknown template group "${category}"`);
+    else if (count !== expectedCounts[category]) issue(page, `${category} group expected ${expectedCounts[category]} templates, found ${count}`);
+  }
+  for (const required of ['copyStyle', 'graphicAccent', 'metadata', 'creditLine', 'copyStyleData', 'graphicAccentData']) {
+    if (!source.includes(required)) issue(page, `editorial template contract missing ${required}`);
+  }
+  if (!source.includes('do not invent products') || !source.includes('non-destructive editorial')) {
+    issue(page, 'editorial source-lock and factual-content guard is incomplete');
+  }
+  for (const forbidden of ['Spider-Man', 'Marvel', 'psychological thriller', 'black crime', 'horror']) {
+    if (source.toLowerCase().includes(forbidden.toLowerCase())) issue(page, `editorial source contains forbidden term "${forbidden}"`);
+  }
+}
+
 function checkVisualOrder(page, source) {
   const contract = visualOrderContracts[page];
   if (!contract) return;
@@ -359,6 +394,7 @@ for (const page of pages) {
   checkClassicalPageContract(page, source);
   checkGarmentVariationLayerContract(page, source, groups);
   checkPresetButtons(page, source);
+  checkEditorialTemplateContract(page, source, groups);
   checkVisualOrder(page, source);
   console.log(`checked ${page}: ${groups.size} radio groups, ${idSet.size} ids`);
 }

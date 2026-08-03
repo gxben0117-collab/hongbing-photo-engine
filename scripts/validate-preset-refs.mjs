@@ -387,12 +387,14 @@ const issues = [];
     layout: liveRadioValues(src, 'layout'),
     typography: liveRadioValues(src, 'typography'),
     graphic: liveRadioValues(src, 'graphic'),
+    graphicAccent: liveRadioValues(src, 'graphicAccent'),
     color: liveRadioValues(src, 'color'),
     imageTreatment: liveRadioValues(src, 'imageTreatment'),
     printFinish: liveRadioValues(src, 'printFinish'),
     placement: liveRadioValues(src, 'placement'),
     whitespace: liveRadioValues(src, 'whitespace'),
     language: liveRadioValues(src, 'language'),
+    copyStyle: liveRadioValues(src, 'copyStyle'),
     ratio: liveRadioValues(src, 'ratio'),
   };
   checkObject('editorial-identity.html', 'themeTemplates', extractObjectLiteral(src, 'themeTemplates'), fieldLive, issues);

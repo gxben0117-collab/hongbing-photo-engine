@@ -878,34 +878,39 @@ function generateAncientGoddess(core, data) {
 
 function generateEditorial(core, data) {
   const sel = {
-    layout: 'classicMagazineCover', typography: 'editorialSerif', graphic: 'barcodeLabel',
-    color: 'dominantBlack', imageTreatment: 'originalEditorial', printFinish: 'cleanDigital',
+    layout: 'classicMagazineCover', typography: 'editorialSerif', copyStyle: 'fashionEditorial', graphic: 'barcodeLabel', graphicAccent: 'issueNumber',
+    color: 'ivoryGold', imageTreatment: 'originalEditorial', printFinish: 'cleanDigital',
     placement: 'rightFullBody', whitespace: 'balancedWhitespace',
-    language: 'bilingualEnglishChinese', ratio: 'magazine23',
-    mainTitle: 'MAKIMA', subtitle: 'SPECIAL FEATURE', tagline: "Domination isn't power, it's nature.",
-    infoLabels: ['PROFILE', 'PSYCHOLOGY'], extraNote: '',
+    language: 'englishBrandDominant', ratio: 'magazine23',
+    mainTitle: 'LUMINA', subtitle: 'SPECIAL FEATURE', tagline: 'A study in presence and style.',
+    infoLabels: ['PROFILE', 'FEATURE'], metadata: 'ISSUE 08', creditLine: 'EDITORIAL SERIES', extraNote: '',
   };
   const parts = [];
   parts.push(`main title / character name: "${sel.mainTitle}"`);
   parts.push(`subtitle / issue text: "${sel.subtitle}"`);
   parts.push(`tagline / quote line: "${sel.tagline}"`);
   parts.push(`information block headers: ${sel.infoLabels.map((l) => `"${l}"`).join(', ')}`);
+  parts.push(`editorial metadata: "${sel.metadata}"`);
+  parts.push(`credit or series line: "${sel.creditLine}"`);
   const textContentBlock = 'text content to use: ' + parts.join('; ') + ',';
   const prompt = [
     data.sourceImageLockGuard + ',',
     data.layoutData[sel.layout] + ',',
+    data.copyStyleData[sel.copyStyle] + ',',
     data.typographyData[sel.typography] + ',',
     data.placementData[sel.placement] + ',',
     textContentBlock,
     data.languageData[sel.language] + ',',
     data.graphicData[sel.graphic] + ',',
+    data.graphicAccentData[sel.graphicAccent] + ',',
     data.colorData[sel.color] + ',',
     data.imageTreatmentData[sel.imageTreatment] + ',',
     data.printFinishData[sel.printFinish] + ',',
     data.whitespaceData[sel.whitespace] + ',',
     data.ratioData[sel.ratio] + ',',
     data.outputQualityGuard + ',',
-    'do not alter the photographed person, outfit, pose, lighting or background in any way — apply editorial graphic design on top only,',
+    'do not alter the photographed person, face, hairstyle, makeup, outfit, body proportions, pose, lighting, camera perspective or background in any way — apply non-destructive editorial graphic design on top only,',
+    'do not invent products, ingredients, medical claims, destinations, coordinates, credits, release dates, additional people or factual metadata that were not supplied,',
     data.negativeGuard + ',',
     'no random text errors, no watermark artifacts, no distorted or illegible typography,',
     '— Attach your already-generated reference photo together with this text when submitting to the image editing model.',
@@ -1368,7 +1373,7 @@ function loadRevision(label, sourceReader) {
       page: 'editorial',
       startMarker: 'const layoutData = {',
       endMarker: 'function selected(name)',
-      exportExpression: '({ layoutData, typographyData, graphicData, colorData, imageTreatmentData, printFinishData, placementData, whitespaceData, languageData, ratioData, sourceImageLockGuard, outputQualityGuard, negativeGuard, themeTemplates })',
+      exportExpression: '({ layoutData, typographyData, graphicData, graphicAccentData, colorData, imageTreatmentData, printFinishData, placementData, whitespaceData, languageData, copyStyleData, ratioData, sourceImageLockGuard, outputQualityGuard, negativeGuard, themeTemplates })',
     });
     prompts['editorial-default.txt'] = generateEditorial(core, editorialData);
   } catch (err) {
