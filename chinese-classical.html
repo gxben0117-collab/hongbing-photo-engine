@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>中式古典美學咒語產生器｜寫真引擎</title>
-<meta name="description" content="漢風、盛唐、宋韻與新式改良漢服的中式古典美學咒語產生器。">
+<meta name="description" content="漢風、盛唐、宋韻與唯美古風寫真的中式古典美學咒語產生器。">
 <meta property="og:title" content="中式古典美學咒語產生器｜寫真引擎">
-<meta property="og:description" content="漢風、盛唐、宋韻與新式改良漢服的中式古典美學咒語產生器。">
+<meta property="og:description" content="漢風、盛唐、宋韻與唯美古風寫真的中式古典美學咒語產生器。">
 <style>
   :root{
     --black:#09090B;--panel:#15131A;--panel-2:#1D1924;--line:#322D3C;
@@ -61,26 +61,39 @@
   <header>
     <div class="eyebrow">Chinese Classical Aesthetic Campaign</div>
     <h1>中式古典美學<span>咒語產生器</span></h1>
-    <p>以漢風、盛唐、宋韻為服裝骨架，加入各自的新式改良方向，再搭配中國傳統材質、庭院、書齋與江南水墨場景，做出保有文化辨識度又不古板的高級寫真。</p>
+    <p>以漢風、盛唐、宋韻與唯美古風為服裝方向，結合中國傳統材質、宮苑、書齋、江南水墨與電影級柔光，做出保有文化辨識度又不古板的高級寫真。</p>
   </header>
 
   <section class="section-preset">
     <div class="section-header"><div class="section-label">00</div><div class="section-title">一鍵主題模板</div></div>
     <p class="hint">一鍵套用會同步填入服裝、材質、姿勢、光線、背景、鏡頭與比例，套用後仍可逐區修改。</p>
     <button class="card" type="button" id="classicalMoodPreset" style="width:100%;min-height:auto;margin-bottom:12px;background:linear-gradient(180deg,#101B1A 0%,#1A2118 100%);"><div class="name">隨機套用</div><div class="desc">各欄位獨立隨機組合，保留完整中式古典美學方向</div></button>
+    <div class="group-title">朝代古典</div>
     <div class="grid grid-3">
       <button class="card" type="button" data-template="hanCourtyard"><div class="name">漢風古雅庭院</div><div class="desc">交領層疊、寬袖、古樸庭院</div></button>
       <button class="card" type="button" data-template="hanBambooPortrait"><div class="name">漢風竹影肖像</div><div class="desc">漢風衣襟、竹林窗影、文化感</div></button>
-      <button class="card" type="button" data-template="hanModernCouture"><div class="name">漢風新式高訂</div><div class="desc">交領邏輯、現代收腰、高級剪裁</div></button>
-      <button class="card" type="button" data-template="hanWindowEditorial"><div class="name">漢風改良花窗棚拍</div><div class="desc">新式漢服、花窗光影、時裝封面</div></button>
       <button class="card" type="button" data-template="tangPalaceGown"><div class="name">盛唐宮苑華裳</div><div class="desc">高腰大袖、宮苑金光、雍容華麗</div></button>
       <button class="card" type="button" data-template="tangGoldPeony"><div class="name">盛唐金線牡丹</div><div class="desc">金線刺繡、牡丹、富麗絲綢</div></button>
-      <button class="card" type="button" data-template="tangModernGown"><div class="name">盛唐新式禮服</div><div class="desc">唐風高腰、現代禮服、高訂比例</div></button>
-      <button class="card" type="button" data-template="tangModernCover"><div class="name">盛唐改良封面大片</div><div class="desc">大袖動勢、封面留白、金色光影</div></button>
       <button class="card" type="button" data-template="songScholarStudy"><div class="name">宋韻書齋清雅</div><div class="desc">褙子線條、書齋窗影、文人氣質</div></button>
       <button class="card" type="button" data-template="songJiangnanInk"><div class="name">宋韻江南水墨</div><div class="desc">淡雅配色、白牆黑瓦、柔和留白</div></button>
+    </div>
+    <div class="group-title">新式改良</div>
+    <div class="grid grid-3">
+      <button class="card" type="button" data-template="hanModernCouture"><div class="name">漢風新式高訂</div><div class="desc">交領邏輯、現代收腰、高級剪裁</div></button>
+      <button class="card" type="button" data-template="hanWindowEditorial"><div class="name">漢風改良花窗棚拍</div><div class="desc">新式漢服、花窗光影、時裝封面</div></button>
+      <button class="card" type="button" data-template="tangModernGown"><div class="name">盛唐新式禮服</div><div class="desc">唐風高腰、現代禮服、高訂比例</div></button>
+      <button class="card" type="button" data-template="tangModernCover"><div class="name">盛唐改良封面大片</div><div class="desc">大袖動勢、封面留白、金色光影</div></button>
       <button class="card" type="button" data-template="songModernMinimal"><div class="name">宋韻新式極簡</div><div class="desc">宋韻留白、現代比例、極簡高級</div></button>
       <button class="card" type="button" data-template="songModernStudio"><div class="name">新式古風精品禮服</div><div class="desc">古典元素、現代剪裁、精品棚拍</div></button>
+    </div>
+    <div class="group-title">唯美古風寫真</div>
+    <div class="grid grid-3">
+      <button class="card" type="button" data-template="beautyLycheeBanquet"><div class="name">荔枝宮苑盛宴</div><div class="desc">粉金華服、荔枝果盤、宮苑晨光</div></button>
+      <button class="card" type="button" data-template="beautyHuaqingMist"><div class="name">華清池柔霧寫真</div><div class="desc">薄紗疊層、白玉池畔、柔霧晨光</div></button>
+      <button class="card" type="button" data-template="beautyPeonyCourt"><div class="name">牡丹宮苑華宴</div><div class="desc">金線牡丹、宮廷珠飾、華苑光影</div></button>
+      <button class="card" type="button" data-template="beautyLotusPavilion"><div class="name">蓮池水榭佳人</div><div class="desc">蓮紋輕紗、水面反光、古典水榭</div></button>
+      <button class="card" type="button" data-template="beautyWindowGauze"><div class="name">花窗薄紗肖像</div><div class="desc">輕紗層次、花窗框景、唯美近景</div></button>
+      <button class="card" type="button" data-template="beautyPlumSnow"><div class="name">梅雪古風寫真</div><div class="desc">素色絲綢、梅枝雪景、藝術人像</div></button>
     </div>
   </section>
 
@@ -93,6 +106,7 @@
       <label class="card"><input type="radio" name="style" value="inkFineArt"><div class="name">水墨藝術人像</div><div class="desc">留白、柔霧、詩意畫面</div></label>
       <label class="card"><input type="radio" name="style" value="fashionEditorial"><div class="name">高級時裝封面</div><div class="desc">現代剪裁、封面與精品感</div></label>
       <label class="card"><input type="radio" name="style" value="modernCouture"><div class="name">新中式精品廣告</div><div class="desc">高訂材質、現代品牌語氣</div></label>
+      <label class="card"><input type="radio" name="style" value="aestheticFineArt"><div class="name">唯美古風寫真</div><div class="desc">柔美、電影感、Fine Art 藝術質感</div></label>
     </div>
   </section>
 
@@ -138,11 +152,13 @@
       <label class="card"><input type="radio" name="garment" value="songOpenFrontBeizi"><div class="name">宋韻對襟褙子</div><div class="desc">對襟長衫、直線層次、文人清雅</div></label>
       <label class="card"><input type="radio" name="garment" value="songShortTopLongSkirt"><div class="name">宋韻短衫長裙</div><div class="desc">短衫、長裙、窄袖與柔和比例</div></label>
     </div>
-    <div class="group-title">新式古風</div>
+    <div class="group-title">唯美古風</div>
     <div class="grid grid-3" data-choice="garment">
       <label class="card"><input type="radio" name="garment" value="ancientPhotoCouture"><div class="name">古風寫真華服</div><div class="desc">精緻層疊、飄帶、唯美上鏡</div></label>
       <label class="card"><input type="radio" name="garment" value="ancientSocialCouture"><div class="name">網紅古風華服</div><div class="desc">修身輪廓、飄帶層次、短影音風格</div></label>
       <label class="card"><input type="radio" name="garment" value="ancientFormalGown"><div class="name">新式古風禮服</div><div class="desc">古典元素、現代剪裁、精品禮服感</div></label>
+      <label class="card"><input type="radio" name="garment" value="ancientPalaceCouture"><div class="name">古風宮廷華服</div><div class="desc">層疊絲綢、宮廷珠飾、唯美宴會寫真</div></label>
+      <label class="card"><input type="radio" name="garment" value="ancientGauzeCouture"><div class="name">古風薄紗華服</div><div class="desc">輕紗疊層、柔霧光影、高級藝術寫真</div></label>
     </div>
     <label class="field">自訂服裝<input id="customGarment" type="text" placeholder="例如：杏色絲紗改良漢服"></label>
   </section>
@@ -180,6 +196,7 @@
       <label class="card"><input type="radio" name="accessory" value="jadePendant"><div class="name">玉佩禁步</div><div class="desc">腰間小幅度的中式配飾</div></label>
       <label class="card"><input type="radio" name="accessory" value="pearlHairOrnament"><div class="name">珍珠髮飾</div><div class="desc">柔和細緻的頭部點綴</div></label>
       <label class="card"><input type="radio" name="accessory" value="goldHairpin"><div class="name">金簪步搖</div><div class="desc">細緻金工與古典髮髻搭配</div></label>
+      <label class="card"><input type="radio" name="accessory" value="phoenixTasselHairpiece"><div class="name">鳳凰流蘇步搖</div><div class="desc">華麗金工、珍珠流蘇與宮廷妝造</div></label>
       <label class="card"><input type="radio" name="accessory" value="woodHairpin"><div class="name">木質髮簪</div><div class="desc">樸雅自然、適合漢風與宋韻</div></label>
       <label class="card"><input type="radio" name="accessory" value="silkFlower"><div class="name">絹花髮飾</div><div class="desc">柔和花形與節制色彩</div></label>
       <label class="card"><input type="radio" name="accessory" value="pearlForehead"><div class="name">珍珠額飾</div><div class="desc">精緻額前裝飾，保持臉部清楚</div></label>
@@ -250,6 +267,8 @@
       <label class="card"><input type="radio" name="pose" value="sideLongLine"><div class="name">側身長線條</div><div class="desc">肩頸、腰線與衣襬形成長線</div></label>
       <label class="card"><input type="radio" name="pose" value="teaSeated"><div class="name">坐姿茶席</div><div class="desc">中式茶席的安靜坐姿</div></label>
       <label class="card"><input type="radio" name="pose" value="teaCup"><div class="name">雙手捧茶盞</div><div class="desc">手指放鬆，呈現安靜生活感</div></label>
+      <label class="card"><input type="radio" name="pose" value="lycheeTray"><div class="name">手持荔枝果盤</div><div class="desc">托鎏金果盤，輕取荔枝，呈現盛宴情境</div></label>
+      <label class="card"><input type="radio" name="pose" value="jadePoolSeated"><div class="name">御池端坐</div><div class="desc">身著完整華服坐於白玉池畔，姿態自然含蓄</div></label>
       <label class="card"><input type="radio" name="pose" value="scrollSeated"><div class="name">坐姿書卷</div><div class="desc">書桌、書卷與側面光線</div></label>
       <label class="card"><input type="radio" name="pose" value="standingScroll"><div class="name">站姿閱讀書卷</div><div class="desc">站立持卷，保留完整服裝輪廓</div></label>
       <label class="card"><input type="radio" name="pose" value="calligraphy"><div class="name">書法雅集</div><div class="desc">執筆或整理宣紙的文人姿態</div></label>
@@ -286,6 +305,8 @@
       <label class="card"><input type="radio" name="lighting" value="waterReflection"><div class="name">水面反射光</div><div class="desc">水鄉柔和冷色反射</div></label>
       <label class="card"><input type="radio" name="lighting" value="softMistBacklight"><div class="name">柔霧逆光</div><div class="desc">袖線與髮絲有細緻輪廓光</div></label>
       <label class="card"><input type="radio" name="lighting" value="classicalRembrandt"><div class="name">古典側光</div><div class="desc">油畫式明暗與克制立體感</div></label>
+      <label class="card"><input type="radio" name="lighting" value="goldenGardenBacklight"><div class="name">宮苑黃金晨光</div><div class="desc">自然晨光、柔和逆光與細緻空氣感</div></label>
+      <label class="card"><input type="radio" name="lighting" value="steamyMorningGlow"><div class="name">御池柔霧晨光</div><div class="desc">水面反射、柔霧輪廓與自然膚色</div></label>
     </div>
     <div class="group-title">09B｜色彩系統</div>
     <p class="hint">單選一組主色；可由下方自訂配色覆蓋。</p>
@@ -300,6 +321,7 @@
       <label class="card"><input type="radio" name="colorPalette" value="bambooGray"><div class="name">竹青與米灰</div><div class="desc">自然、安靜、適合園林</div></label>
       <label class="card"><input type="radio" name="colorPalette" value="plumMist"><div class="name">梅紫與霧灰</div><div class="desc">冬日、清冷、含蓄雅致</div></label>
       <label class="card"><input type="radio" name="colorPalette" value="inkMuted"><div class="name">低飽和水墨色</div><div class="desc">宣紙、墨色與柔和留白</div></label>
+      <label class="card"><input type="radio" name="colorPalette" value="peachChampagne"><div class="name">粉金香檳色</div><div class="desc">桃粉、香檳金、暖白與嫩玉綠</div></label>
     </div>
     <label class="field">指定配色<input id="colorNote" type="text" placeholder="例如：月白、黛青、少量金色"></label>
   </section>
@@ -327,6 +349,8 @@
       <label class="card"><input type="radio" name="background" value="palaceWallShadow"><div class="name">宮牆樹影</div><div class="desc">簡潔牆面與自然樹影</div></label>
       <label class="card"><input type="radio" name="background" value="paperBackdrop"><div class="name">宣紙水墨背景</div><div class="desc">紙張纖維、淡墨與乾淨留白</div></label>
       <label class="card"><input type="radio" name="background" value="pureWhiteBackground"><div class="name">無背景純白色</div><div class="desc">純白棚拍、服裝展示、無環境干擾</div></label>
+      <label class="card"><input type="radio" name="background" value="lycheePalaceGarden"><div class="name">荔枝宮苑盛宴</div><div class="desc">荔枝樹、水榭、蓮池與皇家園林層次</div></label>
+      <label class="card"><input type="radio" name="background" value="royalGardenHotSpring"><div class="name">白玉御苑湯池</div><div class="desc">白玉池、牡丹花瓣、水霧與宮苑長廊</div></label>
     </div>
     <label class="field">自訂背景<input id="customBackground" type="text" placeholder="例如：雨後蘇州園林"></label>
   </section>
@@ -403,6 +427,7 @@ const accessoryData = {
   jadePendant: 'a small carved jade pendant with restrained traditional waist ornament',
   pearlHairOrnament: 'a delicate pearl hair ornament with restrained classical craftsmanship',
   goldHairpin: 'a refined gold hairpin and subtle traditional hair arrangement',
+  phoenixTasselHairpiece: 'an ornate phoenix-inspired gold hairpiece with refined pearl tassels and controlled courtly detail',
   woodHairpin: 'a simple carved wooden hairpin with quiet literati elegance',
   silkFlower: 'a soft silk flower hair ornament in restrained classical colors',
   pearlForehead: 'a delicate pearl forehead ornament while keeping the face clearly unobstructed',
@@ -425,7 +450,9 @@ const garmentData = {
   songShortTopLongSkirt: 'Song-inspired short upper garment with a long flowing skirt, clean layered proportions, narrow sleeves, restrained silk and linen textiles, elegant feminine Song-style silhouette',
   ancientPhotoCouture: 'Chinese-inspired high-end portrait costume, layered gauze and silk, refined decorative details, flowing ribbons, camera-friendly silhouette, cinematic classical beauty editorial styling',
   ancientSocialCouture: 'trend-driven social-media Chinese costume styling, camera-ready fitted garment silhouette, flowing ribbon layers, polished short-form fashion visual language, refined Chinese beauty editorial styling, clothing styling only',
-  ancientFormalGown: 'modern Chinese-inspired formal gown, structured couture tailoring, elegant traditional collar details, restrained embroidery, refined eveningwear silhouette, luxury fashion editorial styling'
+  ancientFormalGown: 'modern Chinese-inspired formal gown, structured couture tailoring, elegant traditional collar details, restrained embroidery, refined eveningwear silhouette, luxury fashion editorial styling',
+  ancientPalaceCouture: 'Chinese-inspired ceremonial palace couture, luxurious layered silk, refined gold embroidery, elegant courtly proportions, ornate but controlled jewelry styling, premium fine-art portrait silhouette',
+  ancientGauzeCouture: 'Chinese-inspired layered gauze couture, softly translucent outer silk layers over a structured opaque inner garment, flowing sleeves, delicate embroidery, romantic refined fine-art portrait styling'
 };
 
 const styleData = {
@@ -434,7 +461,8 @@ const styleData = {
   courtLuxury: 'luxurious Chinese courtly fashion campaign, graceful opulence and premium textile presentation',
   inkFineArt: 'ink-wash fine art portrait photography, poetic negative space, soft restrained visual rhythm',
   fashionEditorial: 'high-fashion editorial photography, contemporary styling while preserving Chinese garment identity',
-  modernCouture: 'premium modern Chinese couture campaign, sophisticated tailoring, polished commercial finish'
+  modernCouture: 'premium modern Chinese couture campaign, sophisticated tailoring, polished commercial finish',
+  aestheticFineArt: 'romantic Chinese classical fine-art portrait photography, refined cinematic softness, poetic realism, premium editorial finish and elegant cultural atmosphere'
 };
 
 const backgroundData = {
@@ -457,7 +485,9 @@ const backgroundData = {
   suzhouCorridor: 'a Suzhou-style garden corridor with white walls, dark tiles and framed courtyard views',
   palaceWallShadow: 'a quiet palace wall with tree shadows, warm stone and restrained background simplicity',
   paperBackdrop: 'a softly textured xuan-paper backdrop with restrained ink wash and generous clean space',
-  pureWhiteBackground: 'pure seamless white background, no visible environment, no architecture, no props, evenly lit clean white studio backdrop'
+  pureWhiteBackground: 'pure seamless white background, no visible environment, no architecture, no props, evenly lit clean white studio backdrop',
+  lycheePalaceGarden: 'a refined palace garden with a waterside pavilion, lotus pond, mature lychee tree and a quiet ceremonial feast setting, layered Tang-inspired architecture and natural depth',
+  royalGardenHotSpring: 'a white-jade royal garden hot-spring pool with soft steam, floating peony petals, carved stone edges and elegant palace corridors, fully dressed portrait setting'
 };
 
 const lightingData = {
@@ -472,7 +502,9 @@ const lightingData = {
   floralWindowProjection: 'soft floral-window shadow projection with gentle patterned light across the garment and background',
   waterReflection: 'subtle waterside reflected light with delicate cool highlights and unified skin tone',
   softMistBacklight: 'soft misty backlight with a luminous edge around sleeves and hair while the face remains evenly exposed',
-  classicalRembrandt: 'classical oil-painting-inspired side light with controlled facial modeling and restrained contrast'
+  classicalRembrandt: 'classical oil-painting-inspired side light with controlled facial modeling and restrained contrast',
+  goldenGardenBacklight: 'natural golden morning backlight through palace garden foliage, soft rim definition, gentle atmospheric depth and even facial exposure',
+  steamyMorningGlow: 'warm morning light reflected from a quiet water surface, soft steam diffusion, delicate rim light and natural skin tone'
 };
 
 const colorPaletteData = {
@@ -485,7 +517,8 @@ const colorPaletteData = {
   porcelainBlue: 'porcelain white, cobalt blue and soft gray',
   bambooGray: 'bamboo green, rice gray and natural linen',
   plumMist: 'muted plum, mist gray and pale snow white',
-  inkMuted: 'low-saturation ink black, paper white and smoky blue'
+  inkMuted: 'low-saturation ink black, paper white and smoky blue',
+  peachChampagne: 'peach pink, champagne gold, warm ivory and fresh jade green'
 };
 
 const poseData = {
@@ -501,6 +534,8 @@ const poseData = {
   sideLongLine: 'side-facing long-line pose with aligned neck, shoulder, waist and flowing garment silhouette',
   teaSeated: 'seated calmly at a Chinese tea table with relaxed shoulders and natural hand placement',
   teaCup: 'holding a small porcelain teacup with both hands, relaxed fingers and a quiet natural moment',
+  lycheeTray: 'holding a refined gilt fruit tray with one hand and gently lifting a lychee with the other, relaxed fingers and a graceful feast portrait gesture',
+  jadePoolSeated: 'seated gracefully at the shallow edge of a white-jade garden pool in a fully layered garment, relaxed shoulders, secure drape and natural hands',
   scrollSeated: 'seated beside a scholar desk while holding a scroll, quiet thoughtful portrait moment',
   standingScroll: 'standing while reading a traditional scroll, keeping the full garment silhouette visible and posture natural',
   calligraphy: 'writing calligraphy at a traditional desk with natural hand position and composed posture',
@@ -584,7 +619,13 @@ const themeTemplates = {
   songScholarStudy: { style: 'classicalPortrait', composition: 'garment detail-focused composition with collar construction, textile texture and refined craftsmanship as visual priorities', garment: 'songOpenFrontBeizi', materials: ['ramieLinen', 'calligraphySeal'], accessory: 'woodHairpin', chest: 'none', waist: 'none', shoulder: 'none', body: 'original', pose: 'scrollSeated', lighting: 'paperWindowSoft', color: 'ivoryTea', background: 'songStudy', framing: 'halfBody', camera: 'beautyPortrait', ratio: 'vertical34' },
   songJiangnanInk: { style: 'inkFineArt', composition: 'full environmental portrait with subject integrated into a Chinese courtyard, study or waterside garden with clear spatial layers', garment: 'songShortTopLongSkirt', materials: ['inkLandscapePattern', 'blueWhitePorcelain'], accessory: 'none', chest: 'none', waist: 'none', shoulder: 'none', body: 'slightWaist', pose: 'railingGaze', lighting: 'inkMist', color: 'inkMuted', background: 'jiangnanWater', framing: 'environment', camera: 'highAngle', ratio: 'landscape169' },
   songModernMinimal: { style: 'fashionEditorial', composition: 'asymmetrical composition with the subject placed to one side, balanced visual weight and clean surrounding space', garment: 'songModern', materials: ['plainSilk', 'kesiTexture'], accessory: 'jadePendant', chest: 'crossWrapDeepV', waist: 'wrapSideSlit', shoulder: 'halter', body: 'tallFashion', pose: 'sideLongLine', lighting: 'modernStudio', color: 'daiJade', background: 'modernChineseStudio', framing: 'threeQuarter', camera: 'sideProfile', ratio: 'vertical45' },
-  songModernStudio: { style: 'modernCouture', composition: 'garment detail-focused composition with collar construction, textile texture and refined craftsmanship as visual priorities', garment: 'ancientFormalGown', materials: ['plainSilk', 'xiangyunSilk'], accessory: 'pearlHairOrnament', chest: 'deepV', waist: 'none', shoulder: 'singleShoulder', body: 'slightWaist', pose: 'sleeveHold', lighting: 'paperWindowSoft', color: 'porcelainBlue', background: 'latticeRoom', framing: 'halfBody', camera: 'threeQuarterSide', ratio: 'vertical45' }
+  songModernStudio: { style: 'modernCouture', composition: 'garment detail-focused composition with collar construction, textile texture and refined craftsmanship as visual priorities', garment: 'ancientFormalGown', materials: ['plainSilk', 'xiangyunSilk'], accessory: 'pearlHairOrnament', chest: 'deepV', waist: 'none', shoulder: 'singleShoulder', body: 'slightWaist', pose: 'sleeveHold', lighting: 'paperWindowSoft', color: 'porcelainBlue', background: 'latticeRoom', framing: 'halfBody', camera: 'threeQuarterSide', ratio: 'vertical45' },
+  beautyLycheeBanquet: { style: 'aestheticFineArt', composition: 'centered classical portrait composition, subject placed in the center with balanced Chinese architectural framing', garment: 'ancientPalaceCouture', materials: ['lightGauze', 'goldEmbroidery'], accessory: 'phoenixTasselHairpiece', chest: 'none', waist: 'none', shoulder: 'none', body: 'slightWaist', pose: 'lycheeTray', lighting: 'goldenGardenBacklight', color: 'peachChampagne', background: 'lycheePalaceGarden', framing: 'threeQuarter', camera: 'beautyPortrait', ratio: 'vertical916' },
+  beautyHuaqingMist: { style: 'aestheticFineArt', composition: 'flowing sleeves and fabric edges create a soft foreground frame while the face remains clearly unobstructed', garment: 'ancientGauzeCouture', materials: ['lightGauze', 'peonyPattern'], accessory: 'pearlHairOrnament', chest: 'none', waist: 'none', shoulder: 'none', body: 'slightWaist', pose: 'jadePoolSeated', lighting: 'steamyMorningGlow', color: 'peachChampagne', background: 'royalGardenHotSpring', framing: 'threeQuarter', camera: 'highAngle', ratio: 'vertical916' },
+  beautyPeonyCourt: { style: 'courtLuxury', composition: 'symmetrical classical composition with balanced windows, courtyard lines and ceremonial visual order', garment: 'ancientPalaceCouture', materials: ['goldEmbroidery', 'peonyPattern'], accessory: 'phoenixTasselHairpiece', chest: 'none', waist: 'none', shoulder: 'none', body: 'tallFashion', pose: 'flowerBranch', lighting: 'tangGold', color: 'rougeGold', background: 'tangPalace', framing: 'fullBody', camera: 'eyeLevel', ratio: 'vertical23' },
+  beautyLotusPavilion: { style: 'aestheticFineArt', composition: 'full environmental portrait with subject integrated into a Chinese courtyard, study or waterside garden with clear spatial layers', garment: 'ancientGauzeCouture', materials: ['lightGauze', 'lotusVinePattern'], accessory: 'pearlHairOrnament', chest: 'none', waist: 'none', shoulder: 'none', body: 'slightWaist', pose: 'railingGaze', lighting: 'waterReflection', color: 'pineIvory', background: 'lotusBridge', framing: 'environment', camera: 'threeQuarterSide', ratio: 'vertical23' },
+  beautyWindowGauze: { style: 'aestheticFineArt', composition: 'wooden lattice window framing around the subject, layered foreground and background depth, intimate Chinese portrait composition', garment: 'ancientGauzeCouture', materials: ['lightGauze', 'windowLatticePattern'], accessory: 'pearlHairOrnament', chest: 'none', waist: 'none', shoulder: 'none', body: 'slightWaist', pose: 'sleeveHold', lighting: 'floralWindowProjection', color: 'smokeBlue', background: 'latticeRoom', framing: 'halfBody', camera: 'beautyPortrait', ratio: 'vertical45' },
+  beautyPlumSnow: { style: 'inkFineArt', composition: 'foreground floral branch framing with the face and garment remaining clearly unobstructed', garment: 'ancientPhotoCouture', materials: ['plainSilk', 'plumOrchidBamboo'], accessory: 'woodHairpin', chest: 'none', waist: 'none', shoulder: 'none', body: 'original', pose: 'flowerBranch', lighting: 'softMistBacklight', color: 'plumMist', background: 'plumSnow', framing: 'threeQuarter', camera: 'threeQuarterSide', ratio: 'vertical45' }
 };
 
 function selected(name){

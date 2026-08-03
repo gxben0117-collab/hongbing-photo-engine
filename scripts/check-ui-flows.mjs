@@ -365,6 +365,24 @@ function checkEditorialTemplateContract(page, source, groups) {
   }
 }
 
+function checkChineseClassicalTemplateContract(page, source) {
+  if (page !== 'chinese-classical.html') return;
+  const templateButtons = tags(source, 'button').filter(tag => attr(tag, 'data-template'));
+  const templateKeys = new Set(templateButtons.map(tag => attr(tag, 'data-template')));
+  const presetKeys = objectKeys(source, 'themeTemplates');
+  if (templateButtons.length !== 18) issue(page, `expected 18 template buttons, found ${templateButtons.length}`);
+  if (!presetKeys || presetKeys.size !== 18) issue(page, `expected 18 themeTemplates entries, found ${presetKeys ? presetKeys.size : 0}`);
+  for (const key of templateKeys) {
+    if (!presetKeys?.has(key)) issue(page, `template button "${key}" has no themeTemplates entry`);
+  }
+  for (const key of presetKeys || []) {
+    if (!templateKeys.has(key)) issue(page, `themeTemplates entry "${key}" has no template button`);
+  }
+  for (const label of ['朝代古典', '新式改良', '唯美古風寫真']) {
+    if (!source.includes(`class="group-title">${label}</div>`)) issue(page, `missing classical template group "${label}"`);
+  }
+}
+
 const themeCopyContracts = {
   'fantasy-fashion.html': '奇幻材質與世界觀元素',
   'chinese-classical.html': '傳統材質與中式元素',
@@ -397,10 +415,10 @@ function checkThemeCopyContract(page, source) {
 
 function checkHomeCopyContract(page, source) {
   if (page !== 'index.html') return;
-  for (const stale of ['真人旅拍感 × 雜誌封面氣場', '24種服裝與24種背景', '24種服裝與24種校園決戰背景']) {
+  for (const stale of ['真人旅拍感 × 雜誌封面氣場', '24種服裝與24種背景', '24種服裝與24種校園決戰背景', '四組十五套']) {
     if (source.includes(stale)) issue(page, `stale homepage copy remains: "${stale}"`);
   }
-  for (const required of ['亞洲傳統服飾', '奇幻世界觀', '動漫角色', '編輯視覺設計']) {
+  for (const required of ['亞洲傳統服飾', '奇幻世界觀', '動漫角色', '編輯視覺設計', '四組十七套']) {
     if (!source.includes(required)) issue(page, `homepage description is missing "${required}"`);
   }
 }
@@ -435,6 +453,7 @@ for (const page of pages) {
   checkGarmentVariationLayerContract(page, source, groups);
   checkPresetButtons(page, source);
   checkEditorialTemplateContract(page, source, groups);
+  checkChineseClassicalTemplateContract(page, source);
   checkThemeCopyContract(page, source);
   checkHomeCopyContract(page, source);
   checkVisualOrder(page, source);

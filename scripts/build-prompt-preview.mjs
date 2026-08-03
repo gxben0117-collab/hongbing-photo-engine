@@ -264,7 +264,7 @@ function generateFantasy(core, data) {
   return prompt.filter(Boolean).join('\n');
 }
 
-function generateChineseClassical(core, data) {
+function generateChineseClassical(core, data, selectionOverride = null) {
   const selection = {
     bodyShape: 'original',
     materialKeys: ['plainSilk', 'calligraphySeal'],
@@ -282,6 +282,7 @@ function generateChineseClassical(core, data) {
     chest: 'crossCollarDeepV',
     waist: 'none',
     shoulder: 'none',
+    ...(selectionOverride || {}),
   };
   const materialText = selection.materialKeys.map(key => data.materialData[key].prompt).join('; ');
   const variationParts = [
@@ -318,6 +319,27 @@ function generateChineseClassical(core, data) {
     'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face',
   ];
   return prompt.filter(Boolean).join('\n');
+}
+
+function classicalTemplatePreviewSelection(template) {
+  return {
+    bodyShape: template.body,
+    materialKeys: template.materials,
+    accessory: template.accessory,
+    garment: template.garment,
+    background: template.background,
+    lighting: template.lighting,
+    color: template.color,
+    composition: template.composition,
+    framing: template.framing,
+    pose: template.pose,
+    style: template.style,
+    camera: template.camera,
+    ratio: template.ratio,
+    chest: template.chest,
+    waist: template.waist,
+    shoulder: template.shoulder,
+  };
 }
 
 function generateCulturalClassical(core, data, config) {
@@ -1122,7 +1144,7 @@ function loadRevision(label, sourceReader) {
       page: 'chineseClassical',
       startMarker: 'const materialData = {',
       endMarker: 'function selected',
-      exportExpression: '({ materialData, accessoryData, garmentData, styleData, backgroundData, lightingData, colorPaletteData, sharedClassicalCore, BODY_SHAPES, GARMENT_VARIATIONS, poseData, framingData, cameraData, ratioData })',
+      exportExpression: '({ materialData, accessoryData, garmentData, styleData, backgroundData, lightingData, colorPaletteData, sharedClassicalCore, BODY_SHAPES, GARMENT_VARIATIONS, poseData, framingData, cameraData, ratioData, themeTemplates })',
     });
   } catch (err) {
     // New page is absent in older base revisions.
@@ -1164,6 +1186,15 @@ function loadRevision(label, sourceReader) {
   };
   if (chineseClassicalData) {
     prompts['chinese-classical-default.txt'] = generateChineseClassical(core, chineseClassicalData);
+    const classicalTemplates = chineseClassicalData.themeTemplates || {};
+    for (const [templateKey, fileName] of [
+      ['beautyLycheeBanquet', 'chinese-classical-beauty-lychee.txt'],
+      ['beautyHuaqingMist', 'chinese-classical-beauty-huaqing-mist.txt'],
+    ]) {
+      if (classicalTemplates[templateKey]) {
+        prompts[fileName] = generateChineseClassical(core, chineseClassicalData, classicalTemplatePreviewSelection(classicalTemplates[templateKey]));
+      }
+    }
   }
   if (japaneseKimonoData) {
     prompts['japanese-kimono-default.txt'] = generateCulturalClassical(core, japaneseKimonoData, {

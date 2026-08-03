@@ -392,7 +392,7 @@ const core = evalCore(coreSource);
     ].filter(Boolean).join('\n');
     checkOutput('chineseClassical', i, sel, output, { requireIdentity: true, identityMarkers: ['身份鎖定系統'] });
     const positiveOutput = output.split(data.sharedClassicalCore.negativePrompt)[0];
-    if (/(xianxia|cultivator|magical aura|futuristic technology|cyberpunk|mechanical armor|technology interface)/i.test(positiveOutput)) {
+    if (/(xianxia|cultivator|magical aura|futuristic technology|cyberpunk|mechanical armor|technology interface|fantasy costume|fairy|goddess|celestial palace|moon palace)/i.test(positiveOutput)) {
       ISSUES.push({ page: 'chineseClassical', iteration: i, selection: sel, problems: ['正向 Prompt 含禁用幻想語彙'] });
     }
   }
