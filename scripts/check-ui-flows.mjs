@@ -365,6 +365,46 @@ function checkEditorialTemplateContract(page, source, groups) {
   }
 }
 
+const themeCopyContracts = {
+  'fantasy-fashion.html': '奇幻材質與世界觀元素',
+  'chinese-classical.html': '傳統材質與中式元素',
+  'xianxia.html': '仙俠材質與修真元素',
+  'anime-character.html': '動漫材質與渲染特效',
+  'flower-fairy.html': '花卉材質與仙子元素',
+  'isekai-fantasy.html': '異世界材質與幻想元素',
+  'floral-sweet.html': '花卉材質與甜美元素',
+  'gala-socialite.html': '晚宴材質與珠寶元素',
+  'kpop-idol.html': '舞台材質與偶像元素',
+  'ancient-goddess.html': '神話材質與古文明元素',
+  'japanese-kimono.html': '日本材質與和風元素',
+  'korean-hanbok.html': '韓國材質與韓服元素',
+};
+
+function checkThemeCopyContract(page, source) {
+  const expectedTitle = themeCopyContracts[page];
+  if (!expectedTitle) return;
+  if (!source.includes(`class="section-title">${expectedTitle}</div>`)) {
+    issue(page, `material section title should be "${expectedTitle}"`);
+  }
+  if (source.includes('主題材質與奇幻元素')) {
+    issue(page, 'generic material section title remains on a theme-specific page');
+  }
+  const materialBlock = sectionBlock(source, 'section-material');
+  if (materialBlock && !/data-choice="materials?"/.test(materialBlock)) {
+    issue(page, 'theme-specific material section is not connected to the material choice group');
+  }
+}
+
+function checkHomeCopyContract(page, source) {
+  if (page !== 'index.html') return;
+  for (const stale of ['真人旅拍感 × 雜誌封面氣場', '24種服裝與24種背景', '24種服裝與24種校園決戰背景']) {
+    if (source.includes(stale)) issue(page, `stale homepage copy remains: "${stale}"`);
+  }
+  for (const required of ['亞洲傳統服飾', '奇幻世界觀', '動漫角色', '編輯視覺設計']) {
+    if (!source.includes(required)) issue(page, `homepage description is missing "${required}"`);
+  }
+}
+
 function checkVisualOrder(page, source) {
   const contract = visualOrderContracts[page];
   if (!contract) return;
@@ -395,6 +435,8 @@ for (const page of pages) {
   checkGarmentVariationLayerContract(page, source, groups);
   checkPresetButtons(page, source);
   checkEditorialTemplateContract(page, source, groups);
+  checkThemeCopyContract(page, source);
+  checkHomeCopyContract(page, source);
   checkVisualOrder(page, source);
   console.log(`checked ${page}: ${groups.size} radio groups, ${idSet.size} ids`);
 }
