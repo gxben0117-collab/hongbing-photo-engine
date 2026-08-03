@@ -211,6 +211,56 @@ const issues = [];
   checkObject('chinese-classical.html', 'themeTemplates', extractObjectLiteral(src, 'themeTemplates'), fieldLive, issues);
 }
 
+// ===== japanese-kimono.html =====
+{
+  const src = fs.readFileSync(path.join(root, 'japanese-kimono.html'), 'utf8');
+  const fieldLive = {
+    style: liveRadioValues(src, 'style'),
+    composition: liveRadioValues(src, 'composition'),
+    garment: liveRadioValues(src, 'garment'),
+    materials: liveInputValues(src, 'materials'),
+    accessory: liveRadioValues(src, 'accessory'),
+    chest: liveRadioValues(src, 'garmentChestVariation'),
+    waist: liveRadioValues(src, 'garmentWaistVariation'),
+    shoulder: liveRadioValues(src, 'garmentShoulderVariation'),
+    body: liveRadioValues(src, 'bodyShape'),
+    pose: liveRadioValues(src, 'pose'),
+    lighting: liveRadioValues(src, 'lighting'),
+    color: liveRadioValues(src, 'colorPalette'),
+    background: liveRadioValues(src, 'background'),
+    whitespace: liveRadioValues(src, 'whitespace'),
+    framing: liveRadioValues(src, 'framing'),
+    camera: liveRadioValues(src, 'camera'),
+    ratio: liveRadioValues(src, 'ratio'),
+  };
+  checkObject('japanese-kimono.html', 'themeTemplates', extractObjectLiteral(src, 'themeTemplates'), fieldLive, issues);
+}
+
+// ===== korean-hanbok.html =====
+{
+  const src = fs.readFileSync(path.join(root, 'korean-hanbok.html'), 'utf8');
+  const fieldLive = {
+    style: liveRadioValues(src, 'style'),
+    composition: liveRadioValues(src, 'composition'),
+    garment: liveRadioValues(src, 'garment'),
+    materials: liveInputValues(src, 'materials'),
+    accessory: liveRadioValues(src, 'accessory'),
+    chest: liveRadioValues(src, 'garmentChestVariation'),
+    waist: liveRadioValues(src, 'garmentWaistVariation'),
+    shoulder: liveRadioValues(src, 'garmentShoulderVariation'),
+    body: liveRadioValues(src, 'bodyShape'),
+    pose: liveRadioValues(src, 'pose'),
+    lighting: liveRadioValues(src, 'lighting'),
+    color: liveRadioValues(src, 'colorPalette'),
+    background: liveRadioValues(src, 'background'),
+    whitespace: liveRadioValues(src, 'whitespace'),
+    framing: liveRadioValues(src, 'framing'),
+    camera: liveRadioValues(src, 'camera'),
+    ratio: liveRadioValues(src, 'ratio'),
+  };
+  checkObject('korean-hanbok.html', 'themeTemplates', extractObjectLiteral(src, 'themeTemplates'), fieldLive, issues);
+}
+
 // ===== anime-character.html =====
 {
   const src = fs.readFileSync(path.join(root, 'anime-character.html'), 'utf8');

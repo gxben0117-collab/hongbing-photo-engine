@@ -218,6 +218,56 @@ period-informed Chinese silhouettes and refined Chinese editorial photography.`
     output: CORE_OUTPUT_QUALITY
   };
 
+  const japaneseKimonoCore = {
+    identityGuard: [
+      CORE_IDENTITY_LOCK,
+      CORE_FACE_GEOMETRY_LOCK,
+      `Style Scope Rule:
+Japanese kimono aesthetics and Japanese editorial art direction only affect clothing, ornaments, background, lighting, composition, mood and textile surface.
+They must not change the person's facial structure, identity, age impression or recognizable features.`
+    ].join("\n\n"),
+    anatomyGuard: humanCore,
+    illustrationSkeleton: illustrationHumanCore,
+    poseGuard: CORE_POSE_NATURALITY,
+    lightingGuard: CORE_LIGHTING_UNIFICATION,
+    compositionGuard: CORE_COMPOSITION_CONTROL,
+    negativePrompt: [
+      CORE_NEGATIVE_PROMPT,
+      `Japanese kimono page scope:
+No Chinese hanfu, no Korean hanbok, no qipao, no xianxia fantasy, no magical aura,
+no generic fantasy robe, no anime cosplay, no samurai armor, no futuristic technology,
+no cyberpunk, no sci-fi, no mecha or mechanical armor.
+Keep the positive visual language grounded in authentic Japanese kimono construction,
+Japanese textile traditions and culturally coherent Japanese settings.`
+    ].join("\n\n"),
+    output: CORE_OUTPUT_QUALITY
+  };
+
+  const koreanHanbokCore = {
+    identityGuard: [
+      CORE_IDENTITY_LOCK,
+      CORE_FACE_GEOMETRY_LOCK,
+      `Style Scope Rule:
+Korean hanbok aesthetics and Korean editorial art direction only affect clothing, ornaments, background, lighting, composition, mood and textile surface.
+They must not change the person's facial structure, identity, age impression or recognizable features.`
+    ].join("\n\n"),
+    anatomyGuard: humanCore,
+    illustrationSkeleton: illustrationHumanCore,
+    poseGuard: CORE_POSE_NATURALITY,
+    lightingGuard: CORE_LIGHTING_UNIFICATION,
+    compositionGuard: CORE_COMPOSITION_CONTROL,
+    negativePrompt: [
+      CORE_NEGATIVE_PROMPT,
+      `Korean hanbok page scope:
+No Japanese kimono, no Chinese hanfu, no qipao, no xianxia fantasy, no magical aura,
+no generic fantasy robe, no anime cosplay, no samurai styling, no futuristic technology,
+no cyberpunk, no sci-fi, no mecha or mechanical armor.
+Keep the positive visual language grounded in authentic Korean hanbok construction,
+Korean textile traditions and culturally coherent Korean settings.`
+    ].join("\n\n"),
+    output: CORE_OUTPUT_QUALITY
+  };
+
   const xianxiaCore = {
     identityGuard: [
       CORE_IDENTITY_LOCK,
@@ -425,6 +475,8 @@ They must not change the person's facial structure, identity, age impression or 
       magazine: magazineCore,
       fantasy: fantasyCore,
       chineseClassical: chineseClassicalCore,
+      japaneseKimono: japaneseKimonoCore,
+      koreanHanbok: koreanHanbokCore,
       xianxia: xianxiaCore,
       anime: animeCore,
       flowerFairy: flowerFairyCore,

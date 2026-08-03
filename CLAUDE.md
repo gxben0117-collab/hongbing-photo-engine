@@ -9,7 +9,7 @@
 - 目標：AI 寫真旅拍咒語產生器；舊「紅兵風格寫真咒語產生器」的正式後繼。
 - 技術棧：純靜態 HTML，GitHub Pages 直接部署，**不需要 npm 或 Python 套件**。
 - 主入口：`index.html`；另有 doll / fantasy-fashion / magazine 等子頁。
-- 目前版本：v4.27；共用身份／臉部幾何核心基準仍為 v4.3。
+- 目前版本：v4.28；共用身份／臉部幾何核心基準仍為 v4.3。
 - 特殊禁區：`核心資料/` 不進 Git（私有提示詞資產）；`backup_original/`、`output/` 不進 Git。
 - 001 完成區的「員工借支」「家庭水電瓦斯記帳」由本專案拆分，此處同名 HTML 為歷史殘留。
 
@@ -27,11 +27,14 @@
   09 拆為光影與色彩系統，10 拆為背景場景與留白方向；補充服裝展示構圖、自然古典姿勢、
   12 組模板欄位與 100 次稽核資料。
 - **全專案 UI、生成咒語與一鍵設定回歸檢查**（2026-08-03）：新增
-  `scripts/check-ui-flows.mjs`，靜態檢查 16 個工具頁的必要控制項、radio 初始值、
+  `scripts/check-ui-flows.mjs`，靜態檢查 18 個工具頁的必要控制項、radio 初始值、
   helper 引用、生成／複製／輸出流程，以及 `data-template`、旅拍／雜誌 preset 與
   實際選項池的對應。`validate-preset-refs.mjs` 同步補上公仔與編輯視覺預設欄位，
   `audit-100x.mjs` 與 `build-prompt-preview.mjs` 同步覆蓋編輯視覺的影像處理／印刷質感。
   上線前完整結果記錄於 [`docs/qa-ui-and-prompt.md`](docs/qa-ui-and-prompt.md)。
+- **新增日本和服與韓國韓服獨立工具頁**（2026-08-03）：新增 `japanese-kimono.html` 與
+  `korean-hanbok.html`，沿用中式古典頁的控制軸結構，但各自隔離服裝、材質、飾品、姿勢、
+  光影、背景、12 組模板與頁面核心；兩頁均納入 UI flow、preset、100 次稽核與 prompt preview。
 - **工作流順序文件同步**（2026-08-03）：共同頁面依「版型／構圖 → 服裝輪廓 →
   主題材質 → 服裝變化 → 身形 → 姿勢 → 自訂 → 光影 → 背景 → 鏡頭 → 比例 →
   生成」排列；旅拍、雜誌、戰鬥學院依各自核心決策順序保留特例，實際 CSS 視覺順序與

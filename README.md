@@ -4,7 +4,7 @@
 
 ## 版本
 
-v4.27 起持續迭代中；完整逐日開發記錄見 [docs/development-log.md](docs/development-log.md)。
+v4.28 起持續迭代中；完整逐日開發記錄見 [docs/development-log.md](docs/development-log.md)。
 
 v4.3 基礎重點：
 
@@ -26,7 +26,7 @@ v4.3 之後陸續完成（詳見開發日誌）：
 ## 專案定位
 
 - `index.html` 是入口與工具導覽頁。
-- 十六個工具頁（見下方「正式頁面」）各自包含 UI、選項資料與咒語組裝邏輯。
+- 十八個工具頁（見下方「正式頁面」）各自包含 UI、選項資料與咒語組裝邏輯。
 - `assets/core-prompt.js` 集中管理 v4.3 共用身份鎖定、臉部幾何、真人骨架、鏡頭重建、光線一致、膚質、負面詞與輸出品質規則。
 - `scripts/` 底下有五個驗證腳本，見下方「上架前檢查」。
 - `docs/` 保存規格、流程、核心 prompt 契約與工程說明。
@@ -41,6 +41,8 @@ v4.3 之後陸續完成（詳見開發日誌）：
 - `doll.html` - 公仔萌工作室
 - `fantasy-fashion.html` - 幻想廣告咒語產生器
 - `chinese-classical.html` - 中式古典美學咒語產生器
+- `japanese-kimono.html` - 日本和服美學咒語產生器
+- `korean-hanbok.html` - 韓國韓服美學咒語產生器
 - `xianxia.html` - 中式仙俠咒語產生器
 - `anime-character.html` - 動漫人物美圖咒語產生器
 - `flower-fairy.html` - 花仙子咒語產生器
@@ -63,6 +65,8 @@ v4.3 之後陸續完成（詳見開發日誌）：
 ├─ doll.html                   # 工具頁: 公仔
 ├─ fantasy-fashion.html        # 工具頁: 幻想廣告
 ├─ chinese-classical.html      # 工具頁: 中式古典美學
+├─ japanese-kimono.html        # 工具頁: 日本和服美學
+├─ korean-hanbok.html           # 工具頁: 韓國韓服美學
 ├─ xianxia.html                # 工具頁: 中式仙俠
 ├─ anime-character.html        # 工具頁: 動漫人物美圖
 ├─ flower-fairy.html           # 工具頁: 花仙子
@@ -93,6 +97,7 @@ v4.3 之後陸續完成（詳見開發日誌）：
 [底層保護核心](docs/shared-protection-core.md)｜[工程維護規劃](docs/engineering.md)｜
 [寫真旅拍流程](docs/travel-workflow.md)｜[雜誌棚拍流程](docs/magazine-workflow.md)｜
 [中式古典美學流程](docs/chinese-classical-workflow.md)｜
+[日本和服美學流程](docs/japanese-kimono-workflow.md)｜[韓國韓服美學流程](docs/korean-hanbok-workflow.md)｜
 [幻想廣告分類表](docs/fantasy-ad-workflow.md)｜[公仔工作流程](docs/doll-workflow.md)｜
 [專案架構](docs/architecture.md)｜[完整程式規格邏輯文件](docs/full-program-spec.md)｜
 [歷史交接文件歸檔](docs/history/)
@@ -125,7 +130,7 @@ git diff --check
 
 ```powershell
 node scripts\build-prompt-preview.mjs   # 固定選項組合，改前/改後 0 diff 迴歸檢查
-node scripts\audit-100x.mjs             # 16 個正式工具頁各隨機 100 組，共 1600 組內容稽核
+node scripts\audit-100x.mjs             # 18 個正式工具頁各隨機 100 組，共 1800 組內容稽核
 node scripts\validate-preset-refs.mjs   # 各頁一鍵套用/預設連動物件引用的選項值是否都存在
 ```
 

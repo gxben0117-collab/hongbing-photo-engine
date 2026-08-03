@@ -12,6 +12,8 @@ const htmlFiles = [
   'doll.html',
   'fantasy-fashion.html',
   'chinese-classical.html',
+  'japanese-kimono.html',
+  'korean-hanbok.html',
   'xianxia.html',
   'anime-character.html',
   'flower-fairy.html',

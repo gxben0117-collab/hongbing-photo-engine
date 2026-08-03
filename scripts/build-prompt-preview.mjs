@@ -322,6 +322,47 @@ function generateChineseClassical(core, data) {
   return prompt.filter(Boolean).join('\n');
 }
 
+function generateCulturalClassical(core, data, config) {
+  const selection = config.selection;
+  const pageCore = data.sharedClassicalCore || core.page[config.pageKey];
+  const materialText = selection.materialKeys.map((key) => data.materialData[key].prompt).join('; ');
+  const variationParts = [
+    data.GARMENT_VARIATIONS.chest[selection.chest],
+    data.GARMENT_VARIATIONS.waist[selection.waist],
+    data.GARMENT_VARIATIONS.shoulder[selection.shoulder],
+  ].filter(Boolean);
+  const prompt = [
+    pageCore.identityGuard + ',',
+    'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
+    pageCore.anatomyGuard + ',',
+    pageCore.poseGuard + ',',
+    'natural relaxed hands, graceful restrained gestures, anatomically natural arms and fingers, no exaggerated fashion pose,',
+    data.BODY_SHAPES[selection.bodyShape] + ',',
+    pageCore.lightingGuard + ',',
+    data.styleData[selection.style] + ',',
+    selection.composition + ',',
+    pageCore.compositionGuard + ',',
+    config.cultureLine + ',',
+    'appearance form: ' + data.garmentData[selection.garment] + ',',
+    config.materialLine + ': ' + materialText + ',',
+    config.accessoryLine + ': ' + data.accessoryData[selection.accessory] + ',',
+    'garment variation details: ' + variationParts.join('; ') + ', preserve ' + config.preserveLine + ',',
+    data.poseData[selection.pose] + ',',
+    data.framingData[selection.framing] + ',',
+    data.cameraData[selection.camera] + ',',
+    'lighting design: ' + data.lightingData[selection.lighting] + ',',
+    'color palette: ' + data.colorPaletteData[selection.color] + ',',
+    'background design: ' + data.backgroundData[selection.background] + ',',
+    'whitespace direction: ' + data.whitespaceData[selection.whitespace] + ',',
+    data.ratioData[selection.ratio] + ',',
+    pageCore.output + ',',
+    'balanced traditional details, refined and luxurious,',
+    pageCore.negativePrompt + ',',
+    'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face',
+  ];
+  return prompt.filter(Boolean).join('\n');
+}
+
 function generateXianxia(core, data) {
   const selection = {
     bodyShape: 'original',
@@ -1084,6 +1125,34 @@ function loadRevision(label, sourceReader) {
   } catch (err) {
     // New page is absent in older base revisions.
   }
+  let japaneseKimonoData = null;
+  try {
+    const japaneseKimonoSource = sourceReader('japanese-kimono.html');
+    japaneseKimonoData = evalDataSegment({
+      source: japaneseKimonoSource,
+      core,
+      page: 'japaneseKimono',
+      startMarker: 'const materialData = {',
+      endMarker: 'function selected',
+      exportExpression: '({ materialData, accessoryData, garmentData, styleData, backgroundData, lightingData, colorPaletteData, whitespaceData, sharedClassicalCore, BODY_SHAPES, GARMENT_VARIATIONS, poseData, framingData, cameraData, ratioData })',
+    });
+  } catch (err) {
+    // New page is absent in older base revisions.
+  }
+  let koreanHanbokData = null;
+  try {
+    const koreanHanbokSource = sourceReader('korean-hanbok.html');
+    koreanHanbokData = evalDataSegment({
+      source: koreanHanbokSource,
+      core,
+      page: 'koreanHanbok',
+      startMarker: 'const materialData = {',
+      endMarker: 'function selected',
+      exportExpression: '({ materialData, accessoryData, garmentData, styleData, backgroundData, lightingData, colorPaletteData, whitespaceData, sharedClassicalCore, BODY_SHAPES, GARMENT_VARIATIONS, poseData, framingData, cameraData, ratioData })',
+    });
+  } catch (err) {
+    // New page is absent in older base revisions.
+  }
   const prompts = {
     'travel-realistic.txt': generateTravel(core, travelData, 'cinematic_realistic'),
     'travel-watercolor.txt': generateTravel(core, travelData, 'watercolor_travel'),
@@ -1093,6 +1162,62 @@ function loadRevision(label, sourceReader) {
   };
   if (chineseClassicalData) {
     prompts['chinese-classical-default.txt'] = generateChineseClassical(core, chineseClassicalData);
+  }
+  if (japaneseKimonoData) {
+    prompts['japanese-kimono-default.txt'] = generateCulturalClassical(core, japaneseKimonoData, {
+      pageKey: 'japaneseKimono',
+      cultureLine: 'refined Japanese kimono aesthetics, culturally grounded Japanese silhouette, elegant silk and obi drape, traditional Japanese design language, refined craftsmanship',
+      materialLine: 'traditional Japanese materials and motifs',
+      accessoryLine: 'traditional Japanese accessory detail',
+      preserveLine: 'the selected Japanese kimono silhouette and obi construction',
+      selection: {
+        bodyShape: 'original',
+        materialKeys: ['yuzenDye', 'sakuraPattern'],
+        accessory: 'tsumamiKanzashi',
+        garment: 'edoFurisode',
+        background: 'sakuraGarden',
+        lighting: 'sakuraBacklight',
+        color: 'sakuraIvory',
+        composition: 'flowing kimono sleeves and fabric edges create a soft foreground frame while the face remains unobstructed',
+        whitespace: 'left',
+        framing: 'threeQuarter',
+        pose: 'raiseSleeve',
+        style: 'fashionEditorial',
+        camera: 'threeQuarterSide',
+        ratio: 'vertical45',
+        chest: 'none',
+        waist: 'none',
+        shoulder: 'none',
+      },
+    });
+  }
+  if (koreanHanbokData) {
+    prompts['korean-hanbok-default.txt'] = generateCulturalClassical(core, koreanHanbokData, {
+      pageKey: 'koreanHanbok',
+      cultureLine: 'refined Korean hanbok aesthetics, culturally grounded Korean silhouette, elegant jeogori and chima drape, traditional Korean design language, refined craftsmanship',
+      materialLine: 'traditional Korean materials and motifs',
+      accessoryLine: 'traditional Korean accessory detail',
+      preserveLine: 'the selected Korean hanbok silhouette and jeogori-chima construction',
+      selection: {
+        bodyShape: 'original',
+        materialKeys: ['hanbokBrocade', 'floralEmbroidery'],
+        accessory: 'daenggi',
+        garment: 'hanbokPhotoCouture',
+        background: 'modernKoreanStudio',
+        lighting: 'hanbokStudio',
+        color: 'smokeBlueRose',
+        composition: 'asymmetrical Korean editorial composition with the subject placed to one side and clean surrounding space',
+        whitespace: 'right',
+        framing: 'threeQuarter',
+        pose: 'sleeveHold',
+        style: 'modernCouture',
+        camera: 'threeQuarterSide',
+        ratio: 'vertical45',
+        chest: 'none',
+        waist: 'none',
+        shoulder: 'none',
+      },
+    });
   }
 
   // xianxia.html is new; older revisions may not have it yet, so skip gracefully.

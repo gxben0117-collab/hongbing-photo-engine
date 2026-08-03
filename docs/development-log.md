@@ -6,6 +6,23 @@
 每筆記錄盡量只留：**做了什麼 → 為什麼 → 驗證方式**，實作細節（哪一行、哪個函式）
 留在對應的 commit diff 或 `docs/history/` 底下的原始交接文件。
 
+## 2026-08-03　新增日本和服與韓國韓服兩個獨立工具頁
+
+- **改動**：新增 `japanese-kimono.html`（日本和服美學）與 `korean-hanbok.html`（韓國韓服
+  美學），兩頁都以 `chinese-classical.html` 的互動骨架為工程範本，但保留獨立 HTML、資料池、
+  一鍵模板與生成組裝邏輯。
+- **日本頁**：建立平安／傳統正裝、婚禮／華麗和服、日常／季節和服、新式和風四組 15 套
+  服裝主題，並加入日本材質／紋樣、和風飾品、季節場景與和服展示姿勢。
+- **韓國頁**：建立傳統朝鮮韓服、宮廷／婚禮韓服、新式韓服三組 15 套服裝主題，並加入
+  韓國材質／紋樣、韓服飾品、韓屋／宮廷場景與韓服展示姿勢。
+- **核心隔離**：`assets/core-prompt.js` 新增 `page.japaneseKimono` 與
+  `page.koreanHanbok`；兩頁沿用共用身份／臉部幾何保護，但負面限制排除彼此及中式、仙俠、
+  科技幻想語彙，正向 Prompt 不混用其他國別服飾。
+- **接入**：`check-ui-flows.mjs`、`validate-preset-refs.mjs`、`audit-100x.mjs` 與
+  `build-prompt-preview.mjs` 全部接入兩頁，首頁也新增兩張獨立工具卡。
+- **驗證**：18 頁 UI flow、preset 引用、每頁 100 組隨機模擬與固定預覽均通過，合計 1800 組
+  模擬 0 issue；靜態檢查與 `git diff --check` 亦通過。
+
 ## 2026-08-03　新增中式古典美學獨立工具頁
 
 - **改動**：新增 chinese-classical.html，以 fantasy-fashion.html 的 UI 與資料組裝結構

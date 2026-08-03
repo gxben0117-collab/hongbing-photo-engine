@@ -1,4 +1,4 @@
-// Full-project audit: extract every option from the six generator pages,
+// Full-project audit: extract every option from the formal generator pages,
 // run N random combinations through a mirror of each page's real assembly
 // logic, and flag structural/content problems (undefined leaks, missing
 // identity lock, duplicate lines, etc). Read-only — writes a report only.
@@ -401,6 +401,67 @@ const core = evalCore(coreSource);
   }
   report('chineseClassical', N);
 }
+
+function auditClassicalCulturePage({ file, pageKey, label, cultureLine, materialLine, preserveLine, forbiddenPositive }) {
+  const html = read(file);
+  const data = evalDataSegment({
+    source: html, core, page: pageKey,
+    startMarker: 'const materialData = {',
+    endMarker: 'function selected',
+    exportExpression: '({ materialData, accessoryData, garmentData, styleData, backgroundData, lightingData, colorPaletteData, whitespaceData, sharedClassicalCore, identityGuard: sharedClassicalCore.identityGuard, anatomyGuard: sharedClassicalCore.anatomyGuard, poseNaturalityGuard: sharedClassicalCore.poseGuard, BODY_SHAPES, GARMENT_VARIATIONS, compositionGuard: sharedClassicalCore.compositionGuard, lightingConsistencyGuard: sharedClassicalCore.lightingGuard, poseData, framingData, cameraData, ratioData })',
+  });
+  const compositionValues = [...radioValues(html, 'composition')];
+  const pools = {
+    bodyShape: Object.keys(data.BODY_SHAPES), material: Object.keys(data.materialData), accessory: Object.keys(data.accessoryData),
+    garment: Object.keys(data.garmentData), chest: Object.keys(data.GARMENT_VARIATIONS.chest), waist: Object.keys(data.GARMENT_VARIATIONS.waist),
+    shoulder: Object.keys(data.GARMENT_VARIATIONS.shoulder), background: Object.keys(data.backgroundData), lighting: Object.keys(data.lightingData),
+    color: Object.keys(data.colorPaletteData), whitespace: Object.keys(data.whitespaceData), composition: compositionValues,
+    framing: Object.keys(data.framingData), pose: Object.keys(data.poseData), style: Object.keys(data.styleData), camera: Object.keys(data.cameraData), ratio: Object.keys(data.ratioData),
+  };
+  for (let i = 0; i < N; i += 1) {
+    const sel = {
+      bodyShape: pick(pools.bodyShape), material: pick(pools.material), material2: pick(pools.material), accessory: pick(pools.accessory), garment: pick(pools.garment),
+      chest: pick(pools.chest), waist: pick(pools.waist), shoulder: pick(pools.shoulder), background: pick(pools.background), lighting: pick(pools.lighting),
+      color: pick(pools.color), whitespace: pick(pools.whitespace), composition: pick(pools.composition), framing: pick(pools.framing), pose: pick(pools.pose),
+      style: pick(pools.style), camera: pick(pools.camera), ratio: pick(pools.ratio),
+    };
+    const materialKeys = sel.material2 === sel.material ? [sel.material] : [sel.material, sel.material2];
+    const materialText = materialKeys.map(key => data.materialData[key].prompt).join('; ');
+    const materialPalette = materialKeys.map(key => data.materialData[key].palette).join(', ');
+    const accessoryText = data.accessoryData[sel.accessory];
+    const variationParts = [data.GARMENT_VARIATIONS.chest[sel.chest], data.GARMENT_VARIATIONS.waist[sel.waist], data.GARMENT_VARIATIONS.shoulder[sel.shoulder]].filter(Boolean);
+    const output = [
+      data.identityGuard + ',', 'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
+      data.anatomyGuard + ',', data.poseNaturalityGuard + ',', 'natural relaxed hands, graceful restrained gestures, anatomically natural arms and fingers, no exaggerated fashion pose,',
+      data.BODY_SHAPES[sel.bodyShape] + ',', data.lightingConsistencyGuard + ',', data.styleData[sel.style] + ',', sel.composition + ',', data.compositionGuard + ',',
+      cultureLine, 'appearance form: ' + data.garmentData[sel.garment] + ',', materialText ? materialLine + ': ' + materialText + ',' : '',
+      accessoryText ? 'culturally coherent accessory detail: ' + accessoryText + ',' : '',
+      variationParts.length ? 'garment variation details: ' + variationParts.join('; ') + ', ' + preserveLine + ',' : '',
+      data.poseData[sel.pose] + ',', data.framingData[sel.framing] + ',', data.cameraData[sel.camera] + ',', 'lighting design: ' + data.lightingData[sel.lighting] + ',',
+      'color palette: ' + (data.colorPaletteData[sel.color] || materialPalette) + ',', 'background design: ' + data.backgroundData[sel.background] + ',',
+      'whitespace direction: ' + data.whitespaceData[sel.whitespace] + ',', data.ratioData[sel.ratio] + ',', data.sharedClassicalCore.output + ',',
+      'balanced traditional details, refined and luxurious,', data.sharedClassicalCore.negativePrompt + ',', 'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face',
+    ].filter(Boolean).join('\n');
+    checkOutput(label, i, sel, output, { requireIdentity: true, identityMarkers: ['身份鎖定系統'] });
+    const positiveOutput = output.split(data.sharedClassicalCore.negativePrompt)[0];
+    if (forbiddenPositive.test(positiveOutput)) ISSUES.push({ page: label, iteration: i, selection: sel, problems: ['正向 Prompt 含跨文化或幻想服飾語彙'] });
+  }
+  report(label, N);
+}
+
+auditClassicalCulturePage({
+  file: 'japanese-kimono.html', pageKey: 'japaneseKimono', label: 'japaneseKimono',
+  cultureLine: 'refined Japanese kimono aesthetics, culturally grounded Japanese silhouette, elegant silk and obi drape, traditional Japanese design language,',
+  materialLine: 'traditional Japanese materials and motifs', preserveLine: 'preserve the selected Japanese kimono silhouette',
+  forbiddenPositive: /(Chinese hanfu|Korean hanbok|qipao|xianxia|magical aura|futuristic technology|cyberpunk|samurai armor)/i,
+});
+
+auditClassicalCulturePage({
+  file: 'korean-hanbok.html', pageKey: 'koreanHanbok', label: 'koreanHanbok',
+  cultureLine: 'refined Korean hanbok aesthetics, culturally grounded Korean silhouette, elegant jeogori and chima drape, traditional Korean design language,',
+  materialLine: 'traditional Korean materials and motifs', preserveLine: 'preserve the selected Korean hanbok silhouette',
+  forbiddenPositive: /(Japanese kimono|Chinese hanfu|qipao|xianxia|magical aura|futuristic technology|cyberpunk|samurai styling)/i,
+});
 
 // ===================== XIANXIA =====================
 {
@@ -1275,5 +1336,5 @@ if (ISSUES.length) {
   }
   process.exitCode = 1;
 } else {
-  console.log('\n✅ ALL SIMULATIONS PASS — 全部 100x16（1600 組）隨機模擬皆無 undefined/NaN/[object Object]/null 洩漏、身份鎖定完整、無相鄰重複行、無禁用角色名。');
+  console.log(`\n✅ ALL SIMULATIONS PASS — 全部 100x${totalRuns / 100}（${totalRuns} 組）隨機模擬皆無 undefined/NaN/[object Object]/null 洩漏、身份鎖定完整、無相鄰重複行、無禁用角色名。`);
 }

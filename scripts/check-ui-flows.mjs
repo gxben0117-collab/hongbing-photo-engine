@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const pages = [
   'travel.html', 'magazine.html', 'doll.html', 'fantasy-fashion.html',
-  'chinese-classical.html',
+  'chinese-classical.html', 'japanese-kimono.html', 'korean-hanbok.html',
   'xianxia.html', 'anime-character.html', 'flower-fairy.html',
   'isekai-fantasy.html', 'store-ad.html', 'floral-sweet.html',
   'gala-socialite.html', 'kpop-idol.html', 'battle-academy.html',
@@ -37,6 +37,20 @@ const visualOrderContracts = {
     'section-ratio': 12, 'section-output': 13,
   },
   'chinese-classical.html': {
+    'section-preset': 0, 'section-style': 1, 'section-composition': 2,
+    'section-garment': 3, 'section-material': 4, 'section-garment-variation': 5,
+    'section-body': 6, 'section-pose': 7, 'section-extra': 8,
+    'section-lighting': 9, 'section-background': 10, 'section-camera': 11,
+    'section-ratio': 12, 'section-output': 13,
+  },
+  'japanese-kimono.html': {
+    'section-preset': 0, 'section-style': 1, 'section-composition': 2,
+    'section-garment': 3, 'section-material': 4, 'section-garment-variation': 5,
+    'section-body': 6, 'section-pose': 7, 'section-extra': 8,
+    'section-lighting': 9, 'section-background': 10, 'section-camera': 11,
+    'section-ratio': 12, 'section-output': 13,
+  },
+  'korean-hanbok.html': {
     'section-preset': 0, 'section-style': 1, 'section-composition': 2,
     'section-garment': 3, 'section-material': 4, 'section-garment-variation': 5,
     'section-body': 6, 'section-pose': 7, 'section-extra': 8,
@@ -223,7 +237,7 @@ function checkChoiceGroups(page, source, groups) {
 }
 
 function checkCheckboxContracts(page, source) {
-  if (page !== 'chinese-classical.html') return;
+  if (!['chinese-classical.html', 'japanese-kimono.html', 'korean-hanbok.html'].includes(page)) return;
   const materialInputs = tags(source, 'input').filter(tag => (
     (attr(tag, 'type') || '').toLowerCase() === 'checkbox' && attr(tag, 'name') === 'materials'
   ));

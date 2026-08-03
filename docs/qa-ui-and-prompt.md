@@ -7,9 +7,10 @@
 
 ## 檢查範圍
 
-目前共 16 個正式工具頁：
+目前共 18 個正式工具頁：
 
-`travel.html`、`magazine.html`、`doll.html`、`fantasy-fashion.html`、`chinese-classical.html`、`xianxia.html`、
+`travel.html`、`magazine.html`、`doll.html`、`fantasy-fashion.html`、`chinese-classical.html`、
+`japanese-kimono.html`、`korean-hanbok.html`、`xianxia.html`、
 `anime-character.html`、`flower-fairy.html`、`isekai-fantasy.html`、`store-ad.html`、
 `floral-sweet.html`、`gala-socialite.html`、`kpop-idol.html`、`battle-academy.html`、
 `ancient-goddess.html`、`editorial-identity.html`。
@@ -37,7 +38,7 @@ git diff --check
   helper 引用的控制項確實存在。
 - `data-choice`、`getElementById()` 與資料欄位沒有指向不存在的 DOM id。
 - 具名一鍵按鈕的 `data-template`、旅拍／雜誌 preset key 都存在於實際資料物件。
-- 旅拍、雜誌、幻想廣告、共同世界觀頁、花仙子與戰鬥學院的 CSS `order` 符合各自
+- 旅拍、雜誌、幻想廣告、三個亞洲傳統服飾頁、花仙子與戰鬥學院的 CSS `order` 符合各自
   的決策順序契約，避免只改了 class 後畫面又回到舊順序。
 
 ## 咒語與一鍵契約
@@ -57,6 +58,10 @@ git diff --check
 - 中式古典美學：成品語氣 → 構圖 → 四組十五套服裝主題（漢風／盛唐／宋韻／新式古風） → 04A 材質／紋樣 → 04B 飾品 →
   服裝變化 → 身形 → 姿勢 → 自訂 → 09A 光影 → 09B 色彩 → 10A 背景 → 10B 留白 →
   鏡頭 → 比例 → 生成；材質最多 2 個、飾品單選。
+- 日本和服美學：成品語氣 → 構圖 → 日本和服主題 → 材質／紋樣 → 和風飾品 → 服裝變化 →
+  身形 → 姿勢 → 自訂 → 光影 → 色彩 → 背景 → 留白 → 鏡頭 → 比例 → 生成。
+- 韓國韓服美學：成品語氣 → 構圖 → 韓國韓服主題 → 材質／紋樣 → 韓服飾品 → 服裝變化 →
+  身形 → 姿勢 → 自訂 → 光影 → 色彩 → 背景 → 留白 → 鏡頭 → 比例 → 生成。
 - 寫真旅拍：主風格與地點／旅拍情境提前，再進入構圖、服裝、姿勢與攝影控制。
 - 雜誌棚拍：封面成品類型與主題／服裝方向提前，妝容、膚質、配飾與光線集中在封面
   細節區。
@@ -66,9 +71,9 @@ git diff --check
 
 ## 2026-08-03 回歸結果
 
-- UI flow contract：16 頁，0 issue。
+- UI flow contract：18 頁，0 issue。
 - preset 引用驗證：0 issue。
-- 隨機生成稽核：16 頁 × 100 組，共 1600 組，0 issue。
+- 隨機生成稽核：18 頁 × 100 組，共 1800 組，0 issue。
 - 固定提示詞預覽：完成；結構與生成輸出可重建。
 - `check-static.mjs` 與 `git diff --check`：完成。
 
