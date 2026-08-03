@@ -1,6 +1,7 @@
 name: Add classical garment options
 
 on:
+  workflow_dispatch:
   push:
     branches: [master]
     paths:
