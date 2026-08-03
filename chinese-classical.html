@@ -144,6 +144,7 @@
       <label class="card"><input type="radio" name="garment" value="ancientSocialCouture"><div class="name">網紅古風華服</div><div class="desc">修身輪廓、飄帶層次、短影音風格</div></label>
       <label class="card"><input type="radio" name="garment" value="ancientFormalGown"><div class="name">新式古風禮服</div><div class="desc">古典元素、現代剪裁、精品禮服感</div></label>
     </div>
+    <label class="field">自訂服裝<input id="customGarment" type="text" placeholder="例如：杏色絲紗改良漢服"></label>
   </section>
 
   <section class="section-material">
@@ -171,6 +172,7 @@
       <label class="card"><input type="checkbox" name="materials" value="windowLatticePattern"><div class="name">中式窗櫺紋</div><div class="desc">建築幾何轉化為服裝暗紋</div></label>
       <label class="card"><input type="checkbox" name="materials" value="ruyiPattern"><div class="name">如意雲頭紋</div><div class="desc">柔和、典雅、適合領緣與袖口</div></label>
     </div>
+    <label class="field">自訂材質／紋樣<input id="customMaterial" type="text" placeholder="例如：淡青色緙絲"></label>
     <div class="group-title">04B｜中式飾品</div>
     <p class="hint">單選一項；配件獨立控制，不會佔用材質與紋樣的 2 個名額。</p>
     <div class="grid grid-3" data-choice="accessory">
@@ -248,18 +250,14 @@
       <label class="card"><input type="radio" name="pose" value="railingGaze"><div class="name">倚欄遠望</div><div class="desc">手扶欄杆，望向庭院遠處</div></label>
       <label class="card"><input type="radio" name="pose" value="formalKneel"><div class="name">端莊跪坐</div><div class="desc">安靜端坐，保持自然骨架</div></label>
     </div>
+    <label class="field">自訂姿勢<input id="customPose" type="text" placeholder="例如：手扶木格窗回頭"></label>
   </section>
 
   <section class="section-extra">
     <div class="section-header"><div class="section-label">08</div><div class="section-title">自訂要求</div></div>
     <div class="form-grid">
-      <label class="field">自訂服裝<input id="customGarment" type="text" placeholder="例如：杏色絲紗改良漢服"></label>
-      <label class="field">自訂材質<input id="customMaterial" type="text" placeholder="例如：淡青色緙絲"></label>
-      <label class="field">自訂背景<input id="customBackground" type="text" placeholder="例如：雨後蘇州園林"></label>
-      <label class="field">自訂姿勢<input id="customPose" type="text" placeholder="例如：手扶木格窗回頭"></label>
-      <label class="field">指定配色<input id="colorNote" type="text" placeholder="例如：月白、黛青、少量金色"></label>
       <label class="field">畫面強度<select id="intensity"><option value="restrained classical detail, elegant and quiet">清雅克制</option><option value="balanced traditional details, refined and luxurious">平衡高級</option><option value="rich textile details, graceful movement and stronger editorial presence">華麗大片</option></select></label>
-      <label class="field full">其他要求<textarea id="extraNote" placeholder="補充畫面、表情、留白或服裝細節"></textarea></label>
+      <label class="field full">其他要求<textarea id="extraNote" placeholder="補充畫面、表情或服裝細節"></textarea></label>
     </div>
   </section>
 
@@ -281,7 +279,7 @@
       <label class="card"><input type="radio" name="lighting" value="classicalRembrandt"><div class="name">古典側光</div><div class="desc">油畫式明暗與克制立體感</div></label>
     </div>
     <div class="group-title">09B｜色彩系統</div>
-    <p class="hint">單選一組主色；可由 08 自訂配色覆蓋。</p>
+    <p class="hint">單選一組主色；可由下方自訂配色覆蓋。</p>
     <div class="grid grid-3" data-choice="colorPalette">
       <label class="card selected"><input type="radio" name="colorPalette" value="ivoryTea" checked><div class="name">米白與淡茶色</div><div class="desc">清雅、溫柔、適合漢風</div></label>
       <label class="card"><input type="radio" name="colorPalette" value="daiJade"><div class="name">黛青與月白</div><div class="desc">宋韻、冷靜、文人氣質</div></label>
@@ -294,11 +292,11 @@
       <label class="card"><input type="radio" name="colorPalette" value="plumMist"><div class="name">梅紫與霧灰</div><div class="desc">冬日、清冷、含蓄雅致</div></label>
       <label class="card"><input type="radio" name="colorPalette" value="inkMuted"><div class="name">低飽和水墨色</div><div class="desc">宣紙、墨色與柔和留白</div></label>
     </div>
+    <label class="field">指定配色<input id="colorNote" type="text" placeholder="例如：月白、黛青、少量金色"></label>
   </section>
 
   <section class="section-background">
     <div class="section-header"><div class="section-label">10</div><div class="section-title">背景場景</div></div>
-    <div class="group-title">10A｜背景場景</div>
     <div class="grid grid-3" data-choice="background">
       <label class="card selected"><input type="radio" name="background" value="hanCourtyard" checked><div class="name">漢代古樸庭院</div><div class="desc">木構、石階、古樸安靜</div></label>
       <label class="card"><input type="radio" name="background" value="tangPalace"><div class="name">盛唐宮苑</div><div class="desc">宮牆、金色、富麗層次</div></label>
@@ -319,7 +317,9 @@
       <label class="card"><input type="radio" name="background" value="suzhouCorridor"><div class="name">蘇式園林長廊</div><div class="desc">白牆、黛瓦與框景長廊</div></label>
       <label class="card"><input type="radio" name="background" value="palaceWallShadow"><div class="name">宮牆樹影</div><div class="desc">簡潔牆面與自然樹影</div></label>
       <label class="card"><input type="radio" name="background" value="paperBackdrop"><div class="name">宣紙水墨背景</div><div class="desc">紙張纖維、淡墨與乾淨留白</div></label>
+      <label class="card"><input type="radio" name="background" value="pureWhiteBackground"><div class="name">無背景純白色</div><div class="desc">純白棚拍、服裝展示、無環境干擾</div></label>
     </div>
+    <label class="field">自訂背景<input id="customBackground" type="text" placeholder="例如：雨後蘇州園林"></label>
   </section>
 
   <section class="section-camera">
@@ -447,7 +447,8 @@ const backgroundData = {
   lotusBridge: 'a lotus pond with a curved stone bridge, calm water and softly layered garden depth',
   suzhouCorridor: 'a Suzhou-style garden corridor with white walls, dark tiles and framed courtyard views',
   palaceWallShadow: 'a quiet palace wall with tree shadows, warm stone and restrained background simplicity',
-  paperBackdrop: 'a softly textured xuan-paper backdrop with restrained ink wash and generous clean space'
+  paperBackdrop: 'a softly textured xuan-paper backdrop with restrained ink wash and generous clean space',
+  pureWhiteBackground: 'pure seamless white background, no visible environment, no architecture, no props, evenly lit clean white studio backdrop'
 };
 
 const lightingData = {

@@ -141,6 +141,7 @@
       <label class="card"><input type="radio" name="garment" value="idolStageHanbok"><div class="name">偶像舞台韓服</div><div class="desc">動態袖線、舞台時裝、韓服結構</div></label>
       <label class="card"><input type="radio" name="garment" value="hanbokHauteCouture"><div class="name">新式韓服高訂</div><div class="desc">高訂結構、精品材質、封面感</div></label>
     </div>
+    <label class="field">自訂服裝<input id="customGarment" type="text" placeholder="例如：霧粉色現代改良韓服"></label>
   </section>
 
   <section class="section-material">
@@ -166,6 +167,7 @@
       <label class="card"><input type="checkbox" name="materials" value="plumBambooPattern"><div class="name">梅竹紋樣</div><div class="desc">自然、清雅、季節感</div></label>
       <label class="card"><input type="checkbox" name="materials" value="layeredOrganza"><div class="name">輕薄歐根紗疊層</div><div class="desc">裙襬與袖線的空氣感</div></label>
     </div>
+    <label class="field">自訂材質／紋樣<input id="customMaterial" type="text" placeholder="例如：淡青苧麻與花卉刺繡"></label>
     <div class="group-title">04B｜韓國飾品與手持物</div>
     <p class="hint">單選一項；配件獨立控制，不會佔用材質與紋樣的 2 個名額。</p>
     <div class="grid grid-3" data-choice="accessory">
@@ -244,18 +246,14 @@
       <label class="card"><input type="radio" name="pose" value="railingGaze"><div class="name">長廊遠望</div><div class="desc">手扶欄杆，望向韓屋庭院</div></label>
       <label class="card"><input type="radio" name="pose" value="formalKneel"><div class="name">端莊跪坐</div><div class="desc">安靜端坐，保持自然骨架</div></label>
     </div>
+    <label class="field">自訂姿勢<input id="customPose" type="text" placeholder="例如：手持圓扇在紙門旁回眸"></label>
   </section>
 
   <section class="section-extra">
     <div class="section-header"><div class="section-label">08</div><div class="section-title">自訂要求</div></div>
     <div class="form-grid">
-      <label class="field">自訂服裝<input id="customGarment" type="text" placeholder="例如：霧粉色現代改良韓服"></label>
-      <label class="field">自訂材質<input id="customMaterial" type="text" placeholder="例如：淡青苧麻與花卉刺繡"></label>
-      <label class="field">自訂背景<input id="customBackground" type="text" placeholder="例如：雨後韓屋長廊"></label>
-      <label class="field">自訂姿勢<input id="customPose" type="text" placeholder="例如：手持圓扇在紙門旁回眸"></label>
-      <label class="field">指定配色<input id="colorNote" type="text" placeholder="例如：淡粉、象牙白、少量金色"></label>
       <label class="field">畫面強度<select id="intensity"><option value="restrained classical detail, elegant and quiet">清雅克制</option><option value="balanced traditional details, refined and luxurious">平衡高級</option><option value="rich textile details, graceful movement and stronger editorial presence">華麗大片</option></select></label>
-      <label class="field full">其他要求<textarea id="extraNote" placeholder="補充畫面、表情、留白或服裝細節"></textarea></label>
+      <label class="field full">其他要求<textarea id="extraNote" placeholder="補充畫面、表情或服裝細節"></textarea></label>
     </div>
   </section>
 
@@ -277,7 +275,7 @@
       <label class="card"><input type="radio" name="lighting" value="hanbokSideLight"><div class="name">韓服古典側光</div><div class="desc">克制明暗與刺繡質感</div></label>
     </div>
     <div class="group-title">09B｜色彩系統</div>
-    <p class="hint">單選一組主色；可由 08 自訂配色覆蓋。</p>
+    <p class="hint">單選一組主色；可由下方自訂配色覆蓋。</p>
     <div class="grid grid-3" data-choice="colorPalette">
       <label class="card selected"><input type="radio" name="colorPalette" value="pastelPinkIvory" checked><div class="name">粉彩與象牙白</div><div class="desc">清雅、溫柔、經典韓服感</div></label>
       <label class="card"><input type="radio" name="colorPalette" value="jadeBlueCream"><div class="name">玉青與乳白</div><div class="desc">清透、冷靜、韓屋氣質</div></label>
@@ -290,11 +288,11 @@
       <label class="card"><input type="radio" name="colorPalette" value="plumSnow"><div class="name">梅紫與雪白</div><div class="desc">冬日、清冷、含蓄雅致</div></label>
       <label class="card"><input type="radio" name="colorPalette" value="mutedHanbok"><div class="name">低飽和韓服色</div><div class="desc">柔霧、布料與清淡留白</div></label>
     </div>
+    <label class="field">指定配色<input id="colorNote" type="text" placeholder="例如：淡粉、象牙白、少量金色"></label>
   </section>
 
   <section class="section-background">
     <div class="section-header"><div class="section-label">10</div><div class="section-title">韓國背景場景</div></div>
-    <div class="group-title">10A｜韓國背景場景</div>
     <div class="grid grid-3" data-choice="background">
       <label class="card selected"><input type="radio" name="background" value="hanokCourtyard" checked><div class="name">韓屋木造庭院</div><div class="desc">木構、石階、古樸安靜</div></label>
       <label class="card"><input type="radio" name="background" value="palaceCorridor"><div class="name">宮廷長廊</div><div class="desc">丹青、長廊、端莊層次</div></label>
@@ -315,7 +313,9 @@
       <label class="card"><input type="radio" name="background" value="wisteriaKoreanPavilion"><div class="name">紫藤亭台</div><div class="desc">藤花、木亭與春日景深</div></label>
       <label class="card"><input type="radio" name="background" value="plainHanbokStudio"><div class="name">純色韓服棚拍</div><div class="desc">極簡背景與服裝主視覺</div></label>
       <label class="card"><input type="radio" name="background" value="inkKoreanBackdrop"><div class="name">韓紙淡墨背景</div><div class="desc">韓紙纖維、淡色與乾淨留白</div></label>
+      <label class="card"><input type="radio" name="background" value="pureWhiteBackground"><div class="name">無背景純白色</div><div class="desc">純白棚拍、服裝展示、無環境干擾</div></label>
     </div>
+    <label class="field">自訂背景<input id="customBackground" type="text" placeholder="例如：雨後韓屋長廊"></label>
   </section>
 
   <section class="section-camera">
@@ -442,7 +442,8 @@ const backgroundData = {
   palaceGarden: 'a quiet Korean palace wall with tree shadows, warm stone and restrained background simplicity',
   wisteriaKoreanPavilion: 'a Korean pavilion covered with wisteria flowers, timber framing and soft spring depth',
   plainHanbokStudio: 'a minimal Korean photography studio with a clean neutral backdrop and premium fashion space',
-  inkKoreanBackdrop: 'a softly textured Korean hanji-paper backdrop with restrained tonal variation and generous clean space'
+  inkKoreanBackdrop: 'a softly textured Korean hanji-paper backdrop with restrained tonal variation and generous clean space',
+  pureWhiteBackground: 'pure seamless white background, no visible environment, no architecture, no props, evenly lit clean white studio backdrop'
 };
 
 const lightingData = {

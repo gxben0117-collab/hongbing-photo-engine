@@ -250,6 +250,47 @@ function checkCheckboxContracts(page, source) {
   }
 }
 
+function sectionBlock(source, className) {
+  const start = source.indexOf(`<section class="${className}">`);
+  if (start === -1) return null;
+  const end = source.indexOf('</section>', start);
+  return end === -1 ? source.slice(start) : source.slice(start, end);
+}
+
+function checkClassicalPageContract(page, source) {
+  if (!['chinese-classical.html', 'japanese-kimono.html', 'korean-hanbok.html'].includes(page)) return;
+
+  const placements = [
+    ['section-garment', 'customGarment'],
+    ['section-material', 'customMaterial'],
+    ['section-pose', 'customPose'],
+    ['section-lighting', 'colorNote'],
+    ['section-background', 'customBackground'],
+  ];
+  for (const [className, id] of placements) {
+    const block = sectionBlock(source, className);
+    if (!block || !block.includes(`id="${id}"`)) {
+      issue(page, `#${id} is not placed in .${className}`);
+    }
+  }
+
+  const extra = sectionBlock(source, 'section-extra');
+  if (!extra || !extra.includes('id="intensity"') || !extra.includes('id="extraNote"')) {
+    issue(page, '08 自訂要求 must contain #intensity and #extraNote');
+  }
+  for (const id of ['customGarment', 'customMaterial', 'customBackground', 'customPose', 'colorNote']) {
+    if (extra?.includes(`id="${id}"`)) issue(page, `08 自訂要求 still contains #${id}`);
+  }
+
+  const background = sectionBlock(source, 'section-background');
+  if (!background?.includes('value="pureWhiteBackground"') || !source.includes('pureWhiteBackground:')) {
+    issue(page, 'background contract is missing pureWhiteBackground UI or data');
+  }
+  if (/10A|10B|whitespaceData|whitespace direction/.test(source)) {
+    issue(page, 'background section contains removed 10A/10B or whitespace controls');
+  }
+}
+
 function checkPresetButtons(page, source) {
   const mappings = [
     ['data-template', 'themeTemplates'],
@@ -291,6 +332,7 @@ for (const page of pages) {
   checkInitialRadioState(page, groups);
   checkChoiceGroups(page, source, groups);
   checkCheckboxContracts(page, source);
+  checkClassicalPageContract(page, source);
   checkPresetButtons(page, source);
   checkVisualOrder(page, source);
   console.log(`checked ${page}: ${groups.size} radio groups, ${idSet.size} ids`);

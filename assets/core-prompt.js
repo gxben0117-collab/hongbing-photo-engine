@@ -32,9 +32,12 @@ Head, neck, shoulders and spine alignment must be anatomically coherent.
 Face and head must belong naturally to the same body pose.
 Head pose may freely turn, tilt or gaze in whatever direction the selected pose requires; identity and facial geometry stay unchanged regardless of head direction. Neck, shoulders, torso and spine must always rotate to naturally follow and support the established head direction — never force the head or face to twist away from a natural angle just to match a body or pose direction instead.
 
+Reconstruct one continuous physical person — head, neck, clavicle, rib cage and spine as one coherent anatomical structure. The preserved identity must emerge naturally within that body, never as a composited, overlaid, pasted-on or independently rendered face.
+
 No oversized head, big head small body effect, deformed body, warped anatomy, extra limbs, extra arms, extra fingers or broken hands.
 No doll proportions unless doll page explicitly requires doll style.
-No pasted-on face, mismatched head and body angle or twisted neck.`;
+No pasted-on face, floating face, composited or separately rendered face, identity overlay or independently rotated head.
+No mismatched head-body angle, disconnected neck, twisted neck or broken head-neck-shoulder alignment.`;
 
   const CORE_CAMERA_RECONSTRUCTION = `【鏡頭重建系統】
 

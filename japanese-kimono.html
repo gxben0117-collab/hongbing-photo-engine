@@ -144,6 +144,7 @@
       <label class="card"><input type="radio" name="garment" value="kimonoPhotoCouture"><div class="name">和風寫真華服</div><div class="desc">層疊絲綢、袖線、上鏡輪廓</div></label>
       <label class="card"><input type="radio" name="garment" value="kimonoHauteCouture"><div class="name">現代和服高訂</div><div class="desc">帶結結構、精品材質、高訂大片</div></label>
     </div>
+    <label class="field">自訂服裝<input id="customGarment" type="text" placeholder="例如：藕粉色現代改良振袖"></label>
   </section>
 
   <section class="section-material">
@@ -169,6 +170,7 @@
       <label class="card"><input type="checkbox" name="materials" value="bambooPattern"><div class="name">竹葉紋</div><div class="desc">自然、清冷、季節感</div></label>
       <label class="card"><input type="checkbox" name="materials" value="lightObiGauze"><div class="name">輕紗帶結疊層</div><div class="desc">袖線、帶結與外層空氣感</div></label>
     </div>
+    <label class="field">自訂材質／紋樣<input id="customMaterial" type="text" placeholder="例如：櫻花友禪染與正絹絲綢"></label>
     <div class="group-title">04B｜日本飾品與手持物</div>
     <p class="hint">單選一項；配件獨立控制，不會佔用材質與紋樣的 2 個名額。</p>
     <div class="grid grid-3" data-choice="accessory">
@@ -247,18 +249,14 @@
       <label class="card"><input type="radio" name="pose" value="railingGaze"><div class="name">緣側遠望</div><div class="desc">手扶欄杆，望向日式庭園</div></label>
       <label class="card"><input type="radio" name="pose" value="formalKneel"><div class="name">端莊正座</div><div class="desc">安靜端坐，保持自然骨架</div></label>
     </div>
+    <label class="field">自訂姿勢<input id="customPose" type="text" placeholder="例如：手持和傘在緣側回眸"></label>
   </section>
 
   <section class="section-extra">
     <div class="section-header"><div class="section-label">08</div><div class="section-title">自訂要求</div></div>
     <div class="form-grid">
-      <label class="field">自訂服裝<input id="customGarment" type="text" placeholder="例如：藕粉色現代改良振袖"></label>
-      <label class="field">自訂材質<input id="customMaterial" type="text" placeholder="例如：櫻花友禪染與正絹絲綢"></label>
-      <label class="field">自訂背景<input id="customBackground" type="text" placeholder="例如：雨後京都町家緣側"></label>
-      <label class="field">自訂姿勢<input id="customPose" type="text" placeholder="例如：手持和傘在緣側回眸"></label>
-      <label class="field">指定配色<input id="colorNote" type="text" placeholder="例如：櫻粉、米白、少量古金"></label>
       <label class="field">畫面強度<select id="intensity"><option value="restrained classical detail, elegant and quiet">清雅克制</option><option value="balanced traditional details, refined and luxurious">平衡高級</option><option value="rich textile details, graceful movement and stronger editorial presence">華麗大片</option></select></label>
-      <label class="field full">其他要求<textarea id="extraNote" placeholder="補充畫面、表情、留白或服裝細節"></textarea></label>
+      <label class="field full">其他要求<textarea id="extraNote" placeholder="補充畫面、表情或服裝細節"></textarea></label>
     </div>
   </section>
 
@@ -280,7 +278,7 @@
       <label class="card"><input type="radio" name="lighting" value="japaneseSideLight"><div class="name">和風古典側光</div><div class="desc">克制明暗與立體服裝質感</div></label>
     </div>
     <div class="group-title">09B｜色彩系統</div>
-    <p class="hint">單選一組主色；可由 08 自訂配色覆蓋。</p>
+    <p class="hint">單選一組主色；可由下方自訂配色覆蓋。</p>
     <div class="grid grid-3" data-choice="colorPalette">
       <label class="card selected"><input type="radio" name="colorPalette" value="sakuraIvory" checked><div class="name">櫻粉與米白</div><div class="desc">清雅、溫柔、春季和風</div></label>
       <label class="card"><input type="radio" name="colorPalette" value="indigoIvory"><div class="name">靛藍與生成白</div><div class="desc">藍染、清冷、傳統質感</div></label>
@@ -293,11 +291,11 @@
       <label class="card"><input type="radio" name="colorPalette" value="plumSnow"><div class="name">梅紫與雪白</div><div class="desc">冬日、清冷、含蓄雅致</div></label>
       <label class="card"><input type="radio" name="colorPalette" value="indigoMuted"><div class="name">低飽和藍染色</div><div class="desc">藍染、紙門與柔和留白</div></label>
     </div>
+    <label class="field">指定配色<input id="colorNote" type="text" placeholder="例如：櫻粉、米白、少量古金"></label>
   </section>
 
   <section class="section-background">
     <div class="section-header"><div class="section-label">10</div><div class="section-title">日本背景場景</div></div>
-    <div class="group-title">10A｜日本背景場景</div>
     <div class="grid grid-3" data-choice="background">
       <label class="card selected"><input type="radio" name="background" value="machiyaInterior" checked><div class="name">町家木造室內</div><div class="desc">木作、紙門、古樸安靜</div></label>
       <label class="card"><input type="radio" name="background" value="tatamiTeaRoom"><div class="name">榻榻米茶室</div><div class="desc">茶具、榻榻米、簡潔留白</div></label>
@@ -318,7 +316,9 @@
       <label class="card"><input type="radio" name="background" value="shrineGarden"><div class="name">古典神社庭院</div><div class="desc">木造門廊、石階與自然樹影</div></label>
       <label class="card"><input type="radio" name="background" value="wisteriaPavilion"><div class="name">紫藤亭台</div><div class="desc">藤花、木亭與柔和春日景深</div></label>
       <label class="card"><input type="radio" name="background" value="plainJapaneseStudio"><div class="name">純色和風棚拍</div><div class="desc">極簡背景與服裝主視覺</div></label>
+      <label class="card"><input type="radio" name="background" value="pureWhiteBackground"><div class="name">無背景純白色</div><div class="desc">純白棚拍、服裝展示、無環境干擾</div></label>
     </div>
+    <label class="field">自訂背景<input id="customBackground" type="text" placeholder="例如：雨後京都町家緣側"></label>
   </section>
 
   <section class="section-camera">
@@ -445,7 +445,8 @@ const backgroundData = {
   paperJapaneseBackdrop: 'a softly textured washi-paper backdrop with restrained tonal variation and generous clean space',
   shrineGarden: 'a traditional Japanese shrine garden with timber gate, stone steps and natural tree shadows',
   wisteriaPavilion: 'a quiet Japanese pavilion covered with wisteria flowers, timber framing and soft spring depth',
-  plainJapaneseStudio: 'a minimal Japanese photography studio with a clean neutral backdrop and premium fashion space'
+  plainJapaneseStudio: 'a minimal Japanese photography studio with a clean neutral backdrop and premium fashion space',
+  pureWhiteBackground: 'pure seamless white background, no visible environment, no architecture, no props, evenly lit clean white studio backdrop'
 };
 
 const lightingData = {

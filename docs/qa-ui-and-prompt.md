@@ -40,6 +40,8 @@ git diff --check
 - 具名一鍵按鈕的 `data-template`、旅拍／雜誌 preset key 都存在於實際資料物件。
 - 旅拍、雜誌、幻想廣告、三個亞洲傳統服飾頁、花仙子與戰鬥學院的 CSS `order` 符合各自
   的決策順序契約，避免只改了 class 後畫面又回到舊順序。
+- 中式古典、和服、韓服三頁的自訂欄位必須位於對應控制區：服裝 03、材質／紋樣 04A、姿勢 07、
+  配色 09B、背景 10；08 僅允許畫面強度與其他要求，背景資料必須包含 `pureWhiteBackground`。
 
 ## 咒語與一鍵契約
 
@@ -50,6 +52,8 @@ git diff --check
   preset／隨機測試。
 - 生成輸出不得出現 `undefined`、`NaN`、`[object Object]`，身份鎖定與頁面必要核心
   guard 必須保留。
+- `CORE_REALISTIC_ANATOMY` 的連續頭頸肩脊椎與非合成臉部約束，必須透過 `humanCore` 或
+  `illustrationHumanCore` 進入正式頁生成輸出，不建立平行核心。
 
 ## 目前頁面順序基準
 
