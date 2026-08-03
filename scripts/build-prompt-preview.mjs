@@ -268,10 +268,13 @@ function generateChineseClassical(core, data) {
   const selection = {
     bodyShape: 'original',
     materialKeys: ['plainSilk', 'calligraphySeal'],
+    accessory: 'pearlHairOrnament',
     garment: 'hanModern',
     background: 'latticeRoom',
     lighting: 'paperWindowSoft',
-    composition: 'subject placed to one side with clean negative space for a refined editorial layout',
+    color: 'smokeBlue',
+    composition: 'asymmetrical composition with the subject placed to one side, balanced visual weight and clean surrounding space',
+    whitespace: 'left',
     framing: 'threeQuarter',
     pose: 'sleeveHold',
     style: 'modernCouture',
@@ -282,7 +285,6 @@ function generateChineseClassical(core, data) {
     shoulder: 'none',
   };
   const materialText = selection.materialKeys.map(key => data.materialData[key].prompt).join('; ');
-  const materialPalette = selection.materialKeys.map(key => data.materialData[key].palette).join(', ');
   const variationParts = [
     data.GARMENT_VARIATIONS.chest[selection.chest],
     data.GARMENT_VARIATIONS.waist[selection.waist],
@@ -293,6 +295,7 @@ function generateChineseClassical(core, data) {
     'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
     data.sharedClassicalCore.anatomyGuard + ',',
     data.sharedClassicalCore.poseGuard + ',',
+    'natural relaxed hands, graceful restrained gestures, anatomically natural arms and fingers, no exaggerated fashion pose,',
     data.BODY_SHAPES[selection.bodyShape] + ',',
     data.sharedClassicalCore.lightingGuard + ',',
     data.styleData[selection.style] + ',',
@@ -301,16 +304,18 @@ function generateChineseClassical(core, data) {
     'refined Chinese clothing aesthetics, period-informed Chinese silhouette, elegant fabric drape, traditional Chinese design language,',
     'appearance form: ' + data.garmentData[selection.garment] + ',',
     'traditional materials and Chinese elements: ' + materialText + ',',
+    'traditional accessory detail: ' + data.accessoryData[selection.accessory] + ',',
     'garment variation details: ' + variationParts.join('; ') + ', preserve the selected period-informed Chinese silhouette,',
     data.poseData[selection.pose] + ',',
     data.framingData[selection.framing] + ',',
     data.cameraData[selection.camera] + ',',
     'lighting design: ' + data.lightingData[selection.lighting] + ',',
+    'color palette: ' + data.colorPaletteData[selection.color] + ',',
     'background design: ' + data.backgroundData[selection.background] + ',',
+    'whitespace direction: ' + data.whitespaceData[selection.whitespace] + ',',
     data.ratioData[selection.ratio] + ',',
     data.sharedClassicalCore.output + ',',
     'balanced traditional details, refined and luxurious,',
-    'color palette: ' + materialPalette + ',',
     data.sharedClassicalCore.negativePrompt + ',',
     'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face',
   ];
@@ -1074,7 +1079,7 @@ function loadRevision(label, sourceReader) {
       page: 'chineseClassical',
       startMarker: 'const materialData = {',
       endMarker: 'function selected',
-      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedClassicalCore, BODY_SHAPES, GARMENT_VARIATIONS, poseData, framingData, cameraData, ratioData })',
+      exportExpression: '({ materialData, accessoryData, garmentData, styleData, backgroundData, lightingData, colorPaletteData, whitespaceData, sharedClassicalCore, BODY_SHAPES, GARMENT_VARIATIONS, poseData, framingData, cameraData, ratioData })',
     });
   } catch (err) {
     // New page is absent in older base revisions.
