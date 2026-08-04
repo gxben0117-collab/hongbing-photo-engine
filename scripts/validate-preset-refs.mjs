@@ -71,6 +71,103 @@ function liveSelectOptionValues(source, selectId) {
   return values;
 }
 
+// UI controls are now expressed with the shared Fantasy camera/body/ratio IDs,
+// while older preset objects can remain readable during the migration. Treat
+// these legacy IDs as aliases here so the validator checks the value that the
+// page's canonicalizing setter will actually apply.
+const LEGACY_VALUE_ALIASES = {
+  'travel.html': {
+    camera: {
+      neutral: 'eyeLevelCover',
+      low: 'lowAngleHero',
+      high: 'highAngleOverhead',
+      soft_focus: 'softFocusGlow',
+      three_quarter_side: 'threeQuarterSide',
+      top_beauty: 'topBeauty',
+      distant_hero: 'distantHero',
+    },
+  },
+  'magazine.html': {
+    camera: {
+      neutral: 'eyeLevelCover',
+      low: 'lowAngleHero',
+      high: 'highAngleOverhead',
+      soft_focus: 'softFocusGlow',
+      beauty_closeup: 'beautyCloseUp',
+      side_profile: 'sideProfile',
+      three_quarter_side: 'threeQuarterSide',
+      top_beauty: 'topBeauty',
+      distant_hero: 'distantHero',
+    },
+  },
+  'chinese-classical.html': {
+    body: {
+      slightWaist: 'slight_waist',
+      curvy: 'curvy_waist',
+      tallFashion: 'fashion_tall',
+      kpopIdol: 'korean_idol',
+    },
+    camera: {
+      eyeLevel: 'eyeLevelCover',
+      lowAngle: 'lowAngleHero',
+      highAngle: 'highAngleOverhead',
+      beautyPortrait: 'beautyCloseUp',
+    },
+    ratio: {
+      vertical23: 'poster23',
+      landscape169: 'horizontal169',
+    },
+  },
+  'japanese-kimono.html': {
+    body: {
+      slightWaist: 'slight_waist',
+      curvy: 'curvy_waist',
+      tallFashion: 'fashion_tall',
+      japaneseElegance: 'japanese_elegance',
+    },
+    camera: {
+      eyeLevel: 'eyeLevelCover',
+      lowAngle: 'lowAngleHero',
+      highAngle: 'highAngleOverhead',
+      beautyPortrait: 'beautyCloseUp',
+    },
+    ratio: {
+      vertical23: 'poster23',
+      landscape169: 'horizontal169',
+    },
+  },
+  'korean-hanbok.html': {
+    body: {
+      slightWaist: 'slight_waist',
+      curvy: 'curvy_waist',
+      tallFashion: 'fashion_tall',
+      kpopIdol: 'korean_idol',
+    },
+    camera: {
+      eyeLevel: 'eyeLevelCover',
+      lowAngle: 'lowAngleHero',
+      highAngle: 'highAngleOverhead',
+      beautyPortrait: 'beautyCloseUp',
+    },
+    ratio: {
+      vertical23: 'poster23',
+      landscape169: 'horizontal169',
+    },
+  },
+  'bridal-editorial.html': {
+    bodyShape: {
+      slightWaist: 'slight_waist',
+      curvyWaist: 'curvy_waist',
+      fashionTall: 'fashion_tall',
+      koreanIdol: 'korean_idol',
+    },
+  },
+};
+
+function canonicalPresetValue(pageLabel, field, value) {
+  return LEGACY_VALUE_ALIASES[pageLabel]?.[field]?.[value] || value;
+}
+
 function checkObject(pageLabel, objName, obj, fieldLive, issues, skipValues = new Set(['none', 'original'])) {
   if (!obj) { console.log(`  (skip: ${objName} not found)`); return; }
   console.log(`=== ${pageLabel}: ${objName} ===`);
@@ -80,7 +177,8 @@ function checkObject(pageLabel, objName, obj, fieldLive, issues, skipValues = ne
       const values = Array.isArray(entry[field]) ? entry[field] : [entry[field]];
       for (const v of values) {
         if (skipValues.has(v)) continue;
-        if (!fieldLive[field].has(v)) {
+        const canonicalValue = canonicalPresetValue(pageLabel, field, v);
+        if (!fieldLive[field].has(v) && !fieldLive[field].has(canonicalValue)) {
           console.log(`  ISSUE: ${objName}."${entryName}" field "${field}"="${v}" not in live options`);
           issues.push({ page: pageLabel, obj: objName, entry: entryName, field, value: v });
         }

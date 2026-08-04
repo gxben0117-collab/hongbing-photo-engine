@@ -56,6 +56,31 @@ git diff --check
 - 首頁與主題頁的可見文案必須符合主題契約：材質區標題、服裝示例、坐姿情境與首頁工具數量
   不得沿用其他主題的泛用文字或過時資料。
 
+### 幻想廣告共用控制契約
+
+幻想廣告頁是正式人像工具的共同工程範本。下列 16 個人像頁必須共享同一組控制值，主題只能在
+後面追加自己的選項，不得改寫共同值：
+
+`travel.html`、`magazine.html`、`fantasy-fashion.html`、`chinese-classical.html`、
+`japanese-kimono.html`、`korean-hanbok.html`、`xianxia.html`、`anime-character.html`、
+`flower-fairy.html`、`isekai-fantasy.html`、`floral-sweet.html`、`gala-socialite.html`、
+`bridal-editorial.html`、`kpop-idol.html`、`battle-academy.html`、`ancient-goddess.html`。
+
+- `拍攝角度與鏡頭感` 共用自然平視、低角度仰拍、高角度俯拍、柔焦光感、近距離美妝感、
+  側臉輪廓感、斜側角度、高角度近景、遠距主視覺 9 組 canonical values。
+- `圖片比例` 共用 9:16、4:5、1:1、2:3、3:4、16:9、4:3、21:9 8 組比例；內部 ID 依幻想頁
+  使用 `vertical916`、`vertical45`、`square`、`poster23`、`vertical34`、`horizontal169`、
+  `horizontal43`、`wideBanner`，旅拍／雜誌使用相同顯示比例的字串值。
+- `身形輪廓` 與 `改造強度 Layer` 在具備服裝三區改造的人像頁共用 5 組身形與
+  `layer0`／`layer3`／`layer6`／`layer9`／`random`；Layer 只控制隨機套用的改造部位數。
+- `構圖取景` 的共同人像頁沿用幻想頁的主圖／偏側留空／材質包圍／斜線動態／對稱儀式／
+  前景框景等版型；中國、和服、韓服、婚紗、旅拍與雜誌可保留文化、婚紗、旅拍或封面專屬構圖，
+  但不應因此改動上述鏡頭、比例、身形與 Layer 契約。
+- `生成咒語` 必須把目前選取值實際組入輸出；一鍵模板、隨機套用與手動選取都使用同一組資料映射。
+
+明確例外：`doll.html` 是公仔比例工具，`store-ad.html` 是商品廣告工具，
+`editorial-identity.html` 是平面編輯設計工具；三頁不屬於真人人像共用控制契約，保留各自領域欄位。
+
 ## 咒語與一鍵契約
 
 - 婚紗藝術寫真頁固定有 12 組一鍵模板；每組必須完整回填婚紗、材質、頭紗、配件、妝髮、姿勢、光影、背景、鏡頭與比例。覆面頭紗只能手動選擇，不進一般隨機池。
@@ -111,4 +136,16 @@ git diff --check
 溢出、無 console error/warning。
 
 這是靜態與 Node `vm` 回歸檢查；若要確認瀏覽器實際像素、剪貼簿權限或 GitHub Pages
-快取，仍需在發布後開啟線上入口做一次人工點擊確認。
+ 快取，仍需在發布後開啟線上入口做一次人工點擊確認。
+
+## 2026-08-04 v4.36 回歸結果
+
+- 幻想廣告控制契約已納入 `check-ui-flows.mjs`：16 個人像頁共同檢查鏡頭、比例；15 個具服裝
+  三區改造頁另外檢查身形與 Layer。
+- 婚紗頁已移除 `85mm 婚紗人像`，模板與固定 Prompt 預覽不再引用 `bridal85mm`。
+- 婚紗 05 服裝改造核心改為胸口／腰側／肩部三欄響應式網格，桌機三欄、平板兩欄、手機單欄，
+  每個部位的選項與自填欄位保持在自己的區塊內。
+- 舊 preset 的鏡頭／身形 ID 由驗證器以 canonical alias 驗證並由頁面 setter 正規化，避免歷史模板
+  靜默失效；新 UI 不再建立舊值。
+- `check-static.mjs`、`check-ui-flows.mjs`、`validate-preset-refs.mjs`、`build-prompt-preview.mjs`、
+  `audit-100x.mjs` 全部通過；19 頁共 1900 組隨機模擬，0 issue。

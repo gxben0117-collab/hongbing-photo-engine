@@ -846,7 +846,7 @@ function generateBridalEditorial(core, data) {
     lighting: 'koreanCreamSoftLight',
     color: 'ivoryCream',
     background: 'creamSeamlessStudio',
-    camera: 'bridal85mm',
+    camera: 'eyeLevelCover',
     ratio: 'vertical916',
     intensity: 'balanced luxury bridal styling, visible couture craftsmanship, refined editorial presence',
   };

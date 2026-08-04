@@ -239,10 +239,10 @@
     <div class="section-header"><div class="section-label">06</div><div class="section-title">身形輪廓</div></div>
     <div class="grid grid-3" data-choice="bodyShape">
       <label class="card selected"><input type="radio" name="bodyShape" value="original" checked><div class="name">原圖自然比例</div><div class="desc">以參考照身形為主</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="slightWaist"><div class="name">輕微纖腰</div><div class="desc">自然修飾腰線，其餘保持自然</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="curvy"><div class="name">豐滿纖腰</div><div class="desc">明顯胸腰臀曲線與 S 曲線</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="tallFashion"><div class="name">高挑時裝比例</div><div class="desc">修長高級模特感</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="kpopIdol"><div class="name">韓系偶像比例</div><div class="desc">挺拔、修長、舞台偶像感</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="slight_waist"><div class="name">輕微纖腰</div><div class="desc">自然修飾腰線</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="curvy_waist"><div class="name">豐滿纖腰</div><div class="desc">明顯胸腰臀曲線</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="fashion_tall"><div class="name">高挑時裝比例</div><div class="desc">修長高級模特感</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="korean_idol"><div class="name">韓系偶像比例</div><div class="desc">修長腿線、俐落肩頸與挺拔姿態</div></label>
     </div>
   </section>
 
@@ -354,24 +354,29 @@
     </div>
     <div class="group-title">拍攝角度</div>
     <div class="grid grid-3" data-choice="camera">
-      <label class="card selected"><input type="radio" name="camera" value="eyeLevel" checked><div class="name">平視封面鏡頭</div><div class="desc">自然、穩定、適合人像</div></label>
-      <label class="card"><input type="radio" name="camera" value="threeQuarterSide"><div class="name">三分之四側面</div><div class="desc">兼顧臉部與衣襟線條</div></label>
-      <label class="card"><input type="radio" name="camera" value="sideProfile"><div class="name">側面輪廓</div><div class="desc">突出肩頸、袖型與花窗</div></label>
-      <label class="card"><input type="radio" name="camera" value="lowAngle"><div class="name">微低角度</div><div class="desc">增加華服與人物氣場</div></label>
-      <label class="card"><input type="radio" name="camera" value="highAngle"><div class="name">微高角度</div><div class="desc">清淡、柔和、生活感</div></label>
-      <label class="card"><input type="radio" name="camera" value="beautyPortrait"><div class="name">自然人像鏡頭</div><div class="desc">保持臉部辨識度與親近感</div></label>
+      <label class="card selected"><input type="radio" name="camera" value="eyeLevelCover" checked><div class="name">自然平視</div><div class="desc">標準封面視角（預設）</div></label>
+      <label class="card"><input type="radio" name="camera" value="lowAngleHero"><div class="name">低角度仰拍</div><div class="desc">英雄感視角／鏡頭低於腰部</div></label>
+      <label class="card"><input type="radio" name="camera" value="highAngleOverhead"><div class="name">高角度俯拍</div><div class="desc">俯視角／鏡頭高於頭部</div></label>
+      <label class="card"><input type="radio" name="camera" value="softFocusGlow"><div class="name">柔焦光感</div><div class="desc">柔和光暈棚拍感</div></label>
+      <label class="card"><input type="radio" name="camera" value="beautyCloseUp"><div class="name">近距離美妝感</div><div class="desc">美妝特寫構圖</div></label>
+      <label class="card"><input type="radio" name="camera" value="sideProfile"><div class="name">側臉輪廓感</div><div class="desc">側臉輪廓／下顎線清楚</div></label>
+      <label class="card"><input type="radio" name="camera" value="threeQuarterSide"><div class="name">斜側角度</div><div class="desc">約 45 度側拍／臉和身形都有立體感</div></label>
+      <label class="card"><input type="radio" name="camera" value="topBeauty"><div class="name">高角度近景</div><div class="desc">從上方靠近拍臉與肩頸</div></label>
+      <label class="card"><input type="radio" name="camera" value="distantHero"><div class="name">遠距主視覺</div><div class="desc">人物與背景完整，廣告版面感強</div></label>
     </div>
   </section>
 
   <section class="section-ratio">
     <div class="section-header"><div class="section-label">12</div><div class="section-title">圖片比例</div></div>
     <div class="grid grid-3" data-choice="ratio">
-      <label class="card"><input type="radio" name="ratio" value="square"><div class="name">1:1</div><div class="desc">方形頭像與社群主圖</div></label>
-      <label class="card selected"><input type="radio" name="ratio" value="vertical45" checked><div class="name">4:5</div><div class="desc">人物封面與精品廣告</div></label>
-      <label class="card"><input type="radio" name="ratio" value="vertical34"><div class="name">3:4</div><div class="desc">傳統人像與寫真</div></label>
-      <label class="card"><input type="radio" name="ratio" value="vertical23"><div class="name">2:3</div><div class="desc">全身服裝大片</div></label>
-      <label class="card"><input type="radio" name="ratio" value="vertical916"><div class="name">9:16</div><div class="desc">手機直幅與限時動態</div></label>
-      <label class="card"><input type="radio" name="ratio" value="landscape169"><div class="name">16:9</div><div class="desc">橫幅場景與電影感</div></label>
+      <label class="card selected"><input type="radio" name="ratio" value="vertical916" checked><div class="name">9:16 直式</div><div class="desc">短影音封面、限時動態</div></label>
+      <label class="card"><input type="radio" name="ratio" value="vertical45"><div class="name">4:5 直式</div><div class="desc">社群貼文與人物封面</div></label>
+      <label class="card"><input type="radio" name="ratio" value="square"><div class="name">1:1 方形</div><div class="desc">社群主圖與頭像</div></label>
+      <label class="card"><input type="radio" name="ratio" value="poster23"><div class="name">2:3 海報</div><div class="desc">全身韓服與精品海報</div></label>
+      <label class="card"><input type="radio" name="ratio" value="vertical34"><div class="name">3:4 直式</div><div class="desc">傳統人像與寫真</div></label>
+      <label class="card"><input type="radio" name="ratio" value="horizontal169"><div class="name">16:9 橫式</div><div class="desc">橫幅場景與影片封面</div></label>
+      <label class="card"><input type="radio" name="ratio" value="horizontal43"><div class="name">4:3 橫式</div><div class="desc">橫式廣告與完整場景</div></label>
+      <label class="card"><input type="radio" name="ratio" value="wideBanner"><div class="name">21:9 寬幅</div><div class="desc">電影感品牌橫幅</div></label>
     </div>
   </section>
 
@@ -523,12 +528,47 @@ const poseData = {
 };
 
 const BODY_SHAPES = {
-  original: 'preserve the reference photo body proportions, natural height, shoulder width, waist and hip relationship',
-  slightWaist: 'subtle natural waist refinement while preserving the reference photo body proportions and overall anatomy',
-  curvy: 'prominent fuller bust curve, narrow slim waistline, dramatic feminine S-curve silhouette, strong bust-waist-hip contrast',
-  tallFashion: 'tall fashion proportion, elongated legs, refined shoulder-to-neck line and graceful editorial model presence',
-  kpopIdol: 'Korean editorial idol-inspired proportion, upright posture, elongated leg impression, toned yet soft hanbok fashion silhouette'
+  original: `【身形輪廓｜原圖自然比例】
+
+Preserve The Reference Photo Natural Body Proportions
+Keep Original Body Shape, Height Impression, Shoulder Width, Waist-To-Hip Balance
+Natural Realistic Adult Female Anatomy
+Do Not Force A New Body Type
+Keep Face, Identity, Age Impression And Personal Features Unchanged`,
+  slight_waist: `【身形輪廓｜輕微纖腰】
+
+Subtle Narrow Waist Refinement
+Slightly More Defined Waistline While Keeping Natural Body Proportions
+Elegant Feminine Silhouette, Not Exaggerated
+Keep The Original Face, Identity And Personal Features Unchanged
+Natural Realistic Adult Female Anatomy`,
+  curvy_waist: `【身形輪廓｜豐滿纖腰】
+
+Japanese Curvy Slim-Waist Adult Female Silhouette
+Full Bust, Slim Waist, Elegant Waist-To-Hip Curve
+Clearly Defined Feminine Body Line
+Keep The Original Face, Identity, Age Impression And Personal Features Unchanged
+Natural Realistic Body Proportions, No Exaggerated Fantasy Anatomy`,
+  fashion_tall: `【身形輪廓｜高挑時裝比例】
+
+Tall High-Fashion Model Silhouette
+Longer Leg Impression, Refined Shoulder And Neck Line, Slim Editorial Body Shape
+Elegant Runway Proportions While Staying Realistic
+Keep The Original Face, Identity And Personal Features Unchanged
+No Doll-Like Or Over-Stretched Anatomy`,
+  korean_idol: `【身形輪廓｜韓系偶像比例】
+
+Korean Idol Stage Proportions
+Balanced Adult Idol Silhouette With A Naturally Long-Leg Impression
+Refined Shoulder And Neck Line, Upright Posture, Toned Yet Soft Feminine Body Balance
+Camera-Friendly Proportions For Performance, Beauty And Editorial Photography
+Keep The Original Face, Identity And Personal Features Unchanged
+Natural Realistic Adult Anatomy, No Doll-Like Or Over-Stretched Body`
 };
+BODY_SHAPES.slightWaist = BODY_SHAPES.slight_waist;
+BODY_SHAPES.curvy = BODY_SHAPES.curvy_waist;
+BODY_SHAPES.tallFashion = BODY_SHAPES.fashion_tall;
+BODY_SHAPES.kpopIdol = BODY_SHAPES.korean_idol;
 
 const GARMENT_VARIATIONS = {
   chest: {
@@ -581,21 +621,49 @@ const framingData = {
 };
 
 const cameraData = {
-  eyeLevel: 'eye-level cover camera, natural perspective and clear identity',
-  threeQuarterSide: 'three-quarter side camera angle balancing face recognition and garment lines',
-  sideProfile: 'side profile camera angle emphasizing shoulder, sleeve and architectural lines',
-  lowAngle: 'slightly low fashion camera angle giving the garment elegant presence without distortion',
-  highAngle: 'slightly high camera angle with a gentle intimate portrait feeling',
-  beautyPortrait: 'natural beauty portrait lens with refined facial detail and realistic perspective'
+  eyeLevelCover: 'natural eye-level camera angle, standard magazine cover perspective, balanced face and body proportion, clean premium portrait framing',
+  lowAngleHero: 'low angle hero shot, camera below waist level, powerful upward perspective, elongated fashion silhouette, strong commanding presence',
+  highAngleOverhead: 'high angle view, camera above head level, elegant top-down perspective, refined fashion composition, clear subject shape',
+  softFocusGlow: 'soft focus glow camera language, gentle halo bloom, luminous studio beauty atmosphere, refined dreamy commercial portrait',
+  beautyCloseUp: 'close distance beauty photography, beauty close-up composition, face and makeup details emphasized, polished cosmetic campaign framing',
+  sideProfile: 'side profile portrait angle, clear jawline silhouette, elegant facial contour, refined profile lighting and fashion editorial framing',
+  threeQuarterSide: 'three-quarter side camera angle, about 45 degree side view, face and body both show dimensional structure, elegant advertising perspective',
+  topBeauty: 'high angle close beauty view, camera above the subject and slightly close, face shoulders neckline and headdress emphasized, elegant cosmetic perspective',
+  distantHero: 'distant hero advertising view, camera pulled back to show subject background and material environment together, spacious brand key visual perspective'
 };
+cameraData.eyeLevel = cameraData.eyeLevelCover;
+cameraData.lowAngle = cameraData.lowAngleHero;
+cameraData.highAngle = cameraData.highAngleOverhead;
+cameraData.beautyPortrait = cameraData.beautyCloseUp;
 
 const ratioData = {
-  square: 'square 1:1 image composition',
-  vertical45: 'vertical 4:5 image composition',
-  vertical34: 'vertical 3:4 image composition',
-  vertical23: 'vertical 2:3 image composition',
-  vertical916: 'vertical 9:16 image composition',
-  landscape169: 'landscape 16:9 image composition'
+  vertical916: 'aspect ratio 9:16, vertical social media cover composition',
+  vertical45: 'aspect ratio 4:5, vertical social media feed poster composition',
+  square: 'aspect ratio 1:1, square commercial campaign image',
+  poster23: 'aspect ratio 2:3, vertical luxury poster composition',
+  vertical34: 'aspect ratio 3:4, vertical portrait poster composition',
+  horizontal169: 'aspect ratio 16:9, horizontal website banner and video cover composition',
+  horizontal43: 'aspect ratio 4:3, horizontal commercial image with balanced subject and environment',
+  wideBanner: 'aspect ratio 21:9, cinematic wide luxury brand banner composition'
+};
+ratioData.vertical23 = ratioData.poster23;
+ratioData.landscape169 = ratioData.horizontal169;
+
+const BODY_CONTROL_ALIASES = {
+  slightWaist: 'slight_waist',
+  curvy: 'curvy_waist',
+  tallFashion: 'fashion_tall',
+  kpopIdol: 'korean_idol'
+};
+const CAMERA_CONTROL_ALIASES = {
+  eyeLevel: 'eyeLevelCover',
+  lowAngle: 'lowAngleHero',
+  highAngle: 'highAngleOverhead',
+  beautyPortrait: 'beautyCloseUp'
+};
+const RATIO_CONTROL_ALIASES = {
+  vertical23: 'poster23',
+  landscape169: 'horizontal169'
 };
 
 const sharedClassicalCore = window.HB_CORE_PROMPT?.page?.koreanHanbok || {};
@@ -623,7 +691,9 @@ function selectedCheckboxes(name){
   return Array.from(document.querySelectorAll('input[name="' + name + '"]:checked')).map(input => input.value);
 }
 function setRadioValue(name, value){
-  const input = Array.from(document.querySelectorAll('input[name="' + name + '"]')).find(item => item.value === value);
+  const aliases = name === 'bodyShape' ? BODY_CONTROL_ALIASES : name === 'camera' ? CAMERA_CONTROL_ALIASES : name === 'ratio' ? RATIO_CONTROL_ALIASES : {};
+  const canonicalValue = aliases[value] || value;
+  const input = Array.from(document.querySelectorAll('input[name="' + name + '"]')).find(item => item.value === canonicalValue);
   if(input) input.checked = true;
 }
 function setCheckboxValues(name, values){

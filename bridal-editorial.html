@@ -98,6 +98,11 @@
   .custom-choice input{margin-top:2px;}
   .layer-wrap{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:12px;}
   .layer-card{min-height:62px;}
+  .garment-core-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:start;}
+  .garment-zone{min-width:0;padding:12px;border:1px solid var(--line);border-radius:8px;background:rgba(32,26,34,.48);}
+  .garment-zone .group-title{margin:0 0 9px;padding-bottom:7px;border-bottom:1px solid var(--line);}
+  .garment-zone .card{margin-bottom:8px;}
+  .garment-zone .custom-choice{margin-top:2px;}
   .limit-note{margin-top:8px;color:var(--rose);font-size:11px;}
   .generate-btn,.copy-btn{
     width:100%;padding:13px 16px;border:1px solid var(--gold);border-radius:6px;
@@ -119,10 +124,12 @@
     h1{font-size:26px;}
     .grid,.grid-3{grid-template-columns:repeat(2,1fr);}
     .layer-wrap{grid-template-columns:repeat(3,1fr);}
+    .garment-core-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
   }
   @media (max-width:480px){
     .grid,.grid-3,.field-grid{grid-template-columns:1fr;}
     .layer-wrap{grid-template-columns:repeat(2,1fr);}
+    .garment-core-grid{grid-template-columns:1fr;}
     .card{min-height:auto;padding:11px 12px;}
     #outputText{min-height:360px;font-size:11px;}
   }
@@ -250,8 +257,8 @@
       <label class="card layer-card"><input type="radio" name="garmentLayer" value="layer9"><div class="name">Layer 9</div><div class="desc">隨機套用時 3 區全改</div></label>
       <label class="card layer-card"><input type="radio" name="garmentLayer" value="random"><div class="name">隨機 Layer</div><div class="desc">隨機重抽改造強度</div></label>
     </div>
-    <div class="grid grid-3">
-      <div>
+    <div class="garment-core-grid">
+      <div class="garment-zone">
         <div class="group-title">胸口</div>
         <label class="card selected"><input type="radio" name="chestDetail" value="none" checked><div class="name">原婚紗一致</div><div class="desc">維持 03 婚紗胸口版型</div></label>
         <label class="card"><input type="radio" name="chestDetail" value="sweetheartCorset"><div class="name">心形束身領口</div><div class="desc">高訂心形領口與束身胸衣</div></label>
@@ -260,7 +267,7 @@
         <label class="card"><input type="radio" name="chestDetail" value="drapedOffShoulderBodice"><div class="name">垂墜露肩胸衣</div><div class="desc">肩側薄紗連接胸衣線條</div></label>
         <label class="field custom-choice">胸口自填<input id="customChestDetail" type="text" placeholder="例如：珍珠沿心形領口細密排列"></label>
       </div>
-      <div>
+      <div class="garment-zone">
         <div class="group-title">腰側</div>
         <label class="card selected"><input type="radio" name="waistSideDetail" value="none" checked><div class="name">原婚紗一致</div><div class="desc">維持 03 婚紗腰線版型</div></label>
         <label class="card"><input type="radio" name="waistSideDetail" value="sculptedWaistCorsetry"><div class="name">雕塑感纖腰結構</div><div class="desc">高訂胸衣與腰線支撐</div></label>
@@ -269,7 +276,7 @@
         <label class="card"><input type="radio" name="waistSideDetail" value="detachableOverskirtWaist"><div class="name">可拆式外裙腰封</div><div class="desc">外裙與主裙形成高訂層次</div></label>
         <label class="field custom-choice">腰側自填<input id="customWaistSideDetail" type="text" placeholder="例如：腰側以細密蕾絲形成自然收腰線"></label>
       </div>
-      <div>
+      <div class="garment-zone">
         <div class="group-title">肩部</div>
         <label class="card selected"><input type="radio" name="shoulderDetail" value="none" checked><div class="name">原婚紗一致</div><div class="desc">維持 03 婚紗肩部版型</div></label>
         <label class="card"><input type="radio" name="shoulderDetail" value="softOffShoulderTulle"><div class="name">垂墜露肩薄紗</div><div class="desc">薄紗自然落在上臂外側</div></label>
@@ -317,10 +324,10 @@
     <p class="hint">單選，控制人物比例與腰線；原圖自然比例會以參考照身形為主要依據。</p>
     <div class="grid grid-3" data-choice="bodyShape">
       <label class="card selected"><input type="radio" name="bodyShape" value="original" checked><div class="name">原圖自然比例</div><div class="desc">以參考照身形為主</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="slightWaist"><div class="name">輕微纖腰</div><div class="desc">自然修飾腰線</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="curvyWaist"><div class="name">豐滿纖腰</div><div class="desc">明顯胸腰臀曲線</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="fashionTall"><div class="name">高挑時裝比例</div><div class="desc">修長高級模特感</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="koreanIdol"><div class="name">韓系偶像比例</div><div class="desc">修長腿線、俐落肩頸與挺拔姿態</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="slight_waist"><div class="name">輕微纖腰</div><div class="desc">自然修飾腰線</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="curvy_waist"><div class="name">豐滿纖腰</div><div class="desc">明顯胸腰臀曲線</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="fashion_tall"><div class="name">高挑時裝比例</div><div class="desc">修長高級模特感</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="korean_idol"><div class="name">韓系偶像比例</div><div class="desc">修長腿線、俐落肩頸與挺拔姿態</div></label>
     </div>
   </section>
 
@@ -434,27 +441,35 @@
 
   <section class="section-camera">
     <div class="section-header"><div class="section-label">13</div><div class="section-title">拍攝角度與鏡頭感</div></div>
-    <p class="hint">決定鏡頭距離與角度；不會覆寫 02 構圖取景。</p>
+    <p class="hint">只改觀看角度、景深和鏡頭氣勢；人物拍到哪裡請回到 02 的「構圖取景」。</p>
     <div class="grid grid-3" data-choice="camera">
-      <label class="card selected"><input type="radio" name="camera" value="bridal85mm" checked><div class="name">85mm 婚紗人像</div><div class="desc">自然壓縮、適合臉與婚紗細節</div></label>
-      <label class="card"><input type="radio" name="camera" value="beautyCloseupLens"><div class="name">美妝特寫鏡頭</div><div class="desc">強調妝容、膚質、頭紗與五官</div></label>
-      <label class="card"><input type="radio" name="camera" value="eyeLevelEditorial"><div class="name">平視編輯角度</div><div class="desc">自然、穩定、高級雜誌感</div></label>
-      <label class="card"><input type="radio" name="camera" value="threeQuarterFashion"><div class="name">斜側時裝角度</div><div class="desc">增加婚紗立體度與身形線條</div></label>
-      <label class="card"><input type="radio" name="camera" value="lowAngleTrainView"><div class="name">低角度拖尾視角</div><div class="desc">適合皇家長拖尾與全身婚紗</div></label>
-      <label class="card"><input type="radio" name="camera" value="wideEnvironmentalLens"><div class="name">環境廣角視角</div><div class="desc">讓教堂、花園或海岸加入故事</div></label>
+      <label class="card selected"><input type="radio" name="camera" value="eyeLevelCover" checked><div class="name">自然平視</div><div class="desc">標準封面視角（預設）</div></label>
+      <label class="card"><input type="radio" name="camera" value="lowAngleHero"><div class="name">低角度仰拍</div><div class="desc">英雄感視角／鏡頭低於腰部</div></label>
+      <label class="card"><input type="radio" name="camera" value="highAngleOverhead"><div class="name">高角度俯拍</div><div class="desc">俯視角／鏡頭高於頭部</div></label>
+      <label class="card"><input type="radio" name="camera" value="softFocusGlow"><div class="name">柔焦光感</div><div class="desc">柔和光暈棚拍感</div></label>
+      <label class="card"><input type="radio" name="camera" value="beautyCloseUp"><div class="name">近距離美妝感</div><div class="desc">美妝特寫構圖</div></label>
+      <label class="card"><input type="radio" name="camera" value="sideProfile"><div class="name">側臉輪廓感</div><div class="desc">側臉輪廓／下顎線清楚</div></label>
+      <label class="card"><input type="radio" name="camera" value="threeQuarterSide"><div class="name">斜側角度</div><div class="desc">約 45 度側拍／臉和身形都有立體感</div></label>
+      <label class="card"><input type="radio" name="camera" value="topBeauty"><div class="name">高角度近景</div><div class="desc">從上方靠近拍臉與肩頸</div></label>
+      <label class="card"><input type="radio" name="camera" value="distantHero"><div class="name">遠距主視覺</div><div class="desc">人物與背景完整，廣告版面感強</div></label>
+      <div class="group-title" style="grid-column:1/-1">婚紗專屬鏡頭</div>
+      <label class="card"><input type="radio" name="camera" value="bridalTrainView"><div class="name">低角度拖尾視角</div><div class="desc">適合皇家長拖尾與全身婚紗</div></label>
+      <label class="card"><input type="radio" name="camera" value="bridalWideEnvironmental"><div class="name">婚紗環境廣角</div><div class="desc">讓教堂、花園或海岸加入故事</div></label>
     </div>
   </section>
 
   <section class="section-ratio">
     <div class="section-header"><div class="section-label">14</div><div class="section-title">圖片比例</div></div>
-    <p class="hint">參考圖建議使用 9:16；全身婚紗與婚紗海報也可使用 2:3 或 4:5。</p>
+    <p class="hint">依發布用途選擇：直式適合人像與社群，橫式適合海報、橫幅或婚紗場景。</p>
     <div class="grid grid-3" data-choice="ratio">
-      <label class="card selected"><input type="radio" name="ratio" value="vertical916" checked><div class="name">9:16 直式</div><div class="desc">長頭紗、社群封面、直式婚紗寫真</div></label>
-      <label class="card"><input type="radio" name="ratio" value="vertical45"><div class="name">4:5 直式</div><div class="desc">婚紗貼文與人物主視覺</div></label>
-      <label class="card"><input type="radio" name="ratio" value="poster23"><div class="name">2:3 海報</div><div class="desc">完整婚紗與品牌海報</div></label>
-      <label class="card"><input type="radio" name="ratio" value="vertical34"><div class="name">3:4 直式</div><div class="desc">寫真集與婚紗型錄</div></label>
-      <label class="card"><input type="radio" name="ratio" value="square"><div class="name">1:1 方形</div><div class="desc">社群貼文與婚紗小卡</div></label>
-      <label class="card"><input type="radio" name="ratio" value="horizontal169"><div class="name">16:9 橫式</div><div class="desc">婚紗故事封面與網站橫幅</div></label>
+      <label class="card selected"><input type="radio" name="ratio" value="vertical916" checked><div class="name">9:16 直式</div><div class="desc">短影音封面、限動</div></label>
+      <label class="card"><input type="radio" name="ratio" value="vertical45"><div class="name">4:5 直式</div><div class="desc">IG／小紅書貼文</div></label>
+      <label class="card"><input type="radio" name="ratio" value="square"><div class="name">1:1 方形</div><div class="desc">社群貼文主圖</div></label>
+      <label class="card"><input type="radio" name="ratio" value="poster23"><div class="name">2:3 海報</div><div class="desc">商業海報感</div></label>
+      <label class="card"><input type="radio" name="ratio" value="vertical34"><div class="name">3:4 直式</div><div class="desc">寫真海報、人物主視覺</div></label>
+      <label class="card"><input type="radio" name="ratio" value="horizontal169"><div class="name">16:9 橫式</div><div class="desc">網站橫幅、影片封面</div></label>
+      <label class="card"><input type="radio" name="ratio" value="horizontal43"><div class="name">4:3 橫式</div><div class="desc">橫式廣告、場景更完整</div></label>
+      <label class="card"><input type="radio" name="ratio" value="wideBanner"><div class="name">21:9 寬幅</div><div class="desc">電影感橫幅、品牌主視覺</div></label>
     </div>
   </section>
 
@@ -596,12 +611,47 @@ const accessoryData = {
 };
 
 const bodyShapes = {
-  original: 'preserve the reference photo natural body proportions, original body shape, height impression, shoulder width and waist-to-hip balance',
-  slightWaist: 'subtle narrow waist refinement while keeping natural adult body proportions and the reference body impression',
-  curvyWaist: 'prominent fuller bust curve, narrow slim waistline, dramatic feminine S-curve silhouette, strong bust-waist-hip contrast, natural realistic adult anatomy',
-  fashionTall: 'tall high-fashion model silhouette, refined shoulder and neck line, long leg impression, realistic couture proportion',
-  koreanIdol: 'balanced Korean idol-inspired adult silhouette, naturally long-leg impression, refined shoulder and neck line, upright posture, toned yet soft body balance'
+  original: `【身形輪廓｜原圖自然比例】
+
+Preserve The Reference Photo Natural Body Proportions
+Keep Original Body Shape, Height Impression, Shoulder Width, Waist-To-Hip Balance
+Natural Realistic Adult Female Anatomy
+Do Not Force A New Body Type
+Keep Face, Identity, Age Impression And Personal Features Unchanged`,
+  slight_waist: `【身形輪廓｜輕微纖腰】
+
+Subtle Narrow Waist Refinement
+Slightly More Defined Waistline While Keeping Natural Body Proportions
+Elegant Feminine Silhouette, Not Exaggerated
+Keep The Original Face, Identity And Personal Features Unchanged
+Natural Realistic Adult Female Anatomy`,
+  curvy_waist: `【身形輪廓｜豐滿纖腰】
+
+Japanese Curvy Slim-Waist Adult Female Silhouette
+Full Bust, Slim Waist, Elegant Waist-To-Hip Curve
+Clearly Defined Feminine Body Line
+Keep The Original Face, Identity, Age Impression And Personal Features Unchanged
+Natural Realistic Body Proportions, No Exaggerated Fantasy Anatomy`,
+  fashion_tall: `【身形輪廓｜高挑時裝比例】
+
+Tall High-Fashion Model Silhouette
+Longer Leg Impression, Refined Shoulder And Neck Line, Slim Editorial Body Shape
+Elegant Runway Proportions While Staying Realistic
+Keep The Original Face, Identity And Personal Features Unchanged
+No Doll-Like Or Over-Stretched Anatomy`,
+  korean_idol: `【身形輪廓｜韓系偶像比例】
+
+Korean Idol Stage Proportions
+Balanced Adult Idol Silhouette With A Naturally Long-Leg Impression
+Refined Shoulder And Neck Line, Upright Posture, Toned Yet Soft Feminine Body Balance
+Camera-Friendly Proportions For Performance, Beauty And Editorial Photography
+Keep The Original Face, Identity And Personal Features Unchanged
+Natural Realistic Adult Anatomy, No Doll-Like Or Over-Stretched Body`
 };
+bodyShapes.slightWaist = bodyShapes.slight_waist;
+bodyShapes.curvyWaist = bodyShapes.curvy_waist;
+bodyShapes.fashionTall = bodyShapes.fashion_tall;
+bodyShapes.koreanIdol = bodyShapes.korean_idol;
 
 const poseData = {
   naturalBridalStand: 'natural dignified bridal standing pose, relaxed shoulders, balanced weight and elegant restrained posture',
@@ -672,35 +722,42 @@ const backgroundData = {
   softGrayWall: 'a minimal soft gray-white wall and refined editorial studio environment'
 };
 const cameraData = {
-  bridal85mm: '85mm bridal portrait lens, natural perspective compression, refined focus separation',
-  beautyCloseupLens: 'premium beauty close-up lens, delicate facial detail and controlled shallow depth of field',
-  eyeLevelEditorial: 'eye-level editorial camera, natural perspective and stable high-fashion portrait framing',
-  threeQuarterFashion: 'three-quarter fashion camera angle, sculptural view of the gown and graceful body line',
-  lowAngleTrainView: 'slightly low bridal fashion angle, elegant long train perspective without enlarging the head',
-  wideEnvironmentalLens: 'wide environmental wedding lens with coherent body proportions and location depth'
+  eyeLevelCover: 'natural eye-level camera angle, standard magazine cover perspective, balanced face and body proportion, clean premium portrait framing',
+  lowAngleHero: 'low angle hero shot, camera below waist level, powerful upward perspective, elongated fashion silhouette, strong commanding presence',
+  highAngleOverhead: 'high angle view, camera above head level, elegant top-down perspective, refined fashion composition, clear subject shape',
+  softFocusGlow: 'soft focus glow camera language, gentle halo bloom, luminous studio beauty atmosphere, refined dreamy commercial portrait',
+  beautyCloseUp: 'close distance beauty photography, beauty close-up composition, face and makeup details emphasized, polished cosmetic campaign framing',
+  sideProfile: 'side profile portrait angle, clear jawline silhouette, elegant facial contour, refined profile lighting and fashion editorial framing',
+  threeQuarterSide: 'three-quarter side camera angle, about 45 degree side view, face and body both show dimensional structure, elegant advertising perspective',
+  topBeauty: 'high angle close beauty view, camera above the subject and slightly close, face shoulders neckline and headdress emphasized, elegant cosmetic perspective',
+  distantHero: 'distant hero advertising view, camera pulled back to show subject background and material environment together, spacious brand key visual perspective',
+  bridalTrainView: 'slightly low bridal fashion angle, elegant long train perspective without enlarging the head',
+  bridalWideEnvironmental: 'wide environmental wedding lens with coherent body proportions and location depth'
 };
 const ratioData = {
-  vertical916: 'vertical 9:16 composition',
-  vertical45: 'vertical 4:5 composition',
-  poster23: 'vertical 2:3 poster composition',
-  vertical34: 'vertical 3:4 portrait composition',
-  square: 'square 1:1 composition',
-  horizontal169: 'horizontal 16:9 composition'
+  vertical916: 'aspect ratio 9:16, vertical social media cover composition',
+  vertical45: 'aspect ratio 4:5, vertical social media feed poster composition',
+  square: 'aspect ratio 1:1, square commercial campaign image',
+  poster23: 'aspect ratio 2:3, vertical luxury poster composition',
+  vertical34: 'aspect ratio 3:4, vertical portrait poster composition',
+  horizontal169: 'aspect ratio 16:9, horizontal website banner and video cover composition',
+  horizontal43: 'aspect ratio 4:3, horizontal commercial image with balanced subject and environment',
+  wideBanner: 'aspect ratio 21:9, cinematic wide luxury brand banner composition'
 };
 
 const themeTemplates = {
-  koreanCreamStudio: { style: 'koreanBridalStudio', composition: 'rightSubjectLeftSpace', framing: 'waistUp', garment: 'coutureMermaid', materials: ['frenchLace', 'pearlBeading'], garmentLayer: 'layer0', chestDetail: 'sweetheartCorset', waistSideDetail: 'sculptedWaistCorsetry', shoulderDetail: 'softOffShoulderTulle', veil: 'pearlVeil', accessories: ['pearlHairpiece', 'pearlEarrings'], bodyShape: 'original', pose: 'downcastThreeQuarter', makeup: ['clearBridalMakeup', 'naturalRose'], hairstyle: 'lowBridalUpdo', skinTexture: 'luxuryAdSkin', lighting: 'koreanCreamSoftLight', color: 'ivoryCream', background: 'creamSeamlessStudio', camera: 'bridal85mm', ratio: 'vertical916', intensity: 'balanced luxury bridal styling, visible couture craftsmanship, refined editorial presence' },
-  pearlVeilBeautyCloseup: { style: 'bridalEditorial', composition: 'veilFramedPortrait', framing: 'bustPortrait', garment: 'minimalColumn', materials: ['pearlBeading', 'layeredTulle'], garmentLayer: 'layer3', chestDetail: 'laceIllusionBodice', waistSideDetail: 'none', shoulderDetail: 'softOffShoulderTulle', veil: 'pearlVeil', accessories: ['pearlHairpiece', 'pearlEarrings'], bodyShape: 'original', pose: 'adjustingVeil', makeup: ['clearBridalMakeup', 'refinedBridalBeauty'], hairstyle: 'softFrenchUpdo', skinTexture: 'realPores', lighting: 'luxuryStudioSoftbox', color: 'purePearlWhite', background: 'pureWhiteStudio', camera: 'beautyCloseupLens', ratio: 'vertical45', intensity: 'restrained luxury bridal styling, delicate couture detail, quiet premium mood' },
-  frenchLaceCouture: { style: 'fineArtWedding', composition: 'centeredBridalPortrait', framing: 'threeQuarter', garment: 'frenchDrapedGown', materials: ['frenchLace', 'floralEmbroidery'], garmentLayer: 'layer6', chestDetail: 'deepVBridalNeckline', waistSideDetail: 'pearlWaistApplique', shoulderDetail: 'laceCapSleeve', veil: 'laceEdgeVeil', accessories: ['pearlEarrings'], bodyShape: 'fashionTall', pose: 'sideProfileGown', makeup: ['naturalRose', 'refinedBridalBeauty'], hairstyle: 'softFrenchUpdo', skinTexture: 'naturalReal', lighting: 'afternoonWindowLight', color: 'ivoryCream', background: 'frenchInterior', camera: 'threeQuarterFashion', ratio: 'vertical45', intensity: 'balanced luxury bridal styling, visible couture craftsmanship, refined editorial presence' },
-  minimalSatinBride: { style: 'bridalCampaign', composition: 'leftSubjectRightSpace', framing: 'waistUp', garment: 'minimalColumn', materials: ['silkSatin'], garmentLayer: 'layer0', chestDetail: 'sweetheartCorset', waistSideDetail: 'drapedWaistPleats', shoulderDetail: 'none', veil: 'shoulderLengthVeil', accessories: [], bodyShape: 'original', pose: 'naturalBridalStand', makeup: ['clearBridalMakeup'], hairstyle: 'originalHair', skinTexture: 'luxuryAdSkin', lighting: 'luxuryStudioSoftbox', color: 'purePearlWhite', background: 'softGrayWall', camera: 'eyeLevelEditorial', ratio: 'vertical45', intensity: 'restrained luxury bridal styling, delicate couture detail, quiet premium mood' },
-  royalCathedralTrain: { style: 'bridalCampaign', composition: 'flowingTrainComposition', framing: 'fullBody', garment: 'detachableTrainGown', materials: ['layeredTulle', 'crystalBeading'], garmentLayer: 'layer9', chestDetail: 'sweetheartCorset', waistSideDetail: 'detachableOverskirtWaist', shoulderDetail: 'detachableTulleSleeve', veil: 'cathedralVeil', accessories: ['minimalCrown'], bodyShape: 'fashionTall', pose: 'trainSpread', makeup: ['refinedBridalBeauty'], hairstyle: 'highBridalUpdo', skinTexture: 'naturalReal', lighting: 'luxuryStudioSoftbox', color: 'purePearlWhite', background: 'palaceWeddingHall', camera: 'lowAngleTrainView', ratio: 'poster23', intensity: 'dramatic couture bridal styling, pronounced train and veil movement, strong fashion editorial presence' },
-  whiteGardenMorning: { style: 'fineArtWedding', composition: 'foregroundFlowerFrame', framing: 'threeQuarter', garment: 'floralSculptureGown', materials: ['floralEmbroidery', 'layeredTulle'], garmentLayer: 'layer6', chestDetail: 'laceIllusionBodice', waistSideDetail: 'pearlWaistApplique', shoulderDetail: 'softOffShoulderTulle', veil: 'fingertipVeil', accessories: ['whiteBouquet'], bodyShape: 'original', pose: 'holdingBouquet', makeup: ['naturalRose', 'clearBridalMakeup'], hairstyle: 'romanticWaves', skinTexture: 'softFocusSkin', lighting: 'gardenMorningMist', color: 'purePearlWhite', background: 'whiteFlowerGarden', camera: 'bridal85mm', ratio: 'vertical916', intensity: 'balanced luxury bridal styling, visible couture craftsmanship, refined editorial presence' },
-  coastalSunsetVeil: { style: 'cinematicBridal', composition: 'environmentalBridalPortrait', framing: 'fullBody', garment: 'detachableTrainGown', materials: ['layeredTulle', 'silkSatin'], garmentLayer: 'layer3', chestDetail: 'drapedOffShoulderBodice', waistSideDetail: 'drapedWaistPleats', shoulderDetail: 'softOffShoulderTulle', veil: 'chapelVeil', accessories: [], bodyShape: 'original', pose: 'walkingVeilMotion', makeup: ['naturalRose'], hairstyle: 'romanticWaves', skinTexture: 'naturalReal', lighting: 'goldenHourBacklight', color: 'champagneWarmWhite', background: 'coastalSunset', camera: 'wideEnvironmentalLens', ratio: 'vertical916', intensity: 'dramatic couture bridal styling, pronounced train and veil movement, strong fashion editorial presence' },
-  cathedralWindowBride: { style: 'cinematicBridal', composition: 'symmetricalCeremonialBride', framing: 'threeQuarter', garment: 'classicALine', materials: ['frenchLace', 'crystalBeading'], garmentLayer: 'layer3', chestDetail: 'laceIllusionBodice', waistSideDetail: 'sculptedWaistCorsetry', shoulderDetail: 'laceCapSleeve', veil: 'chapelVeil', accessories: ['pearlHairpiece'], bodyShape: 'original', pose: 'windowContemplation', makeup: ['refinedBridalBeauty'], hairstyle: 'lowBridalUpdo', skinTexture: 'naturalReal', lighting: 'cathedralWindowProjection', color: 'whitePlatinumGray', background: 'europeanCathedral', camera: 'eyeLevelEditorial', ratio: 'poster23', intensity: 'balanced luxury bridal styling, visible couture craftsmanship, refined editorial presence' },
-  champagneCoutureBride: { style: 'bridalCampaign', composition: 'centeredBridalPortrait', framing: 'fullBody', garment: 'champagneCoutureGown', materials: ['pearlBeading', 'crystalBeading'], garmentLayer: 'layer6', chestDetail: 'sweetheartCorset', waistSideDetail: 'pearlWaistApplique', shoulderDetail: 'singleShoulderBridalCut', veil: 'cathedralVeil', accessories: ['crystalTiara'], bodyShape: 'fashionTall', pose: 'naturalBridalStand', makeup: ['sculptedContour', 'coutureRedLip'], hairstyle: 'highBridalUpdo', skinTexture: 'luxuryAdSkin', lighting: 'luxuryStudioSoftbox', color: 'champagneWarmWhite', background: 'palaceWeddingHall', camera: 'bridal85mm', ratio: 'poster23', intensity: 'dramatic couture bridal styling, pronounced train and veil movement, strong fashion editorial presence' },
-  pinkFloralBride: { style: 'fineArtWedding', composition: 'foregroundFlowerFrame', framing: 'waistUp', garment: 'floralSculptureGown', materials: ['floralEmbroidery', 'pearlBeading'], garmentLayer: 'layer3', chestDetail: 'laceIllusionBodice', waistSideDetail: 'pearlWaistApplique', shoulderDetail: 'laceCapSleeve', veil: 'laceEdgeVeil', accessories: ['coloredBouquet'], bodyShape: 'original', pose: 'downcastThreeQuarter', makeup: ['naturalRose', 'clearBridalMakeup'], hairstyle: 'romanticWaves', skinTexture: 'softFocusSkin', lighting: 'gardenMorningMist', color: 'mistyPinkIvory', background: 'roseGardenPath', camera: 'bridal85mm', ratio: 'vertical916', intensity: 'restrained luxury bridal styling, delicate couture detail, quiet premium mood' },
-  blueCrystalBride: { style: 'bridalMagazine', composition: 'rightSubjectLeftSpace', framing: 'threeQuarter', garment: 'blueCrystalGown', materials: ['crystalBeading', 'silkSatin'], garmentLayer: 'layer3', chestDetail: 'deepVBridalNeckline', waistSideDetail: 'sculptedWaistCorsetry', shoulderDetail: 'singleShoulderBridalCut', veil: 'shoulderLengthVeil', accessories: ['crystalTiara'], bodyShape: 'fashionTall', pose: 'sideProfileGown', makeup: ['refinedBridalBeauty'], hairstyle: 'softFrenchUpdo', skinTexture: 'luxuryAdSkin', lighting: 'cinematicLowContrast', color: 'iceBlueCrystalWhite', background: 'softGrayWall', camera: 'threeQuarterFashion', ratio: 'vertical45', intensity: 'balanced luxury bridal styling, visible couture craftsmanship, refined editorial presence' },
-  bridalMagazineKeyVisual: { style: 'bridalMagazine', composition: 'rightSubjectLeftSpace', framing: 'waistUp', garment: 'coutureMermaid', materials: ['frenchLace', 'pearlBeading'], garmentLayer: 'layer0', chestDetail: 'sweetheartCorset', waistSideDetail: 'sculptedWaistCorsetry', shoulderDetail: 'softOffShoulderTulle', veil: 'pearlVeil', accessories: ['pearlEarrings'], bodyShape: 'original', pose: 'downcastThreeQuarter', makeup: ['clearBridalMakeup', 'koreanSoftMatte'], hairstyle: 'lowBridalUpdo', skinTexture: 'luxuryAdSkin', lighting: 'koreanCreamSoftLight', color: 'ivoryCream', background: 'creamSeamlessStudio', camera: 'bridal85mm', ratio: 'vertical916', intensity: 'balanced luxury bridal styling, visible couture craftsmanship, refined editorial presence' }
+  koreanCreamStudio: { style: 'koreanBridalStudio', composition: 'rightSubjectLeftSpace', framing: 'waistUp', garment: 'coutureMermaid', materials: ['frenchLace', 'pearlBeading'], garmentLayer: 'layer0', chestDetail: 'sweetheartCorset', waistSideDetail: 'sculptedWaistCorsetry', shoulderDetail: 'softOffShoulderTulle', veil: 'pearlVeil', accessories: ['pearlHairpiece', 'pearlEarrings'], bodyShape: 'original', pose: 'downcastThreeQuarter', makeup: ['clearBridalMakeup', 'naturalRose'], hairstyle: 'lowBridalUpdo', skinTexture: 'luxuryAdSkin', lighting: 'koreanCreamSoftLight', color: 'ivoryCream', background: 'creamSeamlessStudio', camera: 'eyeLevelCover', ratio: 'vertical916', intensity: 'balanced luxury bridal styling, visible couture craftsmanship, refined editorial presence' },
+  pearlVeilBeautyCloseup: { style: 'bridalEditorial', composition: 'veilFramedPortrait', framing: 'bustPortrait', garment: 'minimalColumn', materials: ['pearlBeading', 'layeredTulle'], garmentLayer: 'layer3', chestDetail: 'laceIllusionBodice', waistSideDetail: 'none', shoulderDetail: 'softOffShoulderTulle', veil: 'pearlVeil', accessories: ['pearlHairpiece', 'pearlEarrings'], bodyShape: 'original', pose: 'adjustingVeil', makeup: ['clearBridalMakeup', 'refinedBridalBeauty'], hairstyle: 'softFrenchUpdo', skinTexture: 'realPores', lighting: 'luxuryStudioSoftbox', color: 'purePearlWhite', background: 'pureWhiteStudio', camera: 'beautyCloseUp', ratio: 'vertical45', intensity: 'restrained luxury bridal styling, delicate couture detail, quiet premium mood' },
+  frenchLaceCouture: { style: 'fineArtWedding', composition: 'centeredBridalPortrait', framing: 'threeQuarter', garment: 'frenchDrapedGown', materials: ['frenchLace', 'floralEmbroidery'], garmentLayer: 'layer6', chestDetail: 'deepVBridalNeckline', waistSideDetail: 'pearlWaistApplique', shoulderDetail: 'laceCapSleeve', veil: 'laceEdgeVeil', accessories: ['pearlEarrings'], bodyShape: 'fashionTall', pose: 'sideProfileGown', makeup: ['naturalRose', 'refinedBridalBeauty'], hairstyle: 'softFrenchUpdo', skinTexture: 'naturalReal', lighting: 'afternoonWindowLight', color: 'ivoryCream', background: 'frenchInterior', camera: 'threeQuarterSide', ratio: 'vertical45', intensity: 'balanced luxury bridal styling, visible couture craftsmanship, refined editorial presence' },
+  minimalSatinBride: { style: 'bridalCampaign', composition: 'leftSubjectRightSpace', framing: 'waistUp', garment: 'minimalColumn', materials: ['silkSatin'], garmentLayer: 'layer0', chestDetail: 'sweetheartCorset', waistSideDetail: 'drapedWaistPleats', shoulderDetail: 'none', veil: 'shoulderLengthVeil', accessories: [], bodyShape: 'original', pose: 'naturalBridalStand', makeup: ['clearBridalMakeup'], hairstyle: 'originalHair', skinTexture: 'luxuryAdSkin', lighting: 'luxuryStudioSoftbox', color: 'purePearlWhite', background: 'softGrayWall', camera: 'eyeLevelCover', ratio: 'vertical45', intensity: 'restrained luxury bridal styling, delicate couture detail, quiet premium mood' },
+  royalCathedralTrain: { style: 'bridalCampaign', composition: 'flowingTrainComposition', framing: 'fullBody', garment: 'detachableTrainGown', materials: ['layeredTulle', 'crystalBeading'], garmentLayer: 'layer9', chestDetail: 'sweetheartCorset', waistSideDetail: 'detachableOverskirtWaist', shoulderDetail: 'detachableTulleSleeve', veil: 'cathedralVeil', accessories: ['minimalCrown'], bodyShape: 'fashionTall', pose: 'trainSpread', makeup: ['refinedBridalBeauty'], hairstyle: 'highBridalUpdo', skinTexture: 'naturalReal', lighting: 'luxuryStudioSoftbox', color: 'purePearlWhite', background: 'palaceWeddingHall', camera: 'bridalTrainView', ratio: 'poster23', intensity: 'dramatic couture bridal styling, pronounced train and veil movement, strong fashion editorial presence' },
+  whiteGardenMorning: { style: 'fineArtWedding', composition: 'foregroundFlowerFrame', framing: 'threeQuarter', garment: 'floralSculptureGown', materials: ['floralEmbroidery', 'layeredTulle'], garmentLayer: 'layer6', chestDetail: 'laceIllusionBodice', waistSideDetail: 'pearlWaistApplique', shoulderDetail: 'softOffShoulderTulle', veil: 'fingertipVeil', accessories: ['whiteBouquet'], bodyShape: 'original', pose: 'holdingBouquet', makeup: ['naturalRose', 'clearBridalMakeup'], hairstyle: 'romanticWaves', skinTexture: 'softFocusSkin', lighting: 'gardenMorningMist', color: 'purePearlWhite', background: 'whiteFlowerGarden', camera: 'eyeLevelCover', ratio: 'vertical916', intensity: 'balanced luxury bridal styling, visible couture craftsmanship, refined editorial presence' },
+  coastalSunsetVeil: { style: 'cinematicBridal', composition: 'environmentalBridalPortrait', framing: 'fullBody', garment: 'detachableTrainGown', materials: ['layeredTulle', 'silkSatin'], garmentLayer: 'layer3', chestDetail: 'drapedOffShoulderBodice', waistSideDetail: 'drapedWaistPleats', shoulderDetail: 'softOffShoulderTulle', veil: 'chapelVeil', accessories: [], bodyShape: 'original', pose: 'walkingVeilMotion', makeup: ['naturalRose'], hairstyle: 'romanticWaves', skinTexture: 'naturalReal', lighting: 'goldenHourBacklight', color: 'champagneWarmWhite', background: 'coastalSunset', camera: 'bridalWideEnvironmental', ratio: 'vertical916', intensity: 'dramatic couture bridal styling, pronounced train and veil movement, strong fashion editorial presence' },
+  cathedralWindowBride: { style: 'cinematicBridal', composition: 'symmetricalCeremonialBride', framing: 'threeQuarter', garment: 'classicALine', materials: ['frenchLace', 'crystalBeading'], garmentLayer: 'layer3', chestDetail: 'laceIllusionBodice', waistSideDetail: 'sculptedWaistCorsetry', shoulderDetail: 'laceCapSleeve', veil: 'chapelVeil', accessories: ['pearlHairpiece'], bodyShape: 'original', pose: 'windowContemplation', makeup: ['refinedBridalBeauty'], hairstyle: 'lowBridalUpdo', skinTexture: 'naturalReal', lighting: 'cathedralWindowProjection', color: 'whitePlatinumGray', background: 'europeanCathedral', camera: 'eyeLevelCover', ratio: 'poster23', intensity: 'balanced luxury bridal styling, visible couture craftsmanship, refined editorial presence' },
+  champagneCoutureBride: { style: 'bridalCampaign', composition: 'centeredBridalPortrait', framing: 'fullBody', garment: 'champagneCoutureGown', materials: ['pearlBeading', 'crystalBeading'], garmentLayer: 'layer6', chestDetail: 'sweetheartCorset', waistSideDetail: 'pearlWaistApplique', shoulderDetail: 'singleShoulderBridalCut', veil: 'cathedralVeil', accessories: ['crystalTiara'], bodyShape: 'fashionTall', pose: 'naturalBridalStand', makeup: ['sculptedContour', 'coutureRedLip'], hairstyle: 'highBridalUpdo', skinTexture: 'luxuryAdSkin', lighting: 'luxuryStudioSoftbox', color: 'champagneWarmWhite', background: 'palaceWeddingHall', camera: 'eyeLevelCover', ratio: 'poster23', intensity: 'dramatic couture bridal styling, pronounced train and veil movement, strong fashion editorial presence' },
+  pinkFloralBride: { style: 'fineArtWedding', composition: 'foregroundFlowerFrame', framing: 'waistUp', garment: 'floralSculptureGown', materials: ['floralEmbroidery', 'pearlBeading'], garmentLayer: 'layer3', chestDetail: 'laceIllusionBodice', waistSideDetail: 'pearlWaistApplique', shoulderDetail: 'laceCapSleeve', veil: 'laceEdgeVeil', accessories: ['coloredBouquet'], bodyShape: 'original', pose: 'downcastThreeQuarter', makeup: ['naturalRose', 'clearBridalMakeup'], hairstyle: 'romanticWaves', skinTexture: 'softFocusSkin', lighting: 'gardenMorningMist', color: 'mistyPinkIvory', background: 'roseGardenPath', camera: 'eyeLevelCover', ratio: 'vertical916', intensity: 'restrained luxury bridal styling, delicate couture detail, quiet premium mood' },
+  blueCrystalBride: { style: 'bridalMagazine', composition: 'rightSubjectLeftSpace', framing: 'threeQuarter', garment: 'blueCrystalGown', materials: ['crystalBeading', 'silkSatin'], garmentLayer: 'layer3', chestDetail: 'deepVBridalNeckline', waistSideDetail: 'sculptedWaistCorsetry', shoulderDetail: 'singleShoulderBridalCut', veil: 'shoulderLengthVeil', accessories: ['crystalTiara'], bodyShape: 'fashionTall', pose: 'sideProfileGown', makeup: ['refinedBridalBeauty'], hairstyle: 'softFrenchUpdo', skinTexture: 'luxuryAdSkin', lighting: 'cinematicLowContrast', color: 'iceBlueCrystalWhite', background: 'softGrayWall', camera: 'threeQuarterSide', ratio: 'vertical45', intensity: 'balanced luxury bridal styling, visible couture craftsmanship, refined editorial presence' },
+  bridalMagazineKeyVisual: { style: 'bridalMagazine', composition: 'rightSubjectLeftSpace', framing: 'waistUp', garment: 'coutureMermaid', materials: ['frenchLace', 'pearlBeading'], garmentLayer: 'layer0', chestDetail: 'sweetheartCorset', waistSideDetail: 'sculptedWaistCorsetry', shoulderDetail: 'softOffShoulderTulle', veil: 'pearlVeil', accessories: ['pearlEarrings'], bodyShape: 'original', pose: 'downcastThreeQuarter', makeup: ['clearBridalMakeup', 'koreanSoftMatte'], hairstyle: 'lowBridalUpdo', skinTexture: 'luxuryAdSkin', lighting: 'koreanCreamSoftLight', color: 'ivoryCream', background: 'creamSeamlessStudio', camera: 'eyeLevelCover', ratio: 'vertical916', intensity: 'balanced luxury bridal styling, visible couture craftsmanship, refined editorial presence' }
 };
 
 function selected(name){
@@ -711,7 +768,11 @@ function selectedMany(name){
   return Array.from(document.querySelectorAll('input[name="' + name + '"]:checked')).map(item => item.value);
 }
 function setRadioValue(name, value){
-  const item = document.querySelector('input[name="' + name + '"][value="' + CSS.escape(value) + '"]');
+  const aliases = name === 'bodyShape' ? {
+    slightWaist: 'slight_waist', curvyWaist: 'curvy_waist', fashionTall: 'fashion_tall', koreanIdol: 'korean_idol'
+  } : {};
+  const canonicalValue = aliases[value] || value;
+  const item = document.querySelector('input[name="' + name + '"][value="' + CSS.escape(canonicalValue) + '"]');
   if(item) item.checked = true;
 }
 function setCheckboxValues(name, values){

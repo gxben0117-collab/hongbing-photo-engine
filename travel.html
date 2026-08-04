@@ -621,42 +621,42 @@
       <label class="card selected" data-value="9:16">
         <input type="radio" name="ratio" value="9:16" checked>
         <div class="name">9:16</div>
-        <div class="desc">手機桌布</div>
-      </label>
-      <label class="card" data-value="3:4">
-        <input type="radio" name="ratio" value="3:4">
-        <div class="name">3:4</div>
-        <div class="desc">直式人像</div>
+        <div class="desc">手機封面與限時動態</div>
       </label>
       <label class="card" data-value="4:5">
         <input type="radio" name="ratio" value="4:5">
         <div class="name">4:5</div>
-        <div class="desc">IG貼文</div>
+        <div class="desc">社群貼文與人物封面</div>
       </label>
       <label class="card" data-value="1:1">
         <input type="radio" name="ratio" value="1:1">
         <div class="name">1:1</div>
-        <div class="desc">正方形</div>
+        <div class="desc">方形社群主圖</div>
       </label>
       <label class="card" data-value="2:3">
         <input type="radio" name="ratio" value="2:3">
         <div class="name">2:3</div>
-        <div class="desc">直式相片</div>
+        <div class="desc">旅拍海報與直式相片</div>
+      </label>
+      <label class="card" data-value="3:4">
+        <input type="radio" name="ratio" value="3:4">
+        <div class="name">3:4</div>
+        <div class="desc">直式人像與地點故事</div>
       </label>
       <label class="card" data-value="16:9">
         <input type="radio" name="ratio" value="16:9">
         <div class="name">16:9</div>
-        <div class="desc">橫向桌布</div>
-      </label>
-      <label class="card" data-value="21:9">
-        <input type="radio" name="ratio" value="21:9">
-        <div class="name">21:9</div>
-        <div class="desc">電影畫幅</div>
+        <div class="desc">橫式網站與影片封面</div>
       </label>
       <label class="card" data-value="4:3">
         <input type="radio" name="ratio" value="4:3">
         <div class="name">4:3</div>
-        <div class="desc">復古橫式</div>
+        <div class="desc">橫式廣告與完整場景</div>
+      </label>
+      <label class="card" data-value="21:9">
+        <input type="radio" name="ratio" value="21:9">
+        <div class="name">21:9</div>
+        <div class="desc">電影感品牌橫幅</div>
       </label>
       <label class="card" data-value="5:7">
         <input type="radio" name="ratio" value="5:7">
@@ -689,70 +689,81 @@
       <div class="sub">單選，只改觀看角度與景深；人物入鏡大小請在 01 選</div>
     </div>
     <div class="cards" id="cameraCards">
-      <label class="card selected" data-value="neutral">
-        <input type="radio" name="camera" value="neutral" checked>
+      <label class="card selected" data-value="eyeLevelCover">
+        <input type="radio" name="camera" value="eyeLevelCover" checked>
         <div class="name">自然平視</div>
-        <div class="desc">標準旅拍視角(預設)</div>
+        <div class="desc">標準封面視角（預設）</div>
       </label>
-      <label class="card" data-value="low">
-        <input type="radio" name="camera" value="low">
+      <label class="card" data-value="lowAngleHero">
+        <input type="radio" name="camera" value="lowAngleHero">
         <div class="name">低角度仰拍</div>
-        <div class="desc">英雄感視角 / 鏡頭低於腰部</div>
+        <div class="desc">英雄感視角／鏡頭低於腰部</div>
       </label>
-      <label class="card" data-value="high">
-        <input type="radio" name="camera" value="high">
+      <label class="card" data-value="highAngleOverhead">
+        <input type="radio" name="camera" value="highAngleOverhead">
         <div class="name">高角度俯拍</div>
-        <div class="desc">俯視角 / 鏡頭高於頭部</div>
+        <div class="desc">俯視角／鏡頭高於頭部</div>
       </label>
-      <label class="card" data-value="soft_focus">
-        <input type="radio" name="camera" value="soft_focus">
+      <label class="card" data-value="softFocusGlow">
+        <input type="radio" name="camera" value="softFocusGlow">
         <div class="name">柔焦光感</div>
-        <div class="desc">柔和散景 / 膚質自然</div>
+        <div class="desc">柔和光暈、自然膚質與背景分離</div>
       </label>
+      <label class="card" data-value="beautyCloseUp">
+        <input type="radio" name="camera" value="beautyCloseUp">
+        <div class="name">近距離美妝感</div>
+        <div class="desc">臉部、妝容與肌膚細節更清楚</div>
+      </label>
+      <label class="card" data-value="sideProfile">
+        <input type="radio" name="camera" value="sideProfile">
+        <div class="name">側臉輪廓感</div>
+        <div class="desc">側臉輪廓、下顎線與旅途光線清楚</div>
+      </label>
+      <label class="card" data-value="threeQuarterSide">
+        <input type="radio" name="camera" value="threeQuarterSide">
+        <div class="name">斜側角度</div>
+        <div class="desc">臉和身形都有立體感，保留地點故事</div>
+      </label>
+      <label class="card" data-value="topBeauty">
+        <input type="radio" name="camera" value="topBeauty">
+        <div class="name">高角度近景</div>
+        <div class="desc">從上方靠近拍臉、髮型與地點細節</div>
+      </label>
+      <label class="card" data-value="distantHero">
+        <input type="radio" name="camera" value="distantHero">
+        <div class="name">遠距主視覺</div>
+        <div class="desc">人物與景點完整，旅行海報感更強</div>
+      </label>
+      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 旅拍專屬鏡頭</div>
       <label class="card" data-value="cover">
         <input type="radio" name="camera" value="cover">
-        <div class="name">雜誌封面感</div>
-        <div class="desc">封面主視覺 / 眼神集中(覆蓋01構圖)</div>
+        <div class="name">旅拍雜誌封面</div>
+        <div class="desc">強烈封面主視覺與集中眼神</div>
       </label>
       <label class="card" data-value="wide_scene">
         <input type="radio" name="camera" value="wide_scene">
         <div class="name">廣角環境感</div>
-        <div class="desc">景物更完整 / 人物融入風景(覆蓋01構圖)</div>
+        <div class="desc">景物更完整，人物融入風景</div>
       </label>
-          <label class="card" data-value="tele_compression">
+      <label class="card" data-value="tele_compression">
         <input type="radio" name="camera" value="tele_compression">
         <div class="name">長焦壓縮感</div>
-        <div class="desc">背景壓縮 / 人物更突出</div>
+        <div class="desc">背景壓縮，人物更突出</div>
       </label>
       <label class="card" data-value="handheld_doc">
         <input type="radio" name="camera" value="handheld_doc">
         <div class="name">手持紀實感</div>
-        <div class="desc">自然跟拍 / 真實旅途瞬間</div>
+        <div class="desc">自然跟拍，保留真實旅途瞬間</div>
       </label>
       <label class="card" data-value="passerby_view">
         <input type="radio" name="camera" value="passerby_view">
         <div class="name">路人視角</div>
-        <div class="desc">偶遇感 / 街頭抓拍語氣</div>
+        <div class="desc">偶遇感與街頭抓拍語氣</div>
       </label>
       <label class="card" data-value="backlit_silhouette">
         <input type="radio" name="camera" value="backlit_silhouette">
         <div class="name">逆光剪影</div>
-        <div class="desc">背光輪廓 / 夕陽或窗光剪影</div>
-      </label>
-      <label class="card" data-value="three_quarter_side">
-        <input type="radio" name="camera" value="three_quarter_side">
-        <div class="name">斜側角度</div>
-        <div class="desc">三分之四側臉 / 旅拍輪廓立體</div>
-      </label>
-      <label class="card" data-value="top_beauty">
-        <input type="radio" name="camera" value="top_beauty">
-        <div class="name">高角度近景</div>
-        <div class="desc">由上往下 / 臉部與場景細節並重</div>
-      </label>
-      <label class="card" data-value="distant_hero">
-        <input type="radio" name="camera" value="distant_hero">
-        <div class="name">遠距主視覺</div>
-        <div class="desc">人物與景點完整 / 海報旅拍感(覆蓋01構圖)</div>
+        <div class="desc">背光輪廓，夕陽或窗光剪影</div>
       </label>
     </div>
   </section>
@@ -1504,14 +1515,14 @@ Elegant Travel Portrait Mood
 Keep The Subject Recognizable With Refined Painterly Detail`
 };
 const RATIOS = {
-"9:16":"Aspect Ratio 9:16, Vertical Format, Mobile Wallpaper Composition",
-"3:4":"Aspect Ratio 3:4, Vertical Portrait Format",
-"4:5":"Aspect Ratio 4:5, Vertical Format, Social Media Post Composition",
-"1:1":"Aspect Ratio 1:1, Square Format",
-"2:3":"Aspect Ratio 2:3, Vertical Photo Format",
-"16:9":"Aspect Ratio 16:9, Horizontal Format, Landscape Wallpaper Composition",
-"21:9":"Aspect Ratio 21:9, Ultra Wide Cinematic Format, Movie Aspect Ratio",
-"4:3":"Aspect Ratio 4:3, Traditional Horizontal Format, Classic Retro Proportion",
+"9:16":"aspect ratio 9:16, vertical social media cover composition",
+"4:5":"aspect ratio 4:5, vertical social media feed poster composition",
+"1:1":"aspect ratio 1:1, square commercial campaign image",
+"2:3":"aspect ratio 2:3, vertical luxury poster composition",
+"3:4":"aspect ratio 3:4, vertical portrait poster composition",
+"16:9":"aspect ratio 16:9, horizontal website banner and video cover composition",
+"4:3":"aspect ratio 4:3, horizontal commercial image with balanced subject and environment",
+"21:9":"aspect ratio 21:9, cinematic wide luxury brand banner composition",
 "5:7":"Aspect Ratio 5:7, Vertical Poster Format",
 "11:14":"Aspect Ratio 11:14, Tall Portrait Format",
 "2:1":"Aspect Ratio 2:1, Wide Horizontal Format",
@@ -1636,6 +1647,28 @@ Full Editorial Poster Presence
 Clean Silhouette Against The Environment
 Identity Preserved Despite Wider Framing
 No Tiny Unrecognizable Face`
+};
+
+const COMMON_TRAVEL_CAMERAS = {
+  eyeLevelCover: 'natural eye-level camera angle, standard magazine cover perspective, balanced face and body proportion, clean premium portrait framing',
+  lowAngleHero: 'low angle hero shot, camera below waist level, powerful upward perspective, elongated fashion silhouette, strong commanding presence',
+  highAngleOverhead: 'high angle view, camera above head level, elegant top-down perspective, refined fashion composition, clear subject shape',
+  softFocusGlow: 'soft focus glow camera language, gentle halo bloom, luminous studio beauty atmosphere, refined dreamy commercial portrait',
+  beautyCloseUp: 'close distance beauty photography, beauty close-up composition, face and makeup details emphasized, polished cosmetic campaign framing',
+  sideProfile: 'side profile portrait angle, clear jawline silhouette, elegant facial contour, refined profile lighting and fashion editorial framing',
+  threeQuarterSide: 'three-quarter side camera angle, about 45 degree side view, face and body both show dimensional structure, elegant advertising perspective',
+  topBeauty: 'high angle close beauty view, camera above the subject and slightly close, face shoulders neckline and headdress emphasized, elegant cosmetic perspective',
+  distantHero: 'distant hero advertising view, camera pulled back to show subject background and material environment together, spacious brand key visual perspective'
+};
+Object.assign(CAMERA_ANGLES, COMMON_TRAVEL_CAMERAS);
+const CAMERA_CONTROL_ALIASES = {
+  neutral: 'eyeLevelCover',
+  low: 'lowAngleHero',
+  high: 'highAngleOverhead',
+  soft_focus: 'softFocusGlow',
+  three_quarter_side: 'threeQuarterSide',
+  top_beauty: 'topBeauty',
+  distant_hero: 'distantHero'
 };
 
 const TRAVEL_LIGHTING_STYLES = {
@@ -2112,9 +2145,10 @@ setupRadioCards('propCards');
 function setRadioCardValue(containerId, value){
   const container = document.getElementById(containerId);
   if(!container) return;
+  const canonicalValue = containerId === 'cameraCards' ? (CAMERA_CONTROL_ALIASES[value] || value) : value;
   container.querySelectorAll('.card').forEach(card=>{
     const input = card.querySelector('input');
-    const selected = card.dataset.value === value;
+    const selected = card.dataset.value === canonicalValue;
     card.classList.toggle('selected', selected);
     if(input) input.checked = selected;
   });
@@ -2418,9 +2452,6 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
   const adornBlock=adornLines.length
     ? `【裝扮細節模組】\n\n${adornLines.join('\n')}\nStyling must not change facial identity or face shape`
     : null;
-  // 封面 / 廣角環境 / 遠距主視覺屬於景別指令,與 01 構圖同軸,避免同時輸出互斥構圖
-  const cameraOverridesComposition=['cover','wide_scene','distant_hero'].includes(cameraKey);
-
   const sections=[
     CORE.identity,
     skeletonBlock,
@@ -2431,7 +2462,7 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
     ...(cameraBlock?[cameraBlock]:[]),
     ...(poseBlock?[poseBlock]:[]),
     ...(motionBlock?[motionBlock]:[]),
-    ...(cameraOverridesComposition?[]:[COMPOSITION[composition]]),
+    COMPOSITION[composition],
     styleBlock,
     mediaBlock,
     themeBlock,

@@ -148,13 +148,12 @@ const core = evalCore(coreSource);
     const costumeBlockFinal = costumeDirection ? costumeBlock + `\n\n${costumeDirection}\n服裝以上述方向為主軸,細節仍需符合主題世界觀` : costumeBlock;
     const adornLines = [data.HAIR_STYLES[sel.hairKey], data.ACCESSORY_PROPS[sel.propKey]].filter(Boolean);
     const adornBlock = adornLines.length ? `【裝扮細節模組】\n\n${adornLines.join('\n')}\nStyling must not change facial identity or face shape` : null;
-    const cameraOverridesComposition = ['cover', 'wide_scene', 'distant_hero'].includes(sel.cameraKey);
     const themeBlock = `【主題】\n\n${theme}`;
     const ratioBlock = `【輸出比例】\n\n${data.RATIOS[sel.ratioKey]}`;
     const sections = [
       core.page.travel.identity, skeletonBlock, core.page.travel.lighting, core.page.travel.pose, core.page.travel.photographer,
       ...(lightingBlock ? [lightingBlock] : []), ...(cameraBlock ? [cameraBlock] : []), ...(poseBlock ? [poseBlock] : []),
-      ...(motionBlock ? [motionBlock] : []), ...(cameraOverridesComposition ? [] : [data.COMPOSITION[sel.composition]]),
+      ...(motionBlock ? [motionBlock] : []), data.COMPOSITION[sel.composition],
       styleBlock, mediaBlock, themeBlock, costumeBlockFinal, ...(adornBlock ? [adornBlock] : []),
       core.page.travel.cleanframe, core.page.travel.output, ratioBlock,
     ];

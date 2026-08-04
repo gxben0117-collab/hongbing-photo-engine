@@ -75,6 +75,72 @@ const visualOrderContracts = {
   },
 };
 
+// Fantasy is the canonical portrait-control contract. Theme pages may append
+// their own camera or ratio choices, but the shared controls must retain the
+// same values so templates, random selection and user muscle memory remain
+// portable between tools.
+const SHARED_CAMERA_RATIO_PAGES = new Set([
+  'travel.html', 'magazine.html', 'fantasy-fashion.html', 'chinese-classical.html',
+  'japanese-kimono.html', 'korean-hanbok.html', 'xianxia.html',
+  'anime-character.html', 'flower-fairy.html', 'isekai-fantasy.html',
+  'floral-sweet.html', 'gala-socialite.html', 'bridal-editorial.html',
+  'kpop-idol.html', 'battle-academy.html', 'ancient-goddess.html',
+]);
+const SHARED_BODY_LAYER_PAGES = new Set([
+  'magazine.html', 'fantasy-fashion.html', 'chinese-classical.html',
+  'japanese-kimono.html', 'korean-hanbok.html', 'xianxia.html',
+  'anime-character.html', 'flower-fairy.html', 'isekai-fantasy.html',
+  'floral-sweet.html', 'gala-socialite.html', 'bridal-editorial.html',
+  'kpop-idol.html', 'battle-academy.html', 'ancient-goddess.html',
+]);
+const SHARED_CAMERA_VALUES = [
+  'eyeLevelCover', 'lowAngleHero', 'highAngleOverhead', 'softFocusGlow',
+  'beautyCloseUp', 'sideProfile', 'threeQuarterSide', 'topBeauty', 'distantHero',
+];
+const SHARED_PORTRAIT_BODY_VALUES = [
+  'original', 'slight_waist', 'curvy_waist', 'fashion_tall', 'korean_idol',
+];
+const SHARED_RATIO_VALUES = ['vertical916', 'vertical45', 'square', 'poster23', 'vertical34', 'horizontal169', 'horizontal43', 'wideBanner'];
+const SHARED_DIMENSION_RATIO_VALUES = ['9:16', '4:5', '1:1', '2:3', '3:4', '16:9', '4:3', '21:9'];
+const SHARED_GARMENT_LAYER_VALUES = ['layer0', 'layer3', 'layer6', 'layer9', 'random'];
+
+function checkSharedPortraitControlContract(page, source, groups) {
+  if (SHARED_CAMERA_RATIO_PAGES.has(page)) {
+    const camera = groups.get('camera');
+    const ratio = groups.get('ratio');
+    if (!camera) issue(page, 'shared Fantasy camera group is missing');
+    else for (const value of SHARED_CAMERA_VALUES) {
+      if (!camera.values.has(value)) issue(page, `shared camera control is missing "${value}"`);
+    }
+    if (!ratio) issue(page, 'shared Fantasy ratio group is missing');
+    else {
+      const expected = page === 'travel.html' || page === 'magazine.html'
+        ? SHARED_DIMENSION_RATIO_VALUES
+        : SHARED_RATIO_VALUES;
+      for (const value of expected) {
+        if (!ratio.values.has(value)) issue(page, `shared ratio control is missing "${value}"`);
+      }
+    }
+  }
+
+  if (!SHARED_BODY_LAYER_PAGES.has(page)) return;
+  const body = groups.get('bodyShape');
+  if (!body) issue(page, 'shared Fantasy body-shape group is missing');
+  else for (const value of SHARED_PORTRAIT_BODY_VALUES) {
+    if (!body.values.has(value)) issue(page, `shared body-shape control is missing "${value}"`);
+  }
+
+  const layer = groups.get('garmentLayer');
+  if (!layer) issue(page, 'shared garment Layer group is missing');
+  else for (const value of SHARED_GARMENT_LAYER_VALUES) {
+    if (!layer.values.has(value)) issue(page, `shared garment Layer is missing "${value}"`);
+  }
+
+  if (page === 'bridal-editorial.html' && /85mm\s*婚紗人像|bridal85mm/i.test(source)) {
+    issue(page, 'bridal page still contains the removed 85mm 婚紗人像 option');
+  }
+}
+
 for (const page of ['xianxia.html', 'anime-character.html', 'isekai-fantasy.html', 'floral-sweet.html', 'gala-socialite.html', 'kpop-idol.html', 'ancient-goddess.html']) {
   visualOrderContracts[page] = {
     'section-preset': 0, 'section-style': 1, 'section-composition': 2,
@@ -505,6 +571,7 @@ for (const page of pages) {
   checkChineseClassicalTemplateContract(page, source);
   checkThemeCopyContract(page, source);
   checkHomeCopyContract(page, source);
+  checkSharedPortraitControlContract(page, source, groups);
   checkVisualOrder(page, source);
   console.log(`checked ${page}: ${groups.size} radio groups, ${idSet.size} ids`);
 }
