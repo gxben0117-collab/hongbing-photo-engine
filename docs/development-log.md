@@ -15,7 +15,8 @@
 - **婚紗修正**：移除婚紗頁的 `85mm 婚紗人像` 與所有 `bridal85mm` preset 引用；共用鏡頭與比例資料
   已接入婚紗生成、模板與固定 Prompt 預覽。
 - **介面排版**：婚紗 05 服裝改造核心改為獨立的胸口、腰側、肩部三欄區塊，加入平板／手機斷點，
-  防止三組 radio 與自填欄位互相擠壓或錯位。
+  防止三組 radio 與自填欄位互相擠壓或錯位；另修正三欄內 `label.card` 未脫離 inline 排版造成的
+  透明 input 斷行與長直線問題，明確改為區塊卡片並限制卡片寬度。
 - **驗證契約**：`check-ui-flows.mjs` 新增共用控制契約；`validate-preset-refs.mjs` 支援舊 preset
   ID 的 canonical alias 驗證，讓既有模板可平滑套用而不讓新介面重新產生舊 ID。
 - **驗證結果**：靜態檢查、UI flow、preset 引用、固定 Prompt 預覽與 19 頁 × 100 組隨機模擬全部通過，
