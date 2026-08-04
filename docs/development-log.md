@@ -6,6 +6,20 @@
 每筆記錄盡量只留：**做了什麼 → 為什麼 → 驗證方式**，實作細節（哪一行、哪個函式）
 留在對應的 commit diff 或 `docs/history/` 底下的原始交接文件。
 
+## 2026-08-04　v4.37 全站身份優先與 Prompt 精簡
+
+- **最終身份保護**：在共用 `CORE_NEGATIVE_PROMPT` 與旅拍／雜誌使用的畫面淨化區塊加入短版
+  `CORE_FINAL_IDENTITY_PRIORITY`。它位於各頁可變內容之後，明確限制自訂要求只能影響服裝、姿勢、光線、背景
+  與構圖，不得換臉、重設計或獨立渲染臉部；沒有建立第二套鎖臉系統。
+- **婚紗 Layer 修正**：婚紗隨機套用改為讀取目前選定的 Layer，只有選擇「隨機 Layer」時才重新抽強度；
+  隨機材質由可為零改為至少一項，透明面紗仍維持手動限定且不進一般隨機池。
+- **Prompt 精簡**：幻想、仙俠、雜誌、中式古典、日本和服、韓國韓服與婚紗移除身形資料及生成陣列中的重複
+  身份／手勢提醒，保留核心骨架、姿勢自然性與指定的 `Japanese Curvy Slim-Waist Adult Female Silhouette`。
+- **回歸強化**：`audit-100x.mjs` 現在驗證最終身份保護是否存在，`check-ui-flows.mjs` 會阻止婚紗強制 random
+  Layer；測試鏡像同步實際生成順序。
+- **驗證**：`check-static.mjs`、`check-ui-flows.mjs`、`validate-preset-refs.mjs`、
+  `build-prompt-preview.mjs`、`audit-100x.mjs` 與 `git diff --check` 全部通過，19 頁 × 100 組共 1900 組，0 issue。
+
 ## 2026-08-04　v4.36 全站人像控制契約與婚紗頁修正
 
 - **共用範本**：以 `fantasy-fashion.html` 為正式人像頁的共同控制基準，統一 9 組拍攝角度、8 組

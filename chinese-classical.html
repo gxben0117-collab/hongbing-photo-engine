@@ -574,29 +574,23 @@ const BODY_SHAPES = {
 
 Preserve The Reference Photo Natural Body Proportions
 Keep Original Body Shape, Height Impression, Shoulder Width, Waist-To-Hip Balance
-Natural Realistic Adult Female Anatomy
-Do Not Force A New Body Type
-Keep Face, Identity, Age Impression And Personal Features Unchanged`,
+Do Not Force A New Body Type`,
   slight_waist: `【身形輪廓｜輕微纖腰】
 
 Subtle Narrow Waist Refinement
 Slightly More Defined Waistline While Keeping Natural Body Proportions
-Elegant Feminine Silhouette, Not Exaggerated
-Keep The Original Face, Identity And Personal Features Unchanged
-Natural Realistic Adult Female Anatomy`,
+Elegant Feminine Silhouette, Not Exaggerated`,
   curvy_waist: `【身形輪廓｜豐滿纖腰】
 
 Japanese Curvy Slim-Waist Adult Female Silhouette
 Full Bust, Slim Waist, Elegant Waist-To-Hip Curve
 Clearly Defined Feminine Body Line
-Keep The Original Face, Identity, Age Impression And Personal Features Unchanged
 Natural Realistic Body Proportions, No Exaggerated Fantasy Anatomy`,
   fashion_tall: `【身形輪廓｜高挑時裝比例】
 
 Tall High-Fashion Model Silhouette
 Longer Leg Impression, Refined Shoulder And Neck Line, Slim Editorial Body Shape
 Elegant Runway Proportions While Staying Realistic
-Keep The Original Face, Identity And Personal Features Unchanged
 No Doll-Like Or Over-Stretched Anatomy`,
   korean_idol: `【身形輪廓｜韓系偶像比例】
 
@@ -604,8 +598,7 @@ Korean Idol Stage Proportions
 Balanced Adult Idol Silhouette With A Naturally Long-Leg Impression
 Refined Shoulder And Neck Line, Upright Posture, Toned Yet Soft Feminine Body Balance
 Camera-Friendly Proportions For Performance, Beauty And Editorial Photography
-Keep The Original Face, Identity And Personal Features Unchanged
-Natural Realistic Adult Anatomy, No Doll-Like Or Over-Stretched Body`
+No Doll-Like Or Over-Stretched Body`
 };
 BODY_SHAPES.slightWaist = BODY_SHAPES.slight_waist;
 BODY_SHAPES.curvy = BODY_SHAPES.curvy_waist;
@@ -843,10 +836,8 @@ function generate(options){
   const extraNote = document.getElementById('extraNote').value.trim();
   const prompt = [
     sharedClassicalCore.identityGuard + ',',
-    'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
     sharedClassicalCore.anatomyGuard + ',',
     sharedClassicalCore.poseGuard + ',',
-    'natural relaxed hands, graceful restrained gestures, anatomically natural arms and fingers, no exaggerated fashion pose,',
     bodyShape + ',',
     sharedClassicalCore.lightingGuard + ',',
     styleData[selected('style')] + ',',

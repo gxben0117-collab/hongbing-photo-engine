@@ -81,6 +81,9 @@ function checkOutput(pageLabel, i, selection, output, opts = {}) {
   if (/\[object Object\]/.test(output)) problems.push('含 [object Object]');
   if (/^null$|\bnull,|\bnull\n/.test(output)) problems.push('含 null 洩漏');
   if (opts.requireIdentity && core_identity_missing(output, opts.identityMarkers)) problems.push('缺身份鎖定區塊');
+  if (opts.requireIdentity && !opts.skipFinalIdentity && core.blocks.finalIdentityPriority && !output.includes(core.blocks.finalIdentityPriority)) {
+    problems.push('缺最終身份優先保護');
+  }
   const lines = output.split('\n');
   for (let li = 1; li < lines.length; li += 1) {
     if (lines[li].trim() && lines[li] === lines[li - 1]) { problems.push(`相鄰重複行: "${lines[li].slice(0, 40)}"`); break; }
@@ -284,7 +287,7 @@ const core = evalCore(coreSource);
     const framing = data.framingData[sel.framing];
     const poseText = data.poseData[sel.pose];
     const prompt = [
-      data.identityGuard + ',', 'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
+      data.identityGuard + ',',
       resolvedAnatomyGuard + ',', data.poseNaturalityGuard + ',', bodyShape + ',', data.lightingConsistencyGuard + ',',
       sel.composition + ',', data.compositionGuard + ',',
       'appearance form: ' + garmentText + ',', garmentVariationBlock ? garmentVariationBlock + ',' : '',
@@ -363,10 +366,8 @@ const core = evalCore(coreSource);
     ].filter(Boolean);
     const output = [
       data.identityGuard + ',',
-      'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
       data.anatomyGuard + ',',
       data.poseNaturalityGuard + ',',
-      'natural relaxed hands, graceful restrained gestures, anatomically natural arms and fingers, no exaggerated fashion pose,',
       data.BODY_SHAPES[sel.bodyShape] + ',',
       data.lightingConsistencyGuard + ',',
       data.styleData[sel.style] + ',',
@@ -427,8 +428,8 @@ function auditClassicalCulturePage({ file, pageKey, label, cultureLine, material
     const accessoryText = data.accessoryData[sel.accessory];
     const variationParts = [data.GARMENT_VARIATIONS.chest[sel.chest], data.GARMENT_VARIATIONS.waist[sel.waist], data.GARMENT_VARIATIONS.shoulder[sel.shoulder]].filter(Boolean);
     const output = [
-      data.identityGuard + ',', 'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
-      data.anatomyGuard + ',', data.poseNaturalityGuard + ',', 'natural relaxed hands, graceful restrained gestures, anatomically natural arms and fingers, no exaggerated fashion pose,',
+      data.identityGuard + ',',
+      data.anatomyGuard + ',', data.poseNaturalityGuard + ',',
       data.BODY_SHAPES[sel.bodyShape] + ',', data.lightingConsistencyGuard + ',', data.styleData[sel.style] + ',', sel.composition + ',', data.compositionGuard + ',',
       cultureLine, 'appearance form: ' + data.garmentData[sel.garment] + ',', materialText ? materialLine + ': ' + materialText + ',' : '',
       accessoryText ? 'culturally coherent accessory detail: ' + accessoryText + ',' : '',
@@ -512,7 +513,7 @@ auditClassicalCulturePage({
     const framing = data.framingData[sel.framing];
     const poseText = data.poseData[sel.pose];
     const prompt = [
-      data.identityGuard + ',', 'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
+      data.identityGuard + ',',
       resolvedAnatomyGuard + ',', data.poseNaturalityGuard + ',', bodyShape + ',', data.lightingConsistencyGuard + ',',
       sel.composition + ',', data.compositionGuard + ',',
       'appearance form: ' + garmentText + ',', garmentDetailText, 'theme material and art system: ' + materialText + ',',
@@ -915,6 +916,7 @@ auditClassicalCulturePage({
       intensity: pick(pools.intensity), customGarment: pick(customSamples), customMaterial: pick(customSamples),
       customPose: pick(customSamples), customBackground: pick(customSamples), extraNote: pick(customSamples),
     };
+    if (!sel.materials.length) sel.materials = [pick(pools.materials)];
     if (!sel.makeup.length) sel.makeup = [pick(pools.makeup)];
     const materialText = sel.customMaterial
       ? 'custom material system only: ' + sel.customMaterial + '; do not blend preset material options'
@@ -941,8 +943,8 @@ auditClassicalCulturePage({
       veilProtection, data.bodyShapes[sel.bodyShape], sel.customPose ? 'custom pose only: ' + sel.customPose : data.poseData[sel.pose],
       'bridal styling: ' + styling, 'lighting: ' + data.lightingData[sel.lighting], 'color palette: ' + data.colorData[sel.color],
       sel.customBackground ? 'custom background only: ' + sel.customBackground : data.backgroundData[sel.background],
-      data.cameraData[sel.camera], data.ratioData[sel.ratio], sel.intensity, data.CORE.output, data.CORE.negativePrompt,
-      sel.extraNote ? 'additional direction: ' + sel.extraNote : '',
+      data.cameraData[sel.camera], data.ratioData[sel.ratio], sel.intensity, data.CORE.output,
+      sel.extraNote ? 'additional direction: ' + sel.extraNote : '', data.CORE.negativePrompt,
       'No random text, no watermark, no logo artifacts, no extra person, no distorted face, no deformed hands.',
     ];
     checkOutput('bridalEditorial', i, sel, unique(parts).join('\n\n'), { requireIdentity: true, identityMarkers: ['身份鎖定系統'] });
@@ -1212,7 +1214,7 @@ auditClassicalCulturePage({
       `【輸出規格】\n\n4K Quality / Ultra Detailed\nCollectible Figure Photography Quality\nPVC Figure Showcase Lighting\n${data.RATIOS[sel.ratioKey]}`,
     ];
     const output = sections.join('\n\n⸻\n\n');
-    checkOutput('doll', i, sel, output, { requireIdentity: true, identityMarkers: ['公仔化身份轉換系統'] });
+    checkOutput('doll', i, sel, output, { requireIdentity: true, skipFinalIdentity: true, identityMarkers: ['公仔化身份轉換系統'] });
   }
   report('doll', N);
 }

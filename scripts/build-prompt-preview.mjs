@@ -236,7 +236,6 @@ function generateFantasy(core, data) {
   const poseText = data.poseData[selection.pose];
   const prompt = [
     data.identityGuard + ',',
-    'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
     resolvedAnatomyGuard + ',',
     data.poseNaturalityGuard + ',',
     bodyShape + ',',
@@ -292,10 +291,8 @@ function generateChineseClassical(core, data, selectionOverride = null) {
   ].filter(Boolean);
   const prompt = [
     data.sharedClassicalCore.identityGuard + ',',
-    'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
     data.sharedClassicalCore.anatomyGuard + ',',
     data.sharedClassicalCore.poseGuard + ',',
-    'natural relaxed hands, graceful restrained gestures, anatomically natural arms and fingers, no exaggerated fashion pose,',
     data.BODY_SHAPES[selection.bodyShape] + ',',
     data.sharedClassicalCore.lightingGuard + ',',
     data.styleData[selection.style] + ',',
@@ -353,10 +350,8 @@ function generateCulturalClassical(core, data, config) {
   ].filter(Boolean);
   const prompt = [
     pageCore.identityGuard + ',',
-    'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
     pageCore.anatomyGuard + ',',
     pageCore.poseGuard + ',',
-    'natural relaxed hands, graceful restrained gestures, anatomically natural arms and fingers, no exaggerated fashion pose,',
     data.BODY_SHAPES[selection.bodyShape] + ',',
     pageCore.lightingGuard + ',',
     data.styleData[selection.style] + ',',
@@ -430,7 +425,6 @@ function generateXianxia(core, data) {
   const poseText = data.poseData[selection.pose];
   const prompt = [
     data.identityGuard + ',',
-    'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
     resolvedAnatomyGuard + ',',
     data.poseNaturalityGuard + ',',
     bodyShape + ',',

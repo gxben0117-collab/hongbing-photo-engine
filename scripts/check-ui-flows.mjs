@@ -419,6 +419,12 @@ function checkGarmentDetailLayerContract(page, source, groups) {
     if (!source.includes(`name="${field}" value="none"`)) issue(page, `${field} is missing the none option`);
   }
   if (page === 'bridal-editorial.html') {
+    if (source.includes("setRadioValue('garmentLayer', 'random')")) {
+      issue(page, 'random selection must respect the user-selected garment Layer instead of forcing random');
+    }
+    if (!source.includes("resolveLayer(selected('garmentLayer')")) {
+      issue(page, 'random selection must resolve the selected garment Layer');
+    }
     if (!source.includes("getRadioValues('veil').filter(value => value !== 'transparentFaceVeil')")) {
       issue(page, 'transparentFaceVeil must be excluded from the normal random pool');
     }

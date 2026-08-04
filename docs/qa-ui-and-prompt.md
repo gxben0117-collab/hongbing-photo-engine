@@ -138,6 +138,16 @@ git diff --check
 這是靜態與 Node `vm` 回歸檢查；若要確認瀏覽器實際像素、剪貼簿權限或 GitHub Pages
  快取，仍需在發布後開啟線上入口做一次人工點擊確認。
 
+## 2026-08-04 v4.37 回歸結果
+
+- 共用核心已加入 `CORE_FINAL_IDENTITY_PRIORITY`；正式人像輸出在自訂內容後均可找到最終身份保護，公仔頁的
+  明確公仔化例外不套用這條攝影身份尾端規則。
+- 婚紗隨機 Layer 不再強制改成 random；隨機材質至少保留一項，透明面紗仍排除於一般隨機池。
+- 幻想、仙俠、雜誌、中式古典、日本和服、韓國韓服與婚紗的身形／身份重複片段已精簡，指定的
+  `Japanese Curvy Slim-Waist Adult Female Silhouette` 保留。
+- `check-static.mjs`、`check-ui-flows.mjs`、`validate-preset-refs.mjs`、`build-prompt-preview.mjs`、
+  `audit-100x.mjs`、`git diff --check` 全部通過；19 頁共 1900 組隨機模擬，0 issue。
+
 ## 2026-08-04 v4.36 回歸結果
 
 - 幻想廣告控制契約已納入 `check-ui-flows.mjs`：16 個人像頁共同檢查鏡頭、比例；15 個具服裝

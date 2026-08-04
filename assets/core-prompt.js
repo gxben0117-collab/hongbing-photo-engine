@@ -18,6 +18,8 @@ Preserve original forehead height, face width, eye shape/distance, nose shape/wi
 Face Similarity Maximum.
 No facial reconstruction, redesign, beautification or stylization.`;
 
+  const CORE_FINAL_IDENTITY_PRIORITY = `Final identity priority: preserve the reference face, facial geometry, age impression and recognizable features. Any custom direction may change only styling, clothing, pose, lighting, background or composition; never replace, redesign, beautify, composite or separately render the face.`;
+
   const CORE_REALISTIC_ANATOMY = `【真人骨架系統】
 
 Realistic adult female anatomy.
@@ -94,7 +96,9 @@ No detached face look.`;
   const CORE_NEGATIVE_PROMPT = `【通用負面約束】
 
 No face swap/drift, AI/influencer/celebrity/template face, duplicated/pasted face.
-No oversized head, extra limbs/arms/fingers, broken hands, warped anatomy, inconsistent/independent face light, random text or watermark.`;
+No oversized head, extra limbs/arms/fingers, broken hands, warped anatomy, inconsistent/independent face light, random text or watermark.
+
+${CORE_FINAL_IDENTITY_PRIORITY}`;
 
   const CORE_OUTPUT_QUALITY = `【輸出規格】
 
@@ -118,7 +122,9 @@ Only One Human / Solo Subject.
 No Crowd.
 No Extra Person.
 No duplicated person.
-Luxury Editorial Quality.`;
+Luxury Editorial Quality.
+
+${CORE_FINAL_IDENTITY_PRIORITY}`;
 
   const identityCore = [
     CORE_IDENTITY_LOCK,
@@ -473,6 +479,7 @@ They must not change the person's facial structure, identity, age impression or 
   window.CORE_CAMERA_RECONSTRUCTION = CORE_CAMERA_RECONSTRUCTION;
   window.CORE_LIGHTING_UNIFICATION = CORE_LIGHTING_UNIFICATION;
   window.CORE_SKIN_TEXTURE = CORE_SKIN_TEXTURE;
+  window.CORE_FINAL_IDENTITY_PRIORITY = CORE_FINAL_IDENTITY_PRIORITY;
   window.CORE_NEGATIVE_PROMPT = CORE_NEGATIVE_PROMPT;
   window.CORE_OUTPUT_QUALITY = CORE_OUTPUT_QUALITY;
   window.HB_CORE_PROMPT = {
@@ -484,6 +491,7 @@ They must not change the person's facial structure, identity, age impression or 
       cameraReconstruction: CORE_CAMERA_RECONSTRUCTION,
       lightingUnification: CORE_LIGHTING_UNIFICATION,
       skinTexture: CORE_SKIN_TEXTURE,
+      finalIdentityPriority: CORE_FINAL_IDENTITY_PRIORITY,
       illustrationReconstruction: CORE_ILLUSTRATION_RECONSTRUCTION,
       negativePrompt: CORE_NEGATIVE_PROMPT,
       outputQuality: CORE_OUTPUT_QUALITY,
