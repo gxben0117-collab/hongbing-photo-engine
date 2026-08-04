@@ -4,7 +4,7 @@
 
 ## 版本
 
-v4.43 起持續迭代中；完整逐日開發記錄見 [docs/development-log.md](docs/development-log.md)。
+v4.44 起持續迭代中；完整逐日開發記錄見 [docs/development-log.md](docs/development-log.md)。
 
 v4.3 基礎重點：
 
@@ -31,7 +31,7 @@ v4.3 之後陸續完成（詳見開發日誌）：
 - `assets/core-prompt.js` 集中管理 v4.3 共用身份鎖定、臉部幾何、真人骨架、鏡頭重建、光線一致、膚質、負面詞與輸出品質規則。
 - `assets/editorial-finish.js` 集中管理中式古典、和服與韓系偶像三個精品主題頁的高預算編輯成像、材質可信度、光影層次與主題化負面限制；婚紗頁使用等效的短版專屬精品核心，避免重複堆疊而稀釋身份鎖定。
 - `assets/core-prompt.js` 另提供共用 `autoColor` 控制提示；中式古典、和服、韓服、婚紗與編輯視覺設計的色彩系統均提供主題搭配色組與 AI 配色選項。
-- `scripts/` 底下有五個驗證腳本，見下方「上架前檢查」。
+- `scripts/` 底下有驗證腳本與 DOM 順序維護腳本，見下方「上架前檢查」。
 - `docs/` 保存規格、流程、核心 prompt 契約與工程說明。
 - `assets/` 預留給正式共用靜態資源。
 - `output/` 與 `temp/` 是本地產物與暫存區，不應提交生成內容。

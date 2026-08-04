@@ -5,6 +5,14 @@
 這份文件是每次上線前的共同檢查契約，確認「畫面能選」「生成會採用」「一鍵設定不會
 引用失效值」三件事同時成立。它補足單純 HTML 語法檢查看不到的互動與資料連動問題。
 
+## 2026-08-04 v4.44 全站主題語彙與 DOM 順序回歸
+
+- 9 個主題頁的強度 select 與一鍵模板均通過主題詞契約；不再使用跨主題的 `material effects`、`material splash`、
+  `floating particles` 等泛用強度句。
+- 13 頁 section 已按實際 DOM 順序排列；`scripts/reorder-dom-sections.mjs --check` 通過，未改動公仔頁的特殊結構。
+- 第 6 項選項分級顯示保持原樣；19 頁 radio、checkbox、option 與 `data-choice` 數量和基準版本一致。
+- `check-ui-flows.mjs` 同時檢查 DOM 順序、主題強度契約、Layer／模板連動與鎖臉核心引用。
+
 ## 2026-08-04 v4.43 編輯視覺設計 Stage 2 回歸
 
 - 手動版型由 31 個模板型選項整理為 14 個結構家族；31 組一鍵模板仍逐組回填並通過引用驗證。
@@ -42,6 +50,7 @@
 ```powershell
 node scripts\check-static.mjs
 node scripts\check-ui-flows.mjs
+node scripts\reorder-dom-sections.mjs --check
 node scripts\validate-preset-refs.mjs
 node scripts\audit-100x.mjs
 node scripts\build-prompt-preview.mjs
@@ -59,8 +68,8 @@ git diff --check
 - `data-choice`、`getElementById()` 與資料欄位沒有指向不存在的 DOM id。
 - 具名一鍵按鈕的 `data-template`、旅拍／雜誌 preset key 都存在於實際資料物件。
 - 中式古典頁固定有 18 組一鍵模板，並分成「朝代古典」「新式改良」「唯美古風寫真」三組；唯美古風模板不得把人物姓名或仙俠／西式幻想語彙寫入正向 Prompt。
-- 旅拍、雜誌、幻想廣告、三個亞洲傳統服飾頁、花仙子與戰鬥學院的 CSS `order` 符合各自
-  的決策順序契約，避免只改了 class 後畫面又回到舊順序。
+- 旅拍、雜誌、幻想廣告、三個亞洲傳統服飾頁、花仙子與戰鬥學院的 section DOM 順序符合各自
+  的決策順序契約；CSS 只負責樣式，不再作為唯一的畫面排序來源。
 - 中式古典、和服、韓服三頁的自訂欄位必須位於對應控制區：服裝 03、材質／紋樣 04A、姿勢 07、
   配色 09B、背景 10；08 僅允許畫面強度與其他要求，背景資料必須包含 `pureWhiteBackground`。
 - 任何同時具備 `chestDetail`、`waistSideDetail`、`shoulderDetail` 的頁面，都必須提供同一組

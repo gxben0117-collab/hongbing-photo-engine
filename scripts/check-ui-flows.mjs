@@ -575,6 +575,71 @@ const themeCopyContracts = {
   'bridal-editorial.html': '婚紗工藝與材質',
 };
 
+const themeIntensityContracts = {
+  'floral-sweet.html': {
+    forbidden: ['material effects', 'material splash', 'floating particles', 'explosive'],
+    required: ['floral'],
+  },
+  'gala-socialite.html': {
+    forbidden: ['material effects', 'material splash', 'floating particles', 'explosive'],
+    required: ['couture'],
+  },
+  'kpop-idol.html': {
+    forbidden: ['material effects', 'material splash', 'floating particles', 'explosive'],
+    required: ['idol', 'performance'],
+  },
+  'ancient-goddess.html': {
+    forbidden: ['material effects', 'material splash', 'floating particles', 'explosive'],
+    required: ['ceremonial', 'goddess', 'mythic'],
+  },
+  'flower-fairy.html': {
+    forbidden: ['material effects', 'material splash', 'floating particles'],
+    required: ['floral', 'fairy'],
+  },
+  'xianxia.html': {
+    forbidden: ['material effects', 'material splash', 'floating particles'],
+    required: ['xianxia', 'spiritual'],
+  },
+  'anime-character.html': {
+    forbidden: ['material effects', 'material splash', 'floating particles'],
+    required: ['anime', 'character'],
+  },
+  'isekai-fantasy.html': {
+    forbidden: ['material effects', 'material splash', 'floating particles'],
+    required: ['fantasy'],
+  },
+  'battle-academy.html': {
+    forbidden: ['material effects', 'material splash', 'floating particles'],
+    required: ['academy', 'combat', 'battle'],
+  },
+};
+
+function intensityValues(source) {
+  const values = new Set();
+  const selectBlock = source.match(/<select\b[^>]*\bid=["']intensity["'][^>]*>[\s\S]*?<\/select>/i);
+  if (selectBlock) {
+    for (const match of selectBlock[0].matchAll(/<option\b[^>]*value\s*=\s*["']([^"']+)["']/gi)) values.add(match[1]);
+  }
+  for (const match of source.matchAll(/\bintensity\s*:\s*["']([^"']+)["']/g)) values.add(match[1]);
+  return values;
+}
+
+function checkThemeIntensityContract(page, source) {
+  const contract = themeIntensityContracts[page];
+  if (!contract) return;
+  const values = [...intensityValues(source)].map(value => value.toLowerCase());
+  if (!values.length) {
+    issue(page, 'theme intensity values are missing');
+    return;
+  }
+  for (const forbidden of contract.forbidden) {
+    if (values.some(value => value.includes(forbidden))) issue(page, `generic intensity phrase remains: "${forbidden}"`);
+  }
+  for (const required of contract.required) {
+    if (!values.some(value => value.includes(required))) issue(page, `theme intensity values are missing a ${required} marker`);
+  }
+}
+
 function checkThemeCopyContract(page, source) {
   const expectedTitle = themeCopyContracts[page];
   if (!expectedTitle) return;
@@ -603,16 +668,15 @@ function checkHomeCopyContract(page, source) {
 function checkVisualOrder(page, source) {
   const contract = visualOrderContracts[page];
   if (!contract) return;
-  for (const [className, expectedOrder] of Object.entries(contract)) {
-    const match = source.match(new RegExp(`\\.${className}\\s*\\{\\s*order\\s*:\\s*(-?\\d+)\\s*;`));
-    if (!match) {
-      issue(page, `missing visual order rule for .${className}`);
-      continue;
-    }
-    const actualOrder = Number(match[1]);
-    if (actualOrder !== expectedOrder) {
-      issue(page, `visual order .${className} is ${actualOrder}, expected ${expectedOrder}`);
-    }
+  const sectionMatches = [...source.matchAll(/<section\b[^>]*\bclass=["']([^"']+)["'][^>]*>/gi)];
+  const actualClasses = sectionMatches
+    .map(match => match[1].split(/\s+/).find(className => Object.hasOwn(contract, className)))
+    .filter(Boolean);
+  const expectedClasses = Object.entries(contract)
+    .sort(([, left], [, right]) => left - right)
+    .map(([className]) => className);
+  if (actualClasses.join('|') !== expectedClasses.join('|')) {
+    issue(page, `DOM section order is ${actualClasses.join(' -> ')}, expected ${expectedClasses.join(' -> ')}`);
   }
 }
 
@@ -634,6 +698,7 @@ for (const page of pages) {
   checkEditorialTemplateContract(page, source, groups);
   checkChineseClassicalTemplateContract(page, source);
   checkThemeCopyContract(page, source);
+  checkThemeIntensityContract(page, source);
   checkHomeCopyContract(page, source);
   checkSharedPortraitControlContract(page, source, groups);
   checkAutoPoseContract(page, source, groups);

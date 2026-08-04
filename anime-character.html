@@ -475,21 +475,6 @@
     </div>
   </section>
 
-  <section class="section-body">
-    <div class="section-header">
-      <div class="section-label">06</div>
-      <div class="section-title">身形輪廓</div>
-    </div>
-    <p class="hint">單選，控制人物比例與腰線。選「原圖自然比例」時，會以參考照身形為主要依據。</p>
-    <div class="grid grid-3" data-choice="bodyShape">
-      <label class="card selected"><input type="radio" name="bodyShape" value="original" checked><div class="name">原圖自然比例</div><div class="desc">以參考照身形為主</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="slight_waist"><div class="name">輕微纖腰</div><div class="desc">自然修飾腰線</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="curvy_waist"><div class="name">豐滿纖腰</div><div class="desc">明顯胸腰臀曲線</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="fashion_tall"><div class="name">高挑時裝比例</div><div class="desc">修長高級模特感</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="korean_idol"><div class="name">韓系偶像比例</div><div class="desc">修長腿線、俐落肩頸、舞台鏡頭平衡感</div></label>
-    </div>
-  </section>
-
   <section class="section-garment">
     <div class="section-header">
       <div class="section-label">03</div>
@@ -590,9 +575,9 @@
       </label>
       <label class="field">材質呈現強度
         <select id="intensity">
-          <option value="balanced material effects, elegant and luxurious">平衡高級</option>
-          <option value="massive explosive material splash, high speed frozen motion">強烈爆發</option>
-          <option value="subtle floating particles, refined couture details">細緻精修</option>
+          <option value="balanced character action, controlled costume movement, polished anime key visual energy">平衡高級</option>
+          <option value="dynamic battle action, sweeping hair and costume movement, high-energy anime key visual">強烈爆發</option>
+          <option value="restrained character pose, delicate costume accents, clean anime editorial finish">細緻精修</option>
         </select>
       </label>
     </div>
@@ -698,6 +683,21 @@
     </div>
   </section>
 
+  <section class="section-body">
+    <div class="section-header">
+      <div class="section-label">06</div>
+      <div class="section-title">身形輪廓</div>
+    </div>
+    <p class="hint">單選，控制人物比例與腰線。選「原圖自然比例」時，會以參考照身形為主要依據。</p>
+    <div class="grid grid-3" data-choice="bodyShape">
+      <label class="card selected"><input type="radio" name="bodyShape" value="original" checked><div class="name">原圖自然比例</div><div class="desc">以參考照身形為主</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="slight_waist"><div class="name">輕微纖腰</div><div class="desc">自然修飾腰線</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="curvy_waist"><div class="name">豐滿纖腰</div><div class="desc">明顯胸腰臀曲線</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="fashion_tall"><div class="name">高挑時裝比例</div><div class="desc">修長高級模特感</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="korean_idol"><div class="name">韓系偶像比例</div><div class="desc">修長腿線、俐落肩頸、舞台鏡頭平衡感</div></label>
+    </div>
+  </section>
+
   <section class="section-pose">
     <div class="section-header">
       <div class="section-label">07</div>
@@ -767,22 +767,16 @@
     </div>
   </section>
 
-  <section class="section-camera">
+  <section class="section-extra">
     <div class="section-header">
-      <div class="section-label">11</div>
-      <div class="section-title">拍攝角度與鏡頭感</div>
+      <div class="section-label">08</div>
+      <div class="section-title">自訂要求</div>
     </div>
-    <p class="hint">只改觀看角度、景深和鏡頭氣勢；人物拍到哪裡請回到 02 的「人物入鏡比例」。</p>
-    <div class="grid grid-3" data-choice="camera">
-      <label class="card selected"><input type="radio" name="camera" value="eyeLevelCover" checked><div class="name">自然平視</div><div class="desc">標準封面視角(預設)</div></label>
-      <label class="card"><input type="radio" name="camera" value="lowAngleHero"><div class="name">低角度仰拍</div><div class="desc">英雄感視角 / 鏡頭低於腰部</div></label>
-      <label class="card"><input type="radio" name="camera" value="highAngleOverhead"><div class="name">高角度俯拍</div><div class="desc">俯視角 / 鏡頭高於頭部</div></label>
-      <label class="card"><input type="radio" name="camera" value="softFocusGlow"><div class="name">柔焦光感</div><div class="desc">柔和光暈棚拍感</div></label>
-      <label class="card"><input type="radio" name="camera" value="beautyCloseUp"><div class="name">近距離美妝感</div><div class="desc">美妝特寫構圖</div></label>
-      <label class="card"><input type="radio" name="camera" value="sideProfile"><div class="name">側臉輪廓感</div><div class="desc">側臉輪廓 / 下顎線清楚</div></label>
-      <label class="card"><input type="radio" name="camera" value="threeQuarterSide"><div class="name">斜側角度</div><div class="desc">約45度側拍 / 臉和身形都有立體感</div></label>
-      <label class="card"><input type="radio" name="camera" value="topBeauty"><div class="name">高角度近景</div><div class="desc">從上方靠近拍臉與肩頸</div></label>
-      <label class="card"><input type="radio" name="camera" value="distantHero"><div class="name">遠距主視覺</div><div class="desc">人物與背景完整，廣告版面感強</div></label>
+    <p class="hint">只有需要指定道具、禁用元素、文字留白或特殊細節時再填寫，避免與前面選項重複描述。</p>
+    <div class="form-grid">
+      <label class="field full">額外要求
+        <textarea id="extraNote" placeholder="例如：這套魔法少女服是主打，完整呈現裙擺與緞帶；人物手持魔杖道具；不要額外配角；左側保留文案空間"></textarea>
+      </label>
     </div>
   </section>
 
@@ -895,16 +889,22 @@
     </div>
   </section>
 
-  <section class="section-extra">
+  <section class="section-camera">
     <div class="section-header">
-      <div class="section-label">08</div>
-      <div class="section-title">自訂要求</div>
+      <div class="section-label">11</div>
+      <div class="section-title">拍攝角度與鏡頭感</div>
     </div>
-    <p class="hint">只有需要指定道具、禁用元素、文字留白或特殊細節時再填寫，避免與前面選項重複描述。</p>
-    <div class="form-grid">
-      <label class="field full">額外要求
-        <textarea id="extraNote" placeholder="例如：這套魔法少女服是主打，完整呈現裙擺與緞帶；人物手持魔杖道具；不要額外配角；左側保留文案空間"></textarea>
-      </label>
+    <p class="hint">只改觀看角度、景深和鏡頭氣勢；人物拍到哪裡請回到 02 的「人物入鏡比例」。</p>
+    <div class="grid grid-3" data-choice="camera">
+      <label class="card selected"><input type="radio" name="camera" value="eyeLevelCover" checked><div class="name">自然平視</div><div class="desc">標準封面視角(預設)</div></label>
+      <label class="card"><input type="radio" name="camera" value="lowAngleHero"><div class="name">低角度仰拍</div><div class="desc">英雄感視角 / 鏡頭低於腰部</div></label>
+      <label class="card"><input type="radio" name="camera" value="highAngleOverhead"><div class="name">高角度俯拍</div><div class="desc">俯視角 / 鏡頭高於頭部</div></label>
+      <label class="card"><input type="radio" name="camera" value="softFocusGlow"><div class="name">柔焦光感</div><div class="desc">柔和光暈棚拍感</div></label>
+      <label class="card"><input type="radio" name="camera" value="beautyCloseUp"><div class="name">近距離美妝感</div><div class="desc">美妝特寫構圖</div></label>
+      <label class="card"><input type="radio" name="camera" value="sideProfile"><div class="name">側臉輪廓感</div><div class="desc">側臉輪廓 / 下顎線清楚</div></label>
+      <label class="card"><input type="radio" name="camera" value="threeQuarterSide"><div class="name">斜側角度</div><div class="desc">約45度側拍 / 臉和身形都有立體感</div></label>
+      <label class="card"><input type="radio" name="camera" value="topBeauty"><div class="name">高角度近景</div><div class="desc">從上方靠近拍臉與肩頸</div></label>
+      <label class="card"><input type="radio" name="camera" value="distantHero"><div class="name">遠距主視覺</div><div class="desc">人物與背景完整，廣告版面感強</div></label>
     </div>
   </section>
 
@@ -1495,84 +1495,84 @@ const themeTemplates = {
     garment: 'magicalGirlOutfit', material: 'glowingMagicCircle', style: 'moeCute',
     chestDetail: 'statementRibbonBow', waistSideDetail: 'magicalGirlBowSash', shoulderDetail: 'puffedRibbonSleeves',
     composition: 'subject surrounded by selected material environment, material wraps around foreground and background, immersive fantasy advertisement layout',
-    framing: 'fullBody', pose: 'transformationSequencePose', camera: 'lowAngleHero', lighting: 'prismaticColor', background: 'radiantMagicCircleBurst', ratio: '9:16', intensity: 'massive explosive material splash, high speed frozen motion'
+    framing: 'fullBody', pose: 'transformationSequencePose', camera: 'lowAngleHero', lighting: 'prismaticColor', background: 'radiantMagicCircleBurst', ratio: '9:16', intensity: 'dynamic battle action, sweeping hair and costume movement, high-energy anime key visual'
   },
   shrineMaidenRitual: {
     garment: 'shrineMaidenOutfit', material: 'holyLightHalo', style: 'fantasyLightNovel',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'healingSpellGesture', camera: 'eyeLevelCover', lighting: 'halo', background: 'cherryBlossomShrineCourtyard', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    framing: 'threeQuarter', pose: 'healingSpellGesture', camera: 'eyeLevelCover', lighting: 'halo', background: 'cherryBlossomShrineCourtyard', ratio: '4:5', intensity: 'restrained character pose, delicate costume accents, clean anime editorial finish'
   },
   mechaPilotLaunch: {
     garment: 'mechaPilotBodysuit', material: 'neonTechGlowLines', style: 'gameCG',
     chestDetail: 'heroUniformZipper', waistSideDetail: 'pilotHarnessWaist', shoulderDetail: 'heroLightArmorShoulder',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
-    framing: 'threeQuarter', pose: 'dashForwardAttackPose', camera: 'lowAngleHero', lighting: 'coldWhiteMechaLight', background: 'mechaHangarBay', ratio: '9:16', intensity: 'massive explosive material splash, high speed frozen motion'
+    framing: 'threeQuarter', pose: 'dashForwardAttackPose', camera: 'lowAngleHero', lighting: 'coldWhiteMechaLight', background: 'mechaHangarBay', ratio: '9:16', intensity: 'dynamic battle action, sweeping hair and costume movement, high-energy anime key visual'
   },
   swordfighterDuel: {
     garment: 'fantasySwordTunic', material: 'lightningArcEffect', style: 'shonenAction',
     chestDetail: 'graphicColorBlockBodice', waistSideDetail: 'pleatedSkirtWaistband', shoulderDetail: 'shortCapeClasp',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
-    framing: 'threeQuarter', pose: 'swordDrawBattleStance', camera: 'lowAngleHero', lighting: 'hard', background: 'ruinedBattlefield', ratio: '9:16', intensity: 'massive explosive material splash, high speed frozen motion'
+    framing: 'threeQuarter', pose: 'swordDrawBattleStance', camera: 'lowAngleHero', lighting: 'hard', background: 'ruinedBattlefield', ratio: '9:16', intensity: 'dynamic battle action, sweeping hair and costume movement, high-energy anime key visual'
   },
   elvenRangerForest: {
     garment: 'elfRangerOutfit', material: 'windBladeSlashTrail', style: 'fantasyLightNovel',
     composition: 'subject surrounded by selected material environment, material wraps around foreground and background, immersive fantasy advertisement layout',
-    framing: 'fullBody', pose: 'defensiveGuardStance', camera: 'threeQuarterSide', lighting: 'mist', background: 'magicalForestClearing', ratio: '3:4', intensity: 'subtle floating particles, refined couture details'
+    framing: 'fullBody', pose: 'defensiveGuardStance', camera: 'threeQuarterSide', lighting: 'mist', background: 'magicalForestClearing', ratio: '3:4', intensity: 'restrained character pose, delicate costume accents, clean anime editorial finish'
   },
   festivalYukataNight: {
     garment: 'festivalYukata', material: 'sparkleBloomEffect', style: 'moeCute',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'halfBody', pose: 'peaceSignPose', camera: 'eyeLevelCover', lighting: 'stage', background: 'festivalNightStalls', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    framing: 'halfBody', pose: 'peaceSignPose', camera: 'eyeLevelCover', lighting: 'stage', background: 'festivalNightStalls', ratio: '4:5', intensity: 'restrained character pose, delicate costume accents, clean anime editorial finish'
   },
   holyKnightStandoff: {
     garment: 'holyKnightArmorDress', material: 'holyLightHalo', style: 'shonenAction',
     composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
-    framing: 'threeQuarter', pose: 'defensiveGuardStance', camera: 'lowAngleHero', lighting: 'holyCathedralLight', background: 'skyCastleCourtyard', ratio: '9:16', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'threeQuarter', pose: 'defensiveGuardStance', camera: 'lowAngleHero', lighting: 'holyCathedralLight', background: 'skyCastleCourtyard', ratio: '9:16', intensity: 'balanced character action, controlled costume movement, polished anime key visual energy'
   },
   cyberpunkCityChase: {
     garment: 'tacticalBattleUniform', material: 'neonTechGlowLines', style: 'seinenMature',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
-    framing: 'threeQuarter', pose: 'dashForwardAttackPose', camera: 'lowAngleHero', lighting: 'neonPinkCyanSplit', background: 'neonCyberpunkCity', ratio: '9:16', intensity: 'massive explosive material splash, high speed frozen motion'
+    framing: 'threeQuarter', pose: 'dashForwardAttackPose', camera: 'lowAngleHero', lighting: 'neonPinkCyanSplit', background: 'neonCyberpunkCity', ratio: '9:16', intensity: 'dynamic battle action, sweeping hair and costume movement, high-energy anime key visual'
   },
   celestialSorceressMoon: {
     garment: 'moonlightSorceressDress', material: 'glowingMagicCircle', style: 'fantasyLightNovel',
     composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
-    framing: 'threeQuarter', pose: 'wandRaiseCastingPose', camera: 'threeQuarterSide', lighting: 'moonlightCandle', background: 'moonlitCloudSea', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    framing: 'threeQuarter', pose: 'wandRaiseCastingPose', camera: 'threeQuarterSide', lighting: 'moonlightCandle', background: 'moonlitCloudSea', ratio: '4:5', intensity: 'restrained character pose, delicate costume accents, clean anime editorial finish'
   },
   fairyGardenWhimsy: {
     garment: 'fairyWingDress', material: 'sparkleBloomEffect', style: 'moeCute',
     composition: 'subject surrounded by selected material environment, material wraps around foreground and background, immersive fantasy advertisement layout',
-    framing: 'fullBody', pose: 'cheerfulJumpPose', camera: 'eyeLevelCover', lighting: 'mist', background: 'magicalForestClearing', ratio: '3:4', intensity: 'subtle floating particles, refined couture details'
+    framing: 'fullBody', pose: 'cheerfulJumpPose', camera: 'eyeLevelCover', lighting: 'mist', background: 'magicalForestClearing', ratio: '3:4', intensity: 'restrained character pose, delicate costume accents, clean anime editorial finish'
   },
   schoolRooftopFarewell: {
     garment: 'blazerUniform', material: 'windBlownHairStrands', style: 'shoujoRomance',
     composition: 'subject placed to one side, clean empty space reserved for headline and commercial layout',
-    framing: 'threeQuarter', pose: 'dramaticWindSweptCapePose', camera: 'eyeLevelCover', lighting: 'halo', background: 'schoolRooftop', ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'threeQuarter', pose: 'dramaticWindSweptCapePose', camera: 'eyeLevelCover', lighting: 'halo', background: 'schoolRooftop', ratio: '4:5', intensity: 'balanced character action, controlled costume movement, polished anime key visual energy'
   },
   dragonSlayerVictory: {
     garment: 'dualBladeOutfit', material: 'fireElementalSwirl', style: 'shonenAction',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
-    framing: 'threeQuarter', pose: 'victoryPoseAfterBattle', camera: 'lowAngleHero', lighting: 'hard', background: 'ruinedBattlefield', ratio: '9:16', intensity: 'massive explosive material splash, high speed frozen motion'
+    framing: 'threeQuarter', pose: 'victoryPoseAfterBattle', camera: 'lowAngleHero', lighting: 'hard', background: 'ruinedBattlefield', ratio: '9:16', intensity: 'dynamic battle action, sweeping hair and costume movement, high-energy anime key visual'
   },
   iceQueenSummon: {
     garment: 'crystalMagicBodice', material: 'iceCrystalShardBurst', style: 'fantasyLightNovel',
     composition: 'subject surrounded by selected material environment, material wraps around foreground and background, immersive fantasy advertisement layout',
-    framing: 'threeQuarter', pose: 'magicCircleSummonGesture', camera: 'threeQuarterSide', lighting: 'cold', background: 'elementalCrystalCavern', ratio: '4:5', intensity: 'massive explosive material splash, high speed frozen motion'
+    framing: 'threeQuarter', pose: 'magicCircleSummonGesture', camera: 'threeQuarterSide', lighting: 'cold', background: 'elementalCrystalCavern', ratio: '4:5', intensity: 'dynamic battle action, sweeping hair and costume movement, high-energy anime key visual'
   },
   priestessCeremony: {
     garment: 'priestessCeremonialRobe', material: 'holyLightHalo', style: 'posterKeyVisual',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'healingSpellGesture', camera: 'eyeLevelCover', lighting: 'moonlightCandle', background: 'moonlitTempleGarden', ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'threeQuarter', pose: 'healingSpellGesture', camera: 'eyeLevelCover', lighting: 'moonlightCandle', background: 'moonlitTempleGarden', ratio: '4:5', intensity: 'balanced character action, controlled costume movement, polished anime key visual energy'
   },
   galaxyPortalGuardian: {
     garment: 'celestialPriestessRobe', material: 'glowingMagicCircle', style: 'gameCG',
     composition: 'subject surrounded by selected material environment, material wraps around foreground and background, immersive fantasy advertisement layout',
-    framing: 'threeQuarter', pose: 'protectiveBarrierGesture', camera: 'lowAngleHero', lighting: 'starfieldColdBlue', background: 'galaxyPortalRift', ratio: '9:16', intensity: 'massive explosive material splash, high speed frozen motion'
+    framing: 'threeQuarter', pose: 'protectiveBarrierGesture', camera: 'lowAngleHero', lighting: 'starfieldColdBlue', background: 'galaxyPortalRift', ratio: '9:16', intensity: 'dynamic battle action, sweeping hair and costume movement, high-energy anime key visual'
   },
   forestSpiritAwakening: {
     garment: 'forestSpiritGown', material: 'windBladeSlashTrail', style: 'fantasyLightNovel',
     composition: 'subject surrounded by selected material environment, material wraps around foreground and background, immersive fantasy advertisement layout',
-    framing: 'threeQuarter', pose: 'energyChargePowerUp', camera: 'lowAngleHero', lighting: 'mist', background: 'magicalForestClearing', ratio: '4:5', intensity: 'massive explosive material splash, high speed frozen motion'
+    framing: 'threeQuarter', pose: 'energyChargePowerUp', camera: 'lowAngleHero', lighting: 'mist', background: 'magicalForestClearing', ratio: '4:5', intensity: 'dynamic battle action, sweeping hair and costume movement, high-energy anime key visual'
   }
 };
 

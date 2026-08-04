@@ -674,87 +674,6 @@
     </div>
   </section>
 
-  <section class="section-garment-variation">
-    <div class="section-header">
-      <div class="section-label">05</div>
-      <div class="section-title">服裝改造核心</div>
-    </div>
-    <p class="hint">這些是服裝表面的結構化細節，不是重新設計整件服裝，剪裁輪廓仍以 03 服裝輪廓為準。Layer 只決定「隨機套用」時要改幾個部位；手動選了哪個部位，隨機套用不會覆蓋掉。</p>
-
-    <div class="pose-group">
-      <div class="pose-group-label">改造強度 Layer</div>
-      <div class="grid grid-3" data-choice="garmentLayer">
-        <label class="card selected"><input type="radio" name="garmentLayer" value="layer0" checked><div class="name">Layer 0（原始版）</div><div class="desc">三個部位皆無修改</div></label>
-        <label class="card"><input type="radio" name="garmentLayer" value="layer3"><div class="name">Layer 3（輕度）</div><div class="desc">隨機套用時約改 1 個部位</div></label>
-        <label class="card"><input type="radio" name="garmentLayer" value="layer6"><div class="name">Layer 6（中度）</div><div class="desc">隨機套用時約改 2 個部位</div></label>
-        <label class="card"><input type="radio" name="garmentLayer" value="layer9"><div class="name">Layer 9（高度）</div><div class="desc">隨機套用時三個部位全改</div></label>
-        <label class="card"><input type="radio" name="garmentLayer" value="random"><div class="name">隨機 Layer</div><div class="desc">隨機套用時連強度一起重新抽</div></label>
-      </div>
-    </div>
-
-    <div class="pose-group">
-      <div class="pose-group-label">胸口</div>
-      <div class="grid grid-3" data-choice="chestDetail">
-        <label class="card selected"><input type="radio" name="chestDetail" value="none" checked><div class="name">無修改</div><div class="desc">維持 03 服裝輪廓原本胸口版型</div></label>
-        <label class="card"><input type="radio" name="chestDetail" value="deepVNeckline"><div class="name">深 V</div><div class="desc">胸口深 V 領口</div></label>
-        <label class="card"><input type="radio" name="chestDetail" value="waistDeepVNeckline"><div class="name">深 V至腰</div><div class="desc">深 V 領口延伸至腰線</div></label>
-        <label class="card"><input type="radio" name="chestDetail" value="crossCollarDeepVStructured"><div class="name">交領深 V 結構胸衣</div><div class="desc">交領深 V 與結構式胸衣</div></label>
-        <label class="card"><input type="radio" name="chestDetail" value="crossLacingDeepV"><div class="name">交叉綁帶深 V</div><div class="desc">胸口交叉綁帶與深 V 領口</div></label>
-        <label class="card"><input type="radio" name="chestDetail" value="openFrontDeepV"><div class="name">深 V 大開襟</div><div class="desc">交領深 V 大開襟</div></label>
-        <div class="pose-group-label" style="grid-column:1/-1">幻想材質專屬結構</div>
-        <label class="card"><input type="radio" name="chestDetail" value="liquidMetalBodice"><div class="name">液態金屬框架胸衣</div><div class="desc">液態金屬形成高訂胸衣框架</div></label>
-        <label class="card"><input type="radio" name="chestDetail" value="facetedCrystalNeckline"><div class="name">晶體切面領口</div><div class="desc">晶體切面整合在服裝領口</div></label>
-        <label class="card"><input type="radio" name="chestDetail" value="resinInset"><div class="name">透明樹脂拼接</div><div class="desc">透明樹脂嵌片與乾淨高訂邊緣</div></label>
-        <label class="card"><input type="radio" name="chestDetail" value="suspendedMaterialBodice"><div class="name">材質懸浮胸襟</div><div class="desc">由可見結構支撐的懸浮材質胸襟</div></label>
-      </div>
-    </div>
-
-    <div class="pose-group">
-      <div class="pose-group-label">腰側</div>
-      <div class="grid grid-3" data-choice="waistSideDetail">
-        <label class="card selected"><input type="radio" name="waistSideDetail" value="none" checked><div class="name">無修改</div><div class="desc">維持 03 服裝輪廓原本腰線版型</div></label>
-        <label class="card"><input type="radio" name="waistSideDetail" value="wrapSkirtSideSlit"><div class="name">纏裙側開衩</div><div class="desc">高腰纏裙與優雅側開衩</div></label>
-        <label class="card"><input type="radio" name="waistSideDetail" value="highSideSlitSkirt"><div class="name">高衩開裙</div><div class="desc">側邊高衩開裙</div></label>
-        <label class="card"><input type="radio" name="waistSideDetail" value="openSkirtPanel"><div class="name">裙擺敞開</div><div class="desc">裙擺敞開，呈現腿部線條</div></label>
-        <div class="pose-group-label" style="grid-column:1/-1">幻想材質腰部結構</div>
-        <label class="card"><input type="radio" name="waistSideDetail" value="mirroredMetalWaist"><div class="name">鏡面金屬腰甲</div><div class="desc">鏡面金屬形成腰部雕塑結構</div></label>
-        <label class="card"><input type="radio" name="waistSideDetail" value="sculpturalMaterialWaist"><div class="name">流體雕塑腰線</div><div class="desc">選定材質形成流動雕塑腰線</div></label>
-        <label class="card"><input type="radio" name="waistSideDetail" value="crystalWaistBelt"><div class="name">晶體環腰</div><div class="desc">切面晶體腰帶整合服裝輪廓</div></label>
-        <label class="card"><input type="radio" name="waistSideDetail" value="asymMaterialDrape"><div class="name">不對稱材質垂片</div><div class="desc">材質垂片從腰部自然向下延伸</div></label>
-      </div>
-    </div>
-
-    <div class="pose-group">
-      <div class="pose-group-label">肩部</div>
-      <div class="grid grid-3" data-choice="shoulderDetail">
-        <label class="card selected"><input type="radio" name="shoulderDetail" value="none" checked><div class="name">無修改</div><div class="desc">維持 03 服裝輪廓原本肩部版型</div></label>
-        <label class="card"><input type="radio" name="shoulderDetail" value="offShoulderCut"><div class="name">露肩剪裁</div><div class="desc">肩部露肩剪裁</div></label>
-        <label class="card"><input type="radio" name="shoulderDetail" value="singleShoulder"><div class="name">單肩斜裁</div><div class="desc">單肩不對稱斜裁</div></label>
-        <label class="card"><input type="radio" name="shoulderDetail" value="halterNeckCutaway"><div class="name">掛脖削肩</div><div class="desc">掛脖削肩設計</div></label>
-        <div class="pose-group-label" style="grid-column:1/-1">幻想材質肩部結構</div>
-        <label class="card"><input type="radio" name="shoulderDetail" value="architecturalShoulder"><div class="name">建築式肩線</div><div class="desc">建築雕塑感高訂肩線</div></label>
-        <label class="card"><input type="radio" name="shoulderDetail" value="crystalShoulderGuard"><div class="name">晶體肩甲</div><div class="desc">切面晶體整合在肩部</div></label>
-        <label class="card"><input type="radio" name="shoulderDetail" value="materialPetalShoulder"><div class="name">材質花瓣肩片</div><div class="desc">選定材質形成層疊花瓣肩線</div></label>
-        <label class="card"><input type="radio" name="shoulderDetail" value="floatingRingShoulder"><div class="name">懸浮環形肩飾</div><div class="desc">肩後懸浮環飾，保持手臂清楚</div></label>
-      </div>
-    </div>
-  </section>
-
-  <section class="section-body">
-    <div class="section-header">
-      <div class="section-label">06</div>
-      <div class="section-title">身形輪廓</div>
-    </div>
-    <p class="hint">單選，控制人物比例與腰線。選「原圖自然比例」時，會以參考照身形為主要依據。</p>
-    <div class="grid grid-3" data-choice="bodyShape">
-      <label class="card selected"><input type="radio" name="bodyShape" value="original" checked><div class="name">原圖自然比例</div><div class="desc">以參考照身形為主</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="slight_waist"><div class="name">輕微纖腰</div><div class="desc">自然修飾腰線</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="curvy_waist"><div class="name">豐滿纖腰</div><div class="desc">明顯胸腰臀曲線</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="fashion_tall"><div class="name">高挑時裝比例</div><div class="desc">修長高級模特感</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="korean_idol"><div class="name">韓系偶像比例</div><div class="desc">修長腿線、俐落肩頸、舞台鏡頭平衡感</div></label>
-    </div>
-  </section>
-
   <section class="section-material">
     <div class="section-header">
       <div class="section-label">04</div>
@@ -937,6 +856,87 @@
     </div>
   </section>
 
+  <section class="section-garment-variation">
+    <div class="section-header">
+      <div class="section-label">05</div>
+      <div class="section-title">服裝改造核心</div>
+    </div>
+    <p class="hint">這些是服裝表面的結構化細節，不是重新設計整件服裝，剪裁輪廓仍以 03 服裝輪廓為準。Layer 只決定「隨機套用」時要改幾個部位；手動選了哪個部位，隨機套用不會覆蓋掉。</p>
+
+    <div class="pose-group">
+      <div class="pose-group-label">改造強度 Layer</div>
+      <div class="grid grid-3" data-choice="garmentLayer">
+        <label class="card selected"><input type="radio" name="garmentLayer" value="layer0" checked><div class="name">Layer 0（原始版）</div><div class="desc">三個部位皆無修改</div></label>
+        <label class="card"><input type="radio" name="garmentLayer" value="layer3"><div class="name">Layer 3（輕度）</div><div class="desc">隨機套用時約改 1 個部位</div></label>
+        <label class="card"><input type="radio" name="garmentLayer" value="layer6"><div class="name">Layer 6（中度）</div><div class="desc">隨機套用時約改 2 個部位</div></label>
+        <label class="card"><input type="radio" name="garmentLayer" value="layer9"><div class="name">Layer 9（高度）</div><div class="desc">隨機套用時三個部位全改</div></label>
+        <label class="card"><input type="radio" name="garmentLayer" value="random"><div class="name">隨機 Layer</div><div class="desc">隨機套用時連強度一起重新抽</div></label>
+      </div>
+    </div>
+
+    <div class="pose-group">
+      <div class="pose-group-label">胸口</div>
+      <div class="grid grid-3" data-choice="chestDetail">
+        <label class="card selected"><input type="radio" name="chestDetail" value="none" checked><div class="name">無修改</div><div class="desc">維持 03 服裝輪廓原本胸口版型</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="deepVNeckline"><div class="name">深 V</div><div class="desc">胸口深 V 領口</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="waistDeepVNeckline"><div class="name">深 V至腰</div><div class="desc">深 V 領口延伸至腰線</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="crossCollarDeepVStructured"><div class="name">交領深 V 結構胸衣</div><div class="desc">交領深 V 與結構式胸衣</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="crossLacingDeepV"><div class="name">交叉綁帶深 V</div><div class="desc">胸口交叉綁帶與深 V 領口</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="openFrontDeepV"><div class="name">深 V 大開襟</div><div class="desc">交領深 V 大開襟</div></label>
+        <div class="pose-group-label" style="grid-column:1/-1">幻想材質專屬結構</div>
+        <label class="card"><input type="radio" name="chestDetail" value="liquidMetalBodice"><div class="name">液態金屬框架胸衣</div><div class="desc">液態金屬形成高訂胸衣框架</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="facetedCrystalNeckline"><div class="name">晶體切面領口</div><div class="desc">晶體切面整合在服裝領口</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="resinInset"><div class="name">透明樹脂拼接</div><div class="desc">透明樹脂嵌片與乾淨高訂邊緣</div></label>
+        <label class="card"><input type="radio" name="chestDetail" value="suspendedMaterialBodice"><div class="name">材質懸浮胸襟</div><div class="desc">由可見結構支撐的懸浮材質胸襟</div></label>
+      </div>
+    </div>
+
+    <div class="pose-group">
+      <div class="pose-group-label">腰側</div>
+      <div class="grid grid-3" data-choice="waistSideDetail">
+        <label class="card selected"><input type="radio" name="waistSideDetail" value="none" checked><div class="name">無修改</div><div class="desc">維持 03 服裝輪廓原本腰線版型</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="wrapSkirtSideSlit"><div class="name">纏裙側開衩</div><div class="desc">高腰纏裙與優雅側開衩</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="highSideSlitSkirt"><div class="name">高衩開裙</div><div class="desc">側邊高衩開裙</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="openSkirtPanel"><div class="name">裙擺敞開</div><div class="desc">裙擺敞開，呈現腿部線條</div></label>
+        <div class="pose-group-label" style="grid-column:1/-1">幻想材質腰部結構</div>
+        <label class="card"><input type="radio" name="waistSideDetail" value="mirroredMetalWaist"><div class="name">鏡面金屬腰甲</div><div class="desc">鏡面金屬形成腰部雕塑結構</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="sculpturalMaterialWaist"><div class="name">流體雕塑腰線</div><div class="desc">選定材質形成流動雕塑腰線</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="crystalWaistBelt"><div class="name">晶體環腰</div><div class="desc">切面晶體腰帶整合服裝輪廓</div></label>
+        <label class="card"><input type="radio" name="waistSideDetail" value="asymMaterialDrape"><div class="name">不對稱材質垂片</div><div class="desc">材質垂片從腰部自然向下延伸</div></label>
+      </div>
+    </div>
+
+    <div class="pose-group">
+      <div class="pose-group-label">肩部</div>
+      <div class="grid grid-3" data-choice="shoulderDetail">
+        <label class="card selected"><input type="radio" name="shoulderDetail" value="none" checked><div class="name">無修改</div><div class="desc">維持 03 服裝輪廓原本肩部版型</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="offShoulderCut"><div class="name">露肩剪裁</div><div class="desc">肩部露肩剪裁</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="singleShoulder"><div class="name">單肩斜裁</div><div class="desc">單肩不對稱斜裁</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="halterNeckCutaway"><div class="name">掛脖削肩</div><div class="desc">掛脖削肩設計</div></label>
+        <div class="pose-group-label" style="grid-column:1/-1">幻想材質肩部結構</div>
+        <label class="card"><input type="radio" name="shoulderDetail" value="architecturalShoulder"><div class="name">建築式肩線</div><div class="desc">建築雕塑感高訂肩線</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="crystalShoulderGuard"><div class="name">晶體肩甲</div><div class="desc">切面晶體整合在肩部</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="materialPetalShoulder"><div class="name">材質花瓣肩片</div><div class="desc">選定材質形成層疊花瓣肩線</div></label>
+        <label class="card"><input type="radio" name="shoulderDetail" value="floatingRingShoulder"><div class="name">懸浮環形肩飾</div><div class="desc">肩後懸浮環飾，保持手臂清楚</div></label>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-body">
+    <div class="section-header">
+      <div class="section-label">06</div>
+      <div class="section-title">身形輪廓</div>
+    </div>
+    <p class="hint">單選，控制人物比例與腰線。選「原圖自然比例」時，會以參考照身形為主要依據。</p>
+    <div class="grid grid-3" data-choice="bodyShape">
+      <label class="card selected"><input type="radio" name="bodyShape" value="original" checked><div class="name">原圖自然比例</div><div class="desc">以參考照身形為主</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="slight_waist"><div class="name">輕微纖腰</div><div class="desc">自然修飾腰線</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="curvy_waist"><div class="name">豐滿纖腰</div><div class="desc">明顯胸腰臀曲線</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="fashion_tall"><div class="name">高挑時裝比例</div><div class="desc">修長高級模特感</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="korean_idol"><div class="name">韓系偶像比例</div><div class="desc">修長腿線、俐落肩頸、舞台鏡頭平衡感</div></label>
+    </div>
+  </section>
+
   <section class="section-pose">
     <div class="section-header">
       <div class="section-label">07</div>
@@ -1053,22 +1053,16 @@
     </div>
   </section>
 
-  <section class="section-camera">
+  <section class="section-extra">
     <div class="section-header">
-      <div class="section-label">11</div>
-      <div class="section-title">拍攝角度與鏡頭感</div>
+      <div class="section-label">08</div>
+      <div class="section-title">自訂要求</div>
     </div>
-    <p class="hint">只改觀看角度、景深和鏡頭氣勢；人物拍到哪裡請回到 02 的「構圖取景」。</p>
-    <div class="grid grid-3" data-choice="camera">
-      <label class="card selected"><input type="radio" name="camera" value="eyeLevelCover" checked><div class="name">自然平視</div><div class="desc">標準封面視角(預設)</div></label>
-      <label class="card"><input type="radio" name="camera" value="lowAngleHero"><div class="name">低角度仰拍</div><div class="desc">英雄感視角 / 鏡頭低於腰部</div></label>
-      <label class="card"><input type="radio" name="camera" value="highAngleOverhead"><div class="name">高角度俯拍</div><div class="desc">俯視角 / 鏡頭高於頭部</div></label>
-      <label class="card"><input type="radio" name="camera" value="softFocusGlow"><div class="name">柔焦光感</div><div class="desc">柔和光暈棚拍感</div></label>
-      <label class="card"><input type="radio" name="camera" value="beautyCloseUp"><div class="name">近距離美妝感</div><div class="desc">美妝特寫構圖</div></label>
-      <label class="card"><input type="radio" name="camera" value="sideProfile"><div class="name">側臉輪廓感</div><div class="desc">側臉輪廓 / 下顎線清楚</div></label>
-      <label class="card"><input type="radio" name="camera" value="threeQuarterSide"><div class="name">斜側角度</div><div class="desc">約45度側拍 / 臉和身形都有立體感</div></label>
-      <label class="card"><input type="radio" name="camera" value="topBeauty"><div class="name">高角度近景</div><div class="desc">從上方靠近拍臉與肩頸</div></label>
-      <label class="card"><input type="radio" name="camera" value="distantHero"><div class="name">遠距主視覺</div><div class="desc">人物與背景完整，廣告版面感強</div></label>
+    <p class="hint">只有需要指定道具、禁用元素、文字留白或特殊細節時再填寫，避免與前面選項重複描述。</p>
+    <div class="form-grid">
+      <label class="field full">額外要求
+        <textarea id="extraNote" placeholder="例如：這套洋裝是主打，完整呈現裙擺與布料；人物手持透明香水瓶；不要額外道具；左側保留文案空間"></textarea>
+      </label>
     </div>
   </section>
 
@@ -1235,16 +1229,22 @@
     </div>
   </section>
 
-  <section class="section-extra">
+  <section class="section-camera">
     <div class="section-header">
-      <div class="section-label">08</div>
-      <div class="section-title">自訂要求</div>
+      <div class="section-label">11</div>
+      <div class="section-title">拍攝角度與鏡頭感</div>
     </div>
-    <p class="hint">只有需要指定道具、禁用元素、文字留白或特殊細節時再填寫，避免與前面選項重複描述。</p>
-    <div class="form-grid">
-      <label class="field full">額外要求
-        <textarea id="extraNote" placeholder="例如：這套洋裝是主打，完整呈現裙擺與布料；人物手持透明香水瓶；不要額外道具；左側保留文案空間"></textarea>
-      </label>
+    <p class="hint">只改觀看角度、景深和鏡頭氣勢；人物拍到哪裡請回到 02 的「構圖取景」。</p>
+    <div class="grid grid-3" data-choice="camera">
+      <label class="card selected"><input type="radio" name="camera" value="eyeLevelCover" checked><div class="name">自然平視</div><div class="desc">標準封面視角(預設)</div></label>
+      <label class="card"><input type="radio" name="camera" value="lowAngleHero"><div class="name">低角度仰拍</div><div class="desc">英雄感視角 / 鏡頭低於腰部</div></label>
+      <label class="card"><input type="radio" name="camera" value="highAngleOverhead"><div class="name">高角度俯拍</div><div class="desc">俯視角 / 鏡頭高於頭部</div></label>
+      <label class="card"><input type="radio" name="camera" value="softFocusGlow"><div class="name">柔焦光感</div><div class="desc">柔和光暈棚拍感</div></label>
+      <label class="card"><input type="radio" name="camera" value="beautyCloseUp"><div class="name">近距離美妝感</div><div class="desc">美妝特寫構圖</div></label>
+      <label class="card"><input type="radio" name="camera" value="sideProfile"><div class="name">側臉輪廓感</div><div class="desc">側臉輪廓 / 下顎線清楚</div></label>
+      <label class="card"><input type="radio" name="camera" value="threeQuarterSide"><div class="name">斜側角度</div><div class="desc">約45度側拍 / 臉和身形都有立體感</div></label>
+      <label class="card"><input type="radio" name="camera" value="topBeauty"><div class="name">高角度近景</div><div class="desc">從上方靠近拍臉與肩頸</div></label>
+      <label class="card"><input type="radio" name="camera" value="distantHero"><div class="name">遠距主視覺</div><div class="desc">人物與背景完整，廣告版面感強</div></label>
     </div>
   </section>
 

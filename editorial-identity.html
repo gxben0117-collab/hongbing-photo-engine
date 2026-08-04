@@ -315,6 +315,27 @@
     </div>
   </section>
 
+  <section class="editorial-placement">
+    <div class="section-header">
+      <div class="section-label">02</div>
+      <div class="section-title">人物版位</div>
+    </div>
+    <div class="grid grid-3" data-choice="placement">
+      <label class="card selected"><input type="radio" name="placement" value="centeredClose" checked><div class="name">置中特寫</div><div class="desc">人物置中、近景到半身</div></label>
+      <label class="card"><input type="radio" name="placement" value="leftHalfBody"><div class="name">偏左半身</div><div class="desc">人物偏左、右側留給文字</div></label>
+      <label class="card"><input type="radio" name="placement" value="rightFullBody"><div class="name">偏右全身</div><div class="desc">人物偏右、左側留給文字</div></label>
+      <label class="card"><input type="radio" name="placement" value="topCrop"><div class="name">頂部裁切</div><div class="desc">人物偏上、下方留給資訊欄</div></label>
+      <label class="card"><input type="radio" name="placement" value="bottomAnchor"><div class="name">底部延伸</div><div class="desc">人物貼底延伸出畫面、上方留給刊頭</div></label>
+      <label class="card"><input type="radio" name="placement" value="rightFaceHero"><div class="name">右側臉部主視覺</div><div class="desc">右側特寫、左側放美業標註</div></label>
+      <label class="card"><input type="radio" name="placement" value="leftFaceHero"><div class="name">左側臉部主視覺</div><div class="desc">左側特寫、右側放美業標註</div></label>
+      <label class="card"><input type="radio" name="placement" value="centeredFullBody"><div class="name">中央全高人物</div><div class="desc">人物完整置中、圖形環繞</div></label>
+      <label class="card"><input type="radio" name="placement" value="textOverlapHero"><div class="name">人物穿插巨型文字</div><div class="desc">標題與人物形成前後層次</div></label>
+      <label class="card"><input type="radio" name="placement" value="cinemaCenter"><div class="name">電影中心人物</div><div class="desc">中央主視覺、上下安排標題</div></label>
+      <label class="card"><input type="radio" name="placement" value="photobookSide"><div class="name">寫真書跨頁偏側</div><div class="desc">人物靠側、另一側保留章節文字</div></label>
+      <label class="card"><input type="radio" name="placement" value="travelEnvironment"><div class="name">旅遊環境人物</div><div class="desc">保留景色、人物融入環境</div></label>
+    </div>
+  </section>
+
   <section class="editorial-typography">
     <div class="section-header">
       <div class="section-label">03</div>
@@ -335,6 +356,71 @@
       <label class="card"><input type="radio" name="typography" value="photobookSerif"><div class="name">寫真書細襯線字</div><div class="desc">章節、日期與收藏氣質</div></label>
       <label class="card"><input type="radio" name="typography" value="travelHandwritten"><div class="name">旅行手寫標記字</div><div class="desc">地名與旅行筆記感</div></label>
       <label class="card"><input type="radio" name="typography" value="dataMono"><div class="name">資料等寬字</div><div class="desc">日期、座標與編號資料</div></label>
+    </div>
+  </section>
+
+  <section class="editorial-copy-style">
+    <div class="section-header">
+      <div class="section-label">04</div>
+      <div class="section-title">文案語氣</div>
+    </div>
+    <p class="hint">決定未填寫文字時的標題與短句方向；不會捏造真實產品、地址、座標或出版資料。</p>
+    <div class="grid grid-3" data-choice="copyStyle">
+      <label class="card selected"><input type="radio" name="copyStyle" value="fashionEditorial" checked><div class="name">時尚雜誌</div><div class="desc">短標題、刊物標籤與精品語氣</div></label>
+      <label class="card"><input type="radio" name="copyStyle" value="beautyCampaign"><div class="name">精品美業</div><div class="desc">清楚、明亮、精緻的廣告短句</div></label>
+      <label class="card"><input type="radio" name="copyStyle" value="animeCharacter"><div class="name">動漫角色</div><div class="desc">角色名、章節與設定標籤</div></label>
+      <label class="card"><input type="radio" name="copyStyle" value="gameWorld"><div class="name">電玩世界觀</div><div class="desc">角色名稱、版本與世界觀標記</div></label>
+      <label class="card"><input type="radio" name="copyStyle" value="cinemaTrailer"><div class="name">電影預告</div><div class="desc">片名感主標與一句宣傳短句</div></label>
+      <label class="card"><input type="radio" name="copyStyle" value="photobookNarrative"><div class="name">寫真敘事</div><div class="desc">日期、章節與安靜的短文語氣</div></label>
+      <label class="card"><input type="radio" name="copyStyle" value="travelColumn"><div class="name">旅遊專欄</div><div class="desc">地點、旅程章節與旅行筆記</div></label>
+      <label class="card"><input type="radio" name="copyStyle" value="minimalNoCopy"><div class="name">極簡無內文</div><div class="desc">只保留必要標題與小型標記</div></label>
+    </div>
+  </section>
+
+  <section class="editorial-text">
+    <div class="section-header">
+      <div class="section-label">05</div>
+      <div class="section-title">文字內容自填</div>
+    </div>
+    <p class="hint">填寫的文字會原樣使用；未填欄位保持空白。全部留空時，AI 最多補一個非事實性短標題，日期、座標、品牌與署名不自行杜撰。</p>
+    <div class="form-grid">
+      <label class="field">大標題／角色名
+        <input id="mainTitle" type="text" placeholder="例如：LUMINA、SPECIAL FEATURE、留空由AI決定">
+      </label>
+      <label class="field">副標／期號
+        <input id="subtitle" type="text" placeholder="例如：SPECIAL FEATURE、ISSUE 08">
+      </label>
+      <label class="field full">標語／引言句
+        <input id="tagline" type="text" placeholder="例如：A study in presence and style.">
+      </label>
+      <label class="field full">資訊欄標題（最多 4 行）
+        <textarea id="infoLabels" maxlength="160" placeholder="每行一個，例如：&#10;PROFILE&#10;FEATURE&#10;STYLE"></textarea>
+      </label>
+      <label class="field full">資料標記（只填真實資料，例如日期、地點、期號、章節）
+        <input id="metadata" type="text" placeholder="例如：MAY 2024、KYOTO NOTES、VOL. 03">
+      </label>
+      <label class="field full">署名／製作資訊（只填已確認內容）
+        <input id="creditLine" type="text" placeholder="例如：PHOTO STUDY、EDITORIAL SERIES、CHAPTER 01">
+      </label>
+    </div>
+  </section>
+
+  <section class="editorial-language">
+    <div class="section-header">
+      <div class="section-label">06</div>
+      <div class="section-title">文字語言比例</div>
+    </div>
+    <div class="grid grid-3" data-choice="language">
+      <label class="card"><input type="radio" name="language" value="chineseOnly"><div class="name">純中文</div><div class="desc">全部文字使用繁體中文</div></label>
+      <label class="card selected"><input type="radio" name="language" value="bilingualEnglishChinese" checked><div class="name">中英混合</div><div class="desc">英文為主要大字，中文為輔</div></label>
+      <label class="card"><input type="radio" name="language" value="trilingualEditorial"><div class="name">中英日混排</div><div class="desc">英日中文字拼貼，當圖形素材使用</div></label>
+      <label class="card"><input type="radio" name="language" value="englishBrandDominant"><div class="name">英文品牌主導</div><div class="desc">英文大標、中文小型輔助資訊</div></label>
+      <label class="card"><input type="radio" name="language" value="chineseTitleDominant"><div class="name">中文標題主導</div><div class="desc">繁體中文大標、英文小字輔助</div></label>
+      <label class="card"><input type="radio" name="language" value="japaneseAccent"><div class="name">日文點綴</div><div class="desc">英文與中文搭配少量日文標記</div></label>
+      <label class="card"><input type="radio" name="language" value="koreanAccent"><div class="name">韓文點綴</div><div class="desc">英文與中文搭配少量韓文標記</div></label>
+      <label class="card"><input type="radio" name="language" value="dataDominant"><div class="name">數字與資料主導</div><div class="desc">日期、座標、編號成為主要圖形</div></label>
+      <label class="card"><input type="radio" name="language" value="cinemaMinimal"><div class="name">電影片名極簡</div><div class="desc">只保留片名與少量副標</div></label>
+      <label class="card"><input type="radio" name="language" value="travelPlaceDate"><div class="name">地名與日期主導</div><div class="desc">目的地、日期與旅遊筆記</div></label>
     </div>
   </section>
 
@@ -466,27 +552,6 @@
     </div>
   </section>
 
-  <section class="editorial-placement">
-    <div class="section-header">
-      <div class="section-label">02</div>
-      <div class="section-title">人物版位</div>
-    </div>
-    <div class="grid grid-3" data-choice="placement">
-      <label class="card selected"><input type="radio" name="placement" value="centeredClose" checked><div class="name">置中特寫</div><div class="desc">人物置中、近景到半身</div></label>
-      <label class="card"><input type="radio" name="placement" value="leftHalfBody"><div class="name">偏左半身</div><div class="desc">人物偏左、右側留給文字</div></label>
-      <label class="card"><input type="radio" name="placement" value="rightFullBody"><div class="name">偏右全身</div><div class="desc">人物偏右、左側留給文字</div></label>
-      <label class="card"><input type="radio" name="placement" value="topCrop"><div class="name">頂部裁切</div><div class="desc">人物偏上、下方留給資訊欄</div></label>
-      <label class="card"><input type="radio" name="placement" value="bottomAnchor"><div class="name">底部延伸</div><div class="desc">人物貼底延伸出畫面、上方留給刊頭</div></label>
-      <label class="card"><input type="radio" name="placement" value="rightFaceHero"><div class="name">右側臉部主視覺</div><div class="desc">右側特寫、左側放美業標註</div></label>
-      <label class="card"><input type="radio" name="placement" value="leftFaceHero"><div class="name">左側臉部主視覺</div><div class="desc">左側特寫、右側放美業標註</div></label>
-      <label class="card"><input type="radio" name="placement" value="centeredFullBody"><div class="name">中央全高人物</div><div class="desc">人物完整置中、圖形環繞</div></label>
-      <label class="card"><input type="radio" name="placement" value="textOverlapHero"><div class="name">人物穿插巨型文字</div><div class="desc">標題與人物形成前後層次</div></label>
-      <label class="card"><input type="radio" name="placement" value="cinemaCenter"><div class="name">電影中心人物</div><div class="desc">中央主視覺、上下安排標題</div></label>
-      <label class="card"><input type="radio" name="placement" value="photobookSide"><div class="name">寫真書跨頁偏側</div><div class="desc">人物靠側、另一側保留章節文字</div></label>
-      <label class="card"><input type="radio" name="placement" value="travelEnvironment"><div class="name">旅遊環境人物</div><div class="desc">保留景色、人物融入環境</div></label>
-    </div>
-  </section>
-
   <section class="editorial-whitespace">
     <div class="section-header">
       <div class="section-label">12</div>
@@ -501,71 +566,6 @@
       <label class="card"><input type="radio" name="whitespace" value="productSideColumn"><div class="name">產品側欄留白</div><div class="desc">側邊保留成分與產品標籤</div></label>
       <label class="card"><input type="radio" name="whitespace" value="photobookChapter"><div class="name">寫真書章節留白</div><div class="desc">安靜留白、少量收藏註記</div></label>
       <label class="card"><input type="radio" name="whitespace" value="travelTitleSpace"><div class="name">旅遊地點標題留白</div><div class="desc">景色周圍保留地點與路線文字</div></label>
-    </div>
-  </section>
-
-  <section class="editorial-language">
-    <div class="section-header">
-      <div class="section-label">06</div>
-      <div class="section-title">文字語言比例</div>
-    </div>
-    <div class="grid grid-3" data-choice="language">
-      <label class="card"><input type="radio" name="language" value="chineseOnly"><div class="name">純中文</div><div class="desc">全部文字使用繁體中文</div></label>
-      <label class="card selected"><input type="radio" name="language" value="bilingualEnglishChinese" checked><div class="name">中英混合</div><div class="desc">英文為主要大字，中文為輔</div></label>
-      <label class="card"><input type="radio" name="language" value="trilingualEditorial"><div class="name">中英日混排</div><div class="desc">英日中文字拼貼，當圖形素材使用</div></label>
-      <label class="card"><input type="radio" name="language" value="englishBrandDominant"><div class="name">英文品牌主導</div><div class="desc">英文大標、中文小型輔助資訊</div></label>
-      <label class="card"><input type="radio" name="language" value="chineseTitleDominant"><div class="name">中文標題主導</div><div class="desc">繁體中文大標、英文小字輔助</div></label>
-      <label class="card"><input type="radio" name="language" value="japaneseAccent"><div class="name">日文點綴</div><div class="desc">英文與中文搭配少量日文標記</div></label>
-      <label class="card"><input type="radio" name="language" value="koreanAccent"><div class="name">韓文點綴</div><div class="desc">英文與中文搭配少量韓文標記</div></label>
-      <label class="card"><input type="radio" name="language" value="dataDominant"><div class="name">數字與資料主導</div><div class="desc">日期、座標、編號成為主要圖形</div></label>
-      <label class="card"><input type="radio" name="language" value="cinemaMinimal"><div class="name">電影片名極簡</div><div class="desc">只保留片名與少量副標</div></label>
-      <label class="card"><input type="radio" name="language" value="travelPlaceDate"><div class="name">地名與日期主導</div><div class="desc">目的地、日期與旅遊筆記</div></label>
-    </div>
-  </section>
-
-  <section class="editorial-copy-style">
-    <div class="section-header">
-      <div class="section-label">04</div>
-      <div class="section-title">文案語氣</div>
-    </div>
-    <p class="hint">決定未填寫文字時的標題與短句方向；不會捏造真實產品、地址、座標或出版資料。</p>
-    <div class="grid grid-3" data-choice="copyStyle">
-      <label class="card selected"><input type="radio" name="copyStyle" value="fashionEditorial" checked><div class="name">時尚雜誌</div><div class="desc">短標題、刊物標籤與精品語氣</div></label>
-      <label class="card"><input type="radio" name="copyStyle" value="beautyCampaign"><div class="name">精品美業</div><div class="desc">清楚、明亮、精緻的廣告短句</div></label>
-      <label class="card"><input type="radio" name="copyStyle" value="animeCharacter"><div class="name">動漫角色</div><div class="desc">角色名、章節與設定標籤</div></label>
-      <label class="card"><input type="radio" name="copyStyle" value="gameWorld"><div class="name">電玩世界觀</div><div class="desc">角色名稱、版本與世界觀標記</div></label>
-      <label class="card"><input type="radio" name="copyStyle" value="cinemaTrailer"><div class="name">電影預告</div><div class="desc">片名感主標與一句宣傳短句</div></label>
-      <label class="card"><input type="radio" name="copyStyle" value="photobookNarrative"><div class="name">寫真敘事</div><div class="desc">日期、章節與安靜的短文語氣</div></label>
-      <label class="card"><input type="radio" name="copyStyle" value="travelColumn"><div class="name">旅遊專欄</div><div class="desc">地點、旅程章節與旅行筆記</div></label>
-      <label class="card"><input type="radio" name="copyStyle" value="minimalNoCopy"><div class="name">極簡無內文</div><div class="desc">只保留必要標題與小型標記</div></label>
-    </div>
-  </section>
-
-  <section class="editorial-text">
-    <div class="section-header">
-      <div class="section-label">05</div>
-      <div class="section-title">文字內容自填</div>
-    </div>
-    <p class="hint">填寫的文字會原樣使用；未填欄位保持空白。全部留空時，AI 最多補一個非事實性短標題，日期、座標、品牌與署名不自行杜撰。</p>
-    <div class="form-grid">
-      <label class="field">大標題／角色名
-        <input id="mainTitle" type="text" placeholder="例如：LUMINA、SPECIAL FEATURE、留空由AI決定">
-      </label>
-      <label class="field">副標／期號
-        <input id="subtitle" type="text" placeholder="例如：SPECIAL FEATURE、ISSUE 08">
-      </label>
-      <label class="field full">標語／引言句
-        <input id="tagline" type="text" placeholder="例如：A study in presence and style.">
-      </label>
-      <label class="field full">資訊欄標題（最多 4 行）
-        <textarea id="infoLabels" maxlength="160" placeholder="每行一個，例如：&#10;PROFILE&#10;FEATURE&#10;STYLE"></textarea>
-      </label>
-      <label class="field full">資料標記（只填真實資料，例如日期、地點、期號、章節）
-        <input id="metadata" type="text" placeholder="例如：MAY 2024、KYOTO NOTES、VOL. 03">
-      </label>
-      <label class="field full">署名／製作資訊（只填已確認內容）
-        <input id="creditLine" type="text" placeholder="例如：PHOTO STUDY、EDITORIAL SERIES、CHAPTER 01">
-      </label>
     </div>
   </section>
 

@@ -475,21 +475,6 @@
     </div>
   </section>
 
-  <section class="section-body">
-    <div class="section-header">
-      <div class="section-label">06</div>
-      <div class="section-title">身形輪廓</div>
-    </div>
-    <p class="hint">單選，控制人物比例與腰線。選「原圖自然比例」時，會以參考照身形為主要依據。</p>
-    <div class="grid grid-3" data-choice="bodyShape">
-      <label class="card selected"><input type="radio" name="bodyShape" value="original" checked><div class="name">原圖自然比例</div><div class="desc">以參考照身形為主</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="slight_waist"><div class="name">輕微纖腰</div><div class="desc">自然修飾腰線</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="curvy_waist"><div class="name">豐滿纖腰</div><div class="desc">明顯胸腰臀曲線</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="fashion_tall"><div class="name">高挑時裝比例</div><div class="desc">修長高級模特感</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="korean_idol"><div class="name">韓系偶像比例</div><div class="desc">修長腿線、俐落肩頸、舞台鏡頭平衡感</div></label>
-    </div>
-  </section>
-
   <section class="section-garment">
     <div class="section-header">
       <div class="section-label">03</div>
@@ -580,9 +565,9 @@
       </label>
       <label class="field">材質呈現強度
         <select id="intensity">
-          <option value="balanced material effects, elegant and luxurious">平衡高級</option>
-          <option value="massive explosive material splash, high speed frozen motion">強烈爆發</option>
-          <option value="subtle floating particles, refined couture details">細緻精修</option>
+          <option value="balanced romantic styling, lively natural movement, refined floral details">平衡高級</option>
+          <option value="energetic skirt and hair movement, playful floral motion, bright editorial presence">強烈爆發</option>
+          <option value="soft natural movement, delicate floral accents, gentle lifestyle beauty">細緻精修</option>
         </select>
       </label>
     </div>
@@ -688,6 +673,21 @@
     </div>
   </section>
 
+  <section class="section-body">
+    <div class="section-header">
+      <div class="section-label">06</div>
+      <div class="section-title">身形輪廓</div>
+    </div>
+    <p class="hint">單選，控制人物比例與腰線。選「原圖自然比例」時，會以參考照身形為主要依據。</p>
+    <div class="grid grid-3" data-choice="bodyShape">
+      <label class="card selected"><input type="radio" name="bodyShape" value="original" checked><div class="name">原圖自然比例</div><div class="desc">以參考照身形為主</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="slight_waist"><div class="name">輕微纖腰</div><div class="desc">自然修飾腰線</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="curvy_waist"><div class="name">豐滿纖腰</div><div class="desc">明顯胸腰臀曲線</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="fashion_tall"><div class="name">高挑時裝比例</div><div class="desc">修長高級模特感</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="korean_idol"><div class="name">韓系偶像比例</div><div class="desc">修長腿線、俐落肩頸、舞台鏡頭平衡感</div></label>
+    </div>
+  </section>
+
   <section class="section-pose">
     <div class="section-header">
       <div class="section-label">07</div>
@@ -787,22 +787,16 @@
     </div>
   </section>
 
-  <section class="section-camera">
+  <section class="section-extra">
     <div class="section-header">
-      <div class="section-label">11</div>
-      <div class="section-title">拍攝角度與鏡頭感</div>
+      <div class="section-label">08</div>
+      <div class="section-title">自訂要求</div>
     </div>
-    <p class="hint">只改觀看角度、景深和鏡頭氣勢；人物拍到哪裡請回到 02 的「人物入鏡比例」。</p>
-    <div class="grid grid-3" data-choice="camera">
-      <label class="card selected"><input type="radio" name="camera" value="eyeLevelCover" checked><div class="name">自然平視</div><div class="desc">標準封面視角(預設)</div></label>
-      <label class="card"><input type="radio" name="camera" value="lowAngleHero"><div class="name">低角度仰拍</div><div class="desc">英雄感視角 / 鏡頭低於腰部</div></label>
-      <label class="card"><input type="radio" name="camera" value="highAngleOverhead"><div class="name">高角度俯拍</div><div class="desc">俯視角 / 鏡頭高於頭部</div></label>
-      <label class="card"><input type="radio" name="camera" value="softFocusGlow"><div class="name">柔焦光感</div><div class="desc">柔和光暈棚拍感</div></label>
-      <label class="card"><input type="radio" name="camera" value="beautyCloseUp"><div class="name">近距離美妝感</div><div class="desc">美妝特寫構圖</div></label>
-      <label class="card"><input type="radio" name="camera" value="sideProfile"><div class="name">側臉輪廓感</div><div class="desc">側臉輪廓 / 下顎線清楚</div></label>
-      <label class="card"><input type="radio" name="camera" value="threeQuarterSide"><div class="name">斜側角度</div><div class="desc">約45度側拍 / 臉和身形都有立體感</div></label>
-      <label class="card"><input type="radio" name="camera" value="topBeauty"><div class="name">高角度近景</div><div class="desc">從上方靠近拍臉與肩頸</div></label>
-      <label class="card"><input type="radio" name="camera" value="distantHero"><div class="name">遠距主視覺</div><div class="desc">人物與背景完整，廣告版面感強</div></label>
+    <p class="hint">只有需要指定道具、禁用元素、文字留白或特殊細節時再填寫，避免與前面選項重複描述。</p>
+    <div class="form-grid">
+      <label class="field full">額外要求
+        <textarea id="extraNote" placeholder="例如：這套洋裝是主打，完整呈現裙擺與布料；人物手持透明香水瓶；不要額外道具；左側保留文案空間"></textarea>
+      </label>
     </div>
   </section>
 
@@ -898,16 +892,22 @@
     </div>
   </section>
 
-  <section class="section-extra">
+  <section class="section-camera">
     <div class="section-header">
-      <div class="section-label">08</div>
-      <div class="section-title">自訂要求</div>
+      <div class="section-label">11</div>
+      <div class="section-title">拍攝角度與鏡頭感</div>
     </div>
-    <p class="hint">只有需要指定道具、禁用元素、文字留白或特殊細節時再填寫，避免與前面選項重複描述。</p>
-    <div class="form-grid">
-      <label class="field full">額外要求
-        <textarea id="extraNote" placeholder="例如：這套洋裝是主打，完整呈現裙擺與布料；人物手持透明香水瓶；不要額外道具；左側保留文案空間"></textarea>
-      </label>
+    <p class="hint">只改觀看角度、景深和鏡頭氣勢；人物拍到哪裡請回到 02 的「人物入鏡比例」。</p>
+    <div class="grid grid-3" data-choice="camera">
+      <label class="card selected"><input type="radio" name="camera" value="eyeLevelCover" checked><div class="name">自然平視</div><div class="desc">標準封面視角(預設)</div></label>
+      <label class="card"><input type="radio" name="camera" value="lowAngleHero"><div class="name">低角度仰拍</div><div class="desc">英雄感視角 / 鏡頭低於腰部</div></label>
+      <label class="card"><input type="radio" name="camera" value="highAngleOverhead"><div class="name">高角度俯拍</div><div class="desc">俯視角 / 鏡頭高於頭部</div></label>
+      <label class="card"><input type="radio" name="camera" value="softFocusGlow"><div class="name">柔焦光感</div><div class="desc">柔和光暈棚拍感</div></label>
+      <label class="card"><input type="radio" name="camera" value="beautyCloseUp"><div class="name">近距離美妝感</div><div class="desc">美妝特寫構圖</div></label>
+      <label class="card"><input type="radio" name="camera" value="sideProfile"><div class="name">側臉輪廓感</div><div class="desc">側臉輪廓 / 下顎線清楚</div></label>
+      <label class="card"><input type="radio" name="camera" value="threeQuarterSide"><div class="name">斜側角度</div><div class="desc">約45度側拍 / 臉和身形都有立體感</div></label>
+      <label class="card"><input type="radio" name="camera" value="topBeauty"><div class="name">高角度近景</div><div class="desc">從上方靠近拍臉與肩頸</div></label>
+      <label class="card"><input type="radio" name="camera" value="distantHero"><div class="name">遠距主視覺</div><div class="desc">人物與背景完整，廣告版面感強</div></label>
     </div>
   </section>
 
@@ -1478,84 +1478,84 @@ const themeTemplates = {
     garment: 'floralSundress', material: 'handHeldBouquet', style: 'sweetCampaign',
     chestDetail: 'ribbonBowFrontPanel', waistSideDetail: 'statementBowSash', shoulderDetail: 'ribbonTiedStraps',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'floral_bouquet_hug', camera: 'eyeLevelCover', lighting: 'soft', background: 'vintageFlowerShopInterior', ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'threeQuarter', pose: 'floral_bouquet_hug', camera: 'eyeLevelCover', lighting: 'soft', background: 'vintageFlowerShopInterior', ratio: '4:5', intensity: 'balanced romantic styling, lively natural movement, refined floral details'
   },
   picnicMeadowSweetheart: {
     garment: 'babydollFloralDress', material: 'strawFloralBasket', style: 'floralMagazine',
     chestDetail: 'ruffledSweetheart', waistSideDetail: 'gatheredOverskirtPanel', shoulderDetail: 'flowerBudPuffSleeves',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'picnic_basket_sit', camera: 'eyeLevelCover', lighting: 'soft', background: 'picnicLawnMeadow', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    framing: 'threeQuarter', pose: 'picnic_basket_sit', camera: 'eyeLevelCover', lighting: 'soft', background: 'picnicLawnMeadow', ratio: '4:5', intensity: 'soft natural movement, delicate floral accents, gentle lifestyle beauty'
   },
   cherryBlossomTwirl: {
     garment: 'pastelChiffonDress', material: 'petalDriftLight', style: 'romanticCinematic',
     chestDetail: 'ruchedFloralBodice', waistSideDetail: 'floralRufflePanel', shoulderDetail: 'layeredRuffleShoulders',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
-    framing: 'fullBody', pose: 'skirt_twirl_smile', camera: 'lowAngleHero', lighting: 'soft', background: 'cherryBlossomParkPath', ratio: '9:16', intensity: 'subtle floating particles, refined couture details'
+    framing: 'fullBody', pose: 'skirt_twirl_smile', camera: 'lowAngleHero', lighting: 'soft', background: 'cherryBlossomParkPath', ratio: '9:16', intensity: 'soft natural movement, delicate floral accents, gentle lifestyle beauty'
   },
   bowRibbonSweetheart: {
     garment: 'bowWaistDress', material: 'bowAccentDetail', style: 'pastelClean',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'one_hand_waist', camera: 'eyeLevelCover', lighting: 'soft', background: 'pastelGradientBackdrop', ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'threeQuarter', pose: 'one_hand_waist', camera: 'eyeLevelCover', lighting: 'soft', background: 'pastelGradientBackdrop', ratio: '4:5', intensity: 'balanced romantic styling, lively natural movement, refined floral details'
   },
   gardenSwingDaydream: {
     garment: 'laceTieredDress', material: 'softBokehLight', style: 'dreamySoftFocus',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'swing_dangle_glance', camera: 'softFocusGlow', lighting: 'mist', background: 'gardenSwingCorner', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    framing: 'threeQuarter', pose: 'swing_dangle_glance', camera: 'softFocusGlow', lighting: 'mist', background: 'gardenSwingCorner', ratio: '4:5', intensity: 'soft natural movement, delicate floral accents, gentle lifestyle beauty'
   },
   teaTimeElegance: {
     garment: 'laceCollarKnitTop', material: 'teacupPropDetail', style: 'vintageRomance',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'halfBody', pose: 'table_appreciation', camera: 'eyeLevelCover', lighting: 'soft', background: 'bakeryCafeInterior', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    framing: 'halfBody', pose: 'table_appreciation', camera: 'eyeLevelCover', lighting: 'soft', background: 'bakeryCafeInterior', ratio: '4:5', intensity: 'soft natural movement, delicate floral accents, gentle lifestyle beauty'
   },
   sunlitWindowNook: {
     garment: 'floralCamiDress', material: 'sunlightLeakGlow', style: 'beautyCampaign',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'bustPortrait', pose: 'window_light_lean', camera: 'beautyCloseUp', lighting: 'soft', background: 'pastelBedroomWindow', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    framing: 'bustPortrait', pose: 'window_light_lean', camera: 'beautyCloseUp', lighting: 'soft', background: 'pastelBedroomWindow', ratio: '4:5', intensity: 'soft natural movement, delicate floral accents, gentle lifestyle beauty'
   },
   floralCrownMuse: {
     garment: 'bowHairAndDressSet', material: 'flowerCrownAccent', style: 'luxuryBloom',
     composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
-    framing: 'threeQuarter', pose: 'flower_crown_adjust', camera: 'eyeLevelCover', lighting: 'soft', background: 'glassGreenhouseInterior', ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'threeQuarter', pose: 'flower_crown_adjust', camera: 'eyeLevelCover', lighting: 'soft', background: 'glassGreenhouseInterior', ratio: '4:5', intensity: 'balanced romantic styling, lively natural movement, refined floral details'
   },
   laceGardenElegance: {
     garment: 'laceUmbrellaSkirtDress', material: 'pressedFlowerDetail', style: 'artFloral',
     composition: 'foreground material frame composition, selected material appears close to camera around the edges, subject remains clear in the center',
-    framing: 'threeQuarter', pose: 'profile_long_line', camera: 'threeQuarterSide', lighting: 'crystalDaylight', background: 'rosePergolaWalkway', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    framing: 'threeQuarter', pose: 'profile_long_line', camera: 'threeQuarterSide', lighting: 'crystalDaylight', background: 'rosePergolaWalkway', ratio: '4:5', intensity: 'soft natural movement, delicate floral accents, gentle lifestyle beauty'
   },
   sunflowerFieldJoy: {
     garment: 'offShoulderFloralDress', material: 'goldenHourGlow', style: 'floralMagazine',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
-    framing: 'fullBody', pose: 'tiptoe', camera: 'lowAngleHero', lighting: 'soft', background: 'sunflowerFieldAfternoon', ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'fullBody', pose: 'tiptoe', camera: 'lowAngleHero', lighting: 'soft', background: 'sunflowerFieldAfternoon', ratio: '4:5', intensity: 'balanced romantic styling, lively natural movement, refined floral details'
   },
   giftBoxSurprise: {
     garment: 'ribbonStrapDress', material: 'giftBoxRibbonProp', style: 'sweetCampaign',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'wink_finger_heart', camera: 'eyeLevelCover', lighting: 'candyGlossLight', background: 'pastelGradientBackdrop', ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'threeQuarter', pose: 'wink_finger_heart', camera: 'eyeLevelCover', lighting: 'candyGlossLight', background: 'pastelGradientBackdrop', ratio: '4:5', intensity: 'balanced romantic styling, lively natural movement, refined floral details'
   },
   rainyWindowDaydream: {
     garment: 'laceTrimSlipDress', material: 'rainWindowReflection', style: 'dreamySoftFocus',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'bustPortrait', pose: 'hand_neck', camera: 'beautyCloseUp', lighting: 'rainNightCool', background: 'pastelBedroomWindow', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    framing: 'bustPortrait', pose: 'hand_neck', camera: 'beautyCloseUp', lighting: 'rainNightCool', background: 'pastelBedroomWindow', ratio: '4:5', intensity: 'soft natural movement, delicate floral accents, gentle lifestyle beauty'
   },
   europeanCafeDate: {
     garment: 'wrapFloralDress', material: 'silkRibbonFlutter', style: 'vintageRomance',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'chin_rest', camera: 'eyeLevelCover', lighting: 'soft', background: 'europeanAlleyCafe', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    framing: 'threeQuarter', pose: 'chin_rest', camera: 'eyeLevelCover', lighting: 'soft', background: 'europeanAlleyCafe', ratio: '4:5', intensity: 'soft natural movement, delicate floral accents, gentle lifestyle beauty'
   },
   glitterPartyPrincess: {
     garment: 'tulleSkirtPartyDress', material: 'glitterDustShimmer', style: 'luxuryBloom',
     composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
-    framing: 'fullBody', pose: 'center_still', camera: 'lowAngleHero', lighting: 'jewelrySparkle', background: 'softFocusBokehStudio', ratio: '9:16', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'fullBody', pose: 'center_still', camera: 'lowAngleHero', lighting: 'jewelrySparkle', background: 'softFocusBokehStudio', ratio: '9:16', intensity: 'balanced romantic styling, lively natural movement, refined floral details'
   },
   bookstoreCozyAfternoon: {
     garment: 'puffSleeveSweater', material: 'softHazeGlow', style: 'floralMagazine',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'halfBody', pose: 'hair_flip', camera: 'eyeLevelCover', lighting: 'soft', background: 'bookstoreReadingNook', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    framing: 'halfBody', pose: 'hair_flip', camera: 'eyeLevelCover', lighting: 'soft', background: 'bookstoreReadingNook', ratio: '4:5', intensity: 'soft natural movement, delicate floral accents, gentle lifestyle beauty'
   },
   seasideCottonCandySky: {
     garment: 'satinBowPartyDress', material: 'pastelRainbowHaze', style: 'pastelClean',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
-    framing: 'fullBody', pose: 'one_leg_forward', camera: 'threeQuarterSide', lighting: 'prismaticColor', background: 'seasideBoardwalkPastel', ratio: '3:4', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'fullBody', pose: 'one_leg_forward', camera: 'threeQuarterSide', lighting: 'prismaticColor', background: 'seasideBoardwalkPastel', ratio: '3:4', intensity: 'balanced romantic styling, lively natural movement, refined floral details'
   }
 };
 

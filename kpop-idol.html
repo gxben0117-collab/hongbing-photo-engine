@@ -481,21 +481,6 @@
     </div>
   </section>
 
-  <section class="section-body">
-    <div class="section-header">
-      <div class="section-label">06</div>
-      <div class="section-title">身形輪廓</div>
-    </div>
-    <p class="hint">單選，控制人物比例與腰線。選「原圖自然比例」時，會以參考照身形為主要依據。</p>
-    <div class="grid grid-3" data-choice="bodyShape">
-      <label class="card selected"><input type="radio" name="bodyShape" value="original" checked><div class="name">原圖自然比例</div><div class="desc">以參考照身形為主</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="slight_waist"><div class="name">輕微纖腰</div><div class="desc">自然修飾腰線</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="curvy_waist"><div class="name">豐滿纖腰</div><div class="desc">明顯胸腰臀曲線</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="fashion_tall"><div class="name">高挑時裝比例</div><div class="desc">修長高級模特感</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="korean_idol"><div class="name">韓系偶像比例</div><div class="desc">修長腿線、俐落肩頸、舞台鏡頭平衡感</div></label>
-    </div>
-  </section>
-
   <section class="section-garment">
     <div class="section-header">
       <div class="section-label">03</div>
@@ -585,9 +570,9 @@
       </label>
       <label class="field">材質呈現強度
         <select id="intensity">
-          <option value="balanced material effects, elegant and luxurious">平衡高級</option>
-          <option value="massive explosive material splash, high speed frozen motion">強烈爆發</option>
-          <option value="subtle floating particles, refined couture details">細緻精修</option>
+          <option value="balanced performance energy, natural body movement, refined idol stage presence">平衡高級</option>
+          <option value="high-energy performance moment, dynamic hair and garment movement, strong stage rhythm, frozen action photography">強烈爆發</option>
+          <option value="polished stillness, clean idol styling, controlled camera presence">細緻精修</option>
         </select>
       </label>
     </div>
@@ -690,6 +675,21 @@
     </div>
   </section>
 
+  <section class="section-body">
+    <div class="section-header">
+      <div class="section-label">06</div>
+      <div class="section-title">身形輪廓</div>
+    </div>
+    <p class="hint">單選，控制人物比例與腰線。選「原圖自然比例」時，會以參考照身形為主要依據。</p>
+    <div class="grid grid-3" data-choice="bodyShape">
+      <label class="card selected"><input type="radio" name="bodyShape" value="original" checked><div class="name">原圖自然比例</div><div class="desc">以參考照身形為主</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="slight_waist"><div class="name">輕微纖腰</div><div class="desc">自然修飾腰線</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="curvy_waist"><div class="name">豐滿纖腰</div><div class="desc">明顯胸腰臀曲線</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="fashion_tall"><div class="name">高挑時裝比例</div><div class="desc">修長高級模特感</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="korean_idol"><div class="name">韓系偶像比例</div><div class="desc">修長腿線、俐落肩頸、舞台鏡頭平衡感</div></label>
+    </div>
+  </section>
+
   <section class="section-pose">
     <div class="section-header">
       <div class="section-label">07</div>
@@ -787,22 +787,16 @@
     </div>
   </section>
 
-  <section class="section-camera">
+  <section class="section-extra">
     <div class="section-header">
-      <div class="section-label">11</div>
-      <div class="section-title">拍攝角度與鏡頭感</div>
+      <div class="section-label">08</div>
+      <div class="section-title">自訂要求</div>
     </div>
-    <p class="hint">只改觀看角度、景深和鏡頭氣勢；人物拍到哪裡請回到 02 的「人物入鏡比例」。</p>
-    <div class="grid grid-3" data-choice="camera">
-      <label class="card selected"><input type="radio" name="camera" value="eyeLevelCover" checked><div class="name">自然平視</div><div class="desc">標準封面視角(預設)</div></label>
-      <label class="card"><input type="radio" name="camera" value="lowAngleHero"><div class="name">低角度仰拍</div><div class="desc">英雄感視角 / 鏡頭低於腰部</div></label>
-      <label class="card"><input type="radio" name="camera" value="highAngleOverhead"><div class="name">高角度俯拍</div><div class="desc">俯視角 / 鏡頭高於頭部</div></label>
-      <label class="card"><input type="radio" name="camera" value="softFocusGlow"><div class="name">柔焦光感</div><div class="desc">柔和光暈棚拍感</div></label>
-      <label class="card"><input type="radio" name="camera" value="beautyCloseUp"><div class="name">近距離美妝感</div><div class="desc">美妝特寫構圖</div></label>
-      <label class="card"><input type="radio" name="camera" value="sideProfile"><div class="name">側臉輪廓感</div><div class="desc">側臉輪廓 / 下顎線清楚</div></label>
-      <label class="card"><input type="radio" name="camera" value="threeQuarterSide"><div class="name">斜側角度</div><div class="desc">約45度側拍 / 臉和身形都有立體感</div></label>
-      <label class="card"><input type="radio" name="camera" value="topBeauty"><div class="name">高角度近景</div><div class="desc">從上方靠近拍臉與肩頸</div></label>
-      <label class="card"><input type="radio" name="camera" value="distantHero"><div class="name">遠距主視覺</div><div class="desc">人物與背景完整，廣告版面感強</div></label>
+    <p class="hint">只有需要指定道具、禁用元素、文字留白或特殊細節時再填寫，避免與前面選項重複描述。</p>
+    <div class="form-grid">
+      <label class="field full">額外要求
+        <textarea id="extraNote" placeholder="例如：這套洋裝是主打，完整呈現裙擺與布料；人物手持透明香水瓶；不要額外道具；左側保留文案空間"></textarea>
+      </label>
     </div>
   </section>
 
@@ -890,16 +884,22 @@
     </div>
   </section>
 
-  <section class="section-extra">
+  <section class="section-camera">
     <div class="section-header">
-      <div class="section-label">08</div>
-      <div class="section-title">自訂要求</div>
+      <div class="section-label">11</div>
+      <div class="section-title">拍攝角度與鏡頭感</div>
     </div>
-    <p class="hint">只有需要指定道具、禁用元素、文字留白或特殊細節時再填寫，避免與前面選項重複描述。</p>
-    <div class="form-grid">
-      <label class="field full">額外要求
-        <textarea id="extraNote" placeholder="例如：這套洋裝是主打，完整呈現裙擺與布料；人物手持透明香水瓶；不要額外道具；左側保留文案空間"></textarea>
-      </label>
+    <p class="hint">只改觀看角度、景深和鏡頭氣勢；人物拍到哪裡請回到 02 的「人物入鏡比例」。</p>
+    <div class="grid grid-3" data-choice="camera">
+      <label class="card selected"><input type="radio" name="camera" value="eyeLevelCover" checked><div class="name">自然平視</div><div class="desc">標準封面視角(預設)</div></label>
+      <label class="card"><input type="radio" name="camera" value="lowAngleHero"><div class="name">低角度仰拍</div><div class="desc">英雄感視角 / 鏡頭低於腰部</div></label>
+      <label class="card"><input type="radio" name="camera" value="highAngleOverhead"><div class="name">高角度俯拍</div><div class="desc">俯視角 / 鏡頭高於頭部</div></label>
+      <label class="card"><input type="radio" name="camera" value="softFocusGlow"><div class="name">柔焦光感</div><div class="desc">柔和光暈棚拍感</div></label>
+      <label class="card"><input type="radio" name="camera" value="beautyCloseUp"><div class="name">近距離美妝感</div><div class="desc">美妝特寫構圖</div></label>
+      <label class="card"><input type="radio" name="camera" value="sideProfile"><div class="name">側臉輪廓感</div><div class="desc">側臉輪廓 / 下顎線清楚</div></label>
+      <label class="card"><input type="radio" name="camera" value="threeQuarterSide"><div class="name">斜側角度</div><div class="desc">約45度側拍 / 臉和身形都有立體感</div></label>
+      <label class="card"><input type="radio" name="camera" value="topBeauty"><div class="name">高角度近景</div><div class="desc">從上方靠近拍臉與肩頸</div></label>
+      <label class="card"><input type="radio" name="camera" value="distantHero"><div class="name">遠距主視覺</div><div class="desc">人物與背景完整，廣告版面感強</div></label>
     </div>
   </section>
 
@@ -1457,96 +1457,96 @@ const themeTemplates = {
     garment: 'crystalStageBodysuit', material: 'stageSpotBeamGlow', style: 'idolTeaserCampaign',
     chestDetail: 'stageZipperBodice', waistSideDetail: 'rhinestoneWaistChain', shoulderDetail: 'rhinestoneShoulderStrap',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'center_still', camera: 'eyeLevelCover', lighting: 'stage', background: 'ledScreenStageBackdrop', ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'threeQuarter', pose: 'center_still', camera: 'eyeLevelCover', lighting: 'stage', background: 'ledScreenStageBackdrop', ratio: '4:5', intensity: 'balanced performance energy, natural body movement, refined idol stage presence'
   },
   livePerformanceEnergy: {
     garment: 'fringeStageDress', material: 'confettiBurstSparkle', style: 'stageLiveCampaign',
     chestDetail: 'sequinedHalterBodice', waistSideDetail: 'fringeWaistAccent', shoulderDetail: 'fringedEpaulettes',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
-    framing: 'fullBody', pose: 'dance_break_freeze', camera: 'lowAngleHero', lighting: 'stage', background: 'concertStageSpotlight', ratio: '9:16', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'fullBody', pose: 'dance_break_freeze', camera: 'lowAngleHero', lighting: 'stage', background: 'concertStageSpotlight', ratio: '9:16', intensity: 'balanced performance energy, natural body movement, refined idol stage presence'
   },
   minimalRunwayChic: {
     garment: 'monochromeSuitSet', material: 'softFilmGrainMood', style: 'minimalHighFashion',
     chestDetail: 'asymmetricCroppedTop', waistSideDetail: 'stageCorsetBelt', shoulderDetail: 'croppedBoleroShoulder',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'runway_stride', camera: 'threeQuarterSide', lighting: 'soft', background: 'minimalWhiteStudioCyc', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    framing: 'threeQuarter', pose: 'runway_stride', camera: 'threeQuarterSide', lighting: 'soft', background: 'minimalWhiteStudioCyc', ratio: '4:5', intensity: 'polished stillness, clean idol styling, controlled camera presence'
   },
   mvNarrativeMood: {
     garment: 'leatherTrenchCoat', material: 'neonSignReflection', style: 'cinematicMV',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
-    framing: 'fullBody', pose: 'backstage_candid_glance', camera: 'threeQuarterSide', lighting: 'neonPurpleMoonlit', background: 'neonAlleywayNight', ratio: '9:16', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'fullBody', pose: 'backstage_candid_glance', camera: 'threeQuarterSide', lighting: 'neonPurpleMoonlit', background: 'neonAlleywayNight', ratio: '9:16', intensity: 'balanced performance energy, natural body movement, refined idol stage presence'
   },
   airportOffDutyChic: {
     garment: 'oversizedCoatAirport', material: 'sunglassesPropAccent', style: 'airportFashion',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'hands_pockets', camera: 'eyeLevelCover', lighting: 'soft', background: 'airportTerminalModern', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    framing: 'threeQuarter', pose: 'hands_pockets', camera: 'eyeLevelCover', lighting: 'soft', background: 'airportTerminalModern', ratio: '4:5', intensity: 'polished stillness, clean idol styling, controlled camera presence'
   },
   pastelDreamConcept: {
     garment: 'pastelRuffleDress', material: 'pastelHazeGlow', style: 'dreamyPastelConcept',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'finger_heart_stage', camera: 'eyeLevelCover', lighting: 'soft', background: 'pastelGradientStudioIdol', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    framing: 'threeQuarter', pose: 'finger_heart_stage', camera: 'eyeLevelCover', lighting: 'soft', background: 'pastelGradientStudioIdol', ratio: '4:5', intensity: 'polished stillness, clean idol styling, controlled camera presence'
   },
   blackWhitePortraitArt: {
     garment: 'structuredVestSet', material: 'blackWhiteContrastMood', style: 'blackAndWhiteMood',
     composition: 'foreground material frame composition, selected material appears close to camera around the edges, subject remains clear in the center',
-    framing: 'bustPortrait', pose: 'hand_neck', camera: 'beautyCloseUp', lighting: 'hard', background: 'blackVoidStudioBackdrop', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    framing: 'bustPortrait', pose: 'hand_neck', camera: 'beautyCloseUp', lighting: 'hard', background: 'blackVoidStudioBackdrop', ratio: '4:5', intensity: 'polished stillness, clean idol styling, controlled camera presence'
   },
   beautyAmbassadorGlow: {
     garment: 'turtleneckSlipDress', material: 'layeredChainAccessory', style: 'beautyCampaign',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'bustPortrait', pose: 'adjust_earring', camera: 'beautyCloseUp', lighting: 'soft', background: 'pastelGradientStudioIdol', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    framing: 'bustPortrait', pose: 'adjust_earring', camera: 'beautyCloseUp', lighting: 'soft', background: 'pastelGradientStudioIdol', ratio: '4:5', intensity: 'polished stillness, clean idol styling, controlled camera presence'
   },
   streetDancePracticeEnergy: {
     garment: 'trackSuitSet', material: 'musicWaveformGlow', style: 'streetDanceEnergy',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
-    framing: 'fullBody', pose: 'dance_break_freeze', camera: 'lowAngleHero', lighting: 'hard', background: 'dancePracticeRoomMirror', ratio: '9:16', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'fullBody', pose: 'dance_break_freeze', camera: 'lowAngleHero', lighting: 'hard', background: 'dancePracticeRoomMirror', ratio: '9:16', intensity: 'balanced performance energy, natural body movement, refined idol stage presence'
   },
   rooftopSunsetIdolMoment: {
     garment: 'layeredKnitAirport', material: 'goldenHourBacklight', style: 'airportFashion',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'lean', camera: 'eyeLevelCover', lighting: 'soft', background: 'rooftopSunsetLounge', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    framing: 'threeQuarter', pose: 'lean', camera: 'eyeLevelCover', lighting: 'soft', background: 'rooftopSunsetLounge', ratio: '4:5', intensity: 'polished stillness, clean idol styling, controlled camera presence'
   },
   subwayNightMVScene: {
     garment: 'denimJacketLayered', material: 'cityBokehNightGlow', style: 'cinematicMV',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
-    framing: 'fullBody', pose: 'one_leg_forward', camera: 'threeQuarterSide', lighting: 'neonPinkCyanSplit', background: 'subwayStationPlatform', ratio: '9:16', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'fullBody', pose: 'one_leg_forward', camera: 'threeQuarterSide', lighting: 'neonPinkCyanSplit', background: 'subwayStationPlatform', ratio: '9:16', intensity: 'balanced performance energy, natural body movement, refined idol stage presence'
   },
   earMonitorStageFocus: {
     garment: 'cutoutStageBodysuit', material: 'laserLightStreak', style: 'stageLiveCampaign',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'ear_monitor_adjust', camera: 'eyeLevelCover', lighting: 'stage', background: 'concertStageSpotlight', ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'threeQuarter', pose: 'ear_monitor_adjust', camera: 'eyeLevelCover', lighting: 'stage', background: 'concertStageSpotlight', ratio: '4:5', intensity: 'balanced performance energy, natural body movement, refined idol stage presence'
   },
   vintageRecordStoreVibe: {
     garment: 'denimCorsetSet', material: 'vinylRecordProp', style: 'minimalHighFashion',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'hold_theme_prop', camera: 'eyeLevelCover', lighting: 'soft', background: 'vintageRecordStoreInterior', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    framing: 'threeQuarter', pose: 'hold_theme_prop', camera: 'eyeLevelCover', lighting: 'soft', background: 'vintageRecordStoreInterior', ratio: '4:5', intensity: 'polished stillness, clean idol styling, controlled camera presence'
   },
   graffitiStreetConfidence: {
     garment: 'oversizedHoodieSet', material: 'cameraFlashPop', style: 'streetDanceEnergy',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
-    framing: 'fullBody', pose: 'hands_pockets', camera: 'threeQuarterSide', lighting: 'hard', background: 'graffitiWallUrban', ratio: '3:4', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'fullBody', pose: 'hands_pockets', camera: 'threeQuarterSide', lighting: 'hard', background: 'graffitiWallUrban', ratio: '3:4', intensity: 'balanced performance energy, natural body movement, refined idol stage presence'
   },
   micDropConfidencePose: {
     garment: 'sheerLayerStageOutfit', material: 'microphonePropDetail', style: 'stageLiveCampaign',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'mic_drop_confidence', camera: 'lowAngleHero', lighting: 'stage', background: 'ledScreenStageBackdrop', ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'threeQuarter', pose: 'mic_drop_confidence', camera: 'lowAngleHero', lighting: 'stage', background: 'ledScreenStageBackdrop', ratio: '4:5', intensity: 'balanced performance energy, natural body movement, refined idol stage presence'
   },
   cafeWindowCandidPortrait: {
     garment: 'widePantsSuitAirport', material: 'softFilmGrainMood', style: 'minimalHighFashion',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'halfBody', pose: 'chin_rest', camera: 'eyeLevelCover', lighting: 'soft', background: 'cafeWindowSeat', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    framing: 'halfBody', pose: 'chin_rest', camera: 'eyeLevelCover', lighting: 'soft', background: 'cafeWindowSeat', ratio: '4:5', intensity: 'polished stillness, clean idol styling, controlled camera presence'
   },
   kpopBlackGoldComeback: {
     garment: 'monochromeSuitSet', material: 'softFilmGrainMood', style: 'minimalHighFashion', bodyShape: 'fashion_tall',
     chestDetail: 'stageZipperBodice', waistSideDetail: 'stageCorsetBelt', shoulderDetail: 'croppedBoleroShoulder',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'one_hand_waist', camera: 'threeQuarterSide', lighting: 'darkGoldMood', background: 'blackVoidStudioBackdrop', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    framing: 'threeQuarter', pose: 'one_hand_waist', camera: 'threeQuarterSide', lighting: 'darkGoldMood', background: 'blackVoidStudioBackdrop', ratio: '4:5', intensity: 'polished stillness, clean idol styling, controlled camera presence'
   },
   kpopSilverBlackAmbassador: {
     garment: 'structuredVestSet', material: 'blackWhiteContrastMood', style: 'beautyCampaign', bodyShape: 'original',
     chestDetail: 'asymmetricCroppedTop', waistSideDetail: 'stageCorsetBelt', shoulderDetail: 'singleShoulder',
     composition: 'foreground material frame composition, selected material appears close to camera around the edges, subject remains clear in the center',
-    framing: 'bustPortrait', pose: 'adjust_earring', camera: 'beautyCloseUp', lighting: 'hard', background: 'concreteIndustrialStudio', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    framing: 'bustPortrait', pose: 'adjust_earring', camera: 'beautyCloseUp', lighting: 'hard', background: 'concreteIndustrialStudio', ratio: '4:5', intensity: 'polished stillness, clean idol styling, controlled camera presence'
   }
 };
 

@@ -474,21 +474,6 @@
     </div>
   </section>
 
-  <section class="section-body">
-    <div class="section-header">
-      <div class="section-label">06</div>
-      <div class="section-title">身形輪廓</div>
-    </div>
-    <p class="hint">單選，控制人物比例與腰線。選「原圖自然比例」時，會以參考照身形為主要依據。</p>
-    <div class="grid grid-3" data-choice="bodyShape">
-      <label class="card selected"><input type="radio" name="bodyShape" value="original" checked><div class="name">原圖自然比例</div><div class="desc">以參考照身形為主</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="slight_waist"><div class="name">輕微纖腰</div><div class="desc">自然修飾腰線</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="curvy_waist"><div class="name">豐滿纖腰</div><div class="desc">明顯胸腰臀曲線</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="fashion_tall"><div class="name">高挑時裝比例</div><div class="desc">修長高級模特感</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="korean_idol"><div class="name">韓系偶像比例</div><div class="desc">修長腿線、俐落肩頸、舞台鏡頭平衡感</div></label>
-    </div>
-  </section>
-
   <section class="section-garment">
     <div class="section-header">
       <div class="section-label">03</div>
@@ -590,9 +575,9 @@
       </label>
       <label class="field">材質呈現強度
         <select id="intensity">
-          <option value="balanced material effects, elegant and luxurious">平衡高級</option>
-          <option value="massive explosive material splash, high speed frozen motion">強烈爆發</option>
-          <option value="subtle floating particles, refined couture details">細緻精修</option>
+          <option value="balanced fantasy adventure styling, graceful cloak movement, refined worldbuilding presence">平衡高級</option>
+          <option value="dynamic magical action, sweeping cloak and hair movement, high-energy fantasy key visual">強烈爆發</option>
+          <option value="quiet fantasy atmosphere, restrained magical accents, elegant character presence">細緻精修</option>
         </select>
       </label>
     </div>
@@ -692,6 +677,21 @@
           <input id="customShoulderDetail" type="text" placeholder="例如：單肩符文垂墜、肩線寶石鏤空窗、肩帶交錯結構">
         </label>
       </div>
+    </div>
+  </section>
+
+  <section class="section-body">
+    <div class="section-header">
+      <div class="section-label">06</div>
+      <div class="section-title">身形輪廓</div>
+    </div>
+    <p class="hint">單選，控制人物比例與腰線。選「原圖自然比例」時，會以參考照身形為主要依據。</p>
+    <div class="grid grid-3" data-choice="bodyShape">
+      <label class="card selected"><input type="radio" name="bodyShape" value="original" checked><div class="name">原圖自然比例</div><div class="desc">以參考照身形為主</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="slight_waist"><div class="name">輕微纖腰</div><div class="desc">自然修飾腰線</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="curvy_waist"><div class="name">豐滿纖腰</div><div class="desc">明顯胸腰臀曲線</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="fashion_tall"><div class="name">高挑時裝比例</div><div class="desc">修長高級模特感</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="korean_idol"><div class="name">韓系偶像比例</div><div class="desc">修長腿線、俐落肩頸、舞台鏡頭平衡感</div></label>
     </div>
   </section>
 
@@ -822,22 +822,16 @@
     </div>
   </section>
 
-  <section class="section-camera">
+  <section class="section-extra">
     <div class="section-header">
-      <div class="section-label">11</div>
-      <div class="section-title">拍攝角度與鏡頭感</div>
+      <div class="section-label">08</div>
+      <div class="section-title">自訂要求</div>
     </div>
-    <p class="hint">只改觀看角度、景深和鏡頭氣勢；人物拍到哪裡請回到 02 的「人物入鏡比例」。</p>
-    <div class="grid grid-3" data-choice="camera">
-      <label class="card selected"><input type="radio" name="camera" value="eyeLevelCover" checked><div class="name">自然平視</div><div class="desc">標準封面視角(預設)</div></label>
-      <label class="card"><input type="radio" name="camera" value="lowAngleHero"><div class="name">低角度仰拍</div><div class="desc">英雄感視角 / 鏡頭低於腰部</div></label>
-      <label class="card"><input type="radio" name="camera" value="highAngleOverhead"><div class="name">高角度俯拍</div><div class="desc">俯視角 / 鏡頭高於頭部</div></label>
-      <label class="card"><input type="radio" name="camera" value="softFocusGlow"><div class="name">柔焦光感</div><div class="desc">柔和光暈棚拍感</div></label>
-      <label class="card"><input type="radio" name="camera" value="beautyCloseUp"><div class="name">近距離美妝感</div><div class="desc">美妝特寫構圖</div></label>
-      <label class="card"><input type="radio" name="camera" value="sideProfile"><div class="name">側臉輪廓感</div><div class="desc">側臉輪廓 / 下顎線清楚</div></label>
-      <label class="card"><input type="radio" name="camera" value="threeQuarterSide"><div class="name">斜側角度</div><div class="desc">約45度側拍 / 臉和身形都有立體感</div></label>
-      <label class="card"><input type="radio" name="camera" value="topBeauty"><div class="name">高角度近景</div><div class="desc">從上方靠近拍臉與肩頸</div></label>
-      <label class="card"><input type="radio" name="camera" value="distantHero"><div class="name">遠距主視覺</div><div class="desc">人物與背景完整，廣告版面感強</div></label>
+    <p class="hint">只有需要指定道具、禁用元素、文字留白或特殊細節時再填寫，避免與前面選項重複描述。</p>
+    <div class="form-grid">
+      <label class="field full">額外要求
+        <textarea id="extraNote" placeholder="例如：這套洋裝是主打，完整呈現裙擺與布料；人物手持透明香水瓶；不要額外道具；左側保留文案空間"></textarea>
+      </label>
     </div>
   </section>
 
@@ -943,16 +937,22 @@
     </div>
   </section>
 
-  <section class="section-extra">
+  <section class="section-camera">
     <div class="section-header">
-      <div class="section-label">08</div>
-      <div class="section-title">自訂要求</div>
+      <div class="section-label">11</div>
+      <div class="section-title">拍攝角度與鏡頭感</div>
     </div>
-    <p class="hint">只有需要指定道具、禁用元素、文字留白或特殊細節時再填寫，避免與前面選項重複描述。</p>
-    <div class="form-grid">
-      <label class="field full">額外要求
-        <textarea id="extraNote" placeholder="例如：這套洋裝是主打，完整呈現裙擺與布料；人物手持透明香水瓶；不要額外道具；左側保留文案空間"></textarea>
-      </label>
+    <p class="hint">只改觀看角度、景深和鏡頭氣勢；人物拍到哪裡請回到 02 的「人物入鏡比例」。</p>
+    <div class="grid grid-3" data-choice="camera">
+      <label class="card selected"><input type="radio" name="camera" value="eyeLevelCover" checked><div class="name">自然平視</div><div class="desc">標準封面視角(預設)</div></label>
+      <label class="card"><input type="radio" name="camera" value="lowAngleHero"><div class="name">低角度仰拍</div><div class="desc">英雄感視角 / 鏡頭低於腰部</div></label>
+      <label class="card"><input type="radio" name="camera" value="highAngleOverhead"><div class="name">高角度俯拍</div><div class="desc">俯視角 / 鏡頭高於頭部</div></label>
+      <label class="card"><input type="radio" name="camera" value="softFocusGlow"><div class="name">柔焦光感</div><div class="desc">柔和光暈棚拍感</div></label>
+      <label class="card"><input type="radio" name="camera" value="beautyCloseUp"><div class="name">近距離美妝感</div><div class="desc">美妝特寫構圖</div></label>
+      <label class="card"><input type="radio" name="camera" value="sideProfile"><div class="name">側臉輪廓感</div><div class="desc">側臉輪廓 / 下顎線清楚</div></label>
+      <label class="card"><input type="radio" name="camera" value="threeQuarterSide"><div class="name">斜側角度</div><div class="desc">約45度側拍 / 臉和身形都有立體感</div></label>
+      <label class="card"><input type="radio" name="camera" value="topBeauty"><div class="name">高角度近景</div><div class="desc">從上方靠近拍臉與肩頸</div></label>
+      <label class="card"><input type="radio" name="camera" value="distantHero"><div class="name">遠距主視覺</div><div class="desc">人物與背景完整，廣告版面感強</div></label>
     </div>
   </section>
 
@@ -1589,84 +1589,84 @@ const themeTemplates = {
     garment: 'heroTravelerTunic', material: 'holyRadianceAura', style: 'lightNovelAd',
     chestDetail: 'leatherCrossStraps', waistSideDetail: 'adventurerUtilityBelt', shoulderDetail: 'lightPauldron',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'sword_sheathe_calm', camera: 'eyeLevelCover', lighting: 'soft', background: 'fantasyMarketStreet', ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'threeQuarter', pose: 'sword_sheathe_calm', camera: 'eyeLevelCover', lighting: 'soft', background: 'fantasyMarketStreet', ratio: '4:5', intensity: 'balanced fantasy adventure styling, graceful cloak movement, refined worldbuilding presence'
   },
   swordmaidenDuelReady: {
     garment: 'swordmaidenPlateSkirt', material: 'thunderSparkArc', style: 'cinematic',
     chestDetail: 'runeProtectiveChest', waistSideDetail: 'layeredBattleSkirtArmor', shoulderDetail: 'shortCapeShoulderClasp',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
-    framing: 'threeQuarter', pose: 'sword_draw_pose', camera: 'lowAngleHero', lighting: 'hard', background: 'ancientBattleArena', ratio: '9:16', intensity: 'massive explosive material splash, high speed frozen motion'
+    framing: 'threeQuarter', pose: 'sword_draw_pose', camera: 'lowAngleHero', lighting: 'hard', background: 'ancientBattleArena', ratio: '9:16', intensity: 'dynamic magical action, sweeping cloak and hair movement, high-energy fantasy key visual'
   },
   archmageSpellcast: {
     garment: 'archmageRobeEnsemble', material: 'arcaneFireWisp', style: 'lightNovelAd',
     chestDetail: 'saintessLayeredCollar', waistSideDetail: 'runeEmbroideredSash', shoulderDetail: 'saintessMantle',
     composition: 'subject surrounded by selected material environment, material wraps around foreground and background, immersive fantasy advertisement layout',
-    framing: 'threeQuarter', pose: 'spell_casting', camera: 'eyeLevelCover', lighting: 'mist', background: 'arcaneLibraryHall', ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'threeQuarter', pose: 'spell_casting', camera: 'eyeLevelCover', lighting: 'mist', background: 'arcaneLibraryHall', ratio: '4:5', intensity: 'balanced fantasy adventure styling, graceful cloak movement, refined worldbuilding presence'
   },
   saintessBlessing: {
     garment: 'saintessCeremonialWhite', material: 'holyRadianceAura', style: 'clean',
     composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
-    framing: 'threeQuarter', pose: 'arms_wide', camera: 'eyeLevelCover', lighting: 'soft', background: 'coronationCathedral', ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'threeQuarter', pose: 'arms_wide', camera: 'eyeLevelCover', lighting: 'soft', background: 'coronationCathedral', ratio: '4:5', intensity: 'balanced fantasy adventure styling, graceful cloak movement, refined worldbuilding presence'
   },
   forestElfGuardian: {
     garment: 'forestElfTunic', material: 'leafVineTrail', style: 'editorial',
     composition: 'subject surrounded by selected material environment, material wraps around foreground and background, immersive fantasy advertisement layout',
-    framing: 'threeQuarter', pose: 'shield_guard_stand', camera: 'threeQuarterSide', lighting: 'mist', background: 'ancientForestGrove', ratio: '3:4', intensity: 'subtle floating particles, refined couture details'
+    framing: 'threeQuarter', pose: 'shield_guard_stand', camera: 'threeQuarterSide', lighting: 'mist', background: 'ancientForestGrove', ratio: '3:4', intensity: 'quiet fantasy atmosphere, restrained magical accents, elegant character presence'
   },
   otherworldNobleGala: {
     garment: 'noblewomanBallGown', material: 'goldRoyalFiligree', style: 'luxury',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'one_hand_waist', camera: 'eyeLevelCover', lighting: 'jewelrySparkle', background: 'royalBallroom', ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'threeQuarter', pose: 'one_hand_waist', camera: 'eyeLevelCover', lighting: 'jewelrySparkle', background: 'royalBallroom', ratio: '4:5', intensity: 'balanced fantasy adventure styling, graceful cloak movement, refined worldbuilding presence'
   },
   isekaiPrincessCoronation: {
     garment: 'princessSashDress', material: 'pearlCoronationTrim', style: 'clean',
     composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
-    framing: 'threeQuarter', pose: 'center_still', camera: 'eyeLevelCover', lighting: 'soft', background: 'coronationCathedral', ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'threeQuarter', pose: 'center_still', camera: 'eyeLevelCover', lighting: 'soft', background: 'coronationCathedral', ratio: '4:5', intensity: 'balanced fantasy adventure styling, graceful cloak movement, refined worldbuilding presence'
   },
   queenThroneMajesty: {
     garment: 'queenThroneRobe', material: 'goldRoyalFiligree', style: 'blackGold',
     composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
-    framing: 'threeQuarter', pose: 'royal_throne_command', camera: 'lowAngleHero', lighting: 'darkGoldMood', background: 'grandThroneHall', ratio: '9:16', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'threeQuarter', pose: 'royal_throne_command', camera: 'lowAngleHero', lighting: 'darkGoldMood', background: 'grandThroneHall', ratio: '9:16', intensity: 'balanced fantasy adventure styling, graceful cloak movement, refined worldbuilding presence'
   },
   beastGirlWildSpirit: {
     garment: 'beastTribalWrap', material: 'wildSpiritAura', style: 'editorial',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'beast_ear_curl_sit', camera: 'eyeLevelCover', lighting: 'warmWindowSoft', background: 'ancientForestGrove', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    framing: 'threeQuarter', pose: 'beast_ear_curl_sit', camera: 'eyeLevelCover', lighting: 'warmWindowSoft', background: 'ancientForestGrove', ratio: '4:5', intensity: 'quiet fantasy atmosphere, restrained magical accents, elegant character presence'
   },
   foxSpiritMoonlight: {
     garment: 'foxSpiritSilkRobe', material: 'foxfireEmberTrail', style: 'cinematic',
     composition: 'subject surrounded by selected material environment, material wraps around foreground and background, immersive fantasy advertisement layout',
-    framing: 'threeQuarter', pose: 'fan_cover', camera: 'threeQuarterSide', lighting: 'moonlightCandle', background: 'moonlitForestClearing', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    framing: 'threeQuarter', pose: 'fan_cover', camera: 'threeQuarterSide', lighting: 'moonlightCandle', background: 'moonlitForestClearing', ratio: '4:5', intensity: 'quiet fantasy atmosphere, restrained magical accents, elegant character presence'
   },
   catFolkStreetCharm: {
     garment: 'catFolkStreetOutfit', material: 'furTuftGlossSheen', style: 'poster',
     composition: 'subject placed to one side, clean empty space reserved for headline and commercial layout',
-    framing: 'threeQuarter', pose: 'hip', camera: 'eyeLevelCover', lighting: 'soft', background: 'fantasyMarketStreet', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    framing: 'threeQuarter', pose: 'hip', camera: 'eyeLevelCover', lighting: 'soft', background: 'fantasyMarketStreet', ratio: '4:5', intensity: 'quiet fantasy atmosphere, restrained magical accents, elegant character presence'
   },
   darkMageRitual: {
     garment: 'darkSorceressGown', material: 'cursedRuneEmber', style: 'cinematic',
     composition: 'subject surrounded by selected material environment, material wraps around foreground and background, immersive fantasy advertisement layout',
-    framing: 'threeQuarter', pose: 'summoning_circle_kneel', camera: 'lowAngleHero', lighting: 'candleShadowGothic', background: 'cursedCastleRuins', ratio: '9:16', intensity: 'massive explosive material splash, high speed frozen motion'
+    framing: 'threeQuarter', pose: 'summoning_circle_kneel', camera: 'lowAngleHero', lighting: 'candleShadowGothic', background: 'cursedCastleRuins', ratio: '9:16', intensity: 'dynamic magical action, sweeping cloak and hair movement, high-energy fantasy key visual'
   },
   witchCursedBrew: {
     garment: 'witchRitualCorset', material: 'voidPurpleFlame', style: 'artExhibit',
     composition: 'subject surrounded by selected material environment, material wraps around foreground and background, immersive fantasy advertisement layout',
-    framing: 'threeQuarter', pose: 'hold_theme_prop', camera: 'eyeLevelCover', lighting: 'neonPurpleMoonlit', background: 'shadowRealmRift', ratio: '4:5', intensity: 'massive explosive material splash, high speed frozen motion'
+    framing: 'threeQuarter', pose: 'hold_theme_prop', camera: 'eyeLevelCover', lighting: 'neonPurpleMoonlit', background: 'shadowRealmRift', ratio: '4:5', intensity: 'dynamic magical action, sweeping cloak and hair movement, high-energy fantasy key visual'
   },
   succubusMidnightAllure: {
     garment: 'succubusLaceGown', material: 'bloodMoonGlint', style: 'blackGold',
     composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
-    framing: 'threeQuarter', pose: 'hand_chest', camera: 'eyeLevelCover', lighting: 'bloodMoonGlow', background: 'demonThroneChamber', ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'threeQuarter', pose: 'hand_chest', camera: 'eyeLevelCover', lighting: 'bloodMoonGlow', background: 'demonThroneChamber', ratio: '4:5', intensity: 'balanced fantasy adventure styling, graceful cloak movement, refined worldbuilding presence'
   },
   demonNobleCourt: {
     garment: 'demonNobleGownCutout', material: 'demonicSmokeVeil', style: 'blackGold',
     composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
-    framing: 'threeQuarter', pose: 'one_hand_waist', camera: 'eyeLevelCover', lighting: 'darkIceBlue', background: 'obsidianSpireHall', ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'threeQuarter', pose: 'one_hand_waist', camera: 'eyeLevelCover', lighting: 'darkIceBlue', background: 'obsidianSpireHall', ratio: '4:5', intensity: 'balanced fantasy adventure styling, graceful cloak movement, refined worldbuilding presence'
   },
   demonLordDomination: {
     garment: 'demonLordCeremonialMantle', material: 'voidPurpleFlame', style: 'cinematic',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
-    framing: 'fullBody', pose: 'cloak_windswept_stride', camera: 'lowAngleHero', lighting: 'bloodMoonGlow', background: 'demonThroneChamber', ratio: '9:16', intensity: 'massive explosive material splash, high speed frozen motion'
+    framing: 'fullBody', pose: 'cloak_windswept_stride', camera: 'lowAngleHero', lighting: 'bloodMoonGlow', background: 'demonThroneChamber', ratio: '9:16', intensity: 'dynamic magical action, sweeping cloak and hair movement, high-energy fantasy key visual'
   }
 };
 

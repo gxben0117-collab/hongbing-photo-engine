@@ -475,21 +475,6 @@
     </div>
   </section>
 
-  <section class="section-body">
-    <div class="section-header">
-      <div class="section-label">06</div>
-      <div class="section-title">身形輪廓</div>
-    </div>
-    <p class="hint">單選，控制人物比例與腰線。選「原圖自然比例」時，會以參考照身形為主要依據。</p>
-    <div class="grid grid-3" data-choice="bodyShape">
-      <label class="card selected"><input type="radio" name="bodyShape" value="original" checked><div class="name">原圖自然比例</div><div class="desc">以參考照身形為主</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="slight_waist"><div class="name">輕微纖腰</div><div class="desc">自然修飾腰線</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="curvy_waist"><div class="name">豐滿纖腰</div><div class="desc">明顯胸腰臀曲線</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="fashion_tall"><div class="name">高挑時裝比例</div><div class="desc">修長高級模特感</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="korean_idol"><div class="name">韓系偶像比例</div><div class="desc">修長腿線、俐落肩頸、舞台鏡頭平衡感</div></label>
-    </div>
-  </section>
-
   <section class="section-garment">
     <div class="section-header">
       <div class="section-label">03</div>
@@ -581,9 +566,9 @@
       </label>
       <label class="field">材質呈現強度
         <select id="intensity">
-          <option value="balanced material effects, elegant and luxurious">平衡高級</option>
-          <option value="massive explosive material splash, high speed frozen motion">強烈爆發</option>
-          <option value="subtle floating particles, refined couture details">細緻精修</option>
+          <option value="balanced couture styling, controlled garment movement, refined jewelry presence">平衡高級</option>
+          <option value="dramatic red-carpet entrance, sweeping couture movement, powerful editorial presence">強烈爆發</option>
+          <option value="quiet luxury styling, restrained garment movement, delicate jewelry highlights">細緻精修</option>
         </select>
       </label>
     </div>
@@ -689,6 +674,21 @@
     </div>
   </section>
 
+  <section class="section-body">
+    <div class="section-header">
+      <div class="section-label">06</div>
+      <div class="section-title">身形輪廓</div>
+    </div>
+    <p class="hint">單選，控制人物比例與腰線。選「原圖自然比例」時，會以參考照身形為主要依據。</p>
+    <div class="grid grid-3" data-choice="bodyShape">
+      <label class="card selected"><input type="radio" name="bodyShape" value="original" checked><div class="name">原圖自然比例</div><div class="desc">以參考照身形為主</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="slight_waist"><div class="name">輕微纖腰</div><div class="desc">自然修飾腰線</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="curvy_waist"><div class="name">豐滿纖腰</div><div class="desc">明顯胸腰臀曲線</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="fashion_tall"><div class="name">高挑時裝比例</div><div class="desc">修長高級模特感</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="korean_idol"><div class="name">韓系偶像比例</div><div class="desc">修長腿線、俐落肩頸、舞台鏡頭平衡感</div></label>
+    </div>
+  </section>
+
   <section class="section-pose">
     <div class="section-header">
       <div class="section-label">07</div>
@@ -788,22 +788,16 @@
     </div>
   </section>
 
-  <section class="section-camera">
+  <section class="section-extra">
     <div class="section-header">
-      <div class="section-label">11</div>
-      <div class="section-title">拍攝角度與鏡頭感</div>
+      <div class="section-label">08</div>
+      <div class="section-title">自訂要求</div>
     </div>
-    <p class="hint">只改觀看角度、景深和鏡頭氣勢；人物拍到哪裡請回到 02 的「人物入鏡比例」。</p>
-    <div class="grid grid-3" data-choice="camera">
-      <label class="card selected"><input type="radio" name="camera" value="eyeLevelCover" checked><div class="name">自然平視</div><div class="desc">標準封面視角(預設)</div></label>
-      <label class="card"><input type="radio" name="camera" value="lowAngleHero"><div class="name">低角度仰拍</div><div class="desc">英雄感視角 / 鏡頭低於腰部</div></label>
-      <label class="card"><input type="radio" name="camera" value="highAngleOverhead"><div class="name">高角度俯拍</div><div class="desc">俯視角 / 鏡頭高於頭部</div></label>
-      <label class="card"><input type="radio" name="camera" value="softFocusGlow"><div class="name">柔焦光感</div><div class="desc">柔和光暈棚拍感</div></label>
-      <label class="card"><input type="radio" name="camera" value="beautyCloseUp"><div class="name">近距離美妝感</div><div class="desc">美妝特寫構圖</div></label>
-      <label class="card"><input type="radio" name="camera" value="sideProfile"><div class="name">側臉輪廓感</div><div class="desc">側臉輪廓 / 下顎線清楚</div></label>
-      <label class="card"><input type="radio" name="camera" value="threeQuarterSide"><div class="name">斜側角度</div><div class="desc">約45度側拍 / 臉和身形都有立體感</div></label>
-      <label class="card"><input type="radio" name="camera" value="topBeauty"><div class="name">高角度近景</div><div class="desc">從上方靠近拍臉與肩頸</div></label>
-      <label class="card"><input type="radio" name="camera" value="distantHero"><div class="name">遠距主視覺</div><div class="desc">人物與背景完整，廣告版面感強</div></label>
+    <p class="hint">只有需要指定道具、禁用元素、文字留白或特殊細節時再填寫，避免與前面選項重複描述。</p>
+    <div class="form-grid">
+      <label class="field full">額外要求
+        <textarea id="extraNote" placeholder="例如：這套洋裝是主打，完整呈現裙擺與布料；人物手持透明香水瓶；不要額外道具；左側保留文案空間"></textarea>
+      </label>
     </div>
   </section>
 
@@ -893,16 +887,22 @@
     </div>
   </section>
 
-  <section class="section-extra">
+  <section class="section-camera">
     <div class="section-header">
-      <div class="section-label">08</div>
-      <div class="section-title">自訂要求</div>
+      <div class="section-label">11</div>
+      <div class="section-title">拍攝角度與鏡頭感</div>
     </div>
-    <p class="hint">只有需要指定道具、禁用元素、文字留白或特殊細節時再填寫，避免與前面選項重複描述。</p>
-    <div class="form-grid">
-      <label class="field full">額外要求
-        <textarea id="extraNote" placeholder="例如：這套洋裝是主打，完整呈現裙擺與布料；人物手持透明香水瓶；不要額外道具；左側保留文案空間"></textarea>
-      </label>
+    <p class="hint">只改觀看角度、景深和鏡頭氣勢；人物拍到哪裡請回到 02 的「人物入鏡比例」。</p>
+    <div class="grid grid-3" data-choice="camera">
+      <label class="card selected"><input type="radio" name="camera" value="eyeLevelCover" checked><div class="name">自然平視</div><div class="desc">標準封面視角(預設)</div></label>
+      <label class="card"><input type="radio" name="camera" value="lowAngleHero"><div class="name">低角度仰拍</div><div class="desc">英雄感視角 / 鏡頭低於腰部</div></label>
+      <label class="card"><input type="radio" name="camera" value="highAngleOverhead"><div class="name">高角度俯拍</div><div class="desc">俯視角 / 鏡頭高於頭部</div></label>
+      <label class="card"><input type="radio" name="camera" value="softFocusGlow"><div class="name">柔焦光感</div><div class="desc">柔和光暈棚拍感</div></label>
+      <label class="card"><input type="radio" name="camera" value="beautyCloseUp"><div class="name">近距離美妝感</div><div class="desc">美妝特寫構圖</div></label>
+      <label class="card"><input type="radio" name="camera" value="sideProfile"><div class="name">側臉輪廓感</div><div class="desc">側臉輪廓 / 下顎線清楚</div></label>
+      <label class="card"><input type="radio" name="camera" value="threeQuarterSide"><div class="name">斜側角度</div><div class="desc">約45度側拍 / 臉和身形都有立體感</div></label>
+      <label class="card"><input type="radio" name="camera" value="topBeauty"><div class="name">高角度近景</div><div class="desc">從上方靠近拍臉與肩頸</div></label>
+      <label class="card"><input type="radio" name="camera" value="distantHero"><div class="name">遠距主視覺</div><div class="desc">人物與背景完整，廣告版面感強</div></label>
     </div>
   </section>
 
@@ -1464,84 +1464,84 @@ const themeTemplates = {
     garment: 'silkColumnGown', material: 'diamondNecklaceAccent', style: 'galaCampaign',
     chestDetail: 'jeweledPortraitCollar', waistSideDetail: 'gemstoneWaistBelt', shoulderDetail: 'gemstoneShoulderClasp',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'center_still', camera: 'eyeLevelCover', lighting: 'jewelrySparkle', background: 'redCarpetEntrance', ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'threeQuarter', pose: 'center_still', camera: 'eyeLevelCover', lighting: 'jewelrySparkle', background: 'redCarpetEntrance', ratio: '4:5', intensity: 'balanced couture styling, controlled garment movement, refined jewelry presence'
   },
   crystalBallroomWaltz: {
     garment: 'offShoulderEveningGown', material: 'chandelierSparkle', style: 'eleganceMagazine',
     chestDetail: 'satinCowlNeckline', waistSideDetail: 'satinGatheredWaist', shoulderDetail: 'operaShoulderCape',
     composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
-    framing: 'threeQuarter', pose: 'one_hand_waist', camera: 'eyeLevelCover', lighting: 'soft', background: 'crystalChandelierHall', ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'threeQuarter', pose: 'one_hand_waist', camera: 'eyeLevelCover', lighting: 'soft', background: 'crystalChandelierHall', ratio: '4:5', intensity: 'balanced couture styling, controlled garment movement, refined jewelry presence'
   },
   champagneToastMoment: {
     garment: 'sequinEveningGown', material: 'champagneBubbleGlow', style: 'blackTieGlam',
     chestDetail: 'sculptedEveningCorset', waistSideDetail: 'sculpturalPeplumWaist', shoulderDetail: 'sculpturalOneShoulder',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'champagne_toast_glance', camera: 'eyeLevelCover', lighting: 'jewelrySparkle', background: 'grandBallroomInterior', ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'threeQuarter', pose: 'champagne_toast_glance', camera: 'eyeLevelCover', lighting: 'jewelrySparkle', background: 'grandBallroomInterior', ratio: '4:5', intensity: 'balanced couture styling, controlled garment movement, refined jewelry presence'
   },
   staircaseGrandEntrance: {
     garment: 'capeSleeveGown', material: 'featherBoaAccent', style: 'cinematicSoiree',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
-    framing: 'fullBody', pose: 'staircase_descent_pose', camera: 'lowAngleHero', lighting: 'hard', background: 'marbleStaircaseEntrance', ratio: '9:16', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'fullBody', pose: 'staircase_descent_pose', camera: 'lowAngleHero', lighting: 'hard', background: 'marbleStaircaseEntrance', ratio: '9:16', intensity: 'balanced couture styling, controlled garment movement, refined jewelry presence'
   },
   masqueradeBallMystery: {
     garment: 'beadedFringeGown', material: 'maskedBallAccent', style: 'cinematicSoiree',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'masquerade_mask_reveal', camera: 'threeQuarterSide', lighting: 'stage', background: 'operaHouseBoxSeat', ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'threeQuarter', pose: 'masquerade_mask_reveal', camera: 'threeQuarterSide', lighting: 'stage', background: 'operaHouseBoxSeat', ratio: '4:5', intensity: 'balanced couture styling, controlled garment movement, refined jewelry presence'
   },
   candlelitDinnerIntimacy: {
     garment: 'drapedSatinGown', material: 'candlelightFlicker', style: 'softCandlelitRomance',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'halfBody', pose: 'table_appreciation', camera: 'eyeLevelCover', lighting: 'warmWindowSoft', background: 'candlelitDiningHall', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    framing: 'halfBody', pose: 'table_appreciation', camera: 'eyeLevelCover', lighting: 'warmWindowSoft', background: 'candlelitDiningHall', ratio: '4:5', intensity: 'quiet luxury styling, restrained garment movement, delicate jewelry highlights'
   },
   tailoredPowerSuit: {
     garment: 'tailoredTuxedoSuit', material: 'statementEarringsAccent', style: 'cleanLuxury',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'hands_pockets', camera: 'eyeLevelCover', lighting: 'soft', background: 'luxuryHotelLobby', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    framing: 'threeQuarter', pose: 'hands_pockets', camera: 'eyeLevelCover', lighting: 'soft', background: 'luxuryHotelLobby', ratio: '4:5', intensity: 'quiet luxury styling, restrained garment movement, delicate jewelry highlights'
   },
   jewelryCloseUpGlam: {
     garment: 'jeweledCollarGown', material: 'diamondNecklaceAccent', style: 'beautyCampaign',
     composition: 'foreground material frame composition, selected material appears close to camera around the edges, subject remains clear in the center',
-    framing: 'bustPortrait', pose: 'diamond_necklace_touch', camera: 'beautyCloseUp', lighting: 'jewelrySparkle', background: 'blackGoldStudioBackdrop', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    framing: 'bustPortrait', pose: 'diamond_necklace_touch', camera: 'beautyCloseUp', lighting: 'jewelrySparkle', background: 'blackGoldStudioBackdrop', ratio: '4:5', intensity: 'quiet luxury styling, restrained garment movement, delicate jewelry highlights'
   },
   rooftopCocktailChic: {
     garment: 'widePantsJumpsuit', material: 'goldDustShimmer', style: 'eleganceMagazine',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'clutch_hip_hold', camera: 'eyeLevelCover', lighting: 'soft', background: 'rooftopCocktailParty', ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'threeQuarter', pose: 'clutch_hip_hold', camera: 'eyeLevelCover', lighting: 'soft', background: 'rooftopCocktailParty', ratio: '4:5', intensity: 'balanced couture styling, controlled garment movement, refined jewelry presence'
   },
   vintageHollywoodGlamour: {
     garment: 'structuredBustierGown', material: 'silkGloveDetail', style: 'vintageGlamour',
     composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
-    framing: 'threeQuarter', pose: 'vogue_hands', camera: 'sideProfile', lighting: 'darkGoldMood', background: 'operaHouseBoxSeat', ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'threeQuarter', pose: 'vogue_hands', camera: 'sideProfile', lighting: 'darkGoldMood', background: 'operaHouseBoxSeat', ratio: '4:5', intensity: 'balanced couture styling, controlled garment movement, refined jewelry presence'
   },
   moonlitTerraceRomance: {
     garment: 'illusionNecklineGown', material: 'moonlitTerraceGlow', style: 'softCandlelitRomance',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'lean', camera: 'eyeLevelCover', lighting: 'moonlightCandle', background: 'moonlitGardenTerrace', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    framing: 'threeQuarter', pose: 'lean', camera: 'eyeLevelCover', lighting: 'moonlightCandle', background: 'moonlitGardenTerrace', ratio: '4:5', intensity: 'quiet luxury styling, restrained garment movement, delicate jewelry highlights'
   },
   yachtEveningEscape: {
     garment: 'sheerCapeGown', material: 'warmAmberGlow', style: 'eleganceMagazine',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
-    framing: 'fullBody', pose: 'runway_stride', camera: 'threeQuarterSide', lighting: 'soft', background: 'privateYachtDeck', ratio: '3:4', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'fullBody', pose: 'runway_stride', camera: 'threeQuarterSide', lighting: 'soft', background: 'privateYachtDeck', ratio: '3:4', intensity: 'balanced couture styling, controlled garment movement, refined jewelry presence'
   },
   cityNightPenthouseGlam: {
     garment: 'metallicLameGown', material: 'sequinShimmerTrail', style: 'blackTieGlam',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'profile_long_line', camera: 'sideProfile', lighting: 'darkGoldMood', background: 'cityNightSkylineWindow', ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'threeQuarter', pose: 'profile_long_line', camera: 'sideProfile', lighting: 'darkGoldMood', background: 'cityNightSkylineWindow', ratio: '4:5', intensity: 'balanced couture styling, controlled garment movement, refined jewelry presence'
   },
   galleryOpeningPoise: {
     garment: 'beltedBlazerDress', material: 'gemstoneBraceletStack', style: 'artGalleryPoise',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'adjust_earring', camera: 'eyeLevelCover', lighting: 'soft', background: 'artGalleryOpening', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    framing: 'threeQuarter', pose: 'adjust_earring', camera: 'eyeLevelCover', lighting: 'soft', background: 'artGalleryOpening', ratio: '4:5', intensity: 'quiet luxury styling, restrained garment movement, delicate jewelry highlights'
   },
   corsetBallgownFantasy: {
     garment: 'corsetBallgown', material: 'chandelierSparkle', style: 'cinematicSoiree',
     composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
-    framing: 'fullBody', pose: 'center_still', camera: 'lowAngleHero', lighting: 'stage', background: 'grandBallroomInterior', ratio: '9:16', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'fullBody', pose: 'center_still', camera: 'lowAngleHero', lighting: 'stage', background: 'grandBallroomInterior', ratio: '9:16', intensity: 'balanced couture styling, controlled garment movement, refined jewelry presence'
   },
   limousineNightArrival: {
     garment: 'embellishedCapeGown', material: 'redCarpetFlashHighlight', style: 'galaCampaign',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
-    framing: 'threeQuarter', pose: 'glove_pull', camera: 'threeQuarterSide', lighting: 'hard', background: 'limousineInteriorNight', ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'threeQuarter', pose: 'glove_pull', camera: 'threeQuarterSide', lighting: 'hard', background: 'limousineInteriorNight', ratio: '4:5', intensity: 'balanced couture styling, controlled garment movement, refined jewelry presence'
   }
 };
 

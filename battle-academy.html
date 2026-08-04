@@ -486,21 +486,6 @@
     </div>
   </section>
 
-  <section class="section-body">
-    <div class="section-header">
-      <div class="section-label">11</div>
-      <div class="section-title">身形輪廓</div>
-    </div>
-    <p class="hint">單選，控制人物實際比例與腰線。選「原圖自然比例」時，會以參考照身形為主要依據；後面的「腰線輪廓」是服裝剪裁效果，不會改變這裡設定的身形。</p>
-    <div class="grid grid-3" data-choice="bodyShape">
-      <label class="card selected"><input type="radio" name="bodyShape" value="original" checked><div class="name">原圖自然比例</div><div class="desc">以參考照身形為主</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="slight_waist"><div class="name">輕微纖腰</div><div class="desc">自然修飾腰線</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="curvy_waist"><div class="name">豐滿纖腰</div><div class="desc">明顯胸腰臀曲線</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="fashion_tall"><div class="name">高挑時裝比例</div><div class="desc">修長高級模特感</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="korean_idol"><div class="name">韓系偶像比例</div><div class="desc">修長腿線、俐落肩頸、舞台鏡頭平衡感</div></label>
-    </div>
-  </section>
-
   <section class="section-school">
     <div class="section-header">
       <div class="section-label">03</div>
@@ -660,9 +645,9 @@
       </label>
       <label class="field">效果呈現強度
         <select id="intensity">
-          <option value="balanced material effects, elegant and luxurious">平衡高級</option>
-          <option value="massive explosive material splash, high speed frozen motion">強烈爆發</option>
-          <option value="subtle floating particles, refined couture details">細緻精修</option>
+          <option value="balanced academy combat readiness, controlled uniform movement, polished action portrait energy">平衡高級</option>
+          <option value="dynamic combat moment, sweeping uniform and hair movement, high-energy battle key visual">強烈爆發</option>
+          <option value="disciplined pre-battle stillness, restrained uniform details, focused academy portrait">細緻精修</option>
         </select>
       </label>
     </div>
@@ -800,6 +785,21 @@
     </div>
   </section>
 
+  <section class="section-body">
+    <div class="section-header">
+      <div class="section-label">11</div>
+      <div class="section-title">身形輪廓</div>
+    </div>
+    <p class="hint">單選，控制人物實際比例與腰線。選「原圖自然比例」時，會以參考照身形為主要依據；後面的「腰線輪廓」是服裝剪裁效果，不會改變這裡設定的身形。</p>
+    <div class="grid grid-3" data-choice="bodyShape">
+      <label class="card selected"><input type="radio" name="bodyShape" value="original" checked><div class="name">原圖自然比例</div><div class="desc">以參考照身形為主</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="slight_waist"><div class="name">輕微纖腰</div><div class="desc">自然修飾腰線</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="curvy_waist"><div class="name">豐滿纖腰</div><div class="desc">明顯胸腰臀曲線</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="fashion_tall"><div class="name">高挑時裝比例</div><div class="desc">修長高級模特感</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="korean_idol"><div class="name">韓系偶像比例</div><div class="desc">修長腿線、俐落肩頸、舞台鏡頭平衡感</div></label>
+    </div>
+  </section>
+
   <section class="section-pose">
     <div class="section-header">
       <div class="section-label">12</div>
@@ -918,22 +918,16 @@
     </div>
   </section>
 
-  <section class="section-camera">
+  <section class="section-extra">
     <div class="section-header">
-      <div class="section-label">16</div>
-      <div class="section-title">拍攝角度與鏡頭感</div>
+      <div class="section-label">13</div>
+      <div class="section-title">自訂要求</div>
     </div>
-    <p class="hint">只改觀看角度、景深和鏡頭氣勢；人物拍到哪裡請回到 02 的「人物入鏡比例」。</p>
-    <div class="grid grid-3" data-choice="camera">
-      <label class="card selected"><input type="radio" name="camera" value="eyeLevelCover" checked><div class="name">自然平視</div><div class="desc">標準封面視角(預設)</div></label>
-      <label class="card"><input type="radio" name="camera" value="lowAngleHero"><div class="name">低角度仰拍</div><div class="desc">英雄感視角 / 鏡頭低於腰部</div></label>
-      <label class="card"><input type="radio" name="camera" value="highAngleOverhead"><div class="name">高角度俯拍</div><div class="desc">俯視角 / 鏡頭高於頭部</div></label>
-      <label class="card"><input type="radio" name="camera" value="softFocusGlow"><div class="name">柔焦光感</div><div class="desc">柔和光暈棚拍感</div></label>
-      <label class="card"><input type="radio" name="camera" value="beautyCloseUp"><div class="name">近距離美妝感</div><div class="desc">美妝特寫構圖</div></label>
-      <label class="card"><input type="radio" name="camera" value="sideProfile"><div class="name">側臉輪廓感</div><div class="desc">側臉輪廓 / 下顎線清楚</div></label>
-      <label class="card"><input type="radio" name="camera" value="threeQuarterSide"><div class="name">斜側角度</div><div class="desc">約45度側拍 / 臉和身形都有立體感</div></label>
-      <label class="card"><input type="radio" name="camera" value="topBeauty"><div class="name">高角度近景</div><div class="desc">從上方靠近拍臉與肩頸</div></label>
-      <label class="card"><input type="radio" name="camera" value="distantHero"><div class="name">遠距主視覺</div><div class="desc">人物與背景完整，廣告版面感強</div></label>
+    <p class="hint">只有需要指定道具、禁用元素、文字留白或特殊細節時再填寫，避免與前面選項重複描述。</p>
+    <div class="form-grid">
+      <label class="field full">額外要求
+        <textarea id="extraNote" placeholder="例如：這套制服是主打，完整呈現裙擺與剪裁；人物手持透明香水瓶；不要額外道具；左側保留文案空間"></textarea>
+      </label>
     </div>
   </section>
 
@@ -1021,16 +1015,22 @@
     </div>
   </section>
 
-  <section class="section-extra">
+  <section class="section-camera">
     <div class="section-header">
-      <div class="section-label">13</div>
-      <div class="section-title">自訂要求</div>
+      <div class="section-label">16</div>
+      <div class="section-title">拍攝角度與鏡頭感</div>
     </div>
-    <p class="hint">只有需要指定道具、禁用元素、文字留白或特殊細節時再填寫，避免與前面選項重複描述。</p>
-    <div class="form-grid">
-      <label class="field full">額外要求
-        <textarea id="extraNote" placeholder="例如：這套制服是主打，完整呈現裙擺與剪裁；人物手持透明香水瓶；不要額外道具；左側保留文案空間"></textarea>
-      </label>
+    <p class="hint">只改觀看角度、景深和鏡頭氣勢；人物拍到哪裡請回到 02 的「人物入鏡比例」。</p>
+    <div class="grid grid-3" data-choice="camera">
+      <label class="card selected"><input type="radio" name="camera" value="eyeLevelCover" checked><div class="name">自然平視</div><div class="desc">標準封面視角(預設)</div></label>
+      <label class="card"><input type="radio" name="camera" value="lowAngleHero"><div class="name">低角度仰拍</div><div class="desc">英雄感視角 / 鏡頭低於腰部</div></label>
+      <label class="card"><input type="radio" name="camera" value="highAngleOverhead"><div class="name">高角度俯拍</div><div class="desc">俯視角 / 鏡頭高於頭部</div></label>
+      <label class="card"><input type="radio" name="camera" value="softFocusGlow"><div class="name">柔焦光感</div><div class="desc">柔和光暈棚拍感</div></label>
+      <label class="card"><input type="radio" name="camera" value="beautyCloseUp"><div class="name">近距離美妝感</div><div class="desc">美妝特寫構圖</div></label>
+      <label class="card"><input type="radio" name="camera" value="sideProfile"><div class="name">側臉輪廓感</div><div class="desc">側臉輪廓 / 下顎線清楚</div></label>
+      <label class="card"><input type="radio" name="camera" value="threeQuarterSide"><div class="name">斜側角度</div><div class="desc">約45度側拍 / 臉和身形都有立體感</div></label>
+      <label class="card"><input type="radio" name="camera" value="topBeauty"><div class="name">高角度近景</div><div class="desc">從上方靠近拍臉與肩頸</div></label>
+      <label class="card"><input type="radio" name="camera" value="distantHero"><div class="name">遠距主視覺</div><div class="desc">人物與背景完整，廣告版面感強</div></label>
     </div>
   </section>
 
@@ -1608,147 +1608,147 @@ const themeTemplates = {
     chestDetail: 'academyTieModule', waistSideDetail: 'doubleUniformWaistband', shoulderDetail: 'academyEpaulettes',
     accessory: 'swordSheathAccent', fantasyDetail: 'bladeEnergyTrailStreak', armorMode: 'off', emblemFocus: 'chestBadge',
     style: 'tacticalCampaign', composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout', framing: 'fullBody', pose: 'sword_draw_pose', camera: 'lowAngleHero',
-    lighting: 'hard', background: 'schoolCourtyardSakuraBattle', ratio: '9:16', intensity: 'balanced material effects, elegant and luxurious'
+    lighting: 'hard', background: 'schoolCourtyardSakuraBattle', ratio: '9:16', intensity: 'balanced academy combat readiness, controlled uniform movement, polished action portrait energy'
   },
   shirasagiFrostFencerDuel: {
     school: 'shirasagiAcademy', upperBody: 'sailorBlouseTop', waist: 'fittedWaist', lower: 'kneeLengthPleatedSkirt', uniformType: 'standard',
     chestDetail: 'highCollarReinforcedPanel', waistSideDetail: 'equipmentWaistClasps', shoulderDetail: 'lightProtectiveShoulder',
     accessory: 'swordSheathAccent', fantasyDetail: 'spiritPowerAuraGlow', armorMode: 'off', emblemFocus: 'collarPin',
     style: 'cinematicMission', composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner', framing: 'fullBody', pose: 'mid_air_slash', camera: 'lowAngleHero',
-    lighting: 'cold', background: 'schoolRooftopBattle', ratio: '9:16', intensity: 'balanced material effects, elegant and luxurious'
+    lighting: 'cold', background: 'schoolRooftopBattle', ratio: '9:16', intensity: 'balanced academy combat readiness, controlled uniform movement, polished action portrait energy'
   },
   suzakuCrimsonChargeGate: {
     school: 'suzakuAcademy', upperBody: 'standCollarGakuranJacket', waist: 'wideAcademyWaistband', lower: 'hakamaWideTrousers', uniformType: 'standard',
     chestDetail: 'insigniaChestPanel', waistSideDetail: 'armoredSkirtPanels', shoulderDetail: 'commanderMantle',
     accessory: 'energyBladePropAccent', fantasyDetail: 'dustImpactBurst', armorMode: 'light', emblemFocus: 'beltBuckle',
     style: 'darkTacticalMood', composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner', framing: 'fullBody', pose: 'running_charge', camera: 'threeQuarterSide',
-    lighting: 'hard', background: 'schoolGateSiege', ratio: '3:4', intensity: 'balanced material effects, elegant and luxurious'
+    lighting: 'hard', background: 'schoolGateSiege', ratio: '3:4', intensity: 'balanced academy combat readiness, controlled uniform movement, polished action portrait energy'
   },
   seiranWindsweptRooftop: {
     school: 'seiranAcademy', upperBody: 'academyBlazer', waist: 'naturalWaist', lower: 'aLineShortSkirt', uniformType: 'standard',
     accessory: 'hairRibbonAccent', fantasyDetail: 'windTurbulenceMotion', armorMode: 'off', emblemFocus: 'auto',
     style: 'cleanFunctional', composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout', framing: 'threeQuarter', pose: 'cape_wind', camera: 'eyeLevelCover',
-    lighting: 'soft', background: 'academyRooftopDaylight', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    lighting: 'soft', background: 'academyRooftopDaylight', ratio: '4:5', intensity: 'disciplined pre-battle stillness, restrained uniform details, focused academy portrait'
   },
   tsukikageMoonSealAwaken: {
     school: 'tsukikageAcademy', upperBody: 'modernKimonoSchoolTop', waist: 'decorativeCordWaist', lower: 'layeredJapaneseSkirt', uniformType: 'ceremonial',
     accessory: 'braceletCharmAccent', fantasyDetail: 'glowingSealCircle', armorMode: 'off', emblemFocus: 'hairAccessory',
     style: 'gameKeyVisual', composition: 'foreground material frame composition, selected material appears close to camera around the edges, subject remains clear in the center', framing: 'threeQuarter', pose: 'spell_casting', camera: 'lowAngleHero',
-    lighting: 'neonPurpleMoonlit', background: 'sealCircleAbstractBackdrop', ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
+    lighting: 'neonPurpleMoonlit', background: 'sealCircleAbstractBackdrop', ratio: '4:5', intensity: 'balanced academy combat readiness, controlled uniform movement, polished action portrait energy'
   },
   kaguraCeremonialBellDance: {
     school: 'kaguraAcademy', upperBody: 'ceremonialAcademyTop', waist: 'ceremonialSash', lower: 'longPleatedSkirt', uniformType: 'ceremonial',
     accessory: 'schoolEmblemBadgeAccent', fantasyDetail: 'schoolCrestGlowLine', armorMode: 'off', emblemFocus: 'tieEmbroidery',
     style: 'academyEditorial', composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout', framing: 'fullBody', pose: 'floating_ascension', camera: 'eyeLevelCover',
-    lighting: 'palaceNightWarm', background: 'sakuraPetalStudioBackdrop', ratio: '9:16', intensity: 'balanced material effects, elegant and luxurious'
+    lighting: 'palaceNightWarm', background: 'sakuraPetalStudioBackdrop', ratio: '9:16', intensity: 'balanced academy combat readiness, controlled uniform movement, polished action portrait energy'
   },
   sakuraGraduationFinale: {
     school: 'sakuraAcademy', upperBody: 'academyBlazer', waist: 'highWaistTailoring', lower: 'midiPleatedSkirt', uniformType: 'ceremonial',
     accessory: 'hairRibbonAccent', fantasyDetail: 'duskRooftopBattleGlow', armorMode: 'off', emblemFocus: 'cuffEmbroidery',
     style: 'squadPosterCampaign', composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout', framing: 'fullBody', pose: 'salute_ready_stance', camera: 'eyeLevelCover',
-    lighting: 'soft', background: 'academyRooftopDaylight', ratio: '9:16', intensity: 'balanced material effects, elegant and luxurious'
+    lighting: 'soft', background: 'academyRooftopDaylight', ratio: '9:16', intensity: 'balanced academy combat readiness, controlled uniform movement, polished action portrait energy'
   },
   shirasagiStudentCouncilAuthority: {
     school: 'shirasagiAcademy', upperBody: 'tailoredSchoolJacket', waist: 'doubleBeltDetail', lower: 'midiPleatedSkirt', uniformType: 'studentCouncil',
     accessory: 'schoolEmblemBadgeAccent', fantasyDetail: 'schoolCrestGlowLine', armorMode: 'light', emblemFocus: 'beltBuckle',
     style: 'darkTacticalMood', composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout', framing: 'fullBody', pose: 'dual_spirit_guardian_throne', camera: 'lowAngleHero',
-    lighting: 'hard', background: 'sealCircleAbstractBackdrop', ratio: '9:16', intensity: 'balanced material effects, elegant and luxurious'
+    lighting: 'hard', background: 'sealCircleAbstractBackdrop', ratio: '9:16', intensity: 'balanced academy combat readiness, controlled uniform movement, polished action portrait energy'
   },
   suzakuTrainingDojoFocus: {
     school: 'suzakuAcademy', upperBody: 'formalAcademyShirt', waist: 'naturalWaist', lower: 'culotteSkirt', uniformType: 'clubActivity',
     accessory: 'swordSheathAccent', fantasyDetail: 'windTurbulenceMotion', armorMode: 'off', emblemFocus: 'auto',
     style: 'trainingDocumentary', composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout', framing: 'threeQuarter', pose: 'gear_check_moment', camera: 'eyeLevelCover',
-    lighting: 'soft', background: 'kendoDojoInterior', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    lighting: 'soft', background: 'kendoDojoInterior', ratio: '4:5', intensity: 'disciplined pre-battle stillness, restrained uniform details, focused academy portrait'
   },
   seiranEnergyBurstSky: {
     school: 'seiranAcademy', upperBody: 'croppedAcademyBlazer', waist: 'fittedWaist', lower: 'aLineShortSkirt', uniformType: 'standard',
     accessory: 'energyBladePropAccent', fantasyDetail: 'spiritPowerAuraGlow', armorMode: 'off', emblemFocus: 'collarPin',
     style: 'gameKeyVisual', composition: 'foreground material frame composition, selected material appears close to camera around the edges, subject remains clear in the center', framing: 'threeQuarter', pose: 'energy_burst', camera: 'lowAngleHero',
-    lighting: 'hard', background: 'energyFieldAbstractGlow', ratio: '9:16', intensity: 'balanced material effects, elegant and luxurious'
+    lighting: 'hard', background: 'energyFieldAbstractGlow', ratio: '9:16', intensity: 'balanced academy combat readiness, controlled uniform movement, polished action portrait energy'
   },
   tsukikageBattleAftermath: {
     school: 'tsukikageAcademy', upperBody: 'sailorBlouseTop', waist: 'wideAcademyWaistband', lower: 'asymmetricSkirt', uniformType: 'standard',
     accessory: 'hairRibbonAccent', fantasyDetail: 'tornFabricBattleDamage', armorMode: 'off', emblemFocus: 'auto',
     style: 'darkTacticalMood', composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout', framing: 'halfBody', pose: 'hand_chest', camera: 'eyeLevelCover',
-    lighting: 'darkGoldMood', background: 'schoolLibraryBattleAftermath', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    lighting: 'darkGoldMood', background: 'schoolLibraryBattleAftermath', ratio: '4:5', intensity: 'disciplined pre-battle stillness, restrained uniform details, focused academy portrait'
   },
   kaguraShrineGuardianStance: {
     school: 'kaguraAcademy', upperBody: 'crossoverCollarTop', waist: 'obiInspiredWaistband', lower: 'modernHakama', uniformType: 'ceremonial',
     accessory: 'swordSheathAccent', fantasyDetail: 'bladeEnergyTrailStreak', armorMode: 'off', emblemFocus: 'weaponSheathOrnament',
     style: 'cinematicMission', composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout', framing: 'threeQuarter', pose: 'tactical_scan_gesture', camera: 'threeQuarterSide',
-    lighting: 'foxfireGold', background: 'academyCourtyardSunset', ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
+    lighting: 'foxfireGold', background: 'academyCourtyardSunset', ratio: '4:5', intensity: 'balanced academy combat readiness, controlled uniform movement, polished action portrait energy'
   },
   sakuraMidnightEnergyRuins: {
     school: 'sakuraAcademy', upperBody: 'croppedAcademyBlazer', waist: 'narrowBelt', lower: 'midiPleatedSkirt', uniformType: 'standard',
     accessory: 'energyBladePropAccent', fantasyDetail: 'sparkImpactFlare', armorMode: 'full', emblemFocus: 'beltBuckle',
     style: 'darkTacticalMood', composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner', framing: 'fullBody', pose: 'lunge', camera: 'threeQuarterSide',
-    lighting: 'hard', background: 'urbanRuinsMission', ratio: '3:4', intensity: 'massive explosive material splash, high speed frozen motion'
+    lighting: 'hard', background: 'urbanRuinsMission', ratio: '3:4', intensity: 'dynamic combat moment, sweeping uniform and hair movement, high-energy battle key visual'
   },
   shirasagiCloakedSpellcaster: {
     school: 'shirasagiAcademy', upperBody: 'modernKimonoSchoolTop', waist: 'decorativeCordWaist', lower: 'layeredJapaneseSkirt', uniformType: 'ceremonial',
     accessory: 'braceletCharmAccent', fantasyDetail: 'glowingSealCircle', armorMode: 'off', emblemFocus: 'hairAccessory',
     style: 'gameKeyVisual', composition: 'foreground material frame composition, selected material appears close to camera around the edges, subject remains clear in the center', framing: 'threeQuarter', pose: 'spell_casting', camera: 'lowAngleHero',
-    lighting: 'moonGlassSparkle', background: 'spiritEnergyVoidBackdrop', ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
+    lighting: 'moonGlassSparkle', background: 'spiritEnergyVoidBackdrop', ratio: '4:5', intensity: 'balanced academy combat readiness, controlled uniform movement, polished action portrait energy'
   },
   suzakuSquadPosterRally: {
     school: 'suzakuAcademy', upperBody: 'standCollarGakuranJacket', waist: 'highWaistTailoring', lower: 'asymmetricSkirt', uniformType: 'standard',
     accessory: 'schoolEmblemBadgeAccent', fantasyDetail: 'gymnasiumFloodLight', armorMode: 'light', emblemFocus: 'chestBadge',
     style: 'squadPosterCampaign', composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout', framing: 'fullBody', pose: 'center_still', camera: 'lowAngleHero',
-    lighting: 'hard', background: 'gymnasiumBattleArena', ratio: '9:16', intensity: 'balanced material effects, elegant and luxurious'
+    lighting: 'hard', background: 'gymnasiumBattleArena', ratio: '9:16', intensity: 'balanced academy combat readiness, controlled uniform movement, polished action portrait energy'
   },
   kaguraSakuraPetalStudio: {
     school: 'kaguraAcademy', upperBody: 'sailorBlouseTop', waist: 'obiInspiredWaistband', lower: 'modernHakama', uniformType: 'standard',
     accessory: 'hairRibbonAccent', fantasyDetail: 'duskMissionAfterglow', armorMode: 'off', emblemFocus: 'auto',
     style: 'academyEditorial', composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout', framing: 'threeQuarter', pose: 'hair_flip', camera: 'eyeLevelCover',
-    lighting: 'soft', background: 'sakuraPetalStudioBackdrop', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    lighting: 'soft', background: 'sakuraPetalStudioBackdrop', ratio: '4:5', intensity: 'disciplined pre-battle stillness, restrained uniform details, focused academy portrait'
   },
   suzakuSailorTalismanKneel: {
     school: 'suzakuAcademy', upperBody: 'sailorSheerEmbroideredTop', waist: 'cutoutWaistWrap', lower: 'highSlitLongSkirt', uniformType: 'ceremonial',
     accessory: 'talismanChargeAccent', fantasyDetail: 'glowingSealCircle', armorMode: 'light', emblemFocus: 'hairAccessory',
     style: 'cinematicMission', composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout', framing: 'fullBody', pose: 'kneel', camera: 'lowAngleHero',
-    lighting: 'darkGoldMood', background: 'schoolGateSiege', ratio: '9:16', intensity: 'balanced material effects, elegant and luxurious'
+    lighting: 'darkGoldMood', background: 'schoolGateSiege', ratio: '9:16', intensity: 'balanced academy combat readiness, controlled uniform movement, polished action portrait energy'
   },
   kaguraKimonoTalismanRite: {
     school: 'kaguraAcademy', upperBody: 'kimonoSheerEmbroideredTop', waist: 'obiInspiredWaistband', lower: 'highSlitLongSkirt', uniformType: 'ceremonial',
     accessory: 'talismanChargeAccent', fantasyDetail: 'spiritPowerAuraGlow', armorMode: 'light', emblemFocus: 'hairAccessory',
     style: 'academyEditorial', composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout', framing: 'fullBody', pose: 'side_kneel', camera: 'eyeLevelCover',
-    lighting: 'foxfireGold', background: 'academyCourtyardSunset', ratio: '9:16', intensity: 'balanced material effects, elegant and luxurious'
+    lighting: 'foxfireGold', background: 'academyCourtyardSunset', ratio: '9:16', intensity: 'balanced academy combat readiness, controlled uniform movement, polished action portrait energy'
   },
   sakuraGakuranLayeredBloom: {
     school: 'sakuraAcademy', upperBody: 'gakuranOpenSheerLayered', waist: 'highWaistTailoring', lower: 'highSlitLongSkirt', uniformType: 'standard',
     accessory: 'swordSheathAccent', fantasyDetail: 'bladeEnergyTrailStreak', armorMode: 'light', emblemFocus: 'chestBadge',
     style: 'tacticalCampaign', composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner', framing: 'fullBody', pose: 'sword_draw_pose', camera: 'lowAngleHero',
-    lighting: 'hard', background: 'schoolCourtyardSakuraBattle', ratio: '9:16', intensity: 'balanced material effects, elegant and luxurious'
+    lighting: 'hard', background: 'schoolCourtyardSakuraBattle', ratio: '9:16', intensity: 'balanced academy combat readiness, controlled uniform movement, polished action portrait energy'
   },
   seiranBlazerLayeredPoise: {
     school: 'seiranAcademy', upperBody: 'blazerOpenSheerLayered', waist: 'narrowBelt', lower: 'highSlitLongSkirt', uniformType: 'standard',
     accessory: 'hairRibbonAccent', fantasyDetail: 'windTurbulenceMotion', armorMode: 'light', emblemFocus: 'collarPin',
     style: 'academyEditorial', composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout', framing: 'threeQuarter', pose: 'one_hand_waist', camera: 'eyeLevelCover',
-    lighting: 'soft', background: 'academyRooftopDaylight', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    lighting: 'soft', background: 'academyRooftopDaylight', ratio: '4:5', intensity: 'disciplined pre-battle stillness, restrained uniform details, focused academy portrait'
   },
   shirasagiShirtLayeredElegance: {
     school: 'shirasagiAcademy', upperBody: 'shirtOpenSheerLayered', waist: 'decorativeCordWaist', lower: 'highSlitLongSkirt', uniformType: 'standard',
     accessory: 'braceletCharmAccent', fantasyDetail: 'spiritSensorOverlay', armorMode: 'light', emblemFocus: 'cuffEmbroidery',
     style: 'cleanFunctional', composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout', framing: 'halfBody', pose: 'crossed_leg_stand', camera: 'threeQuarterSide',
-    lighting: 'moonGlassSparkle', background: 'academyCorridorModern', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    lighting: 'moonGlassSparkle', background: 'academyCorridorModern', ratio: '4:5', intensity: 'disciplined pre-battle stillness, restrained uniform details, focused academy portrait'
   },
   seiryuDragonWindDojo: {
     school: 'seiryuAcademy', upperBody: 'academyBlazer', waist: 'fittedWaist', lower: 'kneeLengthPleatedSkirt', uniformType: 'standard',
     accessory: 'swordSheathAccent', fantasyDetail: 'windTurbulenceMotion', armorMode: 'light', emblemFocus: 'chestBadge',
     style: 'cinematicMission', composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner', framing: 'fullBody', pose: 'sword_draw_pose', camera: 'lowAngleHero',
-    lighting: 'crystalDaylight', background: 'schoolRooftopBattle', ratio: '9:16', intensity: 'balanced material effects, elegant and luxurious'
+    lighting: 'crystalDaylight', background: 'schoolRooftopBattle', ratio: '9:16', intensity: 'balanced academy combat readiness, controlled uniform movement, polished action portrait energy'
   },
   byakkoTigerDojoFocus: {
     school: 'byakkoAcademy', upperBody: 'standCollarGakuranJacket', waist: 'highWaistTailoring', lower: 'hakamaWideTrousers', uniformType: 'clubActivity',
     waistSideDetail: 'verticalSlit', accessory: 'swordSheathAccent', fantasyDetail: 'sparkImpactFlare', armorMode: 'light', emblemFocus: 'beltBuckle',
     style: 'trainingDocumentary', composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout', framing: 'threeQuarter', pose: 'gear_check_moment', camera: 'eyeLevelCover',
-    lighting: 'hard', background: 'kendoDojoInterior', ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
+    lighting: 'hard', background: 'kendoDojoInterior', ratio: '4:5', intensity: 'balanced academy combat readiness, controlled uniform movement, polished action portrait energy'
   },
   genbuAncientGuardianThrone: {
     school: 'genbuAcademy', upperBody: 'modernKimonoSchoolTop', waist: 'obiInspiredWaistband', lower: 'longPleatedSkirt', uniformType: 'ceremonial',
     shoulderDetail: 'lacePanel', accessory: 'talismanChargeAccent', fantasyDetail: 'glowingSealCircle', armorMode: 'off', emblemFocus: 'hairAccessory',
     style: 'academyEditorial', composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout', framing: 'fullBody', pose: 'dual_spirit_guardian_throne', camera: 'lowAngleHero',
-    lighting: 'darkGoldMood', background: 'academyLibraryModern', ratio: '9:16', intensity: 'balanced material effects, elegant and luxurious'
+    lighting: 'darkGoldMood', background: 'academyLibraryModern', ratio: '9:16', intensity: 'balanced academy combat readiness, controlled uniform movement, polished action portrait energy'
   }
 };
 

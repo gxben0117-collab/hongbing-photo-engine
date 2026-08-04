@@ -479,21 +479,6 @@
     </div>
   </section>
 
-  <section class="section-body">
-    <div class="section-header">
-      <div class="section-label">06</div>
-      <div class="section-title">身形輪廓</div>
-    </div>
-    <p class="hint">單選，控制人物比例與腰線。選「原圖自然比例」時，會以參考照身形為主要依據。</p>
-    <div class="grid grid-3" data-choice="bodyShape">
-      <label class="card selected"><input type="radio" name="bodyShape" value="original" checked><div class="name">原圖自然比例</div><div class="desc">以參考照身形為主</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="slight_waist"><div class="name">輕微纖腰</div><div class="desc">自然修飾腰線</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="curvy_waist"><div class="name">豐滿纖腰</div><div class="desc">明顯胸腰臀曲線</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="fashion_tall"><div class="name">高挑時裝比例</div><div class="desc">修長高級模特感</div></label>
-      <label class="card"><input type="radio" name="bodyShape" value="korean_idol"><div class="name">韓系偶像比例</div><div class="desc">修長腿線、俐落肩頸、舞台鏡頭平衡感</div></label>
-    </div>
-  </section>
-
   <section class="section-garment">
     <div class="section-header">
       <div class="section-label">03</div>
@@ -604,9 +589,9 @@
       </label>
       <label class="field">材質呈現強度
         <select id="intensity">
-          <option value="balanced material effects, elegant and luxurious">平衡高級</option>
-          <option value="massive explosive material splash, high speed frozen motion">強烈爆發</option>
-          <option value="subtle floating particles, refined couture details">細緻精修</option>
+          <option value="balanced xianxia styling, elegant robe and ribbon movement, refined spiritual atmosphere">平衡高級</option>
+          <option value="dynamic robe and ribbon movement, concentrated spiritual energy, cinematic xianxia action">強烈爆發</option>
+          <option value="restrained spiritual atmosphere, delicate flowing fabric, quiet immortal elegance">細緻精修</option>
         </select>
       </label>
     </div>
@@ -746,6 +731,21 @@
     </div>
   </section>
 
+  <section class="section-body">
+    <div class="section-header">
+      <div class="section-label">06</div>
+      <div class="section-title">身形輪廓</div>
+    </div>
+    <p class="hint">單選，控制人物比例與腰線。選「原圖自然比例」時，會以參考照身形為主要依據。</p>
+    <div class="grid grid-3" data-choice="bodyShape">
+      <label class="card selected"><input type="radio" name="bodyShape" value="original" checked><div class="name">原圖自然比例</div><div class="desc">以參考照身形為主</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="slight_waist"><div class="name">輕微纖腰</div><div class="desc">自然修飾腰線</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="curvy_waist"><div class="name">豐滿纖腰</div><div class="desc">明顯胸腰臀曲線</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="fashion_tall"><div class="name">高挑時裝比例</div><div class="desc">修長高級模特感</div></label>
+      <label class="card"><input type="radio" name="bodyShape" value="korean_idol"><div class="name">韓系偶像比例</div><div class="desc">修長腿線、俐落肩頸、舞台鏡頭平衡感</div></label>
+    </div>
+  </section>
+
   <section class="section-pose">
     <div class="section-header">
       <div class="section-label">07</div>
@@ -816,22 +816,16 @@
     </div>
   </section>
 
-  <section class="section-camera">
+  <section class="section-extra">
     <div class="section-header">
-      <div class="section-label">11</div>
-      <div class="section-title">拍攝角度與鏡頭感</div>
+      <div class="section-label">08</div>
+      <div class="section-title">自訂要求</div>
     </div>
-    <p class="hint">只改觀看角度、景深和鏡頭氣勢；人物拍到哪裡請回到 02 的「人物入鏡比例」。</p>
-    <div class="grid grid-3" data-choice="camera">
-      <label class="card selected"><input type="radio" name="camera" value="eyeLevelCover" checked><div class="name">自然平視</div><div class="desc">標準封面視角(預設)</div></label>
-      <label class="card"><input type="radio" name="camera" value="lowAngleHero"><div class="name">低角度仰拍</div><div class="desc">英雄感視角 / 鏡頭低於腰部</div></label>
-      <label class="card"><input type="radio" name="camera" value="highAngleOverhead"><div class="name">高角度俯拍</div><div class="desc">俯視角 / 鏡頭高於頭部</div></label>
-      <label class="card"><input type="radio" name="camera" value="softFocusGlow"><div class="name">柔焦光感</div><div class="desc">柔和光暈棚拍感</div></label>
-      <label class="card"><input type="radio" name="camera" value="beautyCloseUp"><div class="name">近距離美妝感</div><div class="desc">美妝特寫構圖</div></label>
-      <label class="card"><input type="radio" name="camera" value="sideProfile"><div class="name">側臉輪廓感</div><div class="desc">側臉輪廓 / 下顎線清楚</div></label>
-      <label class="card"><input type="radio" name="camera" value="threeQuarterSide"><div class="name">斜側角度</div><div class="desc">約45度側拍 / 臉和身形都有立體感</div></label>
-      <label class="card"><input type="radio" name="camera" value="topBeauty"><div class="name">高角度近景</div><div class="desc">從上方靠近拍臉與肩頸</div></label>
-      <label class="card"><input type="radio" name="camera" value="distantHero"><div class="name">遠距主視覺</div><div class="desc">人物與背景完整，廣告版面感強</div></label>
+    <p class="hint">只有需要指定道具、禁用元素、文字留白或特殊細節時再填寫，避免與前面選項重複描述。</p>
+    <div class="form-grid">
+      <label class="field full">額外要求
+        <textarea id="extraNote" placeholder="例如：這套仙裙是主打，完整呈現寬袖與裙擺；人物手持仙劍；不要額外靈獸；左側保留文案空間"></textarea>
+      </label>
     </div>
   </section>
 
@@ -967,16 +961,22 @@
     </div>
   </section>
 
-  <section class="section-extra">
+  <section class="section-camera">
     <div class="section-header">
-      <div class="section-label">08</div>
-      <div class="section-title">自訂要求</div>
+      <div class="section-label">11</div>
+      <div class="section-title">拍攝角度與鏡頭感</div>
     </div>
-    <p class="hint">只有需要指定道具、禁用元素、文字留白或特殊細節時再填寫，避免與前面選項重複描述。</p>
-    <div class="form-grid">
-      <label class="field full">額外要求
-        <textarea id="extraNote" placeholder="例如：這套仙裙是主打，完整呈現寬袖與裙擺；人物手持仙劍；不要額外靈獸；左側保留文案空間"></textarea>
-      </label>
+    <p class="hint">只改觀看角度、景深和鏡頭氣勢；人物拍到哪裡請回到 02 的「人物入鏡比例」。</p>
+    <div class="grid grid-3" data-choice="camera">
+      <label class="card selected"><input type="radio" name="camera" value="eyeLevelCover" checked><div class="name">自然平視</div><div class="desc">標準封面視角(預設)</div></label>
+      <label class="card"><input type="radio" name="camera" value="lowAngleHero"><div class="name">低角度仰拍</div><div class="desc">英雄感視角 / 鏡頭低於腰部</div></label>
+      <label class="card"><input type="radio" name="camera" value="highAngleOverhead"><div class="name">高角度俯拍</div><div class="desc">俯視角 / 鏡頭高於頭部</div></label>
+      <label class="card"><input type="radio" name="camera" value="softFocusGlow"><div class="name">柔焦光感</div><div class="desc">柔和光暈棚拍感</div></label>
+      <label class="card"><input type="radio" name="camera" value="beautyCloseUp"><div class="name">近距離美妝感</div><div class="desc">美妝特寫構圖</div></label>
+      <label class="card"><input type="radio" name="camera" value="sideProfile"><div class="name">側臉輪廓感</div><div class="desc">側臉輪廓 / 下顎線清楚</div></label>
+      <label class="card"><input type="radio" name="camera" value="threeQuarterSide"><div class="name">斜側角度</div><div class="desc">約45度側拍 / 臉和身形都有立體感</div></label>
+      <label class="card"><input type="radio" name="camera" value="topBeauty"><div class="name">高角度近景</div><div class="desc">從上方靠近拍臉與肩頸</div></label>
+      <label class="card"><input type="radio" name="camera" value="distantHero"><div class="name">遠距主視覺</div><div class="desc">人物與背景完整，廣告版面感強</div></label>
     </div>
   </section>
 
@@ -1644,105 +1644,105 @@ const themeTemplates = {
     chestDetail: 'cloudCrossCollarPanels', waistSideDetail: 'cloudEmbroideredSash', shoulderDetail: 'cloudShoulderOverlayX',
     composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
     framing: 'threeQuarter', pose: 'swordFlightSoar', camera: 'lowAngleHero', lighting: 'halo', background: 'celestialCloudTerrace',
-    ratio: '9:16', intensity: 'balanced material effects, elegant and luxurious'
+    ratio: '9:16', intensity: 'balanced xianxia styling, elegant robe and ribbon movement, refined spiritual atmosphere'
   },
   nineTailFoxImmortal: {
     garment: 'foxSpiritRobe', material: 'nineTailFoxSpirit', style: 'editorial',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
     framing: 'threeQuarter', pose: 'braidTwirl', camera: 'threeQuarterSide', lighting: 'foxfireGold', background: 'bambooForestPath',
-    ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
+    ratio: '4:5', intensity: 'balanced xianxia styling, elegant robe and ribbon movement, refined spiritual atmosphere'
   },
   swordCultivatorDuel: {
     garment: 'swordCultivatorAttire', material: 'swordQiSlash', style: 'huxia',
     chestDetail: 'sectEmbroideredChest', waistSideDetail: 'lightArmorWaistGuard', shoulderDetail: 'robeLightPauldron',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
     framing: 'fullBody', pose: 'duelReadyLunge', camera: 'lowAngleHero', lighting: 'hard', background: 'ancientAltarRuins',
-    ratio: '3:4', intensity: 'massive explosive material splash, high speed frozen motion'
+    ratio: '3:4', intensity: 'dynamic robe and ribbon movement, concentrated spiritual energy, cinematic xianxia action'
   },
   lightningTribulationAscend: {
     garment: 'spiritArmorRobe', material: 'lightningTribulation', style: 'cinematic',
     composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
     framing: 'threeQuarter', pose: 'tribulationStand', camera: 'lowAngleHero', lighting: 'cold', background: 'lightningTribulationSky',
-    ratio: '9:16', intensity: 'massive explosive material splash, high speed frozen motion'
+    ratio: '9:16', intensity: 'dynamic robe and ribbon movement, concentrated spiritual energy, cinematic xianxia action'
   },
   phoenixRebirth: {
     garment: 'phoenixSpiritGown', material: 'vermilionBirdFlame', style: 'blackGold',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
     framing: 'threeQuarter', pose: 'aerialSlashDive', camera: 'lowAngleHero', lighting: 'hard', background: 'risingPhoenixShrine',
-    ratio: '9:16', intensity: 'massive explosive material splash, high speed frozen motion'
+    ratio: '9:16', intensity: 'dynamic robe and ribbon movement, concentrated spiritual energy, cinematic xianxia action'
   },
   moonlitMeditation: {
     garment: 'moonwhiteRobe', material: 'moonlitCloudVeil', style: 'clean',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
     framing: 'bustPortrait', pose: 'meditationSit', camera: 'softFocusGlow', lighting: 'moonlightCandle', background: 'moonlitNightSky',
-    ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    ratio: '4:5', intensity: 'restrained spiritual atmosphere, delicate flowing fabric, quiet immortal elegance'
   },
   peachBlossomWedding: {
     garment: 'redWeddingRobe', material: 'peachBlossomDrift', style: 'luxury',
     composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
     framing: 'threeQuarter', pose: 'veilLiftGesture', camera: 'eyeLevelCover', lighting: 'warmWindowSoft', background: 'cherryBlossomCliff',
-    ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
+    ratio: '4:5', intensity: 'balanced xianxia styling, elegant robe and ribbon movement, refined spiritual atmosphere'
   },
   flowerSpiritGarden: {
     garment: 'flowerSpiritPetalDress', material: 'peachBlossomDrift', style: 'beautyCampaign',
     chestDetail: 'flowingSilkChestDrape', waistSideDetail: 'jadePendantSash', shoulderDetail: 'piboShoulderDrape',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
     framing: 'threeQuarter', pose: 'lotusHold', camera: 'eyeLevelCover', lighting: 'soft', background: 'pavilionCourtyard',
-    ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    ratio: '4:5', intensity: 'restrained spiritual atmosphere, delicate flowing fabric, quiet immortal elegance'
   },
   jianghuWanderer: {
     garment: 'wandererCloakSuit', material: 'windElementSwirl', style: 'huxia',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
     framing: 'fullBody', pose: 'backHandsStand', camera: 'threeQuarterSide', lighting: 'hard', background: 'ancientTownStreet',
-    ratio: '3:4', intensity: 'balanced material effects, elegant and luxurious'
+    ratio: '3:4', intensity: 'balanced xianxia styling, elegant robe and ribbon movement, refined spiritual atmosphere'
   },
   celestialCraneCompanion: {
     garment: 'craneFeatherRobe', material: 'craneCompanion', style: 'editorial',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
     framing: 'threeQuarter', pose: 'windRobeStand', camera: 'eyeLevelCover', lighting: 'soft', background: 'cloudSeaSunrise',
-    ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
+    ratio: '4:5', intensity: 'balanced xianxia styling, elegant robe and ribbon movement, refined spiritual atmosphere'
   },
   azureDragonGuardian: {
     garment: 'swordGuardGown', material: 'azureDragonCoil', style: 'cinematic',
     composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
     framing: 'threeQuarter', pose: 'qiPalmStrike', camera: 'lowAngleHero', lighting: 'cold', background: 'dragonPalaceHall',
-    ratio: '9:16', intensity: 'balanced material effects, elegant and luxurious'
+    ratio: '9:16', intensity: 'balanced xianxia styling, elegant robe and ribbon movement, refined spiritual atmosphere'
   },
   bambooSwordDance: {
     garment: 'discipleUniform', material: 'swordQiSlash', style: 'huxia',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
     framing: 'fullBody', pose: 'swordDanceArc', camera: 'threeQuarterSide', lighting: 'soft', background: 'bambooForestPath',
-    ratio: '3:4', intensity: 'massive explosive material splash, high speed frozen motion'
+    ratio: '3:4', intensity: 'dynamic robe and ribbon movement, concentrated spiritual energy, cinematic xianxia action'
   },
   moonSpiritLotusPond: {
     garment: 'moonSpiritGauzeRobe', material: 'moonlitCloudVeil', style: 'artExhibit',
     composition: 'foreground material frame composition, selected material appears close to camera around the edges, subject remains clear in the center',
     framing: 'closeUp', pose: 'lotusPoolSit', camera: 'beautyCloseUp', lighting: 'mist', background: 'lotusPondPavilion',
-    ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+    ratio: '4:5', intensity: 'restrained spiritual atmosphere, delicate flowing fabric, quiet immortal elegance'
   },
   frostWhiteTiger: {
     garment: 'nightRoamingArmor', material: 'whiteTigerGuard', style: 'cinematic',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
     framing: 'fullBody', pose: 'duelReadyLunge', camera: 'lowAngleHero', lighting: 'cold', background: 'frozenWaterfallCavern',
-    ratio: '3:4', intensity: 'balanced material effects, elegant and luxurious'
+    ratio: '3:4', intensity: 'balanced xianxia styling, elegant robe and ribbon movement, refined spiritual atmosphere'
   },
   mapleSpriteAutumn: {
     garment: 'butterflySpriteGown', material: 'goldenAutumnLeaves', style: 'clean',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
     framing: 'halfBody', pose: 'braidTwirl', camera: 'eyeLevelCover', lighting: 'soft', background: 'autumnMapleValley',
-    ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
+    ratio: '4:5', intensity: 'balanced xianxia styling, elegant robe and ribbon movement, refined spiritual atmosphere'
   },
   duskFairyLantern: {
     garment: 'charmSpriteTrailDress', material: 'spiritButterflyGlow', style: 'editorial',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
     framing: 'fullBody', pose: 'flyingRibbonSpin', camera: 'threeQuarterSide', lighting: 'foxfireGold', background: 'marketFestivalNight',
-    ratio: '3:4', intensity: 'balanced material effects, elegant and luxurious'
+    ratio: '3:4', intensity: 'balanced xianxia styling, elegant robe and ribbon movement, refined spiritual atmosphere'
   },
   courtDancerLanternNight: {
     garment: 'courtDancerRobe', material: 'spiritButterflyGlow', style: 'luxury',
     composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
     framing: 'threeQuarter', pose: 'danceArmRaise', camera: 'threeQuarterSide', lighting: 'foxfireGold', background: 'lanternPalaceEaves',
-    ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
+    ratio: '4:5', intensity: 'balanced xianxia styling, elegant robe and ribbon movement, refined spiritual atmosphere'
   }
 };
 

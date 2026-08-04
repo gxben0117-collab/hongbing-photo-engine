@@ -825,7 +825,10 @@
           </label>
         </div>
       </div>
-    </div>  <!-- 02 主題/服裝方向 -->
+    </div>
+  </section>
+
+  <!-- 02 主題/服裝方向 -->
   <section class="magazine-theme">
     <div class="section-header">
       <span class="section-label">02</span>
@@ -1167,6 +1170,140 @@
     </div>
   </section>
 
+  <!-- 04 妝容、膚質、配飾與光線細節 -->
+  <section class="magazine-details">
+    <div class="section-header">
+      <span class="section-label">04</span>
+      <span class="section-title">妝容、膚質、配飾與光線細節</span>
+      <span class="section-sub">依序調整妝容、膚質、珠寶、表情與光線；不必每項都改</span>
+    </div>
+    <div style="margin-bottom:14px;">
+      <div style="font-size:12px;color:var(--soft);margin-bottom:8px;">妝容（最多 2 個；「原圖一致」代表保留參考照妝感）</div>
+      <div class="chips" id="makeupChips">
+        <label class="chip selected" data-value="original"><input type="checkbox" name="makeup" value="original" checked>原圖一致</label>
+        <label class="chip" data-value="natural_highend"><input type="checkbox" name="makeup" value="natural_highend">自然高級</label>
+        <label class="chip" data-value="smoky_glam"><input type="checkbox" name="makeup" value="smoky_glam">煙燻濃妝</label>
+        <label class="chip" data-value="red_lip"><input type="checkbox" name="makeup" value="red_lip">紅唇</label>
+        <label class="chip" data-value="glossy_lip"><input type="checkbox" name="makeup" value="glossy_lip">濕亮唇妝</label>
+        <label class="chip" data-value="matte_base"><input type="checkbox" name="makeup" value="matte_base">霧面底妝</label>
+        <label class="chip" data-value="precise_eyeliner"><input type="checkbox" name="makeup" value="precise_eyeliner">精緻眼線</label>
+        <label class="chip" data-value="highlight_skin"><input type="checkbox" name="makeup" value="highlight_skin">高光肌膚</label>
+      </div>
+    </div>
+    <div style="margin-bottom:14px;">
+      <div style="font-size:12px;color:var(--soft);margin-bottom:8px;">膚質質感（單選）</div>
+      <div class="cards-4" id="skinTextureCards">
+        <label class="card selected" data-value="original">
+          <input type="radio" name="skinTexture" value="original" checked>
+          <div class="name">原圖一致</div>
+          <div class="desc">適合：保留原照片膚質，不額外修飾</div>
+        </label>
+        <label class="card" data-value="natural_real">
+          <input type="radio" name="skinTexture" value="natural_real">
+          <div class="name">自然真實皮膚</div>
+          <div class="desc">適合：生活感寫真、自然高級、清透人像</div>
+        </label>
+        <label class="card" data-value="luxury_campaign">
+          <input type="radio" name="skinTexture" value="luxury_campaign">
+          <div class="name">高級廣告皮膚</div>
+          <div class="desc">適合：美妝廣告、精品封面、精修商業大片</div>
+        </label>
+        <label class="card" data-value="soft_focus">
+          <input type="radio" name="skinTexture" value="soft_focus">
+          <div class="name">柔焦細膚</div>
+          <div class="desc">適合：夢幻柔光、少女感、柔和雜誌封面</div>
+        </label>
+        <label class="card" data-value="real_pores">
+          <input type="radio" name="skinTexture" value="real_pores">
+          <div class="name">真實毛孔</div>
+          <div class="desc">適合：高級寫真、電影感、近距離臉部、自然高級</div>
+        </label>
+        <label class="card" data-value="dewy_glow">
+          <input type="radio" name="skinTexture" value="dewy_glow">
+          <div class="name">水光透亮肌</div>
+          <div class="desc">適合：韓系妝、保養品廣告、清透美妝特寫</div>
+        </label>
+        <label class="card" data-value="premium_matte">
+          <input type="radio" name="skinTexture" value="premium_matte">
+          <div class="name">高級霧面膚質</div>
+          <div class="desc">適合：時裝大片、復古紅唇、黑白封面、冷感肖像</div>
+        </label>
+      </div>
+    </div>
+    <div style="margin-bottom:14px;">
+      <div style="font-size:12px;color:var(--soft);margin-bottom:8px;">珠寶配飾（最多 2 個；選「無」時不要再選其他項目）</div>
+      <div class="chips" id="jewelryChips">
+        <label class="chip" data-value="none"><input type="checkbox" name="jewelry" value="none">無</label>
+        <label class="chip selected" data-value="earrings"><input type="checkbox" name="jewelry" value="earrings" checked>耳飾重點</label>
+        <label class="chip" data-value="necklace"><input type="checkbox" name="jewelry" value="necklace">項鍊重點</label>
+        <label class="chip" data-value="statement"><input type="checkbox" name="jewelry" value="statement">華麗套組</label>
+      </div>
+    </div>
+    <div style="margin-bottom:14px;">
+      <div style="font-size:12px;color:var(--soft);margin-bottom:8px;">眼神表情（單選；「原圖一致」保留參考照表情）</div>
+      <div class="chips" id="expressionChips">
+        <label class="chip" data-value="calm_direct"><input type="radio" name="expression" value="calm_direct">平靜直視</label>
+        <label class="chip" data-value="cool_stare"><input type="radio" name="expression" value="cool_stare">冷感凝視</label>
+        <label class="chip" data-value="allure_smile"><input type="radio" name="expression" value="allure_smile">微笑誘惑</label>
+        <label class="chip" data-value="tipsy_gaze"><input type="radio" name="expression" value="tipsy_gaze">微醺眼神</label>
+        <label class="chip" data-value="lazy_allure"><input type="radio" name="expression" value="lazy_allure">慵懶誘惑</label>
+        <label class="chip" data-value="queen_smirk"><input type="radio" name="expression" value="queen_smirk">壞笑女王感</label>
+        <label class="chip" data-value="natural_innocent"><input type="radio" name="expression" value="natural_innocent">自然無辜感</label>
+        <label class="chip" data-value="distant_chic"><input type="radio" name="expression" value="distant_chic">高級疏離</label>
+        <label class="chip" data-value="lower_gaze"><input type="radio" name="expression" value="lower_gaze">垂眼沉靜</label>
+        <label class="chip selected" data-value="original"><input type="radio" name="expression" value="original" checked>原圖一致</label>
+      </div>
+    </div>
+    <div style="margin-bottom:0;">
+      <div style="font-size:12px;color:var(--soft);margin-bottom:8px;">光線類型（單選，決定臉部與背景的共同氣氛）</div>
+      <div class="chips" id="lightingChips">
+      <label class="chip selected" data-value="window_soft"><input type="radio" name="lighting" value="window_soft" checked>窗光柔亮</label>
+      <div style="flex-basis:100%;width:100%;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 基礎棚拍光</div>
+      <label class="chip" data-value="mixed_studio"><input type="radio" name="lighting" value="mixed_studio">棚拍混合光</label>
+      <label class="chip" data-value="beauty_fill"><input type="radio" name="lighting" value="beauty_fill">美妝補光</label>
+      <label class="chip" data-value="hard_contrast"><input type="radio" name="lighting" value="hard_contrast">強對比硬光</label>
+      <label class="chip" data-value="uniform_studio_light"><input type="radio" name="lighting" value="uniform_studio_light">均勻棚燈</label>
+      <label class="chip" data-value="cool_blue_studio"><input type="radio" name="lighting" value="cool_blue_studio">冷藍棚燈</label>
+      <label class="chip" data-value="low_key_spot"><input type="radio" name="lighting" value="low_key_spot">低調聚光顯輪廓</label>
+      <label class="chip" data-value="warm_orange_contrast"><input type="radio" name="lighting" value="warm_orange_contrast">暖橘燈光高反差</label>
+      <label class="chip" data-value="dessert_soft_bright"><input type="radio" name="lighting" value="dessert_soft_bright">甜點柔亮棚光</label>
+      <div style="flex-basis:100%;width:100%;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 窗光與居家柔光</div>
+      <label class="chip" data-value="afternoon_sheer_light"><input type="radio" name="lighting" value="afternoon_sheer_light">午後白紗窗光</label>
+      <label class="chip" data-value="mist_glow"><input type="radio" name="lighting" value="mist_glow">夢幻霧光</label>
+      <label class="chip" data-value="porcelain_window_soft"><input type="radio" name="lighting" value="porcelain_window_soft">藍瓷宮殿窗光</label>
+      <label class="chip" data-value="watercolor_paper_soft"><input type="radio" name="lighting" value="watercolor_paper_soft">水彩紙面柔光</label>
+      <label class="chip" data-value="warm_white_window"><input type="radio" name="lighting" value="warm_white_window">暖白窗光</label>
+      <label class="chip" data-value="window_blind_shadow"><input type="radio" name="lighting" value="window_blind_shadow">窗格光影棚拍</label>
+      <div style="flex-basis:100%;width:100%;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 金屬冷調與都會夜色</div>
+      <label class="chip" data-value="rim_light"><input type="radio" name="lighting" value="rim_light">髮絲邊緣光</label>
+      <label class="chip" data-value="cold_metal"><input type="radio" name="lighting" value="cold_metal">冷調金屬光</label>
+      <label class="chip" data-value="black_gold"><input type="radio" name="lighting" value="black_gold">黑金對比光</label>
+      <label class="chip" data-value="dark_gold_mood"><input type="radio" name="lighting" value="dark_gold_mood">暗金低調光</label>
+      <label class="chip" data-value="rain_cool_light"><input type="radio" name="lighting" value="rain_cool_light">雨景冷調光</label>
+      <div style="flex-basis:100%;width:100%;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 珠寶精品閃耀</div>
+      <label class="chip" data-value="white_gold_feather_backlight"><input type="radio" name="lighting" value="white_gold_feather_backlight">白金羽毛逆光</label>
+      <label class="chip" data-value="jewelry_sparkle"><input type="radio" name="lighting" value="jewelry_sparkle">珠寶閃光</label>
+      <label class="chip" data-value="prism_mirror_sparkle"><input type="radio" name="lighting" value="prism_mirror_sparkle">鏡面珠鑽閃光</label>
+      <label class="chip" data-value="prismatic_color"><input type="radio" name="lighting" value="prismatic_color">彩色棱鏡光</label>
+      <label class="chip" data-value="crystal_ballroom_gold"><input type="radio" name="lighting" value="crystal_ballroom_gold">水晶晚宴金光</label>
+      <div style="flex-basis:100%;width:100%;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 宮廷宴會暖光</div>
+      <label class="chip" data-value="stage_beam"><input type="radio" name="lighting" value="stage_beam">舞台光束</label>
+      <label class="chip" data-value="orchestra_gold_spotlight"><input type="radio" name="lighting" value="orchestra_gold_spotlight">音樂廳金色聚光</label>
+      <label class="chip" data-value="ballroom_chandelier_warm"><input type="radio" name="lighting" value="ballroom_chandelier_warm">宴會廳吊燈暖光</label>
+      <label class="chip" data-value="amethyst_candle_gold"><input type="radio" name="lighting" value="amethyst_candle_gold">紫晶燭光</label>
+      <label class="chip" data-value="bedside_candle_warm"><input type="radio" name="lighting" value="bedside_candle_warm">床邊燭燈暖光</label>
+      <div style="flex-basis:100%;width:100%;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 花園自然逆光</div>
+      <label class="chip" data-value="rose_garden_backlight"><input type="radio" name="lighting" value="rose_garden_backlight">玫瑰花園逆光</label>
+      <label class="chip" data-value="peach_blossom_glow"><input type="radio" name="lighting" value="peach_blossom_glow">粉櫻柔光</label>
+      <label class="chip" data-value="cherry_sunset_beauty"><input type="radio" name="lighting" value="cherry_sunset_beauty">紅櫻夕陽美妝光</label>
+      <label class="chip" data-value="seaside_sun_backlight"><input type="radio" name="lighting" value="seaside_sun_backlight">海邊自然逆光</label>
+      <div style="flex-basis:100%;width:100%;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 蕾絲珠簾情境光</div>
+      <label class="chip" data-value="lace_shadow_projection"><input type="radio" name="lighting" value="lace_shadow_projection">蕾絲投影光</label>
+      <label class="chip" data-value="pearl_veil_soft"><input type="radio" name="lighting" value="pearl_veil_soft">珠簾柔霧光</label>
+    </div>
+    </div>
+  </section>
+
   <!-- 05 身形輪廓 -->
   <section class="magazine-body">
     <div class="section-header">
@@ -1201,301 +1338,6 @@
         <div class="desc">修長腿線、俐落肩頸、舞台鏡頭平衡感</div>
       </label>
     </div>
-  </section>
-
-  <!-- 08 背景設定 -->
-  <section class="magazine-background">
-    <div class="section-header">
-      <span class="section-label">08</span>
-      <span class="section-title">拍攝場景與背景</span>
-      <span class="section-sub">單選，決定人物身後出現什麼，不改服裝主題</span>
-    </div>
-    <div class="cards" id="bgCards">
-      <label class="card selected" data-value="studio">
-        <input type="radio" name="bg" value="studio" checked>
-        <div class="name">單色攝影棚</div>
-        <div class="desc">乾淨單一色背景，讓人物成為唯一焦點</div>
-      </label>
-      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 純色棚拍基底</div>
-      <label class="card" data-value="gradient">
-        <input type="radio" name="bg" value="gradient">
-        <div class="name">強烈色彩漸層</div>
-        <div class="desc">明顯色彩過渡，適合時裝與封面感</div>
-      </label>
-      <label class="card" data-value="seamless_paper">
-        <input type="radio" name="bg" value="seamless_paper">
-        <div class="name">無縫背景紙</div>
-        <div class="desc">專業無縫棚拍背景</div>
-      </label>
-      <label class="card" data-value="soft_gradient">
-        <input type="radio" name="bg" value="soft_gradient">
-        <div class="name">柔和色彩漸層</div>
-        <div class="desc">低對比色彩過渡，適合柔光肖像</div>
-      </label>
-      <label class="card" data-value="translucent">
-        <input type="radio" name="bg" value="translucent">
-        <div class="name">透明質感背景</div>
-        <div class="desc">半透明層次背景</div>
-      </label>
-      <label class="card" data-value="minimal_space">
-        <input type="radio" name="bg" value="minimal_space">
-        <div class="name">極簡留白</div>
-        <div class="desc">極簡留白構圖</div>
-      </label>
-      <label class="card" data-value="black_void">
-        <input type="radio" name="bg" value="black_void">
-        <div class="name">黑幕留白</div>
-        <div class="desc">純黑背景聚焦主體</div>
-      </label>
-      <label class="card" data-value="white_seamless">
-        <input type="radio" name="bg" value="white_seamless">
-        <div class="name">純白無縫背景</div>
-        <div class="desc">純白乾淨,美妝與人物突出</div>
-      </label>
-      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 材質牆面與冷調空間</div>
-      <label class="card" data-value="concrete">
-        <input type="radio" name="bg" value="concrete">
-        <div class="name">混凝土牆</div>
-        <div class="desc">冷感工業牆面紋理</div>
-      </label>
-      <label class="card" data-value="metal">
-        <input type="radio" name="bg" value="metal">
-        <div class="name">金屬反光面</div>
-        <div class="desc">高級金屬反光質感</div>
-      </label>
-      <label class="card" data-value="mirror_floor">
-        <input type="radio" name="bg" value="mirror_floor">
-        <div class="name">鏡面地板</div>
-        <div class="desc">地面反射延伸空間</div>
-      </label>
-      <label class="card" data-value="modern_office_desk">
-        <input type="radio" name="bg" value="modern_office_desk">
-        <div class="name">現代辦公室桌景</div>
-        <div class="desc">簡約辦公桌、俐落都會氛圍</div>
-      </label>
-      <label class="card" data-value="stained_glass_rainbow">
-        <input type="radio" name="bg" value="stained_glass_rainbow">
-        <div class="name">彩窗光斑棚拍</div>
-        <div class="desc">彩繪玻璃窗、七彩光斑折射</div>
-      </label>
-      <label class="card" data-value="dark_gray_concrete">
-        <input type="radio" name="bg" value="dark_gray_concrete">
-        <div class="name">深灰水泥牆</div>
-        <div class="desc">冷調工業,高級灰背景</div>
-      </label>
-      <label class="card" data-value="mirror_studio">
-        <input type="radio" name="bg" value="mirror_studio">
-        <div class="name">鏡面反射棚</div>
-        <div class="desc">反射空間,高級棚拍張力</div>
-      </label>
-      <label class="card" data-value="mirror_prism_room">
-        <input type="radio" name="bg" value="mirror_prism_room">
-        <div class="name">鏡面棱鏡房</div>
-        <div class="desc">多面鏡,珠鑽反射,高訂背影</div>
-      </label>
-      <label class="card" data-value="dark_metal">
-        <input type="radio" name="bg" value="dark_metal">
-        <div class="name">暗色金屬背景</div>
-        <div class="desc">深色金屬,冷峻高級感</div>
-      </label>
-      <label class="card" data-value="marble_wall">
-        <input type="radio" name="bg" value="marble_wall">
-        <div class="name">大理石牆面</div>
-        <div class="desc">精品牆面,奢華材質</div>
-      </label>
-      <label class="card" data-value="gallery_white_wall">
-        <input type="radio" name="bg" value="gallery_white_wall">
-        <div class="name">藝術館白牆</div>
-        <div class="desc">展覽空間,極簡留白</div>
-      </label>
-      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 抽象裝置與夜景霓虹</div>
-      <label class="card" data-value="abstract">
-        <input type="radio" name="bg" value="abstract">
-        <div class="name">抽象藝術</div>
-        <div class="desc">幾何/紋理/藝術感背景</div>
-      </label>
-      <label class="card" data-value="install">
-        <input type="radio" name="bg" value="install">
-        <div class="name">抽象裝置</div>
-        <div class="desc">裝置藝術空間</div>
-      </label>
-      <label class="card" data-value="mist">
-        <input type="radio" name="bg" value="mist">
-        <div class="name">霧氣煙感</div>
-        <div class="desc">柔霧煙感氛圍</div>
-      </label>
-      <label class="card" data-value="neon_night">
-        <input type="radio" name="bg" value="neon_night">
-        <div class="name">霓虹夜景</div>
-        <div class="desc">霓虹夜色氛圍</div>
-      </label>
-      <label class="card" data-value="lace_shadow_studio">
-        <input type="radio" name="bg" value="lace_shadow_studio">
-        <div class="name">蕾絲投影棚</div>
-        <div class="desc">暗棚蕾絲光影,神秘肖像</div>
-      </label>
-      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 窗光居家與生活材質</div>
-      <label class="card" data-value="window_light">
-        <input type="radio" name="bg" value="window_light">
-        <div class="name">窗光室內</div>
-        <div class="desc">室內窗光生活感</div>
-      </label>
-      <label class="card" data-value="japanese_window_room">
-        <input type="radio" name="bg" value="japanese_window_room">
-        <div class="name">日系窗邊房間</div>
-        <div class="desc">白紗窗簾,地板,清爽居家感</div>
-      </label>
-      <label class="card" data-value="sheer_curtain_room">
-        <input type="radio" name="bg" value="sheer_curtain_room">
-        <div class="name">白紗柔光室內</div>
-        <div class="desc">白紗窗簾,柔亮午後窗光</div>
-      </label>
-      <label class="card" data-value="drape">
-        <input type="radio" name="bg" value="drape">
-        <div class="name">布幕垂墜</div>
-        <div class="desc">柔軟布幕垂墜層次</div>
-      </label>
-      <label class="card" data-value="ivy_wall_corner">
-        <input type="radio" name="bg" value="ivy_wall_corner">
-        <div class="name">藤蔓牆角</div>
-        <div class="desc">綠色藤蔓牆,自然紅裙寫真</div>
-      </label>
-      <label class="card" data-value="dark_wood_library">
-        <input type="radio" name="bg" value="dark_wood_library">
-        <div class="name">暗色木質書房</div>
-        <div class="desc">木梯書櫃,暗調層次</div>
-      </label>
-      <label class="card" data-value="palm_leaf_still_studio">
-        <input type="radio" name="bg" value="palm_leaf_still_studio">
-        <div class="name">棕櫚葉靜物棚</div>
-        <div class="desc">暗色棕櫚葉,單側柔光</div>
-      </label>
-      <label class="card" data-value="vintage_tile_wall">
-        <input type="radio" name="bg" value="vintage_tile_wall">
-        <div class="name">復古磁磚牆</div>
-        <div class="desc">老件磁磚紋理,懷舊街拍感</div>
-      </label>
-      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 宮廷宴會與奢華空間</div>
-      <label class="card" data-value="luxury_hotel_suite">
-        <input type="radio" name="bg" value="luxury_hotel_suite">
-        <div class="name">高級飯店套房</div>
-        <div class="desc">精品室內,生活雜誌感</div>
-      </label>
-      <label class="card" data-value="orchestra_hall">
-        <input type="radio" name="bg" value="orchestra_hall">
-        <div class="name">金色音樂廳</div>
-        <div class="desc">管弦樂舞台,暖金聚光</div>
-      </label>
-      <label class="card" data-value="marble_stair_ballroom">
-        <input type="radio" name="bg" value="marble_stair_ballroom">
-        <div class="name">大理石樓梯宴會廳</div>
-        <div class="desc">樓梯、吊燈、粉紗禮服全身</div>
-      </label>
-      <label class="card" data-value="crystal_ballroom_balcony">
-        <input type="radio" name="bg" value="crystal_ballroom_balcony">
-        <div class="name">水晶吊燈晚宴陽台</div>
-        <div class="desc">香檳金吊燈、雕花欄杆、晚裝半身主圖</div>
-      </label>
-      <label class="card" data-value="porcelain_white_palace">
-        <input type="radio" name="bg" value="porcelain_white_palace">
-        <div class="name">藍瓷白色宮殿</div>
-        <div class="desc">白色宮廷,藍瓷花紋,精品感</div>
-      </label>
-      <label class="card" data-value="amethyst_rococo_salon">
-        <input type="radio" name="bg" value="amethyst_rococo_salon">
-        <div class="name">紫晶洛可可沙龍</div>
-        <div class="desc">紫花、燭台、金色宮廷肖像</div>
-      </label>
-      <label class="card" data-value="red_curtain">
-        <input type="radio" name="bg" value="red_curtain">
-        <div class="name">紅色幕布</div>
-        <div class="desc">劇場感,復古女星氛圍</div>
-      </label>
-      <label class="card" data-value="red_velvet_lounge">
-        <input type="radio" name="bg" value="red_velvet_lounge">
-        <div class="name">紅絨沙發復古房</div>
-        <div class="desc">絨布沙發,油畫壁燈,劇場暗調</div>
-      </label>
-      <label class="card" data-value="chinese_bedroom">
-        <input type="radio" name="bg" value="chinese_bedroom">
-        <div class="name">中式閨房床榻</div>
-        <div class="desc">雕花床,紗帳,窗櫺暖光</div>
-      </label>
-      <label class="card" data-value="satin_bed_morning">
-        <input type="radio" name="bg" value="satin_bed_morning">
-        <div class="name">緞面床單晨光</div>
-        <div class="desc">緞面床品,白紗窗簾晨光</div>
-      </label>
-      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 花園庭院與自然光景</div>
-      <label class="card" data-value="rose_sculpture_garden">
-        <input type="radio" name="bg" value="rose_sculpture_garden">
-        <div class="name">粉玫瑰雕塑花園</div>
-        <div class="desc">巨型玫瑰,粉色花園高訂</div>
-      </label>
-      <label class="card" data-value="peach_blossom_bokeh">
-        <input type="radio" name="bg" value="peach_blossom_bokeh">
-        <div class="name">粉櫻柔光花景</div>
-        <div class="desc">粉櫻散景,明亮柔光肖像</div>
-      </label>
-      <label class="card" data-value="red_cherry_sunset_bokeh">
-        <input type="radio" name="bg" value="red_cherry_sunset_bokeh">
-        <div class="name">紅櫻夕陽散景</div>
-        <div class="desc">暖紅花景、夕陽散景、近距離美妝肖像</div>
-      </label>
-      <label class="card" data-value="watercolor_flower_paper">
-        <input type="radio" name="bg" value="watercolor_flower_paper">
-        <div class="name">水彩花紙背景</div>
-        <div class="desc">紙紋暈染,藍綠花簪插畫感</div>
-      </label>
-      <label class="card" data-value="seaside_backlight">
-        <input type="radio" name="bg" value="seaside_backlight">
-        <div class="name">海邊逆光</div>
-        <div class="desc">藍海藍天,夏日封面感</div>
-      </label>
-      <label class="card" data-value="cherry_avenue">
-        <input type="radio" name="bg" value="cherry_avenue">
-        <div class="name">櫻花道</div>
-        <div class="desc">櫻花樹徑,花瓣散景</div>
-      </label>
-      <label class="card" data-value="picnic_ivy_column">
-        <input type="radio" name="bg" value="picnic_ivy_column">
-        <div class="name">野餐藤蔓石柱</div>
-        <div class="desc">羅馬柱花藤,野餐佈置</div>
-      </label>
-      <label class="card" data-value="golden_field_backlight">
-        <input type="radio" name="bg" value="golden_field_backlight">
-        <div class="name">黃金草原逆光</div>
-        <div class="desc">風吹草原,金色時刻強逆光</div>
-      </label>
-      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 文化展場與都會場景</div>
-      <label class="card" data-value="scene">
-        <input type="radio" name="bg" value="scene">
-        <div class="name">場景融合</div>
-        <div class="desc">背景虛化,環境氛圍感</div>
-      </label>
-      <label class="card" data-value="scholar_study">
-        <input type="radio" name="bg" value="scholar_study">
-        <div class="name">古風書房</div>
-        <div class="desc">書卷筆架,渾天儀,窗光</div>
-      </label>
-      <label class="card" data-value="gallery_sculpture_hall">
-        <input type="radio" name="bg" value="gallery_sculpture_hall">
-        <div class="name">展場紅色雕塑</div>
-        <div class="desc">極簡展覽空間,雕塑主體對比</div>
-      </label>
-      <label class="card" data-value="rooftop_skyline_window">
-        <input type="radio" name="bg" value="rooftop_skyline_window">
-        <div class="name">落地窗城市天際線</div>
-        <div class="desc">高樓窗景,都會封面感</div>
-      </label>
-      <label class="card" data-value="dessert_table">
-        <input type="radio" name="bg" value="dessert_table">
-        <div class="name">甜點商品棚</div>
-        <div class="desc">蛋糕草莓,粉白棚拍,人物置身甜點桌旁</div>
-      </label>
-    </div>
-    <div style="font-size:12px;color:var(--soft);margin:10px 0 4px;">背景自填（填寫後會取代上方所有選項）</div>
-    <input type="text" class="text-input" id="customBg" placeholder="例如：老式書房壁爐、廢棄溫室玻璃屋、深夜便利商店">
   </section>
   <!-- 06 姿態模組 -->
   <section class="magazine-pose">
@@ -2017,6 +1859,331 @@
     </div>
   </section>
 
+  <!-- 08 背景設定 -->
+  <section class="magazine-background">
+    <div class="section-header">
+      <span class="section-label">08</span>
+      <span class="section-title">拍攝場景與背景</span>
+      <span class="section-sub">單選，決定人物身後出現什麼，不改服裝主題</span>
+    </div>
+    <div class="cards" id="bgCards">
+      <label class="card selected" data-value="studio">
+        <input type="radio" name="bg" value="studio" checked>
+        <div class="name">單色攝影棚</div>
+        <div class="desc">乾淨單一色背景，讓人物成為唯一焦點</div>
+      </label>
+      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 純色棚拍基底</div>
+      <label class="card" data-value="gradient">
+        <input type="radio" name="bg" value="gradient">
+        <div class="name">強烈色彩漸層</div>
+        <div class="desc">明顯色彩過渡，適合時裝與封面感</div>
+      </label>
+      <label class="card" data-value="seamless_paper">
+        <input type="radio" name="bg" value="seamless_paper">
+        <div class="name">無縫背景紙</div>
+        <div class="desc">專業無縫棚拍背景</div>
+      </label>
+      <label class="card" data-value="soft_gradient">
+        <input type="radio" name="bg" value="soft_gradient">
+        <div class="name">柔和色彩漸層</div>
+        <div class="desc">低對比色彩過渡，適合柔光肖像</div>
+      </label>
+      <label class="card" data-value="translucent">
+        <input type="radio" name="bg" value="translucent">
+        <div class="name">透明質感背景</div>
+        <div class="desc">半透明層次背景</div>
+      </label>
+      <label class="card" data-value="minimal_space">
+        <input type="radio" name="bg" value="minimal_space">
+        <div class="name">極簡留白</div>
+        <div class="desc">極簡留白構圖</div>
+      </label>
+      <label class="card" data-value="black_void">
+        <input type="radio" name="bg" value="black_void">
+        <div class="name">黑幕留白</div>
+        <div class="desc">純黑背景聚焦主體</div>
+      </label>
+      <label class="card" data-value="white_seamless">
+        <input type="radio" name="bg" value="white_seamless">
+        <div class="name">純白無縫背景</div>
+        <div class="desc">純白乾淨,美妝與人物突出</div>
+      </label>
+      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 材質牆面與冷調空間</div>
+      <label class="card" data-value="concrete">
+        <input type="radio" name="bg" value="concrete">
+        <div class="name">混凝土牆</div>
+        <div class="desc">冷感工業牆面紋理</div>
+      </label>
+      <label class="card" data-value="metal">
+        <input type="radio" name="bg" value="metal">
+        <div class="name">金屬反光面</div>
+        <div class="desc">高級金屬反光質感</div>
+      </label>
+      <label class="card" data-value="mirror_floor">
+        <input type="radio" name="bg" value="mirror_floor">
+        <div class="name">鏡面地板</div>
+        <div class="desc">地面反射延伸空間</div>
+      </label>
+      <label class="card" data-value="modern_office_desk">
+        <input type="radio" name="bg" value="modern_office_desk">
+        <div class="name">現代辦公室桌景</div>
+        <div class="desc">簡約辦公桌、俐落都會氛圍</div>
+      </label>
+      <label class="card" data-value="stained_glass_rainbow">
+        <input type="radio" name="bg" value="stained_glass_rainbow">
+        <div class="name">彩窗光斑棚拍</div>
+        <div class="desc">彩繪玻璃窗、七彩光斑折射</div>
+      </label>
+      <label class="card" data-value="dark_gray_concrete">
+        <input type="radio" name="bg" value="dark_gray_concrete">
+        <div class="name">深灰水泥牆</div>
+        <div class="desc">冷調工業,高級灰背景</div>
+      </label>
+      <label class="card" data-value="mirror_studio">
+        <input type="radio" name="bg" value="mirror_studio">
+        <div class="name">鏡面反射棚</div>
+        <div class="desc">反射空間,高級棚拍張力</div>
+      </label>
+      <label class="card" data-value="mirror_prism_room">
+        <input type="radio" name="bg" value="mirror_prism_room">
+        <div class="name">鏡面棱鏡房</div>
+        <div class="desc">多面鏡,珠鑽反射,高訂背影</div>
+      </label>
+      <label class="card" data-value="dark_metal">
+        <input type="radio" name="bg" value="dark_metal">
+        <div class="name">暗色金屬背景</div>
+        <div class="desc">深色金屬,冷峻高級感</div>
+      </label>
+      <label class="card" data-value="marble_wall">
+        <input type="radio" name="bg" value="marble_wall">
+        <div class="name">大理石牆面</div>
+        <div class="desc">精品牆面,奢華材質</div>
+      </label>
+      <label class="card" data-value="gallery_white_wall">
+        <input type="radio" name="bg" value="gallery_white_wall">
+        <div class="name">藝術館白牆</div>
+        <div class="desc">展覽空間,極簡留白</div>
+      </label>
+      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 抽象裝置與夜景霓虹</div>
+      <label class="card" data-value="abstract">
+        <input type="radio" name="bg" value="abstract">
+        <div class="name">抽象藝術</div>
+        <div class="desc">幾何/紋理/藝術感背景</div>
+      </label>
+      <label class="card" data-value="install">
+        <input type="radio" name="bg" value="install">
+        <div class="name">抽象裝置</div>
+        <div class="desc">裝置藝術空間</div>
+      </label>
+      <label class="card" data-value="mist">
+        <input type="radio" name="bg" value="mist">
+        <div class="name">霧氣煙感</div>
+        <div class="desc">柔霧煙感氛圍</div>
+      </label>
+      <label class="card" data-value="neon_night">
+        <input type="radio" name="bg" value="neon_night">
+        <div class="name">霓虹夜景</div>
+        <div class="desc">霓虹夜色氛圍</div>
+      </label>
+      <label class="card" data-value="lace_shadow_studio">
+        <input type="radio" name="bg" value="lace_shadow_studio">
+        <div class="name">蕾絲投影棚</div>
+        <div class="desc">暗棚蕾絲光影,神秘肖像</div>
+      </label>
+      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 窗光居家與生活材質</div>
+      <label class="card" data-value="window_light">
+        <input type="radio" name="bg" value="window_light">
+        <div class="name">窗光室內</div>
+        <div class="desc">室內窗光生活感</div>
+      </label>
+      <label class="card" data-value="japanese_window_room">
+        <input type="radio" name="bg" value="japanese_window_room">
+        <div class="name">日系窗邊房間</div>
+        <div class="desc">白紗窗簾,地板,清爽居家感</div>
+      </label>
+      <label class="card" data-value="sheer_curtain_room">
+        <input type="radio" name="bg" value="sheer_curtain_room">
+        <div class="name">白紗柔光室內</div>
+        <div class="desc">白紗窗簾,柔亮午後窗光</div>
+      </label>
+      <label class="card" data-value="drape">
+        <input type="radio" name="bg" value="drape">
+        <div class="name">布幕垂墜</div>
+        <div class="desc">柔軟布幕垂墜層次</div>
+      </label>
+      <label class="card" data-value="ivy_wall_corner">
+        <input type="radio" name="bg" value="ivy_wall_corner">
+        <div class="name">藤蔓牆角</div>
+        <div class="desc">綠色藤蔓牆,自然紅裙寫真</div>
+      </label>
+      <label class="card" data-value="dark_wood_library">
+        <input type="radio" name="bg" value="dark_wood_library">
+        <div class="name">暗色木質書房</div>
+        <div class="desc">木梯書櫃,暗調層次</div>
+      </label>
+      <label class="card" data-value="palm_leaf_still_studio">
+        <input type="radio" name="bg" value="palm_leaf_still_studio">
+        <div class="name">棕櫚葉靜物棚</div>
+        <div class="desc">暗色棕櫚葉,單側柔光</div>
+      </label>
+      <label class="card" data-value="vintage_tile_wall">
+        <input type="radio" name="bg" value="vintage_tile_wall">
+        <div class="name">復古磁磚牆</div>
+        <div class="desc">老件磁磚紋理,懷舊街拍感</div>
+      </label>
+      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 宮廷宴會與奢華空間</div>
+      <label class="card" data-value="luxury_hotel_suite">
+        <input type="radio" name="bg" value="luxury_hotel_suite">
+        <div class="name">高級飯店套房</div>
+        <div class="desc">精品室內,生活雜誌感</div>
+      </label>
+      <label class="card" data-value="orchestra_hall">
+        <input type="radio" name="bg" value="orchestra_hall">
+        <div class="name">金色音樂廳</div>
+        <div class="desc">管弦樂舞台,暖金聚光</div>
+      </label>
+      <label class="card" data-value="marble_stair_ballroom">
+        <input type="radio" name="bg" value="marble_stair_ballroom">
+        <div class="name">大理石樓梯宴會廳</div>
+        <div class="desc">樓梯、吊燈、粉紗禮服全身</div>
+      </label>
+      <label class="card" data-value="crystal_ballroom_balcony">
+        <input type="radio" name="bg" value="crystal_ballroom_balcony">
+        <div class="name">水晶吊燈晚宴陽台</div>
+        <div class="desc">香檳金吊燈、雕花欄杆、晚裝半身主圖</div>
+      </label>
+      <label class="card" data-value="porcelain_white_palace">
+        <input type="radio" name="bg" value="porcelain_white_palace">
+        <div class="name">藍瓷白色宮殿</div>
+        <div class="desc">白色宮廷,藍瓷花紋,精品感</div>
+      </label>
+      <label class="card" data-value="amethyst_rococo_salon">
+        <input type="radio" name="bg" value="amethyst_rococo_salon">
+        <div class="name">紫晶洛可可沙龍</div>
+        <div class="desc">紫花、燭台、金色宮廷肖像</div>
+      </label>
+      <label class="card" data-value="red_curtain">
+        <input type="radio" name="bg" value="red_curtain">
+        <div class="name">紅色幕布</div>
+        <div class="desc">劇場感,復古女星氛圍</div>
+      </label>
+      <label class="card" data-value="red_velvet_lounge">
+        <input type="radio" name="bg" value="red_velvet_lounge">
+        <div class="name">紅絨沙發復古房</div>
+        <div class="desc">絨布沙發,油畫壁燈,劇場暗調</div>
+      </label>
+      <label class="card" data-value="chinese_bedroom">
+        <input type="radio" name="bg" value="chinese_bedroom">
+        <div class="name">中式閨房床榻</div>
+        <div class="desc">雕花床,紗帳,窗櫺暖光</div>
+      </label>
+      <label class="card" data-value="satin_bed_morning">
+        <input type="radio" name="bg" value="satin_bed_morning">
+        <div class="name">緞面床單晨光</div>
+        <div class="desc">緞面床品,白紗窗簾晨光</div>
+      </label>
+      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 花園庭院與自然光景</div>
+      <label class="card" data-value="rose_sculpture_garden">
+        <input type="radio" name="bg" value="rose_sculpture_garden">
+        <div class="name">粉玫瑰雕塑花園</div>
+        <div class="desc">巨型玫瑰,粉色花園高訂</div>
+      </label>
+      <label class="card" data-value="peach_blossom_bokeh">
+        <input type="radio" name="bg" value="peach_blossom_bokeh">
+        <div class="name">粉櫻柔光花景</div>
+        <div class="desc">粉櫻散景,明亮柔光肖像</div>
+      </label>
+      <label class="card" data-value="red_cherry_sunset_bokeh">
+        <input type="radio" name="bg" value="red_cherry_sunset_bokeh">
+        <div class="name">紅櫻夕陽散景</div>
+        <div class="desc">暖紅花景、夕陽散景、近距離美妝肖像</div>
+      </label>
+      <label class="card" data-value="watercolor_flower_paper">
+        <input type="radio" name="bg" value="watercolor_flower_paper">
+        <div class="name">水彩花紙背景</div>
+        <div class="desc">紙紋暈染,藍綠花簪插畫感</div>
+      </label>
+      <label class="card" data-value="seaside_backlight">
+        <input type="radio" name="bg" value="seaside_backlight">
+        <div class="name">海邊逆光</div>
+        <div class="desc">藍海藍天,夏日封面感</div>
+      </label>
+      <label class="card" data-value="cherry_avenue">
+        <input type="radio" name="bg" value="cherry_avenue">
+        <div class="name">櫻花道</div>
+        <div class="desc">櫻花樹徑,花瓣散景</div>
+      </label>
+      <label class="card" data-value="picnic_ivy_column">
+        <input type="radio" name="bg" value="picnic_ivy_column">
+        <div class="name">野餐藤蔓石柱</div>
+        <div class="desc">羅馬柱花藤,野餐佈置</div>
+      </label>
+      <label class="card" data-value="golden_field_backlight">
+        <input type="radio" name="bg" value="golden_field_backlight">
+        <div class="name">黃金草原逆光</div>
+        <div class="desc">風吹草原,金色時刻強逆光</div>
+      </label>
+      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 文化展場與都會場景</div>
+      <label class="card" data-value="scene">
+        <input type="radio" name="bg" value="scene">
+        <div class="name">場景融合</div>
+        <div class="desc">背景虛化,環境氛圍感</div>
+      </label>
+      <label class="card" data-value="scholar_study">
+        <input type="radio" name="bg" value="scholar_study">
+        <div class="name">古風書房</div>
+        <div class="desc">書卷筆架,渾天儀,窗光</div>
+      </label>
+      <label class="card" data-value="gallery_sculpture_hall">
+        <input type="radio" name="bg" value="gallery_sculpture_hall">
+        <div class="name">展場紅色雕塑</div>
+        <div class="desc">極簡展覽空間,雕塑主體對比</div>
+      </label>
+      <label class="card" data-value="rooftop_skyline_window">
+        <input type="radio" name="bg" value="rooftop_skyline_window">
+        <div class="name">落地窗城市天際線</div>
+        <div class="desc">高樓窗景,都會封面感</div>
+      </label>
+      <label class="card" data-value="dessert_table">
+        <input type="radio" name="bg" value="dessert_table">
+        <div class="name">甜點商品棚</div>
+        <div class="desc">蛋糕草莓,粉白棚拍,人物置身甜點桌旁</div>
+      </label>
+    </div>
+    <div style="font-size:12px;color:var(--soft);margin:10px 0 4px;">背景自填（填寫後會取代上方所有選項）</div>
+    <input type="text" class="text-input" id="customBg" placeholder="例如：老式書房壁爐、廢棄溫室玻璃屋、深夜便利商店">
+  </section>
+  <!-- 09 動態節奏 -->
+  <section class="magazine-motion">
+    <div class="section-header">
+      <span class="section-label">09</span>
+      <span class="section-title">動態節奏</span>
+      <span class="section-sub">單選，控制畫面是穩定定格、微風流動或強烈封面張力</span>
+    </div>
+    <div class="cards" id="motionCards">
+      <label class="card" data-value="still">
+        <input type="radio" name="motion" value="still">
+        <div class="name">靜態定格</div>
+        <div class="desc">畫面穩定 / 幾乎無風</div>
+      </label>
+      <label class="card selected" data-value="breeze">
+        <input type="radio" name="motion" value="breeze" checked>
+        <div class="name">微風輕動</div>
+        <div class="desc">髮絲 / 珠寶 / 薄紗微動</div>
+      </label>
+      <label class="card" data-value="flow">
+        <input type="radio" name="motion" value="flow">
+        <div class="name">髮絲流動</div>
+        <div class="desc">風感更強 / 畫面更活</div>
+      </label>
+      <label class="card" data-value="dynamic">
+        <input type="radio" name="motion" value="dynamic">
+        <div class="name">封面張力</div>
+        <div class="desc">更強動態 / 更高封面氣場</div>
+      </label>
+    </div>
+  </section>
+
   <!-- 10 鏡頭氣場 -->
   <section class="magazine-camera">
     <div class="section-header">
@@ -2070,170 +2237,6 @@
         <div class="name">遠距主視覺</div>
         <div class="desc">人物與版面完整,海報感更強</div>
       </label>
-    </div>
-  </section>
-  <!-- 09 動態節奏 -->
-  <section class="magazine-motion">
-    <div class="section-header">
-      <span class="section-label">09</span>
-      <span class="section-title">動態節奏</span>
-      <span class="section-sub">單選，控制畫面是穩定定格、微風流動或強烈封面張力</span>
-    </div>
-    <div class="cards" id="motionCards">
-      <label class="card" data-value="still">
-        <input type="radio" name="motion" value="still">
-        <div class="name">靜態定格</div>
-        <div class="desc">畫面穩定 / 幾乎無風</div>
-      </label>
-      <label class="card selected" data-value="breeze">
-        <input type="radio" name="motion" value="breeze" checked>
-        <div class="name">微風輕動</div>
-        <div class="desc">髮絲 / 珠寶 / 薄紗微動</div>
-      </label>
-      <label class="card" data-value="flow">
-        <input type="radio" name="motion" value="flow">
-        <div class="name">髮絲流動</div>
-        <div class="desc">風感更強 / 畫面更活</div>
-      </label>
-      <label class="card" data-value="dynamic">
-        <input type="radio" name="motion" value="dynamic">
-        <div class="name">封面張力</div>
-        <div class="desc">更強動態 / 更高封面氣場</div>
-      </label>
-    </div>
-  </section>
-
-  <!-- 04 妝容、膚質、配飾與光線細節 -->
-  <section class="magazine-details">
-    <div class="section-header">
-      <span class="section-label">04</span>
-      <span class="section-title">妝容、膚質、配飾與光線細節</span>
-      <span class="section-sub">依序調整妝容、膚質、珠寶、表情與光線；不必每項都改</span>
-    </div>
-    <div style="margin-bottom:14px;">
-      <div style="font-size:12px;color:var(--soft);margin-bottom:8px;">妝容（最多 2 個；「原圖一致」代表保留參考照妝感）</div>
-      <div class="chips" id="makeupChips">
-        <label class="chip selected" data-value="original"><input type="checkbox" name="makeup" value="original" checked>原圖一致</label>
-        <label class="chip" data-value="natural_highend"><input type="checkbox" name="makeup" value="natural_highend">自然高級</label>
-        <label class="chip" data-value="smoky_glam"><input type="checkbox" name="makeup" value="smoky_glam">煙燻濃妝</label>
-        <label class="chip" data-value="red_lip"><input type="checkbox" name="makeup" value="red_lip">紅唇</label>
-        <label class="chip" data-value="glossy_lip"><input type="checkbox" name="makeup" value="glossy_lip">濕亮唇妝</label>
-        <label class="chip" data-value="matte_base"><input type="checkbox" name="makeup" value="matte_base">霧面底妝</label>
-        <label class="chip" data-value="precise_eyeliner"><input type="checkbox" name="makeup" value="precise_eyeliner">精緻眼線</label>
-        <label class="chip" data-value="highlight_skin"><input type="checkbox" name="makeup" value="highlight_skin">高光肌膚</label>
-      </div>
-    </div>
-    <div style="margin-bottom:14px;">
-      <div style="font-size:12px;color:var(--soft);margin-bottom:8px;">膚質質感（單選）</div>
-      <div class="cards-4" id="skinTextureCards">
-        <label class="card selected" data-value="original">
-          <input type="radio" name="skinTexture" value="original" checked>
-          <div class="name">原圖一致</div>
-          <div class="desc">適合：保留原照片膚質，不額外修飾</div>
-        </label>
-        <label class="card" data-value="natural_real">
-          <input type="radio" name="skinTexture" value="natural_real">
-          <div class="name">自然真實皮膚</div>
-          <div class="desc">適合：生活感寫真、自然高級、清透人像</div>
-        </label>
-        <label class="card" data-value="luxury_campaign">
-          <input type="radio" name="skinTexture" value="luxury_campaign">
-          <div class="name">高級廣告皮膚</div>
-          <div class="desc">適合：美妝廣告、精品封面、精修商業大片</div>
-        </label>
-        <label class="card" data-value="soft_focus">
-          <input type="radio" name="skinTexture" value="soft_focus">
-          <div class="name">柔焦細膚</div>
-          <div class="desc">適合：夢幻柔光、少女感、柔和雜誌封面</div>
-        </label>
-        <label class="card" data-value="real_pores">
-          <input type="radio" name="skinTexture" value="real_pores">
-          <div class="name">真實毛孔</div>
-          <div class="desc">適合：高級寫真、電影感、近距離臉部、自然高級</div>
-        </label>
-        <label class="card" data-value="dewy_glow">
-          <input type="radio" name="skinTexture" value="dewy_glow">
-          <div class="name">水光透亮肌</div>
-          <div class="desc">適合：韓系妝、保養品廣告、清透美妝特寫</div>
-        </label>
-        <label class="card" data-value="premium_matte">
-          <input type="radio" name="skinTexture" value="premium_matte">
-          <div class="name">高級霧面膚質</div>
-          <div class="desc">適合：時裝大片、復古紅唇、黑白封面、冷感肖像</div>
-        </label>
-      </div>
-    </div>
-    <div style="margin-bottom:14px;">
-      <div style="font-size:12px;color:var(--soft);margin-bottom:8px;">珠寶配飾（最多 2 個；選「無」時不要再選其他項目）</div>
-      <div class="chips" id="jewelryChips">
-        <label class="chip" data-value="none"><input type="checkbox" name="jewelry" value="none">無</label>
-        <label class="chip selected" data-value="earrings"><input type="checkbox" name="jewelry" value="earrings" checked>耳飾重點</label>
-        <label class="chip" data-value="necklace"><input type="checkbox" name="jewelry" value="necklace">項鍊重點</label>
-        <label class="chip" data-value="statement"><input type="checkbox" name="jewelry" value="statement">華麗套組</label>
-      </div>
-    </div>
-    <div style="margin-bottom:14px;">
-      <div style="font-size:12px;color:var(--soft);margin-bottom:8px;">眼神表情（單選；「原圖一致」保留參考照表情）</div>
-      <div class="chips" id="expressionChips">
-        <label class="chip" data-value="calm_direct"><input type="radio" name="expression" value="calm_direct">平靜直視</label>
-        <label class="chip" data-value="cool_stare"><input type="radio" name="expression" value="cool_stare">冷感凝視</label>
-        <label class="chip" data-value="allure_smile"><input type="radio" name="expression" value="allure_smile">微笑誘惑</label>
-        <label class="chip" data-value="tipsy_gaze"><input type="radio" name="expression" value="tipsy_gaze">微醺眼神</label>
-        <label class="chip" data-value="lazy_allure"><input type="radio" name="expression" value="lazy_allure">慵懶誘惑</label>
-        <label class="chip" data-value="queen_smirk"><input type="radio" name="expression" value="queen_smirk">壞笑女王感</label>
-        <label class="chip" data-value="natural_innocent"><input type="radio" name="expression" value="natural_innocent">自然無辜感</label>
-        <label class="chip" data-value="distant_chic"><input type="radio" name="expression" value="distant_chic">高級疏離</label>
-        <label class="chip" data-value="lower_gaze"><input type="radio" name="expression" value="lower_gaze">垂眼沉靜</label>
-        <label class="chip selected" data-value="original"><input type="radio" name="expression" value="original" checked>原圖一致</label>
-      </div>
-    </div>
-    <div style="margin-bottom:0;">
-      <div style="font-size:12px;color:var(--soft);margin-bottom:8px;">光線類型（單選，決定臉部與背景的共同氣氛）</div>
-      <div class="chips" id="lightingChips">
-      <label class="chip selected" data-value="window_soft"><input type="radio" name="lighting" value="window_soft" checked>窗光柔亮</label>
-      <div style="flex-basis:100%;width:100%;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 基礎棚拍光</div>
-      <label class="chip" data-value="mixed_studio"><input type="radio" name="lighting" value="mixed_studio">棚拍混合光</label>
-      <label class="chip" data-value="beauty_fill"><input type="radio" name="lighting" value="beauty_fill">美妝補光</label>
-      <label class="chip" data-value="hard_contrast"><input type="radio" name="lighting" value="hard_contrast">強對比硬光</label>
-      <label class="chip" data-value="uniform_studio_light"><input type="radio" name="lighting" value="uniform_studio_light">均勻棚燈</label>
-      <label class="chip" data-value="cool_blue_studio"><input type="radio" name="lighting" value="cool_blue_studio">冷藍棚燈</label>
-      <label class="chip" data-value="low_key_spot"><input type="radio" name="lighting" value="low_key_spot">低調聚光顯輪廓</label>
-      <label class="chip" data-value="warm_orange_contrast"><input type="radio" name="lighting" value="warm_orange_contrast">暖橘燈光高反差</label>
-      <label class="chip" data-value="dessert_soft_bright"><input type="radio" name="lighting" value="dessert_soft_bright">甜點柔亮棚光</label>
-      <div style="flex-basis:100%;width:100%;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 窗光與居家柔光</div>
-      <label class="chip" data-value="afternoon_sheer_light"><input type="radio" name="lighting" value="afternoon_sheer_light">午後白紗窗光</label>
-      <label class="chip" data-value="mist_glow"><input type="radio" name="lighting" value="mist_glow">夢幻霧光</label>
-      <label class="chip" data-value="porcelain_window_soft"><input type="radio" name="lighting" value="porcelain_window_soft">藍瓷宮殿窗光</label>
-      <label class="chip" data-value="watercolor_paper_soft"><input type="radio" name="lighting" value="watercolor_paper_soft">水彩紙面柔光</label>
-      <label class="chip" data-value="warm_white_window"><input type="radio" name="lighting" value="warm_white_window">暖白窗光</label>
-      <label class="chip" data-value="window_blind_shadow"><input type="radio" name="lighting" value="window_blind_shadow">窗格光影棚拍</label>
-      <div style="flex-basis:100%;width:100%;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 金屬冷調與都會夜色</div>
-      <label class="chip" data-value="rim_light"><input type="radio" name="lighting" value="rim_light">髮絲邊緣光</label>
-      <label class="chip" data-value="cold_metal"><input type="radio" name="lighting" value="cold_metal">冷調金屬光</label>
-      <label class="chip" data-value="black_gold"><input type="radio" name="lighting" value="black_gold">黑金對比光</label>
-      <label class="chip" data-value="dark_gold_mood"><input type="radio" name="lighting" value="dark_gold_mood">暗金低調光</label>
-      <label class="chip" data-value="rain_cool_light"><input type="radio" name="lighting" value="rain_cool_light">雨景冷調光</label>
-      <div style="flex-basis:100%;width:100%;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 珠寶精品閃耀</div>
-      <label class="chip" data-value="white_gold_feather_backlight"><input type="radio" name="lighting" value="white_gold_feather_backlight">白金羽毛逆光</label>
-      <label class="chip" data-value="jewelry_sparkle"><input type="radio" name="lighting" value="jewelry_sparkle">珠寶閃光</label>
-      <label class="chip" data-value="prism_mirror_sparkle"><input type="radio" name="lighting" value="prism_mirror_sparkle">鏡面珠鑽閃光</label>
-      <label class="chip" data-value="prismatic_color"><input type="radio" name="lighting" value="prismatic_color">彩色棱鏡光</label>
-      <label class="chip" data-value="crystal_ballroom_gold"><input type="radio" name="lighting" value="crystal_ballroom_gold">水晶晚宴金光</label>
-      <div style="flex-basis:100%;width:100%;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 宮廷宴會暖光</div>
-      <label class="chip" data-value="stage_beam"><input type="radio" name="lighting" value="stage_beam">舞台光束</label>
-      <label class="chip" data-value="orchestra_gold_spotlight"><input type="radio" name="lighting" value="orchestra_gold_spotlight">音樂廳金色聚光</label>
-      <label class="chip" data-value="ballroom_chandelier_warm"><input type="radio" name="lighting" value="ballroom_chandelier_warm">宴會廳吊燈暖光</label>
-      <label class="chip" data-value="amethyst_candle_gold"><input type="radio" name="lighting" value="amethyst_candle_gold">紫晶燭光</label>
-      <label class="chip" data-value="bedside_candle_warm"><input type="radio" name="lighting" value="bedside_candle_warm">床邊燭燈暖光</label>
-      <div style="flex-basis:100%;width:100%;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 花園自然逆光</div>
-      <label class="chip" data-value="rose_garden_backlight"><input type="radio" name="lighting" value="rose_garden_backlight">玫瑰花園逆光</label>
-      <label class="chip" data-value="peach_blossom_glow"><input type="radio" name="lighting" value="peach_blossom_glow">粉櫻柔光</label>
-      <label class="chip" data-value="cherry_sunset_beauty"><input type="radio" name="lighting" value="cherry_sunset_beauty">紅櫻夕陽美妝光</label>
-      <label class="chip" data-value="seaside_sun_backlight"><input type="radio" name="lighting" value="seaside_sun_backlight">海邊自然逆光</label>
-      <div style="flex-basis:100%;width:100%;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 蕾絲珠簾情境光</div>
-      <label class="chip" data-value="lace_shadow_projection"><input type="radio" name="lighting" value="lace_shadow_projection">蕾絲投影光</label>
-      <label class="chip" data-value="pearl_veil_soft"><input type="radio" name="lighting" value="pearl_veil_soft">珠簾柔霧光</label>
-    </div>
     </div>
   </section>
 
