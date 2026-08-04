@@ -22,6 +22,8 @@ No facial reconstruction, redesign, beautification or stylization.`;
 
   const CORE_AUTO_POSE_PROMPT = `AI pose selection: choose the single most suitable natural photographic pose for the selected theme, garment silhouette, composition, camera angle, lighting and setting. Present the clothing and subject clearly with relaxed hands, balanced weight and coherent head-neck-shoulder-spine alignment; do not combine incompatible actions or multiple poses.`;
 
+  const CORE_AUTO_COLOR_PROMPT = `AI theme-aware color selection: based on the selected theme, garment silhouette, materials, lighting and background, choose one coherent dominant color, one supporting color and one restrained accent color. Keep the palette culturally and contextually appropriate, preserve subject-background separation, material readability and premium editorial harmony; do not randomly mix unrelated hues or override the selected theme.`;
+
   const CANONICAL_RATIO_VALUES = Object.freeze([
     "9:16", "4:5", "1:1", "2:3", "3:4", "16:9", "4:3", "21:9"
   ]);
@@ -585,6 +587,7 @@ They must not change the person's facial structure, identity, age impression or 
   window.CORE_SKIN_TEXTURE = CORE_SKIN_TEXTURE;
   window.CORE_FINAL_IDENTITY_PRIORITY = CORE_FINAL_IDENTITY_PRIORITY;
   window.HB_AUTO_POSE_PROMPT = CORE_AUTO_POSE_PROMPT;
+  window.HB_AUTO_COLOR_PROMPT = CORE_AUTO_COLOR_PROMPT;
   window.CORE_NEGATIVE_PROMPT = CORE_NEGATIVE_PROMPT;
   window.CORE_OUTPUT_QUALITY = CORE_OUTPUT_QUALITY;
   window.HB_CANONICAL_RATIO_VALUES = CANONICAL_RATIO_VALUES;
@@ -593,11 +596,12 @@ They must not change the person's facial structure, identity, age impression or 
   window.HB_CUSTOM_IDENTITY_CONFLICT_MESSAGE = CUSTOM_IDENTITY_CONFLICT_MESSAGE;
   window.HB_INSTALL_CUSTOM_IDENTITY_WARNING = installCustomIdentityConflictWarning;
   window.HB_CORE_PROMPT = {
-    version: "v4.40",
+    version: "v4.41",
     contracts: TOOL_PAGE_CONTRACTS,
     ratios: CANONICAL_RATIO_PROMPTS,
     controls: {
-      autoPose: CORE_AUTO_POSE_PROMPT
+      autoPose: CORE_AUTO_POSE_PROMPT,
+      autoColor: CORE_AUTO_COLOR_PROMPT
     },
     blocks: {
       identityLock: CORE_IDENTITY_LOCK,

@@ -300,7 +300,7 @@
       <label class="card"><input type="radio" name="lighting" value="hanbokSideLight"><div class="name">韓服古典側光</div><div class="desc">克制明暗與刺繡質感</div></label>
     </div>
     <div class="group-title">09B｜色彩系統</div>
-    <p class="hint">單選一組主色；可由下方自訂配色覆蓋。</p>
+    <p class="hint">單選一組主色或搭配色；AI 選項會依主題、服裝、光線與背景判斷，自訂配色填寫後優先。</p>
     <div class="grid grid-3" data-choice="colorPalette">
       <label class="card selected"><input type="radio" name="colorPalette" value="pastelPinkIvory" checked><div class="name">粉彩與象牙白</div><div class="desc">清雅、溫柔、經典韓服感</div></label>
       <label class="card"><input type="radio" name="colorPalette" value="jadeBlueCream"><div class="name">玉青與乳白</div><div class="desc">清透、冷靜、韓屋氣質</div></label>
@@ -312,6 +312,12 @@
       <label class="card"><input type="radio" name="colorPalette" value="sageLinen"><div class="name">鼠尾草與苧麻白</div><div class="desc">自然、安靜、適合日常韓服</div></label>
       <label class="card"><input type="radio" name="colorPalette" value="plumSnow"><div class="name">梅紫與雪白</div><div class="desc">冬日、清冷、含蓄雅致</div></label>
       <label class="card"><input type="radio" name="colorPalette" value="mutedHanbok"><div class="name">低飽和韓服色</div><div class="desc">柔霧、布料與清淡留白</div></label>
+      <label class="card"><input type="radio" name="colorPalette" value="dancheongIvoryNavy"><div class="name">搭配色｜丹青象牙深藍</div><div class="desc">宮廷建築、端莊對比與文化層次</div></label>
+      <label class="card"><input type="radio" name="colorPalette" value="lotusJadeRose"><div class="name">搭配色｜蓮粉玉青暖白</div><div class="desc">柔和花景、婚禮氣質與清透韓服</div></label>
+      <label class="card"><input type="radio" name="colorPalette" value="royalNavyGold"><div class="name">搭配色｜王室深藍古金</div><div class="desc">正式宮廷、沉穩高級與細緻金線</div></label>
+      <label class="card"><input type="radio" name="colorPalette" value="persimmonCreamSage"><div class="name">搭配色｜柿紅米白鼠尾草</div><div class="desc">韓屋日常、自然材質與溫暖活力</div></label>
+      <label class="card"><input type="radio" name="colorPalette" value="plumSkyGray"><div class="name">搭配色｜梅紫天青灰白</div><div class="desc">季節花景、低飽和與文雅冷調</div></label>
+      <label class="card"><input type="radio" name="colorPalette" value="aiThemeScenePalette"><div class="name">AI 根據主題與場景判斷配色</div><div class="desc">自動選擇主色、輔色與克制點綴色</div></label>
     </div>
     <label class="field">指定配色<input id="colorNote" type="text" placeholder="例如：淡粉、象牙白、少量金色"></label>
   </section>
@@ -502,7 +508,13 @@ const colorPaletteData = {
   dancheongColor: 'dancheong teal, vermilion red, cream and deep green',
   sageLinen: 'sage green, natural linen and rice white',
   plumSnow: 'muted plum, snow white and charcoal gray',
-  mutedHanbok: 'low-saturation pastel hanbok colors, hanji white and smoky blue'
+  mutedHanbok: 'low-saturation pastel hanbok colors, hanji white and smoky blue',
+  dancheongIvoryNavy: 'coordinated palette set of dancheong teal, ivory white and deep navy with dignified Korean court contrast',
+  lotusJadeRose: 'coordinated palette set of lotus pink, jade blue and warm white with soft Korean ceremonial harmony',
+  royalNavyGold: 'coordinated palette set of royal navy, antique gold and ivory with restrained palace couture elegance',
+  persimmonCreamSage: 'coordinated palette set of persimmon red, rice cream and sage green with natural hanok vitality',
+  plumSkyGray: 'coordinated palette set of muted plum, pale sky blue and soft gray-white with quiet seasonal refinement',
+  aiThemeScenePalette: window.HB_CORE_PROMPT?.controls?.autoColor || 'AI theme-aware color selection based on the selected theme, garment, materials, lighting and background; choose one coherent dominant color, one supporting color and one restrained accent color while preserving cultural context, material readability and premium editorial harmony'
 };
 
 const poseData = {

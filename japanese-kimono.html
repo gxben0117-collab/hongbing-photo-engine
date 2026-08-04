@@ -312,7 +312,7 @@
       <label class="card"><input type="radio" name="lighting" value="washiGallerySideLight"><div class="name">和紙畫廊側光</div><div class="desc">墨白背景、絲綢紋理與安靜陰影</div></label>
     </div>
     <div class="group-title">09B｜色彩系統</div>
-    <p class="hint">單選一組主色；可由下方自訂配色覆蓋。</p>
+    <p class="hint">單選一組主色或搭配色；AI 選項會依主題、服裝、光線與背景判斷，自訂配色填寫後優先。</p>
     <div class="grid grid-3" data-choice="colorPalette">
       <label class="card selected"><input type="radio" name="colorPalette" value="sakuraIvory" checked><div class="name">櫻粉與米白</div><div class="desc">清雅、溫柔、春季和風</div></label>
       <label class="card"><input type="radio" name="colorPalette" value="indigoIvory"><div class="name">靛藍與生成白</div><div class="desc">藍染、清冷、傳統質感</div></label>
@@ -324,6 +324,12 @@
       <label class="card"><input type="radio" name="colorPalette" value="bambooSand"><div class="name">竹青與砂色</div><div class="desc">自然、溫和、適合町家</div></label>
       <label class="card"><input type="radio" name="colorPalette" value="plumSnow"><div class="name">梅紫與雪白</div><div class="desc">冬日、清冷、含蓄雅致</div></label>
       <label class="card"><input type="radio" name="colorPalette" value="indigoMuted"><div class="name">低飽和藍染色</div><div class="desc">藍染、紙門與柔和留白</div></label>
+      <label class="card"><input type="radio" name="colorPalette" value="sumiGoldSakura"><div class="name">搭配色｜墨黑古金櫻粉</div><div class="desc">漆器、屏風與精緻和風封面</div></label>
+      <label class="card"><input type="radio" name="colorPalette" value="aiBlueWashiIvory"><div class="name">搭配色｜藍染水色生成白</div><div class="desc">清爽和紙、藍染與自然光層次</div></label>
+      <label class="card"><input type="radio" name="colorPalette" value="matchaPersimmonCream"><div class="name">搭配色｜抹茶茜紅乳白</div><div class="desc">庭園茶室、傳統色與溫潤材質</div></label>
+      <label class="card"><input type="radio" name="colorPalette" value="wisteriaMoonGray"><div class="name">搭配色｜藤紫月白灰藍</div><div class="desc">柔霧花景、安靜冷調與優雅留白</div></label>
+      <label class="card"><input type="radio" name="colorPalette" value="vermilionGoldCharcoal"><div class="name">搭配色｜朱漆古金炭灰</div><div class="desc">正裝華服、克制對比與高級屏風感</div></label>
+      <label class="card"><input type="radio" name="colorPalette" value="aiThemeScenePalette"><div class="name">AI 根據主題與場景判斷配色</div><div class="desc">自動選擇主色、輔色與克制點綴色</div></label>
     </div>
     <label class="field">指定配色<input id="colorNote" type="text" placeholder="例如：櫻粉、米白、少量古金"></label>
   </section>
@@ -521,7 +527,13 @@ const colorPaletteData = {
   goldScreenBlack: 'gold screen, lacquer black and muted crimson',
   bambooSand: 'bamboo green, sand beige and rice white',
   plumSnow: 'muted plum, snow white and charcoal gray',
-  indigoMuted: 'low-saturation indigo, washi white and smoky blue'
+  indigoMuted: 'low-saturation indigo, washi white and smoky blue',
+  sumiGoldSakura: 'coordinated palette set of sumi black, antique gold and restrained sakura pink with premium Japanese lacquer harmony',
+  aiBlueWashiIvory: 'coordinated palette set of indigo blue, pale water blue and unbleached washi white with clean Japanese editorial balance',
+  matchaPersimmonCream: 'coordinated palette set of matcha green, persimmon red and warm cream with tea-room natural harmony',
+  wisteriaMoonGray: 'coordinated palette set of wisteria purple, moon white and misty blue-gray with quiet seasonal elegance',
+  vermilionGoldCharcoal: 'coordinated palette set of vermilion lacquer, antique gold and charcoal gray with restrained formal kimono contrast',
+  aiThemeScenePalette: window.HB_CORE_PROMPT?.controls?.autoColor || 'AI theme-aware color selection based on the selected theme, garment, materials, lighting and background; choose one coherent dominant color, one supporting color and one restrained accent color while preserving cultural context, material readability and premium editorial harmony'
 };
 
 const poseData = {

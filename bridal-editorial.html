@@ -389,7 +389,7 @@
 
   <section class="section-lighting">
     <div class="section-header"><div class="section-label">10</div><div class="section-title">光影與配色</div></div>
-    <p class="hint">光影與配色分開選擇，人物、婚紗與背景共用同一套光線邏輯。</p>
+    <p class="hint">光影與配色分開選擇；可用主色、搭配色組或 AI 依婚紗主題與場景判斷，自訂配色填寫後優先。</p>
     <div class="grid grid-3" data-choice="lighting">
       <label class="card selected"><input type="radio" name="lighting" value="koreanCreamSoftLight" checked><div class="name">韓系奶油柔光</div><div class="desc">低對比、乾淨、柔和膚色</div></label>
       <label class="card"><input type="radio" name="lighting" value="luxuryStudioSoftbox"><div class="name">精品棚拍柔光</div><div class="desc">均勻高級、清楚表現婚紗工藝</div></label>
@@ -410,6 +410,12 @@
       <label class="card"><input type="radio" name="color" value="whitePlatinumGray"><div class="name">白金與淡灰</div><div class="desc">現代高訂、低飽和精品感</div></label>
       <label class="card"><input type="radio" name="color" value="blackChampagneIvory"><div class="name">黑灰香檳與暖白</div><div class="desc">高訂封面、克制金色與深色對比</div></label>
       <label class="card"><input type="radio" name="color" value="pearlCharcoalWhite"><div class="name">珍珠灰白與炭灰</div><div class="desc">典藏肖像、蕾絲與安靜陰影</div></label>
+      <label class="card"><input type="radio" name="color" value="ivoryChampagneCharcoal"><div class="name">搭配色｜象牙香檳炭灰</div><div class="desc">精品婚紗、緞面高光與沉穩對比</div></label>
+      <label class="card"><input type="radio" name="color" value="blushPearlTaupe"><div class="name">搭配色｜煙粉珍珠灰褐</div><div class="desc">柔和浪漫、蕾絲細節與高級暖調</div></label>
+      <label class="card"><input type="radio" name="color" value="platinumIceBlue"><div class="name">搭配色｜鉑金冰藍珍珠白</div><div class="desc">冷調典藏、晶石光澤與現代剪裁</div></label>
+      <label class="card"><input type="radio" name="color" value="roseGoldIvory"><div class="name">搭配色｜玫瑰金象牙暖白</div><div class="desc">花藝婚紗、細緻金屬與溫柔膚色</div></label>
+      <label class="card"><input type="radio" name="color" value="cocoaPearlWhite"><div class="name">搭配色｜可可珍珠暖白</div><div class="desc">室內肖像、復古高訂與柔和陰影</div></label>
+      <label class="card"><input type="radio" name="color" value="aiThemeScenePalette"><div class="name">AI 根據主題與場景判斷配色</div><div class="desc">自動選擇婚紗主色、輔色與克制點綴色</div></label>
     </div>
     <label class="field full custom-choice" style="margin-top:10px;">指定配色自填<input id="colorNote" type="text" placeholder="例如：奶油白、珍珠白、非常淡的香檳金"></label>
   </section>
@@ -711,7 +717,13 @@ const colorData = {
   iceBlueCrystalWhite: 'pale ice blue, crystal white and cool silver highlights',
   whitePlatinumGray: 'bridal white, platinum gray and soft neutral shadows',
   blackChampagneIvory: 'charcoal black, restrained champagne gold and warm ivory with a controlled couture contrast',
-  pearlCharcoalWhite: 'pearl gray, clean bridal white and charcoal shadow with a quiet premium archive balance'
+  pearlCharcoalWhite: 'pearl gray, clean bridal white and charcoal shadow with a quiet premium archive balance',
+  ivoryChampagneCharcoal: 'coordinated palette set of ivory white, champagne gold and charcoal gray with refined bridal couture contrast',
+  blushPearlTaupe: 'coordinated palette set of muted blush, pearl gray and warm taupe with romantic lace-editorial softness',
+  platinumIceBlue: 'coordinated palette set of platinum silver, pale ice blue and pearl white with cool archival bridal elegance',
+  roseGoldIvory: 'coordinated palette set of restrained rose gold, ivory white and soft blush with delicate floral bridal warmth',
+  cocoaPearlWhite: 'coordinated palette set of cocoa brown, pearl white and warm ivory with quiet vintage bridal portrait depth',
+  aiThemeScenePalette: window.HB_CORE_PROMPT?.controls?.autoColor || 'AI theme-aware color selection based on the selected bridal theme, gown, materials, lighting and background; choose one coherent dominant color, one supporting color and one restrained accent color while preserving lace readability, skin tone and premium editorial harmony'
 };
 const backgroundData = {
   creamSeamlessStudio: 'a seamless warm cream bridal studio backdrop, clean and softly graded',

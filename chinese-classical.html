@@ -358,7 +358,7 @@
       <label class="card"><input type="radio" name="lighting" value="jadeGalleryLight"><div class="name">黛青玉白畫廊側光</div><div class="desc">典藏畫廊、絲綢紋理與安靜陰影</div></label>
     </div>
     <div class="group-title">09B｜色彩系統</div>
-    <p class="hint">單選一組主色；可由下方自訂配色覆蓋。</p>
+    <p class="hint">單選一組主色或搭配色；AI 選項會依主題、服裝、光線與背景判斷，自訂配色填寫後優先。</p>
     <div class="grid grid-3" data-choice="colorPalette">
       <label class="card selected"><input type="radio" name="colorPalette" value="ivoryTea" checked><div class="name">米白與淡茶色</div><div class="desc">清雅、溫柔、適合漢風</div></label>
       <label class="card"><input type="radio" name="colorPalette" value="daiJade"><div class="name">黛青與月白</div><div class="desc">宋韻、冷靜、文人氣質</div></label>
@@ -375,6 +375,12 @@
       <label class="card"><input type="radio" name="colorPalette" value="peachJade"><div class="name">桃粉嫩玉色</div><div class="desc">清新、戀愛感與柔和古風</div></label>
       <label class="card"><input type="radio" name="colorPalette" value="lacquerBlackGold"><div class="name">漆黑鎏金</div><div class="desc">精品高訂、深色背景與控制金色</div></label>
       <label class="card"><input type="radio" name="colorPalette" value="jadeWhiteInk"><div class="name">黛青玉白</div><div class="desc">典藏畫廊、墨色與玉白質感</div></label>
+      <label class="card"><input type="radio" name="colorPalette" value="cinnabarJadeIvory"><div class="name">搭配色｜朱砂黛青月白</div><div class="desc">漢風古雅、文化感與柔和層次</div></label>
+      <label class="card"><input type="radio" name="colorPalette" value="inkGoldJade"><div class="name">搭配色｜墨黑鎏金玉白</div><div class="desc">新中式高訂、沉穩與精品對比</div></label>
+      <label class="card"><input type="radio" name="colorPalette" value="peachJadeMoon"><div class="name">搭配色｜桃粉嫩玉月白</div><div class="desc">青春古風、戀愛感與清透活力</div></label>
+      <label class="card"><input type="radio" name="colorPalette" value="bambooTeaIvory"><div class="name">搭配色｜竹青茶褐米白</div><div class="desc">江南庭院、自然材質與安靜暖調</div></label>
+      <label class="card"><input type="radio" name="colorPalette" value="plumSilverInk"><div class="name">搭配色｜梅紫淡銀墨灰</div><div class="desc">清冷冬景、文人質感與低飽和層次</div></label>
+      <label class="card"><input type="radio" name="colorPalette" value="aiThemeScenePalette"><div class="name">AI 根據主題與場景判斷配色</div><div class="desc">自動選擇主色、輔色與克制點綴色</div></label>
     </div>
     <label class="field">指定配色<input id="colorNote" type="text" placeholder="例如：月白、黛青、少量金色"></label>
   </section>
@@ -604,7 +610,13 @@ const colorPaletteData = {
   springPastel: 'soft spring pink, pale celadon, warm ivory and a restrained sky-blue accent',
   peachJade: 'peach blush, pale jade and moon white with low-saturation editorial balance',
   lacquerBlackGold: 'lacquer black, antique gold and warm ivory with controlled high-contrast luxury balance',
-  jadeWhiteInk: 'jade white, muted ink blue and soft charcoal with quiet archival elegance'
+  jadeWhiteInk: 'jade white, muted ink blue and soft charcoal with quiet archival elegance',
+  cinnabarJadeIvory: 'coordinated palette set of cinnabar red, muted jade and moon white with refined Han-inspired balance',
+  inkGoldJade: 'coordinated palette set of deep ink black, antique gold and jade white with restrained modern Chinese couture contrast',
+  peachJadeMoon: 'coordinated palette set of peach blush, fresh jade and moon white with youthful romantic classical energy',
+  bambooTeaIvory: 'coordinated palette set of bamboo green, tea brown and warm ivory with quiet Jiangnan garden harmony',
+  plumSilverInk: 'coordinated palette set of muted plum, soft silver and ink gray with cool scholarly elegance',
+  aiThemeScenePalette: window.HB_CORE_PROMPT?.controls?.autoColor || 'AI theme-aware color selection based on the selected theme, garment, materials, lighting and background; choose one coherent dominant color, one supporting color and one restrained accent color while preserving cultural context, material readability and premium editorial harmony'
 };
 
 const poseData = {

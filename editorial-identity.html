@@ -410,7 +410,7 @@
       <div class="section-label">07</div>
       <div class="section-title">色彩系統</div>
     </div>
-    <p class="hint">整頁只用一個主導色統一字體、圖形與版面，這是編輯設計維持高級感的關鍵。</p>
+    <p class="hint">單選一組主導色或搭配色統一字體、圖形與版面；AI 選項會依主題與畫面內容判斷配色。</p>
     <div class="grid grid-3" data-choice="color">
       <label class="card selected"><input type="radio" name="color" value="dominantBlack" checked><div class="name">純黑主導</div><div class="desc">黑色統一字體與圖形</div></label>
       <label class="card"><input type="radio" name="color" value="dominantWhite"><div class="name">純白極簡</div><div class="desc">近白極簡色調</div></label>
@@ -431,6 +431,12 @@
       <label class="card"><input type="radio" name="color" value="forestIvory"><div class="name">森林綠與米白</div><div class="desc">自然旅拍與季節寫真感</div></label>
       <label class="card"><input type="radio" name="color" value="filmWarm"><div class="name">底片暖色</div><div class="desc">寫真書與生活紀錄色調</div></label>
       <label class="card"><input type="radio" name="color" value="postcardColor"><div class="name">旅行明信片彩色</div><div class="desc">郵票、地圖與旅遊拼貼</div></label>
+      <label class="card"><input type="radio" name="color" value="blackChampagneIvorySet"><div class="name">搭配色｜黑金香檳象牙白</div><div class="desc">精品封面、沉穩對比與高級留白</div></label>
+      <label class="card"><input type="radio" name="color" value="coralPowderWhiteSet"><div class="name">搭配色｜珊瑚粉銀白</div><div class="desc">美顏廣告、柔光與清透商業感</div></label>
+      <label class="card"><input type="radio" name="color" value="indigoCobaltIvorySet"><div class="name">搭配色｜靛藍鈷藍象牙白</div><div class="desc">文化出版、旅遊封面與冷靜秩序</div></label>
+      <label class="card"><input type="radio" name="color" value="forestOliveCreamSet"><div class="name">搭配色｜森林橄欖奶油白</div><div class="desc">自然旅拍、生活寫真與柔和材質</div></label>
+      <label class="card"><input type="radio" name="color" value="silverLilacWhiteSet"><div class="name">搭配色｜銀灰薰衣草白</div><div class="desc">清冷美妝、時尚人物與細緻光感</div></label>
+      <label class="card"><input type="radio" name="color" value="aiThemeScenePalette"><div class="name">AI 根據主題與畫面判斷配色</div><div class="desc">自動選擇主導色、輔色與版面點綴色</div></label>
     </div>
   </section>
 
@@ -740,7 +746,13 @@ const colorData = {
   coastalBlueWhite: 'coastal blue and white color system with clean maritime travel-editorial brightness',
   forestIvory: 'forest green and ivory color system, calm natural travel and seasonal photobook palette',
   filmWarm: 'warm analog film color system with honey, muted red and soft cream accents',
-  postcardColor: 'bright travel-postcard color system combining clear blue, coral, sun yellow and paper white'
+  postcardColor: 'bright travel-postcard color system combining clear blue, coral, sun yellow and paper white',
+  blackChampagneIvorySet: 'coordinated palette set of black, champagne gold and ivory white for restrained luxury editorial hierarchy',
+  coralPowderWhiteSet: 'coordinated palette set of coral, powder pink and silver white for a clean premium beauty-campaign system',
+  indigoCobaltIvorySet: 'coordinated palette set of deep indigo, cobalt blue and ivory white for cultural publication clarity and visual order',
+  forestOliveCreamSet: 'coordinated palette set of forest green, olive and warm cream for natural travel and photobook editorial harmony',
+  silverLilacWhiteSet: 'coordinated palette set of silver gray, soft lilac and clean white for cool beauty and fashion editorial refinement',
+  aiThemeScenePalette: window.HB_CORE_PROMPT?.controls?.autoColor || 'AI theme-aware color selection based on the selected visual theme, image treatment, typography and composition; choose one coherent dominant color, one supporting color and one restrained accent color while preserving hierarchy and premium editorial clarity'
 };
 
 const imageTreatmentData = {

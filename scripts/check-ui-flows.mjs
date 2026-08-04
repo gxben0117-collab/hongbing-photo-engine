@@ -114,6 +114,33 @@ const AUTO_POSE_PAGES = new Set([
   'ancient-goddess.html',
 ]);
 
+const COLOR_SYSTEM_CONTRACTS = {
+  'chinese-classical.html': 'colorPalette',
+  'japanese-kimono.html': 'colorPalette',
+  'korean-hanbok.html': 'colorPalette',
+  'bridal-editorial.html': 'color',
+  'editorial-identity.html': 'color',
+};
+
+function checkColorSystemContract(page, source, groups) {
+  const groupName = COLOR_SYSTEM_CONTRACTS[page];
+  if (!groupName) return;
+  const group = groups.get(groupName);
+  if (!group) {
+    issue(page, `color system group "${groupName}" is missing`);
+    return;
+  }
+  if (!group.values.has('aiThemeScenePalette')) {
+    issue(page, 'color system is missing the AI theme-and-scene palette option');
+  }
+  const comboCount = (source.match(/class="name">搭配色｜/g) || []).length;
+  if (comboCount < 5) issue(page, `color system needs at least 5 coordinated palette sets, found ${comboCount}`);
+  if (!source.includes('AI 根據主題與場景判斷配色') && !source.includes('AI 根據主題與畫面判斷配色')) {
+    issue(page, 'color system is missing visible AI palette wording');
+  }
+  if (!source.includes('aiThemeScenePalette:')) issue(page, 'color system data is missing the AI palette prompt');
+}
+
 function checkSharedPortraitControlContract(page, source, groups) {
   if (SHARED_CAMERA_RATIO_PAGES.has(page)) {
     const camera = groups.get('camera');
@@ -593,6 +620,7 @@ for (const page of pages) {
   checkChoiceGroups(page, source, groups);
   checkCheckboxContracts(page, source);
   checkClassicalPageContract(page, source);
+  checkColorSystemContract(page, source, groups);
   checkGarmentDetailLayerContract(page, source, groups);
   checkPresetButtons(page, source);
   checkEditorialTemplateContract(page, source, groups);
