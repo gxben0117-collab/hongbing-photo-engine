@@ -1661,16 +1661,6 @@ const COMMON_TRAVEL_CAMERAS = {
   distantHero: 'distant hero advertising view, camera pulled back to show subject background and material environment together, spacious brand key visual perspective'
 };
 Object.assign(CAMERA_ANGLES, COMMON_TRAVEL_CAMERAS);
-const CAMERA_CONTROL_ALIASES = {
-  neutral: 'eyeLevelCover',
-  low: 'lowAngleHero',
-  high: 'highAngleOverhead',
-  soft_focus: 'softFocusGlow',
-  three_quarter_side: 'threeQuarterSide',
-  top_beauty: 'topBeauty',
-  distant_hero: 'distantHero'
-};
-
 const TRAVEL_LIGHTING_STYLES = {
 scene_natural:`【光影色彩｜場景自然光】
 
@@ -2145,10 +2135,9 @@ setupRadioCards('propCards');
 function setRadioCardValue(containerId, value){
   const container = document.getElementById(containerId);
   if(!container) return;
-  const canonicalValue = containerId === 'cameraCards' ? (CAMERA_CONTROL_ALIASES[value] || value) : value;
   container.querySelectorAll('.card').forEach(card=>{
     const input = card.querySelector('input');
-    const selected = card.dataset.value === canonicalValue;
+    const selected = card.dataset.value === value;
     card.classList.toggle('selected', selected);
     if(input) input.checked = selected;
   });
@@ -2209,7 +2198,7 @@ const QUICK_TRAVEL_PRESETS = {
     composition: 'B',
     style: 'japanese_clear',
     ratio: '3:4',
-    camera: 'three_quarter_side',
+    camera: 'threeQuarterSide',
     lighting: 'warm_window_soft',
     motion: 'breeze',
     media: 'travel_magazine',
@@ -2269,7 +2258,7 @@ const QUICK_TRAVEL_PRESETS = {
     composition: 'B',
     style: 'cinematic',
     ratio: '16:9',
-    camera: 'three_quarter_side',
+    camera: 'threeQuarterSide',
     lighting: 'backlit_halo',
     motion: 'breeze',
     media: 'cinematic_realistic',
@@ -2279,7 +2268,7 @@ const QUICK_TRAVEL_PRESETS = {
     composition: 'C',
     style: 'street',
     ratio: '9:16',
-    camera: 'low',
+    camera: 'lowAngleHero',
     lighting: 'rain_night_cool',
     motion: 'still',
     media: 'cinematic_realistic',
@@ -2289,7 +2278,7 @@ const QUICK_TRAVEL_PRESETS = {
     composition: 'C',
     style: 'japanese_clear',
     ratio: '3:4',
-    camera: 'neutral',
+    camera: 'eyeLevelCover',
     lighting: 'scene_natural',
     motion: 'breeze',
     media: 'travel_magazine',
@@ -2299,7 +2288,7 @@ const QUICK_TRAVEL_PRESETS = {
     composition: 'C',
     style: 'resort_hotel',
     ratio: '3:4',
-    camera: 'three_quarter_side',
+    camera: 'threeQuarterSide',
     lighting: 'golden_hour',
     motion: 'breeze',
     media: 'cinematic_realistic',
@@ -2325,7 +2314,7 @@ QUICK_TRAVEL_PRESETS.silkRoadBlueTiles = {
   composition: 'B',
   style: 'vintage',
   ratio: '3:4',
-  camera: 'soft_focus',
+  camera: 'softFocusGlow',
   lighting: 'scene_natural',
   motion: 'still',
   media: 'travel_magazine',
@@ -2357,14 +2346,14 @@ function applyTravelPreset(preset){
 
 
 const TRAVEL_STYLE_PRESET_DEFAULTS = {
-  japanese_clear: { camera: 'soft_focus', motion: 'breeze', media: 'cinematic_realistic' },
+  japanese_clear: { camera: 'softFocusGlow', motion: 'breeze', media: 'cinematic_realistic' },
   retro_film_travel: { camera: 'handheld_doc', motion: 'flow', media: 'retro_film' },
   resort_hotel: { camera: 'tele_compression', motion: 'breeze', media: 'travel_magazine' },
   natural_lifestyle: { camera: 'passerby_view', motion: 'flow', media: 'travel_magazine' },
   cinematic: { camera: 'backlit_silhouette', motion: 'dynamic', media: 'cinematic_realistic' },
   vintage: { camera: 'handheld_doc', motion: 'breeze', media: 'retro_film' },
   luxury: { camera: 'cover', motion: 'breeze', media: 'travel_magazine' },
-  ethereal: { camera: 'soft_focus', motion: 'breeze', media: 'postcard_illustration' }
+  ethereal: { camera: 'softFocusGlow', motion: 'breeze', media: 'postcard_illustration' }
 };
 
 function applyTravelStyleDefaults(styleValue){

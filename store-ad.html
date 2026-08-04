@@ -357,11 +357,11 @@
       </label>
       <label class="field">海報比例
         <select id="ratio">
-          <option value="vertical 4:5 social media poster">直式 4:5</option>
-          <option value="vertical 9:16 story poster">直式 9:16</option>
-          <option value="square 1:1 social media poster">方形 1:1</option>
-          <option value="A4 vertical print poster">A4 直式</option>
-          <option value="horizontal 16:9 banner poster">橫式 16:9（FB 封面 / 看板）</option>
+          <option value="4:5">直式 4:5</option>
+          <option value="9:16">直式 9:16</option>
+          <option value="1:1">方形 1:1</option>
+          <option value="A4">A4 直式</option>
+          <option value="16:9">橫式 16:9（FB 封面 / 看板）</option>
         </select>
       </label>
     </div>
@@ -593,6 +593,7 @@ function generate(){
   const industry = document.getElementById('industry').value;
   const logo = document.getElementById('logo').value;
   const ratio = document.getElementById('ratio').value;
+  const ratioPrompt = window.HB_CANONICAL_RATIO_PROMPTS?.[ratio] || ratio;
   const customColor = value('customColor');
   const slogan = value('slogan') || makeSlogan(industry, selected('campaign'));
   const extraNote = value('extraNote');
@@ -621,7 +622,7 @@ function generate(){
     '',
     '【出圖咒語】',
     [
-      `${ratio}, premium commercial poster for a ${industry},`,
+      `${ratioPrompt}, premium commercial poster for a ${industry},`,
       campaign.prompt + ',',
       festivalType ? festivalType + ',' : '',
       visual.prompt + ',',

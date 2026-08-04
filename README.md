@@ -4,7 +4,7 @@
 
 ## 版本
 
-v4.37 起持續迭代中；完整逐日開發記錄見 [docs/development-log.md](docs/development-log.md)。
+v4.38 起持續迭代中；完整逐日開發記錄見 [docs/development-log.md](docs/development-log.md)。
 
 v4.3 基礎重點：
 
@@ -94,6 +94,8 @@ v4.3 之後陸續完成（詳見開發日誌）：
 
 - [開發日誌](docs/development-log.md) — 現況與完整歷史記錄
 - [核心咒語保護契約](docs/core-prompt-contract.md) — 改咒語前必看
+- [工具頁分類與欄位契約](docs/tool-page-contracts.md) — 19 頁分類、欄位命名、比例值、Layer
+  與自訂要求鎖臉提示的正式契約
 
 其餘：[使用方式](docs/usage.md)｜[核心咒語邏輯](docs/core-logic.md)｜
 [底層保護核心](docs/shared-protection-core.md)｜[工程維護規劃](docs/engineering.md)｜

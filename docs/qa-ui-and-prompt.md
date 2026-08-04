@@ -44,9 +44,6 @@ git diff --check
   的決策順序契約，避免只改了 class 後畫面又回到舊順序。
 - 中式古典、和服、韓服三頁的自訂欄位必須位於對應控制區：服裝 03、材質／紋樣 04A、姿勢 07、
   配色 09B、背景 10；08 僅允許畫面強度與其他要求，背景資料必須包含 `pureWhiteBackground`。
-- 任何同時具備 `garmentChestVariation`、`garmentWaistVariation`、`garmentShoulderVariation`
-  的頁面，都必須提供 `garmentLayer` 的 layer0／layer3／layer6／layer9／random 五個值、
-  Layer 對照常數，以及保留已選部位後再補足未選部位的隨機邏輯。
 - 任何同時具備 `chestDetail`、`waistSideDetail`、`shoulderDetail` 的頁面，都必須提供同一組
   Layer 值、`GARMENT_DETAIL_LAYER_ZONES`、主題專屬 `GARMENT_DETAIL_RANDOM_POOLS`，並透過
   `assets/garment-core.js` 的共用 helper 保留手動部位、只補未選區域；每個主題專屬 key 必須同時
@@ -68,9 +65,8 @@ git diff --check
 
 - `拍攝角度與鏡頭感` 共用自然平視、低角度仰拍、高角度俯拍、柔焦光感、近距離美妝感、
   側臉輪廓感、斜側角度、高角度近景、遠距主視覺 9 組 canonical values。
-- `圖片比例` 共用 9:16、4:5、1:1、2:3、3:4、16:9、4:3、21:9 8 組比例；內部 ID 依幻想頁
-  使用 `vertical916`、`vertical45`、`square`、`poster23`、`vertical34`、`horizontal169`、
-  `horizontal43`、`wideBanner`，旅拍／雜誌使用相同顯示比例的字串值。
+- `圖片比例` 共用 9:16、4:5、1:1、2:3、3:4、16:9、4:3、21:9 8 組比例；UI、模板、
+  隨機資料與生成函式都直接使用這些可讀的文字值，不再維護第二套比例 ID。
 - `身形輪廓` 與 `改造強度 Layer` 在具備服裝三區改造的人像頁共用 5 組身形與
   `layer0`／`layer3`／`layer6`／`layer9`／`random`；Layer 只控制隨機套用的改造部位數。
 - `構圖取景` 的共同人像頁沿用幻想頁的主圖／偏側留空／材質包圍／斜線動態／對稱儀式／

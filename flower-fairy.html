@@ -1001,14 +1001,14 @@
     </div>
     <p class="hint">依發布用途選擇：直式適合人像與社群，橫式適合海報、橫幅或世界觀場景。</p>
     <div class="grid" data-choice="ratio">
-      <label class="card selected"><input type="radio" name="ratio" value="vertical916" checked><div class="name">9:16 直式</div><div class="desc">短影音封面、限動</div></label>
-      <label class="card"><input type="radio" name="ratio" value="vertical45"><div class="name">4:5 直式</div><div class="desc">IG / 小紅書貼文</div></label>
-      <label class="card"><input type="radio" name="ratio" value="square"><div class="name">1:1 方形</div><div class="desc">社群貼文主圖</div></label>
-      <label class="card"><input type="radio" name="ratio" value="poster23"><div class="name">2:3 海報</div><div class="desc">商業海報感</div></label>
-      <label class="card"><input type="radio" name="ratio" value="vertical34"><div class="name">3:4 直式</div><div class="desc">寫真海報、人物主視覺</div></label>
-      <label class="card"><input type="radio" name="ratio" value="horizontal169"><div class="name">16:9 橫式</div><div class="desc">網站橫幅、影片封面</div></label>
-      <label class="card"><input type="radio" name="ratio" value="horizontal43"><div class="name">4:3 橫式</div><div class="desc">橫式廣告、場景更完整</div></label>
-      <label class="card"><input type="radio" name="ratio" value="wideBanner"><div class="name">21:9 寬幅</div><div class="desc">電影感橫幅、品牌主視覺</div></label>
+      <label class="card selected"><input type="radio" name="ratio" value="9:16" checked><div class="name">9:16 直式</div><div class="desc">短影音封面、限動</div></label>
+      <label class="card"><input type="radio" name="ratio" value="4:5"><div class="name">4:5 直式</div><div class="desc">IG / 小紅書貼文</div></label>
+      <label class="card"><input type="radio" name="ratio" value="1:1"><div class="name">1:1 方形</div><div class="desc">社群貼文主圖</div></label>
+      <label class="card"><input type="radio" name="ratio" value="2:3"><div class="name">2:3 海報</div><div class="desc">商業海報感</div></label>
+      <label class="card"><input type="radio" name="ratio" value="3:4"><div class="name">3:4 直式</div><div class="desc">寫真海報、人物主視覺</div></label>
+      <label class="card"><input type="radio" name="ratio" value="16:9"><div class="name">16:9 橫式</div><div class="desc">網站橫幅、影片封面</div></label>
+      <label class="card"><input type="radio" name="ratio" value="4:3"><div class="name">4:3 橫式</div><div class="desc">橫式廣告、場景更完整</div></label>
+      <label class="card"><input type="radio" name="ratio" value="21:9"><div class="name">21:9 寬幅</div><div class="desc">電影感橫幅、品牌主視覺</div></label>
     </div>
   </section>
 
@@ -1614,14 +1614,14 @@ const cameraData = {
 };
 
 const ratioData = {
-  vertical916: 'aspect ratio 9:16, vertical social media cover composition',
-  vertical45: 'aspect ratio 4:5, vertical social media feed poster composition',
-  square: 'aspect ratio 1:1, square commercial campaign image',
-  poster23: 'aspect ratio 2:3, vertical luxury poster composition',
-  vertical34: 'aspect ratio 3:4, vertical portrait poster composition',
-  horizontal169: 'aspect ratio 16:9, horizontal website banner and video cover composition',
-  horizontal43: 'aspect ratio 4:3, horizontal commercial image with balanced subject and environment',
-  wideBanner: 'aspect ratio 21:9, cinematic wide luxury brand banner composition'
+  "9:16": 'aspect ratio 9:16, vertical social media cover composition',
+  "4:5": 'aspect ratio 4:5, vertical social media feed poster composition',
+  "1:1": 'aspect ratio 1:1, square commercial campaign image',
+  "2:3": 'aspect ratio 2:3, vertical luxury poster composition',
+  "3:4": 'aspect ratio 3:4, vertical portrait poster composition',
+  "16:9": 'aspect ratio 16:9, horizontal website banner and video cover composition',
+  "4:3": 'aspect ratio 4:3, horizontal commercial image with balanced subject and environment',
+  "21:9": 'aspect ratio 21:9, cinematic wide luxury brand banner composition'
 };
 
 function selected(name){
@@ -1664,84 +1664,84 @@ const themeTemplates = {
     garment: 'roseCrimsonGown', material: 'crimsonRosePetals', style: 'luxury',
     chestDetail: 'flowerCenterBodice', waistSideDetail: 'flowerClusterWaist', shoulderDetail: 'floralGarlandCape',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'hold_flower', camera: 'eyeLevelCover', lighting: 'soft', background: 'roseGardenTwilight', ratio: 'vertical45', wings: 'sheerFairyWings', butterflies: 'fewButterflies', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'threeQuarter', pose: 'hold_flower', camera: 'eyeLevelCover', lighting: 'soft', background: 'roseGardenTwilight', ratio: '4:5', wings: 'sheerFairyWings', butterflies: 'fewButterflies', intensity: 'balanced material effects, elegant and luxurious'
   },
   lilyFairyPurity: {
     garment: 'lilyIvoryGown', material: 'ivoryLilyPetals', style: 'clean',
     chestDetail: 'petalLayeredNeckline', waistSideDetail: 'petalOverskirtPanel', shoulderDetail: 'mistFloralSleeves',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'fairy_garden_kneel', camera: 'eyeLevelCover', lighting: 'soft', background: 'lilyPondReflection', ratio: 'vertical45', wings: 'lightWings', butterflies: 'none', intensity: 'subtle floating particles, refined couture details'
+    framing: 'threeQuarter', pose: 'fairy_garden_kneel', camera: 'eyeLevelCover', lighting: 'soft', background: 'lilyPondReflection', ratio: '4:5', wings: 'lightWings', butterflies: 'none', intensity: 'subtle floating particles, refined couture details'
   },
   lotusFairyPond: {
     garment: 'lotusAquaGown', material: 'lotusPondMist', style: 'editorial',
     chestDetail: 'vineWovenBodice', waistSideDetail: 'organicVineWrap', shoulderDetail: 'vineShoulderStraps',
     composition: 'subject surrounded by selected material environment, material wraps around foreground and background, immersive fantasy advertisement layout',
-    framing: 'threeQuarter', pose: 'water_sleeve', camera: 'threeQuarterSide', lighting: 'crystalDaylight', background: 'lotusPondMorning', ratio: 'vertical45', wings: 'sheerFairyWings', butterflies: 'fewButterflies', intensity: 'subtle floating particles, refined couture details'
+    framing: 'threeQuarter', pose: 'water_sleeve', camera: 'threeQuarterSide', lighting: 'crystalDaylight', background: 'lotusPondMorning', ratio: '4:5', wings: 'sheerFairyWings', butterflies: 'fewButterflies', intensity: 'subtle floating particles, refined couture details'
   },
   crapeMyrtleFairyDream: {
     garment: 'floralCrownGown', material: 'crapeMyrtlePurpleMist', style: 'cinematic',
     composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
-    framing: 'threeQuarter', pose: 'flower_crown_adjust', camera: 'eyeLevelCover', lighting: 'amethystSparkle', background: 'purpleGardenPavilion', ratio: 'vertical45', wings: 'crystalWings', butterflies: 'none', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'threeQuarter', pose: 'flower_crown_adjust', camera: 'eyeLevelCover', lighting: 'amethystSparkle', background: 'purpleGardenPavilion', ratio: '4:5', wings: 'crystalWings', butterflies: 'none', intensity: 'balanced material effects, elegant and luxurious'
   },
   sakuraFairySpring: {
     garment: 'windSweptPetalDress', material: 'sakuraPetalDrift', style: 'editorial',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
-    framing: 'threeQuarter', pose: 'petal_catch_reach', camera: 'eyeLevelCover', lighting: 'soft', background: 'sakuraAvenueBlossom', ratio: 'vertical45', wings: 'none', butterflies: 'none', intensity: 'subtle floating particles, refined couture details'
+    framing: 'threeQuarter', pose: 'petal_catch_reach', camera: 'eyeLevelCover', lighting: 'soft', background: 'sakuraAvenueBlossom', ratio: '4:5', wings: 'none', butterflies: 'none', intensity: 'subtle floating particles, refined couture details'
   },
   peonyFairyOpulence: {
     garment: 'peonyImperialGown', material: 'peonyGoldBloom', style: 'blackGold',
     composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
-    framing: 'threeQuarter', pose: 'center_still', camera: 'eyeLevelCover', lighting: 'darkGoldMood', background: 'peonyImperialCourtyard', ratio: 'vertical45', wings: 'none', butterflies: 'none', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'threeQuarter', pose: 'center_still', camera: 'eyeLevelCover', lighting: 'darkGoldMood', background: 'peonyImperialCourtyard', ratio: '4:5', wings: 'none', butterflies: 'none', intensity: 'balanced material effects, elegant and luxurious'
   },
   wisteriaFairyCascade: {
     garment: 'wisteriaCascadeGown', material: 'wisteriaCascadeVeil', style: 'cinematic',
     composition: 'subject surrounded by selected material environment, material wraps around foreground and background, immersive fantasy advertisement layout',
-    framing: 'threeQuarter', pose: 'recline_diagonal', camera: 'threeQuarterSide', lighting: 'moonlightCandle', background: 'wisteriaTunnelWalk', ratio: 'vertical45', wings: 'petalWings', butterflies: 'none', intensity: 'subtle floating particles, refined couture details'
+    framing: 'threeQuarter', pose: 'recline_diagonal', camera: 'threeQuarterSide', lighting: 'moonlightCandle', background: 'wisteriaTunnelWalk', ratio: '4:5', wings: 'petalWings', butterflies: 'none', intensity: 'subtle floating particles, refined couture details'
   },
   orchidFairyElegance: {
     garment: 'silkFloralBodice', material: 'orchidSilkSheen', style: 'clean',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'one_hand_waist', camera: 'eyeLevelCover', lighting: 'soft', background: 'orchidGreenhouse', ratio: 'vertical45', wings: 'none', butterflies: 'none', intensity: 'subtle floating particles, refined couture details'
+    framing: 'threeQuarter', pose: 'one_hand_waist', camera: 'eyeLevelCover', lighting: 'soft', background: 'orchidGreenhouse', ratio: '4:5', wings: 'none', butterflies: 'none', intensity: 'subtle floating particles, refined couture details'
   },
   camelliaFairyWinter: {
     garment: 'petalLayeredGown', material: 'camelliaWinterBlush', style: 'editorial',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'chin_rest', camera: 'eyeLevelCover', lighting: 'warmWindowSoft', background: 'camelliaWinterGarden', ratio: 'vertical45', wings: 'none', butterflies: 'none', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'threeQuarter', pose: 'chin_rest', camera: 'eyeLevelCover', lighting: 'warmWindowSoft', background: 'camelliaWinterGarden', ratio: '4:5', wings: 'none', butterflies: 'none', intensity: 'balanced material effects, elegant and luxurious'
   },
   hydrangeaFairyRainMist: {
     garment: 'dewMistGown', material: 'hydrangeaRainMist', style: 'artExhibit',
     composition: 'subject surrounded by selected material environment, material wraps around foreground and background, immersive fantasy advertisement layout',
-    framing: 'threeQuarter', pose: 'lift_veil', camera: 'threeQuarterSide', lighting: 'mist', background: 'hydrangeaRainGarden', ratio: 'vertical45', wings: 'sheerFairyWings', butterflies: 'none', intensity: 'subtle floating particles, refined couture details'
+    framing: 'threeQuarter', pose: 'lift_veil', camera: 'threeQuarterSide', lighting: 'mist', background: 'hydrangeaRainGarden', ratio: '4:5', wings: 'sheerFairyWings', butterflies: 'none', intensity: 'subtle floating particles, refined couture details'
   },
   lavenderFairyTwilight: {
     garment: 'floralWrapGown', material: 'lavenderFieldBreeze', style: 'cinematic',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
-    framing: 'threeQuarter', pose: 'arms_wide', camera: 'lowAngleHero', lighting: 'darkGoldMood', background: 'lavenderFieldHorizon', ratio: 'vertical45', wings: 'lightWings', butterflies: 'none', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'threeQuarter', pose: 'arms_wide', camera: 'lowAngleHero', lighting: 'darkGoldMood', background: 'lavenderFieldHorizon', ratio: '4:5', wings: 'lightWings', butterflies: 'none', intensity: 'balanced material effects, elegant and luxurious'
   },
   moonlightGardenGuardian: {
     garment: 'crystalCutoutGown', material: 'moonlitDewCrystal', style: 'cinematic',
     composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
-    framing: 'threeQuarter', pose: 'floating_ascension', camera: 'lowAngleHero', lighting: 'moonlightCandle', background: 'moonlitFlowerMeadow', ratio: 'vertical916', wings: 'crystalWings', butterflies: 'none', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'threeQuarter', pose: 'floating_ascension', camera: 'lowAngleHero', lighting: 'moonlightCandle', background: 'moonlitFlowerMeadow', ratio: '9:16', wings: 'crystalWings', butterflies: 'none', intensity: 'balanced material effects, elegant and luxurious'
   },
   butterflyGardenWhimsy: {
     garment: 'sheerPetalWingDress', material: 'butterflySwarmDrift', style: 'poster',
     composition: 'subject surrounded by selected material environment, material wraps around foreground and background, immersive fantasy advertisement layout',
-    framing: 'fullBody', pose: 'tiptoe', camera: 'eyeLevelCover', lighting: 'prismaticColor', background: 'butterflyCloudDrift', ratio: 'vertical34', wings: 'butterflyWings', butterflies: 'manyButterflies', intensity: 'subtle floating particles, refined couture details'
+    framing: 'fullBody', pose: 'tiptoe', camera: 'eyeLevelCover', lighting: 'prismaticColor', background: 'butterflyCloudDrift', ratio: '3:4', wings: 'butterflyWings', butterflies: 'manyButterflies', intensity: 'subtle floating particles, refined couture details'
   },
   crystalDewFairyMorning: {
     garment: 'crystalFramedCutoutBodice', material: 'lotusWaterDroplets', style: 'clean',
     composition: 'foreground material frame composition, selected material appears close to camera around the edges, subject remains clear in the center',
-    framing: 'threeQuarter', pose: 'hair_flip', camera: 'beautyCloseUp', lighting: 'crystalDaylight', background: 'crystalGreenhouseDome', ratio: 'vertical45', wings: 'crystalWings', butterflies: 'fewButterflies', intensity: 'subtle floating particles, refined couture details'
+    framing: 'threeQuarter', pose: 'hair_flip', camera: 'beautyCloseUp', lighting: 'crystalDaylight', background: 'crystalGreenhouseDome', ratio: '4:5', wings: 'crystalWings', butterflies: 'fewButterflies', intensity: 'subtle floating particles, refined couture details'
   },
   goldenPollenSunriseFairy: {
     garment: 'goldFiligreeOpenworkDress', material: 'goldenPollenDrift', style: 'blackGold',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
-    framing: 'threeQuarter', pose: 'arms_wide', camera: 'lowAngleHero', lighting: 'solarTempleGold', background: 'enchantedOrchard', ratio: 'vertical45', wings: 'lightWings', butterflies: 'none', intensity: 'massive explosive material splash, high speed frozen motion'
+    framing: 'threeQuarter', pose: 'arms_wide', camera: 'lowAngleHero', lighting: 'solarTempleGold', background: 'enchantedOrchard', ratio: '4:5', wings: 'lightWings', butterflies: 'none', intensity: 'massive explosive material splash, high speed frozen motion'
   },
   windBlossomDance: {
     garment: 'windSweptPetalDress', material: 'petalConfettiBurst', style: 'poster',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
-    framing: 'fullBody', pose: 'petal_storm_twirl', camera: 'lowAngleHero', lighting: 'hard', background: 'petalStormVoid', ratio: 'vertical916', wings: 'petalWings', butterflies: 'moderateButterflies', intensity: 'massive explosive material splash, high speed frozen motion'
+    framing: 'fullBody', pose: 'petal_storm_twirl', camera: 'lowAngleHero', lighting: 'hard', background: 'petalStormVoid', ratio: '9:16', wings: 'petalWings', butterflies: 'moderateButterflies', intensity: 'massive explosive material splash, high speed frozen motion'
   }
 };
 

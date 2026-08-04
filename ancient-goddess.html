@@ -905,14 +905,14 @@
     </div>
     <p class="hint">依發布用途選擇：直式適合人像與社群，橫式適合海報、橫幅或世界觀場景。</p>
     <div class="grid" data-choice="ratio">
-      <label class="card selected"><input type="radio" name="ratio" value="vertical916" checked><div class="name">9:16 直式</div><div class="desc">短影音封面、限動</div></label>
-      <label class="card"><input type="radio" name="ratio" value="vertical45"><div class="name">4:5 直式</div><div class="desc">IG / 小紅書貼文</div></label>
-      <label class="card"><input type="radio" name="ratio" value="square"><div class="name">1:1 方形</div><div class="desc">社群貼文主圖</div></label>
-      <label class="card"><input type="radio" name="ratio" value="poster23"><div class="name">2:3 海報</div><div class="desc">商業海報感</div></label>
-      <label class="card"><input type="radio" name="ratio" value="vertical34"><div class="name">3:4 直式</div><div class="desc">寫真海報、人物主視覺</div></label>
-      <label class="card"><input type="radio" name="ratio" value="horizontal169"><div class="name">16:9 橫式</div><div class="desc">網站橫幅、影片封面</div></label>
-      <label class="card"><input type="radio" name="ratio" value="horizontal43"><div class="name">4:3 橫式</div><div class="desc">橫式廣告、場景更完整</div></label>
-      <label class="card"><input type="radio" name="ratio" value="wideBanner"><div class="name">21:9 寬幅</div><div class="desc">電影感橫幅、品牌主視覺</div></label>
+      <label class="card selected"><input type="radio" name="ratio" value="9:16" checked><div class="name">9:16 直式</div><div class="desc">短影音封面、限動</div></label>
+      <label class="card"><input type="radio" name="ratio" value="4:5"><div class="name">4:5 直式</div><div class="desc">IG / 小紅書貼文</div></label>
+      <label class="card"><input type="radio" name="ratio" value="1:1"><div class="name">1:1 方形</div><div class="desc">社群貼文主圖</div></label>
+      <label class="card"><input type="radio" name="ratio" value="2:3"><div class="name">2:3 海報</div><div class="desc">商業海報感</div></label>
+      <label class="card"><input type="radio" name="ratio" value="3:4"><div class="name">3:4 直式</div><div class="desc">寫真海報、人物主視覺</div></label>
+      <label class="card"><input type="radio" name="ratio" value="16:9"><div class="name">16:9 橫式</div><div class="desc">網站橫幅、影片封面</div></label>
+      <label class="card"><input type="radio" name="ratio" value="4:3"><div class="name">4:3 橫式</div><div class="desc">橫式廣告、場景更完整</div></label>
+      <label class="card"><input type="radio" name="ratio" value="21:9"><div class="name">21:9 寬幅</div><div class="desc">電影感橫幅、品牌主視覺</div></label>
     </div>
   </section>
 
@@ -1400,14 +1400,14 @@ const cameraData = {
 };
 
 const ratioData = {
-  vertical916: 'aspect ratio 9:16, vertical social media cover composition',
-  vertical45: 'aspect ratio 4:5, vertical social media feed poster composition',
-  square: 'aspect ratio 1:1, square commercial campaign image',
-  poster23: 'aspect ratio 2:3, vertical luxury poster composition',
-  vertical34: 'aspect ratio 3:4, vertical portrait poster composition',
-  horizontal169: 'aspect ratio 16:9, horizontal website banner and video cover composition',
-  horizontal43: 'aspect ratio 4:3, horizontal commercial image with balanced subject and environment',
-  wideBanner: 'aspect ratio 21:9, cinematic wide luxury brand banner composition'
+  "9:16": 'aspect ratio 9:16, vertical social media cover composition',
+  "4:5": 'aspect ratio 4:5, vertical social media feed poster composition',
+  "1:1": 'aspect ratio 1:1, square commercial campaign image',
+  "2:3": 'aspect ratio 2:3, vertical luxury poster composition',
+  "3:4": 'aspect ratio 3:4, vertical portrait poster composition',
+  "16:9": 'aspect ratio 16:9, horizontal website banner and video cover composition',
+  "4:3": 'aspect ratio 4:3, horizontal commercial image with balanced subject and environment',
+  "21:9": 'aspect ratio 21:9, cinematic wide luxury brand banner composition'
 };
 
 function selected(name){
@@ -1450,84 +1450,84 @@ const themeTemplates = {
     garment: 'goldLaurelArmorGown', material: 'divineHaloGlow', style: 'mythologyEpicPoster',
     chestDetail: 'engravedPectoral', waistSideDetail: 'goldLeafWaistBand', shoulderDetail: 'engravedOneShoulder',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'offering_gesture_goddess', camera: 'eyeLevelCover', lighting: 'halo', background: 'marbleTempleColumnHall', ratio: 'vertical45', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'threeQuarter', pose: 'offering_gesture_goddess', camera: 'eyeLevelCover', lighting: 'halo', background: 'marbleTempleColumnHall', ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
   },
   marbleTempleAltar: {
     garment: 'drapedChitonTogaGown', material: 'ancientBronzePatina', style: 'archaeologicalArtGallery',
     chestDetail: 'pleatedSculpturalBodice', waistSideDetail: 'classicalSideDrapery', shoulderDetail: 'classicalDrapePin',
     composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
-    framing: 'fullBody', pose: 'temple_column_lean', camera: 'lowAngleHero', lighting: 'hard', background: 'mediterraneanTempleTwilight', ratio: 'vertical916', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'fullBody', pose: 'temple_column_lean', camera: 'lowAngleHero', lighting: 'hard', background: 'mediterraneanTempleTwilight', ratio: '9:16', intensity: 'balanced material effects, elegant and luxurious'
   },
   laurelVictoryCrown: {
     garment: 'laurelSashDrapedGown', material: 'laurelWreathCrown', style: 'cleanDivineMinimal',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'center_still', camera: 'eyeLevelCover', lighting: 'soft', background: 'aegeanCliffsideRuins', ratio: 'vertical45', intensity: 'subtle floating particles, refined couture details'
+    framing: 'threeQuarter', pose: 'center_still', camera: 'eyeLevelCover', lighting: 'soft', background: 'aegeanCliffsideRuins', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
   },
   aegeanSeaGoddess: {
     garment: 'oceanShellCorsetGown', material: 'starfieldCelestialDust', style: 'museumRelicPhotography',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
-    framing: 'threeQuarter', pose: 'contrapposto', camera: 'threeQuarterSide', lighting: 'crystalDaylight', background: 'aegeanCliffsideRuins', ratio: 'vertical34', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'threeQuarter', pose: 'contrapposto', camera: 'threeQuarterSide', lighting: 'crystalDaylight', background: 'aegeanCliffsideRuins', ratio: '3:4', intensity: 'balanced material effects, elegant and luxurious'
   },
   wisdomShieldGuardian: {
     garment: 'goldenBreastplateGown', material: 'ancientSwordProp', style: 'cinematicMythEpic',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
-    framing: 'fullBody', pose: 'sword_guard_stance', camera: 'lowAngleHero', lighting: 'hard', background: 'marbleTempleColumnHall', ratio: 'vertical916', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'fullBody', pose: 'sword_guard_stance', camera: 'lowAngleHero', lighting: 'hard', background: 'marbleTempleColumnHall', ratio: '9:16', intensity: 'balanced material effects, elegant and luxurious'
   },
   roseGardenLoveGoddess: {
     garment: 'flowingPeplosGown', material: 'gemstoneInlayAccent', style: 'mysticTwilightRomance',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'hold_flower', camera: 'eyeLevelCover', lighting: 'soft', background: 'oliveGroveTempleCourtyard', ratio: 'vertical45', intensity: 'subtle floating particles, refined couture details'
+    framing: 'threeQuarter', pose: 'hold_flower', camera: 'eyeLevelCover', lighting: 'soft', background: 'oliveGroveTempleCourtyard', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
   },
   starlitOraclePriestess: {
     garment: 'smokeVeilCelestialGown', material: 'starfieldCelestialDust', style: 'mysticTwilightRomance',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'lift_veil', camera: 'softFocusGlow', lighting: 'starfieldColdBlue', background: 'starfieldSacredVoid', ratio: 'vertical45', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'threeQuarter', pose: 'lift_veil', camera: 'softFocusGlow', lighting: 'starfieldColdBlue', background: 'starfieldSacredVoid', ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
   },
   goldenBattleArmorGoddess: {
     garment: 'crystalStarforgeArmorGown', material: 'ancientSwordProp', style: 'cinematicMythEpic',
     chestDetail: 'shellSculpturalBodice', waistSideDetail: 'ceremonialGemWaistChain', shoulderDetail: 'warriorGoddessShoulder',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
-    framing: 'fullBody', pose: 'sword_guard_stance', camera: 'lowAngleHero', lighting: 'cold', background: 'mountOlympusCloudPeak', ratio: 'vertical916', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'fullBody', pose: 'sword_guard_stance', camera: 'lowAngleHero', lighting: 'cold', background: 'mountOlympusCloudPeak', ratio: '9:16', intensity: 'balanced material effects, elegant and luxurious'
   },
   dunhuangFlyingMusician: {
     garment: 'pipaSilkSleeveGown', material: 'pipaLuteProp', style: 'classicalPainterly',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'pipa_reverse_play', camera: 'threeQuarterSide', lighting: 'darkGoldMood', background: 'dunhuangCaveTempleNiche', ratio: 'vertical45', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'threeQuarter', pose: 'pipa_reverse_play', camera: 'threeQuarterSide', lighting: 'darkGoldMood', background: 'dunhuangCaveTempleNiche', ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
   },
   muralNicheHalo: {
     garment: 'muralGoldHaloRobe', material: 'goldMuralLineArt', style: 'sacredGoldCampaign',
     composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
-    framing: 'bustPortrait', pose: 'offering_gesture_goddess', camera: 'beautyCloseUp', lighting: 'palaceNightWarm', background: 'muralCeilingLotusDome', ratio: 'vertical45', intensity: 'subtle floating particles, refined couture details'
+    framing: 'bustPortrait', pose: 'offering_gesture_goddess', camera: 'beautyCloseUp', lighting: 'palaceNightWarm', background: 'muralCeilingLotusDome', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
   },
   silkRoadCaravanGoddess: {
     garment: 'silkRoadJewelSashRobe', material: 'indigoSilkRibbonFlow', style: 'museumRelicPhotography',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
-    framing: 'fullBody', pose: 'ribbon_windblown_dance', camera: 'threeQuarterSide', lighting: 'holyMistBeam', background: 'silkRoadDesertOasis', ratio: 'horizontal169', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'fullBody', pose: 'ribbon_windblown_dance', camera: 'threeQuarterSide', lighting: 'holyMistBeam', background: 'silkRoadDesertOasis', ratio: '16:9', intensity: 'balanced material effects, elegant and luxurious'
   },
   caveTempleDonor: {
     garment: 'caveTempleBrocadeRobe', material: 'muralFadedFresco', style: 'archaeologicalArtGallery',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'halfBody', pose: 'hand_chest', camera: 'eyeLevelCover', lighting: 'soft', background: 'cliffCarvedBuddhaNiche', ratio: 'vertical45', intensity: 'subtle floating particles, refined couture details'
+    framing: 'halfBody', pose: 'hand_chest', camera: 'eyeLevelCover', lighting: 'soft', background: 'cliffCarvedBuddhaNiche', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
   },
   pipaReverseFlying: {
     garment: 'flyingRibbonSilkRobe', material: 'pipaLuteProp', style: 'cinematicMythEpic',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
-    framing: 'fullBody', pose: 'pipa_reverse_play', camera: 'threeQuarterSide', lighting: 'amethystCandleGlow', background: 'muralCeilingLotusDome', ratio: 'vertical916', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'fullBody', pose: 'pipa_reverse_play', camera: 'threeQuarterSide', lighting: 'amethystCandleGlow', background: 'muralCeilingLotusDome', ratio: '9:16', intensity: 'balanced material effects, elegant and luxurious'
   },
   riverGoddessOffering: {
     garment: 'lotusThroneSilkGown', material: 'goldChaliceVessel', style: 'divineBeautyCampaign',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'halfBody', pose: 'offering_gesture_goddess', camera: 'beautyCloseUp', lighting: 'moonSilverReflect', background: 'moonlitSacredLake', ratio: 'vertical45', intensity: 'subtle floating particles, refined couture details'
+    framing: 'halfBody', pose: 'offering_gesture_goddess', camera: 'beautyCloseUp', lighting: 'moonSilverReflect', background: 'moonlitSacredLake', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
   },
   lanternMuralTwilight: {
     garment: 'goldenCrownVeilRobe', material: 'incenseSmokeCurl', style: 'mysticTwilightRomance',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
-    framing: 'threeQuarter', pose: 'lean', camera: 'eyeLevelCover', lighting: 'candleStarContrast', background: 'incenseHallGoldenLantern', ratio: 'vertical45', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'threeQuarter', pose: 'lean', camera: 'eyeLevelCover', lighting: 'candleStarContrast', background: 'incenseHallGoldenLantern', ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
   },
   sacredIncenseRitual: {
     garment: 'muralRibbonCapeGown', material: 'incenseSmokeCurl', style: 'sacredGoldCampaign',
     composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
-    framing: 'fullBody', pose: 'ribbon_windblown_dance', camera: 'lowAngleHero', lighting: 'stage', background: 'incenseHallGoldenLantern', ratio: 'vertical916', intensity: 'balanced material effects, elegant and luxurious'
+    framing: 'fullBody', pose: 'ribbon_windblown_dance', camera: 'lowAngleHero', lighting: 'stage', background: 'incenseHallGoldenLantern', ratio: '9:16', intensity: 'balanced material effects, elegant and luxurious'
   }
 };
 

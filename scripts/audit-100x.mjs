@@ -245,9 +245,9 @@ const core = evalCore(coreSource);
     background: Object.keys(data.backgroundData), lighting: Object.keys(data.lightingData), composition: compositionValues,
     framing: Object.keys(data.framingData), intensity: intensityValues, pose: Object.keys(data.poseData),
     style: Object.keys(data.styleData), camera: Object.keys(data.cameraData), ratio: Object.keys(data.ratioData),
-    garmentChestVariation: Object.keys(data.FANTASY_GARMENT_VARIATIONS.chest),
-    garmentWaistVariation: Object.keys(data.FANTASY_GARMENT_VARIATIONS.waist),
-    garmentShoulderVariation: Object.keys(data.FANTASY_GARMENT_VARIATIONS.shoulder),
+    chestDetail: Object.keys(data.FANTASY_GARMENT_VARIATIONS.chestDetail),
+    waistSideDetail: Object.keys(data.FANTASY_GARMENT_VARIATIONS.waistSideDetail),
+    shoulderDetail: Object.keys(data.FANTASY_GARMENT_VARIATIONS.shoulderDetail),
   };
   const customSamples = ['', '', 'watercolor splash', '手工訂製'];
   for (let i = 0; i < N; i += 1) {
@@ -256,9 +256,9 @@ const core = evalCore(coreSource);
       background: pick(pools.background), lighting: pick(pools.lighting), composition: pick(pools.composition),
       framing: pick(pools.framing), intensity: pick(pools.intensity), pose: pick(pools.pose), style: pick(pools.style),
       camera: pick(pools.camera), ratio: pick(pools.ratio),
-      garmentChestVariation: pick(pools.garmentChestVariation),
-      garmentWaistVariation: pick(pools.garmentWaistVariation),
-      garmentShoulderVariation: pick(pools.garmentShoulderVariation),
+      chestDetail: pick(pools.chestDetail),
+      waistSideDetail: pick(pools.waistSideDetail),
+      shoulderDetail: pick(pools.shoulderDetail),
       customMaterial: pick(customSamples), customGarment: pick(customSamples),
       colorNote: pick(customSamples), extraNote: pick(customSamples),
     };
@@ -274,9 +274,9 @@ const core = evalCore(coreSource);
     const materialPalette = customMaterials.length ? `derive the color palette only from custom material keywords: ${customMaterialText}` : material.palette;
     const garmentText = sel.customGarment ? `custom garment form only: ${sel.customGarment}; do not include or blend any preset garment option` : data.garmentData[sel.garment];
     const garmentVariationParts = [
-      data.FANTASY_GARMENT_VARIATIONS.chest[sel.garmentChestVariation],
-      data.FANTASY_GARMENT_VARIATIONS.waist[sel.garmentWaistVariation],
-      data.FANTASY_GARMENT_VARIATIONS.shoulder[sel.garmentShoulderVariation],
+      data.FANTASY_GARMENT_VARIATIONS.chestDetail[sel.chestDetail],
+      data.FANTASY_GARMENT_VARIATIONS.waistSideDetail[sel.waistSideDetail],
+      data.FANTASY_GARMENT_VARIATIONS.shoulderDetail[sel.shoulderDetail],
     ].filter(Boolean);
     const garmentVariationBlock = garmentVariationParts.length
       ? `【服裝改造核心】\n\n${garmentVariationParts.join('\n')}`
@@ -322,9 +322,9 @@ const core = evalCore(coreSource);
     material: Object.keys(data.materialData),
     accessory: Object.keys(data.accessoryData),
     garment: Object.keys(data.garmentData),
-    chest: Object.keys(data.GARMENT_VARIATIONS.chest),
-    waist: Object.keys(data.GARMENT_VARIATIONS.waist),
-    shoulder: Object.keys(data.GARMENT_VARIATIONS.shoulder),
+    chestDetail: Object.keys(data.GARMENT_VARIATIONS.chestDetail),
+    waistSideDetail: Object.keys(data.GARMENT_VARIATIONS.waistSideDetail),
+    shoulderDetail: Object.keys(data.GARMENT_VARIATIONS.shoulderDetail),
     background: Object.keys(data.backgroundData),
     lighting: Object.keys(data.lightingData),
     color: Object.keys(data.colorPaletteData),
@@ -342,9 +342,9 @@ const core = evalCore(coreSource);
       material2: pick(pools.material),
       accessory: pick(pools.accessory),
       garment: pick(pools.garment),
-      chest: pick(pools.chest),
-      waist: pick(pools.waist),
-      shoulder: pick(pools.shoulder),
+      chestDetail: pick(pools.chestDetail),
+      waistSideDetail: pick(pools.waistSideDetail),
+      shoulderDetail: pick(pools.shoulderDetail),
       background: pick(pools.background),
       lighting: pick(pools.lighting),
       color: pick(pools.color),
@@ -360,9 +360,9 @@ const core = evalCore(coreSource);
     const materialPalette = materialKeys.map(key => data.materialData[key].palette).join(', ');
     const accessoryText = data.accessoryData[sel.accessory];
     const variationParts = [
-      data.GARMENT_VARIATIONS.chest[sel.chest],
-      data.GARMENT_VARIATIONS.waist[sel.waist],
-      data.GARMENT_VARIATIONS.shoulder[sel.shoulder],
+      data.GARMENT_VARIATIONS.chestDetail[sel.chestDetail],
+      data.GARMENT_VARIATIONS.waistSideDetail[sel.waistSideDetail],
+      data.GARMENT_VARIATIONS.shoulderDetail[sel.shoulderDetail],
     ].filter(Boolean);
     const output = [
       data.identityGuard + ',',
@@ -410,15 +410,15 @@ function auditClassicalCulturePage({ file, pageKey, label, cultureLine, material
   const compositionValues = [...radioValues(html, 'composition')];
   const pools = {
     bodyShape: Object.keys(data.BODY_SHAPES), material: Object.keys(data.materialData), accessory: Object.keys(data.accessoryData),
-    garment: Object.keys(data.garmentData), chest: Object.keys(data.GARMENT_VARIATIONS.chest), waist: Object.keys(data.GARMENT_VARIATIONS.waist),
-    shoulder: Object.keys(data.GARMENT_VARIATIONS.shoulder), background: Object.keys(data.backgroundData), lighting: Object.keys(data.lightingData),
+    garment: Object.keys(data.garmentData), chestDetail: Object.keys(data.GARMENT_VARIATIONS.chestDetail), waistSideDetail: Object.keys(data.GARMENT_VARIATIONS.waistSideDetail),
+    shoulderDetail: Object.keys(data.GARMENT_VARIATIONS.shoulderDetail), background: Object.keys(data.backgroundData), lighting: Object.keys(data.lightingData),
     color: Object.keys(data.colorPaletteData), composition: compositionValues,
     framing: Object.keys(data.framingData), pose: Object.keys(data.poseData), style: Object.keys(data.styleData), camera: Object.keys(data.cameraData), ratio: Object.keys(data.ratioData),
   };
   for (let i = 0; i < N; i += 1) {
     const sel = {
       bodyShape: pick(pools.bodyShape), material: pick(pools.material), material2: pick(pools.material), accessory: pick(pools.accessory), garment: pick(pools.garment),
-      chest: pick(pools.chest), waist: pick(pools.waist), shoulder: pick(pools.shoulder), background: pick(pools.background), lighting: pick(pools.lighting),
+      chestDetail: pick(pools.chestDetail), waistSideDetail: pick(pools.waistSideDetail), shoulderDetail: pick(pools.shoulderDetail), background: pick(pools.background), lighting: pick(pools.lighting),
       color: pick(pools.color), composition: pick(pools.composition), framing: pick(pools.framing), pose: pick(pools.pose),
       style: pick(pools.style), camera: pick(pools.camera), ratio: pick(pools.ratio),
     };
@@ -426,7 +426,7 @@ function auditClassicalCulturePage({ file, pageKey, label, cultureLine, material
     const materialText = materialKeys.map(key => data.materialData[key].prompt).join('; ');
     const materialPalette = materialKeys.map(key => data.materialData[key].palette).join(', ');
     const accessoryText = data.accessoryData[sel.accessory];
-    const variationParts = [data.GARMENT_VARIATIONS.chest[sel.chest], data.GARMENT_VARIATIONS.waist[sel.waist], data.GARMENT_VARIATIONS.shoulder[sel.shoulder]].filter(Boolean);
+    const variationParts = [data.GARMENT_VARIATIONS.chestDetail[sel.chestDetail], data.GARMENT_VARIATIONS.waistSideDetail[sel.waistSideDetail], data.GARMENT_VARIATIONS.shoulderDetail[sel.shoulderDetail]].filter(Boolean);
     const output = [
       data.identityGuard + ',',
       data.anatomyGuard + ',', data.poseNaturalityGuard + ',',
@@ -1434,11 +1434,11 @@ const garmentThemeContracts = [
   { file: 'bridal-editorial.html', pool: 'GARMENT_DETAIL_RANDOM_POOLS', fields: ['chestDetail', 'waistSideDetail', 'shoulderDetail'], keys: ['sweetheartCorset', 'deepVBridalNeckline', 'laceIllusionBodice', 'drapedOffShoulderBodice', 'sculptedWaistCorsetry', 'pearlWaistApplique', 'drapedWaistPleats', 'detachableOverskirtWaist', 'softOffShoulderTulle', 'singleShoulderBridalCut', 'laceCapSleeve', 'detachableTulleSleeve'], presets: ['koreanCreamStudio', 'royalCathedralTrain', 'pearlVeilBeautyCloseup'] },
   { file: 'isekai-fantasy.html', pool: 'GARMENT_DETAIL_RANDOM_POOLS', fields: ['chestDetail', 'waistSideDetail', 'shoulderDetail'], keys: ['leatherCrossStraps', 'runeProtectiveChest', 'saintessLayeredCollar', 'royalJeweledFront', 'adventurerUtilityBelt', 'potionSidePouches', 'layeredBattleSkirtArmor', 'runeEmbroideredSash', 'lightPauldron', 'shortCapeShoulderClasp', 'saintessMantle', 'elvenLeafShoulderGuard'], presets: ['heroTravelerJourney', 'swordmaidenDuelReady', 'archmageSpellcast'] },
   { file: 'kpop-idol.html', pool: 'GARMENT_DETAIL_RANDOM_POOLS', fields: ['chestDetail', 'waistSideDetail', 'shoulderDetail'], keys: ['stageZipperBodice', 'rhinestoneStrapBodice', 'asymmetricCroppedTop', 'sequinedHalterBodice', 'rhinestoneWaistChain', 'stageCorsetBelt', 'pleatedPerformanceWaist', 'fringeWaistAccent', 'oneSleevePerformance', 'croppedBoleroShoulder', 'rhinestoneShoulderStrap', 'fringedEpaulettes'], presets: ['comebackTeaserPoster', 'livePerformanceEnergy', 'minimalRunwayChic'] },
-  { file: 'chinese-classical.html', pool: 'GARMENT_VARIATION_RANDOM_POOLS', fields: ['garmentChestVariation', 'garmentWaistVariation', 'garmentShoulderVariation'], keys: ['layeredCrossCollar', 'standingCollarKnots', 'embroideredCollarGuard', 'cloudCollarPanel', 'wovenSilkSash', 'jadePendantDrop', 'mamianSidePleats', 'layeredWrapWaist', 'cloudShoulderOverlay', 'silkShawlDrape', 'wideSleeveShoulderLine', 'modernChineseCapelet'], presets: ['hanCourtyard', 'hanModernCouture', 'songScholarStudy'] },
-  { file: 'japanese-kimono.html', pool: 'GARMENT_VARIATION_RANDOM_POOLS', fields: ['garmentChestVariation', 'garmentWaistVariation', 'garmentShoulderVariation'], keys: ['eriLayeredCollar', 'haneriInsert', 'dateEriLayer', 'modernAsymKimonoCollar', 'maruObiStructure', 'obijimeKnot', 'obiageFold', 'sideTaikoObi', 'furisodeSleeveLine', 'haoriLayer', 'sheerKimonoSleeve', 'modernKimonoCapelet'], presets: ['heianCourt', 'edoFurisodeSakura', 'modernKimonoStudio'] },
-  { file: 'korean-hanbok.html', pool: 'GARMENT_VARIATION_RANDOM_POOLS', fields: ['garmentChestVariation', 'garmentWaistVariation', 'garmentShoulderVariation'], keys: ['dongjeongCollar', 'goreumKnot', 'jeogoriEmbroideryPanel', 'modernSquareJeogori', 'chimaHighWaist', 'norigaeWaistDrop', 'layeredChimaBand', 'modernHanbokWaistband', 'roundedSleeveShoulder', 'baejaLayer', 'wonsamSheerLayer', 'modernHanbokCapelet'], presets: ['scholarPastelStudy', 'royalDanguiPalace', 'modernDailyHanbok'] },
-  { file: 'fantasy-fashion.html', pool: 'GARMENT_VARIATION_RANDOM_POOLS', fields: ['garmentChestVariation', 'garmentWaistVariation', 'garmentShoulderVariation'], keys: ['liquidMetalBodice', 'facetedCrystalNeckline', 'resinInset', 'suspendedMaterialBodice', 'mirroredMetalWaist', 'sculpturalMaterialWaist', 'crystalWaistBelt', 'asymMaterialDrape', 'architecturalShoulder', 'crystalShoulderGuard', 'materialPetalShoulder', 'floatingRingShoulder'], presets: ['redPaperWedding', 'obsidianRoseJewelry', 'pearlMoonBridal'] },
-  { file: 'magazine.html', pool: 'GARMENT_VARIATION_RANDOM_POOLS', fields: ['garmentChestVariation', 'garmentWaistVariation', 'garmentShoulderVariation'], keys: ['cowlNeckline', 'portraitCollar', 'editorialCorset', 'sculpturalAsymNeckline', 'tailoredLapelBodice', 'coutureWaistDrape', 'sculpturalWaistBelt', 'architecturalPeplum', 'statementMetalBelt', 'asymmetricDrapedPanel', 'coutureShoulderCape', 'statementShoulderLine', 'featherShoulderAccent', 'structuredPuffSleeve', 'jewelShoulderStrap'], presets: ['blackGoldBeauty', 'jewelryCoolCover', 'hanfuWindowEditorial'] },
+  { file: 'chinese-classical.html', pool: 'GARMENT_DETAIL_RANDOM_POOLS', fields: ['chestDetail', 'waistSideDetail', 'shoulderDetail'], keys: ['layeredCrossCollar', 'standingCollarKnots', 'embroideredCollarGuard', 'cloudCollarPanel', 'wovenSilkSash', 'jadePendantDrop', 'mamianSidePleats', 'layeredWrapWaist', 'cloudShoulderOverlay', 'silkShawlDrape', 'wideSleeveShoulderLine', 'modernChineseCapelet'], presets: ['hanCourtyard', 'hanModernCouture', 'songScholarStudy'] },
+  { file: 'japanese-kimono.html', pool: 'GARMENT_DETAIL_RANDOM_POOLS', fields: ['chestDetail', 'waistSideDetail', 'shoulderDetail'], keys: ['eriLayeredCollar', 'haneriInsert', 'dateEriLayer', 'modernAsymKimonoCollar', 'maruObiStructure', 'obijimeKnot', 'obiageFold', 'sideTaikoObi', 'furisodeSleeveLine', 'haoriLayer', 'sheerKimonoSleeve', 'modernKimonoCapelet'], presets: ['heianCourt', 'edoFurisodeSakura', 'modernKimonoStudio'] },
+  { file: 'korean-hanbok.html', pool: 'GARMENT_DETAIL_RANDOM_POOLS', fields: ['chestDetail', 'waistSideDetail', 'shoulderDetail'], keys: ['dongjeongCollar', 'goreumKnot', 'jeogoriEmbroideryPanel', 'modernSquareJeogori', 'chimaHighWaist', 'norigaeWaistDrop', 'layeredChimaBand', 'modernHanbokWaistband', 'roundedSleeveShoulder', 'baejaLayer', 'wonsamSheerLayer', 'modernHanbokCapelet'], presets: ['scholarPastelStudy', 'royalDanguiPalace', 'modernDailyHanbok'] },
+  { file: 'fantasy-fashion.html', pool: 'GARMENT_DETAIL_RANDOM_POOLS', fields: ['chestDetail', 'waistSideDetail', 'shoulderDetail'], keys: ['liquidMetalBodice', 'facetedCrystalNeckline', 'resinInset', 'suspendedMaterialBodice', 'mirroredMetalWaist', 'sculpturalMaterialWaist', 'crystalWaistBelt', 'asymMaterialDrape', 'architecturalShoulder', 'crystalShoulderGuard', 'materialPetalShoulder', 'floatingRingShoulder'], presets: ['redPaperWedding', 'obsidianRoseJewelry', 'pearlMoonBridal'] },
+  { file: 'magazine.html', pool: 'GARMENT_DETAIL_RANDOM_POOLS', fields: ['chestDetail', 'waistSideDetail', 'shoulderDetail'], keys: ['cowlNeckline', 'portraitCollar', 'editorialCorset', 'sculpturalAsymNeckline', 'tailoredLapelBodice', 'coutureWaistDrape', 'sculpturalWaistBelt', 'architecturalPeplum', 'statementMetalBelt', 'asymmetricDrapedPanel', 'coutureShoulderCape', 'statementShoulderLine', 'featherShoulderAccent', 'structuredPuffSleeve', 'jewelShoulderStrap'], presets: ['blackGoldBeauty', 'jewelryCoolCover', 'hanfuWindowEditorial'] },
 ];
 
 for (const contract of garmentThemeContracts) {

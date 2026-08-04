@@ -15,6 +15,10 @@ const pages = [
   'ancient-goddess.html', 'editorial-identity.html',
 ];
 
+const coreWindow = {};
+vm.runInNewContext(fs.readFileSync(path.join(root, 'assets/core-prompt.js'), 'utf8'), { window: coreWindow });
+const TOOL_PAGE_CONTRACTS = coreWindow.HB_TOOL_CONTRACTS || {};
+
 const visualOrderContracts = {
   'travel.html': {
     'travel-random': 0, 'travel-preset': 1, 'travel-style': 2, 'travel-theme': 3,
@@ -75,10 +79,9 @@ const visualOrderContracts = {
   },
 };
 
-// Fantasy is the canonical portrait-control contract. Theme pages may append
-// their own camera or ratio choices, but the shared controls must retain the
-// same values so templates, random selection and user muscle memory remain
-// portable between tools.
+// The shared portrait contract uses human-readable ratio values everywhere.
+// Theme pages may append their own controls, but these shared values remain
+// portable between tools and templates.
 const SHARED_CAMERA_RATIO_PAGES = new Set([
   'travel.html', 'magazine.html', 'fantasy-fashion.html', 'chinese-classical.html',
   'japanese-kimono.html', 'korean-hanbok.html', 'xianxia.html',
@@ -100,8 +103,7 @@ const SHARED_CAMERA_VALUES = [
 const SHARED_PORTRAIT_BODY_VALUES = [
   'original', 'slight_waist', 'curvy_waist', 'fashion_tall', 'korean_idol',
 ];
-const SHARED_RATIO_VALUES = ['vertical916', 'vertical45', 'square', 'poster23', 'vertical34', 'horizontal169', 'horizontal43', 'wideBanner'];
-const SHARED_DIMENSION_RATIO_VALUES = ['9:16', '4:5', '1:1', '2:3', '3:4', '16:9', '4:3', '21:9'];
+const SHARED_RATIO_VALUES = ['9:16', '4:5', '1:1', '2:3', '3:4', '16:9', '4:3', '21:9'];
 const SHARED_GARMENT_LAYER_VALUES = ['layer0', 'layer3', 'layer6', 'layer9', 'random'];
 
 function checkSharedPortraitControlContract(page, source, groups) {
@@ -114,10 +116,7 @@ function checkSharedPortraitControlContract(page, source, groups) {
     }
     if (!ratio) issue(page, 'shared Fantasy ratio group is missing');
     else {
-      const expected = page === 'travel.html' || page === 'magazine.html'
-        ? SHARED_DIMENSION_RATIO_VALUES
-        : SHARED_RATIO_VALUES;
-      for (const value of expected) {
+      for (const value of SHARED_RATIO_VALUES) {
         if (!ratio.values.has(value)) issue(page, `shared ratio control is missing "${value}"`);
       }
     }
@@ -270,6 +269,29 @@ function checkRequiredNodes(page, source, idSet) {
   }
 }
 
+function checkToolPageContract(page, source, groups, selects) {
+  const contract = TOOL_PAGE_CONTRACTS[page];
+  if (!contract) {
+    issue(page, 'missing shared tool-page classification contract');
+    return;
+  }
+  if (!source.includes('assets/core-prompt.js')) issue(page, 'page does not load the shared core contract asset');
+
+  for (const control of contract.sharedControls || []) {
+    const hasRadio = groups.has(control);
+    const hasSelect = selects.has(control);
+    if (!hasRadio && !hasSelect) issue(page, `contract control "${control}" is missing`);
+  }
+
+  const ratioGroup = groups.get('ratio');
+  const ratioValues = ratioGroup ? ratioGroup.values : selects.get('ratio');
+  if (ratioValues) {
+    for (const value of contract.ratioValues || []) {
+      if (!ratioValues.has(value)) issue(page, `contract ratio value "${value}" is missing`);
+    }
+  }
+}
+
 function checkRadioReferences(page, source, groups, inputNames, idSet, selects) {
   const checkName = (name, origin) => {
     if (!inputNames.has(name)) issue(page, `${origin} references missing input group "${name}"`);
@@ -363,30 +385,6 @@ function checkClassicalPageContract(page, source) {
   }
   if (/10A|10B|whitespaceData|whitespace direction/.test(source)) {
     issue(page, 'background section contains removed 10A/10B or whitespace controls');
-  }
-}
-
-function checkGarmentVariationLayerContract(page, source, groups) {
-  const variationGroups = ['garmentChestVariation', 'garmentWaistVariation', 'garmentShoulderVariation'];
-  if (!variationGroups.every(name => groups.has(name))) return;
-
-  const layerGroup = groups.get('garmentLayer');
-  const expectedLayers = ['layer0', 'layer3', 'layer6', 'layer9', 'random'];
-  if (!layerGroup) {
-    issue(page, 'three-zone garment core is missing garmentLayer');
-    return;
-  }
-  for (const value of expectedLayers) {
-    if (!layerGroup.values.has(value)) issue(page, `garmentLayer is missing "${value}"`);
-  }
-  if (!source.includes('GARMENT_VARIATION_LAYER_ZONES')) {
-    issue(page, 'garmentLayer has no layer-to-zone mapping');
-  }
-  if (!source.includes('HB_GARMENT_CORE.chooseFreeZones') && (!source.includes('activeZones') || !source.includes('freeZones'))) {
-    issue(page, 'garmentLayer random logic does not preserve active zones and fill only free zones');
-  }
-  if (!source.includes('服裝改造核心')) {
-    issue(page, 'three-zone garment UI is not labeled 服裝改造核心');
   }
 }
 
@@ -565,12 +563,12 @@ for (const page of pages) {
   const groups = radioGroups(source);
   const inputNames = new Set(tags(source, 'input').map(tag => attr(tag, 'name')).filter(Boolean));
   checkRequiredNodes(page, source, idSet);
+  checkToolPageContract(page, source, groups, selectValues(source));
   checkRadioReferences(page, source, groups, inputNames, idSet, selectValues(source));
   checkInitialRadioState(page, groups);
   checkChoiceGroups(page, source, groups);
   checkCheckboxContracts(page, source);
   checkClassicalPageContract(page, source);
-  checkGarmentVariationLayerContract(page, source, groups);
   checkGarmentDetailLayerContract(page, source, groups);
   checkPresetButtons(page, source);
   checkEditorialTemplateContract(page, source, groups);

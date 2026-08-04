@@ -20,6 +20,108 @@ No facial reconstruction, redesign, beautification or stylization.`;
 
   const CORE_FINAL_IDENTITY_PRIORITY = `Final identity priority: preserve the reference face, facial geometry, age impression and recognizable features. Any custom direction may change only styling, clothing, pose, lighting, background or composition; never replace, redesign, beautify, composite or separately render the face.`;
 
+  const CANONICAL_RATIO_VALUES = Object.freeze([
+    "9:16", "4:5", "1:1", "2:3", "3:4", "16:9", "4:3", "21:9"
+  ]);
+
+  const CANONICAL_RATIO_PROMPTS = Object.freeze({
+    "9:16": "aspect ratio 9:16, vertical social media story composition",
+    "4:5": "aspect ratio 4:5, vertical social media feed composition",
+    "1:1": "aspect ratio 1:1, square commercial composition",
+    "2:3": "aspect ratio 2:3, vertical magazine composition",
+    "3:4": "aspect ratio 3:4, vertical editorial poster composition",
+    "16:9": "aspect ratio 16:9, horizontal cinematic composition",
+    "4:3": "aspect ratio 4:3, horizontal editorial composition",
+    "21:9": "aspect ratio 21:9, cinematic wide banner composition",
+    A4: "A4 vertical print poster composition"
+  });
+
+  const DOLL_RATIO_VALUES = Object.freeze(["9:16", "1:1", "3:4", "4:3", "2:3", "4:5"]);
+
+  const STANDARD_PORTRAIT_PAGE_FILES = Object.freeze([
+    "magazine.html", "fantasy-fashion.html", "chinese-classical.html",
+    "japanese-kimono.html", "korean-hanbok.html", "xianxia.html",
+    "anime-character.html", "flower-fairy.html", "isekai-fantasy.html",
+    "floral-sweet.html", "gala-socialite.html", "bridal-editorial.html",
+    "kpop-idol.html", "battle-academy.html", "ancient-goddess.html"
+  ]);
+
+  const STANDARD_PORTRAIT_CONTROLS = Object.freeze([
+    "camera", "ratio", "bodyShape", "garmentLayer"
+  ]);
+
+  const TOOL_PAGE_CONTRACTS = {};
+  STANDARD_PORTRAIT_PAGE_FILES.forEach(file => {
+    TOOL_PAGE_CONTRACTS[file] = {
+      family: "standardPortrait",
+      identityMode: "referencePortrait",
+      sharedControls: STANDARD_PORTRAIT_CONTROLS,
+      ratioValues: CANONICAL_RATIO_VALUES
+    };
+  });
+  TOOL_PAGE_CONTRACTS["travel.html"] = {
+    family: "travelPortrait",
+    identityMode: "referencePortrait",
+    sharedControls: ["camera", "ratio"],
+    ratioValues: CANONICAL_RATIO_VALUES
+  };
+  TOOL_PAGE_CONTRACTS["doll.html"] = {
+    family: "dollTransformation",
+    identityMode: "dollConversion",
+    sharedControls: ["ratio"],
+    ratioValues: DOLL_RATIO_VALUES
+  };
+  TOOL_PAGE_CONTRACTS["store-ad.html"] = {
+    family: "storeAdvertisement",
+    identityMode: "conditionalPersonHero",
+    sharedControls: ["ratio"],
+    ratioValues: ["4:5", "9:16", "1:1", "A4", "16:9"]
+  };
+  TOOL_PAGE_CONTRACTS["editorial-identity.html"] = {
+    family: "editorialDesignStage2",
+    identityMode: "sourceImageLock",
+    sharedControls: ["ratio"],
+    ratioValues: ["2:3", "3:4", "4:5", "1:1", "9:16", "4:3", "3:2", "16:9", "2:1"]
+  };
+  Object.freeze(TOOL_PAGE_CONTRACTS);
+
+  const CUSTOM_IDENTITY_CONFLICT_MESSAGE = "這段自訂要求可能與身份鎖定衝突；生成器仍會優先保留參考照的臉部與身份。請改寫為服裝、姿勢、光線、背景或構圖要求。";
+  const CUSTOM_IDENTITY_CONFLICT_PATTERN = /(face\s*swap|swap\s*(the\s*)?face|replace\s*(the\s*)?face|change\s*(the\s*)?(face|identity|person)|different\s*(face|person)|new\s*(face|identity)|redesign\s*(the\s*)?face|regenerate\s*(the\s*)?face|改成另一個人|換臉|換成別人|更換臉|改臉|重做臉|重新設計臉|不同身份|另一張臉)/iu;
+
+  function installCustomIdentityConflictWarning(root) {
+    if (!root || !root.querySelectorAll) return;
+    const inputs = Array.from(root.querySelectorAll([
+      "input[id^=custom]", "textarea[id^=custom]", "input[name^=custom]", "textarea[name^=custom]",
+      "#extraNote", "#colorNote", "#customStyling"
+    ].join(",")));
+    if (!inputs.length) return;
+
+    if (!root.querySelector("style[data-hb-lock-warning]")) {
+      const style = root.createElement("style");
+      style.dataset.hbLockWarning = "";
+      style.textContent = ".hb-lock-warning{display:none;margin-top:6px;color:#F0B7C5;font-size:12px;line-height:1.55}.hb-lock-warning.is-visible{display:block}";
+      (root.head || root.documentElement).appendChild(style);
+    }
+
+    inputs.forEach(input => {
+      if (input.dataset.hbLockWarningReady === "true") return;
+      input.dataset.hbLockWarningReady = "true";
+      const warning = root.createElement("div");
+      warning.className = "hb-lock-warning";
+      warning.setAttribute("role", "status");
+      warning.textContent = CUSTOM_IDENTITY_CONFLICT_MESSAGE;
+      const container = input.closest(".field, .custom-choice, label") || input.parentElement;
+      if (container) container.appendChild(warning);
+      const warningId = `${input.id || input.name || "custom-input"}-lock-warning`;
+      warning.id = warningId;
+      const describedBy = input.getAttribute("aria-describedby");
+      input.setAttribute("aria-describedby", describedBy ? `${describedBy} ${warningId}` : warningId);
+      const update = () => warning.classList.toggle("is-visible", CUSTOM_IDENTITY_CONFLICT_PATTERN.test(input.value || ""));
+      input.addEventListener("input", update);
+      update();
+    });
+  }
+
   const CORE_REALISTIC_ANATOMY = `【真人骨架系統】
 
 Realistic adult female anatomy.
@@ -482,8 +584,15 @@ They must not change the person's facial structure, identity, age impression or 
   window.CORE_FINAL_IDENTITY_PRIORITY = CORE_FINAL_IDENTITY_PRIORITY;
   window.CORE_NEGATIVE_PROMPT = CORE_NEGATIVE_PROMPT;
   window.CORE_OUTPUT_QUALITY = CORE_OUTPUT_QUALITY;
+  window.HB_CANONICAL_RATIO_VALUES = CANONICAL_RATIO_VALUES;
+  window.HB_CANONICAL_RATIO_PROMPTS = CANONICAL_RATIO_PROMPTS;
+  window.HB_TOOL_CONTRACTS = TOOL_PAGE_CONTRACTS;
+  window.HB_CUSTOM_IDENTITY_CONFLICT_MESSAGE = CUSTOM_IDENTITY_CONFLICT_MESSAGE;
+  window.HB_INSTALL_CUSTOM_IDENTITY_WARNING = installCustomIdentityConflictWarning;
   window.HB_CORE_PROMPT = {
-    version: "v4.3",
+    version: "v4.38",
+    contracts: TOOL_PAGE_CONTRACTS,
+    ratios: CANONICAL_RATIO_PROMPTS,
     blocks: {
       identityLock: CORE_IDENTITY_LOCK,
       faceGeometryLock: CORE_FACE_GEOMETRY_LOCK,
@@ -520,4 +629,10 @@ They must not change the person's facial structure, identity, age impression or 
       editorial: editorialCore
     }
   };
+
+  if (typeof document !== "undefined") {
+    const mountCustomIdentityWarning = () => installCustomIdentityConflictWarning(document);
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mountCustomIdentityWarning, { once: true });
+    else mountCustomIdentityWarning();
+  }
 })();

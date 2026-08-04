@@ -987,14 +987,14 @@
     </div>
     <p class="hint">依發布用途選擇：直式適合人像與社群，橫式適合海報、橫幅或世界觀場景。</p>
     <div class="grid" data-choice="ratio">
-      <label class="card selected"><input type="radio" name="ratio" value="vertical916" checked><div class="name">9:16 直式</div><div class="desc">短影音封面、限動</div></label>
-      <label class="card"><input type="radio" name="ratio" value="vertical45"><div class="name">4:5 直式</div><div class="desc">IG / 小紅書貼文</div></label>
-      <label class="card"><input type="radio" name="ratio" value="square"><div class="name">1:1 方形</div><div class="desc">社群貼文主圖</div></label>
-      <label class="card"><input type="radio" name="ratio" value="poster23"><div class="name">2:3 海報</div><div class="desc">商業海報感</div></label>
-      <label class="card"><input type="radio" name="ratio" value="vertical34"><div class="name">3:4 直式</div><div class="desc">寫真海報、人物主視覺</div></label>
-      <label class="card"><input type="radio" name="ratio" value="horizontal169"><div class="name">16:9 橫式</div><div class="desc">網站橫幅、影片封面</div></label>
-      <label class="card"><input type="radio" name="ratio" value="horizontal43"><div class="name">4:3 橫式</div><div class="desc">橫式廣告、場景更完整</div></label>
-      <label class="card"><input type="radio" name="ratio" value="wideBanner"><div class="name">21:9 寬幅</div><div class="desc">電影感橫幅、品牌主視覺</div></label>
+      <label class="card selected"><input type="radio" name="ratio" value="9:16" checked><div class="name">9:16 直式</div><div class="desc">短影音封面、限動</div></label>
+      <label class="card"><input type="radio" name="ratio" value="4:5"><div class="name">4:5 直式</div><div class="desc">IG / 小紅書貼文</div></label>
+      <label class="card"><input type="radio" name="ratio" value="1:1"><div class="name">1:1 方形</div><div class="desc">社群貼文主圖</div></label>
+      <label class="card"><input type="radio" name="ratio" value="2:3"><div class="name">2:3 海報</div><div class="desc">商業海報感</div></label>
+      <label class="card"><input type="radio" name="ratio" value="3:4"><div class="name">3:4 直式</div><div class="desc">寫真海報、人物主視覺</div></label>
+      <label class="card"><input type="radio" name="ratio" value="16:9"><div class="name">16:9 橫式</div><div class="desc">網站橫幅、影片封面</div></label>
+      <label class="card"><input type="radio" name="ratio" value="4:3"><div class="name">4:3 橫式</div><div class="desc">橫式廣告、場景更完整</div></label>
+      <label class="card"><input type="radio" name="ratio" value="21:9"><div class="name">21:9 寬幅</div><div class="desc">電影感橫幅、品牌主視覺</div></label>
     </div>
   </section>
 
@@ -1593,14 +1593,14 @@ const cameraData = {
 };
 
 const ratioData = {
-  vertical916: 'aspect ratio 9:16, vertical social media cover composition',
-  vertical45: 'aspect ratio 4:5, vertical social media feed poster composition',
-  square: 'aspect ratio 1:1, square commercial campaign image',
-  poster23: 'aspect ratio 2:3, vertical luxury poster composition',
-  vertical34: 'aspect ratio 3:4, vertical portrait poster composition',
-  horizontal169: 'aspect ratio 16:9, horizontal website banner and video cover composition',
-  horizontal43: 'aspect ratio 4:3, horizontal commercial image with balanced subject and environment',
-  wideBanner: 'aspect ratio 21:9, cinematic wide luxury brand banner composition'
+  "9:16": 'aspect ratio 9:16, vertical social media cover composition',
+  "4:5": 'aspect ratio 4:5, vertical social media feed poster composition',
+  "1:1": 'aspect ratio 1:1, square commercial campaign image',
+  "2:3": 'aspect ratio 2:3, vertical luxury poster composition',
+  "3:4": 'aspect ratio 3:4, vertical portrait poster composition',
+  "16:9": 'aspect ratio 16:9, horizontal website banner and video cover composition',
+  "4:3": 'aspect ratio 4:3, horizontal commercial image with balanced subject and environment',
+  "21:9": 'aspect ratio 21:9, cinematic wide luxury brand banner composition'
 };
 
 function selected(name){
@@ -1644,105 +1644,105 @@ const themeTemplates = {
     chestDetail: 'cloudCrossCollarPanels', waistSideDetail: 'cloudEmbroideredSash', shoulderDetail: 'cloudShoulderOverlayX',
     composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
     framing: 'threeQuarter', pose: 'swordFlightSoar', camera: 'lowAngleHero', lighting: 'halo', background: 'celestialCloudTerrace',
-    ratio: 'vertical916', intensity: 'balanced material effects, elegant and luxurious'
+    ratio: '9:16', intensity: 'balanced material effects, elegant and luxurious'
   },
   nineTailFoxImmortal: {
     garment: 'foxSpiritRobe', material: 'nineTailFoxSpirit', style: 'editorial',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
     framing: 'threeQuarter', pose: 'braidTwirl', camera: 'threeQuarterSide', lighting: 'foxfireGold', background: 'bambooForestPath',
-    ratio: 'vertical45', intensity: 'balanced material effects, elegant and luxurious'
+    ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
   },
   swordCultivatorDuel: {
     garment: 'swordCultivatorAttire', material: 'swordQiSlash', style: 'huxia',
     chestDetail: 'sectEmbroideredChest', waistSideDetail: 'lightArmorWaistGuard', shoulderDetail: 'robeLightPauldron',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
     framing: 'fullBody', pose: 'duelReadyLunge', camera: 'lowAngleHero', lighting: 'hard', background: 'ancientAltarRuins',
-    ratio: 'vertical34', intensity: 'massive explosive material splash, high speed frozen motion'
+    ratio: '3:4', intensity: 'massive explosive material splash, high speed frozen motion'
   },
   lightningTribulationAscend: {
     garment: 'spiritArmorRobe', material: 'lightningTribulation', style: 'cinematic',
     composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
     framing: 'threeQuarter', pose: 'tribulationStand', camera: 'lowAngleHero', lighting: 'cold', background: 'lightningTribulationSky',
-    ratio: 'vertical916', intensity: 'massive explosive material splash, high speed frozen motion'
+    ratio: '9:16', intensity: 'massive explosive material splash, high speed frozen motion'
   },
   phoenixRebirth: {
     garment: 'phoenixSpiritGown', material: 'vermilionBirdFlame', style: 'blackGold',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
     framing: 'threeQuarter', pose: 'aerialSlashDive', camera: 'lowAngleHero', lighting: 'hard', background: 'risingPhoenixShrine',
-    ratio: 'vertical916', intensity: 'massive explosive material splash, high speed frozen motion'
+    ratio: '9:16', intensity: 'massive explosive material splash, high speed frozen motion'
   },
   moonlitMeditation: {
     garment: 'moonwhiteRobe', material: 'moonlitCloudVeil', style: 'clean',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
     framing: 'bustPortrait', pose: 'meditationSit', camera: 'softFocusGlow', lighting: 'moonlightCandle', background: 'moonlitNightSky',
-    ratio: 'vertical45', intensity: 'subtle floating particles, refined couture details'
+    ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
   },
   peachBlossomWedding: {
     garment: 'redWeddingRobe', material: 'peachBlossomDrift', style: 'luxury',
     composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
     framing: 'threeQuarter', pose: 'veilLiftGesture', camera: 'eyeLevelCover', lighting: 'warmWindowSoft', background: 'cherryBlossomCliff',
-    ratio: 'vertical45', intensity: 'balanced material effects, elegant and luxurious'
+    ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
   },
   flowerSpiritGarden: {
     garment: 'flowerSpiritPetalDress', material: 'peachBlossomDrift', style: 'beautyCampaign',
     chestDetail: 'flowingSilkChestDrape', waistSideDetail: 'jadePendantSash', shoulderDetail: 'piboShoulderDrape',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
     framing: 'threeQuarter', pose: 'lotusHold', camera: 'eyeLevelCover', lighting: 'soft', background: 'pavilionCourtyard',
-    ratio: 'vertical45', intensity: 'subtle floating particles, refined couture details'
+    ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
   },
   jianghuWanderer: {
     garment: 'wandererCloakSuit', material: 'windElementSwirl', style: 'huxia',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
     framing: 'fullBody', pose: 'backHandsStand', camera: 'threeQuarterSide', lighting: 'hard', background: 'ancientTownStreet',
-    ratio: 'vertical34', intensity: 'balanced material effects, elegant and luxurious'
+    ratio: '3:4', intensity: 'balanced material effects, elegant and luxurious'
   },
   celestialCraneCompanion: {
     garment: 'craneFeatherRobe', material: 'craneCompanion', style: 'editorial',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
     framing: 'threeQuarter', pose: 'windRobeStand', camera: 'eyeLevelCover', lighting: 'soft', background: 'cloudSeaSunrise',
-    ratio: 'vertical45', intensity: 'balanced material effects, elegant and luxurious'
+    ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
   },
   azureDragonGuardian: {
     garment: 'swordGuardGown', material: 'azureDragonCoil', style: 'cinematic',
     composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
     framing: 'threeQuarter', pose: 'qiPalmStrike', camera: 'lowAngleHero', lighting: 'cold', background: 'dragonPalaceHall',
-    ratio: 'vertical916', intensity: 'balanced material effects, elegant and luxurious'
+    ratio: '9:16', intensity: 'balanced material effects, elegant and luxurious'
   },
   bambooSwordDance: {
     garment: 'discipleUniform', material: 'swordQiSlash', style: 'huxia',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
     framing: 'fullBody', pose: 'swordDanceArc', camera: 'threeQuarterSide', lighting: 'soft', background: 'bambooForestPath',
-    ratio: 'vertical34', intensity: 'massive explosive material splash, high speed frozen motion'
+    ratio: '3:4', intensity: 'massive explosive material splash, high speed frozen motion'
   },
   moonSpiritLotusPond: {
     garment: 'moonSpiritGauzeRobe', material: 'moonlitCloudVeil', style: 'artExhibit',
     composition: 'foreground material frame composition, selected material appears close to camera around the edges, subject remains clear in the center',
     framing: 'closeUp', pose: 'lotusPoolSit', camera: 'beautyCloseUp', lighting: 'mist', background: 'lotusPondPavilion',
-    ratio: 'vertical45', intensity: 'subtle floating particles, refined couture details'
+    ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
   },
   frostWhiteTiger: {
     garment: 'nightRoamingArmor', material: 'whiteTigerGuard', style: 'cinematic',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
     framing: 'fullBody', pose: 'duelReadyLunge', camera: 'lowAngleHero', lighting: 'cold', background: 'frozenWaterfallCavern',
-    ratio: 'vertical34', intensity: 'balanced material effects, elegant and luxurious'
+    ratio: '3:4', intensity: 'balanced material effects, elegant and luxurious'
   },
   mapleSpriteAutumn: {
     garment: 'butterflySpriteGown', material: 'goldenAutumnLeaves', style: 'clean',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
     framing: 'halfBody', pose: 'braidTwirl', camera: 'eyeLevelCover', lighting: 'soft', background: 'autumnMapleValley',
-    ratio: 'vertical45', intensity: 'balanced material effects, elegant and luxurious'
+    ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
   },
   duskFairyLantern: {
     garment: 'charmSpriteTrailDress', material: 'spiritButterflyGlow', style: 'editorial',
     composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
     framing: 'fullBody', pose: 'flyingRibbonSpin', camera: 'threeQuarterSide', lighting: 'foxfireGold', background: 'marketFestivalNight',
-    ratio: 'vertical34', intensity: 'balanced material effects, elegant and luxurious'
+    ratio: '3:4', intensity: 'balanced material effects, elegant and luxurious'
   },
   courtDancerLanternNight: {
     garment: 'courtDancerRobe', material: 'spiritButterflyGlow', style: 'luxury',
     composition: 'symmetrical luxury icon composition, subject aligned with a strong central background pattern, ceremonial premium advertising layout',
     framing: 'threeQuarter', pose: 'danceArmRaise', camera: 'threeQuarterSide', lighting: 'foxfireGold', background: 'lanternPalaceEaves',
-    ratio: 'vertical45', intensity: 'balanced material effects, elegant and luxurious'
+    ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
   }
 };
 

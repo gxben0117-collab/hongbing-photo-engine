@@ -14,6 +14,8 @@
   stale 保護、元素級獨立隨機、版權角色名規則、五個驗證腳本的用途
 - [UI 與咒語回歸檢查](qa-ui-and-prompt.md) — 19 個工具頁的控制項、初始值、生成／複製、
   一鍵套用與上線前完整檢查清單
+- [工具頁分類與欄位契約](tool-page-contracts.md) — 19 頁家族分類、共用控制、正式欄位名、
+  比例值、Layer 行為與自訂鎖臉提示
 - [底層保護核心](shared-protection-core.md) — travel/magazine/fantasy 共用的
   身份保護語意細節（最高優先順序、必要語意範本）
 - [專案架構](architecture.md) — 目錄結構、腳本用途、搬移與維護原則

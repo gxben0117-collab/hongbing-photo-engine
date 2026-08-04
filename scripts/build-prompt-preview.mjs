@@ -61,7 +61,62 @@ function evalDataSegment({ source, core, page, startMarker, endMarker, exportExp
   vm.runInNewContext(`${segment}\n;globalThis.__previewData = ${exportExpression};`, context, {
     filename: `${page}-data.js`,
   });
-  return context.__previewData;
+  return normalizeRevisionData(page, context.__previewData);
+}
+
+function normalizeRevisionData(page, data) {
+  if (!data || !['chineseClassical', 'japaneseKimono', 'koreanHanbok'].includes(page)) return data;
+
+  // Only the git-base side of the preview comparison needs these legacy aliases;
+  // formal HTML pages and current templates use canonical values directly.
+  const cameraMap = {
+    eyeLevel: 'eyeLevelCover',
+    lowAngle: 'lowAngleHero',
+    highAngle: 'highAngleOverhead',
+    beautyPortrait: 'beautyCloseUp',
+  };
+  const bodyShapeMap = {
+    slightWaist: 'slight_waist',
+    curvy: 'curvy_waist',
+    tallFashion: 'fashion_tall',
+    kpopIdol: 'korean_idol',
+    japaneseElegance: 'japanese_elegance',
+    fashionTall: 'fashion_tall',
+  };
+  const ratioMap = {
+    vertical916: '9:16',
+    vertical45: '4:5',
+    square: '1:1',
+    poster23: '2:3',
+    vertical34: '3:4',
+    horizontal169: '16:9',
+    horizontal43: '4:3',
+    wideBanner: '21:9',
+    vertical23: '2:3',
+    landscape169: '16:9',
+  };
+  const normalizeValue = (value, map) => map[value] || value;
+  const variations = data.GARMENT_VARIATIONS || {};
+  data.GARMENT_VARIATIONS = {
+    chestDetail: variations.chestDetail || variations.chest || {},
+    waistSideDetail: variations.waistSideDetail || variations.waist || {},
+    shoulderDetail: variations.shoulderDetail || variations.shoulder || {},
+  };
+  const ratioData = data.ratioData || {};
+  for (const [legacy, canonical] of Object.entries(ratioMap)) {
+    if (!ratioData[canonical] && ratioData[legacy]) ratioData[canonical] = ratioData[legacy];
+  }
+  data.ratioData = ratioData;
+  for (const template of Object.values(data.themeTemplates || {})) {
+    if (!template.chestDetail) template.chestDetail = template.chest;
+    if (!template.waistSideDetail) template.waistSideDetail = template.waist;
+    if (!template.shoulderDetail) template.shoulderDetail = template.shoulder;
+    if (!template.bodyShape) template.bodyShape = template.body;
+    template.camera = normalizeValue(template.camera, cameraMap);
+    template.bodyShape = normalizeValue(template.bodyShape, bodyShapeMap);
+    template.ratio = normalizeValue(template.ratio, ratioMap);
+  }
+  return data;
 }
 
 function coreLengths(core) {
@@ -214,7 +269,7 @@ function generateFantasy(core, data) {
     pose: 'center_still',
     style: 'beautyCampaign',
     camera: 'eyeLevelCover',
-    ratio: 'vertical45',
+    ratio: '4:5',
     customMaterial: '',
     customGarment: '',
     colorNote: '',
@@ -277,17 +332,17 @@ function generateChineseClassical(core, data, selectionOverride = null) {
     pose: 'sleeveHold',
     style: 'modernCouture',
     camera: 'threeQuarterSide',
-    ratio: 'vertical45',
-    chest: 'crossCollarDeepV',
-    waist: 'none',
-    shoulder: 'none',
+    ratio: '4:5',
+    chestDetail: 'crossCollarDeepV',
+    waistSideDetail: 'none',
+    shoulderDetail: 'none',
     ...(selectionOverride || {}),
   };
   const materialText = selection.materialKeys.map(key => data.materialData[key].prompt).join('; ');
   const variationParts = [
-    data.GARMENT_VARIATIONS.chest[selection.chest],
-    data.GARMENT_VARIATIONS.waist[selection.waist],
-    data.GARMENT_VARIATIONS.shoulder[selection.shoulder],
+    data.GARMENT_VARIATIONS.chestDetail[selection.chestDetail],
+    data.GARMENT_VARIATIONS.waistSideDetail[selection.waistSideDetail],
+    data.GARMENT_VARIATIONS.shoulderDetail[selection.shoulderDetail],
   ].filter(Boolean);
   const prompt = [
     data.sharedClassicalCore.identityGuard + ',',
@@ -320,7 +375,7 @@ function generateChineseClassical(core, data, selectionOverride = null) {
 
 function classicalTemplatePreviewSelection(template) {
   return {
-    bodyShape: template.body,
+    bodyShape: template.bodyShape,
     materialKeys: template.materials,
     accessory: template.accessory,
     garment: template.garment,
@@ -333,9 +388,9 @@ function classicalTemplatePreviewSelection(template) {
     style: template.style,
     camera: template.camera,
     ratio: template.ratio,
-    chest: template.chest,
-    waist: template.waist,
-    shoulder: template.shoulder,
+    chestDetail: template.chestDetail,
+    waistSideDetail: template.waistSideDetail,
+    shoulderDetail: template.shoulderDetail,
   };
 }
 
@@ -344,9 +399,9 @@ function generateCulturalClassical(core, data, config) {
   const pageCore = data.sharedClassicalCore || core.page[config.pageKey];
   const materialText = selection.materialKeys.map((key) => data.materialData[key].prompt).join('; ');
   const variationParts = [
-    data.GARMENT_VARIATIONS.chest[selection.chest],
-    data.GARMENT_VARIATIONS.waist[selection.waist],
-    data.GARMENT_VARIATIONS.shoulder[selection.shoulder],
+    data.GARMENT_VARIATIONS.chestDetail[selection.chestDetail],
+    data.GARMENT_VARIATIONS.waistSideDetail[selection.waistSideDetail],
+    data.GARMENT_VARIATIONS.shoulderDetail[selection.shoulderDetail],
   ].filter(Boolean);
   const prompt = [
     pageCore.identityGuard + ',',
@@ -390,7 +445,7 @@ function generateXianxia(core, data) {
     pose: 'sword_stance_still',
     style: 'beautyCampaign',
     camera: 'eyeLevelCover',
-    ratio: 'vertical45',
+    ratio: '4:5',
     customMaterial: '',
     customGarment: '',
     chestDetail: 'archCutout',
@@ -466,7 +521,7 @@ function generateAnime(core, data) {
     pose: 'transformationSequencePose',
     style: 'moeCute',
     camera: 'lowAngleHero',
-    ratio: 'vertical916',
+    ratio: '9:16',
     customMaterial: '',
     customGarment: '',
     chestDetail: 'magicCircleCutout',
@@ -538,7 +593,7 @@ function generateFlowerFairy(core, data) {
     pose: 'hold_flower',
     style: 'luxury',
     camera: 'eyeLevelCover',
-    ratio: 'vertical45',
+    ratio: '4:5',
     wings: 'sheerFairyWings',
     butterflies: 'fewButterflies',
     customMaterial: '',
@@ -617,7 +672,7 @@ function generateIsekai(core, data) {
     pose: 'sword_sheathe_calm',
     style: 'lightNovelAd',
     camera: 'eyeLevelCover',
-    ratio: 'vertical45',
+    ratio: '4:5',
     customMaterial: '',
     customGarment: '',
     chestDetail: 'gemInlay',
@@ -689,7 +744,7 @@ function generateFloralSweet(core, data) {
     pose: 'floral_bouquet_hug',
     style: 'sweetCampaign',
     camera: 'eyeLevelCover',
-    ratio: 'vertical45',
+    ratio: '4:5',
     customMaterial: '',
     customGarment: '',
     chestDetail: 'ribbonBow',
@@ -761,7 +816,7 @@ function generateGalaSocialite(core, data) {
     pose: 'center_still',
     style: 'galaCampaign',
     camera: 'eyeLevelCover',
-    ratio: 'vertical45',
+    ratio: '4:5',
     customMaterial: '',
     customGarment: '',
     chestDetail: 'gemInlay',
@@ -841,7 +896,7 @@ function generateBridalEditorial(core, data) {
     color: 'ivoryCream',
     background: 'creamSeamlessStudio',
     camera: 'eyeLevelCover',
-    ratio: 'vertical916',
+    ratio: '9:16',
     intensity: 'balanced luxury bridal styling, visible couture craftsmanship, refined editorial presence',
   };
   const details = [
@@ -894,7 +949,7 @@ function generateAncientGoddess(core, data) {
     pose: 'offering_gesture_goddess',
     style: 'mythologyEpicPoster',
     camera: 'eyeLevelCover',
-    ratio: 'vertical45',
+    ratio: '4:5',
     customMaterial: '',
     customGarment: '',
     chestDetail: 'gemInlay',
@@ -958,7 +1013,7 @@ function generateEditorial(core, data) {
     layout: 'classicMagazineCover', typography: 'editorialSerif', copyStyle: 'fashionEditorial', graphic: 'barcodeLabel', graphicAccent: 'issueNumber',
     color: 'ivoryGold', imageTreatment: 'originalEditorial', printFinish: 'cleanDigital',
     placement: 'rightFullBody', whitespace: 'balancedWhitespace',
-    language: 'englishBrandDominant', ratio: 'magazine23',
+    language: 'englishBrandDominant', ratio: '2:3',
     mainTitle: 'LUMINA', subtitle: 'SPECIAL FEATURE', tagline: 'A study in presence and style.',
     infoLabels: ['PROFILE', 'FEATURE'], metadata: 'ISSUE 08', creditLine: 'EDITORIAL SERIES', extraNote: '',
   };
@@ -1008,7 +1063,7 @@ function generateKpopIdol(core, data) {
     pose: 'center_still',
     style: 'idolTeaserCampaign',
     camera: 'eyeLevelCover',
-    ratio: 'vertical45',
+    ratio: '4:5',
     customMaterial: '',
     customGarment: '',
     chestDetail: 'crystalMesh',
@@ -1072,7 +1127,7 @@ function generateBattleAcademy(core, data) {
     bodyShape: 'original',
     school: 'sakuraAcademy',
     upperBody: 'croppedAcademyBlazer',
-    waist: 'highWaistTailoring',
+    waistSideDetail: 'highWaistTailoring',
     lower: 'pleatedMiniSkirt',
     uniformType: 'standard',
     chestDetail: 'vCutout',
@@ -1090,7 +1145,7 @@ function generateBattleAcademy(core, data) {
     pose: 'sword_draw_pose',
     style: 'tacticalCampaign',
     camera: 'eyeLevelCover',
-    ratio: 'vertical45',
+    ratio: '4:5',
     customSchool: '',
     customUpperBody: '',
     customLower: '',
@@ -1105,7 +1160,7 @@ function generateBattleAcademy(core, data) {
   const schoolPromptText = selection.customSchool ? `custom school identity only: ${selection.customSchool}; do not include or blend any preset school identity option` : schoolInfo.prompt;
   const schoolColorNote = selection.customSchool ? '' : schoolInfo.colorNote;
   const upperText = data.upperBodyData[selection.upperBody];
-  const waistText = data.waistData[selection.waist];
+  const waistText = data.waistData[selection.waistSideDetail];
   const lowerText = data.lowerData[selection.lower];
   const uniformTypeText = data.uniformTypeData[selection.uniformType];
   const chestDetailText = selection.customChestDetail ? `custom chest surface detail only: ${selection.customChestDetail}` : data.chestDetailData[selection.chestDetail];
@@ -1271,10 +1326,10 @@ function loadRevision(label, sourceReader) {
         pose: 'raiseSleeve',
         style: 'fashionEditorial',
         camera: 'threeQuarterSide',
-        ratio: 'vertical45',
-        chest: 'none',
-        waist: 'none',
-        shoulder: 'none',
+        ratio: '4:5',
+        chestDetail: 'none',
+        waistSideDetail: 'none',
+        shoulderDetail: 'none',
       },
     });
   }
@@ -1298,10 +1353,10 @@ function loadRevision(label, sourceReader) {
         pose: 'sleeveHold',
         style: 'modernCouture',
         camera: 'threeQuarterSide',
-        ratio: 'vertical45',
-        chest: 'none',
-        waist: 'none',
-        shoulder: 'none',
+        ratio: '4:5',
+        chestDetail: 'none',
+        waistSideDetail: 'none',
+        shoulderDetail: 'none',
       },
     });
   }

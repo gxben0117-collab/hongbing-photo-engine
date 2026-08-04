@@ -6,6 +6,14 @@
 每筆記錄盡量只留：**做了什麼 → 為什麼 → 驗證方式**，實作細節（哪一行、哪個函式）
 留在對應的 commit diff 或 `docs/history/` 底下的原始交接文件。
 
+## 2026-08-04　v4.38 全站工具頁契約、比例欄位與婚紗 Prompt 優化
+
+- **工具頁分類契約**：新增 `docs/tool-page-contracts.md`，把 19 頁分成標準人像、旅拍、公仔、店家廣告與編輯視覺設計五個家族；標準人像共用幻想頁的 `camera`、`ratio`、`bodyShape`、`garmentLayer`，主題專屬控制仍留在各頁。
+- **欄位統一**：服裝改造核心正式使用 `chestDetail`、`waistSideDetail`、`shoulderDetail` 與 `GARMENT_DETAIL_*`；身形使用 `bodyShape`，Layer 使用 `garmentLayer`，比例使用 `9:16`、`4:5` 等可讀文字值。戰鬥學院的制服輪廓 `waist` 與腰側改造 `waistSideDetail` 保留為兩條不同控制軸。
+- **鎖臉衝突提示**：共用核心對 `custom*`、`extraNote`、`colorNote` 與 `customStyling` 加入即時提示；只提醒，不刪除輸入，生成優先保留身份與臉部幾何核心。
+- **婚紗 Prompt 精簡**：縮短婚紗專屬語氣、頭紗保護與服裝細節包，移除已由共用負面核心涵蓋的重複句，保留婚紗完整服裝、頭紗與身份約束。
+- **驗證**：完成靜態、UI flow、preset 引用、固定預覽、1900 組隨機稽核，以及 19 頁桌面／手機瀏覽器回歸後再部署 GitHub Pages。
+
 ## 2026-08-04　v4.37 全站身份優先與 Prompt 精簡
 
 - **最終身份保護**：在共用 `CORE_NEGATIVE_PROMPT` 與旅拍／雜誌使用的畫面淨化區塊加入短版
