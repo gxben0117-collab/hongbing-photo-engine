@@ -924,8 +924,6 @@ function generateBridalEditorial(core, data, selectionOverride = null) {
     data.CORE.lightingGuard,
     data.CORE.compositionGuard,
     data.BRIDAL_EDITORIAL_CORE,
-    data.editorialFinish?.base || '',
-    data.editorialFinish?.theme || '',
     data.styleData[selection.style],
     data.compositionData[selection.composition],
     data.framingData[selection.framing],
@@ -944,10 +942,9 @@ function generateBridalEditorial(core, data, selectionOverride = null) {
     data.cameraData[selection.camera],
     data.ratioData[selection.ratio],
     selection.intensity,
-    data.CORE.output,
+    data.BRIDAL_OUTPUT_QUALITY,
     data.CORE.negativePrompt,
-    data.editorialFinish?.negative || '',
-    'No random text, no watermark, no logo artifacts, no extra person, no distorted face, no deformed hands.',
+    data.BRIDAL_EDITORIAL_NEGATIVE,
   ];
   return prompt.filter(Boolean).join('\n');
 }
@@ -1517,7 +1514,7 @@ function loadRevision(label, sourceReader) {
       page: 'bridalEditorial',
       startMarker: 'const CORE = window.HB_CORE_PROMPT.page.bridalEditorial;',
       endMarker: 'function selected',
-      exportExpression: '({ CORE, BRIDAL_EDITORIAL_CORE, BRIDAL_VEIL_IDENTITY_PROTECTION, editorialFinish: (typeof editorialFinish === "undefined" ? { base: "", theme: "", negative: "" } : editorialFinish), styleData, compositionData, framingData, garmentData, materialData, chestDetailData, waistSideDetailData, shoulderDetailData, veilData, accessoryData, bodyShapes, poseData, makeupData, hairstyleData, skinData, lightingData, colorData, backgroundData, cameraData, ratioData, themeTemplates })',
+      exportExpression: '({ CORE, BRIDAL_EDITORIAL_CORE, BRIDAL_EDITORIAL_NEGATIVE, BRIDAL_OUTPUT_QUALITY, BRIDAL_VEIL_IDENTITY_PROTECTION, styleData, compositionData, framingData, garmentData, materialData, chestDetailData, waistSideDetailData, shoulderDetailData, veilData, accessoryData, bodyShapes, poseData, makeupData, hairstyleData, skinData, lightingData, colorData, backgroundData, cameraData, ratioData, themeTemplates })',
     });
     prompts['bridal-editorial-default.txt'] = generateBridalEditorial(core, bridalData);
     for (const [templateKey, fileName] of [
@@ -1620,6 +1617,19 @@ function writeText(fileName, text) {
 
 const base = loadRevision(`base-${baseRev}`, (relativePath) => readGit(baseRev, relativePath));
 const worktree = loadRevision('worktree', readWorktree);
+const BRIDAL_PROMPT_BUDGET = 9000;
+const bridalPromptKeys = [
+  'bridal-editorial-default.txt',
+  'bridal-editorial-premium-black-gold.txt',
+  'bridal-editorial-premium-pearl-gray.txt',
+];
+const bridalBudgetOverruns = bridalPromptKeys
+  .filter((fileName) => worktree.prompts[fileName])
+  .map((fileName) => ({ fileName, length: worktree.prompts[fileName].length }))
+  .filter(({ length }) => length >= BRIDAL_PROMPT_BUDGET);
+if (bridalBudgetOverruns.length) {
+  throw new Error(`Bridal prompt budget exceeded (${BRIDAL_PROMPT_BUDGET} chars): ${bridalBudgetOverruns.map(({ fileName, length }) => `${fileName}=${length}`).join(', ')}`);
+}
 
 for (const [fileName, text] of Object.entries(base.prompts)) {
   writeText(`base-${fileName}`, text);
@@ -1644,6 +1654,11 @@ const report = [
     return `| \`${baseRow.key}\` | ${baseRow.length} | ${workLength} | ${workLength - baseRow.length} |`;
   }),
   `| **total** | **${base.coreLengths.total}** | **${worktree.coreLengths.total}** | **${worktree.coreLengths.total - base.coreLengths.total}** |`,
+  ``,
+  `## Bridal Prompt Budget`,
+  ``,
+  `- Limit: ${BRIDAL_PROMPT_BUDGET} characters per baseline preview.`,
+  ...bridalPromptKeys.filter((fileName) => worktree.prompts[fileName]).map((fileName) => `- \`worktree-${fileName}\`: ${worktree.prompts[fileName].length}`),
   ``,
   `## Generated Files`,
   ``,

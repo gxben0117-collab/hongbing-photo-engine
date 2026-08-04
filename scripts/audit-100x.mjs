@@ -93,6 +93,9 @@ function checkOutput(pageLabel, i, selection, output, opts = {}) {
   if (opts.requireEditorialFinish && !output.includes('High-budget editorial campaign production')) {
     problems.push('缺精品成像核心');
   }
+  if (opts.requireBridalEditorial && !output.includes('High-end bridal editorial')) {
+    problems.push('缺婚紗精品核心');
+  }
   const lines = output.split('\n');
   for (let li = 1; li < lines.length; li += 1) {
     if (lines[li].trim() && lines[li] === lines[li - 1]) { problems.push(`相鄰重複行: "${lines[li].slice(0, 40)}"`); break; }
@@ -904,7 +907,7 @@ auditClassicalCulturePage({
     source: html, core, finish: editorialFinish, page: 'bridalEditorial',
     startMarker: 'const CORE = window.HB_CORE_PROMPT.page.bridalEditorial;',
     endMarker: 'function selected',
-    exportExpression: '({ CORE, BRIDAL_EDITORIAL_CORE, BRIDAL_VEIL_IDENTITY_PROTECTION, editorialFinish: (typeof editorialFinish === "undefined" ? { base: "", theme: "", negative: "" } : editorialFinish), styleData, compositionData, framingData, garmentData, materialData, chestDetailData, waistSideDetailData, shoulderDetailData, veilData, accessoryData, bodyShapes, poseData, makeupData, hairstyleData, skinData, lightingData, colorData, backgroundData, cameraData, ratioData, GARMENT_DETAIL_LAYER_ZONES, GARMENT_DETAIL_RANDOM_POOLS })',
+    exportExpression: '({ CORE, BRIDAL_EDITORIAL_CORE, BRIDAL_EDITORIAL_NEGATIVE, BRIDAL_OUTPUT_QUALITY, BRIDAL_VEIL_IDENTITY_PROTECTION, styleData, compositionData, framingData, garmentData, materialData, chestDetailData, waistSideDetailData, shoulderDetailData, veilData, accessoryData, bodyShapes, poseData, makeupData, hairstyleData, skinData, lightingData, colorData, backgroundData, cameraData, ratioData, GARMENT_DETAIL_LAYER_ZONES, GARMENT_DETAIL_RANDOM_POOLS })',
   });
   const pools = {
     style: Object.keys(data.styleData), composition: radioValues(html, 'composition'), framing: radioValues(html, 'framing'),
@@ -950,7 +953,6 @@ auditClassicalCulturePage({
     const parts = [
       data.CORE.identityGuard, data.CORE.anatomyGuard, data.CORE.poseGuard, data.CORE.lightingGuard,
       data.CORE.compositionGuard, data.BRIDAL_EDITORIAL_CORE, data.styleData[sel.style], data.compositionData[sel.composition],
-      data.editorialFinish?.base || '', data.editorialFinish?.theme || '',
       data.framingData[sel.framing], 'gown silhouette: ' + garmentText,
       materialText ? 'bridal gown materials: ' + materialText : '',
       details.length ? 'garment surface detail: ' + details.join(', ') : '',
@@ -958,12 +960,11 @@ auditClassicalCulturePage({
       veilProtection, data.bodyShapes[sel.bodyShape], sel.customPose ? 'custom pose only: ' + sel.customPose : data.poseData[sel.pose],
       'bridal styling: ' + styling, 'lighting: ' + data.lightingData[sel.lighting], 'color palette: ' + data.colorData[sel.color],
       sel.customBackground ? 'custom background only: ' + sel.customBackground : data.backgroundData[sel.background],
-      data.cameraData[sel.camera], data.ratioData[sel.ratio], sel.intensity, data.CORE.output,
+      data.cameraData[sel.camera], data.ratioData[sel.ratio], sel.intensity, data.BRIDAL_OUTPUT_QUALITY,
       sel.extraNote ? 'additional direction: ' + sel.extraNote : '', data.CORE.negativePrompt,
-      data.editorialFinish?.negative || '',
-      'No random text, no watermark, no logo artifacts, no extra person, no distorted face, no deformed hands.',
+      data.BRIDAL_EDITORIAL_NEGATIVE,
     ];
-    checkOutput('bridalEditorial', i, sel, unique(parts).join('\n\n'), { requireIdentity: true, identityMarkers: ['身份鎖定系統'], requireEditorialFinish: true });
+    checkOutput('bridalEditorial', i, sel, unique(parts).join('\n\n'), { requireIdentity: true, identityMarkers: ['身份鎖定系統'], requireBridalEditorial: true });
   }
   report('bridalEditorial', N);
 }

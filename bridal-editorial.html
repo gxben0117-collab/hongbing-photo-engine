@@ -506,10 +506,8 @@
 
 <script src="assets/core-prompt.js"></script>
 <script src="assets/garment-core.js"></script>
-<script src="assets/editorial-finish.js"></script>
 <script>
 const CORE = window.HB_CORE_PROMPT.page.bridalEditorial;
-const editorialFinish = window.HB_EDITORIAL_FINISH?.forPage('bridalEditorial') || { base: '', theme: '', negative: '' };
 const GARMENT_DETAIL_LAYER_ZONES = { layer0: 0, layer3: 1, layer6: 2, layer9: 3 };
 const GARMENT_DETAIL_RANDOM_POOLS = {
   chestDetail: ['sweetheartCorset', 'deepVBridalNeckline', 'laceIllusionBodice', 'drapedOffShoulderBodice'],
@@ -517,16 +515,11 @@ const GARMENT_DETAIL_RANDOM_POOLS = {
   shoulderDetail: ['softOffShoulderTulle', 'singleShoulderBridalCut', 'laceCapSleeve', 'detachableTulleSleeve']
 };
 
-const BRIDAL_EDITORIAL_CORE = [
-  'Bridal editorial language: premium bridal fashion photography, calm refined emotion, natural hands and posture.',
-  'The wedding gown must remain a complete functional garment with coherent support, seams and realistic fabric weight.',
-  'Dress and veil movement follow gravity, wind and the selected pose naturally; no chaotic fabric explosion.'
-].join('\n\n');
+const BRIDAL_EDITORIAL_CORE = 'High-end bridal editorial: believable lace, satin, corsetry and beadwork; complete gown, veil and train follow natural weight and gravity.';
 
-const BRIDAL_VEIL_IDENTITY_PROTECTION = [
-  'The veil is a translucent bridal accessory, not part of the face.',
-  'It may overlap the frame but must not redraw facial geometry; face and veil share the same scene lighting.'
-].join('\n');
+const BRIDAL_EDITORIAL_NEGATIVE = 'No flat catalog lighting, rental-costume styling, plastic or printed-on details, synthetic shine, overdecorated set or excessive saturation.';
+const BRIDAL_OUTPUT_QUALITY = 'Premium bridal editorial with controlled highlights and polished color.';
+const BRIDAL_VEIL_IDENTITY_PROTECTION = 'Translucent veil may cross frame, never alter facial geometry; share the same scene light.';
 
 const styleData = {
   bridalEditorial: 'fine-art bridal editorial photography, quiet luxury, delicate emotional presence, premium wedding portrait quality',
@@ -933,8 +926,6 @@ function generate(options){
     CORE.lightingGuard,
     CORE.compositionGuard,
     BRIDAL_EDITORIAL_CORE,
-    editorialFinish.base,
-    editorialFinish.theme,
     styleData[selected('style')],
     compositionData[selected('composition')],
     framingData[selected('framing')],
@@ -954,9 +945,9 @@ function generate(options){
     cameraData[selected('camera')],
     ratioData[selected('ratio')],
     document.getElementById('intensity').value,
-    CORE.output,
-    editorialFinish.negative,
-    CORE.negativePrompt
+    BRIDAL_OUTPUT_QUALITY,
+    CORE.negativePrompt,
+    BRIDAL_EDITORIAL_NEGATIVE
   ].filter(Boolean);
   const output = HB_GARMENT_CORE.compactPromptParts(parts).join('\n\n⸻\n\n');
   document.getElementById('outputText').value = output;

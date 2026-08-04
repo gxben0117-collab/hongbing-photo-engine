@@ -558,7 +558,7 @@ Uniform battle-ification is not armor-ification: fashion first, school identity 
     compositionGuard: CORE_COMPOSITION_CONTROL,
     negativePrompt: [
       CORE_NEGATIVE_PROMPT,
-      "Bridal page scope:\nNo extra person, no groom, no bridal party, no duplicated bride, no wedding text, no random lettering,\nno generic fantasy costume, no magical effects, no futuristic technology, no cyberpunk, no armor.\nKeep the visual language grounded in premium bridal fashion photography and coherent wedding couture."
+      "Bridal scope:\nSolo bride only; no groom, bridal party, duplicate bride or wedding text.\nNo fantasy, magic, future tech, cyberpunk or armor.\nKeep coherent high-end bridal couture."
     ].join("\n\n"),
     output: CORE_OUTPUT_QUALITY
   };
@@ -596,7 +596,7 @@ They must not change the person's facial structure, identity, age impression or 
   window.HB_CUSTOM_IDENTITY_CONFLICT_MESSAGE = CUSTOM_IDENTITY_CONFLICT_MESSAGE;
   window.HB_INSTALL_CUSTOM_IDENTITY_WARNING = installCustomIdentityConflictWarning;
   window.HB_CORE_PROMPT = {
-    version: "v4.41",
+    version: "v4.42",
     contracts: TOOL_PAGE_CONTRACTS,
     ratios: CANONICAL_RATIO_PROMPTS,
     controls: {
