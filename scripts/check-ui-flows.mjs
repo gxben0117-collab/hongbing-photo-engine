@@ -77,6 +77,14 @@ const visualOrderContracts = {
     'section-background': 15, 'section-camera': 16, 'section-ratio': 17,
     'section-output': 18,
   },
+  'editorial-identity.html': {
+    'editorial-preset': 0, 'editorial-layout': 1, 'editorial-placement': 2,
+    'editorial-typography': 3, 'editorial-copy-style': 4, 'editorial-text': 5,
+    'editorial-language': 6, 'editorial-graphic': 7, 'editorial-graphic-accent': 8,
+    'editorial-color': 9, 'editorial-image-treatment': 10, 'editorial-print-finish': 11,
+    'editorial-whitespace': 12, 'editorial-ratio': 13, 'editorial-extra': 14,
+    'editorial-output': 15,
+  },
 };
 
 // The shared portrait contract uses human-readable ratio values everywhere.
@@ -525,8 +533,8 @@ function checkEditorialTemplateContract(page, source, groups) {
   for (const required of ['copyStyle', 'graphicAccent', 'metadata', 'creditLine', 'copyStyleData', 'graphicAccentData']) {
     if (!source.includes(required)) issue(page, `editorial template contract missing ${required}`);
   }
-  if (!source.includes('do not invent products') || !source.includes('non-destructive editorial')) {
-    issue(page, 'editorial source-lock and factual-content guard is incomplete');
+  if (!source.includes('原圖鎖定系統') || !source.includes('No outpainting') || !source.includes('never infer factual text')) {
+    issue(page, 'editorial Stage 2 source-lock and factual-content guard is incomplete');
   }
   for (const forbidden of ['Spider-Man', 'Marvel', 'psychological thriller', 'black crime', 'horror']) {
     if (source.toLowerCase().includes(forbidden.toLowerCase())) issue(page, `editorial source contains forbidden term "${forbidden}"`);

@@ -1054,11 +1054,7 @@ function generateEditorial(core, data) {
     data.whitespaceData[sel.whitespace] + ',',
     data.ratioData[sel.ratio] + ',',
     data.outputQualityGuard + ',',
-    'do not alter the photographed person, face, hairstyle, makeup, outfit, body proportions, pose, lighting, camera perspective or background in any way — apply non-destructive editorial graphic design on top only,',
-    'do not invent products, ingredients, medical claims, destinations, coordinates, credits, release dates, additional people or factual metadata that were not supplied,',
     data.negativeGuard + ',',
-    'no random text errors, no watermark artifacts, no distorted or illegible typography,',
-    '— Attach your already-generated reference photo together with this text when submitting to the image editing model.',
   ];
   return prompt.filter(Boolean).join('\n');
 }

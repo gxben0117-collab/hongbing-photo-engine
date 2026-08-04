@@ -1372,12 +1372,12 @@ auditClassicalCulturePage({
       if (sel.mainTitle) parts.push(`main title / character name: "${sel.mainTitle}"`);
       if (sel.subtitle) parts.push(`subtitle / issue text: "${sel.subtitle}"`);
       if (sel.tagline) parts.push(`tagline / quote line: "${sel.tagline}"`);
-      if (sel.infoLabels.length) parts.push(`information block headers: ${sel.infoLabels.map((l) => `"${l}"`).join(', ')}`);
+      if (sel.infoLabels.length) parts.push(`information block headers: ${sel.infoLabels.slice(0, 4).map((l) => `"${l}"`).join(', ')}`);
       if (sel.metadata) parts.push(`editorial metadata: "${sel.metadata}"`);
       if (sel.creditLine) parts.push(`credit or series line: "${sel.creditLine}"`);
-      textContentBlock = 'text content to use: ' + parts.join('; ') + '; for unspecified text, infer only short non-factual editorial labels or leave the area blank,';
+      textContentBlock = 'text content to use exactly as supplied: ' + parts.join('; ') + '; leave every unspecified text field blank; never infer factual text,';
     } else {
-      textContentBlock = "no text content specified — infer only a short original editorial title and minimal labels from the attached photo's mood, keep all factual metadata areas blank,";
+      textContentBlock = "no text content specified — optionally infer one short original non-factual editorial title from the attached photo's mood; keep all other text areas, dates, coordinates, brands and credits blank,";
     }
     const prompt = [
       data.sourceImageLockGuard + ',',
@@ -1387,7 +1387,7 @@ auditClassicalCulturePage({
       data.placementData[sel.placement] + ',',
       textContentBlock,
       data.languageData[sel.language] + ',',
-      data.graphicData[sel.graphic] + ',',
+      sel.graphic !== 'none' ? data.graphicData[sel.graphic] + ',' : '',
       sel.graphicAccent !== 'none' ? data.graphicAccentData[sel.graphicAccent] + ',' : '',
       data.colorData[sel.color] + ',',
       data.imageTreatmentData[sel.imageTreatment] + ',',
@@ -1395,14 +1395,10 @@ auditClassicalCulturePage({
       data.whitespaceData[sel.whitespace] + ',',
       data.ratioData[sel.ratio] + ',',
       data.outputQualityGuard + ',',
-      'do not alter the photographed person, face, hairstyle, makeup, outfit, body proportions, pose, lighting, camera perspective or background in any way — apply non-destructive editorial graphic design on top only,',
-      'do not invent products, ingredients, medical claims, destinations, coordinates, credits, release dates, additional people or factual metadata that were not supplied,',
       sel.extraNote ? 'extra direction: ' + sel.extraNote + ',' : '',
       data.negativeGuard + ',',
-      'no random text errors, no watermark artifacts, no distorted or illegible typography,',
-      '— Attach your already-generated reference photo together with this text when submitting to the image editing model.',
     ].filter(Boolean).join('\n');
-    checkOutput('editorial', i, sel, prompt, { requireIdentity: true, identityMarkers: ['原圖鎖定系統'] });
+    checkOutput('editorial', i, sel, prompt, { requireIdentity: false });
   }
   for (const [templateKey, preset] of Object.entries(data.themeTemplates)) {
     const sel = {
@@ -1418,7 +1414,7 @@ auditClassicalCulturePage({
       data.placementData[sel.placement] + ',',
       `text content to use: main title / character name: "${sel.mainTitle}"; subtitle / issue text: "${sel.subtitle}"; tagline / quote line: "${sel.tagline}"; information block headers: "PROFILE", "FEATURE"; editorial metadata: "${sel.metadata}"; credit or series line: "${sel.creditLine}",`,
       data.languageData[sel.language] + ',',
-      data.graphicData[sel.graphic] + ',',
+      sel.graphic !== 'none' ? data.graphicData[sel.graphic] + ',' : '',
       sel.graphicAccent !== 'none' ? data.graphicAccentData[sel.graphicAccent] + ',' : '',
       data.colorData[sel.color] + ',',
       data.imageTreatmentData[sel.imageTreatment] + ',',
@@ -1426,13 +1422,9 @@ auditClassicalCulturePage({
       data.whitespaceData[sel.whitespace] + ',',
       data.ratioData[sel.ratio] + ',',
       data.outputQualityGuard + ',',
-      'do not alter the photographed person, face, hairstyle, makeup, outfit, body proportions, pose, lighting, camera perspective or background in any way — apply non-destructive editorial graphic design on top only,',
-      'do not invent products, ingredients, medical claims, destinations, coordinates, credits, release dates, additional people or factual metadata that were not supplied,',
       data.negativeGuard + ',',
-      'no random text errors, no watermark artifacts, no distorted or illegible typography,',
-      '— Attach your already-generated reference photo together with this text when submitting to the image editing model.',
     ].filter(Boolean).join('\n');
-    checkOutput('editorial-template', templateKey, sel, prompt, { requireIdentity: true, identityMarkers: ['原圖鎖定系統'] });
+    checkOutput('editorial-template', templateKey, sel, prompt, { requireIdentity: false });
   }
   console.log(`editorial templates checked: ${Object.keys(data.themeTemplates).length}`);
   report('editorial', N);
