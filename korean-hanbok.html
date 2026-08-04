@@ -249,7 +249,8 @@
   <section class="section-pose">
     <div class="section-header"><div class="section-label">07</div><div class="section-title">人物姿勢</div></div>
     <div class="grid grid-3" data-choice="pose">
-      <label class="card selected"><input type="radio" name="pose" value="naturalStanding" checked><div class="name">自然端正站立</div><div class="desc">放鬆站立，視線自然</div></label>
+      <label class="card selected"><input type="radio" name="pose" value="auto" checked><div class="name">✦ AI判斷｜主題最佳姿勢</div><div class="desc">依主題、服裝、構圖與場景安排最合適姿勢</div></label>
+      <label class="card"><input type="radio" name="pose" value="naturalStanding"><div class="name">自然端正站立</div><div class="desc">放鬆站立，視線自然</div></label>
       <label class="card"><input type="radio" name="pose" value="handsAtWaist"><div class="name">雙手輕疊腰前</div><div class="desc">端正、克制、適合展示飄帶</div></label>
       <label class="card"><input type="radio" name="pose" value="adjustCollar"><div class="name">單手整理赤古里</div><div class="desc">自然呈現領口與飄帶結構</div></label>
       <label class="card"><input type="radio" name="pose" value="sleeveHold"><div class="name">雙手輕攏寬袖</div><div class="desc">呈現袖型與韓服層次</div></label>
@@ -505,6 +506,7 @@ const colorPaletteData = {
 };
 
 const poseData = {
+  auto: window.HB_CORE_PROMPT?.controls?.autoPose || '',
   naturalStanding: 'natural relaxed standing pose with balanced weight, calm gaze and hands resting naturally',
   handsAtWaist: 'standing with both hands gently folded near the chima waist, relaxed fingers and dignified posture',
   adjustCollar: 'standing while one hand naturally adjusts the jeogori collar, showing the goreum construction without tension',

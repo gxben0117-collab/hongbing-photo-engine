@@ -810,8 +810,8 @@
       <div class="pose-auto">
         <label class="pose-card selected" data-value="auto" style="display:inline-block;min-width:170px;">
           <input type="radio" name="pose" value="auto" checked>
-          <div class="pose-name">✦ 自動</div>
-          <div class="pose-desc">交給AI判斷最佳姿態</div>
+          <div class="pose-name">✦ AI判斷｜主題最佳姿勢</div>
+          <div class="pose-desc">依主題、服裝、構圖與場景安排最合適姿勢</div>
         </label>
       </div>
 
@@ -1421,7 +1421,7 @@ Face is rendered as an integrated part of the scene, not separately lit, relit o
 No independent face/beauty/portrait relighting, no artificial facial whitening or separate facial brightening, no beauty-filter rendering.`;
 
 const poseData = {
-  auto: '',
+  auto: window.HB_CORE_PROMPT?.controls?.autoPose || '',
   contrapposto: 'natural contrapposto pose, weight on one leg, shoulders and hips in opposition, dynamic S-curve body line, elegant model stance',
   hip: 'hand on hip power pose, confident assertive stance, strong female presence, elongated body line',
   lean: 'leaning against surface, relaxed yet powerful stance, body weight shifted elegantly, casual luxury attitude',

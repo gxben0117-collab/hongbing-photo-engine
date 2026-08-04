@@ -197,7 +197,7 @@ const core = evalCore(coreSource);
     const styleBlock = isInkFlower ? `【封面風格｜${style.label}】\n\n${style.text}` : `【封面風格｜${style.label}】\n\n${style.text}\n\n風格僅套用於光線、構圖、氛圍、服裝質感\n不可覆寫或調整五官、臉型、臉部特徵`;
     const bgBlock = isInkFlower ? `【背景設定】\n\nPure White Background\nClean Empty Background\nNo Scene No Environment` : `【背景設定】\n\n${data.BACKGROUNDS[sel.bgKey]}`;
     const bodyShapeBlock = data.BODY_SHAPES[sel.bodyShapeKey];
-    const poseText = isInkFlower ? null : data.POSES[sel.poseKey];
+    const poseText = sel.poseKey === 'auto' ? data.POSES.auto : (isInkFlower ? null : data.POSES[sel.poseKey]);
     const poseBlock = poseText ? `【姿態模組】\n\n${poseText}` : null;
     const framingBlock = data.FRAMING_RATIOS[sel.framingKey];
     const cameraBlock = data.CAMERAS[sel.cameraKey];

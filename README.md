@@ -4,7 +4,7 @@
 
 ## 版本
 
-v4.38 起持續迭代中；完整逐日開發記錄見 [docs/development-log.md](docs/development-log.md)。
+v4.39 起持續迭代中；完整逐日開發記錄見 [docs/development-log.md](docs/development-log.md)。
 
 v4.3 基礎重點：
 
@@ -17,6 +17,7 @@ v4.3 基礎重點：
 v4.3 之後陸續完成（詳見開發日誌）：
 
 - travel / magazine / fantasy 大量擴充選項（姿勢、服裝、材質、背景、光線）
+- 17 個具人物姿勢控制的工具頁提供「AI 判斷｜主題最佳姿勢」，由共用核心依主題、服裝、構圖、鏡頭、光影與場景選擇單一合適姿勢
 - travel / magazine / fantasy 的「生成 → 顯示 → 複製」操作模式統一
   （stale 保護、套用即顯示、按鈕配色一致）
 - 三頁「隨機套用」改為元素級獨立隨機（每個欄位各自抽選再動態組合）

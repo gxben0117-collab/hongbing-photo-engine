@@ -335,7 +335,8 @@
     <div class="section-header"><div class="section-label">08</div><div class="section-title">新娘姿勢與婚紗互動</div></div>
     <p class="hint">姿勢會依入鏡比例搭配；手勢保持放鬆，婚紗與頭紗只在被選到時加入動態。</p>
     <div class="grid grid-3" data-choice="pose">
-      <label class="card selected"><input type="radio" name="pose" value="naturalBridalStand" checked><div class="name">自然端正婚紗站姿</div><div class="desc">肩線放鬆、身形挺拔、安靜高級</div></label>
+      <label class="card selected"><input type="radio" name="pose" value="auto" checked><div class="name">✦ AI判斷｜主題最佳姿勢</div><div class="desc">依婚紗、頭紗、構圖與場景安排最合適姿勢</div></label>
+      <label class="card"><input type="radio" name="pose" value="naturalBridalStand"><div class="name">自然端正婚紗站姿</div><div class="desc">肩線放鬆、身形挺拔、安靜高級</div></label>
       <label class="card"><input type="radio" name="pose" value="downcastThreeQuarter"><div class="name">低頭側望</div><div class="desc">柔和視線、修長頸線與肩線</div></label>
       <label class="card"><input type="radio" name="pose" value="overShoulderGlance"><div class="name">肩後回眸</div><div class="desc">展示頭紗、肩部與側臉線條</div></label>
       <label class="card"><input type="radio" name="pose" value="handsAtWaist"><div class="name">雙手輕放腰前</div><div class="desc">自然手勢、適合婚紗胸衣與腰線</div></label>
@@ -639,6 +640,7 @@ Camera-Friendly Proportions For Performance, Beauty And Editorial Photography
 No Doll-Like Or Over-Stretched Body`
 };
 const poseData = {
+  auto: window.HB_CORE_PROMPT?.controls?.autoPose || '',
   naturalBridalStand: 'natural dignified bridal standing pose, relaxed shoulders, balanced weight and elegant restrained posture',
   downcastThreeQuarter: 'gentle downcast three-quarter pose, lowered gaze, elongated neck, relaxed shoulder line and quiet bridal emotion',
   overShoulderGlance: 'graceful over-the-shoulder bridal glance, body turned naturally with coherent head and torso direction',

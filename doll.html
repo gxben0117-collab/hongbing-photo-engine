@@ -577,7 +577,7 @@
         <div class="sub">可交給 AI 選最穩定姿勢，或指定一個動作</div>
       </div>
       <label class="auto-card selected" id="poseAutoCard" data-value="auto">
-        <input type="radio" name="pose" value="auto" checked>✦ 自動
+        <input type="radio" name="pose" value="auto" checked>✦ AI判斷｜主題最佳姿勢
       </label>
       <div class="chips" id="poseChips">
         <label class="chip" data-value="雙手遮嘴偷笑">雙手遮嘴偷笑</label>
@@ -1075,7 +1075,7 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
 
   const poseBlock=selectedPose.length>0
     ?`【姿勢設定】\n\n${selectedPose.map(p=>POSES[p]||p).join('\n')}`
-    :`【姿勢設定】\n\nAI根據主題與構圖自動選配最適合的姿勢`;
+    :`【姿勢設定】\n\nAI根據主題、構圖與公仔比例自動選配最適合的姿勢`;
 
   const baseBlock=selectedBase.length>0
     ?`【展示底座】\n\n${selectedBase.map(b=>BASES[b]||b).join('\n')}`

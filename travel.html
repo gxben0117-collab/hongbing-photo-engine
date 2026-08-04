@@ -944,8 +944,8 @@
     <div class="cards" id="poseCards">
       <label class="card selected" data-value="auto">
         <input type="radio" name="pose" value="auto" checked>
-        <div class="name">交給導演</div>
-        <div class="desc">依主題與動態自動安排(預設)</div>
+        <div class="name">✦ AI判斷｜旅拍最佳姿勢</div>
+        <div class="desc">依主題、旅拍情境、動態與構圖安排最合適姿勢</div>
       </label>
       <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 站姿與行走</div>
       <label class="card" data-value="lean_wall">
@@ -1909,7 +1909,7 @@ Identity Remains Stable And Clear`
 };
 
 const POSE_STYLES = {
-auto: null,
+auto: window.HB_CORE_PROMPT?.controls?.autoPose || null,
 look_back:`【姿勢模組｜回眸站姿】
 
 Standing Pose Turning Back Toward Camera

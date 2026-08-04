@@ -105,6 +105,14 @@ const SHARED_PORTRAIT_BODY_VALUES = [
 ];
 const SHARED_RATIO_VALUES = ['9:16', '4:5', '1:1', '2:3', '3:4', '16:9', '4:3', '21:9'];
 const SHARED_GARMENT_LAYER_VALUES = ['layer0', 'layer3', 'layer6', 'layer9', 'random'];
+const AUTO_POSE_PAGES = new Set([
+  'travel.html', 'magazine.html', 'doll.html', 'fantasy-fashion.html',
+  'chinese-classical.html', 'japanese-kimono.html', 'korean-hanbok.html',
+  'xianxia.html', 'anime-character.html', 'flower-fairy.html',
+  'isekai-fantasy.html', 'floral-sweet.html', 'gala-socialite.html',
+  'bridal-editorial.html', 'kpop-idol.html', 'battle-academy.html',
+  'ancient-goddess.html',
+]);
 
 function checkSharedPortraitControlContract(page, source, groups) {
   if (SHARED_CAMERA_RATIO_PAGES.has(page)) {
@@ -290,6 +298,22 @@ function checkToolPageContract(page, source, groups, selects) {
       if (!ratioValues.has(value)) issue(page, `contract ratio value "${value}" is missing`);
     }
   }
+}
+
+function checkAutoPoseContract(page, source, groups) {
+  if (!AUTO_POSE_PAGES.has(page)) return;
+  const pose = groups.get('pose');
+  if (!pose) {
+    issue(page, 'AI theme-fit pose control is missing the pose radio group');
+    return;
+  }
+  if (!pose.values.has('auto')) issue(page, 'pose control is missing the "auto" option');
+  if (!source.includes('AI判斷') && !source.includes('AI根據主題')) {
+    issue(page, 'pose auto option is missing the visible AI theme-fit wording');
+  }
+  const hasPromptBinding = /const\s+(?:poseData|POSES|POSE_STYLES)\s*=\s*\{\s*auto:\s*window\.HB_CORE_PROMPT\?\.controls\?\.autoPose/.test(source)
+    || source.includes('公仔比例自動選配最適合的姿勢');
+  if (!hasPromptBinding) issue(page, 'pose auto option is not connected to an AI pose prompt');
 }
 
 function checkRadioReferences(page, source, groups, inputNames, idSet, selects) {
@@ -576,6 +600,7 @@ for (const page of pages) {
   checkThemeCopyContract(page, source);
   checkHomeCopyContract(page, source);
   checkSharedPortraitControlContract(page, source, groups);
+  checkAutoPoseContract(page, source, groups);
   checkVisualOrder(page, source);
   console.log(`checked ${page}: ${groups.size} radio groups, ${idSet.size} ids`);
 }
