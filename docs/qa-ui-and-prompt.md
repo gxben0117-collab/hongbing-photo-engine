@@ -139,6 +139,17 @@ git diff --check
 這是靜態與 Node `vm` 回歸檢查；若要確認瀏覽器實際像素、剪貼簿權限或 GitHub Pages
  快取，仍需在發布後開啟線上入口做一次人工點擊確認。
 
+## 2026-08-04 v4.40 回歸結果
+
+- 四個目標頁的共用精品成像模組均已載入，實際生成組合包含 `High-budget editorial campaign production`，
+  並保留頁面原有身份／骨架／文化主題核心。
+- 中式古典頁新增的 3 組畫面語氣、5 組姿勢、精品光影／配色選項與 7 組新增模板均通過 UI、資料池、
+  一鍵套用與 Prompt 預覽引用檢查；模板總數為 25 組。
+- `check-static.mjs`、`check-ui-flows.mjs`、`validate-preset-refs.mjs`、`build-prompt-preview.mjs`、
+  `audit-100x.mjs 100`、`git diff --check` 全部通過。
+- 全站 19 頁 × 100 組，共 1900 組隨機模擬，0 issue；未發現 `undefined`、`NaN`、`null`、身份核心遺失、
+  相鄰重複行或四頁精品核心漏接。
+
 ## 2026-08-04 v4.37 回歸結果
 
 - 共用核心已加入 `CORE_FINAL_IDENTITY_PRIORITY`；正式人像輸出在自訂內容後均可找到最終身份保護，公仔頁的

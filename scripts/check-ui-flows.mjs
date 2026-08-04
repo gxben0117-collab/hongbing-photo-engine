@@ -511,15 +511,15 @@ function checkChineseClassicalTemplateContract(page, source) {
   const templateButtons = tags(source, 'button').filter(tag => attr(tag, 'data-template'));
   const templateKeys = new Set(templateButtons.map(tag => attr(tag, 'data-template')));
   const presetKeys = objectKeys(source, 'themeTemplates');
-  if (templateButtons.length !== 18) issue(page, `expected 18 template buttons, found ${templateButtons.length}`);
-  if (!presetKeys || presetKeys.size !== 18) issue(page, `expected 18 themeTemplates entries, found ${presetKeys ? presetKeys.size : 0}`);
+  if (templateButtons.length !== 25) issue(page, `expected 25 template buttons, found ${templateButtons.length}`);
+  if (!presetKeys || presetKeys.size !== 25) issue(page, `expected 25 themeTemplates entries, found ${presetKeys ? presetKeys.size : 0}`);
   for (const key of templateKeys) {
     if (!presetKeys?.has(key)) issue(page, `template button "${key}" has no themeTemplates entry`);
   }
   for (const key of presetKeys || []) {
     if (!templateKeys.has(key)) issue(page, `themeTemplates entry "${key}" has no template button`);
   }
-  for (const label of ['朝代古典', '新式改良', '唯美古風寫真']) {
+  for (const label of ['朝代古典', '新式改良', '唯美古風寫真', '青春古風寫真', '精品主視覺']) {
     if (!source.includes(`class="group-title">${label}</div>`)) issue(page, `missing classical template group "${label}"`);
   }
 }

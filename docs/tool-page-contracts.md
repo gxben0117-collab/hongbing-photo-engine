@@ -4,8 +4,9 @@
 
 ## 版本與核心原則
 
-- 目前契約版本：v4.39。
+- 目前契約版本：v4.40。
 - 共用身份、臉部幾何、真人骨架、光線一致與負面限制仍由 `assets/core-prompt.js` 管理。
+- `chinese-classical.html`、`japanese-kimono.html`、`kpop-idol.html`、`bridal-editorial.html` 另共用 `assets/editorial-finish.js`，只補精品成像與主題材質語言，不建立平行鎖臉核心。
 - 自訂要求只提供畫面方向；若輸入換臉、改臉、替換身份等語意，介面顯示提醒，生成仍以鎖臉核心為最高優先。
 - 所有頁面均載入 `assets/core-prompt.js`；不建立逐頁平行鎖臉核心。
 

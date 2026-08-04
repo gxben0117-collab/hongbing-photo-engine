@@ -424,6 +424,12 @@
         <div class="desc">寬褲西裝機場穿搭、柔和底片顆粒感、咖啡廳窗邊座位</div>
       </button>
     </div>
+    <div class="group-title">精品主視覺</div>
+    <button class="card" type="button" id="idolPremiumPreset" style="width:100%;min-height:auto;margin-top:10px;margin-bottom:10px;background:linear-gradient(180deg,#17120D 0%,#211B12 100%);"><div class="name">隨機套用｜精品主視覺</div><div class="desc">從黑金回歸與銀黑美妝大使兩組高預算編輯方向抽取完整設定</div></button>
+    <div class="grid grid-3">
+      <button class="card" type="button" data-template="kpopBlackGoldComeback"><div class="name">黑金回歸精品主視覺</div><div class="desc">黑色訂製套裝、低調金色主光、純黑棚景</div></button>
+      <button class="card" type="button" data-template="kpopSilverBlackAmbassador"><div class="name">銀黑美妝大使封面</div><div class="desc">銀黑材質、近距離美妝構圖、混凝土畫廊背景</div></button>
+    </div>
   </section>
 
   <section class="section-style">
@@ -932,6 +938,7 @@
 
 <script src="assets/core-prompt.js"></script>
 <script src="assets/garment-core.js"></script>
+<script src="assets/editorial-finish.js"></script>
 <script>
 const materialData = {
   stageSpotBeamGlow: {
@@ -1215,6 +1222,7 @@ const lightingData = {
 };
 
 const sharedKpopIdolCore = window.HB_CORE_PROMPT?.page?.kpopIdol || {};
+const editorialFinish = window.HB_EDITORIAL_FINISH?.forPage('kpopIdol') || { base: '', theme: '', negative: '' };
 
 const identityGuard = sharedKpopIdolCore.identityGuard || `Facial Geometry Lock System:
 Preserve Original Forehead Height
@@ -1527,6 +1535,18 @@ const themeTemplates = {
     garment: 'widePantsSuitAirport', material: 'softFilmGrainMood', style: 'minimalHighFashion',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
     framing: 'halfBody', pose: 'chin_rest', camera: 'eyeLevelCover', lighting: 'soft', background: 'cafeWindowSeat', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+  },
+  kpopBlackGoldComeback: {
+    garment: 'monochromeSuitSet', material: 'softFilmGrainMood', style: 'minimalHighFashion', bodyShape: 'fashion_tall',
+    chestDetail: 'stageZipperBodice', waistSideDetail: 'stageCorsetBelt', shoulderDetail: 'croppedBoleroShoulder',
+    composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
+    framing: 'threeQuarter', pose: 'one_hand_waist', camera: 'threeQuarterSide', lighting: 'darkGoldMood', background: 'blackVoidStudioBackdrop', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
+  },
+  kpopSilverBlackAmbassador: {
+    garment: 'structuredVestSet', material: 'blackWhiteContrastMood', style: 'beautyCampaign', bodyShape: 'original',
+    chestDetail: 'asymmetricCroppedTop', waistSideDetail: 'stageCorsetBelt', shoulderDetail: 'singleShoulder',
+    composition: 'foreground material frame composition, selected material appears close to camera around the edges, subject remains clear in the center',
+    framing: 'bustPortrait', pose: 'adjust_earring', camera: 'beautyCloseUp', lighting: 'hard', background: 'concreteIndustrialStudio', ratio: '4:5', intensity: 'subtle floating particles, refined couture details'
   }
 };
 
@@ -1534,7 +1554,7 @@ function applyThemeTemplate(key){
   const preset = themeTemplates[key];
   if(!preset) return;
 
-  ['garment','material','style','composition','framing','pose','camera','lighting','background','ratio'].forEach(name => {
+  ['garment','material','style','composition','framing','pose','camera','lighting','background','ratio','bodyShape'].forEach(name => {
     setRadioValue(name, preset[name]);
   });
 
@@ -1597,6 +1617,10 @@ function applyIdolRandomSelection(){
   });
   refreshCards();
   generate({reveal:true});
+}
+const PREMIUM_TEMPLATE_KEYS = ['kpopBlackGoldComeback', 'kpopSilverBlackAmbassador'];
+function applyIdolPremiumSelection(){
+  applyThemeTemplate(getRandomItem(PREMIUM_TEMPLATE_KEYS));
 }
 
 let idolOutputVisible = false;
@@ -1661,6 +1685,8 @@ function generate(options = {}){
     lightingConsistencyGuard + ',',
     composition + ',',
     compositionGuard + ',',
+    editorialFinish.base,
+    editorialFinish.theme,
     'appearance form: ' + garmentText + ',',
     garmentDetailText,
     'theme material and art system: ' + materialText + ',',
@@ -1679,6 +1705,7 @@ function generate(options = {}){
     'color palette: ' + (colorNote || materialPalette) + ',',
     extraNote ? 'extra direction: ' + extraNote + ',' : '',
     sharedKpopIdolCore.negativePrompt ? sharedKpopIdolCore.negativePrompt + ',' : '',
+    editorialFinish.negative,
     'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face'
   ].filter(Boolean).join('\n');
 
@@ -1702,6 +1729,7 @@ document.getElementById('generateBtn').addEventListener('click', () => generate(
 document.getElementById('idolMoodPreset').addEventListener('click', () => {
   applyIdolRandomSelection();
 });
+document.getElementById('idolPremiumPreset').addEventListener('click', applyIdolPremiumSelection);
 document.querySelectorAll('[data-template]').forEach(button => {
   button.addEventListener('click', () => {
     applyThemeTemplate(button.dataset.template);

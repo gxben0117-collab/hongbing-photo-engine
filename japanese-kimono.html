@@ -82,6 +82,12 @@
       <button class="card" type="button" data-template="modernKimonoStudio"><div class="name">新式改良和服棚拍</div><div class="desc">保留帶結、現代比例、高級剪裁</div></button>
       <button class="card" type="button" data-template="kimonoHauteCouture"><div class="name">現代和服高訂廣告</div><div class="desc">高訂帶結、精品材質、商業大片</div></button>
     </div>
+    <div class="group-title">精品主視覺</div>
+    <button class="card" type="button" id="kimonoPremiumPreset" style="width:100%;min-height:auto;margin-bottom:10px;background:linear-gradient(180deg,#17120D 0%,#211B12 100%);"><div class="name">隨機套用｜精品主視覺</div><div class="desc">從漆黑金箔與和紙墨白兩組和服高訂封面方向抽取完整設定</div></button>
+    <div class="grid grid-3">
+      <button class="card" type="button" data-template="kimonoBlackGoldCouture"><div class="name">漆黑金箔和服高訂</div><div class="desc">西陣織、金箔反射、漆黑棚景與高訂主光</div></button>
+      <button class="card" type="button" data-template="kimonoWashiArchive"><div class="name">和紙墨白典藏封面</div><div class="desc">墨白和紙、安靜側光、典藏檔案感人像</div></button>
+    </div>
   </section>
 
   <section class="section-style">
@@ -302,6 +308,8 @@
       <label class="card"><input type="radio" name="lighting" value="rainReflection"><div class="name">雨後石板反射光</div><div class="desc">和風街道的柔和冷色反射</div></label>
       <label class="card"><input type="radio" name="lighting" value="sakuraBacklight"><div class="name">櫻花柔霧逆光</div><div class="desc">袖線與髮絲有細緻輪廓光</div></label>
       <label class="card"><input type="radio" name="lighting" value="japaneseSideLight"><div class="name">和風古典側光</div><div class="desc">克制明暗與立體服裝質感</div></label>
+      <label class="card"><input type="radio" name="lighting" value="goldScreenNegativeFill"><div class="name">黑金屏風負補光</div><div class="desc">深色分離、金箔反射與高訂層次</div></label>
+      <label class="card"><input type="radio" name="lighting" value="washiGallerySideLight"><div class="name">和紙畫廊側光</div><div class="desc">墨白背景、絲綢紋理與安靜陰影</div></label>
     </div>
     <div class="group-title">09B｜色彩系統</div>
     <p class="hint">單選一組主色；可由下方自訂配色覆蓋。</p>
@@ -343,6 +351,8 @@
       <label class="card"><input type="radio" name="background" value="wisteriaPavilion"><div class="name">紫藤亭台</div><div class="desc">藤花、木亭與柔和春日景深</div></label>
       <label class="card"><input type="radio" name="background" value="plainJapaneseStudio"><div class="name">純色和風棚拍</div><div class="desc">極簡背景與服裝主視覺</div></label>
       <label class="card"><input type="radio" name="background" value="pureWhiteBackground"><div class="name">無背景純白色</div><div class="desc">純白棚拍、服裝展示、無環境干擾</div></label>
+      <label class="card"><input type="radio" name="background" value="blackGoldScreenStudio"><div class="name">漆黑金箔屏風棚</div><div class="desc">黑色漆面、金箔屏風與高訂分離</div></label>
+      <label class="card"><input type="radio" name="background" value="washiGalleryStudio"><div class="name">和紙墨白典藏畫廊</div><div class="desc">和紙纖維、墨白牆面與檔案感</div></label>
     </div>
     <label class="field">自訂背景<input id="customBackground" type="text" placeholder="例如：雨後京都町家緣側"></label>
   </section>
@@ -398,6 +408,7 @@
 
 <script src="assets/core-prompt.js"></script>
 <script src="assets/garment-core.js"></script>
+<script src="assets/editorial-finish.js"></script>
 <script>
 const materialData = {
   plainSilk: { prompt: 'high-grade Japanese silk with elegant natural drape and a restrained premium surface', palette: 'unbleached white, soft blush and warm ivory' },
@@ -478,7 +489,9 @@ const backgroundData = {
   shrineGarden: 'a traditional Japanese shrine garden with timber gate, stone steps and natural tree shadows',
   wisteriaPavilion: 'a quiet Japanese pavilion covered with wisteria flowers, timber framing and soft spring depth',
   plainJapaneseStudio: 'a minimal Japanese photography studio with a clean neutral backdrop and premium fashion space',
-  pureWhiteBackground: 'pure seamless white background, no visible environment, no architecture, no props, evenly lit clean white studio backdrop'
+  pureWhiteBackground: 'pure seamless white background, no visible environment, no architecture, no props, evenly lit clean white studio backdrop',
+  blackGoldScreenStudio: 'a restrained black-gold Japanese screen studio with dark lacquer planes and controlled ceremonial depth',
+  washiGalleryStudio: 'a quiet washi-paper archive gallery with pale ink walls, subtle paper texture and minimal editorial space'
 };
 
 const lightingData = {
@@ -493,7 +506,9 @@ const lightingData = {
   shojiProjection: 'soft shoji-grid projection with gentle patterned light across the kimono and background',
   rainReflection: 'subtle rain-reflected street light with delicate cool highlights and unified skin tone',
   sakuraBacklight: 'soft cherry-blossom backlight with luminous edges around sleeves and hair while the face remains evenly exposed',
-  japaneseSideLight: 'classical Japanese side light with controlled facial modeling and restrained textile contrast'
+  japaneseSideLight: 'classical Japanese side light with controlled facial modeling and restrained textile contrast',
+  goldScreenNegativeFill: 'directional warm light on a black-gold screen with controlled negative fill, deep tonal separation and refined obi highlights',
+  washiGallerySideLight: 'quiet side light across a washi gallery backdrop, soft charcoal shadows, restrained contrast and precise silk texture'
 };
 
 const colorPaletteData = {
@@ -637,6 +652,7 @@ const ratioData = {
   "21:9": 'aspect ratio 21:9, cinematic wide luxury brand banner composition'
 };
 const sharedClassicalCore = window.HB_CORE_PROMPT?.page?.japaneseKimono || {};
+const editorialFinish = window.HB_EDITORIAL_FINISH?.forPage('japaneseKimono') || { base: '', theme: '', negative: '' };
 
 const themeTemplates = {
   heianCourt: { style: 'courtLuxury', composition: 'centered formal portrait composition with balanced Japanese architectural framing', garment: 'heianJunihitoe', materials: ['plainSilk', 'chrysanthemumPattern'], accessory: 'kanzashi', chestDetail: 'eriLayeredCollar', waistSideDetail: 'maruObiStructure', shoulderDetail: 'haoriLayer', bodyShape: 'original', pose: 'naturalStanding', lighting: 'shojiSoft', color: 'sakuraIvory', background: 'machiyaInterior', framing: 'threeQuarter', camera: 'eyeLevelCover', ratio: '3:4' },
@@ -650,7 +666,9 @@ const themeTemplates = {
   womensHakamaAutumn: { style: 'inkFineArt', composition: 'composition with the kimono hem, obi ribbon and layered fabric creating a graceful lower-frame rhythm', garment: 'womensHakama', materials: ['shiboriTexture', 'maplePattern'], accessory: 'pearlComb', chestDetail: 'none', waistSideDetail: 'none', shoulderDetail: 'none', bodyShape: 'japanese_elegance', pose: 'courtyardWalk', lighting: 'bambooFiltered', color: 'vermilionInk', background: 'autumnMapleGarden', framing: 'fullBody', camera: 'threeQuarterSide', ratio: '2:3' },
   taishoRomanCover: { style: 'fashionEditorial', composition: 'asymmetrical Japanese editorial composition with the subject placed to one side and clean surrounding space', garment: 'taishoRoman', materials: ['yuzenDye', 'asanohaPattern'], accessory: 'pearlComb', chestDetail: 'none', waistSideDetail: 'none', shoulderDetail: 'none', bodyShape: 'fashion_tall', pose: 'sideLongLine', lighting: 'japaneseSideLight', color: 'smokeRose', background: 'modernJapaneseStudio', framing: 'threeQuarter', camera: 'sideProfile', ratio: '4:5' },
   modernKimonoStudio: { style: 'modernCouture', composition: 'kimono silhouette and sleeve movement remain visually prominent within the surrounding Japanese classical space', garment: 'modernKimono', materials: ['rinzuSilk', 'seigaihaPattern'], accessory: 'obiJime', chestDetail: 'modernAsymKimonoCollar', waistSideDetail: 'sideTaikoObi', shoulderDetail: 'modernKimonoCapelet', bodyShape: 'japanese_elegance', pose: 'sideLongLine', lighting: 'kimonoStudio', color: 'indigoMuted', background: 'modernJapaneseStudio', framing: 'threeQuarter', camera: 'eyeLevelCover', ratio: '4:5' },
-  kimonoHauteCouture: { style: 'modernCouture', composition: 'kimono detail-focused composition with collar overlap, obi construction, textile texture and refined craftsmanship as priorities', garment: 'kimonoHauteCouture', materials: ['nishijinBrocade', 'lightObiGauze'], accessory: 'kanzashi', chestDetail: 'waistDeepV', waistSideDetail: 'openSkirtPanel', shoulderDetail: 'halter', bodyShape: 'fashion_tall', pose: 'sleeveHold', lighting: 'kimonoStudio', color: 'goldScreenBlack', background: 'plainJapaneseStudio', framing: 'halfBody', camera: 'threeQuarterSide', ratio: '4:5' }
+  kimonoHauteCouture: { style: 'modernCouture', composition: 'kimono detail-focused composition with collar overlap, obi construction, textile texture and refined craftsmanship as priorities', garment: 'kimonoHauteCouture', materials: ['nishijinBrocade', 'lightObiGauze'], accessory: 'kanzashi', chestDetail: 'waistDeepV', waistSideDetail: 'openSkirtPanel', shoulderDetail: 'halter', bodyShape: 'fashion_tall', pose: 'sleeveHold', lighting: 'kimonoStudio', color: 'goldScreenBlack', background: 'plainJapaneseStudio', framing: 'halfBody', camera: 'threeQuarterSide', ratio: '4:5' },
+  kimonoBlackGoldCouture: { style: 'modernCouture', composition: 'kimono detail-focused composition with collar overlap, obi construction, textile texture and refined craftsmanship as priorities', garment: 'kimonoHauteCouture', materials: ['nishijinBrocade', 'goldLeafKimono'], accessory: 'kanzashi', chestDetail: 'waistDeepV', waistSideDetail: 'sideTaikoObi', shoulderDetail: 'halter', bodyShape: 'fashion_tall', pose: 'sleeveHold', lighting: 'goldScreenNegativeFill', color: 'goldScreenBlack', background: 'blackGoldScreenStudio', framing: 'halfBody', camera: 'threeQuarterSide', ratio: '4:5' },
+  kimonoWashiArchive: { style: 'fashionEditorial', composition: 'kimono detail-focused composition with collar overlap, obi construction, textile texture and refined craftsmanship as priorities', garment: 'taishoRoman', materials: ['rinzuSilk', 'seigaihaPattern'], accessory: 'obiJime', chestDetail: 'eriLayeredCollar', waistSideDetail: 'obijimeKnot', shoulderDetail: 'modernKimonoCapelet', bodyShape: 'japanese_elegance', pose: 'windowTurn', lighting: 'washiGallerySideLight', color: 'indigoMuted', background: 'washiGalleryStudio', framing: 'threeQuarter', camera: 'beautyCloseUp', ratio: '4:5' }
 };
 
 function selected(name){
@@ -745,6 +763,10 @@ function applyClassicalRandomSelection(){
   refreshCards();
   generate({ reveal: true });
 }
+const PREMIUM_TEMPLATE_KEYS = ['kimonoBlackGoldCouture', 'kimonoWashiArchive'];
+function applyKimonoPremiumSelection(){
+  applyThemeTemplate(getRandomItem(PREMIUM_TEMPLATE_KEYS));
+}
 let outputVisible = false;
 function markStale(){
   const wrap = document.getElementById('outputWrap');
@@ -781,6 +803,8 @@ function generate(options){
     styleData[selected('style')] + ',',
     selected('composition') + ',',
     sharedClassicalCore.compositionGuard + ',',
+    editorialFinish.base,
+    editorialFinish.theme,
     'refined Japanese kimono aesthetics, culturally grounded Japanese silhouette, elegant silk and obi drape, traditional Japanese design language, refined craftsmanship,',
     'appearance form: ' + garmentText + ',',
     materialParts.length ? 'traditional Japanese materials and motifs: ' + materialParts.join('; ') + ',' : '',
@@ -797,6 +821,7 @@ function generate(options){
     document.getElementById('intensity').value + ',',
     extraNote ? 'extra direction: ' + extraNote + ',' : '',
     sharedClassicalCore.negativePrompt + ',',
+    editorialFinish.negative,
     'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face'
   ].filter(Boolean).join('\n');
   document.getElementById('outputText').value = prompt;
@@ -817,6 +842,7 @@ document.querySelectorAll('input[name="materials"]').forEach(input => input.addE
 }));
 document.getElementById('generateBtn').addEventListener('click', () => generate({ reveal: true }));
 document.getElementById('kimonoMoodPreset').addEventListener('click', applyClassicalRandomSelection);
+document.getElementById('kimonoPremiumPreset').addEventListener('click', applyKimonoPremiumSelection);
 document.querySelectorAll('[data-template]').forEach(button => button.addEventListener('click', () => applyThemeTemplate(button.dataset.template)));
 document.querySelector('.section-preset').addEventListener('click', event => {
   const button = event.target.closest('button.card');

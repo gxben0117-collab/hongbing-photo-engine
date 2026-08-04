@@ -4,7 +4,7 @@
 
 ## 版本
 
-v4.39 起持續迭代中；完整逐日開發記錄見 [docs/development-log.md](docs/development-log.md)。
+v4.40 起持續迭代中；完整逐日開發記錄見 [docs/development-log.md](docs/development-log.md)。
 
 v4.3 基礎重點：
 
@@ -29,6 +29,7 @@ v4.3 之後陸續完成（詳見開發日誌）：
 - `index.html` 是入口與工具導覽頁。
 - 十九個工具頁（見下方「正式頁面」）各自包含 UI、選項資料與咒語組裝邏輯。
 - `assets/core-prompt.js` 集中管理 v4.3 共用身份鎖定、臉部幾何、真人骨架、鏡頭重建、光線一致、膚質、負面詞與輸出品質規則。
+- `assets/editorial-finish.js` 集中管理四個精品主題頁的高預算編輯成像、材質可信度、光影層次與主題化負面限制；不改寫身份鎖定核心。
 - `scripts/` 底下有五個驗證腳本，見下方「上架前檢查」。
 - `docs/` 保存規格、流程、核心 prompt 契約與工程說明。
 - `assets/` 預留給正式共用靜態資源。

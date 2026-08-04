@@ -45,6 +45,12 @@ function evalCore(source) {
   return context.window.HB_CORE_PROMPT;
 }
 
+function evalEditorialFinish(source) {
+  const context = { window: {} };
+  vm.runInNewContext(source, context, { filename: 'editorial-finish.js' });
+  return context.window.HB_EDITORIAL_FINISH;
+}
+
 function sliceBetween(source, startMarker, endMarker) {
   const start = source.indexOf(startMarker);
   if (start === -1) throw new Error(`Missing start marker: ${startMarker}`);
@@ -53,10 +59,10 @@ function sliceBetween(source, startMarker, endMarker) {
   return source.slice(start, end);
 }
 
-function evalDataSegment({ source, core, page, startMarker, endMarker, exportExpression }) {
+function evalDataSegment({ source, core, finish, page, startMarker, endMarker, exportExpression }) {
   const segment = sliceBetween(source, startMarker, endMarker);
   const context = {
-    window: { HB_CORE_PROMPT: { page: { [page]: core.page[page] } } },
+    window: { HB_CORE_PROMPT: { page: { [page]: core.page[page] } }, HB_EDITORIAL_FINISH: finish },
   };
   vm.runInNewContext(`${segment}\n;globalThis.__previewData = ${exportExpression};`, context, {
     filename: `${page}-data.js`,
@@ -353,6 +359,8 @@ function generateChineseClassical(core, data, selectionOverride = null) {
     data.styleData[selection.style] + ',',
     selection.composition + ',',
     data.sharedClassicalCore.compositionGuard + ',',
+    data.editorialFinish?.base || '',
+    data.editorialFinish?.theme || '',
     'refined Chinese clothing aesthetics, period-informed Chinese silhouette, elegant fabric drape, traditional Chinese design language,',
     'appearance form: ' + data.garmentData[selection.garment] + ',',
     'traditional materials and Chinese elements: ' + materialText + ',',
@@ -368,6 +376,7 @@ function generateChineseClassical(core, data, selectionOverride = null) {
     data.sharedClassicalCore.output + ',',
     'balanced traditional details, refined and luxurious,',
     data.sharedClassicalCore.negativePrompt + ',',
+    data.editorialFinish?.negative || '',
     'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face',
   ];
   return prompt.filter(Boolean).join('\n');
@@ -412,6 +421,8 @@ function generateCulturalClassical(core, data, config) {
     data.styleData[selection.style] + ',',
     selection.composition + ',',
     pageCore.compositionGuard + ',',
+    data.editorialFinish?.base || '',
+    data.editorialFinish?.theme || '',
     config.cultureLine + ',',
     'appearance form: ' + data.garmentData[selection.garment] + ',',
     config.materialLine + ': ' + materialText + ',',
@@ -427,6 +438,7 @@ function generateCulturalClassical(core, data, config) {
     pageCore.output + ',',
     'balanced traditional details, refined and luxurious,',
     pageCore.negativePrompt + ',',
+    data.editorialFinish?.negative || '',
     'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face',
   ];
   return prompt.filter(Boolean).join('\n');
@@ -875,7 +887,7 @@ function generateGalaSocialite(core, data) {
   return prompt.filter(Boolean).join('\n');
 }
 
-function generateBridalEditorial(core, data) {
+function generateBridalEditorial(core, data, selectionOverride = null) {
   const selection = {
     style: 'koreanBridalStudio',
     composition: 'rightSubjectLeftSpace',
@@ -898,6 +910,7 @@ function generateBridalEditorial(core, data) {
     camera: 'eyeLevelCover',
     ratio: '9:16',
     intensity: 'balanced luxury bridal styling, visible couture craftsmanship, refined editorial presence',
+    ...(selectionOverride || {}),
   };
   const details = [
     data.chestDetailData[selection.chestDetail],
@@ -911,6 +924,8 @@ function generateBridalEditorial(core, data) {
     data.CORE.lightingGuard,
     data.CORE.compositionGuard,
     data.BRIDAL_EDITORIAL_CORE,
+    data.editorialFinish?.base || '',
+    data.editorialFinish?.theme || '',
     data.styleData[selection.style],
     data.compositionData[selection.composition],
     data.framingData[selection.framing],
@@ -931,6 +946,7 @@ function generateBridalEditorial(core, data) {
     selection.intensity,
     data.CORE.output,
     data.CORE.negativePrompt,
+    data.editorialFinish?.negative || '',
     'No random text, no watermark, no logo artifacts, no extra person, no distorted face, no deformed hands.',
   ];
   return prompt.filter(Boolean).join('\n');
@@ -1050,7 +1066,7 @@ function generateEditorial(core, data) {
   return prompt.filter(Boolean).join('\n');
 }
 
-function generateKpopIdol(core, data) {
+function generateKpopIdol(core, data, selectionOverride = null) {
   const selection = {
     bodyShape: 'original',
     material: 'stageSpotBeamGlow',
@@ -1074,6 +1090,7 @@ function generateKpopIdol(core, data) {
     customShoulderDetail: '',
     colorNote: '',
     extraNote: '',
+    ...(selectionOverride || {}),
   };
   const material = data.materialData[selection.material];
   const materialText = material.prompt;
@@ -1100,6 +1117,8 @@ function generateKpopIdol(core, data) {
     data.lightingConsistencyGuard + ',',
     selection.composition + ',',
     data.compositionGuard + ',',
+    data.editorialFinish?.base || '',
+    data.editorialFinish?.theme || '',
     'appearance form: ' + garmentText + ',',
     garmentDetailText,
     'theme material and art system: ' + materialText + ',',
@@ -1117,6 +1136,7 @@ function generateKpopIdol(core, data) {
     'hyper realistic, ultra detailed, premium advertising finish,',
     'color palette: ' + materialPalette + ',',
     core.page.kpopIdol.negativePrompt ? core.page.kpopIdol.negativePrompt + ',' : '',
+    data.editorialFinish?.negative || '',
     'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face',
   ];
   return prompt.filter(Boolean).join('\n');
@@ -1218,6 +1238,12 @@ function generateBattleAcademy(core, data) {
 function loadRevision(label, sourceReader) {
   const coreSource = sourceReader('assets/core-prompt.js');
   const core = evalCore(coreSource);
+  let finish = { base: '', theme: '', negative: '' };
+  try {
+    finish = evalEditorialFinish(sourceReader('assets/editorial-finish.js'));
+  } catch {
+    // The base revision predates the shared editorial finish asset.
+  }
   const travelSource = sourceReader('travel.html');
   const magazineSource = sourceReader('magazine.html');
   const fantasySource = sourceReader('fantasy-fashion.html');
@@ -1251,10 +1277,11 @@ function loadRevision(label, sourceReader) {
     chineseClassicalData = evalDataSegment({
       source: chineseClassicalSource,
       core,
+      finish,
       page: 'chineseClassical',
       startMarker: 'const materialData = {',
       endMarker: 'function selected',
-      exportExpression: '({ materialData, accessoryData, garmentData, styleData, backgroundData, lightingData, colorPaletteData, sharedClassicalCore, BODY_SHAPES, GARMENT_VARIATIONS, poseData, framingData, cameraData, ratioData, themeTemplates })',
+      exportExpression: '({ materialData, accessoryData, garmentData, styleData, backgroundData, lightingData, colorPaletteData, sharedClassicalCore, BODY_SHAPES, GARMENT_VARIATIONS, poseData, framingData, cameraData, ratioData, themeTemplates, editorialFinish: (typeof editorialFinish === "undefined" ? { base: "", theme: "", negative: "" } : editorialFinish) })',
     });
   } catch (err) {
     // New page is absent in older base revisions.
@@ -1265,10 +1292,11 @@ function loadRevision(label, sourceReader) {
     japaneseKimonoData = evalDataSegment({
       source: japaneseKimonoSource,
       core,
+      finish,
       page: 'japaneseKimono',
       startMarker: 'const materialData = {',
       endMarker: 'function selected',
-      exportExpression: '({ materialData, accessoryData, garmentData, styleData, backgroundData, lightingData, colorPaletteData, sharedClassicalCore, BODY_SHAPES, GARMENT_VARIATIONS, poseData, framingData, cameraData, ratioData })',
+      exportExpression: '({ materialData, accessoryData, garmentData, styleData, backgroundData, lightingData, colorPaletteData, sharedClassicalCore, BODY_SHAPES, GARMENT_VARIATIONS, poseData, framingData, cameraData, ratioData, themeTemplates, editorialFinish: (typeof editorialFinish === "undefined" ? { base: "", theme: "", negative: "" } : editorialFinish) })',
     });
   } catch (err) {
     // New page is absent in older base revisions.
@@ -1300,6 +1328,13 @@ function loadRevision(label, sourceReader) {
     for (const [templateKey, fileName] of [
       ['beautyLycheeBanquet', 'chinese-classical-beauty-lychee.txt'],
       ['beautyHuaqingMist', 'chinese-classical-beauty-huaqing-mist.txt'],
+      ['springFloralHairpinPortrait', 'chinese-classical-youth-spring-hairpin.txt'],
+      ['ancientStreetBrightSmile', 'chinese-classical-youth-ancient-street.txt'],
+      ['flowerMarketRomance', 'chinese-classical-youth-flower-market.txt'],
+      ['blueLilacStreetGlance', 'chinese-classical-youth-blue-lilac.txt'],
+      ['tangGardenTopBeauty', 'chinese-classical-youth-tang-garden.txt'],
+      ['chineseLacquerGoldCouture', 'chinese-classical-premium-lacquer-gold.txt'],
+      ['chineseJadeWhiteArchive', 'chinese-classical-premium-jade-white.txt'],
     ]) {
       if (classicalTemplates[templateKey]) {
         prompts[fileName] = generateChineseClassical(core, chineseClassicalData, classicalTemplatePreviewSelection(classicalTemplates[templateKey]));
@@ -1332,6 +1367,21 @@ function loadRevision(label, sourceReader) {
         shoulderDetail: 'none',
       },
     });
+    const kimonoTemplates = japaneseKimonoData.themeTemplates || {};
+    for (const [templateKey, fileName] of [
+      ['kimonoBlackGoldCouture', 'japanese-kimono-premium-black-gold.txt'],
+      ['kimonoWashiArchive', 'japanese-kimono-premium-washi-archive.txt'],
+    ]) {
+      if (!kimonoTemplates[templateKey]) continue;
+      prompts[fileName] = generateCulturalClassical(core, japaneseKimonoData, {
+        pageKey: 'japaneseKimono',
+        cultureLine: 'refined Japanese kimono aesthetics, culturally grounded Japanese silhouette, elegant silk and obi drape, traditional Japanese design language, refined craftsmanship',
+        materialLine: 'traditional Japanese materials and motifs',
+        accessoryLine: 'traditional Japanese accessory detail',
+        preserveLine: 'the selected Japanese kimono silhouette and obi construction',
+        selection: classicalTemplatePreviewSelection(kimonoTemplates[templateKey]),
+      });
+    }
   }
   if (koreanHanbokData) {
     prompts['korean-hanbok-default.txt'] = generateCulturalClassical(core, koreanHanbokData, {
@@ -1463,12 +1513,21 @@ function loadRevision(label, sourceReader) {
     const bridalData = evalDataSegment({
       source: bridalSource,
       core,
+      finish,
       page: 'bridalEditorial',
       startMarker: 'const CORE = window.HB_CORE_PROMPT.page.bridalEditorial;',
       endMarker: 'function selected',
-      exportExpression: '({ CORE, BRIDAL_EDITORIAL_CORE, BRIDAL_VEIL_IDENTITY_PROTECTION, styleData, compositionData, framingData, garmentData, materialData, chestDetailData, waistSideDetailData, shoulderDetailData, veilData, accessoryData, bodyShapes, poseData, makeupData, hairstyleData, skinData, lightingData, colorData, backgroundData, cameraData, ratioData })',
+      exportExpression: '({ CORE, BRIDAL_EDITORIAL_CORE, BRIDAL_VEIL_IDENTITY_PROTECTION, editorialFinish: (typeof editorialFinish === "undefined" ? { base: "", theme: "", negative: "" } : editorialFinish), styleData, compositionData, framingData, garmentData, materialData, chestDetailData, waistSideDetailData, shoulderDetailData, veilData, accessoryData, bodyShapes, poseData, makeupData, hairstyleData, skinData, lightingData, colorData, backgroundData, cameraData, ratioData, themeTemplates })',
     });
     prompts['bridal-editorial-default.txt'] = generateBridalEditorial(core, bridalData);
+    for (const [templateKey, fileName] of [
+      ['bridalBlackGoldCouture', 'bridal-editorial-premium-black-gold.txt'],
+      ['bridalPearlGrayArchive', 'bridal-editorial-premium-pearl-gray.txt'],
+    ]) {
+      const template = bridalData.themeTemplates?.[templateKey];
+      if (!template) continue;
+      prompts[fileName] = generateBridalEditorial(core, bridalData, template);
+    }
   } catch (err) {
     // Not present in this revision — skip.
   }
@@ -1479,12 +1538,21 @@ function loadRevision(label, sourceReader) {
     const kpopIdolData = evalDataSegment({
       source: kpopIdolSource,
       core,
+      finish,
       page: 'kpopIdol',
       startMarker: 'const materialData = {',
-      endMarker: 'function setRadioValue',
-      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedKpopIdolCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, poseData, framingData, cameraData, ratioData, chestDetailData, waistSideDetailData, shoulderDetailData })',
+      endMarker: 'function applyThemeTemplate',
+      exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedKpopIdolCore, editorialFinish: (typeof editorialFinish === "undefined" ? { base: "", theme: "", negative: "" } : editorialFinish), identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, poseData, framingData, cameraData, ratioData, chestDetailData, waistSideDetailData, shoulderDetailData, themeTemplates })',
     });
     prompts['kpopidol-default.txt'] = generateKpopIdol(core, kpopIdolData);
+    for (const [templateKey, fileName] of [
+      ['kpopBlackGoldComeback', 'kpopidol-premium-black-gold.txt'],
+      ['kpopSilverBlackAmbassador', 'kpopidol-premium-silver-black.txt'],
+    ]) {
+      const template = kpopIdolData.themeTemplates?.[templateKey];
+      if (!template) continue;
+      prompts[fileName] = generateKpopIdol(core, kpopIdolData, template);
+    }
   } catch (err) {
     // Not present in this revision — skip.
   }

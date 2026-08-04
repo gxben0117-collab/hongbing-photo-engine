@@ -593,7 +593,7 @@ They must not change the person's facial structure, identity, age impression or 
   window.HB_CUSTOM_IDENTITY_CONFLICT_MESSAGE = CUSTOM_IDENTITY_CONFLICT_MESSAGE;
   window.HB_INSTALL_CUSTOM_IDENTITY_WARNING = installCustomIdentityConflictWarning;
   window.HB_CORE_PROMPT = {
-    version: "v4.39",
+    version: "v4.40",
     contracts: TOOL_PAGE_CONTRACTS,
     ratios: CANONICAL_RATIO_PROMPTS,
     controls: {

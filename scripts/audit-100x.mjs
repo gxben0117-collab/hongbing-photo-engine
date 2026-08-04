@@ -20,6 +20,12 @@ function evalCore(source) {
   return context.window.HB_CORE_PROMPT;
 }
 
+function evalEditorialFinish(source) {
+  const context = { window: {} };
+  vm.runInNewContext(source, context, { filename: 'editorial-finish.js' });
+  return context.window.HB_EDITORIAL_FINISH;
+}
+
 function sliceBetween(source, startMarker, endMarker) {
   const start = source.indexOf(startMarker);
   if (start === -1) throw new Error(`Missing start marker: ${startMarker}`);
@@ -28,9 +34,9 @@ function sliceBetween(source, startMarker, endMarker) {
   return source.slice(start, end);
 }
 
-function evalDataSegment({ source, core, page, startMarker, endMarker, exportExpression }) {
+function evalDataSegment({ source, core, finish, page, startMarker, endMarker, exportExpression }) {
   const segment = sliceBetween(source, startMarker, endMarker);
-  const context = { window: { HB_CORE_PROMPT: { page: { [page]: core.page[page] } } } };
+  const context = { window: { HB_CORE_PROMPT: { page: { [page]: core.page[page] } }, HB_EDITORIAL_FINISH: finish } };
   vm.runInNewContext(`${segment}\n;globalThis.__d = ${exportExpression};`, context, { filename: `${page}-data.js` });
   return context.__d;
 }
@@ -84,6 +90,9 @@ function checkOutput(pageLabel, i, selection, output, opts = {}) {
   if (opts.requireIdentity && !opts.skipFinalIdentity && core.blocks.finalIdentityPriority && !output.includes(core.blocks.finalIdentityPriority)) {
     problems.push('缺最終身份優先保護');
   }
+  if (opts.requireEditorialFinish && !output.includes('High-budget editorial campaign production')) {
+    problems.push('缺精品成像核心');
+  }
   const lines = output.split('\n');
   for (let li = 1; li < lines.length; li += 1) {
     if (lines[li].trim() && lines[li] === lines[li - 1]) { problems.push(`相鄰重複行: "${lines[li].slice(0, 40)}"`); break; }
@@ -106,6 +115,7 @@ function report(pageLabel, count) {
 // ---------------------------------------------------------------------
 const coreSource = read('assets/core-prompt.js');
 const core = evalCore(coreSource);
+const editorialFinish = evalEditorialFinish(read('assets/editorial-finish.js'));
 
 // ===================== TRAVEL =====================
 {
@@ -311,10 +321,10 @@ const core = evalCore(coreSource);
 {
   const html = read('chinese-classical.html');
   const data = evalDataSegment({
-    source: html, core, page: 'chineseClassical',
+    source: html, core, finish: editorialFinish, page: 'chineseClassical',
     startMarker: 'const materialData = {',
     endMarker: 'function selected',
-    exportExpression: '({ materialData, accessoryData, garmentData, styleData, backgroundData, lightingData, colorPaletteData, sharedClassicalCore, identityGuard: sharedClassicalCore.identityGuard, anatomyGuard: sharedClassicalCore.anatomyGuard, poseNaturalityGuard: sharedClassicalCore.poseGuard, BODY_SHAPES, GARMENT_VARIATIONS, compositionGuard: sharedClassicalCore.compositionGuard, lightingConsistencyGuard: sharedClassicalCore.lightingGuard, poseData, framingData, cameraData, ratioData })',
+    exportExpression: '({ materialData, accessoryData, garmentData, styleData, backgroundData, lightingData, colorPaletteData, sharedClassicalCore, editorialFinish: (typeof editorialFinish === "undefined" ? { base: "", theme: "", negative: "" } : editorialFinish), identityGuard: sharedClassicalCore.identityGuard, anatomyGuard: sharedClassicalCore.anatomyGuard, poseNaturalityGuard: sharedClassicalCore.poseGuard, BODY_SHAPES, GARMENT_VARIATIONS, compositionGuard: sharedClassicalCore.compositionGuard, lightingConsistencyGuard: sharedClassicalCore.lightingGuard, poseData, framingData, cameraData, ratioData })',
   });
   const compositionValues = [...radioValues(html, 'composition')];
   const pools = {
@@ -373,6 +383,8 @@ const core = evalCore(coreSource);
       data.styleData[sel.style] + ',',
       sel.composition + ',',
       data.compositionGuard + ',',
+      data.editorialFinish?.base || '',
+      data.editorialFinish?.theme || '',
       'refined Chinese clothing aesthetics, period-informed Chinese silhouette, elegant fabric drape, traditional Chinese design language,',
       'appearance form: ' + data.garmentData[sel.garment] + ',',
       'traditional materials and Chinese elements: ' + materialText + ',',
@@ -388,9 +400,10 @@ const core = evalCore(coreSource);
       data.sharedClassicalCore.output + ',',
       'balanced traditional details, refined and luxurious,',
       data.sharedClassicalCore.negativePrompt + ',',
+      data.editorialFinish?.negative || '',
       'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face',
     ].filter(Boolean).join('\n');
-    checkOutput('chineseClassical', i, sel, output, { requireIdentity: true, identityMarkers: ['身份鎖定系統'] });
+    checkOutput('chineseClassical', i, sel, output, { requireIdentity: true, identityMarkers: ['身份鎖定系統'], requireEditorialFinish: true });
     const positiveOutput = output.split(data.sharedClassicalCore.negativePrompt)[0];
     if (/(xianxia|cultivator|magical aura|futuristic technology|cyberpunk|mechanical armor|technology interface|fantasy costume|fairy|goddess|celestial palace|moon palace)/i.test(positiveOutput)) {
       ISSUES.push({ page: 'chineseClassical', iteration: i, selection: sel, problems: ['正向 Prompt 含禁用幻想語彙'] });
@@ -402,10 +415,10 @@ const core = evalCore(coreSource);
 function auditClassicalCulturePage({ file, pageKey, label, cultureLine, materialLine, preserveLine, forbiddenPositive }) {
   const html = read(file);
   const data = evalDataSegment({
-    source: html, core, page: pageKey,
+    source: html, core, finish: editorialFinish, page: pageKey,
     startMarker: 'const materialData = {',
     endMarker: 'function selected',
-    exportExpression: '({ materialData, accessoryData, garmentData, styleData, backgroundData, lightingData, colorPaletteData, sharedClassicalCore, identityGuard: sharedClassicalCore.identityGuard, anatomyGuard: sharedClassicalCore.anatomyGuard, poseNaturalityGuard: sharedClassicalCore.poseGuard, BODY_SHAPES, GARMENT_VARIATIONS, compositionGuard: sharedClassicalCore.compositionGuard, lightingConsistencyGuard: sharedClassicalCore.lightingGuard, poseData, framingData, cameraData, ratioData })',
+    exportExpression: '({ materialData, accessoryData, garmentData, styleData, backgroundData, lightingData, colorPaletteData, sharedClassicalCore, editorialFinish: (typeof editorialFinish === "undefined" ? { base: "", theme: "", negative: "" } : editorialFinish), identityGuard: sharedClassicalCore.identityGuard, anatomyGuard: sharedClassicalCore.anatomyGuard, poseNaturalityGuard: sharedClassicalCore.poseGuard, BODY_SHAPES, GARMENT_VARIATIONS, compositionGuard: sharedClassicalCore.compositionGuard, lightingConsistencyGuard: sharedClassicalCore.lightingGuard, poseData, framingData, cameraData, ratioData })',
   });
   const compositionValues = [...radioValues(html, 'composition')];
   const pools = {
@@ -431,15 +444,16 @@ function auditClassicalCulturePage({ file, pageKey, label, cultureLine, material
       data.identityGuard + ',',
       data.anatomyGuard + ',', data.poseNaturalityGuard + ',',
       data.BODY_SHAPES[sel.bodyShape] + ',', data.lightingConsistencyGuard + ',', data.styleData[sel.style] + ',', sel.composition + ',', data.compositionGuard + ',',
+      data.editorialFinish?.base || '', data.editorialFinish?.theme || '',
       cultureLine, 'appearance form: ' + data.garmentData[sel.garment] + ',', materialText ? materialLine + ': ' + materialText + ',' : '',
       accessoryText ? 'culturally coherent accessory detail: ' + accessoryText + ',' : '',
       variationParts.length ? 'garment variation details: ' + variationParts.join('; ') + ', ' + preserveLine + ',' : '',
       data.poseData[sel.pose] + ',', data.framingData[sel.framing] + ',', data.cameraData[sel.camera] + ',', 'lighting design: ' + data.lightingData[sel.lighting] + ',',
       'color palette: ' + (data.colorPaletteData[sel.color] || materialPalette) + ',', 'background design: ' + data.backgroundData[sel.background] + ',',
       data.ratioData[sel.ratio] + ',', data.sharedClassicalCore.output + ',',
-      'balanced traditional details, refined and luxurious,', data.sharedClassicalCore.negativePrompt + ',', 'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face',
+      'balanced traditional details, refined and luxurious,', data.sharedClassicalCore.negativePrompt + ',', data.editorialFinish?.negative || '', 'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face',
     ].filter(Boolean).join('\n');
-    checkOutput(label, i, sel, output, { requireIdentity: true, identityMarkers: ['身份鎖定系統'] });
+    checkOutput(label, i, sel, output, { requireIdentity: true, identityMarkers: ['身份鎖定系統'], requireEditorialFinish: pageKey === 'japaneseKimono' });
     const positiveOutput = output.split(data.sharedClassicalCore.negativePrompt)[0];
     if (forbiddenPositive.test(positiveOutput)) ISSUES.push({ page: label, iteration: i, selection: sel, problems: ['正向 Prompt 含跨文化或幻想服飾語彙'] });
   }
@@ -887,10 +901,10 @@ auditClassicalCulturePage({
 {
   const html = read('bridal-editorial.html');
   const data = evalDataSegment({
-    source: html, core, page: 'bridalEditorial',
+    source: html, core, finish: editorialFinish, page: 'bridalEditorial',
     startMarker: 'const CORE = window.HB_CORE_PROMPT.page.bridalEditorial;',
     endMarker: 'function selected',
-    exportExpression: '({ CORE, BRIDAL_EDITORIAL_CORE, BRIDAL_VEIL_IDENTITY_PROTECTION, styleData, compositionData, framingData, garmentData, materialData, chestDetailData, waistSideDetailData, shoulderDetailData, veilData, accessoryData, bodyShapes, poseData, makeupData, hairstyleData, skinData, lightingData, colorData, backgroundData, cameraData, ratioData, GARMENT_DETAIL_LAYER_ZONES, GARMENT_DETAIL_RANDOM_POOLS })',
+    exportExpression: '({ CORE, BRIDAL_EDITORIAL_CORE, BRIDAL_VEIL_IDENTITY_PROTECTION, editorialFinish: (typeof editorialFinish === "undefined" ? { base: "", theme: "", negative: "" } : editorialFinish), styleData, compositionData, framingData, garmentData, materialData, chestDetailData, waistSideDetailData, shoulderDetailData, veilData, accessoryData, bodyShapes, poseData, makeupData, hairstyleData, skinData, lightingData, colorData, backgroundData, cameraData, ratioData, GARMENT_DETAIL_LAYER_ZONES, GARMENT_DETAIL_RANDOM_POOLS })',
   });
   const pools = {
     style: Object.keys(data.styleData), composition: radioValues(html, 'composition'), framing: radioValues(html, 'framing'),
@@ -936,6 +950,7 @@ auditClassicalCulturePage({
     const parts = [
       data.CORE.identityGuard, data.CORE.anatomyGuard, data.CORE.poseGuard, data.CORE.lightingGuard,
       data.CORE.compositionGuard, data.BRIDAL_EDITORIAL_CORE, data.styleData[sel.style], data.compositionData[sel.composition],
+      data.editorialFinish?.base || '', data.editorialFinish?.theme || '',
       data.framingData[sel.framing], 'gown silhouette: ' + garmentText,
       materialText ? 'bridal gown materials: ' + materialText : '',
       details.length ? 'garment surface detail: ' + details.join(', ') : '',
@@ -945,9 +960,10 @@ auditClassicalCulturePage({
       sel.customBackground ? 'custom background only: ' + sel.customBackground : data.backgroundData[sel.background],
       data.cameraData[sel.camera], data.ratioData[sel.ratio], sel.intensity, data.CORE.output,
       sel.extraNote ? 'additional direction: ' + sel.extraNote : '', data.CORE.negativePrompt,
+      data.editorialFinish?.negative || '',
       'No random text, no watermark, no logo artifacts, no extra person, no distorted face, no deformed hands.',
     ];
-    checkOutput('bridalEditorial', i, sel, unique(parts).join('\n\n'), { requireIdentity: true, identityMarkers: ['身份鎖定系統'] });
+    checkOutput('bridalEditorial', i, sel, unique(parts).join('\n\n'), { requireIdentity: true, identityMarkers: ['身份鎖定系統'], requireEditorialFinish: true });
   }
   report('bridalEditorial', N);
 }
@@ -1025,10 +1041,10 @@ auditClassicalCulturePage({
 {
   const html = read('kpop-idol.html');
   const data = evalDataSegment({
-    source: html, core, page: 'kpopIdol',
+    source: html, core, finish: editorialFinish, page: 'kpopIdol',
     startMarker: 'const materialData = {',
     endMarker: 'function setRadioValue',
-    exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedKpopIdolCore, identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, poseData, framingData, cameraData, ratioData, chestDetailData, waistSideDetailData, shoulderDetailData })',
+    exportExpression: '({ materialData, garmentData, styleData, backgroundData, lightingData, sharedKpopIdolCore, editorialFinish: (typeof editorialFinish === "undefined" ? { base: "", theme: "", negative: "" } : editorialFinish), identityGuard, anatomyGuard, poseNaturalityGuard, BODY_SHAPES, compositionGuard, lightingConsistencyGuard, poseData, framingData, cameraData, ratioData, chestDetailData, waistSideDetailData, shoulderDetailData })',
   });
   const compositionValues = radioValues(html, 'composition');
   const intensityValues = selectValues(html, 'intensity');
@@ -1074,6 +1090,7 @@ auditClassicalCulturePage({
       data.identityGuard + ',', 'Same adult woman from the reference photo, realistic commercial portrait subject, reference photo used for identity only,',
       data.anatomyGuard + ',', data.poseNaturalityGuard + ',', bodyShape + ',', data.lightingConsistencyGuard + ',',
       sel.composition + ',', data.compositionGuard + ',',
+      data.editorialFinish?.base || '', data.editorialFinish?.theme || '',
       'appearance form: ' + garmentText + ',', garmentDetailText, 'theme material and art system: ' + materialText + ',',
       'use the selected material system to form the clothing, ornaments, background accents and advertising visual language,',
       sel.intensity + ',', 'selected material appears as controlled clothing details, ornaments, particles and background accents without overpowering facial identity,',
@@ -1082,10 +1099,11 @@ auditClassicalCulturePage({
       data.ratioData[sel.ratio] + ',', core.page.kpopIdol.output ? core.page.kpopIdol.output + ',' : '',
       'hyper realistic, ultra detailed, premium advertising finish,', 'color palette: ' + (sel.colorNote || materialPalette) + ',',
       sel.extraNote ? 'extra direction: ' + sel.extraNote + ',' : '', core.page.kpopIdol.negativePrompt ? core.page.kpopIdol.negativePrompt + ',' : '',
+      data.editorialFinish?.negative || '',
       'no random text, no watermark, no logo artifacts, no extra fingers, no deformed body, no distorted face',
     ].filter(Boolean);
     const output = prompt.join('\n');
-    checkOutput('kpopIdol', i, sel, output, { requireIdentity: true, identityMarkers: ['身份鎖定系統'] });
+    checkOutput('kpopIdol', i, sel, output, { requireIdentity: true, identityMarkers: ['身份鎖定系統'], requireEditorialFinish: true });
   }
   report('kpopIdol', N);
 }

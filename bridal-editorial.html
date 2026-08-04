@@ -168,6 +168,12 @@
       <button class="card" type="button" data-template="blueCrystalBride"><div class="name">冰藍水晶婚紗</div><div class="desc">冰藍水晶、冷調柔光、精緻高訂畫面</div></button>
       <button class="card" type="button" data-template="bridalMagazineKeyVisual"><div class="name">婚紗雜誌主視覺</div><div class="desc">右側人物、左側乾淨排版空間、封面級人像</div></button>
     </div>
+    <div class="group-title">精品主視覺</div>
+    <button class="card" type="button" id="bridalPremiumPreset" style="width:100%;min-height:auto;margin-top:10px;margin-bottom:10px;background:linear-gradient(180deg,#17120D 0%,#211B12 100%);"><div class="name">隨機套用｜精品主視覺</div><div class="desc">從黑金高訂與珍珠灰白兩組婚紗雜誌方向抽取完整設定</div></button>
+    <div class="grid grid-3">
+      <button class="card" type="button" data-template="bridalBlackGoldCouture"><div class="name">黑金高訂婚紗封面</div><div class="desc">雕塑婚紗、深色畫廊、香檳金方向性主光</div></button>
+      <button class="card" type="button" data-template="bridalPearlGrayArchive"><div class="name">珍珠灰白婚紗典藏</div><div class="desc">珍珠灰背景、蕾絲與緞面工藝、典藏肖像感</div></button>
+    </div>
   </section>
 
   <section class="section-style">
@@ -392,6 +398,8 @@
       <label class="card"><input type="radio" name="lighting" value="goldenHourBacklight"><div class="name">黃昏暖金逆光</div><div class="desc">海岸與戶外婚紗的暖色輪廓光</div></label>
       <label class="card"><input type="radio" name="lighting" value="cathedralWindowProjection"><div class="name">教堂彩窗光</div><div class="desc">彩窗光影投射於婚紗與背景</div></label>
       <label class="card"><input type="radio" name="lighting" value="cinematicLowContrast"><div class="name">電影感低對比光</div><div class="desc">安靜、沉穩、帶有故事感</div></label>
+      <label class="card"><input type="radio" name="lighting" value="blackChampagneCoutureLight"><div class="name">黑金香檳高訂主光</div><div class="desc">深色分離、香檳輪廓與緞面高光</div></label>
+      <label class="card"><input type="radio" name="lighting" value="pearlEditorialShadow"><div class="name">珍珠灰典藏側光</div><div class="desc">蕾絲建模、安靜陰影與典藏質感</div></label>
     </div>
     <div class="grid grid-3" data-choice="color" style="margin-top:10px;">
       <label class="card selected"><input type="radio" name="color" value="ivoryCream" checked><div class="name">象牙白與奶油色</div><div class="desc">最接近參考圖的高級暖白</div></label>
@@ -400,6 +408,8 @@
       <label class="card"><input type="radio" name="color" value="mistyPinkIvory"><div class="name">煙粉與象牙白</div><div class="desc">浪漫柔和的花卉婚紗色系</div></label>
       <label class="card"><input type="radio" name="color" value="iceBlueCrystalWhite"><div class="name">冰藍與水晶白</div><div class="desc">冷調、清透、精緻</div></label>
       <label class="card"><input type="radio" name="color" value="whitePlatinumGray"><div class="name">白金與淡灰</div><div class="desc">現代高訂、低飽和精品感</div></label>
+      <label class="card"><input type="radio" name="color" value="blackChampagneIvory"><div class="name">黑灰香檳與暖白</div><div class="desc">高訂封面、克制金色與深色對比</div></label>
+      <label class="card"><input type="radio" name="color" value="pearlCharcoalWhite"><div class="name">珍珠灰白與炭灰</div><div class="desc">典藏肖像、蕾絲與安靜陰影</div></label>
     </div>
     <label class="field full custom-choice" style="margin-top:10px;">指定配色自填<input id="colorNote" type="text" placeholder="例如：奶油白、珍珠白、非常淡的香檳金"></label>
   </section>
@@ -419,6 +429,8 @@
       <label class="card"><input type="radio" name="background" value="coastalSunset"><div class="name">海岸夕陽</div><div class="desc">風、長頭紗與暖金天色</div></label>
       <label class="card"><input type="radio" name="background" value="windowLightRoom"><div class="name">窗邊自然光空間</div><div class="desc">安靜、親密、適合寫真肖像</div></label>
       <label class="card"><input type="radio" name="background" value="softGrayWall"><div class="name">極簡灰白牆面</div><div class="desc">現代婚紗雜誌與高訂留白</div></label>
+      <label class="card"><input type="radio" name="background" value="charcoalBridalStudio"><div class="name">炭灰婚紗高訂棚</div><div class="desc">雕塑牆面、深色分離與乾淨主體</div></label>
+      <label class="card"><input type="radio" name="background" value="blackGoldBridalGallery"><div class="name">黑金婚紗典藏畫廊</div><div class="desc">黑石、香檳金與精品畫廊層次</div></label>
     </div>
     <label class="field full custom-choice" style="margin-top:10px;">背景自填<input id="customBackground" type="text" placeholder="例如：白色花園拱門前，背景有柔焦樹影"></label>
   </section>
@@ -488,8 +500,10 @@
 
 <script src="assets/core-prompt.js"></script>
 <script src="assets/garment-core.js"></script>
+<script src="assets/editorial-finish.js"></script>
 <script>
 const CORE = window.HB_CORE_PROMPT.page.bridalEditorial;
+const editorialFinish = window.HB_EDITORIAL_FINISH?.forPage('bridalEditorial') || { base: '', theme: '', negative: '' };
 const GARMENT_DETAIL_LAYER_ZONES = { layer0: 0, layer3: 1, layer6: 2, layer9: 3 };
 const GARMENT_DETAIL_RANDOM_POOLS = {
   chestDetail: ['sweetheartCorset', 'deepVBridalNeckline', 'laceIllusionBodice', 'drapedOffShoulderBodice'],
@@ -685,7 +699,9 @@ const lightingData = {
   gardenMorningMist: 'soft misty morning garden light, delicate backlight and natural white balance',
   goldenHourBacklight: 'warm golden-hour backlight with a gentle veil rim light and natural skin tone',
   cathedralWindowProjection: 'soft cathedral stained-glass window projection across the gown and background',
-  cinematicLowContrast: 'cinematic low-contrast lighting with quiet shadows and refined filmic tonal depth'
+  cinematicLowContrast: 'cinematic low-contrast lighting with quiet shadows and refined filmic tonal depth',
+  blackChampagneCoutureLight: 'directional charcoal studio light with a controlled champagne rim, deep tonal separation and smooth bridal satin highlights',
+  pearlEditorialShadow: 'soft directional light across pearl-gray space with restrained shadow depth, clean lace modeling and quiet archival elegance'
 };
 const colorData = {
   ivoryCream: 'ivory white, warm cream and soft pearl highlights',
@@ -693,7 +709,9 @@ const colorData = {
   champagneWarmWhite: 'soft champagne gold, warm white and restrained pearl sheen',
   mistyPinkIvory: 'misty blush pink, ivory white and delicate warm rose accents',
   iceBlueCrystalWhite: 'pale ice blue, crystal white and cool silver highlights',
-  whitePlatinumGray: 'bridal white, platinum gray and soft neutral shadows'
+  whitePlatinumGray: 'bridal white, platinum gray and soft neutral shadows',
+  blackChampagneIvory: 'charcoal black, restrained champagne gold and warm ivory with a controlled couture contrast',
+  pearlCharcoalWhite: 'pearl gray, clean bridal white and charcoal shadow with a quiet premium archive balance'
 };
 const backgroundData = {
   creamSeamlessStudio: 'a seamless warm cream bridal studio backdrop, clean and softly graded',
@@ -706,7 +724,9 @@ const backgroundData = {
   roseGardenPath: 'a romantic rose garden path with soft flowers and natural perspective depth',
   coastalSunset: 'a calm coastal setting at sunset with natural wind and open atmospheric depth',
   windowLightRoom: 'a quiet pale room beside a large window with soft natural bridal portrait light',
-  softGrayWall: 'a minimal soft gray-white wall and refined editorial studio environment'
+  softGrayWall: 'a minimal soft gray-white wall and refined editorial studio environment',
+  charcoalBridalStudio: 'a charcoal bridal couture studio with one sculptural wall plane, controlled shadow depth and no showroom clutter',
+  blackGoldBridalGallery: 'a refined black and champagne bridal gallery with dark stone, restrained gold accents and clean editorial separation'
 };
 const cameraData = {
   eyeLevelCover: 'natural eye-level camera angle, standard magazine cover perspective, balanced face and body proportion, clean premium portrait framing',
@@ -744,7 +764,9 @@ const themeTemplates = {
   champagneCoutureBride: { style: 'bridalCampaign', composition: 'centeredBridalPortrait', framing: 'fullBody', garment: 'champagneCoutureGown', materials: ['pearlBeading', 'crystalBeading'], garmentLayer: 'layer6', chestDetail: 'sweetheartCorset', waistSideDetail: 'pearlWaistApplique', shoulderDetail: 'singleShoulderBridalCut', veil: 'cathedralVeil', accessories: ['crystalTiara'], bodyShape: 'fashion_tall', pose: 'naturalBridalStand', makeup: ['sculptedContour', 'coutureRedLip'], hairstyle: 'highBridalUpdo', skinTexture: 'luxuryAdSkin', lighting: 'luxuryStudioSoftbox', color: 'champagneWarmWhite', background: 'palaceWeddingHall', camera: 'eyeLevelCover', ratio: '2:3', intensity: 'dramatic couture bridal styling, pronounced train and veil movement, strong fashion editorial presence' },
   pinkFloralBride: { style: 'fineArtWedding', composition: 'foregroundFlowerFrame', framing: 'waistUp', garment: 'floralSculptureGown', materials: ['floralEmbroidery', 'pearlBeading'], garmentLayer: 'layer3', chestDetail: 'laceIllusionBodice', waistSideDetail: 'pearlWaistApplique', shoulderDetail: 'laceCapSleeve', veil: 'laceEdgeVeil', accessories: ['coloredBouquet'], bodyShape: 'original', pose: 'downcastThreeQuarter', makeup: ['naturalRose', 'clearBridalMakeup'], hairstyle: 'romanticWaves', skinTexture: 'softFocusSkin', lighting: 'gardenMorningMist', color: 'mistyPinkIvory', background: 'roseGardenPath', camera: 'eyeLevelCover', ratio: '9:16', intensity: 'restrained luxury bridal styling, delicate couture detail, quiet premium mood' },
   blueCrystalBride: { style: 'bridalMagazine', composition: 'rightSubjectLeftSpace', framing: 'threeQuarter', garment: 'blueCrystalGown', materials: ['crystalBeading', 'silkSatin'], garmentLayer: 'layer3', chestDetail: 'deepVBridalNeckline', waistSideDetail: 'sculptedWaistCorsetry', shoulderDetail: 'singleShoulderBridalCut', veil: 'shoulderLengthVeil', accessories: ['crystalTiara'], bodyShape: 'fashion_tall', pose: 'sideProfileGown', makeup: ['refinedBridalBeauty'], hairstyle: 'softFrenchUpdo', skinTexture: 'luxuryAdSkin', lighting: 'cinematicLowContrast', color: 'iceBlueCrystalWhite', background: 'softGrayWall', camera: 'threeQuarterSide', ratio: '4:5', intensity: 'balanced luxury bridal styling, visible couture craftsmanship, refined editorial presence' },
-  bridalMagazineKeyVisual: { style: 'bridalMagazine', composition: 'rightSubjectLeftSpace', framing: 'waistUp', garment: 'coutureMermaid', materials: ['frenchLace', 'pearlBeading'], garmentLayer: 'layer0', chestDetail: 'sweetheartCorset', waistSideDetail: 'sculptedWaistCorsetry', shoulderDetail: 'softOffShoulderTulle', veil: 'pearlVeil', accessories: ['pearlEarrings'], bodyShape: 'original', pose: 'downcastThreeQuarter', makeup: ['clearBridalMakeup', 'koreanSoftMatte'], hairstyle: 'lowBridalUpdo', skinTexture: 'luxuryAdSkin', lighting: 'koreanCreamSoftLight', color: 'ivoryCream', background: 'creamSeamlessStudio', camera: 'eyeLevelCover', ratio: '9:16', intensity: 'balanced luxury bridal styling, visible couture craftsmanship, refined editorial presence' }
+  bridalMagazineKeyVisual: { style: 'bridalMagazine', composition: 'rightSubjectLeftSpace', framing: 'waistUp', garment: 'coutureMermaid', materials: ['frenchLace', 'pearlBeading'], garmentLayer: 'layer0', chestDetail: 'sweetheartCorset', waistSideDetail: 'sculptedWaistCorsetry', shoulderDetail: 'softOffShoulderTulle', veil: 'pearlVeil', accessories: ['pearlEarrings'], bodyShape: 'original', pose: 'downcastThreeQuarter', makeup: ['clearBridalMakeup', 'koreanSoftMatte'], hairstyle: 'lowBridalUpdo', skinTexture: 'luxuryAdSkin', lighting: 'koreanCreamSoftLight', color: 'ivoryCream', background: 'creamSeamlessStudio', camera: 'eyeLevelCover', ratio: '9:16', intensity: 'balanced luxury bridal styling, visible couture craftsmanship, refined editorial presence' },
+  bridalBlackGoldCouture: { style: 'bridalCampaign', composition: 'rightSubjectLeftSpace', framing: 'threeQuarter', garment: 'coutureMermaid', materials: ['silkSatin', 'frenchLace'], garmentLayer: 'layer3', chestDetail: 'deepVBridalNeckline', waistSideDetail: 'sculptedWaistCorsetry', shoulderDetail: 'singleShoulderBridalCut', veil: 'shoulderLengthVeil', accessories: ['pearlEarrings'], bodyShape: 'fashion_tall', pose: 'sideProfileGown', makeup: ['refinedBridalBeauty', 'coutureRedLip'], hairstyle: 'softFrenchUpdo', skinTexture: 'luxuryAdSkin', lighting: 'blackChampagneCoutureLight', color: 'blackChampagneIvory', background: 'blackGoldBridalGallery', camera: 'threeQuarterSide', ratio: '4:5', intensity: 'dramatic couture bridal styling, pronounced train and veil movement, strong fashion editorial presence' },
+  bridalPearlGrayArchive: { style: 'bridalMagazine', composition: 'rightSubjectLeftSpace', framing: 'waistUp', garment: 'minimalColumn', materials: ['frenchLace', 'silkSatin'], garmentLayer: 'layer0', chestDetail: 'sweetheartCorset', waistSideDetail: 'drapedWaistPleats', shoulderDetail: 'softOffShoulderTulle', veil: 'pearlVeil', accessories: ['pearlEarrings'], bodyShape: 'original', pose: 'adjustingVeil', makeup: ['clearBridalMakeup'], hairstyle: 'lowBridalUpdo', skinTexture: 'realPores', lighting: 'pearlEditorialShadow', color: 'pearlCharcoalWhite', background: 'charcoalBridalStudio', camera: 'beautyCloseUp', ratio: '4:5', intensity: 'restrained luxury bridal styling, delicate couture detail, quiet premium mood' }
 };
 
 function selected(name){
@@ -844,6 +866,10 @@ function applyRandomSelection(){
   refreshCards();
   generate({ reveal: true });
 }
+const PREMIUM_TEMPLATE_KEYS = ['bridalBlackGoldCouture', 'bridalPearlGrayArchive'];
+function applyBridalPremiumSelection(){
+  applyThemeTemplate(PREMIUM_TEMPLATE_KEYS[Math.floor(Math.random() * PREMIUM_TEMPLATE_KEYS.length)]);
+}
 function customText(id){
   const item = document.getElementById(id);
   return item ? item.value.trim() : '';
@@ -895,6 +921,8 @@ function generate(options){
     CORE.lightingGuard,
     CORE.compositionGuard,
     BRIDAL_EDITORIAL_CORE,
+    editorialFinish.base,
+    editorialFinish.theme,
     styleData[selected('style')],
     compositionData[selected('composition')],
     framingData[selected('framing')],
@@ -915,6 +943,7 @@ function generate(options){
     ratioData[selected('ratio')],
     document.getElementById('intensity').value,
     CORE.output,
+    editorialFinish.negative,
     CORE.negativePrompt
   ].filter(Boolean);
   const output = HB_GARMENT_CORE.compactPromptParts(parts).join('\n\n⸻\n\n');
@@ -939,6 +968,7 @@ applyMaxTwo('accessories');
 applyMaxTwo('makeup');
 document.getElementById('generateBtn').addEventListener('click', () => generate({ reveal: true }));
 document.getElementById('bridalRandomPreset').addEventListener('click', applyRandomSelection);
+document.getElementById('bridalPremiumPreset').addEventListener('click', applyBridalPremiumSelection);
 document.querySelectorAll('[data-template]').forEach(button => button.addEventListener('click', () => applyThemeTemplate(button.dataset.template)));
 document.querySelector('.section-preset').addEventListener('click', event => {
   const button = event.target.closest('button.card');
