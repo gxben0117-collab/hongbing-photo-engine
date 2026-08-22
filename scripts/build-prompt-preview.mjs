@@ -262,6 +262,43 @@ function generateMagazine(core, data, mediaKey) {
   return sections.join('\n\n⸻\n\n');
 }
 
+function generateLuxuryLifestyle(core, data, selectionOverride = null) {
+  const selection = selectionOverride || {
+    style: 'luxuryLifestyle', scene: 'sofa', garment: 'grayPlaidOffShoulder',
+    chestDetail: 'crossWrapDeepV', waistSideDetail: 'softWaistDrape', shoulderDetail: 'offShoulderCut',
+    bodyShape: 'original', pose: 'sofaSideSit', interaction: 'coffeeCup', lighting: 'morningWindow',
+    colorPalette: 'warmIvoryCamel', camera: 'eyeLevelCover', ratio: '9:16', intensity: 'balanced',
+  };
+  const variationParts = [
+    data.GARMENT_VARIATIONS.chestDetail[selection.chestDetail],
+    data.GARMENT_VARIATIONS.waistSideDetail[selection.waistSideDetail],
+    data.GARMENT_VARIATIONS.shoulderDetail[selection.shoulderDetail],
+  ].filter(Boolean);
+  const variationBlock = variationParts.length ? `【服裝改造核心】\n\n${variationParts.join('\n')}` : '';
+  const sections = [
+    core.page.magazine.identity,
+    core.page.magazine.skeleton,
+    core.page.magazine.pose,
+    core.blocks.lightingUnification,
+    'Commercial residential lifestyle composition: furniture scale, body scale and camera distance remain coherent; the subject stays clear while the interior supports the story without crowding the face.',
+    `【Luxury Lifestyle 攝影語氣】\n\n${data.styleData[selection.style]}`,
+    `【生活場景】\n\n${data.sceneData[selection.scene]}`,
+    `【服裝方向】\n\n${data.garmentData[selection.garment]}`,
+    variationBlock,
+    `【人物姿勢】\n\n${data.poseData[selection.pose]}`,
+    `【生活互動】\n\n${data.interactionData[selection.interaction]}`,
+    `【光影】\n\n${data.lightingData[selection.lighting]}`,
+    `【色彩系統】\n\n${data.colorData[selection.colorPalette]}`,
+    `【畫面強度】\n\n${data.intensityData[selection.intensity]}`,
+    `【鏡頭感】\n\n${data.cameraData[selection.camera]}`,
+    `【圖片比例】\n\n${data.ratioData[selection.ratio]}`,
+    'Premium residential lifestyle campaign, realistic furniture scale, coherent interior architecture, refined fabric and surface texture, no readable text, no logo, no brand mark',
+    core.page.magazine.cleanframe,
+    core.page.magazine.output,
+  ];
+  return sections.filter(Boolean).join('\n\n⸻\n\n');
+}
+
 function generateFantasy(core, data) {
   const selection = {
     bodyShape: 'original',
@@ -1140,7 +1177,7 @@ function generateBattleAcademy(core, data) {
     bodyShape: 'original',
     school: 'sakuraAcademy',
     upperBody: 'croppedAcademyBlazer',
-    waistSideDetail: 'highWaistTailoring',
+    waist: 'highWaistTailoring',
     lower: 'pleatedMiniSkirt',
     uniformType: 'standard',
     chestDetail: 'vCutout',
@@ -1173,7 +1210,7 @@ function generateBattleAcademy(core, data) {
   const schoolPromptText = selection.customSchool ? `custom school identity only: ${selection.customSchool}; do not include or blend any preset school identity option` : schoolInfo.prompt;
   const schoolColorNote = selection.customSchool ? '' : schoolInfo.colorNote;
   const upperText = data.upperBodyData[selection.upperBody];
-  const waistText = data.waistData[selection.waistSideDetail];
+  const waistText = data.waistData[selection.waist];
   const lowerText = data.lowerData[selection.lower];
   const uniformTypeText = data.uniformTypeData[selection.uniformType];
   const chestDetailText = selection.customChestDetail ? `custom chest surface detail only: ${selection.customChestDetail}` : data.chestDetailData[selection.chestDetail];
@@ -1256,6 +1293,20 @@ function loadRevision(label, sourceReader) {
     endMarker: 'function setupRadioCards',
     exportExpression: '({ STYLES, BACKGROUNDS, POSES, CAMERAS, MOTION_LEVELS, DETAIL_BLOCKS, MAGAZINE_ILLUSTRATION_MEDIA_KEYS, MAGAZINE_ILLUSTRATION_SKIN_TEXTURE, MEDIA_STYLES, RATIOS, BODY_SHAPES, FRAMING_RATIOS, COVER_LIGHTING, MAGAZINE_LIGHTING_CONSISTENCY, MAGAZINE_SUBJECT_INTEGRATION, MAGAZINE_FACE_FILL, COVER_COMPOSITION })',
   });
+  let luxuryLifestyleData = null;
+  try {
+    const luxuryLifestyleSource = sourceReader('luxury-lifestyle.html');
+    luxuryLifestyleData = evalDataSegment({
+      source: luxuryLifestyleSource,
+      core,
+      page: 'magazine',
+      startMarker: 'const CORE = window.HB_CORE_PROMPT?.page?.magazine || {};',
+      endMarker: 'function selected',
+      exportExpression: '({ styleData, sceneData, garmentData, poseData, interactionData, lightingData, colorData, cameraData, ratioData, intensityData, GARMENT_VARIATIONS, themeTemplates })',
+    });
+  } catch (err) {
+    // The base revision may predate the independent Luxury Lifestyle page.
+  }
   const fantasyData = evalDataSegment({
     source: fantasySource,
     core,
@@ -1315,6 +1366,11 @@ function loadRevision(label, sourceReader) {
     'magazine-illustration.txt': generateMagazine(core, magazineData, 'manga_cover'),
     'fantasy-default.txt': generateFantasy(core, fantasyData),
   };
+  if (luxuryLifestyleData) {
+    prompts['luxury-lifestyle-default.txt'] = generateLuxuryLifestyle(core, luxuryLifestyleData);
+    const sofaTemplate = luxuryLifestyleData.themeTemplates?.sofaMorningEditorial;
+    if (sofaTemplate) prompts['luxury-lifestyle-sofa-morning.txt'] = generateLuxuryLifestyle(core, luxuryLifestyleData, sofaTemplate);
+  }
   if (chineseClassicalData) {
     prompts['chinese-classical-default.txt'] = generateChineseClassical(core, chineseClassicalData);
     const classicalTemplates = chineseClassicalData.themeTemplates || {};
@@ -1611,8 +1667,22 @@ function writeText(fileName, text) {
   fs.writeFileSync(path.join(outDir, fileName), text, 'utf8');
 }
 
+function findPromptIssues(prompts) {
+  const issues = [];
+  const leakedValuePattern = /\bundefined\b|\bNaN\b|\[object Object\]|\bnull\b/;
+  for (const [fileName, prompt] of Object.entries(prompts)) {
+    if (leakedValuePattern.test(prompt)) issues.push(`${fileName}: leaked runtime value`);
+    if (!prompt.trim()) issues.push(`${fileName}: empty prompt`);
+  }
+  return issues;
+}
+
 const base = loadRevision(`base-${baseRev}`, (relativePath) => readGit(baseRev, relativePath));
 const worktree = loadRevision('worktree', readWorktree);
+const promptIssues = findPromptIssues(worktree.prompts);
+if (promptIssues.length) {
+  throw new Error(`Prompt preview validation failed:\n${promptIssues.join('\n')}`);
+}
 const BRIDAL_PROMPT_BUDGET = 9000;
 const bridalPromptKeys = [
   'bridal-editorial-default.txt',

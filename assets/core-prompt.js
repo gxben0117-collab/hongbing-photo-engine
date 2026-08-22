@@ -43,7 +43,7 @@ No facial reconstruction, redesign, beautification or stylization.`;
   const DOLL_RATIO_VALUES = Object.freeze(["9:16", "1:1", "3:4", "4:3", "2:3", "4:5"]);
 
   const STANDARD_PORTRAIT_PAGE_FILES = Object.freeze([
-    "magazine.html", "fantasy-fashion.html", "chinese-classical.html",
+    "magazine.html", "luxury-lifestyle.html", "fantasy-fashion.html", "chinese-classical.html",
     "japanese-kimono.html", "korean-hanbok.html", "xianxia.html",
     "anime-character.html", "flower-fairy.html", "isekai-fantasy.html",
     "floral-sweet.html", "gala-socialite.html", "bridal-editorial.html",
@@ -199,12 +199,21 @@ Preserve recognizable facial geometry, natural skin tone impression and age impr
 No plastic face.
 No detached face look.`;
 
+  // Portrait pages already include CORE_REALISTIC_ANATOMY in their skeleton.
+  // Keep the shared negative block focused on constraints that are not repeated there.
   const CORE_NEGATIVE_PROMPT = `【通用負面約束】
 
 No face swap/drift, AI/influencer/celebrity/template face, duplicated/pasted face.
-No oversized head, extra limbs/arms/fingers, broken hands, warped anatomy, inconsistent/independent face light, random text or watermark.
+No inconsistent/independent face light, random text or watermark.
 
 ${CORE_FINAL_IDENTITY_PRIORITY}`;
+
+  // Store-ad person heroes do not use the portrait skeleton, so retain the full
+  // anatomy guard for that conditional flow without inflating every portrait page.
+  const CORE_PERSON_HERO_NEGATIVE_PROMPT = `【人物主視覺負面約束】
+
+${CORE_NEGATIVE_PROMPT}
+No oversized head, extra limbs/arms/fingers, broken hands or warped anatomy.`;
 
   const CORE_OUTPUT_QUALITY = `【輸出規格】
 
@@ -470,7 +479,7 @@ Even in doll style, the character must remain recognizable as the uploaded perso
   };
 
   const storeAdCore = {
-    negativePrompt: CORE_NEGATIVE_PROMPT,
+    negativePrompt: CORE_PERSON_HERO_NEGATIVE_PROMPT,
     output: CORE_OUTPUT_QUALITY,
     lighting: CORE_LIGHTING_UNIFICATION
   };
@@ -589,6 +598,7 @@ They must not change the person's facial structure, identity, age impression or 
   window.HB_AUTO_POSE_PROMPT = CORE_AUTO_POSE_PROMPT;
   window.HB_AUTO_COLOR_PROMPT = CORE_AUTO_COLOR_PROMPT;
   window.CORE_NEGATIVE_PROMPT = CORE_NEGATIVE_PROMPT;
+  window.CORE_PERSON_HERO_NEGATIVE_PROMPT = CORE_PERSON_HERO_NEGATIVE_PROMPT;
   window.CORE_OUTPUT_QUALITY = CORE_OUTPUT_QUALITY;
   window.HB_CANONICAL_RATIO_VALUES = CANONICAL_RATIO_VALUES;
   window.HB_CANONICAL_RATIO_PROMPTS = CANONICAL_RATIO_PROMPTS;
@@ -596,7 +606,7 @@ They must not change the person's facial structure, identity, age impression or 
   window.HB_CUSTOM_IDENTITY_CONFLICT_MESSAGE = CUSTOM_IDENTITY_CONFLICT_MESSAGE;
   window.HB_INSTALL_CUSTOM_IDENTITY_WARNING = installCustomIdentityConflictWarning;
   window.HB_CORE_PROMPT = {
-    version: "v4.42",
+    version: "v4.48",
     contracts: TOOL_PAGE_CONTRACTS,
     ratios: CANONICAL_RATIO_PROMPTS,
     controls: {
@@ -613,6 +623,7 @@ They must not change the person's facial structure, identity, age impression or 
       finalIdentityPriority: CORE_FINAL_IDENTITY_PRIORITY,
       illustrationReconstruction: CORE_ILLUSTRATION_RECONSTRUCTION,
       negativePrompt: CORE_NEGATIVE_PROMPT,
+      personHeroNegativePrompt: CORE_PERSON_HERO_NEGATIVE_PROMPT,
       outputQuality: CORE_OUTPUT_QUALITY,
       poseNaturality: CORE_POSE_NATURALITY,
       cleanFrame: CORE_CLEAN_FRAME

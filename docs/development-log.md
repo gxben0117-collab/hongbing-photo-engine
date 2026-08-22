@@ -3,9 +3,32 @@
 依時間排序的完整開發記錄。`CLAUDE.md` 只放最新現況摘要，詳細歷史都在這裡；
 需要追溯「某個功能是哪一批加的、為什麼這樣改」時查這份文件。
 
+## 2026-08-22　v4.48 全站 Prompt 核心去重與整體回歸
+
+- **核心分層**：標準人物頁的 `CORE_NEGATIVE_PROMPT` 移除 `CORE_REALISTIC_ANATOMY` 已經涵蓋的頭身比例、四肢、手部與解剖重複限制；真人骨架核心本身不變。店家廣告的人像主視覺改用 `CORE_PERSON_HERO_NEGATIVE_PROMPT`，保留完整解剖保護。
+- **Luxury Prompt 精簡**：`luxury-lifestyle.html` 與固定預覽／隨機稽核不再在雜誌頁 `cleanframe`、`output` 之後重複附加全域負面核心；標準輸出約 7,566 降至 7,042 字元，身份優先段只保留一次。
+- **預覽驗證補強**：修正戰鬥學院固定預覽誤把 `waistSideDetail` 當成腰線欄位而輸出 `undefined`；`build-prompt-preview.mjs` 現在會阻擋所有預覽中的 `undefined`、`NaN`、`null` 與 `[object Object]` 洩漏。
+- **文件同步**：共用核心版本更新為 v4.48，修正目前文件中的 20 頁、18 個 AI 姿勢入口與 Luxury Lifestyle 獨立歸屬描述。
+- **驗證**：`check-static.mjs`、`check-ui-flows.mjs`、`reorder-dom-sections.mjs --check`、`validate-preset-refs.mjs`、`build-prompt-preview.mjs`、`audit-100x.mjs` 與 `git diff --check` 全部通過；20 頁 × 100 組，共 2,000 組隨機模擬，0 issue。
+
+## 2026-08-22　v4.47 Luxury Lifestyle 獨立工具頁
+
+- **頁面分流**：新增獨立 `luxury-lifestyle.html`，不再把 Luxury Lifestyle 當成雜誌棚拍的單一風格或附加模板；`magazine.html` 的「Luxury Lifestyle 高級公寓生活方式寫真」按鈕與 `QUICK_MAGAZINE_PRESETS` 資料均已移除。
+- **生活場景軸**：建立沙發、咖啡桌、床上、窗前、門口、庭院、陽台、吧檯、餐桌與衣帽間 10 組場景，搭配畫面語氣、服裝、生活互動、姿勢、光影、配色、鏡頭與比例控制。
+- **一鍵模板**：新增 10 組完整模板，會回填場景、服裝、服裝改造 Layer、身形、姿勢、互動、光影、配色、鏡頭、比例與畫面強度。
+- **核心邊界**：新頁沿用雜誌頁的共用人像核心組裝方式，但不複製雜誌資料；身份鎖定、臉部幾何、真人骨架、光線一致、負面與輸出品質核心沒有另建平行版本。
+- **驗證**：新增頁面已接入靜態檢查、UI flow、preset 引用、Prompt 預覽與 100 次隨機稽核；全站目前 20 頁 × 100 組，共 2,000 組模擬。
+
+## 2026-08-22　v4.46 琉璃天使單翼幻想廣告模板
+
+- **來源分類**：將 `風格範例` 中的彩色琉璃單翼參考歸入 `fantasy-fashion.html`，建立「琉璃天使單翼」一鍵模板。
+- **主題化控制**：新增單翼高訂服裝、琉璃羽片材質、單翼內側坐姿、琉璃彩色體積光與幽暗霧感背景；模板固定 9:16、七分身、三分之四背側鏡頭與前景框景構圖。
+- **核心保護**：只吸收翼根、材質、景深、光線與服裝語言；沒有把來源咒語的身份、年齡、皮膚、臉部或獨立骨架限制複製進頁面，`assets/core-prompt.js` 未修改。
+- **文件同步**：在 `docs/style-example-expansion-audit-2026-08-22.md` 登錄來源、分類、吸收範圍與正式實作位置。
+
 ## 2026-08-22　v4.45 風格範例主題化擴充與來源元素分流
 
-- **來源元素分流**：完成 `C:\Users\User\Desktop\ai生圖\風格範例` 的新增素材盤點；高級公寓生活方式寫真歸入 `magazine.html` 的 Luxury Lifestyle 一鍵模板，哥德 Lolita 社區生活快照歸入 `anime-character.html` 的動漫真人風，紅色 PP 撕裂膜繩球博物館禮服歸入 `fantasy-fashion.html` 的展覽級主視覺，銀色水晶鏈甲歸入雜誌高訂封面方向。
+- **來源元素分流**：完成 `C:\Users\User\Desktop\ai生圖\風格範例` 的新增素材盤點；高級公寓生活方式寫真歸入獨立 `luxury-lifestyle.html`，哥德 Lolita 社區生活快照歸入 `anime-character.html` 的動漫真人風，紅色 PP 撕裂膜繩球博物館禮服歸入 `fantasy-fashion.html` 的展覽級主視覺，銀色水晶鏈甲歸入雜誌高訂封面方向。
 - **婚紗變化**：`bridal-editorial.html` 新增香檳絲緞抓褶婚紗、珍珠肩線高訂婚紗、抓褶心形胸衣、柔和聚褶腰線、立體珍珠肩垂、珍珠滾邊大教堂頭紗、白色花卉髮飾與雙手心形互動姿勢，並新增 2 組完整一鍵模板。
 - **核心保護**：來源咒語中的身份、年齡、臉部、骨架、皮膚與負面限制沒有複製到主題資料；`assets/core-prompt.js` 未修改，既有核心組裝順序與鎖臉機制保持不變。固定髮色、品牌字樣、可讀文字、暴露／物件不一致方向列入拒用紀錄。
 - **文件與拒用紀錄**：新增 `docs/style-example-expansion-audit-2026-08-22.md` 與 `docs/style-example-rejected-elements-2026-08-22.md`，記錄採用分類、保留原則與不採用元素，避免之後重新引入已排除內容。

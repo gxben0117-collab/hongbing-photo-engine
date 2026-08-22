@@ -1,10 +1,10 @@
 # 工具頁分類與欄位契約
 
-本文件定義 19 個正式工具頁的責任邊界、共用控制軸與內部欄位名稱。新增選項或一鍵模板前，先判斷頁面所屬家族，再沿用本契約；不要把某一頁的主題資料直接複製到其他家族。
+本文件定義 20 個正式工具頁的責任邊界、共用控制軸與內部欄位名稱。新增選項或一鍵模板前，先判斷頁面所屬家族，再沿用本契約；不要把某一頁的主題資料直接複製到其他家族。
 
 ## 版本與核心原則
 
-- 目前契約版本：v4.42。
+- 目前契約版本：v4.48。
 - 共用身份、臉部幾何、真人骨架、光線一致與負面限制仍由 `assets/core-prompt.js` 管理。
 - `chinese-classical.html`、`japanese-kimono.html`、`kpop-idol.html` 共用 `assets/editorial-finish.js`，只補精品成像與主題材質語言，不建立平行鎖臉核心；`bridal-editorial.html` 使用短版等效婚紗精品核心，避免與鎖臉保護重複堆疊。
 - 自訂要求只提供畫面方向；若輸入換臉、改臉、替換身份等語意，介面顯示提醒，生成仍以鎖臉核心為最高優先。
@@ -13,11 +13,11 @@
 
 ## 五個工具頁家族
 
-### 1. 標準人像家族（15 頁）
+### 1. 標準人像家族（16 頁）
 
 頁面：
 
-`magazine.html`、`fantasy-fashion.html`、`chinese-classical.html`、`japanese-kimono.html`、`korean-hanbok.html`、`xianxia.html`、`anime-character.html`、`flower-fairy.html`、`isekai-fantasy.html`、`floral-sweet.html`、`gala-socialite.html`、`bridal-editorial.html`、`kpop-idol.html`、`battle-academy.html`、`ancient-goddess.html`
+`magazine.html`、`luxury-lifestyle.html`、`fantasy-fashion.html`、`chinese-classical.html`、`japanese-kimono.html`、`korean-hanbok.html`、`xianxia.html`、`anime-character.html`、`flower-fairy.html`、`isekai-fantasy.html`、`floral-sweet.html`、`gala-socialite.html`、`bridal-editorial.html`、`kpop-idol.html`、`battle-academy.html`、`ancient-goddess.html`
 
 共用控制：
 
@@ -28,6 +28,8 @@
 - `pose`
 
 主題頁可增加自己的服裝、材質、姿勢、背景與妝髮欄位，但不得移除共用控制。拍攝角度、圖片比例、身形與 Layer 的實作以幻想廣告頁為工程基準，主題專屬語彙仍由各頁保留。
+
+`luxury-lifestyle.html` 是獨立的生活方式資料頁；它只沿用標準人像的身份／骨架與鏡頭控制契約，不引用 `magazine.html` 的主題選項或一鍵模板資料。
 
 例外：`battle-academy.html` 的制服輪廓使用 `waist`，服裝改造核心的腰側細節使用 `waistSideDetail`；這是兩個不同的控制軸，不是欄位不一致。
 
@@ -99,7 +101,7 @@
 
 ## AI 判斷主題最佳姿勢
 
-17 個有人物姿勢控制的正式頁提供 `pose=auto`，包含旅拍、雜誌、公仔、幻想廣告、
+18 個有人物姿勢控制的正式頁提供 `pose=auto`，包含旅拍、雜誌、Luxury Lifestyle、公仔、幻想廣告、
 中式古典、和服、韓服、仙俠、動漫人物、花仙子、異世界、花漾甜美、晚宴名媛、婚紗、
 韓系偶像、戰鬥學院與古代女神。這個值由 `assets/core-prompt.js` 的
 `HB_CORE_PROMPT.controls.autoPose` 統一提供；各頁只負責保留主題專屬的顯示文案與組裝位置。
@@ -131,4 +133,4 @@ node scripts\audit-100x.mjs
 git diff --check
 ```
 
-瀏覽器回歸需覆蓋 19 頁的：初始值、生成、複製、一鍵模板、隨機套用、自訂警示，以及桌面與 390px 手機寬度下的水平溢位檢查。
+瀏覽器回歸需覆蓋 20 頁的：初始值、生成、複製、一鍵模板、隨機套用、自訂警示，以及桌面與 390px 手機寬度下的水平溢位檢查。

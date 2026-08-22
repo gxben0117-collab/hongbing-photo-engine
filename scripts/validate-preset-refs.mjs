@@ -62,10 +62,10 @@ function liveInputValues(source, fieldName) {
 }
 
 function liveSelectOptionValues(source, selectId) {
-  const selectMatch = source.match(new RegExp(`<select id="${selectId}">([\\s\\S]*?)</select>`));
+  const selectMatch = source.match(new RegExp(`<select\\b[^>]*\\bid=["']${selectId}["'][^>]*>([\\s\\S]*?)</select>`));
   const values = new Set();
   if (!selectMatch) return values;
-  const optRe = /<option value="([^"]+)">/g;
+  const optRe = /<option\b[^>]*\bvalue=["']([^"']+)["'][^>]*>/g;
   let m;
   while ((m = optRe.exec(selectMatch[1]))) values.add(m[1]);
   return values;
@@ -155,6 +155,29 @@ const issues = [];
   checkObject('magazine.html', 'QUICK_MAGAZINE_PRESETS', extractObjectLiteral(src, 'QUICK_MAGAZINE_PRESETS'), fieldLive, issues);
   checkObject('magazine.html', 'STYLE_PRESET_DEFAULTS', extractObjectLiteral(src, 'STYLE_PRESET_DEFAULTS'), fieldLive, issues);
   checkObject('magazine.html', 'THEME_PRESET_DEFAULTS', extractObjectLiteral(src, 'THEME_PRESET_DEFAULTS'), fieldLive, issues);
+}
+
+// ===== luxury-lifestyle.html =====
+{
+  const src = fs.readFileSync(path.join(root, 'luxury-lifestyle.html'), 'utf8');
+  const fieldLive = {
+    style: liveRadioValues(src, 'style'),
+    scene: liveRadioValues(src, 'scene'),
+    garment: liveRadioValues(src, 'garment'),
+    garmentLayer: liveRadioValues(src, 'garmentLayer'),
+    chestDetail: liveRadioValues(src, 'chestDetail'),
+    waistSideDetail: liveRadioValues(src, 'waistSideDetail'),
+    shoulderDetail: liveRadioValues(src, 'shoulderDetail'),
+    bodyShape: liveRadioValues(src, 'bodyShape'),
+    pose: liveRadioValues(src, 'pose'),
+    interaction: liveRadioValues(src, 'interaction'),
+    lighting: liveRadioValues(src, 'lighting'),
+    colorPalette: liveRadioValues(src, 'colorPalette'),
+    camera: liveRadioValues(src, 'camera'),
+    ratio: liveRadioValues(src, 'ratio'),
+    intensity: liveSelectOptionValues(src, 'intensity'),
+  };
+  checkObject('luxury-lifestyle.html', 'themeTemplates', extractObjectLiteral(src, 'themeTemplates'), fieldLive, issues);
 }
 
 // ===== fantasy-fashion.html =====

@@ -9,6 +9,7 @@ const htmlFiles = [
   'index.html',
   'travel.html',
   'magazine.html',
+  'luxury-lifestyle.html',
   'doll.html',
   'fantasy-fashion.html',
   'chinese-classical.html',

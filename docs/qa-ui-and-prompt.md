@@ -5,6 +5,21 @@
 這份文件是每次上線前的共同檢查契約，確認「畫面能選」「生成會採用」「一鍵設定不會
 引用失效值」三件事同時成立。它補足單純 HTML 語法檢查看不到的互動與資料連動問題。
 
+## 2026-08-22 v4.48 全站核心與生成輸出回歸
+
+- `CORE_REALISTIC_ANATOMY`、身份鎖定、臉部幾何與光線一致核心均保留；標準人物頁的負面段落只保留未由骨架涵蓋的身份漂移、獨立打光、文字與水印限制。
+- `store-ad.html` 的人物主視覺仍使用完整 `CORE_PERSON_HERO_NEGATIVE_PROMPT`；非人物海報不會無條件加入人像限制。
+- Luxury Lifestyle 標準 Prompt 為 7,042 字元，`Final identity priority`、`oversized head`、`extra limbs`、`warped anatomy` 各 1 次；沒有重複附加全域負面核心。
+- 固定 Prompt 預覽已修正戰鬥學院腰線欄位錯接，並新增 runtime value guard；所有 36 份 worktree 預覽均無 `undefined`、`NaN`、`null` 或 `[object Object]`。
+- 靜態、UI flow、DOM 順序、preset 引用、固定預覽、20 頁 × 100 組隨機稽核與 `git diff --check` 全部通過，0 issue。
+
+## 2026-08-22 v4.47 Luxury Lifestyle 獨立頁回歸
+
+- `luxury-lifestyle.html` 已加入首頁、共用身份核心、標準 camera／ratio／body／Layer／pose 契約與所有回歸腳本。
+- Luxury Lifestyle 的 10 組一鍵模板完整回填生活場景、服裝、改造 Layer、身形、姿勢、生活互動、光影、配色、鏡頭、比例與強度。
+- `magazine.html` 不再含有 Luxury Lifestyle 公寓模板或其執行資料；新頁只沿用共用核心組裝方式，不引用雜誌主題資料。
+- `check-static.mjs`、`check-ui-flows.mjs`、`validate-preset-refs.mjs`、`build-prompt-preview.mjs`、`audit-100x.mjs` 與 `git diff --check` 通過；20 頁 × 100 組，共 2,000 組隨機模擬，0 issue。
+
 ## 2026-08-04 v4.44 全站主題語彙與 DOM 順序回歸
 
 - 9 個主題頁的強度 select 與一鍵模板均通過主題詞契約；不再使用跨主題的 `material effects`、`material splash`、
@@ -34,9 +49,9 @@
 
 ## 檢查範圍
 
-目前共 19 個正式工具頁：
+目前共 20 個正式工具頁：
 
-`travel.html`、`magazine.html`、`doll.html`、`fantasy-fashion.html`、`chinese-classical.html`、
+`travel.html`、`magazine.html`、`luxury-lifestyle.html`、`doll.html`、`fantasy-fashion.html`、`chinese-classical.html`、
 `japanese-kimono.html`、`korean-hanbok.html`、`xianxia.html`、
 `anime-character.html`、`flower-fairy.html`、`isekai-fantasy.html`、`store-ad.html`、
 `floral-sweet.html`、`gala-socialite.html`、`kpop-idol.html`、`battle-academy.html`、

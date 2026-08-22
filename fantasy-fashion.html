@@ -435,6 +435,10 @@
         <div class="name">聖羽天使繭</div>
         <div class="desc">白金羽翼包覆、雲層裂光、神聖繭形構圖</div>
       </button>
+      <button class="card" type="button" data-template="stainedGlassAngelWing">
+        <div class="name">琉璃天使單翼</div>
+        <div class="desc">巨大彩色單翼包覆、側坐高訂禮服、琉璃彩色體積光</div>
+      </button>
       <button class="card" type="button" data-template="darkIceQueen">
         <div class="name">黑暗冰晶女王</div>
         <div class="desc">黑藍冰晶、暗色女王、冰雪碎片</div>
@@ -630,6 +634,7 @@
       <label class="card"><input type="radio" name="garment" value="geometricCutoutSuit"><div class="name">幾何切割露腰緊身套裝</div><div class="desc">珠光硬挺切面材質、星形綴飾</div></label>
       <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 神話奇幻生靈</div>
       <label class="card"><input type="radio" name="garment" value="angelWingCouture"><div class="name">天使羽翼高訂</div><div class="desc">白金羽翼、聖殿禮服、神聖輪廓</div></label>
+      <label class="card"><input type="radio" name="garment" value="stainedGlassSingleWingCouture"><div class="name">琉璃天使單翼高訂</div><div class="desc">深色高訂禮服、右肩胛露出、單翼翼根連接</div></label>
       <label class="card"><input type="radio" name="garment" value="crystalButterflyArmor"><div class="name">水晶蝶翼甲裙</div><div class="desc">白金細工、透明蝶翼、珠寶胸甲</div></label>
       <label class="card"><input type="radio" name="garment" value="hornFlowerCouture"><div class="name">獸角花冠高訂</div><div class="desc">黑角、白花金鍊、半透明花紗</div></label>
       <label class="card"><input type="radio" name="garment" value="moonElfGown"><div class="name">月光精靈薄紗</div><div class="desc">精靈耳、淡紫飄帶、玻璃花園感</div></label>
@@ -774,6 +779,7 @@
       <label class="card"><input type="radio" name="material" value="peacockBrocade"><div class="name">孔雀羽織錦</div><div class="desc">銀線孔雀提花、冰藍緞面、水晶流蘇</div></label>
 <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 奇幻神話</div>
       <label class="card"><input type="radio" name="material" value="holyWings"><div class="name">聖光羽翼</div><div class="desc">白金羽毛、神聖光暈、聖殿粒子</div></label>
+      <label class="card"><input type="radio" name="material" value="stainedGlassAngelWing"><div class="name">琉璃天使單翼</div><div class="desc">彩色玻璃羽片、金屬導線、單翼螺旋包覆</div></label>
       <label class="card"><input type="radio" name="material" value="crystalButterflyFiligree"><div class="name">水晶蝶翼細工</div><div class="desc">透明蝶翼、白金金屬、虹彩寶石</div></label>
       <label class="card"><input type="radio" name="material" value="hornFlowerChain"><div class="name">獸角花冠金鍊</div><div class="desc">黑角、白花冠、垂墜金鍊水晶</div></label>
       <label class="card"><input type="radio" name="material" value="moonElfCrystal"><div class="name">月光精靈水晶</div><div class="desc">淡紫月光、水晶花枝、透明玻璃閃光</div></label>
@@ -1040,6 +1046,7 @@
           <label class="pose-card"><input type="radio" name="pose" value="crawl_out_rift"><div class="pose-name">匍匐爬出姿</div><div class="pose-desc">從裂縫或場景匍匐爬出,張力感</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="beast_mount_look"><div class="pose-name">騎乘回眸姿</div><div class="pose-desc">騎乘巨獸或坐騎,持道具回望鏡頭</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="wide_wing_spread"><div class="pose-name">展臂飛翔姿</div><div class="pose-desc">雙臂展開如飛翔,仰頭望向遠方</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="seatedSingleWingCocoon"><div class="pose-name">琉璃單翼內側坐姿</div><div class="pose-desc">側坐半蜷縮於翼弧內，翼根與人物背部清楚連接</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="throw_dart_lunge"><div class="pose-name">出手俯身戰鬥姿</div><div class="pose-desc">俯身出手擲物,動勢強烈</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="hero_landing_pose"><div class="pose-name">英雄降落姿</div><div class="pose-desc">單膝觸地、衝擊塵土炸開、單手撐地</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="sword_draw_pose"><div class="pose-name">拔劍蓄勢姿</div><div class="pose-desc">單手拔劍、目光鎖定、戰鬥前張力</div></label>
@@ -1089,6 +1096,7 @@
       <label class="card"><input type="radio" name="lighting" value="warmWindowSoft"><div class="name">柔暖窗影光</div><div class="desc">白棚日光、窗格陰影、紅色反射</div></label>
       <label class="card"><input type="radio" name="lighting" value="jewelrySparkle"><div class="name">珠寶閃光</div><div class="desc">細小高光、切面反射、精品閃耀</div></label>
       <label class="card"><input type="radio" name="lighting" value="prismaticColor"><div class="name">彩色棱鏡光</div><div class="desc">彩虹折射、臉身同光、夢幻廣告</div></label>
+      <label class="card"><input type="radio" name="lighting" value="stainedGlassVolumetric"><div class="name">琉璃彩色體積光</div><div class="desc">彩色光束穿透玻璃羽毛，形成後方光繭</div></label>
       <label class="card"><input type="radio" name="lighting" value="amethystSparkle"><div class="name">紫晶閃光</div><div class="desc">紫色晶體反射、花瓣閃光、珠寶感</div></label>
       <label class="card"><input type="radio" name="lighting" value="redWaterReflection"><div class="name">紅色水光反射</div><div class="desc">紅色水面反光、液態玻璃折射</div></label>
       <label class="card"><input type="radio" name="lighting" value="rainNightCool"><div class="name">雨夜冷光</div><div class="desc">雨幕冷光、濕地反射、臉身同光</div></label>
@@ -1176,6 +1184,7 @@
       <label class="card"><input type="radio" name="background" value="desertRoyalTent"><div class="name">沙漠宮帳</div><div class="desc">暗金帳幕、地毯、寶石與虎紋氛圍</div></label>
       <label class="card"><input type="radio" name="background" value="underwaterKingdom"><div class="name">海底王國</div><div class="desc">珊瑚宮殿、魚群、海龜海豚、水下光束</div></label>
       <label class="card"><input type="radio" name="background" value="cloudCathedralRift"><div class="name">雲層聖殿裂光</div><div class="desc">高空雲層、聖殿拱門、白金裂縫光</div></label>
+      <label class="card"><input type="radio" name="background" value="stainedGlassWingVoid"><div class="name">琉璃單翼幽暗空間</div><div class="desc">深邃暗場、細霧、單翼包覆景深</div></label>
       <label class="card"><input type="radio" name="background" value="darkIcePalace"><div class="name">黑暗冰晶宮</div><div class="desc">冰晶宮殿、暗藍冷光、霜雪空間</div></label>
       <label class="card"><input type="radio" name="background" value="candyStudio"><div class="name">糖果商品棚</div><div class="desc">乾淨棚拍、漂浮軟糖、繽紛商品感</div></label>
       <label class="card"><input type="radio" name="background" value="perfumeGlassStudio"><div class="name">玻璃香氛棚</div><div class="desc">香水瓶感、玻璃折射、柔霧留白</div></label>
@@ -1251,6 +1260,7 @@
       <label class="card"><input type="radio" name="camera" value="beautyCloseUp"><div class="name">近距離美妝感</div><div class="desc">美妝特寫構圖</div></label>
       <label class="card"><input type="radio" name="camera" value="sideProfile"><div class="name">側臉輪廓感</div><div class="desc">側臉輪廓 / 下顎線清楚</div></label>
       <label class="card"><input type="radio" name="camera" value="threeQuarterSide"><div class="name">斜側角度</div><div class="desc">約45度側拍 / 臉和身形都有立體感</div></label>
+      <label class="card"><input type="radio" name="camera" value="stainedGlassMediumTelephoto"><div class="name">50-70mm 中焦段背側</div><div class="desc">距離足夠遠，保留自然身形與翼根景深</div></label>
       <label class="card"><input type="radio" name="camera" value="topBeauty"><div class="name">高角度近景</div><div class="desc">從上方靠近拍臉與肩頸</div></label>
       <label class="card"><input type="radio" name="camera" value="distantHero"><div class="name">遠距主視覺</div><div class="desc">人物與背景完整，廣告版面感強</div></label>
     </div>
@@ -1492,6 +1502,11 @@ const materialData = {
     label: '聖光羽翼',
     prompt: 'white gold angel wings, sacred feather particles, holy cathedral light, luminous wing couture, pearl white feathers and champagne gold highlights, angelic luxury advertisement material, wings remain behind shoulders and do not replace arms',
     palette: 'pearl white, champagne gold, soft ivory, sacred pale blue shadow'
+  },
+  stainedGlassAngelWing: {
+    label: '琉璃天使單翼',
+    prompt: 'one single giant stained-glass angel wing, translucent handcrafted glass feathers with visible central shafts and fine gold-bronze metal leading lines, continuous wing-root anatomy from the right scapula, deep cobalt blue, sapphire, midnight blue, amber gold, ruby red, rose pink, pearl white and teal glass, physically accurate refraction and internal reflection, wing wraps around the subject in a deep three-dimensional spiral, foreground feathers create controlled near-far depth and never replace arms',
+    palette: 'deep cobalt blue, sapphire, midnight blue, amber gold, ruby red, rose pink, pearl white, teal, restrained charcoal shadow'
   },
   harlequinRabbit: {
     label: '黑白馬戲兔',
@@ -2046,6 +2061,7 @@ const garmentData = {
   glassLiquidDress: 'liquid glass dress, transparent flowing glass curves, glossy translucent couture surface, futuristic sculptural evening gown, premium crystal-like fashion form',
   foxMythCouture: 'mythic fox goddess couture, elegant eastern robe silhouette, refined obi or sash structure, golden foxfire tail energy behind the body, shrine mythology luxury styling, face and shoulders remain clear',
   angelWingCouture: 'angelic cathedral couture gown, white gold wing shoulder silhouette, sacred feather train, refined temple ceremony fashion, wings attached behind shoulders with natural arm anatomy preserved',
+  stainedGlassSingleWingCouture: 'midnight navy, smoky black and champagne gold haute couture gown, fitted waist, layered silk, tulle and translucent organza, open back clearly revealing the right shoulder blade and wing root, refined sculptural fashion silhouette',
   crystalButterflyArmor: 'white gold crystal butterfly armor gown, jeweled bodice, translucent butterfly wing panels behind the shoulders, long ivory train, elegant sacred couture silhouette, ornaments do not replace arms or hair',
   hornFlowerCouture: 'fantasy horn flower crown couture, soft sheer white gown, dark curved horn headpiece, ivory flower crown, gold chain body jewelry, refined moon garden goddess styling, face remains clear',
   moonElfGown: 'moon elf glass garden gown, pale lavender translucent tulle, long ribbon sleeves, delicate pointed ear fantasy styling, floral crystal hairpiece, elegant romantic silhouette without cosplay heaviness',
@@ -2127,6 +2143,7 @@ const backgroundData = {
   desertRoyalTent: 'dark gold desert royal tent background, embroidered curtains, warm carpet textures, gemstone props, tiger stripe textile accents, intimate exotic queen advertising set',
   underwaterKingdom: 'underwater fantasy kingdom background, coral palace, clear blue ocean depth, dolphins turtles fish and jellyfish, sunbeams from water surface, colorful reef foreground, immersive aquatic world',
   cloudCathedralRift: 'cloud cathedral rift background, high stone arch opening to dramatic clouds, white gold light breaking through sky, floating feathers, sacred storm atmosphere, celestial luxury space',
+  stainedGlassWingVoid: 'deep shadowed fantasy space filled with fine colorless mist, one giant stained-glass wing dominates the background and curves around the subject, layered depth from rear wing surface to subject to softly defocused foreground feathers, uncluttered dark atmosphere',
   darkIcePalace: 'dark ice palace background, black blue crystal walls, frosted reflective floor, snow particles, cold cinematic queen atmosphere, immersive frozen luxury space',
   solarMarbleThrone: 'sunlit marble throne temple background, white marble throne with a sculptural solar disc arch behind it, tall luminous columns, controlled gold ribbon details, warm morning light and spacious sacred interior, subject remains the clear primary focus',
   candyStudio: 'clean candy product studio background, floating colorful gummy candy, glossy white set, playful but premium commercial layout, uncluttered beauty advertisement space',
@@ -2192,6 +2209,7 @@ const lightingData = {
   warmWindowSoft: 'soft warm sunlight through Chinese lattice window shadows, refined red paper bounce light, red paper reflections softly affecting the face, luxury bridal advertisement glow, delicate facial exposure, face softly lit but consistent with surrounding red paper reflections',
   jewelrySparkle: 'luxury jewelry sparkle lighting, precise tiny specular highlights, faceted reflections, refined catchlights, premium gemstone advertisement shine',
   prismaticColor: 'prismatic color lighting, subtle rainbow refractions across face body clothing and background, unified colorful light environment, dreamy commercial glow',
+  stainedGlassVolumetric: 'dark atmospheric lighting with a warm gold hair rim light and a warm white backlight passing through the stained-glass wing, colored cobalt blue, amber gold, ruby red, rose pink and teal volumetric beams forming a controlled light cocoon, face retains soft neutral fill within the same global light',
   amethystSparkle: 'amethyst sparkle lighting, violet crystal reflections across face body jewelry clothing and background, controlled gemstone highlights, luxurious purple beauty campaign glow',
   redWaterReflection: 'red aquatic reflection lighting, ruby water bounce light affecting face body hair and clothing, glossy liquid glass highlights, unified red water environment',
   rainNightCool: 'cool rainy night lighting, wet ground reflection, soft blue gray rain atmosphere, face and body receive the same rainy environmental light, no separate studio relighting',
@@ -2456,6 +2474,7 @@ const poseData = {
   crawl_out_rift: 'crawling forward pose emerging from a rift or crack, body low to the ground pulling forward with both hands, tense dramatic emergence',
   beast_mount_look: 'riding pose atop a mount or creature, one hand holding a prop, upper body turned back toward camera in a confident glance',
   wide_wing_spread: 'wide arm-spread pose evoking flight, both arms extended outward, head tilted upward toward the sky, soaring triumphant energy',
+  seatedSingleWingCocoon: 'true seated pose with visible weight, body semi-curled inside the inner curve of one giant wing, legs together angled toward the lower left with knees naturally bent, torso gently leaning forward, one hand relaxed near the knee and the other supporting the body behind, head naturally lifted and turned slightly toward camera, right shoulder blade and wing root clearly visible, stable anatomy',
   throw_dart_lunge: 'forward lunging throw pose, body bent low with one arm extended in a throwing motion, sharp explosive combat energy',
   piano_glance_sit: 'seated piano-playing pose, one hand resting on the keys mid-play, upper body turned toward camera in a soft over-the-shoulder glance, elegant poised posture',
   swing_dangle_glance: 'seated swing pose with both hands gripping the chains, legs dangling freely, joyful smiling glance toward camera, gentle floating motion',
@@ -2488,6 +2507,7 @@ const cameraData = {
   beautyCloseUp: 'close distance beauty photography, beauty close-up composition, face and makeup details emphasized, polished cosmetic campaign framing',
   sideProfile: 'side profile portrait angle, clear jawline silhouette, elegant facial contour, refined profile lighting and fashion editorial framing',
   threeQuarterSide: 'three-quarter side camera angle, about 45 degree side view, face and body both show dimensional structure, elegant advertising perspective',
+  stainedGlassMediumTelephoto: '50-70mm medium telephoto fine-art fashion photography, three-quarter rear-side camera angle, camera distance far enough to preserve natural body proportions, face and wing root visible, foreground feathers softly defocused',
   topBeauty: 'high angle close beauty view, camera above the subject and slightly close, face shoulders neckline and headdress emphasized, elegant cosmetic perspective',
   distantHero: 'distant hero advertising view, camera pulled back to show subject background and material environment together, spacious brand key visual perspective'
 };
@@ -2839,6 +2859,19 @@ const themeTemplates = {
     lighting: 'cloudRiftHolyLight',
     background: 'cloudCathedralRift',
     ratio: '2:3',
+    intensity: 'balanced material effects, elegant and luxurious'
+  },
+  stainedGlassAngelWing: {
+    garment: 'stainedGlassSingleWingCouture',
+    material: 'stainedGlassAngelWing',
+    style: 'artExhibit',
+    composition: 'foreground material frame composition, selected material appears close to camera around the edges, subject remains clear in the center',
+    framing: 'threeQuarter',
+    pose: 'seatedSingleWingCocoon',
+    camera: 'stainedGlassMediumTelephoto',
+    lighting: 'stainedGlassVolumetric',
+    background: 'stainedGlassWingVoid',
+    ratio: '9:16',
     intensity: 'balanced material effects, elegant and luxurious'
   },
   darkIceQueen: {
