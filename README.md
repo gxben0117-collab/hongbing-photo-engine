@@ -4,7 +4,9 @@
 
 ## 版本
 
-v4.44 起持續迭代中；完整逐日開發記錄見 [docs/development-log.md](docs/development-log.md)。
+v4.45 起持續迭代中；完整逐日開發記錄見 [docs/development-log.md](docs/development-log.md)。
+
+v4.45 新增風格範例擴充：來源圖片與咒語只補入相符主題頁的資料、姿勢、材質、光影、背景與一鍵模板；共用身份、臉部幾何、真人骨架與負面核心維持不變。
 
 v4.3 基礎重點：
 

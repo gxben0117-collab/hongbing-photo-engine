@@ -423,6 +423,10 @@
         <div class="name">森林精靈覺醒</div>
         <div class="desc">森林精靈裙、風刃特效、魔法森林</div>
       </button>
+      <button class="card" type="button" data-template="gothicLolitaCommunitySnapshot">
+        <div class="name">動漫真人｜哥德 Lolita 社區快照</div>
+        <div class="desc">真人動漫風、精緻哥德洋裝、石磚小路日常感</div>
+      </button>
     </div>
   </section>
 
@@ -442,6 +446,7 @@
       <label class="card"><input type="radio" name="style" value="gameCG"><div class="name">遊戲原畫CG</div><div class="desc">精品遊戲角色CG感，銳利渲染、戲劇光影</div></label>
       <label class="card"><input type="radio" name="style" value="posterKeyVisual"><div class="name">動畫海報主視覺</div><div class="desc">動畫電影海報感，強烈版面、電影感光影</div></label>
       <label class="card"><input type="radio" name="style" value="beautyCloseupAnime"><div class="name">動漫美妝特寫</div><div class="desc">美妝向動漫特寫感，柔和上色、光澤高光</div></label>
+      <label class="card"><input type="radio" name="style" value="liveActionAnime"><div class="name">動漫真人風</div><div class="desc">真人攝影、動漫角色語氣與自然生活感融合</div></label>
     </div>
   </section>
 
@@ -518,6 +523,7 @@
       <label class="card"><input type="radio" name="garment" value="forestSpiritGown"><div class="name">森林精靈裙</div><div class="desc">葉紋上身＋植物感裙擺、自然精靈輪廓</div></label>
       <label class="card"><input type="radio" name="garment" value="celestialPriestessRobe"><div class="name">星界神官袍</div><div class="desc">星光層疊薄紗袍、神聖輪廓</div></label>
       <label class="card"><input type="radio" name="garment" value="moonlightSorceressDress"><div class="name">月光魔女裙</div><div class="desc">淡色流動長裙＋新月配飾、優雅法師輪廓</div></label>
+      <label class="card"><input type="radio" name="garment" value="gothicLolitaDress"><div class="name">哥德 Lolita 日常洋裝</div><div class="desc">黑色蕾絲層次、細緻花飾與精緻日常鞋款</div></label>
     </div>
     <div class="form-grid" style="margin-top:10px;">
       <label class="field full custom-choice" data-custom-choice="garment">服裝自填
@@ -568,6 +574,7 @@
       <label class="card"><input type="radio" name="material" value="fingerlessGloves"><div class="name">露指手套</div><div class="desc">露指手套配件、俐落實用感</div></label>
       <label class="card"><input type="radio" name="material" value="ornateHairClips"><div class="name">精緻髮夾</div><div class="desc">寶石或花朵造型精緻髮夾</div></label>
       <label class="card"><input type="radio" name="material" value="glowingPendantNecklace"><div class="name">發光墜飾項鍊</div><div class="desc">柔和發光的魔法墜飾項鍊</div></label>
+      <label class="card"><input type="radio" name="material" value="gothicLolitaLace"><div class="name">哥德 Lolita 蕾絲工藝</div><div class="desc">黑色蕾絲層疊、細緻花飾與真人服裝質感</div></label>
     </div>
     <div class="form-grid" style="margin-top:10px;">
       <label class="field custom-choice" data-custom-choice="material">渲染特效自填
@@ -757,6 +764,7 @@
           <label class="pose-card"><input type="radio" name="pose" value="contemplativeWindowGazePose"><div class="pose-name">窗邊凝視姿</div><div class="pose-desc">望向窗外，安靜沉思氛圍</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="tearfulEmotionalPose"><div class="pose-name">落淚情緒姿</div><div class="pose-desc">手靠近眼角，動人敘事瞬間</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="laughingCarefreePose"><div class="pose-name">開懷大笑姿</div><div class="pose-desc">頭微仰大笑，無憂表情</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="casualLolitaSnapshot"><div class="pose-name">哥德 Lolita 社區快照</div><div class="pose-desc">石磚小路自然行走，輕扶裙襬，像被捕捉的生活瞬間</div></label>
         </div>
       </div>
     </div>
@@ -829,6 +837,7 @@
       <label class="card"><input type="radio" name="lighting" value="holyMistBeam"><div class="name">逆光雲霧聖光</div><div class="desc">逆光雲霧、聖光穿透感</div></label>
       <label class="card"><input type="radio" name="lighting" value="neonPinkCyanSplit"><div class="name">粉青霓虹雙色光</div><div class="desc">粉紫與青色撞色霓虹</div></label>
       <label class="card"><input type="radio" name="lighting" value="glitchScanlineFlicker"><div class="name">故障掃描線閃光</div><div class="desc">數位雜訊閃爍、賽博故障感</div></label>
+      <label class="card"><input type="radio" name="lighting" value="softOutdoorSnapshot"><div class="name">自然戶外快照光</div><div class="desc">柔和日光、輕微環境分離與社區生活感</div></label>
     </div>
     <div class="form-grid" style="margin-top:10px;">
       <label class="field full">色彩補充
@@ -850,6 +859,7 @@
       <label class="card"><input type="radio" name="background" value="schoolCourtyardBlossoms"><div class="name">校園櫻花中庭</div><div class="desc">盛開櫻花樹、明朗校園春日氛圍</div></label>
       <label class="card"><input type="radio" name="background" value="clubroomInterior"><div class="name">社團教室內部</div><div class="desc">溫馨書架與私人物品、放學後氛圍</div></label>
       <label class="card"><input type="radio" name="background" value="schoolGateSunset"><div class="name">校門夕陽</div><div class="desc">溫暖橘色天空、經典動漫告別場景</div></label>
+      <label class="card"><input type="radio" name="background" value="quietCommunityPath"><div class="name">安靜社區石磚小路</div><div class="desc">綠意、石磚與自然人群距離，偏生活快照感</div></label>
       <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 異世界奇幻</div>
       <label class="card"><input type="radio" name="background" value="fantasyFloatingAcademy"><div class="name">奇幻浮空學院</div><div class="desc">雲端上高聳尖塔建築、魔法學院氛圍</div></label>
       <label class="card"><input type="radio" name="background" value="magicalForestClearing"><div class="name">魔法森林空地</div><div class="desc">發光植物與薄霧、夢幻奇幻氛圍</div></label>
@@ -1094,6 +1104,11 @@ const materialData = {
     label: '發光墜飾項鍊',
     prompt: 'a glowing pendant necklace accessory, softly luminous magical charm',
     palette: 'warm soft glow, delicate chain detail'
+  },
+  gothicLolitaLace: {
+    label: '哥德 Lolita 蕾絲工藝',
+    prompt: 'live-action gothic Lolita lace craft, intricate layered black dress details, refined small floral accents, polished Marie Jane shoe styling, realistic fashion texture',
+    palette: 'black lace, ivory flower accents, muted burgundy ribbon, soft natural green'
   }
 };
 
@@ -1194,7 +1209,8 @@ const garmentData = {
   fairyWingDress: 'fairy wing dress, delicate translucent wing accessory fused with a flowing light dress, whimsical fairy silhouette',
   forestSpiritGown: 'forest spirit gown, leaf-textured bodice with a flowing botanical skirt, nature-spirit silhouette',
   celestialPriestessRobe: 'celestial priestess robe, starlit translucent layers, divine silhouette',
-  moonlightSorceressDress: 'moonlight sorceress dress, pale flowing gown with crescent-moon accents, elegant spellcaster silhouette'
+  moonlightSorceressDress: 'moonlight sorceress dress, pale flowing gown with crescent-moon accents, elegant spellcaster silhouette',
+  gothicLolitaDress: 'live-action gothic Lolita dress, intricate layered black lace and refined floral trims, structured bodice with a full skirt, polished Marie Jane shoes, elegant everyday fashion silhouette'
 };
 
 const styleData = {
@@ -1206,7 +1222,8 @@ const styleData = {
   retroAnime: 'retro 1990s cel animation style, grain texture, classic anime color palette, nostalgic mood',
   gameCG: 'premium game character CG illustration style, crisp rendering, dramatic key-visual lighting, promotional quality',
   posterKeyVisual: 'anime film poster key visual composition, bold graphic layout, cinematic anime lighting',
-  beautyCloseupAnime: 'beauty-focused anime close-up illustration style, soft cel shading, polished glossy highlights'
+  beautyCloseupAnime: 'beauty-focused anime close-up illustration style, soft cel shading, polished glossy highlights',
+  liveActionAnime: 'live-action anime-inspired fashion portrait, photorealistic commercial photography, expressive but realistic human presence, refined character styling'
 };
 
 const backgroundData = {
@@ -1240,11 +1257,13 @@ const backgroundData = {
   glowingParticleVoid: 'glowing particle void background, soft luminous particles floating in darkness, dreamlike anime atmosphere',
   dramaticSunsetSilhouette: 'dramatic sunset silhouette background, bold warm gradient sky, emotional anime atmosphere',
   abstractEnergyExplosion: 'abstract energy explosion backdrop, vivid radiating color burst, dramatic power-up atmosphere',
-  inkWashFlyingWhiteBackdrop: 'ink-wash flying-white brushstroke backdrop, sweeping monochrome calligraphy strokes with soft cherry blossom petal accents, poetic negative-space anime atmosphere'
+  inkWashFlyingWhiteBackdrop: 'ink-wash flying-white brushstroke backdrop, sweeping monochrome calligraphy strokes with soft cherry blossom petal accents, poetic negative-space anime atmosphere',
+  quietCommunityPath: 'quiet residential community stone path, naturally overgrown greenery, soft everyday background, candid live-action neighborhood atmosphere'
 };
 
 const lightingData = {
   soft: 'soft studio lighting, smooth skin tones, refined luxury glow',
+  softOutdoorSnapshot: 'soft natural outdoor daylight, gentle ambient exposure, subtle background separation, realistic community snapshot light',
   hard: 'hard contrast lighting, strong edge shadows, dramatic premium highlights',
   halo: 'backlit halo lighting, glowing rim light, cinematic aura',
   stage: 'stage beam lighting, theatrical spotlight, grand commercial mood',
@@ -1420,7 +1439,8 @@ const poseData = {
   dramaticWindSweptCapePose: 'dramatic wind-swept cape pose, cape or long coat billowing dramatically behind the body, heroic anime silhouette',
   contemplativeWindowGazePose: 'contemplative pose gazing out of a window, one hand resting on the frame, soft wistful anime mood',
   tearfulEmotionalPose: 'tearful emotional pose, one hand near the eyes, head slightly lowered, delicate heartfelt anime expression',
-  laughingCarefreePose: 'laughing carefree pose, head tilted back slightly with a bright genuine smile, relaxed joyful anime energy'
+  laughingCarefreePose: 'laughing carefree pose, head tilted back slightly with a bright genuine smile, relaxed joyful anime energy',
+  casualLolitaSnapshot: 'casual candid standing pose on a stone path, relaxed arms and natural weight shift, slight turn toward the camera, gentle everyday expression, polished live-action fashion snapshot'
 };
 
 const framingData = {
@@ -1573,6 +1593,11 @@ const themeTemplates = {
     garment: 'forestSpiritGown', material: 'windBladeSlashTrail', style: 'fantasyLightNovel',
     composition: 'subject surrounded by selected material environment, material wraps around foreground and background, immersive fantasy advertisement layout',
     framing: 'threeQuarter', pose: 'energyChargePowerUp', camera: 'lowAngleHero', lighting: 'mist', background: 'magicalForestClearing', ratio: '4:5', intensity: 'dynamic battle action, sweeping hair and costume movement, high-energy anime key visual'
+  },
+  gothicLolitaCommunitySnapshot: {
+    garment: 'gothicLolitaDress', material: 'gothicLolitaLace', style: 'liveActionAnime',
+    composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
+    framing: 'threeQuarter', pose: 'casualLolitaSnapshot', camera: 'eyeLevelCover', lighting: 'softOutdoorSnapshot', background: 'quietCommunityPath', ratio: '9:16', intensity: 'restrained character pose, delicate costume accents, clean anime editorial finish'
   }
 };
 

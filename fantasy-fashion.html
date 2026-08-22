@@ -535,6 +535,10 @@
         <div class="name">妖狐夜櫻高台</div>
         <div class="desc">狐尾和風高訂、滿月古樓燈籠、持扇側身、冷暖夜色對比</div>
       </button>
+      <button class="card" type="button" data-template="redRopeMuseumCouture">
+        <div class="name">Museum Couture｜紅繩誕生</div>
+        <div class="desc">紅色撕裂膜繩球、博物館展廳、服裝自然生成</div>
+      </button>
     </div>
   </section>
 
@@ -666,6 +670,7 @@
       <label class="card"><input type="radio" name="garment" value="galaxyGown"><div class="name">星河改良禮服</div><div class="desc">深藍紗裙、星塵縫線</div></label>
       <label class="card"><input type="radio" name="garment" value="runicLeather"><div class="name">符文皮革戰裙</div><div class="desc">皮革剪裁、發光符文刻紋</div></label>
       <label class="card"><input type="radio" name="garment" value="origamiFanRobe"><div class="name">摺紙扇形立領戰袍</div><div class="desc">硬挺摺面材質、削肩綁帶</div></label>
+      <label class="card"><input type="radio" name="garment" value="redRopeMuseumInstallation"><div class="name">紅繩裝置雕塑禮服</div><div class="desc">紅色撕裂膜繩球自然展開成博物館高訂禮服</div></label>
     </div>
     <div class="form-grid" style="margin-top:10px;">
       <label class="field full custom-choice" data-custom-choice="garment">服裝自填
@@ -691,6 +696,7 @@
       <label class="card"><input type="radio" name="material" value="frozenSplashIce"><div class="name">冰晶凍結瞬間</div><div class="desc">水花瞬凍成冰裙、冷調高級</div></label>
       <label class="card"><input type="radio" name="material" value="heartsQueenCouture"><div class="name">紅心皇后禮服</div><div class="desc">撲克紅心宮廷裝、鑲鑽皇冠、撕紙牌框構圖</div></label>
       <label class="card"><input type="radio" name="material" value="jellyfishIridescentGown"><div class="name">水母虹彩裙</div><div class="desc">半透明虹彩水母裙、垂墜觸鬚緞帶、珍珠光澤</div></label>
+      <label class="card"><input type="radio" name="material" value="redRopeMuseumCouture"><div class="name">紅色撕裂膜繩球</div><div class="desc">纖維繩球、撕裂膜理、博物館裝置材質</div></label>
 <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 甜點食品飲品</div>
       <label class="card selected"><input type="radio" name="material" value="milkTea" checked><div class="name">奶茶牛奶</div><div class="desc">焦糖奶茶與牛奶對撞</div></label>
       <label class="card"><input type="radio" name="material" value="strawberry"><div class="name">草莓奶昔</div><div class="desc">粉紅奶昔與草莓果粒</div></label>
@@ -1043,6 +1049,7 @@
           <label class="pose-card"><input type="radio" name="pose" value="floating_ascension"><div class="pose-name">懸浮升空姿</div><div class="pose-desc">身體離地懸浮、長布垂墜、女神感</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="energy_burst"><div class="pose-name">能量爆發姿</div><div class="pose-desc">能量從背後炸開、髮絲被吹向前</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="dual_spirit_guardian_throne"><div class="pose-name">雙靈守護寶座姿</div><div class="pose-desc">端坐寶座、手持發光法杖、左右靈獸環伺</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="emerging_from_installation"><div class="pose-name">裝置中踏出姿</div><div class="pose-desc">從紅繩裝置自然踏出，雙手分開材質，博物館表演感</div></label>
         </div>
       </div>
     </div>
@@ -1126,6 +1133,7 @@
       <label class="card"><input type="radio" name="lighting" value="candleStarContrast"><div class="name">燭光星空對比</div><div class="desc">燭光暖黃、星空冷藍對比</div></label>
       <label class="card"><input type="radio" name="lighting" value="neonPurpleMoonlit"><div class="name">冷紫霓虹月光</div><div class="desc">冷紫霓虹光、月光剪影</div></label>
       <label class="card"><input type="radio" name="lighting" value="holyMistBeam"><div class="name">逆光雲霧聖光</div><div class="desc">逆光雲霧、聖光穿透感</div></label>
+      <label class="card"><input type="radio" name="lighting" value="museumFrontLight"><div class="name">博物館正面展陳光</div><div class="desc">中性明亮、柔和陰影、保留材質纖維細節</div></label>
       <label class="card"><input type="radio" name="lighting" value="candleShadowGothic"><div class="name">燭光哥德暗影</div><div class="desc">搖曳燭光、深色陰影、儀式氛圍</div></label>
       <label class="card"><input type="radio" name="lighting" value="bloodMoonGlow"><div class="name">血月冷光</div><div class="desc">暗紅月光、冷冽陰森氛圍</div></label>
       <label class="card"><input type="radio" name="lighting" value="neonPinkCyanSplit"><div class="name">粉青霓虹雙色光</div><div class="desc">粉紫與青色撞色霓虹</div></label>
@@ -2009,6 +2017,11 @@ const materialData = {
     label: '報紙拼貼材質',
     prompt: 'newsprint collage material system, layered torn newspaper print pages forming the garment surface, visible faded typography and halftone photo fragments, handcrafted paper-collage couture texture',
     palette: 'aged newsprint gray, sepia ink, faded cream, soft charcoal shadow'
+  },
+  redRopeMuseumCouture: {
+    label: '紅色 PP 撕裂膜繩球',
+    prompt: 'red PP tear-film rope material system, a giant coiled red rope sphere naturally opening into layered sculptural couture, visible fibrous strands, twisted rope texture, controlled glossy highlights, museum-grade material realism',
+    palette: 'cinnabar red, vivid vermilion, soft museum white, restrained charcoal shadow'
   }
 };
 
@@ -2074,7 +2087,8 @@ const garmentData = {
   royalMechaGown: 'royal gown silhouette fused with precision mecha panel details and a glowing chest core accent',
   galaxyGown: 'a deep-indigo battle-couture gown with a flowing star-dust embroidered skirt fused with minimal light armor accents at the shoulder',
   runicLeather: 'a fitted leather battle skirt and bodice etched with faintly glowing runic engravings, fused with lightweight tactical straps',
-  wideBrimFloralTrailGown: 'wide-brim sheer floral hat paired with an off-shoulder corseted ball gown and a dramatic trailing skirt, romantic editorial silhouette'
+  wideBrimFloralTrailGown: 'wide-brim sheer floral hat paired with an off-shoulder corseted ball gown and a dramatic trailing skirt, romantic editorial silhouette',
+  redRopeMuseumInstallation: 'museum couture gown formed from a giant red coiled rope sphere, layered sculptural rope panels extending into the skirt and shoulders, visible connection between installation and garment, elegant human-scale couture silhouette'
 };
 
 const styleData = {
@@ -2222,6 +2236,7 @@ const lightingData = {
   candleStarContrast: 'candle and starlight contrast lighting, warm amber candle glow on the subject against a cool blue starry background, romantic high-contrast atmosphere',
   neonPurpleMoonlit: 'purple neon and moonlight lighting, cool violet neon glow blended with silver moonlight silhouette edges, night-city fantasy atmosphere',
   holyMistBeam: 'holy backlit mist beam lighting, radiant light shafts piercing through soft haze, sacred cinematic glow',
+  museumFrontLight: 'clean frontal museum exhibition lighting, bright neutral gallery exposure, controlled soft shadows across the subject and red rope sculpture, material texture remains visible without harsh glare',
   candleShadowGothic: 'flickering candle gothic shadow lighting, warm candlelight against deep dark shadow pockets, ritualistic occult atmosphere',
   bloodMoonGlow: 'blood moon cold glow lighting, deep red moonlight tone, chilling eerie atmosphere',
   neonPinkCyanSplit: 'split neon pink and cyan lighting, dual-tone gel lighting clash across the subject, cyberpunk editorial contrast',
@@ -2452,7 +2467,8 @@ const poseData = {
   floating_ascension: 'floating ascension pose, body gently elevated above the ground, long fabric cascading downward, hair floating naturally as if weightless, serene divine goddess presence',
   energy_burst: 'energy burst pose, radiant energy explosion erupting from behind the body, hair and fabric blown forward by the force, torso held stable and centered, raw power radiating outward',
   rock_stream_leg_extend: 'seated on a moss-covered rock beside a stream pose, one leg elegantly extended toward the water with a bare foot grazing the surface, the other leg bent close to the body, one hand resting on the rock for support, relaxed sensual poise',
-  dual_spirit_guardian_throne: 'seated on an ornate throne pose, one hand gripping a glowing ceremonial staff planted beside the throne, one leg crossed elegantly, chin lifted with commanding gaze, elemental spirit guardians flanking on either side, regal power-summoning presence'
+  dual_spirit_guardian_throne: 'seated on an ornate throne pose, one hand gripping a glowing ceremonial staff planted beside the throne, one leg crossed elegantly, chin lifted with commanding gaze, elemental spirit guardians flanking on either side, regal power-summoning presence',
+  emerging_from_installation: 'standing within a large sculptural installation, one foot stepping forward from the opening, torso gently leaning toward the camera, both hands naturally parting the surrounding material, elegant museum performance pose with stable anatomy'
 };
 
 const framingData = {
@@ -3151,6 +3167,11 @@ const themeTemplates = {
     garment: 'foxMythCouture', material: 'foxfireTails', style: 'cinematic',
     composition: 'subject surrounded by selected material environment, material wraps around foreground and background, immersive fantasy advertisement layout',
     framing: 'threeQuarter', pose: 'fan_cover', camera: 'threeQuarterSide', lighting: 'moonlightCandle', background: 'moonPavilionNight', ratio: '9:16', intensity: 'subtle floating particles, refined couture details'
+  },
+  redRopeMuseumCouture: {
+    garment: 'redRopeMuseumInstallation', material: 'redRopeMuseumCouture', style: 'artExhibit',
+    composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
+    framing: 'threeQuarter', pose: 'emerging_from_installation', camera: 'eyeLevelCover', lighting: 'museumFrontLight', background: 'exhibition', ratio: '9:16', intensity: 'balanced material effects, elegant and luxurious'
   }
 };
 

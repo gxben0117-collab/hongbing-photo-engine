@@ -3,6 +3,14 @@
 依時間排序的完整開發記錄。`CLAUDE.md` 只放最新現況摘要，詳細歷史都在這裡；
 需要追溯「某個功能是哪一批加的、為什麼這樣改」時查這份文件。
 
+## 2026-08-22　v4.45 風格範例主題化擴充與來源元素分流
+
+- **來源元素分流**：完成 `C:\Users\User\Desktop\ai生圖\風格範例` 的新增素材盤點；高級公寓生活方式寫真歸入 `magazine.html` 的 Luxury Lifestyle 一鍵模板，哥德 Lolita 社區生活快照歸入 `anime-character.html` 的動漫真人風，紅色 PP 撕裂膜繩球博物館禮服歸入 `fantasy-fashion.html` 的展覽級主視覺，銀色水晶鏈甲歸入雜誌高訂封面方向。
+- **婚紗變化**：`bridal-editorial.html` 新增香檳絲緞抓褶婚紗、珍珠肩線高訂婚紗、抓褶心形胸衣、柔和聚褶腰線、立體珍珠肩垂、珍珠滾邊大教堂頭紗、白色花卉髮飾與雙手心形互動姿勢，並新增 2 組完整一鍵模板。
+- **核心保護**：來源咒語中的身份、年齡、臉部、骨架、皮膚與負面限制沒有複製到主題資料；`assets/core-prompt.js` 未修改，既有核心組裝順序與鎖臉機制保持不變。固定髮色、品牌字樣、可讀文字、暴露／物件不一致方向列入拒用紀錄。
+- **文件與拒用紀錄**：新增 `docs/style-example-expansion-audit-2026-08-22.md` 與 `docs/style-example-rejected-elements-2026-08-22.md`，記錄採用分類、保留原則與不採用元素，避免之後重新引入已排除內容。
+- **驗證**：`check-static.mjs`、`validate-preset-refs.mjs`、`check-ui-flows.mjs`、`audit-100x.mjs`、`build-prompt-preview.mjs` 與 `git diff --check` 通過；全站 19 頁 × 100 組共 1,900 組隨機模擬為 0 issue。
+
 ## 2026-08-04　v4.44 全站主題語彙與 DOM 實際順序整理
 
 - **主題語氣修正**：將花卉甜美、晚宴名媛、韓系偶像、古代女神、花仙子、仙俠、動漫角色、異世界與戰鬥學院的
