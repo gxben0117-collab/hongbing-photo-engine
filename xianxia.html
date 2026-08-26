@@ -383,6 +383,10 @@
         <div class="name">月下靜修</div>
         <div class="desc">月白仙裙、月下雲紗、靜坐修煉</div>
       </button>
+      <button class="card" type="button" data-template="tipsyImmortalMoonlitWine">
+        <div class="name">醉仙・月下狂飲</div>
+        <div class="desc">月下舉壺、失衡動勢、雲紗與袖帶迎風</div>
+      </button>
       <button class="card" type="button" data-template="peachBlossomWedding">
         <div class="name">桃花仙緣婚典</div>
         <div class="desc">紅嫁衣廣袖、桃花漫天、輕撩面紗</div>
@@ -794,6 +798,7 @@
           <label class="pose-card"><input type="radio" name="pose" value="braidTwirl"><div class="pose-name">撥髮回眸</div><div class="pose-desc">撥髮回眸,柔美敘事感</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="lotusHold"><div class="pose-name">掌托蓮花</div><div class="pose-desc">雙手托起蓮花或靈焰,寧靜供奉感</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="danceArmRaise"><div class="pose-name">揚袖起舞</div><div class="pose-desc">單臂高舉指尖上揚,綢帶隨身飛旋,樂舞伎韻律</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="tipsyWinePot"><div class="pose-name">舉壺微醺動勢</div><div class="pose-desc">微微失衡、舉起玉壺，袖帶與裙襬自然迎風</div></label>
         </div>
       </div>
       <div class="pose-group">
@@ -1568,7 +1573,8 @@ const poseData = {
   tribulationStand: 'standing pose amid a lightning tribulation, arms slightly raised, defiant ascension energy',
   qiPalmStrike: 'dynamic palm-strike pose with visible qi energy radiating from the palm, powerful martial impact',
   flyingRibbonSpin: 'spinning mid-air pose with long ribbon sleeves and hair whirling outward, graceful combat elegance',
-  danceArmRaise: 'graceful court-dance pose with one arm raised high in an elegant curved wrist gesture, torso gently turned, long streamer sleeves sweeping outward on both sides, flying-apsara dance elegance'
+  danceArmRaise: 'graceful court-dance pose with one arm raised high in an elegant curved wrist gesture, torso gently turned, long streamer sleeves sweeping outward on both sides, flying-apsara dance elegance',
+  tipsyWinePot: 'graceful tipsy pose with one foot offset, torso leaning slightly back and to one side, relaxed shoulders, one hand raising an elegant jade wine pot away from the mouth, loose wrist and fingers, a gentle tipsy smile and soft unfocused gaze, sleeves, silk sash and hem moving in different natural directions, beautiful off-balance motion without falling'
 };
 
 const framingData = {
@@ -1676,6 +1682,12 @@ const themeTemplates = {
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
     framing: 'bustPortrait', pose: 'meditationSit', camera: 'softFocusGlow', lighting: 'moonlightCandle', background: 'moonlitNightSky',
     ratio: '4:5', intensity: 'restrained spiritual atmosphere, delicate flowing fabric, quiet immortal elegance'
+  },
+  tipsyImmortalMoonlitWine: {
+    garment: 'moonwhiteRobe', material: 'moonlitCloudVeil', style: 'cinematic',
+    composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
+    framing: 'fullBody', pose: 'tipsyWinePot', camera: 'lowAngleHero', lighting: 'moonlightCandle', background: 'moonlitNightSky',
+    ratio: '9:16', intensity: 'balanced xianxia styling, elegant robe and ribbon movement, refined spiritual atmosphere'
   },
   peachBlossomWedding: {
     garment: 'redWeddingRobe', material: 'peachBlossomDrift', style: 'luxury',

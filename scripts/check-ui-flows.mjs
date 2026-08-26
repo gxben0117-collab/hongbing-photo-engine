@@ -553,8 +553,8 @@ function checkChineseClassicalTemplateContract(page, source) {
   const templateButtons = tags(source, 'button').filter(tag => attr(tag, 'data-template'));
   const templateKeys = new Set(templateButtons.map(tag => attr(tag, 'data-template')));
   const presetKeys = objectKeys(source, 'themeTemplates');
-  if (templateButtons.length !== 25) issue(page, `expected 25 template buttons, found ${templateButtons.length}`);
-  if (!presetKeys || presetKeys.size !== 25) issue(page, `expected 25 themeTemplates entries, found ${presetKeys ? presetKeys.size : 0}`);
+  if (templateButtons.length !== 26) issue(page, `expected 26 template buttons, found ${templateButtons.length}`);
+  if (!presetKeys || presetKeys.size !== 26) issue(page, `expected 26 themeTemplates entries, found ${presetKeys ? presetKeys.size : 0}`);
   for (const key of templateKeys) {
     if (!presetKeys?.has(key)) issue(page, `template button "${key}" has no themeTemplates entry`);
   }
@@ -667,7 +667,7 @@ function checkHomeCopyContract(page, source) {
   for (const stale of ['真人旅拍感 × 雜誌封面氣場', '24種服裝與24種背景', '24種服裝與24種校園決戰背景', '四組十五套']) {
     if (source.includes(stale)) issue(page, `stale homepage copy remains: "${stale}"`);
   }
-  for (const required of ['亞洲傳統服飾', '奇幻世界觀', '動漫角色', '編輯視覺設計', '四組十七套']) {
+  for (const required of ['亞洲傳統服飾', '奇幻世界觀', '動漫角色', '編輯視覺設計', '四組十九套']) {
     if (!source.includes(required)) issue(page, `homepage description is missing "${required}"`);
   }
 }

@@ -1381,6 +1381,7 @@ function loadRevision(label, sourceReader) {
       ['ancientStreetBrightSmile', 'chinese-classical-youth-ancient-street.txt'],
       ['flowerMarketRomance', 'chinese-classical-youth-flower-market.txt'],
       ['blueLilacStreetGlance', 'chinese-classical-youth-blue-lilac.txt'],
+      ['youthfulOpenRobePortrait', 'chinese-classical-youth-open-robe-inner-bodice.txt'],
       ['tangGardenTopBeauty', 'chinese-classical-youth-tang-garden.txt'],
       ['chineseLacquerGoldCouture', 'chinese-classical-premium-lacquer-gold.txt'],
       ['chineseJadeWhiteArchive', 'chinese-classical-premium-jade-white.txt'],

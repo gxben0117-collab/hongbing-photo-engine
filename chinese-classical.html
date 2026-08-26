@@ -101,6 +101,7 @@
       <button class="card" type="button" data-template="ancientStreetBrightSmile"><div class="name">古街迎風笑顏</div><div class="desc">明亮古街、快步動態與清新服裝</div></button>
       <button class="card" type="button" data-template="flowerMarketRomance"><div class="name">花市心動寫真</div><div class="desc">花市、飄帶、柔和戀愛感</div></button>
       <button class="card" type="button" data-template="blueLilacStreetGlance"><div class="name">藍紫古街回眸抓拍</div><div class="desc">微性感改良漢服、街拍回眸與低飽和色彩</div></button>
+      <button class="card" type="button" data-template="youthfulOpenRobePortrait"><div class="name">青春古風・敞襟內襦</div><div class="desc">敞襟外袍、低方領內襦、古街明亮動感</div></button>
       <button class="card" type="button" data-template="tangGardenTopBeauty"><div class="name">盛唐花苑高角度美顏</div><div class="desc">盛唐花苑、輕快轉身與高角度近景</div></button>
     </div>
     <div class="group-title">精品主視覺</div>
@@ -179,6 +180,7 @@
       <label class="card"><input type="radio" name="garment" value="ancientPalaceCouture"><div class="name">古風宮廷華服</div><div class="desc">層疊絲綢、宮廷珠飾、唯美宴會寫真</div></label>
       <label class="card"><input type="radio" name="garment" value="ancientGauzeCouture"><div class="name">古風薄紗華服</div><div class="desc">輕紗疊層、柔霧光影、高級藝術寫真</div></label>
       <label class="card"><input type="radio" name="garment" value="youthfulLightClassicalCouture"><div class="name">青春輕古風華服</div><div class="desc">輕盈絲層、飄帶與清新上鏡比例</div></label>
+      <label class="card"><input type="radio" name="garment" value="ancientOpenRobeInnerBodice"><div class="name">敞襟外袍・內襦層疊</div><div class="desc">外袍自然敞開，內襦清楚可見，保留古風層次</div></label>
     </div>
     <label class="field">自訂服裝<input id="customGarment" type="text" placeholder="例如：杏色絲紗改良漢服"></label>
   </section>
@@ -247,6 +249,7 @@
       <label class="card"><input type="radio" name="chestDetail" value="crossCollarDeepV"><div class="name">交領深 V 結構胸衣</div><div class="desc">交領與結構胸衣融合</div></label>
       <label class="card"><input type="radio" name="chestDetail" value="crossWrapDeepV"><div class="name">交叉綁帶深 V</div><div class="desc">交叉胸帶與深 V 領口</div></label>
       <label class="card"><input type="radio" name="chestDetail" value="openFrontDeepV"><div class="name">深 V 大開襟</div><div class="desc">交領大開襟的現代改良</div></label>
+      <label class="card"><input type="radio" name="chestDetail" value="lowSquareInnerBodice"><div class="name">低方領貼身內襦</div><div class="desc">外袍敞開時清楚呈現方領內襦層次</div></label>
       <div class="pose-group-label" style="grid-column:1/-1">中式專屬結構</div>
       <label class="card"><input type="radio" name="chestDetail" value="layeredCrossCollar"><div class="name">交領雙層襟</div><div class="desc">保留交領右衽的雙層衣襟</div></label>
       <label class="card"><input type="radio" name="chestDetail" value="standingCollarKnots"><div class="name">立領盤扣襟</div><div class="desc">立領與中式盤扣結構</div></label>
@@ -528,7 +531,8 @@ const garmentData = {
   ancientFormalGown: 'modern Chinese-inspired formal gown, structured couture tailoring, elegant traditional collar details, restrained embroidery, refined eveningwear silhouette, luxury fashion editorial styling',
   ancientPalaceCouture: 'Chinese-inspired ceremonial palace couture, luxurious layered silk, refined gold embroidery, elegant courtly proportions, ornate but controlled jewelry styling, premium fine-art portrait silhouette',
   ancientGauzeCouture: 'Chinese-inspired layered gauze couture, softly translucent outer silk layers over a structured opaque inner garment, flowing sleeves, delicate embroidery, romantic refined fine-art portrait styling',
-  youthfulLightClassicalCouture: 'light Chinese classical couture with a youthful tailored silhouette, airy layered silk, graceful ribbons and refined adult fashion portrait styling'
+  youthfulLightClassicalCouture: 'light Chinese classical couture with a youthful tailored silhouette, airy layered silk, graceful ribbons and refined adult fashion portrait styling',
+  ancientOpenRobeInnerBodice: 'Chinese-inspired open-front outer robe layered over a clearly visible opaque fitted inner ruqun bodice, coherent two-layer construction, softly draped silk and gauze, realistic fabric tension, natural folds and gravity-aware draping, refined youthful classical fashion portrait styling'
 };
 
 const styleData = {
@@ -689,6 +693,7 @@ const GARMENT_VARIATIONS = {
     crossCollarDeepV: 'cross-collar deep V neckline with a structured fitted bodice',
     crossWrapDeepV: 'cross-wrap lacing across the bodice, deep V-shaped neckline',
     openFrontDeepV: 'cross-collar deep V open-front robe',
+    lowSquareInnerBodice: 'a low square-neck fitted inner ruqun bodice beneath the outer robe, clearly visible as a separate opaque inner layer, low straight-cut square neckline, structured across the bust, traditional Chinese-inspired inner garment',
     layeredCrossCollar: 'double-layered cross-collar front panels',
     standingCollarKnots: 'a refined standing collar with handmade Chinese knot buttons',
     embroideredCollarGuard: 'an embroidered collar guard following the original neckline',
@@ -718,7 +723,7 @@ const GARMENT_VARIATIONS = {
 
 const GARMENT_DETAIL_LAYER_ZONES = { layer0: 0, layer3: 1, layer6: 2, layer9: 3 };
 const GARMENT_DETAIL_RANDOM_POOLS = {
-  chestDetail: ['layeredCrossCollar', 'standingCollarKnots', 'embroideredCollarGuard', 'cloudCollarPanel'],
+  chestDetail: ['layeredCrossCollar', 'standingCollarKnots', 'embroideredCollarGuard', 'cloudCollarPanel', 'lowSquareInnerBodice'],
   waistSideDetail: ['wovenSilkSash', 'jadePendantDrop', 'mamianSidePleats', 'layeredWrapWaist'],
   shoulderDetail: ['cloudShoulderOverlay', 'silkShawlDrape', 'wideSleeveShoulderLine', 'modernChineseCapelet']
 };
@@ -778,6 +783,7 @@ const themeTemplates = {
   ancientStreetBrightSmile: { style: 'youthfulClassicalPortrait', composition: 'candid ancient-street portrait composition with natural interaction, layered street depth and the subject clearly separated from the background', garment: 'youthfulLightClassicalCouture', materials: ['plainSilk', 'windowLatticePattern'], accessory: 'braidedRibbonOrnament', chestDetail: 'none', waistSideDetail: 'layeredWrapWaist', shoulderDetail: 'wideSleeveShoulderLine', bodyShape: 'slight_waist', pose: 'briskStreetWalk', lighting: 'ancientStreetDiffuseDaylight', color: 'peachJade', background: 'livelyAncientStreet', framing: 'threeQuarter', camera: 'threeQuarterSide', ratio: '4:5' },
   flowerMarketRomance: { style: 'romanticClassicalPortrait', composition: 'foreground floral branch framing with the face and garment remaining clearly unobstructed', garment: 'ancientPhotoCouture', materials: ['lightGauze', 'lotusVinePattern'], accessory: 'butterflySilkFlower', chestDetail: 'crossWrapDeepV', waistSideDetail: 'wrapSideSlit', shoulderDetail: 'offShoulder', bodyShape: 'slight_waist', pose: 'hairRibbonBreeze', lighting: 'ribbonHairBacklight', color: 'peachJade', background: 'springFlowerMarketCorridor', framing: 'threeQuarter', camera: 'threeQuarterSide', ratio: '4:5' },
   blueLilacStreetGlance: { style: 'livelySensualEditorial', composition: 'candid ancient-street portrait composition with natural interaction, layered street depth and the subject clearly separated from the background', garment: 'hanModern', materials: ['lightGauze', 'inkLandscapePattern'], accessory: 'braidedRibbonOrnament', chestDetail: 'crossCollarDeepV', waistSideDetail: 'openSkirtPanel', shoulderDetail: 'singleShoulder', bodyShape: 'fashion_tall', pose: 'overShoulderSmile', lighting: 'ancientStreetDiffuseDaylight', color: 'smokeBlue', background: 'livelyAncientStreet', framing: 'threeQuarter', camera: 'threeQuarterSide', ratio: '4:5' },
+  youthfulOpenRobePortrait: { style: 'youthfulClassicalPortrait', composition: 'close interactive portrait composition with the subject turning naturally toward the camera, visible collarbone, sleeve movement and intimate background depth', garment: 'ancientOpenRobeInnerBodice', materials: ['lightGauze', 'plainSilk'], accessory: 'ribbonFloralHairpin', chestDetail: 'lowSquareInnerBodice', waistSideDetail: 'layeredWrapWaist', shoulderDetail: 'silkShawlDrape', bodyShape: 'slight_waist', pose: 'briskStreetWalk', lighting: 'ancientStreetDiffuseDaylight', color: 'peachJadeMoon', background: 'livelyAncientStreet', framing: 'threeQuarter', camera: 'threeQuarterSide', ratio: '9:16' },
   tangGardenTopBeauty: { style: 'romanticClassicalPortrait', composition: 'close interactive portrait composition with the subject turning naturally toward the camera, visible collarbone, sleeve movement and intimate background depth', garment: 'tangChestHighSkirt', materials: ['peonyPattern', 'lightGauze'], accessory: 'butterflySilkFlower', chestDetail: 'deepV', waistSideDetail: 'layeredWrapWaist', shoulderDetail: 'offShoulder', bodyShape: 'curvy_waist', pose: 'lightSpinTurn', lighting: 'ribbonHairBacklight', color: 'peachChampagne', background: 'livelyAncientStreet', framing: 'halfBody', camera: 'topBeauty', ratio: '4:5' },
   chineseLacquerGoldCouture: { style: 'modernCouture', composition: 'asymmetrical composition with the subject placed to one side, balanced visual weight and clean surrounding space', garment: 'hanModern', materials: ['darkPatternJacquard', 'goldEmbroidery'], accessory: 'jadePendant', chestDetail: 'crossCollarDeepV', waistSideDetail: 'layeredWrapWaist', shoulderDetail: 'modernChineseCapelet', bodyShape: 'fashion_tall', pose: 'sideLongLine', lighting: 'lacquerGoldEditorialLight', color: 'lacquerBlackGold', background: 'darkLacquerStudio', framing: 'threeQuarter', camera: 'threeQuarterSide', ratio: '4:5' },
   chineseJadeWhiteArchive: { style: 'fashionEditorial', composition: 'garment detail-focused composition with collar construction, textile texture and refined craftsmanship as visual priorities', garment: 'songModern', materials: ['kesiTexture', 'inkLandscapePattern'], accessory: 'woodHairpin', chestDetail: 'layeredCrossCollar', waistSideDetail: 'none', shoulderDetail: 'silkShawlDrape', bodyShape: 'original', pose: 'windowTurn', lighting: 'jadeGalleryLight', color: 'jadeWhiteInk', background: 'jadeWhiteGallery', framing: 'halfBody', camera: 'beautyCloseUp', ratio: '4:5' }
