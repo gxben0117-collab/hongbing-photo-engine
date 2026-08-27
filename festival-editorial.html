@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>節慶美學寫真咒語產生器｜寫真引擎</title>
-<meta name="description" content="節慶美學寫真咒語產生器第一版，先以中元月下燈會組合節慶主題、服裝、道具、光影、場景與攝影語言。">
+<meta name="description" content="節慶美學寫真咒語產生器，提供十三個節慶主題與 91 組完整作品概念，組合服裝、道具、光影、場景與攝影語言。">
 <meta property="og:title" content="節慶美學寫真咒語產生器｜寫真引擎">
-<meta property="og:description" content="節慶美學寫真咒語產生器第一版，先以中元月下燈會組合節慶主題、服裝、道具、光影、場景與攝影語言。">
+<meta property="og:description" content="節慶美學寫真咒語產生器，提供十三個節慶主題與 91 組完整作品概念，組合服裝、道具、光影、場景與攝影語言。">
 <meta name="twitter:title" content="節慶美學寫真咒語產生器｜寫真引擎">
-<meta name="twitter:description" content="節慶美學寫真咒語產生器第一版，先以中元月下燈會組合節慶主題、服裝、道具、光影、場景與攝影語言。">
+<meta name="twitter:description" content="節慶美學寫真咒語產生器，提供十三個節慶主題與 91 組完整作品概念，組合服裝、道具、光影、場景與攝影語言。">
 <style>
   :root{
     --black:#090A0D;
@@ -133,6 +133,7 @@
   .form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
   .choice-status{display:block;min-height:18px;margin-top:6px;color:var(--soft);font-size:11px;font-weight:400;}
   .choice-status.is-limit{color:var(--gold);}
+  .option-extension{margin-top:8px;}
   .generate-btn{
     width:100%;
     padding:16px;
@@ -163,6 +164,22 @@
   .preset-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;}
   .preset-btn{padding:12px 13px;text-align:left;color:var(--paper);font:inherit;font-size:13px;font-weight:800;}
   .preset-btn.primary{border-color:var(--gold);color:var(--gold);background:#211E16;}
+  .template-group{margin-top:18px;}
+  .template-group:first-child{margin-top:0;}
+  .template-group-title{
+    display:flex;
+    align-items:baseline;
+    gap:9px;
+    margin-bottom:8px;
+    padding-left:9px;
+    border-left:2px solid var(--night);
+    color:var(--gold-soft);
+    font-size:13px;
+    font-weight:800;
+  }
+  .template-group-title small{color:var(--soft);font-size:11px;font-weight:400;}
+  .template-name{display:block;}
+  .template-desc{display:block;margin-top:3px;color:var(--soft);font-size:11px;font-weight:400;line-height:1.45;}
   .output-wrap{margin-top:24px;}
   .output-wrap.hidden{display:none;}
   .output-stale-badge{display:none;margin-bottom:8px;padding:9px 12px;border:1px solid var(--gold);border-radius:7px;color:var(--gold);font-size:12px;text-align:center;}
@@ -220,17 +237,16 @@
   <header>
     <div class="eyebrow">Festival Editorial Photography</div>
     <h1>節慶美學寫真 <span>咒語產生器</span></h1>
-    <p>第一版先以中元月下燈會驗證：節慶主題、服裝、燈籠、民俗場景、月光與完整人物攝影語言。</p>
+    <p>十三大節慶 × 每節七組完整作品概念：從節慶主題、服裝、道具、場景、姿勢到光影與攝影語言一次組合。</p>
   </header>
 
-  <div class="note">本頁目前只建立中元節測試路線，不加入首頁或其他工具頁。人物參考照片仍是唯一身份來源；共用鎖臉、臉部幾何、真人骨架與自然光線核心會持續優先。</div>
+  <div class="note">本頁目前維持獨立測試，不加入首頁或其他工具頁。每組一鍵模板都是完整作品概念，不是只更換背景；人物參考照片仍是唯一身份來源，共用鎖臉、臉部幾何、真人骨架與自然光線核心會持續優先。</div>
+  <input type="hidden" id="templateConcept" value="">
 
   <section class="section-preset">
-    <div class="section-header"><span class="section-label">00</span><span class="section-title">一鍵版型模板</span><span class="section-sub">先套用完整中元節畫面，再微調細節</span></div>
-    <button class="random-btn" id="festivalRandom" type="button">隨機套用｜中元節氛圍</button>
-    <div class="preset-grid">
-      <button class="preset-btn primary" type="button" data-template="zhongyuanMoonlitLanternFestival">一鍵套用｜中元月下燈會</button>
-    </div>
+    <div class="section-header"><span class="section-label">00</span><span class="section-title">一鍵版型模板</span><span class="section-sub">十三個節日 × 每節七組完整作品概念</span></div>
+    <button class="random-btn" id="festivalRandom" type="button">隨機套用｜十三大節慶</button>
+    <div id="templateGroups"></div>
   </section>
 
   <section class="section-style">
@@ -240,12 +256,25 @@
       <label class="card choice-card"><input type="radio" name="style" value="lanternEditorial"><span class="name">節慶燈影時裝誌</span><span class="desc">服裝展示、精品攝影與高級層次</span></label>
       <label class="card choice-card"><input type="radio" name="style" value="etherealNight"><span class="name">月夜輕幻想</span><span class="desc">柔和神秘、浪漫空氣感、不走恐怖</span></label>
     </div>
+    <div class="grid grid-3 option-extension" id="styleExtensions"></div>
   </section>
 
   <section class="section-theme">
-    <div class="section-header"><span class="section-label">02</span><span class="section-title">節慶主題</span><span class="section-sub">第一版先鎖定中元節路線</span></div>
+    <div class="section-header"><span class="section-label">02</span><span class="section-title">節慶主題</span><span class="section-sub">十三大節慶路線可切換</span></div>
     <div class="grid grid-3">
-      <label class="card choice-card selected"><input type="radio" name="festivalTheme" value="zhongyuanMoonlitLantern" checked><span class="name">中元月下燈會</span><span class="desc">紙燈籠、滿月、古街與唯美祈福氛圍</span></label>
+      <label class="card choice-card"><input type="radio" name="festivalTheme" value="newYear"><span class="name">新春賀年</span><span class="desc">宮燈、花市、廟會、年夜宴與紅金新年氣氛</span></label>
+      <label class="card choice-card"><input type="radio" name="festivalTheme" value="valentine"><span class="name">情人節</span><span class="desc">玫瑰、燭光、約會、珠寶與浪漫人物敘事</span></label>
+      <label class="card choice-card"><input type="radio" name="festivalTheme" value="dragonBoat"><span class="name">端午節</span><span class="desc">龍舟、水鄉、荷塘、粽香與夏日古典雅集</span></label>
+      <label class="card choice-card selected"><input type="radio" name="festivalTheme" value="zhongyuan" checked><span class="name">中元節</span><span class="desc">河燈、古街、祈福、月夜與唯美民俗氛圍</span></label>
+      <label class="card choice-card"><input type="radio" name="festivalTheme" value="midAutumn"><span class="name">中秋節</span><span class="desc">桂花、月宮、庭院、燈會與團圓賞月</span></label>
+      <label class="card choice-card"><input type="radio" name="festivalTheme" value="halloween"><span class="name">萬聖節</span><span class="desc">魔女、哥德、南瓜、古堡與戲劇化時裝</span></label>
+      <label class="card choice-card"><input type="radio" name="festivalTheme" value="christmas"><span class="name">聖誕節</span><span class="desc">雪夜、壁爐、聖誕樹、市集與冬日精品感</span></label>
+      <label class="card choice-card"><input type="radio" name="festivalTheme" value="newYearEve"><span class="name">跨年／元旦</span><span class="desc">煙火、倒數、香檳、派對與新年第一道曙光</span></label>
+      <label class="card choice-card"><input type="radio" name="festivalTheme" value="lanternFestival"><span class="name">元宵節</span><span class="desc">千燈古街、河燈、月色、夜遊與上元浪漫</span></label>
+      <label class="card choice-card"><input type="radio" name="festivalTheme" value="easter"><span class="name">復活節</span><span class="desc">彩蛋花園、春日野餐、花房與粉彩時尚</span></label>
+      <label class="card choice-card"><input type="radio" name="festivalTheme" value="mothersDay"><span class="name">母親節</span><span class="desc">康乃馨、花束、下午茶、居家晨光與溫暖優雅</span></label>
+      <label class="card choice-card"><input type="radio" name="festivalTheme" value="fiveTwenty"><span class="name">520 告白日</span><span class="desc">玫瑰告白、城市約會、夕陽海岸與現代浪漫</span></label>
+      <label class="card choice-card"><input type="radio" name="festivalTheme" value="qixi"><span class="name">七夕</span><span class="desc">銀河鵲橋、月下庭院、荷塘與東方愛情傳說</span></label>
     </div>
   </section>
 
@@ -257,6 +286,7 @@
       <label class="card choice-card"><input type="radio" name="composition" value="environmentalLantern"><span class="name">環境人物主視覺</span><span class="desc">人物融入燈會街道，月亮與建築形成層次</span></label>
       <label class="card choice-card"><input type="radio" name="composition" value="lanternForeground"><span class="name">前景燈籠框景</span><span class="desc">以近景燈籠與花枝框住人物</span></label>
     </div>
+    <div class="grid grid-3 option-extension" id="compositionExtensions"></div>
   </section>
 
   <section class="section-garment">
@@ -268,6 +298,7 @@
       <label class="card choice-card"><input type="radio" name="garment" value="modernFestivalCouture"><span class="name">現代節慶高訂</span><span class="desc">節慶色彩、現代剪裁與上鏡輪廓</span></label>
       <label class="field custom-field">自訂服裝<input class="text-input" id="customGarment" type="text" placeholder="例如：月白絲綢長裙、朱紅刺繡罩衫、古典節慶禮服"></label>
     </div>
+    <div class="grid grid-3 option-extension" id="garmentExtensions"></div>
   </section>
 
   <section class="section-material">
@@ -280,6 +311,7 @@
       <label class="card choice-card"><input type="checkbox" name="material" value="pearlBellTrim" data-max="2"><span class="name">珍珠與小鈴飾邊</span><span class="desc">細微節慶聲響感與精緻反光</span></label>
       <label class="card choice-card"><input type="checkbox" name="material" value="softOrganza" data-max="2"><span class="name">柔霧歐根紗</span><span class="desc">輕薄罩層、柔焦輪廓與精品質地</span></label>
     </div>
+    <div class="grid grid-3 option-extension" id="materialExtensions"></div>
     <span class="choice-status" id="materialStatus"></span>
     <div class="group-title">節慶畫面元素</div>
     <div class="grid grid-3" style="margin-top:8px;">
@@ -290,6 +322,7 @@
       <label class="card choice-card"><input type="checkbox" name="element" value="softMist" data-max="4"><span class="name">薄霧空氣層</span><span class="desc">遠近分離、降低背景雜訊</span></label>
       <label class="card choice-card"><input type="checkbox" name="element" value="friendlyLanternFaces" data-max="4"><span class="name">手繪表情燈籠</span><span class="desc">簡單友善表情，保留節慶趣味而不轉恐怖</span></label>
     </div>
+    <div class="grid grid-3 option-extension" id="elementExtensions"></div>
     <span class="choice-status" id="elementStatus"></span>
   </section>
 
@@ -340,6 +373,7 @@
       <label class="pose-card choice-card"><input type="radio" name="pose" value="moonGaze"><span class="pose-name">仰望月光</span><span class="pose-desc">身體放鬆、視線抬向滿月，保留臉部辨識度</span></label>
       <label class="field custom-field">自訂姿勢<input class="text-input" id="customPose" type="text" placeholder="例如：站在花燈下雙手捧燈、沿廟埕慢慢走過"></label>
     </div>
+    <div class="pose-grid option-extension" id="poseExtensions"></div>
   </section>
 
   <section class="section-extra">
@@ -364,6 +398,7 @@
       <label class="card choice-card"><input type="radio" name="lighting" value="mistyMoonBacklight"><span class="name">薄霧月夜逆光</span><span class="desc">髮絲與袖口有柔和輪廓光</span></label>
       <label class="card choice-card"><input type="radio" name="lighting" value="templeWarmNight"><span class="name">廟埕暖夜光</span><span class="desc">建築暖光與遠處燈籠形成景深</span></label>
     </div>
+    <div class="grid grid-3 option-extension" id="lightingExtensions"></div>
     <div class="group-title">色彩系統</div>
     <div class="grid grid-3" style="margin-top:8px;">
       <label class="card choice-card selected"><input type="radio" name="colorPalette" value="ivoryMidnightGold" checked><span class="name">搭配色｜象牙白・午夜藍・暖金</span><span class="desc">對應參考圖的月光、服裝與燈火</span></label>
@@ -372,6 +407,7 @@
       <label class="card choice-card"><input type="radio" name="colorPalette" value="whiteFlowerBlue"><span class="name">搭配色｜白花・霧藍・濕石灰</span><span class="desc">花朵、月夜與路面反光的柔和系統</span></label>
       <label class="card choice-card"><input type="radio" name="colorPalette" value="aiThemeScenePalette"><span class="name">AI 根據主題判斷配色</span><span class="desc">依節慶、服裝、場景與光影自動協調</span></label>
     </div>
+    <div class="grid grid-3 option-extension" id="colorExtensions"></div>
     <label class="field custom-field">指定配色<input class="text-input" id="colorNote" type="text" placeholder="例如：月白、深藍與一點暖金，不要高飽和"></label>
   </section>
 
@@ -385,6 +421,7 @@
       <label class="card choice-card"><input type="radio" name="background" value="pureWhiteBackground"><span class="name">無背景純白色</span><span class="desc">乾淨棚拍，不保留節慶環境</span></label>
       <label class="field custom-field">自填背景<input class="text-input" id="customBackground" type="text" placeholder="例如：有月光的古典庭院、河畔石橋與遠處花燈"></label>
     </div>
+    <div class="grid grid-3 option-extension" id="backgroundExtensions"></div>
   </section>
 
   <section class="section-camera">
@@ -397,6 +434,7 @@
       <label class="card choice-card"><input type="radio" name="camera" value="softFocusLantern"><span class="name">柔焦燈影人像</span><span class="desc">柔和光暈，臉部仍維持自然細節</span></label>
       <label class="card choice-card"><input type="radio" name="camera" value="sideTurnFestival"><span class="name">側身回望視角</span><span class="desc">側臉、肩線與燈籠形成方向感</span></label>
     </div>
+    <div class="grid grid-3 option-extension" id="cameraExtensions"></div>
   </section>
 
   <section class="section-ratio">
@@ -436,27 +474,106 @@ const cleanFrameCore = CORE.cleanframe || window.CORE_CLEAN_FRAME || '';
 const outputCore = CORE.output || window.CORE_OUTPUT_QUALITY || '';
 
 const styleData = {
-  poeticFolk: 'poetic Zhongyuan Festival-inspired folk-fashion portrait, refined and beautiful, respectful blessing atmosphere, luminous night storytelling',
-  lanternEditorial: 'high-end lantern festival fashion editorial, premium costume presentation, elegant full-body campaign energy, polished visual hierarchy',
-  etherealNight: 'ethereal moonlit festival portrait, soft romantic mystery, restrained dreamlike atmosphere, elegant non-horror visual tone'
+  poeticFolk: 'poetic festival-inspired folk-fashion portrait, refined and culturally grounded, graceful seasonal storytelling',
+  lanternEditorial: 'high-end festival fashion editorial, premium costume presentation, polished visual hierarchy and elegant commercial finish',
+  etherealNight: 'ethereal night festival portrait, soft romantic mystery, restrained dreamlike atmosphere and luminous depth',
+  romanticEditorial: 'romantic editorial portrait, emotionally warm storytelling, delicate styling and refined commercial beauty',
+  luxuryCampaign: 'luxury celebration campaign photography, premium materials, controlled composition and high-end brand polish',
+  cinematicCelebration: 'cinematic celebration portrait, strong environmental storytelling, layered depth and expressive event atmosphere',
+  urbanFashion: 'urban festival fashion editorial, contemporary styling, architectural city depth and confident camera presence',
+  playfulFantasy: 'playful theatrical festival fashion portrait, imaginative styling, charming visual details and polished fantasy editorial energy'
 };
 
 const festivalThemeData = {
-  zhongyuanMoonlitLantern: 'Zhongyuan Festival-inspired moonlit lantern night, respectful folk-lantern gathering, quiet blessing atmosphere'
+  newYear: 'Lunar New Year celebration, auspicious renewal, traditional East Asian spring-festival atmosphere, red lanterns, reunion and warm ceremonial energy',
+  valentine: 'Valentine’s Day romantic celebration, refined affection, flowers, candlelight and intimate premium lifestyle storytelling',
+  dragonBoat: 'Dragon Boat Festival summer tradition, riverside culture, water-town atmosphere, seasonal botanicals and elegant heritage styling',
+  zhongyuan: 'Zhongyuan Festival-inspired moonlit lantern night, respectful folk gathering, quiet blessing atmosphere and poetic nocturnal depth',
+  midAutumn: 'Mid-Autumn Festival moon-viewing celebration, reunion, osmanthus, mooncakes, lanterns and poetic lunar atmosphere',
+  halloween: 'elegant theatrical Halloween fashion celebration, playful gothic styling, pumpkins, masks and imaginative autumn-night atmosphere',
+  christmas: 'Christmas winter celebration, refined seasonal warmth, snow, evergreen details, lights and premium festive fashion',
+  newYearEve: 'New Year’s Eve countdown celebration, fireworks, city lights, champagne, midnight glamour and a hopeful new beginning',
+  lanternFestival: 'Lantern Festival night celebration, luminous street lanterns, moonlit evening walks, river lights and refined East Asian festive romance',
+  easter: 'Easter spring celebration, pastel gardens, painted eggs, European spring styling and fresh premium seasonal fashion',
+  mothersDay: 'Mother’s Day appreciation celebration, carnations, bouquets, warm family affection and refined floral lifestyle portraiture',
+  fiveTwenty: '520 confession day, contemporary romantic declaration, bouquets, city dates, sunset promises and polished modern love-story photography',
+  qixi: 'Qixi Festival romantic legend, star river, magpie bridge, moonlit gardens and elegant Eastern love-story fashion'
+};
+
+const festivalScopeData = {
+  newYear: '【新春賀年主題限制】\n\nKeep Lunar New Year visual language only. No unrelated holiday symbols, no horror, no gore, no random readable text or watermark.',
+  valentine: '【情人節主題限制】\n\nKeep romantic Valentine visual language only. No unrelated holiday symbols, no horror, no gore, no random readable text or watermark.',
+  dragonBoat: '【端午節主題限制】\n\nKeep Dragon Boat Festival and summer riverside visual language only. No unrelated holiday symbols, no horror, no random readable text or watermark.',
+  zhongyuan: '【中元節主題限制】\n\nKeep respectful poetic folk-festival visual language only. No horror, no gore, no blood, no corpse, no demonic creature, no occult ritual, no haunted-house styling, no unrelated holiday symbols, no random readable text or watermark.',
+  midAutumn: '【中秋節主題限制】\n\nKeep Mid-Autumn moon-viewing visual language only. No unrelated holiday symbols, no horror, no gore, no random readable text or watermark.',
+  halloween: '【萬聖節主題限制】\n\nKeep elegant theatrical Halloween fashion only. No gore, blood, corpse, realistic horror, demonic creature or occult ritual; no unrelated holiday symbols, no random readable text or watermark.',
+  christmas: '【聖誕節主題限制】\n\nKeep refined Christmas winter visual language only. No unrelated holiday symbols, no horror, no gore, no random readable text or watermark.',
+  newYearEve: '【跨年／元旦主題限制】\n\nKeep New Year countdown, fireworks and hopeful new-beginning visual language only. No unrelated holiday symbols, no horror, no gore, no random readable text or watermark.',
+  lanternFestival: '【元宵節主題限制】\n\nKeep Lantern Festival night-walk and lantern-viewing visual language only. No unrelated holiday symbols, no horror, no gore, no random readable text or watermark.',
+  easter: '【復活節主題限制】\n\nKeep refined spring Easter visual language only. No Halloween, Christmas or horror symbols, no gore, no random readable text or watermark.',
+  mothersDay: '【母親節主題限制】\n\nKeep warm floral appreciation and elegant lifestyle visual language only. No unrelated holiday symbols, no melodramatic family crowd, no random readable text or watermark.',
+  fiveTwenty: '【520 告白日主題限制】\n\nKeep contemporary romantic confession and premium date visual language only. No unrelated holiday symbols, no explicit adult content, no random readable text or watermark.',
+  qixi: '【七夕主題限制】\n\nKeep elegant Eastern romantic legend and starry-night visual language only. No horror, no occult ritual, no unrelated holiday symbols, no xianxia magic or futuristic technology, no random readable text or watermark.'
 };
 
 const compositionData = {
-  fullBodyLantern: 'full-body vertical portrait composition, subject slightly right of center, warm lantern in the left foreground, bright moon in the upper right, wet reflective path anchoring the lower frame, complete sleeves and hem visible',
-  threeQuarterLantern: 'three-quarter body portrait composition, face, collar, upper garment and hand-held lantern remain clear, layered lantern depth behind the subject',
-  environmentalLantern: 'environmental festival portrait composition, the subject integrated into the lantern street, temple architecture and full moon create depth without crowding the face',
-  lanternForeground: 'foreground-framed portrait composition, softly defocused paper lanterns and white flowers frame the subject, clean separation around the face'
+  fullBodyLantern: 'full-body vertical portrait composition, subject slightly right of center, a clear foreground prop, complete outfit silhouette and environmental depth visible',
+  threeQuarterLantern: 'three-quarter body portrait composition, face, upper garment and main prop remain clear, layered background depth without crowding the face',
+  environmentalLantern: 'environmental festival portrait composition, the subject integrated into the selected celebration setting, architecture and atmosphere create depth',
+  lanternForeground: 'foreground-framed portrait composition, softly defocused seasonal objects frame the subject with clean separation around the face',
+  ceremonialTableau: 'formal ceremonial tableau composition, subject placed clearly within a decorated feast or celebration setting, balanced symmetry and premium editorial spacing',
+  marketWalk: 'dynamic market-walk composition, one clear walking direction, seasonal stalls and objects create a lively but controlled background',
+  fireworksSkyline: 'vertical fireworks composition, subject in the lower or middle frame with a generous sky area, city or rooftop lines remain coherent',
+  intimateTablePortrait: 'intimate table portrait composition, subject, hands and carefully selected tabletop objects form one readable story without clutter',
+  waterfrontAction: 'waterfront environmental composition, subject and seasonal water activity share a clear spatial relationship, open sky and reflected light add depth',
+  gardenPoetic: 'poetic garden composition, subject surrounded by restrained flowers or foliage, clean breathing room and layered natural depth',
+  cityPortrait: 'urban celebration portrait composition, subject separated from city lights and architecture, fashion silhouette remains the primary visual anchor',
+  hotelEditorial: 'luxury hotel editorial composition, subject framed by refined interior architecture, furniture scale and body scale remain coherent',
+  lanternStreetPortrait: 'lantern street portrait composition, subject walking through a layered night street with lanterns framing but never hiding the face',
+  lanternRiverWalk: 'riverside lantern-walk composition, subject, bridge, water lights and open night sky form a clear vertical story',
+  picnicGardenTableau: 'spring picnic tableau composition, subject placed among a refined blanket, basket and garden flowers with clean editorial spacing',
+  greenhousePortrait: 'glasshouse spring portrait composition, subject framed by botanical structure and soft translucent daylight with controlled depth',
+  bouquetPortrait: 'floral bouquet portrait composition, subject and bouquet create a clear beauty-campaign focal point without covering the face',
+  homeWindowPortrait: 'intimate home-window composition, subject framed by morning light, a small vase and calm interior lifestyle details',
+  rooftopConfession: 'rooftop confession composition, subject and bouquet placed against a clean city horizon with emotional space around the gesture',
+  coastalSunsetPortrait: 'coastal sunset portrait composition, subject framed by shoreline, wind movement and a generous glowing horizon',
+  starBridgeComposition: 'star-bridge environmental composition, subject centered within a luminous bridge and star river with grounded architectural perspective',
+  galaxyEnvironmentalPortrait: 'wide galaxy environmental portrait, subject remains clearly readable against a layered star river, clouds and distant bridge'
 };
 
 const garmentData = {
   ivoryGauzeFestivalDress: 'ivory gauze layered festival dress with delicate floral embroidery, soft flowing sleeves, refined ribbon waist details, elegant fitted upper structure and natural skirt movement',
   paleRuqunLayered: 'pale moon-white Chinese-inspired layered ruqun, refined cross-collar construction, softly draped skirt, delicate textile details and graceful festival styling',
   cinnabarLanternCouture: 'cinnabar red and antique-gold festival couture, refined woven texture, elegant long silhouette, controlled ceremonial richness and premium tailoring',
-  modernFestivalCouture: 'modern festival couture with a clean fitted silhouette, restrained traditional textile references, elegant draped layers and high-end editorial finish'
+  modernFestivalCouture: 'modern festival couture with a clean fitted silhouette, restrained traditional textile references, elegant draped layers and high-end editorial finish',
+  redGoldHanfuGown: 'red and antique-gold Chinese-inspired ceremonial gown, layered sleeves, woven brocade panels and refined festive tailoring',
+  crimsonSilkCheongsam: 'crimson silk modern cheongsam-inspired dress, elegant collar line, subtle frog-button detail, sculpted waist and premium evening finish',
+  pastelFlowerMarketDress: 'soft pastel floral market dress with light layered skirt, delicate embroidery, ribbon details and fresh youthful festival styling',
+  navyRiverSilkDress: 'deep navy and jade silk riverside dress with fluid skirt panels, restrained embroidery and elegant water-town movement',
+  lotusSummerHanfu: 'pale lotus-toned summer hanfu with breathable layered silk, wide soft sleeves, botanical embroidery and graceful warm-weather drape',
+  roseRomanticGown: 'soft rose romantic gown with refined floral surface, flowing skirt, elegant neckline and premium intimate portrait silhouette',
+  velvetEveningDress: 'deep wine velvet evening dress with controlled sheen, sculpted but natural silhouette and refined celebration styling',
+  blackGothicCouture: 'black gothic couture dress with elegant structured tailoring, restrained lace, refined sleeves and polished theatrical fashion finish',
+  pumpkinWitchCouture: 'deep plum and pumpkin-toned witch-inspired couture dress, elegant fitted bodice, layered skirt and playful theatrical details',
+  winterWhiteCouture: 'winter-white couture gown with soft structured layers, delicate crystal detail, refined long silhouette and clean snowy elegance',
+  redChristmasVelvet: 'rich red velvet Christmas dress with elegant collar, soft winter trim, fitted waist and premium seasonal tailoring',
+  champagneHotelGown: 'champagne silk evening gown with refined drape, subtle crystal accents and luxurious hotel celebration silhouette',
+  silverPartyCouture: 'silver reflective party couture with controlled metallic surface, clean modern silhouette and polished countdown styling',
+  celestialMoonGown: 'moon-white and silver fantasy-inspired evening gown with layered luminous fabric, refined celestial embroidery and graceful lunar silhouette',
+  dawnSilkDress: 'soft peach and ivory silk daybreak dress with light flowing layers, refined minimal tailoring and hopeful new-year elegance',
+  yuanxiaoLanternHanfu: 'Lantern Festival hanfu-inspired gown with luminous red layers, elegant wide sleeves, lantern-colored silk and graceful night-walk movement',
+  yuanxiaoModernSilk: 'modern East Asian silk dress for a lantern festival, clean fitted structure, subtle traditional details and polished evening styling',
+  easterPastelCouture: 'pastel spring couture with a refined fitted bodice, layered skirt and delicate seasonal color blocking',
+  easterGardenDress: 'fresh botanical garden dress with light sleeves, embroidered blossoms, soft volume and premium spring tailoring',
+  lavenderSpringCouture: 'lavender and buttercream spring couture with elegant draped panels, clean neckline and playful high-fashion finish',
+  carnationCouture: 'carnation-inspired floral couture with rose ivory layers, sculpted but natural lines and refined appreciation-day elegance',
+  ivoryBouquetDress: 'ivory bouquet dress with soft floral texture, flowing skirt, graceful neckline and warm premium portrait silhouette',
+  softRoseSuit: 'soft rose tailored suit with a feminine fitted line, satin camisole layer and polished modern floral campaign styling',
+  roseConfessionCouture: 'rose-red confession couture with a clean fitted silhouette, delicate drape and contemporary romantic evening polish',
+  cityDateCouture: 'modern city-date couture with a refined short jacket, fluid skirt and elegant metropolitan romance',
+  qixiModernHanfu: 'modern Qixi hanfu couture with a clean cross-collar line, luminous silk layers, graceful ribbons and contemporary Eastern romance',
+  qixiStarGown: 'star-river evening gown with moon-white layers, restrained constellation embroidery and elegant movement through the skirt',
+  qixiGardenSilk: 'deep blue and rose silk garden dress with soft drape, delicate floral details and a refined moonlit silhouette'
 };
 
 const materialData = {
@@ -464,16 +581,100 @@ const materialData = {
   floralEmbroidery: 'delicate floral embroidery placed with restraint across the garment, fine thread relief and premium textile detail',
   silkRibbon: 'soft silk ribbons and refined tied details at the hair, waist and sleeve edges, moving naturally with the body',
   pearlBellTrim: 'small pearl and bell-like trim accents used sparingly along the garment edge, delicate reflective detail',
-  softOrganza: 'soft matte organza overlay with airy structure, controlled translucency and clean couture edges'
+  softOrganza: 'soft matte organza overlay with airy structure, controlled translucency and clean couture edges',
+  redGoldBrocade: 'refined red-and-gold woven brocade with controlled thread relief, ceremonial richness and realistic textile weight',
+  wovenBrocade: 'subtle heritage woven pattern with a tactile surface, quiet craftsmanship and premium material readability',
+  freshLotusSilk: 'fresh matte silk with a cool smooth surface, light summer drape and delicate botanical texture',
+  roseSatin: 'soft rose satin with restrained sheen, elegant folds and refined romantic surface reflection',
+  silkSatin: 'premium silk satin with controlled highlights, realistic folds and polished evening drape',
+  velvetTexture: 'deep velvet texture with soft directional light absorption, clean tailoring and restrained luxury',
+  laceTrim: 'fine lace edging used selectively at cuffs and collar, delicate pattern scale and couture finishing',
+  crystalEmbellishment: 'small crystal embellishments placed with restraint, precise sparkle and premium garment craftsmanship',
+  winterFurTrim: 'soft winter trim used sparingly at cuffs or collar, realistic fibers and refined seasonal finish',
+  metallicCouture: 'controlled metallic couture textile with subtle reflective structure, clean surfaces and no plastic shine',
+  reflectiveTextile: 'refined reflective textile accents that catch practical light without overpowering the face or garment construction',
+  pastelTulle: 'soft pastel tulle with controlled volume, clean layered edges and airy spring movement',
+  embroideredLinen: 'fine embroidered linen with visible natural weave, fresh tactile structure and refined garden styling',
+  carnationEmbroidery: 'delicate carnation embroidery with fine thread relief, restrained floral placement and premium textile finish',
+  pearlLace: 'fine pearl-edged lace with subtle bridal-like refinement, clean scale and controlled soft reflection',
+  roseChiffon: 'light rose chiffon with graceful translucency, layered support and natural movement in a soft breeze',
+  starEmbroideredSilk: 'deep blue silk with restrained constellation embroidery, fine thread sparkle and realistic evening drape',
+  cloudGauze: 'pale gauze layers with controlled translucency, cloud-soft volume and elegant gravity-aware movement'
 };
 
 const elementData = {
   warmLanterns: 'many warm paper lanterns at varied distances, layered bokeh and practical light sources',
   fullMoon: 'a bright full moon in a deep blue night sky, cool moonlight integrated into the same scene',
   whiteSpiderLilies: 'white spider lilies along the path, delicate botanical detail with poetic folk symbolism',
-  wetStoneReflection: 'wet stone pavement reflecting lantern light and the lower silhouette with physically plausible reflections',
+  wetStoneReflection: 'wet stone pavement reflecting practical light and the lower silhouette with physically plausible reflections',
   softMist: 'a thin atmospheric mist separating foreground, subject and distant architecture',
-  friendlyLanternFaces: 'a few decorative paper lanterns with simple friendly hand-drawn faces, playful and non-threatening'
+  friendlyLanternFaces: 'a few decorative paper lanterns with simple friendly hand-drawn faces, playful and non-threatening',
+  redSpringLanterns: 'red spring-festival lanterns with restrained gold details, varied depth and warm practical light',
+  flowerMarketStalls: 'fresh flower-market stalls with seasonal blossoms, ribbons and clean controlled background activity',
+  fireworks: 'layered celebratory fireworks in the open sky, luminous but not overexposed',
+  lionDance: 'traditional lion-dance color and movement details kept in the background, festive and culturally grounded',
+  familyFeastTable: 'a refined reunion feast table with porcelain service, seasonal dishes and balanced decorative objects',
+  festivalBanners: 'elegant seasonal banners and textile streamers with no readable writing',
+  rosePetals: 'fresh rose petals and restrained floral arrangements placed as secondary romantic accents',
+  candlelight: 'small candlelight sources and soft reflections, intimate warmth without clutter',
+  cityBokeh: 'soft city bokeh and distant architectural lights, clean separation from the subject',
+  dessertTable: 'a refined French dessert table with pastries, porcelain plates and delicate floral styling',
+  starrySky: 'a clear starry sky with restrained points of light and open romantic depth',
+  dragonBoats: 'colorful dragon boats and distant ceremonial water activity, kept secondary to the subject',
+  riverReflections: 'calm river reflections with elongated seasonal lights and natural water texture',
+  lotusPond: 'a summer lotus pond with broad leaves, restrained blossoms and soft water depth',
+  zongziTable: 'a tasteful table with wrapped rice dumplings, bamboo leaves and seasonal tea service',
+  bambooWaterTown: 'bamboo, water-town railings and restrained riverside vegetation',
+  osmanthusFlowers: 'small osmanthus blossoms and branches with delicate warm seasonal detail',
+  moonLanterns: 'elegant moon-viewing lanterns in varied sizes, warm light and quiet ceremonial rhythm',
+  moonPalaceArchitecture: 'pale lunar garden architecture with refined stone, clouds and restrained celestial ornament',
+  snowfall: 'fine natural snowfall with visible depth, clean white highlights and no obstruction of the face',
+  christmasLights: 'warm Christmas lights arranged in elegant strands, soft bokeh and practical reflections',
+  fireplace: 'a refined fireplace with warm embers, stone surround and controlled interior depth',
+  christmasTree: 'a luxurious Christmas tree with restrained ornaments, warm lights and premium material detail',
+  europeanMarketStalls: 'European Christmas market stalls, wood, evergreen garlands and warm seasonal lights',
+  masqueradeMasks: 'a few elegant masquerade masks used as decorative or hand-held accessories, no face replacement',
+  pumpkins: 'tastefully arranged pumpkins in varied autumn tones, polished seasonal styling',
+  gothicArchitecture: 'refined gothic arches, stone texture and theatrical architectural depth',
+  darkRose: 'dark rose arrangements and deep botanical foliage with controlled romantic drama',
+  magicalForestLights: 'small warm forest lights among autumn trees, playful fantasy atmosphere without supernatural creatures',
+  champagne: 'one elegant champagne glass or bottle used as a restrained celebration prop',
+  cityFireworks: 'distant city fireworks reflected across glass and polished architecture',
+  sunriseHorizon: 'a clean sunrise horizon with soft peach light and hopeful atmospheric depth',
+  countdownLights: 'layered countdown lights and city illumination with no readable numbers or text',
+  crystalChandelier: 'a refined crystal chandelier with controlled sparkle and balanced interior scale',
+  lightTrails: 'subtle long-exposure light trails in the distant city, polished and non-chaotic',
+  jewelrySparkle: 'small jewelry highlights and controlled gemstone sparkle used as a secondary detail',
+  redEnvelopes: 'refined red envelopes arranged as festive props with no readable writing',
+  teaSet: 'a traditional tea set with porcelain cups and calm ceremonial tabletop detail',
+  moonCakes: 'elegant mooncakes and seasonal tea service on a refined table',
+  urbanLights: 'clean urban architectural lights and softly blurred storefront color',
+  iceCrystals: 'delicate ice-crystal highlights and pale winter reflections',
+  autumnLeaves: 'scattered autumn leaves in controlled warm tones, natural seasonal depth',
+  giftBoxes: 'carefully styled gift boxes with ribbons and no readable labels',
+  snowWindow: 'snowy window glass with warm interior reflection and clean seasonal depth',
+  lanternSea: 'a layered sea of hand-held and hanging festival lanterns, varied sizes and warm practical glow without visual clutter',
+  lanternRiverBoats: 'small illuminated lantern boats drifting on calm water, kept in the middle or distant background',
+  lanternRiddles: 'blank decorative lantern tags and tassels with no readable writing, adding a tactile night-market rhythm',
+  paintedEggs: 'carefully painted spring eggs in a restrained pastel palette, arranged as refined seasonal props',
+  springTulips: 'fresh tulips, daffodils and spring branches in a clean botanical arrangement',
+  bunnySculpture: 'one elegant rabbit garden sculpture used as a secondary spring detail, non-childlike and premium',
+  easterBaskets: 'woven spring baskets with ribbons and pastel eggs, arranged with controlled editorial scale',
+  picnicBlanket: 'a refined spring picnic blanket, wicker basket and porcelain service, kept secondary to the subject',
+  greenhouseFlowers: 'glasshouse flowers and translucent leaves with soft botanical depth',
+  carnations: 'fresh carnations in coral, blush and ivory arranged as a premium seasonal floral detail',
+  flowerBouquet: 'one carefully tied bouquet with refined wrapping and a clear shape, never covering the face',
+  homeVase: 'a small ceramic vase with fresh flowers on a calm home table',
+  jewelryGift: 'a small jewelry box or pendant as a restrained appreciation-day luxury detail',
+  confessionBouquet: 'one fresh rose bouquet with elegant wrapping, presented as the central romantic gesture',
+  loveLetterEnvelope: 'a closed decorative envelope with no readable writing, used as a subtle confession-day prop',
+  heartCityLights: 'soft heart-like city bokeh shapes kept abstract and restrained in the distant background',
+  coastalPetals: 'wind-carried rose petals near a quiet shoreline, delicate and physically plausible',
+  magpieBridge: 'an elegant magpie bridge spanning a luminous river, clearly architectural and not a supernatural creature',
+  galaxyRibbon: 'long silk ribbons catching moonlight, creating a graceful visual link through the starry scene',
+  fireflyLights: 'small warm firefly-like practical lights among garden plants, subtle and non-supernatural',
+  qixiFlowers: 'delicate night-blooming flowers and pale petals arranged as an Eastern romantic seasonal detail',
+  wishRibbons: 'fine wish ribbons tied to a garden rail with no readable text, moving gently in the night breeze'
 };
 
 const bodyData = {
@@ -489,14 +690,102 @@ const poseData = {
   lanternLiftHem: 'graceful full-body pose with one hand holding a warm paper lantern and the other hand lightly lifting the flowing skirt, body turned slightly to one side, relaxed shoulders, soft fingers, one clear grounded step, gentle natural smile, sleeves and ribbons moving with the same breeze',
   lanternTurn: 'captured during a natural turn while holding a paper lantern, subtle over-the-shoulder glance, relaxed hands, coherent head-neck-shoulder-spine alignment, hair and ribbons following the motion',
   templeWalk: 'slow natural walk along the wet stone path, one clear step, relaxed arms, flowing hem and sleeves moving naturally, face unobstructed and recognizable',
-  moonGaze: 'relaxed standing pose with the gaze lifted toward the full moon, natural neck and shoulders, hands resting softly around the lantern handle, restrained romantic expression'
+  moonGaze: 'relaxed standing pose with the gaze lifted toward the full moon, natural neck and shoulders, hands resting softly around the lantern handle, restrained romantic expression',
+  offerRedEnvelope: 'standing with one hand gently presenting a red envelope and the other hand relaxed near the waist, bright welcoming expression and natural festive gesture',
+  flowerMarketReach: 'walking slowly through a flower market, one hand reaching toward a blossom or ribbon, relaxed shoulders and lively but controlled movement',
+  lionDanceWelcome: 'standing in a festive street while turning toward a passing lion dance, one hand lifting the sleeve slightly, balanced weight and natural joyful expression',
+  fireworkLookBack: 'captured during a natural turn toward distant fireworks, one clear step, relaxed arms and coherent head-neck-shoulder direction',
+  feastToast: 'seated or standing beside a refined feast table, gently raising a small cup in a celebratory toast, relaxed fingers and composed shoulders',
+  roseHold: 'holding a single rose or a small bouquet near the torso, soft romantic gaze, relaxed elbow and natural elegant posture',
+  candleTable: 'seated at a candlelit table with one hand near a wine glass or candle, gentle eye contact and quiet intimate body language',
+  cityWalkRomance: 'walking naturally through a softly lit city setting, one clear step, coat or skirt moving lightly, relaxed confident gaze',
+  dessertTaste: 'seated beside a dessert table, gently holding a small pastry or porcelain fork, natural wrist angle and playful refined expression',
+  balconyStarGaze: 'standing on a terrace with one hand resting lightly on the railing, gaze turned toward the stars, relaxed shoulders and romantic stillness',
+  riverPaddle: 'standing or seated near a dragon boat with one hand resting naturally on a paddle, stable grounded posture and clear subject separation',
+  waterTownWalk: 'walking beside a water-town railing, one hand lightly touching the sleeve or sash, subtle turn toward the camera and natural fabric movement',
+  lotusTouch: 'standing beside a lotus pond, gently reaching toward a lotus leaf or blossom without covering the face, relaxed graceful posture',
+  teaGathering: 'seated at a tea table, both hands placed naturally around a porcelain cup, quiet cultural gesture and aligned spine',
+  zongziWrap: 'seated at a courtyard table, gently tying a bamboo-leaf-wrapped rice dumpling, precise relaxed hands and warm seasonal expression',
+  lanternRaise: 'standing with both hands raising a small ceremonial lantern at chest level, relaxed fingers, dignified posture and clear face',
+  moonCakeServe: 'gently presenting a mooncake plate with one hand while the other rests near the tea service, calm reunion atmosphere',
+  moonPalaceTurn: 'graceful turning pose in a pale lunar garden, one arm extended softly, layered skirt following the body and face unobstructed',
+  pumpkinHold: 'holding a small decorative pumpkin beside the torso, playful confident pose, relaxed hands and elegant theatrical expression',
+  castleStair: 'standing on a grand stone stair with one hand resting lightly on the banister, composed gothic fashion posture and natural weight',
+  masqueradeTurn: 'holding a decorative masquerade mask beside the face without covering it, body turned three-quarters and shoulders relaxed',
+  fireplaceSit: 'seated beside the fireplace with one hand resting on the arm of a chair or holding a warm cup, relaxed winter lifestyle posture',
+  treeOrnament: 'standing beside the Christmas tree while gently placing or adjusting one ornament, natural reaching gesture and soft seasonal smile',
+  marketWalk: 'walking through a winter market with one hand near a wrapped gift or coat, natural step and refined candid energy',
+  champagneToast: 'raising one elegant champagne glass in a restrained toast, relaxed wrist, balanced shoulders and polished celebration expression',
+  sunriseWalk: 'walking toward a soft sunrise horizon, one clear grounded step, relaxed arms and hopeful natural expression',
+  confidentEditorial: 'confident editorial standing pose with one foot slightly forward, relaxed hands, clean shoulder line and direct camera presence',
+  winterWalk: 'walking lightly through fine snow, one clear step, coat or skirt moving naturally, face unobstructed and body grounded',
+  forestReach: 'standing on a forest path with one hand gently reaching toward a warm light or leaf, playful restrained fantasy gesture',
+  jewelryTouch: 'one hand gently touching a necklace or earring while the other rests naturally, refined beauty-campaign posture and clear face',
+  countdownLook: 'standing near a glass wall and turning toward the countdown lights, relaxed arms, clean silhouette and natural urban confidence',
+  skyGaze: 'standing on a rooftop with the gaze lifted toward the open night sky, relaxed shoulders and balanced fashion posture',
+  ballroomTurn: 'graceful ballroom turn with one foot offset, natural arm placement and fabric following the body without exaggeration',
+  hotelArrival: 'entering a luxury hotel space with one hand near a small clutch, one clear step, relaxed shoulders and polished eye contact',
+  lanternStreetWalk: 'walking slowly through a lantern street with one hand near a tassel, one clear grounded step and a bright natural evening expression',
+  lanternLookUp: 'standing beneath layered lanterns with the gaze lifted gently, relaxed shoulders and one hand resting near a lantern handle',
+  yuanxiaoRiverTurn: 'turning naturally beside a lantern-lit river, one hand lightly touching a sleeve and the other relaxed near the waist',
+  easterEggHold: 'holding one painted spring egg near the torso, relaxed wrist, bright adult expression and natural garden posture',
+  springGardenWalk: 'walking through a spring garden with one clear step, light skirt movement and a fresh confident gaze',
+  picnicTea: 'seated beside a spring picnic setting, gently holding a porcelain cup with relaxed hands and an easy daylight smile',
+  tulipTouch: 'gently touching a tulip or spring branch without covering the face, shoulders open and posture naturally balanced',
+  bouquetHold: 'holding a refined bouquet at the side of the torso, relaxed arms, warm appreciative expression and clear face',
+  carnationArrange: 'standing beside a flower table while arranging one carnation, precise relaxed hands and graceful lifestyle posture',
+  homeWindowMorning: 'standing beside a home window with one hand near a vase or curtain, soft morning expression and relaxed shoulders',
+  hotelBouquetPose: 'standing in a refined hotel lounge while holding a bouquet low near the waist, composed posture and warm eye contact',
+  offerBouquet: 'gently offering one bouquet forward as a clear romantic gesture, relaxed fingers, natural shoulders and sincere gaze',
+  confessionLook: 'turning toward the camera with a soft confident confession-day gaze, one clear step and bouquet held naturally',
+  seasideWindPose: 'standing near a quiet coast with one hand steadying a ribbon or skirt, wind moving hair and fabric naturally',
+  rooftopConfession: 'standing on a city rooftop with a bouquet near the torso, relaxed body language and a direct but gentle romantic gaze',
+  starBridgeWalk: 'walking slowly across a luminous bridge with one grounded step, ribbons following the body and face unobstructed',
+  qixiWish: 'standing beside a garden rail while tying a wish ribbon, relaxed fingers, lifted gaze and graceful Eastern romantic posture',
+  magpieBridgeTurn: 'turning gracefully on a moonlit bridge, one arm softly extended and the layered gown following the body naturally'
 };
 
 const lightingData = {
   moonLanternContrast: 'cool blue moonlight balanced with warm paper-lantern light, one unified environmental exposure, natural skin tone and controlled highlights on gauze',
   softLanternGlow: 'soft warm lantern glow surrounding the subject, deep blue night retained in the distance, gentle facial exposure and refined textile highlights',
   mistyMoonBacklight: 'soft moonlit backlight through thin mist, delicate rim light around hair and sleeves, face evenly exposed within the same global light',
-  templeWarmNight: 'warm temple and lantern practical lights with restrained night contrast, architecture and subject share the same white balance'
+  templeWarmNight: 'warm temple and lantern practical lights with restrained night contrast, architecture and subject share the same white balance',
+  springLanternWarm: 'warm spring-festival lantern light with gentle red and gold reflections, clean face exposure and controlled background depth',
+  redGoldCeremonial: 'rich warm ceremonial light with restrained red and antique-gold reflections, premium textile modeling and natural skin tone',
+  fireworksBacklight: 'distant fireworks create a soft colored backlight while a unified frontal fill keeps face and body naturally readable',
+  roseCandlelight: 'soft rose-toned candlelight with gentle highlights on satin and skin, intimate contrast and refined romantic exposure',
+  hotelAmber: 'luxury hotel amber light with polished warm reflections, controlled shadow depth and premium evening skin tone',
+  riverSummerDaylight: 'bright summer riverside daylight with soft reflected water light, natural skin tone and crisp textile movement',
+  softSummerDiffuse: 'soft diffused summer daylight with airy exposure, gentle shadows and fresh botanical color separation',
+  lotusGoldenHour: 'warm golden-hour light across lotus leaves and silk, soft rim definition and natural facial exposure',
+  scholarWindowLight: 'quiet window light across a traditional tea table, restrained contrast and clear material texture',
+  mountainMistLight: 'diffused mountain light through soft mist, pale atmospheric depth and even exposure across face and clothing',
+  moonGardenSilver: 'cool silver moonlight with delicate warm lantern accents, calm lunar contrast and refined fabric highlights',
+  halloweenCandle: 'controlled candle and pumpkin light with warm amber pools, theatrical contrast and clean facial exposure',
+  gothicMoonlight: 'cool gothic moonlight with restrained warm practical accents, deep architectural depth and refined couture modeling',
+  cityNightBokeh: 'clean urban night bokeh with unified city illumination, controlled highlights and natural skin color',
+  jewelrySpotlight: 'focused but integrated luxury beauty light, precise jewelry sparkle, soft facial fill and controlled background falloff',
+  softCafeDaylight: 'soft afternoon cafe daylight with warm pastry and floral reflections, bright natural exposure and gentle shadows',
+  starryBacklight: 'subtle starry-night backlight with a soft environmental fill, delicate hair edge and natural face exposure',
+  ballroomCandlelight: 'warm ballroom candlelight and chandelier reflections, controlled high-end evening contrast and coherent skin tone',
+  snowBlueWarm: 'cool snowy blue light balanced by warm window or tree lights, soft winter contrast and natural skin exposure',
+  christmasTreeGlow: 'warm Christmas tree practical lights with gentle colored reflections, refined seasonal highlights and clean face detail',
+  marketWarm: 'warm Christmas market lights in cool evening air, layered practical sources and realistic textile color',
+  iceBlueGlow: 'pale ice-blue ambient light with restrained silver highlights, luminous but physically coherent winter atmosphere',
+  rooftopFireworks: 'cool rooftop night light balanced by champagne warmth and distant fireworks, polished countdown exposure',
+  futureLuminous: 'clean luminous fashion light with restrained reflective highlights, modern editorial contrast and no harsh color clipping',
+  dawnGold: 'soft first-sunrise gold across a pale horizon, gentle atmospheric haze and hopeful natural skin tone',
+  premiumStudio: 'premium studio key light with subtle edge definition, precise textile modeling and polished commercial contrast',
+  lanternNightGlow: 'layered warm lantern glow with cool night fill, clean face exposure and controlled highlights across silk',
+  pastelSpringLight: 'bright pastel spring daylight with soft shadows, fresh skin tone and gentle color separation across flowers',
+  greenhouseDiffuse: 'diffused glasshouse daylight with translucent botanical reflections and even premium facial exposure',
+  carnationSoftLight: 'soft floral daylight with warm ivory fill, delicate highlights on petals and calm lifestyle contrast',
+  homeMorningLight: 'quiet morning window light with warm interior bounce, natural skin tone and gentle household reflections',
+  roseSunset: 'warm rose-gold sunset light with soft shoreline fill, natural wind detail and romantic tonal depth',
+  confessionCityGlow: 'clean city evening glow with warm bouquet accents, soft facial fill and controlled reflective pavement',
+  coastalGoldenHour: 'open coastal golden-hour light with gentle wind, warm horizon glow and natural body separation',
+  galaxyMoonlight: 'cool moonlight across a star river balanced with subtle warm bridge light, coherent skin and fabric exposure',
+  qixiLanternLight: 'soft lantern light and silver moonlight balanced across an Eastern garden, delicate highlights and clean facial detail'
 };
 
 const colorData = {
@@ -504,7 +793,47 @@ const colorData = {
   moonJadeSilver: 'coordinated palette of moon white, muted jade, deep teal and soft silver, quiet cool folk elegance',
   cinnabarLanternGold: 'coordinated palette of cinnabar red, antique gold and ink black, festive richness with controlled saturation',
   whiteFlowerBlue: 'coordinated palette of white flowers, mist blue and wet stone gray, delicate nocturnal botanical harmony',
-  aiThemeScenePalette: window.HB_CORE_PROMPT?.controls?.autoColor || window.HB_AUTO_COLOR_PROMPT || ''
+  aiThemeScenePalette: window.HB_CORE_PROMPT?.controls?.autoColor || window.HB_AUTO_COLOR_PROMPT || '',
+  redGoldSpring: 'coordinated palette of auspicious red, antique gold, warm ivory and a restrained jade accent',
+  peachJadeSpring: 'coordinated palette of peach blossom pink, pale jade, warm ivory and soft sky blue',
+  cinnabarChampagne: 'coordinated palette of cinnabar red, champagne gold, deep ink and warm porcelain',
+  roseChampagne: 'coordinated palette of rose pink, champagne, warm ivory and a restrained berry accent',
+  midnightRose: 'coordinated palette of midnight blue, dusty rose, soft silver and warm candlelight',
+  cityRoseNight: 'coordinated palette of deep plum, rose, charcoal and controlled city amber',
+  burgundyChampagne: 'coordinated palette of burgundy, champagne gold, ivory and deep cocoa',
+  inkJade: 'coordinated palette of ink blue, muted jade, river gray and warm ivory',
+  lotusPeach: 'coordinated palette of lotus pink, pale jade, water blue and warm ivory',
+  lotusGreen: 'coordinated palette of lotus green, bamboo, soft ivory and a restrained cinnabar accent',
+  moonOsmanthus: 'coordinated palette of moon white, osmanthus gold, muted jade and deep blue',
+  moonSilverPearl: 'coordinated palette of silver white, pearl, moon blue and restrained lavender',
+  pumpkinPlum: 'coordinated palette of pumpkin orange, deep plum, black and antique silver',
+  forestPlum: 'coordinated palette of moss green, deep plum, autumn amber and charcoal',
+  blackRuby: 'coordinated palette of black, ruby red, antique silver and a restrained rose accent',
+  blackRubyGold: 'coordinated palette of black, ruby, antique gold and deep wine',
+  winterIvoryRed: 'coordinated palette of winter white, evergreen, festive red and soft gold',
+  pineGold: 'coordinated palette of pine green, warm ivory, antique gold and deep red',
+  citySilverRed: 'coordinated palette of silver, charcoal, festive red and cool city blue',
+  champagnePine: 'coordinated palette of champagne, pine green, warm ivory and a restrained red accent',
+  iceBlueSilver: 'coordinated palette of ice blue, silver white, pale lavender and deep winter blue',
+  midnightSilver: 'coordinated palette of midnight blue, silver, cool white and restrained champagne',
+  champagneNight: 'coordinated palette of champagne, black, midnight blue and soft crystal white',
+  citySilver: 'coordinated palette of urban silver, charcoal, midnight blue and clean white',
+  cityMoonSilver: 'coordinated palette of moon silver, charcoal, muted blue and a restrained warm city accent',
+  electricSilver: 'coordinated palette of polished silver, deep midnight, cool white and one controlled luminous accent',
+  dawnPeach: 'coordinated palette of dawn peach, ivory, pale gold and soft sky blue',
+  yuanxiaoRedGold: 'coordinated palette of vermilion red, antique gold, warm ivory and deep night blue',
+  yuanxiaoNightBlue: 'coordinated palette of midnight blue, lantern gold, moon white and a restrained cinnabar accent',
+  easterPastel: 'coordinated palette of buttercream, blush pink, mint jade and pale sky blue',
+  easterLavenderMint: 'coordinated palette of lavender, mint, warm ivory and soft lemon yellow',
+  easterButtercream: 'coordinated palette of buttercream, peach, fresh green and clean white',
+  mothersRoseCream: 'coordinated palette of carnation pink, warm cream, muted sage and champagne',
+  mothersLilacPearl: 'coordinated palette of soft lilac, pearl white, blush and pale sage',
+  mothersWarmIvory: 'coordinated palette of warm ivory, coral pink, honey gold and leafy green',
+  confessionCherryRose: 'coordinated palette of cherry rose, soft pink, champagne and clean ivory',
+  confessionSunsetRose: 'coordinated palette of sunset peach, rose red, warm sand and pale gold',
+  qixiGalaxyBlue: 'coordinated palette of galaxy blue, moon silver, lavender and restrained warm gold',
+  qixiLavenderGold: 'coordinated palette of lavender, antique gold, moon white and deep indigo',
+  qixiRoseNight: 'coordinated palette of midnight blue, rose, pearl white and a delicate gold accent'
 };
 
 const backgroundData = {
@@ -512,7 +841,87 @@ const backgroundData = {
   riverLanternBlessing: 'quiet riverside blessing scene, floating lanterns on dark water, a traditional stone bridge, distant eaves and gentle moonlit reflections',
   oldTownLanternAlley: 'traditional old-town lantern alley, timber facades, hanging paper lanterns, narrow wet stone lane and clean walking space around the subject',
   quietTempleCourtyard: 'quiet temple courtyard with stone steps, restrained greenery, a few warm lanterns, dark rooflines and calm moonlit depth',
-  pureWhiteBackground: 'pure seamless white background, no visible environment, no architecture, no props, evenly lit clean white studio backdrop'
+  pureWhiteBackground: 'pure seamless white background, no visible environment, no architecture, no props, evenly lit clean white studio backdrop',
+  newYearPalaceHall: 'grand red-lacquer palace hall with hanging spring lanterns, refined feast table, carved wood and controlled ceremonial depth',
+  festivalTempleSquare: 'lively but polished spring temple square with red lanterns, seasonal banners, lion-dance activity kept softly in the background',
+  springFlowerMarket: 'airy spring flower market with blossom stalls, silk ribbons, traditional awnings and clean walking space',
+  fireworkRooftop: 'refined rooftop above a luminous city, open sky for fireworks, clean architectural edge and controlled night depth',
+  newYearFeastHall: 'luxury reunion feast hall with red lacquer, porcelain tableware, warm lantern light and elegant interior architecture',
+  modernRedGoldStudio: 'modern red-and-gold fashion studio with one architectural plane, polished floor and premium campaign separation',
+  roseGarden: 'romantic rose garden with soft petals, sculpted greenery, warm late-afternoon depth and intimate editorial atmosphere',
+  candlelitDining: 'refined candlelit dining room with flowers, elegant tableware, warm walls and controlled evening depth',
+  cityValentineNight: 'glamorous city avenue at night with rose-toned bokeh, polished pavement and restrained urban architecture',
+  luxuryHotelSuite: 'luxury hotel suite with marble, soft curtains, refined seating and warm city-window depth',
+  dessertCafe: 'bright French-style dessert cafe with porcelain, pastries, pale florals and soft afternoon window light',
+  starryRooftop: 'quiet rooftop terrace beneath a clear starry sky, low architectural lines and romantic open depth',
+  jewelryGallery: 'minimal luxury jewelry gallery with dark stone, warm spotlights and clean premium display surfaces',
+  dragonBoatRiverside: 'summer riverside festival with traditional dragon boats, stone embankment, flags and reflected daylight',
+  jiangnanWaterTown: 'Jiangnan water-town lane with white walls, dark tiled roofs, stone railing and calm canal reflections',
+  lotusPondSummer: 'summer lotus pond with a quiet pavilion, broad leaves, pale water and soft botanical depth',
+  scholarTeaCourtyard: 'classical scholar tea courtyard with wooden table, porcelain tea set, bamboo and restrained summer shade',
+  zongziCourtyard: 'warm courtyard with bamboo table, wrapped rice dumplings, seasonal tea and filtered afternoon light',
+  mountainGarden: 'mountain garden with a stone path, misty layered hills, bamboo and distant water, spacious environmental portrait depth',
+  modernSummerStudio: 'modern summer fashion studio with jade and water-gray surfaces, clean editorial space and restrained botanical accents',
+  spiderLilyGarden: 'moonlit garden path lined with white spider lilies, dark foliage, low mist and quiet reflective depth',
+  moonlitRiverRealm: 'poetic moonlit riverside with floating lights, distant bridge, pale mist and elegant East Asian night atmosphere',
+  zhongyuanNightFeast: 'refined nocturnal feast courtyard with lanterns, dark wood, seasonal flowers and a quiet ceremonial table',
+  moonOsmanthusGarden: 'moon-viewing garden with osmanthus trees, pale stone, a small pavilion and soft lantern depth',
+  moonPalaceGarden: 'luminous lunar garden with pale stone terraces, elegant moon-palace architecture, fine clouds and restrained fantasy depth',
+  moonViewingCourtyard: 'quiet mid-autumn courtyard with a round table, mooncakes, tea, osmanthus branches and warm lanterns',
+  midAutumnLanternStreet: 'polished mid-autumn lantern street with moon-viewing decorations, traditional facades and clean walking space',
+  familyFeastCourtyard: 'warm family reunion courtyard with seasonal tableware, lanterns, mooncakes and layered garden architecture',
+  cityMoonView: 'modern city rooftop or window terrace for moon viewing, clean skyline, moonlight and understated urban elegance',
+  pumpkinGarden: 'elegant autumn pumpkin garden with warm foliage, lantern light and polished seasonal styling',
+  gothicCastleHall: 'grand gothic castle hall with stone arches, candlelight and controlled theatrical architectural depth',
+  autumnForest: 'autumn forest path with warm leaves, subtle lights, refined mist and playful theatrical atmosphere',
+  darkRoseManor: 'dark rose manor garden with deep foliage, stone terrace, moonlight and restrained romantic gothic styling',
+  masqueradeBallroom: 'luxurious masquerade ballroom with crystal chandelier, deep velvet, polished floor and elegant theatrical depth',
+  halloweenCityAlley: 'stylized city Halloween alley with pumpkins, refined storefront light and clean contemporary fashion space',
+  snowyStreet: 'quiet European snowy street with warm windows, evergreen details and delicate falling snow',
+  fireplaceRoom: 'warm luxury winter room with fireplace, textured stone, soft seating and controlled Christmas depth',
+  christmasTreeHall: 'grand festive hall with a refined Christmas tree, warm lights, polished floor and premium interior scale',
+  europeanMarket: 'European Christmas market with timber stalls, evergreen garlands, warm lights and softly falling snow',
+  cityChristmasLights: 'modern city avenue wrapped in elegant Christmas lights, reflective pavement and restrained festive bokeh',
+  winterDinner: 'luxury winter dinner room with candlelight, crystal, evergreen styling and refined seasonal architecture',
+  iceFairytale: 'pale ice garden with crystalline surfaces, snow haze, moonlit blue depth and elegant fairytale atmosphere',
+  skylineRooftop: 'high-rise rooftop with open midnight skyline, distant fireworks and clean architectural lines',
+  skyscraperCountdown: 'glass skyscraper interior overlooking a luminous city countdown, polished reflections and spacious fashion framing',
+  countdownHotelHall: 'luxury hotel countdown hall with crystal chandelier, champagne service, formal architecture and premium party depth',
+  partyTerrace: 'open rooftop party terrace with city lights, champagne table, clear sky and controlled celebration atmosphere',
+  newYearHotelBallroom: 'grand hotel ballroom with polished floor, crystal chandelier, midnight decorations and refined countdown styling',
+  dawnMountain: 'quiet mountain overlook at first sunrise of the new year, pale horizon, soft mist and hopeful open space',
+  futureCityRooftop: 'clean futuristic-inspired city rooftop fashion set with luminous architectural lines, reflective surfaces and no machinery',
+  yuanxiaoLanternStreet: 'night lantern street with layered silk lanterns, traditional shopfronts, moonlit paving and a clean walking path',
+  yuanxiaoRiverLanterns: 'quiet river promenade with floating lantern boats, stone bridge, dark water reflections and open night depth',
+  yuanxiaoPalaceNight: 'grand palace courtyard at Lantern Festival night with red lanterns, carved eaves and refined ceremonial space',
+  yuanxiaoLanternGarden: 'moonlit garden filled with carefully spaced lanterns, flowering branches, stone paths and elegant evening depth',
+  yuanxiaoCitySquare: 'modern city square during Lantern Festival with architectural light lines, lantern installations and polished pavement',
+  easterEggGarden: 'sunny spring garden with pastel painted eggs, fresh flowers, trimmed greenery and airy editorial depth',
+  europeanSpringPicnic: 'European spring meadow picnic with wicker basket, pastel blanket, flowering trees and clean open daylight',
+  pastelGreenhouse: 'bright glasshouse filled with spring leaves, flowers, translucent panels and soft botanical depth',
+  easterForest: 'fresh spring woodland path with flowers, soft green foliage and a refined storybook atmosphere',
+  springTeaTerrace: 'sunlit spring tea terrace with pale furniture, flowers, porcelain and a clean garden horizon',
+  easterFashionStudio: 'premium pastel spring studio with one botanical set wall, clean floor and controlled fashion-campaign space',
+  carnationGarden: 'elegant carnation garden with layered flower beds, pale stone paths and warm spring depth',
+  mothersFrenchGarden: 'French-style garden terrace with carnations, wrought-iron seating, pale stone and refined afternoon light',
+  mothersHotelLounge: 'luxury hotel lounge with floral arrangements, soft seating, marble details and calm appreciation-day elegance',
+  mothersCourtyard: 'quiet home courtyard with a flower table, ceramic vase, leafy shade and warm lifestyle depth',
+  mothersHomeMorning: 'bright refined home interior beside a large window, fresh flowers, calm furniture and gentle morning light',
+  mothersFlowerStudio: 'premium floral studio with carnations, wrapping table, clean shelves and controlled commercial beauty depth',
+  mothersJewelrySalon: 'minimal jewelry salon with warm ivory walls, floral details, glass display and precise luxury light',
+  confessionFlowerSea: 'romantic rose field with soft paths, drifting petals, warm horizon and generous contemporary love-story depth',
+  confessionCityRooftop: 'clean city rooftop at blue hour with bouquet, skyline, soft city bokeh and open emotional space',
+  confessionLuxuryHotel: 'luxury hotel suite prepared for a romantic surprise, flowers, soft curtains, marble and warm city-window light',
+  confessionCoast: 'quiet seaside at sunset with a glowing horizon, gentle wind, shoreline reflections and refined romantic space',
+  confessionFlowerStreet: 'bright flower-lined city street with small shops, wrapped bouquets and controlled contemporary date atmosphere',
+  confessionStarTerrace: 'private terrace beneath a clear starry sky with a small table, flowers and distant city depth',
+  confessionJewelrySalon: 'premium jewelry salon with rose-toned display light, polished stone and one refined romantic gift detail',
+  qixiMagpieBridge: 'luminous Eastern magpie bridge above a calm star river, distant mountains, soft clouds and grounded architectural depth',
+  qixiStarRiver: 'wide star-river landscape with layered night sky, silk ribbons, distant bridge and a clear path for the subject',
+  qixiEasternCourtyard: 'moonlit Eastern courtyard with carved windows, flowering branches, wish ribbons and a quiet stone terrace',
+  qixiLotusNight: 'night lotus pond with small lanterns, dark water, pale blossoms and restrained romantic mist',
+  qixiTangFeast: 'elegant Tang-inspired moonlit banquet courtyard with silk table styling, lanterns and open architectural depth',
+  qixiModernRooftop: 'modern East Asian rooftop with city lights, moonlit skyline and clean space for contemporary romantic fashion'
 };
 
 const cameraData = {
@@ -564,28 +973,475 @@ const GARMENT_VARIATIONS = {
   }
 };
 
-const themeTemplates = {
-  zhongyuanMoonlitLanternFestival: {
-    style: 'poeticFolk',
-    festivalTheme: 'zhongyuanMoonlitLantern',
-    composition: 'fullBodyLantern',
-    garment: 'ivoryGauzeFestivalDress',
-    materials: ['lightGauze', 'floralEmbroidery'],
-    elements: ['warmLanterns', 'fullMoon', 'whiteSpiderLilies', 'wetStoneReflection'],
-    garmentLayer: 'layer0',
-    chestDetail: 'squareNeckBodice',
-    waistSideDetail: 'ribbonWaist',
-    shoulderDetail: 'softBellSleeves',
-    bodyShape: 'original',
-    pose: 'lanternLiftHem',
-    lighting: 'moonLanternContrast',
-    colorPalette: 'ivoryMidnightGold',
-    background: 'moonlitTempleLanternStreet',
-    camera: 'fullBodyEditorial',
-    ratio: '9:16',
-    intensity: 'premium'
-  }
+const EXTRA_OPTIONS = {
+  style: [
+    ['romanticEditorial', '浪漫編輯寫真', '情感敘事、柔和美感與高級人物攝影'],
+    ['luxuryCampaign', '精品節慶廣告', '材質、燈光與品牌主視覺完成度'],
+    ['cinematicCelebration', '電影節慶敘事', '環境事件、空間深度與電影感'],
+    ['urbanFashion', '都會節慶時裝', '城市建築、時裝輪廓與自信鏡頭感'],
+    ['playfulFantasy', '奇趣節慶幻想', '想像力、裝飾細節與輕盈戲劇感']
+  ],
+  composition: [
+    ['ceremonialTableau', '儀式華宴構圖', '人物與宴席或慶典陳設形成完整主視覺'],
+    ['marketWalk', '節慶市集行走', '一個清楚動作、攤位與人物互相呼應'],
+    ['fireworksSkyline', '煙火天幕構圖', '人物位於中下方，天空與煙火保留層次'],
+    ['intimateTablePortrait', '桌邊親密肖像', '人物、手勢與桌面物件形成單一故事'],
+    ['waterfrontAction', '水岸活動構圖', '人物與水面活動有清楚空間關係'],
+    ['gardenPoetic', '花園詩意構圖', '花木、人物與留白形成柔和景深'],
+    ['cityPortrait', '城市時裝構圖', '建築與燈光襯托人物，不搶服裝輪廓'],
+    ['hotelEditorial', '飯店精品構圖', '高級室內、人物與家具尺度協調']
+  ],
+  garment: [
+    ['redGoldHanfuGown', '紅金漢風華服', '紅金、織錦、層疊袖型與賀年儀式感'],
+    ['crimsonSilkCheongsam', '朱紅絲質旗袍', '現代中式領線、修身剪裁與年夜氣氛'],
+    ['pastelFlowerMarketDress', '粉彩花市洋裝', '花卉、絲帶、輕裙襬與春日活力'],
+    ['navyRiverSilkDress', '黛青水岸絲裙', '水鄉色彩、流動裙片與夏日清涼感'],
+    ['lotusSummerHanfu', '荷色夏日襦裙', '荷花色、透氣絲料與柔和寬袖'],
+    ['roseRomanticGown', '玫瑰浪漫禮服', '柔粉花卉、飄逸裙襬與戀愛感'],
+    ['velvetEveningDress', '酒紅絲絨晚禮服', '深色絲絨、夜間光澤與成熟精品感'],
+    ['blackGothicCouture', '黑色哥德高訂', '結構剪裁、細緻蕾絲與戲劇時裝感'],
+    ['pumpkinWitchCouture', '南瓜魔女高訂', '深紫、南瓜色、層疊裙與奇趣造型'],
+    ['winterWhiteCouture', '冰雪白色高訂', '白色層次、晶體裝飾與冬日輪廓'],
+    ['redChristmasVelvet', '聖誕紅絲絨', '節慶紅、柔冬飾邊與高級禮服感'],
+    ['champagneHotelGown', '香檳飯店晚禮服', '絲緞、晶石與奢華室內派對感'],
+    ['silverPartyCouture', '銀色跨年高訂', '控制金屬反光、俐落剪裁與倒數時裝感'],
+    ['celestialMoonGown', '月宮銀白華服', '月白、銀色層疊與優雅幻想輪廓'],
+    ['dawnSilkDress', '曙光絲質長裙', '桃杏、象牙白與新年初光的輕盈氣質']
+  ],
+  material: [
+    ['redGoldBrocade', '紅金織錦', '節慶織紋與高級布料重量'],
+    ['wovenBrocade', '低調織錦', '細緻傳統紋理與安靜工藝感'],
+    ['freshLotusSilk', '清爽荷色真絲', '夏日柔霧、滑順表面與自然垂墜'],
+    ['roseSatin', '玫瑰色緞面', '柔和反光與浪漫布料摺線'],
+    ['silkSatin', '高級絲緞', '晚間高光、流動皺褶與精品質感'],
+    ['velvetTexture', '深色絲絨', '吸光表面、細膩絨面與成熟氣質'],
+    ['laceTrim', '細緻蕾絲滾邊', '局部領口、袖口與裙邊裝飾'],
+    ['crystalEmbellishment', '晶石細節', '精準小面積閃耀，不遮蓋人物'],
+    ['winterFurTrim', '柔軟冬日飾邊', '袖口或領口的自然纖維層次'],
+    ['metallicCouture', '控制金屬布料', '低反光銀金表面與現代高訂感'],
+    ['reflectiveTextile', '細緻反光材質', '只捕捉環境光，不產生塑膠亮面']
+  ],
+  element: [
+    ['redSpringLanterns', '新春紅燈籠', '紅燈籠、金色細節與暖色實景光源'],
+    ['flowerMarketStalls', '新春花市', '花攤、絲帶與乾淨的節慶人群深度'],
+    ['fireworks', '節慶煙火', '多層煙火、開放天空與不過曝光點'],
+    ['lionDance', '瑞獅迎春', '背景中的舞獅動勢，人物仍是主體'],
+    ['familyFeastTable', '團圓宴席', '瓷器、節慶菜餚與精緻桌面'],
+    ['festivalBanners', '節慶布幔', '無可讀文字的旗幡、布條與空間裝飾'],
+    ['rosePetals', '玫瑰花瓣', '低調花瓣與浪漫花藝'],
+    ['candlelight', '燭光', '小型燭火、桌面反射與親密氣氛'],
+    ['cityBokeh', '城市散景', '遠方城市燈光與清楚主體分離'],
+    ['dessertTable', '法式甜點桌', '糕點、瓷盤與精緻午後花藝'],
+    ['starrySky', '星空', '稀疏星點與開闊浪漫夜空'],
+    ['dragonBoats', '龍舟水岸', '遠景龍舟與節慶水面活動'],
+    ['riverReflections', '河面倒影', '水面延伸光線與自然反射'],
+    ['lotusPond', '荷塘', '荷葉、荷花與夏日水面'],
+    ['zongziTable', '粽香桌面', '粽子、竹葉、竹籃與茶席'],
+    ['bambooWaterTown', '竹影水鄉', '竹子、欄杆與江南水景'],
+    ['osmanthusFlowers', '桂花枝影', '小型桂花、枝葉與季節細節'],
+    ['moonLanterns', '中秋花燈', '月下花燈與安靜節慶節奏'],
+    ['moonPalaceArchitecture', '月宮建築', '淡色石材、月宮屋簷與克制幻想'],
+    ['snowfall', '細雪', '有遠近層次的自然降雪'],
+    ['christmasLights', '聖誕燈飾', '暖色燈串、柔和散景與實景反光'],
+    ['fireplace', '壁爐', '石材壁爐、火光與冬日室內深度'],
+    ['christmasTree', '聖誕樹', '精緻裝飾、暖燈與節慶焦點'],
+    ['europeanMarketStalls', '歐洲聖誕市集', '木攤、常青花環與暖色燈光'],
+    ['masqueradeMasks', '假面舞會面具', '手持或作為道具，不遮住臉'],
+    ['pumpkins', '南瓜陳設', '不同色階南瓜與秋季精品佈置'],
+    ['gothicArchitecture', '哥德建築', '石拱、柱線與戲劇化空間'],
+    ['darkRose', '暗色玫瑰', '深色花朵、葉片與浪漫戲劇感'],
+    ['magicalForestLights', '森林微光', '樹間暖色小光點，不加入超自然生物'],
+    ['champagne', '香檳道具', '單一酒杯或酒瓶，作為克制派對細節'],
+    ['cityFireworks', '城市煙火倒影', '玻璃與建築上的遠方煙火反射'],
+    ['sunriseHorizon', '日出地平線', '桃金色天際與新開始的開闊感'],
+    ['countdownLights', '倒數燈光', '無可讀數字的城市倒數光點'],
+    ['crystalChandelier', '水晶吊燈', '高級室內精準閃耀與比例控制'],
+    ['lightTrails', '城市光軌', '遠景細緻長曝光線，不凌亂'],
+    ['jewelrySparkle', '珠寶閃耀', '小面積寶石光點與美妝廣告質感'],
+    ['redEnvelopes', '紅包', '無可讀文字的節慶手持或桌面道具'],
+    ['teaSet', '茶席', '瓷杯、茶壺與安靜儀式感'],
+    ['moonCakes', '月餅', '精緻月餅、茶具與團圓桌面'],
+    ['iceCrystals', '冰晶', '細緻冰晶反光與冬日空氣'],
+    ['autumnLeaves', '秋葉', '控制色彩的自然落葉'],
+    ['giftBoxes', '禮物盒', '緞帶包裝與無品牌標籤'],
+    ['snowWindow', '雪窗反光', '窗面雪景與室內暖光反射']
+  ],
+  pose: [
+    ['offerRedEnvelope', '遞出紅包', '自然迎接姿勢與放鬆手指'],
+    ['flowerMarketReach', '花市選花', '走動中輕觸花束或絲帶'],
+    ['lionDanceWelcome', '迎接瑞獅', '轉身看向背景活動，袖口微抬'],
+    ['fireworkLookBack', '煙火回眸', '轉身看向煙火，一個清楚步伐'],
+    ['feastToast', '團圓舉杯', '在宴席旁自然舉杯祝賀'],
+    ['roseHold', '手持玫瑰', '玫瑰靠近身體，柔和戀愛眼神'],
+    ['candleTable', '燭光桌邊', '靠近燭光或酒杯的安靜互動'],
+    ['cityWalkRomance', '城市約會行走', '自然走過夜色街道，服裝有輕微動勢'],
+    ['dessertTaste', '午後品嘗甜點', '手持小點心或瓷叉，表情輕盈'],
+    ['balconyStarGaze', '露台望星', '一手輕扶欄杆，視線望向星空'],
+    ['riverPaddle', '水岸扶槳', '手扶船槳，身體重心穩定'],
+    ['waterTownWalk', '水鄉緩步', '沿欄杆行走，回望鏡頭'],
+    ['lotusTouch', '輕觸荷花', '不遮臉地觸碰花葉'],
+    ['teaGathering', '茶席端杯', '雙手自然環抱瓷杯，脊椎對齊'],
+    ['zongziWrap', '包粽動作', '在桌邊以放鬆雙手整理竹葉'],
+    ['lanternRaise', '舉燈祈福', '雙手將小燈籠抬至胸前'],
+    ['moonCakeServe', '奉上月餅', '手持月餅盤，另一手靠近茶席'],
+    ['moonPalaceTurn', '月宮轉身', '優雅轉身，裙襬跟隨身體'],
+    ['pumpkinHold', '手持南瓜', '南瓜靠近身側，俏皮但高級'],
+    ['castleStair', '古堡階梯', '一手輕扶扶手，穩定站姿'],
+    ['masqueradeTurn', '假面回身', '面具放在臉旁，不遮蓋身份'],
+    ['fireplaceSit', '壁爐側坐', '坐在壁爐旁，手靠椅側或暖杯'],
+    ['treeOrnament', '裝飾聖誕樹', '自然伸手整理一件裝飾'],
+    ['marketWalk', '冬日市集行走', '沿市集行走，手靠禮物或外套'],
+    ['champagneToast', '跨年舉杯', '舉起單一香檳杯，手腕自然'],
+    ['sunriseWalk', '曙光行走', '朝日出走去，一個穩定落地步伐'],
+    ['confidentEditorial', '自信時裝站姿', '一腳微前、雙手放鬆、直視鏡頭'],
+    ['winterWalk', '雪中緩步', '細雪中自然行走，裙襬或外套輕動'],
+    ['forestReach', '森林觸光', '手伸向樹間暖光或一片葉子'],
+    ['jewelryTouch', '整理珠寶', '一手觸碰耳飾或項鍊，臉部清楚'],
+    ['countdownLook', '倒數回望', '轉身看向城市倒數燈光'],
+    ['skyGaze', '仰望夜空', '屋頂上放鬆抬頭，肩頸自然'],
+    ['ballroomTurn', '舞會轉身', '一腳錯開，禮服自然跟隨'],
+    ['hotelArrival', '飯店入場', '手持小手包踏入高級空間']
+  ],
+  lighting: [
+    ['springLanternWarm', '新春燈火暖光', '紅金燈籠光與乾淨臉部曝光'],
+    ['redGoldCeremonial', '紅金儀式光', '暖色禮儀光與精品布料塑形'],
+    ['fireworksBacklight', '煙火輪廓光', '遠方煙火背光與自然補光'],
+    ['roseCandlelight', '玫瑰燭光', '柔玫瑰色燭光與緞面反射'],
+    ['hotelAmber', '飯店琥珀光', '高級室內暖光與受控陰影'],
+    ['riverSummerDaylight', '水岸夏日光', '水面反射的明亮自然日光'],
+    ['softSummerDiffuse', '夏日漫射光', '明亮、清爽、柔和陰影'],
+    ['lotusGoldenHour', '荷塘金色時刻', '荷葉與絲料上的夕陽輪廓'],
+    ['scholarWindowLight', '茶室窗光', '窗光穿過茶席，材質清楚'],
+    ['mountainMistLight', '山水霧光', '薄霧中的平均曝光與遠景層次'],
+    ['moonGardenSilver', '月宮銀光', '銀色月光與少量暖燈交錯'],
+    ['halloweenCandle', '萬聖燭火', '南瓜與燭火暖光，戲劇但不恐怖'],
+    ['gothicMoonlight', '哥德月光', '冷月光與少量實景暖光'],
+    ['cityNightBokeh', '城市夜景散光', '城市光源統一色溫與乾淨高光'],
+    ['jewelrySpotlight', '珠寶精品光', '小面積聚光、柔和臉部補光'],
+    ['softCafeDaylight', '甜點午後光', '咖啡館窗光與明亮自然曝光'],
+    ['starryBacklight', '星空柔逆光', '夜間環境補光與髮絲輪廓'],
+    ['ballroomCandlelight', '舞會燭光', '吊燈、燭光與禮服的高級對比'],
+    ['snowBlueWarm', '雪夜冷暖光', '藍色雪夜與窗內暖光平衡'],
+    ['christmasTreeGlow', '聖誕樹暖光', '聖誕燈串反射與自然膚色'],
+    ['marketWarm', '冬日市集光', '市集暖燈與冷空氣層次'],
+    ['iceBlueGlow', '冰雪藍光', '冰藍環境光與銀色細節'],
+    ['rooftopFireworks', '屋頂煙火光', '城市冷光、香檳暖光與煙火'],
+    ['futureLuminous', '未來感時裝光', '乾淨發光建築反射與現代高訂'],
+    ['dawnGold', '新年曙光', '第一道金色日光與薄霧'],
+    ['premiumStudio', '精品棚拍光', '精準主光、輪廓光與高級布料塑形']
+  ],
+  color: [
+    ['redGoldSpring', '搭配色｜新春紅・古金・暖象牙', '喜氣、華麗、節慶主視覺'],
+    ['peachJadeSpring', '搭配色｜桃粉・淡玉・暖白', '花市、春日與清新活力'],
+    ['cinnabarChampagne', '搭配色｜朱紅・香檳・墨色', '年夜宴與中式精品'],
+    ['roseChampagne', '搭配色｜玫瑰・香檳・暖白', '浪漫、柔和、精緻'],
+    ['midnightRose', '搭配色｜午夜藍・玫瑰・銀灰', '星空約會與夜景'],
+    ['cityRoseNight', '搭配色｜深莓・玫瑰・城市灰', '都會情人節時裝'],
+    ['burgundyChampagne', '搭配色｜酒紅・香檳・象牙', '燭光晚宴與飯店質感'],
+    ['inkJade', '搭配色｜墨藍・黛玉・河灰', '水鄉、龍舟與夏日古典'],
+    ['lotusPeach', '搭配色｜荷粉・淡玉・水藍', '荷塘與清透夏韻'],
+    ['lotusGreen', '搭配色｜荷綠・竹青・暖白', '端午雅集與自然水岸'],
+    ['moonOsmanthus', '搭配色｜月白・桂金・黛青', '中秋、桂花與月夜'],
+    ['moonSilverPearl', '搭配色｜銀白・珍珠・月藍', '月宮與銀色幻想'],
+    ['pumpkinPlum', '搭配色｜南瓜・深紫・黑色', '萬聖節奇趣時裝'],
+    ['forestPlum', '搭配色｜苔綠・梅紫・秋金', '魔法森林與秋季'],
+    ['blackRuby', '搭配色｜黑色・紅寶石・銀色', '哥德、玫瑰與高級戲劇感'],
+    ['blackRubyGold', '搭配色｜黑色・紅寶石・古金', '假面舞會與古堡'],
+    ['winterIvoryRed', '搭配色｜冬白・松綠・節慶紅', '聖誕雪景與市集'],
+    ['pineGold', '搭配色｜松綠・暖白・古金', '壁爐、聖誕樹與冬日室內'],
+    ['citySilverRed', '搭配色｜銀灰・城市黑・節慶紅', '都會聖誕與街景'],
+    ['champagnePine', '搭配色｜香檳・松綠・暖白', '聖誕晚宴與精品派對'],
+    ['iceBlueSilver', '搭配色｜冰藍・銀白・淡紫', '冰雪童話與冬日幻想'],
+    ['midnightSilver', '搭配色｜午夜藍・銀色・冷白', '跨年煙火與城市夜景'],
+    ['champagneNight', '搭配色｜香檳・黑色・午夜藍', '奢華倒數與飯店舞會'],
+    ['citySilver', '搭配色｜城市銀・炭灰・冷白', '摩天樓與都會倒數'],
+    ['cityMoonSilver', '搭配色｜月銀・炭灰・城市藍', '都市賞月與夜間時裝'],
+    ['electricSilver', '搭配色｜拋光銀・午夜・冷白', '未來感高訂與發光城市'],
+    ['dawnPeach', '搭配色｜曙光桃・象牙・淡金', '元旦日出與新開始']
+  ],
+  background: [
+    ['newYearPalaceHall', '新春宮殿華宴', '紅漆宮殿、宮燈與年夜宴席'],
+    ['festivalTempleSquare', '新春廟會廣場', '燈籠、布幔與遠景瑞獅'],
+    ['springFlowerMarket', '新春花市走廊', '花攤、絲帶與明亮春日'],
+    ['fireworkRooftop', '除夕煙火屋頂', '城市屋頂與大面積煙火天空'],
+    ['newYearFeastHall', '豪門年夜宴廳', '高級室內、瓷器與暖色宴席'],
+    ['modernRedGoldStudio', '東方紅金攝影棚', '現代建築面與精品主視覺'],
+    ['roseGarden', '玫瑰花海庭園', '玫瑰、綠意與浪漫景深'],
+    ['candlelitDining', '燭光晚宴廳', '花藝餐桌與溫暖燭光'],
+    ['cityValentineNight', '都會情人夜景', '玫瑰色城市燈光與濕地反射'],
+    ['luxuryHotelSuite', '奢華飯店套房', '大理石、窗簾與城市窗景'],
+    ['dessertCafe', '法式甜點午後', '明亮咖啡館、瓷器與糕點'],
+    ['starryRooftop', '星空露台', '低矮欄杆、星空與城市遠景'],
+    ['jewelryGallery', '高級珠寶展廳', '深色石材、展櫃與精品聚光'],
+    ['dragonBoatRiverside', '龍舟水岸', '石岸、龍舟、旗幟與夏日水光'],
+    ['jiangnanWaterTown', '江南水鄉', '白牆黑瓦、石橋與平靜河面'],
+    ['lotusPondSummer', '荷塘夏韻', '亭台、荷葉與柔和水面'],
+    ['scholarTeaCourtyard', '古典端午茶庭', '木桌、茶席、竹影與窗光'],
+    ['zongziCourtyard', '粽香庭院', '竹桌、粽子與午後院落'],
+    ['mountainGarden', '山水漢風遊園', '山徑、遠山、竹林與薄霧'],
+    ['modernSummerStudio', '新中式端午棚拍', '玉色、河灰與現代攝影棚'],
+    ['spiderLilyGarden', '彼岸花月夜花園', '白色花朵、月光、低霧與濕路'],
+    ['moonlitRiverRealm', '東方月下河境', '河燈、古橋、月色與淡霧'],
+    ['zhongyuanNightFeast', '華麗中元夜宴', '深木、燈籠、花木與安靜宴席'],
+    ['moonOsmanthusGarden', '桂花月夜庭園', '桂花樹、亭台與月下石庭'],
+    ['moonPalaceGarden', '月宮幻想花園', '銀白建築、淡雲與月光'],
+    ['moonViewingCourtyard', '中秋賞月庭院', '月餅、茶席、花燈與桂花'],
+    ['midAutumnLanternStreet', '中秋月下燈街', '花燈、傳統街屋與乾淨步道'],
+    ['familyFeastCourtyard', '花好月圓家宴', '庭院圓桌、燈籠與團圓陳設'],
+    ['cityMoonView', '都會賞月露台', '城市天際線、玻璃窗與明月'],
+    ['pumpkinGarden', '南瓜奇幻庭院', '南瓜、秋葉與暖色微光'],
+    ['gothicCastleHall', '哥德古堡大廳', '石拱、樓梯與受控燭光'],
+    ['autumnForest', '魔法森林小徑', '秋林、暖光與薄霧'],
+    ['darkRoseManor', '暗黑玫瑰莊園', '深色玫瑰、石牆與月色'],
+    ['masqueradeBallroom', '奢華假面舞會', '水晶吊燈、黑絨與拋光地面'],
+    ['halloweenCityAlley', '都會萬聖街巷', '南瓜、城市燈光與現代時裝空間'],
+    ['snowyStreet', '浪漫雪夜街道', '歐洲街景、暖窗與細雪'],
+    ['fireplaceRoom', '暖冬壁爐房', '石材壁爐、軟椅與冬日室內'],
+    ['christmasTreeHall', '豪華聖誕樹大廳', '大型樹飾、暖燈與高級地面'],
+    ['europeanMarket', '歐洲聖誕市集', '木攤、常青花環與雪景'],
+    ['cityChristmasLights', '都會聖誕燈海', '城市街道、反光路面與燈串'],
+    ['winterDinner', '奢華聖誕晚宴', '餐桌、燭光、水晶與常青裝飾'],
+    ['iceFairytale', '冰雪童話花園', '冰藍、晶體、雪霧與月色'],
+    ['skylineRooftop', '午夜煙火屋頂', '高樓屋頂、城市天際線與煙火'],
+    ['skyscraperCountdown', '摩天樓倒數廳', '玻璃帷幕、城市燈光與開闊空間'],
+    ['countdownHotelHall', '華麗飯店倒數', '水晶吊燈、香檳與正式大廳'],
+    ['partyTerrace', '頂樓香檳夜', '露台、城市夜景與香檳桌'],
+    ['newYearHotelBallroom', '跨年飯店舞會', '舞池、吊燈與午夜裝飾'],
+    ['dawnMountain', '新年第一道曙光', '山頂、薄霧與桃金色地平線'],
+    ['futureCityRooftop', '未來感城市屋頂', '發光建築線、反光材質與乾淨天際線']
+  ],
+  camera: [
+    ['fireworksWide', '煙火寬幅主視覺', '鏡頭拉遠，保留人物、天空與煙火比例'],
+    ['intimateEyeLevel', '親密平視肖像', '人物親近但不使用近距離變形'],
+    ['fashionThreeQuarter', '時裝三分之四視角', '服裝結構、身形與臉部都有立體感'],
+    ['beautyEditorial', '精品美感肖像', '臉部與配件清楚，保持自然透視']
+  ]
 };
+
+const FESTIVAL_TEMPLATES = [];
+function addFestivalGroup(group, groupLabel, items){
+  items.forEach(item => FESTIVAL_TEMPLATES.push(Object.assign({ group, groupLabel, theme: group }, item)));
+}
+
+addFestivalGroup('newYear', '新春賀年', [
+  { key: 'newYearPalaceFeast', label: '宮燈華宴', description: '紅金宮殿、團圓宴席與端莊華服', style: 'lanternEditorial', composition: 'ceremonialTableau', garment: 'redGoldHanfuGown', materials: ['redGoldBrocade', 'silkRibbon'], elements: ['redSpringLanterns', 'familyFeastTable', 'festivalBanners', 'warmLanterns'], layer: 'layer0', chest: 'squareNeckBodice', waist: 'layeredSash', shoulder: 'softBellSleeves', body: 'original', pose: 'feastToast', lighting: 'redGoldCeremonial', color: 'redGoldSpring', background: 'newYearPalaceHall', camera: 'distantFestivalHero', ratio: '9:16', intensity: 'premium', concept: 'A grand red-lacquer palace feast on Lunar New Year eve: the adult woman is the clear central figure in layered red-and-gold ceremonial clothing, surrounded by lanterns, porcelain tableware and restrained spring banners.' },
+  { key: 'newYearTempleFair', label: '盛世廟會', description: '紅燈籠、廟會與瑞獅迎春', style: 'poeticFolk', composition: 'marketWalk', garment: 'crimsonSilkCheongsam', materials: ['redGoldBrocade', 'floralEmbroidery'], elements: ['redSpringLanterns', 'lionDance', 'festivalBanners', 'friendlyLanternFaces'], layer: 'layer3', chest: 'crossWrapBodice', waist: 'ribbonWaist', shoulder: 'ribbonShoulder', body: 'original', pose: 'lionDanceWelcome', lighting: 'springLanternWarm', color: 'cinnabarChampagne', background: 'festivalTempleSquare', camera: 'eyeLevelFestival', ratio: '4:5', intensity: 'balanced', concept: 'A lively but polished Lunar New Year temple fair, with a distant lion dance passing behind her, red lanterns and fabric banners creating movement while her face and modern Chinese silhouette remain the visual anchor.' },
+  { key: 'newYearFlowerMarket', label: '新春花市', description: '春日花攤、絲帶與輕盈人物動勢', style: 'romanticEditorial', composition: 'marketWalk', garment: 'pastelFlowerMarketDress', materials: ['floralEmbroidery', 'silkRibbon'], elements: ['flowerMarketStalls', 'redSpringLanterns', 'festivalBanners', 'softMist'], layer: 'layer0', chest: 'none', waist: 'ribbonWaist', shoulder: 'softBellSleeves', body: 'slight_waist', pose: 'flowerMarketReach', lighting: 'springLanternWarm', color: 'peachJadeSpring', background: 'springFlowerMarket', camera: 'fashionThreeQuarter', ratio: '9:16', intensity: 'premium', concept: 'A fresh spring flower-market portrait: she pauses to choose a blossom as silk ribbons and pale petals move gently, balancing youthful energy with a premium editorial finish.' },
+  { key: 'newYearFireworksEve', label: '煙火除夕夜', description: '屋頂煙火、城市輪廓與紅金時刻', style: 'cinematicCelebration', composition: 'fireworksSkyline', garment: 'modernFestivalCouture', materials: ['metallicCouture', 'crystalEmbellishment'], elements: ['fireworks', 'redSpringLanterns', 'cityBokeh', 'fullMoon'], layer: 'layer3', chest: 'squareNeckBodice', waist: 'layeredSash', shoulder: 'ribbonShoulder', body: 'fashion_tall', pose: 'fireworkLookBack', lighting: 'fireworksBacklight', color: 'midnightSilver', background: 'fireworkRooftop', camera: 'fireworksWide', ratio: '9:16', intensity: 'cinematic', concept: 'A cinematic New Year’s Eve rooftop portrait with the first fireworks opening over the city, a refined red-gold modern couture silhouette and one natural look back toward the sky.' },
+  { key: 'newYearLionDance', label: '瑞獅迎春', description: '人物、舞獅動勢與節慶街景', style: 'cinematicCelebration', composition: 'environmentalLantern', garment: 'redGoldHanfuGown', materials: ['redGoldBrocade', 'wovenBrocade'], elements: ['lionDance', 'redSpringLanterns', 'festivalBanners', 'flowerMarketStalls'], layer: 'layer6', chest: 'crossWrapBodice', waist: 'layeredSash', shoulder: 'softBellSleeves', body: 'original', pose: 'lionDanceWelcome', lighting: 'redGoldCeremonial', color: 'redGoldSpring', background: 'festivalTempleSquare', camera: 'distantFestivalHero', ratio: '4:5', intensity: 'premium', concept: 'A celebratory spring street scene where a colorful lion dance creates a soft background rhythm, while she turns with a lifted sleeve and the red-and-gold garment stays sharply presented.' },
+  { key: 'newYearLuxuryFeast', label: '豪門年夜宴', description: '高級室內、瓷器與中式晚宴質感', style: 'luxuryCampaign', composition: 'intimateTablePortrait', garment: 'crimsonSilkCheongsam', materials: ['silkSatin', 'crystalEmbellishment'], elements: ['familyFeastTable', 'redSpringLanterns', 'candlelight', 'crystalChandelier'], layer: 'layer3', chest: 'squareNeckBodice', waist: 'ribbonWaist', shoulder: 'ribbonShoulder', body: 'curvy_waist', pose: 'feastToast', lighting: 'hotelAmber', color: 'cinnabarChampagne', background: 'newYearFeastHall', camera: 'intimateEyeLevel', ratio: '4:5', intensity: 'premium', concept: 'A luxurious New Year reunion dinner in a red-lacquer dining hall, with porcelain, crystal and a single celebratory toast framing a refined modern Chinese evening look.' },
+  { key: 'newYearRedGoldFashion', label: '東方紅金時尚', description: '紅金攝影棚與現代節慶高訂', style: 'urbanFashion', composition: 'cityPortrait', garment: 'modernFestivalCouture', materials: ['metallicCouture', 'redGoldBrocade'], elements: ['redSpringLanterns', 'cityBokeh', 'festivalBanners', 'jewelrySparkle'], layer: 'layer9', chest: 'crossWrapBodice', waist: 'layeredSash', shoulder: 'ribbonShoulder', body: 'fashion_tall', pose: 'confidentEditorial', lighting: 'premiumStudio', color: 'redGoldSpring', background: 'modernRedGoldStudio', camera: 'fashionThreeQuarter', ratio: '2:3', intensity: 'premium', concept: 'An editorial red-and-gold fashion campaign that translates Lunar New Year symbols into a clean contemporary couture portrait with controlled luxury rather than costume clutter.' }
+]);
+
+addFestivalGroup('valentine', '情人節', [
+  { key: 'valentineRoseGarden', label: '浪漫玫瑰花海', description: '玫瑰、花瓣與柔和戀愛感', style: 'romanticEditorial', composition: 'gardenPoetic', garment: 'roseRomanticGown', materials: ['roseSatin', 'floralEmbroidery'], elements: ['rosePetals', 'candlelight', 'softMist', 'cityBokeh'], layer: 'layer0', chest: 'squareNeckBodice', waist: 'ribbonWaist', shoulder: 'softBellSleeves', body: 'original', pose: 'roseHold', lighting: 'roseCandlelight', color: 'roseChampagne', background: 'roseGarden', camera: 'beautyEditorial', ratio: '4:5', intensity: 'premium', concept: 'A romantic rose-garden portrait built around one rose, soft petals and a gentle gaze, with the adult woman styled as the emotional center of a luxury fragrance campaign.' },
+  { key: 'valentineCandleDinner', label: '燭光晚宴', description: '餐桌燭光與成熟浪漫晚宴', style: 'luxuryCampaign', composition: 'intimateTablePortrait', garment: 'velvetEveningDress', materials: ['velvetTexture', 'crystalEmbellishment'], elements: ['candlelight', 'rosePetals', 'familyFeastTable', 'crystalChandelier'], layer: 'layer3', chest: 'crossWrapBodice', waist: 'ribbonWaist', shoulder: 'ribbonShoulder', body: 'curvy_waist', pose: 'candleTable', lighting: 'roseCandlelight', color: 'burgundyChampagne', background: 'candlelitDining', camera: 'intimateEyeLevel', ratio: '4:5', intensity: 'premium', concept: 'A refined Valentine candlelit dinner with deep wine velvet, crystal tableware and a quiet intimate gesture, elegant rather than theatrical.' },
+  { key: 'valentineCityNight', label: '都會夜色情人', description: '城市散景、夜色與時裝行走', style: 'urbanFashion', composition: 'cityPortrait', garment: 'modernFestivalCouture', materials: ['metallicCouture', 'roseSatin'], elements: ['cityBokeh', 'rosePetals', 'urbanLights', 'candlelight'], layer: 'layer0', chest: 'squareNeckBodice', waist: 'ribbonWaist', shoulder: 'ribbonShoulder', body: 'fashion_tall', pose: 'cityWalkRomance', lighting: 'cityNightBokeh', color: 'cityRoseNight', background: 'cityValentineNight', camera: 'fashionThreeQuarter', ratio: '9:16', intensity: 'cinematic', concept: 'A contemporary city Valentine story captured mid-walk: rose accents appear only in the distant bokeh and styling, leaving a clean fashion silhouette and confident romantic presence.' },
+  { key: 'valentineHotelDate', label: '奢華飯店約會', description: '套房窗景、絲緞與精品約會', style: 'luxuryCampaign', composition: 'hotelEditorial', garment: 'champagneHotelGown', materials: ['silkSatin', 'crystalEmbellishment'], elements: ['rosePetals', 'candlelight', 'cityBokeh', 'jewelrySparkle'], layer: 'layer3', chest: 'squareNeckBodice', waist: 'ribbonWaist', shoulder: 'ribbonShoulder', body: 'slight_waist', pose: 'hotelArrival', lighting: 'hotelAmber', color: 'roseChampagne', background: 'luxuryHotelSuite', camera: 'distantFestivalHero', ratio: '2:3', intensity: 'premium', concept: 'A luxury hotel date rendered as a premium fashion editorial, with champagne silk, marble, soft curtains and a poised arrival moment instead of a generic bedroom scene.' },
+  { key: 'valentineFrenchDessert', label: '法式甜點午後', description: '甜點桌、午後窗光與輕盈互動', style: 'romanticEditorial', composition: 'intimateTablePortrait', garment: 'pastelFlowerMarketDress', materials: ['roseSatin', 'softOrganza'], elements: ['dessertTable', 'rosePetals', 'flowerMarketStalls', 'teaSet'], layer: 'layer0', chest: 'none', waist: 'ribbonWaist', shoulder: 'softBellSleeves', body: 'original', pose: 'dessertTaste', lighting: 'softCafeDaylight', color: 'peachJadeSpring', background: 'dessertCafe', camera: 'eyeLevelFestival', ratio: '4:5', intensity: 'balanced', concept: 'A bright French dessert afternoon with pastries, porcelain and soft florals, capturing an unforced playful moment while keeping the image polished and adult.' },
+  { key: 'valentineStarryTerrace', label: '星空露台約會', description: '露台、星空與安靜浪漫氛圍', style: 'etherealNight', composition: 'gardenPoetic', garment: 'roseRomanticGown', materials: ['softOrganza', 'crystalEmbellishment'], elements: ['starrySky', 'rosePetals', 'cityBokeh', 'fullMoon'], layer: 'layer3', chest: 'squareNeckBodice', waist: 'ribbonWaist', shoulder: 'softBellSleeves', body: 'original', pose: 'balconyStarGaze', lighting: 'starryBacklight', color: 'midnightRose', background: 'starryRooftop', camera: 'distantFestivalHero', ratio: '9:16', intensity: 'cinematic', concept: 'A quiet rooftop date under a sparse star field, where the rose gown, railing and distant city become a restrained romantic story with clear facial recognition.' },
+  { key: 'valentineJewelryLove', label: '高級珠寶情人', description: '珠寶展廳、聚光與精品美感', style: 'luxuryCampaign', composition: 'threeQuarterLantern', garment: 'modernFestivalCouture', materials: ['crystalEmbellishment', 'metallicCouture'], elements: ['jewelrySparkle', 'rosePetals', 'cityBokeh', 'crystalChandelier'], layer: 'layer0', chest: 'squareNeckBodice', waist: 'ribbonWaist', shoulder: 'ribbonShoulder', body: 'slight_waist', pose: 'jewelryTouch', lighting: 'jewelrySpotlight', color: 'blackRubyGold', background: 'jewelryGallery', camera: 'beautyEditorial', ratio: '4:5', intensity: 'premium', concept: 'A jewelry campaign for Valentine’s Day: she gently touches one necklace or earring while controlled gemstone sparkle and a single rose accent support, never replace, her identity.' }
+]);
+
+addFestivalGroup('dragonBoat', '端午節', [
+  { key: 'dragonBoatWaterfront', label: '龍舟水岸', description: '龍舟、河岸與夏日水光', style: 'poeticFolk', composition: 'waterfrontAction', garment: 'navyRiverSilkDress', materials: ['freshLotusSilk', 'floralEmbroidery'], elements: ['dragonBoats', 'riverReflections', 'festivalBanners', 'bambooWaterTown'], layer: 'layer0', chest: 'squareNeckBodice', waist: 'layeredSash', shoulder: 'softBellSleeves', body: 'original', pose: 'riverPaddle', lighting: 'riverSummerDaylight', color: 'inkJade', background: 'dragonBoatRiverside', camera: 'distantFestivalHero', ratio: '9:16', intensity: 'balanced', concept: 'A summer Dragon Boat Festival riverside portrait with distant boats, reflected sunlight and a deep navy silk silhouette, energetic but culturally grounded.' },
+  { key: 'dragonBoatJiangnan', label: '江南水鄉', description: '白牆黑瓦、石橋與水鄉行走', style: 'poeticFolk', composition: 'environmentalLantern', garment: 'paleRuqunLayered', materials: ['lightGauze', 'floralEmbroidery'], elements: ['bambooWaterTown', 'riverReflections', 'lotusPond', 'softMist'], layer: 'layer3', chest: 'crossWrapBodice', waist: 'layeredSash', shoulder: 'softBellSleeves', body: 'original', pose: 'waterTownWalk', lighting: 'softSummerDiffuse', color: 'inkJade', background: 'jiangnanWaterTown', camera: 'distantFestivalHero', ratio: '4:5', intensity: 'premium', concept: 'A Jiangnan water-town walking portrait where white walls, dark tiles and canal reflections give the pale layered outfit a refined summer travel-story setting.' },
+  { key: 'dragonBoatLotusSummer', label: '荷塘夏韻', description: '荷花、亭台與清透夏日服裝', style: 'etherealNight', composition: 'gardenPoetic', garment: 'lotusSummerHanfu', materials: ['freshLotusSilk', 'softOrganza'], elements: ['lotusPond', 'bambooWaterTown', 'softMist', 'riverReflections'], layer: 'layer0', chest: 'none', waist: 'ribbonWaist', shoulder: 'softBellSleeves', body: 'slight_waist', pose: 'lotusTouch', lighting: 'lotusGoldenHour', color: 'lotusPeach', background: 'lotusPondSummer', camera: 'beautyEditorial', ratio: '4:5', intensity: 'premium', concept: 'A lotus-pond summer portrait with breathable silk, a gentle touch toward a blossom and a warm late-afternoon atmosphere, light and elegant rather than ornate.' },
+  { key: 'dragonBoatTeaGathering', label: '古典端午雅集', description: '茶席、竹影與文人氣質', style: 'poeticFolk', composition: 'intimateTablePortrait', garment: 'paleRuqunLayered', materials: ['wovenBrocade', 'freshLotusSilk'], elements: ['teaSet', 'bambooWaterTown', 'zongziTable', 'lotusPond'], layer: 'layer3', chest: 'squareNeckBodice', waist: 'layeredSash', shoulder: 'ribbonShoulder', body: 'original', pose: 'teaGathering', lighting: 'scholarWindowLight', color: 'lotusGreen', background: 'scholarTeaCourtyard', camera: 'intimateEyeLevel', ratio: '2:3', intensity: 'premium', concept: 'A classical Dragon Boat Festival tea gathering with a scholar’s table, bamboo shade and seasonal tea objects, composed as a quiet cultural portrait.' },
+  { key: 'dragonBoatZongziCourtyard', label: '粽香庭院', description: '竹桌、粽子與溫暖生活感', style: 'romanticEditorial', composition: 'intimateTablePortrait', garment: 'lotusSummerHanfu', materials: ['freshLotusSilk', 'floralEmbroidery'], elements: ['zongziTable', 'teaSet', 'bambooWaterTown', 'familyFeastTable'], layer: 'layer0', chest: 'none', waist: 'ribbonWaist', shoulder: 'softBellSleeves', body: 'original', pose: 'zongziWrap', lighting: 'softSummerDiffuse', color: 'lotusGreen', background: 'zongziCourtyard', camera: 'eyeLevelFestival', ratio: '4:5', intensity: 'balanced', concept: 'A warm courtyard lifestyle portrait centered on the hands tying bamboo leaves, seasonal food and soft summer shade, with the person remaining recognizable and naturally engaged.' },
+  { key: 'dragonBoatMountainGarden', label: '山水漢風遊園', description: '山徑、遠山、竹林與薄霧', style: 'cinematicCelebration', composition: 'environmentalLantern', garment: 'navyRiverSilkDress', materials: ['softOrganza', 'floralEmbroidery'], elements: ['bambooWaterTown', 'riverReflections', 'softMist', 'lotusPond'], layer: 'layer6', chest: 'crossWrapBodice', waist: 'layeredSash', shoulder: 'softBellSleeves', body: 'fashion_tall', pose: 'waterTownWalk', lighting: 'mountainMistLight', color: 'inkJade', background: 'mountainGarden', camera: 'distantFestivalHero', ratio: '9:16', intensity: 'cinematic', concept: 'A spacious mountain-and-water garden walk inspired by a refined Han-style travel portrait, with misty hills and bamboo giving the flowing navy garment room to move.' },
+  { key: 'dragonBoatModernCouture', label: '新中式端午時尚', description: '玉色、河灰與現代端午高訂', style: 'urbanFashion', composition: 'cityPortrait', garment: 'modernFestivalCouture', materials: ['metallicCouture', 'wovenBrocade'], elements: ['dragonBoats', 'riverReflections', 'cityBokeh', 'festivalBanners'], layer: 'layer9', chest: 'squareNeckBodice', waist: 'layeredSash', shoulder: 'ribbonShoulder', body: 'fashion_tall', pose: 'confidentEditorial', lighting: 'premiumStudio', color: 'inkJade', background: 'modernSummerStudio', camera: 'fashionThreeQuarter', ratio: '2:3', intensity: 'premium', concept: 'A contemporary Dragon Boat fashion campaign translating river, jade and woven heritage references into a clean high-end studio portrait.' }
+]);
+
+addFestivalGroup('zhongyuan', '中元節', [
+  { key: 'zhongyuanMoonRiver', label: '月下河燈', description: '河燈、月色、白花與濕地反光', style: 'poeticFolk', composition: 'fullBodyLantern', garment: 'ivoryGauzeFestivalDress', materials: ['lightGauze', 'floralEmbroidery'], elements: ['warmLanterns', 'fullMoon', 'whiteSpiderLilies', 'wetStoneReflection'], layer: 'layer0', chest: 'squareNeckBodice', waist: 'ribbonWaist', shoulder: 'softBellSleeves', body: 'original', pose: 'lanternLiftHem', lighting: 'moonLanternContrast', color: 'ivoryMidnightGold', background: 'riverLanternBlessing', camera: 'fullBodyEditorial', ratio: '9:16', intensity: 'premium', concept: 'A respectful Zhongyuan moonlit river scene: an adult woman in an ivory layered festival dress holds one glowing lantern and lightly lifts the hem while white flowers and wet reflections deepen the night.' },
+  { key: 'zhongyuanOldStreet', label: '古街燈影', description: '古街、手繪燈籠與自然回眸', style: 'lanternEditorial', composition: 'environmentalLantern', garment: 'paleRuqunLayered', materials: ['lightGauze', 'silkRibbon'], elements: ['warmLanterns', 'friendlyLanternFaces', 'wetStoneReflection', 'festivalBanners'], layer: 'layer3', chest: 'crossWrapBodice', waist: 'layeredSash', shoulder: 'ribbonShoulder', body: 'original', pose: 'lanternTurn', lighting: 'softLanternGlow', color: 'moonJadeSilver', background: 'oldTownLanternAlley', camera: 'distantFestivalHero', ratio: '4:5', intensity: 'balanced', concept: 'A gentle old-town lantern walk with a few friendly hand-drawn lantern faces as decorative folk details, never literal creatures or horror imagery.' },
+  { key: 'zhongyuanBlessingNight', label: '中元祈福夜', description: '廟埕、舉燈與安靜祈福', style: 'poeticFolk', composition: 'ceremonialTableau', garment: 'paleRuqunLayered', materials: ['floralEmbroidery', 'pearlBellTrim'], elements: ['warmLanterns', 'fullMoon', 'whiteSpiderLilies', 'festivalBanners'], layer: 'layer3', chest: 'squareNeckBodice', waist: 'layeredSash', shoulder: 'softBellSleeves', body: 'original', pose: 'lanternRaise', lighting: 'templeWarmNight', color: 'whiteFlowerBlue', background: 'quietTempleCourtyard', camera: 'eyeLevelFestival', ratio: '2:3', intensity: 'premium', concept: 'A quiet blessing-night portrait in a temple courtyard, built from warm lanterns, pale flowers and a dignified raised-lantern gesture rather than fear or spectacle.' },
+  { key: 'zhongyuanBlueMoon', label: '幽藍月夜', description: '藍色月光、薄霧與全身寫真', style: 'etherealNight', composition: 'fullBodyLantern', garment: 'ivoryGauzeFestivalDress', materials: ['softOrganza', 'pearlBellTrim'], elements: ['fullMoon', 'softMist', 'whiteSpiderLilies', 'warmLanterns'], layer: 'layer0', chest: 'none', waist: 'ribbonWaist', shoulder: 'softBellSleeves', body: 'fashion_tall', pose: 'moonGaze', lighting: 'mistyMoonBacklight', color: 'moonJadeSilver', background: 'moonlitTempleLanternStreet', camera: 'fullBodyEditorial', ratio: '9:16', intensity: 'cinematic', concept: 'A blue moonlit full-body portrait with airy gauze, restrained mist and white flowers, creating poetic mystery while preserving a grounded human presence.' },
+  { key: 'zhongyuanSpiderLilyRealm', label: '彼岸花靈境', description: '白色彼岸花、月夜花園與輕幻想', style: 'etherealNight', composition: 'gardenPoetic', garment: 'ivoryGauzeFestivalDress', materials: ['softOrganza', 'floralEmbroidery'], elements: ['whiteSpiderLilies', 'fullMoon', 'softMist', 'wetStoneReflection'], layer: 'layer3', chest: 'squareNeckBodice', waist: 'ribbonWaist', shoulder: 'ribbonShoulder', body: 'original', pose: 'moonGaze', lighting: 'moonGardenSilver', color: 'whiteFlowerBlue', background: 'spiderLilyGarden', camera: 'distantFestivalHero', ratio: '2:3', intensity: 'cinematic', concept: 'A restrained poetic flower realm built from white spider lilies, moonlight and a wet garden path, with delicate atmosphere but no supernatural entity or horror styling.' },
+  { key: 'zhongyuanEasternSpirit', label: '東方靈界幻想', description: '河境、浮燈與東方輕幻想', style: 'playfulFantasy', composition: 'environmentalLantern', garment: 'paleRuqunLayered', materials: ['lightGauze', 'silkRibbon'], elements: ['warmLanterns', 'fullMoon', 'softMist', 'riverReflections'], layer: 'layer6', chest: 'crossWrapBodice', waist: 'layeredSash', shoulder: 'softBellSleeves', body: 'original', pose: 'lanternTurn', lighting: 'moonLanternContrast', color: 'moonSilverPearl', background: 'moonlitRiverRealm', camera: 'distantFestivalHero', ratio: '9:16', intensity: 'cinematic', concept: 'An elegant Eastern moonlit river fantasy where floating lights and mist suggest an unseen story, while the image remains a premium human portrait with natural anatomy.' },
+  { key: 'zhongyuanNightFeast', label: '華麗中元夜宴', description: '深木、燈籠、花木與夜間宴席', style: 'luxuryCampaign', composition: 'ceremonialTableau', garment: 'cinnabarLanternCouture', materials: ['redGoldBrocade', 'pearlBellTrim'], elements: ['warmLanterns', 'familyFeastTable', 'whiteSpiderLilies', 'candlelight'], layer: 'layer9', chest: 'squareNeckBodice', waist: 'layeredSash', shoulder: 'ribbonShoulder', body: 'curvy_waist', pose: 'feastToast', lighting: 'templeWarmNight', color: 'cinnabarLanternGold', background: 'zhongyuanNightFeast', camera: 'distantFestivalHero', ratio: '4:5', intensity: 'premium', concept: 'A luxurious but respectful Zhongyuan night feast with deep wood, ivory flowers and warm lanterns, composed as an upscale cultural fashion campaign.' }
+]);
+
+addFestivalGroup('midAutumn', '中秋節', [
+  { key: 'midAutumnOsmanthus', label: '桂花月夜', description: '桂花、月光與柔和古典庭園', style: 'poeticFolk', composition: 'gardenPoetic', garment: 'paleRuqunLayered', materials: ['floralEmbroidery', 'silkRibbon'], elements: ['osmanthusFlowers', 'fullMoon', 'moonLanterns', 'softMist'], layer: 'layer0', chest: 'none', waist: 'ribbonWaist', shoulder: 'softBellSleeves', body: 'original', pose: 'moonGaze', lighting: 'moonGardenSilver', color: 'moonOsmanthus', background: 'moonOsmanthusGarden', camera: 'fullBodyEditorial', ratio: '9:16', intensity: 'premium', concept: 'A quiet Mid-Autumn portrait beneath an osmanthus tree, with moonlight, a small lantern and pale layered clothing creating a literary seasonal atmosphere.' },
+  { key: 'midAutumnMoonPalace', label: '月宮仙境', description: '銀白月宮、雲霧與優雅幻想', style: 'etherealNight', composition: 'environmentalLantern', garment: 'celestialMoonGown', materials: ['softOrganza', 'crystalEmbellishment'], elements: ['fullMoon', 'moonPalaceArchitecture', 'softMist', 'iceCrystals'], layer: 'layer3', chest: 'squareNeckBodice', waist: 'ribbonWaist', shoulder: 'softBellSleeves', body: 'fashion_tall', pose: 'moonPalaceTurn', lighting: 'moonGardenSilver', color: 'moonSilverPearl', background: 'moonPalaceGarden', camera: 'distantFestivalHero', ratio: '2:3', intensity: 'cinematic', concept: 'A refined lunar garden portrait using pale stone, soft clouds and silver fabric as a Mid-Autumn fantasy route, with the person remaining physically grounded and recognizable.' },
+  { key: 'midAutumnCourtyard', label: '中秋庭院', description: '月餅、茶席、花燈與團圓庭院', style: 'romanticEditorial', composition: 'intimateTablePortrait', garment: 'paleRuqunLayered', materials: ['silkSatin', 'floralEmbroidery'], elements: ['moonCakes', 'teaSet', 'familyFeastTable', 'moonLanterns'], layer: 'layer0', chest: 'none', waist: 'ribbonWaist', shoulder: 'ribbonShoulder', body: 'original', pose: 'moonCakeServe', lighting: 'softLanternGlow', color: 'moonOsmanthus', background: 'moonViewingCourtyard', camera: 'eyeLevelFestival', ratio: '4:5', intensity: 'balanced', concept: 'A warm reunion courtyard portrait focused on presenting mooncakes beside tea, with lanterns and osmanthus giving the scene a lived-in Mid-Autumn story.' },
+  { key: 'midAutumnLanternFair', label: '月下燈會', description: '花燈、街道與中秋時裝動勢', style: 'lanternEditorial', composition: 'marketWalk', garment: 'modernFestivalCouture', materials: ['silkRibbon', 'softOrganza'], elements: ['moonLanterns', 'warmLanterns', 'festivalBanners', 'fullMoon'], layer: 'layer3', chest: 'crossWrapBodice', waist: 'layeredSash', shoulder: 'ribbonShoulder', body: 'fashion_tall', pose: 'lanternTurn', lighting: 'softLanternGlow', color: 'cinnabarLanternGold', background: 'midAutumnLanternStreet', camera: 'fashionThreeQuarter', ratio: '9:16', intensity: 'premium', concept: 'A polished Mid-Autumn lantern-fair fashion story, capturing one natural turn through the lights while the modern festive garment stays sharply readable.' },
+  { key: 'midAutumnReunionFeast', label: '花好月圓家宴', description: '團圓家宴、桂花與溫暖月色', style: 'luxuryCampaign', composition: 'ceremonialTableau', garment: 'crimsonSilkCheongsam', materials: ['silkSatin', 'floralEmbroidery'], elements: ['familyFeastTable', 'moonCakes', 'osmanthusFlowers', 'moonLanterns'], layer: 'layer3', chest: 'squareNeckBodice', waist: 'ribbonWaist', shoulder: 'ribbonShoulder', body: 'slight_waist', pose: 'feastToast', lighting: 'hotelAmber', color: 'cinnabarChampagne', background: 'familyFeastCourtyard', camera: 'distantFestivalHero', ratio: '4:5', intensity: 'premium', concept: 'A premium reunion feast beneath the moon, using a crimson silk silhouette, porcelain tableware and osmanthus to express abundance without visual clutter.' },
+  { key: 'midAutumnChangE', label: '嫦娥奔月幻想', description: '月宮、飄帶與優雅飛行感', style: 'playfulFantasy', composition: 'fullBodyLantern', garment: 'celestialMoonGown', materials: ['softOrganza', 'silkRibbon'], elements: ['fullMoon', 'moonPalaceArchitecture', 'softMist', 'moonLanterns'], layer: 'layer6', chest: 'squareNeckBodice', waist: 'ribbonWaist', shoulder: 'softBellSleeves', body: 'fashion_tall', pose: 'moonPalaceTurn', lighting: 'mistyMoonBacklight', color: 'moonSilverPearl', background: 'moonPalaceGarden', camera: 'distantFestivalHero', ratio: '9:16', intensity: 'cinematic', concept: 'A graceful Chang’e-inspired lunar fantasy expressed through flowing ribbons, a pale moon garden and controlled floating fabric, without wings, magic effects or distorted anatomy.' },
+  { key: 'midAutumnCityMoon', label: '都會賞月時尚', description: '城市露台、明月與現代時裝', style: 'urbanFashion', composition: 'cityPortrait', garment: 'silverPartyCouture', materials: ['metallicCouture', 'crystalEmbellishment'], elements: ['fullMoon', 'cityBokeh', 'moonLanterns', 'lightTrails'], layer: 'layer0', chest: 'none', waist: 'ribbonWaist', shoulder: 'ribbonShoulder', body: 'fashion_tall', pose: 'skyGaze', lighting: 'cityNightBokeh', color: 'cityMoonSilver', background: 'cityMoonView', camera: 'fashionThreeQuarter', ratio: '4:5', intensity: 'premium', concept: 'A contemporary Mid-Autumn city portrait where a silver fashion silhouette meets one bright moon, glass reflections and a quiet rooftop atmosphere.' }
+]);
+
+addFestivalGroup('halloween', '萬聖節', [
+  { key: 'halloweenWitch', label: '華麗魔女', description: '南瓜庭院、黑色高訂與戲劇光影', style: 'playfulFantasy', composition: 'fullBodyLantern', garment: 'blackGothicCouture', materials: ['velvetTexture', 'laceTrim'], elements: ['pumpkins', 'candlelight', 'autumnLeaves', 'gothicArchitecture'], layer: 'layer3', chest: 'crossWrapBodice', waist: 'ribbonWaist', shoulder: 'softBellSleeves', body: 'original', pose: 'confidentEditorial', lighting: 'halloweenCandle', color: 'blackRuby', background: 'pumpkinGarden', camera: 'fullBodyEditorial', ratio: '2:3', intensity: 'premium', concept: 'An elegant Halloween witch fashion portrait in a polished pumpkin garden, using velvet, lace and candlelight for theatricality without gore or frightening creatures.' },
+  { key: 'halloweenGothicCastle', label: '哥德古堡', description: '石拱、樓梯、月光與哥德服裝', style: 'cinematicCelebration', composition: 'environmentalLantern', garment: 'blackGothicCouture', materials: ['velvetTexture', 'laceTrim'], elements: ['gothicArchitecture', 'candlelight', 'fullMoon', 'autumnLeaves'], layer: 'layer6', chest: 'squareNeckBodice', waist: 'layeredSash', shoulder: 'ribbonShoulder', body: 'fashion_tall', pose: 'castleStair', lighting: 'gothicMoonlight', color: 'blackRubyGold', background: 'gothicCastleHall', camera: 'distantFestivalHero', ratio: '9:16', intensity: 'cinematic', concept: 'A gothic castle fashion story built from stone arches, velvet and cool moonlight, with a composed stair pose and elegant theatrical atmosphere rather than horror.' },
+  { key: 'halloweenPumpkinNight', label: '南瓜奇幻夜', description: '南瓜、秋葉與俏皮節慶造型', style: 'playfulFantasy', composition: 'fullBodyLantern', garment: 'pumpkinWitchCouture', materials: ['softOrganza', 'velvetTexture'], elements: ['pumpkins', 'fullMoon', 'autumnLeaves', 'magicalForestLights'], layer: 'layer0', chest: 'none', waist: 'ribbonWaist', shoulder: 'softBellSleeves', body: 'original', pose: 'pumpkinHold', lighting: 'halloweenCandle', color: 'pumpkinPlum', background: 'pumpkinGarden', camera: 'fullBodyEditorial', ratio: '4:5', intensity: 'balanced', concept: 'A playful pumpkin-night portrait with one decorative pumpkin, layered autumn color and a light theatrical smile, keeping the outfit polished and the atmosphere charming.' },
+  { key: 'halloweenDarkRose', label: '暗黑玫瑰莊園', description: '暗色玫瑰、莊園月色與浪漫戲劇感', style: 'etherealNight', composition: 'gardenPoetic', garment: 'blackGothicCouture', materials: ['velvetTexture', 'floralEmbroidery'], elements: ['darkRose', 'fullMoon', 'candlelight', 'softMist'], layer: 'layer3', chest: 'squareNeckBodice', waist: 'ribbonWaist', shoulder: 'ribbonShoulder', body: 'slight_waist', pose: 'roseHold', lighting: 'gothicMoonlight', color: 'blackRuby', background: 'darkRoseManor', camera: 'beautyEditorial', ratio: '2:3', intensity: 'premium', concept: 'A dark rose manor portrait that uses deep flowers and controlled moonlight for romantic drama, with no blood, corpse, occult ritual or horror imagery.' },
+  { key: 'halloweenMagicForest', label: '魔法森林', description: '秋林微光、薄霧與輕幻想', style: 'playfulFantasy', composition: 'environmentalLantern', garment: 'pumpkinWitchCouture', materials: ['softOrganza', 'crystalEmbellishment'], elements: ['magicalForestLights', 'autumnLeaves', 'softMist', 'fullMoon'], layer: 'layer3', chest: 'crossWrapBodice', waist: 'layeredSash', shoulder: 'softBellSleeves', body: 'original', pose: 'forestReach', lighting: 'starryBacklight', color: 'forestPlum', background: 'autumnForest', camera: 'distantFestivalHero', ratio: '9:16', intensity: 'cinematic', concept: 'A whimsical autumn forest portrait with small warm lights between trees, delicate mist and a reaching gesture, keeping fantasy decorative and non-threatening.' },
+  { key: 'halloweenMasquerade', label: '奢華假面舞會', description: '水晶吊燈、面具與高級舞會', style: 'luxuryCampaign', composition: 'ceremonialTableau', garment: 'blackGothicCouture', materials: ['velvetTexture', 'crystalEmbellishment'], elements: ['masqueradeMasks', 'crystalChandelier', 'candlelight', 'darkRose'], layer: 'layer9', chest: 'squareNeckBodice', waist: 'layeredSash', shoulder: 'ribbonShoulder', body: 'fashion_tall', pose: 'masqueradeTurn', lighting: 'ballroomCandlelight', color: 'blackRubyGold', background: 'masqueradeBallroom', camera: 'fashionThreeQuarter', ratio: '4:5', intensity: 'premium', concept: 'A luxury Halloween masquerade ballroom portrait: one decorative mask is held beside the face, never replacing it, while velvet and crystal create an editorial evening finish.' },
+  { key: 'halloweenCityFashion', label: '都會萬聖時尚', description: '城市街巷、南瓜與現代節慶高訂', style: 'urbanFashion', composition: 'cityPortrait', garment: 'modernFestivalCouture', materials: ['metallicCouture', 'laceTrim'], elements: ['pumpkins', 'cityBokeh', 'urbanLights', 'festivalBanners'], layer: 'layer0', chest: 'none', waist: 'ribbonWaist', shoulder: 'ribbonShoulder', body: 'fashion_tall', pose: 'cityWalkRomance', lighting: 'cityNightBokeh', color: 'pumpkinPlum', background: 'halloweenCityAlley', camera: 'fashionThreeQuarter', ratio: '9:16', intensity: 'premium', concept: 'A contemporary Halloween street-fashion campaign with controlled pumpkin color, clean urban light and a modern silhouette instead of a generic costume party.' }
+]);
+
+addFestivalGroup('christmas', '聖誕節', [
+  { key: 'christmasSnowNight', label: '浪漫雪夜', description: '雪景、暖窗與白色冬日高訂', style: 'romanticEditorial', composition: 'fullBodyLantern', garment: 'winterWhiteCouture', materials: ['winterFurTrim', 'crystalEmbellishment'], elements: ['snowfall', 'christmasLights', 'snowWindow', 'fullMoon'], layer: 'layer0', chest: 'squareNeckBodice', waist: 'ribbonWaist', shoulder: 'softBellSleeves', body: 'original', pose: 'winterWalk', lighting: 'snowBlueWarm', color: 'winterIvoryRed', background: 'snowyStreet', camera: 'fullBodyEditorial', ratio: '9:16', intensity: 'premium', concept: 'A romantic Christmas snow-night portrait with a winter-white couture silhouette, warm windows and fine snowfall, composed as a polished seasonal fashion image.' },
+  { key: 'christmasFireplace', label: '暖冬壁爐', description: '壁爐、軟椅與溫暖居家節慶感', style: 'luxuryCampaign', composition: 'intimateTablePortrait', garment: 'redChristmasVelvet', materials: ['velvetTexture', 'winterFurTrim'], elements: ['fireplace', 'christmasTree', 'giftBoxes', 'candlelight'], layer: 'layer3', chest: 'squareNeckBodice', waist: 'ribbonWaist', shoulder: 'softBellSleeves', body: 'original', pose: 'fireplaceSit', lighting: 'hotelAmber', color: 'pineGold', background: 'fireplaceRoom', camera: 'intimateEyeLevel', ratio: '4:5', intensity: 'premium', concept: 'A warm winter lifestyle portrait beside a refined fireplace, with red velvet, wrapped gifts and a small tree creating intimate Christmas luxury.' },
+  { key: 'christmasTreeLuxury', label: '豪華聖誕樹', description: '大廳樹飾、晶石與精品禮服', style: 'luxuryCampaign', composition: 'ceremonialTableau', garment: 'champagneHotelGown', materials: ['silkSatin', 'crystalEmbellishment'], elements: ['christmasTree', 'christmasLights', 'crystalChandelier', 'giftBoxes'], layer: 'layer6', chest: 'crossWrapBodice', waist: 'layeredSash', shoulder: 'ribbonShoulder', body: 'fashion_tall', pose: 'treeOrnament', lighting: 'christmasTreeGlow', color: 'champagnePine', background: 'christmasTreeHall', camera: 'distantFestivalHero', ratio: '2:3', intensity: 'premium', concept: 'A grand Christmas-tree hall fashion campaign where she adjusts one ornament, surrounded by crystal, warm lights and champagne silk without excessive decoration.' },
+  { key: 'christmasEuropeanMarket', label: '歐洲聖誕市集', description: '木攤、常青花環與雪中行走', style: 'poeticFolk', composition: 'marketWalk', garment: 'redChristmasVelvet', materials: ['winterFurTrim', 'softOrganza'], elements: ['europeanMarketStalls', 'christmasLights', 'snowfall', 'giftBoxes'], layer: 'layer0', chest: 'none', waist: 'ribbonWaist', shoulder: 'softBellSleeves', body: 'original', pose: 'marketWalk', lighting: 'marketWarm', color: 'winterIvoryRed', background: 'europeanMarket', camera: 'eyeLevelFestival', ratio: '9:16', intensity: 'balanced', concept: 'A candid-but-polished Christmas market walk with evergreen stalls, fine snow and a red velvet silhouette, keeping background activity softly controlled.' },
+  { key: 'christmasCityLights', label: '都會聖誕燈海', description: '城市燈飾、反光路面與現代時裝', style: 'urbanFashion', composition: 'cityPortrait', garment: 'silverPartyCouture', materials: ['metallicCouture', 'crystalEmbellishment'], elements: ['christmasLights', 'cityBokeh', 'snowfall', 'urbanLights'], layer: 'layer3', chest: 'squareNeckBodice', waist: 'ribbonWaist', shoulder: 'ribbonShoulder', body: 'fashion_tall', pose: 'cityWalkRomance', lighting: 'cityNightBokeh', color: 'citySilverRed', background: 'cityChristmasLights', camera: 'fashionThreeQuarter', ratio: '4:5', intensity: 'premium', concept: 'A modern city Christmas campaign with silver couture, warm light strands and wet pavement reflections, using urban architecture as a clean fashion frame.' },
+  { key: 'christmasLuxuryDinner', label: '奢華聖誕晚宴', description: '餐桌、水晶、壁爐與正式晚宴', style: 'luxuryCampaign', composition: 'ceremonialTableau', garment: 'champagneHotelGown', materials: ['velvetTexture', 'crystalEmbellishment'], elements: ['familyFeastTable', 'christmasTree', 'candlelight', 'crystalChandelier'], layer: 'layer3', chest: 'squareNeckBodice', waist: 'ribbonWaist', shoulder: 'ribbonShoulder', body: 'curvy_waist', pose: 'feastToast', lighting: 'ballroomCandlelight', color: 'champagnePine', background: 'winterDinner', camera: 'distantFestivalHero', ratio: '4:5', intensity: 'premium', concept: 'A formal Christmas dinner campaign built around champagne silk, crystal, evergreen decoration and one restrained toast, with the room supporting rather than overwhelming the subject.' },
+  { key: 'christmasIceFairytale', label: '冰雪童話', description: '冰晶、雪霧與銀藍童話質感', style: 'etherealNight', composition: 'environmentalLantern', garment: 'winterWhiteCouture', materials: ['softOrganza', 'reflectiveTextile'], elements: ['iceCrystals', 'snowfall', 'fullMoon', 'softMist'], layer: 'layer6', chest: 'crossWrapBodice', waist: 'ribbonWaist', shoulder: 'softBellSleeves', body: 'fashion_tall', pose: 'winterWalk', lighting: 'iceBlueGlow', color: 'iceBlueSilver', background: 'iceFairytale', camera: 'distantFestivalHero', ratio: '9:16', intensity: 'cinematic', concept: 'An elegant ice-fairytale Christmas portrait using pale blue light, crystal highlights and soft snow haze, keeping the body grounded and the face naturally integrated.' }
+]);
+
+addFestivalGroup('newYearEve', '跨年／元旦', [
+  { key: 'newYearEveMidnightFireworks', label: '午夜煙火', description: '午夜屋頂、煙火與華麗倒數', style: 'cinematicCelebration', composition: 'fireworksSkyline', garment: 'silverPartyCouture', materials: ['metallicCouture', 'crystalEmbellishment'], elements: ['fireworks', 'cityFireworks', 'champagne', 'cityBokeh'], layer: 'layer3', chest: 'squareNeckBodice', waist: 'ribbonWaist', shoulder: 'ribbonShoulder', body: 'fashion_tall', pose: 'fireworkLookBack', lighting: 'rooftopFireworks', color: 'midnightSilver', background: 'skylineRooftop', camera: 'fireworksWide', ratio: '9:16', intensity: 'cinematic', concept: 'A midnight rooftop countdown captured as the first fireworks bloom, with silver couture, one champagne detail and a clean hopeful city horizon.' },
+  { key: 'newYearEveSkyscraper', label: '摩天樓倒數', description: '玻璃帷幕、城市光點與都會時裝', style: 'urbanFashion', composition: 'cityPortrait', garment: 'silverPartyCouture', materials: ['reflectiveTextile', 'metallicCouture'], elements: ['countdownLights', 'cityBokeh', 'cityFireworks', 'lightTrails'], layer: 'layer0', chest: 'none', waist: 'ribbonWaist', shoulder: 'ribbonShoulder', body: 'fashion_tall', pose: 'countdownLook', lighting: 'cityNightBokeh', color: 'citySilver', background: 'skyscraperCountdown', camera: 'fashionThreeQuarter', ratio: '4:5', intensity: 'premium', concept: 'A high-rise glass countdown portrait where abstract city lights imply the final seconds without readable numbers, keeping reflective couture and the face in control.' },
+  { key: 'newYearEveLuxuryParty', label: '奢華跨年派對', description: '水晶吊燈、香檳與正式派對', style: 'luxuryCampaign', composition: 'ceremonialTableau', garment: 'champagneHotelGown', materials: ['silkSatin', 'crystalEmbellishment'], elements: ['champagne', 'crystalChandelier', 'candlelight', 'cityBokeh'], layer: 'layer6', chest: 'crossWrapBodice', waist: 'ribbonWaist', shoulder: 'ribbonShoulder', body: 'curvy_waist', pose: 'champagneToast', lighting: 'ballroomCandlelight', color: 'champagneNight', background: 'countdownHotelHall', camera: 'distantFestivalHero', ratio: '4:5', intensity: 'premium', concept: 'A polished hotel countdown party centered on champagne silk, crystal and one elegant toast, with luxury atmosphere instead of noisy party clutter.' },
+  { key: 'newYearEveRooftopChampagne', label: '頂樓香檳夜', description: '露台、香檳桌與城市夜色', style: 'romanticEditorial', composition: 'hotelEditorial', garment: 'champagneHotelGown', materials: ['silkSatin', 'reflectiveTextile'], elements: ['champagne', 'cityBokeh', 'cityFireworks', 'countdownLights'], layer: 'layer3', chest: 'squareNeckBodice', waist: 'ribbonWaist', shoulder: 'softBellSleeves', body: 'slight_waist', pose: 'champagneToast', lighting: 'rooftopFireworks', color: 'champagneNight', background: 'partyTerrace', camera: 'intimateEyeLevel', ratio: '9:16', intensity: 'cinematic', concept: 'A rooftop champagne moment before midnight, balancing a warm glass, distant fireworks and a softly tailored gown in a romantic city atmosphere.' },
+  { key: 'newYearEveHotelBall', label: '華麗飯店舞會', description: '正式舞會、禮服與水晶吊燈', style: 'luxuryCampaign', composition: 'ceremonialTableau', garment: 'velvetEveningDress', materials: ['velvetTexture', 'crystalEmbellishment'], elements: ['crystalChandelier', 'champagne', 'candlelight', 'cityBokeh'], layer: 'layer9', chest: 'crossWrapBodice', waist: 'layeredSash', shoulder: 'ribbonShoulder', body: 'fashion_tall', pose: 'ballroomTurn', lighting: 'ballroomCandlelight', color: 'blackRubyGold', background: 'newYearHotelBallroom', camera: 'fashionThreeQuarter', ratio: '2:3', intensity: 'premium', concept: 'A grand hotel ballroom portrait caught during one graceful turn, using deep velvet, crystal and midnight celebration styling with coherent body mechanics.' },
+  { key: 'newYearEveFirstSunrise', label: '新年第一道曙光', description: '山頂曙光、薄霧與新開始', style: 'poeticFolk', composition: 'environmentalLantern', garment: 'dawnSilkDress', materials: ['silkSatin', 'softOrganza'], elements: ['sunriseHorizon', 'softMist', 'riverReflections', 'autumnLeaves'], layer: 'layer0', chest: 'none', waist: 'ribbonWaist', shoulder: 'softBellSleeves', body: 'original', pose: 'sunriseWalk', lighting: 'dawnGold', color: 'dawnPeach', background: 'dawnMountain', camera: 'distantFestivalHero', ratio: '9:16', intensity: 'cinematic', concept: 'A hopeful first-sunrise portrait on a quiet mountain overlook, with peach silk, pale mist and one grounded step toward the new year.' },
+  { key: 'newYearEveFutureFashion', label: '未來感跨年時尚', description: '發光城市線與現代高訂', style: 'urbanFashion', composition: 'cityPortrait', garment: 'silverPartyCouture', materials: ['reflectiveTextile', 'metallicCouture'], elements: ['lightTrails', 'countdownLights', 'cityBokeh', 'cityFireworks'], layer: 'layer3', chest: 'squareNeckBodice', waist: 'layeredSash', shoulder: 'ribbonShoulder', body: 'fashion_tall', pose: 'confidentEditorial', lighting: 'futureLuminous', color: 'electricSilver', background: 'futureCityRooftop', camera: 'fashionThreeQuarter', ratio: '2:3', intensity: 'premium', concept: 'A future-inspired New Year fashion cover using luminous architecture, silver couture and restrained light trails, with no machinery, armor or cyberpunk world-building.' }
+]);
+
+addFestivalGroup('lanternFestival', '元宵節', [
+  { key: 'lanternFestivalAncientStreet', label: '千燈古街', description: '千燈、古街與夜遊人物主視覺', style: 'poeticFolk', composition: 'lanternStreetPortrait', garment: 'yuanxiaoLanternHanfu', materials: ['redGoldBrocade', 'silkRibbon'], elements: ['lanternSea', 'lanternRiddles', 'redSpringLanterns', 'warmLanterns'], layer: 'layer3', chest: 'squareNeckBodice', waist: 'layeredSash', shoulder: 'softBellSleeves', body: 'original', pose: 'lanternStreetWalk', lighting: 'lanternNightGlow', color: 'yuanxiaoRedGold', background: 'yuanxiaoLanternStreet', camera: 'distantFestivalHero', ratio: '9:16', intensity: 'balanced', concept: 'A polished Lantern Festival night walk through a historic lantern street, with the adult woman as the clear subject in luminous red layers while tassels, practical lights and old shopfronts create depth.' },
+  { key: 'lanternFestivalUpperLanternNight', label: '上元花燈夜', description: '花燈、月色與精品夜間服裝', style: 'lanternEditorial', composition: 'environmentalLantern', garment: 'cinnabarLanternCouture', materials: ['redGoldBrocade', 'pearlBellTrim'], elements: ['lanternSea', 'moonLanterns', 'fullMoon', 'lanternRiddles'], layer: 'layer6', chest: 'crossWrapBodice', waist: 'ribbonWaist', shoulder: 'ribbonShoulder', body: 'fashion_tall', pose: 'lanternLookUp', lighting: 'moonLanternContrast', color: 'yuanxiaoNightBlue', background: 'yuanxiaoLanternGarden', camera: 'fashionThreeQuarter', ratio: '4:5', intensity: 'premium', concept: 'An editorial Lantern Festival portrait beneath layered flower lanterns and a full moon, balancing a sharp cinnabar silhouette with cool night depth and controlled warm light.' },
+  { key: 'lanternFestivalMoonLady', label: '月下提燈佳人', description: '月下提燈、柔和肖像與東方夜色', style: 'romanticEditorial', composition: 'threeQuarterLantern', garment: 'yuanxiaoModernSilk', materials: ['silkSatin', 'roseChiffon'], elements: ['moonLanterns', 'fullMoon', 'lanternSea', 'lanternRiddles'], layer: 'layer3', chest: 'squareNeckBodice', waist: 'ribbonWaist', shoulder: 'softBellSleeves', body: 'slight_waist', pose: 'lanternRaise', lighting: 'lanternNightGlow', color: 'midnightSilver', background: 'yuanxiaoPalaceNight', camera: 'intimateEyeLevel', ratio: '9:16', intensity: 'cinematic', concept: 'A romantic moonlit portrait of an adult woman raising one lantern near a palace courtyard, with clear facial expression, soft silk and a restrained East Asian evening mood.' },
+  { key: 'lanternFestivalJiangnanLights', label: '江南水鄉燈會', description: '水鄉、河燈、石橋與柔和倒影', style: 'poeticFolk', composition: 'lanternRiverWalk', garment: 'paleRuqunLayered', materials: ['freshLotusSilk', 'silkRibbon'], elements: ['lanternRiverBoats', 'riverReflections', 'lanternSea', 'bambooWaterTown'], layer: 'layer0', chest: 'none', waist: 'ribbonWaist', shoulder: 'softBellSleeves', body: 'original', pose: 'yuanxiaoRiverTurn', lighting: 'softLanternGlow', color: 'inkJade', background: 'yuanxiaoRiverLanterns', camera: 'distantFestivalHero', ratio: '9:16', intensity: 'quiet', concept: 'A quiet Jiangnan Lantern Festival walk beside a stone bridge and floating lantern boats, where pale layered silk, calm water and bamboo create a poetic but grounded travel portrait.' },
+  { key: 'lanternFestivalRoyalFeast', label: '皇家上元夜宴', description: '宮殿、宴席與盛大上元儀式感', style: 'luxuryCampaign', composition: 'ceremonialTableau', garment: 'redGoldHanfuGown', materials: ['redGoldBrocade', 'crystalEmbellishment'], elements: ['familyFeastTable', 'lanternSea', 'redSpringLanterns', 'crystalChandelier'], layer: 'layer9', chest: 'crossWrapBodice', waist: 'layeredSash', shoulder: 'ribbonShoulder', body: 'curvy_waist', pose: 'feastToast', lighting: 'redGoldCeremonial', color: 'cinnabarChampagne', background: 'yuanxiaoPalaceNight', camera: 'fashionThreeQuarter', ratio: '4:5', intensity: 'premium', concept: 'A grand palace banquet for the Lantern Festival, designed as a luxury campaign with red-gold brocade, porcelain, lanterns and one composed celebratory gesture.' },
+  { key: 'lanternFestivalDreamland', label: '夢幻花燈仙境', description: '花燈、薄霧與輕幻想夜景', style: 'etherealNight', composition: 'gardenPoetic', garment: 'celestialMoonGown', materials: ['softOrganza', 'crystalEmbellishment'], elements: ['lanternSea', 'fullMoon', 'softMist', 'fireflyLights'], layer: 'layer6', chest: 'squareNeckBodice', waist: 'ribbonWaist', shoulder: 'softBellSleeves', body: 'fashion_tall', pose: 'lanternRaise', lighting: 'moonGardenSilver', color: 'moonSilverPearl', background: 'yuanxiaoLanternGarden', camera: 'distantFestivalHero', ratio: '9:16', intensity: 'cinematic', concept: 'A soft Lantern Festival dreamscape built from floating lantern light, moon haze and pale couture, keeping the adult woman physically grounded within a refined garden rather than a supernatural world.' },
+  { key: 'lanternFestivalModernCity', label: '現代城市元宵燈會', description: '城市建築、燈飾與現代時裝大片', style: 'urbanFashion', composition: 'cityPortrait', garment: 'modernFestivalCouture', materials: ['metallicCouture', 'reflectiveTextile'], elements: ['lanternSea', 'cityBokeh', 'urbanLights', 'redSpringLanterns'], layer: 'layer3', chest: 'squareNeckBodice', waist: 'ribbonWaist', shoulder: 'ribbonShoulder', body: 'fashion_tall', pose: 'confidentEditorial', lighting: 'cityNightBokeh', color: 'citySilverRed', background: 'yuanxiaoCitySquare', camera: 'fashionThreeQuarter', ratio: '4:5', intensity: 'premium', concept: 'A contemporary Lantern Festival fashion cover in a polished city square, pairing modern couture with large-scale lantern installations, clean architecture and controlled urban bokeh.' }
+]);
+
+addFestivalGroup('easter', '復活節', [
+  { key: 'easterSpringEggGarden', label: '春日彩蛋花園', description: '彩蛋、花園與清新粉彩寫真', style: 'romanticEditorial', composition: 'gardenPoetic', garment: 'easterPastelCouture', materials: ['pastelTulle', 'floralEmbroidery'], elements: ['paintedEggs', 'springTulips', 'easterBaskets', 'bunnySculpture'], layer: 'layer0', chest: 'none', waist: 'ribbonWaist', shoulder: 'softBellSleeves', body: 'original', pose: 'easterEggHold', lighting: 'pastelSpringLight', color: 'easterPastel', background: 'easterEggGarden', camera: 'beautyEditorial', ratio: '4:5', intensity: 'premium', concept: 'A fresh Easter garden portrait with pastel eggs, tulips and one elegant spring basket, balancing adult fashion presence with bright premium seasonal styling.' },
+  { key: 'easterBunnyManor', label: '夢幻兔兔莊園', description: '春日莊園、兔子雕塑與輕盈幻想', style: 'playfulFantasy', composition: 'gardenPoetic', garment: 'easterGardenDress', materials: ['embroideredLinen', 'pastelTulle'], elements: ['bunnySculpture', 'paintedEggs', 'springTulips', 'easterBaskets'], layer: 'layer3', chest: 'squareNeckBodice', waist: 'ribbonWaist', shoulder: 'softBellSleeves', body: 'slight_waist', pose: 'springGardenWalk', lighting: 'greenhouseDiffuse', color: 'easterLavenderMint', background: 'easterForest', camera: 'distantFestivalHero', ratio: '9:16', intensity: 'cinematic', concept: 'A refined storybook Easter manor walk through spring foliage, using a single rabbit sculpture, pastel eggs and light garden couture without becoming childlike.' },
+  { key: 'easterEuropeanPicnic', label: '歐洲復活節野餐', description: '歐洲草地、野餐籃與春日陽光', style: 'poeticFolk', composition: 'picnicGardenTableau', garment: 'pastelFlowerMarketDress', materials: ['embroideredLinen', 'softOrganza'], elements: ['picnicBlanket', 'easterBaskets', 'springTulips', 'paintedEggs'], layer: 'layer0', chest: 'none', waist: 'ribbonWaist', shoulder: 'softBellSleeves', body: 'original', pose: 'picnicTea', lighting: 'softSummerDiffuse', color: 'easterButtercream', background: 'europeanSpringPicnic', camera: 'fullBodyEditorial', ratio: '9:16', intensity: 'balanced', concept: 'A sunlit European Easter picnic with linen, wicker and spring flowers, composed as a relaxed lifestyle editorial with the subject and picnic details in clear proportion.' },
+  { key: 'easterPastelGlasshouse', label: '粉彩春日花房', description: '玻璃花房、透光葉片與高級粉彩', style: 'lanternEditorial', composition: 'greenhousePortrait', garment: 'lavenderSpringCouture', materials: ['pastelTulle', 'crystalEmbellishment'], elements: ['greenhouseFlowers', 'paintedEggs', 'springTulips', 'bunnySculpture'], layer: 'layer6', chest: 'crossWrapBodice', waist: 'ribbonWaist', shoulder: 'ribbonShoulder', body: 'fashion_tall', pose: 'tulipTouch', lighting: 'greenhouseDiffuse', color: 'easterLavenderMint', background: 'pastelGreenhouse', camera: 'fashionThreeQuarter', ratio: '4:5', intensity: 'premium', concept: 'A high-end Easter greenhouse fashion portrait where lavender couture, translucent leaves and controlled pastel props create a clean spring campaign.' },
+  { key: 'easterForestSecret', label: '森林彩蛋秘境', description: '春日森林、彩蛋與柔和故事感', style: 'etherealNight', composition: 'gardenPoetic', garment: 'easterGardenDress', materials: ['embroideredLinen', 'roseChiffon'], elements: ['easterBaskets', 'paintedEggs', 'fireflyLights', 'springTulips'], layer: 'layer3', chest: 'squareNeckBodice', waist: 'layeredSash', shoulder: 'softBellSleeves', body: 'original', pose: 'forestReach', lighting: 'softSummerDiffuse', color: 'easterPastel', background: 'easterForest', camera: 'distantFestivalHero', ratio: '9:16', intensity: 'cinematic', concept: 'A gentle Easter forest discovery scene with a few painted eggs and warm garden lights, keeping the adult subject, natural movement and fresh fabric as the focus.' },
+  { key: 'easterTeaAfternoon', label: '復活節下午茶', description: '春日茶席、甜點與優雅生活感', style: 'luxuryCampaign', composition: 'intimateTablePortrait', garment: 'ivoryBouquetDress', materials: ['roseSatin', 'pearlLace'], elements: ['dessertTable', 'easterBaskets', 'springTulips', 'teaSet'], layer: 'layer3', chest: 'squareNeckBodice', waist: 'ribbonWaist', shoulder: 'ribbonShoulder', body: 'slight_waist', pose: 'picnicTea', lighting: 'softCafeDaylight', color: 'easterButtercream', background: 'springTeaTerrace', camera: 'intimateEyeLevel', ratio: '4:5', intensity: 'premium', concept: 'A premium Easter afternoon tea portrait with porcelain, pastries, tulips and ivory tailoring, using a calm tabletop story rather than a crowded holiday set.' },
+  { key: 'easterSpringFashion', label: '高級春季時尚大片', description: '粉彩高訂、花房與春季封面感', style: 'urbanFashion', composition: 'cityPortrait', garment: 'lavenderSpringCouture', materials: ['silkSatin', 'crystalEmbellishment'], elements: ['springTulips', 'greenhouseFlowers', 'cityBokeh', 'paintedEggs'], layer: 'layer6', chest: 'crossWrapBodice', waist: 'ribbonWaist', shoulder: 'ribbonShoulder', body: 'fashion_tall', pose: 'confidentEditorial', lighting: 'premiumStudio', color: 'easterLavenderMint', background: 'easterFashionStudio', camera: 'fashionThreeQuarter', ratio: '2:3', intensity: 'premium', concept: 'A polished spring fashion cover inspired by Easter color and botanical forms, with clean pastel couture, precise studio light and restrained seasonal props.' }
+]);
+
+addFestivalGroup('mothersDay', '母親節', [
+  { key: 'mothersCarnationSea', label: '康乃馨花海', description: '康乃馨花景、柔和光線與花卉肖像', style: 'romanticEditorial', composition: 'gardenPoetic', garment: 'carnationCouture', materials: ['carnationEmbroidery', 'roseSatin'], elements: ['carnations', 'flowerBouquet', 'springTulips', 'softMist'], layer: 'layer0', chest: 'none', waist: 'ribbonWaist', shoulder: 'softBellSleeves', body: 'original', pose: 'bouquetHold', lighting: 'carnationSoftLight', color: 'mothersRoseCream', background: 'carnationGarden', camera: 'beautyEditorial', ratio: '4:5', intensity: 'premium', concept: 'A refined Mother’s Day floral portrait surrounded by carnations, where warm appreciation, soft rose-ivory couture and clean garden depth create a premium campaign image.' },
+  { key: 'mothersFrenchTea', label: '法式花園下午茶', description: '法式花園、茶席與優雅午後', style: 'luxuryCampaign', composition: 'intimateTablePortrait', garment: 'ivoryBouquetDress', materials: ['pearlLace', 'silkSatin'], elements: ['carnations', 'teaSet', 'dessertTable', 'homeVase'], layer: 'layer3', chest: 'squareNeckBodice', waist: 'ribbonWaist', shoulder: 'ribbonShoulder', body: 'slight_waist', pose: 'teaGathering', lighting: 'softCafeDaylight', color: 'mothersLilacPearl', background: 'mothersFrenchGarden', camera: 'intimateEyeLevel', ratio: '4:5', intensity: 'premium', concept: 'A quiet French garden afternoon tea for Mother’s Day, with ivory lace, porcelain, carnations and one composed cup gesture in a polished lifestyle portrait.' },
+  { key: 'mothersHotelAppreciation', label: '高級飯店母親節', description: '飯店花藝、香檳色禮服與精品質感', style: 'luxuryCampaign', composition: 'hotelEditorial', garment: 'softRoseSuit', materials: ['silkSatin', 'crystalEmbellishment'], elements: ['flowerBouquet', 'jewelryGift', 'carnations', 'crystalChandelier'], layer: 'layer6', chest: 'crossWrapBodice', waist: 'layeredSash', shoulder: 'ribbonShoulder', body: 'fashion_tall', pose: 'hotelBouquetPose', lighting: 'hotelAmber', color: 'mothersWarmIvory', background: 'mothersHotelLounge', camera: 'fashionThreeQuarter', ratio: '2:3', intensity: 'premium', concept: 'A luxury hotel Mother’s Day campaign centered on a soft rose suit, a carefully wrapped bouquet and subtle jewelry detail, with the interior supporting the subject.' },
+  { key: 'mothersSpringCourtyard', label: '春日庭院優雅寫真', description: '居家庭院、花桌與溫柔春日氣氛', style: 'poeticFolk', composition: 'bouquetPortrait', garment: 'carnationCouture', materials: ['floralEmbroidery', 'carnationEmbroidery'], elements: ['carnations', 'flowerBouquet', 'homeVase', 'softMist'], layer: 'layer3', chest: 'none', waist: 'ribbonWaist', shoulder: 'softBellSleeves', body: 'original', pose: 'carnationArrange', lighting: 'carnationSoftLight', color: 'mothersRoseCream', background: 'mothersCourtyard', camera: 'beautyEditorial', ratio: '9:16', intensity: 'balanced', concept: 'A graceful spring courtyard portrait where the adult woman arranges one carnation beside a flower table, combining everyday warmth with refined photographic composition.' },
+  { key: 'mothersFloralLuxury', label: '奢華花藝肖像', description: '大型花藝、珠寶細節與高級棚拍', style: 'luxuryCampaign', composition: 'bouquetPortrait', garment: 'ivoryBouquetDress', materials: ['silkSatin', 'crystalEmbellishment'], elements: ['flowerBouquet', 'jewelryGift', 'carnations', 'jewelrySparkle'], layer: 'layer9', chest: 'crossWrapBodice', waist: 'layeredSash', shoulder: 'ribbonShoulder', body: 'curvy_waist', pose: 'jewelryTouch', lighting: 'premiumStudio', color: 'mothersWarmIvory', background: 'mothersFlowerStudio', camera: 'fashionThreeQuarter', ratio: '4:5', intensity: 'premium', concept: 'A luxury floral beauty portrait built around ivory couture, carnations and one precise jewelry gesture, with studio light revealing texture without visual excess.' },
+  { key: 'mothersHomeMorning', label: '溫馨居家晨光', description: '窗邊花瓶、晨光與生活方式寫真', style: 'romanticEditorial', composition: 'homeWindowPortrait', garment: 'softRoseSuit', materials: ['embroideredLinen', 'roseSatin'], elements: ['homeVase', 'carnations', 'flowerBouquet', 'teaSet'], layer: 'layer0', chest: 'none', waist: 'ribbonWaist', shoulder: 'softBellSleeves', body: 'original', pose: 'homeWindowMorning', lighting: 'homeMorningLight', color: 'mothersWarmIvory', background: 'mothersHomeMorning', camera: 'intimateEyeLevel', ratio: '9:16', intensity: 'quiet', concept: 'A warm Mother’s Day morning at home, with fresh carnations by the window, soft rose tailoring and a believable quiet lifestyle moment.' },
+  { key: 'mothersJewelryFashion', label: '母親節珠寶時尚大片', description: '珠寶展廳、花藝與現代精品時裝', style: 'urbanFashion', composition: 'cityPortrait', garment: 'softRoseSuit', materials: ['pearlLace', 'crystalEmbellishment'], elements: ['jewelryGift', 'jewelrySparkle', 'carnations', 'cityBokeh'], layer: 'layer6', chest: 'crossWrapBodice', waist: 'ribbonWaist', shoulder: 'ribbonShoulder', body: 'fashion_tall', pose: 'jewelryTouch', lighting: 'jewelrySpotlight', color: 'mothersLilacPearl', background: 'mothersJewelrySalon', camera: 'fashionThreeQuarter', ratio: '2:3', intensity: 'premium', concept: 'A modern Mother’s Day jewelry fashion cover with soft rose tailoring, pearl detail and carnations, keeping the portrait precise, warm and commercially elegant.' }
+]);
+
+addFestivalGroup('fiveTwenty', '520 告白日', [
+  { key: 'fiveTwentyRoseGarden', label: '玫瑰告白花海', description: '玫瑰花海、花束與直接告白情緒', style: 'romanticEditorial', composition: 'gardenPoetic', garment: 'roseConfessionCouture', materials: ['roseSatin', 'roseChiffon'], elements: ['confessionBouquet', 'rosePetals', 'heartCityLights', 'springTulips'], layer: 'layer0', chest: 'none', waist: 'ribbonWaist', shoulder: 'softBellSleeves', body: 'original', pose: 'offerBouquet', lighting: 'roseSunset', color: 'confessionCherryRose', background: 'confessionFlowerSea', camera: 'beautyEditorial', ratio: '4:5', intensity: 'premium', concept: 'A contemporary 520 confession portrait in a rose field, with one bouquet offered clearly toward the camera and a polished cherry-rose romantic fashion silhouette.' },
+  { key: 'fiveTwentyRooftopNight', label: '城市天台告白夜', description: '城市天台、花束與藍調夜色', style: 'urbanFashion', composition: 'rooftopConfession', garment: 'cityDateCouture', materials: ['silkSatin', 'reflectiveTextile'], elements: ['confessionBouquet', 'cityBokeh', 'loveLetterEnvelope', 'heartCityLights'], layer: 'layer3', chest: 'squareNeckBodice', waist: 'ribbonWaist', shoulder: 'ribbonShoulder', body: 'fashion_tall', pose: 'rooftopConfession', lighting: 'confessionCityGlow', color: 'cityRoseNight', background: 'confessionCityRooftop', camera: 'fashionThreeQuarter', ratio: '9:16', intensity: 'cinematic', concept: 'A blue-hour rooftop confession with a bouquet, closed envelope and city lights, composed as a modern romance campaign with emotional space around the gesture.' },
+  { key: 'fiveTwentyHotelSurprise', label: '浪漫飯店驚喜', description: '飯店驚喜、花束與高級約會感', style: 'luxuryCampaign', composition: 'hotelEditorial', garment: 'roseConfessionCouture', materials: ['silkSatin', 'crystalEmbellishment'], elements: ['confessionBouquet', 'candlelight', 'jewelryGift', 'rosePetals'], layer: 'layer6', chest: 'crossWrapBodice', waist: 'layeredSash', shoulder: 'ribbonShoulder', body: 'curvy_waist', pose: 'hotelArrival', lighting: 'hotelAmber', color: 'burgundyChampagne', background: 'confessionLuxuryHotel', camera: 'distantFestivalHero', ratio: '4:5', intensity: 'premium', concept: 'A polished 520 hotel-surprise portrait with rose couture, candlelight and one refined gift detail, keeping the room luxurious but the confession gesture unmistakable.' },
+  { key: 'fiveTwentyCoastalSunset', label: '海岸夕陽告白', description: '海岸夕陽、風吹裙襬與浪漫地平線', style: 'romanticEditorial', composition: 'coastalSunsetPortrait', garment: 'roseRomanticGown', materials: ['roseChiffon', 'silkSatin'], elements: ['coastalPetals', 'flowerBouquet', 'softMist', 'riverReflections'], layer: 'layer0', chest: 'none', waist: 'ribbonWaist', shoulder: 'softBellSleeves', body: 'slight_waist', pose: 'seasideWindPose', lighting: 'coastalGoldenHour', color: 'confessionSunsetRose', background: 'confessionCoast', camera: 'distantFestivalHero', ratio: '9:16', intensity: 'cinematic', concept: 'A quiet 520 confession by the coast at sunset, where a rose gown, natural wind and a small bouquet create a spacious contemporary love story.' },
+  { key: 'fiveTwentyFlowerStreet', label: '花束街頭約會', description: '花店街景、行走與明亮約會感', style: 'urbanFashion', composition: 'marketWalk', garment: 'pastelFlowerMarketDress', materials: ['roseSatin', 'laceTrim'], elements: ['confessionBouquet', 'flowerMarketStalls', 'rosePetals', 'cityBokeh'], layer: 'layer3', chest: 'squareNeckBodice', waist: 'ribbonWaist', shoulder: 'ribbonShoulder', body: 'slight_waist', pose: 'offerBouquet', lighting: 'confessionCityGlow', color: 'confessionCherryRose', background: 'confessionFlowerStreet', camera: 'fashionThreeQuarter', ratio: '4:5', intensity: 'balanced', concept: 'A bright flower-street date scene for 520, with one bouquet, a clear walking gesture and contemporary pastel styling against softly controlled shopfront depth.' },
+  { key: 'fiveTwentyStarCandle', label: '星空燭光告白', description: '星空露台、燭光與安靜告白', style: 'etherealNight', composition: 'intimateTablePortrait', garment: 'champagneHotelGown', materials: ['roseSatin', 'crystalEmbellishment'], elements: ['candlelight', 'starrySky', 'confessionBouquet', 'loveLetterEnvelope'], layer: 'layer6', chest: 'crossWrapBodice', waist: 'ribbonWaist', shoulder: 'softBellSleeves', body: 'slight_waist', pose: 'candleTable', lighting: 'starryBacklight', color: 'midnightRose', background: 'confessionStarTerrace', camera: 'intimateEyeLevel', ratio: '9:16', intensity: 'cinematic', concept: 'An intimate 520 confession on a starry terrace, built from candlelight, a closed letter and one bouquet, with the adult subject remaining naturally integrated and clearly readable.' },
+  { key: 'fiveTwentyJewelryCover', label: '520 奢華珠寶大片', description: '玫瑰花束、珠寶與精品告白封面', style: 'luxuryCampaign', composition: 'bouquetPortrait', garment: 'cityDateCouture', materials: ['silkSatin', 'crystalEmbellishment'], elements: ['jewelrySparkle', 'confessionBouquet', 'jewelryGift', 'cityBokeh'], layer: 'layer9', chest: 'crossWrapBodice', waist: 'layeredSash', shoulder: 'ribbonShoulder', body: 'fashion_tall', pose: 'jewelryTouch', lighting: 'jewelrySpotlight', color: 'burgundyChampagne', background: 'confessionJewelrySalon', camera: 'beautyEditorial', ratio: '2:3', intensity: 'premium', concept: 'A luxury 520 jewelry cover with rose-red couture, one bouquet and precise gemstone sparkle, presented as a refined contemporary declaration rather than a crowded romance scene.' }
+]);
+
+addFestivalGroup('qixi', '七夕', [
+  { key: 'qixiGalaxyMagpieBridge', label: '銀河鵲橋仙境', description: '星河、鵲橋、雲霧與東方浪漫幻想', style: 'etherealNight', composition: 'starBridgeComposition', garment: 'qixiStarGown', materials: ['starEmbroideredSilk', 'cloudGauze'], elements: ['magpieBridge', 'starrySky', 'galaxyRibbon', 'fireflyLights'], layer: 'layer3', chest: 'squareNeckBodice', waist: 'ribbonWaist', shoulder: 'softBellSleeves', body: 'fashion_tall', pose: 'starBridgeWalk', lighting: 'galaxyMoonlight', color: 'qixiGalaxyBlue', background: 'qixiMagpieBridge', camera: 'distantFestivalHero', ratio: '9:16', intensity: 'cinematic', concept: 'A Qixi love-story portrait on an elegant magpie bridge above a star river, using moonlit silk, restrained clouds and one grounded walking gesture instead of supernatural spectacle.' },
+  { key: 'qixiLanternOldStreet', label: '七夕花燈古街', description: '花燈古街、絲帶與東方夜遊', style: 'poeticFolk', composition: 'lanternStreetPortrait', garment: 'qixiModernHanfu', materials: ['floralEmbroidery', 'silkRibbon'], elements: ['moonLanterns', 'wishRibbons', 'qixiFlowers', 'lanternSea'], layer: 'layer0', chest: 'none', waist: 'ribbonWaist', shoulder: 'softBellSleeves', body: 'original', pose: 'lanternStreetWalk', lighting: 'qixiLanternLight', color: 'qixiLavenderGold', background: 'oldTownLanternAlley', camera: 'fashionThreeQuarter', ratio: '4:5', intensity: 'balanced', concept: 'A Qixi night walk through an old lantern street, pairing modern hanfu couture with wish ribbons and moonlit flowers in a graceful Eastern romance editorial.' },
+  { key: 'qixiMoonEasternCourtyard', label: '月下東方庭院', description: '月下庭院、花枝與含蓄愛情氛圍', style: 'romanticEditorial', composition: 'gardenPoetic', garment: 'qixiGardenSilk', materials: ['roseChiffon', 'starEmbroideredSilk'], elements: ['fullMoon', 'qixiFlowers', 'wishRibbons', 'fireflyLights'], layer: 'layer6', chest: 'crossWrapBodice', waist: 'layeredSash', shoulder: 'ribbonShoulder', body: 'slight_waist', pose: 'qixiWish', lighting: 'moonGardenSilver', color: 'qixiRoseNight', background: 'qixiEasternCourtyard', camera: 'beautyEditorial', ratio: '9:16', intensity: 'premium', concept: 'A quiet Qixi courtyard beneath the moon, where rose-blue silk, wish ribbons and small garden lights support a restrained romantic gaze and clear portrait focus.' },
+  { key: 'qixiStarRiverLegend', label: '牛郎織女星河幻想', description: '星河、鵲橋與寬幅傳說畫面', style: 'playfulFantasy', composition: 'galaxyEnvironmentalPortrait', garment: 'celestialMoonGown', materials: ['cloudGauze', 'crystalEmbellishment'], elements: ['starrySky', 'magpieBridge', 'galaxyRibbon', 'softMist'], layer: 'layer9', chest: 'crossWrapBodice', waist: 'layeredSash', shoulder: 'ribbonShoulder', body: 'fashion_tall', pose: 'magpieBridgeTurn', lighting: 'galaxyMoonlight', color: 'qixiGalaxyBlue', background: 'qixiStarRiver', camera: 'distantFestivalHero', ratio: '2:3', intensity: 'cinematic', concept: 'A wide Qixi legend-inspired fashion image with a luminous star river and distant magpie bridge, keeping the adult subject, anatomy and gown physically coherent inside the poetic scene.' },
+  { key: 'qixiLotusNight', label: '荷塘七夕夜', description: '荷塘、花燈、水面與柔和夜色', style: 'poeticFolk', composition: 'waterfrontAction', garment: 'qixiGardenSilk', materials: ['freshLotusSilk', 'softOrganza'], elements: ['lotusPond', 'moonLanterns', 'riverReflections', 'qixiFlowers'], layer: 'layer3', chest: 'squareNeckBodice', waist: 'ribbonWaist', shoulder: 'softBellSleeves', body: 'original', pose: 'lotusTouch', lighting: 'qixiLanternLight', color: 'moonOsmanthus', background: 'qixiLotusNight', camera: 'fullBodyEditorial', ratio: '9:16', intensity: 'quiet', concept: 'A poetic Qixi night beside a lotus pond, with a pale flower, small lanterns and calm reflections framing a natural full-body Eastern portrait.' },
+  { key: 'qixiTangBanquet', label: '盛唐七夕夜宴', description: '盛唐華裳、月宴與華麗東方庭院', style: 'luxuryCampaign', composition: 'ceremonialTableau', garment: 'redGoldHanfuGown', materials: ['redGoldBrocade', 'starEmbroideredSilk'], elements: ['familyFeastTable', 'moonLanterns', 'qixiFlowers', 'crystalChandelier'], layer: 'layer6', chest: 'crossWrapBodice', waist: 'layeredSash', shoulder: 'ribbonShoulder', body: 'curvy_waist', pose: 'feastToast', lighting: 'redGoldCeremonial', color: 'qixiLavenderGold', background: 'qixiTangFeast', camera: 'fashionThreeQuarter', ratio: '4:5', intensity: 'premium', concept: 'A luxurious Tang-inspired Qixi banquet with red-gold silk, moon lanterns and floral table styling, designed as an elegant Eastern fashion campaign with one clear toast gesture.' },
+  { key: 'qixiModernEasternFashion', label: '現代東方七夕時尚', description: '城市月色、新中式高訂與現代封面感', style: 'urbanFashion', composition: 'cityPortrait', garment: 'qixiModernHanfu', materials: ['silkSatin', 'reflectiveTextile'], elements: ['cityBokeh', 'moonLanterns', 'galaxyRibbon', 'jewelrySparkle'], layer: 'layer3', chest: 'squareNeckBodice', waist: 'ribbonWaist', shoulder: 'ribbonShoulder', body: 'fashion_tall', pose: 'confidentEditorial', lighting: 'cityNightBokeh', color: 'qixiRoseNight', background: 'qixiModernRooftop', camera: 'fashionThreeQuarter', ratio: '2:3', intensity: 'premium', concept: 'A modern Eastern Qixi fashion cover on a clean city rooftop, combining cross-collar silk, moon lanterns and restrained star-like accents with premium urban composition.' }
+]);
+
+function normalizeTemplate(item){
+  return {
+    label: item.label,
+    description: item.description,
+    concept: item.concept,
+    style: item.style,
+    festivalTheme: item.theme,
+    composition: item.composition,
+    garment: item.garment,
+    materials: item.materials,
+    elements: item.elements,
+    garmentLayer: item.layer,
+    chestDetail: item.chest,
+    waistSideDetail: item.waist,
+    shoulderDetail: item.shoulder,
+    bodyShape: item.body,
+    pose: item.pose,
+    lighting: item.lighting,
+    colorPalette: item.color,
+    background: item.background,
+    camera: item.camera,
+    ratio: item.ratio,
+    intensity: item.intensity
+  };
+}
+const themeTemplates = Object.fromEntries(FESTIVAL_TEMPLATES.map(item => [item.key, normalizeTemplate(item)]));
+
+function escapeHtml(value){
+  return String(value ?? '').replace(/[&<>"']/g, character => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  }[character]));
+}
+function renderOptionExtensions(){
+  const config = [
+    ['style', 'style', 'styleExtensions', 'radio', 0, 'card'],
+    ['composition', 'composition', 'compositionExtensions', 'radio', 0, 'card'],
+    ['garment', 'garment', 'garmentExtensions', 'radio', 0, 'card'],
+    ['material', 'material', 'materialExtensions', 'checkbox', 2, 'card'],
+    ['element', 'element', 'elementExtensions', 'checkbox', 4, 'card'],
+    ['pose', 'pose', 'poseExtensions', 'radio', 0, 'pose-card'],
+    ['lighting', 'lighting', 'lightingExtensions', 'radio', 0, 'card'],
+    ['color', 'colorPalette', 'colorExtensions', 'radio', 0, 'card'],
+    ['background', 'background', 'backgroundExtensions', 'radio', 0, 'card'],
+    ['camera', 'camera', 'cameraExtensions', 'radio', 0, 'card']
+  ];
+  config.forEach(([dataName, inputName, containerId, type, max, cardClass]) => {
+    const container = document.getElementById(containerId);
+    if(!container) return;
+    const nameClass = cardClass === 'pose-card' ? 'pose-name' : 'name';
+    const descClass = cardClass === 'pose-card' ? 'pose-desc' : 'desc';
+    container.innerHTML = (EXTRA_OPTIONS[dataName] || []).map(([value, label, description]) => {
+      const maxAttribute = max ? ' data-max="' + max + '"' : '';
+      return '<label class="' + cardClass + ' choice-card">' +
+        '<input type="' + type + '" name="' + escapeHtml(inputName) + '" value="' + escapeHtml(value) + '"' + maxAttribute + '>' +
+        '<span class="' + nameClass + '">' + escapeHtml(label) + '</span>' +
+        '<span class="' + descClass + '">' + escapeHtml(description) + '</span>' +
+        '</label>';
+    }).join('');
+  });
+}
+function renderTemplateGroups(){
+  const container = document.getElementById('templateGroups');
+  if(!container) return;
+  const groups = [];
+  FESTIVAL_TEMPLATES.forEach(item => {
+    let group = groups.find(candidate => candidate.key === item.group);
+    if(!group){
+      group = { key: item.group, label: item.groupLabel, items: [] };
+      groups.push(group);
+    }
+    group.items.push(item);
+  });
+  container.innerHTML = groups.map(group => {
+    const buttons = group.items.map(item =>
+      '<button class="preset-btn' + (item.key === 'zhongyuanMoonRiver' ? ' primary' : '') + '" type="button" data-template="' + escapeHtml(item.key) + '">' +
+      '<span class="template-name">一鍵套用｜' + escapeHtml(item.label) + '</span>' +
+      '<span class="template-desc">' + escapeHtml(item.description) + '</span>' +
+      '</button>'
+    ).join('');
+    return '<section class="template-group" data-template-group="' + escapeHtml(group.key) + '">' +
+      '<div class="template-group-title"><span>' + escapeHtml(group.label) + '</span><small>' + group.items.length + ' 組完整作品</small></div>' +
+      '<div class="preset-grid">' + buttons + '</div>' +
+      '</section>';
+  }).join('');
+}
 
 function selected(name){
   return document.querySelector('input[name="' + name + '"]:checked')?.value || '';
@@ -633,6 +1489,10 @@ function clearCustomFields(){
     if(field) field.value = '';
   });
 }
+let applyingTemplate = false;
+function clearTemplateConcept(){
+  if(!applyingTemplate) document.getElementById('templateConcept').value = '';
+}
 function resolveVariationParts(){
   return HB_GARMENT_CORE.compactPromptParts([
     GARMENT_VARIATIONS.chestDetail[selected('chestDetail')],
@@ -643,15 +1503,22 @@ function resolveVariationParts(){
 function applyTemplate(key){
   const preset = themeTemplates[key];
   if(!preset) return;
-  ['style', 'festivalTheme', 'composition', 'garment', 'garmentLayer', 'chestDetail', 'waistSideDetail', 'shoulderDetail', 'bodyShape', 'pose', 'lighting', 'colorPalette', 'background', 'camera', 'ratio'].forEach(name => setRadioValue(name, preset[name]));
-  setCheckedValues('material', preset.materials);
-  setCheckedValues('element', preset.elements);
-  document.getElementById('intensity').value = preset.intensity;
-  clearCustomFields();
+  applyingTemplate = true;
+  try {
+    ['style', 'festivalTheme', 'composition', 'garment', 'garmentLayer', 'chestDetail', 'waistSideDetail', 'shoulderDetail', 'bodyShape', 'pose', 'lighting', 'colorPalette', 'background', 'camera', 'ratio'].forEach(name => setRadioValue(name, preset[name]));
+    setCheckedValues('material', preset.materials);
+    setCheckedValues('element', preset.elements);
+    document.getElementById('intensity').value = preset.intensity;
+    clearCustomFields();
+    document.getElementById('templateConcept').value = preset.concept || '';
+  } finally {
+    applyingTemplate = false;
+  }
   refreshCards();
   generate({ reveal: true });
 }
 function applyRandomSelection(){
+  clearTemplateConcept();
   clearCustomFields();
   ['style', 'festivalTheme', 'composition', 'garment', 'bodyShape', 'pose', 'lighting', 'colorPalette', 'background', 'camera', 'ratio'].forEach(name => setRadioValue(name, randomItem(values(name))));
   setCheckedValues('material', shuffle(values('material')).slice(0, 2));
@@ -691,6 +1558,7 @@ function generate(options){
   const colorNote = document.getElementById('colorNote').value.trim();
   const customBackground = document.getElementById('customBackground').value.trim();
   const extraNote = document.getElementById('extraNote').value.trim();
+  const templateConcept = document.getElementById('templateConcept').value.trim();
   const styleText = styleData[selected('style')];
   const themeText = festivalThemeData[selected('festivalTheme')];
   const compositionText = compositionData[selected('composition')];
@@ -702,7 +1570,7 @@ function generate(options){
   const colorText = colorNote || colorData[selected('colorPalette')];
   const variationParts = resolveVariationParts();
   const variationBlock = variationParts.length ? '【服裝改造核心】\n\n' + variationParts.join('\n') : '';
-  const scopeNegative = '【中元節主題限制】\n\nRespectful folk-festival visual language only. No horror, no gore, no blood, no corpse, no demonic creature, no occult ritual, no haunted-house styling, no Western Halloween elements, no xianxia magic, no futuristic technology, no modern streetwear, no random readable text or watermark.';
+  const scopeNegative = festivalScopeData[selected('festivalTheme')] || '';
   const prompt = [
     identityCore,
     anatomyCore,
@@ -712,6 +1580,7 @@ function generate(options){
     '【節慶攝影構圖核心】\n\nSubject scale, body scale, lantern scale and architectural depth remain coherent. Keep the face clear, the body naturally proportioned and every practical light source inside one integrated photograph.',
     '【成品用途 / 畫面語氣】\n\n' + styleText,
     '【節慶主題】\n\n' + themeText,
+    templateConcept ? '【完整作品概念】\n\n' + templateConcept : '',
     '【構圖取景】\n\n' + compositionText,
     '【服裝方向】\n\n' + garmentText,
     '【節慶材質】\n\n' + materialText,
@@ -736,19 +1605,25 @@ function generate(options){
   if(settings.reveal) document.getElementById('outputWrap').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
-document.querySelectorAll('input[type="radio"]').forEach(input => input.addEventListener('change', () => { refreshCards(); markStale(); }));
+renderOptionExtensions();
+renderTemplateGroups();
+document.querySelectorAll('input[type="radio"]').forEach(input => input.addEventListener('change', () => { clearTemplateConcept(); refreshCards(); markStale(); }));
 document.querySelectorAll('input[type="checkbox"]').forEach(input => input.addEventListener('change', event => {
   const max = Number(event.target.dataset.max || 0);
   const checked = checkedValues(event.target.name);
   if(max && checked.length > max) event.target.checked = false;
+  clearTemplateConcept();
   refreshCards();
   markStale();
 }));
-['customGarment', 'customPose', 'colorNote', 'customBackground', 'extraNote', 'intensity'].forEach(id => document.getElementById(id).addEventListener('input', markStale));
-document.getElementById('intensity').addEventListener('change', markStale);
+['customGarment', 'customPose', 'colorNote', 'customBackground', 'extraNote', 'intensity'].forEach(id => document.getElementById(id).addEventListener('input', () => { clearTemplateConcept(); markStale(); }));
+document.getElementById('intensity').addEventListener('change', () => { clearTemplateConcept(); markStale(); });
 document.getElementById('generateBtn').addEventListener('click', () => generate({ reveal: true }));
 document.getElementById('festivalRandom').addEventListener('click', applyRandomSelection);
-document.querySelectorAll('[data-template]').forEach(button => button.addEventListener('click', () => applyTemplate(button.dataset.template)));
+document.getElementById('templateGroups').addEventListener('click', event => {
+  const button = event.target.closest('[data-template]');
+  if(button) applyTemplate(button.dataset.template);
+});
 document.getElementById('copyBtn').addEventListener('click', () => {
   if(document.getElementById('outputWrap').classList.contains('stale')) return;
   const text = document.getElementById('outputText').value;
@@ -771,7 +1646,7 @@ document.getElementById('copyBtn').addEventListener('click', () => {
 });
 window.HB_INSTALL_CUSTOM_IDENTITY_WARNING?.(document);
 refreshCards();
-applyTemplate('zhongyuanMoonlitLanternFestival');
+applyTemplate('zhongyuanMoonRiver');
 </script>
 </body>
 </html>
