@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>節慶美學寫真咒語產生器｜寫真引擎</title>
+<meta name="description" content="節慶美學寫真咒語產生器第一版，先以中元月下燈會組合節慶主題、服裝、道具、光影、場景與攝影語言。">
+<meta property="og:title" content="節慶美學寫真咒語產生器｜寫真引擎">
+<meta property="og:description" content="節慶美學寫真咒語產生器第一版，先以中元月下燈會組合節慶主題、服裝、道具、光影、場景與攝影語言。">
+<meta name="twitter:title" content="節慶美學寫真咒語產生器｜寫真引擎">
+<meta name="twitter:description" content="節慶美學寫真咒語產生器第一版，先以中元月下燈會組合節慶主題、服裝、道具、光影、場景與攝影語言。">
+<style>
+  :root{
+    --black:#090A0D;
+    --panel:#15171C;
+    --panel-2:#1D2028;
+    --line:#303541;
+    --paper:#F5F3EE;
+    --soft:#AAAEB9;
+    --white:#FFFFFF;
+    --gold:#C9A84C;
+    --gold-soft:#E8D5A3;
+    --night:#8FA9D8;
+    --selected:#211E16;
+    --warning:#F0B7C5;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    min-height:100vh;
+    background:var(--black);
+    color:var(--paper);
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    line-height:1.6;
+    padding-bottom:76px;
+  }
+  nav{
+    position:fixed;
+    inset:0 0 auto;
+    height:54px;
+    z-index:20;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 24px;
+    background:rgba(9,10,13,.94);
+    border-bottom:1px solid var(--line);
+    backdrop-filter:blur(12px);
+  }
+  .nav-logo{
+    color:var(--gold);
+    font-family:"Noto Serif TC",serif;
+    font-size:14px;
+    font-weight:700;
+    letter-spacing:.08em;
+    text-decoration:none;
+  }
+  .nav-context{color:var(--soft);font-size:11px;letter-spacing:.12em;}
+  .wrap{width:min(960px,100%);margin:0 auto;padding:70px 20px 40px;}
+  header{padding:48px 0 34px;margin-bottom:24px;border-bottom:1px solid var(--line);}
+  .eyebrow{color:var(--night);font-size:11px;letter-spacing:.3em;text-transform:uppercase;margin-bottom:12px;}
+  h1{color:var(--white);font-family:"Noto Serif TC",serif;font-size:32px;line-height:1.2;letter-spacing:.02em;margin-bottom:10px;}
+  h1 span{color:var(--gold-soft);}
+  header p{color:var(--soft);font-size:14px;max-width:760px;}
+  .note{
+    margin-bottom:28px;
+    padding:12px 14px;
+    border:1px solid var(--line);
+    border-left:3px solid var(--gold);
+    border-radius:7px;
+    background:var(--panel);
+    color:var(--soft);
+    font-size:12px;
+  }
+  section{margin-bottom:28px;}
+  .section-header{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    padding-bottom:10px;
+    margin-bottom:12px;
+    border-bottom:1px solid var(--line);
+  }
+  .section-label{color:var(--gold);font-size:12px;font-weight:700;letter-spacing:.16em;}
+  .section-title{color:var(--white);font-size:16px;font-weight:800;}
+  .section-sub{margin-left:auto;color:var(--soft);font-size:11px;}
+  .hint{margin:-4px 0 12px;color:var(--soft);font-size:12px;}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+  .grid-3{grid-template-columns:repeat(3,1fr);}
+  .grid-2{grid-template-columns:repeat(2,1fr);}
+  .card,.pose-card,.preset-btn{
+    position:relative;
+    cursor:pointer;
+    border:1px solid var(--line);
+    background:var(--panel);
+    border-radius:8px;
+    transition:border-color .15s,background .15s,color .15s;
+  }
+  .card{min-height:74px;padding:12px 13px;}
+  .card input,.pose-card input{position:absolute;opacity:0;pointer-events:none;}
+  .card:hover,.pose-card:hover,.preset-btn:hover{border-color:var(--gold);}
+  .card.selected,.pose-card.selected{border-color:var(--gold);background:var(--selected);}
+  .name,.pose-name{display:block;color:var(--paper);font-size:13px;font-weight:800;margin-bottom:3px;}
+  .selected .name,.selected .pose-name{color:var(--gold);}
+  .desc,.pose-desc{display:block;color:var(--soft);font-size:11px;line-height:1.45;}
+  .group-title{
+    grid-column:1/-1;
+    margin:8px 0 0;
+    padding-left:8px;
+    border-left:2px solid var(--gold);
+    color:var(--gold);
+    font-size:12px;
+    font-weight:700;
+  }
+  .pose-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+  .pose-card{min-height:74px;padding:12px 13px;}
+  .layer-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:14px;}
+  .layer-card{min-height:68px;}
+  .field{display:block;color:var(--gold-soft);font-size:12px;font-weight:700;}
+  .text-input,.select-input{
+    width:100%;
+    margin-top:7px;
+    padding:11px 12px;
+    border:1px solid var(--line);
+    border-radius:7px;
+    background:var(--panel);
+    color:var(--paper);
+    font:inherit;
+    font-size:13px;
+  }
+  .text-input::placeholder{color:#6F747F;}
+  .text-input:focus,.select-input:focus{outline:none;border-color:var(--gold);}
+  .custom-field{grid-column:1/-1;margin-top:4px;}
+  .form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+  .choice-status{display:block;min-height:18px;margin-top:6px;color:var(--soft);font-size:11px;font-weight:400;}
+  .choice-status.is-limit{color:var(--gold);}
+  .generate-btn{
+    width:100%;
+    padding:16px;
+    border:1px solid var(--gold);
+    border-radius:8px;
+    background:var(--gold);
+    color:var(--black);
+    font-family:"Noto Serif TC",serif;
+    font-size:15px;
+    font-weight:900;
+    letter-spacing:.06em;
+    cursor:pointer;
+  }
+  .random-btn{
+    width:100%;
+    margin-bottom:12px;
+    padding:13px;
+    border:1px solid var(--night);
+    border-radius:8px;
+    background:#171D2B;
+    color:var(--night);
+    font:inherit;
+    font-size:13px;
+    font-weight:800;
+    letter-spacing:.04em;
+    cursor:pointer;
+  }
+  .preset-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;}
+  .preset-btn{padding:12px 13px;text-align:left;color:var(--paper);font:inherit;font-size:13px;font-weight:800;}
+  .preset-btn.primary{border-color:var(--gold);color:var(--gold);background:#211E16;}
+  .output-wrap{margin-top:24px;}
+  .output-wrap.hidden{display:none;}
+  .output-stale-badge{display:none;margin-bottom:8px;padding:9px 12px;border:1px solid var(--gold);border-radius:7px;color:var(--gold);font-size:12px;text-align:center;}
+  .output-wrap.stale .output-stale-badge{display:block;}
+  .output-wrap.stale textarea,.output-wrap.stale .copy-btn{opacity:.45;pointer-events:none;}
+  textarea{
+    width:100%;
+    min-height:360px;
+    padding:15px;
+    border:1px solid var(--line);
+    border-radius:8px;
+    background:var(--panel);
+    color:var(--paper);
+    font:12px/1.75 Consolas,"Microsoft JhengHei",monospace;
+    resize:vertical;
+  }
+  .copy-btn{
+    width:100%;
+    margin-top:8px;
+    padding:12px;
+    border:1px solid var(--gold);
+    border-radius:8px;
+    background:transparent;
+    color:var(--gold);
+    font:inherit;
+    font-size:13px;
+    font-weight:800;
+    cursor:pointer;
+  }
+  .copy-btn.copied{background:var(--gold);color:var(--black);}
+  @media (max-width:760px){
+    nav{position:sticky;height:auto;align-items:stretch;flex-direction:column;gap:8px;padding:10px 14px 8px;}
+    .nav-context{font-size:10px;}
+    .wrap{padding:22px 14px 34px;}
+    header{padding:26px 0 26px;}
+    h1{font-size:28px;}
+    .section-sub{width:100%;margin-left:0;}
+    .grid,.grid-3,.grid-2,.pose-grid{grid-template-columns:repeat(2,1fr);}
+    .layer-grid{grid-template-columns:repeat(3,1fr);}
+  }
+  @media (max-width:480px){
+    .grid,.grid-3,.grid-2,.pose-grid,.layer-grid,.preset-grid,.form-grid{grid-template-columns:1fr;}
+    .card,.pose-card{min-height:0;}
+    .section-header{align-items:flex-start;flex-wrap:wrap;gap:5px 9px;}
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">寫真引擎</a>
+  <span class="nav-context">獨立測試專題｜第一版</span>
+</nav>
+
+<main class="wrap">
+  <header>
+    <div class="eyebrow">Festival Editorial Photography</div>
+    <h1>節慶美學寫真 <span>咒語產生器</span></h1>
+    <p>第一版先以中元月下燈會驗證：節慶主題、服裝、燈籠、民俗場景、月光與完整人物攝影語言。</p>
+  </header>
+
+  <div class="note">本頁目前只建立中元節測試路線，不加入首頁或其他工具頁。人物參考照片仍是唯一身份來源；共用鎖臉、臉部幾何、真人骨架與自然光線核心會持續優先。</div>
+
+  <section class="section-preset">
+    <div class="section-header"><span class="section-label">00</span><span class="section-title">一鍵版型模板</span><span class="section-sub">先套用完整中元節畫面，再微調細節</span></div>
+    <button class="random-btn" id="festivalRandom" type="button">隨機套用｜中元節氛圍</button>
+    <div class="preset-grid">
+      <button class="preset-btn primary" type="button" data-template="zhongyuanMoonlitLanternFestival">一鍵套用｜中元月下燈會</button>
+    </div>
+  </section>
+
+  <section class="section-style">
+    <div class="section-header"><span class="section-label">01</span><span class="section-title">成品用途 / 畫面語氣</span><span class="section-sub">決定節慶作品的攝影氣質</span></div>
+    <div class="grid grid-3">
+      <label class="card choice-card selected"><input type="radio" name="style" value="poeticFolk" checked><span class="name">唯美民俗寫真</span><span class="desc">月夜、燈影、祈福與安靜文化感</span></label>
+      <label class="card choice-card"><input type="radio" name="style" value="lanternEditorial"><span class="name">節慶燈影時裝誌</span><span class="desc">服裝展示、精品攝影與高級層次</span></label>
+      <label class="card choice-card"><input type="radio" name="style" value="etherealNight"><span class="name">月夜輕幻想</span><span class="desc">柔和神秘、浪漫空氣感、不走恐怖</span></label>
+    </div>
+  </section>
+
+  <section class="section-theme">
+    <div class="section-header"><span class="section-label">02</span><span class="section-title">節慶主題</span><span class="section-sub">第一版先鎖定中元節路線</span></div>
+    <div class="grid grid-3">
+      <label class="card choice-card selected"><input type="radio" name="festivalTheme" value="zhongyuanMoonlitLantern" checked><span class="name">中元月下燈會</span><span class="desc">紙燈籠、滿月、古街與唯美祈福氛圍</span></label>
+    </div>
+  </section>
+
+  <section class="section-composition">
+    <div class="section-header"><span class="section-label">03</span><span class="section-title">構圖取景</span><span class="section-sub">讓節慶道具與人物各自有清楚位置</span></div>
+    <div class="grid grid-3">
+      <label class="card choice-card selected"><input type="radio" name="composition" value="fullBodyLantern" checked><span class="name">燈籠全身直式</span><span class="desc">完整展示人物、裙襬、燈籠與濕地反光</span></label>
+      <label class="card choice-card"><input type="radio" name="composition" value="threeQuarterLantern"><span class="name">三分之二身燈影</span><span class="desc">臉部、胸口服裝與手提燈籠清楚</span></label>
+      <label class="card choice-card"><input type="radio" name="composition" value="environmentalLantern"><span class="name">環境人物主視覺</span><span class="desc">人物融入燈會街道，月亮與建築形成層次</span></label>
+      <label class="card choice-card"><input type="radio" name="composition" value="lanternForeground"><span class="name">前景燈籠框景</span><span class="desc">以近景燈籠與花枝框住人物</span></label>
+    </div>
+  </section>
+
+  <section class="section-garment">
+    <div class="section-header"><span class="section-label">04</span><span class="section-title">服裝方向</span><span class="section-sub">先決定服裝整體，再由改造核心補局部</span></div>
+    <div class="grid grid-3">
+      <label class="card choice-card selected"><input type="radio" name="garment" value="ivoryGauzeFestivalDress" checked><span class="name">象牙白輕紗節慶華服</span><span class="desc">花卉刺繡、飄袖、絲帶與柔和層疊</span></label>
+      <label class="card choice-card"><input type="radio" name="garment" value="paleRuqunLayered"><span class="name">月白改良襦裙</span><span class="desc">中式層疊、柔和裙襬與古典比例</span></label>
+      <label class="card choice-card"><input type="radio" name="garment" value="cinnabarLanternCouture"><span class="name">朱金燈會華服</span><span class="desc">朱紅、古金、織紋與節慶精品感</span></label>
+      <label class="card choice-card"><input type="radio" name="garment" value="modernFestivalCouture"><span class="name">現代節慶高訂</span><span class="desc">節慶色彩、現代剪裁與上鏡輪廓</span></label>
+      <label class="field custom-field">自訂服裝<input class="text-input" id="customGarment" type="text" placeholder="例如：月白絲綢長裙、朱紅刺繡罩衫、古典節慶禮服"></label>
+    </div>
+  </section>
+
+  <section class="section-material">
+    <div class="section-header"><span class="section-label">05</span><span class="section-title">節慶材質與元素</span><span class="section-sub">材質最多 2 個；畫面元素最多 4 個</span></div>
+    <div class="group-title">服裝材質</div>
+    <div class="grid grid-3" style="margin-top:8px;">
+      <label class="card choice-card selected"><input type="checkbox" name="material" value="lightGauze" data-max="2" checked><span class="name">輕盈紗質層次</span><span class="desc">柔軟飄動、保留服裝結構與自然垂墜</span></label>
+      <label class="card choice-card selected"><input type="checkbox" name="material" value="floralEmbroidery" data-max="2" checked><span class="name">細緻花卉刺繡</span><span class="desc">低調花紋、局部裝飾、不喧賓奪主</span></label>
+      <label class="card choice-card"><input type="checkbox" name="material" value="silkRibbon" data-max="2"><span class="name">絲帶與柔垂綁結</span><span class="desc">髮飾、腰部與袖口的輕柔動勢</span></label>
+      <label class="card choice-card"><input type="checkbox" name="material" value="pearlBellTrim" data-max="2"><span class="name">珍珠與小鈴飾邊</span><span class="desc">細微節慶聲響感與精緻反光</span></label>
+      <label class="card choice-card"><input type="checkbox" name="material" value="softOrganza" data-max="2"><span class="name">柔霧歐根紗</span><span class="desc">輕薄罩層、柔焦輪廓與精品質地</span></label>
+    </div>
+    <span class="choice-status" id="materialStatus"></span>
+    <div class="group-title">節慶畫面元素</div>
+    <div class="grid grid-3" style="margin-top:8px;">
+      <label class="card choice-card selected"><input type="checkbox" name="element" value="warmLanterns" data-max="4" checked><span class="name">暖光紙燈籠</span><span class="desc">前景、背景與手持道具形成光點層次</span></label>
+      <label class="card choice-card selected"><input type="checkbox" name="element" value="fullMoon" data-max="4" checked><span class="name">夜空滿月</span><span class="desc">右上方月面，作為冷色主光的視覺來源</span></label>
+      <label class="card choice-card selected"><input type="checkbox" name="element" value="whiteSpiderLilies" data-max="4" checked><span class="name">白色彼岸花</span><span class="desc">沿路點綴，唯美民俗而非恐怖符號</span></label>
+      <label class="card choice-card selected"><input type="checkbox" name="element" value="wetStoneReflection" data-max="4" checked><span class="name">濕石板路反光</span><span class="desc">延伸燈光與人物輪廓，增加畫面深度</span></label>
+      <label class="card choice-card"><input type="checkbox" name="element" value="softMist" data-max="4"><span class="name">薄霧空氣層</span><span class="desc">遠近分離、降低背景雜訊</span></label>
+      <label class="card choice-card"><input type="checkbox" name="element" value="friendlyLanternFaces" data-max="4"><span class="name">手繪表情燈籠</span><span class="desc">簡單友善表情，保留節慶趣味而不轉恐怖</span></label>
+    </div>
+    <span class="choice-status" id="elementStatus"></span>
+  </section>
+
+  <section class="section-garment-variation">
+    <div class="section-header"><span class="section-label">06</span><span class="section-title">服裝改造核心</span><span class="section-sub">只改局部結構，不重新設計整件服裝</span></div>
+    <p class="hint">Layer 只控制隨機套用時補足幾個部位；手動選擇的胸口、腰側與肩部不會被覆蓋。</p>
+    <div class="layer-grid">
+      <label class="card choice-card selected"><input type="radio" name="garmentLayer" value="layer0" checked><span class="name">Layer 0</span><span class="desc">原始版型</span></label>
+      <label class="card choice-card"><input type="radio" name="garmentLayer" value="layer3"><span class="name">Layer 3</span><span class="desc">隨機補 1 個部位</span></label>
+      <label class="card choice-card"><input type="radio" name="garmentLayer" value="layer6"><span class="name">Layer 6</span><span class="desc">隨機補 2 個部位</span></label>
+      <label class="card choice-card"><input type="radio" name="garmentLayer" value="layer9"><span class="name">Layer 9</span><span class="desc">三個部位全改</span></label>
+      <label class="card choice-card"><input type="radio" name="garmentLayer" value="random"><span class="name">隨機 Layer</span><span class="desc">連強度一起重新抽</span></label>
+    </div>
+    <div class="grid grid-3">
+      <div class="group-title">胸口結構</div>
+      <label class="card choice-card selected"><input type="radio" name="chestDetail" value="none" checked><span class="name">原服裝一致</span><span class="desc">不增加胸口改造</span></label>
+      <label class="card choice-card"><input type="radio" name="chestDetail" value="squareNeckBodice"><span class="name">柔方領結構胸衣</span><span class="desc">方領、內裡支撐與穩定版型</span></label>
+      <label class="card choice-card"><input type="radio" name="chestDetail" value="crossWrapBodice"><span class="name">交叉裹身胸衣</span><span class="desc">交叉結構、分層覆蓋與細緻剪裁</span></label>
+      <div class="group-title">腰側結構</div>
+      <label class="card choice-card selected"><input type="radio" name="waistSideDetail" value="none" checked><span class="name">原服裝一致</span><span class="desc">不增加腰側改造</span></label>
+      <label class="card choice-card"><input type="radio" name="waistSideDetail" value="ribbonWaist"><span class="name">絲帶腰部結構</span><span class="desc">柔垂綁帶、自然收束與裙襬連接</span></label>
+      <label class="card choice-card"><input type="radio" name="waistSideDetail" value="layeredSash"><span class="name">層疊織帶腰封</span><span class="desc">中式織帶、穩定腰線與服裝層次</span></label>
+      <div class="group-title">肩部結構</div>
+      <label class="card choice-card selected"><input type="radio" name="shoulderDetail" value="none" checked><span class="name">原服裝一致</span><span class="desc">不增加肩部改造</span></label>
+      <label class="card choice-card"><input type="radio" name="shoulderDetail" value="softBellSleeves"><span class="name">柔垂喇叭袖</span><span class="desc">寬鬆袖口、輕盈布料與自然飄動</span></label>
+      <label class="card choice-card"><input type="radio" name="shoulderDetail" value="ribbonShoulder"><span class="name">肩部絲帶垂墜</span><span class="desc">肩線與絲帶形成柔和動勢</span></label>
+    </div>
+  </section>
+
+  <section class="section-body">
+    <div class="section-header"><span class="section-label">07</span><span class="section-title">身形輪廓</span><span class="section-sub">只控制身形走向，不覆寫參考照身份</span></div>
+    <div class="grid grid-3">
+      <label class="card choice-card selected"><input type="radio" name="bodyShape" value="original" checked><span class="name">原圖自然比例</span><span class="desc">以參考照身形為主</span></label>
+      <label class="card choice-card"><input type="radio" name="bodyShape" value="slight_waist"><span class="name">輕微纖腰</span><span class="desc">自然修飾腰線</span></label>
+      <label class="card choice-card"><input type="radio" name="bodyShape" value="curvy_waist"><span class="name">豐滿纖腰</span><span class="desc">明顯胸腰臀曲線</span></label>
+      <label class="card choice-card"><input type="radio" name="bodyShape" value="fashion_tall"><span class="name">高挑時裝比例</span><span class="desc">修長高級模特感</span></label>
+      <label class="card choice-card"><input type="radio" name="bodyShape" value="korean_idol"><span class="name">韓系偶像比例</span><span class="desc">挺拔、修長、舞台寫真感</span></label>
+    </div>
+  </section>
+
+  <section class="section-pose">
+    <div class="section-header"><span class="section-label">08</span><span class="section-title">人物姿勢</span><span class="section-sub">讓人物與燈籠、裙襬和夜間場景自然互動</span></div>
+    <div class="pose-grid">
+      <label class="pose-card choice-card"><input type="radio" name="pose" value="auto"><span class="pose-name">AI判斷｜主題最佳姿勢</span><span class="pose-desc">依中元節、服裝、構圖與道具安排單一自然姿勢</span></label>
+      <label class="pose-card choice-card selected"><input type="radio" name="pose" value="lanternLiftHem" checked><span class="pose-name">提燈輕提裙襬</span><span class="pose-desc">一手提燈，一手輕提裙襬，身體微側</span></label>
+      <label class="pose-card choice-card"><input type="radio" name="pose" value="lanternTurn"><span class="pose-name">提燈回眸</span><span class="pose-desc">走動中自然回望鏡頭，袖帶與髮絲有動勢</span></label>
+      <label class="pose-card choice-card"><input type="radio" name="pose" value="templeWalk"><span class="pose-name">古街緩步</span><span class="pose-desc">沿濕石板路行走，燈籠與裙襬保持清楚</span></label>
+      <label class="pose-card choice-card"><input type="radio" name="pose" value="moonGaze"><span class="pose-name">仰望月光</span><span class="pose-desc">身體放鬆、視線抬向滿月，保留臉部辨識度</span></label>
+      <label class="field custom-field">自訂姿勢<input class="text-input" id="customPose" type="text" placeholder="例如：站在花燈下雙手捧燈、沿廟埕慢慢走過"></label>
+    </div>
+  </section>
+
+  <section class="section-extra">
+    <div class="section-header"><span class="section-label">09</span><span class="section-title">自訂要求</span><span class="section-sub">只放其他要求與畫面強度</span></div>
+    <div class="form-grid">
+      <label class="field">畫面強度<select id="intensity" class="select-input">
+        <option value="quiet">安靜唯美，民俗氛圍優先</option>
+        <option value="balanced" selected>平衡寫真，人物與節慶場景並重</option>
+        <option value="premium">精品廣告，材質與光影更精緻</option>
+        <option value="cinematic">電影敘事，夜色與空間更有層次</option>
+      </select></label>
+      <label class="field">其他要求<input class="text-input" id="extraNote" type="text" placeholder="例如：保持畫面乾淨、不要文字、不要其他人物"></label>
+    </div>
+  </section>
+
+  <section class="section-lighting">
+    <div class="section-header"><span class="section-label">10</span><span class="section-title">光影色彩</span><span class="section-sub">光影與配色分開控制</span></div>
+    <div class="group-title">光影方式</div>
+    <div class="grid grid-3" style="margin-top:8px;">
+      <label class="card choice-card selected"><input type="radio" name="lighting" value="moonLanternContrast" checked><span class="name">月光與燈籠對比</span><span class="desc">冷藍月光搭配暖色燈籠，人物曝光自然</span></label>
+      <label class="card choice-card"><input type="radio" name="lighting" value="softLanternGlow"><span class="name">柔和燈影包圍光</span><span class="desc">暖光包圍人物，背景保留夜色層次</span></label>
+      <label class="card choice-card"><input type="radio" name="lighting" value="mistyMoonBacklight"><span class="name">薄霧月夜逆光</span><span class="desc">髮絲與袖口有柔和輪廓光</span></label>
+      <label class="card choice-card"><input type="radio" name="lighting" value="templeWarmNight"><span class="name">廟埕暖夜光</span><span class="desc">建築暖光與遠處燈籠形成景深</span></label>
+    </div>
+    <div class="group-title">色彩系統</div>
+    <div class="grid grid-3" style="margin-top:8px;">
+      <label class="card choice-card selected"><input type="radio" name="colorPalette" value="ivoryMidnightGold" checked><span class="name">搭配色｜象牙白・午夜藍・暖金</span><span class="desc">對應參考圖的月光、服裝與燈火</span></label>
+      <label class="card choice-card"><input type="radio" name="colorPalette" value="moonJadeSilver"><span class="name">搭配色｜月白・黛青・銀灰</span><span class="desc">清冷、雅緻、霧夜民俗感</span></label>
+      <label class="card choice-card"><input type="radio" name="colorPalette" value="cinnabarLanternGold"><span class="name">搭配色｜朱紅・古金・墨黑</span><span class="desc">節慶、華麗、燈會主視覺</span></label>
+      <label class="card choice-card"><input type="radio" name="colorPalette" value="whiteFlowerBlue"><span class="name">搭配色｜白花・霧藍・濕石灰</span><span class="desc">花朵、月夜與路面反光的柔和系統</span></label>
+      <label class="card choice-card"><input type="radio" name="colorPalette" value="aiThemeScenePalette"><span class="name">AI 根據主題判斷配色</span><span class="desc">依節慶、服裝、場景與光影自動協調</span></label>
+    </div>
+    <label class="field custom-field">指定配色<input class="text-input" id="colorNote" type="text" placeholder="例如：月白、深藍與一點暖金，不要高飽和"></label>
+  </section>
+
+  <section class="section-background">
+    <div class="section-header"><span class="section-label">11</span><span class="section-title">背景場景</span><span class="section-sub">用空間建立節慶故事，不新增其他節日語彙</span></div>
+    <div class="grid grid-3">
+      <label class="card choice-card selected"><input type="radio" name="background" value="moonlitTempleLanternStreet" checked><span class="name">月下廟宇燈街</span><span class="desc">古典屋簷、紙燈籠、滿月與濕石板路</span></label>
+      <label class="card choice-card"><input type="radio" name="background" value="riverLanternBlessing"><span class="name">河岸放燈祈福</span><span class="desc">水面、河燈、遠方古橋與安靜夜色</span></label>
+      <label class="card choice-card"><input type="radio" name="background" value="oldTownLanternAlley"><span class="name">古街燈影小巷</span><span class="desc">木造街屋、連續燈籠與人物行走空間</span></label>
+      <label class="card choice-card"><input type="radio" name="background" value="quietTempleCourtyard"><span class="name">靜謐廟埕庭院</span><span class="desc">石階、花木、廟埕與少量燈火層次</span></label>
+      <label class="card choice-card"><input type="radio" name="background" value="pureWhiteBackground"><span class="name">無背景純白色</span><span class="desc">乾淨棚拍，不保留節慶環境</span></label>
+      <label class="field custom-field">自填背景<input class="text-input" id="customBackground" type="text" placeholder="例如：有月光的古典庭院、河畔石橋與遠處花燈"></label>
+    </div>
+  </section>
+
+  <section class="section-camera">
+    <div class="section-header"><span class="section-label">12</span><span class="section-title">拍攝角度與鏡頭感</span><span class="section-sub">維持自然頭身比例與人物辨識度</span></div>
+    <div class="grid grid-3">
+      <label class="card choice-card selected"><input type="radio" name="camera" value="fullBodyEditorial" checked><span class="name">50–70mm 全身寫真</span><span class="desc">自然透視、足夠距離、完整展示服裝與場景</span></label>
+      <label class="card choice-card"><input type="radio" name="camera" value="eyeLevelFestival"><span class="name">平視節慶肖像</span><span class="desc">人物親近、背景燈影保持平衡</span></label>
+      <label class="card choice-card"><input type="radio" name="camera" value="threeQuarterFestival"><span class="name">三分之四時裝視角</span><span class="desc">服裝結構、手提道具與臉部都有立體感</span></label>
+      <label class="card choice-card"><input type="radio" name="camera" value="distantFestivalHero"><span class="name">遠距節慶主視覺</span><span class="desc">人物、月亮、燈街與建築完整共存</span></label>
+      <label class="card choice-card"><input type="radio" name="camera" value="softFocusLantern"><span class="name">柔焦燈影人像</span><span class="desc">柔和光暈，臉部仍維持自然細節</span></label>
+      <label class="card choice-card"><input type="radio" name="camera" value="sideTurnFestival"><span class="name">側身回望視角</span><span class="desc">側臉、肩線與燈籠形成方向感</span></label>
+    </div>
+  </section>
+
+  <section class="section-ratio">
+    <div class="section-header"><span class="section-label">13</span><span class="section-title">圖片比例</span><span class="section-sub">使用統一文字比例值</span></div>
+    <div class="grid grid-4">
+      <label class="card choice-card selected"><input type="radio" name="ratio" value="9:16" checked><span class="name">9:16</span><span class="desc">直式節慶寫真主視覺</span></label>
+      <label class="card choice-card"><input type="radio" name="ratio" value="4:5"><span class="name">4:5</span><span class="desc">社群精品人物圖</span></label>
+      <label class="card choice-card"><input type="radio" name="ratio" value="2:3"><span class="name">2:3</span><span class="desc">直式節慶海報</span></label>
+      <label class="card choice-card"><input type="radio" name="ratio" value="3:4"><span class="name">3:4</span><span class="desc">人物與環境平衡</span></label>
+      <label class="card choice-card"><input type="radio" name="ratio" value="1:1"><span class="name">1:1</span><span class="desc">方形節慶社群主圖</span></label>
+      <label class="card choice-card"><input type="radio" name="ratio" value="16:9"><span class="name">16:9</span><span class="desc">網站或影片橫幅</span></label>
+    </div>
+  </section>
+
+  <section class="section-output">
+    <div class="section-header"><span class="section-label">14</span><span class="section-title">生成咒語</span><span class="section-sub">生成後可複製到 ChatGPT 使用</span></div>
+    <button class="generate-btn" id="generateBtn" type="button">生成完整咒語</button>
+  </section>
+
+  <div class="output-wrap hidden" id="outputWrap">
+    <div class="output-stale-badge">選項已變更，請重新生成咒語</div>
+    <textarea id="outputText" readonly></textarea>
+    <button class="copy-btn" id="copyBtn" type="button">一鍵複製</button>
+  </div>
+</main>
+
+<script src="assets/core-prompt.js"></script>
+<script src="assets/garment-core.js"></script>
+<script>
+const CORE = window.HB_CORE_PROMPT?.page?.magazine || {};
+const identityCore = CORE.identity || window.CORE_IDENTITY_LOCK || '';
+const anatomyCore = CORE.skeleton || window.CORE_REALISTIC_ANATOMY || '';
+const poseCore = CORE.pose || window.CORE_POSE_NATURALITY || '';
+const photographerCore = CORE.photographer || '';
+const lightingCore = CORE.lighting || window.CORE_LIGHTING_UNIFICATION || '';
+const cleanFrameCore = CORE.cleanframe || window.CORE_CLEAN_FRAME || '';
+const outputCore = CORE.output || window.CORE_OUTPUT_QUALITY || '';
+
+const styleData = {
+  poeticFolk: 'poetic Zhongyuan Festival-inspired folk-fashion portrait, refined and beautiful, respectful blessing atmosphere, luminous night storytelling',
+  lanternEditorial: 'high-end lantern festival fashion editorial, premium costume presentation, elegant full-body campaign energy, polished visual hierarchy',
+  etherealNight: 'ethereal moonlit festival portrait, soft romantic mystery, restrained dreamlike atmosphere, elegant non-horror visual tone'
+};
+
+const festivalThemeData = {
+  zhongyuanMoonlitLantern: 'Zhongyuan Festival-inspired moonlit lantern night, respectful folk-lantern gathering, quiet blessing atmosphere'
+};
+
+const compositionData = {
+  fullBodyLantern: 'full-body vertical portrait composition, subject slightly right of center, warm lantern in the left foreground, bright moon in the upper right, wet reflective path anchoring the lower frame, complete sleeves and hem visible',
+  threeQuarterLantern: 'three-quarter body portrait composition, face, collar, upper garment and hand-held lantern remain clear, layered lantern depth behind the subject',
+  environmentalLantern: 'environmental festival portrait composition, the subject integrated into the lantern street, temple architecture and full moon create depth without crowding the face',
+  lanternForeground: 'foreground-framed portrait composition, softly defocused paper lanterns and white flowers frame the subject, clean separation around the face'
+};
+
+const garmentData = {
+  ivoryGauzeFestivalDress: 'ivory gauze layered festival dress with delicate floral embroidery, soft flowing sleeves, refined ribbon waist details, elegant fitted upper structure and natural skirt movement',
+  paleRuqunLayered: 'pale moon-white Chinese-inspired layered ruqun, refined cross-collar construction, softly draped skirt, delicate textile details and graceful festival styling',
+  cinnabarLanternCouture: 'cinnabar red and antique-gold festival couture, refined woven texture, elegant long silhouette, controlled ceremonial richness and premium tailoring',
+  modernFestivalCouture: 'modern festival couture with a clean fitted silhouette, restrained traditional textile references, elegant draped layers and high-end editorial finish'
+};
+
+const materialData = {
+  lightGauze: 'lightweight gauze layers with controlled opacity, realistic fabric tension and natural gravity-aware draping',
+  floralEmbroidery: 'delicate floral embroidery placed with restraint across the garment, fine thread relief and premium textile detail',
+  silkRibbon: 'soft silk ribbons and refined tied details at the hair, waist and sleeve edges, moving naturally with the body',
+  pearlBellTrim: 'small pearl and bell-like trim accents used sparingly along the garment edge, delicate reflective detail',
+  softOrganza: 'soft matte organza overlay with airy structure, controlled translucency and clean couture edges'
+};
+
+const elementData = {
+  warmLanterns: 'many warm paper lanterns at varied distances, layered bokeh and practical light sources',
+  fullMoon: 'a bright full moon in a deep blue night sky, cool moonlight integrated into the same scene',
+  whiteSpiderLilies: 'white spider lilies along the path, delicate botanical detail with poetic folk symbolism',
+  wetStoneReflection: 'wet stone pavement reflecting lantern light and the lower silhouette with physically plausible reflections',
+  softMist: 'a thin atmospheric mist separating foreground, subject and distant architecture',
+  friendlyLanternFaces: 'a few decorative paper lanterns with simple friendly hand-drawn faces, playful and non-threatening'
+};
+
+const bodyData = {
+  original: 'original natural body proportions from the reference photo, do not reshape the body',
+  slight_waist: 'slightly refined waistline, subtle natural shaping, keep shoulders, hips and overall body proportions faithful to the reference',
+  curvy_waist: 'fuller feminine bust curve and narrow slim waistline, dramatic feminine S-curve silhouette, strong bust-waist-hip contrast, keep anatomy natural',
+  fashion_tall: 'tall fashion proportion, elongated but natural body line, refined model presence without changing facial identity',
+  korean_idol: 'Korean idol-inspired proportion, upright posture, long clean body line, toned yet soft commercial portrait presence'
+};
+
+const poseData = {
+  auto: window.HB_CORE_PROMPT?.controls?.autoPose || window.HB_AUTO_POSE_PROMPT || '',
+  lanternLiftHem: 'graceful full-body pose with one hand holding a warm paper lantern and the other hand lightly lifting the flowing skirt, body turned slightly to one side, relaxed shoulders, soft fingers, one clear grounded step, gentle natural smile, sleeves and ribbons moving with the same breeze',
+  lanternTurn: 'captured during a natural turn while holding a paper lantern, subtle over-the-shoulder glance, relaxed hands, coherent head-neck-shoulder-spine alignment, hair and ribbons following the motion',
+  templeWalk: 'slow natural walk along the wet stone path, one clear step, relaxed arms, flowing hem and sleeves moving naturally, face unobstructed and recognizable',
+  moonGaze: 'relaxed standing pose with the gaze lifted toward the full moon, natural neck and shoulders, hands resting softly around the lantern handle, restrained romantic expression'
+};
+
+const lightingData = {
+  moonLanternContrast: 'cool blue moonlight balanced with warm paper-lantern light, one unified environmental exposure, natural skin tone and controlled highlights on gauze',
+  softLanternGlow: 'soft warm lantern glow surrounding the subject, deep blue night retained in the distance, gentle facial exposure and refined textile highlights',
+  mistyMoonBacklight: 'soft moonlit backlight through thin mist, delicate rim light around hair and sleeves, face evenly exposed within the same global light',
+  templeWarmNight: 'warm temple and lantern practical lights with restrained night contrast, architecture and subject share the same white balance'
+};
+
+const colorData = {
+  ivoryMidnightGold: 'coordinated palette of ivory white, midnight blue and restrained warm gold, cool-warm contrast with premium editorial balance',
+  moonJadeSilver: 'coordinated palette of moon white, muted jade, deep teal and soft silver, quiet cool folk elegance',
+  cinnabarLanternGold: 'coordinated palette of cinnabar red, antique gold and ink black, festive richness with controlled saturation',
+  whiteFlowerBlue: 'coordinated palette of white flowers, mist blue and wet stone gray, delicate nocturnal botanical harmony',
+  aiThemeScenePalette: window.HB_CORE_PROMPT?.controls?.autoColor || window.HB_AUTO_COLOR_PROMPT || ''
+};
+
+const backgroundData = {
+  moonlitTempleLanternStreet: 'traditional temple street at night, dark wooden eaves, layered paper lanterns, a bright full moon, wet stone pavement and white flowers along the path',
+  riverLanternBlessing: 'quiet riverside blessing scene, floating lanterns on dark water, a traditional stone bridge, distant eaves and gentle moonlit reflections',
+  oldTownLanternAlley: 'traditional old-town lantern alley, timber facades, hanging paper lanterns, narrow wet stone lane and clean walking space around the subject',
+  quietTempleCourtyard: 'quiet temple courtyard with stone steps, restrained greenery, a few warm lanterns, dark rooflines and calm moonlit depth',
+  pureWhiteBackground: 'pure seamless white background, no visible environment, no architecture, no props, evenly lit clean white studio backdrop'
+};
+
+const cameraData = {
+  fullBodyEditorial: '50–70mm full-body editorial photography, camera far enough to preserve natural body proportions, balanced face and body scale, no close-up distortion',
+  eyeLevelFestival: 'natural eye-level festival portrait camera, standard perspective, balanced face and body proportion, clean premium framing',
+  threeQuarterFestival: 'three-quarter camera angle at about 45 degrees, face, body and lantern show dimensional structure, refined advertising perspective',
+  distantFestivalHero: 'distant festival hero camera, pulled back to show the subject, moon, lantern street and architecture together, spacious key visual perspective',
+  softFocusLantern: 'soft-focus lantern portrait camera language, gentle practical-light bloom, face remains readable with natural skin detail',
+  sideTurnFestival: 'side-turn portrait camera, clear jawline and shoulder silhouette, lantern depth and moonlit architecture behind the subject'
+};
+
+const ratioData = {
+  '9:16': 'aspect ratio 9:16, vertical festival editorial composition',
+  '4:5': 'aspect ratio 4:5, vertical premium social portrait composition',
+  '2:3': 'aspect ratio 2:3, vertical festival poster composition',
+  '3:4': 'aspect ratio 3:4, vertical portrait composition with balanced environment',
+  '1:1': 'aspect ratio 1:1, square festival campaign composition',
+  '16:9': 'aspect ratio 16:9, horizontal festival key visual composition'
+};
+
+const intensityData = {
+  quiet: 'quiet poetic festival direction, restrained styling, gentle folk atmosphere and believable movement',
+  balanced: 'balanced festival editorial direction, subject, clothing, lanterns and architecture share clear visual priority',
+  premium: 'premium festival campaign direction, refined textile detail, practical light, controlled reflections and polished color grading',
+  cinematic: 'cinematic festival storytelling, layered night depth, expressive moonlight and lantern contrast with clean subject separation'
+};
+
+const GARMENT_DETAIL_LAYER_ZONES = Object.freeze({ layer0: 0, layer3: 1, layer6: 2, layer9: 3 });
+const GARMENT_DETAIL_RANDOM_POOLS = Object.freeze({
+  chestDetail: ['squareNeckBodice', 'crossWrapBodice'],
+  waistSideDetail: ['ribbonWaist', 'layeredSash'],
+  shoulderDetail: ['softBellSleeves', 'ribbonShoulder']
+});
+const GARMENT_VARIATIONS = {
+  chestDetail: {
+    none: '',
+    squareNeckBodice: 'a soft square-neck fitted bodice with stable inner support, an opaque structured inner layer and realistic fabric tension',
+    crossWrapBodice: 'a refined cross-wrap bodice structure with secure layered coverage, elegant tailoring and natural textile support'
+  },
+  waistSideDetail: {
+    none: '',
+    ribbonWaist: 'soft silk ribbon waist construction with a natural gathered transition into the skirt, realistic tied ends and restrained movement',
+    layeredSash: 'layered woven sash at the waist, stable wrap logic, subtle texture and an elegant connection between upper garment and skirt'
+  },
+  shoulderDetail: {
+    none: '',
+    softBellSleeves: 'soft bell sleeves with airy cuffs, stable shoulder construction and natural fabric movement',
+    ribbonShoulder: 'refined shoulder ribbons falling with natural gravity, balanced shoulder line and controlled decorative movement'
+  }
+};
+
+const themeTemplates = {
+  zhongyuanMoonlitLanternFestival: {
+    style: 'poeticFolk',
+    festivalTheme: 'zhongyuanMoonlitLantern',
+    composition: 'fullBodyLantern',
+    garment: 'ivoryGauzeFestivalDress',
+    materials: ['lightGauze', 'floralEmbroidery'],
+    elements: ['warmLanterns', 'fullMoon', 'whiteSpiderLilies', 'wetStoneReflection'],
+    garmentLayer: 'layer0',
+    chestDetail: 'squareNeckBodice',
+    waistSideDetail: 'ribbonWaist',
+    shoulderDetail: 'softBellSleeves',
+    bodyShape: 'original',
+    pose: 'lanternLiftHem',
+    lighting: 'moonLanternContrast',
+    colorPalette: 'ivoryMidnightGold',
+    background: 'moonlitTempleLanternStreet',
+    camera: 'fullBodyEditorial',
+    ratio: '9:16',
+    intensity: 'premium'
+  }
+};
+
+function selected(name){
+  return document.querySelector('input[name="' + name + '"]:checked')?.value || '';
+}
+function checkedValues(name){
+  return Array.from(document.querySelectorAll('input[name="' + name + '"]:checked')).map(input => input.value);
+}
+function values(name){
+  return Array.from(document.querySelectorAll('input[name="' + name + '"]')).map(input => input.value);
+}
+function randomItem(list){
+  return list[Math.floor(Math.random() * list.length)];
+}
+function shuffle(list){
+  return list.slice().sort(() => Math.random() - 0.5);
+}
+function setRadioValue(name, value){
+  const input = document.querySelector('input[name="' + name + '"][value="' + CSS.escape(value) + '"]');
+  if(input) input.checked = true;
+}
+function setCheckedValues(name, selectedValues){
+  const chosen = new Set(selectedValues || []);
+  document.querySelectorAll('input[name="' + name + '"][type="checkbox"]').forEach(input => {
+    input.checked = chosen.has(input.value);
+  });
+}
+function refreshCards(){
+  document.querySelectorAll('.choice-card').forEach(card => {
+    const input = card.querySelector('input');
+    if(input) card.classList.toggle('selected', input.checked);
+  });
+  updateChoiceStatus('material', 2, 'materialStatus');
+  updateChoiceStatus('element', 4, 'elementStatus');
+}
+function updateChoiceStatus(name, max, id){
+  const status = document.getElementById(id);
+  if(!status) return;
+  const count = checkedValues(name).length;
+  status.textContent = count + ' / ' + max;
+  status.classList.toggle('is-limit', count >= max);
+}
+function clearCustomFields(){
+  ['customGarment', 'customPose', 'colorNote', 'customBackground', 'extraNote'].forEach(id => {
+    const field = document.getElementById(id);
+    if(field) field.value = '';
+  });
+}
+function resolveVariationParts(){
+  return HB_GARMENT_CORE.compactPromptParts([
+    GARMENT_VARIATIONS.chestDetail[selected('chestDetail')],
+    GARMENT_VARIATIONS.waistSideDetail[selected('waistSideDetail')],
+    GARMENT_VARIATIONS.shoulderDetail[selected('shoulderDetail')]
+  ]);
+}
+function applyTemplate(key){
+  const preset = themeTemplates[key];
+  if(!preset) return;
+  ['style', 'festivalTheme', 'composition', 'garment', 'garmentLayer', 'chestDetail', 'waistSideDetail', 'shoulderDetail', 'bodyShape', 'pose', 'lighting', 'colorPalette', 'background', 'camera', 'ratio'].forEach(name => setRadioValue(name, preset[name]));
+  setCheckedValues('material', preset.materials);
+  setCheckedValues('element', preset.elements);
+  document.getElementById('intensity').value = preset.intensity;
+  clearCustomFields();
+  refreshCards();
+  generate({ reveal: true });
+}
+function applyRandomSelection(){
+  clearCustomFields();
+  ['style', 'festivalTheme', 'composition', 'garment', 'bodyShape', 'pose', 'lighting', 'colorPalette', 'background', 'camera', 'ratio'].forEach(name => setRadioValue(name, randomItem(values(name))));
+  setCheckedValues('material', shuffle(values('material')).slice(0, 2));
+  setCheckedValues('element', shuffle(values('element')).slice(0, 4));
+  setRadioValue('garmentLayer', randomItem(['layer0', 'layer3', 'layer6', 'layer9']));
+  setRadioValue('chestDetail', 'none');
+  setRadioValue('waistSideDetail', 'none');
+  setRadioValue('shoulderDetail', 'none');
+  const layerSelection = HB_GARMENT_CORE.resolveLayer(selected('garmentLayer'), ['layer0', 'layer3', 'layer6', 'layer9'], GARMENT_DETAIL_LAYER_ZONES);
+  setRadioValue('garmentLayer', layerSelection.key);
+  const zoneFields = {
+    chestDetail: GARMENT_VARIATIONS.chestDetail,
+    waistSideDetail: GARMENT_VARIATIONS.waistSideDetail,
+    shoulderDetail: GARMENT_VARIATIONS.shoulderDetail
+  };
+  const randomZones = HB_GARMENT_CORE.chooseFreeZones(zoneFields, name => selected(name), layerSelection.targetCount).zones;
+  randomZones.forEach(name => {
+    const pool = HB_GARMENT_CORE.randomKeys(zoneFields[name], GARMENT_DETAIL_RANDOM_POOLS[name]);
+    if(pool.length) setRadioValue(name, randomItem(pool));
+  });
+  document.getElementById('intensity').value = randomItem(Object.keys(intensityData));
+  refreshCards();
+  generate({ reveal: true });
+}
+function markStale(){
+  const wrap = document.getElementById('outputWrap');
+  if(!wrap.classList.contains('hidden')) wrap.classList.add('stale');
+}
+function joinData(data, keys, fallback){
+  const parts = (keys || []).map(key => data[key]).filter(Boolean);
+  return parts.length ? parts.join(', ') : fallback;
+}
+function generate(options){
+  const settings = options || {};
+  const customGarment = document.getElementById('customGarment').value.trim();
+  const customPose = document.getElementById('customPose').value.trim();
+  const colorNote = document.getElementById('colorNote').value.trim();
+  const customBackground = document.getElementById('customBackground').value.trim();
+  const extraNote = document.getElementById('extraNote').value.trim();
+  const styleText = styleData[selected('style')];
+  const themeText = festivalThemeData[selected('festivalTheme')];
+  const compositionText = compositionData[selected('composition')];
+  const garmentText = customGarment ? 'custom festival garment direction only: ' + customGarment + '; do not blend another preset garment' : garmentData[selected('garment')];
+  const materialText = joinData(materialData, checkedValues('material'), 'refined festival textile with realistic drape');
+  const elementText = joinData(elementData, checkedValues('element'), 'restrained festival details selected by the scene');
+  const poseText = customPose ? 'custom natural festival pose only: ' + customPose + '; do not blend another preset pose' : poseData[selected('pose')];
+  const backgroundText = customBackground ? 'custom festival background only: ' + customBackground + '; do not blend another preset background' : backgroundData[selected('background')];
+  const colorText = colorNote || colorData[selected('colorPalette')];
+  const variationParts = resolveVariationParts();
+  const variationBlock = variationParts.length ? '【服裝改造核心】\n\n' + variationParts.join('\n') : '';
+  const scopeNegative = '【中元節主題限制】\n\nRespectful folk-festival visual language only. No horror, no gore, no blood, no corpse, no demonic creature, no occult ritual, no haunted-house styling, no Western Halloween elements, no xianxia magic, no futuristic technology, no modern streetwear, no random readable text or watermark.';
+  const prompt = [
+    identityCore,
+    anatomyCore,
+    poseCore,
+    photographerCore,
+    lightingCore,
+    '【節慶攝影構圖核心】\n\nSubject scale, body scale, lantern scale and architectural depth remain coherent. Keep the face clear, the body naturally proportioned and every practical light source inside one integrated photograph.',
+    '【成品用途 / 畫面語氣】\n\n' + styleText,
+    '【節慶主題】\n\n' + themeText,
+    '【構圖取景】\n\n' + compositionText,
+    '【服裝方向】\n\n' + garmentText,
+    '【節慶材質】\n\n' + materialText,
+    '【節慶畫面元素】\n\n' + elementText,
+    variationBlock,
+    '【身形輪廓】\n\n' + bodyData[selected('bodyShape')],
+    '【人物姿勢】\n\n' + poseText,
+    '【光影】\n\n' + lightingData[selected('lighting')],
+    '【色彩系統】\n\n' + colorText,
+    '【背景場景】\n\n' + backgroundText,
+    '【拍攝角度與鏡頭感】\n\n' + cameraData[selected('camera')],
+    '【圖片比例】\n\n' + ratioData[selected('ratio')],
+    '【畫面強度】\n\n' + intensityData[document.getElementById('intensity').value],
+    scopeNegative,
+    cleanFrameCore,
+    outputCore,
+    extraNote ? '【其他要求】\n\n' + extraNote : ''
+  ].filter(Boolean).join('\n\n---\n\n');
+  document.getElementById('outputText').value = prompt;
+  document.getElementById('outputWrap').classList.remove('hidden', 'stale');
+  document.getElementById('copyBtn').textContent = '一鍵複製';
+  if(settings.reveal) document.getElementById('outputWrap').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+document.querySelectorAll('input[type="radio"]').forEach(input => input.addEventListener('change', () => { refreshCards(); markStale(); }));
+document.querySelectorAll('input[type="checkbox"]').forEach(input => input.addEventListener('change', event => {
+  const max = Number(event.target.dataset.max || 0);
+  const checked = checkedValues(event.target.name);
+  if(max && checked.length > max) event.target.checked = false;
+  refreshCards();
+  markStale();
+}));
+['customGarment', 'customPose', 'colorNote', 'customBackground', 'extraNote', 'intensity'].forEach(id => document.getElementById(id).addEventListener('input', markStale));
+document.getElementById('intensity').addEventListener('change', markStale);
+document.getElementById('generateBtn').addEventListener('click', () => generate({ reveal: true }));
+document.getElementById('festivalRandom').addEventListener('click', applyRandomSelection);
+document.querySelectorAll('[data-template]').forEach(button => button.addEventListener('click', () => applyTemplate(button.dataset.template)));
+document.getElementById('copyBtn').addEventListener('click', () => {
+  if(document.getElementById('outputWrap').classList.contains('stale')) return;
+  const text = document.getElementById('outputText').value;
+  const button = document.getElementById('copyBtn');
+  const done = () => {
+    button.textContent = '已複製';
+    button.classList.add('copied');
+    setTimeout(() => { button.textContent = '一鍵複製'; button.classList.remove('copied'); }, 1400);
+  };
+  if(navigator.clipboard?.writeText) navigator.clipboard.writeText(text).then(done).catch(() => {
+    document.getElementById('outputText').select();
+    document.execCommand('copy');
+    done();
+  });
+  else {
+    document.getElementById('outputText').select();
+    document.execCommand('copy');
+    done();
+  }
+});
+window.HB_INSTALL_CUSTOM_IDENTITY_WARNING?.(document);
+refreshCards();
+applyTemplate('zhongyuanMoonlitLanternFestival');
+</script>
+</body>
+</html>
