@@ -702,6 +702,7 @@
       <label class="card"><input type="radio" name="material" value="heartsQueenCouture"><div class="name">紅心皇后禮服</div><div class="desc">撲克紅心宮廷裝、鑲鑽皇冠、撕紙牌框構圖</div></label>
       <label class="card"><input type="radio" name="material" value="jellyfishIridescentGown"><div class="name">水母虹彩裙</div><div class="desc">半透明虹彩水母裙、垂墜觸鬚緞帶、珍珠光澤</div></label>
       <label class="card"><input type="radio" name="material" value="redRopeMuseumCouture"><div class="name">紅色撕裂膜繩球</div><div class="desc">纖維繩球、撕裂膜理、博物館裝置材質</div></label>
+      <label class="card"><input type="radio" name="material" value="wonderlandPocketWatchTea"><div class="name">懷錶與傾灑茶飲道具</div><div class="desc">飄浮懷錶、傾灑茶飲、玫瑰花瓣與撲克牌書頁</div></label>
 <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 甜點食品飲品</div>
       <label class="card selected"><input type="radio" name="material" value="milkTea" checked><div class="name">奶茶牛奶</div><div class="desc">焦糖奶茶與牛奶對撞</div></label>
       <label class="card"><input type="radio" name="material" value="strawberry"><div class="name">草莓奶昔</div><div class="desc">粉紅奶昔與草莓果粒</div></label>
@@ -1057,6 +1058,7 @@
           <label class="pose-card"><input type="radio" name="pose" value="energy_burst"><div class="pose-name">能量爆發姿</div><div class="pose-desc">能量從背後炸開、髮絲被吹向前</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="dual_spirit_guardian_throne"><div class="pose-name">雙靈守護寶座姿</div><div class="pose-desc">端坐寶座、手持發光法杖、左右靈獸環伺</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="emerging_from_installation"><div class="pose-name">裝置中踏出姿</div><div class="pose-desc">從紅繩裝置自然踏出，雙手分開材質，博物館表演感</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="wonderland_falling_tumble"><div class="pose-name">仙境墜落翻轉姿</div><div class="pose-desc">倒栽蔥式墜落構圖，一手伸展，裙擺髮絲隨墜落飄動</div></label>
         </div>
       </div>
     </div>
@@ -1215,6 +1217,7 @@
       <label class="card"><input type="radio" name="background" value="goldenCarriageSquare"><div class="name">哥德馬車廣場</div><div class="desc">黑金馬車、教堂廣場、鵝卵石街道</div></label>
       <label class="card"><input type="radio" name="background" value="rockyCoastTidepool"><div class="name">礁岩海岸潮池</div><div class="desc">海蝕礁岩、清澈潮池、藍天海風</div></label>
       <label class="card"><input type="radio" name="background" value="cliffsideInfinityPoolSunset"><div class="name">水島莊園無邊際泳池日落</div><div class="desc">懸崖無邊際泳池、金色日落海平線、精品度假莊園</div></label>
+      <label class="card"><input type="radio" name="background" value="wonderlandBaroqueFallingHall"><div class="name">巴洛克墜落廳堂</div><div class="desc">傾斜墜落視角、垂墜窗簾與雕花天花板、仙境奇幻氛圍</div></label>
       <label class="card"><input type="radio" name="background" value="crystalForestPath"><div class="name">水晶森林步道</div><div class="desc">水晶樹、垂墜吊墜、玻璃棧道聖光</div></label>
       <label class="card"><input type="radio" name="background" value="rainbowCloudSky"><div class="name">彩虹雲海天空</div><div class="desc">彩虹拱、泡泡、粉彩雲海陽光</div></label>
       <label class="card"><input type="radio" name="background" value="industrialSteamFactory"><div class="name">廢棄工業廠房</div><div class="desc">蒸氣管線、機械手臂、煙霧瀰漫</div></label>
@@ -2037,6 +2040,11 @@ const materialData = {
     label: '紅色 PP 撕裂膜繩球',
     prompt: 'red PP tear-film rope material system, a giant coiled red rope sphere naturally opening into layered sculptural couture, visible fibrous strands, twisted rope texture, controlled glossy highlights, museum-grade material realism',
     palette: 'cinnabar red, vivid vermilion, soft museum white, restrained charcoal shadow'
+  },
+  wonderlandPocketWatchTea: {
+    label: '懷錶與傾灑茶飲道具',
+    prompt: 'Wonderland prop ensemble material system, an ornate antique pocket watch floating nearby with a delicate porcelain teacup spilling a ribbon of tea mid-air, scattered rose petals, drifting playing cards and open book pages surrounding the subject, whimsical storybook advertisement atmosphere',
+    palette: 'antique brass gold, porcelain white, warm amber tea, deep rose red, soft parchment cream'
   }
 };
 
@@ -2196,7 +2204,8 @@ const backgroundData = {
   crescentMoonGoldfishSky: 'crescent moon goldfish sky background, an ornate golden crescent-moon swing suspended among blue sky and clouds, glowing koi goldfish swimming weightlessly through the air around the swing, dreamlike floating fantasy atmosphere',
   blossomGardenRainbowFlare: 'backlit blossom garden background, sunlight streaming through blooming branches, soft rainbow lens flare and floating light particles, dreamy warm romantic atmosphere',
   phoenixDragonThroneHall: 'ornate throne hall background, an ancient palace throne flanked by a blazing fire phoenix spirit coiling on one side and a crystalline ice-and-lightning dragon spirit guarding the other side, epic dual-elemental guardian atmosphere',
-  cliffsideInfinityPoolSunset: 'cliffside infinity-pool resort background, sweeping ocean horizon at golden sunset, sleek modern villa architecture framing the pool edge, warm reflective water surface, luxury travel-editorial atmosphere'
+  cliffsideInfinityPoolSunset: 'cliffside infinity-pool resort background, sweeping ocean horizon at golden sunset, sleek modern villa architecture framing the pool edge, warm reflective water surface, luxury travel-editorial atmosphere',
+  wonderlandBaroqueFallingHall: 'baroque palace interior background viewed from a tilted, vertiginous falling perspective, grand curtains and an ornately carved ceiling rushing past overhead, tall sunlit window streaming light from below, whimsical Wonderland descent atmosphere'
 };
 
 const lightingData = {
@@ -2487,7 +2496,8 @@ const poseData = {
   energy_burst: 'energy burst pose, radiant energy explosion erupting from behind the body, hair and fabric blown forward by the force, torso held stable and centered, raw power radiating outward',
   rock_stream_leg_extend: 'seated on a moss-covered rock beside a stream pose, one leg elegantly extended toward the water with a bare foot grazing the surface, the other leg bent close to the body, one hand resting on the rock for support, relaxed sensual poise',
   dual_spirit_guardian_throne: 'seated on an ornate throne pose, one hand gripping a glowing ceremonial staff planted beside the throne, one leg crossed elegantly, chin lifted with commanding gaze, elemental spirit guardians flanking on either side, regal power-summoning presence',
-  emerging_from_installation: 'standing within a large sculptural installation, one foot stepping forward from the opening, torso gently leaning toward the camera, both hands naturally parting the surrounding material, elegant museum performance pose with stable anatomy'
+  emerging_from_installation: 'standing within a large sculptural installation, one foot stepping forward from the opening, torso gently leaning toward the camera, both hands naturally parting the surrounding material, elegant museum performance pose with stable anatomy',
+  wonderland_falling_tumble: 'dynamic falling tumble pose, body suspended mid-air in an inverted freefall composition, one arm reaching outward toward the viewer, legs raised gracefully overhead, long hair and full skirt caught streaming in the fall, whimsical Alice-in-Wonderland descent energy with fully covered, naturally weighted anatomy'
 };
 
 const framingData = {

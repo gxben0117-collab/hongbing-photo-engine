@@ -3836,3 +3836,21 @@
   （新增 EDITORIAL IDENTITY 模擬區塊，含文字自填欄位留空/填寫兩種情境隨機測試，
   全站累計 1500 次模擬 0 issue）、`build-prompt-preview.mjs`（新增
   `generateEditorial()`，輸出與 MAKIMA 參考圖風格一致，人工核對正確）。
+
+## 2026-08-30　fantasy-fashion.html：分析風格範例新圖，新增「仙境墜落」姿勢/背景/道具
+
+- **背景**：`風格範例` 資料夾清空後只新增 1 張圖（愛麗絲夢遊仙境墜落主題：深藍
+  絲絨蕾絲宮廷洋裝、高領長袖、白色荷葉蕾絲滾邊，倒栽蔥式墜落構圖，周圍飄浮撲克牌、
+  懷錶、傾灑茶飲、玫瑰花瓣與翻頁書，巴洛克宮廷室內背景）。服裝完整包覆，即使倒立
+  姿勢也無曝光疑慮，安全。
+- **落地前查重**：`fantasy-fashion.html` 已有「維多利亞蓬裙洋裝」服裝與
+  「heart-suit playing card queen」材質（撲克牌皇后主題），但沒有「墜落/倒栽蔥」
+  動態姿勢、傾斜墜落視角背景，也沒有懷錶/傾灑茶飲這組道具，判定不重複，予以新增。
+- **新增 3 項**：姿勢 `wonderland_falling_tumble`（仙境墜落翻轉姿）、背景
+  `wonderlandBaroqueFallingHall`（巴洛克墜落廳堂）、材質
+  `wonderlandPocketWatchTea`（懷錶與傾灑茶飲道具）。
+- **驗證**：四支驗證腳本全數重跑通過（`check-static`／`validate-preset-refs`
+  （fantasy-fashion.html 60 組 themeTemplates 0 issue）／`audit-100x`（全站
+  2000 次模擬 0 issue，含 bridal-editorial／chinese-classical／
+  japanese-kimono／korean-hanbok 等站上已擴充的其他頁面）／
+  `build-prompt-preview`）。
