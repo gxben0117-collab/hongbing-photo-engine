@@ -116,7 +116,7 @@ const SHARED_CAMERA_VALUES = [
   'beautyCloseUp', 'sideProfile', 'threeQuarterSide', 'topBeauty', 'distantHero',
 ];
 const SHARED_PORTRAIT_BODY_VALUES = [
-  'original', 'slight_waist', 'curvy_waist', 'fashion_tall', 'korean_idol',
+  'original', 'slight_waist', 'curvy_waist', 'fashion_tall', 'korean_idol', 'full_bust_cleavage',
 ];
 const SHARED_RATIO_VALUES = ['9:16', '4:5', '1:1', '2:3', '3:4', '16:9', '4:3', '21:9'];
 const SHARED_GARMENT_LAYER_VALUES = ['layer0', 'layer3', 'layer6', 'layer9', 'random'];
