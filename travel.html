@@ -376,6 +376,7 @@
       <button type="button" class="preset-btn" data-travel-preset="seasideCastleSunset">一鍵套用｜海邊城堡夕陽旅拍</button>
       <button type="button" class="preset-btn" data-travel-preset="chineseTeaCourtyard">一鍵套用｜中式庭院茶席旗袍</button>
       <button type="button" class="preset-btn" data-travel-preset="silkRoadBlueTiles">一鍵套用｜絲路藍磚古城旅拍</button>
+      <button type="button" class="preset-btn" data-travel-preset="snowOnsenFloralRobe">一鍵套用｜雪景溫泉花卉和風旅拍</button>
     </div>
   </section>
 
@@ -488,6 +489,7 @@
       <label class="chip" data-value="京都嵐山"><input type="radio" name="themePreset" value="京都嵐山">京都嵐山</label>
       <label class="chip" data-value="大阪道頓堀"><input type="radio" name="themePreset" value="大阪道頓堀">大阪道頓堀</label>
       <label class="chip" data-value="北海道雪景小樽"><input type="radio" name="themePreset" value="北海道雪景小樽">北海道雪景小樽</label>
+      <label class="chip" data-value="雪景溫泉溪谷"><input type="radio" name="themePreset" value="雪景溫泉溪谷">雪景溫泉溪谷</label>
       <label class="chip" data-value="沖繩海岸"><input type="radio" name="themePreset" value="沖繩海岸">沖繩海岸</label>
       <label class="chip" data-value="東京原宿cosplay貓女"><input type="radio" name="themePreset" value="東京原宿cosplay貓女">東京原宿cosplay貓女</label>
       <label class="chip" data-value="大阪祭典和服舞姬"><input type="radio" name="themePreset" value="大阪祭典和服舞姬">大阪祭典和服舞姬</label>
@@ -638,6 +640,11 @@
         <input type="radio" name="costume" value="floral_halter_kimono_dress">
         <div class="name">改良和服削肩綁帶洋裝</div>
         <div class="desc">碎花綁帶深V / 高衩罩紗 / 現代和風</div>
+      </label>
+      <label class="card" data-value="snow_flower_wrap_robe">
+        <input type="radio" name="costume" value="snow_flower_wrap_robe">
+        <div class="name">雪景花卉包覆和風長袍</div>
+        <div class="desc">白藍灰花卉 / 包覆式領口 / 腰間繫帶</div>
       </label>
       <label class="card" data-value="floral_long_qipao">
         <input type="radio" name="costume" value="floral_long_qipao">
@@ -2069,6 +2076,7 @@ flow_dress:`Costume Direction: Flowing Dress — elegant long dress with soft fl
 qipao:`Costume Direction: Refined Qipao — modern refined cheongsam with high collar and elegant side slit, fine oriental fabric pattern, graceful eastern silhouette`,
 kimono_yukata:`Costume Direction: Kimono / Yukata — modern refined kimono or summer yukata with obi sash, clean layered collar, elegant Japanese travel styling`,
 floral_halter_kimono_dress:`Costume Direction: Floral Halter Kimono Dress — modern kimono-inspired halter dress with a deep-V neckline, obi-style tassel sash at the waist, draped floral outer robe with off-shoulder sleeves and a thigh-high slit, romantic modernized Japanese travel styling`,
+snow_flower_wrap_robe:`Costume Direction: Snow Floral Wrap Robe — white, icy blue and soft gray floral wrap-style Japanese robe, naturally structured V-shaped overlapping front, fitted waist tie, long flowing sleeves, layered skirt with a tasteful high side opening, refined modern onsen travel styling, realistic fabric weight, tension and drape`,
 campus_uniform:`Costume Direction: Campus Style — preppy academic outfit with shirt, ribbon or bow tie, pleated skirt and cardigan, fresh youthful yet adult styling`,
 y2k_street:`Costume Direction: Y2K Streetwear — glossy jacket or satin top, layered accessories, pleated or cargo skirt, chunky sneakers, playful urban trend styling`,
 denim_casual:`Costume Direction: Denim Casual — well-fitted denim with simple top or knitwear, relaxed everyday travel outfit, effortless natural styling`,
@@ -2320,6 +2328,21 @@ QUICK_TRAVEL_PRESETS.silkRoadBlueTiles = {
   media: 'travel_magazine',
   pose: 'stairs_sit',
   themeText: '絲路藍磚古城旅拍, 中亞藍白花磚拱廊與土色石牆, 湖水綠透紗長裙與金幣頭飾層次, 慵懶托腮坐姿, 午後暖陽斜光, 神秘絲路風情'
+};
+
+QUICK_TRAVEL_PRESETS.snowOnsenFloralRobe = {
+  composition: 'C',
+  style: 'japanese_clear',
+  ratio: '2:3',
+  camera: 'threeQuarterSide',
+  lighting: 'scene_natural',
+  motion: 'still',
+  media: 'cinematic_realistic',
+  pose: 'railing_gaze',
+  costume: 'snow_flower_wrap_robe',
+  hair: 'braided_updo',
+  prop: 'hair_flower',
+  themeText: '雪景溫泉花卉和風旅拍, 白雪覆蓋的山間溫泉溪谷與深色木造旅館, 白色與冰藍灰花卉包覆式和風長袍, 自然交疊 V 形前襟、腰間繫帶、長袖與層疊裙擺, 裙側保留優雅高衩活動量, 編髮與小型白花髮飾, 木棧道或溪邊欄杆旁自然站立回望, 冷白陰天雪光與水面環境反射, 安靜高級冬日旅拍, 全身人物與雪景環境平衡, 保留真實布料重量、張力、皺褶與垂墜'
 };
 
 function applyTravelPreset(preset){
