@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>現代寫真攝影咒語產生器｜寫真引擎</title>
+<meta name="description" content="現代寫真攝影咒語產生器，組合現代人像、居家生活、姿態、服裝、光影、色彩與鏡頭語言。">
+<meta property="og:title" content="現代寫真攝影咒語產生器｜寫真引擎">
+<meta property="og:description" content="現代寫真攝影咒語產生器，組合現代人像、居家生活、姿態、服裝、光影、色彩與鏡頭語言。">
+<meta name="twitter:title" content="現代寫真攝影咒語產生器｜寫真引擎">
+<meta name="twitter:description" content="現代寫真攝影咒語產生器，組合現代人像、居家生活、姿態、服裝、光影、色彩與鏡頭語言。">
+<style>
+  :root{
+    --black:#0A0A0A;
+    --panel:#171615;
+    --panel-2:#211D18;
+    --line:#37312A;
+    --paper:#F7F4EF;
+    --soft:#A7A09A;
+    --gold:#C9A84C;
+    --gold-soft:#E8D5A3;
+    --white:#FFFFFF;
+    --selected:#241C12;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    min-height:100vh;
+    background:var(--black);
+    color:var(--paper);
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    line-height:1.6;
+    padding-bottom:76px;
+  }
+  nav{
+    position:fixed;
+    inset:0 0 auto;
+    height:54px;
+    z-index:20;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 24px;
+    background:rgba(10,10,10,.93);
+    border-bottom:1px solid var(--line);
+    backdrop-filter:blur(12px);
+  }
+  .nav-logo{color:var(--gold);font-family:"Noto Serif TC",serif;font-size:14px;font-weight:700;letter-spacing:.08em;text-decoration:none;}
+  .nav-links{display:flex;gap:6px;align-items:center;}
+  .nav-link{color:var(--soft);font-size:12px;text-decoration:none;padding:6px 12px;border:1px solid transparent;border-radius:999px;}
+  .nav-link:hover,.nav-link.active{color:var(--gold);border-color:var(--gold);background:rgba(201,168,76,.08);}
+  .wrap{width:min(940px,100%);margin:0 auto;padding:70px 20px 40px;}
+  header{padding:48px 0 34px;margin-bottom:26px;border-bottom:1px solid var(--line);}
+  .eyebrow{color:var(--gold);font-size:11px;letter-spacing:.3em;text-transform:uppercase;margin-bottom:12px;}
+  h1{color:var(--white);font-family:"Noto Serif TC",serif;font-size:32px;line-height:1.2;letter-spacing:.02em;margin-bottom:10px;}
+  h1 span{color:var(--gold-soft);}
+  header p{color:var(--soft);font-size:14px;}
+  .note{margin-bottom:28px;padding:12px 14px;border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:7px;background:var(--panel);color:var(--soft);font-size:12px;}
+  section{margin-bottom:28px;}
+  .section-header{display:flex;align-items:baseline;gap:10px;padding-bottom:10px;margin-bottom:12px;border-bottom:1px solid var(--line);}
+  .section-label{color:var(--gold);font-size:12px;font-weight:700;letter-spacing:.16em;}
+  .section-title{color:var(--white);font-size:16px;font-weight:800;}
+  .section-sub{margin-left:auto;color:var(--soft);font-size:11px;}
+  .hint{margin:-4px 0 12px;color:var(--soft);font-size:12px;}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+  .grid-3{grid-template-columns:repeat(3,1fr);}
+  .card,.pose-card,.preset-btn{position:relative;cursor:pointer;border:1px solid var(--line);background:var(--panel);border-radius:8px;transition:border-color .15s,background .15s,color .15s;}
+  .card{min-height:74px;padding:12px 13px;}
+  .card input,.pose-card input{position:absolute;opacity:0;pointer-events:none;}
+  .card:hover,.pose-card:hover,.preset-btn:hover{border-color:var(--gold);}
+  .card.selected,.pose-card.selected{border-color:var(--gold);background:var(--selected);}
+  .name,.pose-name{display:block;color:var(--paper);font-size:13px;font-weight:800;margin-bottom:3px;}
+  .selected .name,.selected .pose-name{color:var(--gold);}
+  .desc,.pose-desc{display:block;color:var(--soft);font-size:11px;line-height:1.45;}
+  .group-title{grid-column:1/-1;margin:8px 0 0;padding-left:8px;border-left:2px solid var(--gold);color:var(--gold);font-size:12px;font-weight:700;}
+  .pose-group{margin-bottom:14px;}
+  .pose-group-label{margin-bottom:8px;color:var(--soft);font-size:11px;letter-spacing:.08em;}
+  .pose-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+  .pose-card{min-height:74px;padding:12px 13px;}
+  .layer-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:14px;}
+  .layer-card{min-height:68px;}
+  .field{display:block;color:var(--gold-soft);font-size:12px;font-weight:700;}
+  .text-input,.select-input{width:100%;margin-top:7px;padding:11px 12px;border:1px solid var(--line);border-radius:7px;background:var(--panel);color:var(--paper);font:inherit;font-size:13px;}
+  .text-input::placeholder{color:#6F6963;}
+  .text-input:focus,.select-input:focus{outline:none;border-color:var(--gold);}
+  .custom-field{grid-column:1/-1;margin-top:4px;}
+  .form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+  .generate-btn{width:100%;padding:16px;border:1px solid var(--gold);border-radius:8px;background:var(--gold);color:var(--black);font-family:"Noto Serif TC",serif;font-size:15px;font-weight:900;letter-spacing:.06em;cursor:pointer;}
+  .random-btn{margin-bottom:12px;background:linear-gradient(180deg,#2A2117,#17110C);color:var(--gold);}
+  .preset-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;}
+  .preset-btn{padding:12px 13px;text-align:left;color:var(--paper);font:inherit;font-size:13px;font-weight:800;}
+  .preset-btn.primary{border-color:var(--gold);color:var(--gold);background:linear-gradient(180deg,#2A2117,#17110C);}
+  .output-wrap{margin-top:24px;}
+  .output-wrap.hidden{display:none;}
+  .output-stale-badge{display:none;margin-bottom:8px;padding:9px 12px;border:1px solid var(--gold);border-radius:7px;color:var(--gold);font-size:12px;text-align:center;}
+  .output-wrap.stale .output-stale-badge{display:block;}
+  .output-wrap.stale textarea,.output-wrap.stale .copy-btn{opacity:.45;pointer-events:none;}
+  textarea{width:100%;min-height:360px;padding:15px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--paper);font:12px/1.75 Consolas,"Microsoft JhengHei",monospace;resize:vertical;}
+  .copy-btn{width:100%;margin-top:8px;padding:12px;border:1px solid var(--gold);border-radius:8px;background:transparent;color:var(--gold);font:inherit;font-size:13px;font-weight:800;cursor:pointer;}
+  .copy-btn.copied{background:var(--gold);color:var(--black);}
+  @media (max-width:760px){
+    nav{position:sticky;height:auto;align-items:stretch;flex-direction:column;gap:8px;padding:10px 14px 8px;}
+    .nav-links{overflow-x:auto;justify-content:flex-start;}
+    .nav-link{flex:0 0 auto;white-space:nowrap;padding:5px 9px;font-size:11px;}
+    .wrap{padding:22px 14px 34px;}
+    header{padding:26px 0 26px;}
+    h1{font-size:28px;}
+    .section-sub{width:100%;margin-left:0;}
+    .grid,.grid-3,.pose-grid{grid-template-columns:repeat(2,1fr);}
+    .layer-grid{grid-template-columns:repeat(3,1fr);}
+  }
+  @media (max-width:480px){
+    .grid,.grid-3,.pose-grid,.layer-grid,.preset-grid,.form-grid{grid-template-columns:1fr;}
+    .card,.pose-card{min-height:0;}
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">寫真引擎</a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">首頁</a>
+    <a class="nav-link" href="magazine.html">雜誌棚拍</a>
+    <a class="nav-link active" href="modern-portrait.html">現代寫真</a>
+    <a class="nav-link" href="luxury-lifestyle.html">Luxury Lifestyle</a>
+  </div>
+</nav>
+
+<main class="wrap">
+  <header>
+    <div class="eyebrow">Modern Portrait Photography</div>
+    <h1>現代寫真攝影 <span>咒語產生器</span></h1>
+    <p>現代人像 × 居家柔光 × 生活時尚 × 姿態攝影</p>
+  </header>
+
+  <div class="note">請附上人物參考照片。場景、服裝、姿勢與光影只改變畫面語言；身份鎖定、臉部幾何與真人骨架核心會持續優先。</div>
+
+  <section class="section-preset">
+    <div class="section-header"><span class="section-label">00</span><span class="section-title">一鍵版型模板</span><span class="section-sub">先套用完整現代寫真企劃，再微調細節</span></div>
+    <button class="generate-btn random-btn" id="lifestyleRandom" type="button">隨機套用｜現代寫真生活感</button>
+    <div class="preset-grid">
+      <button class="preset-btn primary" type="button" data-template="whiteMorningBed">一鍵套用｜白床晨光人像</button>
+      <button class="preset-btn" type="button" data-template="pillowSidePortrait">一鍵套用｜枕邊柔光特寫</button>
+      <button class="preset-btn" type="button" data-template="pastelSofaMoment">一鍵套用｜粉彩沙發生活感</button>
+      <button class="preset-btn" type="button" data-template="tatamiQuietPortrait">一鍵套用｜和室安靜肖像</button>
+      <button class="preset-btn" type="button" data-template="blindWindowEditorial">一鍵套用｜百葉窗時裝光</button>
+      <button class="preset-btn" type="button" data-template="brightCorridorWalk">一鍵套用｜明亮走廊回眸</button>
+      <button class="preset-btn" type="button" data-template="goldenOutdoorPortrait">一鍵套用｜綠意金色人像</button>
+      <button class="preset-btn" type="button" data-template="redGoldFestive">一鍵套用｜紅金節慶肖像</button>
+      <button class="preset-btn" type="button" data-template="bedProneAiry">一鍵套用｜床面輕盈動態</button>
+      <button class="preset-btn" type="button" data-template="softGlamourLounge">一鍵套用｜柔光居家魅力</button>
+    </div>
+  </section>
+
+  <section class="section-style">
+    <div class="section-header"><span class="section-label">01</span><span class="section-title">畫面語氣</span><span class="section-sub">決定現代人像作品的敘事與完成度</span></div>
+    <div class="grid grid-3">
+      <label class="card selected"><input type="radio" name="style" value="everydayEditorial" checked><span class="name">現代生活編輯感</span><span class="desc">自然人物、乾淨空間、完整攝影敘事</span></label>
+      <label class="card"><input type="radio" name="style" value="softLifestyle"><span class="name">柔光生活寫真</span><span class="desc">明亮柔和、輕鬆親近、生活感自然</span></label>
+      <label class="card"><input type="radio" name="style" value="freshGlamour"><span class="name">清新美顏廣告</span><span class="desc">肌膚與表情明亮，人物是畫面主焦點</span></label>
+      <label class="card"><input type="radio" name="style" value="fashionPortrait"><span class="name">現代時裝肖像</span><span class="desc">服裝輪廓、姿態與構圖清楚俐落</span></label>
+      <label class="card"><input type="radio" name="style" value="candidStory"><span class="name">自然抓拍敘事</span><span class="desc">捕捉正在發生的動作，保留真實節奏</span></label>
+      <label class="card"><input type="radio" name="style" value="quietMinimal"><span class="name">極簡安靜肖像</span><span class="desc">少量道具、留意光線、克制而高級</span></label>
+    </div>
+  </section>
+
+  <section class="section-scene">
+    <div class="section-header"><span class="section-label">02</span><span class="section-title">現代生活場景</span><span class="section-sub">單選，決定人物、空間與故事的主要關係</span></div>
+    <div class="grid grid-3">
+      <label class="card selected"><input type="radio" name="scene" value="whiteBedroom" checked><span class="name">白色臥室</span><span class="desc">白床單、窗邊柔光、安靜生活片段</span></label>
+      <label class="card"><input type="radio" name="scene" value="pastelLounge"><span class="name">粉彩沙發客廳</span><span class="desc">柔和家具、抱枕與輕快人物互動</span></label>
+      <label class="card"><input type="radio" name="scene" value="japaneseInterior"><span class="name">日式室內</span><span class="desc">木質、榻榻米、紙門與安靜生活感</span></label>
+      <label class="card"><input type="radio" name="scene" value="blindWindowRoom"><span class="name">百葉窗房間</span><span class="desc">條紋光影、簡潔牆面、時裝肖像氛圍</span></label>
+      <label class="card"><input type="radio" name="scene" value="brightCorridor"><span class="name">明亮走廊</span><span class="desc">乾淨線條、行走動作與自然回眸</span></label>
+      <label class="card"><input type="radio" name="scene" value="outdoorGreenery"><span class="name">戶外綠意</span><span class="desc">樹影、自然背景與輕盈移動感</span></label>
+      <label class="card"><input type="radio" name="scene" value="festiveChineseInterior"><span class="name">節慶中式室內</span><span class="desc">紅色陳設、燈飾與現代東方生活情境</span></label>
+      <label class="card"><input type="radio" name="scene" value="elegantLounge"><span class="name">高級休憩空間</span><span class="desc">沙發、茶几、低調材質與安靜人物故事</span></label>
+      <label class="card"><input type="radio" name="scene" value="windowBedroom"><span class="name">窗邊臥室</span><span class="desc">床沿、窗簾與人物的柔和側面關係</span></label>
+      <label class="card"><input type="radio" name="scene" value="softStudio"><span class="name">自然光攝影棚</span><span class="desc">簡潔背景、柔光與現代人物肖像</span></label>
+      <label class="field custom-field">自訂場景<input class="text-input" id="customScene" type="text" placeholder="例如：城市公寓閱讀角、咖啡店窗邊、雨後綠地長廊"></label>
+    </div>
+  </section>
+
+  <section class="section-garment">
+    <div class="section-header"><span class="section-label">03</span><span class="section-title">現代服裝方向</span><span class="section-sub">讓服裝、場景與人物氣質形成同一套作品語言</span></div>
+    <div class="grid grid-3">
+      <label class="card selected"><input type="radio" name="garment" value="pinkCamisoleShorts" checked><span class="name">粉彩細肩帶套裝</span><span class="desc">輕盈上衣、俐落短褲與生活寫真感</span></label>
+      <label class="card"><input type="radio" name="garment" value="chiffonSummerDress"><span class="name">雪紡夏日洋裝</span><span class="desc">柔軟薄紗、輕盈層次與自然垂墜</span></label>
+      <label class="card"><input type="radio" name="garment" value="softFittedDress"><span class="name">柔和合身洋裝</span><span class="desc">乾淨線條、舒適剪裁與現代女性氣質</span></label>
+      <label class="card"><input type="radio" name="garment" value="minimalKnitSet"><span class="name">極簡針織套裝</span><span class="desc">細緻針織、自然輪廓與居家柔光</span></label>
+      <label class="card"><input type="radio" name="garment" value="laceSatinHomewear"><span class="name">蕾絲緞面居家服</span><span class="desc">細節精緻、材質柔和、完整居家層次</span></label>
+      <label class="card"><input type="radio" name="garment" value="blackEditorialDress"><span class="name">黑色編輯洋裝</span><span class="desc">簡潔輪廓、時裝感與高對比材質</span></label>
+      <label class="card"><input type="radio" name="garment" value="modernQipao"><span class="name">現代改良旗袍</span><span class="desc">東方線條、現代剪裁與生活場景融合</span></label>
+      <label class="card"><input type="radio" name="garment" value="halterDress"><span class="name">掛脖長洋裝</span><span class="desc">俐落肩頸線、流動裙身與戶外寫真感</span></label>
+      <label class="field custom-field">自訂服裝<input class="text-input" id="customGarment" type="text" placeholder="例如：白色襯衫與牛仔長裙、霧藍針織洋裝、米色風衣"></label>
+    </div>
+  </section>
+
+  <section class="section-garment-variation">
+    <div class="section-header"><span class="section-label">04</span><span class="section-title">服裝改造核心</span><span class="section-sub">只改服裝局部結構，不重新設計整件服裝</span></div>
+    <p class="hint">Layer 只控制隨機套用時要補足幾個部位；手動選擇的胸口、腰側與肩部不會被覆蓋。</p>
+    <div class="layer-grid">
+      <label class="card layer-card selected"><input type="radio" name="garmentLayer" value="layer0" checked><span class="name">Layer 0</span><span class="desc">原始版型</span></label>
+      <label class="card layer-card"><input type="radio" name="garmentLayer" value="layer3"><span class="name">Layer 3</span><span class="desc">隨機補 1 個部位</span></label>
+      <label class="card layer-card"><input type="radio" name="garmentLayer" value="layer6"><span class="name">Layer 6</span><span class="desc">隨機補 2 個部位</span></label>
+      <label class="card layer-card"><input type="radio" name="garmentLayer" value="layer9"><span class="name">Layer 9</span><span class="desc">三個部位全改</span></label>
+      <label class="card layer-card"><input type="radio" name="garmentLayer" value="random"><span class="name">隨機 Layer</span><span class="desc">連強度一起抽</span></label>
+    </div>
+    <div class="grid grid-3">
+      <div class="group-title">胸口</div>
+      <label class="card selected"><input type="radio" name="chestDetail" value="none" checked><span class="name">原服裝一致</span><span class="desc">不增加胸口改造</span></label>
+      <label class="card"><input type="radio" name="chestDetail" value="softSquareNeckline"><span class="name">柔方領結構</span><span class="desc">平直方領、穩定內裡與清楚線條</span></label>
+      <label class="card"><input type="radio" name="chestDetail" value="crossWrapBodice"><span class="name">交叉裹身胸衣</span><span class="desc">交叉結構、自然包覆與現代剪裁</span></label>
+      <label class="card"><input type="radio" name="chestDetail" value="layeredCamisole"><span class="name">疊穿細肩帶</span><span class="desc">細肩帶、罩衫或針織層次</span></label>
+      <div class="group-title">腰側</div>
+      <label class="card selected"><input type="radio" name="waistSideDetail" value="none" checked><span class="name">原服裝一致</span><span class="desc">不增加腰側改造</span></label>
+      <label class="card"><input type="radio" name="waistSideDetail" value="softWaistDrape"><span class="name">柔和聚褶腰線</span><span class="desc">自然收腰、布料聚褶與生活感</span></label>
+      <label class="card"><input type="radio" name="waistSideDetail" value="sideWrapSlit"><span class="name">側邊纏裹開衩</span><span class="desc">活動量自然、層次清楚、剪裁精緻</span></label>
+      <label class="card"><input type="radio" name="waistSideDetail" value="slimBeltLine"><span class="name">細腰封線條</span><span class="desc">窄腰封、細皮帶或同布腰節</span></label>
+      <div class="group-title">肩部</div>
+      <label class="card selected"><input type="radio" name="shoulderDetail" value="none" checked><span class="name">原服裝一致</span><span class="desc">不增加肩部改造</span></label>
+      <label class="card"><input type="radio" name="shoulderDetail" value="offShoulderCut"><span class="name">露肩剪裁</span><span class="desc">肩線清楚、布料穩定、現代時裝感</span></label>
+      <label class="card"><input type="radio" name="shoulderDetail" value="singleShoulderDrape"><span class="name">單肩斜裁</span><span class="desc">單側斜裁、柔和垂墜與不對稱線條</span></label>
+      <label class="card"><input type="radio" name="shoulderDetail" value="softCardiganDrape"><span class="name">罩衫垂肩</span><span class="desc">針織或絲質罩衫自然落在肩側</span></label>
+    </div>
+  </section>
+
+  <section class="section-body">
+    <div class="section-header"><span class="section-label">05</span><span class="section-title">身形輪廓</span><span class="section-sub">只控制身形走向，不覆寫參考照身份</span></div>
+    <div class="grid grid-3">
+      <label class="card selected"><input type="radio" name="bodyShape" value="original" checked><span class="name">原圖自然比例</span><span class="desc">以參考照身形為主</span></label>
+      <label class="card"><input type="radio" name="bodyShape" value="slight_waist"><span class="name">輕微纖腰</span><span class="desc">自然修飾腰線</span></label>
+      <label class="card"><input type="radio" name="bodyShape" value="curvy_waist"><span class="name">豐滿纖腰</span><span class="desc">明顯胸腰臀曲線</span></label>
+      <label class="card"><input type="radio" name="bodyShape" value="fashion_tall"><span class="name">高挑時裝比例</span><span class="desc">修長高級模特感</span></label>
+      <label class="card"><input type="radio" name="bodyShape" value="korean_idol"><span class="name">韓系偶像比例</span><span class="desc">挺拔、修長、舞台寫真感</span></label>
+      <label class="card"><input type="radio" name="bodyShape" value="full_bust_cleavage"><span class="name">深溝豐滿上圍身材</span><span class="desc">豐滿上圍、自然深溝與穩定胸腰比例</span></label>
+    </div>
+  </section>
+
+  <section class="section-pose">
+    <div class="section-header"><span class="section-label">06</span><span class="section-title">人物姿勢</span><span class="section-sub">展示服裝與人物狀態，保留自然重心和手部結構</span></div>
+    <div class="pose-grid">
+      <label class="pose-card selected"><input type="radio" name="pose" value="auto" checked><span class="pose-name">AI判斷｜主題最佳姿勢</span><span class="pose-desc">依主題、場景、服裝與光線選擇完整姿勢</span></label>
+      <label class="pose-card"><input type="radio" name="pose" value="naturalStanding"><span class="pose-name">自然端正站立</span><span class="pose-desc">肩膀放鬆、重心穩定、手部自然</span></label>
+      <label class="pose-card"><input type="radio" name="pose" value="standingThreeQuarter"><span class="pose-name">三分之四站姿</span><span class="pose-desc">展示肩頸與服裝線條，雙腿不交錯扭曲</span></label>
+      <label class="pose-card"><input type="radio" name="pose" value="gentleHairTouch"><span class="pose-name">輕觸髮絲</span><span class="pose-desc">一手自然靠近髮側，表情保持放鬆</span></label>
+      <label class="pose-card"><input type="radio" name="pose" value="armsRaisedGracefully"><span class="pose-name">抬手整理衣袖</span><span class="pose-desc">手臂有空間、袖口與肩線清楚</span></label>
+      <label class="pose-card"><input type="radio" name="pose" value="leaningWall"><span class="pose-name">靠牆側身</span><span class="pose-desc">背部有支撐、腰胯自然、視線穩定</span></label>
+      <label class="pose-card"><input type="radio" name="pose" value="sofaSideSit"><span class="pose-name">沙發側坐</span><span class="pose-desc">肩膀放鬆、雙腿自然收放</span></label>
+      <label class="pose-card"><input type="radio" name="pose" value="bedSideSit"><span class="pose-name">床緣坐姿</span><span class="pose-desc">坐在床側，軀幹與腿部保持連續</span></label>
+      <label class="pose-card"><input type="radio" name="pose" value="bedRecliningDiagonal"><span class="pose-name">床面斜倚</span><span class="pose-desc">身體沿床面自然斜躺，四肢比例清楚</span></label>
+      <label class="pose-card"><input type="radio" name="pose" value="bedSidePillowClose"><span class="pose-name">枕邊側臥特寫</span><span class="pose-desc">側臥靠枕，臉部與肩頸方向一致</span></label>
+      <label class="pose-card"><input type="radio" name="pose" value="bedProneLegsUp"><span class="pose-name">俯臥抬腿</span><span class="pose-desc">腿部自然彎曲抬起，手腳不交疊變形</span></label>
+      <label class="pose-card"><input type="radio" name="pose" value="windowSeatedLongLine"><span class="pose-name">窗邊長線坐姿</span><span class="pose-desc">坐在窗邊，身體線條與光線方向一致</span></label>
+      <label class="pose-card"><input type="radio" name="pose" value="blindWindowLean"><span class="pose-name">百葉窗前倚立</span><span class="pose-desc">身體接住條紋光影，肩胯保持自然</span></label>
+      <label class="pose-card"><input type="radio" name="pose" value="lookBackWalking"><span class="pose-name">行走回眸</span><span class="pose-desc">步伐與轉頭連續，衣料產生自然動態</span></label>
+      <label class="pose-card"><input type="radio" name="pose" value="tatamiSeated"><span class="pose-name">和室端坐</span><span class="pose-desc">坐姿端正，手部安定，服裝輪廓完整</span></label>
+      <label class="pose-card"><input type="radio" name="pose" value="softSeated"><span class="pose-name">柔和休憩坐姿</span><span class="pose-desc">坐在椅面或沙發，保留生活感與身體重心</span></label>
+      <label class="field custom-field">自訂姿勢<input class="text-input" id="customPose" type="text" placeholder="例如：坐在窗邊翻閱畫冊、站在走廊回頭整理外套"></label>
+    </div>
+  </section>
+
+  <section class="section-interaction">
+    <div class="section-header"><span class="section-label">07</span><span class="section-title">道具與互動</span><span class="section-sub">讓手部有自然動作，但不搶走人物焦點</span></div>
+    <div class="grid grid-3">
+      <label class="card selected"><input type="radio" name="interaction" value="none" checked><span class="name">無指定道具</span><span class="desc">讓 AI 依場景自然安排</span></label>
+      <label class="card"><input type="radio" name="interaction" value="pillowLinen"><span class="name">抱枕與床品</span><span class="desc">自然整理布料，不遮住臉部</span></label>
+      <label class="card"><input type="radio" name="interaction" value="flowerCushion"><span class="name">花束或花抱枕</span><span class="desc">柔和色彩，成為次要畫面層次</span></label>
+      <label class="card"><input type="radio" name="interaction" value="bookMagazine"><span class="name">書本或畫冊</span><span class="desc">翻閱或放在膝上，不生成可讀文字</span></label>
+      <label class="card"><input type="radio" name="interaction" value="coffeeCup"><span class="name">咖啡杯</span><span class="desc">桌邊暖氣氛，手勢保持穩定</span></label>
+      <label class="card"><input type="radio" name="interaction" value="hairRibbon"><span class="name">髮帶或髮飾</span><span class="desc">整理髮絲的輕微動作，臉部保持清楚</span></label>
+      <label class="card"><input type="radio" name="interaction" value="windowCurtain"><span class="name">窗簾</span><span class="desc">與窗光互動，手臂和肩膀自然延伸</span></label>
+      <label class="card"><input type="radio" name="interaction" value="teaCup"><span class="name">茶杯</span><span class="desc">簡潔桌面與安靜生活情境</span></label>
+    </div>
+  </section>
+
+  <section class="section-lighting">
+    <div class="section-header"><span class="section-label">08</span><span class="section-title">光影色彩</span><span class="section-sub">光線與配色分開選，也可交給 AI 依主題判斷</span></div>
+    <div class="group-title">光影方式</div>
+    <div class="grid grid-3" style="margin-top:8px;">
+      <label class="card selected"><input type="radio" name="lighting" value="whiteWindowHighKey" checked><span class="name">白窗高亮柔光</span><span class="desc">明亮白色環境、柔和陰影與清透空間</span></label>
+      <label class="card"><input type="radio" name="lighting" value="softDiffusedDaylight"><span class="name">自然漫射日光</span><span class="desc">低硬度光線，服裝與肌膚細節自然</span></label>
+      <label class="card"><input type="radio" name="lighting" value="goldenBacklight"><span class="name">金色逆光</span><span class="desc">髮絲與衣料有輕柔輪廓光</span></label>
+      <label class="card"><input type="radio" name="lighting" value="blindStripeLight"><span class="name">百葉窗條紋光</span><span class="desc">規律光影落在牆面與服裝上</span></label>
+      <label class="card"><input type="radio" name="lighting" value="warmInteriorSoft"><span class="name">室內暖色柔光</span><span class="desc">燈具與環境反射形成統一暖調</span></label>
+      <label class="card"><input type="radio" name="lighting" value="moodyDirectional"><span class="name">方向性時裝光</span><span class="desc">明暗有層次，人物輪廓和材質仍清楚</span></label>
+    </div>
+    <div class="group-title">色彩系統</div>
+    <div class="grid grid-3" style="margin-top:8px;">
+      <label class="card selected"><input type="radio" name="colorPalette" value="warmIvoryWhite" checked><span class="name">搭配色｜暖象牙白與木色</span><span class="desc">白床、窗光與自然材質的乾淨基調</span></label>
+      <label class="card"><input type="radio" name="colorPalette" value="blushPinkIvory"><span class="name">搭配色｜霧粉與象牙白</span><span class="desc">柔和、明亮、帶有生活人像親和力</span></label>
+      <label class="card"><input type="radio" name="colorPalette" value="grayBlueSilver"><span class="name">搭配色｜灰藍與銀灰</span><span class="desc">窗影、室內時裝與安靜質感</span></label>
+      <label class="card"><input type="radio" name="colorPalette" value="blackWhiteBlush"><span class="name">搭配色｜黑白與柔粉</span><span class="desc">高對比服裝、清楚人物與現代編輯感</span></label>
+      <label class="card"><input type="radio" name="colorPalette" value="freshGreenCream"><span class="name">搭配色｜嫩綠與奶油白</span><span class="desc">戶外綠意、明亮空氣與輕快活力</span></label>
+      <label class="card"><input type="radio" name="colorPalette" value="redGoldChinese"><span class="name">搭配色｜朱紅與暖金</span><span class="desc">節慶中式室內的現代高級色彩</span></label>
+      <label class="card"><input type="radio" name="colorPalette" value="aiThemeScenePalette"><span class="name">AI 根據主題與場景判斷配色</span><span class="desc">自動協調服裝、場景、道具與光線</span></label>
+    </div>
+    <label class="field custom-field">指定配色<input class="text-input" id="colorNote" type="text" placeholder="例如：霧藍、米白與銀灰，或奶油白搭配一點朱紅"></label>
+  </section>
+
+  <section class="section-camera">
+    <div class="section-header"><span class="section-label">09</span><span class="section-title">拍攝角度與鏡頭感</span><span class="section-sub">沿用全站標準鏡頭契約，依景別保持自然頭身比例</span></div>
+    <div class="grid grid-3">
+      <label class="card selected"><input type="radio" name="camera" value="eyeLevelCover" checked><span class="name">平視人物封面</span><span class="desc">自然視線、人物比例與空間穩定</span></label>
+      <label class="card"><input type="radio" name="camera" value="lowAngleHero"><span class="name">低角度時裝感</span><span class="desc">拉長身形，但保留自然建築尺度</span></label>
+      <label class="card"><input type="radio" name="camera" value="highAngleOverhead"><span class="name">高角度俯視</span><span class="desc">適合床面、桌面與平面構圖</span></label>
+      <label class="card"><input type="radio" name="camera" value="softFocusGlow"><span class="name">柔焦光感肖像</span><span class="desc">柔和暈光、人物與背景層次清楚</span></label>
+      <label class="card"><input type="radio" name="camera" value="beautyCloseUp"><span class="name">近距離人物特寫</span><span class="desc">臉與上身清楚，背景自然退後</span></label>
+      <label class="card"><input type="radio" name="camera" value="sideProfile"><span class="name">側面輪廓視角</span><span class="desc">臉部輪廓、肩線與光線方向清楚</span></label>
+      <label class="card"><input type="radio" name="camera" value="threeQuarterSide"><span class="name">三分之四視角</span><span class="desc">人物、服裝與場景有立體層次</span></label>
+      <label class="card"><input type="radio" name="camera" value="topBeauty"><span class="name">高角度細節視角</span><span class="desc">適合床上、枕邊或柔和互動畫面</span></label>
+      <label class="card"><input type="radio" name="camera" value="distantHero"><span class="name">遠距環境人像</span><span class="desc">完整展示人物、姿勢與場景關係</span></label>
+    </div>
+  </section>
+
+  <section class="section-ratio">
+    <div class="section-header"><span class="section-label">10</span><span class="section-title">圖片比例</span><span class="section-sub">使用統一文字比例值</span></div>
+    <div class="grid grid-4">
+      <label class="card selected"><input type="radio" name="ratio" value="9:16" checked><span class="name">9:16</span><span class="desc">直式生活短片封面</span></label>
+      <label class="card"><input type="radio" name="ratio" value="4:5"><span class="name">4:5</span><span class="desc">社群精品人物圖</span></label>
+      <label class="card"><input type="radio" name="ratio" value="1:1"><span class="name">1:1</span><span class="desc">方形生活品牌主圖</span></label>
+      <label class="card"><input type="radio" name="ratio" value="2:3"><span class="name">2:3</span><span class="desc">直式寫真海報</span></label>
+      <label class="card"><input type="radio" name="ratio" value="3:4"><span class="name">3:4</span><span class="desc">人物與空間平衡</span></label>
+      <label class="card"><input type="radio" name="ratio" value="16:9"><span class="name">16:9</span><span class="desc">網站或影片橫幅</span></label>
+      <label class="card"><input type="radio" name="ratio" value="4:3"><span class="name">4:3</span><span class="desc">室內環境故事畫面</span></label>
+      <label class="card"><input type="radio" name="ratio" value="21:9"><span class="name">21:9</span><span class="desc">寬幅住宅品牌電影感</span></label>
+    </div>
+  </section>
+
+  <section class="section-extra">
+    <div class="section-header"><span class="section-label">11</span><span class="section-title">自訂要求</span><span class="section-sub">只放其他要求與畫面強度</span></div>
+    <div class="form-grid">
+      <label class="field">畫面強度<select id="intensity" class="select-input">
+        <option value="quiet">安靜自然，生活感優先</option>
+        <option value="balanced" selected>平衡高級，人物與空間並重</option>
+        <option value="premium">精品廣告，材質與光影更精緻</option>
+        <option value="cinematic">電影生活感，光影與空間更有敘事</option>
+      </select></label>
+      <label class="field">其他要求<input class="text-input" id="extraNote" type="text" placeholder="例如：保留桌面整潔、不要文字、不要多餘人物"></label>
+    </div>
+  </section>
+
+  <section class="section-output">
+    <div class="section-header"><span class="section-label">12</span><span class="section-title">生成咒語</span></div>
+    <button class="generate-btn" id="generateBtn" type="button">生成完整咒語</button>
+  </section>
+
+  <div class="output-wrap hidden" id="outputWrap">
+    <div class="output-stale-badge">選項已變更，請重新生成咒語</div>
+    <textarea id="outputText" readonly></textarea>
+    <button class="copy-btn" id="copyBtn" type="button">一鍵複製</button>
+  </div>
+</main>
+
+<script src="assets/core-prompt.js"></script>
+<script src="assets/garment-core.js"></script>
+<script>
+const CORE = window.HB_CORE_PROMPT?.page?.modernPortrait || {};
+const identityCore = CORE.identity || window.CORE_IDENTITY_LOCK || '';
+const anatomyCore = CORE.skeleton || window.CORE_REALISTIC_ANATOMY || '';
+const poseCore = CORE.pose || window.CORE_POSE_NATURALITY || '';
+const photographerCore = CORE.photographer || '';
+const lightingCore = CORE.lighting || window.CORE_LIGHTING_UNIFICATION || '';
+const coherenceCore = 'Selected clothing, props, pose, setting, lighting and palette must read as one coherent modern portrait production; every element supports the same visual story without unrelated style mixing.';
+const outputCore = CORE.output || window.CORE_OUTPUT_QUALITY || '';
+const cleanFrameCore = CORE.cleanframe || window.CORE_CLEAN_FRAME || '';
+const finishCore = 'Premium modern portrait finish, realistic material response, controlled depth of field, refined tonal separation, clean background detail and professional color grading.';
+const scopedNegativeCore = 'No generic template face, no cheap costume appearance, no plastic skin, no unrelated palette, no clutter, no unreadable text, no logo, no brand mark.';
+
+const styleData = {
+  everydayEditorial: 'modern portrait editorial photography, natural polished styling, believable daily atmosphere, human-centered commercial storytelling',
+  softLifestyle: 'soft lifestyle portrait photography, gentle daylight, relaxed presence, intimate everyday atmosphere and refined natural styling',
+  freshGlamour: 'fresh beauty campaign portrait, clear expressive presence, luminous skin texture, clean modern styling and premium commercial finish',
+  fashionPortrait: 'modern fashion portrait editorial, clothing silhouette and body language clearly presented, precise composition and contemporary styling',
+  candidStory: 'candid modern portrait storytelling, captured natural movement, authentic gesture, spontaneous expression and carefully observed environment',
+  quietMinimal: 'quiet minimalist portrait photography, restrained styling, clean visual field, subtle emotion and deliberate use of light and space'
+};
+
+const sceneData = {
+  whiteBedroom: 'bright white bedroom scene, clean linen bedding, soft pillows, uncluttered wall and daylight entering from a nearby window, intimate modern portrait setting',
+  pastelLounge: 'pastel living room scene with a soft sofa, rounded cushions, light table and airy interior depth, playful but polished modern lifestyle portrait',
+  japaneseInterior: 'quiet Japanese-inspired interior, warm wood, tatami texture, sliding screen and low furniture, calm contemporary lifestyle setting',
+  blindWindowRoom: 'minimal room beside a window with horizontal blinds, clean wall planes, controlled shadows and graphic stripe light across the setting',
+  brightCorridor: 'bright architectural corridor with pale walls, repeating lines, clean floor and open depth, suitable for a natural walking portrait',
+  outdoorGreenery: 'fresh outdoor greenery, layered leaves, soft open-air background and a narrow garden path, natural portrait atmosphere with breathing room',
+  festiveChineseInterior: 'modern Chinese-inspired festive interior with restrained red decorations, warm wood, hanging lights and a clean residential background',
+  elegantLounge: 'quiet elegant lounge with a refined sofa, coffee table, linen textures and curated neutral decor, polished contemporary portrait setting',
+  windowBedroom: 'bedroom beside a tall window, sheer curtain, linen bed edge and soft side light, intimate portrait environment with clear spatial depth',
+  softStudio: 'minimal natural-light studio with a warm neutral wall, subtle floor shadow and clean open space, contemporary portrait campaign setting'
+};
+
+const sceneStoryData = {
+  whiteBedroom: 'a quiet morning portrait captured in a bright private room, where clean linen and soft daylight make the subject feel close and unforced',
+  pastelLounge: 'a lighthearted pause in a pastel living room, balancing relaxed body language with a carefully styled modern interior',
+  japaneseInterior: 'a calm indoor portrait built around warm wood, measured gestures and the quiet rhythm of a contemporary Japanese-inspired home',
+  blindWindowRoom: 'a graphic portrait moment in which the subject moves through alternating bands of window light and room shadow',
+  brightCorridor: 'a natural passage through a bright architectural space, turning a simple walk into a clean modern fashion story',
+  outdoorGreenery: 'an open-air portrait surrounded by fresh greenery, with movement, light and background depth carrying the emotional tone',
+  festiveChineseInterior: 'a modern festive portrait set among warm red details, keeping the person central while the room supplies cultural atmosphere',
+  elegantLounge: 'a composed lifestyle portrait in a quiet lounge, where furniture, clothing and soft light share one restrained visual language',
+  windowBedroom: 'an intimate window-side portrait that follows the subject from soft room shadow into natural daylight',
+  softStudio: 'a clean contemporary portrait session where a simple studio environment leaves room for expression, styling and gesture'
+};
+
+const garmentData = {
+  pinkCamisoleShorts: 'soft pastel camisole top with tailored shorts, light fabric layering, clean seams and relaxed contemporary portrait styling',
+  chiffonSummerDress: 'light chiffon summer dress with flowing layers, delicate surface texture, natural drape and airy modern styling',
+  softFittedDress: 'soft fitted midi dress with a clean neckline, gentle waist shaping, realistic fabric tension and refined everyday elegance',
+  minimalKnitSet: 'minimal fine-gauge knit set with a fitted top and relaxed skirt or trousers, tactile textile detail and clean modern silhouette',
+  laceSatinHomewear: 'lace-trimmed satin homewear with a coordinated robe layer, controlled sheen, fluid folds and polished intimate lifestyle styling',
+  blackEditorialDress: 'minimal black editorial dress with precise tailoring, clear shoulder line, controlled drape and contemporary fashion presence',
+  modernQipao: 'modern Chinese-inspired fitted dress with restrained collar or button detail, contemporary tailoring and clean lifestyle styling',
+  halterDress: 'modern halter-neck long dress with an elegant shoulder line, flowing skirt and refined outdoor portrait movement'
+};
+
+const bodyShapes = {
+  original: 'original natural body proportions from the reference photo, do not reshape the body',
+  slight_waist: 'slightly refined waistline, subtle natural shaping, keep shoulders hips and overall body proportions faithful to the reference',
+  curvy_waist: 'fuller feminine bust curve and narrow slim waistline, dramatic feminine S-curve silhouette, strong bust-waist-hip contrast, keep anatomy natural',
+  fashion_tall: 'tall fashion proportion, elongated but natural body line, refined model presence without changing facial identity',
+  korean_idol: 'Korean idol-inspired proportion, upright posture, long clean body line, toned yet soft commercial portrait presence',
+  full_bust_cleavage: 'adult woman with a naturally fuller bust and pronounced natural cleavage, fuller upper-body silhouette with a defined waist and balanced feminine proportions, realistic anatomy, natural gravity, coherent bust-to-waist proportions, selected garment remains unchanged, no exaggerated breast size or artificial body shaping'
+};
+
+const poseData = {
+  auto: window.HB_CORE_PROMPT?.controls?.autoPose || 'AI choose the single most suitable natural modern portrait pose from the selected scene, clothing, light and composition, with relaxed hands and coherent body mechanics',
+  naturalStanding: 'natural upright standing pose, relaxed shoulders, balanced weight, hands resting comfortably and clothing silhouette clearly visible',
+  standingThreeQuarter: 'three-quarter standing pose, shoulders and hips turn naturally together, relaxed arms and stable feet present a clear modern portrait line',
+  gentleHairTouch: 'one hand lightly touching the hair near the shoulder, elbow relaxed, neck and shoulder direction coherent, expression natural',
+  armsRaisedGracefully: 'arms lifted gently while adjusting a sleeve or hair, enough space around the elbows, natural wrists and anatomically aligned shoulders',
+  leaningWall: 'soft side lean against a wall, one leg carrying the weight, hips and shoulders naturally aligned, hands relaxed at the body',
+  sofaSideSit: 'sideways seated pose on a sofa, relaxed shoulders, one hand resting on the cushion, knees and ankles arranged naturally with grounded weight',
+  bedSideSit: 'seated at the edge of the bed, one hand lightly smoothing linen, torso relaxed, feet grounded and head-neck-shoulder direction coherent',
+  bedRecliningDiagonal: 'reclining diagonally across the bed with supported back and naturally arranged legs, arms relaxed, full body continuity preserved',
+  bedSidePillowClose: 'side-lying portrait beside a pillow, face, neck and shoulders follow the same direction, hands relaxed and body supported by the bedding',
+  bedProneLegsUp: 'prone pose on the bed with lower legs gently raised and knees naturally bent, hands visible and relaxed, no crossed or twisted limbs',
+  windowSeatedLongLine: 'seated beside the window with one side of the body receiving light, spine long but relaxed, hands resting naturally and gaze directed into the scene',
+  blindWindowLean: 'standing beside the blinds with a gentle lean, body follows the window plane, shoulders level and hands placed in a quiet natural gesture',
+  lookBackWalking: 'natural walking pose with a subtle over-the-shoulder glance, step and head turn connected, fabric moving lightly without exaggerated motion',
+  tatamiSeated: 'calm seated pose on a tatami surface, upright relaxed spine, hands resting together and clothing layers arranged clearly',
+  softSeated: 'relaxed seated portrait on a chair or sofa, shoulders open, hips grounded, hands natural and body line easy rather than rigid'
+};
+
+const interactionData = {
+  none: 'no specified prop, let the selected modern scene carry the portrait narrative',
+  pillowLinen: 'soft pillow and linen fabric arranged naturally near the subject, hands may lightly adjust the texture without covering the face',
+  flowerCushion: 'small flower cushion or restrained seasonal bouquet used as a secondary color and texture layer',
+  bookMagazine: 'open art book or fashion magazine held naturally or placed on the furniture, no readable text',
+  coffeeCup: 'single ceramic coffee cup with subtle steam, held or placed naturally without hiding the face',
+  hairRibbon: 'simple hair ribbon or hair accessory adjusted with a gentle hand movement, kept secondary to the portrait',
+  windowCurtain: 'sheer curtain touched lightly with one hand, fabric follows the window light and remains physically plausible',
+  teaCup: 'small ceramic tea cup on a clean low table, restrained domestic detail and natural hand placement'
+};
+
+const lightingData = {
+  whiteWindowHighKey: 'high-key white window light, bright clean exposure, soft shadow edges and unified natural reflection across face body clothing and room',
+  softDiffusedDaylight: 'soft diffused daylight through a large window, low-contrast exposure, gentle shadows and clear fabric texture',
+  goldenBacklight: 'warm golden backlight through the setting, subtle rim light on hair and fabric, balanced fill and coherent environmental color',
+  blindStripeLight: 'controlled window-blind stripe light, graphic alternating bands across the wall and clothing, exposure kept natural and readable',
+  warmInteriorSoft: 'soft warm interior light from practical lamps, gentle room depth, restrained highlights and consistent skin tone across the scene',
+  moodyDirectional: 'refined directional portrait light with measured contrast, clear facial readability, controlled shadow shape and premium fashion atmosphere'
+};
+
+const colorData = {
+  warmIvoryWhite: 'warm ivory, soft white, pale wood and muted beige coordinated palette',
+  blushPinkIvory: 'dusty blush, pale pink, ivory, soft gray and light wood coordinated palette',
+  grayBlueSilver: 'gray blue, silver gray, cool white and pale oak coordinated palette',
+  blackWhiteBlush: 'black, clean white, muted blush and soft gray coordinated palette',
+  freshGreenCream: 'fresh leaf green, cream, warm white and natural wood coordinated palette',
+  redGoldChinese: 'restrained vermilion red, warm gold, dark wood and soft ivory coordinated palette',
+  aiThemeScenePalette: window.HB_CORE_PROMPT?.controls?.autoColor || 'AI choose one coherent dominant color, one supporting color and one restrained accent based on the selected modern portrait theme, scene, clothing and lighting'
+};
+
+const cameraData = {
+  eyeLevelCover: 'natural eye-level camera angle, balanced modern portrait cover perspective, stable face body and setting proportion',
+  lowAngleHero: 'measured low-angle fashion portrait view, camera placed below the subject, elongated but natural silhouette without wide-angle distortion',
+  highAngleOverhead: 'high-angle view from above the subject, clear relationship between body, bed or floor plane, with natural proportions retained',
+  softFocusGlow: 'soft-focus portrait camera language with restrained bloom, luminous atmosphere and facial geometry kept clear',
+  beautyCloseUp: 'close portrait framing for face and upper body, background recedes naturally while the subject remains part of the same scene',
+  sideProfile: 'side-profile portrait angle, facial contour, neck and shoulder line remain coherent with the selected light direction',
+  threeQuarterSide: 'three-quarter camera angle, approximately 45 degrees, showing face, clothing and setting with dimensional structure',
+  topBeauty: 'intimate high-angle detail view for bed, pillow or quiet lifestyle interaction, with head and body scale kept natural',
+  distantHero: 'camera pulled back for an environmental portrait, showing the complete subject, pose and setting relationship with breathing room'
+};
+
+const ratioData = {
+  '9:16': 'aspect ratio 9:16, vertical modern portrait composition',
+  '4:5': 'aspect ratio 4:5, vertical premium portrait composition',
+  '1:1': 'aspect ratio 1:1, square modern portrait campaign composition',
+  '2:3': 'aspect ratio 2:3, vertical fashion portrait composition',
+  '3:4': 'aspect ratio 3:4, vertical portrait and setting balance composition',
+  '16:9': 'aspect ratio 16:9, horizontal modern lifestyle composition',
+  '4:3': 'aspect ratio 4:3, horizontal environmental portrait composition',
+  '21:9': 'aspect ratio 21:9, wide modern campaign banner composition'
+};
+
+const intensityData = {
+  quiet: 'quiet natural portrait direction, restrained styling and believable everyday movement',
+  balanced: 'balanced modern portrait direction, person, clothing and environment receive clear visual priority',
+  premium: 'premium commercial portrait direction, refined fabric texture, controlled highlights and polished tonal separation',
+  cinematic: 'layered portrait storytelling, expressive environmental light and carefully controlled depth'
+};
+
+const GARMENT_DETAIL_LAYER_ZONES = Object.freeze({ layer0: 0, layer3: 1, layer6: 2, layer9: 3 });
+const GARMENT_DETAIL_RANDOM_POOLS = Object.freeze({
+  chestDetail: ['softSquareNeckline', 'crossWrapBodice', 'layeredCamisole'],
+  waistSideDetail: ['softWaistDrape', 'sideWrapSlit', 'slimBeltLine'],
+  shoulderDetail: ['offShoulderCut', 'singleShoulderDrape', 'softCardiganDrape']
+});
+const GARMENT_VARIATIONS = {
+  chestDetail: {
+    none: '',
+    softSquareNeckline: 'soft square neckline with structured bodice support, stable garment construction and natural fabric tension',
+    crossWrapBodice: 'cross-wrap bodice structure with secure layered coverage, refined tailoring and realistic garment support',
+    layeredCamisole: 'layered camisole straps beneath a soft cardigan or robe layer, refined contemporary portrait styling'
+  },
+  waistSideDetail: {
+    none: '',
+    softWaistDrape: 'soft gathered waistline and controlled fabric drape, subtle natural shaping without distortion',
+    sideWrapSlit: 'elegant side wrap opening with a restrained walking slit, layered fabric coverage and polished tailoring',
+    slimBeltLine: 'slim waist belt or tonal belt seam, clean waist definition integrated into the selected garment'
+  },
+  shoulderDetail: {
+    none: '',
+    offShoulderCut: 'tasteful off-shoulder cut, natural shoulder line, stable garment construction and refined modern styling',
+    singleShoulderDrape: 'single-shoulder diagonal cut with soft draped fabric, asymmetrical fashion detail and balanced coverage',
+    softCardiganDrape: 'soft cardigan or robe layer falling naturally from the shoulders, realistic knit or silk weight and relaxed styling'
+  }
+};
+
+const SCENE_POSE_POOLS = Object.freeze({
+  whiteBedroom: ['bedSideSit', 'bedRecliningDiagonal', 'bedSidePillowClose', 'bedProneLegsUp'],
+  pastelLounge: ['sofaSideSit', 'softSeated', 'naturalStanding'],
+  japaneseInterior: ['tatamiSeated', 'softSeated', 'gentleHairTouch'],
+  blindWindowRoom: ['blindWindowLean', 'windowSeatedLongLine', 'leaningWall'],
+  brightCorridor: ['naturalStanding', 'standingThreeQuarter', 'lookBackWalking'],
+  outdoorGreenery: ['lookBackWalking', 'naturalStanding', 'standingThreeQuarter'],
+  festiveChineseInterior: ['standingThreeQuarter', 'gentleHairTouch', 'softSeated'],
+  elegantLounge: ['softSeated', 'sofaSideSit', 'gentleHairTouch'],
+  windowBedroom: ['windowSeatedLongLine', 'bedSideSit', 'gentleHairTouch'],
+  softStudio: ['naturalStanding', 'standingThreeQuarter', 'leaningWall']
+});
+const SCENE_CAMERA_POOLS = Object.freeze({
+  whiteBedroom: ['highAngleOverhead', 'topBeauty', 'beautyCloseUp'],
+  pastelLounge: ['threeQuarterSide', 'eyeLevelCover', 'softFocusGlow'],
+  japaneseInterior: ['eyeLevelCover', 'threeQuarterSide', 'sideProfile'],
+  blindWindowRoom: ['sideProfile', 'threeQuarterSide', 'eyeLevelCover'],
+  brightCorridor: ['distantHero', 'threeQuarterSide', 'eyeLevelCover'],
+  outdoorGreenery: ['distantHero', 'threeQuarterSide', 'sideProfile'],
+  festiveChineseInterior: ['eyeLevelCover', 'threeQuarterSide', 'beautyCloseUp'],
+  elegantLounge: ['eyeLevelCover', 'threeQuarterSide', 'beautyCloseUp'],
+  windowBedroom: ['sideProfile', 'topBeauty', 'beautyCloseUp'],
+  softStudio: ['eyeLevelCover', 'threeQuarterSide', 'beautyCloseUp']
+});
+const SCENE_LIGHTING_POOLS = Object.freeze({
+  whiteBedroom: ['whiteWindowHighKey', 'softDiffusedDaylight'],
+  pastelLounge: ['softDiffusedDaylight', 'whiteWindowHighKey'],
+  japaneseInterior: ['warmInteriorSoft', 'softDiffusedDaylight'],
+  blindWindowRoom: ['blindStripeLight', 'softDiffusedDaylight'],
+  brightCorridor: ['softDiffusedDaylight', 'whiteWindowHighKey'],
+  outdoorGreenery: ['goldenBacklight', 'softDiffusedDaylight'],
+  festiveChineseInterior: ['warmInteriorSoft', 'moodyDirectional'],
+  elegantLounge: ['softDiffusedDaylight', 'warmInteriorSoft'],
+  windowBedroom: ['whiteWindowHighKey', 'softDiffusedDaylight'],
+  softStudio: ['softDiffusedDaylight', 'moodyDirectional']
+});
+
+const themeTemplates = {
+  whiteMorningBed: { story: 'a quiet morning portrait captured in a bright private room, where clean linen and soft daylight make the subject feel close and unforced', style: 'softLifestyle', scene: 'whiteBedroom', garment: 'pinkCamisoleShorts', garmentLayer: 'layer3', chestDetail: 'layeredCamisole', waistSideDetail: 'softWaistDrape', shoulderDetail: 'softCardiganDrape', bodyShape: 'original', pose: 'bedRecliningDiagonal', interaction: 'pillowLinen', lighting: 'whiteWindowHighKey', colorPalette: 'warmIvoryWhite', camera: 'highAngleOverhead', ratio: '9:16', intensity: 'balanced' },
+  pillowSidePortrait: { story: 'a quiet morning portrait captured in a bright private room, where clean linen and soft daylight make the subject feel close and unforced', style: 'freshGlamour', scene: 'whiteBedroom', garment: 'softFittedDress', garmentLayer: 'layer0', chestDetail: 'softSquareNeckline', waistSideDetail: 'none', shoulderDetail: 'none', bodyShape: 'original', pose: 'bedSidePillowClose', interaction: 'pillowLinen', lighting: 'softDiffusedDaylight', colorPalette: 'warmIvoryWhite', camera: 'beautyCloseUp', ratio: '4:5', intensity: 'premium' },
+  pastelSofaMoment: { story: 'a lighthearted pause in a pastel living room, balancing relaxed body language with a carefully styled modern interior', style: 'everydayEditorial', scene: 'pastelLounge', garment: 'pinkCamisoleShorts', garmentLayer: 'layer3', chestDetail: 'crossWrapBodice', waistSideDetail: 'slimBeltLine', shoulderDetail: 'offShoulderCut', bodyShape: 'original', pose: 'sofaSideSit', interaction: 'flowerCushion', lighting: 'softDiffusedDaylight', colorPalette: 'blushPinkIvory', camera: 'threeQuarterSide', ratio: '9:16', intensity: 'balanced' },
+  tatamiQuietPortrait: { story: 'a calm indoor portrait built around warm wood, measured gestures and the quiet rhythm of a contemporary Japanese-inspired home', style: 'quietMinimal', scene: 'japaneseInterior', garment: 'modernQipao', garmentLayer: 'layer0', chestDetail: 'softSquareNeckline', waistSideDetail: 'none', shoulderDetail: 'none', bodyShape: 'original', pose: 'tatamiSeated', interaction: 'teaCup', lighting: 'warmInteriorSoft', colorPalette: 'grayBlueSilver', camera: 'eyeLevelCover', ratio: '4:5', intensity: 'quiet' },
+  blindWindowEditorial: { story: 'a graphic portrait moment in which the subject moves through alternating bands of window light and room shadow', style: 'fashionPortrait', scene: 'blindWindowRoom', garment: 'blackEditorialDress', garmentLayer: 'layer3', chestDetail: 'crossWrapBodice', waistSideDetail: 'slimBeltLine', shoulderDetail: 'singleShoulderDrape', bodyShape: 'fashion_tall', pose: 'blindWindowLean', interaction: 'windowCurtain', lighting: 'blindStripeLight', colorPalette: 'blackWhiteBlush', camera: 'sideProfile', ratio: '3:4', intensity: 'premium' },
+  brightCorridorWalk: { story: 'a natural passage through a bright architectural space, turning a simple walk into a clean modern fashion story', style: 'candidStory', scene: 'brightCorridor', garment: 'chiffonSummerDress', garmentLayer: 'layer0', chestDetail: 'none', waistSideDetail: 'none', shoulderDetail: 'none', bodyShape: 'original', pose: 'lookBackWalking', interaction: 'none', lighting: 'softDiffusedDaylight', colorPalette: 'freshGreenCream', camera: 'distantHero', ratio: '2:3', intensity: 'balanced' },
+  goldenOutdoorPortrait: { story: 'an open-air portrait surrounded by fresh greenery, with movement, light and background depth carrying the emotional tone', style: 'freshGlamour', scene: 'outdoorGreenery', garment: 'halterDress', garmentLayer: 'layer3', chestDetail: 'softSquareNeckline', waistSideDetail: 'softWaistDrape', shoulderDetail: 'none', bodyShape: 'fashion_tall', pose: 'standingThreeQuarter', interaction: 'flowerCushion', lighting: 'goldenBacklight', colorPalette: 'freshGreenCream', camera: 'threeQuarterSide', ratio: '3:4', intensity: 'premium' },
+  redGoldFestive: { story: 'a modern festive portrait set among warm red details, keeping the person central while the room supplies cultural atmosphere', style: 'fashionPortrait', scene: 'festiveChineseInterior', garment: 'modernQipao', garmentLayer: 'layer3', chestDetail: 'softSquareNeckline', waistSideDetail: 'slimBeltLine', shoulderDetail: 'singleShoulderDrape', bodyShape: 'original', pose: 'gentleHairTouch', interaction: 'hairRibbon', lighting: 'warmInteriorSoft', colorPalette: 'redGoldChinese', camera: 'eyeLevelCover', ratio: '4:5', intensity: 'premium' },
+  bedProneAiry: { story: 'a quiet morning portrait captured in a bright private room, where clean linen and soft daylight make the subject feel close and unforced', style: 'candidStory', scene: 'whiteBedroom', garment: 'minimalKnitSet', garmentLayer: 'layer0', chestDetail: 'none', waistSideDetail: 'none', shoulderDetail: 'none', bodyShape: 'original', pose: 'bedProneLegsUp', interaction: 'pillowLinen', lighting: 'whiteWindowHighKey', colorPalette: 'blushPinkIvory', camera: 'highAngleOverhead', ratio: '9:16', intensity: 'balanced' },
+  softGlamourLounge: { story: 'a composed lifestyle portrait in a quiet lounge, where furniture, clothing and soft light share one restrained visual language', style: 'freshGlamour', scene: 'elegantLounge', garment: 'laceSatinHomewear', garmentLayer: 'layer3', chestDetail: 'layeredCamisole', waistSideDetail: 'softWaistDrape', shoulderDetail: 'softCardiganDrape', bodyShape: 'curvy_waist', pose: 'softSeated', interaction: 'coffeeCup', lighting: 'moodyDirectional', colorPalette: 'grayBlueSilver', camera: 'beautyCloseUp', ratio: '4:5', intensity: 'premium' }
+};
+
+let activeTemplateStory = '';
+
+function selected(name){
+  return document.querySelector(`input[name="${name}"]:checked`)?.value || '';
+}
+function values(name){
+  return Array.from(document.querySelectorAll(`input[name="${name}"]`)).map(input => input.value);
+}
+function randomItem(list){
+  return list[Math.floor(Math.random() * list.length)];
+}
+function setRadioValue(name, value){
+  const input = document.querySelector(`input[name="${name}"][value="${CSS.escape(value)}"]`);
+  if(input) input.checked = true;
+}
+function refreshCards(){
+  document.querySelectorAll('.card,.pose-card').forEach(card => {
+    const input = card.querySelector('input');
+    if(input) card.classList.toggle('selected', input.checked);
+  });
+}
+function clearCustomFields(){
+  ['customScene','customGarment','customPose','colorNote','extraNote'].forEach(id => {
+    const field = document.getElementById(id);
+    if(field) field.value = '';
+  });
+}
+function resolveVariationParts(){
+  const parts = [
+    GARMENT_VARIATIONS.chestDetail[selected('chestDetail')],
+    GARMENT_VARIATIONS.waistSideDetail[selected('waistSideDetail')],
+    GARMENT_VARIATIONS.shoulderDetail[selected('shoulderDetail')]
+  ];
+  return HB_GARMENT_CORE.compactPromptParts(parts);
+}
+function applyTemplate(key){
+  const preset = themeTemplates[key];
+  if(!preset) return;
+  ['style','scene','garment','garmentLayer','chestDetail','waistSideDetail','shoulderDetail','bodyShape','pose','interaction','lighting','colorPalette','camera','ratio'].forEach(name => setRadioValue(name, preset[name]));
+  document.getElementById('intensity').value = preset.intensity;
+  activeTemplateStory = preset.story || sceneStoryData[preset.scene] || '';
+  clearCustomFields();
+  refreshCards();
+  generate({reveal:true});
+}
+function applyRandomSelection(){
+  clearCustomFields();
+  activeTemplateStory = '';
+  ['style','garment','bodyShape','interaction','colorPalette','ratio'].forEach(name => setRadioValue(name, randomItem(values(name))));
+  const sceneKey = randomItem(values('scene'));
+  setRadioValue('scene', sceneKey);
+  const posePool = ['auto', ...(SCENE_POSE_POOLS[sceneKey] || values('pose'))];
+  const cameraPool = SCENE_CAMERA_POOLS[sceneKey] || values('camera');
+  const lightingPool = SCENE_LIGHTING_POOLS[sceneKey] || values('lighting');
+  setRadioValue('pose', randomItem(posePool));
+  setRadioValue('camera', randomItem(cameraPool));
+  setRadioValue('lighting', randomItem(lightingPool));
+  setRadioValue('garmentLayer', randomItem(['layer0','layer3','layer6','layer9']));
+  setRadioValue('chestDetail', 'none');
+  setRadioValue('waistSideDetail', 'none');
+  setRadioValue('shoulderDetail', 'none');
+  const layerKeys = ['layer0','layer3','layer6','layer9'];
+  const layerSelection = HB_GARMENT_CORE.resolveLayer(selected('garmentLayer'), layerKeys, GARMENT_DETAIL_LAYER_ZONES);
+  setRadioValue('garmentLayer', layerSelection.key);
+  const zoneFields = {
+    chestDetail: GARMENT_VARIATIONS.chestDetail,
+    waistSideDetail: GARMENT_VARIATIONS.waistSideDetail,
+    shoulderDetail: GARMENT_VARIATIONS.shoulderDetail
+  };
+  const { zones } = HB_GARMENT_CORE.chooseFreeZones(zoneFields, name => selected(name), layerSelection.targetCount);
+  zones.forEach(name => {
+    const pool = HB_GARMENT_CORE.randomKeys(zoneFields[name], GARMENT_DETAIL_RANDOM_POOLS[name]);
+    if(pool.length) setRadioValue(name, randomItem(pool));
+  });
+  document.getElementById('intensity').value = randomItem(Object.keys(intensityData));
+  refreshCards();
+  generate({reveal:true});
+}
+function markStale(){
+  const wrap = document.getElementById('outputWrap');
+  if(!wrap.classList.contains('hidden')) wrap.classList.add('stale');
+}
+function generate(options = {}){
+  const customScene = document.getElementById('customScene').value.trim();
+  const customGarment = document.getElementById('customGarment').value.trim();
+  const customPose = document.getElementById('customPose').value.trim();
+  const colorNote = document.getElementById('colorNote').value.trim();
+  const extraNote = document.getElementById('extraNote').value.trim();
+  const sceneKey = selected('scene');
+  const styleText = styleData[selected('style')];
+  const sceneText = customScene ? `custom modern portrait setting only: ${customScene}; do not blend another preset scene` : sceneData[sceneKey];
+  const garmentText = customGarment ? `custom modern garment direction only: ${customGarment}; do not blend another preset garment` : garmentData[selected('garment')];
+  const poseText = customPose ? `custom natural portrait pose only: ${customPose}; do not blend another preset pose` : poseData[selected('pose')];
+  const interactionText = interactionData[selected('interaction')];
+  const lightingText = lightingData[selected('lighting')];
+  const colorText = colorNote || colorData[selected('colorPalette')];
+  const storyText = customScene
+    ? `a modern portrait story built around ${customScene}`
+    : (activeTemplateStory || sceneStoryData[sceneKey]);
+  const variationParts = resolveVariationParts();
+  const variationBlock = variationParts.length ? `【服裝改造核心】\n\n${variationParts.join('\n')}` : '';
+  const prompt = [
+    identityCore,
+    anatomyCore,
+    poseCore,
+    lightingCore,
+    photographerCore,
+    coherenceCore,
+    `【作品概念】\n\n${storyText}`,
+    `【畫面語氣】\n\n${styleText}`,
+    `【現代生活場景】\n\n${sceneText}`,
+    `【現代服裝方向】\n\n${garmentText}`,
+    variationBlock,
+    `【身形輪廓】\n\n${bodyShapes[selected('bodyShape')]}`,
+    `【人物姿勢】\n\n${poseText}`,
+    `【道具與互動】\n\n${interactionText}`,
+    `【光影】\n\n${lightingText}`,
+    `【色彩系統】\n\n${colorText}`,
+    `【畫面強度】\n\n${intensityData[document.getElementById('intensity').value]}`,
+    `【鏡頭感】\n\n${cameraData[selected('camera')]}. Use only this selected camera perspective; do not combine close portrait framing with full-body environmental framing.`,
+    `【圖片比例】\n\n${ratioData[selected('ratio')]}`,
+    finishCore,
+    cleanFrameCore,
+    scopedNegativeCore,
+    outputCore,
+    extraNote ? `【其他要求】\n\n${extraNote}` : ''
+  ].filter(Boolean).join('\n\n⸻\n\n');
+  document.getElementById('outputText').value = prompt;
+  document.getElementById('outputWrap').classList.remove('hidden','stale');
+  document.getElementById('copyBtn').textContent = '一鍵複製';
+  if(options.reveal) document.getElementById('outputWrap').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+document.querySelectorAll('input[type="radio"]').forEach(input => input.addEventListener('change', () => { activeTemplateStory = ''; refreshCards(); markStale(); }));
+['customScene','customGarment','customPose','colorNote','extraNote','intensity'].forEach(id => document.getElementById(id).addEventListener('input', markStale));
+document.getElementById('intensity').addEventListener('change', markStale);
+document.getElementById('generateBtn').addEventListener('click', () => generate({reveal:true}));
+document.getElementById('lifestyleRandom').addEventListener('click', applyRandomSelection);
+document.querySelectorAll('[data-template]').forEach(button => button.addEventListener('click', () => applyTemplate(button.dataset.template)));
+document.getElementById('copyBtn').addEventListener('click', () => {
+  if(document.getElementById('outputWrap').classList.contains('stale')) return;
+  const text = document.getElementById('outputText').value;
+  const button = document.getElementById('copyBtn');
+  const done = () => { button.textContent = '已複製'; button.classList.add('copied'); setTimeout(() => { button.textContent = '一鍵複製'; button.classList.remove('copied'); }, 1400); };
+  if(navigator.clipboard?.writeText) navigator.clipboard.writeText(text).then(done).catch(() => { document.getElementById('outputText').select(); document.execCommand('copy'); done(); });
+  else { document.getElementById('outputText').select(); document.execCommand('copy'); done(); }
+});
+window.HB_INSTALL_CUSTOM_IDENTITY_WARNING?.(document);
+refreshCards();
+generate();
+</script>
+</body>
+</html>

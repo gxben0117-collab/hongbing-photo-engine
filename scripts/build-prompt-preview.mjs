@@ -299,6 +299,49 @@ function generateLuxuryLifestyle(core, data, selectionOverride = null) {
   return sections.filter(Boolean).join('\n\n⸻\n\n');
 }
 
+function generateModernPortrait(core, data, selectionOverride = null) {
+  const selection = selectionOverride || {
+    story: data.sceneStoryData.whiteBedroom,
+    style: 'softLifestyle', scene: 'whiteBedroom', garment: 'pinkCamisoleShorts',
+    chestDetail: 'layeredCamisole', waistSideDetail: 'softWaistDrape', shoulderDetail: 'softCardiganDrape',
+    bodyShape: 'original', pose: 'bedRecliningDiagonal', interaction: 'pillowLinen',
+    lighting: 'whiteWindowHighKey', colorPalette: 'warmIvoryWhite', camera: 'highAngleOverhead',
+    ratio: '9:16', intensity: 'balanced',
+  };
+  const variationParts = [
+    data.GARMENT_VARIATIONS.chestDetail[selection.chestDetail],
+    data.GARMENT_VARIATIONS.waistSideDetail[selection.waistSideDetail],
+    data.GARMENT_VARIATIONS.shoulderDetail[selection.shoulderDetail],
+  ].filter(Boolean);
+  const variationBlock = variationParts.length ? `【服裝改造核心】\n\n${variationParts.join('\n')}` : '';
+  const sections = [
+    core.page.modernPortrait.identity,
+    core.page.modernPortrait.skeleton,
+    core.page.modernPortrait.pose,
+    core.page.modernPortrait.lighting,
+    core.page.modernPortrait.photographer,
+    'Selected clothing, props, pose, setting, lighting and palette must read as one coherent modern portrait production; every element supports the same visual story without unrelated style mixing.',
+    `【作品概念】\n\n${selection.story || data.sceneStoryData[selection.scene]}`,
+    `【畫面語氣】\n\n${data.styleData[selection.style]}`,
+    `【現代生活場景】\n\n${data.sceneData[selection.scene]}`,
+    `【現代服裝方向】\n\n${data.garmentData[selection.garment]}`,
+    variationBlock,
+    `【身形輪廓】\n\n${data.bodyShapes[selection.bodyShape]}`,
+    `【人物姿勢】\n\n${data.poseData[selection.pose]}`,
+    `【道具與互動】\n\n${data.interactionData[selection.interaction]}`,
+    `【光影】\n\n${data.lightingData[selection.lighting]}`,
+    `【色彩系統】\n\n${data.colorData[selection.colorPalette]}`,
+    `【畫面強度】\n\n${data.intensityData[selection.intensity]}`,
+    `【鏡頭感】\n\n${data.cameraData[selection.camera]}. Use only this selected camera perspective; do not combine close portrait framing with full-body environmental framing.`,
+    `【圖片比例】\n\n${data.ratioData[selection.ratio]}`,
+    'Premium modern portrait finish, realistic material response, controlled depth of field, refined tonal separation and professional color grading.',
+    core.page.modernPortrait.cleanframe,
+    'No generic template face, no cheap costume appearance, no plastic skin, no unrelated palette, no clutter, no unreadable text, no logo, no brand mark.',
+    core.page.modernPortrait.output,
+  ];
+  return sections.filter(Boolean).join('\n\n⸻\n\n');
+}
+
 function generateFantasy(core, data) {
   const selection = {
     bodyShape: 'original',
@@ -1307,6 +1350,20 @@ function loadRevision(label, sourceReader) {
   } catch (err) {
     // The base revision may predate the independent Luxury Lifestyle page.
   }
+  let modernPortraitData = null;
+  try {
+    const modernPortraitSource = sourceReader('modern-portrait.html');
+    modernPortraitData = evalDataSegment({
+      source: modernPortraitSource,
+      core,
+      page: 'modernPortrait',
+      startMarker: 'const CORE = window.HB_CORE_PROMPT?.page?.modernPortrait || {};',
+      endMarker: 'function selected',
+      exportExpression: '({ styleData, sceneData, sceneStoryData, garmentData, bodyShapes, poseData, interactionData, lightingData, colorData, cameraData, ratioData, intensityData, GARMENT_VARIATIONS, themeTemplates })',
+    });
+  } catch (err) {
+    // The base revision may predate the independent Modern Portrait page.
+  }
   const fantasyData = evalDataSegment({
     source: fantasySource,
     core,
@@ -1370,6 +1427,11 @@ function loadRevision(label, sourceReader) {
     prompts['luxury-lifestyle-default.txt'] = generateLuxuryLifestyle(core, luxuryLifestyleData);
     const sofaTemplate = luxuryLifestyleData.themeTemplates?.sofaMorningEditorial;
     if (sofaTemplate) prompts['luxury-lifestyle-sofa-morning.txt'] = generateLuxuryLifestyle(core, luxuryLifestyleData, sofaTemplate);
+  }
+  if (modernPortraitData) {
+    prompts['modern-portrait-default.txt'] = generateModernPortrait(core, modernPortraitData);
+    const whiteMorningTemplate = modernPortraitData.themeTemplates?.whiteMorningBed;
+    if (whiteMorningTemplate) prompts['modern-portrait-white-morning.txt'] = generateModernPortrait(core, modernPortraitData, whiteMorningTemplate);
   }
   if (chineseClassicalData) {
     prompts['chinese-classical-default.txt'] = generateChineseClassical(core, chineseClassicalData);

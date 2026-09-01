@@ -299,6 +299,73 @@ const editorialFinish = evalEditorialFinish(read('assets/editorial-finish.js'));
   report('luxuryLifestyle', N);
 }
 
+// ===================== MODERN PORTRAIT =====================
+{
+  const html = read('modern-portrait.html');
+  const data = evalDataSegment({
+    source: html, core, page: 'modernPortrait',
+    startMarker: 'const CORE = window.HB_CORE_PROMPT?.page?.modernPortrait || {};',
+    endMarker: 'function selected',
+    exportExpression: '({ styleData, sceneData, sceneStoryData, garmentData, bodyShapes, poseData, interactionData, lightingData, colorData, cameraData, ratioData, intensityData, GARMENT_VARIATIONS, SCENE_POSE_POOLS, SCENE_CAMERA_POOLS, SCENE_LIGHTING_POOLS, themeTemplates })',
+  });
+  const pools = {
+    style: Object.keys(data.styleData), scene: Object.keys(data.sceneData), garment: Object.keys(data.garmentData),
+    bodyShape: Object.keys(data.bodyShapes), pose: Object.keys(data.poseData), interaction: Object.keys(data.interactionData),
+    lighting: Object.keys(data.lightingData), colorPalette: Object.keys(data.colorData), camera: Object.keys(data.cameraData),
+    ratio: Object.keys(data.ratioData), intensity: Object.keys(data.intensityData),
+    chestDetail: Object.keys(data.GARMENT_VARIATIONS.chestDetail), waistSideDetail: Object.keys(data.GARMENT_VARIATIONS.waistSideDetail),
+    shoulderDetail: Object.keys(data.GARMENT_VARIATIONS.shoulderDetail),
+  };
+  for (let i = 0; i < N; i += 1) {
+    const scene = pick(pools.scene);
+    const posePool = ['auto', ...(data.SCENE_POSE_POOLS?.[scene] || pools.pose)];
+    const cameraPool = data.SCENE_CAMERA_POOLS?.[scene] || pools.camera;
+    const lightingPool = data.SCENE_LIGHTING_POOLS?.[scene] || pools.lighting;
+    const sel = {
+      style: pick(pools.style), scene, garment: pick(pools.garment), bodyShape: pick(pools.bodyShape),
+      pose: pick(posePool), interaction: pick(pools.interaction), lighting: pick(lightingPool), colorPalette: pick(pools.colorPalette),
+      camera: pick(cameraPool), ratio: pick(pools.ratio), intensity: pick(pools.intensity),
+      chestDetail: pick(pools.chestDetail), waistSideDetail: pick(pools.waistSideDetail), shoulderDetail: pick(pools.shoulderDetail),
+      customScene: randomText(), customGarment: randomText(), customPose: randomText(), colorNote: randomText(), extraNote: randomText(),
+    };
+    const sceneText = sel.customScene.trim() ? `custom modern portrait setting only: ${sel.customScene.trim()}` : data.sceneData[sel.scene];
+    const garmentText = sel.customGarment.trim() ? `custom modern garment direction only: ${sel.customGarment.trim()}` : data.garmentData[sel.garment];
+    const poseText = sel.customPose.trim() ? `custom natural portrait pose only: ${sel.customPose.trim()}` : data.poseData[sel.pose];
+    const storyText = data.sceneStoryData[sel.scene];
+    const colorText = sel.colorNote.trim() ? sel.colorNote.trim() : data.colorData[sel.colorPalette];
+    const variationParts = [
+      data.GARMENT_VARIATIONS.chestDetail[sel.chestDetail],
+      data.GARMENT_VARIATIONS.waistSideDetail[sel.waistSideDetail],
+      data.GARMENT_VARIATIONS.shoulderDetail[sel.shoulderDetail],
+    ].filter(Boolean);
+    const variationBlock = variationParts.length ? `【服裝改造核心】\n\n${variationParts.join('\n')}` : '';
+    const sections = [
+      core.page.modernPortrait.identity, core.page.modernPortrait.skeleton, core.page.modernPortrait.pose,
+      core.page.modernPortrait.lighting, core.page.modernPortrait.photographer,
+      'Selected clothing, props, pose, setting, lighting and palette must read as one coherent modern portrait production.',
+      `【作品概念】\n\n${storyText}`,
+      `【畫面語氣】\n\n${data.styleData[sel.style]}`,
+      `【現代生活場景】\n\n${sceneText}`,
+      `【現代服裝方向】\n\n${garmentText}`,
+      variationBlock,
+      `【人物姿勢】\n\n${poseText}`,
+      `【道具與互動】\n\n${data.interactionData[sel.interaction]}`,
+      `【光影】\n\n${data.lightingData[sel.lighting]}`,
+      `【色彩系統】\n\n${colorText}`,
+      `【畫面強度】\n\n${data.intensityData[sel.intensity]}`,
+      `【鏡頭感】\n\n${data.cameraData[sel.camera]}. Use only this selected camera perspective; do not combine close portrait framing with full-body environmental framing.`,
+      `【圖片比例】\n\n${data.ratioData[sel.ratio]}`,
+      `【身形輪廓】\n\n${data.bodyShapes[sel.bodyShape]}`,
+      'Premium modern portrait finish, realistic material response, controlled depth of field and professional color grading.',
+      core.page.modernPortrait.cleanframe, 'No generic template face, no cheap costume appearance, no plastic skin, no unrelated palette, no clutter.',
+      core.page.modernPortrait.output,
+      sel.extraNote.trim() ? `【其他要求】\n\n${sel.extraNote.trim()}` : '',
+    ].filter(Boolean);
+    checkOutput('modernPortrait', i, sel, sections.join('\n\n⸻\n\n'), { requireIdentity: true, identityMarkers: ['身份鎖定系統'] });
+  }
+  report('modernPortrait', N);
+}
+
 // ===================== FANTASY =====================
 {
   const html = read('fantasy-fashion.html');

@@ -180,6 +180,29 @@ const issues = [];
   checkObject('luxury-lifestyle.html', 'themeTemplates', extractObjectLiteral(src, 'themeTemplates'), fieldLive, issues);
 }
 
+// ===== modern-portrait.html =====
+{
+  const src = fs.readFileSync(path.join(root, 'modern-portrait.html'), 'utf8');
+  const fieldLive = {
+    style: liveRadioValues(src, 'style'),
+    scene: liveRadioValues(src, 'scene'),
+    garment: liveRadioValues(src, 'garment'),
+    garmentLayer: liveRadioValues(src, 'garmentLayer'),
+    chestDetail: liveRadioValues(src, 'chestDetail'),
+    waistSideDetail: liveRadioValues(src, 'waistSideDetail'),
+    shoulderDetail: liveRadioValues(src, 'shoulderDetail'),
+    bodyShape: liveRadioValues(src, 'bodyShape'),
+    pose: liveRadioValues(src, 'pose'),
+    interaction: liveRadioValues(src, 'interaction'),
+    lighting: liveRadioValues(src, 'lighting'),
+    colorPalette: liveRadioValues(src, 'colorPalette'),
+    camera: liveRadioValues(src, 'camera'),
+    ratio: liveRadioValues(src, 'ratio'),
+    intensity: liveSelectOptionValues(src, 'intensity'),
+  };
+  checkObject('modern-portrait.html', 'themeTemplates', extractObjectLiteral(src, 'themeTemplates'), fieldLive, issues);
+}
+
 // ===== fantasy-fashion.html =====
 {
   const src = fs.readFileSync(path.join(root, 'fantasy-fashion.html'), 'utf8');

@@ -4,7 +4,9 @@
 
 ## 版本
 
-v4.51 起持續迭代中；完整逐日開發記錄見 [docs/development-log.md](docs/development-log.md)。
+v4.52 起持續迭代中；完整逐日開發記錄見 [docs/development-log.md](docs/development-log.md)。
+
+v4.52 新增獨立 `modern-portrait.html` 現代寫真攝影工具，提供現代生活場景、服裝、姿勢、光影、色彩、鏡頭與 10 組完整一鍵模板；同時建立全站分類登記表、主題歸屬總規範與分類驗證腳本。`Luxury Lifestyle` 維持既有獨立頁，未把頁面資料互相混用；共用鎖臉、臉部幾何與真人骨架核心維持不變。
 
 v4.51 新增旅拍「雪景溫泉花卉和風旅拍」主題、雪景花卉包覆和風長袍服裝方向與完整一鍵模板；共用鎖臉、臉部幾何與真人骨架核心維持不變。
 
@@ -54,6 +56,7 @@ v4.3 之後陸續完成（詳見開發日誌）：
 - `travel.html` - 寫真旅拍風格咒語產生器
 - `magazine.html` - 雜誌棚拍風格咒語產生器
 - `luxury-lifestyle.html` - Luxury Lifestyle 攝影咒語產生器
+- `modern-portrait.html` - 現代寫真攝影咒語產生器
 - `doll.html` - 公仔萌工作室
 - `fantasy-fashion.html` - 幻想廣告咒語產生器
 - `chinese-classical.html` - 中式古典美學咒語產生器
@@ -80,6 +83,7 @@ v4.3 之後陸續完成（詳見開發日誌）：
 ├─ travel.html                 # 工具頁: 寫真旅拍
 ├─ magazine.html               # 工具頁: 雜誌棚拍
 ├─ luxury-lifestyle.html       # 工具頁: Luxury Lifestyle 攝影
+├─ modern-portrait.html        # 工具頁: 現代寫真攝影
 ├─ doll.html                   # 工具頁: 公仔
 ├─ fantasy-fashion.html        # 工具頁: 幻想廣告
 ├─ chinese-classical.html      # 工具頁: 中式古典美學
@@ -111,7 +115,9 @@ v4.3 之後陸續完成（詳見開發日誌）：
 
 - [開發日誌](docs/development-log.md) — 現況與完整歷史記錄
 - [核心咒語保護契約](docs/core-prompt-contract.md) — 改咒語前必看
-- [工具頁分類與欄位契約](docs/tool-page-contracts.md) — 20 頁分類、欄位命名、比例值、Layer
+- [全站分類歸屬總規範](docs/theme-classification-rules.md) — 主題歸屬、共用核心邊界與新素材分流規則
+- [工具頁主題與欄位契約](docs/tool-theme-contracts.md) — 21 頁分類、欄位命名、比例值、Layer
+- [工具頁分類與欄位契約](docs/tool-page-contracts.md) — 歷史版欄位契約與演進記錄
   與自訂要求鎖臉提示的正式契約
 
 其餘：[使用方式](docs/usage.md)｜[核心咒語邏輯](docs/core-logic.md)｜
@@ -153,7 +159,7 @@ git diff --check
 
 ```powershell
 node scripts\build-prompt-preview.mjs   # 固定選項組合，改前/改後 0 diff 迴歸檢查
-node scripts\audit-100x.mjs             # 20 個正式工具頁各隨機 100 組，共 2000 組內容稽核
+node scripts\audit-100x.mjs             # 21 個正式工具頁各隨機 100 組，共 2100 組內容稽核
 node scripts\validate-preset-refs.mjs   # 各頁一鍵套用/預設連動物件引用的選項值是否都存在
 ```
 

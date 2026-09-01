@@ -10,6 +10,7 @@ const htmlFiles = [
   'travel.html',
   'magazine.html',
   'luxury-lifestyle.html',
+  'modern-portrait.html',
   'doll.html',
   'fantasy-fashion.html',
   'chinese-classical.html',

@@ -43,7 +43,7 @@ No facial reconstruction, redesign, beautification or stylization.`;
   const DOLL_RATIO_VALUES = Object.freeze(["9:16", "1:1", "3:4", "4:3", "2:3", "4:5"]);
 
   const STANDARD_PORTRAIT_PAGE_FILES = Object.freeze([
-    "magazine.html", "luxury-lifestyle.html", "fantasy-fashion.html", "chinese-classical.html",
+    "magazine.html", "luxury-lifestyle.html", "modern-portrait.html", "fantasy-fashion.html", "chinese-classical.html",
     "japanese-kimono.html", "korean-hanbok.html", "xianxia.html",
     "anime-character.html", "flower-fairy.html", "isekai-fantasy.html",
     "floral-sweet.html", "gala-socialite.html", "bridal-editorial.html",
@@ -295,6 +295,22 @@ Human-Centered Editorial Composition.
 Pose And Framing Support Identity Recognition.
 Refined Magazine Storytelling.
 Professional Cover Photography Direction.`,
+    lighting: CORE_LIGHTING_UNIFICATION,
+    cleanframe: CORE_CLEAN_FRAME,
+    output: CORE_OUTPUT_QUALITY
+  };
+
+  const modernPortraitCore = {
+    identity: identityCore,
+    skeleton: humanCore,
+    illustrationSkeleton: illustrationHumanCore,
+    pose: CORE_POSE_NATURALITY,
+    photographer: `【現代寫真攝影師模組】
+
+Modern Portrait Storytelling.
+Human-centered lifestyle composition.
+Natural gesture, coherent setting and refined commercial direction.
+The selected scene, clothing, light and camera form one believable photographic moment.`,
     lighting: CORE_LIGHTING_UNIFICATION,
     cleanframe: CORE_CLEAN_FRAME,
     output: CORE_OUTPUT_QUALITY
@@ -606,7 +622,7 @@ They must not change the person's facial structure, identity, age impression or 
   window.HB_CUSTOM_IDENTITY_CONFLICT_MESSAGE = CUSTOM_IDENTITY_CONFLICT_MESSAGE;
   window.HB_INSTALL_CUSTOM_IDENTITY_WARNING = installCustomIdentityConflictWarning;
   window.HB_CORE_PROMPT = {
-    version: "v4.48",
+    version: "v4.52",
     contracts: TOOL_PAGE_CONTRACTS,
     ratios: CANONICAL_RATIO_PROMPTS,
     controls: {
@@ -631,6 +647,7 @@ They must not change the person's facial structure, identity, age impression or 
     page: {
       travel: travelCore,
       magazine: magazineCore,
+      modernPortrait: modernPortraitCore,
       fantasy: fantasyCore,
       chineseClassical: chineseClassicalCore,
       japaneseKimono: japaneseKimonoCore,

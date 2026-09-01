@@ -3,6 +3,13 @@
 依時間排序的完整開發記錄。`CLAUDE.md` 只放最新現況摘要，詳細歷史都在這裡；
 需要追溯「某個功能是哪一批加的、為什麼這樣改」時查這份文件。
 
+## 2026-09-01　v4.52 現代寫真攝影與全站分類歸屬規範
+
+- **獨立工具頁**：新增 `modern-portrait.html` 現代寫真攝影咒語產生器；現代生活場景、服裝、姿勢、互動、光影、色彩、鏡頭與比例各自可選，並提供 10 組完整一鍵模板。`Luxury Lifestyle` 保留為獨立專用頁，未把兩頁的主題資料或模板互相混用。
+- **核心邊界**：現代寫真只組入頁面專屬作品概念；使用者指定不放入共用核心的東亞外觀、特定髮色／唇色／身材、單一色彩、動物耳朵與風格化負面詞均未寫入 `assets/core-prompt.js`。既有身份鎖定、臉部幾何與真人骨架核心維持不變。
+- **分類治理**：新增 `assets/theme-registry.js`、`docs/theme-classification-rules.md`、`docs/tool-theme-contracts.md` 與 `scripts/check-theme-classification.mjs`，建立每頁單一主分類、可用控制軸、禁止混入語彙與新素材分流規則。
+- **驗證**：`check-static.mjs`、`check-ui-flows.mjs`、`validate-preset-refs.mjs`、`check-theme-classification.mjs`、`build-prompt-preview.mjs`、`audit-100x.mjs` 全部通過；21 頁 × 100 組，共 2,100 組隨機模擬，0 issue。
+
 ## 2026-08-31　v4.51 雪景溫泉花卉和風旅拍
 
 - **來源分析**：讀取 `C:\Users\User\Desktop\ai生圖\風格範例` 內兩張雪景和風範例；資料夾沒有對應文字咒語檔，因此只採用圖片可辨識且與旅拍主題相符的視覺要素。
