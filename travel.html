@@ -383,6 +383,7 @@
       <button type="button" class="preset-btn" data-travel-preset="duneWindStory">一鍵套用｜沙丘迎風旅拍</button>
       <button type="button" class="preset-btn" data-travel-preset="streamSummerSnapshot">一鍵套用｜溪水夏日自然感</button>
       <button type="button" class="preset-btn" data-travel-preset="coastalBicycleFloral">一鍵套用｜海岸單車花漾旅拍</button>
+      <button type="button" class="preset-btn" data-travel-preset="goldenFlowerRedVoile">一鍵套用｜金色花田紅紗藝術旅拍</button>
     </div>
   </section>
 
@@ -615,6 +616,11 @@
         <div class="name">F 大景遠構</div>
         <div class="desc">全景環境,主體融入景色,旅行故事感</div>
       </label>
+      <label class="card" data-value="G">
+        <input type="radio" name="composition" value="G">
+        <div class="name">G 花田中景藝術肖像</div>
+        <div class="desc">中景人像,花田環境清楚,細膩藝術旅拍感</div>
+      </label>
     </div>
   </section>
 
@@ -729,6 +735,12 @@
         <input type="radio" name="costume" value="crochet_apron_bikini">
         <div class="name">鉤織圍裙比基尼</div>
         <div class="desc">針織鉤花材質 / 草帽點綴</div>
+      </label>
+      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 藝術旅拍</div>
+      <label class="card" data-value="red_voile_wrap">
+        <input type="radio" name="costume" value="red_voile_wrap">
+        <div class="name">紅色絲質薄紗披覆</div>
+        <div class="desc">紅紗層疊包覆 / 柔和肩線 / 藝術旅拍感</div>
       </label>
       <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 正式與晚宴</div>
       <label class="card" data-value="flow_dress">
@@ -1196,6 +1208,11 @@
         <div class="name">旅拍雜誌封面</div>
         <div class="desc">強烈封面主視覺與集中眼神</div>
       </label>
+      <label class="card" data-value="mediumPortrait70">
+        <input type="radio" name="camera" value="mediumPortrait70">
+        <div class="name">70mm 中景人像</div>
+        <div class="desc">平視中景、自然比例與柔和花田散景</div>
+      </label>
       <label class="card" data-value="wide_scene">
         <input type="radio" name="camera" value="wide_scene">
         <div class="name">廣角環境感</div>
@@ -1431,7 +1448,17 @@ Environment Occupies 65-80% Of Frame
 Grand Travel Landscape Composition
 Clear Destination Landmark Or Natural Scenery
 Subject Integrated Into The Scene
-Strong Travel Storytelling Atmosphere`
+Strong Travel Storytelling Atmosphere`,
+G:`【構圖模組｜花田中景藝術肖像】
+
+Medium Portrait Shot
+Waist-Up To Mid-Thigh Framing
+Subject Occupies 55-65% Of Frame
+Bright Flower Field Remains Clearly Readable Around The Subject
+Eye-Level Editorial Portrait Composition
+Foreground Yellow Blossoms Create Soft Depth
+Balanced Subject And Environment
+Fine-Art Travel Portrait Storytelling`
 };
 
 const STYLES = {
@@ -1674,6 +1701,7 @@ No Tiny Unrecognizable Face`
 
 const COMMON_TRAVEL_CAMERAS = {
   eyeLevelCover: 'natural eye-level camera angle, standard magazine cover perspective, balanced face and body proportion, clean premium portrait framing',
+  mediumPortrait70: 'eye-level medium portrait, 70mm lens, camera distance far enough to preserve natural body proportions, shallow depth of field, creamy background bokeh, subject and flower field remain visually connected',
   lowAngleHero: 'low angle hero shot, camera below waist level, powerful upward perspective, elongated fashion silhouette, strong commanding presence',
   highAngleOverhead: 'high angle view, camera above head level, elegant top-down perspective, refined fashion composition, clear subject shape',
   softFocusGlow: 'soft focus glow camera language, gentle halo bloom, luminous studio beauty atmosphere, refined dreamy commercial portrait',
@@ -2098,6 +2126,7 @@ Identity And Facial Features Remain Clearly Recognizable`
 
 const COSTUME_DIRECTIONS = {
 auto: null,
+red_voile_wrap:`Costume Direction: Red Silk Voile Wrap — long sheer red silk voile scarf arranged as an elegant fashion wrap, controlled layered draping, one shoulder softly exposed, secure overlapping coverage over intimate areas, graceful shoulders collarbone and waist, liquid folds with realistic fabric tension, weight and drape, tasteful fine-art travel styling`,
 flow_dress:`Costume Direction: Flowing Dress — elegant long dress with soft flowing fabric, hemline moving with the wind, romantic travel silhouette`,
 qipao:`Costume Direction: Refined Qipao — modern refined cheongsam with high collar and elegant side slit, fine oriental fabric pattern, graceful eastern silhouette`,
 kimono_yukata:`Costume Direction: Kimono / Yukata — modern refined kimono or summer yukata with obi sash, clean layered collar, elegant Japanese travel styling`,
@@ -2449,6 +2478,21 @@ QUICK_TRAVEL_PRESETS.coastalBicycleFloral = {
   hair: 'soft_waves',
   prop: 'none',
   themeText: '海岸單車花漾旅拍, 海岸道路、藍色海面與清爽城市邊界, 輕盈花卉度假洋裝與自然外層, 人物在單車旁自然停步回望或輕扶車把, 海風帶動髮絲與裙擺, 明亮自然日光與海面反射, 清新高級旅拍故事, 保留人物與單車比例自然'
+};
+
+QUICK_TRAVEL_PRESETS.goldenFlowerRedVoile = {
+  composition: 'G',
+  style: 'natural_lifestyle',
+  ratio: '2:3',
+  camera: 'mediumPortrait70',
+  lighting: 'golden_hour',
+  motion: 'breeze',
+  media: 'travel_magazine',
+  pose: 'look_back',
+  costume: 'red_voile_wrap',
+  hair: 'auto',
+  prop: 'none',
+  themeText: '金色花田紅紗藝術旅拍, 遼闊明亮的油菜花田與柔和黃色花朵散景, 長條紅色絲質薄紗作為優雅披覆造型, 層疊垂墜並保持穩定包覆, 柔和露出單側肩線與鎖骨腰線, 自然回眸站姿, 海風吹動髮絲與薄紗邊緣, 柔和漫射黃金時刻光與微冷陰影, Fuji Pro 400H inspired pastel low-contrast fine-art film color with subtle green-magenta balance, 淺景深奶油花田散景, 保留自然身體比例與真實布料重量張力皺褶垂墜, 高級唯美旅拍藝術人像'
 };
 
 function applyTravelPreset(preset){
