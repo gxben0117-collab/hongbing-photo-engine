@@ -377,6 +377,11 @@
       <button type="button" class="preset-btn" data-travel-preset="chineseTeaCourtyard">一鍵套用｜中式庭院茶席旗袍</button>
       <button type="button" class="preset-btn" data-travel-preset="silkRoadBlueTiles">一鍵套用｜絲路藍磚古城旅拍</button>
       <button type="button" class="preset-btn" data-travel-preset="snowOnsenFloralRobe">一鍵套用｜雪景溫泉花卉和風旅拍</button>
+      <button type="button" class="preset-btn" data-travel-preset="goldenCorridorWalk">一鍵套用｜金色長廊回眸旅拍</button>
+      <button type="button" class="preset-btn" data-travel-preset="poolsideSummerSnapshot">一鍵套用｜度假泳池夏日快照</button>
+      <button type="button" class="preset-btn" data-travel-preset="harborBoatMorning">一鍵套用｜碼頭船上晨光旅拍</button>
+      <button type="button" class="preset-btn" data-travel-preset="duneWindStory">一鍵套用｜沙丘迎風旅拍</button>
+      <button type="button" class="preset-btn" data-travel-preset="streamSummerSnapshot">一鍵套用｜溪水夏日自然感</button>
     </div>
   </section>
 
@@ -1030,6 +1035,11 @@
         <div class="name">黃金時刻夕陽</div>
         <div class="desc">夕陽逆光 / 長影 / 髮絲金邊</div>
       </label>
+      <label class="card" data-value="golden_corridor">
+        <input type="radio" name="lighting" value="golden_corridor">
+        <div class="name">金色長廊窗光</div>
+        <div class="desc">午後窗光、幾何地影與薄紗輪廓光</div>
+      </label>
       <label class="card" data-value="sunset_beach_gold">
         <input type="radio" name="lighting" value="sunset_beach_gold">
         <div class="name">沙灘夕陽暖金光</div>
@@ -1204,6 +1214,11 @@
         <input type="radio" name="camera" value="passerby_view">
         <div class="name">路人視角</div>
         <div class="desc">偶遇感與街頭抓拍語氣</div>
+      </label>
+      <label class="card" data-value="corridor_perspective">
+        <input type="radio" name="camera" value="corridor_perspective">
+        <div class="name">長廊透視構圖</div>
+        <div class="desc">35-50mm、中段機位與建築引導線</div>
       </label>
       <label class="card" data-value="backlit_silhouette">
         <input type="radio" name="camera" value="backlit_silhouette">
@@ -1665,7 +1680,8 @@ const COMMON_TRAVEL_CAMERAS = {
   sideProfile: 'side profile portrait angle, clear jawline silhouette, elegant facial contour, refined profile lighting and fashion editorial framing',
   threeQuarterSide: 'three-quarter side camera angle, about 45 degree side view, face and body both show dimensional structure, elegant advertising perspective',
   topBeauty: 'high angle close beauty view, camera above the subject and slightly close, face shoulders neckline and headdress emphasized, elegant cosmetic perspective',
-  distantHero: 'distant hero advertising view, camera pulled back to show subject background and material environment together, spacious brand key visual perspective'
+  distantHero: 'distant hero advertising view, camera pulled back to show subject background and material environment together, spacious brand key visual perspective',
+  corridor_perspective: 'corridor perspective, 35-50mm equivalent lens, camera around torso height, strong architectural leading lines converging behind the subject, subject placed within the perspective axis, moderate environmental depth and natural proportions'
 };
 Object.assign(CAMERA_ANGLES, COMMON_TRAVEL_CAMERAS);
 const TRAVEL_LIGHTING_STYLES = {
@@ -1797,6 +1813,15 @@ Long Soft Shadows And Gentle Rim Light On Hair
 Sun Position Low Near The Horizon
 Sky Gradient From Gold To Soft Peach
 Face Keeps Natural Warm Exposure Within The Same Sunset Light`,
+
+golden_corridor:`【光影色彩｜金色長廊窗光】
+
+Warm late-afternoon sunlight entering through large corridor windows
+Strong directional side and back light with a soft golden rim around hair shoulders and flowing fabric
+Long geometric window shadows across the corridor floor
+Warm cream architectural reflections and bright luminous highlights
+Soft natural facial fill within the same environment
+Elegant airy editorial travel atmosphere`,
 
 blue_hour:`【光影色彩｜藍調暮色】
 
@@ -2343,6 +2368,71 @@ QUICK_TRAVEL_PRESETS.snowOnsenFloralRobe = {
   hair: 'braided_updo',
   prop: 'hair_flower',
   themeText: '雪景溫泉花卉和風旅拍, 白雪覆蓋的山間溫泉溪谷與深色木造旅館, 白色與冰藍灰花卉包覆式和風長袍, 自然交疊 V 形前襟、腰間繫帶、長袖與層疊裙擺, 裙側保留優雅高衩活動量, 編髮與小型白花髮飾, 木棧道或溪邊欄杆旁自然站立回望, 冷白陰天雪光與水面環境反射, 安靜高級冬日旅拍, 全身人物與雪景環境平衡, 保留真實布料重量、張力、皺褶與垂墜'
+};
+
+QUICK_TRAVEL_PRESETS.goldenCorridorWalk = {
+  composition: 'C',
+  style: 'resort_hotel',
+  ratio: '2:3',
+  camera: 'corridor_perspective',
+  lighting: 'golden_corridor',
+  motion: 'breeze',
+  media: 'travel_magazine',
+  pose: 'walk_turn',
+  costume: 'flow_dress',
+  themeText: '高級飯店古典長廊旅拍, 米白牆柱、落地窗與長廊透視線, 象牙白奶油色長袖薄紗長裙, 柔和束腰與飄逸裙擺, 行走中自然回身望向鏡頭, 午後金色窗光、地面幾何光影與髮絲薄紗輪廓光, 空氣感高級旅拍故事, 人物與建築比例自然'
+};
+
+QUICK_TRAVEL_PRESETS.poolsideSummerSnapshot = {
+  composition: 'B',
+  style: 'resort_hotel',
+  ratio: '4:5',
+  camera: 'wide_scene',
+  lighting: 'pool_summer_bright',
+  motion: 'breeze',
+  media: 'travel_magazine',
+  pose: 'wade_water_touch',
+  costume: 'resort_cover',
+  themeText: '高級度假村泳池夏日旅拍, 藍色泳池、水面反光與白色躺椅, 輕盈度假洋裝與透氣罩衫, 赤腳或簡約涼鞋, 人物在池畔自然觸水或回望, 明亮夏日直射光與水面反射協調, 清爽高級度假雜誌感, 保留真實水面、布料與身體比例'
+};
+
+QUICK_TRAVEL_PRESETS.harborBoatMorning = {
+  composition: 'C',
+  style: 'natural_lifestyle',
+  ratio: '3:4',
+  camera: 'wide_scene',
+  lighting: 'morning_mist',
+  motion: 'breeze',
+  media: 'travel_magazine',
+  pose: 'railing_gaze',
+  costume: 'flow_dress',
+  themeText: '海港船上晨光旅拍, 木質船舷、碼頭與遠方海面, 米白或霧藍飄逸長裙, 一手自然扶著欄杆、安靜望向海面, 清晨薄霧與柔和側光, 真實旅行紀錄與高級人物寫真平衡, 船體與人物尺度自然'
+};
+
+QUICK_TRAVEL_PRESETS.duneWindStory = {
+  composition: 'F',
+  style: 'cinematic',
+  ratio: '2:3',
+  camera: 'wide_scene',
+  lighting: 'golden_hour',
+  motion: 'flow',
+  media: 'cinematic_realistic',
+  pose: 'back_view_gaze',
+  costume: 'flow_dress',
+  themeText: '沙丘風中旅拍, 開闊沙丘、細緻風紋與遠方地平線, 赭色或米白流動長裙與輕薄披巾, 背影站立並微微回望, 夕陽暖金側逆光, 髮絲與裙擺隨風但動勢受控, 大景環境人物攝影, 保留真實沙地與人物比例'
+};
+
+QUICK_TRAVEL_PRESETS.streamSummerSnapshot = {
+  composition: 'C',
+  style: 'natural_lifestyle',
+  ratio: '9:16',
+  camera: 'wide_scene',
+  lighting: 'noon_water_glare',
+  motion: 'dynamic',
+  media: 'cinematic_realistic',
+  pose: 'wade_water_touch',
+  costume: 'athleisure',
+  themeText: '山間溪水夏日旅拍, 清澈溪流、圓石、綠樹與自然水花, 輕便清爽旅居穿搭與薄外層, 站在淺水中自然觸水或踏石前進, 正午水面反光與樹蔭冷暖平衡, 真實抓拍感與清爽戶外活力, 不誇張濕身效果, 人物與溪谷環境比例自然'
 };
 
 function applyTravelPreset(preset){

@@ -174,6 +174,7 @@
       <label class="card"><input type="radio" name="scene" value="homeBar"><span class="name">吧檯</span><span class="desc">家用吧檯、杯具、夜間暖光</span></label>
       <label class="card"><input type="radio" name="scene" value="diningNook"><span class="name">餐桌</span><span class="desc">餐桌、花器、瓷器與生活品牌構圖</span></label>
       <label class="card"><input type="radio" name="scene" value="dressingCorner"><span class="name">衣帽間</span><span class="desc">鏡面、衣物、珠寶與出門前準備</span></label>
+      <label class="card"><input type="radio" name="scene" value="spaBathroom"><span class="name">飯店 SPA 浴室</span><span class="desc">大理石、浴缸、浴袍與柔和晨光</span></label>
       <label class="field custom-field">自訂場景<input class="text-input" id="customScene" type="text" placeholder="例如：高級公寓閱讀角、飯店套房窗邊、泳池旁休憩區"></label>
     </div>
   </section>
@@ -247,6 +248,7 @@
       <label class="pose-card"><input type="radio" name="pose" value="balconyLean"><span class="pose-name">陽台倚欄</span><span class="pose-desc">身體微靠欄杆、看向遠景</span></label>
       <label class="pose-card"><input type="radio" name="pose" value="barLean"><span class="pose-name">吧檯倚坐</span><span class="pose-desc">一手靠桌面、另一手拿杯</span></label>
       <label class="pose-card"><input type="radio" name="pose" value="mirrorReady"><span class="pose-name">鏡前整理</span><span class="pose-desc">整理耳飾、髮絲或外套</span></label>
+      <label class="pose-card"><input type="radio" name="pose" value="bathEdgeSit"><span class="pose-name">浴缸邊休憩</span><span class="pose-desc">披著浴袍坐在浴缸邊，肩頸與手部自然放鬆</span></label>
       <label class="field custom-field">自訂姿勢<input class="text-input" id="customPose" type="text" placeholder="例如：坐在窗邊閱讀、站在廚房島台旁整理花束"></label>
     </div>
   </section>
@@ -262,6 +264,7 @@
       <label class="card"><input type="radio" name="interaction" value="handbagCoat"><span class="name">手袋與外套</span><span class="desc">回家或出門前的生活物件</span></label>
       <label class="card"><input type="radio" name="interaction" value="wineGlass"><span class="name">水晶杯</span><span class="desc">吧檯或晚間餐桌的小型焦點</span></label>
       <label class="card"><input type="radio" name="interaction" value="laptopDesk"><span class="name">筆電工作</span><span class="desc">居家辦公、生活品牌敘事</span></label>
+      <label class="card"><input type="radio" name="interaction" value="bathTowel"><span class="name">浴巾與浴袍</span><span class="desc">柔軟浴巾或浴袍作為 SPA 生活細節</span></label>
     </div>
   </section>
 
@@ -275,6 +278,7 @@
       <label class="card"><input type="radio" name="lighting" value="eveningLamp"><span class="name">夜間室內燈光</span><span class="desc">檯燈、壁燈、深色住宅層次</span></label>
       <label class="card"><input type="radio" name="lighting" value="overcastSoft"><span class="name">陰天高級柔光</span><span class="desc">低對比、灰米色、安靜生活感</span></label>
       <label class="card"><input type="radio" name="lighting" value="cityNightWindow"><span class="name">城市夜窗光</span><span class="desc">室內暖光與遠方城市冷光</span></label>
+      <label class="card"><input type="radio" name="lighting" value="spaMorningLight"><span class="name">SPA 晨間柔光</span><span class="desc">霧面玻璃與暖白天光，石材反射保持柔和</span></label>
     </div>
     <div class="group-title">色彩系統</div>
     <div class="grid grid-3" style="margin-top:8px;">
@@ -373,7 +377,8 @@ const sceneData = {
   balcony: 'luxury apartment balcony scene, slim railing, outdoor chair, distant city or coastal horizon, architectural lines and open air, refined golden-hour lifestyle composition',
   homeBar: 'private home bar scene, dark stone counter, glassware, warm cabinetry and subtle brass accents, intimate evening residential campaign atmosphere',
   diningNook: 'high-end dining nook scene, sculptural table, linen setting, ceramic vase and restrained flowers, warm residential architecture, polished lifestyle advertising composition',
-  dressingCorner: 'luxury dressing corner scene, full-height mirror, curated wardrobe rail, jewelry tray and soft bench, refined getting-ready lifestyle portrait'
+  dressingCorner: 'luxury dressing corner scene, full-height mirror, curated wardrobe rail, jewelry tray and soft bench, refined getting-ready lifestyle portrait',
+  spaBathroom: 'quiet luxury hotel spa bathroom with pale marble, freestanding bathtub, folded towels, brushed metal fixtures and diffused morning light, refined residential lifestyle setting'
 };
 
 const garmentData = {
@@ -406,7 +411,8 @@ const poseData = {
   courtyardWalk: 'slow natural walk through the private courtyard, fabric moving lightly, head turning toward the camera, calm candid editorial energy',
   balconyLean: 'standing or lightly seated beside the balcony railing, one hand resting on the rail, body angled toward the distant view, elegant relaxed posture',
   barLean: 'lightly leaning at the home bar, one hand resting on the counter or holding a glass, shoulders relaxed, intimate evening lifestyle pose',
-  mirrorReady: 'standing before the dressing mirror, gently adjusting an earring, collar or hair, face remains visible in a natural three-quarter reflection'
+  mirrorReady: 'standing before the dressing mirror, gently adjusting an earring, collar or hair, face remains visible in a natural three-quarter reflection',
+  bathEdgeSit: 'seated calmly on the edge of a freestanding bathtub while wearing a refined robe layer, feet grounded, shoulders relaxed and hands resting naturally on the towel or lap'
 };
 
 const interactionData = {
@@ -417,7 +423,8 @@ const interactionData = {
   flowerVase: 'small seasonal bouquet or ceramic vase, natural flower-arranging gesture, restrained residential floral styling',
   handbagCoat: 'structured leather handbag and softly draped coat as arrival-home props, objects remain secondary to the subject',
   wineGlass: 'single elegant crystal glass on the bar or dining table, restrained evening lifestyle detail, no drinking exaggeration',
-  laptopDesk: 'slim laptop on the desk or dining table, quiet home-work interaction, no readable screen text'
+  laptopDesk: 'slim laptop on the desk or dining table, quiet home-work interaction, no readable screen text',
+  bathTowel: 'folded luxury towel or softly draped bathrobe used as a secondary spa detail, realistic terry texture and no exposed body'
 };
 
 const lightingData = {
@@ -426,7 +433,8 @@ const lightingData = {
   goldenHourHome: 'warm golden-hour sunlight entering the home, subtle amber rim light, long gentle shadows, unified environmental color',
   eveningLamp: 'warm evening table-lamp and wall-lamp lighting, soft pools of amber light, controlled deep room shadows, face remains naturally readable',
   overcastSoft: 'overcast daylight through large windows, low-contrast gray-beige atmosphere, soft even exposure and calm premium mood',
-  cityNightWindow: 'warm interior light blended with cool distant city lights through the window, balanced evening contrast across the entire scene'
+  cityNightWindow: 'warm interior light blended with cool distant city lights through the window, balanced evening contrast across the entire scene',
+  spaMorningLight: 'diffused warm-white morning light through frosted spa glass, soft marble bounce, restrained highlights and clear natural facial readability'
 };
 
 const colorData = {
@@ -506,7 +514,8 @@ const themeTemplates = {
   balconyGoldenHour: { style: 'luxuryLifestyle', scene: 'balcony', garment: 'satinEveningHomewear', garmentLayer: 'layer3', chestDetail: 'crossWrapDeepV', waistSideDetail: 'slimBeltLine', shoulderDetail: 'softCardiganDrape', bodyShape: 'fashion_tall', pose: 'balconyLean', interaction: 'wineGlass', lighting: 'goldenHourHome', colorPalette: 'champagneBlack', camera: 'distantHero', ratio: '9:16', intensity: 'cinematic' },
   homeBarEvening: { style: 'homeCampaign', scene: 'homeBar', garment: 'satinEveningHomewear', garmentLayer: 'layer6', chestDetail: 'crossWrapDeepV', waistSideDetail: 'slimBeltLine', shoulderDetail: 'singleShoulderDrape', bodyShape: 'curvy_waist', pose: 'barLean', interaction: 'wineGlass', lighting: 'eveningLamp', colorPalette: 'champagneBlack', camera: 'eyeLevelCover', ratio: '4:5', intensity: 'premium' },
   diningNookLifestyle: { style: 'homeCampaign', scene: 'diningNook', garment: 'cashmereLoungeSet', garmentLayer: 'layer0', chestDetail: 'none', waistSideDetail: 'none', shoulderDetail: 'softCardiganDrape', bodyShape: 'original', pose: 'auto', interaction: 'flowerVase', lighting: 'goldenHourHome', colorPalette: 'warmIvoryCamel', camera: 'threeQuarterSide', ratio: '4:5', intensity: 'balanced' },
-  dressingCornerBeauty: { style: 'fashionLifestyle', scene: 'dressingCorner', garment: 'blazerMiniDress', garmentLayer: 'layer3', chestDetail: 'softSquareBodice', waistSideDetail: 'slimBeltLine', shoulderDetail: 'offShoulderCut', bodyShape: 'korean_idol', pose: 'mirrorReady', interaction: 'none', lighting: 'morningWindow', colorPalette: 'charcoalCream', camera: 'beautyCloseUp', ratio: '4:5', intensity: 'premium' }
+  dressingCornerBeauty: { style: 'fashionLifestyle', scene: 'dressingCorner', garment: 'blazerMiniDress', garmentLayer: 'layer3', chestDetail: 'softSquareBodice', waistSideDetail: 'slimBeltLine', shoulderDetail: 'offShoulderCut', bodyShape: 'korean_idol', pose: 'mirrorReady', interaction: 'none', lighting: 'morningWindow', colorPalette: 'charcoalCream', camera: 'beautyCloseUp', ratio: '4:5', intensity: 'premium' },
+  marbleSpaMorning: { style: 'quietLuxury', scene: 'spaBathroom', garment: 'satinEveningHomewear', garmentLayer: 'layer0', chestDetail: 'layeredCamisole', waistSideDetail: 'softWaistDrape', shoulderDetail: 'softCardiganDrape', bodyShape: 'original', pose: 'bathEdgeSit', interaction: 'bathTowel', lighting: 'spaMorningLight', colorPalette: 'warmIvoryCamel', camera: 'threeQuarterSide', ratio: '4:5', intensity: 'premium' }
 };
 
 function selected(name){

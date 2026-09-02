@@ -8,7 +8,7 @@ const formalPages = [
   'travel.html', 'magazine.html', 'luxury-lifestyle.html', 'modern-portrait.html', 'doll.html',
   'fantasy-fashion.html', 'chinese-classical.html', 'japanese-kimono.html', 'korean-hanbok.html',
   'xianxia.html', 'anime-character.html', 'flower-fairy.html', 'isekai-fantasy.html',
-  'store-ad.html', 'floral-sweet.html', 'gala-socialite.html', 'bridal-editorial.html',
+  'store-ad.html', 'floral-sweet.html', 'gala-socialite.html', 'festival-editorial.html', 'bridal-editorial.html',
   'kpop-idol.html', 'battle-academy.html', 'ancient-goddess.html', 'editorial-identity.html'
 ];
 const failures = [];
@@ -76,8 +76,8 @@ for (const marker of modernRequiredMarkers) {
   if (!modernSource.includes(marker)) fail(`modern-portrait.html missing required marker: ${marker}`);
 }
 const templateCount = (modernSource.match(/^[ \t]+[A-Za-z][A-Za-z0-9]*: \{ story:/gm) || []).length;
-if (templateCount !== 10) fail(`modern-portrait.html should have 10 complete templates, found ${templateCount}`);
-else pass('modern portrait has 10 complete templates');
+if (templateCount < 15) fail(`modern-portrait.html should have at least 15 complete templates, found ${templateCount}`);
+else pass(`modern portrait has ${templateCount} complete templates`);
 
 const modernPositiveBlock = modernSource
   .replace(/<nav>[\s\S]*?<\/nav>/i, '')

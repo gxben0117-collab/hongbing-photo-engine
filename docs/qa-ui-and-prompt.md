@@ -1,5 +1,20 @@
 # UI 與咒語回歸檢查
 
+## 2026-09-02 v4.54 142 張風格範例整合回歸
+
+- `assets/style-reference-142.js` 登記 142 筆匿名來源 row；每筆只有一個 primary owner，46 筆跨來源群組資料有明確頁面覆寫，7 個特殊案例有紀錄。
+- `modern-portrait.html`、`travel.html`、`magazine.html` 與 `luxury-lifestyle.html` 分別有 20、18、28、11 組完整一鍵模板；新增值均由頁面資料、生成組合與模板引用驗證覆蓋。
+- `festival-editorial.html` 已補入 `assets/theme-registry.js` 正式分類；節慶、幻想、動漫、花卉、住宅與商業活動素材維持各自 owner，不回灌共用核心。
+- `assets/core-prompt.js` 未修改；來源工作簿、圖片與私人原始咒語未複製進正式網站。
+- 本次驗收應通過 `check-static.mjs`、`check-ui-flows.mjs`、`validate-preset-refs.mjs`、`check-theme-classification.mjs`、`check-style-reference-142.mjs`、`build-prompt-preview.mjs`、`audit-100x.mjs` 與 `git diff --check`。
+
+## 2026-09-02 v4.53 風格範例分流回歸
+
+- `modern-portrait.html` 現在有 15 組完整一鍵模板；新增玫瑰木、藍白格紋、灰藍蕾絲、粉色羅紋與淡紫緞面頁面專屬資料，未寫入共用核心。
+- `magazine.html` 的「極簡白襯衫封面」改為白磚高亮棚拍；`gala-socialite.html` 新增香檳銀夜景模板；`travel.html` 新增金色長廊回眸模板。
+- 新增場景、服裝、姿勢、光影與鏡頭值均有對應 UI 控制、生成組合與一鍵模板引用；聖誕紅緞面與貓耳不在本次正式頁資料中。
+- `assets/core-prompt.js` 共用身份、臉部幾何、真人骨架與光線一致性文字保持不變；不新增來源人物外貌、身份或固定數字比例。
+
 ## 2026-09-01 v4.52 現代寫真與分類規範回歸
 
 - `modern-portrait.html` 已加入首頁、共用身份／臉部幾何／真人骨架核心、標準 camera／ratio／body／Layer／AI 姿勢契約與所有回歸腳本。

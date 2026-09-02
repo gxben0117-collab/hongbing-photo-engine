@@ -606,7 +606,7 @@
       <button type="button" class="preset-btn primary" data-magazine-preset="blackGoldBeauty">一鍵套用｜黑金高訂美妝特寫</button>
       <button type="button" class="preset-btn" data-magazine-preset="jewelryCoolCover">一鍵套用｜珠寶冷光封面</button>
       <button type="button" class="preset-btn" data-magazine-preset="perfumeMistCover">一鍵套用｜夢幻香氛柔霧</button>
-      <button type="button" class="preset-btn" data-magazine-preset="minimalWhiteShirt">一鍵套用｜極簡白襯衫封面</button>
+      <button type="button" class="preset-btn" data-magazine-preset="minimalWhiteShirt">一鍵套用｜Office Glamour 白襯衫封面</button>
       <button type="button" class="preset-btn" data-magazine-preset="futureSilverCool">一鍵套用｜未來銀色冷感</button>
       <button type="button" class="preset-btn" data-magazine-preset="redCarpetCouture">一鍵套用｜紅毯高訂全身</button>
       <button type="button" class="preset-btn" data-magazine-preset="pearlVeilBeauty">一鍵套用｜珠簾面紗美妝</button>
@@ -627,6 +627,10 @@
       <button type="button" class="preset-btn" data-magazine-preset="redFloralDeepV">一鍵套用｜紅花薄紗深 V 禮服</button>
       <button type="button" class="preset-btn" data-magazine-preset="futureCosPortrait">一鍵套用｜未來系 Cos 風寫真</button>
       <button type="button" class="preset-btn" data-magazine-preset="silverCrystalChainmail">一鍵套用｜銀色水晶鏈甲封面</button>
+      <button type="button" class="preset-btn" data-magazine-preset="beautyLipstickCampaign">一鍵套用｜美顏廣告白棚</button>
+      <button type="button" class="preset-btn" data-magazine-preset="hairCareSilkLight">一鍵套用｜美髮廣告絲光</button>
+      <button type="button" class="preset-btn" data-magazine-preset="productTabletopPortrait">一鍵套用｜精品產品桌面肖像</button>
+      <button type="button" class="preset-btn" data-magazine-preset="eventBackdropPortrait">一鍵套用｜活動背板人物肖像</button>
     </div>
   </section>
 
@@ -1914,6 +1918,11 @@
         <div class="name">純白無縫背景</div>
         <div class="desc">純白乾淨,美妝與人物突出</div>
       </label>
+      <label class="card" data-value="white_brick_studio">
+        <input type="radio" name="bg" value="white_brick_studio">
+        <div class="name">白磚高亮棚拍</div>
+        <div class="desc">白色磚牆、亮面地板與清楚柔邊投影</div>
+      </label>
       <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 材質牆面與冷調空間</div>
       <label class="card" data-value="concrete">
         <input type="radio" name="bg" value="concrete">
@@ -2771,6 +2780,11 @@ Clean White Studio Sweep
 High Key Beauty Editorial Background
 No Visual Clutter
 Subject And Makeup Details Stand Out Clearly`,
+white_brick_studio:`White Painted Brick Studio
+Clean Glossy Pale Floor
+Bright Directional High-Key Exposure
+Defined Soft-Edged Cast Shadow On The Brick Wall
+Minimal Office Glamour Editorial Environment`,
 dark_gray_concrete:`Dark Gray Concrete Wall
 Deep Gray Cement Texture
 Cool Industrial Editorial Mood
@@ -4264,6 +4278,7 @@ const BG_LIGHTING_MAP = {
   black_void: 'black_gold',
   neon_night: 'rim_light',
   white_seamless: 'beauty_fill',
+  white_brick_studio: 'window_soft',
   dark_gray_concrete: 'rim_light',
   luxury_hotel_suite: 'window_soft',
   mirror_studio: 'rim_light',
@@ -4502,7 +4517,7 @@ const THEME_PRESET_DEFAULTS = {
   '紅毯女星': { style: 'couture_gown', bg: 'red_curtain', framing: 'full_body', camera: 'lowAngleHero', motion: 'flow', makeup: ['red_lip', 'precise_eyeliner'], skinTexture: 'premium_matte', jewelry: ['statement'], expression: 'allure_smile', lighting: 'black_gold', ratio: '2:3' },
   '復古名伶': { style: 'lofficiel', bg: 'red_curtain', framing: 'bust', camera: 'sideProfile', motion: 'still', makeup: ['red_lip', 'matte_base'], skinTexture: 'premium_matte', jewelry: ['earrings'], expression: 'distant_chic', lighting: 'window_soft', ratio: '4:5' },
   '未來銀色高訂': { style: 'fashion_ad', bg: 'dark_metal', framing: 'three_quarter', camera: 'lowAngleHero', motion: 'dynamic', makeup: ['smoky_glam', 'highlight_skin'], skinTexture: 'luxury_campaign', jewelry: ['statement'], expression: 'cool_stare', lighting: 'rim_light', ratio: '4:5' },
-  '極簡白襯衫': { style: 'brand_lookbook', bg: 'white_seamless', framing: 'half_body', camera: 'eyeLevelCover', motion: 'still', makeup: ['natural_highend'], skinTexture: 'natural_real', jewelry: ['none'], expression: 'calm_direct', lighting: 'beauty_fill', ratio: '4:5' },
+  '極簡白襯衫': { style: 'brand_lookbook', bg: 'white_brick_studio', framing: 'half_body', camera: 'eyeLevelCover', motion: 'still', makeup: ['natural_highend'], skinTexture: 'natural_real', jewelry: ['none'], expression: 'calm_direct', lighting: 'window_soft', ratio: '4:5' },
   'AIRism服裝': { style: 'brand_lookbook', bg: 'white_seamless', framing: 'half_body', camera: 'eyeLevelCover', motion: 'still', makeup: ['natural_highend'], skinTexture: 'natural_real', jewelry: ['none'], expression: 'calm_direct', lighting: 'beauty_fill', ratio: '4:5' },
   '黑色西裝女王': { style: 'person_of_year', bg: 'dark_gray_concrete', framing: 'three_quarter', camera: 'lowAngleHero', motion: 'still', makeup: ['matte_base', 'precise_eyeliner'], skinTexture: 'premium_matte', jewelry: ['none'], expression: 'cool_stare', lighting: 'rim_light', ratio: '4:5' },
   '珠寶禮服': { style: 'jewelry_ad', bg: 'marble_wall', framing: 'bust', camera: 'beautyCloseUp', motion: 'breeze', makeup: ['natural_highend', 'highlight_skin'], skinTexture: 'luxury_campaign', jewelry: ['statement'], expression: 'cool_stare', lighting: 'beauty_fill', ratio: '4:5' },
@@ -4884,7 +4899,7 @@ const QUICK_MAGAZINE_PRESETS = {
   minimalWhiteShirt: {
     label: '極簡白襯衫封面',
     style: 'minimal_feature',
-    bg: 'white_seamless',
+    bg: 'white_brick_studio',
     pose: 'center_still',
     framing: 'half_body',
     camera: 'eyeLevelCover',
@@ -4895,7 +4910,8 @@ const QUICK_MAGAZINE_PRESETS = {
     expression: 'calm_direct',
     lighting: 'window_soft',
     media: 'realistic_studio',
-    ratio: '4:5'
+    ratio: '4:5',
+    themeText: 'Office Glamour editorial portrait, fitted crisp white short-sleeve blouse with a structured open collar, high-waisted fitted black narrow skirt, sheer black tights, glossy black pointed-toe pumps and a minimal gold wristwatch, white painted brick studio with a glossy pale floor, clean directional high-key light, defined soft-edged cast shadow on the brick wall, 50-70mm portrait perspective, natural commercial fashion photography'
   },
   futureSilverCool: {
     label: '未來銀色冷感',
@@ -5123,6 +5139,30 @@ const QUICK_MAGAZINE_PRESETS = {
     themeText: 'high-end fashion magazine portrait, body turned slightly to the side with the face clearly visible, long straight hair caught by a controlled side wind, a couture top constructed from dark silver metal rings, fine chains, transparent crystal and mirrored sequins, refined chainmail texture, black velvet opera gloves, cool sculptural shoulders, premium editorial styling, controlled reflective highlights, no brand, no readable text, no costume franchise identity',
     style: 'fashion_ad', bg: 'dark_metal', pose: 'profile_long_line', framing: 'three_quarter', camera: 'threeQuarterSide', motion: 'flow', makeup: ['smoky_glam', 'precise_eyeliner'], skinTexture: 'luxury_campaign', jewelry: ['statement'], expression: 'cool_stare', lighting: 'cold_metal', media: 'realistic_studio', ratio: '4:5'
   }
+};
+
+QUICK_MAGAZINE_PRESETS.beautyLipstickCampaign = {
+  label: '美顏廣告白棚',
+  themeText: '美顏廣告白棚肖像, clean beauty campaign, refined makeup details, unbranded cosmetic compact or lipstick as a secondary prop, crisp white studio, luminous but natural skin texture, premium commercial beauty photography, no readable brand text',
+  style: 'beauty_closeup', bg: 'white_seamless', pose: 'hand_chest', framing: 'bust', camera: 'beautyCloseUp', motion: 'still', makeup: ['red_lip', 'highlight_skin'], skinTexture: 'luxury_campaign', jewelry: ['earrings'], expression: 'calm_direct', lighting: 'beauty_fill', media: 'realistic_studio', ratio: '4:5'
+};
+
+QUICK_MAGAZINE_PRESETS.hairCareSilkLight = {
+  label: '美髮廣告絲光',
+  themeText: '美髮廣告絲光肖像, premium hair-care campaign, healthy glossy hair with individual strands visible, gentle hand near the hair, clean pale studio, controlled airflow and soft reflective highlights, refined commercial beauty photography, no readable brand text',
+  style: 'beauty_closeup', bg: 'mirror_studio', pose: 'hand_neck', framing: 'face_closeup', camera: 'sideProfile', motion: 'breeze', makeup: ['natural_highend', 'highlight_skin'], skinTexture: 'natural_real', jewelry: ['none'], expression: 'lower_gaze', lighting: 'beauty_fill', media: 'realistic_studio', ratio: '4:5'
+};
+
+QUICK_MAGAZINE_PRESETS.productTabletopPortrait = {
+  label: '精品產品桌面肖像',
+  themeText: '精品產品桌面肖像, refined product-focused beauty editorial, a single unbranded cosmetic or fragrance object placed on a clean table in the foreground, subject remains the clear human focus, soft neutral studio, controlled reflections and premium material detail, no readable brand text',
+  style: 'beauty_cover', bg: 'white_seamless', pose: 'hold_theme_prop', framing: 'bust', camera: 'beautyCloseUp', motion: 'still', makeup: ['natural_highend'], skinTexture: 'luxury_campaign', jewelry: ['none'], expression: 'calm_direct', lighting: 'beauty_fill', media: 'realistic_studio', ratio: '4:5'
+};
+
+QUICK_MAGAZINE_PRESETS.eventBackdropPortrait = {
+  label: '活動背板人物肖像',
+  themeText: '高級品牌活動背板人物肖像, polished event portrait, elegant outfit, clean step-and-repeat style backdrop without readable logos, measured direct gaze, professional event flash balanced with soft fill, premium editorial finish, no brand mark or legible text',
+  style: 'magazine_masthead', bg: 'minimal_space', pose: 'center_still', framing: 'half_body', camera: 'eyeLevelCover', motion: 'still', makeup: ['natural_highend', 'precise_eyeliner'], skinTexture: 'luxury_campaign', jewelry: ['earrings'], expression: 'calm_direct', lighting: 'beauty_fill', media: 'realistic_studio', ratio: '4:5'
 };
 
 function getRandomItem(values){

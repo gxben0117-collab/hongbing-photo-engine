@@ -1,6 +1,6 @@
 # 工具頁主題與欄位契約
 
-版本：v4.52
+版本：v4.54
 
 這份表是 `docs/theme-classification-rules.md` 的執行摘要；每頁的詳細 allowed／forbidden 內容以 `assets/theme-registry.js` 為準。
 
@@ -22,6 +22,7 @@
 | `store-ad.html` | storeAdvertisement | 店家活動主視覺 | 活動資訊、商品／服務、後製文案 | 固定人物身份主體 |
 | `floral-sweet.html` | floralSweet | 花漾甜美生活寫真 | 甜美服裝、花束、柔和場景 | 全站粉彩預設 |
 | `gala-socialite.html` | galaSocialite | 晚宴名媛人物寫真 | 晚宴禮服、珠寶、紅毯、宴會廳 | 一般生活頁預設 |
+| `festival-editorial.html` | festivalEditorial | 節慶文化與季節人物寫真 | 節日主題、道具、場景、節慶光影 | 把節慶敘事強制帶入其他工具 |
 | `bridal-editorial.html` | bridalEditorial | 單人婚紗藝術寫真 | 婚紗、頭紗、珠繡、新娘光影 | 多人婚禮、舊 85mm 選項 |
 | `kpop-idol.html` | kpopIdol | 韓系偶像人物寫真 | 舞台、機場、街頭、偶像姿態 | 一般現代人像預設 |
 | `battle-academy.html` | battleAcademy | 戰鬥制服學園角色 | 學校身份、制服、裝甲、校園戰鬥 | 一般服裝改造頁 |

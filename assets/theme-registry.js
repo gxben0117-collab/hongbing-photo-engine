@@ -153,6 +153,15 @@
       allowed: ['晚宴、紅毯、珠寶廣告、宴會廳與高級社交氛圍'],
       forbidden: ['把晚宴場景當成所有現代生活頁的預設']
     },
+    'festival-editorial.html': {
+      label: '節慶美學寫真',
+      family: 'festivalEditorial',
+      productionMode: 'referencePortrait',
+      primaryIntent: '以節慶文化、季節場景與人物造型組成完整主題寫真',
+      owns: ['節慶主題', '節慶服裝', '節慶道具', '節慶場景', '節慶光影'],
+      allowed: ['新春、元宵、情人節、端午、中元、中秋、七夕、萬聖節、聖誕節與跨年主題'],
+      forbidden: ['把節慶道具或節日敘事強制帶入其他正式工具頁']
+    },
     'bridal-editorial.html': {
       label: '婚紗藝術寫真',
       family: 'bridalEditorial',

@@ -411,6 +411,10 @@
         <div class="name">城市夜景頂樓魅力</div>
         <div class="desc">金屬光澤禮服、亮片微光軌跡、城市夜景落地窗</div>
       </button>
+      <button class="card" type="button" data-template="champagneSilverNightPortrait">
+        <div class="name">香檳銀夜景側身</div>
+        <div class="desc">香檳銀細閃禮服、城市夜景、人物亮於背景</div>
+      </button>
       <button class="card" type="button" data-template="galleryOpeningPoise">
         <div class="name">藝廊開幕氣質</div>
         <div class="desc">收腰西裝裙裝、寶石手鍊疊戴、藝廊開幕現場</div>
@@ -493,6 +497,7 @@
       <label class="card"><input type="radio" name="garment" value="beadedFringeGown"><div class="name">珠繡流蘇禮服</div><div class="desc">珠繡流蘇裝飾、裝飾藝術動態輪廓</div></label>
       <label class="card"><input type="radio" name="garment" value="crystalEmbellishedGown"><div class="name">水鑽鑲嵌禮服</div><div class="desc">水鑽鑲嵌細節、閃耀精緻輪廓</div></label>
       <label class="card"><input type="radio" name="garment" value="metallicLameGown"><div class="name">金屬光澤禮服</div><div class="desc">金屬光澤面料、液態流動輪廓</div></label>
+      <label class="card"><input type="radio" name="garment" value="champagneSilverEveningGown"><div class="name">香檳銀細閃禮服</div><div class="desc">香檳銀微閃、交疊領口與自然貼身線條</div></label>
       <label class="card"><input type="radio" name="garment" value="jeweledCollarGown"><div class="name">珠寶領口禮服</div><div class="desc">珠寶鑲嵌領口、焦點領線輪廓</div></label>
       <label class="card"><input type="radio" name="garment" value="jewelSashDrapedGown"><div class="name">寶石腰封垂墜禮服</div><div class="desc">華麗寶石腰封、流動緞面垂墜輪廓</div></label>
       <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 俐落剪裁套裝</div>
@@ -722,6 +727,7 @@
           <label class="pose-card"><input type="radio" name="pose" value="coat_hold"><div class="pose-name">抓外套領口</div><div class="pose-desc">雙手抓領口,高訂氣場</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="one_leg_forward"><div class="pose-name">單腿前伸站姿</div><div class="pose-desc">一腿前伸,腳尖拉長</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="profile_long_line"><div class="pose-name">側身長線條</div><div class="pose-desc">側身站立,頸肩腰線清楚</div></label>
+          <label class="pose-card"><input type="radio" name="pose" value="nightSideTurn"><div class="pose-name">夜景側身回肩</div><div class="pose-desc">髖部側向、肩膀回轉、回望城市燈光</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="center_still"><div class="pose-name">正面安定站姿</div><div class="pose-desc">正面站穩,精品主視覺感</div></label>
           <label class="pose-card"><input type="radio" name="pose" value="one_hand_waist"><div class="pose-name">單手扶腰</div><div class="pose-desc">一手扶腰,另一手自然垂放</div></label>
         </div>
@@ -821,6 +827,7 @@
       <label class="card"><input type="radio" name="lighting" value="amethystSparkle"><div class="name">紫晶閃光</div><div class="desc">紫色晶體反射、花瓣閃光、珠寶感</div></label>
       <label class="card"><input type="radio" name="lighting" value="rainNightCool"><div class="name">雨夜冷光</div><div class="desc">雨幕冷光、濕地反射、臉身同光</div></label>
       <label class="card"><input type="radio" name="lighting" value="darkGoldMood"><div class="name">暗金情緒光</div><div class="desc">低調金光、深色背景、情緒美妝</div></label>
+      <label class="card"><input type="radio" name="lighting" value="nightGlamourPortrait"><div class="name">夜景人物美光</div><div class="desc">人物微亮、冷暖夜景與城市散景分離</div></label>
       <label class="card"><input type="radio" name="lighting" value="palaceNightWarm"><div class="name">宮殿夜景暖光</div><div class="desc">夜景宮殿暖光、金箔與雪粒反射</div></label>
       <label class="card"><input type="radio" name="lighting" value="amethystCandleGlow"><div class="name">紫晶燭光宮廷</div><div class="desc">暖金燭光、紫晶反射、柔亮宮廷膚色</div></label>
       <label class="card"><input type="radio" name="lighting" value="darkIceBlue"><div class="name">暗藍冰晶冷光</div><div class="desc">冰藍反射、暗色背景、冷光一致</div></label>
@@ -904,6 +911,7 @@
       <label class="card"><input type="radio" name="camera" value="threeQuarterSide"><div class="name">斜側角度</div><div class="desc">約45度側拍 / 臉和身形都有立體感</div></label>
       <label class="card"><input type="radio" name="camera" value="topBeauty"><div class="name">高角度近景</div><div class="desc">從上方靠近拍臉與肩頸</div></label>
       <label class="card"><input type="radio" name="camera" value="distantHero"><div class="name">遠距主視覺</div><div class="desc">人物與背景完整，廣告版面感強</div></label>
+      <label class="card"><input type="radio" name="camera" value="nightBokehPortrait"><div class="name">夜景散景人像</div><div class="desc">中距離人物、城市燈光清楚但不搶焦</div></label>
     </div>
   </section>
 
@@ -1156,7 +1164,8 @@ const garmentData = {
   cutoutWaistFeatherGown: 'cutout-waist evening gown with feather-and-floral appliqué accents, sculpted side openwork, refined dramatic silhouette',
   jewelSashDrapedGown: 'jewel-belted draped satin evening gown, ornate gemstone sash cinching the waist, fluid elegant silhouette',
   laceCheongsamMiniGown: 'ivory lace mini cheongsam evening dress with gold floral embroidery, mandarin collar, chic refined silhouette',
-  dustyPinkCrystalCorsetGown: 'dusty-pink crystal-embellished corset ballgown with a sweetheart neckline and layered tulle skirt, delicate bow accents at the waist, romantic princess-like silhouette'
+  dustyPinkCrystalCorsetGown: 'dusty-pink crystal-embellished corset ballgown with a sweetheart neckline and layered tulle skirt, delicate bow accents at the waist, romantic princess-like silhouette',
+  champagneSilverEveningGown: 'champagne-silver shimmering evening gown, fine reflective micro-shimmer textile, thin spaghetti straps, softly draped crossover neckline, fitted waist, body-skimming silhouette, elegant side slit, subtle metallic chain neckline detail, natural fabric folds and refined evening tailoring'
 };
 
 const styleData = {
@@ -1226,6 +1235,7 @@ const lightingData = {
   candleStarContrast: 'candle and starlight contrast lighting, warm amber candle glow on the subject against a cool blue starry background, romantic high-contrast atmosphere',
   neonPurpleMoonlit: 'purple neon and moonlight lighting, cool violet neon glow blended with silver moonlight silhouette edges, night-city fantasy atmosphere',
   holyMistBeam: 'holy backlit mist beam lighting, radiant light shafts piercing through soft haze, sacred cinematic glow',
+  nightGlamourPortrait: 'dark nighttime environment with a large soft diffused key light from slightly above and in front, gentle frontal fill preserving facial detail, neutral-to-warm skin tone against cool blue ambient surroundings, colorful architectural lights remaining visible, strong subject-background separation, background approximately one to two stops darker than the subject, soft circular city-light bokeh',
 };
 
 const sharedGalaSocialiteCore = window.HB_CORE_PROMPT?.page?.galaSocialite || {};
@@ -1396,7 +1406,8 @@ const poseData = {
   clutch_hip_hold: 'one hand holding a clutch bag against the hip, confident poised standing gesture',
   masquerade_mask_reveal: 'holding an ornate masquerade mask beside the face, mysterious glamorous reveal moment',
   staircase_descent_pose: 'descending a grand staircase, one hand trailing lightly along the railing, poised regal movement',
-  diamond_necklace_touch: 'fingertips lightly touching a diamond necklace at the collarbone, refined jewelry-focused gesture'
+  diamond_necklace_touch: 'fingertips lightly touching a diamond necklace at the collarbone, refined jewelry-focused gesture',
+  nightSideTurn: 'standing in a three-quarter side pose, hips angled slightly away, shoulders gently rotated toward camera, upper body subtly leaning back, hands gathered naturally near the upper torso, head turned toward the lens, coherent balance and relaxed hands'
 };
 
 const framingData = {
@@ -1417,7 +1428,8 @@ const cameraData = {
   sideProfile: 'side profile portrait angle, clear jawline silhouette, elegant facial contour, refined profile lighting and fashion editorial framing',
   threeQuarterSide: 'three-quarter side camera angle, about 45 degree side view, face and body both show dimensional structure, elegant advertising perspective',
   topBeauty: 'high angle close beauty view, camera above the subject and slightly close, face shoulders neckline and headdress emphasized, elegant cosmetic perspective',
-  distantHero: 'distant hero advertising view, camera pulled back to show subject background and material environment together, spacious brand key visual perspective'
+  distantHero: 'distant hero advertising view, camera pulled back to show subject background and material environment together, spacious brand key visual perspective',
+  nightBokehPortrait: 'night bokeh portrait perspective, 50-70mm equivalent lens, moderate shooting distance, subject remains brighter than the city background, architectural lights stay visible as soft circular bokeh without close-range facial distortion'
 };
 
 const ratioData = {
@@ -1534,6 +1546,11 @@ const themeTemplates = {
     garment: 'metallicLameGown', material: 'sequinShimmerTrail', style: 'blackTieGlam',
     composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
     framing: 'threeQuarter', pose: 'profile_long_line', camera: 'sideProfile', lighting: 'darkGoldMood', background: 'cityNightSkylineWindow', ratio: '4:5', intensity: 'balanced couture styling, controlled garment movement, refined jewelry presence'
+  },
+  champagneSilverNightPortrait: {
+    garment: 'champagneSilverEveningGown', material: 'champagneBubbleGlow', style: 'galaCampaign',
+    composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
+    framing: 'threeQuarter', pose: 'nightSideTurn', camera: 'nightBokehPortrait', lighting: 'nightGlamourPortrait', background: 'cityNightSkylineWindow', ratio: '4:5', intensity: 'balanced couture styling, controlled garment movement, refined jewelry presence'
   },
   galleryOpeningPoise: {
     garment: 'beltedBlazerDress', material: 'gemstoneBraceletStack', style: 'artGalleryPoise',

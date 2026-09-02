@@ -4,9 +4,11 @@
 
 ## 版本
 
-v4.52 起持續迭代中；完整逐日開發記錄見 [docs/development-log.md](docs/development-log.md)。
+v4.54 起持續迭代中；完整逐日開發記錄見 [docs/development-log.md](docs/development-log.md)。
 
-v4.52 新增獨立 `modern-portrait.html` 現代寫真攝影工具，提供現代生活場景、服裝、姿勢、光影、色彩、鏡頭與 10 組完整一鍵模板；同時建立全站分類登記表、主題歸屬總規範與分類驗證腳本。`Luxury Lifestyle` 維持既有獨立頁，未把頁面資料互相混用；共用鎖臉、臉部幾何與真人骨架核心維持不變。
+v4.54 依 `風格範例_142張逐張咒語分析.xlsx` 建立匿名分類登記與單一 owner 驗證；現代寫真、旅拍、雜誌與 Luxury Lifestyle 分別擴充至 20、18、28、11 組完整一鍵模板，並補正節慶頁的主題登記。素材只進入相符工具頁的頁面資料，不改共用鎖臉、臉部幾何、真人骨架或光線一致性核心。
+
+v4.53 延續獨立 `modern-portrait.html` 現代寫真攝影工具，新增風格範例分流的居家、窗光、床面與玫瑰木模組，完整一鍵模板擴充至 15 組；並將白襯衫白磚棚拍、香檳銀夜景與飯店長廊分流至雜誌、名媛與旅拍頁。聖誕素材、來源人物外貌／身份與固定數字比例不進共用核心；共用鎖臉、臉部幾何與真人骨架核心維持不變。
 
 v4.51 新增旅拍「雪景溫泉花卉和風旅拍」主題、雪景花卉包覆和風長袍服裝方向與完整一鍵模板；共用鎖臉、臉部幾何與真人骨架核心維持不變。
 
@@ -41,7 +43,7 @@ v4.3 之後陸續完成（詳見開發日誌）：
 ## 專案定位
 
 - `index.html` 是入口與工具導覽頁。
-- 二十個工具頁（見下方「正式頁面」）各自包含 UI、選項資料與咒語組裝邏輯。
+- 二十二個正式工具頁（見下方「正式頁面」）各自包含 UI、選項資料與咒語組裝邏輯。
 - `assets/core-prompt.js` 集中管理 v4.3 共用身份鎖定、臉部幾何、真人骨架、鏡頭重建、光線一致、膚質、負面詞與輸出品質規則。
 - `assets/editorial-finish.js` 集中管理中式古典、和服與韓系偶像三個精品主題頁的高預算編輯成像、材質可信度、光影層次與主題化負面限制；婚紗頁使用等效的短版專屬精品核心，避免重複堆疊而稀釋身份鎖定。
 - `assets/core-prompt.js` 另提供共用 `autoColor` 控制提示；中式古典、和服、韓服、婚紗與編輯視覺設計的色彩系統均提供主題搭配色組與 AI 配色選項。
@@ -69,6 +71,7 @@ v4.3 之後陸續完成（詳見開發日誌）：
 - `store-ad.html` - 店家活動廣告產生器
 - `floral-sweet.html` - 花漾甜美系咒語產生器
 - `gala-socialite.html` - 氣質名媛宴會咒語產生器
+- `festival-editorial.html` - 節慶美學寫真咒語產生器
 - `bridal-editorial.html` - 婚紗藝術寫真咒語產生器
 - `kpop-idol.html` - 韓系氣質偶像風咒語產生器
 - `battle-academy.html` - 戰鬥制服學園咒語產生器
@@ -116,7 +119,7 @@ v4.3 之後陸續完成（詳見開發日誌）：
 - [開發日誌](docs/development-log.md) — 現況與完整歷史記錄
 - [核心咒語保護契約](docs/core-prompt-contract.md) — 改咒語前必看
 - [全站分類歸屬總規範](docs/theme-classification-rules.md) — 主題歸屬、共用核心邊界與新素材分流規則
-- [工具頁主題與欄位契約](docs/tool-theme-contracts.md) — 21 頁分類、欄位命名、比例值、Layer
+- [工具頁主題與欄位契約](docs/tool-theme-contracts.md) — 22 頁分類、欄位命名、比例值、Layer
 - [工具頁分類與欄位契約](docs/tool-page-contracts.md) — 歷史版欄位契約與演進記錄
   與自訂要求鎖臉提示的正式契約
 
@@ -159,7 +162,7 @@ git diff --check
 
 ```powershell
 node scripts\build-prompt-preview.mjs   # 固定選項組合，改前/改後 0 diff 迴歸檢查
-node scripts\audit-100x.mjs             # 21 個正式工具頁各隨機 100 組，共 2100 組內容稽核
+node scripts\audit-100x.mjs             # 目前腳本涵蓋 21 個標準 Prompt 頁，各隨機 100 組，共 2100 組內容稽核
 node scripts\validate-preset-refs.mjs   # 各頁一鍵套用/預設連動物件引用的選項值是否都存在
 ```
 
