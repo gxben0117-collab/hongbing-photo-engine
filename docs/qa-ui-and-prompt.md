@@ -1,5 +1,12 @@
 # UI 與咒語回歸檢查
 
+## 2026-09-02 v4.55 38 張風格範例批次與婚紗擴充回歸
+
+- 批次登記涵蓋 38 張來源圖片，分類群組互不重複，每筆都有唯一 primary owner；其他分類採 record-only 或 candidate-only，不會意外污染正式頁。
+- 婚紗頁新增的 4 個控制值與 3 組一鍵模板都使用既有欄位資料，模板會完整回填構圖、服裝、材質、Layer、頭紗、姿勢、光影、配色、背景、鏡頭與比例。
+- assets/core-prompt.js、身份鎖定、臉部幾何、真人骨架與光線一致性核心維持不變。
+- 上線前需通過 check-style-reference-batch-2026-09-02.mjs、check-static.mjs、check-ui-flows.mjs、validate-preset-refs.mjs、check-theme-classification.mjs、check-style-reference-142.mjs、build-prompt-preview.mjs、audit-100x.mjs 與 git diff --check。
+
 ## 2026-09-02 v4.54 142 張風格範例整合回歸
 
 - `assets/style-reference-142.js` 登記 142 筆匿名來源 row；每筆只有一個 primary owner，46 筆跨來源群組資料有明確頁面覆寫，7 個特殊案例有紀錄。
