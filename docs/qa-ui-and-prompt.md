@@ -1,5 +1,12 @@
 # UI 與咒語回歸檢查
 
+## 2026-09-02 v4.56 第二批風格範例與五組模板回歸
+
+- 第二批登記涵蓋 22 張來源圖片，分類群組互不重複，每筆都有唯一 primary owner；其他分類採 record-only 或 candidate-only，不會意外污染正式頁。
+- 現代寫真新增街角茶飲店快照場景與完整模板；旅拍新增海岸單車花漾模板；幻想廣告新增水晶碎片美妝、紅紗風場、水墨書法三組完整模板。
+- 新模板均重用既有服裝、姿勢、光線、鏡頭、比例與強度資料鍵；核心身份、臉部幾何、真人骨架與光線一致性核心維持不變。
+- 上線前需通過 check-style-reference-batch-2026-09-02-second.mjs、check-static.mjs、check-ui-flows.mjs、validate-preset-refs.mjs、check-theme-classification.mjs、check-style-reference-142.mjs、build-prompt-preview.mjs、audit-100x.mjs 與 git diff --check。
+
 ## 2026-09-02 v4.55 38 張風格範例批次與婚紗擴充回歸
 
 - 批次登記涵蓋 38 張來源圖片，分類群組互不重複，每筆都有唯一 primary owner；其他分類採 record-only 或 candidate-only，不會意外污染正式頁。

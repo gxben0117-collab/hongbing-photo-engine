@@ -193,6 +193,7 @@
       <label class="card"><input type="radio" name="scene" value="cafeWindow"><span class="name">咖啡館窗邊</span><span class="desc">木桌、玻璃窗與自然街景景深</span></label>
       <label class="card"><input type="radio" name="scene" value="carInterior"><span class="name">車內生活寫真</span><span class="desc">座艙、窗外光線與自然回身互動</span></label>
       <label class="card"><input type="radio" name="scene" value="storefrontStreet"><span class="name">明亮街角店面</span><span class="desc">店面玻璃、騎樓與清爽城市日常</span></label>
+      <label class="card"><input type="radio" name="scene" value="teaShopSnapshot"><span class="name">街角茶飲店快照</span><span class="desc">明亮店內、日常點單互動與自然紀錄距離</span></label>
       <label class="field custom-field">自訂場景<input class="text-input" id="customScene" type="text" placeholder="例如：城市公寓閱讀角、咖啡店窗邊、雨後綠地長廊"></label>
     </div>
   </section>
@@ -443,7 +444,8 @@ const sceneData = {
   cityRooftop: 'open contemporary city rooftop with a low parapet, distant skyline, pale concrete surfaces and generous sky, clean urban portrait environment with clear architectural depth',
   cafeWindow: 'quiet contemporary cafe beside a large glass window, small wooden table, ceramic cup, soft street background and shallow but believable interior depth',
   carInterior: 'clean modern car interior with realistic seats, dashboard and side-window daylight, city surroundings softly visible outside, intimate mobile lifestyle portrait setting',
-  storefrontStreet: 'bright city storefront corner with glass facade, covered sidewalk, simple architectural lines and softly observed pedestrians kept secondary in the distance'
+  storefrontStreet: 'bright city storefront corner with glass facade, covered sidewalk, simple architectural lines and softly observed pedestrians kept secondary in the distance',
+  teaShopSnapshot: 'bright neighborhood tea shop interior with a clean counter, simple unbranded drink cups and practical menu surfaces kept unreadable and secondary, lively everyday documentary portrait setting'
 };
 
 const sceneStoryData = {
@@ -463,7 +465,8 @@ const sceneStoryData = {
   cityRooftop: 'a fresh urban portrait on an open rooftop, using skyline depth, wind and clean architecture to create a confident modern story',
   cafeWindow: 'a relaxed cafe-window portrait built around a small daily pause, warm surfaces and a softly observed street beyond the glass',
   carInterior: 'a candid mobile portrait captured inside a parked modern car, where window light, interior materials and a natural turn create a believable everyday story',
-  storefrontStreet: 'a bright city corner portrait that follows a natural walk past a storefront, keeping the subject central while glass, pavement and passing life add context'
+  storefrontStreet: 'a bright city corner portrait that follows a natural walk past a storefront, keeping the subject central while glass, pavement and passing life add context',
+  teaShopSnapshot: 'a lively everyday portrait captured during a brief tea-shop order, balancing a direct camera connection with a believable local setting'
 };
 
 const garmentData = {
@@ -643,7 +646,8 @@ const SCENE_POSE_POOLS = Object.freeze({
   cityRooftop: ['rooftopWindStand', 'naturalStanding', 'standingThreeQuarter'],
   cafeWindow: ['cafeTableSit', 'softSeated', 'gentleHairTouch'],
   carInterior: ['carSeatTurn', 'gentleHairTouch', 'windowSeatedLongLine'],
-  storefrontStreet: ['storefrontWalk', 'lookBackWalking', 'naturalStanding']
+  storefrontStreet: ['storefrontWalk', 'lookBackWalking', 'naturalStanding'],
+  teaShopSnapshot: ['naturalStanding', 'gentleHairTouch', 'standingThreeQuarter']
 });
 const SCENE_CAMERA_POOLS = Object.freeze({
   whiteBedroom: ['highAngleOverhead', 'topBeauty', 'beautyCloseUp'],
@@ -662,7 +666,8 @@ const SCENE_CAMERA_POOLS = Object.freeze({
   cityRooftop: ['environmental50mm', 'threeQuarterSide', 'distantHero'],
   cafeWindow: ['environmental50mm', 'threeQuarterSide', 'eyeLevelCover'],
   carInterior: ['environmental50mm', 'sideProfile', 'threeQuarterSide'],
-  storefrontStreet: ['streetLevelDocumentary', 'threeQuarterSide', 'eyeLevelCover']
+  storefrontStreet: ['streetLevelDocumentary', 'threeQuarterSide', 'eyeLevelCover'],
+  teaShopSnapshot: ['streetLevelDocumentary', 'eyeLevelCover', 'threeQuarterSide']
 });
 const SCENE_LIGHTING_POOLS = Object.freeze({
   whiteBedroom: ['whiteWindowHighKey', 'softDiffusedDaylight'],
@@ -681,7 +686,8 @@ const SCENE_LIGHTING_POOLS = Object.freeze({
   cityRooftop: ['rooftopSunsetSoft', 'cityOpenShade'],
   cafeWindow: ['cafeWindowGlow', 'softDiffusedDaylight'],
   carInterior: ['cityOpenShade', 'softDiffusedDaylight'],
-  storefrontStreet: ['cityOpenShade', 'softDiffusedDaylight']
+  storefrontStreet: ['cityOpenShade', 'softDiffusedDaylight'],
+  teaShopSnapshot: ['cafeWindowGlow', 'cityOpenShade', 'softDiffusedDaylight']
 });
 
 const themeTemplates = {
@@ -704,7 +710,8 @@ const themeTemplates = {
   cafeWindowPause: { story: 'a relaxed cafe-window portrait built around a quiet daily pause, warm surfaces and a softly observed street beyond the glass', style: 'softLifestyle', scene: 'cafeWindow', garment: 'satinSlipLayer', garmentLayer: 'layer3', chestDetail: 'layeredCamisole', waistSideDetail: 'softWaistDrape', shoulderDetail: 'softCardiganDrape', bodyShape: 'original', pose: 'cafeTableSit', interaction: 'coffeeCup', lighting: 'cafeWindowGlow', colorPalette: 'terracottaCream', camera: 'environmental50mm', ratio: '4:5', intensity: 'balanced' },
   carInteriorDaylight: { story: 'a candid mobile portrait captured inside a parked modern car, where window light, interior materials and a natural turn create a believable everyday story', style: 'candidStory', scene: 'carInterior', garment: 'denimStreetSet', garmentLayer: 'layer0', chestDetail: 'none', waistSideDetail: 'none', shoulderDetail: 'none', bodyShape: 'original', pose: 'carSeatTurn', interaction: 'steeringWheel', lighting: 'cityOpenShade', colorPalette: 'cityNeutralDenim', camera: 'environmental50mm', ratio: '9:16', intensity: 'balanced' },
   storefrontStreetWalk: { story: 'a bright city corner portrait that follows a natural walk past a storefront, keeping the subject central while glass, pavement and passing life add context', style: 'candidStory', scene: 'storefrontStreet', garment: 'denimStreetSet', garmentLayer: 'layer0', chestDetail: 'none', waistSideDetail: 'slimBeltLine', shoulderDetail: 'none', bodyShape: 'original', pose: 'storefrontWalk', interaction: 'shoppingBag', lighting: 'cityOpenShade', colorPalette: 'cityNeutralDenim', camera: 'streetLevelDocumentary', ratio: '2:3', intensity: 'balanced' },
-  whiteBlazerUrban: { story: 'a clean urban fashion portrait built around a crisp white suit, pale architecture and measured commercial light', style: 'fashionPortrait', scene: 'softStudio', garment: 'whiteBlazerSet', garmentLayer: 'layer0', chestDetail: 'softSquareNeckline', waistSideDetail: 'slimBeltLine', shoulderDetail: 'none', bodyShape: 'fashion_tall', pose: 'standingThreeQuarter', interaction: 'compactMirror', lighting: 'cityOpenShade', colorPalette: 'blackWhiteBlush', camera: 'environmental50mm', ratio: '4:5', intensity: 'premium' }
+  whiteBlazerUrban: { story: 'a clean urban fashion portrait built around a crisp white suit, pale architecture and measured commercial light', style: 'fashionPortrait', scene: 'softStudio', garment: 'whiteBlazerSet', garmentLayer: 'layer0', chestDetail: 'softSquareNeckline', waistSideDetail: 'slimBeltLine', shoulderDetail: 'none', bodyShape: 'fashion_tall', pose: 'standingThreeQuarter', interaction: 'compactMirror', lighting: 'cityOpenShade', colorPalette: 'blackWhiteBlush', camera: 'environmental50mm', ratio: '4:5', intensity: 'premium' },
+  teaShopSnapshot: { story: 'a lively everyday portrait captured during a brief tea-shop order, balancing a direct camera connection with a believable local setting', style: 'candidStory', scene: 'teaShopSnapshot', garment: 'denimStreetSet', garmentLayer: 'layer0', chestDetail: 'none', waistSideDetail: 'none', shoulderDetail: 'none', bodyShape: 'original', pose: 'naturalStanding', interaction: 'teaCup', lighting: 'cafeWindowGlow', colorPalette: 'terracottaCream', camera: 'streetLevelDocumentary', ratio: '4:5', intensity: 'balanced' }
 };
 
 let activeTemplateStory = '';

@@ -399,6 +399,10 @@
         <div class="name">白金水晶蝶翼聖殿</div>
         <div class="desc">水晶蝶翼、白金細工、拱廊聖光</div>
       </button>
+      <button class="card" type="button" data-template="crystalShardBeautyPortrait">
+        <div class="name">水晶碎片美妝特寫</div>
+        <div class="desc">鑽石晶體、近景美妝與受控彩色折射</div>
+      </button>
       <button class="card" type="button" data-template="hornFlowerMoonGarden">
         <div class="name">黑角花冠月光花園</div>
         <div class="desc">獸角花冠、白花金鍊、月光玻璃花園</div>
@@ -487,6 +491,10 @@
         <div class="name">花卉紗藝女神</div>
         <div class="desc">透明花卉紗、暖金逆光、背身側臉、柔霧藝術牆</div>
       </button>
+      <button class="card" type="button" data-template="scarletGauzeFieldEditorial">
+        <div class="name">紅紗風場高訂主視覺</div>
+        <div class="desc">紅色流動紗、開闊風場與高訂動態構圖</div>
+      </button>
       <button class="card" type="button" data-template="glassFlameOpera">
         <div class="name">玻璃火焰歌劇</div>
         <div class="desc">透明火焰、深紅舞台、禮服動勢、戲劇光束</div>
@@ -514,6 +522,10 @@
       <button class="card" type="button" data-template="inkWaterBloomGown">
         <div class="name">墨染水雲裙</div>
         <div class="desc">墨水入水瞬凍成裙、水袖東方禪意、藝術展覽級</div>
+      </button>
+      <button class="card" type="button" data-template="inkCalligraphyCouture">
+        <div class="name">水墨書法流動禮服</div>
+        <div class="desc">書法水墨、蝶舞流線、展覽級文化廣告</div>
       </button>
       <button class="card" type="button" data-template="shatteredMirrorBurstGown">
         <div class="name">碎鏡爆散裙</div>
@@ -3231,6 +3243,45 @@ const themeTemplates = {
     garment: 'victorianRuffleGown', material: 'wonderlandPocketWatchTea', style: 'cinematic',
     composition: 'subject surrounded by selected material environment, material wraps around foreground and background, immersive fantasy advertisement layout',
     framing: 'fullBody', pose: 'wonderland_falling_tumble', camera: 'highAngleOverhead', lighting: 'halo', background: 'wonderlandBaroqueFallingHall', ratio: '4:5', intensity: 'balanced material effects, elegant and luxurious'
+  },
+  crystalShardBeautyPortrait: {
+    garment: 'dress',
+    material: 'diamond',
+    style: 'beautyCampaign',
+    composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
+    framing: 'closeUp',
+    pose: 'hand_neck',
+    camera: 'beautyCloseUp',
+    lighting: 'prismaticColor',
+    background: 'mirrorGallery',
+    ratio: '4:5',
+    intensity: 'balanced material effects, elegant and luxurious'
+  },
+  scarletGauzeFieldEditorial: {
+    garment: 'cloudGauze',
+    material: 'smokeVeilGown',
+    style: 'editorial',
+    composition: 'diagonal dynamic advertising layout, subject and material flow from one corner to the opposite corner',
+    framing: 'threeQuarter',
+    pose: 'cape_wind',
+    camera: 'threeQuarterSide',
+    lighting: 'soft',
+    background: 'silverReedMountainField',
+    ratio: '9:16',
+    intensity: 'balanced material effects, elegant and luxurious'
+  },
+  inkCalligraphyCouture: {
+    garment: 'trainGown',
+    material: 'inkCalligraphyButterflyGown',
+    style: 'artExhibit',
+    composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
+    framing: 'fullBody',
+    pose: 'calligraphy_brush',
+    camera: 'eyeLevelCover',
+    lighting: 'soft',
+    background: 'exhibition',
+    ratio: '9:16',
+    intensity: 'balanced material effects, elegant and luxurious'
   }
 };
 
