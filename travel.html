@@ -384,6 +384,8 @@
       <button type="button" class="preset-btn" data-travel-preset="streamSummerSnapshot">一鍵套用｜溪水夏日自然感</button>
       <button type="button" class="preset-btn" data-travel-preset="coastalBicycleFloral">一鍵套用｜海岸單車花漾旅拍</button>
       <button type="button" class="preset-btn" data-travel-preset="goldenFlowerRedVoile">一鍵套用｜金色花田紅紗藝術旅拍</button>
+      <button type="button" class="preset-btn" data-travel-preset="stationSunsetLookBack">一鍵套用｜金色夕陽車站回眸</button>
+      <button type="button" class="preset-btn" data-travel-preset="mediterraneanColorWall">一鍵套用｜地中海彩牆草帽</button>
     </div>
   </section>
 
@@ -574,6 +576,8 @@
       <label class="chip" data-value="街邊咖啡店石牆"><input type="radio" name="themePreset" value="街邊咖啡店石牆">街邊咖啡店石牆</label>
       <label class="chip" data-value="精品店騎樓街道"><input type="radio" name="themePreset" value="精品店騎樓街道">精品店騎樓街道</label>
       <label class="chip" data-value="高樓天台城市天際線"><input type="radio" name="themePreset" value="高樓天台城市天際線">高樓天台城市天際線</label>
+      <label class="chip" data-value="金色夕陽車站月台"><input type="radio" name="themePreset" value="金色夕陽車站月台">金色夕陽車站月台</label>
+      <label class="chip" data-value="地中海彩牆與草帽"><input type="radio" name="themePreset" value="地中海彩牆與草帽">地中海彩牆與草帽</label>
     </div>
     <input type="text" class="theme-input" id="themeInput" placeholder="例如：東京原宿cosplay貓女">
   </section>
@@ -620,6 +624,11 @@
         <input type="radio" name="composition" value="G">
         <div class="name">G 花田中景藝術肖像</div>
         <div class="desc">中景人像,花田環境清楚,細膩藝術旅拍感</div>
+      </label>
+      <label class="card" data-value="H">
+        <input type="radio" name="composition" value="H">
+        <div class="name">H 車站環境人物</div>
+        <div class="desc">人物與月台透視並重,保留旅途故事方向</div>
       </label>
     </div>
   </section>
@@ -1048,6 +1057,11 @@
         <div class="name">黃金時刻夕陽</div>
         <div class="desc">夕陽逆光 / 長影 / 髮絲金邊</div>
       </label>
+      <label class="card" data-value="station_golden_backlight">
+        <input type="radio" name="lighting" value="station_golden_backlight">
+        <div class="name">車站夕陽逆光</div>
+        <div class="desc">月台暖金光、長影與旅途空間層次</div>
+      </label>
       <label class="card" data-value="golden_corridor">
         <input type="radio" name="lighting" value="golden_corridor">
         <div class="name">金色長廊窗光</div>
@@ -1458,7 +1472,18 @@ Bright Flower Field Remains Clearly Readable Around The Subject
 Eye-Level Editorial Portrait Composition
 Foreground Yellow Blossoms Create Soft Depth
 Balanced Subject And Environment
-Fine-Art Travel Portrait Storytelling`
+Fine-Art Travel Portrait Storytelling`,
+H:`【構圖模組｜車站環境人物】
+
+Medium To Full Body Environmental Portrait
+Subject Occupies 45-60% Of Frame
+Platform Canopy, Rails And Track Lines Create Leading Perspective
+Departure Architecture And Travel Context Remain Clearly Readable
+50mm Environmental Travel Lens
+Eye-Level Documentary Editorial Composition
+Foreground Platform Detail, Midground Subject, Background Station Depth
+Natural Body Proportions Without Wide-Angle Exaggeration
+Travel Storytelling With The Person As The Clear Primary Subject`
 };
 
 const STYLES = {
@@ -1842,6 +1867,16 @@ Long Soft Shadows And Gentle Rim Light On Hair
 Sun Position Low Near The Horizon
 Sky Gradient From Gold To Soft Peach
 Face Keeps Natural Warm Exposure Within The Same Sunset Light`,
+
+station_golden_backlight:`【光影色彩｜車站夕陽逆光】
+
+Station Platform Golden-Hour Backlight
+Warm low sunlight enters along the platform and canopy
+Long architectural shadows follow the rails and floor
+Soft golden rim light defines hair and garment edges
+Face receives gentle natural fill from the platform surfaces
+Subject, station architecture and distant travel background share the same warm exposure
+No detached studio lighting`,
 
 golden_corridor:`【光影色彩｜金色長廊窗光】
 
@@ -2493,6 +2528,36 @@ QUICK_TRAVEL_PRESETS.goldenFlowerRedVoile = {
   hair: 'auto',
   prop: 'none',
   themeText: '金色花田紅紗藝術旅拍, 遼闊明亮的油菜花田與柔和黃色花朵散景, 長條紅色絲質薄紗作為優雅披覆造型, 層疊垂墜並保持穩定包覆, 柔和露出單側肩線與鎖骨腰線, 自然回眸站姿, 海風吹動髮絲與薄紗邊緣, 柔和漫射黃金時刻光與微冷陰影, Fuji Pro 400H inspired pastel low-contrast fine-art film color with subtle green-magenta balance, 淺景深奶油花田散景, 保留自然身體比例與真實布料重量張力皺褶垂墜, 高級唯美旅拍藝術人像'
+};
+
+QUICK_TRAVEL_PRESETS.stationSunsetLookBack = {
+  composition: 'H',
+  style: 'natural_lifestyle',
+  ratio: '2:3',
+  camera: 'corridor_perspective',
+  lighting: 'station_golden_backlight',
+  motion: 'breeze',
+  media: 'travel_magazine',
+  pose: 'look_back',
+  costume: 'denim_casual',
+  hair: 'soft_waves',
+  prop: 'none',
+  themeText: '金色夕陽車站回眸旅拍, 老車站月台、遮雨棚、鐵軌與遠方列車縱深, 白色輕薄上衣搭配中藍丹寧與簡約旅行袋, 行走中自然回眸, 髮絲被微風吹動, 月台夕陽逆光與長形建築陰影一致, 50mm 環境人物構圖, 人物與旅途空間共同形成高級旅行故事'
+};
+
+QUICK_TRAVEL_PRESETS.mediterraneanColorWall = {
+  composition: 'C',
+  style: 'natural_lifestyle',
+  ratio: '2:3',
+  camera: 'wide_scene',
+  lighting: 'scene_natural',
+  motion: 'breeze',
+  media: 'travel_magazine',
+  pose: 'look_back',
+  costume: 'flow_dress',
+  hair: 'soft_waves',
+  prop: 'none',
+  themeText: '地中海彩牆草帽旅拍, 藍白或暖赭色彩牆、窄巷、拱門與明亮海岸天空, 輕盈白色或淡藍長洋裝搭配草帽, 一手輕扶帽沿並自然回眸, 清澈海岸日光、柔和牆面反射與微風裙擺, 全身人物與彩色建築平衡, 高級度假旅行雜誌故事'
 };
 
 function applyTravelPreset(preset){

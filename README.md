@@ -4,7 +4,9 @@
 
 ## 版本
 
-v4.57 起持續迭代中；完整逐日開發記錄見 [docs/development-log.md](docs/development-log.md)。
+v4.58 起持續迭代中；完整逐日開發記錄見 [docs/development-log.md](docs/development-log.md)。
+
+v4.58 依風格範例擴充現代寫真、旅拍、Luxury Lifestyle 與雜誌棚拍，新增 8 組完整一鍵模板及對應頁面資料；共用鎖臉核心維持不變。
 
 v4.57 新增旅拍「金色花田紅紗藝術旅拍」完整一鍵模板，包含花田中景、70mm 中景、黃金時刻、紅色絲質薄紗披覆與自然回眸；內容未進入共用鎖臉核心。
 

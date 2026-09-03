@@ -1,5 +1,11 @@
 # UI 與咒語回歸檢查
 
+## 2026-09-03 v4.58 四頁風格範例擴充回歸
+
+- 現代寫真新增 4 組完整模板；旅拍新增 2 組完整模板、H 車站環境人物構圖與車站夕陽逆光；Luxury Lifestyle 與雜誌棚拍各新增 1 組完整模板。
+- 新增值均有實際 UI 控制、頁面資料對照與一鍵回填；未修改共用身份／臉部幾何／真人骨架核心。
+- 分類登記見 [`docs/style-reference-expansion-2026-09-03.md`](style-reference-expansion-2026-09-03.md)。上線前需通過 `check-static.mjs`、`check-ui-flows.mjs`、`reorder-dom-sections.mjs --check`、`validate-preset-refs.mjs`、`check-theme-classification.mjs`、`build-prompt-preview.mjs`、`audit-100x.mjs` 與 `git diff --check`。
+
 ## 2026-09-02 v4.57 金色花田紅紗旅拍模板回歸
 
 - 旅拍新增的構圖 G、70mm 中景鏡頭、紅色絲質薄紗披覆服裝與一鍵模板均有對應的實際 UI 選項與生成資料鍵。
