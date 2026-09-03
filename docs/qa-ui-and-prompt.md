@@ -1,5 +1,12 @@
 # UI 與咒語回歸檢查
 
+## 2026-09-03 v4.59 日本和服深 U 高訂模板回歸
+
+- `japanese-kimono.html` 新增的服裝、材質、胸口、腰側、框景、姿勢、配色與一鍵模板均有實際 UI 控制、資料鍵與生成引用。
+- 新模板完整回填和服頁欄位，沿用既有日本和服背景、窗光、斜側鏡頭與 9:16 比例；未修改共用鎖臉、臉部幾何、真人骨架或負面核心。
+- `deepUKimonoCouture` 與 `floralCutworkWaistOverlay` 保留在日本和服頁，未加入其他主題的共用改造池；既有隨機 Layer 行為維持不變。
+- 上線前需通過 `check-static.mjs`、`check-ui-flows.mjs`、`reorder-dom-sections.mjs --check`、`validate-preset-refs.mjs`、`check-theme-classification.mjs`、`build-prompt-preview.mjs`、`audit-100x.mjs` 與 `git diff --check`。
+
 ## 2026-09-03 v4.58 四頁風格範例擴充回歸
 
 - 現代寫真新增 4 組完整模板；旅拍新增 2 組完整模板、H 車站環境人物構圖與車站夕陽逆光；Luxury Lifestyle 與雜誌棚拍各新增 1 組完整模板。

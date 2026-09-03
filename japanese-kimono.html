@@ -81,6 +81,7 @@
       <button class="card" type="button" data-template="taishoRomanCover"><div class="name">大正浪漫人物封面</div><div class="desc">和洋折衷、復古、雜誌封面</div></button>
       <button class="card" type="button" data-template="modernKimonoStudio"><div class="name">新式改良和服棚拍</div><div class="desc">保留帶結、現代比例、高級剪裁</div></button>
       <button class="card" type="button" data-template="kimonoHauteCouture"><div class="name">現代和服高訂廣告</div><div class="desc">高訂帶結、精品材質、商業大片</div></button>
+      <button class="card" type="button" data-template="ivoryGoldPinkUNeckCouture"><div class="name">象牙金粉深 U 高訂和服</div><div class="desc">象牙金粉、花卉鏤空、深 U 領口與町家窗光</div></button>
     </div>
     <div class="group-title">精品主視覺</div>
     <button class="card" type="button" id="kimonoPremiumPreset" style="width:100%;min-height:auto;margin-bottom:10px;background:linear-gradient(180deg,#17120D 0%,#211B12 100%);"><div class="name">隨機套用｜精品主視覺</div><div class="desc">從漆黑金箔與和紙墨白兩組和服高訂封面方向抽取完整設定</div></button>
@@ -112,6 +113,7 @@
       <label class="card"><input type="radio" name="composition" value="flowing kimono sleeves and fabric edges create a soft foreground frame while the face remains unobstructed"><div class="name">前景長袖框景</div><div class="desc">袖線形成柔和前景</div></label>
       <label class="card"><input type="radio" name="composition" value="full environmental portrait integrated into a machiya, garden or traditional Japanese interior with clear spatial layers"><div class="name">和風環境人像</div><div class="desc">人物與日本場景共同敘事</div></label>
       <label class="card"><input type="radio" name="composition" value="kimono detail-focused composition with collar overlap, obi construction, textile texture and refined craftsmanship as priorities"><div class="name">和服細節主題構圖</div><div class="desc">領口、帶結與織紋為重點</div></label>
+      <label class="card"><input type="radio" name="composition" value="kimono detail-focused composition with neckline, sleeve construction, obi structure and refined textile craftsmanship as priorities"><div class="name">高訂領口袖線構圖</div><div class="desc">領口、袖型、腰帶與刺繡細節為重點</div></label>
       <label class="card"><input type="radio" name="composition" value="kimono silhouette and sleeve movement remain visually prominent within the surrounding Japanese classical space"><div class="name">和服輪廓主題構圖</div><div class="desc">突出袖型、帶結與衣襬</div></label>
       <label class="card"><input type="radio" name="composition" value="wide composition with long kimono sleeves opening outward and the layered garment construction clearly visible"><div class="name">振袖展開構圖</div><div class="desc">展示長袖與服裝層次</div></label>
       <label class="card"><input type="radio" name="composition" value="composition with the kimono hem, obi ribbon and layered fabric creating a graceful lower-frame rhythm"><div class="name">衣襬流動構圖</div><div class="desc">突出衣襬、帶結與布料動勢</div></label>
@@ -149,6 +151,7 @@
       <label class="card"><input type="radio" name="garment" value="modernKimono"><div class="name">新式改良和服</div><div class="desc">保留領口與帶結、現代比例</div></label>
       <label class="card"><input type="radio" name="garment" value="kimonoPhotoCouture"><div class="name">和風寫真華服</div><div class="desc">層疊絲綢、袖線、上鏡輪廓</div></label>
       <label class="card"><input type="radio" name="garment" value="kimonoHauteCouture"><div class="name">現代和服高訂</div><div class="desc">帶結結構、精品材質、高訂大片</div></label>
+      <label class="card"><input type="radio" name="garment" value="ivoryGoldPinkCouture"><div class="name">象牙金粉改良和服</div><div class="desc">象牙白、淡金、柔粉與立體花卉高訂</div></label>
     </div>
     <label class="field">自訂服裝<input id="customGarment" type="text" placeholder="例如：藕粉色現代改良振袖"></label>
   </section>
@@ -175,6 +178,8 @@
       <label class="card"><input type="checkbox" name="materials" value="asanohaPattern"><div class="name">麻葉紋</div><div class="desc">幾何、清爽、現代和風</div></label>
       <label class="card"><input type="checkbox" name="materials" value="bambooPattern"><div class="name">竹葉紋</div><div class="desc">自然、清冷、季節感</div></label>
       <label class="card"><input type="checkbox" name="materials" value="lightObiGauze"><div class="name">輕紗帶結疊層</div><div class="desc">袖線、帶結與外層空氣感</div></label>
+      <label class="card"><input type="checkbox" name="materials" value="goldThreadFloralEmbroidery"><div class="name">金線立體花卉刺繡</div><div class="desc">金線、立體花朵與高訂表面層次</div></label>
+      <label class="card"><input type="checkbox" name="materials" value="floralLaceCutwork"><div class="name">花卉蕾絲鏤空</div><div class="desc">花卉蕾絲、裝飾鏤空與薄紗覆層</div></label>
     </div>
     <label class="field">自訂材質／紋樣<input id="customMaterial" type="text" placeholder="例如：櫻花友禪染與正絹絲綢"></label>
     <div class="group-title">04B｜日本飾品與手持物</div>
@@ -212,6 +217,7 @@
       <label class="card"><input type="radio" name="chestDetail" value="crossCollarDeepV"><div class="name">交領深 V 結構胸衣</div><div class="desc">交領與結構胸衣融合</div></label>
       <label class="card"><input type="radio" name="chestDetail" value="crossWrapDeepV"><div class="name">交叉綁帶深 V</div><div class="desc">交叉胸帶與深 V 領口</div></label>
       <label class="card"><input type="radio" name="chestDetail" value="openFrontDeepV"><div class="name">深 V 大開襟</div><div class="desc">交領大開襟的現代改良</div></label>
+      <label class="card"><input type="radio" name="chestDetail" value="deepUKimonoCouture"><div class="name">深 U 型高訂和服領口</div><div class="desc">深 U 圓弧領口、鎖骨與上胸線條</div></label>
       <div class="pose-group-label" style="grid-column:1/-1">和服襟領結構</div>
       <label class="card"><input type="radio" name="chestDetail" value="eriLayeredCollar"><div class="name">重疊襟領</div><div class="desc">和服多層襟領精準重疊</div></label>
       <label class="card"><input type="radio" name="chestDetail" value="haneriInsert"><div class="name">刺繡半襟</div><div class="desc">半襟沿原和領細緻露出</div></label>
@@ -224,6 +230,7 @@
       <label class="card"><input type="radio" name="waistSideDetail" value="wrapSideSlit"><div class="name">纏裙側開衩</div><div class="desc">wrap skirt with an elegant side slit</div></label>
       <label class="card"><input type="radio" name="waistSideDetail" value="highSideSlit"><div class="name">高衩開裙</div><div class="desc">high side slit skirt with controlled drape</div></label>
       <label class="card"><input type="radio" name="waistSideDetail" value="openSkirtPanel"><div class="name">裙擺敞開</div><div class="desc">open front skirt panel with flowing layers</div></label>
+      <label class="card"><input type="radio" name="waistSideDetail" value="floralCutworkWaistOverlay"><div class="name">花卉鏤空腰側覆層</div><div class="desc">花卉鏤空與薄紗層次，保留和服腰帶結構</div></label>
       <div class="pose-group-label" style="grid-column:1/-1">和服帶結構</div>
       <label class="card"><input type="radio" name="waistSideDetail" value="maruObiStructure"><div class="name">丸帶寬腰結</div><div class="desc">正式丸帶的寬版腰部結構</div></label>
       <label class="card"><input type="radio" name="waistSideDetail" value="obijimeKnot"><div class="name">帶締珠結</div><div class="desc">腰帶中央的裝飾帶締結</div></label>
@@ -271,6 +278,7 @@
       <label class="card"><input type="radio" name="pose" value="courtyardWalk"><div class="name">庭園緩步</div><div class="desc">衣襬與袖線有輕微動勢</div></label>
       <label class="card"><input type="radio" name="pose" value="liftHemWalk"><div class="name">輕提和服下襬</div><div class="desc">單手提起外層衣襬，保持自然步伐</div></label>
       <label class="card"><input type="radio" name="pose" value="sideLongLine"><div class="name">側身長線條</div><div class="desc">肩頸、腰帶與衣襬形成長線</div></label>
+      <label class="card"><input type="radio" name="pose" value="slightThreeQuarterGaze"><div class="name">略側身溫柔凝視</div><div class="desc">略微側身面向鏡頭，神情自然迷人</div></label>
       <label class="card"><input type="radio" name="pose" value="teaSeated"><div class="name">茶室坐姿</div><div class="desc">榻榻米茶室的安靜坐姿</div></label>
       <label class="card"><input type="radio" name="pose" value="teaCup"><div class="name">雙手捧茶碗</div><div class="desc">手指放鬆，呈現安靜生活感</div></label>
       <label class="card"><input type="radio" name="pose" value="scrollSeated"><div class="name">坐姿閱讀書卷</div><div class="desc">木桌、書卷與側面光線</div></label>
@@ -330,6 +338,7 @@
       <label class="card"><input type="radio" name="colorPalette" value="matchaPersimmonCream"><div class="name">搭配色｜抹茶茜紅乳白</div><div class="desc">庭園茶室、傳統色與溫潤材質</div></label>
       <label class="card"><input type="radio" name="colorPalette" value="wisteriaMoonGray"><div class="name">搭配色｜藤紫月白灰藍</div><div class="desc">柔霧花景、安靜冷調與優雅留白</div></label>
       <label class="card"><input type="radio" name="colorPalette" value="vermilionGoldCharcoal"><div class="name">搭配色｜朱漆古金炭灰</div><div class="desc">正裝華服、克制對比與高級屏風感</div></label>
+      <label class="card"><input type="radio" name="colorPalette" value="ivoryGoldSoftPink"><div class="name">搭配色｜象牙淡金柔粉</div><div class="desc">高訂和服、花卉刺繡與柔和窗光</div></label>
       <label class="card"><input type="radio" name="colorPalette" value="aiThemeScenePalette"><div class="name">AI 根據主題與場景判斷配色</div><div class="desc">自動選擇主色、輔色與克制點綴色</div></label>
     </div>
     <label class="field">指定配色<input id="colorNote" type="text" placeholder="例如：櫻粉、米白、少量古金"></label>
@@ -370,6 +379,7 @@
     <div class="grid grid-3" data-choice="framing">
       <label class="card"><input type="radio" name="framing" value="faceCloseup"><div class="name">臉部特寫</div><div class="desc">臉部與領口材質為主</div></label>
       <label class="card selected"><input type="radio" name="framing" value="halfBody" checked><div class="name">半身</div><div class="desc">妝容、肩線與服裝細節</div></label>
+      <label class="card"><input type="radio" name="framing" value="upperThighPortrait"><div class="name">大腿以上中近景</div><div class="desc">人物佔主要比例，保留領口、袖線與腰部結構</div></label>
       <label class="card"><input type="radio" name="framing" value="threeQuarter"><div class="name">四分之三身</div><div class="desc">人物與服裝比例平衡</div></label>
       <label class="card"><input type="radio" name="framing" value="fullBody"><div class="name">全身</div><div class="desc">完整呈現衣襬與袖型</div></label>
       <label class="card"><input type="radio" name="framing" value="environment"><div class="name">環境遠景</div><div class="desc">人物與場景共同敘事</div></label>
@@ -433,7 +443,9 @@ const materialData = {
   seigaihaPattern: { prompt: 'continuous Japanese seigaiha wave pattern woven with clean geometric rhythm', palette: 'indigo, unbleached white and muted blue' },
   asanohaPattern: { prompt: 'Japanese asanoha geometric pattern with crisp repeating structure and contemporary clarity', palette: 'deep blue, cream and pale gray' },
   bambooPattern: { prompt: 'slender Japanese bamboo leaf motif with restrained natural elegance and quiet seasonal detail', palette: 'bamboo green, rice white and warm beige' },
-  lightObiGauze: { prompt: 'light layered silk gauze around the obi and sleeve edges with airy refined movement', palette: 'mist white, pale lavender and soft blush' }
+  lightObiGauze: { prompt: 'light layered silk gauze around the obi and sleeve edges with airy refined movement', palette: 'mist white, pale lavender and soft blush' },
+  goldThreadFloralEmbroidery: { prompt: 'dimensional floral embroidery with fine gold-thread accents and restrained raised flower appliques', palette: 'pale gold, ivory and soft blush' },
+  floralLaceCutwork: { prompt: 'delicate floral lace and decorative cutwork layered over an opaque lining with controlled semi-sheer detail', palette: 'ivory, soft pink and warm gold' }
 };
 
 const accessoryData = {
@@ -464,7 +476,8 @@ const garmentData = {
   taishoRoman: 'Taisho Roman kimono styling, elegant kimono and hakama layering, subtle Western vintage accessories, refined early modern Japanese editorial mood',
   modernKimono: 'modern modified kimono, preserved wrap collar and obi structure, contemporary fitted proportions, refined wearable Japanese fashion design',
   kimonoPhotoCouture: 'Japanese-inspired portrait couture, layered silk and flowing sleeve movement, camera-ready silhouette, luxurious kimono beauty editorial styling',
-  kimonoHauteCouture: 'modern Japanese kimono haute couture, architectural obi construction, premium textile design, restrained traditional motifs, luxury fashion editorial styling'
+  kimonoHauteCouture: 'modern Japanese kimono haute couture, architectural obi construction, premium textile design, restrained traditional motifs, luxury fashion editorial styling',
+  ivoryGoldPinkCouture: 'modern Japanese kimono haute couture in ivory, pale gold and soft pink, preserved wrap-collar and obi structure, wide furisode sleeves, luxurious refined styling'
 };
 
 const styleData = {
@@ -534,6 +547,7 @@ const colorPaletteData = {
   matchaPersimmonCream: 'coordinated palette set of matcha green, persimmon red and warm cream with tea-room natural harmony',
   wisteriaMoonGray: 'coordinated palette set of wisteria purple, moon white and misty blue-gray with quiet seasonal elegance',
   vermilionGoldCharcoal: 'coordinated palette set of vermilion lacquer, antique gold and charcoal gray with restrained formal kimono contrast',
+  ivoryGoldSoftPink: 'coordinated palette set of warm ivory, pale gold and soft pink with refined Japanese couture harmony',
   aiThemeScenePalette: window.HB_CORE_PROMPT?.controls?.autoColor || 'AI theme-aware color selection based on the selected theme, garment, materials, lighting and background; choose one coherent dominant color, one supporting color and one restrained accent color while preserving cultural context, material readability and premium editorial harmony'
 };
 
@@ -549,6 +563,7 @@ const poseData = {
   courtyardWalk: 'captured during a slow graceful walk through a Japanese garden, subtle sleeve and hem movement',
   liftHemWalk: 'walking gracefully while lightly lifting the kimono hem with one hand, natural step and relaxed shoulders',
   sideLongLine: 'side-facing long-line pose with aligned neck, shoulder, obi and flowing kimono silhouette',
+  slightThreeQuarterGaze: 'standing in a slight three-quarter turn toward the camera with relaxed shoulders, a gentle gaze and naturally resting hands',
   teaSeated: 'seated calmly in a Japanese tea room with relaxed shoulders and natural hand placement',
   teaCup: 'holding a small Japanese tea bowl with both hands, relaxed fingers and a quiet natural moment',
   scrollSeated: 'seated beside a wooden desk while reading a traditional Japanese book, quiet thoughtful portrait moment',
@@ -607,6 +622,7 @@ const GARMENT_VARIATIONS = {
     crossCollarDeepV: 'cross-collar deep V neckline with a structured fitted bodice',
     crossWrapDeepV: 'cross-wrap lacing across the bodice, deep V-shaped neckline',
     openFrontDeepV: 'cross-collar deep V open-front robe',
+    deepUKimonoCouture: 'deep rounded U-shaped neckline integrated into a structured Japanese kimono couture bodice, visible collarbone and upper chest, fine gold-thread and floral-lace edging while preserving the wrap-collar and obi structure',
     eriLayeredCollar: 'precisely layered kimono eri collars',
     haneriInsert: 'an embroidered haneri insert following the kimono collar',
     dateEriLayer: 'a contrasting date-eri collar layer',
@@ -617,6 +633,7 @@ const GARMENT_VARIATIONS = {
     wrapSideSlit: 'wrap skirt with an elegant side slit and controlled layered drape',
     highSideSlit: 'high side slit skirt with controlled drape and preserved Japanese garment structure',
     openSkirtPanel: 'open front skirt panel with flowing layered fabric and a clear traditional Japanese wrap logic',
+    floralCutworkWaistOverlay: 'decorative floral cutwork and a controlled semi-sheer waist-side overlay over an opaque lining, preserving the Japanese obi structure',
     maruObiStructure: 'a formal broad maru-obi arrangement',
     obijimeKnot: 'a decorative obijime cord knot centered over the obi',
     obiageFold: 'a softly folded obiage accent above the obi',
@@ -644,6 +661,7 @@ const GARMENT_DETAIL_RANDOM_POOLS = {
 const framingData = {
   faceCloseup: 'face close-up framing with collar and textile texture visible',
   halfBody: 'half-body fashion portrait framing',
+  upperThighPortrait: 'mid-thigh-up fashion portrait framing, subject fills most of the vertical frame while the neckline, sleeves and obi remain clearly visible',
   threeQuarter: 'three-quarter body framing showing garment construction and natural pose',
   fullBody: 'full-body fashion portrait framing showing the complete sleeve and hem silhouette',
   environment: 'wide environmental portrait framing with the subject integrated into the classical scene'
@@ -686,6 +704,7 @@ const themeTemplates = {
   taishoRomanCover: { style: 'fashionEditorial', composition: 'asymmetrical Japanese editorial composition with the subject placed to one side and clean surrounding space', garment: 'taishoRoman', materials: ['yuzenDye', 'asanohaPattern'], accessory: 'pearlComb', chestDetail: 'none', waistSideDetail: 'none', shoulderDetail: 'none', bodyShape: 'fashion_tall', pose: 'sideLongLine', lighting: 'japaneseSideLight', color: 'smokeRose', background: 'modernJapaneseStudio', framing: 'threeQuarter', camera: 'sideProfile', ratio: '4:5' },
   modernKimonoStudio: { style: 'modernCouture', composition: 'kimono silhouette and sleeve movement remain visually prominent within the surrounding Japanese classical space', garment: 'modernKimono', materials: ['rinzuSilk', 'seigaihaPattern'], accessory: 'obiJime', chestDetail: 'modernAsymKimonoCollar', waistSideDetail: 'sideTaikoObi', shoulderDetail: 'modernKimonoCapelet', bodyShape: 'japanese_elegance', pose: 'sideLongLine', lighting: 'kimonoStudio', color: 'indigoMuted', background: 'modernJapaneseStudio', framing: 'threeQuarter', camera: 'eyeLevelCover', ratio: '4:5' },
   kimonoHauteCouture: { style: 'modernCouture', composition: 'kimono detail-focused composition with collar overlap, obi construction, textile texture and refined craftsmanship as priorities', garment: 'kimonoHauteCouture', materials: ['nishijinBrocade', 'lightObiGauze'], accessory: 'kanzashi', chestDetail: 'waistDeepV', waistSideDetail: 'openSkirtPanel', shoulderDetail: 'halter', bodyShape: 'fashion_tall', pose: 'sleeveHold', lighting: 'kimonoStudio', color: 'goldScreenBlack', background: 'plainJapaneseStudio', framing: 'halfBody', camera: 'threeQuarterSide', ratio: '4:5' },
+  ivoryGoldPinkUNeckCouture: { style: 'modernCouture', composition: 'kimono detail-focused composition with neckline, sleeve construction, obi structure and refined textile craftsmanship as priorities', garment: 'ivoryGoldPinkCouture', materials: ['goldThreadFloralEmbroidery', 'floralLaceCutwork'], accessory: 'pearlComb', chestDetail: 'deepUKimonoCouture', waistSideDetail: 'floralCutworkWaistOverlay', shoulderDetail: 'sheerKimonoSleeve', bodyShape: 'original', pose: 'slightThreeQuarterGaze', lighting: 'shojiSoft', color: 'ivoryGoldSoftPink', background: 'machiyaInterior', framing: 'upperThighPortrait', camera: 'threeQuarterSide', ratio: '9:16' },
   kimonoBlackGoldCouture: { style: 'modernCouture', composition: 'kimono detail-focused composition with collar overlap, obi construction, textile texture and refined craftsmanship as priorities', garment: 'kimonoHauteCouture', materials: ['nishijinBrocade', 'goldLeafKimono'], accessory: 'kanzashi', chestDetail: 'waistDeepV', waistSideDetail: 'sideTaikoObi', shoulderDetail: 'halter', bodyShape: 'fashion_tall', pose: 'sleeveHold', lighting: 'goldScreenNegativeFill', color: 'goldScreenBlack', background: 'blackGoldScreenStudio', framing: 'halfBody', camera: 'threeQuarterSide', ratio: '4:5' },
   kimonoWashiArchive: { style: 'fashionEditorial', composition: 'kimono detail-focused composition with collar overlap, obi construction, textile texture and refined craftsmanship as priorities', garment: 'taishoRoman', materials: ['rinzuSilk', 'seigaihaPattern'], accessory: 'obiJime', chestDetail: 'eriLayeredCollar', waistSideDetail: 'obijimeKnot', shoulderDetail: 'modernKimonoCapelet', bodyShape: 'japanese_elegance', pose: 'windowTurn', lighting: 'washiGallerySideLight', color: 'indigoMuted', background: 'washiGalleryStudio', framing: 'threeQuarter', camera: 'beautyCloseUp', ratio: '4:5' }
 };

@@ -4,7 +4,9 @@
 
 ## 版本
 
-v4.58 起持續迭代中；完整逐日開發記錄見 [docs/development-log.md](docs/development-log.md)。
+v4.59 起持續迭代中；完整逐日開發記錄見 [docs/development-log.md](docs/development-log.md)。
+
+v4.59 為日本和服頁新增「象牙金粉深 U 高訂和服」完整一鍵模板，補入改良和服、花卉刺繡、蕾絲鏤空、深 U 領口、腰側覆層、大腿以上框景與側身姿勢；共用鎖臉核心維持不變。
 
 v4.58 依風格範例擴充現代寫真、旅拍、Luxury Lifestyle 與雜誌棚拍，新增 8 組完整一鍵模板及對應頁面資料；共用鎖臉核心維持不變。
 
