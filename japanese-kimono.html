@@ -85,6 +85,12 @@
       <button class="card" type="button" data-template="kimonoHauteCouture"><div class="name">現代和服高訂廣告</div><div class="desc">高訂帶結、精品材質、商業大片</div></button>
       <button class="card" type="button" data-template="ivoryGoldPinkUNeckCouture"><div class="name">象牙金粉深 U 高訂和服</div><div class="desc">象牙金粉、花卉鏤空、深 U 領口與町家窗光</div></button>
       <button class="card" type="button" data-template="crimsonGoldBlossomProfile"><div class="name">絳紅金織花枝側影</div><div class="desc">絳紅黑金和服、華麗髮飾、花枝與暖色花景側身肖像</div></button>
+      <button class="card" type="button" data-template="snowLanternKimonoPortrait"><div class="name">雪岸提燈冬日和服</div><div class="desc">雪景水岸、暖提燈、冬日層疊與藍調光</div></button>
+      <button class="card" type="button" data-template="hydrangeaBlueYukata"><div class="name">藍紫繡球花浴衣</div><div class="desc">繡球花園、粉彩浴衣、花籃與柔霧日光</div></button>
+      <button class="card" type="button" data-template="shrineWhiteYukata"><div class="name">神社白色浴衣日光</div><div class="desc">白色浴衣、神社手水、清透日光與自然互動</div></button>
+      <button class="card" type="button" data-template="teaShopWhiteYukata"><div class="name">茶屋門口白浴衣</div><div class="desc">木造茶屋、巾著、日常站姿與生活感</div></button>
+      <button class="card" type="button" data-template="iceCreamPastelYukata"><div class="name">祭典冰淇淋粉彩浴衣</div><div class="desc">粉彩浴衣、輕快手持物與明亮祭典氛圍</div></button>
+      <button class="card" type="button" data-template="whiteUmbrellaGarden"><div class="name">花園白傘和服</div><div class="desc">白傘、花園、斜側站姿與柔和季節光</div></button>
     </div>
     <div class="group-title">精品主視覺</div>
     <button class="card" type="button" id="kimonoPremiumPreset" style="width:100%;min-height:auto;margin-bottom:10px;background:linear-gradient(180deg,#17120D 0%,#211B12 100%);"><div class="name">隨機套用｜精品主視覺</div><div class="desc">從漆黑金箔與和紙墨白兩組和服高訂封面方向抽取完整設定</div></button>
@@ -155,6 +161,9 @@
       <label class="card"><input type="radio" name="garment" value="kimonoPhotoCouture"><div class="name">和風寫真華服</div><div class="desc">層疊絲綢、袖線、上鏡輪廓</div></label>
       <label class="card"><input type="radio" name="garment" value="kimonoHauteCouture"><div class="name">現代和服高訂</div><div class="desc">帶結結構、精品材質、高訂大片</div></label>
       <label class="card"><input type="radio" name="garment" value="ivoryGoldPinkCouture"><div class="name">象牙金粉改良和服</div><div class="desc">象牙白、淡金、柔粉與立體花卉高訂</div></label>
+      <label class="card"><input type="radio" name="garment" value="pastelHydrangeaYukata"><div class="name">藍紫繡球花浴衣</div><div class="desc">粉彩浴衣、繡球花紋與夏日花園</div></label>
+      <label class="card"><input type="radio" name="garment" value="winterLanternKimono"><div class="name">雪夜提燈層疊和服</div><div class="desc">冬日層次、雪景、暖色提燈</div></label>
+      <label class="card"><input type="radio" name="garment" value="modernWhiteYukata"><div class="name">現代白色浴衣</div><div class="desc">白色簡潔、神社日光與自然生活感</div></label>
     </div>
     <label class="field">自訂服裝<input id="customGarment" type="text" placeholder="例如：藕粉色現代改良振袖"></label>
   </section>
@@ -183,6 +192,7 @@
       <label class="card"><input type="checkbox" name="materials" value="lightObiGauze"><div class="name">輕紗帶結疊層</div><div class="desc">袖線、帶結與外層空氣感</div></label>
       <label class="card"><input type="checkbox" name="materials" value="goldThreadFloralEmbroidery"><div class="name">金線立體花卉刺繡</div><div class="desc">金線、立體花朵與高訂表面層次</div></label>
       <label class="card"><input type="checkbox" name="materials" value="floralLaceCutwork"><div class="name">花卉蕾絲鏤空</div><div class="desc">花卉蕾絲、裝飾鏤空與薄紗覆層</div></label>
+      <label class="card"><input type="checkbox" name="materials" value="hydrangeaPattern"><div class="name">藍紫繡球花紋</div><div class="desc">夏日花園、藍紫粉彩與季節紋樣</div></label>
     </div>
     <label class="field">自訂材質／紋樣<input id="customMaterial" type="text" placeholder="例如：櫻花友禪染與正絹絲綢"></label>
     <div class="group-title">04B｜日本飾品與手持物</div>
@@ -198,6 +208,8 @@
       <label class="card"><input type="radio" name="accessory" value="sensu"><div class="name">折扇</div><div class="desc">端莊手持物與姿勢焦點</div></label>
       <label class="card"><input type="radio" name="accessory" value="wagasa"><div class="name">和傘</div><div class="desc">雨景、庭園與季節構圖</div></label>
       <label class="card"><input type="radio" name="accessory" value="roundFan"><div class="name">手持團扇</div><div class="desc">夏日浴衣與柔和生活感</div></label>
+      <label class="card"><input type="radio" name="accessory" value="shrinePurificationLadle"><div class="name">神社手水柄杓</div><div class="desc">神社日常互動，手部自然且不遮臉</div></label>
+      <label class="card"><input type="radio" name="accessory" value="smallFestivalIceCream"><div class="name">祭典冰淇淋</div><div class="desc">輕快浴衣生活感，無品牌文字</div></label>
     </div>
   </section>
 
@@ -292,6 +304,11 @@
       <label class="card"><input type="radio" name="pose" value="flowerBranch"><div class="name">手持季節花枝</div><div class="desc">櫻花、梅枝或紅葉的低調點綴</div></label>
       <label class="card"><input type="radio" name="pose" value="railingGaze"><div class="name">緣側遠望</div><div class="desc">手扶欄杆，望向日式庭園</div></label>
       <label class="card"><input type="radio" name="pose" value="formalKneel"><div class="name">端莊正座</div><div class="desc">安靜端坐，保持自然骨架</div></label>
+      <label class="card"><input type="radio" name="pose" value="seatedLanternWaterfront"><div class="name">雪岸提燈坐姿</div><div class="desc">雪景水岸坐姿，衣襬有支撐、暖燈作次要層次</div></label>
+      <label class="card"><input type="radio" name="pose" value="shrinePurification"><div class="name">神社手水互動</div><div class="desc">手持柄杓，自然站姿，臉部保持清楚</div></label>
+      <label class="card"><input type="radio" name="pose" value="holdIceCream"><div class="name">浴衣手持冰淇淋</div><div class="desc">輕鬆祭典互動，手指與手臂保持自然</div></label>
+      <label class="card"><input type="radio" name="pose" value="holdKinchaku"><div class="name">茶屋門口巾著站姿</div><div class="desc">巾著垂在身側，木造店面建立生活感</div></label>
+      <label class="card"><input type="radio" name="pose" value="umbrellaThreeQuarter"><div class="name">花園白傘斜側站姿</div><div class="desc">白傘不遮臉，袖線與庭園形成完整輪廓</div></label>
     </div>
     <label class="field">自訂姿勢<input id="customPose" type="text" placeholder="例如：手持和傘在緣側回眸"></label>
   </section>
@@ -322,6 +339,9 @@
       <label class="card"><input type="radio" name="lighting" value="japaneseSideLight"><div class="name">和風古典側光</div><div class="desc">克制明暗與立體服裝質感</div></label>
       <label class="card"><input type="radio" name="lighting" value="goldScreenNegativeFill"><div class="name">黑金屏風負補光</div><div class="desc">深色分離、金箔反射與高訂層次</div></label>
       <label class="card"><input type="radio" name="lighting" value="washiGallerySideLight"><div class="name">和紙畫廊側光</div><div class="desc">墨白背景、絲綢紋理與安靜陰影</div></label>
+      <label class="card"><input type="radio" name="lighting" value="snowLanternBlueHour"><div class="name">雪夜提燈藍調光</div><div class="desc">冷藍雪光與暖提燈反射平衡</div></label>
+      <label class="card"><input type="radio" name="lighting" value="hydrangeaGardenSoft"><div class="name">繡球花園柔霧光</div><div class="desc">藍紫花色反射、柔和膚色與低對比</div></label>
+      <label class="card"><input type="radio" name="lighting" value="shrineDaylight"><div class="name">神社清透日光</div><div class="desc">石材反光、自然膚色與和服細節</div></label>
     </div>
     <div class="group-title">09B｜色彩系統</div>
     <p class="hint">單選一組主色或搭配色；AI 選項會依主題、服裝、光線與背景判斷，自訂配色填寫後優先。</p>
@@ -372,6 +392,10 @@
       <label class="card"><input type="radio" name="background" value="pureWhiteBackground"><div class="name">無背景純白色</div><div class="desc">純白棚拍、服裝展示、無環境干擾</div></label>
       <label class="card"><input type="radio" name="background" value="blackGoldScreenStudio"><div class="name">漆黑金箔屏風棚</div><div class="desc">黑色漆面、金箔屏風與高訂分離</div></label>
       <label class="card"><input type="radio" name="background" value="washiGalleryStudio"><div class="name">和紙墨白典藏畫廊</div><div class="desc">和紙纖維、墨白牆面與檔案感</div></label>
+      <label class="card"><input type="radio" name="background" value="snowLanternWaterfront"><div class="name">雪景提燈水岸</div><div class="desc">雪夜、暗木、暖燈倒影與季節深度</div></label>
+      <label class="card"><input type="radio" name="background" value="hydrangeaShrineGarden"><div class="name">繡球花神社庭院</div><div class="desc">藍紫花叢、石徑、木造神社與柔和景深</div></label>
+      <label class="card"><input type="radio" name="background" value="shrinePurificationFountain"><div class="name">神社手水場</div><div class="desc">石水盆、木造屋頂與清爽庭院</div></label>
+      <label class="card"><input type="radio" name="background" value="traditionalTeaShopStreet"><div class="name">傳統茶屋門口</div><div class="desc">木造店面、門簾與安靜街道生活感</div></label>
     </div>
     <label class="field">自訂背景<input id="customBackground" type="text" placeholder="例如：雨後京都町家緣側"></label>
   </section>
@@ -448,7 +472,8 @@ const materialData = {
   bambooPattern: { prompt: 'slender Japanese bamboo leaf motif with restrained natural elegance and quiet seasonal detail', palette: 'bamboo green, rice white and warm beige' },
   lightObiGauze: { prompt: 'light layered silk gauze around the obi and sleeve edges with airy refined movement', palette: 'mist white, pale lavender and soft blush' },
   goldThreadFloralEmbroidery: { prompt: 'dimensional floral embroidery with fine gold-thread accents and restrained raised flower appliques', palette: 'pale gold, ivory and soft blush' },
-  floralLaceCutwork: { prompt: 'delicate floral lace and decorative cutwork layered over an opaque lining with controlled semi-sheer detail', palette: 'ivory, soft pink and warm gold' }
+  floralLaceCutwork: { prompt: 'delicate floral lace and decorative cutwork layered over an opaque lining with controlled semi-sheer detail', palette: 'ivory, soft pink and warm gold' },
+  hydrangeaPattern: { prompt: 'delicate blue and lavender hydrangea motif printed across lightweight summer kimono fabric with restrained seasonal spacing', palette: 'hydrangea blue, soft lavender and unbleached white' }
 };
 
 const accessoryData = {
@@ -461,7 +486,9 @@ const accessoryData = {
   kinchaku: 'a small traditional kinchaku drawstring bag held naturally at the side',
   sensu: 'a refined Japanese folding fan held beside the torso without covering the face',
   wagasa: 'a traditional Japanese wagasa umbrella integrated into the pose and seasonal setting',
-  roundFan: 'a small Japanese round fan held naturally near the torso without covering the face'
+  roundFan: 'a small Japanese round fan held naturally near the torso without covering the face',
+  shrinePurificationLadle: 'a traditional shrine purification ladle held naturally at a stone water basin, kept secondary to the subject',
+  smallFestivalIceCream: 'a small unbranded soft-serve ice cream held naturally beside the torso as a light festival detail'
 };
 
 const garmentData = {
@@ -480,7 +507,10 @@ const garmentData = {
   modernKimono: 'modern modified kimono, preserved wrap collar and obi structure, contemporary fitted proportions, refined wearable Japanese fashion design',
   kimonoPhotoCouture: 'Japanese-inspired portrait couture, layered silk and flowing sleeve movement, camera-ready silhouette, luxurious kimono beauty editorial styling',
   kimonoHauteCouture: 'modern Japanese kimono haute couture, architectural obi construction, premium textile design, restrained traditional motifs, luxury fashion editorial styling',
-  ivoryGoldPinkCouture: 'modern Japanese kimono haute couture in ivory, pale gold and soft pink, preserved wrap-collar and obi structure, wide furisode sleeves, luxurious refined styling'
+  ivoryGoldPinkCouture: 'modern Japanese kimono haute couture in ivory, pale gold and soft pink, preserved wrap-collar and obi structure, wide furisode sleeves, luxurious refined styling',
+  pastelHydrangeaYukata: 'light pastel summer yukata with blue-lavender hydrangea motifs, a simple coordinated obi and a fresh wearable Japanese garden silhouette',
+  winterLanternKimono: 'layered winter kimono with a pale patterned outer layer, warm obi, practical seasonal texture and refined Japanese street portrait styling',
+  modernWhiteYukata: 'clean white modern yukata with restrained floral detail, soft obi and a natural wearable silhouette for a quiet shrine portrait'
 };
 
 const styleData = {
@@ -514,7 +544,11 @@ const backgroundData = {
   plainJapaneseStudio: 'a minimal Japanese photography studio with a clean neutral backdrop and premium fashion space',
   pureWhiteBackground: 'pure seamless white background, no visible environment, no architecture, no props, evenly lit clean white studio backdrop',
   blackGoldScreenStudio: 'a restrained black-gold Japanese screen studio with dark lacquer planes and controlled ceremonial depth',
-  washiGalleryStudio: 'a quiet washi-paper archive gallery with pale ink walls, subtle paper texture and minimal editorial space'
+  washiGalleryStudio: 'a quiet washi-paper archive gallery with pale ink walls, subtle paper texture and minimal editorial space',
+  snowLanternWaterfront: 'snowy Japanese waterfront at dusk with warm lantern reflections, dark timber and layered winter depth',
+  hydrangeaShrineGarden: 'quiet Japanese shrine garden filled with blue and lavender hydrangeas, stone path, timber architecture and soft seasonal depth',
+  shrinePurificationFountain: 'traditional Japanese shrine purification fountain with stone basin, timber roof and clear courtyard depth',
+  traditionalTeaShopStreet: 'quiet traditional Japanese tea shop frontage with timber, noren-style fabric and restrained street depth'
 };
 
 const lightingData = {
@@ -531,7 +565,10 @@ const lightingData = {
   sakuraBacklight: 'soft cherry-blossom backlight with luminous edges around sleeves and hair while the face remains evenly exposed',
   japaneseSideLight: 'classical Japanese side light with controlled facial modeling and restrained textile contrast',
   goldScreenNegativeFill: 'directional warm light on a black-gold screen with controlled negative fill, deep tonal separation and refined obi highlights',
-  washiGallerySideLight: 'quiet side light across a washi gallery backdrop, soft charcoal shadows, restrained contrast and precise silk texture'
+  washiGallerySideLight: 'quiet side light across a washi gallery backdrop, soft charcoal shadows, restrained contrast and precise silk texture',
+  snowLanternBlueHour: 'cool blue-hour snow light with warm lantern reflections on the kimono, balanced face exposure and readable textile texture',
+  hydrangeaGardenSoft: 'soft overcast garden light with cool blue floral bounce, gentle face exposure and quiet pastel contrast',
+  shrineDaylight: 'clear diffused shrine daylight with pale stone bounce, natural skin exposure and controlled kimono highlights'
 };
 
 const colorPaletteData = {
@@ -576,7 +613,12 @@ const poseData = {
   raiseSleeve: 'raising one furisode sleeve gracefully to display its construction, natural shoulder and elbow alignment',
   flowerBranch: 'holding a cherry blossom, plum branch or autumn maple branch beside the body, gentle seasonal gesture',
   railingGaze: 'standing beside an engawa railing and gazing into the Japanese garden with natural posture',
-  formalKneel: 'formal seiza sitting pose with aligned spine, relaxed shoulders and dignified stillness'
+  formalKneel: 'formal seiza sitting pose with aligned spine, relaxed shoulders and dignified stillness',
+  seatedLanternWaterfront: 'seated securely beside a snowy Japanese waterfront with hands resting naturally and the kimono hem supported by the ground',
+  shrinePurification: 'standing at a shrine purification fountain while holding the ladle naturally, face unobstructed and shoulders relaxed',
+  holdIceCream: 'holding a small soft-serve ice cream beside the torso with a relaxed festival expression and stable posture',
+  holdKinchaku: 'standing outside a traditional tea shop with a small kinchaku bag held at the side, natural weight balance and gentle gaze',
+  umbrellaThreeQuarter: 'standing in a Japanese garden while holding a white wagasa, turning three-quarter toward the camera with natural sleeve drape'
 };
 
 const BODY_SHAPES = {
@@ -710,7 +752,13 @@ const themeTemplates = {
   ivoryGoldPinkUNeckCouture: { style: 'modernCouture', composition: 'kimono detail-focused composition with neckline, sleeve construction, obi structure and refined textile craftsmanship as priorities', garment: 'ivoryGoldPinkCouture', materials: ['goldThreadFloralEmbroidery', 'floralLaceCutwork'], accessory: 'pearlComb', chestDetail: 'deepUKimonoCouture', waistSideDetail: 'floralCutworkWaistOverlay', shoulderDetail: 'sheerKimonoSleeve', bodyShape: 'original', pose: 'slightThreeQuarterGaze', lighting: 'shojiSoft', color: 'ivoryGoldSoftPink', background: 'machiyaInterior', framing: 'upperThighPortrait', camera: 'threeQuarterSide', ratio: '9:16' },
   kimonoBlackGoldCouture: { style: 'modernCouture', composition: 'kimono detail-focused composition with collar overlap, obi construction, textile texture and refined craftsmanship as priorities', garment: 'kimonoHauteCouture', materials: ['nishijinBrocade', 'goldLeafKimono'], accessory: 'kanzashi', chestDetail: 'waistDeepV', waistSideDetail: 'sideTaikoObi', shoulderDetail: 'halter', bodyShape: 'fashion_tall', pose: 'sleeveHold', lighting: 'goldScreenNegativeFill', color: 'goldScreenBlack', background: 'blackGoldScreenStudio', framing: 'halfBody', camera: 'threeQuarterSide', ratio: '4:5' },
   kimonoWashiArchive: { style: 'fashionEditorial', composition: 'kimono detail-focused composition with collar overlap, obi construction, textile texture and refined craftsmanship as priorities', garment: 'taishoRoman', materials: ['rinzuSilk', 'seigaihaPattern'], accessory: 'obiJime', chestDetail: 'eriLayeredCollar', waistSideDetail: 'obijimeKnot', shoulderDetail: 'modernKimonoCapelet', bodyShape: 'japanese_elegance', pose: 'windowTurn', lighting: 'washiGallerySideLight', color: 'indigoMuted', background: 'washiGalleryStudio', framing: 'threeQuarter', camera: 'beautyCloseUp', ratio: '4:5' },
-  crimsonGoldBlossomProfile: { style: 'courtLuxury', composition: 'kimono detail-focused composition with collar overlap, obi construction, textile texture and refined craftsmanship as priorities', garment: 'colorUchikake', materials: ['nishijinBrocade', 'goldLeafKimono'], accessory: 'kanzashi', chestDetail: 'none', waistSideDetail: 'maruObiStructure', shoulderDetail: 'furisodeSleeveLine', bodyShape: 'original', pose: 'flowerBranch', lighting: 'lanternWarm', color: 'goldCrimson', background: 'pondGarden', framing: 'threeQuarter', camera: 'sideProfile', ratio: '4:5' }
+  crimsonGoldBlossomProfile: { style: 'courtLuxury', composition: 'kimono detail-focused composition with collar overlap, obi construction, textile texture and refined craftsmanship as priorities', garment: 'colorUchikake', materials: ['nishijinBrocade', 'goldLeafKimono'], accessory: 'kanzashi', chestDetail: 'none', waistSideDetail: 'maruObiStructure', shoulderDetail: 'furisodeSleeveLine', bodyShape: 'original', pose: 'flowerBranch', lighting: 'lanternWarm', color: 'goldCrimson', background: 'pondGarden', framing: 'threeQuarter', camera: 'sideProfile', ratio: '4:5' },
+  snowLanternKimonoPortrait: { style: 'culturePortrait', composition: 'full environmental portrait integrated into a machiya, garden or traditional Japanese interior with clear spatial layers', garment: 'winterLanternKimono', materials: ['rinzuSilk', 'plumPattern'], accessory: 'kinchaku', chestDetail: 'none', waistSideDetail: 'obijimeKnot', shoulderDetail: 'haoriLayer', bodyShape: 'original', pose: 'seatedLanternWaterfront', lighting: 'snowLanternBlueHour', color: 'plumSnow', background: 'snowLanternWaterfront', framing: 'threeQuarter', camera: 'distantHero', ratio: '2:3' },
+  hydrangeaBlueYukata: { style: 'culturePortrait', composition: 'foreground seasonal branch framing with the face and kimono remaining clearly unobstructed', garment: 'pastelHydrangeaYukata', materials: ['chirimenCrepe', 'hydrangeaPattern'], accessory: 'kinchaku', chestDetail: 'none', waistSideDetail: 'obijimeKnot', shoulderDetail: 'none', bodyShape: 'original', pose: 'holdKinchaku', lighting: 'hydrangeaGardenSoft', color: 'aiBlueWashiIvory', background: 'hydrangeaShrineGarden', framing: 'fullBody', camera: 'threeQuarterSide', ratio: '2:3' },
+  shrineWhiteYukata: { style: 'classicalPortrait', composition: 'symmetrical composition with shoji panels, garden lines and balanced ceremonial order', garment: 'modernWhiteYukata', materials: ['plainSilk', 'sakuraPattern'], accessory: 'shrinePurificationLadle', chestDetail: 'none', waistSideDetail: 'none', shoulderDetail: 'none', bodyShape: 'original', pose: 'shrinePurification', lighting: 'shrineDaylight', color: 'sakuraIvory', background: 'shrinePurificationFountain', framing: 'threeQuarter', camera: 'eyeLevelCover', ratio: '4:5' },
+  teaShopWhiteYukata: { style: 'culturePortrait', composition: 'traditional Japanese doorway framing the subject with clear foreground, midground and background depth', garment: 'modernWhiteYukata', materials: ['plainSilk', 'asanohaPattern'], accessory: 'kinchaku', chestDetail: 'none', waistSideDetail: 'none', shoulderDetail: 'none', bodyShape: 'original', pose: 'holdKinchaku', lighting: 'shrineDaylight', color: 'indigoIvory', background: 'traditionalTeaShopStreet', framing: 'threeQuarter', camera: 'threeQuarterSide', ratio: '2:3' },
+  iceCreamPastelYukata: { style: 'culturePortrait', composition: 'asymmetrical Japanese editorial composition with the subject placed to one side and clean surrounding space', garment: 'pastelHydrangeaYukata', materials: ['chirimenCrepe', 'sakuraPattern'], accessory: 'smallFestivalIceCream', chestDetail: 'none', waistSideDetail: 'none', shoulderDetail: 'none', bodyShape: 'original', pose: 'holdIceCream', lighting: 'morningGarden', color: 'sakuraIvory', background: 'lanternStreet', framing: 'threeQuarter', camera: 'eyeLevelCover', ratio: '4:5' },
+  whiteUmbrellaGarden: { style: 'fashionEditorial', composition: 'full environmental portrait integrated into a machiya, garden or traditional Japanese interior with clear spatial layers', garment: 'summerYukata', materials: ['plainSilk', 'bambooPattern'], accessory: 'wagasa', chestDetail: 'none', waistSideDetail: 'none', shoulderDetail: 'none', bodyShape: 'japanese_elegance', pose: 'umbrellaThreeQuarter', lighting: 'morningGarden', color: 'mossCream', background: 'pondGarden', framing: 'fullBody', camera: 'threeQuarterSide', ratio: '2:3' }
 };
 
 function selected(name){

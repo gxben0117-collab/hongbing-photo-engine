@@ -1,5 +1,12 @@
 # UI 與咒語回歸檢查
 
+## 2026-09-04 v4.70 第五批風格範例回歸
+
+- 49 張來源圖片完成唯一 primary owner 分類；現代寫真、中式古典、西式婚紗、中式婚嫁、花卉甜美與日本和服共新增 25 組完整一鍵模板。
+- 新增模板的服裝、材質／紋樣、配件、姿勢、互動、背景、光影與色彩資料均有實際 UI 控制與生成引用；幻想、動漫真人與雜誌素材維持 record-only。
+- `check-style-reference-batch-2026-09-04-fifth.mjs`、`check-static.mjs`、`check-ui-flows.mjs`、`validate-preset-refs.mjs`、`check-theme-classification.mjs`、`reorder-dom-sections.mjs --check`、`build-prompt-preview.mjs`、`audit-100x.mjs 100` 與 `git diff --check` 全部通過。
+- `assets/core-prompt.js` 與共用身份鎖定、臉部幾何、真人骨架及負面核心未修改；來源圖片與私有提示詞沒有進入網站。
+
 ## 2026-09-04 v4.69 全站工具頁流程一致性回歸
 
 - 23 個正式工具頁均檢查一鍵模板、生成完整咒語、輸出區與一鍵複製流程。
