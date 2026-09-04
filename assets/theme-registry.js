@@ -45,6 +45,15 @@
       allowed: ['居家生活、自然光、窗影、人物互動、現代時裝肖像與完整作品概念', '城市建築、精品街拍與果園前景互動'],
       forbidden: ['把 Luxury Lifestyle 的住宅品牌敘事強制套到所有模板', '旅遊地點主導', '奇幻、仙俠或動漫世界觀']
     },
+    'extreme-sports.html': {
+      label: '極限運動高速攝影',
+      family: 'extremeSports',
+      productionMode: 'referencePortrait',
+      primaryIntent: '以衝浪、滑雪、滑板與酷跑的高速動作瞬間建立人物運動寫真',
+      owns: ['衝浪', '滑雪', '滑板', '酷跑', '高速凝結', '器材接觸', '水花與雪霧', '城市障礙物', '戶外動態攝影'],
+      allowed: ['運動品牌廣告、高速動作紀實、器材與地形互動、低角度追拍與瞬間凝結'],
+      forbidden: ['重機賽車與遮臉頭盔主題', '把生活方式或婚紗服裝混入運動裝備', '奇幻或仙俠世界觀']
+    },
     'doll.html': {
       label: '公仔系列',
       family: 'dollTransformation',

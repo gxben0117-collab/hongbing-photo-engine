@@ -1,5 +1,20 @@
 # UI 與咒語回歸檢查
 
+## 2026-09-04 v4.67 極限運動頁與發布前全站驗收
+
+- `extreme-sports.html` 已接入首頁、主題 registry、正式頁面清單與返回工具總覽；四類運動均有實際 UI 選項與完整一鍵模板。
+- 極限運動 Prompt 包含高速快門凝結、單一決定性動作、器材／地形接觸、環境粒子與運動方向一致性；未加入重機賽車或遮臉頭盔主題。
+- `magazine.html` 一鍵模板與隨機套用會沿用共用生成結果定位流程，生成後可直接看到完整咒語並按一鍵複製。
+- 發布前驗證：`check-static.mjs`、`check-ui-flows.mjs`、`validate-preset-refs.mjs`、`check-theme-classification.mjs`、`reorder-dom-sections.mjs --check`、三批風格素材檢查、`build-prompt-preview.mjs`、`audit-100x.mjs 100` 與 `git diff --check` 全部通過。
+
+## 2026-09-04 v4.66 全站實際 Prompt 組裝回歸
+
+- 針對 22 個正式工具頁檢查實際生成組裝；2,200 組隨機組合全部通過，沒有 `undefined`、`NaN`、空白 Prompt 區段、身份鎖定缺失、相鄰重複行或禁用角色名。
+- 雜誌頁 `half_body`／`full_body` 構圖值已與 `FRAMING_RATIOS` 對齊；「白色毛料椅動感時裝」實際輸出包含全身構圖、毛料椅場景、白 T、挺版淺藍丹寧、牛仔短褲、霧黑尖頭長靴、銀色矩形扣與菱格紋肩包。
+- 旅拍與雜誌服裝邏輯區不再重複嵌入完整 `themeText`；主題敘事仍保留在主題區，服裝、姿勢、背景、光線與鏡頭仍由各自正式欄位輸出。
+- 白色毛料椅模板本地實際輸出約 9,061 字元；身份鎖定、臉部幾何、真人骨架、光線一致性、全身構圖與頁面專屬服裝資料均保留。
+- 驗證：`node scripts\\check-static.mjs`、`node scripts\\check-ui-flows.mjs`、`node scripts\\validate-preset-refs.mjs`、`node scripts\\build-prompt-preview.mjs`、`node scripts\\audit-100x.mjs 100`、`git diff --check`。
+
 ## 2026-09-04 v4.65 兩組附圖模板回歸
 
 - 雜誌頁既有「白色毛料椅動感時裝」已完整回填白 T、淺藍挺版丹寧襯衫、高腰牛仔短褲、霧黑尖頭長靴、銀色矩形扣、菱格紋肩包與耳飾；`jewelry` 已與實際 UI 的 `earrings` 值一致。

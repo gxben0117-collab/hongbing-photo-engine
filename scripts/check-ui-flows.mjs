@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 // one-click / generation code. This intentionally avoids a browser dependency.
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const pages = [
-  'travel.html', 'magazine.html', 'luxury-lifestyle.html', 'modern-portrait.html', 'doll.html', 'fantasy-fashion.html',
+  'travel.html', 'magazine.html', 'luxury-lifestyle.html', 'modern-portrait.html', 'extreme-sports.html', 'doll.html', 'fantasy-fashion.html',
   'chinese-classical.html', 'japanese-kimono.html', 'korean-hanbok.html',
   'xianxia.html', 'anime-character.html', 'flower-fairy.html',
   'isekai-fantasy.html', 'store-ad.html', 'floral-sweet.html',
@@ -46,6 +46,13 @@ const visualOrderContracts = {
     'section-pose': 6, 'section-interaction': 7, 'section-lighting': 8,
     'section-camera': 9, 'section-ratio': 10, 'section-extra': 11,
     'section-output': 12,
+  },
+  'extreme-sports.html': {
+    'section-preset': 0, 'section-style': 1, 'section-sport': 2, 'section-action': 3,
+    'section-garment': 4, 'section-garment-variation': 5, 'section-body': 6,
+    'section-pose': 7, 'section-extra': 8, 'section-lighting': 9,
+    'section-background': 10, 'section-camera': 11, 'section-ratio': 12,
+    'section-output': 13,
   },
   'fantasy-fashion.html': {
     'section-preset': 0, 'section-style': 1, 'section-composition': 2,
@@ -105,14 +112,14 @@ const visualOrderContracts = {
 // Theme pages may append their own controls, but these shared values remain
 // portable between tools and templates.
 const SHARED_CAMERA_RATIO_PAGES = new Set([
-  'travel.html', 'magazine.html', 'luxury-lifestyle.html', 'modern-portrait.html', 'fantasy-fashion.html', 'chinese-classical.html',
+  'travel.html', 'magazine.html', 'luxury-lifestyle.html', 'modern-portrait.html', 'extreme-sports.html', 'fantasy-fashion.html', 'chinese-classical.html',
   'japanese-kimono.html', 'korean-hanbok.html', 'xianxia.html',
   'anime-character.html', 'flower-fairy.html', 'isekai-fantasy.html',
   'floral-sweet.html', 'gala-socialite.html', 'bridal-editorial.html', 'chinese-bridal.html',
   'kpop-idol.html', 'battle-academy.html', 'ancient-goddess.html',
 ]);
 const SHARED_BODY_LAYER_PAGES = new Set([
-  'magazine.html', 'luxury-lifestyle.html', 'modern-portrait.html', 'fantasy-fashion.html', 'chinese-classical.html',
+  'magazine.html', 'luxury-lifestyle.html', 'modern-portrait.html', 'extreme-sports.html', 'fantasy-fashion.html', 'chinese-classical.html',
   'japanese-kimono.html', 'korean-hanbok.html', 'xianxia.html',
   'anime-character.html', 'flower-fairy.html', 'isekai-fantasy.html',
   'floral-sweet.html', 'gala-socialite.html', 'bridal-editorial.html', 'chinese-bridal.html',
@@ -128,7 +135,7 @@ const SHARED_PORTRAIT_BODY_VALUES = [
 const SHARED_RATIO_VALUES = ['9:16', '4:5', '1:1', '2:3', '3:4', '16:9', '4:3', '21:9'];
 const SHARED_GARMENT_LAYER_VALUES = ['layer0', 'layer3', 'layer6', 'layer9', 'random'];
 const AUTO_POSE_PAGES = new Set([
-  'travel.html', 'magazine.html', 'luxury-lifestyle.html', 'modern-portrait.html', 'doll.html', 'fantasy-fashion.html',
+  'travel.html', 'magazine.html', 'luxury-lifestyle.html', 'modern-portrait.html', 'extreme-sports.html', 'doll.html', 'fantasy-fashion.html',
   'chinese-classical.html', 'japanese-kimono.html', 'korean-hanbok.html',
   'xianxia.html', 'anime-character.html', 'flower-fairy.html',
   'isekai-fantasy.html', 'floral-sweet.html', 'gala-socialite.html',

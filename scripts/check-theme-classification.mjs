@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const formalPages = [
-  'travel.html', 'magazine.html', 'luxury-lifestyle.html', 'modern-portrait.html', 'doll.html',
+  'travel.html', 'magazine.html', 'luxury-lifestyle.html', 'modern-portrait.html', 'extreme-sports.html', 'doll.html',
   'fantasy-fashion.html', 'chinese-classical.html', 'japanese-kimono.html', 'korean-hanbok.html',
   'xianxia.html', 'anime-character.html', 'flower-fairy.html', 'isekai-fantasy.html',
   'store-ad.html', 'floral-sweet.html', 'gala-socialite.html', 'festival-editorial.html', 'bridal-editorial.html', 'chinese-bridal.html',
@@ -65,6 +65,11 @@ if (!coreSource.includes('modernPortraitCore') || !coreSource.includes('modernPo
 } else {
   pass('modern portrait uses a page-scoped core assembly');
 }
+if (!coreSource.includes('extremeSportsCore') || !coreSource.includes('extremeSports: extremeSportsCore')) {
+  fail('extreme sports page core is not registered in assets/core-prompt.js');
+} else {
+  pass('extreme sports uses a page-scoped core assembly');
+}
 
 const modernSource = read('modern-portrait.html');
 const modernRequiredMarkers = [
@@ -78,6 +83,22 @@ for (const marker of modernRequiredMarkers) {
 const templateCount = (modernSource.match(/^[ \t]+[A-Za-z][A-Za-z0-9]*: \{ story:/gm) || []).length;
 if (templateCount < 15) fail(`modern-portrait.html should have at least 15 complete templates, found ${templateCount}`);
 else pass(`modern portrait has ${templateCount} complete templates`);
+
+const extremeSource = read('extreme-sports.html');
+const extremeRequiredMarkers = [
+  '極限運動高速攝影', 'Extreme Sports High-Speed Photography', 'const CORE = window.HB_CORE_PROMPT?.page?.extremeSports',
+  'name="sport" value="surfing"', 'name="sport" value="skiing"', 'name="sport" value="skateboarding"', 'name="sport" value="parkour"',
+  'AI判斷｜主題最佳瞬間', 'name="camera" value="groundLevelTracking"', 'name="ratio" value="9:16"'
+];
+for (const marker of extremeRequiredMarkers) {
+  if (!extremeSource.includes(marker)) fail(`extreme-sports.html missing required marker: ${marker}`);
+}
+const extremeTemplateCount = (extremeSource.match(/^[ \t]+[A-Za-z][A-Za-z0-9]*: \{ story:/gm) || []).length;
+if (extremeTemplateCount < 20) fail(`extreme-sports.html should have at least 20 complete templates, found ${extremeTemplateCount}`);
+else pass(`extreme sports has ${extremeTemplateCount} complete templates`);
+for (const excluded of ['motorcycle', 'motorbike', 'motor racing', '重機賽車']) {
+  if (new RegExp(`\\b${excluded}\\b`, 'i').test(extremeSource)) fail(`extreme-sports.html contains excluded motorcycle theme term: ${excluded}`);
+}
 
 const modernPositiveBlock = modernSource
   .replace(/<nav>[\s\S]*?<\/nav>/i, '')

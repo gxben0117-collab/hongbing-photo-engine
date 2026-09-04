@@ -2763,7 +2763,7 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
   const skeletonBlock=ILLUSTRATION_MEDIA_KEYS.has(mediaKey)
     ? (CORE.illustrationSkeleton || CORE.skeleton)
     : CORE.skeleton;
-  const costumeBlock=`【服裝邏輯模組｜動態造型系統】\n\n根據主題「${theme}」自動設計服裝層次(Layer1~Layer7)\n服裝層數依主題自動增減,通常2~5層,特殊主題可擴展至7層\n優先真人旅拍感\n優先${style.label}的視覺語言\n服裝符合主題世界觀與材質質感\nPremium Fabric / Fine Embroidery / Rich Material Detail\n\n避免過度Cosplay化\n避免遊戲角色盔甲化\n避免動漫角色化`;
+  const costumeBlock=`【服裝邏輯模組｜動態造型系統】\n\n根據上述主題與服裝方向自動設計服裝層次(Layer1~Layer7)\n服裝層數依主題自動增減,通常2~5層,特殊主題可擴展至7層\n優先真人旅拍感\n優先${style.label}的視覺語言\n服裝符合主題世界觀與材質質感\nPremium Fabric / Fine Embroidery / Rich Material Detail\n\n避免過度Cosplay化\n避免遊戲角色盔甲化\n避免動漫角色化`;
   const themeBlock=`【主題】\n\n${theme}`;
   const ratioBlock=`【輸出比例】\n\n${RATIOS[ratioKey]}`;
 

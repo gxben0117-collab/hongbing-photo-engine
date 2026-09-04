@@ -100,6 +100,12 @@ function checkOutput(pageLabel, i, selection, output, opts = {}) {
   for (let li = 1; li < lines.length; li += 1) {
     if (lines[li].trim() && lines[li] === lines[li - 1]) { problems.push(`相鄰重複行: "${lines[li].slice(0, 40)}"`); break; }
   }
+  const chunks = output.split('\n\n⸻\n\n');
+  if (chunks.some((chunk, index) => index > 0 && !chunk.trim())) problems.push('含空白 Prompt 區段');
+  if (opts.themeValue && opts.themeValue.length > 10) {
+    const themeOccurrences = output.split(opts.themeValue).length - 1;
+    if (themeOccurrences > 1) problems.push(`主題文字重複 ${themeOccurrences} 次`);
+  }
   if (problems.length) {
     ISSUES.push({ page: pageLabel, iteration: i, selection, problems });
   }
@@ -158,7 +164,7 @@ const editorialFinish = evalEditorialFinish(read('assets/editorial-finish.js'));
     const mediaBlock = data.MEDIA_STYLES[sel.mediaKey];
     const skeletonBlock = data.ILLUSTRATION_MEDIA_KEYS.has(sel.mediaKey)
       ? (core.page.travel.illustrationSkeleton || core.page.travel.skeleton) : core.page.travel.skeleton;
-    const costumeBlock = `【服裝邏輯模組｜動態造型系統】\n\n根據主題「${theme}」自動設計服裝層次(Layer1~Layer7)\n服裝層數依主題自動增減,通常2~5層,特殊主題可擴展至7層\n優先真人旅拍感\n優先${style.label}的視覺語言\n服裝符合主題世界觀與材質質感\nPremium Fabric / Fine Embroidery / Rich Material Detail\n\n避免過度Cosplay化\n避免遊戲角色盔甲化\n避免動漫角色化`;
+    const costumeBlock = `【服裝邏輯模組｜動態造型系統】\n\n根據上述主題與服裝方向自動設計服裝層次(Layer1~Layer7)\n服裝層數依主題自動增減,通常2~5層,特殊主題可擴展至7層\n優先真人旅拍感\n優先${style.label}的視覺語言\n服裝符合主題世界觀與材質質感\nPremium Fabric / Fine Embroidery / Rich Material Detail\n\n避免過度Cosplay化\n避免遊戲角色盔甲化\n避免動漫角色化`;
     const poseBlock = data.POSE_STYLES[sel.poseKey] || null;
     const costumeDirection = data.COSTUME_DIRECTIONS[sel.costumeKey] || null;
     const costumeBlockFinal = costumeDirection ? costumeBlock + `\n\n${costumeDirection}\n服裝以上述方向為主軸,細節仍需符合主題世界觀` : costumeBlock;
@@ -174,7 +180,7 @@ const editorialFinish = evalEditorialFinish(read('assets/editorial-finish.js'));
       core.page.travel.cleanframe, core.page.travel.output, ratioBlock,
     ];
     const output = sections.join('\n\n⸻\n\n');
-    checkOutput('travel', i, sel, output, { requireIdentity: true, identityMarkers: ['身份鎖定系統'] });
+    checkOutput('travel', i, sel, output, { requireIdentity: true, identityMarkers: ['身份鎖定系統'], themeValue: theme });
   }
   report('travel', N);
 }
@@ -188,9 +194,15 @@ const editorialFinish = evalEditorialFinish(read('assets/editorial-finish.js'));
     endMarker: 'function setupRadioCards',
     exportExpression: '({ STYLES, BACKGROUNDS, POSES, CAMERAS, MOTION_LEVELS, DETAIL_BLOCKS, MAGAZINE_ILLUSTRATION_MEDIA_KEYS, MAGAZINE_ILLUSTRATION_SKIN_TEXTURE, MEDIA_STYLES, RATIOS, BODY_SHAPES, FRAMING_RATIOS, COVER_LIGHTING, MAGAZINE_LIGHTING_CONSISTENCY, MAGAZINE_SUBJECT_INTEGRATION, MAGAZINE_FACE_FILL, COVER_COMPOSITION })',
   });
+  const framingUiValues = new Set(radioValues(html, 'framing'));
+  const missingFramingData = [...framingUiValues].filter((value) => !Object.prototype.hasOwnProperty.call(data.FRAMING_RATIOS, value));
+  const orphanFramingData = Object.keys(data.FRAMING_RATIOS).filter((value) => !framingUiValues.has(value));
+  if (missingFramingData.length || orphanFramingData.length) {
+    throw new Error(`magazine framing lookup mismatch: UI-only=${missingFramingData.join(',') || 'none'} data-only=${orphanFramingData.join(',') || 'none'}`);
+  }
   const pools = {
     style: Object.keys(data.STYLES), bodyShape: Object.keys(data.BODY_SHAPES), bg: Object.keys(data.BACKGROUNDS),
-    pose: Object.keys(data.POSES), framing: Object.keys(data.FRAMING_RATIOS), camera: Object.keys(data.CAMERAS),
+    pose: Object.keys(data.POSES), framing: [...framingUiValues], camera: Object.keys(data.CAMERAS),
     motion: Object.keys(data.MOTION_LEVELS), ratio: Object.keys(data.RATIOS), media: Object.keys(data.MEDIA_STYLES),
     makeup: Object.keys(data.DETAIL_BLOCKS.makeup), skinTexture: Object.keys(data.DETAIL_BLOCKS.skinTexture),
     jewelry: Object.keys(data.DETAIL_BLOCKS.jewelry), expression: Object.keys(data.DETAIL_BLOCKS.expression),
@@ -216,8 +228,8 @@ const editorialFinish = evalEditorialFinish(read('assets/editorial-finish.js'));
     const cameraBlock = data.CAMERAS[sel.cameraKey];
     const motionBlock = data.MOTION_LEVELS[sel.motionKey];
     const costumeBlock = isInkFlower
-      ? `【服裝邏輯模組｜花墨染專屬】\n\n服裝依主題「${theme}」或AI自動決定\n薄紗半透明材質為主\nSheer Translucent Fabric\nOrganza Or Thin Silk Texture\n服裝與花卉自然融合`
-      : `【服裝邏輯模組｜動態造型系統】\n\n根據主題「${theme}」自動設計服裝層次\n服裝層數依主題自動增減,通常2~5層\n優先封面大片感\n優先${style.label}的視覺語言\n服裝符合主題世界觀與材質質感\nPremium Fabric / Luxury Material Detail\n\n避免過度Cosplay化\n避免遊戲角色盔甲化`;
+      ? `【服裝邏輯模組｜花墨染專屬】\n\n服裝依上述主題與服裝方向或AI自動決定\n薄紗半透明材質為主\nSheer Translucent Fabric\nOrganza Or Thin Silk Texture\n服裝與花卉自然融合`
+      : `【服裝邏輯模組｜動態造型系統】\n\n根據上述主題與服裝方向自動設計服裝層次\n服裝層數依主題自動增減,通常2~5層\n優先封面大片感\n優先${style.label}的視覺語言\n服裝符合主題世界觀與材質質感\nPremium Fabric / Luxury Material Detail\n\n避免過度Cosplay化\n避免遊戲角色盔甲化`;
     const makeupBlock = `【妝容】\n\n${sel.makeupKeys.map((k) => data.DETAIL_BLOCKS.makeup[k]).filter(Boolean).join('\n\n')}`;
     const skinTextureBlock = `【膚質質感】\n\n${data.DETAIL_BLOCKS.skinTexture[sel.skinTextureKey]}`;
     const jewelryBlock = `【珠寶配飾】\n\n${sel.jewelryKeys.map((k) => data.DETAIL_BLOCKS.jewelry[k]).filter(Boolean).join('\n\n')}`;
@@ -237,7 +249,7 @@ const editorialFinish = evalEditorialFinish(read('assets/editorial-finish.js'));
       data.COVER_LIGHTING, core.page.magazine.cleanframe, core.page.magazine.output, ratioBlock,
     ];
     const output = sections.join('\n\n⸻\n\n');
-    checkOutput('magazine', i, sel, output, { requireIdentity: true, identityMarkers: ['身份鎖定系統'] });
+    checkOutput('magazine', i, sel, output, { requireIdentity: true, identityMarkers: ['身份鎖定系統'], themeValue: theme });
   }
   report('magazine', N);
 }
@@ -364,6 +376,79 @@ const editorialFinish = evalEditorialFinish(read('assets/editorial-finish.js'));
     checkOutput('modernPortrait', i, sel, sections.join('\n\n⸻\n\n'), { requireIdentity: true, identityMarkers: ['身份鎖定系統'] });
   }
   report('modernPortrait', N);
+}
+
+// ===================== EXTREME SPORTS =====================
+{
+  const html = read('extreme-sports.html');
+  const data = evalDataSegment({
+    source: html, core, page: 'extremeSports',
+    startMarker: 'const CORE = window.HB_CORE_PROMPT?.page?.extremeSports || window.HB_CORE_PROMPT?.page?.modernPortrait || {};',
+    endMarker: 'function selected',
+    exportExpression: '({ styleData, sportData, actionData, garmentData, poseData, lightingData, colorData, backgroundData, cameraData, ratioData, intensityData, GARMENT_VARIATIONS, GARMENT_DETAIL_RANDOM_POOLS, SPORT_POOLS, themeTemplates, sportsActionCore, sportsCoherenceCore })',
+  });
+  const bodyShapes = {
+    original: 'original natural body proportions from the reference photo, do not reshape the body',
+    slight_waist: 'slightly refined waistline, subtle natural shaping, keep shoulders hips and overall body proportions faithful to the reference',
+    curvy_waist: 'fuller feminine bust curve and narrow slim waistline, dramatic feminine S-curve silhouette, strong bust-waist-hip contrast, keep anatomy natural',
+    fashion_tall: 'tall fashion proportion, elongated but natural body line, refined athlete editorial presence without changing facial identity',
+    korean_idol: 'Korean idol-inspired proportion, upright posture, long clean body line, toned yet soft commercial action portrait presence',
+    full_bust_cleavage: 'adult woman with naturally fuller bust and balanced athletic proportions, realistic anatomy, natural gravity and functional sports-garment support, no exaggerated body shaping',
+  };
+  const pools = {
+    style: Object.keys(data.styleData), sport: Object.keys(data.sportData), bodyShape: Object.keys(bodyShapes),
+    colorPalette: Object.keys(data.colorData), camera: Object.keys(data.cameraData), ratio: Object.keys(data.ratioData),
+    intensity: Object.keys(data.intensityData), garmentLayer: ['layer0', 'layer3', 'layer6', 'layer9'],
+    chestDetail: Object.keys(data.GARMENT_VARIATIONS.chestDetail), waistSideDetail: Object.keys(data.GARMENT_VARIATIONS.waistSideDetail),
+    shoulderDetail: Object.keys(data.GARMENT_VARIATIONS.shoulderDetail),
+  };
+  for (let i = 0; i < N; i += 1) {
+    const sport = pick(pools.sport);
+    const sportPool = data.SPORT_POOLS[sport];
+    const sel = {
+      style: pick(pools.style), sport,
+      action: pick(sportPool.actions), garment: pick(sportPool.garments), pose: pick(sportPool.poses),
+      lighting: pick(sportPool.lighting), background: pick(sportPool.backgrounds), colorPalette: pick(pools.colorPalette),
+      camera: pick(pools.camera), ratio: pick(pools.ratio), intensity: pick(pools.intensity), bodyShape: pick(pools.bodyShape),
+      garmentLayer: pick(pools.garmentLayer), chestDetail: pick(pools.chestDetail), waistSideDetail: pick(pools.waistSideDetail),
+      shoulderDetail: pick(pools.shoulderDetail), customGarment: randomText(), customPose: randomText(), customBackground: randomText(),
+      customChest: randomText(), customWaist: randomText(), customShoulder: randomText(), colorNote: randomText(), extraNote: randomText(),
+    };
+    const styleText = data.styleData[sel.style];
+    const sportText = data.sportData[sel.sport];
+    const actionText = data.actionData[sel.action];
+    const garmentText = sel.customGarment.trim() ? `custom sports garment and equipment direction only: ${sel.customGarment.trim()}; do not blend another preset garment` : data.garmentData[sel.garment];
+    const poseText = sel.customPose.trim() ? `custom athletic pose only: ${sel.customPose.trim()}; do not blend another preset pose` : data.poseData[sel.pose];
+    const backgroundText = sel.customBackground.trim() ? `custom outdoor sports setting only: ${sel.customBackground.trim()}; do not blend another preset background` : data.backgroundData[sel.background];
+    const colorText = sel.colorNote.trim() ? sel.colorNote.trim() : data.colorData[sel.colorPalette];
+    const variationParts = [
+      data.GARMENT_VARIATIONS.chestDetail[sel.chestDetail],
+      data.GARMENT_VARIATIONS.waistSideDetail[sel.waistSideDetail],
+      data.GARMENT_VARIATIONS.shoulderDetail[sel.shoulderDetail],
+    ].filter(Boolean);
+    const variationCustom = [
+      sel.customChest.trim() && `custom chest equipment detail only: ${sel.customChest.trim()}`,
+      sel.customWaist.trim() && `custom waist equipment detail only: ${sel.customWaist.trim()}`,
+      sel.customShoulder.trim() && `custom shoulder equipment detail only: ${sel.customShoulder.trim()}`,
+    ].filter(Boolean);
+    const variationBlock = [...variationParts, ...variationCustom].length ? `【服裝改造核心】\n\n${[...variationParts, ...variationCustom].join('\n')}` : '';
+    const sections = [
+      core.page.extremeSports.identity, core.page.extremeSports.skeleton, core.page.extremeSports.pose,
+      core.page.extremeSports.lighting, data.sportsActionCore, data.sportsCoherenceCore,
+      `【作品概念】\n\na professional ${sel.sport} action portrait built around one decisive high-speed moment`,
+      `【畫面語氣】\n\n${styleText}`, `【運動主題】\n\n${sportText}`, `【動作瞬間】\n\n${actionText}`,
+      `【運動服裝與裝備】\n\n${garmentText}`, variationBlock, `【身形輪廓】\n\n${bodyShapes[sel.bodyShape]}`,
+      `【人物姿勢與身體方向】\n\n${poseText}`, `【光影】\n\n${data.lightingData[sel.lighting]}`,
+      `【色彩系統】\n\n${colorText}`, `【背景場景與環境】\n\n${backgroundText}`,
+      `【拍攝角度與鏡頭感】\n\n${data.cameraData[sel.camera]}. Use a high-speed shutter to freeze the decisive action; preserve natural body scale and equipment contact.`,
+      `【圖片比例】\n\n${data.ratioData[sel.ratio]}`, `【畫面強度】\n\n${data.intensityData[sel.intensity]}`,
+      core.page.extremeSports.cleanframe, core.page.extremeSports.output,
+      '【極限運動負面限制】\n\nNo unsafe impossible anatomy, no detached or duplicated equipment, no floating athlete, no impossible board, ski, skateboard, rail, wall or landing-surface contact, no warped limbs, no unreadable brand or watermark.',
+      sel.extraNote.trim() ? `【其他要求】\n\n${sel.extraNote.trim()}` : '',
+    ].filter(Boolean);
+    checkOutput('extremeSports', i, sel, sections.join('\n\n⸻\n\n'), { requireIdentity: true, identityMarkers: ['身份鎖定系統'] });
+  }
+  report('extremeSports', N);
 }
 
 // ===================== FANTASY =====================

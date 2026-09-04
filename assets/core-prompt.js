@@ -43,7 +43,7 @@ No facial reconstruction, redesign, beautification or stylization.`;
   const DOLL_RATIO_VALUES = Object.freeze(["9:16", "1:1", "3:4", "4:3", "2:3", "4:5"]);
 
   const STANDARD_PORTRAIT_PAGE_FILES = Object.freeze([
-    "magazine.html", "luxury-lifestyle.html", "modern-portrait.html", "fantasy-fashion.html", "chinese-classical.html",
+    "magazine.html", "luxury-lifestyle.html", "modern-portrait.html", "extreme-sports.html", "fantasy-fashion.html", "chinese-classical.html",
     "japanese-kimono.html", "korean-hanbok.html", "xianxia.html",
     "anime-character.html", "flower-fairy.html", "isekai-fantasy.html",
     "floral-sweet.html", "gala-socialite.html", "bridal-editorial.html", "chinese-bridal.html",
@@ -315,6 +315,8 @@ The selected scene, clothing, light and camera form one believable photographic 
     cleanframe: CORE_CLEAN_FRAME,
     output: CORE_OUTPUT_QUALITY
   };
+
+  const extremeSportsCore = modernPortraitCore;
 
   const fantasyCore = {
     identityGuard: [
@@ -648,6 +650,7 @@ They must not change the person's facial structure, identity, age impression or 
       travel: travelCore,
       magazine: magazineCore,
       modernPortrait: modernPortraitCore,
+      extremeSports: extremeSportsCore,
       fantasy: fantasyCore,
       chineseClassical: chineseClassicalCore,
       japaneseKimono: japaneseKimonoCore,

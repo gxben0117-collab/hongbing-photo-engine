@@ -4144,7 +4144,7 @@ Subject Occupies 70-80% Of Frame
 Head, Shoulders And Upper Chest Clearly Visible
 Strong Editorial Portrait Presence
 Keep Neckline, Jewelry And Facial Identity Clear`,
-half_bodyShape:`【人物入鏡比例｜半身封面】
+  half_body:`【人物入鏡比例｜半身封面】
 
 Half Body Cover Framing
 Subject Occupies 60-75% Of Frame
@@ -4158,7 +4158,7 @@ Subject Occupies 50-65% Of Frame
 Frame From Head To Above Or Around The Knees
 Show Outfit Silhouette, Pose And Body Line Clearly
 Keep Face Recognizable And Not Too Small`,
-full_bodyShape:`【人物入鏡比例｜全身入鏡】
+  full_body:`【人物入鏡比例｜全身入鏡】
 
 Full Body Framing
 Subject Occupies 35-50% Of Frame
@@ -4500,7 +4500,6 @@ if(defaultBgValue && BG_LIGHTING_MAP[defaultBgValue]){
 const themeChips = document.querySelectorAll('#themeChips .chip');
 const riskThemeChips = document.querySelectorAll('#riskThemeChips .chip');
 const themeInputEl = document.getElementById('themeInput');
-let skipNextScroll = false;
 
 const STYLE_PRESET_DEFAULTS = {
   vogue: { bg: 'gradient', framing: 'half_body', camera: 'lowAngleHero', motion: 'dynamic', makeup: ['natural_highend', 'precise_eyeliner'], skinTexture: 'luxury_campaign', jewelry: ['statement'], expression: 'cool_stare', lighting: 'mixed_studio', media: 'realistic_studio', ratio: '4:5' },
@@ -4788,8 +4787,8 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
   const motionBlock = MOTION_LEVELS[motionKey];
 
   const costumeBlock = isInkFlower
-    ? `【服裝邏輯模組｜花墨染專屬】\n\n服裝依主題「${theme}」或AI自動決定\n薄紗半透明材質為主\nSheer Translucent Fabric\nOrganza Or Thin Silk Texture\n服裝與花卉自然融合`
-    : `【服裝邏輯模組｜動態造型系統】\n\n根據主題「${theme}」自動設計服裝層次\n服裝層數依主題自動增減,通常2~5層\n優先封面大片感\n優先${style.label}的視覺語言\n服裝符合主題世界觀與材質質感\nPremium Fabric / Luxury Material Detail\n\n避免過度Cosplay化\n避免遊戲角色盔甲化`;
+    ? `【服裝邏輯模組｜花墨染專屬】\n\n服裝依上述主題與服裝方向或AI自動決定\n薄紗半透明材質為主\nSheer Translucent Fabric\nOrganza Or Thin Silk Texture\n服裝與花卉自然融合`
+    : `【服裝邏輯模組｜動態造型系統】\n\n根據上述主題與服裝方向自動設計服裝層次\n服裝層數依主題自動增減,通常2~5層\n優先封面大片感\n優先${style.label}的視覺語言\n服裝符合主題世界觀與材質質感\nPremium Fabric / Luxury Material Detail\n\n避免過度Cosplay化\n避免遊戲角色盔甲化`;
 
   const garmentVariationParts = HB_GARMENT_CORE.compactPromptParts([
     MAGAZINE_GARMENT_VARIATIONS.chestDetail[chestDetailKey],
@@ -4846,11 +4845,7 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
   document.getElementById('outputText').value = sections.join('\n\n⸻\n\n');
   document.getElementById('outputWrap').classList.remove('hidden');
   clearStale();
-  if(skipNextScroll){
-    skipNextScroll = false;
-  } else {
-    document.getElementById('outputWrap').scrollIntoView({behavior:'smooth', block:'nearest'});
-  }
+  document.getElementById('outputWrap').scrollIntoView({behavior:'smooth', block:'nearest'});
 
   const copyBtn = document.getElementById('copyBtn');
   copyBtn.textContent = '一鍵複製';
@@ -5199,7 +5194,7 @@ QUICK_MAGAZINE_PRESETS.eventBackdropPortrait = {
 
 QUICK_MAGAZINE_PRESETS.whiteChairDynamicFashion = {
   label: '白色毛料椅動感時裝',
-  themeText: '白色極簡毛料椅動感時裝棚拍, rounded boucle chair as a sculptural secondary set element, clean white studio floor, fitted white heavyweight T-shirt with slight structure, light-blue high-count denim overshirt with a crisp slightly shortened cut, high-waisted blue denim shorts, matte black leather accents with silver rectangular buckles, matte black pointed knee-high fashion boots, compact black quilted shoulder bag worn crossbody, tiny refined earrings, long ponytail caught in controlled motion, seated fashion pose with stable legs and visible contact shadow, high-key commercial light, premium contemporary editorial photography, no brand text or watermark',
+  themeText: '白色動感時裝造型, fitted white heavyweight T-shirt with slight structure, light-blue high-count denim overshirt with a crisp slightly shortened cut, high-waisted blue denim shorts, matte black pointed knee-high fashion boots with silver rectangular buckles, compact black quilted shoulder bag worn crossbody',
   style: 'brand_lookbook', bg: 'white_boucle_chair_studio', pose: 'white_chair_ponytail', framing: 'full_body', camera: 'lowAngleHero', motion: 'dynamic', makeup: ['natural_highend'], skinTexture: 'natural_real', jewelry: ['earrings'], expression: 'calm_direct', lighting: 'high_key_chair_studio', media: 'realistic_studio', ratio: '2:3'
 };
 
@@ -5226,7 +5221,6 @@ function applyMagazinePreset(preset, options = {}){
   themeInputEl.value = preset.themeText || preset.label;
   themeInputEl.classList.add('theme-active');
   if(options.generate){
-    skipNextScroll = true;
     document.getElementById('generateBtn').click();
   }
 }
@@ -5304,7 +5298,6 @@ function applyMagazineRandomSelection(){
     themeInputEl.value = selectedThemeChip.dataset.value;
     themeInputEl.classList.remove('theme-active');
   }
-  skipNextScroll = true;
   document.getElementById('generateBtn').click();
 }
 

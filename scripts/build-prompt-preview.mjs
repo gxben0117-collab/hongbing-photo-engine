@@ -156,7 +156,7 @@ function generateTravel(core, data, mediaKey) {
   const skeletonBlock = data.ILLUSTRATION_MEDIA_KEYS.has(selection.mediaKey)
     ? (core.page.travel.illustrationSkeleton || core.page.travel.skeleton)
     : core.page.travel.skeleton;
-  const costumeBlock = `【服裝邏輯模組｜動態造型系統】\n\n根據主題「${selection.theme}」自動設計服裝層次(Layer1~Layer7)\n服裝層數依主題自動增減,通常2~5層,特殊主題可擴展至7層\n優先真人旅拍感\n優先${style.label}的視覺語言\n服裝符合主題世界觀與材質質感\nPremium Fabric / Fine Embroidery / Rich Material Detail\n\n避免過度Cosplay化\n避免遊戲角色盔甲化\n避免動漫角色化`;
+  const costumeBlock = `【服裝邏輯模組｜動態造型系統】\n\n根據上述主題與服裝方向自動設計服裝層次(Layer1~Layer7)\n服裝層數依主題自動增減,通常2~5層,特殊主題可擴展至7層\n優先真人旅拍感\n優先${style.label}的視覺語言\n服裝符合主題世界觀與材質質感\nPremium Fabric / Fine Embroidery / Rich Material Detail\n\n避免過度Cosplay化\n避免遊戲角色盔甲化\n避免動漫角色化`;
   const themeBlock = `【主題】\n\n${selection.theme}`;
   const ratioBlock = `【輸出比例】\n\n${data.RATIOS[selection.ratioKey]}`;
   const sections = [
@@ -213,8 +213,8 @@ function generateMagazine(core, data, mediaKey) {
   const cameraBlock = data.CAMERAS[selection.cameraKey];
   const motionBlock = data.MOTION_LEVELS[selection.motionKey];
   const costumeBlock = isInkFlower
-    ? `【服裝邏輯模組｜花墨染專屬】\n\n服裝依主題「${selection.theme}」或AI自動決定\n薄紗半透明材質為主\nSheer Translucent Fabric\nOrganza Or Thin Silk Texture\n服裝與花卉自然融合`
-    : `【服裝邏輯模組｜動態造型系統】\n\n根據主題「${selection.theme}」自動設計服裝層次\n服裝層數依主題自動增減,通常2~5層\n優先封面大片感\n優先${style.label}的視覺語言\n服裝符合主題世界觀與材質質感\nPremium Fabric / Luxury Material Detail\n\n避免過度Cosplay化\n避免遊戲角色盔甲化`;
+    ? `【服裝邏輯模組｜花墨染專屬】\n\n服裝依上述主題與服裝方向或AI自動決定\n薄紗半透明材質為主\nSheer Translucent Fabric\nOrganza Or Thin Silk Texture\n服裝與花卉自然融合`
+    : `【服裝邏輯模組｜動態造型系統】\n\n根據上述主題與服裝方向自動設計服裝層次\n服裝層數依主題自動增減,通常2~5層\n優先封面大片感\n優先${style.label}的視覺語言\n服裝符合主題世界觀與材質質感\nPremium Fabric / Luxury Material Detail\n\n避免過度Cosplay化\n避免遊戲角色盔甲化`;
   const makeupBlock = `【妝容】\n\n${selection.makeupKeys.map((key) => data.DETAIL_BLOCKS.makeup[key]).filter(Boolean).join('\n\n')}`;
   const skinTextureBlock = `【膚質質感】\n\n${data.DETAIL_BLOCKS.skinTexture[selection.skinTextureKey]}`;
   const jewelryBlock = `【珠寶配飾】\n\n${selection.jewelryKeys.map((key) => data.DETAIL_BLOCKS.jewelry[key]).filter(Boolean).join('\n\n')}`;
