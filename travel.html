@@ -389,6 +389,7 @@
       <button type="button" class="preset-btn" data-travel-preset="goldenFlowerRedVoile">一鍵套用｜金色花田紅紗藝術旅拍</button>
       <button type="button" class="preset-btn" data-travel-preset="stationSunsetLookBack">一鍵套用｜金色夕陽車站回眸</button>
       <button type="button" class="preset-btn" data-travel-preset="stationDaylightKnit">一鍵套用｜白日車站針織行走</button>
+      <button type="button" class="preset-btn" data-travel-preset="iceCreamStepsSnapshot">一鍵套用｜石階冰淇淋旅拍快照</button>
       <button type="button" class="preset-btn" data-travel-preset="mediterraneanColorWall">一鍵套用｜地中海彩牆草帽</button>
     </div>
   </section>
@@ -698,6 +699,11 @@
         <div class="name">牛仔休閒</div>
         <div class="desc">丹寧 / 日常鬆弛感</div>
       </label>
+      <label class="card" data-value="denim_overshirt_shorts">
+        <input type="radio" name="costume" value="denim_overshirt_shorts">
+        <div class="name">丹寧襯衫短褲套裝</div>
+        <div class="desc">挺版淺藍丹寧、白 T、高腰短褲與霧黑長靴</div>
+      </label>
       <label class="card" data-value="athleisure">
         <input type="radio" name="costume" value="athleisure">
         <div class="name">運動休閒服</div>
@@ -868,6 +874,16 @@
         <input type="radio" name="prop" value="handbag">
         <div class="name">簡約手提包</div>
         <div class="desc">皮革手提包自然垂掛，保持手部清楚</div>
+      </label>
+      <label class="card" data-value="quilted_shoulder_bag">
+        <input type="radio" name="prop" value="quilted_shoulder_bag">
+        <div class="name">菱格紋肩背包</div>
+        <div class="desc">霧黑菱格紋包款，作為低調穿搭配件</div>
+      </label>
+      <label class="card" data-value="ice_cream">
+        <input type="radio" name="prop" value="ice_cream">
+        <div class="name">冰淇淋互動</div>
+        <div class="desc">手持單支冰淇淋，增加自然旅途故事</div>
       </label>
     </div>
     <div style="font-size:12px;color:var(--ink-soft);margin:10px 0 4px;">裝扮細節自填（額外補充，會與上方髮型/配件選項一併加入）</div>
@@ -2221,6 +2237,7 @@ snow_flower_wrap_robe:`Costume Direction: Snow Floral Wrap Robe — white, icy b
 campus_uniform:`Costume Direction: Campus Style — preppy academic outfit with shirt, ribbon or bow tie, pleated skirt and cardigan, fresh youthful yet adult styling`,
 y2k_street:`Costume Direction: Y2K Streetwear — glossy jacket or satin top, layered accessories, pleated or cargo skirt, chunky sneakers, playful urban trend styling`,
 denim_casual:`Costume Direction: Denim Casual — well-fitted denim with simple top or knitwear, relaxed everyday travel outfit, effortless natural styling`,
+denim_overshirt_shorts:`Costume Direction: Structured Denim Travel Set — fitted heavyweight white T-shirt, slightly structured light-blue high-count denim overshirt with a slightly shortened cut, high-waisted blue denim shorts, matte black leather accents with silver rectangular buckles, matte black pointed knee-high fashion boots, polished but natural travel styling`,
 resort_cover:`Costume Direction: Resort Style — breezy resort dress or light cover-up over swim-inspired top, straw hat optional, vacation seaside styling kept elegant`,
 evening_gown:`Costume Direction: Evening Gown — refined evening dress with premium fabric and clean silhouette, suitable for night city or hotel scenes`,
 winter_coat:`Costume Direction: Winter Coat — long wool coat or padded jacket with scarf, layered winter textures, cozy cold-season travel styling`,
@@ -2257,7 +2274,9 @@ headphones:`Accessory: over-ear headphones worn around the neck, trendy street s
 hair_flower:`Accessory: small flower or delicate hairpin accent in the hair`,
 beret:`Accessory: soft beret hat tilted naturally, face fully visible`,
 mini_backpack:`Accessory: small fashionable backpack or crossbody bag`,
-handbag:`Accessory: a simple unbranded leather handbag carried naturally at the side, secondary to the travel portrait`
+handbag:`Accessory: a simple unbranded leather handbag carried naturally at the side, secondary to the travel portrait`,
+quilted_shoulder_bag:`Accessory: a compact unbranded matte-black quilted shoulder bag worn naturally at the side, subtle silver hardware, secondary to the travel portrait`,
+ice_cream:`Accessory: one small ice cream cone held naturally as a playful travel prop, hand anatomy remains clear and the prop stays secondary to the face`
 };
 
 function setupRadioCards(id){
@@ -2473,6 +2492,21 @@ const QUICK_TRAVEL_PRESETS = {
     prop: 'handbag',
     themeText: '白日車站針織行走旅拍, 明亮車站階梯與玻璃通道形成深遠透視, 白色細緻針織上衣搭配高腰俐落寬褲與簡約皮革手提包, 沿月台自然行走並回眸, 髮絲與衣料有輕微移動, 玻璃與建築漫射日光保持人物與環境同光, 都市灰、象牙白與酒紅點綴, 旅行雜誌感與自然身體比例'
   }
+};
+
+QUICK_TRAVEL_PRESETS.iceCreamStepsSnapshot = {
+  composition: 'H',
+  style: 'natural_lifestyle',
+  ratio: '3:4',
+  camera: 'corridor_perspective',
+  lighting: 'station_daylight',
+  motion: 'still',
+  media: 'travel_magazine',
+  pose: 'stairs_sit',
+  costume: 'denim_overshirt_shorts',
+  hair: 'soft_waves',
+  prop: 'ice_cream',
+  themeText: '石階冰淇淋旅拍快照, bright outdoor stone steps with a softly observed travel setting, yellow knit top layered under green overalls, one ice cream held toward the camera as a playful secondary detail, natural seated pose, candid smile, warm daylight, relaxed travel magazine snapshot, clear subject separation and natural body scale'
 };
 
 QUICK_TRAVEL_PRESETS.silkRoadBlueTiles = {

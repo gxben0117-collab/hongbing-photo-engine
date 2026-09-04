@@ -160,6 +160,7 @@
       <button class="preset-btn" type="button" data-template="whiteBlazerUrban">一鍵套用｜白西裝城市肖像</button>
       <button class="preset-btn" type="button" data-template="whiteShirtDenimWindow">一鍵套用｜高樓窗光白衫丹寧</button>
       <button class="preset-btn" type="button" data-template="concreteStairNight">一鍵套用｜清水模階梯夜間人像</button>
+      <button class="preset-btn" type="button" data-template="whiteDressStoneSteps">一鍵套用｜白裙石階自然寫真</button>
       <button class="preset-btn" type="button" data-template="boutiqueKnitStreet">一鍵套用｜精品店門口白針織</button>
       <button class="preset-btn" type="button" data-template="bloodOrangeOrchard">一鍵套用｜血橙果園前景互動</button>
       <button class="preset-btn" type="button" data-template="campusGreenDaily">一鍵套用｜校園綠蔭日常</button>
@@ -203,6 +204,7 @@
       <label class="card"><input type="radio" name="scene" value="teaShopSnapshot"><span class="name">街角茶飲店快照</span><span class="desc">明亮店內、日常點單互動與自然紀錄距離</span></label>
       <label class="card"><input type="radio" name="scene" value="highRiseWindow"><span class="name">高樓落地窗</span><span class="desc">城市景觀、窗邊側光與俐落生活時裝</span></label>
       <label class="card"><input type="radio" name="scene" value="concreteStairNight"><span class="name">清水模階梯夜景</span><span class="desc">混凝土牆面、階梯透視與城市散景</span></label>
+      <label class="card"><input type="radio" name="scene" value="stoneStepsDoorway"><span class="name">木門石階日間寫真</span><span class="desc">寬石階、深色木門與溫暖自然日光</span></label>
       <label class="card"><input type="radio" name="scene" value="boutiqueEntrance"><span class="name">精品店門口</span><span class="desc">玻璃櫥窗、騎樓陰影與高級都會街拍</span></label>
       <label class="card"><input type="radio" name="scene" value="bloodOrangeOrchard"><span class="name">血橙果園</span><span class="desc">橙樹果實、戶外日光與前景互動</span></label>
       <label class="card"><input type="radio" name="scene" value="campusGreenPath"><span class="name">校園綠蔭小徑</span><span class="desc">成熟樹蔭、長椅、路燈與自然生活感</span></label>
@@ -217,6 +219,7 @@
     <div class="grid grid-3">
       <label class="card selected"><input type="radio" name="garment" value="pinkCamisoleShorts" checked><span class="name">粉彩細肩帶套裝</span><span class="desc">輕盈上衣、俐落短褲與生活寫真感</span></label>
       <label class="card"><input type="radio" name="garment" value="chiffonSummerDress"><span class="name">雪紡夏日洋裝</span><span class="desc">柔軟薄紗、輕盈層次與自然垂墜</span></label>
+      <label class="card"><input type="radio" name="garment" value="whiteShortLifestyleDress"><span class="name">白色短洋裝</span><span class="desc">簡潔白裙、自然肩線與日間生活感</span></label>
       <label class="card"><input type="radio" name="garment" value="softFittedDress"><span class="name">柔和合身洋裝</span><span class="desc">乾淨線條、舒適剪裁與現代女性氣質</span></label>
       <label class="card"><input type="radio" name="garment" value="minimalKnitSet"><span class="name">極簡針織套裝</span><span class="desc">細緻針織、自然輪廓與居家柔光</span></label>
       <label class="card"><input type="radio" name="garment" value="laceSatinHomewear"><span class="name">蕾絲緞面居家服</span><span class="desc">細節精緻、材質柔和、完整居家層次</span></label>
@@ -496,6 +499,7 @@ const sceneData = {
   teaShopSnapshot: 'bright neighborhood tea shop interior with a clean counter, simple unbranded drink cups and practical menu surfaces kept unreadable and secondary, lively everyday documentary portrait setting',
   highRiseWindow: 'bright high-rise apartment beside floor-to-ceiling windows, clear city skyline beyond the glass, simple interior planes and natural daylight, polished modern lifestyle portrait setting',
   concreteStairNight: 'quiet contemporary concrete stairwell at night, pale poured-concrete walls, warm linear ceiling light, deep stair perspective and softly blurred city lights beyond the landing',
+  stoneStepsDoorway: 'bright natural portrait setting with broad stone steps, a dark wooden doorway, simple architectural lines and clean open depth, casual modern lifestyle environment',
   boutiqueEntrance: 'premium city boutique entrance with a clean glass facade, pale stone threshold, restrained storefront lighting and secondary pedestrians kept softly out of focus',
   bloodOrangeOrchard: 'sunlit blood-orange orchard beside a rustic bright window and wood sill, dense green leaves, ripe citrus in the foreground and a warm outdoor lifestyle portrait environment',
   campusGreenPath: 'campus-inspired leafy path with mature trees, a simple black lamp post, a quiet bench and soft background depth, natural modern lifestyle portrait setting',
@@ -524,6 +528,7 @@ const sceneStoryData = {
   teaShopSnapshot: 'a lively everyday portrait captured during a brief tea-shop order, balancing a direct camera connection with a believable local setting',
   highRiseWindow: 'a polished high-rise window portrait that balances a quiet modern interior with a clear city view, using daylight and a composed side profile to create an elevated everyday story',
   concreteStairNight: 'a measured night portrait in a concrete stairwell, using warm architectural light, stair perspective and distant city bokeh to turn a simple pause into a refined urban story',
+  stoneStepsDoorway: 'a bright natural portrait on broad stone steps beside a dark wooden doorway, where a simple white dress and relaxed seated pose create an unforced modern lifestyle story',
   boutiqueEntrance: 'a clean city fashion snapshot outside a premium boutique, where glass, pale stone and a natural walking gesture create a quiet contemporary street story',
   bloodOrangeOrchard: 'a warm orchard portrait built around the playful offer of a single blood orange, keeping the fruit as a foreground storytelling detail while the person remains the clear subject',
   campusGreenPath: 'a fresh adult lifestyle portrait along a leafy campus-inspired path, combining everyday fashion, gentle movement and calm architectural details',
@@ -549,6 +554,7 @@ const garmentData = {
   denimStreetSet: 'clean medium-wash denim jacket and skirt or trousers with a simple fitted top, practical seams and relaxed polished street portrait styling',
   whiteShirtDenim: 'lightweight semi-sheer white button-down shirt layered over a fitted inner top with clean medium-wash denim jeans, natural fabric tension, realistic folds and polished high-rise lifestyle styling',
   whiteKnitWideLeg: 'fine white open-knit long-sleeve top layered with secure coverage over a simple inner top, paired with tailored white wide-leg trousers, refined texture and premium city styling',
+  whiteShortLifestyleDress: 'simple white short lifestyle dress with a clean neckline, natural shoulder line, light structured fabric and realistic folds, refined daytime portrait styling',
   citrusRuchedDress: 'warm rust-orange ruched midi dress with a softly fitted silhouette, realistic gathered fabric, stable straps and refined summer orchard styling',
   beigeKnitFloralSkirt: 'soft beige fine-gauge short-sleeve knit top paired with a white floral midi skirt, clean waist definition, realistic textile texture and polished everyday elegance',
   campusCardiganPlaid: 'soft camel knit cardigan layered over a crisp white collared shirt, refined plaid skirt, practical leather backpack and polished campus-inspired daily fashion styling',
@@ -742,6 +748,7 @@ const SCENE_POSE_POOLS = Object.freeze({
   teaShopSnapshot: ['naturalStanding', 'gentleHairTouch', 'standingThreeQuarter'],
   highRiseWindow: ['windowProfileLean', 'windowSeatedLongLine', 'standingThreeQuarter'],
   concreteStairNight: ['concreteStairSit', 'naturalStanding', 'standingThreeQuarter'],
+  stoneStepsDoorway: ['concreteStairSit', 'softSeated', 'naturalStanding'],
   boutiqueEntrance: ['storefrontWalk', 'lookBackWalking', 'naturalStanding'],
   bloodOrangeOrchard: ['offerFruitCamera', 'standingThreeQuarter', 'gentleHairTouch'],
   rainyUrbanBoutique: ['rainyUmbrellaWalk', 'storefrontWalk', 'lookBackWalking'],
@@ -768,6 +775,7 @@ const SCENE_CAMERA_POOLS = Object.freeze({
   teaShopSnapshot: ['streetLevelDocumentary', 'eyeLevelCover', 'threeQuarterSide'],
   highRiseWindow: ['environmental50mm', 'sideProfile', 'threeQuarterSide'],
   concreteStairNight: ['environmental50mm', 'distantHero', 'threeQuarterSide'],
+  stoneStepsDoorway: ['environmental50mm', 'threeQuarterSide', 'streetLevelDocumentary'],
   boutiqueEntrance: ['streetLevelDocumentary', 'threeQuarterSide', 'eyeLevelCover'],
   bloodOrangeOrchard: ['environmental50mm', 'threeQuarterSide', 'eyeLevelCover'],
   rainyUrbanBoutique: ['streetLevelDocumentary', 'threeQuarterSide', 'eyeLevelCover'],
@@ -794,6 +802,7 @@ const SCENE_LIGHTING_POOLS = Object.freeze({
   teaShopSnapshot: ['cafeWindowGlow', 'cityOpenShade', 'softDiffusedDaylight'],
   highRiseWindow: ['highRiseWindowSideLight', 'softDiffusedDaylight'],
   concreteStairNight: ['warmArchitecturalNight', 'cityOpenShade'],
+  stoneStepsDoorway: ['softDiffusedDaylight', 'goldenBacklight'],
   boutiqueEntrance: ['cityOpenShade', 'softDiffusedDaylight'],
   bloodOrangeOrchard: ['citrusDaylight', 'goldenBacklight', 'softDiffusedDaylight'],
   campusGreenPath: ['campusLeafyDaylight', 'softDiffusedDaylight', 'goldenBacklight'],
@@ -827,6 +836,7 @@ const themeTemplates = {
   concreteStairNight: { story: 'a measured night portrait in a concrete stairwell, using warm architectural light, stair perspective and distant city bokeh to turn a simple pause into a refined urban story', style: 'quietMinimal', scene: 'concreteStairNight', garment: 'beigeKnitFloralSkirt', garmentLayer: 'layer0', chestDetail: 'none', waistSideDetail: 'none', shoulderDetail: 'none', bodyShape: 'original', pose: 'concreteStairSit', interaction: 'none', lighting: 'warmArchitecturalNight', colorPalette: 'warmConcreteCoolCity', camera: 'environmental50mm', ratio: '2:3', intensity: 'premium' },
   boutiqueKnitStreet: { story: 'a clean city fashion snapshot outside a premium boutique, where glass, pale stone and a natural walking gesture create a quiet contemporary street story', style: 'fashionPortrait', scene: 'boutiqueEntrance', garment: 'whiteKnitWideLeg', garmentLayer: 'layer0', chestDetail: 'none', waistSideDetail: 'slimBeltLine', shoulderDetail: 'none', bodyShape: 'fashion_tall', pose: 'storefrontWalk', interaction: 'shoppingBag', lighting: 'cityOpenShade', colorPalette: 'whiteDenimGraphite', camera: 'streetLevelDocumentary', ratio: '2:3', intensity: 'premium' },
   bloodOrangeOrchard: { story: 'a warm orchard portrait built around the playful offer of a single blood orange, keeping the fruit as a foreground storytelling detail while the person remains the clear subject', style: 'candidStory', scene: 'bloodOrangeOrchard', garment: 'citrusRuchedDress', garmentLayer: 'layer0', chestDetail: 'none', waistSideDetail: 'softWaistDrape', shoulderDetail: 'none', bodyShape: 'original', pose: 'offerFruitCamera', interaction: 'citrusForeground', lighting: 'citrusDaylight', colorPalette: 'rustCitrusGreen', camera: 'environmental50mm', ratio: '2:3', intensity: 'premium' },
+  whiteDressStoneSteps: { story: 'a bright natural portrait on broad stone steps beside a dark wooden doorway, where a simple white short dress and relaxed seated pose create an unforced modern lifestyle story', style: 'candidStory', scene: 'stoneStepsDoorway', garment: 'whiteShortLifestyleDress', garmentLayer: 'layer0', chestDetail: 'softSquareNeckline', waistSideDetail: 'none', shoulderDetail: 'offShoulderCut', bodyShape: 'original', pose: 'concreteStairSit', interaction: 'none', lighting: 'softDiffusedDaylight', colorPalette: 'warmIvoryWhite', camera: 'environmental50mm', ratio: '2:3', intensity: 'premium' },
   campusGreenDaily: { story: 'a fresh adult lifestyle portrait set along a leafy campus-inspired path, combining everyday fashion, gentle movement and calm architectural details', style: 'candidStory', scene: 'campusGreenPath', garment: 'campusCardiganPlaid', garmentLayer: 'layer0', chestDetail: 'none', waistSideDetail: 'none', shoulderDetail: 'none', bodyShape: 'original', pose: 'campusWalk', interaction: 'leatherBackpack', lighting: 'campusLeafyDaylight', colorPalette: 'freshGreenCream', camera: 'streetLevelDocumentary', ratio: '2:3', intensity: 'premium' },
   rainyUrbanBoutique: { story: 'a polished rain-soaked city portrait outside a premium boutique, using wet pavement reflections, warm window light and a natural walking gesture to create a refined contemporary street story', style: 'fashionPortrait', scene: 'rainyUrbanBoutique', garment: 'rainyTrenchBurgundy', garmentLayer: 'layer0', chestDetail: 'none', waistSideDetail: 'slimBeltLine', shoulderDetail: 'none', bodyShape: 'original', pose: 'rainyUmbrellaWalk', interaction: 'clearUmbrella', lighting: 'rainyCityReflections', colorPalette: 'rainyCharcoalBurgundy', camera: 'streetLevelDocumentary', ratio: '2:3', intensity: 'premium' },
   urbanLeopardLowAngle: { story: 'a confident contemporary street-fashion portrait staged on broad city steps, using a controlled low angle, bold animal-print contrast and strong architectural perspective without losing natural body scale', style: 'fashionPortrait', scene: 'urbanArchitectureSteps', garment: 'leopardCamoStreet', garmentLayer: 'layer0', chestDetail: 'none', waistSideDetail: 'slimBeltLine', shoulderDetail: 'none', bodyShape: 'original', pose: 'urbanLeopardCrouch', interaction: 'silverSunglasses', lighting: 'urbanClearDaylight', colorPalette: 'leopardOliveSilver', camera: 'lowAngleHero', ratio: '9:16', intensity: 'premium' }

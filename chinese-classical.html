@@ -108,6 +108,7 @@
       <button class="card" type="button" data-template="blueLilacStreetGlance"><div class="name">藍紫古街回眸抓拍</div><div class="desc">微性感改良漢服、街拍回眸與低飽和色彩</div></button>
       <button class="card" type="button" data-template="youthfulOpenRobePortrait"><div class="name">青春古風・敞襟內襦</div><div class="desc">敞襟外袍、低方領內襦、古街明亮動感</div></button>
       <button class="card" type="button" data-template="lanternTanghuluStreetPortrait"><div class="name">花燈古街糖葫蘆互動寫真</div><div class="desc">古街燈籠、手持糖葫蘆、自然行走回眸</div></button>
+      <button class="card" type="button" data-template="lanternBlossomHanfuPortrait"><div class="name">花燈花卉漢服肖像</div><div class="desc">粉白花卉服裝、伸手觸燈、古街暖色散景</div></button>
       <button class="card" type="button" data-template="tangGardenTopBeauty"><div class="name">盛唐花苑高角度美顏</div><div class="desc">盛唐花苑、輕快轉身與高角度近景</div></button>
     </div>
     <div class="group-title">精品主視覺</div>
@@ -238,6 +239,7 @@
       <label class="card"><input type="radio" name="accessory" value="braidedRibbonOrnament"><div class="name">編髮彩帶</div><div class="desc">編髮、彩帶與自然動態</div></label>
       <label class="card"><input type="radio" name="accessory" value="redPaperUmbrella"><div class="name">朱紅紙傘</div><div class="desc">傳統紙傘作為手持前景與動勢道具</div></label>
       <label class="card"><input type="radio" name="accessory" value="tanghulu"><div class="name">糖葫蘆</div><div class="desc">古街互動小道具，手部與視線自然協調</div></label>
+      <label class="card"><input type="radio" name="accessory" value="handLantern"><div class="name">手提花燈</div><div class="desc">手持花燈，形成溫暖古街互動焦點</div></label>
     </div>
   </section>
 
@@ -343,6 +345,7 @@
     <div class="grid grid-3" data-choice="pose" style="margin-top:8px;">
       <label class="card"><input type="radio" name="pose" value="paperUmbrellaDynamic"><div class="name">朱紅紙傘動態行走</div><div class="desc">宮牆旁自然行走、手臂延展、袖口與飄帶隨風</div></label>
       <label class="card"><input type="radio" name="pose" value="lanternTanghulu"><div class="name">花燈街手持糖葫蘆</div><div class="desc">自然行走、手持糖葫蘆、輕笑回眸</div></label>
+      <label class="card"><input type="radio" name="pose" value="reachLantern"><div class="name">伸手觸燈回望</div><div class="desc">自然伸手靠近花燈，視線與身體方向協調</div></label>
     </div>
   </section>
 
@@ -534,6 +537,7 @@ const accessoryData = {
   phoenixTasselHairpiece: 'an ornate phoenix-inspired gold hairpiece with refined pearl tassels and controlled courtly detail',
   redPaperUmbrella: 'a traditional vermilion paper umbrella held as a clear secondary prop, refined bamboo ribs and controlled red color accent',
   tanghulu: 'a single traditional tanghulu skewer held as a small foreground street prop, glossy fruit coating and restrained festive color',
+  handLantern: 'a small traditional paper lantern held naturally at arm’s length, warm light remains a secondary prop and does not cover the face',
   woodHairpin: 'a simple carved wooden hairpin with quiet literati elegance',
   silkFlower: 'a soft silk flower hair ornament in restrained classical colors',
   pearlForehead: 'a delicate pearl forehead ornament while keeping the face clearly unobstructed',
@@ -689,6 +693,7 @@ const poseData = {
   hairRibbonBreeze: 'one hand gently brushing the hair as a light breeze moves the hair and silk ribbons, relaxed shoulders and natural fingers',
   paperUmbrellaDynamic: 'holding a traditional red paper umbrella while taking one natural step beside a palace wall, one arm extending with relaxed wrist, ribbons and wide sleeves following the movement, face unobstructed',
   lanternTanghulu: 'walking naturally through a lantern street while holding one tanghulu skewer at chest level, relaxed fingers, gentle smile and a subtle over-the-shoulder glance with coherent body direction',
+  reachLantern: 'standing in a lantern street while reaching gently toward a nearby traditional paper lantern with one arm naturally extended, relaxed fingers, soft expression and coherent head, shoulder and torso direction',
   briskStreetWalk: 'captured during a lively but natural walk through an ancient street, one clear step, flowing hem movement and relaxed hands',
   lightSpinTurn: 'a light turning motion captured mid-step, sleeves and ribbons following the body naturally while the face remains unobstructed',
   upwardNaturalSmile: 'looking slightly upward with a bright natural smile, relaxed neck and shoulders, soft hands and a candid adult portrait moment',
@@ -838,7 +843,8 @@ const themeTemplates = {
   cinnabarScreenClassic: { style: 'classicalPortrait', composition: 'folding screen and architectural planes create elegant layered framing around the subject', garment: 'tangClassical', materials: ['goldEmbroidery', 'peonyPattern'], accessory: 'goldHairpin', chestDetail: 'layeredCrossCollar', waistSideDetail: 'wovenSilkSash', shoulderDetail: 'wideSleeveShoulderLine', bodyShape: 'original', pose: 'screenSeatedGlance', lighting: 'cinnabarWindowWarm', color: 'cinnabarIvoryInkGold', background: 'screenInterior', framing: 'threeQuarter', camera: 'threeQuarterSide', ratio: '4:5' },
   ornateHeadpieceClosePortrait: { style: 'courtLuxury', composition: 'ornate headpiece close portrait composition, refined gold hair ornament and facial expression remain the visual priorities, garment and background stay secondary, culturally grounded Chinese classical styling', garment: 'ancientPalaceCouture', materials: ['goldEmbroidery', 'peonyPattern'], accessory: 'phoenixTasselHairpiece', chestDetail: 'none', waistSideDetail: 'none', shoulderDetail: 'none', bodyShape: 'original', pose: 'headpieceThreeQuarter', lighting: 'headpieceGoldPortraitLight', color: 'rougeGold', background: 'redLacquerHall', framing: 'halfBody', camera: 'beautyCloseUp', ratio: '4:5' },
   cinnabarPaperUmbrellaPalace: { style: 'livelySensualEditorial', composition: 'palace wall perspective composition with a red paper umbrella, flowing ribbons and clear architectural depth, subject remains the primary focus', garment: 'hanClassical', materials: ['lightGauze', 'birdFlowerEmbroidery'], accessory: 'redPaperUmbrella', chestDetail: 'none', waistSideDetail: 'wovenSilkSash', shoulderDetail: 'wideSleeveShoulderLine', bodyShape: 'original', pose: 'paperUmbrellaDynamic', lighting: 'palaceRibbonDaylight', color: 'cinnabarJadeIvory', background: 'palaceWallPerspective', framing: 'threeQuarter', camera: 'threeQuarterSide', ratio: '9:16' },
-  lanternTanghuluStreetPortrait: { style: 'youthfulClassicalPortrait', composition: 'lantern street interactive portrait composition with warm lantern layers, a clear foreground prop and natural walking depth', garment: 'youthfulLightClassicalCouture', materials: ['lightGauze', 'birdFlowerEmbroidery'], accessory: 'tanghulu', chestDetail: 'none', waistSideDetail: 'layeredWrapWaist', shoulderDetail: 'silkShawlDrape', bodyShape: 'original', pose: 'lanternTanghulu', lighting: 'lanternStreetWarm', color: 'peachJadeMoon', background: 'lanternOldTownNight', framing: 'threeQuarter', camera: 'threeQuarterSide', ratio: '9:16' }
+  lanternTanghuluStreetPortrait: { style: 'youthfulClassicalPortrait', composition: 'lantern street interactive portrait composition with warm lantern layers, a clear foreground prop and natural walking depth', garment: 'youthfulLightClassicalCouture', materials: ['lightGauze', 'birdFlowerEmbroidery'], accessory: 'tanghulu', chestDetail: 'none', waistSideDetail: 'layeredWrapWaist', shoulderDetail: 'silkShawlDrape', bodyShape: 'original', pose: 'lanternTanghulu', lighting: 'lanternStreetWarm', color: 'peachJadeMoon', background: 'lanternOldTownNight', framing: 'threeQuarter', camera: 'threeQuarterSide', ratio: '9:16' },
+  lanternBlossomHanfuPortrait: { style: 'youthfulClassicalPortrait', composition: 'lantern street interactive portrait composition with warm lantern layers, a clear foreground prop and natural walking depth', garment: 'youthfulLightClassicalCouture', materials: ['lightGauze', 'birdFlowerEmbroidery'], accessory: 'handLantern', chestDetail: 'none', waistSideDetail: 'layeredWrapWaist', shoulderDetail: 'silkShawlDrape', bodyShape: 'original', pose: 'reachLantern', lighting: 'lanternStreetWarm', color: 'peachJadeMoon', background: 'lanternOldTownNight', framing: 'threeQuarter', camera: 'threeQuarterSide', ratio: '9:16' }
 };
 
 function selected(name){

@@ -1,5 +1,12 @@
 # UI 與咒語回歸檢查
 
+## 2026-09-04 v4.65 兩組附圖模板回歸
+
+- 雜誌頁既有「白色毛料椅動感時裝」已完整回填白 T、淺藍挺版丹寧襯衫、高腰牛仔短褲、霧黑尖頭長靴、銀色矩形扣、菱格紋肩包與耳飾；`jewelry` 已與實際 UI 的 `earrings` 值一致。
+- Luxury Lifestyle 新增精品咖啡館、酒紅針織與百褶短裙、咖啡桌邊坐姿、暖金散景、酒紅駝色黃銅配色與「酒紅咖啡館暖金夜景」一鍵模板；14 組模板均有對應 UI 與生成資料。
+- `check-static.mjs`、`check-ui-flows.mjs`、`reorder-dom-sections.mjs --check`、`validate-preset-refs.mjs`、`check-theme-classification.mjs`、`build-prompt-preview.mjs`、`audit-100x.mjs` 與 `git diff --check` 全部通過；22 頁 × 100 組共 2,200 組隨機回歸為 0 issue。
+- 本次只新增頁面專屬資料與分類文件，共用鎖臉、臉部幾何與真人骨架核心未修改。
+
 ## 2026-09-03 v4.59 日本和服深 U 高訂模板回歸
 
 - `japanese-kimono.html` 新增的服裝、材質、胸口、腰側、框景、姿勢、配色與一鍵模板均有實際 UI 控制、資料鍵與生成引用。

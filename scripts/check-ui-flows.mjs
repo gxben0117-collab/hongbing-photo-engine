@@ -569,8 +569,8 @@ function checkChineseClassicalTemplateContract(page, source) {
   const templateButtons = tags(source, 'button').filter(tag => attr(tag, 'data-template'));
   const templateKeys = new Set(templateButtons.map(tag => attr(tag, 'data-template')));
   const presetKeys = objectKeys(source, 'themeTemplates');
-  if (templateButtons.length !== 30) issue(page, `expected 30 template buttons, found ${templateButtons.length}`);
-  if (!presetKeys || presetKeys.size !== 30) issue(page, `expected 30 themeTemplates entries, found ${presetKeys ? presetKeys.size : 0}`);
+  if (templateButtons.length !== 31) issue(page, `expected 31 template buttons, found ${templateButtons.length}`);
+  if (!presetKeys || presetKeys.size !== 31) issue(page, `expected 31 themeTemplates entries, found ${presetKeys ? presetKeys.size : 0}`);
   for (const key of templateKeys) {
     if (!presetKeys?.has(key)) issue(page, `template button "${key}" has no themeTemplates entry`);
   }
