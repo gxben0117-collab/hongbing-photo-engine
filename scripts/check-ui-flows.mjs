@@ -711,6 +711,23 @@ function checkVisualOrder(page, source) {
   }
 }
 
+function checkFlexOutputPlacement(page, source) {
+  const contract = visualOrderContracts[page];
+  if (!contract) return;
+  const normalized = source.replace(/\s+/g, '');
+  if (!normalized.includes('display:flex;flex-direction:column')) return;
+
+  const expectedOrder = page === 'travel.html'
+    ? 99
+    : Math.max(...Object.values(contract)) + 1;
+  const outputRule = normalized.match(/\.wrap>\.output-wrap\{[^}]*order:(\d+)/);
+  if (!outputRule) {
+    issue(page, 'column-flex layout is missing an explicit final order for .output-wrap');
+  } else if (Number(outputRule[1]) !== expectedOrder) {
+    issue(page, `.output-wrap order is ${outputRule[1]}, expected ${expectedOrder}`);
+  }
+}
+
 for (const page of pages) {
   const source = fs.readFileSync(path.join(root, page), 'utf8');
   const idSet = idsIn(source);
@@ -734,6 +751,7 @@ for (const page of pages) {
   checkSharedPortraitControlContract(page, source, groups);
   checkAutoPoseContract(page, source, groups);
   checkVisualOrder(page, source);
+  checkFlexOutputPlacement(page, source);
   console.log(`checked ${page}: ${groups.size} radio groups, ${idSet.size} ids`);
 }
 

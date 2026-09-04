@@ -1,5 +1,12 @@
 # UI 與咒語回歸檢查
 
+## 2026-09-04 v4.69 全站工具頁流程一致性回歸
+
+- 23 個正式工具頁均檢查一鍵模板、生成完整咒語、輸出區與一鍵複製流程。
+- 欄式頁均有明確的 `.wrap > .output-wrap` 最終排序；旅拍的既有特殊排序值保留並納入契約。
+- 中式古典與婚紗頁已用瀏覽器完成一鍵套用 → 生成 → 輸出 → 複製實測。
+- `check-static.mjs`、`check-ui-flows.mjs`、`validate-preset-refs.mjs`、`reorder-dom-sections.mjs --check`、`build-prompt-preview.mjs`、`audit-100x.mjs 100` 與 `git diff --check` 全部通過。
+
 ## 2026-09-04 v4.67 極限運動頁與發布前全站驗收
 
 - `extreme-sports.html` 已接入首頁、主題 registry、正式頁面清單與返回工具總覽；四類運動均有實際 UI 選項與完整一鍵模板。
