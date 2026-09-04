@@ -17,6 +17,8 @@
   body{min-height:100vh;background:var(--black);color:var(--paper);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.6;padding-bottom:72px}
   nav{position:fixed;top:0;left:0;right:0;height:54px;padding:0 24px;background:rgba(9,9,11,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);z-index:100;display:flex;align-items:center}
   .nav-logo{color:var(--gold);font-family:"Noto Serif TC",serif;font-size:14px;font-weight:700;letter-spacing:.08em}
+  .nav-home-link{margin-left:auto;color:var(--gold);text-decoration:none;font-size:12px;white-space:nowrap;padding:5px 10px;border:1px solid var(--line);border-radius:6px}
+  .nav-home-link:hover{color:var(--paper);border-color:var(--gold)}
   .wrap{width:min(920px,100%);margin:0 auto;padding:70px 20px 40px}
   header{padding:48px 0 36px;border-bottom:1px solid var(--line);margin-bottom:36px}
   .eyebrow{color:var(--jade);font-size:11px;letter-spacing:.3em;text-transform:uppercase;margin-bottom:12px}
@@ -56,7 +58,7 @@
 </style>
 </head>
 <body>
-<nav><span class="nav-logo">寫真引擎</span></nav>
+<nav><span class="nav-logo">寫真引擎</span><a class="nav-home-link" href="index.html">返回工具總覽</a></nav>
 <main class="wrap">
   <header>
     <div class="eyebrow">Japanese Kimono Aesthetic Campaign</div>

@@ -17,6 +17,8 @@
   body{min-height:100vh;background:var(--black);color:var(--paper);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.6;padding-bottom:72px}
   nav{position:fixed;top:0;left:0;right:0;height:54px;padding:0 24px;background:rgba(9,9,11,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);z-index:100;display:flex;align-items:center}
   .nav-logo{color:var(--gold);font-family:"Noto Serif TC",serif;font-size:14px;font-weight:700;letter-spacing:.08em}
+  .nav-home-link{margin-left:auto;color:var(--gold);text-decoration:none;font-size:12px;white-space:nowrap;padding:5px 10px;border:1px solid var(--line);border-radius:6px}
+  .nav-home-link:hover{color:var(--paper);border-color:var(--gold)}
   .wrap{width:min(920px,100%);margin:0 auto;padding:70px 20px 40px}
   header{padding:48px 0 36px;border-bottom:1px solid var(--line);margin-bottom:36px}
   .eyebrow{color:var(--jade);font-size:11px;letter-spacing:.3em;text-transform:uppercase;margin-bottom:12px}
@@ -56,7 +58,7 @@
 </style>
 </head>
 <body>
-<nav><span class="nav-logo">寫真引擎</span></nav>
+<nav><span class="nav-logo">寫真引擎</span><a class="nav-home-link" href="index.html">返回工具總覽</a></nav>
 <main class="wrap">
   <header>
     <div class="eyebrow">Chinese Classical Aesthetic Campaign</div>
@@ -93,6 +95,7 @@
       <button class="card" type="button" data-template="beautyPeonyCourt"><div class="name">牡丹宮苑華宴</div><div class="desc">金線牡丹、宮廷珠飾、華苑光影</div></button>
       <button class="card" type="button" data-template="beautyLotusPavilion"><div class="name">蓮池水榭佳人</div><div class="desc">蓮紋輕紗、水面反光、古典水榭</div></button>
       <button class="card" type="button" data-template="beautyWindowGauze"><div class="name">花窗薄紗肖像</div><div class="desc">輕紗層次、花窗框景、唯美近景</div></button>
+      <button class="card" type="button" data-template="cinnabarScreenClassic"><div class="name">朱紅屏風古典華裳</div><div class="desc">木質室內、山水屏風、暖光坐姿</div></button>
       <button class="card" type="button" data-template="beautyPlumSnow"><div class="name">梅雪古風寫真</div><div class="desc">素色絲綢、梅枝雪景、藝術人像</div></button>
     </div>
     <div class="group-title">青春古風寫真</div>
@@ -325,6 +328,7 @@
       <label class="card"><input type="radio" name="pose" value="briskStreetWalk"><div class="name">古街快步</div><div class="desc">行走中的抓拍感，步伐與衣襬自然同步</div></label>
       <label class="card"><input type="radio" name="pose" value="lightSpinTurn"><div class="name">輕快轉身</div><div class="desc">轉身瞬間展示袖線與裙襬流動</div></label>
       <label class="card"><input type="radio" name="pose" value="upwardNaturalSmile"><div class="name">抬眼自然笑</div><div class="desc">抬眼看向鏡頭，表情明亮但不幼態</div></label>
+      <label class="card"><input type="radio" name="pose" value="screenSeatedGlance"><div class="name">屏風前坐姿回眸</div><div class="desc">木地板坐姿、手扶衣襟、自然回望鏡頭</div></label>
     </div>
     <label class="field">自訂姿勢<input id="customPose" type="text" placeholder="例如：手扶木格窗回頭"></label>
   </section>
@@ -360,6 +364,7 @@
       <label class="card"><input type="radio" name="lighting" value="ribbonHairBacklight"><div class="name">髮絲飄帶逆光</div><div class="desc">髮絲、飄帶與輪廓光動勢</div></label>
       <label class="card"><input type="radio" name="lighting" value="lacquerGoldEditorialLight"><div class="name">漆黑鎏金高訂主光</div><div class="desc">深色層次、克制金色與精品封面質感</div></label>
       <label class="card"><input type="radio" name="lighting" value="jadeGalleryLight"><div class="name">黛青玉白畫廊側光</div><div class="desc">典藏畫廊、絲綢紋理與安靜陰影</div></label>
+      <label class="card"><input type="radio" name="lighting" value="cinnabarWindowWarm"><div class="name">朱紅屏風窗邊暖光</div><div class="desc">木地板反光、暖色窗光與服裝紋理</div></label>
     </div>
     <div class="group-title">09B｜色彩系統</div>
     <p class="hint">單選一組主色或搭配色；AI 選項會依主題、服裝、光線與背景判斷，自訂配色填寫後優先。</p>
@@ -385,6 +390,7 @@
       <label class="card"><input type="radio" name="colorPalette" value="bambooTeaIvory"><div class="name">搭配色｜竹青茶褐米白</div><div class="desc">江南庭院、自然材質與安靜暖調</div></label>
       <label class="card"><input type="radio" name="colorPalette" value="plumSilverInk"><div class="name">搭配色｜梅紫淡銀墨灰</div><div class="desc">清冷冬景、文人質感與低飽和層次</div></label>
       <label class="card"><input type="radio" name="colorPalette" value="aiThemeScenePalette"><div class="name">AI 根據主題與場景判斷配色</div><div class="desc">自動選擇主色、輔色與克制點綴色</div></label>
+      <label class="card"><input type="radio" name="colorPalette" value="cinnabarIvoryInkGold"><div class="name">搭配色｜朱紅象牙墨綠金</div><div class="desc">古典華裳、屏風木作與克制金線</div></label>
     </div>
     <label class="field">指定配色<input id="colorNote" type="text" placeholder="例如：月白、黛青、少量金色"></label>
   </section>
@@ -597,7 +603,8 @@ const lightingData = {
   ancientStreetDiffuseDaylight: 'bright diffused daylight in a traditional street, soft directional shadows, natural skin tone and crisp fabric movement',
   ribbonHairBacklight: 'controlled spring backlight tracing the hair and silk ribbons, gentle rim definition with the face evenly exposed',
   lacquerGoldEditorialLight: 'directional black-lacquer studio light with a controlled warm gold rim, deep tonal contrast and smooth couture highlight roll-off',
-  jadeGalleryLight: 'quiet gallery side light across jade-white stone and silk, restrained cool contrast, subtle shadow depth and refined textile modeling'
+  jadeGalleryLight: 'quiet gallery side light across jade-white stone and silk, restrained cool contrast, subtle shadow depth and refined textile modeling',
+  cinnabarWindowWarm: 'warm window light across a red folding screen interior, subtle reflection from polished wood flooring, controlled highlights on gold embroidery and unified natural facial exposure'
 };
 
 const colorPaletteData = {
@@ -621,6 +628,7 @@ const colorPaletteData = {
   peachJadeMoon: 'coordinated palette set of peach blush, fresh jade and moon white with youthful romantic classical energy',
   bambooTeaIvory: 'coordinated palette set of bamboo green, tea brown and warm ivory with quiet Jiangnan garden harmony',
   plumSilverInk: 'coordinated palette set of muted plum, soft silver and ink gray with cool scholarly elegance',
+  cinnabarIvoryInkGold: 'coordinated palette set of cinnabar red, warm ivory, deep ink green and restrained antique gold with refined classical Chinese contrast',
   aiThemeScenePalette: window.HB_CORE_PROMPT?.controls?.autoColor || 'AI theme-aware color selection based on the selected theme, garment, materials, lighting and background; choose one coherent dominant color, one supporting color and one restrained accent color while preserving cultural context, material readability and premium editorial harmony'
 };
 
@@ -652,7 +660,8 @@ const poseData = {
   hairRibbonBreeze: 'one hand gently brushing the hair as a light breeze moves the hair and silk ribbons, relaxed shoulders and natural fingers',
   briskStreetWalk: 'captured during a lively but natural walk through an ancient street, one clear step, flowing hem movement and relaxed hands',
   lightSpinTurn: 'a light turning motion captured mid-step, sleeves and ribbons following the body naturally while the face remains unobstructed',
-  upwardNaturalSmile: 'looking slightly upward with a bright natural smile, relaxed neck and shoulders, soft hands and a candid adult portrait moment'
+  upwardNaturalSmile: 'looking slightly upward with a bright natural smile, relaxed neck and shoulders, soft hands and a candid adult portrait moment',
+  screenSeatedGlance: 'seated gracefully on a polished wooden floor before a folding screen, one hand lightly adjusting the robe collar, torso turned naturally toward the camera with a calm over-the-shoulder glance and relaxed fingers'
 };
 
 const BODY_SHAPES = {
@@ -793,7 +802,8 @@ const themeTemplates = {
   youthfulOpenRobePortrait: { style: 'youthfulClassicalPortrait', composition: 'close interactive portrait composition with the subject turning naturally toward the camera, visible collarbone, sleeve movement and intimate background depth', garment: 'ancientOpenRobeInnerBodice', materials: ['lightGauze', 'plainSilk'], accessory: 'ribbonFloralHairpin', chestDetail: 'lowSquareInnerBodice', waistSideDetail: 'layeredWrapWaist', shoulderDetail: 'silkShawlDrape', bodyShape: 'slight_waist', pose: 'briskStreetWalk', lighting: 'ancientStreetDiffuseDaylight', color: 'peachJadeMoon', background: 'livelyAncientStreet', framing: 'threeQuarter', camera: 'threeQuarterSide', ratio: '9:16' },
   tangGardenTopBeauty: { style: 'romanticClassicalPortrait', composition: 'close interactive portrait composition with the subject turning naturally toward the camera, visible collarbone, sleeve movement and intimate background depth', garment: 'tangChestHighSkirt', materials: ['peonyPattern', 'lightGauze'], accessory: 'butterflySilkFlower', chestDetail: 'deepV', waistSideDetail: 'layeredWrapWaist', shoulderDetail: 'offShoulder', bodyShape: 'curvy_waist', pose: 'lightSpinTurn', lighting: 'ribbonHairBacklight', color: 'peachChampagne', background: 'livelyAncientStreet', framing: 'halfBody', camera: 'topBeauty', ratio: '4:5' },
   chineseLacquerGoldCouture: { style: 'modernCouture', composition: 'asymmetrical composition with the subject placed to one side, balanced visual weight and clean surrounding space', garment: 'hanModern', materials: ['darkPatternJacquard', 'goldEmbroidery'], accessory: 'jadePendant', chestDetail: 'crossCollarDeepV', waistSideDetail: 'layeredWrapWaist', shoulderDetail: 'modernChineseCapelet', bodyShape: 'fashion_tall', pose: 'sideLongLine', lighting: 'lacquerGoldEditorialLight', color: 'lacquerBlackGold', background: 'darkLacquerStudio', framing: 'threeQuarter', camera: 'threeQuarterSide', ratio: '4:5' },
-  chineseJadeWhiteArchive: { style: 'fashionEditorial', composition: 'garment detail-focused composition with collar construction, textile texture and refined craftsmanship as visual priorities', garment: 'songModern', materials: ['kesiTexture', 'inkLandscapePattern'], accessory: 'woodHairpin', chestDetail: 'layeredCrossCollar', waistSideDetail: 'none', shoulderDetail: 'silkShawlDrape', bodyShape: 'original', pose: 'windowTurn', lighting: 'jadeGalleryLight', color: 'jadeWhiteInk', background: 'jadeWhiteGallery', framing: 'halfBody', camera: 'beautyCloseUp', ratio: '4:5' }
+  chineseJadeWhiteArchive: { style: 'fashionEditorial', composition: 'garment detail-focused composition with collar construction, textile texture and refined craftsmanship as visual priorities', garment: 'songModern', materials: ['kesiTexture', 'inkLandscapePattern'], accessory: 'woodHairpin', chestDetail: 'layeredCrossCollar', waistSideDetail: 'none', shoulderDetail: 'silkShawlDrape', bodyShape: 'original', pose: 'windowTurn', lighting: 'jadeGalleryLight', color: 'jadeWhiteInk', background: 'jadeWhiteGallery', framing: 'halfBody', camera: 'beautyCloseUp', ratio: '4:5' },
+  cinnabarScreenClassic: { style: 'classicalPortrait', composition: 'folding screen and architectural planes create elegant layered framing around the subject', garment: 'tangClassical', materials: ['goldEmbroidery', 'peonyPattern'], accessory: 'goldHairpin', chestDetail: 'layeredCrossCollar', waistSideDetail: 'wovenSilkSash', shoulderDetail: 'wideSleeveShoulderLine', bodyShape: 'original', pose: 'screenSeatedGlance', lighting: 'cinnabarWindowWarm', color: 'cinnabarIvoryInkGold', background: 'screenInterior', framing: 'threeQuarter', camera: 'threeQuarterSide', ratio: '4:5' }
 };
 
 function selected(name){

@@ -178,6 +178,7 @@
       <button class="card" type="button" data-template="coastalDaylightVeil"><div class="name">海岸明亮日光長紗</div><div class="desc">藍天海岸、明亮日光與飄動長頭紗</div></button>
       <button class="card" type="button" data-template="backViewTrainEditorial"><div class="name">背影回眸長紗主視覺</div><div class="desc">完整展示婚紗背面、頭紗與長拖尾</div></button>
       <button class="card" type="button" data-template="highKeyWindowRuffleBride"><div class="name">落地窗柔霧蓬裙婚紗</div><div class="desc">窗邊柔光、立體蓬裙與高級寫真感</div></button>
+      <button class="card" type="button" data-template="vintageRoseBouquetBride"><div class="name">紅玫瑰復古婚紗寫真</div><div class="desc">奶油白婚紗、石階門廊與紅玫瑰花束</div></button>
     </div>
   </section>
 
@@ -207,6 +208,7 @@
       <label class="card"><input type="radio" name="composition" value="flowingTrainComposition"><div class="name">裙襬展開構圖</div><div class="desc">讓長拖尾與薄紗動態成為畫面主線</div></label>
       <label class="card"><input type="radio" name="composition" value="backViewTrainEditorial"><div class="name">背影回眸長紗構圖</div><div class="desc">三分之二背面視角展示婚紗背面、頭紗與拖尾</div></label>
       <label class="card"><input type="radio" name="composition" value="environmentalBridalPortrait"><div class="name">環境婚紗構圖</div><div class="desc">人物與教堂、庭園或海岸共同敘事</div></label>
+      <label class="card"><input type="radio" name="composition" value="stairGownDisplay"><div class="name">古典石階婚紗展示</div><div class="desc">石階、門廊與婚紗裙身共同形成復古縱深</div></label>
     </div>
     <div class="grid grid-3" data-choice="framing" style="margin-top:10px;">
       <label class="card selected"><input type="radio" name="framing" value="closePortrait" checked><div class="name">臉部新娘特寫</div><div class="desc">重點放在臉、妝容與頭紗</div></label>
@@ -332,6 +334,7 @@
       <label class="card"><input type="checkbox" name="accessories" value="bridalGloves"><div class="name">新娘長手套</div><div class="desc">優雅高訂配件</div></label>
       <label class="card"><input type="checkbox" name="accessories" value="tulleShoulderWrap"><div class="name">婚紗薄紗披肩</div><div class="desc">輕盈肩部層次</div></label>
       <label class="card"><input type="checkbox" name="accessories" value="bridalFlowerHairpiece"><div class="name">白色花卉髮飾</div><div class="desc">小型花飾與新娘髮型自然融合</div></label>
+      <label class="card"><input type="checkbox" name="accessories" value="redRoseBouquet"><div class="name">紅玫瑰手捧花</div><div class="desc">紅白對比、花束位於身前不遮臉</div></label>
     </div>
     <div class="limit-note" id="accessoriesLimit">配件已選 0 / 2</div>
     <div class="field-grid">
@@ -371,6 +374,7 @@
       <label class="card"><input type="radio" name="pose" value="walkingVeilMotion"><div class="name">緩步婚紗動態</div><div class="desc">輕微步行、裙襬與頭紗自然移動</div></label>
       <label class="card"><input type="radio" name="pose" value="seatedBridalPortrait"><div class="name">坐姿婚紗肖像</div><div class="desc">端雅坐姿與裙身層次</div></label>
       <label class="card"><input type="radio" name="pose" value="heartHandsBride"><div class="name">雙手心形互動</div><div class="desc">自然微笑、溫柔互動與窗邊婚紗情緒</div></label>
+      <label class="card"><input type="radio" name="pose" value="seatedBouquetOnSteps"><div class="name">石階坐姿手持花束</div><div class="desc">坐在古典石階，裙身與紅玫瑰自然展開</div></label>
       <label class="field full custom-choice">姿勢自填<input id="customPose" type="text" placeholder="例如：人物側身站在窗邊，一手輕扶頭紗，視線微微向下"></label>
     </div>
   </section>
@@ -419,6 +423,7 @@
       <label class="card"><input type="radio" name="lighting" value="cinematicLowContrast"><div class="name">電影感低對比光</div><div class="desc">安靜、沉穩、帶有故事感</div></label>
       <label class="card"><input type="radio" name="lighting" value="blackChampagneCoutureLight"><div class="name">黑金香檳高訂主光</div><div class="desc">深色分離、香檳輪廓與緞面高光</div></label>
       <label class="card"><input type="radio" name="lighting" value="pearlEditorialShadow"><div class="name">珍珠灰典藏側光</div><div class="desc">蕾絲建模、安靜陰影與典藏質感</div></label>
+      <label class="card"><input type="radio" name="lighting" value="stoneStepAfternoonLight"><div class="name">石階午後明亮光</div><div class="desc">明亮午後自然光、石材反射與紅白對比</div></label>
     </div>
     <div class="grid grid-3" data-choice="color" style="margin-top:10px;">
       <label class="card selected"><input type="radio" name="color" value="ivoryCream" checked><div class="name">象牙白與奶油色</div><div class="desc">最接近參考圖的高級暖白</div></label>
@@ -435,6 +440,7 @@
       <label class="card"><input type="radio" name="color" value="roseGoldIvory"><div class="name">搭配色｜玫瑰金象牙暖白</div><div class="desc">花藝婚紗、細緻金屬與溫柔膚色</div></label>
       <label class="card"><input type="radio" name="color" value="cocoaPearlWhite"><div class="name">搭配色｜可可珍珠暖白</div><div class="desc">室內肖像、復古高訂與柔和陰影</div></label>
       <label class="card"><input type="radio" name="color" value="aiThemeScenePalette"><div class="name">AI 根據主題與場景判斷配色</div><div class="desc">自動選擇婚紗主色、輔色與克制點綴色</div></label>
+      <label class="card"><input type="radio" name="color" value="ivoryRoseRed"><div class="name">搭配色｜奶油白與玫瑰紅</div><div class="desc">紅白對比、復古花束與婚紗高級感</div></label>
     </div>
     <label class="field full custom-choice" style="margin-top:10px;">指定配色自填<input id="colorNote" type="text" placeholder="例如：奶油白、珍珠白、非常淡的香檳金"></label>
   </section>
@@ -457,6 +463,7 @@
       <label class="card"><input type="radio" name="background" value="softGrayWall"><div class="name">極簡灰白牆面</div><div class="desc">現代婚紗雜誌與高訂留白</div></label>
       <label class="card"><input type="radio" name="background" value="charcoalBridalStudio"><div class="name">炭灰婚紗高訂棚</div><div class="desc">雕塑牆面、深色分離與乾淨主體</div></label>
       <label class="card"><input type="radio" name="background" value="blackGoldBridalGallery"><div class="name">黑金婚紗典藏畫廊</div><div class="desc">黑石、香檳金與精品畫廊層次</div></label>
+      <label class="card"><input type="radio" name="background" value="vintageStoneDoorway"><div class="name">復古石階古典門廊</div><div class="desc">石階、古典門口與復古建築縱深</div></label>
     </div>
     <label class="field full custom-choice" style="margin-top:10px;">背景自填<input id="customBackground" type="text" placeholder="例如：白色花園拱門前，背景有柔焦樹影"></label>
   </section>
@@ -559,7 +566,8 @@ const compositionData = {
   foregroundFlowerFrame: 'soft white flowers in the near foreground create depth around the frame without covering the face',
   flowingTrainComposition: 'composition follows the flowing bridal train and veil from the subject into the lower frame, coherent fabric direction',
   backViewTrainEditorial: 'three-quarter rear bridal editorial composition, gown back, veil and train clearly visible, natural shoulder and head direction, face remains coherent and not obscured',
-  environmentalBridalPortrait: 'environmental bridal portrait composition, subject integrated with the selected wedding location while remaining the clear focal point'
+  environmentalBridalPortrait: 'environmental bridal portrait composition, subject integrated with the selected wedding location while remaining the clear focal point',
+  stairGownDisplay: 'full-body bridal composition on classical stone steps, gown silhouette and bouquet clearly visible, architectural doorway framing and natural perspective depth, bride remains the primary subject'
 };
 
 const framingData = {
@@ -648,7 +656,8 @@ const accessoryData = {
   pearlEarrings: 'small pearl earrings adding a refined highlight near the face',
   bridalGloves: 'elegant bridal opera gloves with realistic fabric fit',
   tulleShoulderWrap: 'a lightweight tulle bridal shoulder wrap',
-  bridalFlowerHairpiece: 'a small white floral hairpiece integrated into the bridal hairstyle'
+  bridalFlowerHairpiece: 'a small white floral hairpiece integrated into the bridal hairstyle',
+  redRoseBouquet: 'a refined bouquet of deep red roses held naturally below the face, vivid red petals balanced against the ivory gown without covering facial landmarks'
 };
 
 const bodyShapes = {
@@ -702,7 +711,8 @@ const poseData = {
   windowContemplation: 'standing beside a window in a quiet side-facing pose, soft gaze toward the light and calm bridal presence',
   walkingVeilMotion: 'slow graceful walking bridal pose, veil and skirt moving gently with the step, natural body mechanics',
   seatedBridalPortrait: 'elegant seated bridal portrait, upright posture, relaxed hands and carefully arranged gown volume',
-  heartHandsBride: 'standing in warm window light, both hands gently forming a heart at chest height, relaxed shoulders, soft genuine smile and refined bridal editorial presence'
+  heartHandsBride: 'standing in warm window light, both hands gently forming a heart at chest height, relaxed shoulders, soft genuine smile and refined bridal editorial presence',
+  seatedBouquetOnSteps: 'seated securely on classical stone steps while holding a refined red rose bouquet below the face, gown arranged naturally along the stairs, shoulders relaxed and hands anatomically coherent'
 };
 
 const makeupData = {
@@ -739,7 +749,8 @@ const lightingData = {
   cathedralWindowProjection: 'soft cathedral stained-glass window projection across the gown and background',
   cinematicLowContrast: 'cinematic low-contrast lighting with quiet shadows and refined filmic tonal depth',
   blackChampagneCoutureLight: 'directional charcoal studio light with a controlled champagne rim, deep tonal separation and smooth bridal satin highlights',
-  pearlEditorialShadow: 'soft directional light across pearl-gray space with restrained shadow depth, clean lace modeling and quiet archival elegance'
+  pearlEditorialShadow: 'soft directional light across pearl-gray space with restrained shadow depth, clean lace modeling and quiet archival elegance',
+  stoneStepAfternoonLight: 'bright afternoon natural light across classical stone steps and a doorway, soft reflected fill from pale stone, clear ivory gown texture and controlled red flower highlights'
 };
 const colorData = {
   ivoryCream: 'ivory white, warm cream and soft pearl highlights',
@@ -755,6 +766,7 @@ const colorData = {
   platinumIceBlue: 'coordinated palette set of platinum silver, pale ice blue and pearl white with cool archival bridal elegance',
   roseGoldIvory: 'coordinated palette set of restrained rose gold, ivory white and soft blush with delicate floral bridal warmth',
   cocoaPearlWhite: 'coordinated palette set of cocoa brown, pearl white and warm ivory with quiet vintage bridal portrait depth',
+  ivoryRoseRed: 'coordinated palette set of creamy ivory, warm white and restrained deep rose red with a refined vintage bridal contrast',
   aiThemeScenePalette: window.HB_CORE_PROMPT?.controls?.autoColor || 'AI theme-aware color selection based on the selected bridal theme, gown, materials, lighting and background; choose one coherent dominant color, one supporting color and one restrained accent color while preserving lace readability, skin tone and premium editorial harmony'
 };
 const backgroundData = {
@@ -771,7 +783,8 @@ const backgroundData = {
   windowLightRoom: 'a quiet pale room beside a large window with soft natural bridal portrait light',
   softGrayWall: 'a minimal soft gray-white wall and refined editorial studio environment',
   charcoalBridalStudio: 'a charcoal bridal couture studio with one sculptural wall plane, controlled shadow depth and no showroom clutter',
-  blackGoldBridalGallery: 'a refined black and champagne bridal gallery with dark stone, restrained gold accents and clean editorial separation'
+  blackGoldBridalGallery: 'a refined black and champagne bridal gallery with dark stone, restrained gold accents and clean editorial separation',
+  vintageStoneDoorway: 'a refined vintage architectural setting with classical stone steps, an aged doorway, pale masonry and soft surrounding depth, suitable for an elegant bridal portrait'
 };
 const cameraData = {
   eyeLevelCover: 'natural eye-level camera angle, standard magazine cover perspective, balanced face and body proportion, clean premium portrait framing',
@@ -816,7 +829,8 @@ const themeTemplates = {
   pearlShoulderGardenBride: { style: 'bridalCampaign', composition: 'foregroundFlowerFrame', framing: 'threeQuarter', garment: 'pearlShoulderCouture', materials: ['scatteredPearlEmbroidery', 'floralEmbroidery'], garmentLayer: 'layer3', chestDetail: 'sweetheartCorset', waistSideDetail: 'pearlWaistApplique', shoulderDetail: 'pearlShoulderDrape', veil: 'fingertipVeil', accessories: ['bridalFlowerHairpiece'], bodyShape: 'original', pose: 'holdingBouquet', makeup: ['clearBridalMakeup'], hairstyle: 'softFrenchUpdo', skinTexture: 'luxuryAdSkin', lighting: 'gardenMorningMist', color: 'purePearlWhite', background: 'whiteFlowerGarden', camera: 'threeQuarterSide', ratio: '4:5', intensity: 'balanced luxury bridal styling, visible couture craftsmanship, refined editorial presence' },
   coastalDaylightVeil: { style: 'cinematicBridal', composition: 'environmentalBridalPortrait', framing: 'fullBody', garment: 'detachableTrainGown', materials: ['layeredTulle', 'silkSatin'], garmentLayer: 'layer6', chestDetail: 'drapedOffShoulderBodice', waistSideDetail: 'drapedWaistPleats', shoulderDetail: 'softOffShoulderTulle', veil: 'cathedralVeil', accessories: ['whiteBouquet'], bodyShape: 'original', pose: 'walkingVeilMotion', makeup: ['naturalRose'], hairstyle: 'romanticWaves', skinTexture: 'naturalReal', lighting: 'coastalHighKeyDaylight', color: 'iceBlueCrystalWhite', background: 'coastalDaylight', camera: 'bridalWideEnvironmental', ratio: '9:16', intensity: 'dramatic couture bridal styling, pronounced train and veil movement, strong fashion editorial presence' },
   backViewTrainEditorial: { style: 'bridalMagazine', composition: 'backViewTrainEditorial', framing: 'fullBody', garment: 'detachableTrainGown', materials: ['layeredTulle', 'pearlBeading'], garmentLayer: 'layer9', chestDetail: 'sweetheartCorset', waistSideDetail: 'detachableOverskirtWaist', shoulderDetail: 'detachableTulleSleeve', veil: 'cathedralVeil', accessories: ['minimalCrown'], bodyShape: 'fashion_tall', pose: 'backViewOverShoulder', makeup: ['refinedBridalBeauty'], hairstyle: 'highBridalUpdo', skinTexture: 'naturalReal', lighting: 'cinematicLowContrast', color: 'whitePlatinumGray', background: 'palaceWeddingHall', camera: 'bridalTrainView', ratio: '2:3', intensity: 'dramatic couture bridal styling, pronounced train and veil movement, strong fashion editorial presence' },
-  highKeyWindowRuffleBride: { style: 'fineArtWedding', composition: 'flowingTrainComposition', framing: 'fullBody', garment: 'royalBallgown', materials: ['layeredTulle', 'floralEmbroidery'], garmentLayer: 'layer3', chestDetail: 'drapedOffShoulderBodice', waistSideDetail: 'drapedWaistPleats', shoulderDetail: 'softOffShoulderTulle', veil: 'fingertipVeil', accessories: ['bridalFlowerHairpiece'], bodyShape: 'original', pose: 'windowContemplation', makeup: ['clearBridalMakeup'], hairstyle: 'softFrenchUpdo', skinTexture: 'softFocusSkin', lighting: 'afternoonWindowLight', color: 'purePearlWhite', background: 'windowLightRoom', camera: 'eyeLevelCover', ratio: '9:16', intensity: 'balanced luxury bridal styling, visible couture craftsmanship, refined editorial presence' }
+  highKeyWindowRuffleBride: { style: 'fineArtWedding', composition: 'flowingTrainComposition', framing: 'fullBody', garment: 'royalBallgown', materials: ['layeredTulle', 'floralEmbroidery'], garmentLayer: 'layer3', chestDetail: 'drapedOffShoulderBodice', waistSideDetail: 'drapedWaistPleats', shoulderDetail: 'softOffShoulderTulle', veil: 'fingertipVeil', accessories: ['bridalFlowerHairpiece'], bodyShape: 'original', pose: 'windowContemplation', makeup: ['clearBridalMakeup'], hairstyle: 'softFrenchUpdo', skinTexture: 'softFocusSkin', lighting: 'afternoonWindowLight', color: 'purePearlWhite', background: 'windowLightRoom', camera: 'eyeLevelCover', ratio: '9:16', intensity: 'balanced luxury bridal styling, visible couture craftsmanship, refined editorial presence' },
+  vintageRoseBouquetBride: { style: 'fineArtWedding', composition: 'stairGownDisplay', framing: 'fullBody', garment: 'classicALine', materials: ['frenchLace', 'floralEmbroidery'], garmentLayer: 'layer3', chestDetail: 'sweetheartCorset', waistSideDetail: 'drapedWaistPleats', shoulderDetail: 'laceCapSleeve', veil: 'fingertipVeil', accessories: ['redRoseBouquet'], bodyShape: 'original', pose: 'seatedBouquetOnSteps', makeup: ['naturalRose'], hairstyle: 'softFrenchUpdo', skinTexture: 'naturalReal', lighting: 'stoneStepAfternoonLight', color: 'ivoryRoseRed', background: 'vintageStoneDoorway', camera: 'eyeLevelCover', ratio: '9:16', intensity: 'balanced luxury bridal styling, visible couture craftsmanship, refined editorial presence' }
 };
 
 function selected(name){

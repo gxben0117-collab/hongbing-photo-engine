@@ -339,6 +339,9 @@
 
 <nav>
   <span class="nav-logo">寫真引擎</span>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">返回工具總覽</a>
+  </div>
 </nav>
 
 <div class="wrap">
@@ -385,6 +388,7 @@
       <button type="button" class="preset-btn" data-travel-preset="coastalBicycleFloral">一鍵套用｜海岸單車花漾旅拍</button>
       <button type="button" class="preset-btn" data-travel-preset="goldenFlowerRedVoile">一鍵套用｜金色花田紅紗藝術旅拍</button>
       <button type="button" class="preset-btn" data-travel-preset="stationSunsetLookBack">一鍵套用｜金色夕陽車站回眸</button>
+      <button type="button" class="preset-btn" data-travel-preset="stationDaylightKnit">一鍵套用｜白日車站針織行走</button>
       <button type="button" class="preset-btn" data-travel-preset="mediterraneanColorWall">一鍵套用｜地中海彩牆草帽</button>
     </div>
   </section>
@@ -724,6 +728,11 @@
         <div class="name">波希米亞市集綁帶上衣</div>
         <div class="desc">繫帶泡泡袖 / 金屬鏈飾腰帶</div>
       </label>
+      <label class="card" data-value="station_white_knit">
+        <input type="radio" name="costume" value="station_white_knit">
+        <div class="name">白日車站白針織寬褲</div>
+        <div class="desc">白色針織 / 高腰寬褲 / 俐落旅行穿搭</div>
+      </label>
       <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 度假海灘</div>
       <label class="card" data-value="resort_cover">
         <input type="radio" name="costume" value="resort_cover">
@@ -855,6 +864,11 @@
         <div class="name">小背包</div>
         <div class="desc">後背或側背小包</div>
       </label>
+      <label class="card" data-value="handbag">
+        <input type="radio" name="prop" value="handbag">
+        <div class="name">簡約手提包</div>
+        <div class="desc">皮革手提包自然垂掛，保持手部清楚</div>
+      </label>
     </div>
     <div style="font-size:12px;color:var(--ink-soft);margin:10px 0 4px;">裝扮細節自填（額外補充，會與上方髮型/配件選項一併加入）</div>
     <input type="text" class="theme-input" id="customAdorn" placeholder="例如：珍珠耳環、絲巾綁髮、復古墨鏡">
@@ -966,6 +980,16 @@
         <div class="name">底片相機持拍</div>
         <div class="desc">舉起底片相機取景 / 旅拍攝影師瞬間</div>
       </label>
+      <label class="card" data-value="station_walk_glance">
+        <input type="radio" name="pose" value="station_walk_glance">
+        <div class="name">車站行走回眸</div>
+        <div class="desc">沿月台行走，回眸連接站體透視</div>
+      </label>
+      <label class="card" data-value="station_side_descent">
+        <input type="radio" name="pose" value="station_side_descent">
+        <div class="name">車站階梯側身下樓</div>
+        <div class="desc">側身下階，手提包自然下垂、步伐穩定</div>
+      </label>
       <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 生活情境</div>
       <label class="card" data-value="tea_pour">
         <input type="radio" name="pose" value="tea_pour">
@@ -1061,6 +1085,11 @@
         <input type="radio" name="lighting" value="station_golden_backlight">
         <div class="name">車站夕陽逆光</div>
         <div class="desc">月台暖金光、長影與旅途空間層次</div>
+      </label>
+      <label class="card" data-value="station_daylight">
+        <input type="radio" name="lighting" value="station_daylight">
+        <div class="name">車站明亮日間光</div>
+        <div class="desc">玻璃通道漫射日光，人物與站體共享自然曝光</div>
       </label>
       <label class="card" data-value="golden_corridor">
         <input type="radio" name="lighting" value="golden_corridor">
@@ -1878,6 +1907,14 @@ Face receives gentle natural fill from the platform surfaces
 Subject, station architecture and distant travel background share the same warm exposure
 No detached studio lighting`,
 
+station_daylight:`【光影色彩｜車站明亮日間光】
+
+Bright Daylight Through Station Glass And Open Canopy
+Soft Architectural Bounce Light Across Face, Body And Knit Texture
+Platform, glass corridor and subject share the same natural exposure
+Clean daylight travel editorial mood with controlled highlights
+No detached studio beauty lighting`,
+
 golden_corridor:`【光影色彩｜金色長廊窗光】
 
 Warm late-afternoon sunlight entering through large corridor windows
@@ -2156,6 +2193,20 @@ Standing Pose Holding A Vintage Film Camera Up To One Eye
 Other Hand Steadying The Camera Body Or Resting Near The Strap
 Candid Mid-Shot Travel Photographer Moment
 Soft Natural Smile Partially Visible Beside The Camera
+Identity And Facial Features Remain Clearly Recognizable`,
+station_walk_glance:`【姿勢模組｜車站行走回眸】
+
+Captured Mid-Walk Along A Station Platform
+Natural Step Turning Back Toward The Camera
+Handbag Held At The Side Without Covering The Body
+Platform Lines, shoulders and hips follow one coherent direction
+Identity And Facial Features Remain Clearly Recognizable`,
+station_side_descent:`【姿勢模組｜車站階梯側身下樓】
+
+Walking Down Station Steps In A Natural Side Three-Quarter View
+One Hand Carries A Small Handbag, the other arm remains relaxed
+Feet, knees and hips follow the same descending direction
+Stable architectural perspective with no twisted limbs
 Identity And Facial Features Remain Clearly Recognizable`
 };
 
@@ -2186,7 +2237,8 @@ floral_long_qipao:`Costume Direction: Floral Long Qipao — floor-length floral-
 boho_tribal_dress:`Costume Direction: Bohemian One-Shoulder Dress — one-shoulder bohemian dress with tribal-pattern woven skirt panel, earthy textured fabric, relaxed nomadic-chic travel silhouette`,
 knit_shawl_cardigan:`Costume Direction: Draped Knit Shawl-Cardigan — oversized draped knit shawl-cardigan layered over a simple blouse, soft cable-knit texture, cozy relaxed autumn travel styling`,
 boho_lace_wedding_gown:`Costume Direction: Bohemian Lace Wedding Gown — floor-length bohemian lace gown with a flowing tulle train, delicate floral lace bodice, romantic destination-wedding silhouette`,
-boho_market_blouse:`Costume Direction: Bohemian Market Blouse — tie-front bohemian blouse with soft puff sleeves, metallic chain-link belt accent, relaxed market-stroll travel silhouette`
+boho_market_blouse:`Costume Direction: Bohemian Market Blouse — tie-front bohemian blouse with soft puff sleeves, metallic chain-link belt accent, relaxed market-stroll travel silhouette`,
+station_white_knit:`Costume Direction: Daytime Station Knitwear — refined white knit long-sleeve top with secure coverage, high-waisted tailored wide-leg trousers, compact leather handbag and polished travel styling`
 };
 
 const HAIR_STYLES = {
@@ -2204,7 +2256,8 @@ glasses:`Accessory: slim thin-frame glasses that do not hide the eyes or facial 
 headphones:`Accessory: over-ear headphones worn around the neck, trendy street styling`,
 hair_flower:`Accessory: small flower or delicate hairpin accent in the hair`,
 beret:`Accessory: soft beret hat tilted naturally, face fully visible`,
-mini_backpack:`Accessory: small fashionable backpack or crossbody bag`
+mini_backpack:`Accessory: small fashionable backpack or crossbody bag`,
+handbag:`Accessory: a simple unbranded leather handbag carried naturally at the side, secondary to the travel portrait`
 };
 
 function setupRadioCards(id){
@@ -2405,6 +2458,20 @@ const QUICK_TRAVEL_PRESETS = {
     pose: 'tea_pour',
     costume: 'qipao',
     themeText: '中式庭院茶席旅拍, 老宅庭院與木質茶桌, 盆栽綠意與斑駁光影, 墨綠色改良旗袍, 站在茶桌旁優雅斟茶, 低眸專注神情, 午後自然光與地面樹影, 東方生活美學'
+  },
+  stationDaylightKnit: {
+    composition: 'H',
+    style: 'natural_lifestyle',
+    ratio: '2:3',
+    camera: 'corridor_perspective',
+    lighting: 'station_daylight',
+    motion: 'flow',
+    media: 'travel_magazine',
+    pose: 'station_walk_glance',
+    costume: 'station_white_knit',
+    hair: 'soft_waves',
+    prop: 'handbag',
+    themeText: '白日車站針織行走旅拍, 明亮車站階梯與玻璃通道形成深遠透視, 白色細緻針織上衣搭配高腰俐落寬褲與簡約皮革手提包, 沿月台自然行走並回眸, 髮絲與衣料有輕微移動, 玻璃與建築漫射日光保持人物與環境同光, 都市灰、象牙白與酒紅點綴, 旅行雜誌感與自然身體比例'
   }
 };
 
