@@ -21,7 +21,7 @@
 - `xianxia.html` / `anime-character.html` / `flower-fairy.html` - 仙俠、動漫人物、花仙子
 - `isekai-fantasy.html` / `floral-sweet.html` / `gala-socialite.html` - 異世界、花漾甜美、晚宴名媛
 - `kpop-idol.html` / `battle-academy.html` - 韓系偶像、戰鬥制服學園
-- `ancient-goddess.html` / `bridal-editorial.html` / `editorial-identity.html` - 古代女神、婚紗藝術寫真、編輯視覺設計
+- `ancient-goddess.html` / `bridal-editorial.html` / `chinese-bridal.html` / `editorial-identity.html` - 古代女神、西式婚紗、中式婚嫁、編輯視覺設計
 - `assets/core-prompt.js` - 共用身份鎖定與保護核心（`window.HB_CORE_PROMPT`）
 - `docs/` - 使用方式、核心邏輯、各頁流程、工程維護文件
   - `docs/development-log.md` - 依時間排序的完整開發記錄（唯一時間軸來源）

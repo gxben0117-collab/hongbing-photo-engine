@@ -1,8 +1,8 @@
 # 工具頁主題與欄位契約
 
-版本：v4.54
+版本：v4.63
 
-這份表是 `docs/theme-classification-rules.md` 的執行摘要；每頁的詳細 allowed／forbidden 內容以 `assets/theme-registry.js` 為準。
+這份表是 `docs/theme-classification-rules.md` 的執行摘要；每頁的詳細 allowed／forbidden 內容以 `assets/theme-registry.js` 為準。現行正式工具頁共 23 頁。
 
 | 工具頁 | family | 主要作品 | 主責控制軸 | 不負責的內容 |
 |---|---|---|---|---|
@@ -23,7 +23,8 @@
 | `floral-sweet.html` | floralSweet | 花漾甜美生活寫真 | 甜美服裝、花束、柔和場景 | 全站粉彩預設 |
 | `gala-socialite.html` | galaSocialite | 晚宴名媛人物寫真 | 晚宴禮服、珠寶、紅毯、宴會廳 | 一般生活頁預設 |
 | `festival-editorial.html` | festivalEditorial | 節慶文化與季節人物寫真 | 節日主題、道具、場景、節慶光影 | 把節慶敘事強制帶入其他工具 |
-| `bridal-editorial.html` | bridalEditorial | 單人婚紗藝術寫真 | 婚紗、頭紗、珠繡、新娘光影 | 多人婚禮、舊 85mm 選項 |
+| `bridal-editorial.html` | bridalEditorial | 單人西式婚紗藝術寫真 | 西式婚紗、頭紗、珠繡、新娘光影 | 中式婚服、多人物婚禮、舊 85mm 選項 |
+| `chinese-bridal.html` | chineseBridal | 中式婚嫁藝術寫真 | 龍鳳褂、秀禾服、鳳冠霞帔、織金刺繡、喜堂古宅 | 西式婚紗主體、教堂長頭紗、仙俠與科技幻想 |
 | `kpop-idol.html` | kpopIdol | 韓系偶像人物寫真 | 舞台、機場、街頭、偶像姿態 | 一般現代人像預設 |
 | `battle-academy.html` | battleAcademy | 戰鬥制服學園角色 | 學校身份、制服、裝甲、校園戰鬥 | 一般服裝改造頁 |
 | `ancient-goddess.html` | ancientGoddess | 古文明女神史詩寫真 | 神殿、敦煌、古文明服裝 | 其他文化頁的泛用語彙 |

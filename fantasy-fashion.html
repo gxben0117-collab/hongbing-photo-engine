@@ -528,6 +528,14 @@
         <div class="name">水墨書法流動禮服</div>
         <div class="desc">書法水墨、蝶舞流線、展覽級文化廣告</div>
       </button>
+      <button class="card" type="button" data-template="pinkFeatherGardenPortrait">
+        <div class="name">粉羽花園高訂肖像</div>
+        <div class="desc">粉紅羽毛禮服、花園柔光、浪漫高訂肖像</div>
+      </button>
+      <button class="card" type="button" data-template="yellowFlowerSwingGarden">
+        <div class="name">黃色花卉鞦韆花園</div>
+        <div class="desc">黃色花卉禮服、花園鞦韆、明亮春日動感</div>
+      </button>
       <button class="card" type="button" data-template="shatteredMirrorBurstGown">
         <div class="name">碎鏡爆散裙</div>
         <div class="desc">千片碎鏡懸浮凍結、稜鏡折射、對角動態構圖</div>
@@ -1112,6 +1120,8 @@
       <label class="card"><input type="radio" name="lighting" value="halo"><div class="name">逆光光暈</div><div class="desc">邊緣發光、神聖氣場</div></label>
       <label class="card"><input type="radio" name="lighting" value="stage"><div class="name">舞台光束</div><div class="desc">聚光燈、戲劇舞台感</div></label>
       <label class="card"><input type="radio" name="lighting" value="mist"><div class="name">夢幻霧光</div><div class="desc">柔霧、漂浮、空氣感</div></label>
+      <label class="card"><input type="radio" name="lighting" value="pinkGardenBacklight"><div class="name">粉羽花園逆光</div><div class="desc">花園柔暖逆光、羽毛輪廓光、精品肖像質感</div></label>
+      <label class="card"><input type="radio" name="lighting" value="flowerGardenDaylight"><div class="name">花園清透日光</div><div class="desc">明亮春日光、花卉反射、黃色服裝細節清楚</div></label>
       <label class="card"><input type="radio" name="lighting" value="cold"><div class="name">冷調金屬光</div><div class="desc">冷冽反光、金屬質地</div></label>
       <label class="card"><input type="radio" name="lighting" value="warmWindowSoft"><div class="name">柔暖窗影光</div><div class="desc">白棚日光、窗格陰影、紅色反射</div></label>
       <label class="card"><input type="radio" name="lighting" value="jewelrySparkle"><div class="name">珠寶閃光</div><div class="desc">細小高光、切面反射、精品閃耀</div></label>
@@ -1186,6 +1196,8 @@
       <label class="card"><input type="radio" name="background" value="exhibition"><div class="name">展覽空間</div><div class="desc">博物館級、陳列感、文化氣質</div></label>
       <label class="card"><input type="radio" name="background" value="palace"><div class="name">神殿 / 宮殿</div><div class="desc">儀式感、權威感、戲劇場景</div></label>
       <label class="card"><input type="radio" name="background" value="flowerSea"><div class="name">花海背景</div><div class="desc">浪漫、繁花、視覺飽和</div></label>
+      <label class="card"><input type="radio" name="background" value="pinkFeatherGarden"><div class="name">粉羽花園</div><div class="desc">粉色花園、羽毛高訂、柔和景深</div></label>
+      <label class="card"><input type="radio" name="background" value="flowerGardenSwing"><div class="name">花園鞦韆</div><div class="desc">黃色花園、木製鞦韆、輕盈春日氛圍</div></label>
       <label class="card"><input type="radio" name="background" value="cosmic"><div class="name">宇宙星場</div><div class="desc">星河、深空、未來氛圍</div></label>
       <label class="card"><input type="radio" name="background" value="materialWall"><div class="name">材質牆面</div><div class="desc">背景也由材質構成</div></label>
       <label class="card"><input type="radio" name="background" value="luxuryRoom"><div class="name">精品室內</div><div class="desc">高級室內、品牌陳設、生活感</div></label>
@@ -2151,6 +2163,8 @@ const backgroundData = {
   exhibition: 'museum-like exhibition space, curated display environment, refined cultural presentation',
   palace: 'mythic palace or temple background, ceremonial architecture, grand dramatic atmosphere',
   flowerSea: 'lush flower sea background, blooming layered petals, romantic visual richness',
+  pinkFeatherGarden: 'romantic pink flower garden background with layered blossoms, pale garden paths and controlled depth, soft petals frame the couture portrait without covering the face',
+  flowerGardenSwing: 'bright flower garden background with a refined wooden swing, pale yellow blossoms, layered green foliage and airy depth, playful luxury fashion setting',
   cosmic: 'cosmic starfield background, deep space atmosphere, floating luminous particles',
   materialWall: 'background made of the same selected material, immersive material wall, cohesive visual system',
   luxuryRoom: 'luxury interior room background, premium lifestyle setting, refined decorative atmosphere',
@@ -2232,6 +2246,8 @@ const lightingData = {
   halo: 'backlit halo lighting, glowing rim light, cinematic aura',
   stage: 'stage beam lighting, theatrical spotlight, grand commercial mood',
   mist: 'dream mist lighting, soft haze, floating luminous atmosphere',
+  pinkGardenBacklight: 'soft warm garden backlight through pink blossoms, delicate feather rim light, balanced facial exposure and controlled pastel contrast',
+  flowerGardenDaylight: 'clear spring garden daylight with soft filtered highlights, gentle foliage bounce and readable yellow floral dress texture',
   cold: 'cold metallic lighting, crisp reflections, cool premium tone',
   warmWindowSoft: 'soft warm sunlight through Chinese lattice window shadows, refined red paper bounce light, red paper reflections softly affecting the face, luxury bridal advertisement glow, delicate facial exposure, face softly lit but consistent with surrounding red paper reflections',
   jewelrySparkle: 'luxury jewelry sparkle lighting, precise tiny specular highlights, faceted reflections, refined catchlights, premium gemstone advertisement shine',
@@ -3281,6 +3297,32 @@ const themeTemplates = {
     camera: 'eyeLevelCover',
     lighting: 'soft',
     background: 'exhibition',
+    ratio: '9:16',
+    intensity: 'balanced material effects, elegant and luxurious'
+  },
+  pinkFeatherGardenPortrait: {
+    garment: 'featherCouture',
+    material: 'seasonalFlowerSpirits',
+    style: 'editorial',
+    composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
+    framing: 'threeQuarter',
+    pose: 'hand_neck',
+    camera: 'threeQuarterSide',
+    lighting: 'pinkGardenBacklight',
+    background: 'pinkFeatherGarden',
+    ratio: '4:5',
+    intensity: 'balanced material effects, elegant and luxurious'
+  },
+  yellowFlowerSwingGarden: {
+    garment: 'wideBrimFloralTrailGown',
+    material: 'seasonalFlowerSpirits',
+    style: 'beautyCampaign',
+    composition: 'centered commercial key visual, subject placed in the middle of the frame, balanced advertising layout',
+    framing: 'fullBody',
+    pose: 'swing_dangle_glance',
+    camera: 'eyeLevelCover',
+    lighting: 'flowerGardenDaylight',
+    background: 'flowerGardenSwing',
     ratio: '9:16',
     intensity: 'balanced material effects, elegant and luxurious'
   }

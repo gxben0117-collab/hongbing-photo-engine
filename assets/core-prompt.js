@@ -46,7 +46,7 @@ No facial reconstruction, redesign, beautification or stylization.`;
     "magazine.html", "luxury-lifestyle.html", "modern-portrait.html", "fantasy-fashion.html", "chinese-classical.html",
     "japanese-kimono.html", "korean-hanbok.html", "xianxia.html",
     "anime-character.html", "flower-fairy.html", "isekai-fantasy.html",
-    "floral-sweet.html", "gala-socialite.html", "bridal-editorial.html",
+    "floral-sweet.html", "gala-socialite.html", "bridal-editorial.html", "chinese-bridal.html",
     "kpop-idol.html", "battle-academy.html", "ancient-goddess.html"
   ]);
 

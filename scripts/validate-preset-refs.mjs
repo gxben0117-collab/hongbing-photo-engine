@@ -468,6 +468,36 @@ const issues = [];
   checkObject('bridal-editorial.html', 'themeTemplates', extractObjectLiteral(src, 'themeTemplates'), fieldLive, issues);
 }
 
+// ===== chinese-bridal.html =====
+{
+  const src = fs.readFileSync(path.join(root, 'chinese-bridal.html'), 'utf8');
+  const fieldLive = {
+    style: liveRadioValues(src, 'style'),
+    composition: liveRadioValues(src, 'composition'),
+    framing: liveRadioValues(src, 'framing'),
+    garment: liveRadioValues(src, 'garment'),
+    materials: liveInputValues(src, 'materials'),
+    garmentLayer: liveRadioValues(src, 'garmentLayer'),
+    chestDetail: liveRadioValues(src, 'chestDetail'),
+    waistSideDetail: liveRadioValues(src, 'waistSideDetail'),
+    shoulderDetail: liveRadioValues(src, 'shoulderDetail'),
+    veil: liveRadioValues(src, 'veil'),
+    accessories: liveInputValues(src, 'accessories'),
+    bodyShape: liveRadioValues(src, 'bodyShape'),
+    pose: liveRadioValues(src, 'pose'),
+    makeup: liveInputValues(src, 'makeup'),
+    hairstyle: liveRadioValues(src, 'hairstyle'),
+    skinTexture: liveRadioValues(src, 'skinTexture'),
+    lighting: liveRadioValues(src, 'lighting'),
+    color: liveRadioValues(src, 'color'),
+    background: liveRadioValues(src, 'background'),
+    camera: liveRadioValues(src, 'camera'),
+    ratio: liveRadioValues(src, 'ratio'),
+    intensity: liveSelectOptionValues(src, 'intensity'),
+  };
+  checkObject('chinese-bridal.html', 'themeTemplates', extractObjectLiteral(src, 'themeTemplates'), fieldLive, issues);
+}
+
 // ===== ancient-goddess.html =====
 {
   const src = fs.readFileSync(path.join(root, 'ancient-goddess.html'), 'utf8');

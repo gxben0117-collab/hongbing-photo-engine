@@ -2,11 +2,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>婚紗藝術寫真咒語產生器｜寫真引擎</title>
-<meta name="description" content="婚紗藝術寫真咒語產生器，整合高訂婚紗、頭紗、姿勢、妝髮、光影、背景與身份鎖定核心。">
-<meta property="og:title" content="婚紗藝術寫真咒語產生器｜寫真引擎">
+<title>西式婚紗藝術寫真咒語產生器｜寫真引擎</title>
+<meta name="description" content="西式婚紗藝術寫真咒語產生器，整合高訂婚紗、頭紗、姿勢、妝髮、光影、背景與身份鎖定核心。">
+<meta property="og:title" content="西式婚紗藝術寫真咒語產生器｜寫真引擎">
 <meta property="og:description" content="以真人參考照製作精品婚紗棚拍、婚紗廣告與婚紗雜誌寫真咒語。">
-<meta name="twitter:title" content="婚紗藝術寫真咒語產生器｜寫真引擎">
+<meta name="twitter:title" content="西式婚紗藝術寫真咒語產生器｜寫真引擎">
 <meta name="twitter:description" content="以真人參考照製作精品婚紗棚拍、婚紗廣告與婚紗雜誌寫真咒語。">
 <style>
   :root{
@@ -144,7 +144,7 @@
 <main class="wrap">
   <header>
     <div class="eyebrow">Bridal Editorial Collection</div>
-    <h1>婚紗藝術寫真<span>咒語產生器</span></h1>
+    <h1>西式婚紗藝術寫真<span>咒語產生器</span></h1>
     <p>以真人參考照建立單人新娘的精品婚紗寫真，控制高訂婚紗、頭紗、姿態、妝髮、光影與場景；身份鎖定核心優先，婚紗只改變造型與攝影語氣。</p>
   </header>
 
@@ -179,6 +179,7 @@
       <button class="card" type="button" data-template="backViewTrainEditorial"><div class="name">背影回眸長紗主視覺</div><div class="desc">完整展示婚紗背面、頭紗與長拖尾</div></button>
       <button class="card" type="button" data-template="highKeyWindowRuffleBride"><div class="name">落地窗柔霧蓬裙婚紗</div><div class="desc">窗邊柔光、立體蓬裙與高級寫真感</div></button>
       <button class="card" type="button" data-template="vintageRoseBouquetBride"><div class="name">紅玫瑰復古婚紗寫真</div><div class="desc">奶油白婚紗、石階門廊與紅玫瑰花束</div></button>
+      <button class="card" type="button" data-template="lotusPondWaterBride"><div class="name">荷塘白紗水上寫真</div><div class="desc">白色刺繡婚紗、荷塘水面與午後逆光</div></button>
     </div>
   </section>
 
@@ -208,6 +209,7 @@
       <label class="card"><input type="radio" name="composition" value="flowingTrainComposition"><div class="name">裙襬展開構圖</div><div class="desc">讓長拖尾與薄紗動態成為畫面主線</div></label>
       <label class="card"><input type="radio" name="composition" value="backViewTrainEditorial"><div class="name">背影回眸長紗構圖</div><div class="desc">三分之二背面視角展示婚紗背面、頭紗與拖尾</div></label>
       <label class="card"><input type="radio" name="composition" value="environmentalBridalPortrait"><div class="name">環境婚紗構圖</div><div class="desc">人物與教堂、庭園或海岸共同敘事</div></label>
+      <label class="card"><input type="radio" name="composition" value="lotusPondBridalComposition"><div class="name">荷塘水面婚紗構圖</div><div class="desc">白紗、荷葉、水面反光與自然景深</div></label>
       <label class="card"><input type="radio" name="composition" value="stairGownDisplay"><div class="name">古典石階婚紗展示</div><div class="desc">石階、門廊與婚紗裙身共同形成復古縱深</div></label>
     </div>
     <div class="grid grid-3" data-choice="framing" style="margin-top:10px;">
@@ -377,6 +379,9 @@
       <label class="card"><input type="radio" name="pose" value="seatedBouquetOnSteps"><div class="name">石階坐姿手持花束</div><div class="desc">坐在古典石階，裙身與紅玫瑰自然展開</div></label>
       <label class="field full custom-choice">姿勢自填<input id="customPose" type="text" placeholder="例如：人物側身站在窗邊，一手輕扶頭紗，視線微微向下"></label>
     </div>
+    <div class="grid grid-3" data-choice="pose" style="margin-top:8px;">
+      <label class="card"><input type="radio" name="pose" value="lotusPondRecline"><div class="name">荷塘側坐斜躺</div><div class="desc">身體有支撐、白紗自然鋪展、水面與人物同景</div></label>
+    </div>
   </section>
 
   <section class="section-styling">
@@ -443,6 +448,9 @@
       <label class="card"><input type="radio" name="color" value="ivoryRoseRed"><div class="name">搭配色｜奶油白與玫瑰紅</div><div class="desc">紅白對比、復古花束與婚紗高級感</div></label>
     </div>
     <label class="field full custom-choice" style="margin-top:10px;">指定配色自填<input id="colorNote" type="text" placeholder="例如：奶油白、珍珠白、非常淡的香檳金"></label>
+    <div class="grid grid-3" data-choice="lighting" style="margin-top:8px;">
+      <label class="card"><input type="radio" name="lighting" value="lotusWaterBacklight"><div class="name">荷塘午後逆光</div><div class="desc">水面反光、頭紗輪廓光、白紗刺繡清楚</div></label>
+    </div>
   </section>
 
   <section class="section-background">
@@ -466,6 +474,9 @@
       <label class="card"><input type="radio" name="background" value="vintageStoneDoorway"><div class="name">復古石階古典門廊</div><div class="desc">石階、古典門口與復古建築縱深</div></label>
     </div>
     <label class="field full custom-choice" style="margin-top:10px;">背景自填<input id="customBackground" type="text" placeholder="例如：白色花園拱門前，背景有柔焦樹影"></label>
+    <div class="grid grid-3" data-choice="background" style="margin-top:8px;">
+      <label class="card"><input type="radio" name="background" value="lotusPondWedding"><div class="name">荷塘水上婚紗</div><div class="desc">荷葉、白蓮、淺水反光與自然婚紗景深</div></label>
+    </div>
   </section>
 
   <section class="section-extra">
@@ -567,7 +578,8 @@ const compositionData = {
   flowingTrainComposition: 'composition follows the flowing bridal train and veil from the subject into the lower frame, coherent fabric direction',
   backViewTrainEditorial: 'three-quarter rear bridal editorial composition, gown back, veil and train clearly visible, natural shoulder and head direction, face remains coherent and not obscured',
   environmentalBridalPortrait: 'environmental bridal portrait composition, subject integrated with the selected wedding location while remaining the clear focal point',
-  stairGownDisplay: 'full-body bridal composition on classical stone steps, gown silhouette and bouquet clearly visible, architectural doorway framing and natural perspective depth, bride remains the primary subject'
+  stairGownDisplay: 'full-body bridal composition on classical stone steps, gown silhouette and bouquet clearly visible, architectural doorway framing and natural perspective depth, bride remains the primary subject',
+  lotusPondBridalComposition: 'refined environmental bridal composition beside a lotus pond, white gown and water reflection share the frame, foreground lotus leaves add depth without covering the bride'
 };
 
 const framingData = {
@@ -712,7 +724,8 @@ const poseData = {
   walkingVeilMotion: 'slow graceful walking bridal pose, veil and skirt moving gently with the step, natural body mechanics',
   seatedBridalPortrait: 'elegant seated bridal portrait, upright posture, relaxed hands and carefully arranged gown volume',
   heartHandsBride: 'standing in warm window light, both hands gently forming a heart at chest height, relaxed shoulders, soft genuine smile and refined bridal editorial presence',
-  seatedBouquetOnSteps: 'seated securely on classical stone steps while holding a refined red rose bouquet below the face, gown arranged naturally along the stairs, shoulders relaxed and hands anatomically coherent'
+  seatedBouquetOnSteps: 'seated securely on classical stone steps while holding a refined red rose bouquet below the face, gown arranged naturally along the stairs, shoulders relaxed and hands anatomically coherent',
+  lotusPondRecline: 'supported reclined bridal pose beside a calm lotus pond, torso and head comfortably supported, legs arranged naturally, gown draped over the ground and water edge, hands relaxed and body direction coherent'
 };
 
 const makeupData = {
@@ -750,7 +763,8 @@ const lightingData = {
   cinematicLowContrast: 'cinematic low-contrast lighting with quiet shadows and refined filmic tonal depth',
   blackChampagneCoutureLight: 'directional charcoal studio light with a controlled champagne rim, deep tonal separation and smooth bridal satin highlights',
   pearlEditorialShadow: 'soft directional light across pearl-gray space with restrained shadow depth, clean lace modeling and quiet archival elegance',
-  stoneStepAfternoonLight: 'bright afternoon natural light across classical stone steps and a doorway, soft reflected fill from pale stone, clear ivory gown texture and controlled red flower highlights'
+  stoneStepAfternoonLight: 'bright afternoon natural light across classical stone steps and a doorway, soft reflected fill from pale stone, clear ivory gown texture and controlled red flower highlights',
+  lotusWaterBacklight: 'soft afternoon backlight reflected from a calm lotus pond, gentle rim light on veil and tulle, natural facial exposure, readable white embroidery and unified water bounce'
 };
 const colorData = {
   ivoryCream: 'ivory white, warm cream and soft pearl highlights',
@@ -784,7 +798,8 @@ const backgroundData = {
   softGrayWall: 'a minimal soft gray-white wall and refined editorial studio environment',
   charcoalBridalStudio: 'a charcoal bridal couture studio with one sculptural wall plane, controlled shadow depth and no showroom clutter',
   blackGoldBridalGallery: 'a refined black and champagne bridal gallery with dark stone, restrained gold accents and clean editorial separation',
-  vintageStoneDoorway: 'a refined vintage architectural setting with classical stone steps, an aged doorway, pale masonry and soft surrounding depth, suitable for an elegant bridal portrait'
+  vintageStoneDoorway: 'a refined vintage architectural setting with classical stone steps, an aged doorway, pale masonry and soft surrounding depth, suitable for an elegant bridal portrait',
+  lotusPondWedding: 'a calm lotus pond with broad green leaves, pale lotus blossoms, shallow reflective water and a refined natural bridal portrait setting, gown remains fully dressed and clearly readable'
 };
 const cameraData = {
   eyeLevelCover: 'natural eye-level camera angle, standard magazine cover perspective, balanced face and body proportion, clean premium portrait framing',
@@ -830,7 +845,8 @@ const themeTemplates = {
   coastalDaylightVeil: { style: 'cinematicBridal', composition: 'environmentalBridalPortrait', framing: 'fullBody', garment: 'detachableTrainGown', materials: ['layeredTulle', 'silkSatin'], garmentLayer: 'layer6', chestDetail: 'drapedOffShoulderBodice', waistSideDetail: 'drapedWaistPleats', shoulderDetail: 'softOffShoulderTulle', veil: 'cathedralVeil', accessories: ['whiteBouquet'], bodyShape: 'original', pose: 'walkingVeilMotion', makeup: ['naturalRose'], hairstyle: 'romanticWaves', skinTexture: 'naturalReal', lighting: 'coastalHighKeyDaylight', color: 'iceBlueCrystalWhite', background: 'coastalDaylight', camera: 'bridalWideEnvironmental', ratio: '9:16', intensity: 'dramatic couture bridal styling, pronounced train and veil movement, strong fashion editorial presence' },
   backViewTrainEditorial: { style: 'bridalMagazine', composition: 'backViewTrainEditorial', framing: 'fullBody', garment: 'detachableTrainGown', materials: ['layeredTulle', 'pearlBeading'], garmentLayer: 'layer9', chestDetail: 'sweetheartCorset', waistSideDetail: 'detachableOverskirtWaist', shoulderDetail: 'detachableTulleSleeve', veil: 'cathedralVeil', accessories: ['minimalCrown'], bodyShape: 'fashion_tall', pose: 'backViewOverShoulder', makeup: ['refinedBridalBeauty'], hairstyle: 'highBridalUpdo', skinTexture: 'naturalReal', lighting: 'cinematicLowContrast', color: 'whitePlatinumGray', background: 'palaceWeddingHall', camera: 'bridalTrainView', ratio: '2:3', intensity: 'dramatic couture bridal styling, pronounced train and veil movement, strong fashion editorial presence' },
   highKeyWindowRuffleBride: { style: 'fineArtWedding', composition: 'flowingTrainComposition', framing: 'fullBody', garment: 'royalBallgown', materials: ['layeredTulle', 'floralEmbroidery'], garmentLayer: 'layer3', chestDetail: 'drapedOffShoulderBodice', waistSideDetail: 'drapedWaistPleats', shoulderDetail: 'softOffShoulderTulle', veil: 'fingertipVeil', accessories: ['bridalFlowerHairpiece'], bodyShape: 'original', pose: 'windowContemplation', makeup: ['clearBridalMakeup'], hairstyle: 'softFrenchUpdo', skinTexture: 'softFocusSkin', lighting: 'afternoonWindowLight', color: 'purePearlWhite', background: 'windowLightRoom', camera: 'eyeLevelCover', ratio: '9:16', intensity: 'balanced luxury bridal styling, visible couture craftsmanship, refined editorial presence' },
-  vintageRoseBouquetBride: { style: 'fineArtWedding', composition: 'stairGownDisplay', framing: 'fullBody', garment: 'classicALine', materials: ['frenchLace', 'floralEmbroidery'], garmentLayer: 'layer3', chestDetail: 'sweetheartCorset', waistSideDetail: 'drapedWaistPleats', shoulderDetail: 'laceCapSleeve', veil: 'fingertipVeil', accessories: ['redRoseBouquet'], bodyShape: 'original', pose: 'seatedBouquetOnSteps', makeup: ['naturalRose'], hairstyle: 'softFrenchUpdo', skinTexture: 'naturalReal', lighting: 'stoneStepAfternoonLight', color: 'ivoryRoseRed', background: 'vintageStoneDoorway', camera: 'eyeLevelCover', ratio: '9:16', intensity: 'balanced luxury bridal styling, visible couture craftsmanship, refined editorial presence' }
+  vintageRoseBouquetBride: { style: 'fineArtWedding', composition: 'stairGownDisplay', framing: 'fullBody', garment: 'classicALine', materials: ['frenchLace', 'floralEmbroidery'], garmentLayer: 'layer3', chestDetail: 'sweetheartCorset', waistSideDetail: 'drapedWaistPleats', shoulderDetail: 'laceCapSleeve', veil: 'fingertipVeil', accessories: ['redRoseBouquet'], bodyShape: 'original', pose: 'seatedBouquetOnSteps', makeup: ['naturalRose'], hairstyle: 'softFrenchUpdo', skinTexture: 'naturalReal', lighting: 'stoneStepAfternoonLight', color: 'ivoryRoseRed', background: 'vintageStoneDoorway', camera: 'eyeLevelCover', ratio: '9:16', intensity: 'balanced luxury bridal styling, visible couture craftsmanship, refined editorial presence' },
+  lotusPondWaterBride: { style: 'fineArtWedding', composition: 'lotusPondBridalComposition', framing: 'fullBody', garment: 'floralSculptureGown', materials: ['floralEmbroidery', 'layeredTulle'], garmentLayer: 'layer6', chestDetail: 'laceIllusionBodice', waistSideDetail: 'pearlWaistApplique', shoulderDetail: 'softOffShoulderTulle', veil: 'fingertipVeil', accessories: ['whiteBouquet'], bodyShape: 'original', pose: 'lotusPondRecline', makeup: ['naturalRose'], hairstyle: 'romanticWaves', skinTexture: 'naturalReal', lighting: 'lotusWaterBacklight', color: 'purePearlWhite', background: 'lotusPondWedding', camera: 'bridalWideEnvironmental', ratio: '2:3', intensity: 'balanced luxury bridal styling, visible couture craftsmanship, refined editorial presence' }
 };
 
 function selected(name){

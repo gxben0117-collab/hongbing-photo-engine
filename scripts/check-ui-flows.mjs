@@ -11,7 +11,7 @@ const pages = [
   'chinese-classical.html', 'japanese-kimono.html', 'korean-hanbok.html',
   'xianxia.html', 'anime-character.html', 'flower-fairy.html',
   'isekai-fantasy.html', 'store-ad.html', 'floral-sweet.html',
-  'gala-socialite.html', 'bridal-editorial.html', 'kpop-idol.html', 'battle-academy.html',
+  'gala-socialite.html', 'bridal-editorial.html', 'chinese-bridal.html', 'kpop-idol.html', 'battle-academy.html',
   'ancient-goddess.html', 'editorial-identity.html',
 ];
 
@@ -108,14 +108,14 @@ const SHARED_CAMERA_RATIO_PAGES = new Set([
   'travel.html', 'magazine.html', 'luxury-lifestyle.html', 'modern-portrait.html', 'fantasy-fashion.html', 'chinese-classical.html',
   'japanese-kimono.html', 'korean-hanbok.html', 'xianxia.html',
   'anime-character.html', 'flower-fairy.html', 'isekai-fantasy.html',
-  'floral-sweet.html', 'gala-socialite.html', 'bridal-editorial.html',
+  'floral-sweet.html', 'gala-socialite.html', 'bridal-editorial.html', 'chinese-bridal.html',
   'kpop-idol.html', 'battle-academy.html', 'ancient-goddess.html',
 ]);
 const SHARED_BODY_LAYER_PAGES = new Set([
   'magazine.html', 'luxury-lifestyle.html', 'modern-portrait.html', 'fantasy-fashion.html', 'chinese-classical.html',
   'japanese-kimono.html', 'korean-hanbok.html', 'xianxia.html',
   'anime-character.html', 'flower-fairy.html', 'isekai-fantasy.html',
-  'floral-sweet.html', 'gala-socialite.html', 'bridal-editorial.html',
+  'floral-sweet.html', 'gala-socialite.html', 'bridal-editorial.html', 'chinese-bridal.html',
   'kpop-idol.html', 'battle-academy.html', 'ancient-goddess.html',
 ]);
 const SHARED_CAMERA_VALUES = [
@@ -132,7 +132,7 @@ const AUTO_POSE_PAGES = new Set([
   'chinese-classical.html', 'japanese-kimono.html', 'korean-hanbok.html',
   'xianxia.html', 'anime-character.html', 'flower-fairy.html',
   'isekai-fantasy.html', 'floral-sweet.html', 'gala-socialite.html',
-  'bridal-editorial.html', 'kpop-idol.html', 'battle-academy.html',
+  'bridal-editorial.html', 'chinese-bridal.html', 'kpop-idol.html', 'battle-academy.html',
   'ancient-goddess.html',
 ]);
 
@@ -141,6 +141,7 @@ const COLOR_SYSTEM_CONTRACTS = {
   'japanese-kimono.html': 'colorPalette',
   'korean-hanbok.html': 'colorPalette',
   'bridal-editorial.html': 'color',
+  'chinese-bridal.html': 'color',
   'editorial-identity.html': 'color',
 };
 
@@ -208,6 +209,14 @@ for (const page of ['xianxia.html', 'anime-character.html', 'isekai-fantasy.html
 }
 
 visualOrderContracts['bridal-editorial.html'] = {
+  'section-preset': 0, 'section-style': 1, 'section-composition': 2,
+  'section-garment': 3, 'section-material': 4, 'section-garment-variation': 5,
+  'section-veil': 6, 'section-body': 7, 'section-pose': 8,
+  'section-styling': 9, 'section-lighting': 10, 'section-background': 11,
+  'section-extra': 12, 'section-camera': 13, 'section-ratio': 14,
+  'section-output': 15,
+};
+visualOrderContracts['chinese-bridal.html'] = {
   'section-preset': 0, 'section-style': 1, 'section-composition': 2,
   'section-garment': 3, 'section-material': 4, 'section-garment-variation': 5,
   'section-veil': 6, 'section-body': 7, 'section-pose': 8,
@@ -407,7 +416,7 @@ function checkChoiceGroups(page, source, groups) {
 }
 
 function checkCheckboxContracts(page, source) {
-  if (!['chinese-classical.html', 'japanese-kimono.html', 'korean-hanbok.html', 'bridal-editorial.html'].includes(page)) return;
+  if (!['chinese-classical.html', 'japanese-kimono.html', 'korean-hanbok.html', 'bridal-editorial.html', 'chinese-bridal.html'].includes(page)) return;
   const materialInputs = tags(source, 'input').filter(tag => (
     (attr(tag, 'type') || '').toLowerCase() === 'checkbox' && attr(tag, 'name') === 'materials'
   ));
@@ -560,8 +569,8 @@ function checkChineseClassicalTemplateContract(page, source) {
   const templateButtons = tags(source, 'button').filter(tag => attr(tag, 'data-template'));
   const templateKeys = new Set(templateButtons.map(tag => attr(tag, 'data-template')));
   const presetKeys = objectKeys(source, 'themeTemplates');
-  if (templateButtons.length !== 28) issue(page, `expected 28 template buttons, found ${templateButtons.length}`);
-  if (!presetKeys || presetKeys.size !== 28) issue(page, `expected 28 themeTemplates entries, found ${presetKeys ? presetKeys.size : 0}`);
+  if (templateButtons.length !== 30) issue(page, `expected 30 template buttons, found ${templateButtons.length}`);
+  if (!presetKeys || presetKeys.size !== 30) issue(page, `expected 30 themeTemplates entries, found ${presetKeys ? presetKeys.size : 0}`);
   for (const key of templateKeys) {
     if (!presetKeys?.has(key)) issue(page, `template button "${key}" has no themeTemplates entry`);
   }
@@ -587,6 +596,7 @@ const themeCopyContracts = {
   'japanese-kimono.html': '日本材質與和風元素',
   'korean-hanbok.html': '韓國材質與韓服元素',
   'bridal-editorial.html': '婚紗工藝與材質',
+  'chinese-bridal.html': '中式婚嫁工藝與材質',
 };
 
 const themeIntensityContracts = {

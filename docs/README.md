@@ -14,10 +14,10 @@
 - [2026-09-02 風格範例批次分類與採用紀錄](style-reference-batch-2026-09-02.md) — 38 張圖片的匿名分類、唯一歸屬、正式採用與排除邊界
 - [核心咒語邏輯](core-logic.md) — 共用核心區塊、輸出段落順序、插畫媒材條件化、
   stale 保護、元素級獨立隨機、版權角色名規則、五個驗證腳本的用途
-- [UI 與咒語回歸檢查](qa-ui-and-prompt.md) — 22 個登記工具頁的控制項、初始值、生成／複製、
+- [UI 與咒語回歸檢查](qa-ui-and-prompt.md) — 23 個登記工具頁的控制項、初始值、生成／複製、
   一鍵套用與上線前完整檢查清單
 - [全站分類歸屬總規範](theme-classification-rules.md) — 主題歸屬、共用核心邊界、素材分流與模板所有權
-- [工具頁主題與欄位契約](tool-theme-contracts.md) — 22 頁家族分類、共用控制、正式欄位名、
+- [工具頁主題與欄位契約](tool-theme-contracts.md) — 23 頁家族分類、共用控制、正式欄位名、
   比例值、Layer 行為與自訂要求鎖臉提示
 - [工具頁分類與欄位契約](tool-page-contracts.md) — 歷史版 20 頁家族分類、共用控制、正式欄位名、
   比例值、Layer 行為與自訂鎖臉提示
@@ -35,7 +35,8 @@
 - [中式古典美學流程](chinese-classical-workflow.md)
 - [日本和服美學流程](japanese-kimono-workflow.md)
 - [韓國韓服美學流程](korean-hanbok-workflow.md)
-- [婚紗藝術寫真流程](bridal-editorial-workflow.md)
+- [西式婚紗藝術寫真流程](bridal-editorial-workflow.md)
+- [中式婚嫁藝術寫真流程](chinese-bridal-workflow.md)
 - [幻想廣告咒語產生器分類表](fantasy-ad-workflow.md)
 - [公仔工作流程](doll-workflow.md)
 

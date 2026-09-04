@@ -7,6 +7,13 @@
 - `deepUKimonoCouture` 與 `floralCutworkWaistOverlay` 保留在日本和服頁，未加入其他主題的共用改造池；既有隨機 Layer 行為維持不變。
 - 上線前需通過 `check-static.mjs`、`check-ui-flows.mjs`、`reorder-dom-sections.mjs --check`、`validate-preset-refs.mjs`、`check-theme-classification.mjs`、`build-prompt-preview.mjs`、`audit-100x.mjs` 與 `git diff --check`。
 
+## 2026-09-04 v4.63 西式婚紗與中式婚嫁頁面分流
+
+- `bridal-editorial.html` 的可見定位改為西式婚紗藝術寫真；原有西式婚紗資料與生成邏輯保留。
+- 新增 `chinese-bridal.html`，以龍鳳褂、秀禾服、鳳冠霞帔、織金刺繡與喜堂／古宅為頁面專屬主題，提供 12 組完整一鍵模板。
+- 新頁採用正式共用 camera、ratio、body、Layer 與 AI 主題姿勢契約；服裝改造核心的手動優先與 Layer 語義維持一致。
+- 新頁納入首頁、registry、靜態、UI flow、DOM 順序、preset、分類與 100 次隨機回歸檢查；共用鎖臉、臉部幾何與真人骨架核心未修改。
+
 ## 2026-09-03 v4.58 四頁風格範例擴充回歸
 
 - 現代寫真新增 4 組完整模板；旅拍新增 2 組完整模板、H 車站環境人物構圖與車站夕陽逆光；Luxury Lifestyle 與雜誌棚拍各新增 1 組完整模板。
@@ -105,13 +112,13 @@
 
 ## 檢查範圍
 
-目前共 20 個正式工具頁：
+目前共 23 個正式工具頁：
 
 `travel.html`、`magazine.html`、`luxury-lifestyle.html`、`doll.html`、`fantasy-fashion.html`、`chinese-classical.html`、
 `japanese-kimono.html`、`korean-hanbok.html`、`xianxia.html`、
 `anime-character.html`、`flower-fairy.html`、`isekai-fantasy.html`、`store-ad.html`、
 `floral-sweet.html`、`gala-socialite.html`、`kpop-idol.html`、`battle-academy.html`、
- `bridal-editorial.html`、
+ `bridal-editorial.html`、`chinese-bridal.html`、
 `ancient-goddess.html`、`editorial-identity.html`。
 
 ## 上線前命令
@@ -154,19 +161,19 @@ git diff --check
 
 ### 幻想廣告共用控制契約
 
-幻想廣告頁是正式人像工具的共同工程範本。下列 16 個人像頁必須共享同一組控制值，主題只能在
+幻想廣告頁是正式人像工具的共同工程範本。下列 19 個人像頁必須共享同一組控制值，主題只能在
 後面追加自己的選項，不得改寫共同值：
 
-`travel.html`、`magazine.html`、`fantasy-fashion.html`、`chinese-classical.html`、
+`travel.html`、`magazine.html`、`luxury-lifestyle.html`、`modern-portrait.html`、`fantasy-fashion.html`、`chinese-classical.html`、
 `japanese-kimono.html`、`korean-hanbok.html`、`xianxia.html`、`anime-character.html`、
 `flower-fairy.html`、`isekai-fantasy.html`、`floral-sweet.html`、`gala-socialite.html`、
-`bridal-editorial.html`、`kpop-idol.html`、`battle-academy.html`、`ancient-goddess.html`。
+`bridal-editorial.html`、`chinese-bridal.html`、`kpop-idol.html`、`battle-academy.html`、`ancient-goddess.html`。
 
 - `拍攝角度與鏡頭感` 共用自然平視、低角度仰拍、高角度俯拍、柔焦光感、近距離美妝感、
   側臉輪廓感、斜側角度、高角度近景、遠距主視覺 9 組 canonical values。
 - `圖片比例` 共用 9:16、4:5、1:1、2:3、3:4、16:9、4:3、21:9 8 組比例；UI、模板、
   隨機資料與生成函式都直接使用這些可讀的文字值，不再維護第二套比例 ID。
-- 17 個有人物姿勢控制的頁面都必須提供 `pose=auto`，可見文案需表達「AI 判斷配合主題的最佳姿勢」，
+- 20 個有人物姿勢控制的頁面都必須提供 `pose=auto`，可見文案需表達「AI 判斷配合主題的最佳姿勢」，
   並由 `HB_CORE_PROMPT.controls.autoPose` 或該頁的等價資料映射實際進入生成咒語；具名姿勢與自訂姿勢
   選取後不得再疊加 auto 指令。
 - `身形輪廓` 與 `改造強度 Layer` 在具備服裝三區改造的人像頁共用 6 組身形與
@@ -183,7 +190,8 @@ git diff --check
 
 ## 咒語與一鍵契約
 
-- 婚紗藝術寫真頁固定有 12 組一鍵模板；每組必須完整回填婚紗、材質、頭紗、配件、妝髮、姿勢、光影、背景、鏡頭與比例。覆面頭紗只能手動選擇，不進一般隨機池。
+- 西式婚紗藝術寫真頁固定有 12 組一鍵模板；每組必須完整回填婚紗、材質、頭紗、配件、妝髮、姿勢、光影、背景、鏡頭與比例。覆面頭紗只能手動選擇，不進一般隨機池。
+- 中式婚嫁藝術寫真頁固定有 12 組一鍵模板；每組必須完整回填婚服形制、工藝、服裝改造、儀式層、妝髮、姿勢、光影、背景、鏡頭與比例，不得引用西式婚紗資料。
 - 婚紗頁的頭紗身份保護只在選擇頭紗時追加，無頭紗時不得輸出 veil 保護段落；構圖留白不得生成文字。
 
 - 手動改選項後，既有輸出會標記 stale；重新生成前不可複製舊咒語。
@@ -201,7 +209,8 @@ git diff --check
 
 ## 目前頁面順序基準
 
-- 婚紗藝術寫真：成品語氣 → 構圖 → 婚紗輪廓 → 工藝材質 → 服裝改造 → 頭紗配件 → 身形 → 姿勢 → 妝髮膚質 → 光影配色 → 背景 → 自訂 → 鏡頭 → 比例 → 生成。
+- 西式婚紗藝術寫真：成品語氣 → 構圖 → 婚紗輪廓 → 工藝材質 → 服裝改造 → 頭紗配件 → 身形 → 姿勢 → 妝髮膚質 → 光影配色 → 背景 → 自訂 → 鏡頭 → 比例 → 生成。
+- 中式婚嫁藝術寫真：成品語氣 → 構圖 → 婚服形制 → 中式婚嫁工藝 → 服裝改造 → 儀式層與配件 → 身形 → 婚嫁儀態 → 妝髮膚質 → 光影配色 → 背景 → 自訂 → 鏡頭 → 比例 → 生成。
 - 婚紗頁採單人新娘範圍；不得由模板或隨機套用加入新郎、伴郎、伴娘或第二位人物。
 
 - 共同世界觀頁：版型／構圖 → 服裝輪廓 → 主題材質 → 服裝改造 → 身形 → 姿勢 →

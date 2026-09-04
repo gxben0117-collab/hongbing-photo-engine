@@ -163,13 +163,22 @@
       forbidden: ['把節慶道具或節日敘事強制帶入其他正式工具頁']
     },
     'bridal-editorial.html': {
-      label: '婚紗藝術寫真',
+      label: '西式婚紗藝術寫真',
       family: 'bridalEditorial',
       productionMode: 'referencePortrait',
-      primaryIntent: '單人新娘的婚紗廣告與藝術寫真',
+      primaryIntent: '單人新娘的西式婚紗廣告與藝術寫真',
       owns: ['婚紗輪廓', '蕾絲珠繡', '頭紗', '新娘配件', '婚紗光影'],
-      allowed: ['高訂婚紗、頭紗、珠繡、婚禮空間與單人新娘肖像'],
-      forbidden: ['85mm 婚紗人像舊選項', '多人物婚禮主題', '仙俠或科技幻想']
+      allowed: ['高訂西式婚紗、頭紗、蕾絲珠繡、教堂或海岸婚禮空間與單人新娘肖像'],
+      forbidden: ['85mm 婚紗人像舊選項', '中式婚服形制', '多人物婚禮主題', '仙俠或科技幻想']
+    },
+    'chinese-bridal.html': {
+      label: '中式婚嫁藝術寫真',
+      family: 'chineseBridal',
+      productionMode: 'referencePortrait',
+      primaryIntent: '龍鳳褂、秀禾服與中式婚嫁儀式的高級人物寫真',
+      owns: ['中式婚服形制', '織金刺繡', '鳳冠霞帔', '婚嫁儀態', '喜堂古宅與中式婚嫁光影'],
+      allowed: ['龍鳳褂、秀禾服、鳳冠霞帔、漢唐宋婚服、新中式高訂與中式婚嫁場景'],
+      forbidden: ['西式婚紗作為主體', '教堂長頭紗正向混入', '仙俠或科技幻想', '多人婚禮主題']
     },
     'kpop-idol.html': {
       label: '韓系氣質偶像風',

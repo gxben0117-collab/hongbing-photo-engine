@@ -1029,6 +1029,73 @@ function generateBridalEditorial(core, data, selectionOverride = null) {
   return prompt.filter(Boolean).join('\n');
 }
 
+function generateChineseBridal(core, data, selectionOverride = null) {
+  const selection = {
+    style: 'traditionalCeremonialPortrait',
+    composition: 'centeredChineseCeremony',
+    framing: 'fullBody',
+    garment: 'longfengKwa',
+    materials: ['redGoldBrocade', 'dragonPhoenixEmbroidery'],
+    garmentLayer: 'layer3',
+    chestDetail: 'standingCollarWeddingBodice',
+    waistSideDetail: 'embroideredWaistSash',
+    shoulderDetail: 'goldCuffShoulder',
+    veil: 'none',
+    accessories: ['phoenixCrown', 'jadePendant'],
+    bodyShape: 'original',
+    pose: 'ceremonialStanding',
+    makeup: ['classicRedBridal'],
+    hairstyle: 'phoenixCrownUpdo',
+    skinTexture: 'luxuryAdSkin',
+    lighting: 'redGoldCeremonial',
+    color: 'cinnabarGoldIvory',
+    background: 'redGoldWeddingHall',
+    camera: 'eyeLevelCover',
+    ratio: '9:16',
+    intensity: 'balanced Chinese bridal couture styling, visible embroidery craftsmanship, premium editorial presence',
+    ...(selectionOverride || {}),
+  };
+  const materialText = selection.materials.map(key => data.materialData[key]).filter(Boolean).join(', ');
+  const accessoryText = selection.accessories.map(key => data.accessoryData[key]).filter(Boolean).join(', ');
+  const garmentDetails = [
+    data.chestDetailData[selection.chestDetail],
+    data.waistSideDetailData[selection.waistSideDetail],
+    data.shoulderDetailData[selection.shoulderDetail],
+  ].filter(Boolean).join(', ');
+  const ceremonyLayer = data.veilData[selection.veil];
+  const prompt = [
+    data.CORE.identityGuard,
+    data.CORE.anatomyGuard,
+    data.CORE.poseGuard,
+    data.CORE.lightingGuard,
+    data.CORE.compositionGuard,
+    data.CHINESE_BRIDAL_CORE,
+    data.styleData[selection.style],
+    data.compositionData[selection.composition],
+    data.framingData[selection.framing],
+    'Chinese wedding garment form: ' + data.garmentData[selection.garment],
+    materialText ? 'Chinese wedding garment materials and craftsmanship: ' + materialText : '',
+    garmentDetails ? 'garment surface detail: ' + garmentDetails + ' — structural surface accents only, the selected wedding garment silhouette stays unchanged' : '',
+    selection.garmentLayer === 'layer0' ? '' : 'controlled garment detail intensity, surface changes remain subordinate to the selected wedding garment form',
+    ceremonyLayer ? 'ceremonial textile layer: ' + ceremonyLayer : '',
+    accessoryText ? 'Chinese bridal accessories: ' + accessoryText : '',
+    data.CEREMONIAL_LAYER_PROTECTION,
+    data.bodyShapes[selection.bodyShape],
+    data.poseData[selection.pose],
+    'Chinese bridal styling: ' + selection.makeup.map(key => data.makeupData[key]).filter(Boolean).join(', ') + ', ' + data.hairstyleData[selection.hairstyle] + ', ' + data.skinData[selection.skinTexture],
+    'lighting: ' + data.lightingData[selection.lighting],
+    'color palette: ' + data.colorData[selection.color],
+    'background: ' + data.backgroundData[selection.background],
+    data.cameraData[selection.camera],
+    data.ratioData[selection.ratio],
+    selection.intensity,
+    data.CHINESE_BRIDAL_OUTPUT,
+    data.CORE.negativePrompt,
+    data.CHINESE_BRIDAL_NEGATIVE,
+  ];
+  return prompt.filter(Boolean).join('\n');
+}
+
 function generateAncientGoddess(core, data) {
   const selection = {
     bodyShape: 'original',
@@ -1640,6 +1707,24 @@ function loadRevision(label, sourceReader) {
       if (!template) continue;
       prompts[fileName] = generateBridalEditorial(core, bridalData, template);
     }
+  } catch (err) {
+    // Not present in this revision — skip.
+  }
+
+  // chinese-bridal.html is new; older revisions may not have it yet, so skip gracefully.
+  try {
+    const chineseBridalSource = sourceReader('chinese-bridal.html');
+    const chineseBridalData = evalDataSegment({
+      source: chineseBridalSource,
+      core,
+      page: 'chineseClassical',
+      startMarker: 'const CORE = window.HB_CORE_PROMPT.page.chineseClassical;',
+      endMarker: 'function selected',
+      exportExpression: '({ CORE, CHINESE_BRIDAL_CORE, CHINESE_BRIDAL_NEGATIVE, CHINESE_BRIDAL_OUTPUT, CEREMONIAL_LAYER_PROTECTION, styleData, compositionData, framingData, garmentData, materialData, chestDetailData, waistSideDetailData, shoulderDetailData, veilData, accessoryData, bodyShapes, poseData, makeupData, hairstyleData, skinData, lightingData, colorData, backgroundData, cameraData, ratioData, themeTemplates })',
+    });
+    prompts['chinese-bridal-default.txt'] = generateChineseBridal(core, chineseBridalData);
+    const ceremonyTemplate = chineseBridalData.themeTemplates?.dragonPhoenixRedGold;
+    if (ceremonyTemplate) prompts['chinese-bridal-dragon-phoenix.txt'] = generateChineseBridal(core, chineseBridalData, ceremonyTemplate);
   } catch (err) {
     // Not present in this revision — skip.
   }

@@ -97,6 +97,7 @@
       <button class="card" type="button" data-template="beautyWindowGauze"><div class="name">花窗薄紗肖像</div><div class="desc">輕紗層次、花窗框景、唯美近景</div></button>
       <button class="card" type="button" data-template="cinnabarScreenClassic"><div class="name">朱紅屏風古典華裳</div><div class="desc">木質室內、山水屏風、暖光坐姿</div></button>
       <button class="card" type="button" data-template="ornateHeadpieceClosePortrait"><div class="name">古典華麗頭飾近距離肖像</div><div class="desc">華麗金工頭飾、宮苑側光與近距離肖像</div></button>
+      <button class="card" type="button" data-template="cinnabarPaperUmbrellaPalace"><div class="name">朱紅紙傘宮牆動態華裳</div><div class="desc">紅色古裝、紙傘、宮牆透視與飄帶動勢</div></button>
       <button class="card" type="button" data-template="beautyPlumSnow"><div class="name">梅雪古風寫真</div><div class="desc">素色絲綢、梅枝雪景、藝術人像</div></button>
     </div>
     <div class="group-title">青春古風寫真</div>
@@ -106,6 +107,7 @@
       <button class="card" type="button" data-template="flowerMarketRomance"><div class="name">花市心動寫真</div><div class="desc">花市、飄帶、柔和戀愛感</div></button>
       <button class="card" type="button" data-template="blueLilacStreetGlance"><div class="name">藍紫古街回眸抓拍</div><div class="desc">微性感改良漢服、街拍回眸與低飽和色彩</div></button>
       <button class="card" type="button" data-template="youthfulOpenRobePortrait"><div class="name">青春古風・敞襟內襦</div><div class="desc">敞襟外袍、低方領內襦、古街明亮動感</div></button>
+      <button class="card" type="button" data-template="lanternTanghuluStreetPortrait"><div class="name">花燈古街糖葫蘆互動寫真</div><div class="desc">古街燈籠、手持糖葫蘆、自然行走回眸</div></button>
       <button class="card" type="button" data-template="tangGardenTopBeauty"><div class="name">盛唐花苑高角度美顏</div><div class="desc">盛唐花苑、輕快轉身與高角度近景</div></button>
     </div>
     <div class="group-title">精品主視覺</div>
@@ -149,6 +151,8 @@
       <label class="card"><input type="radio" name="composition" value="folding screen and architectural planes create elegant layered framing around the subject"><div class="name">屏風分層構圖</div><div class="desc">屏風、人物與背景形成前後層次</div></label>
       <label class="card"><input type="radio" name="composition" value="foreground floral branch framing with the face and garment remaining clearly unobstructed"><div class="name">前景花枝框景</div><div class="desc">以花枝增加畫面深度，不遮擋臉部</div></label>
       <label class="card"><input type="radio" name="composition" value="candid ancient-street portrait composition with natural interaction, layered street depth and the subject clearly separated from the background"><div class="name">古街動態抓拍</div><div class="desc">自然互動、街景景深與靈動瞬間</div></label>
+      <label class="card"><input type="radio" name="composition" value="palace wall perspective composition with a red paper umbrella, flowing ribbons and clear architectural depth, subject remains the primary focus"><div class="name">宮牆紙傘透視構圖</div><div class="desc">宮牆、紙傘與飄帶形成縱深動勢</div></label>
+      <label class="card"><input type="radio" name="composition" value="lantern street interactive portrait composition with warm lantern layers, a clear foreground prop and natural walking depth"><div class="name">花燈古街互動構圖</div><div class="desc">前景道具、燈籠與人物行走層次</div></label>
       <label class="card"><input type="radio" name="composition" value="close interactive portrait composition with the subject turning naturally toward the camera, visible collarbone, sleeve movement and intimate background depth"><div class="name">近距離互動肖像</div><div class="desc">近景、回眸、衣料與眼神互動</div></label>
       <label class="card"><input type="radio" name="composition" value="ornate headpiece close portrait composition, refined gold hair ornament and facial expression remain the visual priorities, garment and background stay secondary, culturally grounded Chinese classical styling"><div class="name">古典華麗頭飾近肖像</div><div class="desc">金工頭飾、臉部表情與古典細節為主視覺</div></label>
     </div>
@@ -232,6 +236,8 @@
       <label class="card"><input type="radio" name="accessory" value="ribbonFloralHairpin"><div class="name">飄帶花簪</div><div class="desc">花簪與絲帶隨微風吹動</div></label>
       <label class="card"><input type="radio" name="accessory" value="butterflySilkFlower"><div class="name">蝶飾絹花</div><div class="desc">清新花飾與節制青春色彩</div></label>
       <label class="card"><input type="radio" name="accessory" value="braidedRibbonOrnament"><div class="name">編髮彩帶</div><div class="desc">編髮、彩帶與自然動態</div></label>
+      <label class="card"><input type="radio" name="accessory" value="redPaperUmbrella"><div class="name">朱紅紙傘</div><div class="desc">傳統紙傘作為手持前景與動勢道具</div></label>
+      <label class="card"><input type="radio" name="accessory" value="tanghulu"><div class="name">糖葫蘆</div><div class="desc">古街互動小道具，手部與視線自然協調</div></label>
     </div>
   </section>
 
@@ -334,6 +340,10 @@
       <label class="card"><input type="radio" name="pose" value="headpieceThreeQuarter"><div class="name">頭飾三分之四近肖像</div><div class="desc">頭飾完整可見、輕轉下巴、雙手不遮臉</div></label>
     </div>
     <label class="field">自訂姿勢<input id="customPose" type="text" placeholder="例如：手扶木格窗回頭"></label>
+    <div class="grid grid-3" data-choice="pose" style="margin-top:8px;">
+      <label class="card"><input type="radio" name="pose" value="paperUmbrellaDynamic"><div class="name">朱紅紙傘動態行走</div><div class="desc">宮牆旁自然行走、手臂延展、袖口與飄帶隨風</div></label>
+      <label class="card"><input type="radio" name="pose" value="lanternTanghulu"><div class="name">花燈街手持糖葫蘆</div><div class="desc">自然行走、手持糖葫蘆、輕笑回眸</div></label>
+    </div>
   </section>
 
   <section class="section-extra">
@@ -397,6 +407,10 @@
       <label class="card"><input type="radio" name="colorPalette" value="cinnabarIvoryInkGold"><div class="name">搭配色｜朱紅象牙墨綠金</div><div class="desc">古典華裳、屏風木作與克制金線</div></label>
     </div>
     <label class="field">指定配色<input id="colorNote" type="text" placeholder="例如：月白、黛青、少量金色"></label>
+    <div class="grid grid-3" data-choice="lighting" style="margin-top:8px;">
+      <label class="card"><input type="radio" name="lighting" value="palaceRibbonDaylight"><div class="name">宮牆飄帶日光</div><div class="desc">明亮日光、石牆反光、袖口與飄帶輪廓光</div></label>
+      <label class="card"><input type="radio" name="lighting" value="lanternStreetWarm"><div class="name">花燈古街暖光</div><div class="desc">分層燈籠暖光、紅色反射、夜景膚色自然</div></label>
+    </div>
   </section>
 
   <section class="section-background">
@@ -430,6 +444,10 @@
       <label class="card"><input type="radio" name="background" value="jadeWhiteGallery"><div class="name">黛青玉白畫廊</div><div class="desc">玉白石材、極簡架構與典藏氣質</div></label>
     </div>
     <label class="field">自訂背景<input id="customBackground" type="text" placeholder="例如：雨後蘇州園林"></label>
+    <div class="grid grid-3" data-choice="background" style="margin-top:8px;">
+      <label class="card"><input type="radio" name="background" value="palaceWallPerspective"><div class="name">朱紅宮牆透視</div><div class="desc">長廊透視、石地、屋簷與飄帶動勢</div></label>
+      <label class="card"><input type="radio" name="background" value="lanternOldTownNight"><div class="name">花燈古街夜景</div><div class="desc">木造店舖、分層紅燈籠、石板街與節慶景深</div></label>
+    </div>
   </section>
 
   <section class="section-camera">
@@ -514,6 +532,8 @@ const accessoryData = {
   pearlHairOrnament: 'a delicate pearl hair ornament with restrained classical craftsmanship',
   goldHairpin: 'a refined gold hairpin and subtle traditional hair arrangement',
   phoenixTasselHairpiece: 'an ornate phoenix-inspired gold hairpiece with refined pearl tassels and controlled courtly detail',
+  redPaperUmbrella: 'a traditional vermilion paper umbrella held as a clear secondary prop, refined bamboo ribs and controlled red color accent',
+  tanghulu: 'a single traditional tanghulu skewer held as a small foreground street prop, glossy fruit coating and restrained festive color',
   woodHairpin: 'a simple carved wooden hairpin with quiet literati elegance',
   silkFlower: 'a soft silk flower hair ornament in restrained classical colors',
   pearlForehead: 'a delicate pearl forehead ornament while keeping the face clearly unobstructed',
@@ -583,6 +603,8 @@ const backgroundData = {
   lycheePalaceGarden: 'a refined palace garden with a waterside pavilion, lotus pond, mature lychee tree and a quiet ceremonial feast setting, layered Tang-inspired architecture and natural depth',
   royalGardenHotSpring: 'a white-jade royal garden hot-spring pool with soft steam, floating peony petals, carved stone edges and elegant palace corridors, fully dressed portrait setting',
   livelyAncientStreet: 'a lively traditional Chinese street with timber facades, soft daylight, controlled background activity and clean subject separation',
+  palaceWallPerspective: 'a refined vermilion palace wall passage with long architectural perspective, pale stone ground, traditional roof details and clear depth for flowing ribbons and sleeves',
+  lanternOldTownNight: 'a traditional Chinese old-town street at night with layered warm red lanterns, timber storefronts, stone paving and softly blurred festive activity behind the subject',
   springFlowerMarketCorridor: 'a refined spring flower-market corridor with pale blossoms, traditional awnings and airy layered depth, kept visually restrained',
   darkLacquerStudio: 'a dark lacquer Chinese couture studio with charcoal walls, a single architectural plane and controlled deep background separation',
   jadeWhiteGallery: 'a quiet jade-white contemporary gallery with subtle stone texture, minimal architecture and archival fashion portrait atmosphere'
@@ -609,7 +631,9 @@ const lightingData = {
   lacquerGoldEditorialLight: 'directional black-lacquer studio light with a controlled warm gold rim, deep tonal contrast and smooth couture highlight roll-off',
   jadeGalleryLight: 'quiet gallery side light across jade-white stone and silk, restrained cool contrast, subtle shadow depth and refined textile modeling',
   cinnabarWindowWarm: 'warm window light across a red folding screen interior, subtle reflection from polished wood flooring, controlled highlights on gold embroidery and unified natural facial exposure',
-  headpieceGoldPortraitLight: 'controlled warm side light with a soft fill across the face, precise highlights on the ornate gold hairpiece and restrained shadow depth in the lacquered background'
+  headpieceGoldPortraitLight: 'controlled warm side light with a soft fill across the face, precise highlights on the ornate gold hairpiece and restrained shadow depth in the lacquered background',
+  palaceRibbonDaylight: 'bright diffused daylight along a palace wall, soft warm stone bounce, controlled rim light on ribbons and sleeves and even facial exposure',
+  lanternStreetWarm: 'warm layered lantern light across the face, garment and old-town street, gentle red bounce, readable skin tone and restrained night contrast',
 };
 
 const colorPaletteData = {
@@ -663,6 +687,8 @@ const poseData = {
   formalKneel: 'formal seated kneeling pose with aligned spine, relaxed shoulders and dignified stillness',
   overShoulderSmile: 'natural over-the-shoulder turn toward the camera with a subtle relaxed smile, coherent head and torso direction and loose fingers',
   hairRibbonBreeze: 'one hand gently brushing the hair as a light breeze moves the hair and silk ribbons, relaxed shoulders and natural fingers',
+  paperUmbrellaDynamic: 'holding a traditional red paper umbrella while taking one natural step beside a palace wall, one arm extending with relaxed wrist, ribbons and wide sleeves following the movement, face unobstructed',
+  lanternTanghulu: 'walking naturally through a lantern street while holding one tanghulu skewer at chest level, relaxed fingers, gentle smile and a subtle over-the-shoulder glance with coherent body direction',
   briskStreetWalk: 'captured during a lively but natural walk through an ancient street, one clear step, flowing hem movement and relaxed hands',
   lightSpinTurn: 'a light turning motion captured mid-step, sleeves and ribbons following the body naturally while the face remains unobstructed',
   upwardNaturalSmile: 'looking slightly upward with a bright natural smile, relaxed neck and shoulders, soft hands and a candid adult portrait moment',
@@ -810,7 +836,9 @@ const themeTemplates = {
   chineseLacquerGoldCouture: { style: 'modernCouture', composition: 'asymmetrical composition with the subject placed to one side, balanced visual weight and clean surrounding space', garment: 'hanModern', materials: ['darkPatternJacquard', 'goldEmbroidery'], accessory: 'jadePendant', chestDetail: 'crossCollarDeepV', waistSideDetail: 'layeredWrapWaist', shoulderDetail: 'modernChineseCapelet', bodyShape: 'fashion_tall', pose: 'sideLongLine', lighting: 'lacquerGoldEditorialLight', color: 'lacquerBlackGold', background: 'darkLacquerStudio', framing: 'threeQuarter', camera: 'threeQuarterSide', ratio: '4:5' },
   chineseJadeWhiteArchive: { style: 'fashionEditorial', composition: 'garment detail-focused composition with collar construction, textile texture and refined craftsmanship as visual priorities', garment: 'songModern', materials: ['kesiTexture', 'inkLandscapePattern'], accessory: 'woodHairpin', chestDetail: 'layeredCrossCollar', waistSideDetail: 'none', shoulderDetail: 'silkShawlDrape', bodyShape: 'original', pose: 'windowTurn', lighting: 'jadeGalleryLight', color: 'jadeWhiteInk', background: 'jadeWhiteGallery', framing: 'halfBody', camera: 'beautyCloseUp', ratio: '4:5' },
   cinnabarScreenClassic: { style: 'classicalPortrait', composition: 'folding screen and architectural planes create elegant layered framing around the subject', garment: 'tangClassical', materials: ['goldEmbroidery', 'peonyPattern'], accessory: 'goldHairpin', chestDetail: 'layeredCrossCollar', waistSideDetail: 'wovenSilkSash', shoulderDetail: 'wideSleeveShoulderLine', bodyShape: 'original', pose: 'screenSeatedGlance', lighting: 'cinnabarWindowWarm', color: 'cinnabarIvoryInkGold', background: 'screenInterior', framing: 'threeQuarter', camera: 'threeQuarterSide', ratio: '4:5' },
-  ornateHeadpieceClosePortrait: { style: 'courtLuxury', composition: 'ornate headpiece close portrait composition, refined gold hair ornament and facial expression remain the visual priorities, garment and background stay secondary, culturally grounded Chinese classical styling', garment: 'ancientPalaceCouture', materials: ['goldEmbroidery', 'peonyPattern'], accessory: 'phoenixTasselHairpiece', chestDetail: 'none', waistSideDetail: 'none', shoulderDetail: 'none', bodyShape: 'original', pose: 'headpieceThreeQuarter', lighting: 'headpieceGoldPortraitLight', color: 'rougeGold', background: 'redLacquerHall', framing: 'halfBody', camera: 'beautyCloseUp', ratio: '4:5' }
+  ornateHeadpieceClosePortrait: { style: 'courtLuxury', composition: 'ornate headpiece close portrait composition, refined gold hair ornament and facial expression remain the visual priorities, garment and background stay secondary, culturally grounded Chinese classical styling', garment: 'ancientPalaceCouture', materials: ['goldEmbroidery', 'peonyPattern'], accessory: 'phoenixTasselHairpiece', chestDetail: 'none', waistSideDetail: 'none', shoulderDetail: 'none', bodyShape: 'original', pose: 'headpieceThreeQuarter', lighting: 'headpieceGoldPortraitLight', color: 'rougeGold', background: 'redLacquerHall', framing: 'halfBody', camera: 'beautyCloseUp', ratio: '4:5' },
+  cinnabarPaperUmbrellaPalace: { style: 'livelySensualEditorial', composition: 'palace wall perspective composition with a red paper umbrella, flowing ribbons and clear architectural depth, subject remains the primary focus', garment: 'hanClassical', materials: ['lightGauze', 'birdFlowerEmbroidery'], accessory: 'redPaperUmbrella', chestDetail: 'none', waistSideDetail: 'wovenSilkSash', shoulderDetail: 'wideSleeveShoulderLine', bodyShape: 'original', pose: 'paperUmbrellaDynamic', lighting: 'palaceRibbonDaylight', color: 'cinnabarJadeIvory', background: 'palaceWallPerspective', framing: 'threeQuarter', camera: 'threeQuarterSide', ratio: '9:16' },
+  lanternTanghuluStreetPortrait: { style: 'youthfulClassicalPortrait', composition: 'lantern street interactive portrait composition with warm lantern layers, a clear foreground prop and natural walking depth', garment: 'youthfulLightClassicalCouture', materials: ['lightGauze', 'birdFlowerEmbroidery'], accessory: 'tanghulu', chestDetail: 'none', waistSideDetail: 'layeredWrapWaist', shoulderDetail: 'silkShawlDrape', bodyShape: 'original', pose: 'lanternTanghulu', lighting: 'lanternStreetWarm', color: 'peachJadeMoon', background: 'lanternOldTownNight', framing: 'threeQuarter', camera: 'threeQuarterSide', ratio: '9:16' }
 };
 
 function selected(name){

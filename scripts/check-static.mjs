@@ -24,6 +24,7 @@ const htmlFiles = [
   'floral-sweet.html',
   'gala-socialite.html',
   'bridal-editorial.html',
+  'chinese-bridal.html',
   'kpop-idol.html',
   'battle-academy.html',
   'ancient-goddess.html',

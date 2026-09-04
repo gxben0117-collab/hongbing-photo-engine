@@ -8,7 +8,7 @@ const formalPages = [
   'travel.html', 'magazine.html', 'luxury-lifestyle.html', 'modern-portrait.html', 'doll.html',
   'fantasy-fashion.html', 'chinese-classical.html', 'japanese-kimono.html', 'korean-hanbok.html',
   'xianxia.html', 'anime-character.html', 'flower-fairy.html', 'isekai-fantasy.html',
-  'store-ad.html', 'floral-sweet.html', 'gala-socialite.html', 'festival-editorial.html', 'bridal-editorial.html',
+  'store-ad.html', 'floral-sweet.html', 'gala-socialite.html', 'festival-editorial.html', 'bridal-editorial.html', 'chinese-bridal.html',
   'kpop-idol.html', 'battle-academy.html', 'ancient-goddess.html', 'editorial-identity.html'
 ];
 const failures = [];

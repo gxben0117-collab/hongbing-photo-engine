@@ -43,7 +43,7 @@ v4.3 基礎重點：
 v4.3 之後陸續完成（詳見開發日誌）：
 
 - travel / magazine / fantasy 大量擴充選項（姿勢、服裝、材質、背景、光線）
-- 18 個具人物姿勢控制的工具頁提供「AI 判斷｜主題最佳姿勢」，由共用核心依主題、服裝、構圖、鏡頭、光影與場景選擇單一合適姿勢
+- 20 個具人物姿勢控制的工具頁提供「AI 判斷｜主題最佳姿勢」，由共用核心依主題、服裝、構圖、鏡頭、光影與場景選擇單一合適姿勢
 - travel / magazine / fantasy 的「生成 → 顯示 → 複製」操作模式統一
   （stale 保護、套用即顯示、按鈕配色一致）
 - 三頁「隨機套用」改為元素級獨立隨機（每個欄位各自抽選再動態組合）
@@ -53,7 +53,7 @@ v4.3 之後陸續完成（詳見開發日誌）：
 ## 專案定位
 
 - `index.html` 是入口與工具導覽頁。
-- 二十二個正式工具頁（見下方「正式頁面」）各自包含 UI、選項資料與咒語組裝邏輯。
+- 二十三個正式工具頁（見下方「正式頁面」）各自包含 UI、選項資料與咒語組裝邏輯。
 - `assets/core-prompt.js` 集中管理 v4.3 共用身份鎖定、臉部幾何、真人骨架、鏡頭重建、光線一致、膚質、負面詞與輸出品質規則。
 - `assets/editorial-finish.js` 集中管理中式古典、和服與韓系偶像三個精品主題頁的高預算編輯成像、材質可信度、光影層次與主題化負面限制；婚紗頁使用等效的短版專屬精品核心，避免重複堆疊而稀釋身份鎖定。
 - `assets/core-prompt.js` 另提供共用 `autoColor` 控制提示；中式古典、和服、韓服、婚紗與編輯視覺設計的色彩系統均提供主題搭配色組與 AI 配色選項。
@@ -82,7 +82,8 @@ v4.3 之後陸續完成（詳見開發日誌）：
 - `floral-sweet.html` - 花漾甜美系咒語產生器
 - `gala-socialite.html` - 氣質名媛宴會咒語產生器
 - `festival-editorial.html` - 節慶美學寫真咒語產生器
-- `bridal-editorial.html` - 婚紗藝術寫真咒語產生器
+- `bridal-editorial.html` - 西式婚紗藝術寫真咒語產生器
+- `chinese-bridal.html` - 中式婚嫁藝術寫真咒語產生器
 - `kpop-idol.html` - 韓系氣質偶像風咒語產生器
 - `battle-academy.html` - 戰鬥制服學園咒語產生器
 - `ancient-goddess.html` - 神話古文明女神咒語產生器
@@ -109,7 +110,8 @@ v4.3 之後陸續完成（詳見開發日誌）：
 ├─ store-ad.html               # 工具頁: 店家廣告
 ├─ floral-sweet.html           # 工具頁: 花漾甜美系
 ├─ gala-socialite.html         # 工具頁: 氣質名媛宴會
-├─ bridal-editorial.html      # 工具頁: 婚紗藝術寫真
+├─ bridal-editorial.html      # 工具頁: 西式婚紗藝術寫真
+├─ chinese-bridal.html        # 工具頁: 中式婚嫁藝術寫真
 ├─ kpop-idol.html              # 工具頁: 韓系氣質偶像風
 ├─ battle-academy.html         # 工具頁: 戰鬥制服學園
 ├─ ancient-goddess.html        # 工具頁: 神話古文明女神
@@ -129,7 +131,7 @@ v4.3 之後陸續完成（詳見開發日誌）：
 - [開發日誌](docs/development-log.md) — 現況與完整歷史記錄
 - [核心咒語保護契約](docs/core-prompt-contract.md) — 改咒語前必看
 - [全站分類歸屬總規範](docs/theme-classification-rules.md) — 主題歸屬、共用核心邊界與新素材分流規則
-- [工具頁主題與欄位契約](docs/tool-theme-contracts.md) — 22 頁分類、欄位命名、比例值、Layer
+- [工具頁主題與欄位契約](docs/tool-theme-contracts.md) — 23 頁分類、欄位命名、比例值、Layer
 - [工具頁分類與欄位契約](docs/tool-page-contracts.md) — 歷史版欄位契約與演進記錄
   與自訂要求鎖臉提示的正式契約
 
@@ -139,7 +141,7 @@ v4.3 之後陸續完成（詳見開發日誌）：
 [Luxury Lifestyle 攝影流程](docs/luxury-lifestyle-workflow.md)｜
 [中式古典美學流程](docs/chinese-classical-workflow.md)｜
 [日本和服美學流程](docs/japanese-kimono-workflow.md)｜[韓國韓服美學流程](docs/korean-hanbok-workflow.md)｜
-[婚紗藝術寫真流程](docs/bridal-editorial-workflow.md)｜
+[西式婚紗藝術寫真流程](docs/bridal-editorial-workflow.md)｜[中式婚嫁藝術寫真流程](docs/chinese-bridal-workflow.md)｜
 [幻想廣告分類表](docs/fantasy-ad-workflow.md)｜[公仔工作流程](docs/doll-workflow.md)｜
 [專案架構](docs/architecture.md)｜[完整程式規格邏輯文件](docs/full-program-spec.md)｜
 [歷史交接文件歸檔](docs/history/)
