@@ -163,6 +163,7 @@
       <button class="preset-btn" type="button" data-template="boutiqueKnitStreet">一鍵套用｜精品店門口白針織</button>
       <button class="preset-btn" type="button" data-template="bloodOrangeOrchard">一鍵套用｜血橙果園前景互動</button>
       <button class="preset-btn" type="button" data-template="campusGreenDaily">一鍵套用｜校園綠蔭日常</button>
+      <button class="preset-btn" type="button" data-template="rainyUrbanBoutique">一鍵套用｜雨夜都市精品街拍</button>
     </div>
   </section>
 
@@ -204,6 +205,7 @@
       <label class="card"><input type="radio" name="scene" value="boutiqueEntrance"><span class="name">精品店門口</span><span class="desc">玻璃櫥窗、騎樓陰影與高級都會街拍</span></label>
       <label class="card"><input type="radio" name="scene" value="bloodOrangeOrchard"><span class="name">血橙果園</span><span class="desc">橙樹果實、戶外日光與前景互動</span></label>
       <label class="card"><input type="radio" name="scene" value="campusGreenPath"><span class="name">校園綠蔭小徑</span><span class="desc">成熟樹蔭、長椅、路燈與自然生活感</span></label>
+      <label class="card"><input type="radio" name="scene" value="rainyUrbanBoutique"><span class="name">雨夜都市精品街</span><span class="desc">精品櫥窗、濕地反光、雨夜建築與都會層次</span></label>
       <label class="field custom-field">自訂場景<input class="text-input" id="customScene" type="text" placeholder="例如：城市公寓閱讀角、咖啡店窗邊、雨後綠地長廊"></label>
     </div>
   </section>
@@ -231,6 +233,7 @@
       <label class="card"><input type="radio" name="garment" value="citrusRuchedDress"><span class="name">橙棕抓褶洋裝</span><span class="desc">暖橙色抓褶洋裝、自然貼合與果園色彩</span></label>
       <label class="card"><input type="radio" name="garment" value="beigeKnitFloralSkirt"><span class="name">米色針織與碎花長裙</span><span class="desc">柔軟短袖針織、花卉長裙與城市生活感</span></label>
       <label class="card"><input type="radio" name="garment" value="campusCardiganPlaid"><span class="name">校園針織格紋套裝</span><span class="desc">駝色針織、白襯衫、格紋裙與皮革背包</span></label>
+      <label class="card"><input type="radio" name="garment" value="rainyTrenchBurgundy"><span class="name">炭灰風衣與酒紅洋裝</span><span class="desc">俐落風衣、酒紅針織、皮革靴與精品街拍感</span></label>
       <label class="field custom-field">自訂服裝<input class="text-input" id="customGarment" type="text" placeholder="例如：白色襯衫與牛仔長裙、霧藍針織洋裝、米色風衣"></label>
     </div>
   </section>
@@ -310,6 +313,7 @@
       <label class="pose-card"><input type="radio" name="pose" value="campusBenchSeat"><span class="pose-name">綠蔭長椅坐姿</span><span class="pose-desc">背包自然放在身旁，肩膀放鬆、膝踝有支撐</span></label>
       <label class="pose-card"><input type="radio" name="pose" value="campusLampStand"><span class="pose-name">路燈旁自然站姿</span><span class="pose-desc">手部靠近背包背帶，重心穩定、姿態輕鬆</span></label>
       <label class="pose-card"><input type="radio" name="pose" value="campusWalk"><span class="pose-name">綠蔭小徑行走</span><span class="pose-desc">步伐自然，針織衣襬與髮絲有輕微動態</span></label>
+      <label class="pose-card"><input type="radio" name="pose" value="rainyUmbrellaWalk"><span class="pose-name">雨夜持傘行走</span><span class="pose-desc">沿精品街自然行走，傘面不遮臉，步伐與衣襬保持連續</span></label>
       <label class="field custom-field">自訂姿勢<input class="text-input" id="customPose" type="text" placeholder="例如：坐在窗邊翻閱畫冊、站在走廊回頭整理外套"></label>
     </div>
   </section>
@@ -331,6 +335,7 @@
       <label class="card"><input type="radio" name="interaction" value="shoppingBag"><span class="name">簡約購物袋</span><span class="desc">無標誌購物袋作為街角生活細節</span></label>
       <label class="card"><input type="radio" name="interaction" value="citrusForeground"><span class="name">血橙前景互動</span><span class="desc">手持單顆血橙靠近鏡頭，果實作為次要前景</span></label>
       <label class="card"><input type="radio" name="interaction" value="leatherBackpack"><span class="name">皮革背包</span><span class="desc">背著或放在身旁，作為校園日常次要道具</span></label>
+      <label class="card"><input type="radio" name="interaction" value="clearUmbrella"><span class="name">透明雨傘</span><span class="desc">無標誌透明傘、細緻雨滴，不遮住臉部</span></label>
     </div>
   </section>
 
@@ -354,6 +359,7 @@
       <label class="card"><input type="radio" name="lighting" value="highRiseWindowSideLight"><span class="name">高樓窗邊側光</span><span class="desc">窗外城市日光、室內陰影與人物輪廓平衡</span></label>
       <label class="card"><input type="radio" name="lighting" value="citrusDaylight"><span class="name">果園明亮日光</span><span class="desc">自然日光、果實反射與膚色保持清爽</span></label>
       <label class="card"><input type="radio" name="lighting" value="campusLeafyDaylight"><span class="name">綠蔭散射光</span><span class="desc">成熟樹葉過濾日光，膚色與服裝細節自然</span></label>
+      <label class="card"><input type="radio" name="lighting" value="rainyCityReflections"><span class="name">雨夜櫥窗反射光</span><span class="desc">陰雨環境光、精品暖窗光與濕地反射統一</span></label>
     </div>
     <div class="group-title">色彩系統</div>
     <div class="grid grid-3" style="margin-top:8px;">
@@ -370,6 +376,7 @@
       <label class="card"><input type="radio" name="colorPalette" value="whiteDenimGraphite"><span class="name">搭配色｜白色丹寧與石墨灰</span><span class="desc">高樓窗光、牛仔布料與現代城市背景</span></label>
       <label class="card"><input type="radio" name="colorPalette" value="warmConcreteCoolCity"><span class="name">搭配色｜暖混凝土與冷城市藍</span><span class="desc">夜間階梯、建築光與遠景散景</span></label>
       <label class="card"><input type="radio" name="colorPalette" value="rustCitrusGreen"><span class="name">搭配色｜橙棕、血橙與葉綠</span><span class="desc">果園前景、暖色服裝與自然戶外層次</span></label>
+      <label class="card"><input type="radio" name="colorPalette" value="rainyCharcoalBurgundy"><span class="name">搭配色｜炭灰、酒紅與精品琥珀</span><span class="desc">雨夜街景、風衣、櫥窗光與成熟都會質感</span></label>
       <label class="card"><input type="radio" name="colorPalette" value="aiThemeScenePalette"><span class="name">AI 根據主題與場景判斷配色</span><span class="desc">自動協調服裝、場景、道具與光線</span></label>
     </div>
     <label class="field custom-field">指定配色<input class="text-input" id="colorNote" type="text" placeholder="例如：霧藍、米白與銀灰，或奶油白搭配一點朱紅"></label>
@@ -480,7 +487,8 @@ const sceneData = {
   concreteStairNight: 'quiet contemporary concrete stairwell at night, pale poured-concrete walls, warm linear ceiling light, deep stair perspective and softly blurred city lights beyond the landing',
   boutiqueEntrance: 'premium city boutique entrance with a clean glass facade, pale stone threshold, restrained storefront lighting and secondary pedestrians kept softly out of focus',
   bloodOrangeOrchard: 'sunlit blood-orange orchard beside a rustic bright window and wood sill, dense green leaves, ripe citrus in the foreground and a warm outdoor lifestyle portrait environment',
-  campusGreenPath: 'campus-inspired leafy path with mature trees, a simple black lamp post, a quiet bench and soft background depth, natural modern lifestyle portrait setting'
+  campusGreenPath: 'campus-inspired leafy path with mature trees, a simple black lamp post, a quiet bench and soft background depth, natural modern lifestyle portrait setting',
+  rainyUrbanBoutique: 'rainy upscale city street outside a premium boutique, wet pavement, glass storefront, understated umbrellas and soft architectural depth, refined urban portrait setting with controlled reflections'
 };
 
 const sceneStoryData = {
@@ -506,7 +514,8 @@ const sceneStoryData = {
   concreteStairNight: 'a measured night portrait in a concrete stairwell, using warm architectural light, stair perspective and distant city bokeh to turn a simple pause into a refined urban story',
   boutiqueEntrance: 'a clean city fashion snapshot outside a premium boutique, where glass, pale stone and a natural walking gesture create a quiet contemporary street story',
   bloodOrangeOrchard: 'a warm orchard portrait built around the playful offer of a single blood orange, keeping the fruit as a foreground storytelling detail while the person remains the clear subject',
-  campusGreenPath: 'a fresh adult lifestyle portrait along a leafy campus-inspired path, combining everyday fashion, gentle movement and calm architectural details'
+  campusGreenPath: 'a fresh adult lifestyle portrait along a leafy campus-inspired path, combining everyday fashion, gentle movement and calm architectural details',
+  rainyUrbanBoutique: 'a polished rain-soaked city portrait outside a premium boutique, using wet pavement reflections, warm window light and a natural walking gesture to create a refined contemporary street story'
 };
 
 const garmentData = {
@@ -529,7 +538,8 @@ const garmentData = {
   whiteKnitWideLeg: 'fine white open-knit long-sleeve top layered with secure coverage over a simple inner top, paired with tailored white wide-leg trousers, refined texture and premium city styling',
   citrusRuchedDress: 'warm rust-orange ruched midi dress with a softly fitted silhouette, realistic gathered fabric, stable straps and refined summer orchard styling',
   beigeKnitFloralSkirt: 'soft beige fine-gauge short-sleeve knit top paired with a white floral midi skirt, clean waist definition, realistic textile texture and polished everyday elegance',
-  campusCardiganPlaid: 'soft camel knit cardigan layered over a crisp white collared shirt, refined plaid skirt, practical leather backpack and polished campus-inspired daily fashion styling'
+  campusCardiganPlaid: 'soft camel knit cardigan layered over a crisp white collared shirt, refined plaid skirt, practical leather backpack and polished campus-inspired daily fashion styling',
+  rainyTrenchBurgundy: 'tailored charcoal trench coat over a deep burgundy knit dress, polished leather ankle boots and a compact unbranded handbag, realistic rain-ready fabric and refined luxury street styling'
 };
 
 const bodyShapes = {
@@ -572,7 +582,8 @@ const poseData = {
   offerFruitCamera: 'standing or leaning beside the orchard window, one arm extending a single blood orange toward the camera as a controlled foreground gesture, shoulder and wrist aligned and the face unobstructed',
   campusBenchSeat: 'relaxed seated pose on a park bench with the backpack placed naturally beside or worn, shoulders open, hands resting comfortably, stable knees and feet',
   campusLampStand: 'standing beside a simple lamp post with one hand lightly resting near the strap of the backpack, relaxed shoulders and balanced weight',
-  campusWalk: 'natural walking pose along a leafy path with the backpack carried comfortably, subtle movement in the cardigan and coherent step'
+  campusWalk: 'natural walking pose along a leafy path with the backpack carried comfortably, subtle movement in the cardigan and coherent step',
+  rainyUmbrellaWalk: 'walking naturally along the wet boutique street while holding a compact umbrella at the side, one clear step, shoulders relaxed, head and torso direction coherent and a subtle glance toward the camera'
 };
 
 const interactionData = {
@@ -589,7 +600,8 @@ const interactionData = {
   compactMirror: 'small unbranded compact mirror or subtle grooming gesture, hand and wrist relaxed, mirror kept below or beside the face without blocking identity',
   shoppingBag: 'a simple unbranded paper shopping bag carried at the side, secondary to the person and integrated with the storefront walk',
   citrusForeground: 'one single blood orange held toward the camera as a playful foreground detail, fruit remains secondary to the face, hand anatomy and depth perspective stay natural',
-  leatherBackpack: 'a practical unbranded leather backpack carried naturally or placed beside the subject, secondary to the portrait and consistent with the campus-inspired setting'
+  leatherBackpack: 'a practical unbranded leather backpack carried naturally or placed beside the subject, secondary to the portrait and consistent with the campus-inspired setting',
+  clearUmbrella: 'a single elegant transparent umbrella held naturally at the side, subtle raindrops on the surface, no logo or readable text, never covering the face'
 };
 
 const lightingData = {
@@ -608,7 +620,8 @@ const lightingData = {
   warmArchitecturalNight: 'warm linear architectural light in a concrete stairwell at night, soft amber illumination across face body and walls, restrained city bokeh and readable shadow detail',
   highRiseWindowSideLight: 'clear daylight from a high-rise window, gentle side light across face and clothing, balanced interior shadow and controlled skyline brightness beyond the glass',
   citrusDaylight: 'fresh warm daylight in an orange orchard, soft leaf-filtered highlights, gentle fruit bounce and readable skin and fabric texture without harsh overexposure',
-  campusLeafyDaylight: 'soft diffused daylight filtered through mature green leaves, gentle facial fill, controlled highlights and natural white balance across the person, clothing and path'
+  campusLeafyDaylight: 'soft diffused daylight filtered through mature green leaves, gentle facial fill, controlled highlights and natural white balance across the person, clothing and path',
+  rainyCityReflections: 'soft overcast rainy daylight blended with warm boutique window light, controlled reflections on wet pavement, cool ambient shadows and warm facial fill unified across the scene'
 };
 
 const colorData = {
@@ -625,6 +638,7 @@ const colorData = {
   whiteDenimGraphite: 'clean white, medium denim blue, graphite gray and a restrained silver accent coordinated palette',
   warmConcreteCoolCity: 'warm concrete beige, amber light, deep charcoal and a restrained cool city blue coordinated palette',
   rustCitrusGreen: 'rust orange, blood orange, fresh leaf green and warm cream coordinated palette',
+  rainyCharcoalBurgundy: 'charcoal gray, wet asphalt black, deep burgundy, muted cream and restrained warm boutique amber coordinated palette',
   aiThemeScenePalette: window.HB_CORE_PROMPT?.controls?.autoColor || 'AI choose one coherent dominant color, one supporting color and one restrained accent based on the selected modern portrait theme, scene, clothing and lighting'
 };
 
@@ -711,7 +725,8 @@ const SCENE_POSE_POOLS = Object.freeze({
   highRiseWindow: ['windowProfileLean', 'windowSeatedLongLine', 'standingThreeQuarter'],
   concreteStairNight: ['concreteStairSit', 'naturalStanding', 'standingThreeQuarter'],
   boutiqueEntrance: ['storefrontWalk', 'lookBackWalking', 'naturalStanding'],
-  bloodOrangeOrchard: ['offerFruitCamera', 'standingThreeQuarter', 'gentleHairTouch']
+  bloodOrangeOrchard: ['offerFruitCamera', 'standingThreeQuarter', 'gentleHairTouch'],
+  rainyUrbanBoutique: ['rainyUmbrellaWalk', 'storefrontWalk', 'lookBackWalking']
 });
 const SCENE_CAMERA_POOLS = Object.freeze({
   whiteBedroom: ['highAngleOverhead', 'topBeauty', 'beautyCloseUp'],
@@ -735,7 +750,8 @@ const SCENE_CAMERA_POOLS = Object.freeze({
   highRiseWindow: ['environmental50mm', 'sideProfile', 'threeQuarterSide'],
   concreteStairNight: ['environmental50mm', 'distantHero', 'threeQuarterSide'],
   boutiqueEntrance: ['streetLevelDocumentary', 'threeQuarterSide', 'eyeLevelCover'],
-  bloodOrangeOrchard: ['environmental50mm', 'threeQuarterSide', 'eyeLevelCover']
+  bloodOrangeOrchard: ['environmental50mm', 'threeQuarterSide', 'eyeLevelCover'],
+  rainyUrbanBoutique: ['streetLevelDocumentary', 'threeQuarterSide', 'eyeLevelCover']
 });
 const SCENE_LIGHTING_POOLS = Object.freeze({
   whiteBedroom: ['whiteWindowHighKey', 'softDiffusedDaylight'],
@@ -760,7 +776,8 @@ const SCENE_LIGHTING_POOLS = Object.freeze({
   concreteStairNight: ['warmArchitecturalNight', 'cityOpenShade'],
   boutiqueEntrance: ['cityOpenShade', 'softDiffusedDaylight'],
   bloodOrangeOrchard: ['citrusDaylight', 'goldenBacklight', 'softDiffusedDaylight'],
-  campusGreenPath: ['campusLeafyDaylight', 'softDiffusedDaylight', 'goldenBacklight']
+  campusGreenPath: ['campusLeafyDaylight', 'softDiffusedDaylight', 'goldenBacklight'],
+  rainyUrbanBoutique: ['rainyCityReflections', 'cityOpenShade', 'softDiffusedDaylight']
 });
 
 const themeTemplates = {
@@ -789,7 +806,8 @@ const themeTemplates = {
   concreteStairNight: { story: 'a measured night portrait in a concrete stairwell, using warm architectural light, stair perspective and distant city bokeh to turn a simple pause into a refined urban story', style: 'quietMinimal', scene: 'concreteStairNight', garment: 'beigeKnitFloralSkirt', garmentLayer: 'layer0', chestDetail: 'none', waistSideDetail: 'none', shoulderDetail: 'none', bodyShape: 'original', pose: 'concreteStairSit', interaction: 'none', lighting: 'warmArchitecturalNight', colorPalette: 'warmConcreteCoolCity', camera: 'environmental50mm', ratio: '2:3', intensity: 'premium' },
   boutiqueKnitStreet: { story: 'a clean city fashion snapshot outside a premium boutique, where glass, pale stone and a natural walking gesture create a quiet contemporary street story', style: 'fashionPortrait', scene: 'boutiqueEntrance', garment: 'whiteKnitWideLeg', garmentLayer: 'layer0', chestDetail: 'none', waistSideDetail: 'slimBeltLine', shoulderDetail: 'none', bodyShape: 'fashion_tall', pose: 'storefrontWalk', interaction: 'shoppingBag', lighting: 'cityOpenShade', colorPalette: 'whiteDenimGraphite', camera: 'streetLevelDocumentary', ratio: '2:3', intensity: 'premium' },
   bloodOrangeOrchard: { story: 'a warm orchard portrait built around the playful offer of a single blood orange, keeping the fruit as a foreground storytelling detail while the person remains the clear subject', style: 'candidStory', scene: 'bloodOrangeOrchard', garment: 'citrusRuchedDress', garmentLayer: 'layer0', chestDetail: 'none', waistSideDetail: 'softWaistDrape', shoulderDetail: 'none', bodyShape: 'original', pose: 'offerFruitCamera', interaction: 'citrusForeground', lighting: 'citrusDaylight', colorPalette: 'rustCitrusGreen', camera: 'environmental50mm', ratio: '2:3', intensity: 'premium' },
-  campusGreenDaily: { story: 'a fresh adult lifestyle portrait set along a leafy campus-inspired path, combining everyday fashion, gentle movement and calm architectural details', style: 'candidStory', scene: 'campusGreenPath', garment: 'campusCardiganPlaid', garmentLayer: 'layer0', chestDetail: 'none', waistSideDetail: 'none', shoulderDetail: 'none', bodyShape: 'original', pose: 'campusWalk', interaction: 'leatherBackpack', lighting: 'campusLeafyDaylight', colorPalette: 'freshGreenCream', camera: 'streetLevelDocumentary', ratio: '2:3', intensity: 'premium' }
+  campusGreenDaily: { story: 'a fresh adult lifestyle portrait set along a leafy campus-inspired path, combining everyday fashion, gentle movement and calm architectural details', style: 'candidStory', scene: 'campusGreenPath', garment: 'campusCardiganPlaid', garmentLayer: 'layer0', chestDetail: 'none', waistSideDetail: 'none', shoulderDetail: 'none', bodyShape: 'original', pose: 'campusWalk', interaction: 'leatherBackpack', lighting: 'campusLeafyDaylight', colorPalette: 'freshGreenCream', camera: 'streetLevelDocumentary', ratio: '2:3', intensity: 'premium' },
+  rainyUrbanBoutique: { story: 'a polished rain-soaked city portrait outside a premium boutique, using wet pavement reflections, warm window light and a natural walking gesture to create a refined contemporary street story', style: 'fashionPortrait', scene: 'rainyUrbanBoutique', garment: 'rainyTrenchBurgundy', garmentLayer: 'layer0', chestDetail: 'none', waistSideDetail: 'slimBeltLine', shoulderDetail: 'none', bodyShape: 'original', pose: 'rainyUmbrellaWalk', interaction: 'clearUmbrella', lighting: 'rainyCityReflections', colorPalette: 'rainyCharcoalBurgundy', camera: 'streetLevelDocumentary', ratio: '2:3', intensity: 'premium' }
 };
 
 let activeTemplateStory = '';

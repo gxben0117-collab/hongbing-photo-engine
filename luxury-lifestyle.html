@@ -148,6 +148,7 @@
       <button class="preset-btn" type="button" data-template="diningNookLifestyle">一鍵套用｜餐桌生活方式廣告</button>
       <button class="preset-btn" type="button" data-template="dressingCornerBeauty">一鍵套用｜衣帽間準備時刻</button>
       <button class="preset-btn" type="button" data-template="oceanViewBalconyResort">一鍵套用｜海景高樓陽台度假寫真</button>
+      <button class="preset-btn" type="button" data-template="pinkSheerWindowLifestyle">一鍵套用｜粉色薄紗窗邊 Luxury Lifestyle</button>
     </div>
   </section>
 
@@ -177,6 +178,7 @@
       <label class="card"><input type="radio" name="scene" value="diningNook"><span class="name">餐桌</span><span class="desc">餐桌、花器、瓷器與生活品牌構圖</span></label>
       <label class="card"><input type="radio" name="scene" value="dressingCorner"><span class="name">衣帽間</span><span class="desc">鏡面、衣物、珠寶與出門前準備</span></label>
       <label class="card"><input type="radio" name="scene" value="spaBathroom"><span class="name">飯店 SPA 浴室</span><span class="desc">大理石、浴缸、浴袍與柔和晨光</span></label>
+      <label class="card"><input type="radio" name="scene" value="pinkSheerWindow"><span class="name">粉色薄紗窗邊</span><span class="desc">粉色薄紗、窗邊柔光與安靜公寓層次</span></label>
       <label class="field custom-field">自訂場景<input class="text-input" id="customScene" type="text" placeholder="例如：高級公寓閱讀角、飯店套房窗邊、泳池旁休憩區"></label>
     </div>
   </section>
@@ -193,6 +195,7 @@
       <label class="card"><input type="radio" name="garment" value="modernCheongsamLifestyle"><span class="name">新中式生活洋裝</span><span class="desc">立領或盤扣細節，現代住宅時裝感</span></label>
       <label class="card"><input type="radio" name="garment" value="blazerMiniDress"><span class="name">精品西裝短洋裝</span><span class="desc">結構肩線、腰身與城市公寓氣質</span></label>
       <label class="card"><input type="radio" name="garment" value="oliveResortSwimwear"><span class="name">橄欖綠度假泳裝</span><span class="desc">紋理泳裝、輕薄罩衫與高級海景生活感</span></label>
+      <label class="card"><input type="radio" name="garment" value="pinkSheerLaceRobe"><span class="name">粉色薄紗蕾絲罩衫</span><span class="desc">蕾絲邊薄紗罩衫、全遮蔽內搭與精品居家層次</span></label>
       <label class="field custom-field">自訂服裝<input class="text-input" id="customGarment" type="text" placeholder="例如：奶油白針織套裝、墨綠絲質長裙、米色風衣"></label>
     </div>
   </section>
@@ -283,6 +286,7 @@
       <label class="card"><input type="radio" name="lighting" value="cityNightWindow"><span class="name">城市夜窗光</span><span class="desc">室內暖光與遠方城市冷光</span></label>
       <label class="card"><input type="radio" name="lighting" value="spaMorningLight"><span class="name">SPA 晨間柔光</span><span class="desc">霧面玻璃與暖白天光，石材反射保持柔和</span></label>
       <label class="card"><input type="radio" name="lighting" value="coastalMiddayLight"><span class="name">海岸清澈日光</span><span class="desc">藍海反射、清晰日光與自然肌膚層次</span></label>
+      <label class="card"><input type="radio" name="lighting" value="pinkSheerWindowLight"><span class="name">粉色薄紗窗光</span><span class="desc">窗簾透光、柔和粉色反射與細緻布料高光</span></label>
     </div>
     <div class="group-title">色彩系統</div>
     <div class="grid grid-3" style="margin-top:8px;">
@@ -293,6 +297,7 @@
       <label class="card"><input type="radio" name="colorPalette" value="navySand"><span class="name">搭配色｜深藍與沙色</span><span class="desc">陽台、旅行住宅、成熟質感</span></label>
       <label class="card"><input type="radio" name="colorPalette" value="champagneBlack"><span class="name">搭配色｜香檳金與黑</span><span class="desc">吧檯、晚宴、夜間 Luxury Lifestyle</span></label>
       <label class="card"><input type="radio" name="colorPalette" value="oceanOliveWhite"><span class="name">搭配色｜海藍、橄欖與白</span><span class="desc">海景陽台、度假服裝與清澈高級日光</span></label>
+      <label class="card"><input type="radio" name="colorPalette" value="blushPearlRose"><span class="name">搭配色｜粉霧、珍珠與玫瑰木</span><span class="desc">薄紗窗邊、柔和室內與精品生活感</span></label>
       <label class="card"><input type="radio" name="colorPalette" value="aiThemeScenePalette"><span class="name">AI 根據主題與場景判斷配色</span><span class="desc">自動協調服裝、室內、道具與光線</span></label>
     </div>
     <label class="field custom-field">指定配色<input class="text-input" id="colorNote" type="text" placeholder="例如：奶茶米白、深綠與古銅、灰藍與暖木色"></label>
@@ -377,6 +382,7 @@ const sceneData = {
   coffeeTable: 'premium living room coffee table scene, stone or dark wood table, ceramic coffee service, art book and small floral arrangement, sofa and window depth behind the subject, editorial tabletop composition',
   bed: 'quiet luxury bedroom scene, layered ivory linen bedding, upholstered headboard, soft throw, bedside table and filtered morning light, relaxed but fully composed residential portrait',
   window: 'floor-to-ceiling apartment window scene, sheer curtains, softly blurred city or garden view, warm interior materials, subject framed between window light and room shadow',
+  pinkSheerWindow: 'soft blush-pink apartment window scene with sheer curtains, pale plaster wall, filtered daylight and a quiet luxury residential portrait atmosphere, subject framed between translucent fabric and warm room depth',
   entryway: 'high-end residential entryway scene, sculptural console, mirror, coat hook, leather handbag and softly lit doorway, elegant arrival-home lifestyle story',
   courtyard: 'private residential courtyard scene, stone path, restrained greenery, outdoor lounge furniture, textured wall and soft afternoon depth, quiet luxury garden portrait',
   balcony: 'luxury apartment balcony scene, slim railing, outdoor chair, distant city or coastal horizon, architectural lines and open air, refined golden-hour lifestyle composition',
@@ -396,7 +402,8 @@ const garmentData = {
   minimalKnitDress: 'minimal fine-gauge knit dress, clean neckline, natural body-skimming silhouette, premium neutral textile and modern apartment styling',
   modernCheongsamLifestyle: 'modern Chinese-inspired lifestyle dress, restrained mandarin collar or delicate frog-button detail, contemporary tailored silhouette, premium residential fashion styling',
   blazerMiniDress: 'structured blazer mini dress, sculpted shoulder line, fitted waist and polished fabric, modern city-apartment luxury styling',
-  oliveResortSwimwear: 'olive-green textured resort swimwear with a refined supportive top and high-waisted bottoms, lightweight linen shirt worn as a relaxed outer layer, realistic fabric construction and premium coastal lifestyle styling'
+  oliveResortSwimwear: 'olive-green textured resort swimwear with a refined supportive top and high-waisted bottoms, lightweight linen shirt worn as a relaxed outer layer, realistic fabric construction and premium coastal lifestyle styling',
+  pinkSheerLaceRobe: 'soft blush-pink sheer chiffon robe with delicate lace edging layered over a fully opaque silk slip dress, controlled translucent outer texture, realistic fabric weight and refined quiet-luxury home styling'
 };
 
 const bodyShapes = {
@@ -442,7 +449,8 @@ const lightingData = {
   overcastSoft: 'overcast daylight through large windows, low-contrast gray-beige atmosphere, soft even exposure and calm premium mood',
   cityNightWindow: 'warm interior light blended with cool distant city lights through the window, balanced evening contrast across the entire scene',
   spaMorningLight: 'diffused warm-white morning light through frosted spa glass, soft marble bounce, restrained highlights and clear natural facial readability',
-  coastalMiddayLight: 'clear coastal midday light across the high-rise balcony, soft blue sea bounce, readable skin and garment texture, controlled highlights on glass railing and pale stone, no detached studio light'
+  coastalMiddayLight: 'clear coastal midday light across the high-rise balcony, soft blue sea bounce, readable skin and garment texture, controlled highlights on glass railing and pale stone, no detached studio light',
+  pinkSheerWindowLight: 'diffused blush-tinted window daylight through sheer curtains, soft luminous exposure, gentle room bounce and controlled highlights across the robe and face'
 };
 
 const colorData = {
@@ -453,6 +461,7 @@ const colorData = {
   navySand: 'deep navy, sand, warm white, walnut wood and aged brass coordinated palette',
   champagneBlack: 'champagne, black, smoked glass, dark walnut and soft amber coordinated palette',
   oceanOliveWhite: 'clear ocean blue, olive green, warm white, pale stone and restrained silver coordinated palette',
+  blushPearlRose: 'blush pink, pearl white, warm ivory, muted rosewood and soft champagne coordinated palette',
   aiThemeScenePalette: window.HB_CORE_PROMPT?.controls?.autoColor || 'AI determine the most suitable coordinated color palette from the selected lifestyle scene, garment, lighting and residential materials'
 };
 
@@ -525,7 +534,8 @@ const themeTemplates = {
   diningNookLifestyle: { style: 'homeCampaign', scene: 'diningNook', garment: 'cashmereLoungeSet', garmentLayer: 'layer0', chestDetail: 'none', waistSideDetail: 'none', shoulderDetail: 'softCardiganDrape', bodyShape: 'original', pose: 'auto', interaction: 'flowerVase', lighting: 'goldenHourHome', colorPalette: 'warmIvoryCamel', camera: 'threeQuarterSide', ratio: '4:5', intensity: 'balanced' },
   dressingCornerBeauty: { style: 'fashionLifestyle', scene: 'dressingCorner', garment: 'blazerMiniDress', garmentLayer: 'layer3', chestDetail: 'softSquareBodice', waistSideDetail: 'slimBeltLine', shoulderDetail: 'offShoulderCut', bodyShape: 'korean_idol', pose: 'mirrorReady', interaction: 'none', lighting: 'morningWindow', colorPalette: 'charcoalCream', camera: 'beautyCloseUp', ratio: '4:5', intensity: 'premium' },
   marbleSpaMorning: { style: 'quietLuxury', scene: 'spaBathroom', garment: 'satinEveningHomewear', garmentLayer: 'layer0', chestDetail: 'layeredCamisole', waistSideDetail: 'softWaistDrape', shoulderDetail: 'softCardiganDrape', bodyShape: 'original', pose: 'bathEdgeSit', interaction: 'bathTowel', lighting: 'spaMorningLight', colorPalette: 'warmIvoryCamel', camera: 'threeQuarterSide', ratio: '4:5', intensity: 'premium' },
-  oceanViewBalconyResort: { style: 'luxuryLifestyle', scene: 'oceanViewBalcony', garment: 'oliveResortSwimwear', garmentLayer: 'layer0', chestDetail: 'none', waistSideDetail: 'none', shoulderDetail: 'softCardiganDrape', bodyShape: 'original', pose: 'balconyLean', interaction: 'none', lighting: 'coastalMiddayLight', colorPalette: 'oceanOliveWhite', camera: 'distantHero', ratio: '9:16', intensity: 'premium' }
+  oceanViewBalconyResort: { style: 'luxuryLifestyle', scene: 'oceanViewBalcony', garment: 'oliveResortSwimwear', garmentLayer: 'layer0', chestDetail: 'none', waistSideDetail: 'none', shoulderDetail: 'softCardiganDrape', bodyShape: 'original', pose: 'balconyLean', interaction: 'none', lighting: 'coastalMiddayLight', colorPalette: 'oceanOliveWhite', camera: 'distantHero', ratio: '9:16', intensity: 'premium' },
+  pinkSheerWindowLifestyle: { style: 'quietLuxury', scene: 'pinkSheerWindow', garment: 'pinkSheerLaceRobe', garmentLayer: 'layer0', chestDetail: 'none', waistSideDetail: 'none', shoulderDetail: 'softCardiganDrape', bodyShape: 'original', pose: 'curtainOpen', interaction: 'none', lighting: 'pinkSheerWindowLight', colorPalette: 'blushPearlRose', camera: 'beautyCloseUp', ratio: '4:5', intensity: 'premium' }
 };
 
 function selected(name){
