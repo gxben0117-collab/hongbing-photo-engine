@@ -385,7 +385,7 @@ const editorialFinish = evalEditorialFinish(read('assets/editorial-finish.js'));
     source: html, core, page: 'extremeSports',
     startMarker: 'const CORE = window.HB_CORE_PROMPT?.page?.extremeSports || window.HB_CORE_PROMPT?.page?.modernPortrait || {};',
     endMarker: 'function selected',
-    exportExpression: '({ styleData, sportData, actionData, garmentData, poseData, lightingData, colorData, backgroundData, cameraData, ratioData, intensityData, GARMENT_VARIATIONS, GARMENT_DETAIL_RANDOM_POOLS, SPORT_POOLS, themeTemplates, sportsActionCore, sportsCoherenceCore })',
+    exportExpression: '({ styleData, sportData, actionData, environmentScaleData, garmentData, poseData, lightingData, colorData, backgroundData, cameraData, ratioData, intensityData, GARMENT_VARIATIONS, GARMENT_DETAIL_RANDOM_POOLS, SPORT_POOLS, themeTemplates, sportsActionCore, sportsCoherenceCore })',
   });
   const bodyShapes = {
     original: 'original natural body proportions from the reference photo, do not reshape the body',
@@ -437,6 +437,7 @@ const editorialFinish = evalEditorialFinish(read('assets/editorial-finish.js'));
       core.page.extremeSports.lighting, data.sportsActionCore, data.sportsCoherenceCore,
       `【作品概念】\n\na professional ${sel.sport} action portrait built around one decisive high-speed moment`,
       `【畫面語氣】\n\n${styleText}`, `【運動主題】\n\n${sportText}`, `【動作瞬間】\n\n${actionText}`,
+      data.environmentScaleData[sel.sport] ? `【環境反應尺度】\n\n${data.environmentScaleData[sel.sport]}` : '',
       `【運動服裝與裝備】\n\n${garmentText}`, variationBlock, `【身形輪廓】\n\n${bodyShapes[sel.bodyShape]}`,
       `【人物姿勢與身體方向】\n\n${poseText}`, `【光影】\n\n${data.lightingData[sel.lighting]}`,
       `【色彩系統】\n\n${colorText}`, `【背景場景與環境】\n\n${backgroundText}`,
