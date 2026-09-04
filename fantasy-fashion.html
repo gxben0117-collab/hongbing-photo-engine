@@ -1188,6 +1188,11 @@
       <label class="card"><input type="radio" name="lighting" value="bloodMoonGlow"><div class="name">血月冷光</div><div class="desc">暗紅月光、冷冽陰森氛圍</div></label>
       <label class="card"><input type="radio" name="lighting" value="neonPinkCyanSplit"><div class="name">粉青霓虹雙色光</div><div class="desc">粉紫與青色撞色霓虹</div></label>
       <label class="card"><input type="radio" name="lighting" value="glitchScanlineFlicker"><div class="name">故障掃描線閃光</div><div class="desc">數位雜訊閃爍、賽博故障感</div></label>
+      <label class="card"><input type="radio" name="lighting" value="venetianBlindShadowStripe"><div class="name">百葉窗格柵光影</div><div class="desc">硬光穿透百葉窗、臉部與身體條紋明暗交替</div></label>
+      <label class="card"><input type="radio" name="lighting" value="hardArchitecturalShadowBlock"><div class="name">建築硬光矩形塊影</div><div class="desc">單一硬光切出俐落矩形陰影、冷調明暗分割</div></label>
+      <label class="card"><input type="radio" name="lighting" value="dappledFoliageGradientShadow"><div class="name">枝葉斑駁漸層光影</div><div class="desc">葉隙碎光灑落、陰影斑駁到全亮的漸層</div></label>
+      <label class="card"><input type="radio" name="lighting" value="selfSilhouetteWallDouble"><div class="name">自身剪影疊影牆</div><div class="desc">主體柔光自然、牆面同時映出她本人的硬邊剪影</div></label>
+      <label class="card"><input type="radio" name="lighting" value="warmCoolSplitAmbient"><div class="name">冷暖雙色溫對比光</div><div class="desc">暖金與冷藍兩道光源在畫面中對分</div></label>
     </div>
     <div class="form-grid" style="margin-top:10px;">
       <label class="field full">色彩補充
@@ -1346,6 +1351,7 @@
   </section>
 </main>
 
+<script src="assets/lighting-system.js"></script>
 <script src="assets/core-prompt.js"></script>
 <script src="assets/garment-core.js"></script>
 <script>
@@ -2320,7 +2326,12 @@ const lightingData = {
   candleShadowGothic: 'flickering candle gothic shadow lighting, warm candlelight against deep dark shadow pockets, ritualistic occult atmosphere',
   bloodMoonGlow: 'blood moon cold glow lighting, deep red moonlight tone, chilling eerie atmosphere',
   neonPinkCyanSplit: 'split neon pink and cyan lighting, dual-tone gel lighting clash across the subject, cyberpunk editorial contrast',
-  glitchScanlineFlicker: 'glitch scanline flicker lighting, flickering digital noise light bands, cyberpunk malfunction atmosphere'
+  glitchScanlineFlicker: 'glitch scanline flicker lighting, flickering digital noise light bands, cyberpunk malfunction atmosphere',
+  venetianBlindShadowStripe: 'venetian blind shadow-stripe lighting, hard directional sunlight passing through window blinds casts crisp repeating horizontal slat shadows across the face, body and background, alternating bright and dark bands forming graphic chiaroscuro striping',
+  hardArchitecturalShadowBlock: 'hard architectural shadow-block lighting, a single hard directional light source casts one crisp-edged rectangular shadow across a plain wall or floor, splitting the scene into a bright zone and a deep cool-toned shadow zone, graphic minimal contrast',
+  dappledFoliageGradientShadow: 'dappled foliage gradient shadow lighting, hard sunlight broken by unseen leaves and branches into irregular soft-edged light patches across the skin and background, shifting from dense dappled shade to fully sunlit areas within one frame',
+  selfSilhouetteWallDouble: 'self-silhouette wall-double lighting, hard directional light renders the subject softly and naturally while simultaneously casting a crisp, oversized hard-edged silhouette of her own shape onto a nearby wall, a doubled soft-subject and hard-shadow-double composition',
+  warmCoolSplitAmbient: 'warm-cool split ambient lighting, two distinct light sources of opposing color temperature meet across the frame — a warm amber or gold source on one side, a cool blue or violet source on the other — dividing the face and scene into a deliberate warm-versus-cool color contrast'
 };
 
 const sharedFantasyCore = window.HB_CORE_PROMPT?.page?.fantasy || {};
@@ -3482,7 +3493,7 @@ function generate(options = {}){
   const background = customBackground
     ? `custom background only: ${customBackground}; do not include or blend any preset background option`
     : backgroundData[selected('background')];
-  const lighting = lightingData[selected('lighting')];
+  const lighting = window.HB_LIGHTING_SYSTEM?.resolve(lightingData, selected('lighting')) || lightingData[selected('lighting')];
   const colorNote = document.getElementById('colorNote').value.trim();
   const extraNote = document.getElementById('extraNote').value.trim();
   const composition = selected('composition');

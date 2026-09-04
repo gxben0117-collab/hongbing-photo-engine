@@ -150,6 +150,7 @@
       <button class="preset-btn" type="button" data-template="oceanViewBalconyResort">一鍵套用｜海景高樓陽台度假寫真</button>
       <button class="preset-btn" type="button" data-template="pinkSheerWindowLifestyle">一鍵套用｜粉色薄紗窗邊 Luxury Lifestyle</button>
       <button class="preset-btn" type="button" data-template="cafeBurgundyEveningLifestyle">一鍵套用｜酒紅咖啡館暖金夜景</button>
+      <button class="preset-btn" type="button" data-template="warmCoolLibraryLifestyle">一鍵套用｜書房暖冷雙色溫生活誌</button>
     </div>
   </section>
 
@@ -292,6 +293,10 @@
       <label class="card"><input type="radio" name="lighting" value="coastalMiddayLight"><span class="name">海岸清澈日光</span><span class="desc">藍海反射、清晰日光與自然肌膚層次</span></label>
       <label class="card"><input type="radio" name="lighting" value="pinkSheerWindowLight"><span class="name">粉色薄紗窗光</span><span class="desc">窗簾透光、柔和粉色反射與細緻布料高光</span></label>
       <label class="card"><input type="radio" name="lighting" value="cafeWarmBokeh"><span class="name">咖啡館暖金散景</span><span class="desc">室內暖金光、玻璃反射與城市夜色柔焦</span></label>
+      <label class="card"><input type="radio" name="lighting" value="venetianBlindShadowStripe"><span class="name">百葉窗格柵光影</span><span class="desc">條紋硬影穿過室內，家具與人物共享同一光線</span></label>
+      <label class="card"><input type="radio" name="lighting" value="hardArchitecturalShadowBlock"><span class="name">建築硬光矩形塊影</span><span class="desc">牆面形成明暗分區，呈現住宅精品廣告感</span></label>
+      <label class="card"><input type="radio" name="lighting" value="dappledFoliageGradientShadow"><span class="name">庭院枝葉斑駁光</span><span class="desc">庭院葉影由陰影自然過渡到柔和日光</span></label>
+      <label class="card"><input type="radio" name="lighting" value="warmCoolSplitAmbient"><span class="name">室內暖冷雙色溫</span><span class="desc">室內暖燈與窗外冷光共同建立夜間層次</span></label>
     </div>
     <div class="group-title">色彩系統</div>
     <div class="grid grid-3" style="margin-top:8px;">
@@ -363,6 +368,7 @@
   </div>
 </main>
 
+<script src="assets/lighting-system.js"></script>
 <script src="assets/core-prompt.js"></script>
 <script src="assets/garment-core.js"></script>
 <script>
@@ -460,7 +466,11 @@ const lightingData = {
   spaMorningLight: 'diffused warm-white morning light through frosted spa glass, soft marble bounce, restrained highlights and clear natural facial readability',
   coastalMiddayLight: 'clear coastal midday light across the high-rise balcony, soft blue sea bounce, readable skin and garment texture, controlled highlights on glass railing and pale stone, no detached studio light',
   pinkSheerWindowLight: 'diffused blush-tinted window daylight through sheer curtains, soft luminous exposure, gentle room bounce and controlled highlights across the robe and face',
-  cafeWarmBokeh: 'warm cafe pendant and window light with amber highlights, soft reflections on the table and glass, deep but readable room shadows, colorful city bokeh kept behind the subject'
+  cafeWarmBokeh: 'warm cafe pendant and window light with amber highlights, soft reflections on the table and glass, deep but readable room shadows, colorful city bokeh kept behind the subject',
+  venetianBlindShadowStripe: 'hard directional daylight filtered through venetian blinds, crisp repeating horizontal shadow stripes fall across the subject and background, face remains naturally readable, one unified scene exposure',
+  hardArchitecturalShadowBlock: 'hard architectural shadow-block lighting, a single directional source casts one crisp rectangular shadow across the wall or floor, dividing the scene into a bright zone and a deep cool shadow zone, face and body share the same exposure',
+  dappledFoliageGradientShadow: 'dappled sunlight filtered through leaves and branches, irregular light patches transition from soft shade to gentle full sun across the subject and background, natural exposure and readable face',
+  warmCoolSplitAmbient: 'two distinct environmental light sources meet across the frame, warm amber light on one side and cool blue-violet light on the other, face body clothing and background share the same deliberate warm-versus-cool exposure'
 };
 
 const colorData = {
@@ -534,6 +544,7 @@ const GARMENT_VARIATIONS = {
 };
 
 const themeTemplates = {
+  warmCoolLibraryLifestyle: { style: 'fashionLifestyle', scene: 'diningNook', garment: 'burgundyKnitPleatedSkirt', garmentLayer: 'layer0', chestDetail: 'none', waistSideDetail: 'slimBeltLine', shoulderDetail: 'none', bodyShape: 'original', pose: 'cafeTableSeated', interaction: 'wineGlass', lighting: 'warmCoolSplitAmbient', colorPalette: 'burgundyCamelBrass', camera: 'threeQuarterSide', ratio: '4:5', intensity: 'premium' },
   sofaMorningEditorial: { style: 'luxuryLifestyle', scene: 'sofa', garment: 'grayPlaidOffShoulder', garmentLayer: 'layer3', chestDetail: 'crossWrapDeepV', waistSideDetail: 'softWaistDrape', shoulderDetail: 'offShoulderCut', bodyShape: 'original', pose: 'sofaSideSit', interaction: 'coffeeCup', lighting: 'morningWindow', colorPalette: 'warmIvoryCamel', camera: 'eyeLevelCover', ratio: '9:16', intensity: 'balanced' },
   coffeeTableWeekend: { style: 'candidPremium', scene: 'coffeeTable', garment: 'tailoredShirtTrousers', garmentLayer: 'layer0', chestDetail: 'none', waistSideDetail: 'none', shoulderDetail: 'none', bodyShape: 'slight_waist', pose: 'coffeePour', interaction: 'bookMagazine', lighting: 'afternoonNatural', colorPalette: 'cocoaSage', camera: 'threeQuarterSide', ratio: '4:5', intensity: 'quiet' },
   bedLinenMorning: { style: 'quietLuxury', scene: 'bed', garment: 'silkSlipLayered', garmentLayer: 'layer3', chestDetail: 'layeredCamisole', waistSideDetail: 'softWaistDrape', shoulderDetail: 'softCardiganDrape', bodyShape: 'original', pose: 'bedSideSit', interaction: 'none', lighting: 'morningWindow', colorPalette: 'blushTaupe', camera: 'topBeauty', ratio: '9:16', intensity: 'balanced' },
@@ -631,7 +642,7 @@ function generate(options = {}){
   const garmentText = customGarment ? `custom lifestyle garment direction only: ${customGarment}; do not blend another preset garment` : garmentData[selected('garment')];
   const poseText = customPose ? `custom natural lifestyle pose only: ${customPose}; do not blend another preset pose` : poseData[selected('pose')];
   const interactionText = interactionData[selected('interaction')];
-  const lightingText = lightingData[selected('lighting')];
+  const lightingText = window.HB_LIGHTING_SYSTEM?.resolve(lightingData, selected('lighting')) || lightingData[selected('lighting')];
   const colorText = colorNote || colorData[selected('colorPalette')];
   const variationParts = resolveVariationParts();
   const variationBlock = variationParts.length ? `【服裝改造核心】\n\n${variationParts.join('\n')}` : '';

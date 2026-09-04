@@ -70,6 +70,7 @@
     <div class="section-header"><div class="section-label">00</div><div class="section-title">一鍵主題模板</div></div>
     <p class="hint">一鍵套用會同步填入服裝、材質、姿勢、光線、背景、鏡頭與比例，套用後仍可逐區修改。</p>
     <button class="card" type="button" id="classicalMoodPreset" style="width:100%;min-height:auto;margin-bottom:12px;background:linear-gradient(180deg,#101B1A 0%,#1A2118 100%);"><div class="name">隨機套用</div><div class="desc">各欄位獨立隨機組合，保留完整中式古典美學方向</div></button>
+    <button class="card" type="button" data-template="cinnabarArchitecturalShadow" style="width:100%;min-height:auto;margin-bottom:12px;background:linear-gradient(180deg,#241717 0%,#1B1414 100%);"><div class="name">建築斜影朱紅屏風肖像</div><div class="desc">朱紅中式華裳、屏風層次、俐落硬光與自然側身回望</div></button>
     <div class="group-title">朝代古典</div>
     <div class="grid grid-3">
       <button class="card" type="button" data-template="hanCourtyard"><div class="name">漢風古雅庭院</div><div class="desc">交領層疊、寬袖、古樸庭院</div></button>
@@ -365,6 +366,9 @@
     <div class="section-header"><div class="section-label">09</div><div class="section-title">光影色彩</div></div>
     <div class="group-title">09A｜光影方式</div>
     <div class="grid grid-3" data-choice="lighting">
+      <label class="card"><input type="radio" name="lighting" value="hardArchitecturalShadowBlock"><div class="name">建築硬光矩形塊影</div><div class="desc">宮牆或屏風形成俐落明暗分區，保留臉部可辨識度</div></label>
+      <label class="card"><input type="radio" name="lighting" value="dappledFoliageGradientShadow"><div class="name">枝葉斑駁漸層光影</div><div class="desc">花木葉隙碎光由陰影自然過渡到日光</div></label>
+      <label class="card"><input type="radio" name="lighting" value="venetianBlindShadowStripe"><div class="name">花窗格柵光影</div><div class="desc">窗格投影形成規律明暗條帶，人物與背景同光</div></label>
       <label class="card selected"><input type="radio" name="lighting" value="paperWindowSoft" checked><div class="name">宣紙窗影柔光</div><div class="desc">柔和、清透、適合宋韻</div></label>
       <label class="card"><input type="radio" name="lighting" value="morningCourtyard"><div class="name">晨間庭院自然光</div><div class="desc">自然日光與淡雅色彩</div></label>
       <label class="card"><input type="radio" name="lighting" value="bambooShadow"><div class="name">午後竹影</div><div class="desc">竹葉影子與柔和對比</div></label>
@@ -508,6 +512,7 @@
   </section>
 </main>
 
+<script src="assets/lighting-system.js"></script>
 <script src="assets/core-prompt.js"></script>
 <script src="assets/garment-core.js"></script>
 <script src="assets/editorial-finish.js"></script>
@@ -818,6 +823,7 @@ const sharedClassicalCore = window.HB_CORE_PROMPT?.page?.chineseClassical || {};
 const editorialFinish = window.HB_EDITORIAL_FINISH?.forPage('chineseClassical') || { base: '', theme: '', negative: '' };
 
 const themeTemplates = {
+  cinnabarArchitecturalShadow: { style: 'fashionEditorial', composition: 'folding screen and architectural planes create elegant layered framing around the subject', garment: 'hanModern', materials: ['wovenBrocade', 'windowLatticePattern'], accessory: 'jadePendant', chestDetail: 'crossCollarDeepV', waistSideDetail: 'layeredWrapWaist', shoulderDetail: 'modernChineseCapelet', bodyShape: 'original', pose: 'windowTurn', lighting: 'hardArchitecturalShadowBlock', color: 'cinnabarInk', background: 'latticeRoom', framing: 'threeQuarter', camera: 'threeQuarterSide', ratio: '4:5' },
   hanCourtyard: { style: 'classicalPortrait', composition: 'centered classical portrait composition, subject placed in the center with balanced Chinese architectural framing', garment: 'hanClassical', materials: ['plainSilk'], accessory: 'none', chestDetail: 'layeredCrossCollar', waistSideDetail: 'wovenSilkSash', shoulderDetail: 'cloudShoulderOverlay', bodyShape: 'original', pose: 'naturalStanding', lighting: 'morningCourtyard', color: 'ivoryTea', background: 'hanCourtyard', framing: 'threeQuarter', camera: 'eyeLevelCover', ratio: '3:4' },
   hanBambooPortrait: { style: 'culturePortrait', composition: 'wooden lattice window framing around the subject, layered foreground and background depth, intimate Chinese portrait composition', garment: 'hanCurvedWrap', materials: ['ramieLinen', 'plumOrchidBamboo'], accessory: 'woodHairpin', chestDetail: 'none', waistSideDetail: 'none', shoulderDetail: 'none', bodyShape: 'slight_waist', pose: 'windowTurn', lighting: 'bambooShadow', color: 'bambooGray', background: 'bambooCourtyard', framing: 'halfBody', camera: 'threeQuarterSide', ratio: '4:5' },
   hanModernCouture: { style: 'modernCouture', composition: 'asymmetrical composition with the subject placed to one side, balanced visual weight and clean surrounding space', garment: 'hanModern', materials: ['wovenBrocade', 'windowLatticePattern'], accessory: 'jadePendant', chestDetail: 'crossCollarDeepV', waistSideDetail: 'layeredWrapWaist', shoulderDetail: 'modernChineseCapelet', bodyShape: 'fashion_tall', pose: 'sideLongLine', lighting: 'modernStudio', color: 'daiJade', background: 'modernChineseStudio', framing: 'threeQuarter', camera: 'eyeLevelCover', ratio: '4:5' },
@@ -997,7 +1003,7 @@ function generate(options){
     poseText + ',',
     framingData[selected('framing')] + ',',
     cameraData[selected('camera')] + ',',
-    'lighting design: ' + lightingData[selected('lighting')] + ',',
+    'lighting design: ' + (window.HB_LIGHTING_SYSTEM?.resolve(lightingData, selected('lighting')) || lightingData[selected('lighting')]) + ',',
     'color palette: ' + (colorNote || colorPaletteData[selected('colorPalette')] || materialPalette) + ',',
     'background design: ' + background + ',',
     ratioData[selected('ratio')] + ',',
