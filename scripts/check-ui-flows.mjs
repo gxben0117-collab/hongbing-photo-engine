@@ -27,11 +27,11 @@ const visualOrderContracts = {
     'travel-ratio': 11, 'travel-media': 12, 'travel-output': 13,
   },
   'magazine.html': {
-    'magazine-preset': 0, 'magazine-style': 1, 'magazine-theme': 2,
-    'magazine-garment-variation': 3, 'magazine-details': 4, 'magazine-body': 5,
-    'magazine-pose': 6, 'magazine-framing': 7, 'magazine-background': 8,
-    'magazine-motion': 9, 'magazine-camera': 10, 'magazine-ratio': 11,
-    'magazine-media': 12, 'magazine-output': 13,
+    'section-preset': 0, 'section-style': 1, 'section-theme': 2,
+    'section-garment-variation': 3, 'section-details': 4, 'section-body': 5,
+    'section-pose': 6, 'section-framing': 7, 'section-background': 8,
+    'section-motion': 9, 'section-camera': 10, 'section-ratio': 11,
+    'section-media': 12, 'section-output': 13,
   },
   'luxury-lifestyle.html': {
     'section-preset': 0, 'section-style': 1, 'section-scene': 2,

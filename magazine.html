@@ -42,20 +42,21 @@
   }
   .wrap > header{order:-2;}
   .wrap > .note{order:-1;}
-  .magazine-preset{order:0;}
-  .magazine-style{order:1;}
-  .magazine-theme{order:2;}
-  .magazine-garment-variation{order:3;}
-  .magazine-details{order:4;}
-  .magazine-body{order:5;}
-  .magazine-pose{order:6;}
-  .magazine-framing{order:7;}
-  .magazine-background{order:8;}
-  .magazine-motion{order:9;}
-  .magazine-camera{order:10;}
-  .magazine-ratio{order:11;}
-  .magazine-media{order:12;}
-  .magazine-output{order:13;}
+  .section-preset{order:0;}
+  .section-style{order:1;}
+  .section-theme{order:2;}
+  .section-garment-variation{order:3;}
+  .section-details{order:4;}
+  .section-body{order:5;}
+  .section-pose{order:6;}
+  .section-framing{order:7;}
+  .section-background{order:8;}
+  .section-motion{order:9;}
+  .section-camera{order:10;}
+  .section-ratio{order:11;}
+  .section-media{order:12;}
+  .section-output{order:13;}
+  .wrap > .output-wrap{order:14;}
 
   /* ── NAV ── */
   nav{
@@ -387,7 +388,7 @@
     color:var(--black);
     border:none;
     border-radius:8px;
-    padding:18px;
+    padding:16px;
     font-size:15px;
     font-weight:900;
     letter-spacing:0.08em;
@@ -397,15 +398,22 @@
   }
   .generate-btn:active{ opacity:0.85; }
 
+  .random-btn{
+    margin-bottom:12px;
+    background:linear-gradient(180deg,#17120b 0%,#22180f 100%);
+    color:var(--gold);
+    border:1px solid var(--gold);
+  }
+
   .preset-grid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:10px;
-    margin-bottom:18px;
+    margin-bottom:0;
   }
   .preset-btn{
     border:1px solid var(--line);
-    border-radius:10px;
+    border-radius:8px;
     background:linear-gradient(180deg,#171717 0%,#111 100%);
     color:var(--paper);
     padding:12px 14px;
@@ -600,9 +608,14 @@
     💡 使用時請附上人物參考照片。身份鎖定系統需要照片才能生效。
   </div>
 
-  <!-- 00 一鍵組合 -->
-  <section class="magazine-preset">
-    <button class="generate-btn" id="magazineMoodPreset" style="margin-bottom:18px;background:linear-gradient(180deg,#17120b 0%,#22180f 100%);color:var(--gold);border:1px solid var(--gold);">隨機套用｜棚拍封面感覺</button>
+  <!-- 00 一鍵版型模板 -->
+  <section class="section-preset">
+    <div class="section-header">
+      <span class="section-label">00</span>
+      <span class="section-title">一鍵版型模板</span>
+      <span class="section-sub">先套用完整封面情境，再微調細節</span>
+    </div>
+    <button class="generate-btn random-btn" id="magazineMoodPreset" type="button">隨機套用｜棚拍封面感覺</button>
     <div class="preset-grid">
       <button type="button" class="preset-btn primary" data-magazine-preset="blackGoldBeauty">一鍵套用｜黑金高訂美妝特寫</button>
       <button type="button" class="preset-btn" data-magazine-preset="jewelryCoolCover">一鍵套用｜珠寶冷光封面</button>
@@ -639,7 +652,7 @@
   </section>
 
   <!-- 01 封面風格 -->
-  <section class="magazine-style">
+  <section class="section-style">
     <div class="section-header">
       <span class="section-label">01</span>
       <span class="section-title">雜誌成品類型</span>
@@ -838,7 +851,7 @@
   </section>
 
   <!-- 02 主題/服裝方向 -->
-  <section class="magazine-theme">
+  <section class="section-theme">
     <div class="section-header">
       <span class="section-label">02</span>
       <span class="section-title">主題 / 服裝方向</span>
@@ -993,7 +1006,7 @@
   </section>
 
   <!-- 03 服裝改造核心 -->
-  <section class="magazine-garment-variation">
+  <section class="section-garment-variation">
     <div class="section-header">
       <span class="section-label">03</span>
       <span class="section-title">服裝改造核心</span>
@@ -1180,7 +1193,7 @@
   </section>
 
   <!-- 04 妝容、膚質、配飾與光線細節 -->
-  <section class="magazine-details">
+  <section class="section-details">
     <div class="section-header">
       <span class="section-label">04</span>
       <span class="section-title">妝容、膚質、配飾與光線細節</span>
@@ -1315,7 +1328,7 @@
   </section>
 
   <!-- 05 身形輪廓 -->
-  <section class="magazine-body">
+  <section class="section-body">
     <div class="section-header">
       <span class="section-label">05</span>
       <span class="section-title">身形輪廓</span>
@@ -1355,7 +1368,7 @@
     </div>
   </section>
   <!-- 06 姿態模組 -->
-  <section class="magazine-pose">
+  <section class="section-pose">
     <div class="section-header">
       <span class="section-label">06</span>
       <span class="section-title">人物姿勢</span>
@@ -1839,7 +1852,7 @@
   </section>
 
   <!-- 07 人物入鏡比例 -->
-  <section class="magazine-framing">
+  <section class="section-framing">
     <div class="section-header">
       <span class="section-label">07</span>
       <span class="section-title">人物入鏡比例</span>
@@ -1880,7 +1893,7 @@
   </section>
 
   <!-- 08 背景設定 -->
-  <section class="magazine-background">
+  <section class="section-background">
     <div class="section-header">
       <span class="section-label">08</span>
       <span class="section-title">拍攝場景與背景</span>
@@ -2184,7 +2197,7 @@
     <input type="text" class="text-input" id="customBg" placeholder="例如：老式書房壁爐、廢棄溫室玻璃屋、深夜便利商店">
   </section>
   <!-- 09 動態節奏 -->
-  <section class="magazine-motion">
+  <section class="section-motion">
     <div class="section-header">
       <span class="section-label">09</span>
       <span class="section-title">動態節奏</span>
@@ -2215,7 +2228,7 @@
   </section>
 
   <!-- 10 鏡頭氣場 -->
-  <section class="magazine-camera">
+  <section class="section-camera">
     <div class="section-header">
       <span class="section-label">10</span>
       <span class="section-title">拍攝角度與鏡頭感</span>
@@ -2273,7 +2286,7 @@
 
 
   <!-- 11 圖片比例 -->
-  <section class="magazine-ratio">
+  <section class="section-ratio">
     <div class="section-header">
       <span class="section-label">11</span>
       <span class="section-title">圖片比例</span>
@@ -2344,7 +2357,7 @@
   </section>
 
   <!-- 12 輸出風格 -->
-  <section class="magazine-media">
+  <section class="section-media">
     <div class="section-header">
       <span class="section-label">12</span>
       <span class="section-title">最後呈現媒材</span>
@@ -2393,17 +2406,17 @@
       </label></div>
   </section>
   <!-- 13 生成 -->
-  <section class="magazine-output">
+  <section class="section-output">
     <div class="section-header">
       <span class="section-label">13</span>
       <span class="section-title">生成咒語</span>
     </div>
-    <button class="generate-btn" id="generateBtn">生成完整咒語</button>
+    <button class="generate-btn" id="generateBtn" type="button">生成完整咒語</button>
   </section>
   <div class="output-wrap hidden" id="outputWrap">
     <div class="output-stale-badge">選項已變更，請重新按「生成完整咒語」</div>
     <textarea id="outputText" readonly></textarea>
-    <button class="copy-btn" id="copyBtn">一鍵複製</button>
+    <button class="copy-btn" id="copyBtn" type="button">一鍵複製</button>
   </div>
 
 </div>
