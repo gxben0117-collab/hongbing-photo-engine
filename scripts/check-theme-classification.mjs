@@ -87,17 +87,17 @@ else pass(`modern portrait has ${templateCount} complete templates`);
 const extremeSource = read('extreme-sports.html');
 const extremeRequiredMarkers = [
   '極限運動高速攝影', 'Extreme Sports High-Speed Photography', 'const CORE = window.HB_CORE_PROMPT?.page?.extremeSports',
-  'name="sport" value="surfing"', 'name="sport" value="skiing"', 'name="sport" value="skateboarding"', 'name="sport" value="parkour"',
+  'name="sport" value="surfing"', 'name="sport" value="skiing"', 'name="sport" value="skateboarding"', 'name="sport" value="parkour"', 'name="sport" value="inlineSkating"',
   'AI判斷｜主題最佳瞬間', 'name="camera" value="groundLevelTracking"', 'name="ratio" value="9:16"',
-  'const environmentScaleData', 'Large-scale ocean response', 'Large-scale snow response', '【環境反應尺度】'
+  'const environmentScaleData', 'Large-scale ocean response', 'Large-scale snow response', '【環境反應尺度】', 'const faceVisibilityData', 'Full-face visibility priority', '【臉部可見與安全裝備】'
 ];
 for (const marker of extremeRequiredMarkers) {
   if (!extremeSource.includes(marker)) fail(`extreme-sports.html missing required marker: ${marker}`);
 }
 const extremeTemplateCount = (extremeSource.match(/^[ \t]+[A-Za-z][A-Za-z0-9]*: \{ story:/gm) || []).length;
-if (extremeTemplateCount < 44) fail(`extreme-sports.html should have at least 44 complete templates, found ${extremeTemplateCount}`);
+if (extremeTemplateCount < 54) fail(`extreme-sports.html should have at least 54 complete templates, found ${extremeTemplateCount}`);
 else pass(`extreme sports has ${extremeTemplateCount} complete templates`);
-for (const [sport, minimum] of Object.entries({ surfing: 12, skiing: 12, skateboarding: 10, parkour: 10 })) {
+for (const [sport, minimum] of Object.entries({ surfing: 12, skiing: 12, skateboarding: 10, parkour: 10, inlineSkating: 10 })) {
   const count = (extremeSource.match(new RegExp(`sport: '${sport}'`, 'g')) || []).length;
   if (count < minimum) fail(`extreme-sports.html should have at least ${minimum} ${sport} templates, found ${count}`);
   else pass(`extreme sports has ${count} ${sport} templates`);

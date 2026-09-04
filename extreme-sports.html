@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>極限運動高速攝影咒語產生器｜寫真引擎</title>
-<meta name="description" content="極限運動高速攝影咒語產生器，組合衝浪、滑雪、動作瞬間、運動裝備、光線、背景與高速攝影鏡頭語言。">
+<meta name="description" content="極限運動高速攝影咒語產生器，組合衝浪、滑雪、滑板、酷跑、直排輪動作瞬間、運動裝備、光線、背景與高速攝影鏡頭語言。">
 <meta property="og:title" content="極限運動高速攝影咒語產生器｜寫真引擎">
-<meta property="og:description" content="衝浪、滑雪、滑板與酷跑的高速動態寫真咒語產生器。">
+<meta property="og:description" content="衝浪、滑雪、滑板、酷跑與直排輪的高速動態寫真咒語產生器。">
 <meta name="twitter:title" content="極限運動高速攝影咒語產生器｜寫真引擎">
-<meta name="twitter:description" content="衝浪、滑雪、滑板與酷跑的高速動態寫真咒語產生器。">
+<meta name="twitter:description" content="衝浪、滑雪、滑板、酷跑與直排輪的高速動態寫真咒語產生器。">
 <style>
   :root{--black:#090909;--panel:#171615;--line:#37312A;--paper:#F7F4EF;--soft:#A7A09A;--gold:#C9A84C;--gold-soft:#E8D5A3;--white:#FFF;--selected:#241C12;--blue:#8EC7E8;}
   *{box-sizing:border-box;margin:0;padding:0;}
@@ -81,7 +81,7 @@
   <header>
     <div class="eyebrow">Extreme Sports High-Speed Photography</div>
     <h1>極限運動高速攝影 <span>咒語產生器</span></h1>
-    <p>衝浪 × 滑雪 × 滑板 × 酷跑 × 高速凝結 × 戶外動態寫真</p>
+    <p>衝浪 × 滑雪 × 滑板 × 酷跑 × 直排輪 × 高速凝結 × 戶外動態寫真</p>
   </header>
   <div class="note">請附上成年人物參考照片。運動服裝、器材、動作與環境會重新構成畫面；身份鎖定、臉部幾何、真人骨架與頭身比例核心持續優先，並要求人物與器材接觸自然、安全裝備完整。</div>
 
@@ -133,6 +133,16 @@
       <button class="preset-btn" type="button" data-template="parkourRailFlow">一鍵套用｜欄杆流動追拍</button>
       <button class="preset-btn" type="button" data-template="parkourUnderpassVault">一鍵套用｜地下道連續翻越</button>
       <button class="preset-btn" type="button" data-template="parkourSkylineArc">一鍵套用｜天際線跨越弧線</button>
+      <button class="preset-btn" type="button" data-template="inlineRailGrindHero">一鍵套用｜直排輪欄杆研磨</button>
+      <button class="preset-btn" type="button" data-template="inlineStairJumpFreeze">一鍵套用｜直排輪階梯飛越</button>
+      <button class="preset-btn" type="button" data-template="inlineRiversideSprint">一鍵套用｜河岸長道高速滑行</button>
+      <button class="preset-btn" type="button" data-template="inlineSlalomCurve">一鍵套用｜街頭繞桿弧線</button>
+      <button class="preset-btn" type="button" data-template="inlineWallRidePortrait">一鍵套用｜直排輪牆面貼滑</button>
+      <button class="preset-btn" type="button" data-template="inlineWetBoulevard">一鍵套用｜濕地街道水痕</button>
+      <button class="preset-btn" type="button" data-template="inlineParkAirborne">一鍵套用｜滑輪公園空中飛越</button>
+      <button class="preset-btn" type="button" data-template="inlineNightTrack">一鍵套用｜城市夜色追焦</button>
+      <button class="preset-btn" type="button" data-template="inlineUrbanFlow">一鍵套用｜都市輪滑流動</button>
+      <button class="preset-btn" type="button" data-template="inlineSkateParkLanding">一鍵套用｜公園落地瞬間</button>
     </div>
   </section>
 
@@ -153,6 +163,7 @@
       <label class="card"><input type="radio" name="sport" value="skiing"><span class="name">滑雪</span><span class="desc">雪山、滑雪板、粉雪與高速下坡</span></label>
       <label class="card"><input type="radio" name="sport" value="skateboarding"><span class="name">滑板</span><span class="desc">滑板、欄杆、階梯與城市落地瞬間</span></label>
       <label class="card"><input type="radio" name="sport" value="parkour"><span class="name">酷跑</span><span class="desc">牆面、欄杆、屋頂與身體翻越動作</span></label>
+      <label class="card"><input type="radio" name="sport" value="inlineSkating"><span class="name">直排輪／街頭輪滑</span><span class="desc">輪滑、欄杆、階梯、街頭速度與貼地動態</span></label>
     </div>
   </section>
 
@@ -184,6 +195,13 @@
       <label class="pose-card"><input type="radio" name="action" value="parkourRooftopLeap"><span class="pose-name">屋頂跨越</span><span class="pose-desc">跨越空間、落點與城市尺度清晰</span></label>
       <label class="pose-card"><input type="radio" name="action" value="parkourLanding"><span class="pose-name">低位落地</span><span class="pose-desc">雙腳承重、手臂平衡與地面接觸自然</span></label>
       <label class="pose-card"><input type="radio" name="action" value="parkourRailFlow"><span class="pose-name">欄杆流動穿越</span><span class="pose-desc">身體沿欄杆方向移動，關節不扭曲</span></label>
+      <div class="group-title">直排輪動作</div>
+      <label class="pose-card"><input type="radio" name="action" value="inlineRailGrind"><span class="pose-name">欄杆研磨滑行</span><span class="pose-desc">輪架與欄杆接觸，身體低位平衡</span></label>
+      <label class="pose-card"><input type="radio" name="action" value="inlineStairJump"><span class="pose-name">階梯飛越</span><span class="pose-desc">空中越過階梯，落地線與輪子方向清楚</span></label>
+      <label class="pose-card"><input type="radio" name="action" value="inlineUrbanSprint"><span class="pose-name">城市高速滑行</span><span class="pose-desc">貼地加速、手臂擺動與街道透視一致</span></label>
+      <label class="pose-card"><input type="radio" name="action" value="inlineSlalom"><span class="pose-name">街頭繞桿</span><span class="pose-desc">連續轉向、輪痕與身體重心可讀</span></label>
+      <label class="pose-card"><input type="radio" name="action" value="inlineWallRide"><span class="pose-name">牆面貼滑</span><span class="pose-desc">輪子沿牆面短暫接觸，軸線自然</span></label>
+      <label class="pose-card"><input type="radio" name="action" value="inlineWetCarve"><span class="pose-name">濕地弧線切入</span><span class="pose-desc">輪面切過淺水，水痕與轉向瞬間凝結</span></label>
     </div>
   </section>
 
@@ -204,6 +222,10 @@
       <div class="group-title">酷跑裝備</div>
       <label class="card"><input type="radio" name="garment" value="parkourTechnicalSet"><span class="name">酷跑機能服</span><span class="desc">彈性上衣、活動長褲、抓地鞋與輕量護具</span></label>
       <label class="card"><input type="radio" name="garment" value="parkourUrbanLayer"><span class="name">都市層次運動裝</span><span class="desc">輕量風衣、機能背心、活動長褲與抓地鞋</span></label>
+      <div class="group-title">直排輪裝備</div>
+      <label class="card"><input type="radio" name="garment" value="inlineStreetTech"><span class="name">街頭輪滑機能服</span><span class="desc">耐磨上衣、活動短褲、護膝與開放式安全帽</span></label>
+      <label class="card"><input type="radio" name="garment" value="inlineParkSet"><span class="name">輪滑公園競技裝</span><span class="desc">彈性機能服、護腕護膝、直排輪與護具</span></label>
+      <label class="card"><input type="radio" name="garment" value="inlineEditorialSet"><span class="name">高級街拍輪滑裝</span><span class="desc">俐落城市服裝、直排輪與低調保護配件</span></label>
       <label class="field custom-field">自訂服裝與裝備<input class="text-input" id="customGarment" type="text" placeholder="例如：霧藍防水滑雪外套、橘色衝浪板與黑色護具"></label>
     </div>
   </section>
@@ -266,6 +288,9 @@
       <label class="pose-card"><input type="radio" name="pose" value="skateCrouch"><span class="pose-name">滑板低位平衡</span><span class="pose-desc">膝蓋彎曲，雙腳與板面方向自然</span></label>
       <label class="pose-card"><input type="radio" name="pose" value="parkourVault"><span class="pose-name">酷跑翻越支撐</span><span class="pose-desc">掌面、牆面或欄杆接觸清楚，軀幹連續</span></label>
       <label class="pose-card"><input type="radio" name="pose" value="parkourLanding"><span class="pose-name">酷跑落地吸震</span><span class="pose-desc">雙腳承重、膝蓋自然彎曲、手臂平衡</span></label>
+      <label class="pose-card"><input type="radio" name="pose" value="inlineCrouch"><span class="pose-name">直排輪低位平衡</span><span class="pose-desc">膝蓋彎曲、身體前傾、輪面與路徑方向一致</span></label>
+      <label class="pose-card"><input type="radio" name="pose" value="inlineAirborne"><span class="pose-name">直排輪空中飛越</span><span class="pose-desc">雙腿自然收起，輪鞋與身體軸線清楚</span></label>
+      <label class="pose-card"><input type="radio" name="pose" value="inlineFlow"><span class="pose-name">直排輪流動轉向</span><span class="pose-desc">肩胯跟隨弧線，手臂自然平衡</span></label>
       <label class="field custom-field">自訂姿勢<input class="text-input" id="customPose" type="text" placeholder="例如：滑雪者落地後轉身看向山谷，雙手保持平衡"></label>
     </div>
   </section>
@@ -290,6 +315,9 @@
       <label class="card"><input type="radio" name="lighting" value="blueHourRidge"><span class="name">藍調山脊光</span><span class="desc">冷藍環境、頭盔輪廓光與雪面層次</span></label>
       <label class="card"><input type="radio" name="lighting" value="urbanHardDaylight"><span class="name">都市清晰日光</span><span class="desc">建築反射、硬朗地面光與動作輪廓</span></label>
       <label class="card"><input type="radio" name="lighting" value="urbanGoldenBacklight"><span class="name">城市金色逆光</span><span class="desc">斜射陽光、長影與滑板或酷跑速度線</span></label>
+      <label class="card"><input type="radio" name="lighting" value="inlineFreshDaylight"><span class="name">輪滑明亮日光</span><span class="desc">清楚輪痕、護具與開放式臉部光線</span></label>
+      <label class="card"><input type="radio" name="lighting" value="inlineGoldenRim"><span class="name">輪滑金色邊緣光</span><span class="desc">髮絲、衣物與街道路徑的暖色速度線</span></label>
+      <label class="card"><input type="radio" name="lighting" value="inlineNightCity"><span class="name">輪滑城市夜光</span><span class="desc">店面光、濕地反射與人物臉部補光</span></label>
       <div class="group-title">色彩系統</div>
       <label class="card selected"><input type="radio" name="colorPalette" value="oceanCobaltCoral" checked><span class="name">海洋鈷藍 × 珊瑚橘</span><span class="desc">運動品牌海岸色彩與醒目焦點</span></label>
       <label class="card"><input type="radio" name="colorPalette" value="seafoamSunset"><span class="name">海沫白 × 落日金</span><span class="desc">柔和海岸、浪花與夕陽協調</span></label>
@@ -299,6 +327,9 @@
       <label class="card"><input type="radio" name="colorPalette" value="blueHourSilver"><span class="name">藍調銀灰 × 琥珀</span><span class="desc">冷色山脊與護目鏡暖色反射</span></label>
       <label class="card"><input type="radio" name="colorPalette" value="concreteLimeOrange"><span class="name">清水模 × 螢光橘</span><span class="desc">城市運動場景與動作焦點分離</span></label>
       <label class="card"><input type="radio" name="colorPalette" value="urbanCharcoalRed"><span class="name">炭黑 × 競速紅</span><span class="desc">酷跑與滑板的速度感和安全色</span></label>
+      <label class="card"><input type="radio" name="colorPalette" value="inlineCobaltSilver"><span class="name">鈷藍 × 銀灰</span><span class="desc">城市輪滑、金屬欄杆與清爽速度感</span></label>
+      <label class="card"><input type="radio" name="colorPalette" value="inlineRoseGraphite"><span class="name">霧玫瑰 × 石墨</span><span class="desc">街拍服裝、混凝土與低調精品感</span></label>
+      <label class="card"><input type="radio" name="colorPalette" value="inlineNightTeal"><span class="name">深青 × 冷銀</span><span class="desc">夜間輪痕、城市燈點與濕地反光</span></label>
       <label class="card"><input type="radio" name="colorPalette" value="aiThemeScenePalette"><span class="name">AI判斷｜主題最佳配色</span><span class="desc">依運動、裝備、地形與光線選一組協調配色</span></label>
       <label class="field custom-field">指定配色<input class="text-input" id="colorNote" type="text" placeholder="例如：冰藍、霧黑與螢光黃，保持雪霧中的人物分離"></label>
     </div>
@@ -319,6 +350,9 @@
       <label class="card"><input type="radio" name="background" value="urbanRooftopRoute"><span class="name">都市屋頂動線</span><span class="desc">屋頂、牆面、欄杆與酷跑跨越空間</span></label>
       <label class="card"><input type="radio" name="background" value="concreteUnderpass"><span class="name">清水模地下通道</span><span class="desc">柱體、陰影、低角度與城市速度感</span></label>
       <label class="card"><input type="radio" name="background" value="pureWhiteBackground"><span class="name">無背景純白色</span><span class="desc">運動器材與動作展示用極簡背景</span></label>
+      <label class="card"><input type="radio" name="background" value="inlineSkatePark"><span class="name">直排輪滑板公園</span><span class="desc">坡道、碗池、欄杆與開放落地區</span></label>
+      <label class="card"><input type="radio" name="background" value="inlineRiversideWalk"><span class="name">河岸長道步道</span><span class="desc">玻璃欄杆、城市天際線與高速透視</span></label>
+      <label class="card"><input type="radio" name="background" value="inlineWetBoulevard"><span class="name">雨後濕地街道</span><span class="desc">路面反光、店面散景與輪滑弧線</span></label>
       <label class="field custom-field">自訂背景<input class="text-input" id="customBackground" type="text" placeholder="例如：暴風雪後的高山稜線、遠方雲海與乾淨雪坡"></label>
     </div>
   </section>
@@ -388,7 +422,11 @@ Adult athlete only, complete functional safety equipment where appropriate, no i
 const sportsCoherenceCore = 'The selected sport, action, equipment, pose, terrain, light, camera and color palette must read as one coherent professional outdoor photography production; the athlete remains the visual subject and the environment explains the motion.';
 const environmentScaleData = {
   surfing: 'Large-scale ocean response: the wave face may rise high around the athlete, with broad sheets of whitewater, a wide spray fan and many suspended droplets extending through the foreground and midground. Make the wave and spray visibly larger and more powerful than an ordinary splash, while keeping the face, upper body, surfboard and board contact points unobstructed and readable.',
-  skiing: 'Large-scale snow response: deep powder erupts into a tall, wide and dense plume from the ski edges, with airborne snow crystals spreading through the foreground and midground and a substantial trailing snow cloud behind the athlete. Snow spray may rise to torso height and occupy a strong part of the frame, while keeping the face, goggles, skis, boots and direction of travel readable.'
+  skiing: 'Large-scale snow response: deep powder erupts into a tall, wide and dense plume from the ski edges, with airborne snow crystals spreading through the foreground and midground and a substantial trailing snow cloud behind the athlete. Snow spray may rise to torso height and occupy a strong part of the frame, while keeping the face, goggles, skis, boots and direction of travel readable.',
+  inlineSkating: 'Large-scale ground response: wheels carve a clear arc through fine road grit or a shallow reflective water film, with visible wheel spray, small airborne particles and a readable trail extending through the foreground. Keep the face, eyes, body line, skate frames and ground contact fully visible; the effect supports speed without becoming a smoke cloud.'
+};
+const faceVisibilityData = {
+  inlineSkating: 'Full-face visibility priority: keep the athlete\'s eyes, nose, mouth, jawline and facial expression completely unobstructed. Use only open-face protective equipment when necessary; no full-face helmet, no visor, no face mask and no mirrored goggles.'
 };
 
 const styleData = {
@@ -402,7 +440,8 @@ const sportData = {
   surfing: 'surfing action photography, powerful large-scale ocean wave, broad whitewater spray, surfboard movement, suspended saltwater droplets and coastal wind',
   skiing: 'alpine skiing action photography, snow-covered mountain terrain, skis carving through deep powder, a large airborne snow plume and cold mountain air',
   skateboarding: 'skateboarding action photography, urban concrete architecture, skateboard wheels, rails, stairs and precise landing mechanics',
-  parkour: 'parkour action photography, urban architecture, walls, rails, jumps, vaults and clear body-environment contact'
+  parkour: 'parkour action photography, urban architecture, walls, rails, jumps, vaults and clear body-environment contact',
+  inlineSkating: 'inline skating action photography, urban concrete architecture, inline skate wheels, rails, stairs, curved tracks and fast low-ground movement'
 };
 
 const actionData = {
@@ -426,7 +465,13 @@ const actionData = {
   parkourWallVault: 'parkour athlete vaulting over a concrete wall, palms and supporting surface clearly connected, legs following a readable arc with controlled momentum',
   parkourRooftopLeap: 'parkour athlete crossing a measured rooftop gap, takeoff and landing surfaces both visible, body extended naturally with urban scale and safe distance readable',
   parkourLanding: 'parkour athlete landing in a low controlled position on a concrete platform, both feet bearing weight, hands balancing and impact path clearly frozen',
-  parkourRailFlow: 'parkour athlete moving fluidly along a city rail, hand or foot contact visible, torso and limbs aligned with the rail direction and next landing point'
+  parkourRailFlow: 'parkour athlete moving fluidly along a city rail, hand or foot contact visible, torso and limbs aligned with the rail direction and next landing point',
+  inlineRailGrind: 'inline skater grinding a metal rail in one controlled sequence, skate frames visibly contacting the rail, knees flexed and the landing path sharply readable',
+  inlineStairJump: 'inline skater clearing a short urban stair set, both skate wheels aligned with the forward path, airborne body balanced and landing surface clearly visible',
+  inlineUrbanSprint: 'inline skater accelerating along a city promenade, low athletic stance, rapid wheel contact, flowing hair and strong perspective lines conveying speed',
+  inlineSlalom: 'inline skater weaving through a sequence of street markers, edge-to-edge wheel control, natural hip and shoulder rotation and a clear S-shaped motion trail',
+  inlineWallRide: 'inline skater performing a controlled wall ride, skate wheels and wall contact aligned, body axis balanced against the concrete plane and face fully readable',
+  inlineWetCarve: 'inline skater carving across a shallow wet pavement curve, wheels throwing a crisp fan of water, knees flexed and the reflective ground path frozen at high speed'
 };
 
 const garmentData = {
@@ -439,7 +484,10 @@ const garmentData = {
   skateStreetSet: 'structured technical streetwear set with a fitted heavyweight T-shirt, slightly cropped light-blue denim overshirt, high-waisted blue denim shorts, matte black leather accents, silver rectangular buckles, pointed knee-high matte boots and a compact quilted shoulder bag',
   skateMinimalSet: 'clean urban skate outfit with a fitted performance top, durable high-waisted cargo shorts, protective wrist guards, flat skate shoes and a simple skateboard with realistic grip tape and trucks',
   parkourTechnicalSet: 'flexible parkour technical outfit with a fitted moisture-wicking top, articulated stretch cargo pants, lightweight knee protection and high-grip athletic shoes, all functional for vaulting and landing',
-  parkourUrbanLayer: 'layered urban movement outfit with a lightweight wind shell, technical base layer, tapered stretch pants, compact utility belt and high-grip shoes, with unrestricted shoulder and hip mobility'
+  parkourUrbanLayer: 'layered urban movement outfit with a lightweight wind shell, technical base layer, tapered stretch pants, compact utility belt and high-grip shoes, with unrestricted shoulder and hip mobility',
+  inlineStreetTech: 'durable inline street outfit with a fitted technical top, flexible cargo pants or shorts, knee and wrist protection, open-face skate helmet and high-performance inline skates with secure wheel frames',
+  inlineParkSet: 'clean skate-park inline outfit with a lightweight protective jacket, articulated stretch trousers, knee pads, wrist guards and responsive inline skates, with no face-covering equipment',
+  inlineEditorialSet: 'premium urban inline styling with a structured cropped wind layer, fitted performance base, relaxed movement trousers, understated open-face protection and refined inline skates'
 };
 
 const poseData = {
@@ -453,7 +501,10 @@ const poseData = {
   equipmentReady: 'upright outdoor athlete pose while adjusting gloves, goggles or board equipment, stable feet and relaxed shoulders, equipment remains secondary to the person',
   skateCrouch: 'low balanced skateboarding stance, knees flexed over the board, shoulders aligned with the travel direction, hands relaxed and feet visibly secured to the deck',
   parkourVault: 'controlled parkour vault pose, one hand or both hands supporting the selected surface, hips and legs clearing the obstacle, head and spine following the travel direction',
-  parkourLanding: 'stable parkour landing pose with knees flexed to absorb impact, feet planted on the selected surface, hands used naturally for balance and no twisted joints'
+  parkourLanding: 'stable parkour landing pose with knees flexed to absorb impact, feet planted on the selected surface, hands used naturally for balance and no twisted joints',
+  inlineCrouch: 'low inline-skating balance pose, knees flexed, torso leaning naturally into the travel direction, both skate frames grounded and hands relaxed for stability',
+  inlineAirborne: 'controlled airborne inline-skating pose, knees naturally tucked, both skate frames aligned with the landing path, shoulders and hips following one rotation axis',
+  inlineFlow: 'fluid inline-skating carve pose, shoulders and hips following a wide arc, one arm balancing naturally and wheel contact remaining clear through the curve'
 };
 
 const lightingData = {
@@ -464,7 +515,10 @@ const lightingData = {
   powderSoftLight: 'soft diffused mountain light through airborne powder, gentle shadow edges, readable technical fabric texture and unified cold environmental color',
   blueHourRidge: 'deep blue-hour mountain light with restrained amber edge light on goggles and equipment, readable snow texture and controlled cool contrast',
   urbanHardDaylight: 'clean hard urban daylight with controlled concrete highlights, crisp contact shadows and readable skin, garment and skateboard or wall texture',
-  urbanGoldenBacklight: 'warm low urban backlight along architecture, controlled rim light on moving hair and clothing, long shadows and a balanced face exposure'
+  urbanGoldenBacklight: 'warm low urban backlight along architecture, controlled rim light on moving hair and clothing, long shadows and a balanced face exposure',
+  inlineFreshDaylight: 'bright clean daylight across the skating route, crisp wheel shadows, controlled highlights on protective gear and a clear unobstructed face',
+  inlineGoldenRim: 'warm golden-hour rim light along the skating path, glowing edge light on hair and clothing, long pavement shadows and a balanced face exposure',
+  inlineNightCity: 'refined city-night light with soft storefront glow, restrained pavement reflections, readable facial fill and controlled bokeh behind the moving skater'
 };
 
 const colorData = {
@@ -476,6 +530,9 @@ const colorData = {
   blueHourSilver: 'deep blue hour blue, silver gray, snow white and one restrained amber highlight',
   concreteLimeOrange: 'concrete gray, clean white, controlled lime green and one vivid orange action accent',
   urbanCharcoalRed: 'urban charcoal, washed denim blue, warm concrete and one restrained racing red accent',
+  inlineCobaltSilver: 'urban cobalt blue, silver gray, clean white and one restrained citrus accent',
+  inlineRoseGraphite: 'dusty rose, graphite black, warm concrete and one restrained chrome highlight',
+  inlineNightTeal: 'deep teal, soft black, cool silver and controlled amber city lights',
   aiThemeScenePalette: window.HB_CORE_PROMPT?.controls?.autoColor || 'AI choose one coherent dominant color, one supporting color and one restrained accent from the selected sport, equipment, terrain and lighting'
 };
 
@@ -491,7 +548,10 @@ const backgroundData = {
   urbanStairPlaza: 'open urban stair plaza with concrete steps, metal rails, broad landing zones and clean architectural lines around the skateboarder',
   urbanRooftopRoute: 'safe-feeling urban rooftop route with concrete walls, low rails, visible landing platforms and layered city architecture in the distance',
   concreteUnderpass: 'bright concrete underpass with repeating columns, textured walls, clear floor plane and controlled perspective for skateboarding or parkour movement',
-  pureWhiteBackground: 'minimal pure white background with a subtle ground contact shadow, equipment and action direction isolated for a clean campaign study'
+  pureWhiteBackground: 'minimal pure white background with a subtle ground contact shadow, equipment and action direction isolated for a clean campaign study',
+  inlineSkatePark: 'clean professional concrete skate park with bowls, low ramps, metal rails and open landing zones, no distracting spectators or readable branding',
+  inlineRiversideWalk: 'wide urban riverside promenade with a smooth path, glass railing, open skyline and repeating perspective lines around the moving inline skater',
+  inlineWetBoulevard: 'wet downtown boulevard after light rain, reflective pavement, warm storefront bokeh and clear open space around the skater, with no readable logos'
 };
 
 const cameraData = {
@@ -585,7 +645,17 @@ const themeTemplates = {
   parkourLandingDust: { story: 'a grounded action study capturing the exact absorption of a low landing on concrete, with balanced hands, flexed knees and a restrained dust trace under the athlete', style: 'highSpeedDocumentary', sport: 'parkour', action: 'parkourLanding', garment: 'parkourTechnicalSet', garmentLayer: 'layer6', chestDetail: 'layeredBaseLayer', waistSideDetail: 'waterproofWaistSeam', shoulderDetail: 'contrastSleevePanel', bodyShape: 'original', pose: 'parkourLanding', lighting: 'urbanHardDaylight', colorPalette: 'concreteLimeOrange', background: 'concreteUnderpass', camera: 'topBeauty', ratio: '4:5', intensity: 'balanced' },
   parkourRailFlow: { story: 'a golden-hour tracking portrait of a parkour athlete flowing along an urban rail, with hand contact, torso direction, shadow and the next landing point visually connected', style: 'athleteEditorial', sport: 'parkour', action: 'parkourRailFlow', garment: 'parkourUrbanLayer', garmentLayer: 'layer0', chestDetail: 'none', waistSideDetail: 'none', shoulderDetail: 'none', bodyShape: 'korean_idol', pose: 'parkourVault', lighting: 'urbanGoldenBacklight', colorPalette: 'urbanCharcoalRed', background: 'urbanRooftopRoute', camera: 'urbanTracking', ratio: '9:16', intensity: 'premium' },
   parkourUnderpassVault: { story: 'a precise underpass sequence freezing a controlled wall vault between repeating columns, with clear palm support, body clearance and a readable next step', style: 'highSpeedDocumentary', sport: 'parkour', action: 'parkourWallVault', garment: 'parkourUrbanLayer', garmentLayer: 'layer3', chestDetail: 'reinforcedChestPanel', waistSideDetail: 'technicalWaistBelt', shoulderDetail: 'contrastSleevePanel', bodyShape: 'original', pose: 'parkourVault', lighting: 'urbanHardDaylight', colorPalette: 'concreteLimeOrange', background: 'concreteUnderpass', camera: 'threeQuarterSide', ratio: '3:4', intensity: 'premium' },
-  parkourSkylineArc: { story: 'a wide city action cover showing one measured rooftop leap as a clean arc against the skyline, with both platforms, body extension and landing route kept legible', style: 'athleteEditorial', sport: 'parkour', action: 'parkourRooftopLeap', garment: 'parkourTechnicalSet', garmentLayer: 'layer6', chestDetail: 'layeredBaseLayer', waistSideDetail: 'waterproofWaistSeam', shoulderDetail: 'protectiveShoulderLine', bodyShape: 'fashion_tall', pose: 'parkourVault', lighting: 'urbanGoldenBacklight', colorPalette: 'urbanCharcoalRed', background: 'urbanRooftopRoute', camera: 'distantHero', ratio: '16:9', intensity: 'cinematic' }
+  parkourSkylineArc: { story: 'a wide city action cover showing one measured rooftop leap as a clean arc against the skyline, with both platforms, body extension and landing route kept legible', style: 'athleteEditorial', sport: 'parkour', action: 'parkourRooftopLeap', garment: 'parkourTechnicalSet', garmentLayer: 'layer6', chestDetail: 'layeredBaseLayer', waistSideDetail: 'waterproofWaistSeam', shoulderDetail: 'protectiveShoulderLine', bodyShape: 'fashion_tall', pose: 'parkourVault', lighting: 'urbanGoldenBacklight', colorPalette: 'urbanCharcoalRed', background: 'urbanRooftopRoute', camera: 'distantHero', ratio: '16:9', intensity: 'cinematic' },
+  inlineRailGrindHero: { story: 'a premium daylight street-action cover freezing one clean inline rail grind, with the skate frames, rail contact, low body line and landing route all sharply readable', style: 'athleteEditorial', sport: 'inlineSkating', action: 'inlineRailGrind', garment: 'inlineStreetTech', garmentLayer: 'layer3', chestDetail: 'zipVentPanel', waistSideDetail: 'technicalWaistBelt', shoulderDetail: 'protectiveShoulderLine', bodyShape: 'original', pose: 'inlineCrouch', lighting: 'inlineFreshDaylight', colorPalette: 'inlineCobaltSilver', background: 'inlineSkatePark', camera: 'groundLevelTracking', ratio: '9:16', intensity: 'premium' },
+  inlineStairJumpFreeze: { story: 'a crisp urban sports portrait freezing an inline skater clearing a short stair set, with the open face, paired skate frames and landing plane held inside strong concrete geometry', style: 'sportsCampaign', sport: 'inlineSkating', action: 'inlineStairJump', garment: 'inlineParkSet', garmentLayer: 'layer6', chestDetail: 'reinforcedChestPanel', waistSideDetail: 'utilityWaistClips', shoulderDetail: 'contrastSleevePanel', bodyShape: 'fashion_tall', pose: 'inlineAirborne', lighting: 'inlineFreshDaylight', colorPalette: 'inlineRoseGraphite', background: 'urbanStairPlaza', camera: 'lowAngleHero', ratio: '4:5', intensity: 'cinematic' },
+  inlineRiversideSprint: { story: 'a refined riverside lifestyle action frame following an inline skater accelerating along a long promenade, with open skyline, wheel contact and flowing hair creating a clean speed line', style: 'oceanMountainPortrait', sport: 'inlineSkating', action: 'inlineUrbanSprint', garment: 'inlineEditorialSet', garmentLayer: 'layer0', chestDetail: 'none', waistSideDetail: 'none', shoulderDetail: 'none', bodyShape: 'original', pose: 'inlineCrouch', lighting: 'inlineGoldenRim', colorPalette: 'inlineCobaltSilver', background: 'inlineRiversideWalk', camera: 'urbanTracking', ratio: '2:3', intensity: 'premium' },
+  inlineSlalomCurve: { story: 'a graphic city-night action study of an inline skater weaving through street markers, with an S-shaped wheel trail, natural shoulder rotation and controlled reflections', style: 'highSpeedDocumentary', sport: 'inlineSkating', action: 'inlineSlalom', garment: 'inlineStreetTech', garmentLayer: 'layer3', chestDetail: 'layeredBaseLayer', waistSideDetail: 'waterproofWaistSeam', shoulderDetail: 'none', bodyShape: 'korean_idol', pose: 'inlineFlow', lighting: 'inlineNightCity', colorPalette: 'inlineNightTeal', background: 'inlineWetBoulevard', camera: 'longLensFreeze', ratio: '9:16', intensity: 'cinematic' },
+  inlineWallRidePortrait: { story: 'a polished concrete-architecture portrait built around one controlled inline wall ride, preserving the open face, wheel contact, body axis and wall plane in one coherent instant', style: 'sportsCampaign', sport: 'inlineSkating', action: 'inlineWallRide', garment: 'inlineParkSet', garmentLayer: 'layer6', chestDetail: 'reinforcedChestPanel', waistSideDetail: 'technicalWaistBelt', shoulderDetail: 'windproofShoulderYoke', bodyShape: 'original', pose: 'inlineFlow', lighting: 'inlineGoldenRim', colorPalette: 'inlineRoseGraphite', background: 'concreteUnderpass', camera: 'threeQuarterSide', ratio: '3:4', intensity: 'premium' },
+  inlineWetBoulevard: { story: 'a cinematic after-rain boulevard frame capturing an inline skater carving through a shallow reflective curve, with a broad wheel-spray fan and warm storefront bokeh behind the athlete', style: 'athleteEditorial', sport: 'inlineSkating', action: 'inlineWetCarve', garment: 'inlineEditorialSet', garmentLayer: 'layer9', chestDetail: 'zipVentPanel', waistSideDetail: 'waterproofWaistSeam', shoulderDetail: 'contrastSleevePanel', bodyShape: 'fashion_tall', pose: 'inlineFlow', lighting: 'inlineNightCity', colorPalette: 'inlineNightTeal', background: 'inlineWetBoulevard', camera: 'groundLevelTracking', ratio: '9:16', intensity: 'premium' },
+  inlineParkAirborne: { story: 'a bright skate-park action cover freezing an inline skater above a low ramp, with knees naturally tucked, both wheel frames aligned and the landing zone open below', style: 'sportsCampaign', sport: 'inlineSkating', action: 'inlineStairJump', garment: 'inlineParkSet', garmentLayer: 'layer3', chestDetail: 'layeredBaseLayer', waistSideDetail: 'utilityWaistClips', shoulderDetail: 'windproofShoulderYoke', bodyShape: 'original', pose: 'inlineAirborne', lighting: 'inlineFreshDaylight', colorPalette: 'inlineCobaltSilver', background: 'inlineSkatePark', camera: 'lowAngleHero', ratio: '2:3', intensity: 'cinematic' },
+  inlineNightTrack: { story: 'a refined city-night tracking portrait of an inline skater accelerating beneath storefront lights, with readable eyes, repeating pavement perspective and a restrained wheel trail', style: 'highSpeedDocumentary', sport: 'inlineSkating', action: 'inlineUrbanSprint', garment: 'inlineStreetTech', garmentLayer: 'layer0', chestDetail: 'none', waistSideDetail: 'none', shoulderDetail: 'none', bodyShape: 'original', pose: 'inlineCrouch', lighting: 'inlineNightCity', colorPalette: 'inlineNightTeal', background: 'inlineRiversideWalk', camera: 'urbanTracking', ratio: '4:5', intensity: 'premium' },
+  inlineUrbanFlow: { story: 'a smooth urban inline-flow editorial where the skater arcs past a concrete stair plaza, with relaxed arm balance, clean wheel contact and long architectural perspective', style: 'athleteEditorial', sport: 'inlineSkating', action: 'inlineSlalom', garment: 'inlineEditorialSet', garmentLayer: 'layer3', chestDetail: 'none', waistSideDetail: 'technicalWaistBelt', shoulderDetail: 'contrastSleevePanel', bodyShape: 'korean_idol', pose: 'inlineFlow', lighting: 'inlineGoldenRim', colorPalette: 'inlineRoseGraphite', background: 'urbanStairPlaza', camera: 'urbanTracking', ratio: '16:9', intensity: 'cinematic' },
+  inlineSkateParkLanding: { story: 'a decisive skate-park landing photograph with knees absorbing impact, both inline skates contacting the concrete together and a clear open face above the protective gear', style: 'highSpeedDocumentary', sport: 'inlineSkating', action: 'inlineStairJump', garment: 'inlineStreetTech', garmentLayer: 'layer6', chestDetail: 'reinforcedChestPanel', waistSideDetail: 'utilityWaistClips', shoulderDetail: 'protectiveShoulderLine', bodyShape: 'original', pose: 'inlineCrouch', lighting: 'inlineFreshDaylight', colorPalette: 'inlineCobaltSilver', background: 'inlineSkatePark', camera: 'groundLevelTracking', ratio: '4:5', intensity: 'premium' }
 };
 
 const SPORT_POOLS = Object.freeze({
@@ -593,6 +663,7 @@ const SPORT_POOLS = Object.freeze({
   skiing: { actions: ['auto', 'skiPowderCarve', 'skiAlpineJump', 'skiSlalom', 'skiTreeLine', 'skiParkTrick', 'skiRidgeRun'], garments: ['skiShell', 'skiFreeride', 'skiParkSuit'], poses: ['auto', 'skiCarve', 'skiAirborne', 'skiLanding'], lighting: ['alpineClearDay', 'powderSoftLight', 'blueHourRidge'], backgrounds: ['alpinePowderSlope', 'snowParkRamp', 'alpineTreeLine', 'blueHourRidgeLine'] },
   skateboarding: { actions: ['auto', 'skateStairRail', 'skateWallRide', 'skatePlazaPush', 'skateStreetLanding'], garments: ['skateStreetSet', 'skateMinimalSet'], poses: ['auto', 'skateCrouch'], lighting: ['urbanHardDaylight', 'urbanGoldenBacklight'], backgrounds: ['urbanStairPlaza', 'concreteUnderpass'], },
   parkour: { actions: ['auto', 'parkourWallVault', 'parkourRooftopLeap', 'parkourLanding', 'parkourRailFlow'], garments: ['parkourTechnicalSet', 'parkourUrbanLayer'], poses: ['auto', 'parkourVault', 'parkourLanding'], lighting: ['urbanHardDaylight', 'urbanGoldenBacklight'], backgrounds: ['urbanRooftopRoute', 'concreteUnderpass'] },
+  inlineSkating: { actions: ['auto', 'inlineRailGrind', 'inlineStairJump', 'inlineUrbanSprint', 'inlineSlalom', 'inlineWallRide', 'inlineWetCarve'], garments: ['inlineStreetTech', 'inlineParkSet', 'inlineEditorialSet'], poses: ['auto', 'inlineCrouch', 'inlineAirborne', 'inlineFlow'], lighting: ['inlineFreshDaylight', 'inlineGoldenRim', 'inlineNightCity'], backgrounds: ['inlineSkatePark', 'inlineRiversideWalk', 'inlineWetBoulevard'], cameras: ['groundLevelTracking', 'urbanTracking', 'lowAngleHero', 'threeQuarterSide', 'longLensFreeze'] },
 });
 
 function selected(name){return document.querySelector(`input[name="${name}"]:checked`)?.value || '';}
@@ -608,12 +679,13 @@ function randomPoseForSport(sport){return randomItem(SPORT_POOLS[sport]?.poses||
 function randomBackgroundForSport(sport){return randomItem(SPORT_POOLS[sport]?.backgrounds||SPORT_POOLS.surfing.backgrounds);}
 function randomLightingForSport(sport){return randomItem(SPORT_POOLS[sport]?.lighting||SPORT_POOLS.surfing.lighting);}
 function randomGarmentForSport(sport){return randomItem(SPORT_POOLS[sport]?.garments||SPORT_POOLS.surfing.garments);}
-function applyRandom(){clearCustomFields();activeTemplateStory='';const sport=randomItem(Object.keys(SPORT_POOLS));setRadioValue('sport',sport);setRadioValue('style',randomItem(values('style')));setRadioValue('action',randomActionForSport(sport));setRadioValue('garment',randomGarmentForSport(sport));setRadioValue('pose',randomPoseForSport(sport));setRadioValue('lighting',randomLightingForSport(sport));setRadioValue('background',randomBackgroundForSport(sport));setRadioValue('colorPalette',randomItem(values('colorPalette')));setRadioValue('camera',randomItem(['waterlineAction','snowTrackLow','longLensFreeze','groundLevelTracking','urbanTracking','threeQuarterSide','distantHero']));setRadioValue('ratio',randomItem(values('ratio')));setRadioValue('bodyShape',randomItem(values('bodyShape')));setRadioValue('garmentLayer',randomItem(['layer0','layer3','layer6','layer9']));setRadioValue('chestDetail','none');setRadioValue('waistSideDetail','none');setRadioValue('shoulderDetail','none');const layerSelection=HB_GARMENT_CORE.resolveLayer(selected('garmentLayer'),['layer0','layer3','layer6','layer9'],GARMENT_DETAIL_LAYER_ZONES);setRadioValue('garmentLayer',layerSelection.key);const zoneFields={chestDetail:GARMENT_VARIATIONS.chestDetail,waistSideDetail:GARMENT_VARIATIONS.waistSideDetail,shoulderDetail:GARMENT_VARIATIONS.shoulderDetail};const chosen=HB_GARMENT_CORE.chooseFreeZones(zoneFields,name=>selected(name),layerSelection.targetCount);chosen.zones.forEach(name=>{const pool=HB_GARMENT_CORE.randomKeys(zoneFields[name],GARMENT_DETAIL_RANDOM_POOLS[name]);if(pool.length)setRadioValue(name,randomItem(pool));});document.getElementById('intensity').value=randomItem(Object.keys(intensityData));refreshCards();generate({reveal:true});}
+function randomCameraForSport(sport){return randomItem(SPORT_POOLS[sport]?.cameras||['waterlineAction','snowTrackLow','longLensFreeze','groundLevelTracking','urbanTracking','threeQuarterSide','distantHero']);}
+function applyRandom(){clearCustomFields();activeTemplateStory='';const sport=randomItem(Object.keys(SPORT_POOLS));setRadioValue('sport',sport);setRadioValue('style',randomItem(values('style')));setRadioValue('action',randomActionForSport(sport));setRadioValue('garment',randomGarmentForSport(sport));setRadioValue('pose',randomPoseForSport(sport));setRadioValue('lighting',randomLightingForSport(sport));setRadioValue('background',randomBackgroundForSport(sport));setRadioValue('colorPalette',randomItem(values('colorPalette')));setRadioValue('camera',randomCameraForSport(sport));setRadioValue('ratio',randomItem(values('ratio')));setRadioValue('bodyShape',randomItem(values('bodyShape')));setRadioValue('garmentLayer',randomItem(['layer0','layer3','layer6','layer9']));setRadioValue('chestDetail','none');setRadioValue('waistSideDetail','none');setRadioValue('shoulderDetail','none');const layerSelection=HB_GARMENT_CORE.resolveLayer(selected('garmentLayer'),['layer0','layer3','layer6','layer9'],GARMENT_DETAIL_LAYER_ZONES);setRadioValue('garmentLayer',layerSelection.key);const zoneFields={chestDetail:GARMENT_VARIATIONS.chestDetail,waistSideDetail:GARMENT_VARIATIONS.waistSideDetail,shoulderDetail:GARMENT_VARIATIONS.shoulderDetail};const chosen=HB_GARMENT_CORE.chooseFreeZones(zoneFields,name=>selected(name),layerSelection.targetCount);chosen.zones.forEach(name=>{const pool=HB_GARMENT_CORE.randomKeys(zoneFields[name],GARMENT_DETAIL_RANDOM_POOLS[name]);if(pool.length)setRadioValue(name,randomItem(pool));});document.getElementById('intensity').value=randomItem(Object.keys(intensityData));refreshCards();generate({reveal:true});}
 function markStale(){const wrap=document.getElementById('outputWrap');if(!wrap.classList.contains('hidden'))wrap.classList.add('stale');}
 function generate(options={}){
   const sportKey=selected('sport');const customGarment=document.getElementById('customGarment').value.trim();const customPose=document.getElementById('customPose').value.trim();const customBackground=document.getElementById('customBackground').value.trim();const customChest=document.getElementById('customChest').value.trim();const customWaist=document.getElementById('customWaist').value.trim();const customShoulder=document.getElementById('customShoulder').value.trim();const extraNote=document.getElementById('extraNote').value.trim();const colorNote=document.getElementById('colorNote').value.trim();
-  const styleText=styleData[selected('style')];const sportText=sportData[sportKey];const actionText=actionData[selected('action')];const environmentScaleText=environmentScaleData[sportKey]||'';const garmentText=customGarment?`custom sports garment and equipment direction only: ${customGarment}; do not blend another preset garment`:garmentData[selected('garment')];const actionPose=poseData[selected('pose')];const poseText=customPose?`custom athletic pose only: ${customPose}; do not blend another preset pose`:actionPose;const backgroundText=customBackground?`custom outdoor sports setting only: ${customBackground}; do not blend another preset background`:backgroundData[selected('background')];const lightingText=lightingData[selected('lighting')];const colorText=colorNote||colorData[selected('colorPalette')];const variationCustom=[customChest&&`custom chest equipment detail only: ${customChest}`,customWaist&&`custom waist equipment detail only: ${customWaist}`,customShoulder&&`custom shoulder equipment detail only: ${customShoulder}`].filter(Boolean);const variationText=[...variationParts(),...variationCustom];const variationBlock=variationText.length?`【服裝改造核心】\n\n${variationText.join('\n')}`:'';const environmentScaleBlock=environmentScaleText?`【環境反應尺度】\n\n${environmentScaleText}`:'';const storyText=activeTemplateStory||`a professional ${sportKey} action portrait built around one decisive high-speed moment`;
-  const prompt=[identityCore,anatomyCore,poseCore,lightingCore,sportsActionCore,sportsCoherenceCore,`【作品概念】\n\n${storyText}`,`【畫面語氣】\n\n${styleText}`,`【運動主題】\n\n${sportText}`,`【動作瞬間】\n\n${actionText}`,environmentScaleBlock,`【運動服裝與裝備】\n\n${garmentText}`,variationBlock,`【身形輪廓】\n\n${({original:'original natural body proportions from the reference photo, do not reshape the body',slight_waist:'slightly refined waistline, subtle natural shaping, keep shoulders hips and overall body proportions faithful to the reference',curvy_waist:'fuller feminine bust curve and narrow slim waistline, dramatic feminine S-curve silhouette, strong bust-waist-hip contrast, keep anatomy natural',fashion_tall:'tall fashion proportion, elongated but natural body line, refined athlete editorial presence without changing facial identity',korean_idol:'Korean idol-inspired proportion, upright posture, long clean body line, toned yet soft commercial action portrait presence',full_bust_cleavage:'adult woman with naturally fuller bust and balanced athletic proportions, realistic anatomy, natural gravity and functional sports-garment support, no exaggerated body shaping'})[selected('bodyShape')]}`,`【人物姿勢與身體方向】\n\n${poseText}`,`【光影】\n\n${lightingText}`,`【色彩系統】\n\n${colorText}`,`【背景場景與環境】\n\n${backgroundText}`,`【拍攝角度與鏡頭感】\n\n${cameraData[selected('camera')]}. Use a high-speed shutter to freeze the decisive action; preserve natural body scale and equipment contact.`,`【圖片比例】\n\n${ratioData[selected('ratio')]}`,`【畫面強度】\n\n${intensityData[document.getElementById('intensity').value]}`,cleanFrameCore,outputCore,`【極限運動負面限制】\n\nNo unsafe impossible anatomy, no detached or duplicated equipment, no floating athlete, no impossible board, ski, skateboard, rail, wall or landing-surface contact, no warped limbs, no unreadable brand or watermark.`,extraNote?`【其他要求】\n\n${extraNote}`:''].filter(Boolean).join('\n\n⸻\n\n');
+  const styleText=styleData[selected('style')];const sportText=sportData[sportKey];const actionText=actionData[selected('action')];const environmentScaleText=environmentScaleData[sportKey]||'';const faceVisibilityText=faceVisibilityData[sportKey]||'';const garmentText=customGarment?`custom sports garment and equipment direction only: ${customGarment}; do not blend another preset garment`:garmentData[selected('garment')];const actionPose=poseData[selected('pose')];const poseText=customPose?`custom athletic pose only: ${customPose}; do not blend another preset pose`:actionPose;const backgroundText=customBackground?`custom outdoor sports setting only: ${customBackground}; do not blend another preset background`:backgroundData[selected('background')];const lightingText=lightingData[selected('lighting')];const colorText=colorNote||colorData[selected('colorPalette')];const variationCustom=[customChest&&`custom chest equipment detail only: ${customChest}`,customWaist&&`custom waist equipment detail only: ${customWaist}`,customShoulder&&`custom shoulder equipment detail only: ${customShoulder}`].filter(Boolean);const variationText=[...variationParts(),...variationCustom];const variationBlock=variationText.length?`【服裝改造核心】\n\n${variationText.join('\n')}`:'';const environmentScaleBlock=environmentScaleText?`【環境反應尺度】\n\n${environmentScaleText}`:'';const faceVisibilityBlock=faceVisibilityText?`【臉部可見與安全裝備】\n\n${faceVisibilityText}`:'';const storyText=activeTemplateStory||`a professional ${sportKey} action portrait built around one decisive high-speed moment`;
+  const prompt=[identityCore,anatomyCore,poseCore,lightingCore,sportsActionCore,sportsCoherenceCore,`【作品概念】\n\n${storyText}`,`【畫面語氣】\n\n${styleText}`,`【運動主題】\n\n${sportText}`,`【動作瞬間】\n\n${actionText}`,environmentScaleBlock,faceVisibilityBlock,`【運動服裝與裝備】\n\n${garmentText}`,variationBlock,`【身形輪廓】\n\n${({original:'original natural body proportions from the reference photo, do not reshape the body',slight_waist:'slightly refined waistline, subtle natural shaping, keep shoulders hips and overall body proportions faithful to the reference',curvy_waist:'fuller feminine bust curve and narrow slim waistline, dramatic feminine S-curve silhouette, strong bust-waist-hip contrast, keep anatomy natural',fashion_tall:'tall fashion proportion, elongated but natural body line, refined athlete editorial presence without changing facial identity',korean_idol:'Korean idol-inspired proportion, upright posture, long clean body line, toned yet soft commercial action portrait presence',full_bust_cleavage:'adult woman with naturally fuller bust and balanced athletic proportions, realistic anatomy, natural gravity and functional sports-garment support, no exaggerated body shaping'})[selected('bodyShape')]}`,`【人物姿勢與身體方向】\n\n${poseText}`,`【光影】\n\n${lightingText}`,`【色彩系統】\n\n${colorText}`,`【背景場景與環境】\n\n${backgroundText}`,`【拍攝角度與鏡頭感】\n\n${cameraData[selected('camera')]}. Use a high-speed shutter to freeze the decisive action; preserve natural body scale and equipment contact.`,`【圖片比例】\n\n${ratioData[selected('ratio')]}`,`【畫面強度】\n\n${intensityData[document.getElementById('intensity').value]}`,cleanFrameCore,outputCore,`【極限運動負面限制】\n\nNo unsafe impossible anatomy, no detached or duplicated equipment, no floating athlete, no impossible board, ski, skateboard, rail, wall or landing-surface contact, no warped limbs, no unreadable brand or watermark.`,extraNote?`【其他要求】\n\n${extraNote}`:''].filter(Boolean).join('\n\n⸻\n\n');
   document.getElementById('outputText').value=prompt;document.getElementById('outputWrap').classList.remove('hidden','stale');document.getElementById('copyBtn').textContent='一鍵複製';if(options.reveal)document.getElementById('outputWrap').scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 let activeTemplateStory='';
