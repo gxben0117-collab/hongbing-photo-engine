@@ -391,7 +391,6 @@
       <button type="button" class="preset-btn" data-travel-preset="stationDaylightKnit">一鍵套用｜白日車站針織行走</button>
       <button type="button" class="preset-btn" data-travel-preset="iceCreamStepsSnapshot">一鍵套用｜石階冰淇淋旅拍快照</button>
       <button type="button" class="preset-btn" data-travel-preset="mediterraneanColorWall">一鍵套用｜地中海彩牆草帽</button>
-      <button type="button" class="preset-btn" data-travel-preset="architecturalShadowPortrait">一鍵套用｜建築斜影車站旅拍</button>
     </div>
   </section>
 
@@ -1067,22 +1066,6 @@
       <div class="sub">單選，讓人物與旅途背景處在同一種光線與色溫中</div>
     </div>
     <div class="cards" id="lightingCards">
-      <div style="grid-column:1/-1;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 風格範例光影</div>
-      <label class="card" data-value="hardArchitecturalShadowBlock">
-        <input type="radio" name="lighting" value="hardArchitecturalShadowBlock">
-        <div class="name">旅途建築硬光塊影</div>
-        <div class="desc">車站、長廊或石牆的俐落明暗分區</div>
-      </label>
-      <label class="card" data-value="dappledFoliageGradientShadow">
-        <input type="radio" name="lighting" value="dappledFoliageGradientShadow">
-        <div class="name">旅途枝葉斑駁光影</div>
-        <div class="desc">自然葉隙碎光與人物、環境同時曝光</div>
-      </label>
-      <label class="card" data-value="warmCoolSplitAmbient">
-        <input type="radio" name="lighting" value="warmCoolSplitAmbient">
-        <div class="name">旅途冷暖雙色溫</div>
-        <div class="desc">室內暖光與城市冷光在同一場景交會</div>
-      </label>
       <label class="card selected" data-value="scene_natural">
         <input type="radio" name="lighting" value="scene_natural" checked>
         <div class="name">場景自然光</div>
@@ -1452,7 +1435,6 @@
   </div>
 </div>
 
-<script src="assets/lighting-system.js"></script>
 <script src="assets/core-prompt.js"></script>
 <script>
 const CORE = window.HB_CORE_PROMPT.page.travel;
@@ -2679,21 +2661,6 @@ QUICK_TRAVEL_PRESETS.mediterraneanColorWall = {
   themeText: '地中海彩牆草帽旅拍, 藍白或暖赭色彩牆、窄巷、拱門與明亮海岸天空, 輕盈白色或淡藍長洋裝搭配草帽, 一手輕扶帽沿並自然回眸, 清澈海岸日光、柔和牆面反射與微風裙擺, 全身人物與彩色建築平衡, 高級度假旅行雜誌故事'
 };
 
-QUICK_TRAVEL_PRESETS.architecturalShadowPortrait = {
-  composition: 'H',
-  style: 'natural_lifestyle',
-  ratio: '2:3',
-  camera: 'corridor_perspective',
-  lighting: 'hardArchitecturalShadowBlock',
-  motion: 'flow',
-  media: 'travel_magazine',
-  pose: 'station_walk_glance',
-  costume: 'station_white_knit',
-  hair: 'soft_waves',
-  prop: 'handbag',
-  themeText: '建築斜影車站旅拍, 明亮車站階梯與玻璃長廊形成深遠透視, 白色細緻針織上衣搭配高腰俐落寬褲與簡約皮革手提包, 沿長廊自然行走並回眸, 單一硬光在牆面切出清晰矩形明暗區, 人物、服裝與建築共享同一曝光, 都市灰、象牙白與低調酒紅點綴, 高級旅行雜誌故事'
-};
-
 function applyTravelPreset(preset){
   if(!preset) return;
   clearCustomChoiceFields();
@@ -2790,7 +2757,7 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
 
   const styleBlock=`【風格模組｜主風格】\n\n${style.text}\n\n${STYLE_SCOPE_NOTE}`;
   const cameraBlock=CAMERA_ANGLES[cameraKey];
-  const lightingBlock=window.HB_LIGHTING_SYSTEM?.resolve(TRAVEL_LIGHTING_STYLES, lightingKey) || TRAVEL_LIGHTING_STYLES[lightingKey];
+  const lightingBlock=TRAVEL_LIGHTING_STYLES[lightingKey];
   const motionBlock=MOTION_LEVELS[motionKey];
   const mediaBlock=MEDIA_STYLES[mediaKey];
   const skeletonBlock=ILLUSTRATION_MEDIA_KEYS.has(mediaKey)

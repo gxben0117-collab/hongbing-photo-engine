@@ -4,9 +4,7 @@
 
 ## 版本
 
-v4.74 起持續迭代中；完整逐日開發記錄見 [docs/development-log.md](docs/development-log.md)。
-
-v4.74 新增共用風格範例光影系統，將百葉窗格柵、建築硬光塊影、枝葉斑駁漸層、冷暖雙色溫與自體雙重剪影五種技法接入 8 個適用工具頁；頁面仍保留主題專屬光影優先權，身份鎖定與真人骨架核心維持不變。
+v4.69 起持續迭代中；完整逐日開發記錄見 [docs/development-log.md](docs/development-log.md)。
 
 v4.69 完成全站工具頁流程回歸：補齊欄式頁面的輸出區固定排序，統一「一鍵套用／隨機 → 生成完整咒語 → 輸出 → 一鍵複製」流程，並新增 UI 排序契約檢查；已完成 23 頁介面驗收與代表頁瀏覽器操作驗證。
 
@@ -174,7 +172,6 @@ v4.3 之後陸續完成（詳見開發日誌）：
 ```powershell
 node scripts\check-static.mjs
 node scripts\check-ui-flows.mjs
-node scripts\check-lighting-system.mjs
 git diff --check
 ```
 
@@ -191,8 +188,6 @@ git diff --check
 node scripts\build-prompt-preview.mjs   # 固定選項組合，改前/改後 0 diff 迴歸檢查
 node scripts\audit-100x.mjs             # 目前腳本涵蓋 23 個標準 Prompt 頁，各隨機 100 組，共 2300 組內容稽核
 node scripts\validate-preset-refs.mjs   # 各頁一鍵套用/預設連動物件引用的選項值是否都存在
-node scripts\check-theme-classification.mjs # 主題分類、模板數量與頁面專屬資料邊界
-node scripts\reorder-dom-sections.mjs --check # 工具頁實際 DOM 決策順序
 ```
 
 ## 維護原則

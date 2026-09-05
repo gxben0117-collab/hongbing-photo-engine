@@ -1,11 +1,5 @@
 # UI 與咒語回歸檢查
 
-## 2026-09-05 v4.74 風格範例光影系統回歸
-
-- 共用光影目錄包含 5 種抽象技法，8 個適用頁面均有可見選項、生成解析與至少 1 組模板引用；頁面專屬 `lightingData` 優先於共用回退資料。
-- `chinese-classical.html` 新增建築斜影朱紅屏風肖像模板，實際模板與 UI flow 契約同步為 36 組。
-- `check-lighting-system.mjs`、`check-static.mjs`、`check-ui-flows.mjs`、`validate-preset-refs.mjs`、`check-theme-classification.mjs`、`reorder-dom-sections.mjs --check`、`build-prompt-preview.mjs`、`audit-100x.mjs 100` 與 `git diff --check` 全部通過。
-
 ## 2026-09-04 v4.73 直排輪／街頭輪滑回歸
 
 - 極限運動頁新增直排輪／街頭輪滑分類與 10 組完整一鍵模板；衝浪 12、滑雪 12、滑板 10、酷跑 10、直排輪 10，總數 54 組。

@@ -1,13 +1,5 @@
 # 開發日誌
 
-# 2026-09-05　v4.74 風格範例光影系統導入
-
-- 讀取 `docs/光影分析交接-2026-09-05.md`、`C:/Users/User/Desktop/ai生圖/光影` 與 `C:/Users/User/Desktop/ai生圖/風格範例`，將可跨主題重用的光影技法抽象為 `assets/lighting-system.js` 五組共用資料：百葉窗格柵光影、建築硬光矩形塊影、枝葉斑駁漸層光影、自體剪影牆面雙重輪廓與冷暖雙色溫對比光。
-- 將共用技法接入現代寫真、Luxury Lifestyle、中式古典、和服、婚紗、旅拍、雜誌與幻想廣告；各頁仍由自己的 `lightingData` 優先，只有同名技法才回退到共用目錄，避免主題光影被覆蓋或跨頁混用。
-- 新增 `docs/lighting-system-spec.md` 與 `scripts/check-lighting-system.mjs`，驗證共用光影資料、頁面可見選項、模板引用與生成組裝；未把來源人物身份、品牌／浮水印、固定身材、服裝或場景整包帶入共用核心。
-- `chinese-classical.html` 新增 1 組建築斜影朱紅屏風模板，並同步將 UI flow 契約由 35 組更新為 36 組；共用鎖臉、臉部幾何與真人骨架核心未修改。
-- 驗證：`check-lighting-system.mjs`、`check-static.mjs`、`validate-preset-refs.mjs`、`check-ui-flows.mjs`、`check-theme-classification.mjs`、`reorder-dom-sections.mjs --check`、`build-prompt-preview.mjs`、`audit-100x.mjs 100` 與 `git diff --check` 全部通過；23 頁 × 100 組，共 2,300 組隨機組裝為 0 issue。
-
 # 2026-09-04　v4.73 直排輪／街頭輪滑專題擴充
 
 - 新增 `inlineSkating` 運動分類與 10 組完整一鍵模板，極限運動頁由 44 組擴充至 54 組。

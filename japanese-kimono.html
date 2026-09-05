@@ -71,8 +71,7 @@
     <p class="hint">一鍵套用會同步填入服裝、材質、姿勢、光線、背景、鏡頭與比例，套用後仍可逐區修改。</p>
     <button class="card" type="button" id="kimonoMoodPreset" style="width:100%;min-height:auto;margin-bottom:12px;background:linear-gradient(180deg,#24161A 0%,#211D18 100%);"><div class="name">隨機套用｜和風寫真感覺</div><div class="desc">各欄位獨立隨機組合，保留日本和服與和風寫真方向</div></button>
     <div class="grid grid-3">
-    <button class="card" type="button" data-template="japaneseArchitecturalShadow"><div class="name">障子格柵硬光和服肖像</div><div class="desc">平安小袿、町家窗格、格柵光影與自然回望</div></button>
-    <button class="card" type="button" data-template="heianCourt"><div class="name">平安十二單宮廷肖像</div><div class="desc">層疊絲綢、長袖、宮廷雅韻</div></button>
+      <button class="card" type="button" data-template="heianCourt"><div class="name">平安十二單宮廷肖像</div><div class="desc">層疊絲綢、長袖、宮廷雅韻</div></button>
       <button class="card" type="button" data-template="heianKouchigi"><div class="name">平安小袿庭園寫真</div><div class="desc">小袿層次、庭園、柔和古典感</div></button>
       <button class="card" type="button" data-template="edoFurisodeSakura"><div class="name">江戶振袖櫻花寫真</div><div class="desc">長袖振袖、櫻花、精緻和服</div></button>
       <button class="card" type="button" data-template="blackTomesodeGold"><div class="name">黑留袖金屏風封面</div><div class="desc">黑色正裝、金色紋樣、封面感</div></button>
@@ -346,10 +345,6 @@
     </div>
     <div class="group-title">09B｜色彩系統</div>
     <p class="hint">單選一組主色或搭配色；AI 選項會依主題、服裝、光線與背景判斷，自訂配色填寫後優先。</p>
-    <div class="grid grid-3" data-choice="lighting" style="margin-top:8px;">
-      <label class="card"><input type="radio" name="lighting" value="venetianBlindShadowStripe"><div class="name">障子格柵光影</div><div class="desc">窗格硬影落在和服與町家背景，臉部保持自然可辨識</div></label>
-      <label class="card"><input type="radio" name="lighting" value="dappledFoliageGradientShadow"><div class="name">庭園枝葉斑駁光影</div><div class="desc">庭木葉隙碎光在和服紋理與石庭間自然過渡</div></label>
-    </div>
     <div class="grid grid-3" data-choice="colorPalette">
       <label class="card selected"><input type="radio" name="colorPalette" value="sakuraIvory" checked><div class="name">櫻粉與米白</div><div class="desc">清雅、溫柔、春季和風</div></label>
       <label class="card"><input type="radio" name="colorPalette" value="indigoIvory"><div class="name">靛藍與生成白</div><div class="desc">藍染、清冷、傳統質感</div></label>
@@ -455,7 +450,6 @@
   </section>
 </main>
 
-<script src="assets/lighting-system.js"></script>
 <script src="assets/core-prompt.js"></script>
 <script src="assets/garment-core.js"></script>
 <script src="assets/editorial-finish.js"></script>
@@ -743,7 +737,6 @@ const sharedClassicalCore = window.HB_CORE_PROMPT?.page?.japaneseKimono || {};
 const editorialFinish = window.HB_EDITORIAL_FINISH?.forPage('japaneseKimono') || { base: '', theme: '', negative: '' };
 
 const themeTemplates = {
-  japaneseArchitecturalShadow: { style: 'fashionEditorial', composition: 'engawa and shoji framing around the subject with layered foreground and background depth', garment: 'heianKouchigi', materials: ['rinzuSilk', 'plumPattern'], accessory: 'tsumamiKanzashi', chestDetail: 'none', waistSideDetail: 'maruObiStructure', shoulderDetail: 'haoriLayer', bodyShape: 'original', pose: 'windowTurn', lighting: 'venetianBlindShadowStripe', color: 'goldScreenBlack', background: 'machiyaInterior', framing: 'threeQuarter', camera: 'threeQuarterSide', ratio: '4:5' },
   heianCourt: { style: 'courtLuxury', composition: 'centered formal portrait composition with balanced Japanese architectural framing', garment: 'heianJunihitoe', materials: ['plainSilk', 'chrysanthemumPattern'], accessory: 'kanzashi', chestDetail: 'eriLayeredCollar', waistSideDetail: 'maruObiStructure', shoulderDetail: 'haoriLayer', bodyShape: 'original', pose: 'naturalStanding', lighting: 'shojiSoft', color: 'sakuraIvory', background: 'machiyaInterior', framing: 'threeQuarter', camera: 'eyeLevelCover', ratio: '3:4' },
   heianKouchigi: { style: 'culturePortrait', composition: 'engawa and shoji framing around the subject with layered foreground and background depth', garment: 'heianKouchigi', materials: ['rinzuSilk', 'plumPattern'], accessory: 'tsumamiKanzashi', chestDetail: 'none', waistSideDetail: 'none', shoulderDetail: 'none', bodyShape: 'slight_waist', pose: 'windowTurn', lighting: 'morningGarden', color: 'smokeRose', background: 'engawaGarden', framing: 'halfBody', camera: 'threeQuarterSide', ratio: '4:5' },
   edoFurisodeSakura: { style: 'fashionEditorial', composition: 'wide composition with long kimono sleeves opening outward and the layered garment construction clearly visible', garment: 'edoFurisode', materials: ['yuzenDye', 'sakuraPattern'], accessory: 'tsumamiKanzashi', chestDetail: 'haneriInsert', waistSideDetail: 'obijimeKnot', shoulderDetail: 'furisodeSleeveLine', bodyShape: 'japanese_elegance', pose: 'raiseSleeve', lighting: 'sakuraBacklight', color: 'sakuraIvory', background: 'sakuraGarden', framing: 'fullBody', camera: 'eyeLevelCover', ratio: '2:3' },
@@ -910,7 +903,7 @@ function generate(options){
     poseText + ',',
     framingData[selected('framing')] + ',',
     cameraData[selected('camera')] + ',',
-    'lighting design: ' + (window.HB_LIGHTING_SYSTEM?.resolve(lightingData, selected('lighting')) || lightingData[selected('lighting')]) + ',',
+    'lighting design: ' + lightingData[selected('lighting')] + ',',
     'color palette: ' + (colorNote || colorPaletteData[selected('colorPalette')] || materialPalette) + ',',
     'background design: ' + background + ',',
     ratioData[selected('ratio')] + ',',

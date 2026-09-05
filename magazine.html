@@ -617,7 +617,6 @@
     </div>
     <button class="generate-btn random-btn" id="magazineMoodPreset" type="button">隨機套用｜棚拍封面感覺</button>
     <div class="preset-grid">
-      <button type="button" class="preset-btn" data-magazine-preset="architecturalShadowPortrait">一鍵套用｜建築斜影白衫肖像</button>
       <button type="button" class="preset-btn primary" data-magazine-preset="blackGoldBeauty">一鍵套用｜黑金高訂美妝特寫</button>
       <button type="button" class="preset-btn" data-magazine-preset="jewelryCoolCover">一鍵套用｜珠寶冷光封面</button>
       <button type="button" class="preset-btn" data-magazine-preset="perfumeMistCover">一鍵套用｜夢幻香氛柔霧</button>
@@ -1280,10 +1279,6 @@
     <div style="margin-bottom:0;">
       <div style="font-size:12px;color:var(--soft);margin-bottom:8px;">光線類型（單選，決定臉部與背景的共同氣氛）</div>
       <div class="chips" id="lightingChips">
-      <div style="flex-basis:100%;width:100%;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 風格範例建築光影</div>
-      <label class="chip" data-value="venetianBlindShadowStripe"><input type="radio" name="lighting" value="venetianBlindShadowStripe">百葉窗格柵光影</label>
-      <label class="chip" data-value="hardArchitecturalShadowBlock"><input type="radio" name="lighting" value="hardArchitecturalShadowBlock">建築硬光矩形塊影</label>
-      <label class="chip" data-value="warmCoolSplitAmbient"><input type="radio" name="lighting" value="warmCoolSplitAmbient">冷暖雙色溫對比光</label>
       <label class="chip selected" data-value="window_soft"><input type="radio" name="lighting" value="window_soft" checked>窗光柔亮</label>
       <div style="flex-basis:100%;width:100%;font-size:12px;color:var(--gold);margin:8px 0 2px;">✦ 基礎棚拍光</div>
       <label class="chip" data-value="mixed_studio"><input type="radio" name="lighting" value="mixed_studio">棚拍混合光</label>
@@ -2426,7 +2421,6 @@
 
 </div>
 
-<script src="assets/lighting-system.js"></script>
 <script src="assets/core-prompt.js"></script>
 <script src="assets/garment-core.js"></script>
 <script>
@@ -4822,7 +4816,7 @@ document.getElementById('generateBtn').addEventListener('click',()=>{
   const skinTextureBlock = `【膚質質感】\n\n${DETAIL_BLOCKS.skinTexture[skinTextureKey]}`;
   const jewelryBlock = `【珠寶配飾】\n\n${jewelryKeys.map(key=>DETAIL_BLOCKS.jewelry[key]).filter(Boolean).join('\n\n')}`;
   const expressionBlock = `【眼神表情】\n\n${DETAIL_BLOCKS.expression[expressionKey]}`;
-  const lightingToneBlock = `【光線類型】\n\n${window.HB_LIGHTING_SYSTEM?.resolve(DETAIL_BLOCKS.lighting, lightingKey) || DETAIL_BLOCKS.lighting[lightingKey]}`;
+  const lightingToneBlock = `【光線類型】\n\n${DETAIL_BLOCKS.lighting[lightingKey]}`;
   const mediaBlock = MEDIA_STYLES[mediaKey];
   const isIllustrationMedia = MAGAZINE_ILLUSTRATION_MEDIA_KEYS.has(mediaKey);
   const skeletonBlock = isIllustrationMedia ? (CORE.illustrationSkeleton || CORE.skeleton) : CORE.skeleton;
@@ -4892,23 +4886,6 @@ document.getElementById('copyBtn').addEventListener('click',()=>{
 });
 
 const QUICK_MAGAZINE_PRESETS = {
-  architecturalShadowPortrait: {
-    label: '建築斜影白衫肖像',
-    themeText: '建築斜影白衫肖像, structured white fitted top and tailored dark denim, seated naturally in a clean pale interior, long hair moving lightly, a single hard directional light creates crisp architectural shadow geometry across the wall and floor, subject and setting share one coherent exposure, premium modern fashion editorial photography, realistic fabric texture and natural body proportions, no readable brand text or watermark',
-    style: 'brand_lookbook',
-    bg: 'white_seamless',
-    pose: 'center_still',
-    framing: 'three_quarter',
-    camera: 'threeQuarterSide',
-    motion: 'still',
-    makeup: ['natural_highend'],
-    skinTexture: 'natural_real',
-    jewelry: ['none'],
-    expression: 'calm_direct',
-    lighting: 'hardArchitecturalShadowBlock',
-    media: 'realistic_studio',
-    ratio: '2:3'
-  },
   blackGoldBeauty: {
     label: '黑金高訂美妝特寫',
     style: 'beauty_closeup',

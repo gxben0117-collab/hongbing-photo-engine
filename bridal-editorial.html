@@ -156,7 +156,6 @@
       <div class="name">隨機套用｜婚紗藝術寫真</div><div class="desc">重新抽取風格、婚紗、頭紗、姿勢、光線與背景</div>
     </button>
     <div class="grid grid-3">
-      <button class="card" type="button" data-template="dappledGardenLaceBride"><div class="name">花園斑駁光影蕾絲婚紗</div><div class="desc">白花前景、自然葉隙光、蕾絲與頭紗細節</div></button>
       <button class="card" type="button" data-template="koreanCreamStudio"><div class="name">韓系奶油精品棚拍</div><div class="desc">參考圖同款：偏右留白、蕾絲魚尾、珍珠長頭紗</div></button>
       <button class="card" type="button" data-template="pearlVeilBeautyCloseup"><div class="name">珍珠頭紗美妝特寫</div><div class="desc">胸像構圖、清透妝容、珍珠與頭紗框景</div></button>
       <button class="card" type="button" data-template="frenchLaceCouture"><div class="name">法式蕾絲高訂新娘</div><div class="desc">立體蕾絲、低盤髮、精品婚紗工作室</div></button>
@@ -423,8 +422,6 @@
     <div class="section-header"><div class="section-label">10</div><div class="section-title">光影與配色</div></div>
     <p class="hint">光影與配色分開選擇；可用主色、搭配色組或 AI 依婚紗主題與場景判斷，自訂配色填寫後優先。</p>
     <div class="grid grid-3" data-choice="lighting">
-      <label class="card"><input type="radio" name="lighting" value="dappledFoliageGradientShadow"><div class="name">花園枝葉斑駁光影</div><div class="desc">白花與婚紗共享自然葉隙光，保留臉部與蕾絲細節</div></label>
-      <label class="card"><input type="radio" name="lighting" value="hardArchitecturalShadowBlock"><div class="name">建築硬光矩形塊影</div><div class="desc">門廊或牆面切出俐落明暗，維持高級婚紗輪廓</div></label>
       <label class="card selected"><input type="radio" name="lighting" value="koreanCreamSoftLight" checked><div class="name">韓系奶油柔光</div><div class="desc">低對比、乾淨、柔和膚色</div></label>
       <label class="card"><input type="radio" name="lighting" value="luxuryStudioSoftbox"><div class="name">精品棚拍柔光</div><div class="desc">均勻高級、清楚表現婚紗工藝</div></label>
       <label class="card"><input type="radio" name="lighting" value="afternoonWindowLight"><div class="name">午後窗邊柔光</div><div class="desc">自然方向光與細緻影子</div></label>
@@ -552,7 +549,6 @@
   </section>
 </main>
 
-<script src="assets/lighting-system.js"></script>
 <script src="assets/core-prompt.js"></script>
 <script src="assets/garment-core.js"></script>
 <script>
@@ -841,7 +837,6 @@ const ratioData = {
 };
 
 const themeTemplates = {
-  dappledGardenLaceBride: { style: 'fineArtWedding', composition: 'foregroundFlowerFrame', framing: 'threeQuarter', garment: 'floralSculptureGown', materials: ['floralEmbroidery', 'layeredTulle'], garmentLayer: 'layer3', chestDetail: 'laceIllusionBodice', waistSideDetail: 'pearlWaistApplique', shoulderDetail: 'softOffShoulderTulle', veil: 'fingertipVeil', accessories: ['whiteBouquet'], bodyShape: 'original', pose: 'holdingBouquet', makeup: ['naturalRose'], hairstyle: 'romanticWaves', skinTexture: 'softFocusSkin', lighting: 'dappledFoliageGradientShadow', color: 'purePearlWhite', background: 'whiteFlowerGarden', camera: 'threeQuarterSide', ratio: '9:16', intensity: 'balanced luxury bridal styling, visible couture craftsmanship, refined editorial presence' },
   koreanCreamStudio: { style: 'koreanBridalStudio', composition: 'rightSubjectLeftSpace', framing: 'waistUp', garment: 'coutureMermaid', materials: ['frenchLace', 'pearlBeading'], garmentLayer: 'layer0', chestDetail: 'sweetheartCorset', waistSideDetail: 'sculptedWaistCorsetry', shoulderDetail: 'softOffShoulderTulle', veil: 'pearlVeil', accessories: ['pearlHairpiece', 'pearlEarrings'], bodyShape: 'original', pose: 'downcastThreeQuarter', makeup: ['clearBridalMakeup', 'naturalRose'], hairstyle: 'lowBridalUpdo', skinTexture: 'luxuryAdSkin', lighting: 'koreanCreamSoftLight', color: 'ivoryCream', background: 'creamSeamlessStudio', camera: 'eyeLevelCover', ratio: '9:16', intensity: 'balanced luxury bridal styling, visible couture craftsmanship, refined editorial presence' },
   pearlVeilBeautyCloseup: { style: 'bridalEditorial', composition: 'veilFramedPortrait', framing: 'bustPortrait', garment: 'minimalColumn', materials: ['pearlBeading', 'layeredTulle'], garmentLayer: 'layer3', chestDetail: 'laceIllusionBodice', waistSideDetail: 'none', shoulderDetail: 'softOffShoulderTulle', veil: 'pearlVeil', accessories: ['pearlHairpiece', 'pearlEarrings'], bodyShape: 'original', pose: 'adjustingVeil', makeup: ['clearBridalMakeup', 'refinedBridalBeauty'], hairstyle: 'softFrenchUpdo', skinTexture: 'realPores', lighting: 'luxuryStudioSoftbox', color: 'purePearlWhite', background: 'pureWhiteStudio', camera: 'beautyCloseUp', ratio: '4:5', intensity: 'restrained luxury bridal styling, delicate couture detail, quiet premium mood' },
   frenchLaceCouture: { style: 'fineArtWedding', composition: 'centeredBridalPortrait', framing: 'threeQuarter', garment: 'frenchDrapedGown', materials: ['frenchLace', 'floralEmbroidery'], garmentLayer: 'layer6', chestDetail: 'deepVBridalNeckline', waistSideDetail: 'pearlWaistApplique', shoulderDetail: 'laceCapSleeve', veil: 'laceEdgeVeil', accessories: ['pearlEarrings'], bodyShape: 'fashion_tall', pose: 'sideProfileGown', makeup: ['naturalRose', 'refinedBridalBeauty'], hairstyle: 'softFrenchUpdo', skinTexture: 'naturalReal', lighting: 'afternoonWindowLight', color: 'ivoryCream', background: 'frenchInterior', camera: 'threeQuarterSide', ratio: '4:5', intensity: 'balanced luxury bridal styling, visible couture craftsmanship, refined editorial presence' },
@@ -1031,7 +1026,7 @@ function generate(options){
     bodyShapes[selected('bodyShape')],
     poseText,
     'bridal styling: ' + stylingText,
-    'lighting: ' + (window.HB_LIGHTING_SYSTEM?.resolve(lightingData, selected('lighting')) || lightingData[selected('lighting')]),
+    'lighting: ' + lightingData[selected('lighting')],
     'color palette: ' + colorText,
     'background: ' + backgroundText,
     customExtra ? 'additional direction: ' + customExtra : '',

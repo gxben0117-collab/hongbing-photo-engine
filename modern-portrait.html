@@ -176,7 +176,6 @@
       <button class="preset-btn" type="button" data-template="plumSatinStudyNight">一鍵套用｜梅紫緞面書房夜景</button>
       <button class="preset-btn" type="button" data-template="brownChairWarmPortrait">一鍵套用｜棕色洋裝暖室坐姿</button>
       <button class="preset-btn" type="button" data-template="whiteBlouseCityCloseup">一鍵套用｜白衫城市近景</button>
-      <button class="preset-btn" type="button" data-template="architecturalShadowWallEditorial">一鍵套用｜建築斜影白衫時裝</button>
     </div>
   </section>
 
@@ -388,10 +387,6 @@
     <div class="section-header"><span class="section-label">08</span><span class="section-title">光影色彩</span><span class="section-sub">光線與配色分開選，也可交給 AI 依主題判斷</span></div>
     <div class="group-title">光影方式</div>
     <div class="grid grid-3" style="margin-top:8px;">
-      <label class="card"><input type="radio" name="lighting" value="venetianBlindShadowStripe"><span class="name">百葉窗格柵光影</span><span class="desc">條紋硬影穿過牆面與服裝，人物與背景共享同一曝光</span></label>
-      <label class="card"><input type="radio" name="lighting" value="hardArchitecturalShadowBlock"><span class="name">建築硬光矩形塊影</span><span class="desc">單一硬光切出俐落明暗分區，保持臉部自然可辨識</span></label>
-      <label class="card"><input type="radio" name="lighting" value="dappledFoliageGradientShadow"><span class="name">枝葉斑駁漸層光影</span><span class="desc">葉隙碎光由陰影自然過渡到柔和日光</span></label>
-      <label class="card"><input type="radio" name="lighting" value="warmCoolSplitAmbient"><span class="name">冷暖雙色溫對比光</span><span class="desc">兩側環境光形成有控制的暖金與冷藍層次</span></label>
       <label class="card selected"><input type="radio" name="lighting" value="whiteWindowHighKey" checked><span class="name">白窗高亮柔光</span><span class="desc">明亮白色環境、柔和陰影與清透空間</span></label>
       <label class="card"><input type="radio" name="lighting" value="softDiffusedDaylight"><span class="name">自然漫射日光</span><span class="desc">低硬度光線，服裝與肌膚細節自然</span></label>
       <label class="card"><input type="radio" name="lighting" value="goldenBacklight"><span class="name">金色逆光</span><span class="desc">髮絲與衣料有輕柔輪廓光</span></label>
@@ -506,7 +501,6 @@
   </div>
 </main>
 
-<script src="assets/lighting-system.js"></script>
 <script src="assets/core-prompt.js"></script>
 <script src="assets/garment-core.js"></script>
 <script>
@@ -718,10 +712,6 @@ const lightingData = {
   softDiffusedDaylight: 'soft diffused daylight through a large window, low-contrast exposure, gentle shadows and clear fabric texture',
   goldenBacklight: 'warm golden backlight through the setting, subtle rim light on hair and fabric, balanced fill and coherent environmental color',
   blindStripeLight: 'controlled window-blind stripe light, graphic alternating bands across the wall and clothing, exposure kept natural and readable',
-  venetianBlindShadowStripe: 'hard directional daylight filtered through venetian blinds, crisp repeating horizontal shadow stripes fall across the subject and background, face remains naturally readable, one unified scene exposure',
-  hardArchitecturalShadowBlock: 'hard architectural shadow-block lighting, a single directional source casts one crisp rectangular shadow across the wall or floor, dividing the scene into a bright zone and a deep cool shadow zone, face and body share the same exposure',
-  dappledFoliageGradientShadow: 'dappled sunlight filtered through leaves and branches, irregular light patches transition from soft shade to gentle full sun across the subject and background, natural exposure and readable face',
-  warmCoolSplitAmbient: 'two distinct environmental light sources meet across the frame, warm amber light on one side and cool blue-violet light on the other, face body clothing and background share the same deliberate warm-versus-cool exposure',
   warmInteriorSoft: 'soft warm interior light from practical lamps, gentle room depth, restrained highlights and consistent skin tone across the scene',
   moodyDirectional: 'refined directional portrait light with measured contrast, clear facial readability, controlled shadow shape and premium fashion atmosphere',
   roseContrastBeauty: 'soft frontal beauty light on the subject against a darker rosewood interior, gentle facial fill, warm-neutral skin tone, controlled shadow separation and subtle background depth',
@@ -938,7 +928,6 @@ const SCENE_LIGHTING_POOLS = Object.freeze({
 });
 
 const themeTemplates = {
-  architecturalShadowWallEditorial: { story: 'a precise modern fashion portrait staged beside a pale architectural wall, where a single hard light creates graphic shadow geometry while the subject remains naturally grounded', style: 'fashionPortrait', scene: 'sunlitStoneWall', garment: 'whiteRibbedBlouse', garmentLayer: 'layer0', chestDetail: 'none', waistSideDetail: 'slimBeltLine', shoulderDetail: 'none', bodyShape: 'original', pose: 'windowProfileLean', interaction: 'none', lighting: 'hardArchitecturalShadowBlock', colorPalette: 'blackWhiteBlush', camera: 'environmental50mm', ratio: '2:3', intensity: 'premium' },
   whiteMorningBed: { story: 'a quiet morning portrait captured in a bright private room, where clean linen and soft daylight make the subject feel close and unforced', style: 'softLifestyle', scene: 'whiteBedroom', garment: 'pinkCamisoleShorts', garmentLayer: 'layer3', chestDetail: 'layeredCamisole', waistSideDetail: 'softWaistDrape', shoulderDetail: 'softCardiganDrape', bodyShape: 'original', pose: 'bedRecliningDiagonal', interaction: 'pillowLinen', lighting: 'whiteWindowHighKey', colorPalette: 'warmIvoryWhite', camera: 'highAngleOverhead', ratio: '9:16', intensity: 'balanced' },
   pillowSidePortrait: { story: 'a quiet morning portrait captured in a bright private room, where clean linen and soft daylight make the subject feel close and unforced', style: 'freshGlamour', scene: 'whiteBedroom', garment: 'softFittedDress', garmentLayer: 'layer0', chestDetail: 'softSquareNeckline', waistSideDetail: 'none', shoulderDetail: 'none', bodyShape: 'original', pose: 'bedSidePillowClose', interaction: 'pillowLinen', lighting: 'softDiffusedDaylight', colorPalette: 'warmIvoryWhite', camera: 'beautyCloseUp', ratio: '4:5', intensity: 'premium' },
   pastelSofaMoment: { story: 'a lighthearted pause in a pastel living room, balancing relaxed body language with a carefully styled modern interior', style: 'everydayEditorial', scene: 'pastelLounge', garment: 'pinkCamisoleShorts', garmentLayer: 'layer3', chestDetail: 'crossWrapBodice', waistSideDetail: 'slimBeltLine', shoulderDetail: 'offShoulderCut', bodyShape: 'original', pose: 'sofaSideSit', interaction: 'flowerCushion', lighting: 'softDiffusedDaylight', colorPalette: 'blushPinkIvory', camera: 'threeQuarterSide', ratio: '9:16', intensity: 'balanced' },
@@ -1074,7 +1063,7 @@ function generate(options = {}){
   const garmentText = customGarment ? `custom modern garment direction only: ${customGarment}; do not blend another preset garment` : garmentData[selected('garment')];
   const poseText = customPose ? `custom natural portrait pose only: ${customPose}; do not blend another preset pose` : poseData[selected('pose')];
   const interactionText = interactionData[selected('interaction')];
-  const lightingText = window.HB_LIGHTING_SYSTEM?.resolve(lightingData, selected('lighting')) || lightingData[selected('lighting')];
+  const lightingText = lightingData[selected('lighting')];
   const colorText = colorNote || colorData[selected('colorPalette')];
   const storyText = customScene
     ? `a modern portrait story built around ${customScene}`
